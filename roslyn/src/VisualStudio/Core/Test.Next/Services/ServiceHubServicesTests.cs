@@ -1162,11 +1162,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             string documentName
         )
         {
-            var project = solution.Projects.First(
-                p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
+            var project = solution.Projects.First(p =>
+                string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
             );
-            var document = project.Documents.First(
-                d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
+            var document = project.Documents.First(d =>
+                string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
             );
 
             return (project, document);
@@ -1178,14 +1178,13 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             ImmutableArray<string> documentNames
         )
         {
-            var project = solution.Projects.First(
-                p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
+            var project = solution.Projects.First(p =>
+                string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
             );
-            var documents = documentNames.SelectAsArray(
-                documentName =>
-                    project.Documents.First(
-                        d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
-                    )
+            var documents = documentNames.SelectAsArray(documentName =>
+                project.Documents.First(d =>
+                    string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
+                )
             );
 
             return (project, documents);

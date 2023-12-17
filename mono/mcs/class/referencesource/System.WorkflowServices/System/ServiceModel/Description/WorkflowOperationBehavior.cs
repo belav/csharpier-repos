@@ -60,7 +60,9 @@ namespace System.ServiceModel.Description
             }
 
             WorkflowRuntimeBehavior workflowRuntimeBehavior =
-                dispatch.Parent.ChannelDispatcher.Host.Description.Behaviors.Find<WorkflowRuntimeBehavior>();
+                dispatch.Parent.ChannelDispatcher.Host.Description.Behaviors.Find<WorkflowRuntimeBehavior>(
+
+                );
 
             if (workflowRuntimeBehavior == null)
             {

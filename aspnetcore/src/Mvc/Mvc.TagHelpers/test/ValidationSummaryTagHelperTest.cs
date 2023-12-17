@@ -379,15 +379,14 @@ public class ValidationSummaryTagHelperTest
 
         var generator = new Mock<IHtmlGenerator>();
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateValidationSummary(
-                        expectedViewContext,
-                        expectedExcludePropertyErrors,
-                        null, // message
-                        null, // headerTag
-                        null
-                    )
+            .Setup(mock =>
+                mock.GenerateValidationSummary(
+                    expectedViewContext,
+                    expectedExcludePropertyErrors,
+                    null, // message
+                    null, // headerTag
+                    null
+                )
             ) // htmlAttributes
             .Returns(new TagBuilder("div"))
             .Verifiable();
@@ -442,15 +441,14 @@ public class ValidationSummaryTagHelperTest
 
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateValidationSummary(
-                        It.IsAny<ViewContext>(),
-                        It.IsAny<bool>(),
-                        It.IsAny<string>(),
-                        It.IsAny<string>(),
-                        It.IsAny<object>()
-                    )
+            .Setup(mock =>
+                mock.GenerateValidationSummary(
+                    It.IsAny<ViewContext>(),
+                    It.IsAny<bool>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<object>()
+                )
             )
             .Returns(tagBuilder);
 
@@ -567,15 +565,14 @@ public class ValidationSummaryTagHelperTest
 
         var generator = new Mock<IHtmlGenerator>();
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateValidationSummary(
-                        It.IsAny<ViewContext>(),
-                        It.IsAny<bool>(),
-                        It.IsAny<string>(),
-                        It.IsAny<string>(),
-                        It.IsAny<object>()
-                    )
+            .Setup(mock =>
+                mock.GenerateValidationSummary(
+                    It.IsAny<ViewContext>(),
+                    It.IsAny<bool>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<object>()
+                )
             )
             .Returns(tagBuilder)
             .Verifiable();

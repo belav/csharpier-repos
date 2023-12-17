@@ -807,10 +807,9 @@ public class StartupManagerTests
     public void BadServiceProviderFactoryFailsThatReturnsNullServiceProviderOverriddenByDefault()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<
-            IServiceProviderFactory<MyContainer>,
-            MyBadContainerFactory
-        >();
+        serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyBadContainerFactory>(
+
+        );
         var services = serviceCollection.BuildServiceProvider();
 
         var startup = StartupLoader.LoadMethods(

@@ -385,8 +385,8 @@ namespace Roslyn.Test.Utilities
         {
             return reader
                 .AssemblyReferences.Select(r => reader.GetAssemblyReference(r))
-                .Select(
-                    row => $"{reader.GetString(row.Name)} {row.Version.Major}.{row.Version.Minor}"
+                .Select(row =>
+                    $"{reader.GetString(row.Name)} {row.Version.Major}.{row.Version.Minor}"
                 );
         }
 
@@ -394,9 +394,8 @@ namespace Roslyn.Test.Utilities
         {
             return reader
                 .TypeReferences.Select(t => reader.GetTypeReference(t))
-                .Select(
-                    t =>
-                        $"{reader.GetString(t.Name)}, {reader.GetString(t.Namespace)}, {reader.Dump(t.ResolutionScope)}"
+                .Select(t =>
+                    $"{reader.GetString(t.Name)}, {reader.GetString(t.Namespace)}, {reader.Dump(t.ResolutionScope)}"
                 );
         }
 
@@ -608,11 +607,11 @@ namespace Roslyn.Test.Utilities
 
                 AssertEx.SetEqual(
                     metadataReader
-                        .CustomAttributes.Select(
-                            a => metadataReader.GetCustomAttribute(a).Constructor
+                        .CustomAttributes.Select(a =>
+                            metadataReader.GetCustomAttribute(a).Constructor
                         )
-                        .Select(
-                            c => metadataReader.GetMemberReference((MemberReferenceHandle)c).Parent
+                        .Select(c =>
+                            metadataReader.GetMemberReference((MemberReferenceHandle)c).Parent
                         )
                         .Select(p => metadataReader.GetTypeReference((TypeReferenceHandle)p).Name)
                         .Select(n => metadataReader.GetString(n)),

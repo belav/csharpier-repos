@@ -31,20 +31,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             // Filter out identifiers which are not used in statements.
             var variableNamesReadInside = new HashSet<string>(
                 ForEachInfo
-                    .Statements.SelectMany(
-                        statement => ForEachInfo.SemanticModel.AnalyzeDataFlow(statement).ReadInside
+                    .Statements.SelectMany(statement =>
+                        ForEachInfo.SemanticModel.AnalyzeDataFlow(statement).ReadInside
                     )
                     .Select(symbol => symbol.Name)
             );
-            var identifiersUsedInStatements = ForEachInfo.Identifiers.Where(
-                identifier => variableNamesReadInside.Contains(identifier.ValueText)
+            var identifiersUsedInStatements = ForEachInfo.Identifiers.Where(identifier =>
+                variableNamesReadInside.Contains(identifier.ValueText)
             );
 
             // If there is a single statement and it is a block, leave it as is.
             // Otherwise, wrap with a block.
             var block = WrapWithBlockIfNecessary(
-                ForEachInfo.Statements.SelectAsArray(
-                    statement => statement.KeepCommentsAndAddElasticMarkers()
+                ForEachInfo.Statements.SelectAsArray(statement =>
+                    statement.KeepCommentsAndAddElasticMarkers()
                 )
             );
 
@@ -100,9 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             {
                 var tupleForSelectExpression = SyntaxFactory.TupleExpression(
                     SyntaxFactory.SeparatedList(
-                        identifiers.Select(
-                            identifier =>
-                                SyntaxFactory.Argument(SyntaxFactory.IdentifierName(identifier))
+                        identifiers.Select(identifier =>
+                            SyntaxFactory.Argument(SyntaxFactory.IdentifierName(identifier))
                         )
                     )
                 );
@@ -110,8 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     VarNameIdentifier,
                     SyntaxFactory.ParenthesizedVariableDesignation(
                         SyntaxFactory.SeparatedList<VariableDesignationSyntax>(
-                            identifiers.Select(
-                                identifier => SyntaxFactory.SingleVariableDesignation(identifier)
+                            identifiers.Select(identifier =>
+                                SyntaxFactory.SingleVariableDesignation(identifier)
                             )
                         )
                     )

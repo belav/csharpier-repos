@@ -2286,8 +2286,9 @@ namespace Mono.CSharp
 
             if (InterfaceType != null)
             {
-                string base_IndexerName =
-                    InterfaceType.MemberDefinition.GetAttributeDefaultMember();
+                string base_IndexerName = InterfaceType.MemberDefinition.GetAttributeDefaultMember(
+
+                );
                 if (base_IndexerName != ShortName)
                 {
                     SetMemberName(

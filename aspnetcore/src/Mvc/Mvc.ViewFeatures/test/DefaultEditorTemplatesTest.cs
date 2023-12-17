@@ -103,8 +103,8 @@ public class DefaultEditorTemplatesTest
             // Similar to HtmlString.Empty today.
             var noopContentWithEmptyToString = new Mock<IHtmlContent>(MockBehavior.Strict);
             noopContentWithEmptyToString.Setup(c => c.ToString()).Returns(string.Empty);
-            noopContentWithEmptyToString.Setup(
-                c => c.WriteTo(It.IsAny<TextWriter>(), It.IsAny<HtmlEncoder>())
+            noopContentWithEmptyToString.Setup(c =>
+                c.WriteTo(It.IsAny<TextWriter>(), It.IsAny<HtmlEncoder>())
             );
 
             // Similar to an empty StringHtmlContent today.
@@ -112,8 +112,8 @@ public class DefaultEditorTemplatesTest
             noopContentWithNonEmptyToString
                 .Setup(c => c.ToString())
                 .Returns(typeof(StringHtmlContent).FullName);
-            noopContentWithNonEmptyToString.Setup(
-                c => c.WriteTo(It.IsAny<TextWriter>(), It.IsAny<HtmlEncoder>())
+            noopContentWithNonEmptyToString.Setup(c =>
+                c.WriteTo(It.IsAny<TextWriter>(), It.IsAny<HtmlEncoder>())
             );
 
             // Makes noop calls on the TextWriter.
@@ -283,32 +283,28 @@ public class DefaultEditorTemplatesTest
         helperMock.SetupGet(h => h.ViewContext).Returns(helperToCopy.ViewContext);
         helperMock.SetupGet(h => h.ViewData).Returns(helperToCopy.ViewData);
         helperMock
-            .Setup(
-                h =>
-                    h.Label(
-                        It.Is<string>(
-                            s =>
-                                string.Equals("Property1", s, StringComparison.Ordinal)
-                                || string.Equals("Property2", s, StringComparison.Ordinal)
-                        ),
-                        null, // labelText
-                        null
-                    )
+            .Setup(h =>
+                h.Label(
+                    It.Is<string>(s =>
+                        string.Equals("Property1", s, StringComparison.Ordinal)
+                        || string.Equals("Property2", s, StringComparison.Ordinal)
+                    ),
+                    null, // labelText
+                    null
+                )
             ) // htmlAttributes
             .Returns(labelContent);
         helperMock
-            .Setup(
-                h =>
-                    h.ValidationMessage(
-                        It.Is<string>(
-                            s =>
-                                string.Equals("Property1", s, StringComparison.Ordinal)
-                                || string.Equals("Property2", s, StringComparison.Ordinal)
-                        ),
-                        null, // message
-                        null, // htmlAttributes
-                        null
-                    )
+            .Setup(h =>
+                h.ValidationMessage(
+                    It.Is<string>(s =>
+                        string.Equals("Property1", s, StringComparison.Ordinal)
+                        || string.Equals("Property2", s, StringComparison.Ordinal)
+                    ),
+                    null, // message
+                    null, // htmlAttributes
+                    null
+                )
             ) // tag
             .Returns(HtmlString.Empty);
 
@@ -405,23 +401,21 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectWithScaffoldColumn();
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound("", Enumerable.Empty<string>()));
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
@@ -654,23 +648,21 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
@@ -703,23 +695,21 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
@@ -754,23 +744,21 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -818,23 +806,21 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -881,23 +867,21 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -945,23 +929,21 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -1007,23 +989,21 @@ public class DefaultEditorTemplatesTest
         };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
@@ -1062,23 +1042,21 @@ public class DefaultEditorTemplatesTest
         );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -1149,23 +1127,21 @@ public class DefaultEditorTemplatesTest
         );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -1241,23 +1217,21 @@ public class DefaultEditorTemplatesTest
         );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -1333,23 +1307,21 @@ public class DefaultEditorTemplatesTest
         );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -1423,23 +1395,21 @@ public class DefaultEditorTemplatesTest
         );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -1512,23 +1482,21 @@ public class DefaultEditorTemplatesTest
         );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
 
@@ -1569,23 +1537,21 @@ public class DefaultEditorTemplatesTest
         };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
@@ -1611,23 +1577,21 @@ public class DefaultEditorTemplatesTest
         };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
@@ -1654,23 +1618,21 @@ public class DefaultEditorTemplatesTest
         };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
@@ -1705,23 +1667,21 @@ public class DefaultEditorTemplatesTest
             );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found("test-view", view.Object));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
@@ -1738,23 +1698,21 @@ public class DefaultEditorTemplatesTest
         // Arrange
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "EditorTemplates/String", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "EditorTemplates/String", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found(string.Empty, new Mock<IView>().Object))
             .Verifiable();

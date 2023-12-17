@@ -28,10 +28,9 @@ public class MapAllClaimsAction : ClaimAction
             // Avoid adding a claim if there's a duplicate name and value. This often happens in OIDC when claims are
             // retrieved both from the id_token and from the user-info endpoint.
             var duplicate =
-                identity.FindFirst(
-                    c =>
-                        string.Equals(c.Type, pair.Name, StringComparison.OrdinalIgnoreCase)
-                        && string.Equals(c.Value, claimValue, StringComparison.Ordinal)
+                identity.FindFirst(c =>
+                    string.Equals(c.Type, pair.Name, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(c.Value, claimValue, StringComparison.Ordinal)
                 ) != null;
 
             if (!duplicate)

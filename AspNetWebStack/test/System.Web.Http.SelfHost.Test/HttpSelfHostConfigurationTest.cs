@@ -22,11 +22,9 @@ namespace System.Web.Http.SelfHost
         {
             get
             {
-                return new TheoryDataSet<
-                    string,
-                    HttpBindingSecurityMode,
-                    HttpClientCredentialType
-                >()
+                return new TheoryDataSet<string, HttpBindingSecurityMode, HttpClientCredentialType>(
+
+                )
                 {
                     {
                         "http://localhost",
@@ -50,11 +48,9 @@ namespace System.Web.Http.SelfHost
         {
             get
             {
-                return new TheoryDataSet<
-                    string,
-                    HttpBindingSecurityMode,
-                    HttpClientCredentialType
-                >()
+                return new TheoryDataSet<string, HttpBindingSecurityMode, HttpClientCredentialType>(
+
+                )
                 {
                     {
                         "http://localhost",
@@ -78,11 +74,9 @@ namespace System.Web.Http.SelfHost
         {
             get
             {
-                return new TheoryDataSet<
-                    string,
-                    HttpBindingSecurityMode,
-                    HttpClientCredentialType
-                >()
+                return new TheoryDataSet<string, HttpBindingSecurityMode, HttpClientCredentialType>(
+
+                )
                 {
                     {
                         "http://localhost",
@@ -146,11 +140,9 @@ namespace System.Web.Http.SelfHost
         {
             get
             {
-                return new TheoryDataSet<
-                    string,
-                    HttpBindingSecurityMode,
-                    HttpClientCredentialType
-                >()
+                return new TheoryDataSet<string, HttpBindingSecurityMode, HttpClientCredentialType>(
+
+                )
                 {
                     {
                         "http://localhost",
@@ -453,8 +445,9 @@ namespace System.Web.Http.SelfHost
         public void HttpSelfHostConfiguration_X509CertificateValidator_RoundTrips()
         {
             // Arrange
-            X509CertificateValidator x509CertificateValidator =
-                new Mock<X509CertificateValidator>().Object;
+            X509CertificateValidator x509CertificateValidator = new Mock<X509CertificateValidator>(
+
+            ).Object;
 
             Assert.Reflection.Property(
                 new HttpSelfHostConfiguration("http://localhost"),

@@ -60,19 +60,15 @@ namespace System.Web.WebPages.Test
                 StringWriter writer = new StringWriter();
 
                 mock = new Mock<StreamWriter>(MockBehavior.Strict, stream) { CallBase = true };
-                mock.Setup(
-                        sw =>
-                            sw.Write(
-                                It.IsAny<char[]>(),
-                                It.IsAny<int>(),
-                                It.Is<int>(
-                                    c =>
-                                        c == StringWriterExtensions.BufferSize
-                                        || c
-                                            == textInBytes.Length
-                                                % StringWriterExtensions.BufferSize
-                                )
+                mock.Setup(sw =>
+                        sw.Write(
+                            It.IsAny<char[]>(),
+                            It.IsAny<int>(),
+                            It.Is<int>(c =>
+                                c == StringWriterExtensions.BufferSize
+                                || c == textInBytes.Length % StringWriterExtensions.BufferSize
                             )
+                        )
                     )
                     .Verifiable();
 

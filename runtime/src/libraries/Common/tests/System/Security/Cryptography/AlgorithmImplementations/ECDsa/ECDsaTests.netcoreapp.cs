@@ -27,14 +27,13 @@ namespace System.Security.Cryptography.EcDsa.Tests
             int count,
             HashAlgorithmName hashAlgorithm
         ) =>
-            WithOutputArray(
-                dest =>
-                    ecdsa.SignData(new ReadOnlySpan<byte>(data, offset, count), dest, hashAlgorithm)
+            WithOutputArray(dest =>
+                ecdsa.SignData(new ReadOnlySpan<byte>(data, offset, count), dest, hashAlgorithm)
             );
 
         protected override byte[] SignHash(ECDsa ecdsa, byte[] hash, int offset, int count) =>
-            WithOutputArray(
-                dest => ecdsa.SignHash(new ReadOnlySpan<byte>(hash, offset, count), dest)
+            WithOutputArray(dest =>
+                ecdsa.SignHash(new ReadOnlySpan<byte>(hash, offset, count), dest)
             );
 
         protected override bool VerifyHash(
@@ -225,28 +224,26 @@ namespace System.Security.Cryptography.EcDsa.Tests
             int count,
             HashAlgorithmName hashAlgorithm
         ) =>
-            TryWithOutputArray(
-                dest =>
-                    ecdsa.TrySignData(
-                        new ReadOnlySpan<byte>(data, offset, count),
-                        dest,
-                        hashAlgorithm,
-                        out int bytesWritten
-                    )
-                        ? (true, bytesWritten)
-                        : (false, 0)
+            TryWithOutputArray(dest =>
+                ecdsa.TrySignData(
+                    new ReadOnlySpan<byte>(data, offset, count),
+                    dest,
+                    hashAlgorithm,
+                    out int bytesWritten
+                )
+                    ? (true, bytesWritten)
+                    : (false, 0)
             );
 
         protected override byte[] SignHash(ECDsa ecdsa, byte[] hash, int offset, int count) =>
-            TryWithOutputArray(
-                dest =>
-                    ecdsa.TrySignHash(
-                        new ReadOnlySpan<byte>(hash, offset, count),
-                        dest,
-                        out int bytesWritten
-                    )
-                        ? (true, bytesWritten)
-                        : (false, 0)
+            TryWithOutputArray(dest =>
+                ecdsa.TrySignHash(
+                    new ReadOnlySpan<byte>(hash, offset, count),
+                    dest,
+                    out int bytesWritten
+                )
+                    ? (true, bytesWritten)
+                    : (false, 0)
             );
 
         protected override bool VerifyHash(

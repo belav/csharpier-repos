@@ -186,13 +186,12 @@ namespace IdeCoreBenchmarks
             foreach (var project in _workspace.CurrentSolution.Projects)
             {
                 var tasks = project
-                    .Documents.Select(
-                        d =>
-                            Task.Run(async () =>
-                            {
-                                // await WalkTree(d);
-                                await TopLevelSyntaxTreeIndex.GetIndexAsync(d, default);
-                            })
+                    .Documents.Select(d =>
+                        Task.Run(async () =>
+                        {
+                            // await WalkTree(d);
+                            await TopLevelSyntaxTreeIndex.GetIndexAsync(d, default);
+                        })
                     )
                     .ToList();
                 await Task.WhenAll(tasks);
@@ -221,16 +220,15 @@ namespace IdeCoreBenchmarks
                 var indexTime = TimeSpan.Zero;
                 var tasks = _workspace
                     .CurrentSolution.Projects.SelectMany(p => p.Documents)
-                    .Select(
-                        d =>
-                            Task.Run(async () =>
-                            {
-                                var tree = await d.GetSyntaxRootAsync();
-                                var stopwatch = SharedStopwatch.StartNew();
-                                await TopLevelSyntaxTreeIndex.GetIndexAsync(d, default);
-                                await SyntaxTreeIndex.GetIndexAsync(d, default);
-                                indexTime += stopwatch.Elapsed;
-                            })
+                    .Select(d =>
+                        Task.Run(async () =>
+                        {
+                            var tree = await d.GetSyntaxRootAsync();
+                            var stopwatch = SharedStopwatch.StartNew();
+                            await TopLevelSyntaxTreeIndex.GetIndexAsync(d, default);
+                            await SyntaxTreeIndex.GetIndexAsync(d, default);
+                            indexTime += stopwatch.Elapsed;
+                        })
                     )
                     .ToList();
                 await Task.WhenAll(tasks);
@@ -251,17 +249,16 @@ namespace IdeCoreBenchmarks
             var solution = _workspace.CurrentSolution;
             var searchTasks = solution
                 .Projects.GroupBy(p => p.Services.GetService<INavigateToSearchService>())
-                .Select(
-                    g =>
-                        Task.Run(
-                            () =>
-                                SearchAsync(
-                                    solution,
-                                    g,
-                                    priorityDocuments: ImmutableArray<Document>.Empty
-                                ),
-                            CancellationToken.None
-                        )
+                .Select(g =>
+                    Task.Run(
+                        () =>
+                            SearchAsync(
+                                solution,
+                                g,
+                                priorityDocuments: ImmutableArray<Document>.Empty
+                            ),
+                        CancellationToken.None
+                    )
                 )
                 .ToArray();
 

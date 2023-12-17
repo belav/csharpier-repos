@@ -53,13 +53,8 @@ internal sealed class RazorProjectPageRouteModelProvider : IPageRouteModelProvid
         {
             var relativePath = item.CombinedPath;
             if (
-                context.RouteModels.Any(
-                    m =>
-                        string.Equals(
-                            relativePath,
-                            m.RelativePath,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                context.RouteModels.Any(m =>
+                    string.Equals(relativePath, m.RelativePath, StringComparison.OrdinalIgnoreCase)
                 )
             )
             {
@@ -91,13 +86,8 @@ internal sealed class RazorProjectPageRouteModelProvider : IPageRouteModelProvid
         {
             var relativePath = item.CombinedPath;
             if (
-                context.RouteModels.Any(
-                    m =>
-                        string.Equals(
-                            relativePath,
-                            m.RelativePath,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                context.RouteModels.Any(m =>
+                    string.Equals(relativePath, m.RelativePath, StringComparison.OrdinalIgnoreCase)
                 )
             )
             {

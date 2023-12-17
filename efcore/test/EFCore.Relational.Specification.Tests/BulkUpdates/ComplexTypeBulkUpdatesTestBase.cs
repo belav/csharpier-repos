@@ -93,15 +93,12 @@ public abstract class ComplexTypeBulkUpdatesTestBase<TFixture> : BulkUpdatesTest
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Select(
-                        c =>
-                            new
-                            {
-                                c.ShippingAddress,
-                                c.BillingAddress,
-                                Customer = c
-                            }
-                    ),
+                    .Select(c => new
+                    {
+                        c.ShippingAddress,
+                        c.BillingAddress,
+                        Customer = c
+                    }),
             x => x.Customer,
             s =>
                 s.SetProperty(x => x.ShippingAddress.ZipCode, x => x.BillingAddress.ZipCode)

@@ -368,8 +368,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var tupleType = NamedTypeSymbol.CreateTuple(
                     locationOpt: null,
-                    elementTypesWithAnnotations: builder!.SelectAsArray(
-                        e => TypeWithAnnotations.Create(e.Type)
+                    elementTypesWithAnnotations: builder!.SelectAsArray(e =>
+                        TypeWithAnnotations.Create(e.Type)
                     ),
                     elementLocations: default,
                     elementNames: default,

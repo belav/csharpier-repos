@@ -2902,8 +2902,8 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(Person12),
         };
 
-        var testContext = GetTestContext(
-            request => request.QueryString = new QueryString("?HomeAddress.Street=someStreet")
+        var testContext = GetTestContext(request =>
+            request.QueryString = new QueryString("?HomeAddress.Street=someStreet")
         );
 
         var modelState = testContext.ModelState;
@@ -2954,8 +2954,8 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(Address12),
         };
 
-        var testContext = GetTestContext(
-            request => request.QueryString = new QueryString("?HomeAddress.Street=someStreet")
+        var testContext = GetTestContext(request =>
+            request.QueryString = new QueryString("?HomeAddress.Street=someStreet")
         );
 
         var modelState = testContext.ModelState;
@@ -3024,11 +3024,10 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(Person13),
         };
 
-        var testContext = GetTestContext(
-            request =>
-                request.QueryString = new QueryString(
-                    "?Address.Number=23&Address.Street=someStreet&Address.City=Redmond&Address.State=WA"
-                )
+        var testContext = GetTestContext(request =>
+            request.QueryString = new QueryString(
+                "?Address.Number=23&Address.Street=someStreet&Address.City=Redmond&Address.State=WA"
+            )
         );
 
         var modelState = testContext.ModelState;
@@ -3084,11 +3083,10 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(Address13),
         };
 
-        var testContext = GetTestContext(
-            request =>
-                request.QueryString = new QueryString(
-                    "?Number=23&Street=someStreet&City=Redmond&State=WA"
-                )
+        var testContext = GetTestContext(request =>
+            request.QueryString = new QueryString(
+                "?Number=23&Street=someStreet&City=Redmond&State=WA"
+            )
         );
 
         var modelState = testContext.ModelState;
@@ -3696,8 +3694,8 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(ThreeDeepModel),
         };
 
-        var testContext = GetTestContext(
-            updateOptions: options => options.MaxModelBindingRecursionDepth = 3
+        var testContext = GetTestContext(updateOptions: options =>
+            options.MaxModelBindingRecursionDepth = 3
         );
 
         var modelState = testContext.ModelState;
@@ -3745,8 +3743,8 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(FourDeepModel),
         };
 
-        var testContext = GetTestContext(
-            updateOptions: options => options.MaxModelBindingRecursionDepth = 3
+        var testContext = GetTestContext(updateOptions: options =>
+            options.MaxModelBindingRecursionDepth = 3
         );
 
         var modelState = testContext.ModelState;

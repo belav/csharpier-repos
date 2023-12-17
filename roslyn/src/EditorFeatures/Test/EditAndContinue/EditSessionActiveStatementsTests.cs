@@ -316,8 +316,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             AssertEx.Equal(
                 new[] { $"[{document1.FilePath}: (4,8)-(4,46)]", "[]", },
-                oldActiveStatements1.Select(
-                    s => "[" + string.Join(", ", s.ExceptionRegions.Spans) + "]"
+                oldActiveStatements1.Select(s =>
+                    "[" + string.Join(", ", s.ExceptionRegions.Spans) + "]"
                 )
             );
 
@@ -331,8 +331,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     "[]",
                     $"[{document2.FilePath}: (26,35)-(26,46)]",
                 },
-                oldActiveStatements2.Select(
-                    s => "[" + string.Join(", ", s.ExceptionRegions.Spans) + "]"
+                oldActiveStatements2.Select(s =>
+                    "[" + string.Join(", ", s.ExceptionRegions.Spans) + "]"
                 )
             );
 
@@ -351,8 +351,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         statements[4]
                     ),
                     newExceptionRegions: ImmutableArray.Create(
-                        oldActiveStatements2[0].ExceptionRegions.Spans.SelectAsArray(
-                            es => es.AddLineDelta(+1)
+                        oldActiveStatements2[0].ExceptionRegions.Spans.SelectAsArray(es =>
+                            es.AddLineDelta(+1)
                         ),
                         oldActiveStatements2[1].ExceptionRegions.Spans,
                         oldActiveStatements2[2].ExceptionRegions.Spans
@@ -383,8 +383,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"0x06000003 v1 | AS {document2.FilePath}: (21,14)-(21,24) => (21,14)-(21,24)",
                     $"0x06000005 v1 | AS {document2.FilePath}: (26,20)-(26,25) => (26,20)-(26,25)"
                 },
-                nonRemappableRegions.Select(
-                    r => $"{r.Method.GetDebuggerDisplay()} | {r.Region.GetDebuggerDisplay()}"
+                nonRemappableRegions.Select(r =>
+                    $"{r.Method.GetDebuggerDisplay()} | {r.Region.GetDebuggerDisplay()}"
                 )
             );
 
@@ -482,16 +482,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             // Note that the spans correspond to the base snapshot (V2).
             AssertEx.Equal(
                 new[] { $"[{document.FilePath}: (8,8)-(12,9) 'catch (Exception) {{']", "[]", },
-                oldActiveStatements.Select(
-                    s =>
-                        "["
-                        + string.Join(
-                            ", ",
-                            s.ExceptionRegions.Spans.Select(
-                                span => $"{span} '{GetFirstLineText(span.Span, baseText)}'"
-                            )
+                oldActiveStatements.Select(s =>
+                    "["
+                    + string.Join(
+                        ", ",
+                        s.ExceptionRegions.Spans.Select(span =>
+                            $"{span} '{GetFirstLineText(span.Span, baseText)}'"
                         )
-                        + "]"
+                    )
+                    + "]"
                 )
             );
 
@@ -536,8 +535,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 },
                 nonRemappableRegions
                     .OrderBy(r => r.Region.OldSpan.Span.Start.Line)
-                    .Select(
-                        r => $"{r.Method.GetDebuggerDisplay()} | {r.Region.GetDebuggerDisplay()}"
+                    .Select(r =>
+                        $"{r.Method.GetDebuggerDisplay()} | {r.Region.GetDebuggerDisplay()}"
                     )
             );
 
@@ -548,9 +547,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             AssertEx.Equal(
                 new[] { "0x06000001 v1 IL_0000: (6,18)-(6,23) '<AS:0>F2();</AS:0>'" },
-                activeStatementsInUpdatedMethods.Select(
-                    update =>
-                        $"{InspectActiveStatementUpdate(update)} '{GetFirstLineText(update.NewSpan.ToLinePositionSpan(), updatedText)}'"
+                activeStatementsInUpdatedMethods.Select(update =>
+                    $"{InspectActiveStatementUpdate(update)} '{GetFirstLineText(update.NewSpan.ToLinePositionSpan(), updatedText)}'"
                 )
             );
         }
@@ -750,8 +748,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"2: {document.FilePath}: (29,22)-(29,26) flags=[NonLeafFrame] mvid=11111111-1111-1111-1111-111111111111 0x06000003 v1 IL_0000 '{{   <AS:2>M();</AS:2>'",
                     $"3: {document.FilePath}: (53,22)-(53,26) flags=[NonLeafFrame] mvid=11111111-1111-1111-1111-111111111111 0x06000004 v1 IL_0000 '<AS:3>M();</AS:3>'"
                 },
-                baseActiveStatements.Select(
-                    s => InspectActiveStatementAndInstruction(s, sourceTextV2)
+                baseActiveStatements.Select(s =>
+                    InspectActiveStatementAndInstruction(s, sourceTextV2)
                 )
             );
 
@@ -773,16 +771,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"[{document.FilePath}: (38,16)-(40,9) '<ER:2.1>catch', {document.FilePath}: (34,20)-(36,13) '<ER:2.0>finally']",
                     $"[{document.FilePath}: (56,16)-(58,9) '<ER:3.1>catch', {document.FilePath}: (51,20)-(54,13) '<ER:3.0>catch']",
                 },
-                oldActiveStatements.Select(
-                    s =>
-                        "["
-                        + string.Join(
-                            ", ",
-                            s.ExceptionRegions.Spans.Select(
-                                span => $"{span} '{GetFirstLineText(span.Span, sourceTextV2)}'"
-                            )
+                oldActiveStatements.Select(s =>
+                    "["
+                    + string.Join(
+                        ", ",
+                        s.ExceptionRegions.Spans.Select(span =>
+                            $"{span} '{GetFirstLineText(span.Span, sourceTextV2)}'"
                         )
-                        + "]"
+                    )
+                    + "]"
                 )
             );
 
@@ -806,12 +803,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     ),
                     newExceptionRegions: ImmutableArray.Create(
                         oldActiveStatements[0].ExceptionRegions.Spans,
-                        oldActiveStatements[1].ExceptionRegions.Spans.SelectAsArray(
-                            es => es.AddLineDelta(-1)
+                        oldActiveStatements[1].ExceptionRegions.Spans.SelectAsArray(es =>
+                            es.AddLineDelta(-1)
                         ),
                         oldActiveStatements[2].ExceptionRegions.Spans,
-                        oldActiveStatements[3].ExceptionRegions.Spans.SelectAsArray(
-                            es => es.AddLineDelta(+2)
+                        oldActiveStatements[3].ExceptionRegions.Spans.SelectAsArray(es =>
+                            es.AddLineDelta(+2)
                         )
                     )
                 )
@@ -844,8 +841,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 },
                 nonRemappableRegions
                     .OrderBy(r => r.Region.OldSpan.Span.Start.Line)
-                    .Select(
-                        r => $"{r.Method.GetDebuggerDisplay()} | {r.Region.GetDebuggerDisplay()}"
+                    .Select(r =>
+                        $"{r.Method.GetDebuggerDisplay()} | {r.Region.GetDebuggerDisplay()}"
                     )
             );
 
@@ -869,9 +866,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"0x06000002 v2 IL_0000: (19,18)-(19,22) '<AS:1>M();</AS:1>'",
                     $"0x06000004 v1 IL_0000: (55,22)-(55,26) '<AS:3>M();</AS:3>'"
                 },
-                activeStatementsInUpdatedMethods.Select(
-                    update =>
-                        $"{InspectActiveStatementUpdate(update)} '{GetFirstLineText(update.NewSpan.ToLinePositionSpan(), sourceTextV3)}'"
+                activeStatementsInUpdatedMethods.Select(update =>
+                    $"{InspectActiveStatementUpdate(update)} '{GetFirstLineText(update.NewSpan.ToLinePositionSpan(), sourceTextV3)}'"
                 )
             );
         }
@@ -975,8 +971,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             AssertEx.Equal(
                 new[] { $"[{document.FilePath}: (8,8)-(10,9)]", "[]" },
-                oldActiveStatements.Select(
-                    s => "[" + string.Join(",", s.ExceptionRegions.Spans) + "]"
+                oldActiveStatements.Select(s =>
+                    "[" + string.Join(",", s.ExceptionRegions.Spans) + "]"
                 )
             );
         }

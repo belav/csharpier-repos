@@ -218,8 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
             textAfterBasicPaste = snapshotAfterTrivialEdit.AsText();
             contentSpansAfterBasicPaste =
-                StringExpressionBeforePasteInfo.ContentSpans.SelectAsArray(
-                    ts => MapSpan(ts, snapshotBeforeTrivialEdit, snapshotAfterTrivialEdit)
+                StringExpressionBeforePasteInfo.ContentSpans.SelectAsArray(ts =>
+                    MapSpan(ts, snapshotBeforeTrivialEdit, snapshotAfterTrivialEdit)
                 );
         }
 

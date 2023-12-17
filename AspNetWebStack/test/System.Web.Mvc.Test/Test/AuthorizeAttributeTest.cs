@@ -34,8 +34,9 @@ namespace System.Web.Mvc.Test
         public void CanRetrieveMultipleAuthorizeAttributesFromOneClass()
         {
             // Arrange
-            ClassWithMultipleAuthorizeAttributes @class =
-                new ClassWithMultipleAuthorizeAttributes();
+            ClassWithMultipleAuthorizeAttributes @class = new ClassWithMultipleAuthorizeAttributes(
+
+            );
 
             // Act
             IEnumerable<AuthorizeAttribute> attributes = TypeDescriptor
@@ -165,12 +166,11 @@ namespace System.Web.Mvc.Test
             mockAuthContext.Setup(c => c.HttpContext.User.Identity.IsAuthenticated).Returns(false);
             mockAuthContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
             mockAuthContext
-                .Setup(
-                    c =>
-                        c.ActionDescriptor.ControllerDescriptor.IsDefined(
-                            typeof(AllowAnonymousAttribute),
-                            true
-                        )
+                .Setup(c =>
+                    c.ActionDescriptor.ControllerDescriptor.IsDefined(
+                        typeof(AllowAnonymousAttribute),
+                        true
+                    )
                 )
                 .Returns(false);
             AuthorizationContext authContext = mockAuthContext.Object;
@@ -228,12 +228,11 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockFilterContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
             mockFilterContext
-                .Setup(
-                    c =>
-                        c.HttpContext.Response.Cache.AddValidationCallback(
-                            It.IsAny<HttpCacheValidateHandler>(),
-                            null /* data */
-                        )
+                .Setup(c =>
+                    c.HttpContext.Response.Cache.AddValidationCallback(
+                        It.IsAny<HttpCacheValidateHandler>(),
+                        null /* data */
+                    )
                 )
                 .Callback(
                     delegate(HttpCacheValidateHandler handler, object data)
@@ -244,12 +243,11 @@ namespace System.Web.Mvc.Test
                 )
                 .Verifiable();
             mockFilterContext
-                .Setup(
-                    c =>
-                        c.ActionDescriptor.ControllerDescriptor.IsDefined(
-                            typeof(AllowAnonymousAttribute),
-                            true
-                        )
+                .Setup(c =>
+                    c.ActionDescriptor.ControllerDescriptor.IsDefined(
+                        typeof(AllowAnonymousAttribute),
+                        true
+                    )
                 )
                 .Returns(false);
             AuthorizationContext filterContext = mockFilterContext.Object;
@@ -317,12 +315,11 @@ namespace System.Web.Mvc.Test
             Mock<AuthorizationContext> mockFilterContext = new Mock<AuthorizationContext>();
             mockFilterContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
             mockFilterContext
-                .Setup(
-                    c =>
-                        c.ActionDescriptor.ControllerDescriptor.IsDefined(
-                            typeof(AllowAnonymousAttribute),
-                            true
-                        )
+                .Setup(c =>
+                    c.ActionDescriptor.ControllerDescriptor.IsDefined(
+                        typeof(AllowAnonymousAttribute),
+                        true
+                    )
                 )
                 .Returns(true);
 

@@ -173,10 +173,9 @@ namespace System.Web.Hosting
                 && (app_physical_dir.Length > 0)
             )
             {
-                new FileIOPermission(
-                    FileIOPermissionAccess.PathDiscovery,
-                    app_physical_dir
-                ).Demand();
+                new FileIOPermission(FileIOPermissionAccess.PathDiscovery, app_physical_dir).Demand(
+
+                );
             }
             return app_physical_dir;
         }

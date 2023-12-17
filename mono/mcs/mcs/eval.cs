@@ -1444,8 +1444,8 @@ namespace Mono.CSharp
 
             if (current_container.Containers != null)
             {
-                var existing = current_container.Containers.FirstOrDefault(
-                    l => l.MemberName.Basename == tc.MemberName.Basename
+                var existing = current_container.Containers.FirstOrDefault(l =>
+                    l.MemberName.Basename == tc.MemberName.Basename
                 );
                 if (existing != null)
                 {

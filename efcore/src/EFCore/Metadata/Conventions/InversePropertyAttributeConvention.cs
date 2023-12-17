@@ -92,23 +92,21 @@ public class InversePropertyAttributeConvention
         var inverseNavigationPropertyInfo =
             targetEntityType
                 .GetRuntimeProperties()
-                .Values.FirstOrDefault(
-                    p =>
-                        string.Equals(
-                            p.GetSimpleMemberName(),
-                            attribute.Property,
-                            StringComparison.Ordinal
-                        ) && navigationCandidates.ContainsKey(p)
+                .Values.FirstOrDefault(p =>
+                    string.Equals(
+                        p.GetSimpleMemberName(),
+                        attribute.Property,
+                        StringComparison.Ordinal
+                    ) && navigationCandidates.ContainsKey(p)
                 )
             ?? targetEntityType
                 .GetRuntimeProperties()
-                .Values.FirstOrDefault(
-                    p =>
-                        string.Equals(
-                            p.GetSimpleMemberName(),
-                            attribute.Property,
-                            StringComparison.OrdinalIgnoreCase
-                        ) && navigationCandidates.ContainsKey(p)
+                .Values.FirstOrDefault(p =>
+                    string.Equals(
+                        p.GetSimpleMemberName(),
+                        attribute.Property,
+                        StringComparison.OrdinalIgnoreCase
+                    ) && navigationCandidates.ContainsKey(p)
                 );
 
         if (

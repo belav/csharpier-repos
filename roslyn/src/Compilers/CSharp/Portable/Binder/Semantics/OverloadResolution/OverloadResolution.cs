@@ -226,13 +226,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             // types derived from System.Object.
             bool checkOverriddenOrHidden = !(
                 isExtensionMethodResolution
-                && members.All(
-                    static m =>
-                        m.ContainingSymbol
-                            is NamedTypeSymbol
-                            {
-                                BaseTypeNoUseSiteDiagnostics.SpecialType: SpecialType.System_Object
-                            }
+                && members.All(static m =>
+                    m.ContainingSymbol
+                        is NamedTypeSymbol
+                        {
+                            BaseTypeNoUseSiteDiagnostics.SpecialType: SpecialType.System_Object
+                        }
                 )
             );
 
@@ -659,11 +658,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var unmanagedCallingConventionTypes =
                             unmanagedCallersOnlyData.CallingConventionTypes;
                         Debug.Assert(
-                            unmanagedCallingConventionTypes.All(
-                                u =>
-                                    FunctionPointerTypeSymbol.IsCallingConventionModifier(
-                                        (NamedTypeSymbol)u
-                                    )
+                            unmanagedCallingConventionTypes.All(u =>
+                                FunctionPointerTypeSymbol.IsCallingConventionModifier(
+                                    (NamedTypeSymbol)u
+                                )
                             )
                         );
 

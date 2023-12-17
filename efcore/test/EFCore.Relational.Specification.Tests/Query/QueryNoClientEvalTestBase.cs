@@ -56,11 +56,8 @@ public abstract class QueryNoClientEvalTestBase<TFixture> : IClassFixture<TFixtu
         AssertTranslationFailedWithDetails(
             () =>
                 context
-                    .Customers.Where(
-                        c1 =>
-                            context.Customers.Any(
-                                c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon
-                            )
+                    .Customers.Where(c1 =>
+                        context.Customers.Any(c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon)
                     )
                     .ToList(),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))

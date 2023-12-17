@@ -532,13 +532,12 @@ public class ShutdownTests : IISFunctionalTestBase
 
         await deploymentResult.AssertStarts();
 
-        deploymentResult.ModifyWebConfig(
-            element =>
-                element
-                    .Descendants("system.webServer")
-                    .Single()
-                    .GetOrAdd("aspNetCore")
-                    .SetAttributeValue("hostingModel", "inprocess")
+        deploymentResult.ModifyWebConfig(element =>
+            element
+                .Descendants("system.webServer")
+                .Single()
+                .GetOrAdd("aspNetCore")
+                .SetAttributeValue("hostingModel", "inprocess")
         );
 
         // Have to retry here to allow ANCM to receive notification and react to it

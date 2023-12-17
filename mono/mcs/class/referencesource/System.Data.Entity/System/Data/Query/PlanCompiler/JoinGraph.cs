@@ -1286,8 +1286,8 @@ namespace System.Data.Query.PlanCompiler
                     useCompatMode
                         ? (
                             augmentedJoinNode.Children.All(c => c is AugmentedTableNode)
-                            && augmentedJoinNode.JoinEdges.All(
-                                joinEdge => IsConstraintPresentForTurningIntoInnerJoin(joinEdge)
+                            && augmentedJoinNode.JoinEdges.All(joinEdge =>
+                                IsConstraintPresentForTurningIntoInnerJoin(joinEdge)
                             )
                         )
                         : (

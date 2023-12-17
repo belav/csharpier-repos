@@ -27,12 +27,9 @@ public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>
 
         services
             .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
-            .AddDbContext<TestUserDbContext>(
-                o =>
-                    o.UseSqlite(fixture.Connection)
-                        .ConfigureWarnings(
-                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
-                        )
+            .AddDbContext<TestUserDbContext>(o =>
+                o.UseSqlite(fixture.Connection)
+                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
             )
             .AddIdentityCore<IdentityUser>(o => { })
             .AddEntityFrameworkStores<TestUserDbContext>();

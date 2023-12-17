@@ -76,8 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             Assert.Equal(descriptions.Length, symbols.Length);
             AssertEx.SetEqual(
-                symbols.Select(
-                    s => s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                symbols.Select(s => s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
                 ),
                 descriptions
             );
@@ -573,12 +572,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var model = compilation.GetSemanticModel(tree);
             var annotationsByMethod = allAnnotations
-                .GroupBy(
-                    annotation =>
-                        annotation
-                            .Expression.Ancestors()
-                            .OfType<BaseMethodDeclarationSyntax>()
-                            .First()
+                .GroupBy(annotation =>
+                    annotation.Expression.Ancestors().OfType<BaseMethodDeclarationSyntax>().First()
                 )
                 .ToArray();
             foreach (var annotations in annotationsByMethod)

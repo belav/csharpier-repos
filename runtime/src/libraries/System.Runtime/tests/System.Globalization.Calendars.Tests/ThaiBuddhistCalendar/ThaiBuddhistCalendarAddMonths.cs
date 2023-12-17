@@ -8,8 +8,9 @@ namespace System.Globalization.Tests
 {
     public class ThaiBuddhistCalendarAddMonths
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator =
-            new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator(
+
+        );
 
         public static IEnumerable<object[]> AddMonths_TestData()
         {

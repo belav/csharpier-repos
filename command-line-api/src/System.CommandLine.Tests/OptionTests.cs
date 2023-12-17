@@ -256,15 +256,14 @@ namespace System.CommandLine.Tests
         public void Option_T_default_value_is_validated()
         {
             var option = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
-            option.Validators.Add(
-                symbol =>
-                    symbol.AddError(
-                        symbol
-                            .Tokens.Select(t => t.Value)
-                            .Where(v => v == "123")
-                            .Select(_ => "ERR")
-                            .First()
-                    )
+            option.Validators.Add(symbol =>
+                symbol.AddError(
+                    symbol
+                        .Tokens.Select(t => t.Value)
+                        .Where(v => v == "123")
+                        .Select(_ => "ERR")
+                        .First()
+                )
             );
 
             new CliRootCommand { option }

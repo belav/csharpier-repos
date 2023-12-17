@@ -28,8 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )]
         public CSharpSyntaxGeneratorInternal() { }
 
-        public static readonly SyntaxGeneratorInternal Instance =
-            new CSharpSyntaxGeneratorInternal();
+        public static readonly SyntaxGeneratorInternal Instance = new CSharpSyntaxGeneratorInternal(
+
+        );
 
         public override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

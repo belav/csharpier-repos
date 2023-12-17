@@ -108,9 +108,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                     Value = GetMarkdownString(descriptionBuilder)
                 },
                 RawContent = new ClassifiedTextElement(
-                    descriptionBuilder.Select(
-                        tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
-                    )
+                    descriptionBuilder.Select(tp => new ClassifiedTextRun(
+                        tp.Tag.ToClassificationTypeName(),
+                        tp.Text
+                    ))
                 )
             };
 

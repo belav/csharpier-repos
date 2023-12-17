@@ -1171,8 +1171,8 @@ public class Program
                 return tree.GetRoot()
                     .DescendantNodes()
                     .OfType<InvocationExpressionSyntax>()
-                    .Where(
-                        e => e.Expression is IdentifierNameSyntax { Identifier.ValueText: "nameof" }
+                    .Where(e =>
+                        e.Expression is IdentifierNameSyntax { Identifier.ValueText: "nameof" }
                     )
                     .ToImmutableArray();
             }
@@ -1275,8 +1275,8 @@ public class Program
                 return tree.GetRoot()
                     .DescendantNodes()
                     .OfType<InvocationExpressionSyntax>()
-                    .Where(
-                        e => e.Expression is IdentifierNameSyntax { Identifier.ValueText: "nameof" }
+                    .Where(e =>
+                        e.Expression is IdentifierNameSyntax { Identifier.ValueText: "nameof" }
                     )
                     .ToImmutableArray();
             }
@@ -1386,8 +1386,8 @@ public class Program
                 return tree.GetRoot()
                     .DescendantNodes()
                     .OfType<InvocationExpressionSyntax>()
-                    .Where(
-                        e => e.Expression is IdentifierNameSyntax { Identifier.ValueText: "nameof" }
+                    .Where(e =>
+                        e.Expression is IdentifierNameSyntax { Identifier.ValueText: "nameof" }
                     )
                     .ToImmutableArray();
             }
@@ -1498,8 +1498,8 @@ public class Program
                 return tree.GetRoot()
                     .DescendantNodes()
                     .OfType<InvocationExpressionSyntax>()
-                    .Where(
-                        e => e.Expression is IdentifierNameSyntax { Identifier.ValueText: "nameof" }
+                    .Where(e =>
+                        e.Expression is IdentifierNameSyntax { Identifier.ValueText: "nameof" }
                     )
                     .ToImmutableArray();
             }

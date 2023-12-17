@@ -65,8 +65,8 @@ internal abstract class AbstractEmbeddedLanguageFeatureService<TService>
             .ToImmutableArray();
 
         // Grab out the services that handle unannotated literals and APIs.
-        _legacyServices = orderedFeatureProviders.WhereAsArray(
-            c => c.Metadata.SupportsUnannotatedAPIs
+        _legacyServices = orderedFeatureProviders.WhereAsArray(c =>
+            c.Metadata.SupportsUnannotatedAPIs
         );
 
         using var _ = PooledDictionary<

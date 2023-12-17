@@ -248,8 +248,8 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
             includeReducedExtensionMethods: true
         );
 
-        return addMethods.Any(
-            static m => m is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any()
+        return addMethods.Any(static m =>
+            m is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any()
         );
     }
 

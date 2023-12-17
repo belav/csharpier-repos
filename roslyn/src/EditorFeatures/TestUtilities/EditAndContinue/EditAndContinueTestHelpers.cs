@@ -402,13 +402,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             // string comparison to simplify understanding why a test failed:
             AssertEx.Equal(
-                expectedSemanticEdits.Select(
-                    e =>
-                        $"{e.Kind}: {e.SymbolProvider((e.Kind == SemanticEditKind.Delete ? oldCompilation : newCompilation))}"
+                expectedSemanticEdits.Select(e =>
+                    $"{e.Kind}: {e.SymbolProvider((e.Kind == SemanticEditKind.Delete ? oldCompilation : newCompilation))}"
                 ),
-                actualSemanticEdits.Select(
-                    e =>
-                        $"{e.Kind}: {e.Symbol.Resolve(e.Kind == SemanticEditKind.Delete ? oldCompilation : newCompilation).Symbol}"
+                actualSemanticEdits.Select(e =>
+                    $"{e.Kind}: {e.Symbol.Resolve(e.Kind == SemanticEditKind.Delete ? oldCompilation : newCompilation).Symbol}"
                 ),
                 message: message
             );
@@ -676,20 +674,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 matches
                     .OrderBy(partners => partners.Key.GetLocation().SourceSpan.Start)
                     .ThenByDescending(partners => partners.Key.Span.Length)
-                    .Select(
-                        partners =>
-                            new MatchingPair
-                            {
-                                Old = partners
-                                    .Key.ToString()
-                                    .Replace("\r\n", " ")
-                                    .Replace("\n", " "),
-                                New = partners
-                                    .Value.ToString()
-                                    .Replace("\r\n", " ")
-                                    .Replace("\n", " ")
-                            }
-                    )
+                    .Select(partners => new MatchingPair
+                    {
+                        Old = partners.Key.ToString().Replace("\r\n", " ").Replace("\n", " "),
+                        New = partners.Value.ToString().Replace("\r\n", " ").Replace("\n", " ")
+                    })
             );
         }
     }

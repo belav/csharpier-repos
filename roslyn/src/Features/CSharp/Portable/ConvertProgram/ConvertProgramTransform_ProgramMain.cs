@@ -227,10 +227,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             // Remove comment explaining top level statements as it isn't relevant if the user switches back to full
             // Program.Main form.
             var leadingTrivia = node.GetLeadingTrivia();
-            var comment = leadingTrivia.FirstOrNull(
-                c =>
-                    c.Kind() is SyntaxKind.SingleLineCommentTrivia
-                    && c.ToString().Contains("https://aka.ms/new-console-template")
+            var comment = leadingTrivia.FirstOrNull(c =>
+                c.Kind() is SyntaxKind.SingleLineCommentTrivia
+                && c.ToString().Contains("https://aka.ms/new-console-template")
             );
             if (comment == null)
                 return node;

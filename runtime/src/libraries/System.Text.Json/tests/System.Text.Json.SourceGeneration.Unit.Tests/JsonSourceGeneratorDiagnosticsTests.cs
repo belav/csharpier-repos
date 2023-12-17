@@ -99,8 +99,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             // Compile the referenced assembly first.
             Compilation campaignCompilation =
                 CompilationHelper.CreateCampaignSummaryViewModelCompilation();
-            Compilation eventCompilation =
-                CompilationHelper.CreateActiveOrUpcomingEventCompilation();
+            Compilation eventCompilation = CompilationHelper.CreateActiveOrUpcomingEventCompilation(
+
+            );
 
             // Emit the image of the referenced assembly.
             byte[] campaignImage = CompilationHelper.CreateAssemblyImage(campaignCompilation);
@@ -150,8 +151,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             // Compile the referenced assembly first.
             Compilation campaignCompilation =
                 CompilationHelper.CreateCampaignSummaryViewModelCompilation();
-            Compilation eventCompilation =
-                CompilationHelper.CreateActiveOrUpcomingEventCompilation();
+            Compilation eventCompilation = CompilationHelper.CreateActiveOrUpcomingEventCompilation(
+
+            );
 
             // Emit the image of the referenced assembly.
             byte[] campaignImage = CompilationHelper.CreateAssemblyImage(campaignCompilation);

@@ -1879,8 +1879,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.RequestServices = new ServiceCollection()
             .AddSingleton(LoggerFactory)
-            .ConfigureHttpJsonOptions(
-                o => o.SerializerOptions.TypeInfoResolver = TestJsonContext.Default
+            .ConfigureHttpJsonOptions(o =>
+                o.SerializerOptions.TypeInfoResolver = TestJsonContext.Default
             )
             .BuildServiceProvider();
 

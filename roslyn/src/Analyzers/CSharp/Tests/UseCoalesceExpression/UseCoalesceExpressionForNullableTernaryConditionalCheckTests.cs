@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
             Workspace workspace
         ) =>
             (
-                new CSharpUseCoalesceExpressionForNullableTernaryConditionalCheckDiagnosticAnalyzer(),
+                new CSharpUseCoalesceExpressionForNullableTernaryConditionalCheckDiagnosticAnalyzer(
+
+                ),
                 new UseCoalesceExpressionForNullableTernaryConditionalCheckCodeFixProvider()
             );
 

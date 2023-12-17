@@ -80,10 +80,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             _rootScope = serviceProvider.Root;
             _scopeResolverCache =
-                new ConcurrentDictionary<
-                    ServiceCacheKey,
-                    Func<ServiceProviderEngineScope, object>
-                >();
+                new ConcurrentDictionary<ServiceCacheKey, Func<ServiceProviderEngineScope, object>>(
+
+                );
             _buildTypeDelegate = (key, cs) => BuildNoCache(cs);
         }
 
@@ -225,8 +224,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
             return NewArrayInit(
                 callSite.ItemType,
-                callSite.ServiceCallSites.Select(
-                    cs => Convert(VisitCallSite(cs, context), callSite.ItemType)
+                callSite.ServiceCallSites.Select(cs =>
+                    Convert(VisitCallSite(cs, context), callSite.ItemType)
                 )
             );
         }

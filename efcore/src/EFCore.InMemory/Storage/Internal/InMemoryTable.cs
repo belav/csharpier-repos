@@ -474,11 +474,10 @@ public class InMemoryTable<TKey> : IInMemoryTable
                     "{"
                         + string.Join(
                             ", ",
-                            concurrencyConflicts.Select(
-                                c =>
-                                    c.Key.Name
-                                    + ": "
-                                    + Convert.ToString(c.Value, CultureInfo.InvariantCulture)
+                            concurrencyConflicts.Select(c =>
+                                c.Key.Name
+                                + ": "
+                                + Convert.ToString(c.Value, CultureInfo.InvariantCulture)
                             )
                         )
                         + "}"

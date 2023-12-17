@@ -5852,9 +5852,9 @@ struct S
                     var methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         "int?",
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnTypeWithAnnotations.ToDisplayString()
+                        ((MethodSymbol)methodData.Method).ReturnTypeWithAnnotations.ToDisplayString(
+
+                        )
                     );
                     methodData.VerifyIL(
                         @"{
@@ -5879,9 +5879,9 @@ struct S
                     methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         "int?",
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnTypeWithAnnotations.ToDisplayString()
+                        ((MethodSymbol)methodData.Method).ReturnTypeWithAnnotations.ToDisplayString(
+
+                        )
                     );
 
                     testData = new CompilationTestData();

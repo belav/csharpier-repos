@@ -94,8 +94,8 @@ internal class DefinitionContextTracker(
         if (
             reason == ConnectionReason.TextViewLifetime
             || !textView
-                .BufferGraph.GetTextBuffers(
-                    b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
+                .BufferGraph.GetTextBuffers(b =>
+                    b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
                 )
                 .Any()
         )

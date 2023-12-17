@@ -251,8 +251,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
             if (featureNames.Contains(FeatureAttribute.NavigateTo))
             {
-                var statusService =
-                    workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                var statusService = workspace.Services.GetRequiredService<IWorkspaceStatusService>(
+
+                );
                 Contract.ThrowIfFalse(await statusService.IsFullyLoadedAsync(cancellationToken));
 
                 // Make sure the "priming" operation has started for Nav To

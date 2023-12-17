@@ -26,15 +26,27 @@ namespace Mono.Linker.Tests.Cases.Reflection
             GetMethod_Name_BindingAttr.TestNullName();
             GetMethod_Name_BindingAttr.TestUnknownName("Unknown");
             GetMethod_Name_BindingAttr.TestUnknownNameAndWrongBindingFlags("Unknown");
-            GetMethod_Name_BindingAttr_Binder_Types_Modifiers.TestNameBindingFlagsAndParameterModifier();
-            GetMethod_Name_BindingAttr_Binder_CallConvention_Types_Modifiers.TestNameBindingFlagsCallingConventionParameterModifier();
+            GetMethod_Name_BindingAttr_Binder_Types_Modifiers.TestNameBindingFlagsAndParameterModifier(
+
+            );
+            GetMethod_Name_BindingAttr_Binder_CallConvention_Types_Modifiers.TestNameBindingFlagsCallingConventionParameterModifier(
+
+            );
 #if NETCOREAPP
             GetMethod_Name_BindingAttr_Types.TestNameBindingFlagsAndTypes();
             GetMethod_Name_GenericParameterCount_Types.TestNameWithIntAndType();
-            GetMethod_Name_GenericParameterCount_Types_Modifiers.TestNameWithIntAndTypeAndModifiers();
-            GetMethod_Name_GenericParameterCount_BindingAttr_Binder_Types_Modifiers.TestNameWithIntAndBindingFlags();
-            GetMethod_Name_GenericParameterCount_BindingAttr_Binder_Types_Modifiers_PrivateBinding.TestNameWithIntAndPrivateBindingFlags();
-            GetMethod_Name_GenericParameterCount_BindingAttr_Binder_CallConvention_Types_Modifiers.TestNameWithIntBindingFlagsCallingConventionParameter();
+            GetMethod_Name_GenericParameterCount_Types_Modifiers.TestNameWithIntAndTypeAndModifiers(
+
+            );
+            GetMethod_Name_GenericParameterCount_BindingAttr_Binder_Types_Modifiers.TestNameWithIntAndBindingFlags(
+
+            );
+            GetMethod_Name_GenericParameterCount_BindingAttr_Binder_Types_Modifiers_PrivateBinding.TestNameWithIntAndPrivateBindingFlags(
+
+            );
+            GetMethod_Name_GenericParameterCount_BindingAttr_Binder_CallConvention_Types_Modifiers.TestNameWithIntBindingFlagsCallingConventionParameter(
+
+            );
 #endif
             TestNullName();
             TestEmptyName();

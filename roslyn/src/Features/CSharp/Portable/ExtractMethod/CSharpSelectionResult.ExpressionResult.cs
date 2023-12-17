@@ -69,8 +69,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 // special case for array initializer and explicit cast
                 if (node.IsArrayInitializer())
                 {
-                    var variableDeclExpression =
-                        node.GetAncestorOrThis<VariableDeclarationSyntax>();
+                    var variableDeclExpression = node.GetAncestorOrThis<VariableDeclarationSyntax>(
+
+                    );
                     if (variableDeclExpression != null)
                         return (
                             model.GetTypeInfo(variableDeclExpression.Type).Type,

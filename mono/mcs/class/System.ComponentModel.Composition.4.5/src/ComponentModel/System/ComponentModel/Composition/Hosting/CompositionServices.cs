@@ -620,9 +620,10 @@ namespace System.ComponentModel.Composition.Hosting
             // NOTE : this is a carefully found balance between eager and delay-evaluation - the properties are filtered once and upfront
             // whereas the key/Type pairs are created every time. The latter is fine as KVPs are structs and as such copied on access regardless.
             // This also allows us to avoid creation of List<KVP> which - at least according to FxCop - leads to isues with NGEN
-            return properties.Select(
-                property => new KeyValuePair<string, Type>(property.Name, property.PropertyType)
-            );
+            return properties.Select(property => new KeyValuePair<string, Type>(
+                property.Name,
+                property.PropertyType
+            ));
         }
 
         internal static IDictionary<string, object> GetImportMetadata(

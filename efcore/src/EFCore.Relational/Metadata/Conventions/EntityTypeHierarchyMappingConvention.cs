@@ -98,11 +98,10 @@ public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
                         pk != null
                         && !entityType
                             .FindDeclaredForeignKeys(pk.Properties)
-                            .Any(
-                                fk =>
-                                    fk.PrincipalKey.IsPrimaryKey()
-                                    && fk.PrincipalEntityType.IsAssignableFrom(entityType)
-                                    && fk.PrincipalEntityType != entityType
+                            .Any(fk =>
+                                fk.PrincipalKey.IsPrimaryKey()
+                                && fk.PrincipalEntityType.IsAssignableFrom(entityType)
+                                && fk.PrincipalEntityType != entityType
                             )
                     )
                     {

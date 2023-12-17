@@ -68,7 +68,9 @@ namespace System.Data.Spatial
             {
                 if (this.spatialSvcs != null)
                 {
-                    throw SpatialExceptions.WellKnownValueSerializationPropertyNotDirectlySettable();
+                    throw SpatialExceptions.WellKnownValueSerializationPropertyNotDirectlySettable(
+
+                    );
                 }
 
                 DbSpatialServices resolvedServices = DbSpatialServices.Default;

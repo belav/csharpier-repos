@@ -278,8 +278,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         case TypeKind.Struct:
                             if (constraintType.IsNullableType())
                             {
-                                var underlyingType =
-                                    constraintType.Type.GetNullableUnderlyingType();
+                                var underlyingType = constraintType.Type.GetNullableUnderlyingType(
+
+                                );
                                 if (underlyingType.TypeKind == TypeKind.TypeParameter)
                                 {
                                     var underlyingTypeParameter =

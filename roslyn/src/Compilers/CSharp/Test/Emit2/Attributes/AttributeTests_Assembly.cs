@@ -1890,9 +1890,8 @@ public class C {}
 
             var sourceAttributes = compilation
                 .Assembly.GetAttributes()
-                .Where(
-                    a =>
-                        string.Equals(a.AttributeClass.Name, attrTypeName, StringComparison.Ordinal)
+                .Where(a =>
+                    string.Equals(a.AttributeClass.Name, attrTypeName, StringComparison.Ordinal)
                 );
 
             Assert.Equal(expectedSrcAttrCount, sourceAttributes.Count());
@@ -1909,13 +1908,12 @@ public class C {}
 
                     var metadataAttributes = module
                         .ContainingAssembly.GetAttributes()
-                        .Where(
-                            a =>
-                                string.Equals(
-                                    a.AttributeClass.Name,
-                                    attrTypeName,
-                                    StringComparison.Ordinal
-                                )
+                        .Where(a =>
+                            string.Equals(
+                                a.AttributeClass.Name,
+                                attrTypeName,
+                                StringComparison.Ordinal
+                            )
                         );
 
                     Assert.Equal(expectedEmittedAttrsCount, metadataAttributes.Count());
@@ -3447,9 +3445,8 @@ public class C { }
         {
             return assembly
                 .GetAttributes()
-                .Where(
-                    data =>
-                        data.IsTargetAttribute(AttributeDescription.AssemblyDescriptionAttribute)
+                .Where(data =>
+                    data.IsTargetAttribute(AttributeDescription.AssemblyDescriptionAttribute)
                 );
         }
 
@@ -3656,11 +3653,8 @@ public class C { }
                     symbolValidator: (ModuleSymbol m) =>
                     {
                         var attrs = m.ContainingAssembly.GetAttributes();
-                        var attrlist = attrs.Where(
-                            a =>
-                                a.IsTargetAttribute(
-                                    AttributeDescription.AssemblyFileVersionAttribute
-                                )
+                        var attrlist = attrs.Where(a =>
+                            a.IsTargetAttribute(AttributeDescription.AssemblyFileVersionAttribute)
                         );
 
                         Assert.Equal(1, attrlist.Count());

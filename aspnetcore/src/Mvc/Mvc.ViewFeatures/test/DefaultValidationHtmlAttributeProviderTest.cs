@@ -124,13 +124,12 @@ public class DefaultValidationHtmlAttributeProviderTest
 
         var attributeProviderMock = new Mock<ValidationHtmlAttributeProvider>() { CallBase = true };
         attributeProviderMock
-            .Setup(
-                p =>
-                    p.AddValidationAttributes(
-                        It.IsAny<ViewContext>(),
-                        It.IsAny<ModelExplorer>(),
-                        It.IsAny<IDictionary<string, string>>()
-                    )
+            .Setup(p =>
+                p.AddValidationAttributes(
+                    It.IsAny<ViewContext>(),
+                    It.IsAny<ModelExplorer>(),
+                    It.IsAny<IDictionary<string, string>>()
+                )
             )
             .Verifiable();
         var attributeProvider = attributeProviderMock.Object;
@@ -205,13 +204,12 @@ public class DefaultValidationHtmlAttributeProviderTest
 
         var attributeProviderMock = new Mock<ValidationHtmlAttributeProvider>() { CallBase = true };
         attributeProviderMock
-            .Setup(
-                p =>
-                    p.AddValidationAttributes(
-                        It.IsAny<ViewContext>(),
-                        It.IsAny<ModelExplorer>(),
-                        It.IsAny<IDictionary<string, string>>()
-                    )
+            .Setup(p =>
+                p.AddValidationAttributes(
+                    It.IsAny<ViewContext>(),
+                    It.IsAny<ModelExplorer>(),
+                    It.IsAny<IDictionary<string, string>>()
+                )
             )
             .Verifiable();
         var attributeProvider = attributeProviderMock.Object;

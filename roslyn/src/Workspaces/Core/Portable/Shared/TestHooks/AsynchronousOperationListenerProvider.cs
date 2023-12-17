@@ -82,8 +82,10 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                 concurrencyLevel: 2,
                 capacity: 20
             );
-            _createCallback = name =>
-                new AsynchronousOperationListener(name, DiagnosticTokensEnabled);
+            _createCallback = name => new AsynchronousOperationListener(
+                name,
+                DiagnosticTokensEnabled
+            );
         }
 
         public IAsynchronousOperationListener GetListener(string featureName)

@@ -424,11 +424,10 @@ public class RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>
         ArgumentNullException.ThrowIfNull(role);
         ArgumentNullException.ThrowIfNull(claim);
         var claims = await RoleClaims
-            .Where(
-                rc =>
-                    rc.RoleId.Equals(role.Id)
-                    && rc.ClaimValue == claim.Value
-                    && rc.ClaimType == claim.Type
+            .Where(rc =>
+                rc.RoleId.Equals(role.Id)
+                && rc.ClaimValue == claim.Value
+                && rc.ClaimType == claim.Type
             )
             .ToListAsync(cancellationToken);
         foreach (var c in claims)

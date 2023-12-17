@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                         TextView.Caret.Position.BufferPosition.Position
                     );
 
-                var virtualSpaces = spans.SingleOrDefault(
-                    kvp => kvp.Key.StartsWith("VirtualSpaces#")
+                var virtualSpaces = spans.SingleOrDefault(kvp =>
+                    kvp.Key.StartsWith("VirtualSpaces#")
                 );
                 if (virtualSpaces.Key != null)
                 {

@@ -230,17 +230,16 @@ public class QueryCompilationContext
             ? query
             : Expression.Block(
                 _runtimeParameters
-                    .Select(
-                        kv =>
-                            Expression.Call(
-                                QueryContextParameter,
-                                QueryContextAddParameterMethodInfo,
-                                Expression.Constant(kv.Key),
-                                Expression.Convert(
-                                    Expression.Invoke(kv.Value, QueryContextParameter),
-                                    typeof(object)
-                                )
+                    .Select(kv =>
+                        Expression.Call(
+                            QueryContextParameter,
+                            QueryContextAddParameterMethodInfo,
+                            Expression.Constant(kv.Key),
+                            Expression.Convert(
+                                Expression.Invoke(kv.Value, QueryContextParameter),
+                                typeof(object)
                             )
+                        )
                     )
                     .Append(query)
             );

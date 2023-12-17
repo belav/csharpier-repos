@@ -49,15 +49,14 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
         };
 
         var app = endpoints.CreateApplicationBuilder();
-        app.Use(
-            next =>
-                context =>
-                {
-                    // Set endpoint to null so the static files middleware will handle the request.
-                    context.SetEndpoint(null);
+        app.Use(next =>
+            context =>
+            {
+                // Set endpoint to null so the static files middleware will handle the request.
+                context.SetEndpoint(null);
 
-                    return next(context);
-                }
+                return next(context);
+            }
         );
         app.UseStaticFiles(options);
 
@@ -89,7 +88,9 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
             // sources, once we figure out the exact scenarios for
             // https://github.com/dotnet/aspnetcore/issues/46992
             var factory =
-                endpoints.ServiceProvider.GetRequiredService<RazorComponentEndpointDataSourceFactory>();
+                endpoints.ServiceProvider.GetRequiredService<RazorComponentEndpointDataSourceFactory>(
+
+                );
             dataSource = factory.CreateDataSource<TRootComponent>(endpoints);
             endpoints.DataSources.Add(dataSource);
         }

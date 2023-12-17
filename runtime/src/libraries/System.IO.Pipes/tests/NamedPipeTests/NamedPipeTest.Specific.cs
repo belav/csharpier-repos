@@ -296,10 +296,9 @@ namespace System.IO.Pipes.Tests
                     from server in servers
                     select server.WaitForConnectionAsync()
                 ).ToArray();
-                Task[] clientWaits = (
-                    from client in clients
-                    select client.ConnectAsync()
-                ).ToArray();
+                Task[] clientWaits = (from client in clients select client.ConnectAsync()).ToArray(
+
+                );
                 await serverWaits.Concat(clientWaits).ToArray().WhenAllOrAnyFailed();
 
                 Task[] serverSends = (

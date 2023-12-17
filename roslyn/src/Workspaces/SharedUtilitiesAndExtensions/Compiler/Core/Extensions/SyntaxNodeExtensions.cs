@@ -1080,8 +1080,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 var ifStack = pooledIfStack.Object;
 
                 foreach (
-                    var token in root.DescendantTokens(
-                        descendIntoChildren: static node => node.ContainsDirectives
+                    var token in root.DescendantTokens(descendIntoChildren: static node =>
+                        node.ContainsDirectives
                     )
                 )
                 {

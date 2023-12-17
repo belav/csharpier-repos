@@ -168,13 +168,12 @@ internal sealed class AttributeRoute : IRouter
         {
             var allErrors = string.Join(
                 Environment.NewLine + Environment.NewLine,
-                errors.Select(
-                    e =>
-                        Resources.FormatAttributeRoute_IndividualErrorMessage(
-                            e.ActionDescriptor.DisplayName,
-                            Environment.NewLine,
-                            e.ErrorMessage
-                        )
+                errors.Select(e =>
+                    Resources.FormatAttributeRoute_IndividualErrorMessage(
+                        e.ActionDescriptor.DisplayName,
+                        Environment.NewLine,
+                        e.ErrorMessage
+                    )
                 )
             );
 

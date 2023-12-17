@@ -174,8 +174,8 @@ namespace System.Net.Http.Formatting
         public void ComparerSortsListCorrectly(string[] unsorted, string[] expectedSorted)
         {
             // Arrange
-            IEnumerable<StringWithQualityHeaderValue> unsortedValues = unsorted.Select(
-                u => StringWithQualityHeaderValue.Parse(u)
+            IEnumerable<StringWithQualityHeaderValue> unsortedValues = unsorted.Select(u =>
+                StringWithQualityHeaderValue.Parse(u)
             );
 
             IEnumerable<StringWithQualityHeaderValue> expectedSortedValues = expectedSorted.Select(

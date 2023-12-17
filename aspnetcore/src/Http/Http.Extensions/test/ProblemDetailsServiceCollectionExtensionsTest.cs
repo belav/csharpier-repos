@@ -91,8 +91,8 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         collection.AddProblemDetails();
 
         // Assert
-        var serviceDescriptors = collection.Where(
-            serviceDescriptor => serviceDescriptor.ServiceType == typeof(IProblemDetailsWriter)
+        var serviceDescriptors = collection.Where(serviceDescriptor =>
+            serviceDescriptor.ServiceType == typeof(IProblemDetailsWriter)
         );
         Assert.True(
             (expectedCount == serviceDescriptors.Count()),
@@ -126,8 +126,8 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         // Arrange
         var collection = new ServiceCollection();
         collection.AddOptions<JsonOptions>();
-        collection.ConfigureAll<JsonOptions>(
-            options => options.SerializerOptions.TypeInfoResolver = new TestExtensionsJsonContext()
+        collection.ConfigureAll<JsonOptions>(options =>
+            options.SerializerOptions.TypeInfoResolver = new TestExtensionsJsonContext()
         );
 
         // Act
@@ -196,28 +196,25 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
 
         if (behavior == CustomContextBehavior.Prepend)
         {
-            collection.ConfigureAll<JsonOptions>(
-                options =>
-                    options.SerializerOptions.TypeInfoResolverChain.Insert(
-                        0,
-                        TestExtensionsJsonContext.Default
-                    )
+            collection.ConfigureAll<JsonOptions>(options =>
+                options.SerializerOptions.TypeInfoResolverChain.Insert(
+                    0,
+                    TestExtensionsJsonContext.Default
+                )
             );
         }
         else if (behavior == CustomContextBehavior.Append)
         {
-            collection.ConfigureAll<JsonOptions>(
-                options =>
-                    options.SerializerOptions.TypeInfoResolverChain.Add(
-                        TestExtensionsJsonContext.Default
-                    )
+            collection.ConfigureAll<JsonOptions>(options =>
+                options.SerializerOptions.TypeInfoResolverChain.Add(
+                    TestExtensionsJsonContext.Default
+                )
             );
         }
         else
         {
-            collection.ConfigureAll<JsonOptions>(
-                options =>
-                    options.SerializerOptions.TypeInfoResolver = TestExtensionsJsonContext.Default
+            collection.ConfigureAll<JsonOptions>(options =>
+                options.SerializerOptions.TypeInfoResolver = TestExtensionsJsonContext.Default
             );
         }
 
@@ -250,8 +247,8 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         // Arrange
         var collection = new ServiceCollection();
         collection.AddOptions<JsonOptions>();
-        collection.ConfigureAll<JsonOptions>(
-            options => options.SerializerOptions.TypeInfoResolver = null
+        collection.ConfigureAll<JsonOptions>(options =>
+            options.SerializerOptions.TypeInfoResolver = null
         );
 
         // Act
@@ -277,9 +274,8 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         // Arrange
         var collection = new ServiceCollection();
         collection.AddOptions<JsonOptions>();
-        collection.ConfigureAll<JsonOptions>(
-            options =>
-                options.SerializerOptions.TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+        collection.ConfigureAll<JsonOptions>(options =>
+            options.SerializerOptions.TypeInfoResolver = new DefaultJsonTypeInfoResolver()
         );
 
         // Act
@@ -320,12 +316,8 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
 
         // add any custom ProblemDetails TypeInfoResolvers after calling AddProblemDetails()
         var customProblemDetailsResolver = new CustomProblemDetailsTypeInfoResolver();
-        collection.ConfigureAll<JsonOptions>(
-            options =>
-                options.SerializerOptions.TypeInfoResolverChain.Insert(
-                    0,
-                    customProblemDetailsResolver
-                )
+        collection.ConfigureAll<JsonOptions>(options =>
+            options.SerializerOptions.TypeInfoResolverChain.Insert(0, customProblemDetailsResolver)
         );
 
         // Assert

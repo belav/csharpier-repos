@@ -283,13 +283,10 @@ namespace System.Data.Mapping.Update.Internal
 
                         foreach (
                             var resultColumn in m_resultColumns
-                                .Select(
-                                    r =>
-                                        new KeyValuePair<int, PropagatorResult>(
-                                            GetColumnOrdinal(translator, reader, r.Key),
-                                            r.Value
-                                        )
-                                )
+                                .Select(r => new KeyValuePair<int, PropagatorResult>(
+                                    GetColumnOrdinal(translator, reader, r.Key),
+                                    r.Value
+                                ))
                                 .OrderBy(r => r.Key)
                         ) // order by column ordinal to avoid breaking SequentialAccess readers
                         {

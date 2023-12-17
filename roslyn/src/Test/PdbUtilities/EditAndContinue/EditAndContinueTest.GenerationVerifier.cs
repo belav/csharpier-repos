@@ -99,12 +99,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             internal void VerifyDeletedMembers(params string[] expected)
             {
-                var actual = _generationInfo.Baseline.DeletedMembers.Select(
-                    e =>
-                        e.Key.ToString()
-                        + ": {"
-                        + string.Join(", ", e.Value.Select(v => v.Name))
-                        + "}"
+                var actual = _generationInfo.Baseline.DeletedMembers.Select(e =>
+                    e.Key.ToString() + ": {" + string.Join(", ", e.Value.Select(v => v.Name)) + "}"
                 );
                 AssertEx.SetEqual(
                     expected,
@@ -178,12 +174,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             public void VerifySynthesizedMembers(params string[] expected)
             {
-                var actual = _generationInfo.Baseline.SynthesizedMembers.Select(
-                    e =>
-                        e.Key.ToString()
-                        + ": {"
-                        + string.Join(", ", e.Value.Select(v => v.Name))
-                        + "}"
+                var actual = _generationInfo.Baseline.SynthesizedMembers.Select(e =>
+                    e.Key.ToString() + ": {" + string.Join(", ", e.Value.Select(v => v.Name)) + "}"
                 );
 
                 AssertEx.SetEqual(

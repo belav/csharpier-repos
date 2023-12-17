@@ -349,14 +349,13 @@ public class XmlKeyManagerTests
         DateTimeOffset expirationDate = activationDate.AddMonths(1);
         var mockInternalKeyManager = new Mock<IInternalXmlKeyManager>();
         mockInternalKeyManager
-            .Setup(
-                o =>
-                    o.CreateNewKey(
-                        It.IsAny<Guid>(),
-                        It.IsAny<DateTimeOffset>(),
-                        activationDate,
-                        expirationDate
-                    )
+            .Setup(o =>
+                o.CreateNewKey(
+                    It.IsAny<Guid>(),
+                    It.IsAny<DateTimeOffset>(),
+                    activationDate,
+                    expirationDate
+                )
             )
             .Callback<Guid, DateTimeOffset, DateTimeOffset, DateTimeOffset>(
                 (innerKeyId, innerCreationDate, innerActivationDate, innerExpirationDate) =>
@@ -864,13 +863,12 @@ public class XmlKeyManagerTests
         DateTimeOffset? actualRevocationDate = null;
         var mockInternalKeyManager = new Mock<IInternalXmlKeyManager>();
         mockInternalKeyManager
-            .Setup(
-                o =>
-                    o.RevokeSingleKey(
-                        keyToRevoke,
-                        It.IsAny<DateTimeOffset>(),
-                        "Here's some reason text."
-                    )
+            .Setup(o =>
+                o.RevokeSingleKey(
+                    keyToRevoke,
+                    It.IsAny<DateTimeOffset>(),
+                    "Here's some reason text."
+                )
             )
             .Callback<Guid, DateTimeOffset, string>(
                 (innerKeyId, innerRevocationDate, innerReason) =>

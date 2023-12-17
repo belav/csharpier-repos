@@ -140,13 +140,10 @@ namespace Microsoft.Interop
                                     InitializerExpression(
                                         SyntaxKind.CollectionInitializerExpression,
                                         SeparatedList<ExpressionSyntax>(
-                                            methodStub.CallingConvention.Array.Select(
-                                                callConv =>
-                                                    TypeOfExpression(
-                                                        TypeSyntaxes.CallConv(
-                                                            callConv.Name.ValueText
-                                                        )
-                                                    )
+                                            methodStub.CallingConvention.Array.Select(callConv =>
+                                                TypeOfExpression(
+                                                    TypeSyntaxes.CallConv(callConv.Name.ValueText)
+                                                )
                                             )
                                         )
                                     )

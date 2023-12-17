@@ -513,8 +513,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             Mock<MockableTokenValidator> mockValidator = new Mock<MockableTokenValidator>();
             mockValidator
-                .Setup(
-                    o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
+                .Setup(o =>
+                    o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
                 )
                 .Throws(new HttpAntiForgeryException("my-message"));
 
@@ -552,8 +552,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             Mock<MockableTokenValidator> mockValidator = new Mock<MockableTokenValidator>();
             mockValidator
-                .Setup(
-                    o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
+                .Setup(o =>
+                    o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
                 )
                 .Verifiable();
 
@@ -592,8 +592,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             Mock<MockableTokenValidator> mockValidator = new Mock<MockableTokenValidator>();
             mockValidator
-                .Setup(
-                    o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
+                .Setup(o =>
+                    o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
                 )
                 .Throws(new HttpAntiForgeryException("my-message"));
 
@@ -632,8 +632,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             Mock<MockableTokenValidator> mockValidator = new Mock<MockableTokenValidator>();
             mockValidator
-                .Setup(
-                    o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
+                .Setup(o =>
+                    o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
                 )
                 .Verifiable();
 

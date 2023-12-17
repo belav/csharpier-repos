@@ -417,8 +417,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     $"Expecting type for init method, {type.DisplayString}, to have both properties and ctor params."
                 );
 
-                IEnumerable<PropertySpec> initOnlyProps = type.Properties.Where(
-                    prop => prop is { SetOnInit: true }
+                IEnumerable<PropertySpec> initOnlyProps = type.Properties.Where(prop =>
+                    prop is { SetOnInit: true }
                 );
                 List<string> ctorArgList = new();
 

@@ -38,13 +38,14 @@ namespace System.Resources.Tests
         [Fact]
         public static void ExpectMissingManifestResourceException()
         {
-            MissingManifestResourceException e =
-                Assert.Throws<MissingManifestResourceException>(() =>
+            MissingManifestResourceException e = Assert.Throws<MissingManifestResourceException>(
+                () =>
                 {
                     Type resourceType = typeof(Resources.TestClassWithoutNeutralResources);
                     ResourceManager resourceManager = new ResourceManager(resourceType);
                     string actual = resourceManager.GetString("Any");
-                });
+                }
+            );
             Assert.NotNull(e.Message);
         }
 
@@ -297,14 +298,13 @@ namespace System.Resources.Tests
             using Barrier barrier = new(Threads);
             Task[] tasks = Enumerable
                 .Range(0, Threads)
-                .Select(
-                    _ =>
-                        Task.Factory.StartNew(
-                            WaitForBarrierThenEnumerateResources,
-                            CancellationToken.None,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default
-                        )
+                .Select(_ =>
+                    Task.Factory.StartNew(
+                        WaitForBarrierThenEnumerateResources,
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
                 )
                 .ToArray();
 

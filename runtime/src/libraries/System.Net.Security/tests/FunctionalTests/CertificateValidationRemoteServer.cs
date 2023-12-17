@@ -295,8 +295,9 @@ namespace System.Net.Security.Tests
                 {
                     issuingAuthority.Revoke(serverCert, serverCert.NotBefore);
 
-                    SslServerAuthenticationOptions serverOpts =
-                        new SslServerAuthenticationOptions();
+                    SslServerAuthenticationOptions serverOpts = new SslServerAuthenticationOptions(
+
+                    );
 
                     if (offlineContext.HasValue)
                     {

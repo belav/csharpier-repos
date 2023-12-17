@@ -59,13 +59,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [Fact]
         public void TwoAppFrameworksOnTopOfMiddleWare()
         {
-            RunTest(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.0")
-                            .WithFramework("MiddleWare", "2.1.0")
-                            .WithFramework("SerializerWare", "3.0.1")
-                            .WithFramework("OMWare", "7.3.1")
+            RunTest(runtimeConfig =>
+                    runtimeConfig
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.0")
+                        .WithFramework("MiddleWare", "2.1.0")
+                        .WithFramework("SerializerWare", "3.0.1")
+                        .WithFramework("OMWare", "7.3.1")
                 )
                 // https://github.com/dotnet/runtime/issues/71027
                 // This should pass just fine and resolve all frameworks correctly

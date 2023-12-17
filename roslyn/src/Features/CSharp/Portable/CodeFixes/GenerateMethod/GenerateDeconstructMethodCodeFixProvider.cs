@@ -63,12 +63,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateDeconstructMethod
 
             var deconstruction = token
                 .GetAncestors<SyntaxNode>()
-                .FirstOrDefault(
-                    n =>
-                        n.Kind()
-                            is SyntaxKind.SimpleAssignmentExpression
-                                or SyntaxKind.ForEachVariableStatement
-                                or SyntaxKind.PositionalPatternClause
+                .FirstOrDefault(n =>
+                    n.Kind()
+                        is SyntaxKind.SimpleAssignmentExpression
+                            or SyntaxKind.ForEachVariableStatement
+                            or SyntaxKind.PositionalPatternClause
                 );
 
             if (deconstruction is null)
@@ -122,8 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateDeconstructMethod
             // Subpatterns are cast to ConstantPatternSyntax for use of GenerateNameForExpression and GetTypeInfo
             if (
                 deconstruction is PositionalPatternClauseSyntax positionalPatternClause
-                && positionalPatternClause.Subpatterns.Any(
-                    p => p.Pattern is not ConstantPatternSyntax
+                && positionalPatternClause.Subpatterns.Any(p =>
+                    p.Pattern is not ConstantPatternSyntax
                 )
             )
             {

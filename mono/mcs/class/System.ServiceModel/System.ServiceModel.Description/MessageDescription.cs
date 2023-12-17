@@ -42,8 +42,9 @@ namespace System.ServiceModel.Description
     {
         string action;
         MessageDirection direction;
-        MessagePropertyDescriptionCollection properties =
-            new MessagePropertyDescriptionCollection();
+        MessagePropertyDescriptionCollection properties = new MessagePropertyDescriptionCollection(
+
+        );
         MessageBodyDescription body = new MessageBodyDescription();
         MessageHeaderDescriptionCollection headers = new MessageHeaderDescriptionCollection();
         Type message_type;

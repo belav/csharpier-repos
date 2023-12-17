@@ -77,8 +77,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     receiverTypeSymbol,
                     cancellationToken
                 );
-                var targetTypesSymbolKeyData = targetTypesSymbols.SelectAsArray(
-                    s => SymbolKey.CreateString(s, cancellationToken)
+                var targetTypesSymbolKeyData = targetTypesSymbols.SelectAsArray(s =>
+                    SymbolKey.CreateString(s, cancellationToken)
                 );
 
                 // Call the project overload.  Add-import-for-extension-method doesn't search outside of the current

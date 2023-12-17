@@ -355,10 +355,9 @@ namespace System.Web.Mvc.Routing
                         return exception;
                     }
 
-                    foundCatchAllParameter = subsegments.Any<PathSubsegment>(
-                        seg =>
-                            (seg is PathParameterSubsegment)
-                            && ((PathParameterSubsegment)seg).IsCatchAll
+                    foundCatchAllParameter = subsegments.Any<PathSubsegment>(seg =>
+                        (seg is PathParameterSubsegment)
+                        && ((PathParameterSubsegment)seg).IsCatchAll
                     );
                 }
             }

@@ -39,10 +39,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 if (!_map.TryGetValue(documentId, out var secondMap))
                 {
                     secondMap =
-                        new Dictionary<
-                            object,
-                            WeakReference<AbstractTableEntriesSnapshot<TItem>>
-                        >();
+                        new Dictionary<object, WeakReference<AbstractTableEntriesSnapshot<TItem>>>(
+
+                        );
                     _map.Add(documentId, secondMap);
                 }
 
@@ -71,8 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             lock (_gate)
             {
                 foreach (
-                    var documentId in _map.Keys.Where(
-                        d => projectId == null ? true : d.ProjectId == projectId
+                    var documentId in _map.Keys.Where(d =>
+                        projectId == null ? true : d.ProjectId == projectId
                     )
                         .ToList()
                 )

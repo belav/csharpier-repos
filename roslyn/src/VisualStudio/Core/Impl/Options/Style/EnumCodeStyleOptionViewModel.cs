@@ -65,11 +65,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             _selectedPreference = Preferences[enumIndex];
 
-            var notificationViewModel = NotificationPreferences.Single(
-                i => i.Notification.Severity == codeStyleOption.Notification.Severity
+            var notificationViewModel = NotificationPreferences.Single(i =>
+                i.Notification.Severity == codeStyleOption.Notification.Severity
             );
-            _selectedNotificationPreference = NotificationPreferences.Single(
-                p => p.Notification.Severity == notificationViewModel.Notification.Severity
+            _selectedNotificationPreference = NotificationPreferences.Single(p =>
+                p.Notification.Severity == notificationViewModel.Notification.Severity
             );
 
             NotifyPropertyChanged(nameof(SelectedPreference));

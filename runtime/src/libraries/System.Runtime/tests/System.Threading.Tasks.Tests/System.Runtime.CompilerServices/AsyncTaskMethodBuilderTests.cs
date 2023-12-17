@@ -823,8 +823,8 @@ namespace System.Threading.Tasks.Tests
                             throw new XunitException(sb.ToString());
                         }
 
-                        EventWrittenEventArgs iam = events.SingleOrDefault(
-                            e => e.EventName == "IncompleteAsyncMethod"
+                        EventWrittenEventArgs iam = events.SingleOrDefault(e =>
+                            e.EventName == "IncompleteAsyncMethod"
                         );
                         if (iam == null)
                         {

@@ -61,8 +61,9 @@ namespace System.Workflow.Activities.Rules.Design
             {
                 if (DialogResult.OK == dlg.ShowDialog(this))
                 {
-                    RuleExpressionCondition declarativeRuleDefinition =
-                        new RuleExpressionCondition();
+                    RuleExpressionCondition declarativeRuleDefinition = new RuleExpressionCondition(
+
+                    );
                     declarativeRuleDefinition.Expression = dlg.Expression;
                     declarativeRuleDefinition.Name = this.CreateNewName();
                     this.declarativeConditionCollection.Add(declarativeRuleDefinition);

@@ -35,12 +35,12 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             return member switch
             {
                 FieldDeclarationSyntax fieldDeclaration
-                    => fieldDeclaration.Declaration.Variables.SelectAsArray(
-                        v => (declaration: (SyntaxNode)v, identifier: v.Identifier)
+                    => fieldDeclaration.Declaration.Variables.SelectAsArray(v =>
+                        (declaration: (SyntaxNode)v, identifier: v.Identifier)
                     ),
                 EventFieldDeclarationSyntax eventFieldDeclaration
-                    => eventFieldDeclaration.Declaration.Variables.SelectAsArray(
-                        v => (declaration: (SyntaxNode)v, identifier: v.Identifier)
+                    => eventFieldDeclaration.Declaration.Variables.SelectAsArray(v =>
+                        (declaration: (SyntaxNode)v, identifier: v.Identifier)
                     ),
                 _
                     => ImmutableArray.Create(

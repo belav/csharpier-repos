@@ -212,8 +212,8 @@ public class PropertyAsParameterInfoTests
     {
         var methodInfo = typeof(ArgumentList).GetMethod(methodName);
         var parameters = methodInfo.GetParameters();
-        return parameters.Single(
-            p => p.Name.Equals(parameterName, StringComparison.OrdinalIgnoreCase)
+        return parameters.Single(p =>
+            p.Name.Equals(parameterName, StringComparison.OrdinalIgnoreCase)
         );
     }
 

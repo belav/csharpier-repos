@@ -732,8 +732,8 @@ namespace System.Tests
         public void IsSZArray_TrueForSZArrayTypes()
         {
             foreach (
-                Type type in NonArrayBaseTypes.Select(
-                    nonArrayBaseType => nonArrayBaseType.MakeArrayType()
+                Type type in NonArrayBaseTypes.Select(nonArrayBaseType =>
+                    nonArrayBaseType.MakeArrayType()
                 )
             )
             {
@@ -745,8 +745,8 @@ namespace System.Tests
         public void IsSZArray_FalseForVariableBoundArrayTypes()
         {
             foreach (
-                Type type in NonArrayBaseTypes.Select(
-                    nonArrayBaseType => nonArrayBaseType.MakeArrayType(1)
+                Type type in NonArrayBaseTypes.Select(nonArrayBaseType =>
+                    nonArrayBaseType.MakeArrayType(1)
                 )
             )
             {
@@ -754,8 +754,8 @@ namespace System.Tests
             }
 
             foreach (
-                Type type in NonArrayBaseTypes.Select(
-                    nonArrayBaseType => nonArrayBaseType.MakeArrayType(2)
+                Type type in NonArrayBaseTypes.Select(nonArrayBaseType =>
+                    nonArrayBaseType.MakeArrayType(2)
                 )
             )
             {
@@ -794,8 +794,8 @@ namespace System.Tests
         public void IsVariableBoundArray_FalseForSZArrayTypes()
         {
             foreach (
-                Type type in NonArrayBaseTypes.Select(
-                    nonArrayBaseType => nonArrayBaseType.MakeArrayType()
+                Type type in NonArrayBaseTypes.Select(nonArrayBaseType =>
+                    nonArrayBaseType.MakeArrayType()
                 )
             )
             {
@@ -807,8 +807,8 @@ namespace System.Tests
         public void IsVariableBoundArray_TrueForVariableBoundArrayTypes()
         {
             foreach (
-                Type type in NonArrayBaseTypes.Select(
-                    nonArrayBaseType => nonArrayBaseType.MakeArrayType(1)
+                Type type in NonArrayBaseTypes.Select(nonArrayBaseType =>
+                    nonArrayBaseType.MakeArrayType(1)
                 )
             )
             {
@@ -816,8 +816,8 @@ namespace System.Tests
             }
 
             foreach (
-                Type type in NonArrayBaseTypes.Select(
-                    nonArrayBaseType => nonArrayBaseType.MakeArrayType(2)
+                Type type in NonArrayBaseTypes.Select(nonArrayBaseType =>
+                    nonArrayBaseType.MakeArrayType(2)
                 )
             )
             {

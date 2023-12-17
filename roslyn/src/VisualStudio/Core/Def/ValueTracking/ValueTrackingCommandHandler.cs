@@ -142,8 +142,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             var classificationFormatMap =
                 _classificationFormatMapService.GetClassificationFormatMap(textView);
             var solution = document.Project.Solution;
-            var valueTrackingService =
-                solution.Services.GetRequiredService<IValueTrackingService>();
+            var valueTrackingService = solution.Services.GetRequiredService<IValueTrackingService>(
+
+            );
             var rootItemMap = items.GroupBy(
                 i => i.Parent,
                 resultSelector: (key, items) => (parent: key, children: items)

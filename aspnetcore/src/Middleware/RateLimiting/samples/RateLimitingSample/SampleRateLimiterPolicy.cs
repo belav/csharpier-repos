@@ -30,15 +30,14 @@ public class SampleRateLimiterPolicy : IRateLimiterPolicy<string>
     {
         return RateLimitPartition.GetSlidingWindowLimiter<string>(
             string.Empty,
-            key =>
-                new SlidingWindowRateLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 1,
-                    Window = TimeSpan.FromSeconds(5),
-                    SegmentsPerWindow = 1
-                }
+            key => new SlidingWindowRateLimiterOptions
+            {
+                PermitLimit = 1,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 1,
+                Window = TimeSpan.FromSeconds(5),
+                SegmentsPerWindow = 1
+            }
         );
     }
 }

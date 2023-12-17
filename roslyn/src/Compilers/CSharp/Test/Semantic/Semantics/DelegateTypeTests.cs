@@ -13338,8 +13338,8 @@ class Program
 
             var identifiers = nodes
                 .OfType<InvocationExpressionSyntax>()
-                .Where(
-                    i => i.Expression is IdentifierNameSyntax id && id.Identifier.Text == "Report"
+                .Where(i =>
+                    i.Expression is IdentifierNameSyntax id && id.Identifier.Text == "Report"
                 )
                 .Select(i => i.ArgumentList.Arguments[0].Expression)
                 .ToArray();

@@ -340,8 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (
                 DeclaringCompilation.ShouldEmitNativeIntegerAttributes()
-                && ConstraintTypesNoUseSiteDiagnostics.Any(
-                    static t => t.ContainsNativeIntegerWrapperType()
+                && ConstraintTypesNoUseSiteDiagnostics.Any(static t =>
+                    t.ContainsNativeIntegerWrapperType()
                 )
             )
             {

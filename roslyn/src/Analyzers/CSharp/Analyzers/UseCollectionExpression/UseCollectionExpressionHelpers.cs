@@ -977,13 +977,12 @@ internal static class UseCollectionExpressionHelpers
                             assignmentExpression
                                 .Right.DescendantNodesAndSelf()
                                 .OfType<IdentifierNameSyntax>()
-                                .Any(
-                                    i =>
-                                        localSymbol.Equals(
-                                            semanticModel
-                                                .GetSymbolInfo(i, cancellationToken)
-                                                .GetAnySymbol()
-                                        )
+                                .Any(i =>
+                                    localSymbol.Equals(
+                                        semanticModel
+                                            .GetSymbolInfo(i, cancellationToken)
+                                            .GetAnySymbol()
+                                    )
                                 )
                         )
                         {
@@ -1160,13 +1159,9 @@ internal static class UseCollectionExpressionHelpers
 
                 // If we have `Create<T>(T)`, `Create<T>(T, T)` etc., then this is convertible.
                 if (
-                    originalCreateMethod.Parameters.All(
-                        static p =>
-                            p.Type
-                                is ITypeParameterSymbol
-                                {
-                                    TypeParameterKind: TypeParameterKind.Method
-                                }
+                    originalCreateMethod.Parameters.All(static p =>
+                        p.Type
+                            is ITypeParameterSymbol { TypeParameterKind: TypeParameterKind.Method }
                     )
                 )
                     return arguments.Count == originalCreateMethod.Parameters.Length;
@@ -1426,11 +1421,10 @@ internal static class UseCollectionExpressionHelpers
             : SeparatedList<ArgumentSyntax>(
                 initializer
                     .Expressions.GetWithSeparators()
-                    .Select(
-                        nodeOrToken =>
-                            nodeOrToken.IsToken
-                                ? nodeOrToken
-                                : Argument((ExpressionSyntax)nodeOrToken.AsNode()!)
+                    .Select(nodeOrToken =>
+                        nodeOrToken.IsToken
+                            ? nodeOrToken
+                            : Argument((ExpressionSyntax)nodeOrToken.AsNode()!)
                     )
             );
     }

@@ -136,8 +136,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             CancellationToken cancellationToken
         )
         {
-            var classificationService =
-                document.GetRequiredLanguageService<IClassificationService>();
+            var classificationService = document.GetRequiredLanguageService<IClassificationService>(
+
+            );
 
             // We always return both syntactic and semantic classifications.  If there is a syntactic classifier running on the client
             // then the semantic token classifications will override them.
@@ -157,8 +158,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             // about the 'text' classification.  It's added for everything between real classifications (including
             // whitespace), and just means 'don't classify this'.  No need for us to actually include that in
             // semantic tokens as it just wastes space in the result.
-            var nonEmptySpans = spans.Where(
-                s => !s.TextSpan.IsEmpty && s.ClassificationType != ClassificationTypeNames.Text
+            var nonEmptySpans = spans.Where(s =>
+                !s.TextSpan.IsEmpty && s.ClassificationType != ClassificationTypeNames.Text
             );
             classifiedSpans.AddRange(nonEmptySpans);
         }

@@ -1033,9 +1033,8 @@ namespace System.IO
                     expectedAccessRules,
                     actualAccessRule =>
                     {
-                        int count = expectedAccessRules.Count(
-                            expectedAccessRule =>
-                                AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
+                        int count = expectedAccessRules.Count(expectedAccessRule =>
+                            AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
                         );
                         Assert.True(count > 0);
                     }

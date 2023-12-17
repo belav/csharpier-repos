@@ -1758,8 +1758,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         var originalParameter = originalParameters[i];
                         var rewrittenParameter = rewrittenParameters[i];
 
-                        var argument = invocationOperation.Arguments.FirstOrDefault(
-                            a => Equals(originalParameter, a.Parameter)
+                        var argument = invocationOperation.Arguments.FirstOrDefault(a =>
+                            Equals(originalParameter, a.Parameter)
                         );
                         var argumentSyntax = argument?.Syntax as ArgumentSyntax;
 

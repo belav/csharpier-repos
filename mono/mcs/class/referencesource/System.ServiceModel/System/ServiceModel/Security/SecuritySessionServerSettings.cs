@@ -779,8 +779,9 @@ namespace System.ServiceModel.Security
                     new InvalidOperationException(SR.GetString(SR.SSSSCreateAcceptor))
                 );
             }
-            object listenerSecurityState =
-                this.sessionProtocolFactory.CreateListenerSecurityState();
+            object listenerSecurityState = this.sessionProtocolFactory.CreateListenerSecurityState(
+
+            );
             if (typeof(TChannel) == typeof(IReplySessionChannel))
             {
                 this.channelAcceptor = new SecuritySessionChannelAcceptor<IReplySessionChannel>(

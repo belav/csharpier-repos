@@ -47,11 +47,10 @@ public abstract class SharedTypeQueryTestBase : NonSharedModelTestBase
             modelBuilder
                 .Entity<ViewQuery24601>()
                 .HasNoKey()
-                .HasQueryFilter(
-                    e =>
-                        Set<Dictionary<string, object>>("STET")
-                            .Select(i => (string)i["Value"])
-                            .Contains(e.Value)
+                .HasQueryFilter(e =>
+                    Set<Dictionary<string, object>>("STET")
+                        .Select(i => (string)i["Value"])
+                        .Contains(e.Value)
                 );
         }
     }

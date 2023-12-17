@@ -5344,8 +5344,8 @@ class B : A
             var allAttributes = (
                 (PEModuleSymbol)parameter.ContainingModule
             ).GetCustomAttributesForToken(peParameter.Handle);
-            var paramArrayAttributes = allAttributes.Where(
-                a => a.AttributeClass.ToTestDisplayString() == "System.ParamArrayAttribute"
+            var paramArrayAttributes = allAttributes.Where(a =>
+                a.AttributeClass.ToTestDisplayString() == "System.ParamArrayAttribute"
             );
 
             if (expected)

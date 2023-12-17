@@ -29,8 +29,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder
-                .Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                .Setup(o =>
+                    o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
@@ -82,8 +82,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder
-                .Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                .Setup(o =>
+                    o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)

@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Func<DiagnosticAnalyzer, IEnumerable<Diagnostic>> runAnalysis
         )
         {
-            await VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(
-                a => Task.FromResult(runAnalysis(a))
+            await VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(a =>
+                Task.FromResult(runAnalysis(a))
             );
         }
 

@@ -338,10 +338,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             {
                                 var projectDirectory = Path.GetDirectoryName(project.FilePath);
                                 documentId = documents
-                                    .FirstOrDefault(
-                                        document =>
-                                            Path.Combine(projectDirectory, document.FilePath)
-                                            == item.GetOriginalFilePath()
+                                    .FirstOrDefault(document =>
+                                        Path.Combine(projectDirectory, document.FilePath)
+                                        == item.GetOriginalFilePath()
                                     )
                                     ?.Id;
                                 if (documentId is not null)

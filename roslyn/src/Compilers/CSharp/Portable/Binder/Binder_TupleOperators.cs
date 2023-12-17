@@ -649,14 +649,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            ImmutableArray<Location> elementLocations = elements.SelectAsArray(
-                e => e.Syntax.Location
+            ImmutableArray<Location> elementLocations = elements.SelectAsArray(e =>
+                e.Syntax.Location
             );
 
             var tuple = NamedTypeSymbol.CreateTuple(
                 locationOpt: null,
-                elementTypesWithAnnotations: convertedTypes.SelectAsArray(
-                    t => TypeWithAnnotations.Create(t)
+                elementTypesWithAnnotations: convertedTypes.SelectAsArray(t =>
+                    TypeWithAnnotations.Create(t)
                 ),
                 elementLocations,
                 elementNames: names,

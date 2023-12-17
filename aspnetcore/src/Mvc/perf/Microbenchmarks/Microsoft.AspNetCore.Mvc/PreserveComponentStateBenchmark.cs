@@ -76,7 +76,9 @@ public class PreserveComponentStateBenchmark
     {
         _tagHelper.ViewContext = GetViewContext();
         var state =
-            _tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<PersistentComponentState>();
+            _tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<PersistentComponentState>(
+
+            );
         foreach (var (key, value) in _entries)
         {
             state.PersistAsJson(key, value);

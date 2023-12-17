@@ -112,10 +112,9 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
         }
 
         if (
-            !declaredResponseMetadata.Any(
-                m =>
-                    m.IsDefault
-                    && SymbolEqualityComparer.Default.Equals(m.AttributeSource, context.Method)
+            !declaredResponseMetadata.Any(m =>
+                m.IsDefault
+                && SymbolEqualityComparer.Default.Equals(m.AttributeSource, context.Method)
             )
         )
         {

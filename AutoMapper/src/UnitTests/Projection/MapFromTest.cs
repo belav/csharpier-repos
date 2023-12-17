@@ -22,10 +22,9 @@ public class CustomMapFromExpressionTest
     [Fact]
     public void Should_map_from_String()
     {
-        var config = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<UserModel, UserDto>()
-                    .ForMember(dto => dto.FullName, opt => opt.MapFrom("FirstName"))
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<UserModel, UserDto>()
+                .ForMember(dto => dto.FullName, opt => opt.MapFrom("FirstName"))
         );
 
         var um = new UserModel();
@@ -50,10 +49,9 @@ public class CustomMapFromExpressionTest
     [Fact]
     public void Should_project_from_String()
     {
-        var config = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<UserModel, UserDto>()
-                    .ForMember(dto => dto.FullName, opt => opt.MapFrom("FirstName"))
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<UserModel, UserDto>()
+                .ForMember(dto => dto.FullName, opt => opt.MapFrom("FirstName"))
         );
         var result = new[] { new UserModel { FirstName = "Hallo" } }
             .AsQueryable()
@@ -78,10 +76,9 @@ public class When_mapping_from_and_source_member_both_can_work : AutoMapperSpecB
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateProjection<Model, Dto>()
-                    .ForMember(d => d.ShortDescription, o => o.MapFrom(s => "mappedFrom"))
+        new(c =>
+            c.CreateProjection<Model, Dto>()
+                .ForMember(d => d.ShortDescription, o => o.MapFrom(s => "mappedFrom"))
         );
 
     protected override void Because_of()
@@ -147,10 +144,8 @@ public class When_mapping_from_private_method : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Model, Dto>()
-                    .ForMember(d => d.Value, o => o.MapFrom("Inner.GetSomeValue"))
+        new(c =>
+            c.CreateMap<Model, Dto>().ForMember(d => d.Value, o => o.MapFrom("Inner.GetSomeValue"))
         );
 
     [Fact]

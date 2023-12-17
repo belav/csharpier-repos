@@ -1531,11 +1531,10 @@ ulong.MinValue --> 0";
                 .Where(predicate)
                 .OfType<BoundExpression>()
                 .Where(node => node.ConstantValueOpt != null)
-                .Select(
-                    node =>
-                        node.Syntax.ToFullString().Trim()
-                        + " --> "
-                        + ExtractValue(node.ConstantValueOpt)
+                .Select(node =>
+                    node.Syntax.ToFullString().Trim()
+                    + " --> "
+                    + ExtractValue(node.ConstantValueOpt)
                 );
             var result = string.Join(Environment.NewLine, constants);
             return result;
@@ -3233,13 +3232,12 @@ class C{0}
 
             var source = string.Join(
                 Environment.NewLine,
-                range.Select(
-                    i =>
-                        i == 0
-                            ? string.Format(template, i, i + 1, i + 1)
-                            : i == (numConstants - 1)
-                                ? string.Format(template, i, i - 1, i - 1)
-                                : string.Format(template, i, i - 1, i + 1)
+                range.Select(i =>
+                    i == 0
+                        ? string.Format(template, i, i + 1, i + 1)
+                        : i == (numConstants - 1)
+                            ? string.Format(template, i, i - 1, i - 1)
+                            : string.Format(template, i, i - 1, i + 1)
                 )
             );
 
@@ -3333,13 +3331,12 @@ enum E{0}
 
             var source = string.Join(
                 Environment.NewLine,
-                range.Select(
-                    i =>
-                        i == 0
-                            ? string.Format(template, i, i + 1, i + 1)
-                            : i == (numConstants - 1)
-                                ? string.Format(template, i, i - 1, i - 1)
-                                : string.Format(template, i, i - 1, i + 1)
+                range.Select(i =>
+                    i == 0
+                        ? string.Format(template, i, i + 1, i + 1)
+                        : i == (numConstants - 1)
+                            ? string.Format(template, i, i - 1, i - 1)
+                            : string.Format(template, i, i - 1, i + 1)
                 )
             );
 
@@ -3457,13 +3454,12 @@ enum E{0}
 
             var source = string.Join(
                 Environment.NewLine,
-                range.Select(
-                    i =>
-                        i == 0
-                            ? string.Format(template, i, i + 1, i + 1)
-                            : i == (numEnums - 1)
-                                ? string.Format(template, i, i - 1, i - 1)
-                                : string.Format(template, i, i - 1, i + 1)
+                range.Select(i =>
+                    i == 0
+                        ? string.Format(template, i, i + 1, i + 1)
+                        : i == (numEnums - 1)
+                            ? string.Format(template, i, i - 1, i - 1)
+                            : string.Format(template, i, i - 1, i + 1)
                 )
             );
 

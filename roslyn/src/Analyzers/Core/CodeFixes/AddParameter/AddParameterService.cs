@@ -92,16 +92,15 @@ namespace Microsoft.CodeAnalysis.AddParameter
                     .ConfigureAwait(false)
                 : method.GetAllMethodSymbolsOfPartialParts();
 
-            var anySymbolReferencesNotInSource = referencedSymbols.Any(
-                static symbol => !symbol.IsFromSource()
+            var anySymbolReferencesNotInSource = referencedSymbols.Any(static symbol =>
+                !symbol.IsFromSource()
             );
             var locationsInSource = referencedSymbols.Where(symbol => symbol.IsFromSource());
 
             // Indexing Locations[0] is valid because IMethodSymbols have one location at most
             // and IsFromSource() tests if there is at least one location.
-            var locationsByDocument = locationsInSource.ToLookup(
-                declarationLocation =>
-                    solution.GetRequiredDocument(declarationLocation.Locations[0].SourceTree!)
+            var locationsByDocument = locationsInSource.ToLookup(declarationLocation =>
+                solution.GetRequiredDocument(declarationLocation.Locations[0].SourceTree!)
             );
 
             foreach (var documentLookup in locationsByDocument)

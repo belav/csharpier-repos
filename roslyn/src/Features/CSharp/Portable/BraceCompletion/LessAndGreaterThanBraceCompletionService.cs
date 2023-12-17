@@ -51,8 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             if (
                 token.CheckParent<TypeParameterListSyntax>(n => n.LessThanToken == token)
                 || token.CheckParent<TypeArgumentListSyntax>(n => n.LessThanToken == token)
-                || token.CheckParent<FunctionPointerParameterListSyntax>(
-                    n => n.LessThanToken == token
+                || token.CheckParent<FunctionPointerParameterListSyntax>(n =>
+                    n.LessThanToken == token
                 )
             )
             {

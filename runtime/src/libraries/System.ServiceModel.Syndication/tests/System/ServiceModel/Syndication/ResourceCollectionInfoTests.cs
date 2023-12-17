@@ -386,8 +386,9 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateInlineCategoriesDocument_Invoke_ReturnsExpected()
         {
             var workspace = new ResourceCollectionInfoSubclass();
-            InlineCategoriesDocument document =
-                workspace.CreateInlineCategoriesDocumentEntryPoint();
+            InlineCategoriesDocument document = workspace.CreateInlineCategoriesDocumentEntryPoint(
+
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.Categories);

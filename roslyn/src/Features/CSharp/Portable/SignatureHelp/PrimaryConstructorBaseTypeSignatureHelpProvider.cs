@@ -133,8 +133,8 @@ internal partial class PrimaryConstructorBaseTypeSignatureHelpProvider
 
         var accessibleConstructors = baseType
             .InstanceConstructors.WhereAsArray(c => c.IsAccessibleWithin(within))
-            .WhereAsArray(
-                c => c.IsEditorBrowsable(options.HideAdvancedMembers, semanticModel.Compilation)
+            .WhereAsArray(c =>
+                c.IsEditorBrowsable(options.HideAdvancedMembers, semanticModel.Compilation)
             )
             .Sort(semanticModel, baseTypeSyntax.SpanStart);
 
@@ -153,15 +153,14 @@ internal partial class PrimaryConstructorBaseTypeSignatureHelpProvider
 
         return CreateSignatureHelpItems(
             accessibleConstructors
-                .SelectAsArray(
-                    c =>
-                        Convert(
-                            c,
-                            baseTypeSyntax.ArgumentList.OpenParenToken,
-                            semanticModel,
-                            structuralTypeDisplayService,
-                            documentationCommentFormattingService
-                        )
+                .SelectAsArray(c =>
+                    Convert(
+                        c,
+                        baseTypeSyntax.ArgumentList.OpenParenToken,
+                        semanticModel,
+                        structuralTypeDisplayService,
+                        documentationCommentFormattingService
+                    )
                 )
                 .ToList(),
             textSpan,
@@ -222,8 +221,8 @@ internal partial class PrimaryConstructorBaseTypeSignatureHelpProvider
             GetSeparatorParts(),
             GetPostambleParts(),
             constructor
-                .Parameters.Select(
-                    p => Convert(p, semanticModel, position, documentationCommentFormattingService)
+                .Parameters.Select(p =>
+                    Convert(p, semanticModel, position, documentationCommentFormattingService)
                 )
                 .ToList()
         );

@@ -374,9 +374,9 @@ namespace System.Web.Hosting
             //
             if (appHost is ISAPIApplicationHost && !ServerConfig.UseMetabase)
             {
-                string rootWebConfigPath = (
-                    (ISAPIApplicationHost)appHost
-                ).ResolveRootWebConfigPath();
+                string rootWebConfigPath = ((ISAPIApplicationHost)appHost).ResolveRootWebConfigPath(
+
+                );
                 if (!String.IsNullOrEmpty(rootWebConfigPath))
                 {
                     Debug.Assert(File.Exists(rootWebConfigPath), "File.Exists(rootWebConfigPath)");

@@ -88,8 +88,8 @@ namespace System.Web.Mvc
                         List<Type> deserializedTypes = serializer.DeserializeTypes(reader);
                         if (
                             deserializedTypes != null
-                            && deserializedTypes.All(
-                                type => TypeIsPublicClass(type) && predicate(type)
+                            && deserializedTypes.All(type =>
+                                TypeIsPublicClass(type) && predicate(type)
                             )
                         )
                         {

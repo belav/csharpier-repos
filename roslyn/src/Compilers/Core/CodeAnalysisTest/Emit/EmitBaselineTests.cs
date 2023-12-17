@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                 MethodDefinitionHandle,
                 EditAndContinueMethodDebugInformation
             >(_ => default);
-            var localSigProvider = new Func<MethodDefinitionHandle, StandaloneSignatureHandle>(
-                _ => default
+            var localSigProvider = new Func<MethodDefinitionHandle, StandaloneSignatureHandle>(_ =>
+                default
             );
             var peModule = ModuleMetadata.CreateFromImage(TestResources.Basic.Members);
             var peReader = peModule.Module.PEReaderOpt;

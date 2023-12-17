@@ -981,8 +981,8 @@ public class InlineRouteParameterParserTests
     private static IInlineConstraintResolver GetConstraintResolver()
     {
         var services = new ServiceCollection().AddOptions();
-        services.Configure<RouteOptions>(
-            options => options.ConstraintMap.Add("test", typeof(TestRouteConstraint))
+        services.Configure<RouteOptions>(options =>
+            options.ConstraintMap.Add("test", typeof(TestRouteConstraint))
         );
         var serviceProvider = services.BuildServiceProvider();
         var accessor = serviceProvider.GetRequiredService<IOptions<RouteOptions>>();

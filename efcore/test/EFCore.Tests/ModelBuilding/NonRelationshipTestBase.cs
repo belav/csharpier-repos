@@ -371,8 +371,8 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Can_set_property_annotation_by_type()
         {
-            var modelBuilder = CreateModelBuilder(
-                c => c.Properties<string>().HaveAnnotation("foo", "bar")
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Properties<string>().HaveAnnotation("foo", "bar")
             );
 
             modelBuilder.Ignore<Product>();
@@ -454,8 +454,7 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Conventions_can_be_added()
         {
-            var modelBuilder = CreateModelBuilder(
-                c => c.Conventions.Add(s => new TestConvention())
+            var modelBuilder = CreateModelBuilder(c => c.Conventions.Add(s => new TestConvention())
             );
 
             var model = modelBuilder.FinalizeModel();
@@ -494,14 +493,10 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Conventions_can_be_replaced()
         {
-            var modelBuilder = CreateModelBuilder(
-                c =>
-                    c.Conventions.Replace<DbSetFindingConvention>(
-                        s =>
-                            new TestDbSetFindingConvention(
-                                s.GetService<ProviderConventionSetBuilderDependencies>()!
-                            )
-                    )
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Conventions.Replace<DbSetFindingConvention>(s => new TestDbSetFindingConvention(
+                    s.GetService<ProviderConventionSetBuilderDependencies>()!
+                ))
             );
 
             var model = modelBuilder.FinalizeModel();
@@ -975,8 +970,8 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Properties_can_have_provider_type_set_for_type()
         {
-            var modelBuilder = CreateModelBuilder(
-                c => c.Properties<string>().HaveConversion<byte[]>()
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Properties<string>().HaveConversion<byte[]>()
             );
 
             modelBuilder.Entity<Quarks>(b =>
@@ -1276,10 +1271,9 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Value_converter_configured_on_non_nullable_type_is_applied()
         {
-            var modelBuilder = CreateModelBuilder(
-                c =>
-                    c.Properties<int>()
-                        .HaveConversion<NumberToStringConverter<int>, CustomValueComparer<int>>()
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Properties<int>()
+                    .HaveConversion<NumberToStringConverter<int>, CustomValueComparer<int>>()
             );
 
             modelBuilder.Entity<Quarks>(b => b.Property<int?>("Wierd"));
@@ -2723,8 +2717,8 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Can_set_primitive_collection_annotation_by_type()
         {
-            var modelBuilder = CreateModelBuilder(
-                c => c.Properties<string>().HaveAnnotation("foo", "bar")
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Properties<string>().HaveAnnotation("foo", "bar")
             );
 
             modelBuilder.Ignore<Product>();

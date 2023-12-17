@@ -25,8 +25,8 @@ public class ClaimActionCollection : IEnumerable<ClaimAction>
     public void Remove(string claimType)
     {
         var itemsToRemove = Actions
-            .Where(
-                map => string.Equals(claimType, map.ClaimType, StringComparison.OrdinalIgnoreCase)
+            .Where(map =>
+                string.Equals(claimType, map.ClaimType, StringComparison.OrdinalIgnoreCase)
             )
             .ToList();
         itemsToRemove.ForEach(map => Actions.Remove(map));

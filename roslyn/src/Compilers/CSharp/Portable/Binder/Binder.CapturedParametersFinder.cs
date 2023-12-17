@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var containingType = primaryConstructor.ContainingType;
 
                 foreach (
-                    SourceMemberMethodSymbol sourceMethod in containingType.GetMethodsPossiblyCapturingPrimaryConstructorParameters()
+                    SourceMemberMethodSymbol sourceMethod in containingType.GetMethodsPossiblyCapturingPrimaryConstructorParameters(
+
+                    )
                 )
                 {
                     Binder? bodyBinder;

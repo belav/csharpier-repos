@@ -96,8 +96,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnBase
+                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnBase
                     )
                 )
         );
@@ -124,8 +124,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(
-                        x => x.DerivedSefReferenceOnBase
+                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x =>
+                        x.DerivedSefReferenceOnBase
                     )
                 )
         );
@@ -142,8 +142,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.BaseSelfReferenceOnDerived
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.BaseSelfReferenceOnDerived
                     )
                 )
         );
@@ -161,8 +161,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnBase
+                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnBase
                     )
                 )
         );
@@ -241,8 +241,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(
-                        x => x.BaseCollectionOnBase
+                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x =>
+                        x.BaseCollectionOnBase
                     )
                 )
         );
@@ -270,8 +270,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(
-                        x => x.BaseCollectionOnBase
+                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x =>
+                        x.BaseCollectionOnBase
                     )
                 )
         );
@@ -351,8 +351,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnBase
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnBase
                     )
                 )
         );
@@ -369,8 +369,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnDerived
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnDerived
                     )
                 )
         );
@@ -387,8 +387,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.DerivedReferenceOnDerived
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.DerivedReferenceOnDerived
                     )
                 )
         );
@@ -416,8 +416,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnBase
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnBase
                     )
                 )
         );
@@ -435,8 +435,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnDerived
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnDerived
                     )
                 )
         );
@@ -454,8 +454,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.DerivedReferenceOnDerived
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.DerivedReferenceOnDerived
                     )
                 )
         );
@@ -485,8 +485,7 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.ReferenceOnBase
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.ReferenceOnBase
                     )
                 )
         );
@@ -501,8 +500,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.ReferenceOnDerived
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.ReferenceOnDerived
                     )
                 )
         );
@@ -528,8 +527,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.BaseCollectionOnBase
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.BaseCollectionOnBase
                     )
                 )
         );
@@ -546,8 +545,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.BaseCollectionOnDerived
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.BaseCollectionOnDerived
                     )
                 )
         );
@@ -564,8 +563,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.DerivedCollectionOnDerived
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.DerivedCollectionOnDerived
                     )
                 )
         );
@@ -592,8 +591,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnBase
+                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnBase
                     ),
                     new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedReference)
                 )
@@ -611,8 +610,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnBase
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnBase
                     ),
                     new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedReference)
                 )
@@ -645,8 +644,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnBase
+                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnBase
                     ),
                     new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedCollection)
                 )
@@ -664,8 +663,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        x => x.BaseReferenceOnBase
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
+                        x.BaseReferenceOnBase
                     ),
                     new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedCollection)
                 )
@@ -699,8 +698,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(
-                        x => x.BaseCollectionOnBase
+                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x =>
+                        x.BaseCollectionOnBase
                     ),
                     new ExpectedInclude<BaseCollectionOnBase>(x => x.NestedReference)
                 )
@@ -734,8 +733,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(
-                        x => x.BaseCollectionOnBase
+                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x =>
+                        x.BaseCollectionOnBase
                     ),
                     new ExpectedInclude<BaseCollectionOnBase>(x => x.NestedCollection)
                 )
@@ -803,8 +802,8 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
-                        i => i.DerivedCollectionOnDerived
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(i =>
+                        i.DerivedCollectionOnDerived
                     )
                 );
             }

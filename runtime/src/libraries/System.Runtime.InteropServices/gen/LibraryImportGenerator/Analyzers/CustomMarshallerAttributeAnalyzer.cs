@@ -1534,14 +1534,13 @@ namespace Microsoft.Interop.Analyzers
                     marshallerType
                         .GetMembers(ShapeMemberNames.BufferSize)
                         .OfType<IPropertySymbol>()
-                        .FirstOrDefault(
-                            prop =>
-                                prop
-                                    is {
-                                        ReturnsByRef: false,
-                                        ReturnsByRefReadonly: false,
-                                        GetMethod: not null
-                                    }
+                        .FirstOrDefault(prop =>
+                            prop
+                                is {
+                                    ReturnsByRef: false,
+                                    ReturnsByRefReadonly: false,
+                                    GetMethod: not null
+                                }
                         )
                     is null
                 )

@@ -276,8 +276,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 // then we don't really want to infer a base type for 'Goo'.
 
                 // However, there are a few other cases were we can infer a base type.
-                var syntaxFacts =
-                    document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = document.Document.GetRequiredLanguageService<ISyntaxFactsService>(
+
+                );
                 if (service.IsInCatchDeclaration(NameOrMemberAccessExpression))
                 {
                     SetBaseType(this.Compilation.ExceptionType());

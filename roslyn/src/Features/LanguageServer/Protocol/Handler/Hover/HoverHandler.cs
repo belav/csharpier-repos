@@ -86,7 +86,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return null;
 
             var hoverService =
-                document.Project.Solution.Services.GetRequiredService<ILspHoverResultCreationService>();
+                document.Project.Solution.Services.GetRequiredService<ILspHoverResultCreationService>(
+
+                );
             return await hoverService
                 .CreateHoverAsync(document, info, clientCapabilities, cancellationToken)
                 .ConfigureAwait(false);

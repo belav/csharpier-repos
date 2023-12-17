@@ -115,7 +115,9 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             bool succeeded;
 
             var indicatorFactory =
-                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>(
+
+                );
 
             // TODO: prior logic was to get a tracking span of length 1 here.  Preserving that, though it's unclear if
             // that is necessary for the BWI to work properly.

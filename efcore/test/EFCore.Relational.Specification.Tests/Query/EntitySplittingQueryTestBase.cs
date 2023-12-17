@@ -100,15 +100,12 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
             async,
             ss =>
                 ss.Set<EntityOne>()
-                    .Select(
-                        e =>
-                            new
-                            {
-                                e.Id,
-                                e.IntValue1,
-                                e.StringValue1
-                            }
-                    ),
+                    .Select(e => new
+                    {
+                        e.Id,
+                        e.IntValue1,
+                        e.StringValue1
+                    }),
             elementSorter: e => e.Id
         );
     }
@@ -147,15 +144,12 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
             async,
             ss =>
                 ss.Set<EntityOne>()
-                    .Select(
-                        e =>
-                            new
-                            {
-                                e.Id,
-                                e.IntValue3,
-                                e.StringValue3
-                            }
-                    ),
+                    .Select(e => new
+                    {
+                        e.Id,
+                        e.IntValue3,
+                        e.StringValue3
+                    }),
             elementSorter: e => e.Id
         );
     }
@@ -194,15 +188,12 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
             async,
             ss =>
                 ss.Set<EntityOne>()
-                    .Select(
-                        e =>
-                            new
-                            {
-                                e.Id,
-                                e.IntValue4,
-                                e.StringValue4
-                            }
-                    ),
+                    .Select(e => new
+                    {
+                        e.Id,
+                        e.IntValue4,
+                        e.StringValue4
+                    }),
             elementSorter: e => e.Id
         );
     }
@@ -470,15 +461,12 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
             async,
             ss =>
                 ss.Set<EntityOne>()
-                    .Select(
-                        e =>
-                            new
-                            {
-                                e.IntValue1,
-                                e.IntValue3,
-                                e.EntityThree
-                            }
-                    ),
+                    .Select(e => new
+                    {
+                        e.IntValue1,
+                        e.IntValue3,
+                        e.EntityThree
+                    }),
             elementSorter: e => e.IntValue1,
             elementAsserter: (e, a) =>
             {
@@ -577,15 +565,12 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
             async,
             ss =>
                 ss.Set<EntityOne>()
-                    .Select(
-                        e =>
-                            new
-                            {
-                                e.Id,
-                                e.OwnedReference.OwnedIntValue4,
-                                e.OwnedReference.OwnedStringValue4
-                            }
-                    ),
+                    .Select(e => new
+                    {
+                        e.Id,
+                        e.OwnedReference.OwnedIntValue4,
+                        e.OwnedReference.OwnedStringValue4
+                    }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
             {
@@ -690,15 +675,12 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
             async,
             ss =>
                 ss.Set<EntityOne>()
-                    .Select(
-                        e =>
-                            new
-                            {
-                                e.Id,
-                                e.OwnedReference.OwnedIntValue4,
-                                e.OwnedReference.OwnedStringValue4
-                            }
-                    ),
+                    .Select(e => new
+                    {
+                        e.Id,
+                        e.OwnedReference.OwnedIntValue4,
+                        e.OwnedReference.OwnedStringValue4
+                    }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
             {
@@ -2830,10 +2812,9 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
             expectedType.IsGenericType
             && expectedType
                 .GetTypeInfo()
-                .ImplementedInterfaces.Any(
-                    i =>
-                        i.IsConstructedGenericType
-                        && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                .ImplementedInterfaces.Any(i =>
+                    i.IsConstructedGenericType
+                    && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)
                 )
         )
         {

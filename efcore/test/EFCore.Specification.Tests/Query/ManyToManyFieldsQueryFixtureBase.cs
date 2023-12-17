@@ -234,15 +234,12 @@ public abstract class ManyToManyFieldsQueryFixtureBase
 
         modelBuilder
             .Entity<EntityCompositeKey>()
-            .HasKey(
-                e =>
-                    new
-                    {
-                        e.Key1,
-                        e.Key2,
-                        e.Key3
-                    }
-            );
+            .HasKey(e => new
+            {
+                e.Key1,
+                e.Key2,
+                e.Key3
+            });
 
         modelBuilder.Entity<EntityRoot>(b =>
         {
@@ -387,15 +384,12 @@ public abstract class ManyToManyFieldsQueryFixtureBase
                 l =>
                     l.HasOne(x => x.Composite)
                         .WithMany(x => x.JoinThreeFull)
-                        .HasForeignKey(
-                            e =>
-                                new
-                                {
-                                    e.CompositeId1,
-                                    e.CompositeId2,
-                                    e.CompositeId3
-                                }
-                        )
+                        .HasForeignKey(e => new
+                        {
+                            e.CompositeId1,
+                            e.CompositeId2,
+                            e.CompositeId3
+                        })
                         .IsRequired(),
                 r => r.HasOne(x => x.Three).WithMany(x => x.JoinCompositeKeyFull).IsRequired(),
                 b =>
@@ -427,15 +421,12 @@ public abstract class ManyToManyFieldsQueryFixtureBase
                 l =>
                     l.HasOne(x => x.Composite)
                         .WithMany(x => x.JoinLeafFull)
-                        .HasForeignKey(
-                            e =>
-                                new
-                                {
-                                    e.CompositeId1,
-                                    e.CompositeId2,
-                                    e.CompositeId3
-                                }
-                        )
+                        .HasForeignKey(e => new
+                        {
+                            e.CompositeId1,
+                            e.CompositeId2,
+                            e.CompositeId3
+                        })
             );
 
         modelBuilder.SharedTypeEntity<ProxyableSharedType>(

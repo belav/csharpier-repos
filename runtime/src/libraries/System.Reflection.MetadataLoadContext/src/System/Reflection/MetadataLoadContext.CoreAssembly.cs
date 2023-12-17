@@ -26,9 +26,9 @@ namespace System.Reflection
             }
             else
             {
-                RoAssemblyName roAssemblyName = new AssemblyName(
-                    coreAssemblyName
-                ).ToRoAssemblyName();
+                RoAssemblyName roAssemblyName = new AssemblyName(coreAssemblyName).ToRoAssemblyName(
+
+                );
                 _coreAssembly = TryResolveAssembly(roAssemblyName, out e);
             }
 

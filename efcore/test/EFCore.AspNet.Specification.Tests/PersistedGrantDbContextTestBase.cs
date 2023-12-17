@@ -373,11 +373,10 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
             base.AddOptions(builder)
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging()
-                .ConfigureWarnings(
-                    b =>
-                        b.Default(WarningBehavior.Throw)
-                            .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
-                            .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
+                .ConfigureWarnings(b =>
+                    b.Default(WarningBehavior.Throw)
+                        .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
+                        .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
                 );
 
         protected override bool UsePooling => false; // The IdentityServer ConfigurationDbContext has additional service dependencies

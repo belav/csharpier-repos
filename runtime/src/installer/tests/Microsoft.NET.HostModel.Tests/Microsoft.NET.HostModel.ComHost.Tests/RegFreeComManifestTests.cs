@@ -142,10 +142,9 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
             Assert.Single(
                 fileElement
                     .Elements(regFreeComManifestNamespace + "comClass")
-                    .Where(
-                        cls =>
-                            cls.Attribute("clsid").Value == guid
-                            && cls.Attribute("progid").Value == progId
+                    .Where(cls =>
+                        cls.Attribute("clsid").Value == guid
+                        && cls.Attribute("progid").Value == progId
                     )
             );
         }

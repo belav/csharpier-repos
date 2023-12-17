@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 var buffer = spans.First().Snapshot.TextBuffer;
                 var currentSnapshot = buffer.CurrentSnapshot;
                 spans = new NormalizedSnapshotSpanCollection(
-                    spans.Select(
-                        s => s.TranslateTo(currentSnapshot, SpanTrackingMode.EdgeExclusive)
+                    spans.Select(s => s.TranslateTo(currentSnapshot, SpanTrackingMode.EdgeExclusive)
                     )
                 );
             }

@@ -165,27 +165,24 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
             typeof(EntityFrameworkQueryableExtensions)
                 .GetTypeInfo()
                 .GetDeclaredMethods(nameof(EntityFrameworkQueryableExtensions.Include))
-                .Single(
-                    mi =>
-                        mi.GetGenericArguments().Count() == 2
-                        && mi.GetParameters()
-                            .Any(
-                                pi =>
-                                    pi.Name == "navigationPropertyPath"
-                                    && pi.ParameterType != typeof(string)
-                            )
+                .Single(mi =>
+                    mi.GetGenericArguments().Count() == 2
+                    && mi.GetParameters()
+                        .Any(pi =>
+                            pi.Name == "navigationPropertyPath"
+                            && pi.ParameterType != typeof(string)
+                        )
                 );
 
         private static readonly MethodInfo _thenIncludeAfterReferenceMethodInfo =
             typeof(EntityFrameworkQueryableExtensions)
                 .GetTypeInfo()
                 .GetDeclaredMethods(nameof(EntityFrameworkQueryableExtensions.ThenInclude))
-                .Single(
-                    mi =>
-                        mi.GetGenericArguments().Count() == 3
-                        && mi.GetParameters()[0]
-                            .ParameterType.GenericTypeArguments[1]
-                            .IsGenericParameter
+                .Single(mi =>
+                    mi.GetGenericArguments().Count() == 3
+                    && mi.GetParameters()[0]
+                        .ParameterType.GenericTypeArguments[1]
+                        .IsGenericParameter
                 );
 
         private static readonly MethodInfo _thenIncludeAfterEnumerableMethodInfo =

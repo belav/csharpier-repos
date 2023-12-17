@@ -302,18 +302,17 @@ public class EntityMaterializerSourceTest
     [InlineData(true)]
     public void Can_create_materializer_for_entity_with_fields(bool useParameters)
     {
-        using var context = new SomeEntityContext(
-            b =>
-                b.Entity<SomeEntityWithFields>(eb =>
-                {
-                    eb.UsePropertyAccessMode(PropertyAccessMode.Field);
+        using var context = new SomeEntityContext(b =>
+            b.Entity<SomeEntityWithFields>(eb =>
+            {
+                eb.UsePropertyAccessMode(PropertyAccessMode.Field);
 
-                    eb.Property(e => e.Enum).HasField("_enum");
-                    eb.Property(e => e.Foo).HasField("_foo");
-                    eb.Property(e => e.Goo).HasField("_goo");
-                    eb.Property(e => e.Id).HasField("_id");
-                    eb.Property(e => e.MaybeEnum).HasField("_maybeEnum");
-                })
+                eb.Property(e => e.Enum).HasField("_enum");
+                eb.Property(e => e.Foo).HasField("_foo");
+                eb.Property(e => e.Goo).HasField("_goo");
+                eb.Property(e => e.Id).HasField("_id");
+                eb.Property(e => e.MaybeEnum).HasField("_maybeEnum");
+            })
         );
 
         var entityType = context.Model.FindEntityType(typeof(SomeEntityWithFields));
@@ -346,13 +345,12 @@ public class EntityMaterializerSourceTest
     [InlineData(true)]
     public void Can_read_nulls(bool useParameters)
     {
-        using var context = new SomeEntityContext(
-            b =>
-                b.Entity<SomeEntity>(eb =>
-                {
-                    eb.Ignore(e => e.Enum);
-                    eb.Ignore(e => e.MaybeEnum);
-                })
+        using var context = new SomeEntityContext(b =>
+            b.Entity<SomeEntity>(eb =>
+            {
+                eb.Ignore(e => e.Enum);
+                eb.Ignore(e => e.MaybeEnum);
+            })
         );
 
         var entityType = context.Model.FindEntityType(typeof(SomeEntity));
@@ -379,19 +377,18 @@ public class EntityMaterializerSourceTest
     [InlineData(true)]
     public void Can_create_materializer_for_entity_ignoring_shadow_fields(bool useParameters)
     {
-        using var context = new SomeEntityContext(
-            b =>
-                b.Entity<SomeEntity>(eb =>
-                {
-                    eb.UsePropertyAccessMode(PropertyAccessMode.Property);
+        using var context = new SomeEntityContext(b =>
+            b.Entity<SomeEntity>(eb =>
+            {
+                eb.UsePropertyAccessMode(PropertyAccessMode.Property);
 
-                    eb.Ignore(e => e.Enum);
-                    eb.Ignore(e => e.MaybeEnum);
+                eb.Ignore(e => e.Enum);
+                eb.Ignore(e => e.MaybeEnum);
 
-                    eb.Property<int>("IdShadow");
-                    eb.Property<string>("FooShadow");
-                    eb.Property<Guid>("GooShadow");
-                })
+                eb.Property<int>("IdShadow");
+                eb.Property<string>("FooShadow");
+                eb.Property<Guid>("GooShadow");
+            })
         );
 
         var entityType = context.Model.FindEntityType(typeof(SomeEntity));

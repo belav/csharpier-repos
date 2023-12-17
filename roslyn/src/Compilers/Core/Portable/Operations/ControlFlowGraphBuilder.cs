@@ -1514,13 +1514,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 #if DEBUG
             Debug.Assert(
                 spillingTheStack
-                    || _evalStack.All(
-                        slot =>
-                            slot.operationOpt == null
-                            || slot.operationOpt.Kind == OperationKind.FlowCaptureReference
-                            || slot.operationOpt.Kind == OperationKind.DeclarationExpression
-                            || slot.operationOpt.Kind == OperationKind.Discard
-                            || slot.operationOpt.Kind == OperationKind.OmittedArgument
+                    || _evalStack.All(slot =>
+                        slot.operationOpt == null
+                        || slot.operationOpt.Kind == OperationKind.FlowCaptureReference
+                        || slot.operationOpt.Kind == OperationKind.DeclarationExpression
+                        || slot.operationOpt.Kind == OperationKind.Discard
+                        || slot.operationOpt.Kind == OperationKind.OmittedArgument
                     )
             );
 #endif
@@ -4773,12 +4772,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             var predecessors = ArrayBuilder<BasicBlockBuilder>.GetInstance();
                             handlerRegion.FirstBlock.GetPredecessors(predecessors);
                             Debug.Assert(
-                                predecessors.All(
-                                    p =>
-                                        filterAndHandlerRegion.Regions[0].FirstBlock!.Ordinal
-                                            <= p.Ordinal
-                                        && filterAndHandlerRegion.Regions[0].LastBlock!.Ordinal
-                                            >= p.Ordinal
+                                predecessors.All(p =>
+                                    filterAndHandlerRegion.Regions[0].FirstBlock!.Ordinal
+                                        <= p.Ordinal
+                                    && filterAndHandlerRegion.Regions[0].LastBlock!.Ordinal
+                                        >= p.Ordinal
                                 )
                             );
                             predecessors.Free();

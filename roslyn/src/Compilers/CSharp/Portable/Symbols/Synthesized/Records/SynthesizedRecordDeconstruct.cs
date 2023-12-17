@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
         {
             Debug.Assert(
-                positionalMembers.All(
-                    p => p is PropertySymbol { GetMethod: not null } or FieldSymbol
+                positionalMembers.All(p =>
+                    p is PropertySymbol { GetMethod: not null } or FieldSymbol
                 )
             );
             _ctor = ctor;

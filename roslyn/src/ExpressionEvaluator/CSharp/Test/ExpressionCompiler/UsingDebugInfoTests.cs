@@ -655,12 +655,11 @@ public class C
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            "Main"
-                        )
+                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
+                    metadataReader.StringComparer.Equals(
+                        metadataReader.GetMethodDefinition(h).Name,
+                        "Main"
+                    )
                 );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
@@ -715,12 +714,11 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            "Main"
-                        )
+                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
+                    metadataReader.StringComparer.Equals(
+                        metadataReader.GetMethodDefinition(h).Name,
+                        "Main"
+                    )
                 );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
@@ -772,12 +770,11 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            "Main"
-                        )
+                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
+                    metadataReader.StringComparer.Equals(
+                        metadataReader.GetMethodDefinition(h).Name,
+                        "Main"
+                    )
                 );
                 var methodToken = metadataReader.GetToken(methodHandle);
 

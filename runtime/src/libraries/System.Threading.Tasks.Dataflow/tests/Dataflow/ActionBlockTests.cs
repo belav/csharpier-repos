@@ -12,32 +12,30 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public void TestToString()
         {
             // Test ToString() with the only custom configuration being NameFormat
-            DataflowTestHelpers.TestToString(
-                nameFormat =>
-                    nameFormat != null
-                        ? new ActionBlock<int>(
-                            i => { },
-                            new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
-                        )
-                        : new ActionBlock<int>(i => { })
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new ActionBlock<int>(
+                        i => { },
+                        new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new ActionBlock<int>(i => { })
             );
 
             // Test ToString() with other configuration
-            DataflowTestHelpers.TestToString(
-                nameFormat =>
-                    nameFormat != null
-                        ? new ActionBlock<int>(
-                            i => { },
-                            new ExecutionDataflowBlockOptions()
-                            {
-                                NameFormat = nameFormat,
-                                SingleProducerConstrained = true
-                            }
-                        )
-                        : new ActionBlock<int>(
-                            i => { },
-                            new ExecutionDataflowBlockOptions() { SingleProducerConstrained = true }
-                        )
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new ActionBlock<int>(
+                        i => { },
+                        new ExecutionDataflowBlockOptions()
+                        {
+                            NameFormat = nameFormat,
+                            SingleProducerConstrained = true
+                        }
+                    )
+                    : new ActionBlock<int>(
+                        i => { },
+                        new ExecutionDataflowBlockOptions() { SingleProducerConstrained = true }
+                    )
             );
         }
 

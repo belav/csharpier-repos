@@ -52,8 +52,8 @@ public class MultipleComponentsTest
             var logs = Browser.Manage().Logs.GetLog(LogType.Browser).ToArray();
             var curatedLogs = logs.Where(l => l.Timestamp > LastLogTimeStamp);
 
-            return curatedLogs.Count(
-                    e => e.Message.Contains("Starting up Blazor server-side application")
+            return curatedLogs.Count(e =>
+                    e.Message.Contains("Starting up Blazor server-side application")
                 ) == 1;
         });
     }
@@ -120,12 +120,11 @@ public class MultipleComponentsTest
     {
         content = content.Replace("\r\n", "");
         var matches = Regex.Matches(content, MarkerPattern);
-        var markers = matches.Select(
-            s =>
-                JsonSerializer.Deserialize<ComponentMarker>(
-                    s.Groups[1].Value,
-                    ServerComponentSerializationSettings.JsonSerializationOptions
-                )
+        var markers = matches.Select(s =>
+            JsonSerializer.Deserialize<ComponentMarker>(
+                s.Groups[1].Value,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            )
         );
 
         var prerenderMarkers = markers

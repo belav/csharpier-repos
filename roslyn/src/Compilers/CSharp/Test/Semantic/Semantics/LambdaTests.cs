@@ -4553,8 +4553,8 @@ class Program
             )
             {
                 var actualAttributes = attributes.SelectAsArray(a => a.AttributeClass.GetSymbol());
-                var expectedAttributes = expectedAttributeNames.Select(
-                    n => comp.GetTypeByMetadataName(n)
+                var expectedAttributes = expectedAttributeNames.Select(n =>
+                    comp.GetTypeByMetadataName(n)
                 );
                 AssertEx.Equal(expectedAttributes, actualAttributes);
             }
@@ -7826,15 +7826,13 @@ class Program
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(i => i.Identifier.ValueText == "parameter")
-                .Where(
-                    i =>
-                        i.Ancestors()
-                            .Any(
-                                a =>
-                                    a.IsKind(SyntaxKind.Attribute)
-                                    || a.IsKind(SyntaxKind.DefaultExpression)
-                                    || a.IsKind(SyntaxKind.InvocationExpression)
-                            )
+                .Where(i =>
+                    i.Ancestors()
+                        .Any(a =>
+                            a.IsKind(SyntaxKind.Attribute)
+                            || a.IsKind(SyntaxKind.DefaultExpression)
+                            || a.IsKind(SyntaxKind.InvocationExpression)
+                        )
                 )
                 .ToArray();
 

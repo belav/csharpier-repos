@@ -30,14 +30,13 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             CancellationToken cancellationToken
         )
         {
-            var items = accessibleMethods.SelectAsArray(
-                method =>
-                    ConvertMethodGroupMethod(
-                        document,
-                        method,
-                        invocationExpression.SpanStart,
-                        semanticModel
-                    )
+            var items = accessibleMethods.SelectAsArray(method =>
+                ConvertMethodGroupMethod(
+                    document,
+                    method,
+                    invocationExpression.SpanStart,
+                    semanticModel
+                )
             );
             var selectedItemIndex = TryGetSelectedIndex(accessibleMethods, currentSymbol);
             return Task.FromResult((items, selectedItemIndex));
@@ -109,8 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     );
 
                 Contract.ThrowIfFalse(includeInstance || includeStatic);
-                methodGroup = methodGroup.Where(
-                    m => (m.IsStatic && includeStatic) || (!m.IsStatic && includeInstance)
+                methodGroup = methodGroup.Where(m =>
+                    (m.IsStatic && includeStatic) || (!m.IsStatic && includeInstance)
                 );
             }
             else if (
@@ -119,8 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             )
             {
                 // We always need to include local functions regardless of whether they are static.
-                methodGroup = methodGroup.Where(
-                    m => m.IsStatic || m is IMethodSymbol { MethodKind: MethodKind.LocalFunction }
+                methodGroup = methodGroup.Where(m =>
+                    m.IsStatic || m is IMethodSymbol { MethodKind: MethodKind.LocalFunction }
                 );
             }
 

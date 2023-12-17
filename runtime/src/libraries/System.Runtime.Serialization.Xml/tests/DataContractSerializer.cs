@@ -3101,11 +3101,12 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_PocoDerivedTypeWithBaseTypeWithDataMember()
     {
-        PocoDerivedTypeWithDataMemberInBaseType value =
-            new PocoDerivedTypeWithDataMemberInBaseType()
-            {
-                EmbeddedDataMember = new PocoTypeAsEmbeddedDataMember { Name = "Foo" }
-            };
+        PocoDerivedTypeWithDataMemberInBaseType value = new PocoDerivedTypeWithDataMemberInBaseType(
+
+        )
+        {
+            EmbeddedDataMember = new PocoTypeAsEmbeddedDataMember { Name = "Foo" }
+        };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<PocoDerivedTypeWithDataMemberInBaseType>(
                 value,
@@ -3134,7 +3135,9 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithNestedGenericClassImplementingIXmlSerialiable()
     {
         TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool> value =
-            new TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool>()
+            new TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool>(
+
+            )
             {
                 StringValue = "Foo"
             };
@@ -3356,8 +3359,9 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_CollectionDataContractWithCustomKeyName()
     {
-        CollectionDataContractWithCustomKeyName value =
-            new CollectionDataContractWithCustomKeyName();
+        CollectionDataContractWithCustomKeyName value = new CollectionDataContractWithCustomKeyName(
+
+        );
         value.Add(100, 123);
         value.Add(200, 456);
         var deserializedValue =
@@ -5356,7 +5360,9 @@ public static partial class DataContractSerializerTests
         );
 
         TestObjectInObjectContainerWithSimpleResolver(
-            new SerializationTestTypes.PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM(),
+            new SerializationTestTypes.PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM(
+
+            ),
             @"<ObjectContainer xmlns=""http://schemas.datacontract.org/2004/07/SerializationTestTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><_data z:Id=""i1"" i:type=""a:SerializationTestTypes.PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM***"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/"" xmlns:a=""http://schemas.datacontract.org/2004/07/SerializationTestTypes.PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM***""><Data i:nil=""true""/><DerivedData2 i:nil=""true""/><_derivedData1/></_data><_data2 z:Ref=""i1"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/""/></ObjectContainer>"
         );
 
@@ -5410,7 +5416,9 @@ public static partial class DataContractSerializerTests
         );
 
         TestObjectInObjectContainerWithSimpleResolver(
-            new SerializationTestTypes.Prop_PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM(),
+            new SerializationTestTypes.Prop_PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM(
+
+            ),
             @"<ObjectContainer xmlns=""http://schemas.datacontract.org/2004/07/SerializationTestTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><_data z:Id=""i1"" i:type=""a:SerializationTestTypes.Prop_PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM***"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/"" xmlns:a=""http://schemas.datacontract.org/2004/07/SerializationTestTypes.Prop_PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM***""><Data i:nil=""true""/><DerivedData2 i:nil=""true""/><_derivedData1/></_data><_data2 z:Ref=""i1"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/""/></ObjectContainer>"
         );
 

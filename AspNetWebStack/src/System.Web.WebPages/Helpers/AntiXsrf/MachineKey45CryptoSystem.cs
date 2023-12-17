@@ -13,8 +13,9 @@ namespace System.Web.Helpers.AntiXsrf
         {
             "System.Web.Helpers.AntiXsrf.AntiForgeryToken.v1"
         };
-        private static readonly MachineKey45CryptoSystem _singletonInstance =
-            GetSingletonInstance();
+        private static readonly MachineKey45CryptoSystem _singletonInstance = GetSingletonInstance(
+
+        );
 
         public static MachineKey45CryptoSystem Instance
         {

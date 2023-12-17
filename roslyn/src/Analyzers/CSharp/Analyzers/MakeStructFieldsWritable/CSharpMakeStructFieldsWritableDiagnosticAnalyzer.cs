@@ -45,8 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                context => SymbolAnalyzer.CreateAndRegisterActions(context)
+            context.RegisterCompilationStartAction(context =>
+                SymbolAnalyzer.CreateAndRegisterActions(context)
             );
         }
 
@@ -96,9 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
                 return namedTypeSymbol
                     .GetMembers()
                     .OfType<IFieldSymbol>()
-                    .Any(
-                        field =>
-                            field is { AssociatedSymbol: null, IsStatic: false, IsReadOnly: true }
+                    .Any(field =>
+                        field is { AssociatedSymbol: null, IsStatic: false, IsReadOnly: true }
                     );
             }
 

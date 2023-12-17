@@ -272,7 +272,9 @@ namespace ILCompiler.DependencyAnalysisFramework
                         )
                         {
                             storedDependencySet =
-                                new HashSet<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry>();
+                                new HashSet<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry>(
+
+                                );
                             _conditional_dependency_store.Add(
                                 dependency.OtherReasonNode,
                                 storedDependencySet

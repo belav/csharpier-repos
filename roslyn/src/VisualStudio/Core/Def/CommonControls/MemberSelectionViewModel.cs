@@ -41,8 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             // Use public property to hook property change events up
             Members = members.OrderBy(s => s.SymbolName).ToImmutableArray();
             _symbolToDependentsMap = dependentsMap;
-            _symbolToMemberViewMap = members.ToImmutableDictionary(
-                memberViewModel => memberViewModel.Symbol
+            _symbolToMemberViewMap = members.ToImmutableDictionary(memberViewModel =>
+                memberViewModel.Symbol
             );
 
             UpdateMembersBasedOnDestinationKind(destinationTypeKind);
@@ -113,8 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
         {
             Contract.ThrowIfFalse(ShowCheckDependentsButton);
 
-            var checkedMembers = Members.WhereAsArray(
-                member => member.IsChecked && member.IsCheckable
+            var checkedMembers = Members.WhereAsArray(member =>
+                member.IsChecked && member.IsCheckable
             );
 
             var result = _uiThreadOperationExecutor.Execute(
@@ -144,27 +144,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 
         public ImmutableArray<(ISymbol member, bool makeAbstract)> GetSelectedMembers() =>
             Members
-                .Where(
-                    memberSymbolView => memberSymbolView.IsChecked && memberSymbolView.IsCheckable
+                .Where(memberSymbolView =>
+                    memberSymbolView.IsChecked && memberSymbolView.IsCheckable
                 )
-                .SelectAsArray(
-                    memberViewModel =>
-                        (
-                            member: memberViewModel.Symbol,
-                            makeAbstract: memberViewModel.IsMakeAbstractCheckable
-                                && memberViewModel.MakeAbstract
-                        )
+                .SelectAsArray(memberViewModel =>
+                    (
+                        member: memberViewModel.Symbol,
+                        makeAbstract: memberViewModel.IsMakeAbstractCheckable
+                            && memberViewModel.MakeAbstract
+                    )
                 );
 
         public void UpdateMembersBasedOnDestinationKind(TypeKind destinationType)
         {
-            var fields = Members.WhereAsArray(
-                memberViewModel => memberViewModel.Symbol.IsKind(SymbolKind.Field)
+            var fields = Members.WhereAsArray(memberViewModel =>
+                memberViewModel.Symbol.IsKind(SymbolKind.Field)
             );
-            var makeAbstractEnabledCheckboxes = Members.WhereAsArray(
-                memberViewModel =>
-                    !memberViewModel.Symbol.IsKind(SymbolKind.Field)
-                    && !memberViewModel.Symbol.IsAbstract
+            var makeAbstractEnabledCheckboxes = Members.WhereAsArray(memberViewModel =>
+                !memberViewModel.Symbol.IsKind(SymbolKind.Field)
+                && !memberViewModel.Symbol.IsAbstract
             );
             var isInterface = destinationType == TypeKind.Interface;
 

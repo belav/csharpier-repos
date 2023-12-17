@@ -68,8 +68,8 @@ namespace System.Data.Mapping.Update.Internal
                     entityType = (EntityType)type;
                     keyMembers = new Set<EdmMember>(entityType.KeyMembers).MakeReadOnly();
                     foreignKeyMembers = new Set<EdmMember>(
-                        ((EntitySet)entitySetBase).ForeignKeyDependents.SelectMany(
-                            fk => fk.Item2.ToProperties
+                        ((EntitySet)entitySetBase).ForeignKeyDependents.SelectMany(fk =>
+                            fk.Item2.ToProperties
                         )
                     ).MakeReadOnly();
                     break;

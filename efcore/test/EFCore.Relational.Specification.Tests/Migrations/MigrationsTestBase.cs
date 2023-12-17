@@ -1232,12 +1232,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     e =>
                     {
                         e.Property<int>("DriverLicense");
-                        e.ToTable(
-                            tb =>
-                                tb.HasCheckConstraint(
-                                    "CK_People_Foo",
-                                    $"{DelimitIdentifier("DriverLicense")} > 0"
-                                )
+                        e.ToTable(tb =>
+                            tb.HasCheckConstraint(
+                                "CK_People_Foo",
+                                $"{DelimitIdentifier("DriverLicense")} > 0"
+                            )
                         );
                     }
                 ),
@@ -3000,12 +2999,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             builder =>
                 builder
                     .Entity("People")
-                    .ToTable(
-                        tb =>
-                            tb.HasCheckConstraint(
-                                "CK_People_Foo",
-                                $"{DelimitIdentifier("DriverLicense")} > 0"
-                            )
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 0"
+                        )
                     ),
             model =>
             {
@@ -3028,22 +3026,20 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             builder =>
                 builder
                     .Entity("People")
-                    .ToTable(
-                        tb =>
-                            tb.HasCheckConstraint(
-                                "CK_People_Foo",
-                                $"{DelimitIdentifier("DriverLicense")} > 0"
-                            )
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 0"
+                        )
                     ),
             builder =>
                 builder
                     .Entity("People")
-                    .ToTable(
-                        tb =>
-                            tb.HasCheckConstraint(
-                                "CK_People_Foo",
-                                $"{DelimitIdentifier("DriverLicense")} > 1"
-                            )
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 1"
+                        )
                     ),
             model =>
             {
@@ -3066,12 +3062,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             builder =>
                 builder
                     .Entity("People")
-                    .ToTable(
-                        tb =>
-                            tb.HasCheckConstraint(
-                                "CK_People_Foo",
-                                $"{DelimitIdentifier("DriverLicense")} > 0"
-                            )
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 0"
+                        )
                     ),
             builder => { },
             model =>

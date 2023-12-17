@@ -28,20 +28,19 @@ public class HostingTests
 
         var builder = new WebHostBuilder()
             .UseStartup<TestStartup>()
-            .ConfigureServices(
-                s =>
-                    s.AddDataProtection()
-                        .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                        .AddSingleton<IServer>(
-                            new FakeServer(
-                                onStart: () =>
-                                    tcs.TrySetException(
-                                        new InvalidOperationException(
-                                            "Server was started before key ring was initialized"
-                                        )
+            .ConfigureServices(s =>
+                s.AddDataProtection()
+                    .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                    .AddSingleton<IServer>(
+                        new FakeServer(
+                            onStart: () =>
+                                tcs.TrySetException(
+                                    new InvalidOperationException(
+                                        "Server was started before key ring was initialized"
                                     )
-                            )
+                                )
                         )
+                    )
             );
 
         using (var host = builder.Build())
@@ -64,20 +63,19 @@ public class HostingTests
             .Callback(() => tcs.TrySetResult());
 
         var builder = new HostBuilder()
-            .ConfigureServices(
-                s =>
-                    s.AddDataProtection()
-                        .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                        .AddSingleton<IServer>(
-                            new FakeServer(
-                                onStart: () =>
-                                    tcs.TrySetException(
-                                        new InvalidOperationException(
-                                            "Server was started before key ring was initialized"
-                                        )
+            .ConfigureServices(s =>
+                s.AddDataProtection()
+                    .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                    .AddSingleton<IServer>(
+                        new FakeServer(
+                            onStart: () =>
+                                tcs.TrySetException(
+                                    new InvalidOperationException(
+                                        "Server was started before key ring was initialized"
                                     )
-                            )
+                                )
                         )
+                    )
             )
             .ConfigureWebHost(b => b.UseStartup<TestStartup>());
 
@@ -107,11 +105,10 @@ public class HostingTests
         mockServer.Setup(m => m.Features).Returns(new FeatureCollection());
 
         var builder = new HostBuilder()
-            .ConfigureServices(
-                s =>
-                    s.AddDataProtection()
-                        .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                        .AddSingleton(mockServer.Object)
+            .ConfigureServices(s =>
+                s.AddDataProtection()
+                    .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                    .AddSingleton(mockServer.Object)
             )
             .ConfigureWebHost(b => b.UseStartup<TestStartup>());
 

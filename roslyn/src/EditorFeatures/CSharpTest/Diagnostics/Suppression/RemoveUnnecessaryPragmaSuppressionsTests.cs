@@ -150,8 +150,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
                 ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context) =>
-                context.RegisterCompilationStartAction(
-                    context => context.RegisterCompilationEndAction(_ => { })
+                context.RegisterCompilationStartAction(context =>
+                    context.RegisterCompilationEndAction(_ => { })
                 );
         }
 

@@ -87,9 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             : reference;
 
                     if (
-                        !ignorableAssemblyLists.Any(
-                            ignorableAssemblyList =>
-                                ignorableAssemblyList.Includes(redirectedReference)
+                        !ignorableAssemblyLists.Any(ignorableAssemblyList =>
+                            ignorableAssemblyList.Includes(redirectedReference)
                         )
                     )
                     {

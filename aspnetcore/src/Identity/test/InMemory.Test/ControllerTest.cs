@@ -21,14 +21,13 @@ public class ControllerTest
     {
         var context = new DefaultHttpContext();
         var auth = MockAuth(context);
-        auth.Setup(
-                a =>
-                    a.SignInAsync(
-                        context,
-                        IdentityConstants.ApplicationScheme,
-                        It.IsAny<ClaimsPrincipal>(),
-                        It.IsAny<AuthenticationProperties>()
-                    )
+        auth.Setup(a =>
+                a.SignInAsync(
+                    context,
+                    IdentityConstants.ApplicationScheme,
+                    It.IsAny<ClaimsPrincipal>(),
+                    It.IsAny<AuthenticationProperties>()
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();

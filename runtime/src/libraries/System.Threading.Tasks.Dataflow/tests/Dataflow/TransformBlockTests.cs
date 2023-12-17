@@ -73,14 +73,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestToString()
         {
-            DataflowTestHelpers.TestToString(
-                nameFormat =>
-                    nameFormat != null
-                        ? new TransformBlock<int, int>(
-                            i => i,
-                            new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
-                        )
-                        : new TransformBlock<int, int>(i => i)
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new TransformBlock<int, int>(
+                        i => i,
+                        new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new TransformBlock<int, int>(i => i)
             );
         }
 

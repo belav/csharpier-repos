@@ -589,11 +589,10 @@ public class UserStore<
         ArgumentNullException.ThrowIfNull(newClaim);
 
         var matchedClaims = await UserClaims
-            .Where(
-                uc =>
-                    uc.UserId.Equals(user.Id)
-                    && uc.ClaimValue == claim.Value
-                    && uc.ClaimType == claim.Type
+            .Where(uc =>
+                uc.UserId.Equals(user.Id)
+                && uc.ClaimValue == claim.Value
+                && uc.ClaimType == claim.Type
             )
             .ToListAsync(cancellationToken);
         foreach (var matchedClaim in matchedClaims)
@@ -622,11 +621,10 @@ public class UserStore<
         foreach (var claim in claims)
         {
             var matchedClaims = await UserClaims
-                .Where(
-                    uc =>
-                        uc.UserId.Equals(user.Id)
-                        && uc.ClaimValue == claim.Value
-                        && uc.ClaimType == claim.Type
+                .Where(uc =>
+                    uc.UserId.Equals(user.Id)
+                    && uc.ClaimValue == claim.Value
+                    && uc.ClaimType == claim.Type
                 )
                 .ToListAsync(cancellationToken);
             foreach (var c in matchedClaims)

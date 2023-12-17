@@ -410,11 +410,10 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         {
             var query = context
                 .Set<SimpleCounter>()
-                .Where(
-                    c =>
-                        c.StyleKey == "Swag"
-                        && c.IsTest == false
-                        && c.Discriminator == new Dictionary<string, string>()
+                .Where(c =>
+                    c.StyleKey == "Swag"
+                    && c.IsTest == false
+                    && c.Discriminator == new Dictionary<string, string>()
                 );
 
             var result = async ? await query.SingleAsync() : query.Single();
@@ -440,15 +439,12 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         var query = context
             .Set<Blog>()
             .Where(b => b.BlogId == 2)
-            .Select(
-                x =>
-                    new
-                    {
-                        x.BlogId,
-                        x.Url,
-                        RssUrl = x is RssBlog ? ((RssBlog)x).RssUrl : null
-                    }
-            )
+            .Select(x => new
+            {
+                x.BlogId,
+                x.Url,
+                RssUrl = x is RssBlog ? ((RssBlog)x).RssUrl : null
+            })
             .ToList();
 
         var result = Assert.Single(query);
@@ -614,13 +610,9 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         var group = MessageGroup.SomeGroup;
         var query = context
             .Set<User23059>()
-            .Where(
-                x =>
-                    !x.IsSoftDeleted
-                    && (
-                        x.MessageGroups.Contains(group)
-                        || x.MessageGroups.Contains(MessageGroup.All)
-                    )
+            .Where(x =>
+                !x.IsSoftDeleted
+                && (x.MessageGroups.Contains(group) || x.MessageGroups.Contains(MessageGroup.All))
             )
             .ToList();
 
@@ -847,18 +839,13 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                         context
                             .Set<Dashboard>()
                             .AsNoTracking()
-                            .Select(
-                                d =>
-                                    new
-                                    {
-                                        d.Id,
-                                        d.Name,
-                                        Layouts = d.Layouts.Select(
-                                            l => new { H = l.Height, W = l.Width }
-                                        )
-                                            .ToList()
-                                    }
-                            )
+                            .Select(d => new
+                            {
+                                d.Id,
+                                d.Name,
+                                Layouts = d.Layouts.Select(l => new { H = l.Height, W = l.Width })
+                                    .ToList()
+                            })
                             .ToList()
                 )
                 .Message.Replace("\r", "")
@@ -935,10 +922,9 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         using var context = CreateContext();
         var results = context
             .Set<BuiltInDataTypes>()
-            .Where(
-                b =>
-                    context.Set<BuiltInDataTypes>().Select(bb => bb.TestBoolean).Contains(true)
-                    && b.Id == 13
+            .Where(b =>
+                context.Set<BuiltInDataTypes>().Select(bb => bb.TestBoolean).Contains(true)
+                && b.Id == 13
             )
             .ToList();
 

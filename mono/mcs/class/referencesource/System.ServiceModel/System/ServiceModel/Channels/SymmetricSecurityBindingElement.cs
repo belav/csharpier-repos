@@ -183,8 +183,9 @@ namespace System.ServiceModel.Channels
                 );
             }
 
-            SymmetricSecurityProtocolFactory protocolFactory =
-                new SymmetricSecurityProtocolFactory();
+            SymmetricSecurityProtocolFactory protocolFactory = new SymmetricSecurityProtocolFactory(
+
+            );
             if (isForService)
             {
                 base.ApplyAuditBehaviorSettings(context, protocolFactory);

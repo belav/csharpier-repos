@@ -52,15 +52,14 @@ public class SourceToDestinationNameMapperAttributesMember : ISourceToDestinatio
                 sourceMembers.Length == 0 ? Empty : sourceMembers;
         }
         return sourceMembers
-            .FirstOrDefault(
-                d =>
-                    d.Attribute.IsMatch(
-                        sourceTypeDetails,
-                        d.Member,
-                        destType,
-                        destMemberType,
-                        nameToSearch
-                    )
+            .FirstOrDefault(d =>
+                d.Attribute.IsMatch(
+                    sourceTypeDetails,
+                    d.Member,
+                    destType,
+                    destMemberType,
+                    nameToSearch
+                )
             )
             .Member;
     }

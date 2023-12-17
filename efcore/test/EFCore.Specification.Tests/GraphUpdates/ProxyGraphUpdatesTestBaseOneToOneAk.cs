@@ -55,11 +55,11 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
             context =>
             {
                 new2 = context.CreateProxy<OptionalSingleAk2>(e => e.AlternateId = Guid.NewGuid());
-                new2d = context.CreateProxy<OptionalSingleAk2Derived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new2d = context.CreateProxy<OptionalSingleAk2Derived>(e =>
+                    e.AlternateId = Guid.NewGuid()
                 );
-                new2dd = context.CreateProxy<OptionalSingleAk2MoreDerived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new2dd = context.CreateProxy<OptionalSingleAk2MoreDerived>(e =>
+                    e.AlternateId = Guid.NewGuid()
                 );
                 new2c = context.CreateProxy<OptionalSingleComposite2>();
                 new1 = context.CreateProxy<OptionalSingleAk1>(e =>
@@ -246,11 +246,11 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
             context =>
             {
                 new2 = context.CreateProxy<OptionalSingleAk2>(e => e.AlternateId = Guid.NewGuid());
-                new2d = context.CreateProxy<OptionalSingleAk2Derived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new2d = context.CreateProxy<OptionalSingleAk2Derived>(e =>
+                    e.AlternateId = Guid.NewGuid()
                 );
-                new2dd = context.CreateProxy<OptionalSingleAk2MoreDerived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new2dd = context.CreateProxy<OptionalSingleAk2MoreDerived>(e =>
+                    e.AlternateId = Guid.NewGuid()
                 );
                 new2c = context.CreateProxy<OptionalSingleComposite2>();
                 new1 = context.CreateProxy<OptionalSingleAk1>(e =>
@@ -598,14 +598,14 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                new2 = context.CreateProxy<RequiredNonPkSingleAk2>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new2 = context.CreateProxy<RequiredNonPkSingleAk2>(e =>
+                    e.AlternateId = Guid.NewGuid()
                 );
-                new2d = context.CreateProxy<RequiredNonPkSingleAk2Derived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new2d = context.CreateProxy<RequiredNonPkSingleAk2Derived>(e =>
+                    e.AlternateId = Guid.NewGuid()
                 );
-                new2dd = context.CreateProxy<RequiredNonPkSingleAk2MoreDerived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new2dd = context.CreateProxy<RequiredNonPkSingleAk2MoreDerived>(e =>
+                    e.AlternateId = Guid.NewGuid()
                 );
                 new1 = context.CreateProxy<RequiredNonPkSingleAk1>(e =>
                 {

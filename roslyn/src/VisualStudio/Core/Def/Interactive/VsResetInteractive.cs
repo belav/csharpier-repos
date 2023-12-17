@@ -195,8 +195,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         }
 
         internal Project GetProjectFromHierarchy(IVsHierarchy hierarchy) =>
-            _workspace.CurrentSolution.Projects.FirstOrDefault(
-                proj => _workspace.GetHierarchy(proj.Id) == hierarchy
+            _workspace.CurrentSolution.Projects.FirstOrDefault(proj =>
+                _workspace.GetHierarchy(proj.Id) == hierarchy
             );
 
         private static InteractiveHostPlatform? GetInteractiveHostPlatform(
@@ -356,10 +356,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         )
         {
             var document =
-                interactiveWindow.CurrentLanguageBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                interactiveWindow.CurrentLanguageBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+                );
             var compilation = await document.Project.GetCompilationAsync().ConfigureAwait(true);
-            return namespacesToImport.Where(
-                ns => compilation.GlobalNamespace.GetQualifiedNamespace(ns) != null
+            return namespacesToImport.Where(ns =>
+                compilation.GlobalNamespace.GetQualifiedNamespace(ns) != null
             );
         }
     }

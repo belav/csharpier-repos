@@ -91,19 +91,16 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
             if (watchedDirectories.Any())
             {
                 var directoryWatches = watchedDirectories
-                    .Select(
-                        d =>
-                            new FileSystemWatcher
-                            {
-                                GlobPattern = new RelativePattern
-                                {
-                                    BaseUri = ProtocolConversions.CreateAbsoluteUri(d.Path),
-                                    Pattern = d.ExtensionFilter is not null
-                                        ? "**/*" + d.ExtensionFilter
-                                        : "**/*"
-                                }
-                            }
-                    )
+                    .Select(d => new FileSystemWatcher
+                    {
+                        GlobPattern = new RelativePattern
+                        {
+                            BaseUri = ProtocolConversions.CreateAbsoluteUri(d.Path),
+                            Pattern = d.ExtensionFilter is not null
+                                ? "**/*" + d.ExtensionFilter
+                                : "**/*"
+                        }
+                    })
                     .ToArray();
 
                 _directoryWatchRegistration = new LspFileWatchRegistration(

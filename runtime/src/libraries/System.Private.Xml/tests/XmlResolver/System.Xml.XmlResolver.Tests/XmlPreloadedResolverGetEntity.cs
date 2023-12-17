@@ -256,13 +256,12 @@ namespace System.Xml.XmlResolverTests
                 string systemUrlPrefix,
                 string pathPrefix
             ) =>
-                ids.Select(
-                    x =>
-                        (
-                            x.PublicId,
-                            systemUrlPrefix + x.RelativeId,
-                            Path.Combine(pathPrefix, x.RelativeId)
-                        )
+                ids.Select(x =>
+                    (
+                        x.PublicId,
+                        systemUrlPrefix + x.RelativeId,
+                        Path.Combine(pathPrefix, x.RelativeId)
+                    )
                 );
         }
 

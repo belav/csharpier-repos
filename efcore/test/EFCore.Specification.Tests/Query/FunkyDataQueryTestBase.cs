@@ -223,8 +223,8 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         c => ss.Set<FunkyCustomer>().Select(c2 => c2.LastName),
                         (fn, ln) => new { fn, ln }
                     )
-                    .Where(
-                        r => r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.Contains(xx))) == true
+                    .Where(r =>
+                        r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.Contains(xx))) == true
                     ),
             elementSorter: e => (e.fn, e.ln),
             elementAsserter: (e, a) =>
@@ -254,8 +254,8 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         c => ss.Set<FunkyCustomer>().Select(c2 => c2.LastName),
                         (fn, ln) => new { fn, ln }
                     )
-                    .Where(
-                        r => r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.Contains(xx))) != true
+                    .Where(r =>
+                        r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.Contains(xx))) != true
                     )
         );
 
@@ -509,11 +509,9 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss => ss.Set<FunkyCustomer>().Where(c => c.FirstName.StartsWith(c.LastName)),
             ss =>
                 ss.Set<FunkyCustomer>()
-                    .Where(
-                        c =>
-                            c.FirstName.MaybeScalar(
-                                x => c.LastName.MaybeScalar(xx => x.StartsWith(xx))
-                            ) == true
+                    .Where(c =>
+                        c.FirstName.MaybeScalar(x => c.LastName.MaybeScalar(xx => x.StartsWith(xx)))
+                        == true
                     )
         );
     }
@@ -538,8 +536,8 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         c => ss.Set<FunkyCustomer>().Select(c2 => c2.LastName),
                         (fn, ln) => new { fn, ln }
                     )
-                    .Where(
-                        r => r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.StartsWith(xx))) == true
+                    .Where(r =>
+                        r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.StartsWith(xx))) == true
                     ),
             elementSorter: e => (e.fn, e.ln),
             elementAsserter: (e, a) =>
@@ -569,12 +567,8 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         c => ss.Set<FunkyCustomer>().Select(c2 => c2.LastName),
                         (fn, ln) => new { fn, ln }
                     )
-                    .Where(
-                        r =>
-                            !(
-                                r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.StartsWith(xx)))
-                                == true
-                            )
+                    .Where(r =>
+                        !(r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.StartsWith(xx))) == true)
                     )
         );
 
@@ -792,8 +786,8 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         c => ss.Set<FunkyCustomer>().Select(c2 => c2.LastName),
                         (fn, ln) => new { fn, ln }
                     )
-                    .Where(
-                        r => r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.EndsWith(xx))) == true
+                    .Where(r =>
+                        r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.EndsWith(xx))) == true
                     ),
             elementSorter: e => (e.fn, e.ln),
             elementAsserter: (e, a) =>
@@ -823,9 +817,8 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         c => ss.Set<FunkyCustomer>().Select(c2 => c2.LastName),
                         (fn, ln) => new { fn, ln }
                     )
-                    .Where(
-                        r =>
-                            !(r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.EndsWith(xx))) == true)
+                    .Where(r =>
+                        !(r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.EndsWith(xx))) == true)
                     )
         );
 
@@ -849,8 +842,8 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         c => ss.Set<FunkyCustomer>().Select(c2 => c2.LastName),
                         (fn, ln) => new { fn, ln }
                     )
-                    .Where(
-                        r => r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.EndsWith(xx))) == true
+                    .Where(r =>
+                        r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.EndsWith(xx))) == true
                     ),
             elementSorter: e => (e.fn, e.ln),
             elementAsserter: (e, a) =>
@@ -880,11 +873,10 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         c => ss.Set<FunkyCustomer>().Select(c2 => c2.LastName),
                         (fn, ln) => new { fn, ln }
                     )
-                    .Where(
-                        r =>
-                            !(r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.EndsWith(xx))) == true)
-                                ? true
-                                : false
+                    .Where(r =>
+                        !(r.fn.MaybeScalar(x => r.ln.MaybeScalar(xx => x.EndsWith(xx))) == true)
+                            ? true
+                            : false
                     )
         );
 
@@ -900,13 +892,12 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<FunkyCustomer>()
                     .SelectMany(c => ss.Set<FunkyCustomer>(), (c1, c2) => new { c1, c2 })
-                    .Where(
-                        r =>
-                            (
-                                r.c1.FirstName != null
-                                && r.c2.LastName != null
-                                && r.c1.FirstName.EndsWith(r.c2.LastName)
-                            ) == r.c1.NullableBool
+                    .Where(r =>
+                        (
+                            r.c1.FirstName != null
+                            && r.c2.LastName != null
+                            && r.c1.FirstName.EndsWith(r.c2.LastName)
+                        ) == r.c1.NullableBool
                     ),
             elementSorter: e => (e.c1.Id, e.c2.Id),
             elementAsserter: (e, a) =>
@@ -928,13 +919,12 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<FunkyCustomer>()
                     .SelectMany(c => ss.Set<FunkyCustomer>(), (c1, c2) => new { c1, c2 })
-                    .Where(
-                        r =>
-                            (
-                                r.c1.FirstName != null
-                                && r.c2.LastName != null
-                                && r.c1.FirstName.EndsWith(r.c2.LastName)
-                            ) != r.c1.NullableBool
+                    .Where(r =>
+                        (
+                            r.c1.FirstName != null
+                            && r.c2.LastName != null
+                            && r.c1.FirstName.EndsWith(r.c2.LastName)
+                        ) != r.c1.NullableBool
                     ),
             elementSorter: e => (e.c1.Id, e.c2.Id),
             elementAsserter: (e, a) =>
@@ -952,25 +942,19 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<FunkyCustomer>()
                     .OrderBy(e => e.Id)
-                    .Select(
-                        e =>
-                            new
-                            {
-                                first = (char?)e.FirstName.FirstOrDefault(),
-                                last = (char?)e.FirstName.LastOrDefault()
-                            }
-                    ),
+                    .Select(e => new
+                    {
+                        first = (char?)e.FirstName.FirstOrDefault(),
+                        last = (char?)e.FirstName.LastOrDefault()
+                    }),
             ss =>
                 ss.Set<FunkyCustomer>()
                     .OrderBy(e => e.Id)
-                    .Select(
-                        e =>
-                            new
-                            {
-                                first = e.FirstName.MaybeScalar(x => x.FirstOrDefault()),
-                                last = e.FirstName.MaybeScalar(x => x.LastOrDefault())
-                            }
-                    ),
+                    .Select(e => new
+                    {
+                        first = e.FirstName.MaybeScalar(x => x.FirstOrDefault()),
+                        last = e.FirstName.MaybeScalar(x => x.LastOrDefault())
+                    }),
             assertOrder: true,
             elementAsserter: (e, a) =>
             {
@@ -992,10 +976,9 @@ public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Where(c => c.FirstName.Contains(s) || c.LastName.StartsWith(s)),
             ss =>
                 ss.Set<FunkyCustomer>()
-                    .Where(
-                        c =>
-                            c.FirstName.MaybeScalar(f => f.Contains(s)) == true
-                            || c.LastName.MaybeScalar(l => l.StartsWith(s)) == true
+                    .Where(c =>
+                        c.FirstName.MaybeScalar(f => f.Contains(s)) == true
+                        || c.LastName.MaybeScalar(l => l.StartsWith(s)) == true
                     )
         );
     }

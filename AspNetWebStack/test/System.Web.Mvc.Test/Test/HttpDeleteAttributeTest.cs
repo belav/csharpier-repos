@@ -26,7 +26,9 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void IsValidForRequestThrowsIfControllerContextIsNull()
         {
-            HttpVerbAttributeHelper.TestHttpVerbAttributeNullControllerContext<HttpDeleteAttribute>();
+            HttpVerbAttributeHelper.TestHttpVerbAttributeNullControllerContext<HttpDeleteAttribute>(
+
+            );
         }
     }
 }

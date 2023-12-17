@@ -144,12 +144,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     {
                         // Multiple values: build list of var = c1, var = c2, ..., then OR them all.
                         List<DbExpression> operands = domainValues
-                            .Select(
-                                c =>
-                                    (DbExpression)
-                                        cqt.Equal(
-                                            c.AsCqt(row, this.RestrictedMemberSlot.MemberPath)
-                                        )
+                            .Select(c =>
+                                (DbExpression)
+                                    cqt.Equal(c.AsCqt(row, this.RestrictedMemberSlot.MemberPath))
                             )
                             .ToList();
                         cqt = Helpers.BuildBalancedTreeInPlace(

@@ -114,11 +114,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // create a map
                 var map = new Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData>();
 
-                _formattingResults.Do(
-                    result =>
-                        result
-                            .GetChanges(cancellationToken)
-                            .Do(change => map.Add(change.Item1, change.Item2))
+                _formattingResults.Do(result =>
+                    result
+                        .GetChanges(cancellationToken)
+                        .Do(change => map.Add(change.Item1, change.Item2))
                 );
 
                 return Rewriter(map, cancellationToken);

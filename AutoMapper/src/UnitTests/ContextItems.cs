@@ -3,12 +3,11 @@
 public class Context_try_get_items : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<int, int>()
-                    .ConvertUsing(
-                        (s, _, c) => c.TryGetItems(out var items) ? (int)items["override"] : s
-                    )
+        new(c =>
+            c.CreateMap<int, int>()
+                .ConvertUsing(
+                    (s, _, c) => c.TryGetItems(out var items) ? (int)items["override"] : s
+                )
         );
 
     [Fact]

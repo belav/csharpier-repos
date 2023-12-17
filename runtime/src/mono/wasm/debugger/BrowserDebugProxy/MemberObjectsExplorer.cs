@@ -548,11 +548,10 @@ namespace BrowserDebugProxy
                 {
                     // this has `new` keyword if it is newSlot but direct child was not a newSlot:
                     var child = allMembers
-                        .FirstOrDefault(
-                            kvp =>
-                                (kvp.Key == propName || kvp.Key.StartsWith($"{propName} ("))
-                                && kvp.Value[InternalUseFieldName.ParentTypeId.Name]?.Value<int>()
-                                    == typeId
+                        .FirstOrDefault(kvp =>
+                            (kvp.Key == propName || kvp.Key.StartsWith($"{propName} ("))
+                            && kvp.Value[InternalUseFieldName.ParentTypeId.Name]?.Value<int>()
+                                == typeId
                         )
                         .Value;
                     bool wasOverriddenByDerivedType =
@@ -817,8 +816,9 @@ namespace BrowserDebugProxy
             DotnetObjectId id = new DotnetObjectId("object", objectId);
             using var commandParamsObjWriter = new MonoBinaryWriter();
             commandParamsObjWriter.WriteObj(id, sdbHelper);
-            ArraySegment<byte> getPropertiesParamBuffer =
-                commandParamsObjWriter.GetParameterBuffer();
+            ArraySegment<byte> getPropertiesParamBuffer = commandParamsObjWriter.GetParameterBuffer(
+
+            );
 
             var allMembers = new Dictionary<string, JObject>();
             int typeIdsCnt = typeIdsIncludingParents.Count;

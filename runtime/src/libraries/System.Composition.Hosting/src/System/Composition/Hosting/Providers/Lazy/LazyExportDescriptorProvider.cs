@@ -43,27 +43,22 @@ namespace System.Composition.Hosting.Providers.Lazy
         {
             return definitionAccessor
                 .ResolveDependencies("value", lazyContract.ChangeType(typeof(TValue)), false)
-                .Select(
-                    d =>
-                        new ExportDescriptorPromise(
-                            lazyContract,
-                            Formatters.Format(typeof(Lazy<TValue>)),
-                            false,
-                            () => new[] { d },
-                            _ =>
-                            {
-                                var dsc = d.Target.GetDescriptor();
-                                var da = dsc.Activator;
-                                return ExportDescriptor.Create(
-                                    (c, o) =>
-                                        new Lazy<TValue>(
-                                            () => (TValue)CompositionOperation.Run(c, da)
-                                        ),
-                                    dsc.Metadata
-                                );
-                            }
-                        )
-                )
+                .Select(d => new ExportDescriptorPromise(
+                    lazyContract,
+                    Formatters.Format(typeof(Lazy<TValue>)),
+                    false,
+                    () => new[] { d },
+                    _ =>
+                    {
+                        var dsc = d.Target.GetDescriptor();
+                        var da = dsc.Activator;
+                        return ExportDescriptor.Create(
+                            (c, o) =>
+                                new Lazy<TValue>(() => (TValue)CompositionOperation.Run(c, da)),
+                            dsc.Metadata
+                        );
+                    }
+                ))
                 .ToArray();
         }
     }

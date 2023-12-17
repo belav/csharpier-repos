@@ -334,15 +334,16 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             }
 
             using var _ = ArrayBuilder<PickMembersOption>.GetInstance(out var pickMemberOptions);
-            var canAddNullCheck = viableMembers.Any(
-                static m => m.GetSymbolType().CanAddNullCheck()
+            var canAddNullCheck = viableMembers.Any(static m => m.GetSymbolType().CanAddNullCheck()
             );
 
             if (canAddNullCheck)
             {
                 // ILegacyGlobalOptionsWorkspaceService is not provided in LSP, so don't give the code action with Dialog if it is null
                 var globalOptions =
-                    document.Project.Solution.Services.GetService<ILegacyGlobalOptionsWorkspaceService>();
+                    document.Project.Solution.Services.GetService<ILegacyGlobalOptionsWorkspaceService>(
+
+                    );
                 if (globalOptions == null)
                 {
                     return null;

@@ -451,16 +451,15 @@ public class EventTests
     )
     {
         var builder = new HostBuilder()
-            .ConfigureServices(
-                services =>
-                    services
-                        .AddRouting()
-                        .AddAuthentication()
-                        .AddNegotiate(options =>
-                        {
-                            options.StateFactory = new TestNegotiateStateFactory();
-                            configureOptions?.Invoke(options);
-                        })
+            .ConfigureServices(services =>
+                services
+                    .AddRouting()
+                    .AddAuthentication()
+                    .AddNegotiate(options =>
+                    {
+                        options.StateFactory = new TestNegotiateStateFactory();
+                        configureOptions?.Invoke(options);
+                    })
             )
             .ConfigureWebHost(webHostBuilder =>
             {

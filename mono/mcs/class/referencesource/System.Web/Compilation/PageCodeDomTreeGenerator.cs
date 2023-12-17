@@ -264,8 +264,9 @@ namespace System.Web.Compilation
                     );
 
                     // e.g. outputCacheSettings = new outputCacheParameters;
-                    CodeObjectCreateExpression cacheSettingsObject =
-                        new CodeObjectCreateExpression();
+                    CodeObjectCreateExpression cacheSettingsObject = new CodeObjectCreateExpression(
+
+                    );
                     cacheSettingsObject.CreateType = new CodeTypeReference(
                         typeof(OutputCacheParameters)
                     );

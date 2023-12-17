@@ -62,15 +62,12 @@ public class DataProtectionProviderTests
             setupAction: builder =>
             {
                 builder.SetApplicationName("TestApplication");
-                builder.Services.AddSingleton<IKeyManager>(
-                    s =>
-                        new XmlKeyManager(
-                            s.GetRequiredService<IOptions<KeyManagementOptions>>(),
-                            s.GetRequiredService<IActivator>(),
-                            NullLoggerFactory.Instance,
-                            mock.Object
-                        )
-                );
+                builder.Services.AddSingleton<IKeyManager>(s => new XmlKeyManager(
+                    s.GetRequiredService<IOptions<KeyManagementOptions>>(),
+                    s.GetRequiredService<IActivator>(),
+                    NullLoggerFactory.Instance,
+                    mock.Object
+                ));
             }
         );
 

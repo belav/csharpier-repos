@@ -531,15 +531,12 @@ public class RelationalScaffoldingModelFactoryTest
             }
         };
         foreach (
-            var column in keyProps.Select(
-                k =>
-                    new DatabaseColumn
-                    {
-                        Table = Table,
-                        Name = k,
-                        StoreType = "int"
-                    }
-            )
+            var column in keyProps.Select(k => new DatabaseColumn
+            {
+                Table = Table,
+                Name = k,
+                StoreType = "int"
+            })
         )
         {
             info.Tables[0].Columns.Add(column);

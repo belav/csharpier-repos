@@ -149,18 +149,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     .Apply(provider)
                     .SelectMany(
                         (additionalText, _) =>
-                            Logics.Select(
-                                logic =>
-                                    (AdditionalText)
-                                        new InMemoryAdditionalText(
-                                            HintNameProvider.GetNextHintName(),
-                                            additionalText.GetText()!.ToString() switch
-                                            {
-                                                "a" when logic.TransformAs => "b",
-                                                "c" when logic.TransformCs => "d",
-                                                var other => other
-                                            }
-                                        )
+                            Logics.Select(logic =>
+                                (AdditionalText)
+                                    new InMemoryAdditionalText(
+                                        HintNameProvider.GetNextHintName(),
+                                        additionalText.GetText()!.ToString() switch
+                                        {
+                                            "a" when logic.TransformAs => "b",
+                                            "c" when logic.TransformCs => "d",
+                                            var other => other
+                                        }
+                                    )
                             )
                     );
             }
@@ -207,15 +206,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 IncrementalValuesProvider<AdditionalText> provider
             )
             {
-                var provider1 = provider.Where(
-                    additionalText =>
-                        additionalText.GetText()!.ToString() is var textString
-                        && (
-                            (IncludeAs && textString == "a")
-                            || (IncludeBs && textString == "b")
-                            || (IncludeCs && textString == "c")
-                            || (IncludeDs && textString == "d")
-                        )
+                var provider1 = provider.Where(additionalText =>
+                    additionalText.GetText()!.ToString() is var textString
+                    && (
+                        (IncludeAs && textString == "a")
+                        || (IncludeBs && textString == "b")
+                        || (IncludeCs && textString == "c")
+                        || (IncludeDs && textString == "d")
+                    )
                 );
                 return Source.Apply(provider1);
             }

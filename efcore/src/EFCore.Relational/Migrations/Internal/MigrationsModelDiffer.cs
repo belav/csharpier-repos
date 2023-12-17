@@ -287,10 +287,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     continue;
                 }
 
-                var principalCreateTableOperation = createTableOperations.FirstOrDefault(
-                    o =>
-                        o.Name == addForeignKeyOperation.PrincipalTable
-                        && o.Schema == addForeignKeyOperation.PrincipalSchema
+                var principalCreateTableOperation = createTableOperations.FirstOrDefault(o =>
+                    o.Name == addForeignKeyOperation.PrincipalTable
+                    && o.Schema == addForeignKeyOperation.PrincipalSchema
                 );
                 if (principalCreateTableOperation != null)
                 {
@@ -613,16 +612,14 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     StringComparison.OrdinalIgnoreCase
                 ),
             (s, t, _) =>
-                s.EntityTypeMappings.Any(
-                    se =>
-                        t.EntityTypeMappings.Any(
-                            te =>
-                                string.Equals(
-                                    se.TypeBase.Name,
-                                    te.TypeBase.Name,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                s.EntityTypeMappings.Any(se =>
+                    t.EntityTypeMappings.Any(te =>
+                        string.Equals(
+                            se.TypeBase.Name,
+                            te.TypeBase.Name,
+                            StringComparison.OrdinalIgnoreCase
                         )
+                    )
                 )
         );
 
@@ -933,8 +930,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         var sortedPropertyInfos = graph.TopologicalSort().SelectMany(e => types[e].Values).ToList();
 
         return sortedPropertyInfos
-            .Select(
-                pi => primaryKeyPropertyGroups.ContainsKey(pi) ? primaryKeyPropertyGroups[pi] : null
+            .Select(pi =>
+                primaryKeyPropertyGroups.ContainsKey(pi) ? primaryKeyPropertyGroups[pi] : null
             )
             // ReSharper disable once RedundantEnumerableCastCall
             .Where(e => e != null)
@@ -942,10 +939,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             .Concat(leastPriorityPrimaryKeyProperties)
             .Concat(
                 sortedPropertyInfos
-                    .Where(
-                        pi =>
-                            !primaryKeyPropertyGroups.ContainsKey(pi)
-                            && entityType.ClrType.IsAssignableFrom(pi.DeclaringType)
+                    .Where(pi =>
+                        !primaryKeyPropertyGroups.ContainsKey(pi)
+                        && entityType.ClrType.IsAssignableFrom(pi.DeclaringType)
                     )
                     .SelectMany(p => groups[p])
             )
@@ -957,10 +953,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             )
             .Concat(
                 sortedPropertyInfos
-                    .Where(
-                        pi =>
-                            !primaryKeyPropertyGroups.ContainsKey(pi)
-                            && !entityType.ClrType.IsAssignableFrom(pi.DeclaringType)
+                    .Where(pi =>
+                        !primaryKeyPropertyGroups.ContainsKey(pi)
+                        && !entityType.ClrType.IsAssignableFrom(pi.DeclaringType)
                     )
                     .SelectMany(p => groups[p])
             );
@@ -1017,51 +1012,45 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             Remove,
             (s, t, _) => string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase),
             (s, t, c) =>
-                s.PropertyMappings.Any(
-                    sm =>
-                        t.PropertyMappings.Any(
-                            tm =>
-                                string.Equals(
-                                    sm.Property.Name,
-                                    tm.Property.Name,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                                && EntityTypePathEquals(
-                                    sm.Property.DeclaringType,
-                                    tm.Property.DeclaringType,
-                                    c
-                                )
+                s.PropertyMappings.Any(sm =>
+                    t.PropertyMappings.Any(tm =>
+                        string.Equals(
+                            sm.Property.Name,
+                            tm.Property.Name,
+                            StringComparison.OrdinalIgnoreCase
                         )
+                        && EntityTypePathEquals(
+                            sm.Property.DeclaringType,
+                            tm.Property.DeclaringType,
+                            c
+                        )
+                    )
                 ),
             (s, t, _) =>
-                s.PropertyMappings.Any(
-                    sm =>
-                        t.PropertyMappings.Any(
-                            tm =>
-                                string.Equals(
-                                    sm.Property.Name,
-                                    tm.Property.Name,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                s.PropertyMappings.Any(sm =>
+                    t.PropertyMappings.Any(tm =>
+                        string.Equals(
+                            sm.Property.Name,
+                            tm.Property.Name,
+                            StringComparison.OrdinalIgnoreCase
                         )
+                    )
                 ),
             (s, t, c) =>
                 ColumnStructureEquals(s, t)
-                && s.PropertyMappings.Any(
-                    sm =>
-                        t.PropertyMappings.Any(
-                            tm =>
-                                string.Equals(
-                                    sm.Property.Name,
-                                    tm.Property.Name,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                                && EntityTypePathEquals(
-                                    sm.Property.DeclaringType,
-                                    tm.Property.DeclaringType,
-                                    c
-                                )
+                && s.PropertyMappings.Any(sm =>
+                    t.PropertyMappings.Any(tm =>
+                        string.Equals(
+                            sm.Property.Name,
+                            tm.Property.Name,
+                            StringComparison.OrdinalIgnoreCase
                         )
+                        && EntityTypePathEquals(
+                            sm.Property.DeclaringType,
+                            tm.Property.DeclaringType,
+                            c
+                        )
+                    )
                 ),
             (s, t, _) =>
                 ColumnStructureEquals(s, t) && ColumnAnnotationsEqual(s, t, matchValues: true),
@@ -2257,8 +2246,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         }
                     }
 
-                    var existingColumnModification = command.ColumnModifications.FirstOrDefault(
-                        c => c.ColumnName == column.Name
+                    var existingColumnModification = command.ColumnModifications.FirstOrDefault(c =>
+                        c.ColumnName == column.Name
                     );
                     if (existingColumnModification != null)
                     {
@@ -2445,8 +2434,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 for (var i = 0; i < keyValues.Length; i++)
                 {
-                    var modification = targetRow.ColumnModifications.First(
-                        m => m.ColumnName == key.Columns[i].Name
+                    var modification = targetRow.ColumnModifications.First(m =>
+                        m.ColumnName == key.Columns[i].Name
                     );
                     keyValues[i] = modification.Value;
                 }
@@ -2508,8 +2497,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         continue;
                     }
 
-                    var sourceColumnModification = sourceRow.ColumnModifications.FirstOrDefault(
-                        m => m.ColumnName == sourceColumn.Name
+                    var sourceColumnModification = sourceRow.ColumnModifications.FirstOrDefault(m =>
+                        m.ColumnName == sourceColumn.Name
                     );
                     if (sourceColumnModification == null)
                     {
@@ -2615,13 +2604,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
         var commands = identityMaps
             .Values.SelectMany(m => m.Rows)
-            .Where(
-                r =>
-                    r.EntityState is EntityState.Added or EntityState.Modified
-                    || (
-                        r.EntityState is EntityState.Deleted
-                        && diffContext.FindDrop(r.Table!) == null
-                    )
+            .Where(r =>
+                r.EntityState is EntityState.Added or EntityState.Modified
+                || (r.EntityState is EntityState.Deleted && diffContext.FindDrop(r.Table!) == null)
             );
 
         var commandSets = new CommandBatchPreparer(
@@ -2736,8 +2721,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         var keyColumns = command
                             .ColumnModifications.Where(col => col.IsKey)
                             .Select(c => (IColumn)c.Column!);
-                        var anyKeyColumnDropped = keyColumns.Any(
-                            c => diffContext.FindDrop(c) != null
+                        var anyKeyColumnDropped = keyColumns.Any(c =>
+                            diffContext.FindDrop(c) != null
                         );
 
                         yield return new DeleteDataOperation
@@ -2858,13 +2843,12 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         var unmatched = new List<IAnnotation>(target);
         foreach (var annotation in source)
         {
-            var index = unmatched.FindIndex(
-                a =>
-                    a.Name == annotation.Name
-                    && StructuralComparisons.StructuralEqualityComparer.Equals(
-                        a.Value,
-                        annotation.Value
-                    )
+            var index = unmatched.FindIndex(a =>
+                a.Name == annotation.Name
+                && StructuralComparisons.StructuralEqualityComparer.Equals(
+                    a.Value,
+                    annotation.Value
+                )
             );
             if (index == -1)
             {
@@ -2957,8 +2941,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         "{"
         + string.Join(
             ", ",
-            values.Select(
-                p => p == null ? "<null>" : Convert.ToString(p, CultureInfo.InvariantCulture)
+            values.Select(p =>
+                p == null ? "<null>" : Convert.ToString(p, CultureInfo.InvariantCulture)
             )
         )
         + "}";

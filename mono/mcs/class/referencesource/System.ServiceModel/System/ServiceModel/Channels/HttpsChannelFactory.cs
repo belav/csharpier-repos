@@ -40,7 +40,9 @@ namespace System.ServiceModel.Channels
             )
             {
                 this.sslCertificateValidator =
-                    credentials.ServiceCertificate.SslCertificateAuthentication.GetCertificateValidator();
+                    credentials.ServiceCertificate.SslCertificateAuthentication.GetCertificateValidator(
+
+                    );
                 this.remoteCertificateValidationCallback = new RemoteCertificateValidationCallback(
                     RemoteCertificateValidationCallback
                 );

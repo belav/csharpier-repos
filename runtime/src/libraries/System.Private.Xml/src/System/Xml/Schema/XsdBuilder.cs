@@ -2418,8 +2418,9 @@ namespace System.Xml.Schema
             {
                 builder.SendValidationEvent(SR.Sch_ComplexContentContentModel, "extension");
             }
-            builder._xso = builder._complexContentExtension =
-                new XmlSchemaComplexContentExtension();
+            builder._xso = builder._complexContentExtension = new XmlSchemaComplexContentExtension(
+
+            );
             builder._complexContent.Content = builder._complexContentExtension;
         }
 

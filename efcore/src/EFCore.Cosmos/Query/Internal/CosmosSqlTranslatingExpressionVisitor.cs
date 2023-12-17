@@ -896,8 +896,7 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
                     : _sqlExpressionFactory.In(
                         discriminatorColumn,
                         concreteEntityTypes
-                            .Select(
-                                et => _sqlExpressionFactory.Constant(et.GetDiscriminatorValue())
+                            .Select(et => _sqlExpressionFactory.Constant(et.GetDiscriminatorValue())
                             )
                             .ToArray()
                     );
@@ -1123,13 +1122,12 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
 
             result = Visit(
                 primaryKeyProperties1
-                    .Select(
-                        p =>
-                            Expression.MakeBinary(
-                                nodeType,
-                                CreatePropertyAccessExpression(nonNullEntityReference, p),
-                                Expression.Constant(null, p.ClrType.MakeNullable())
-                            )
+                    .Select(p =>
+                        Expression.MakeBinary(
+                            nodeType,
+                            CreatePropertyAccessExpression(nonNullEntityReference, p),
+                            Expression.Constant(null, p.ClrType.MakeNullable())
+                        )
                     )
                     .Aggregate(
                         (l, r) =>
@@ -1180,13 +1178,12 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
 
         result = Visit(
             primaryKeyProperties
-                .Select(
-                    p =>
-                        Expression.MakeBinary(
-                            nodeType,
-                            CreatePropertyAccessExpression(left, p),
-                            CreatePropertyAccessExpression(right, p)
-                        )
+                .Select(p =>
+                    Expression.MakeBinary(
+                        nodeType,
+                        CreatePropertyAccessExpression(left, p),
+                        CreatePropertyAccessExpression(right, p)
+                    )
                 )
                 .Aggregate(
                     (l, r) =>
@@ -1233,8 +1230,8 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
                 return _queryCompilationContext.RegisterRuntimeParameter(newParameterName, lambda);
 
             case MemberInitExpression memberInitExpression
-                when memberInitExpression.Bindings.SingleOrDefault(
-                    mb => mb.Member.Name == property.Name
+                when memberInitExpression.Bindings.SingleOrDefault(mb =>
+                    mb.Member.Name == property.Name
                 )
                     is MemberAssignment memberAssignment:
                 return memberAssignment.Expression;
@@ -1308,10 +1305,9 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
             NewArrayExpression e => e.Expressions.All(CanEvaluate),
             MemberInitExpression e
                 => CanEvaluate(e.NewExpression)
-                    && e.Bindings.All(
-                        mb =>
-                            mb is MemberAssignment memberAssignment
-                            && CanEvaluate(memberAssignment.Expression)
+                    && e.Bindings.All(mb =>
+                        mb is MemberAssignment memberAssignment
+                        && CanEvaluate(memberAssignment.Expression)
                     ),
             _ => false
         };

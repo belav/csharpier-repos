@@ -48,8 +48,8 @@ namespace System.Net.Http.Formatting
 
             foreach (MediaTypeHeaderValue mediaType1 in formatter1.SupportedMediaTypes)
             {
-                MediaTypeHeaderValue mediaType2 = formatter2.SupportedMediaTypes.Single(
-                    m => m.Equals(mediaType1)
+                MediaTypeHeaderValue mediaType2 = formatter2.SupportedMediaTypes.Single(m =>
+                    m.Equals(mediaType1)
                 );
                 Assert.NotSame(mediaType1, mediaType2);
             }

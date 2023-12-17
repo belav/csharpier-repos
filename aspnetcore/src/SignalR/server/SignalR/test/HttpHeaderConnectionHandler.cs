@@ -26,8 +26,8 @@ public class HttpHeaderConnectionHandler : ConnectionHandler
 
             var headerName = Encoding.UTF8.GetString(buffer.ToArray());
             var headerValues = headers
-                .FirstOrDefault(
-                    h => string.Equals(h.Key, headerName, StringComparison.OrdinalIgnoreCase)
+                .FirstOrDefault(h =>
+                    string.Equals(h.Key, headerName, StringComparison.OrdinalIgnoreCase)
                 )
                 .Value.ToArray();
 

@@ -1816,8 +1816,7 @@ class B
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("B")
                 .GetMembers("M")
                 .OfType<MethodSymbol>()
-                .Single(
-                    method => method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
+                .Single(method => method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
             Assert.Equal(expectedOriginalDefinitionSymbol, actualSymbol.OriginalDefinition);
@@ -2003,8 +2002,7 @@ class U { }
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMembers("M")
                 .OfType<MethodSymbol>()
-                .Single(
-                    method => method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
+                .Single(method => method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
 
@@ -2038,8 +2036,7 @@ class A<T>
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMembers("M")
                 .OfType<MethodSymbol>()
-                .Single(
-                    method => method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
+                .Single(method => method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
 
@@ -2846,10 +2843,9 @@ class C
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.LogicalNotOperatorName)
                 .OfType<MethodSymbol>()
-                .Single(
-                    method =>
-                        method.ParameterTypesWithAnnotations.Single().SpecialType
-                        == SpecialType.System_Int32
+                .Single(method =>
+                    method.ParameterTypesWithAnnotations.Single().SpecialType
+                    == SpecialType.System_Int32
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
 
@@ -3068,10 +3064,9 @@ class C
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.DivisionOperatorName)
                 .OfType<MethodSymbol>()
-                .Single(
-                    method =>
-                        method.ParameterTypesWithAnnotations.First().SpecialType
-                        == SpecialType.System_Int32
+                .Single(method =>
+                    method.ParameterTypesWithAnnotations.First().SpecialType
+                    == SpecialType.System_Int32
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
 
@@ -3318,10 +3313,9 @@ class C
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.ImplicitConversionName)
                 .OfType<MethodSymbol>()
-                .Single(
-                    method =>
-                        method.ParameterTypesWithAnnotations.Single().SpecialType
-                        == SpecialType.System_Int32
+                .Single(method =>
+                    method.ParameterTypesWithAnnotations.Single().SpecialType
+                    == SpecialType.System_Int32
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
 
@@ -3362,11 +3356,10 @@ class C
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.ImplicitConversionName)
                 .OfType<MethodSymbol>()
-                .Single(
-                    method =>
-                        method.ParameterTypesWithAnnotations.Single().SpecialType
-                            == SpecialType.System_Int32
-                        && method.ReturnType.SpecialType == SpecialType.System_Int32
+                .Single(method =>
+                    method.ParameterTypesWithAnnotations.Single().SpecialType
+                        == SpecialType.System_Int32
+                    && method.ReturnType.SpecialType == SpecialType.System_Int32
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
 
@@ -6985,10 +6978,9 @@ enum E { }
 
             var expectedSymbol = compilation
                 .GetSpecialType(SpecialType.System_String)
-                .InstanceConstructors.Single(
-                    ctor =>
-                        ctor.Parameters.Length == 1
-                        && ctor.GetParameterType(0).Kind == SymbolKind.ArrayType
+                .InstanceConstructors.Single(ctor =>
+                    ctor.Parameters.Length == 1
+                    && ctor.GetParameterType(0).Kind == SymbolKind.ArrayType
                 );
 
             var cref = GetCrefSyntaxes(compilation).Single();
@@ -7869,12 +7861,11 @@ class Cat { }
                     .DescendantTrivia()
                     .Select(trivia => trivia.GetStructure())
                     .OfType<DocumentationCommentTriviaSyntax>();
-                return docComments.SelectMany(
-                    docComment =>
-                        docComment
-                            .DescendantNodes()
-                            .OfType<XmlCrefAttributeSyntax>()
-                            .Select(attr => attr.Cref)
+                return docComments.SelectMany(docComment =>
+                    docComment
+                        .DescendantNodes()
+                        .OfType<XmlCrefAttributeSyntax>()
+                        .Select(attr => attr.Cref)
                 );
             });
         }

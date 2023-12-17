@@ -144,17 +144,16 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             return CreateSignatureHelpItems(
                 accessibleConstructors
-                    .Select(
-                        c =>
-                            Convert(
-                                c,
-                                within,
-                                attribute,
-                                semanticModel,
-                                structuralTypeDisplayService,
-                                documentationCommentFormatter,
-                                cancellationToken
-                            )
+                    .Select(c =>
+                        Convert(
+                            c,
+                            within,
+                            attribute,
+                            semanticModel,
+                            structuralTypeDisplayService,
+                            documentationCommentFormatter,
+                            cancellationToken
+                        )
                     )
                     .ToList(),
                 textSpan,

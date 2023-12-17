@@ -398,22 +398,20 @@ public class MonsterContext<
         // TODO: Many-to-many
         //modelBuilder.Entity<TSupplier>().ForeignKeys(fk => fk.HasForeignKey<TProduct>(e => e.SupplierId));
 
-        modelBuilder.Entity<TBackOrderLine>(
-            bb =>
-                bb.HasOne(b => (TSupplier)b.Supplier)
-                    .WithMany(s => (ICollection<TBackOrderLine>)s.BackOrderLines)
-                    .HasForeignKey(e => e.SupplierId)
+        modelBuilder.Entity<TBackOrderLine>(bb =>
+            bb.HasOne(b => (TSupplier)b.Supplier)
+                .WithMany(s => (ICollection<TBackOrderLine>)s.BackOrderLines)
+                .HasForeignKey(e => e.SupplierId)
         );
 
-        modelBuilder.Entity<TDiscontinuedProduct>(
-            db =>
-                db.HasOne(d => (TProduct)d.ReplacedBy)
-                    .WithMany(p => (ICollection<TDiscontinuedProduct>)p.Replaces)
-                    .HasForeignKey(e => e.ReplacementProductId)
+        modelBuilder.Entity<TDiscontinuedProduct>(db =>
+            db.HasOne(d => (TProduct)d.ReplacedBy)
+                .WithMany(p => (ICollection<TDiscontinuedProduct>)p.Replaces)
+                .HasForeignKey(e => e.ReplacementProductId)
         );
 
-        modelBuilder.Entity<TProductPageView>(
-            pb => pb.HasOne(p => (TProduct)p.Product).WithMany().HasForeignKey(e => e.ProductId)
+        modelBuilder.Entity<TProductPageView>(pb =>
+            pb.HasOne(p => (TProduct)p.Product).WithMany().HasForeignKey(e => e.ProductId)
         );
     }
 

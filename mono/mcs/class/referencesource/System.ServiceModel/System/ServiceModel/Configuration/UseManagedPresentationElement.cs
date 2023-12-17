@@ -17,8 +17,9 @@ namespace System.ServiceModel.Configuration
 
         protected internal override BindingElement CreateBindingElement()
         {
-            UseManagedPresentationBindingElement binding =
-                new UseManagedPresentationBindingElement();
+            UseManagedPresentationBindingElement binding = new UseManagedPresentationBindingElement(
+
+            );
             this.ApplyConfiguration(binding);
             return binding;
         }

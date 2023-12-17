@@ -57,8 +57,8 @@ namespace System.Composition.Hosting.Providers.Metadata
                     .Compile();
             }
 
-            var parameterlessConstructor = ti.DeclaredConstructors.SingleOrDefault(
-                ci => ci.IsPublic && ci.GetParameters().Length == 0
+            var parameterlessConstructor = ti.DeclaredConstructors.SingleOrDefault(ci =>
+                ci.IsPublic && ci.GetParameters().Length == 0
             );
             if (parameterlessConstructor != null)
             {
@@ -76,14 +76,13 @@ namespace System.Composition.Hosting.Providers.Metadata
                 foreach (
                     var prop in typeof(TMetadata)
                         .GetTypeInfo()
-                        .DeclaredProperties.Where(
-                            prop =>
-                                prop.GetMethod != null
-                                && prop.GetMethod.IsPublic
-                                && !prop.GetMethod.IsStatic
-                                && prop.SetMethod != null
-                                && prop.SetMethod.IsPublic
-                                && !prop.SetMethod.IsStatic
+                        .DeclaredProperties.Where(prop =>
+                            prop.GetMethod != null
+                            && prop.GetMethod.IsPublic
+                            && !prop.GetMethod.IsStatic
+                            && prop.SetMethod != null
+                            && prop.SetMethod.IsPublic
+                            && !prop.SetMethod.IsStatic
                         )
                 )
                 {

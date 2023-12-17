@@ -108,8 +108,8 @@ namespace DbLinq.Sqlite
                         keyColRow.TableName,
                         keyColRow.TableSchema
                     );
-                    DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(
-                        t => tableFullDbName == t.Name
+                    DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t =>
+                        tableFullDbName == t.Name
                     );
                     if (table == null)
                     {

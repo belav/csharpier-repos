@@ -454,14 +454,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 foreach (var watchedDirectory in watchedDirectories)
                 {
                     _fileChangeWatcher._taskQueue.AddWork(
-                        watchedDirectories.Select(
-                            watchedDirectory =>
-                                WatcherOperation.WatchDirectory(
-                                    watchedDirectory.Path,
-                                    watchedDirectory.ExtensionFilter,
-                                    this,
-                                    _directoryWatchCookies
-                                )
+                        watchedDirectories.Select(watchedDirectory =>
+                            WatcherOperation.WatchDirectory(
+                                watchedDirectory.Path,
+                                watchedDirectory.ExtensionFilter,
+                                this,
+                                _directoryWatchCookies
+                            )
                         )
                     );
                 }

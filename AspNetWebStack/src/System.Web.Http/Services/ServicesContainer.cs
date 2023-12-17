@@ -180,8 +180,8 @@ namespace System.Web.Http.Controllers
             }
 
             object[] filteredServices = services.Where(svc => svc != null).ToArray();
-            object incorrectlyTypedService = filteredServices.FirstOrDefault(
-                svc => !serviceType.IsAssignableFrom(svc.GetType())
+            object incorrectlyTypedService = filteredServices.FirstOrDefault(svc =>
+                !serviceType.IsAssignableFrom(svc.GetType())
             );
             if (incorrectlyTypedService != null)
             {

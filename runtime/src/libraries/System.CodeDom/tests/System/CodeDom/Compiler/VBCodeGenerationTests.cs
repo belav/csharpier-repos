@@ -2867,14 +2867,16 @@ namespace System.CodeDom.Compiler.Tests
             fooMethod1.Attributes = MemberAttributes.Public;
             fooMethod1.ReturnType = new CodeTypeReference(typeof(string));
 
-            CodeParameterDeclarationExpression parameter1 =
-                new CodeParameterDeclarationExpression();
+            CodeParameterDeclarationExpression parameter1 = new CodeParameterDeclarationExpression(
+
+            );
             parameter1.Name = "format";
             parameter1.Type = new CodeTypeReference(typeof(string));
             fooMethod1.Parameters.Add(parameter1);
 
-            CodeParameterDeclarationExpression parameter2 =
-                new CodeParameterDeclarationExpression();
+            CodeParameterDeclarationExpression parameter2 = new CodeParameterDeclarationExpression(
+
+            );
             parameter2.Name = "array";
             parameter2.Type = new CodeTypeReference(typeof(object[]));
             parameter2.CustomAttributes.Add(

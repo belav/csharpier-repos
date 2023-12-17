@@ -84,10 +84,9 @@ public class NullSubstituteWithStrings
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            cfg =>
-                cfg.CreateProjection<Customer, CustomerViewModel>()
-                    .ForMember(d => d.Value, o => o.NullSubstitute("5"))
+        new(cfg =>
+            cfg.CreateProjection<Customer, CustomerViewModel>()
+                .ForMember(d => d.Value, o => o.NullSubstitute("5"))
         );
 
     [Fact]

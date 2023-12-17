@@ -94,12 +94,11 @@ namespace Microsoft.CodeAnalysis.Options
         {
             var internallyDefined = _changedOptionKeys
                 .Where(key => key.Option is IOption2)
-                .SelectAsArray(
-                    key =>
-                        KeyValuePairUtil.Create(
-                            new OptionKey2((IOption2)key.Option, key.Language),
-                            _values[key]
-                        )
+                .SelectAsArray(key =>
+                    KeyValuePairUtil.Create(
+                        new OptionKey2((IOption2)key.Option, key.Language),
+                        _values[key]
+                    )
                 );
             var externallyDefined = _changedOptionKeys
                 .Where(key => key.Option is not IOption2)

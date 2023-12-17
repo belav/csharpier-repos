@@ -168,15 +168,14 @@ public class When_mapping_generic_interface : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            cfg =>
-                cfg.CreateMap(typeof(IList<>), typeof(IDestinationBase<>))
-                    .ForMember(
-                        nameof(IDestinationBase<Object>.Items),
-                        p_Expression => p_Expression.MapFrom(p_Source => p_Source)
-                    )
-                    .ForMember("PropertyToMap", o => o.Ignore())
-                    .AsProxy()
+        new(cfg =>
+            cfg.CreateMap(typeof(IList<>), typeof(IDestinationBase<>))
+                .ForMember(
+                    nameof(IDestinationBase<Object>.Items),
+                    p_Expression => p_Expression.MapFrom(p_Source => p_Source)
+                )
+                .ForMember("PropertyToMap", o => o.Ignore())
+                .AsProxy()
         );
 
     [Fact]
@@ -238,8 +237,8 @@ public class When_mapping_base_interface_members
     [Fact]
     public void Should_find_inherited_members_by_name()
     {
-        new MapperConfiguration(
-            c => c.CreateMap<ISource, ITarget>().ForMember("BaseId", opt => opt.Ignore())
+        new MapperConfiguration(c =>
+            c.CreateMap<ISource, ITarget>().ForMember("BaseId", opt => opt.Ignore())
         );
     }
 }
@@ -390,18 +389,17 @@ public class When_mapping_a_concrete_type_to_an_interface_type : AutoMapperSpecB
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            cfg =>
-                cfg.CreateMap<Source, IDestination>()
-                    .AsProxy()
-                    .ForMember(x => x.Value2, o => o.MapFrom(x => x.Value1))
-                    .ForMember(x => x.Value3, o => o.Ignore())
-                    .AfterMap(
-                        (_, d) =>
-                        {
-                            d.Value3 = "value 3";
-                        }
-                    )
+        new(cfg =>
+            cfg.CreateMap<Source, IDestination>()
+                .AsProxy()
+                .ForMember(x => x.Value2, o => o.MapFrom(x => x.Value1))
+                .ForMember(x => x.Value3, o => o.Ignore())
+                .AfterMap(
+                    (_, d) =>
+                    {
+                        d.Value3 = "value 3";
+                    }
+                )
         );
 
     protected override void Because_of()

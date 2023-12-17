@@ -665,10 +665,9 @@ class Program
                     HangMitigatingCancellationToken
                 );
             Assert.True(
-                classifiedTokens.Any(
-                    c =>
-                        c.Span.GetText().ToString() == "void"
-                        && c.ClassificationType.Classification == "keyword"
+                classifiedTokens.Any(c =>
+                    c.Span.GetText().ToString() == "void"
+                    && c.ClassificationType.Classification == "keyword"
                 )
             );
         }

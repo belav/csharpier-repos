@@ -19,10 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         )
             where TCommandHandler : ICommandHandler
         {
-            var lazyCommandHandlers = exportProvider.GetExports<
-                ICommandHandler,
-                OrderableMetadata
-            >();
+            var lazyCommandHandlers = exportProvider.GetExports<ICommandHandler, OrderableMetadata>(
+
+            );
             return Assert.IsType<TCommandHandler>(
                 lazyCommandHandlers
                     .Single(lazyCommandHandler => lazyCommandHandler.Metadata.Name == name)
@@ -43,10 +42,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             >();
             return Assert.IsType<TCommandHandler>(
                 lazyCommandHandlers
-                    .Single(
-                        lazyCommandHandler =>
-                            lazyCommandHandler.Metadata.Name == name
-                            && lazyCommandHandler.Metadata.ContentTypes.Contains(contentType)
+                    .Single(lazyCommandHandler =>
+                        lazyCommandHandler.Metadata.Name == name
+                        && lazyCommandHandler.Metadata.ContentTypes.Contains(contentType)
                     )
                     .Value
             );

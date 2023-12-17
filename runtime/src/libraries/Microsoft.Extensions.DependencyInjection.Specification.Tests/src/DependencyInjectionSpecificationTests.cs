@@ -465,10 +465,12 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService =
-                    outerScope.ServiceProvider.GetService<IFakeScopedService>();
-                var innerScopedService =
-                    innerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var outerScopedService = outerScope.ServiceProvider.GetService<IFakeScopedService>(
+
+                );
+                var innerScopedService = innerScope.ServiceProvider.GetService<IFakeScopedService>(
+
+                );
 
                 // Assert
                 Assert.NotNull(outerScopedService);
@@ -658,10 +660,12 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService =
-                    outerScope.ServiceProvider.GetService<IFakeScopedService>();
-                var innerScopedService =
-                    innerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var outerScopedService = outerScope.ServiceProvider.GetService<IFakeScopedService>(
+
+                );
+                var innerScopedService = innerScope.ServiceProvider.GetService<IFakeScopedService>(
+
+                );
 
                 // Assert
                 Assert.NotSame(outerScopedService, innerScopedService);

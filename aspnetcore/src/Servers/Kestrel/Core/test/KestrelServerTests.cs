@@ -303,8 +303,8 @@ public class KestrelServerTests
             new MockTransportFactory(),
             mockLoggerFactory.Object
         );
-        mockLoggerFactory.Verify(
-            factory => factory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel")
+        mockLoggerFactory.Verify(factory =>
+            factory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel")
         );
     }
 
@@ -681,9 +681,8 @@ public class KestrelServerTests
         var mockTransport = new Mock<IConnectionListener>();
         var mockTransportFactory = new Mock<IConnectionListenerFactory>();
         mockTransportFactory
-            .Setup(
-                transportFactory =>
-                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            .Setup(transportFactory =>
+                transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
             )
             .Returns<EndPoint, CancellationToken>(
                 (e, token) =>
@@ -746,9 +745,8 @@ public class KestrelServerTests
         var mockTransport = new Mock<IConnectionListener>();
         var mockTransportFactory = new Mock<IConnectionListenerFactory>();
         mockTransportFactory
-            .Setup(
-                transportFactory =>
-                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            .Setup(transportFactory =>
+                transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
             )
             .Returns<EndPoint, CancellationToken>(
                 (e, token) =>
@@ -830,9 +828,8 @@ public class KestrelServerTests
         var mockTransport = new Mock<IConnectionListener>();
         var mockTransportFactory = new Mock<IConnectionListenerFactory>();
         mockTransportFactory
-            .Setup(
-                transportFactory =>
-                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            .Setup(transportFactory =>
+                transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
             )
             .Returns<EndPoint, CancellationToken>(
                 (e, token) =>
@@ -1001,9 +998,8 @@ public class KestrelServerTests
         var mockTransports = new List<Mock<IConnectionListener>>();
         var mockTransportFactory = new Mock<IConnectionListenerFactory>();
         mockTransportFactory
-            .Setup(
-                transportFactory =>
-                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            .Setup(transportFactory =>
+                transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
             )
             .Returns<EndPoint, CancellationToken>(
                 (e, token) =>
@@ -1216,9 +1212,8 @@ public class KestrelServerTests
         var mockTransports = new List<Mock<IConnectionListener>>();
         var mockTransportFactory = new Mock<IConnectionListenerFactory>();
         mockTransportFactory
-            .Setup(
-                transportFactory =>
-                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            .Setup(transportFactory =>
+                transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
             )
             .Returns<EndPoint, CancellationToken>(
                 (e, token) =>

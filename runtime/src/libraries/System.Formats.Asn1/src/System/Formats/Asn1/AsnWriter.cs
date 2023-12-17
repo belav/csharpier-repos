@@ -501,8 +501,9 @@ namespace System.Formats.Asn1
                 throw new InvalidOperationException(SR.AsnWriter_PopWrongTag);
             }
 
-            (Asn1Tag stackTag, int lenOffset, UniversalTagNumber stackTagType) =
-                _nestingStack.Peek();
+            (Asn1Tag stackTag, int lenOffset, UniversalTagNumber stackTagType) = _nestingStack.Peek(
+
+            );
 
             Debug.Assert(tag.IsConstructed);
             if (stackTag != tag || stackTagType != tagType)

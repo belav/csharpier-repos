@@ -134,9 +134,9 @@ namespace System.ServiceModel.Dispatcher
 
         public IEnumerator<KeyValuePair<MessageQuery, TItem>> GetEnumerator()
         {
-            return (
-                (ICollection<KeyValuePair<MessageQuery, TItem>>)this.dictionary
-            ).GetEnumerator();
+            return ((ICollection<KeyValuePair<MessageQuery, TItem>>)this.dictionary).GetEnumerator(
+
+            );
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -351,8 +351,9 @@ namespace System.ServiceModel.Dispatcher
 
                 public Enumerator(Enumerable<TSource, TResult> enumerable)
                 {
-                    this.outerEnumerator =
-                        enumerable.table.collectionsByType.Values.GetEnumerator();
+                    this.outerEnumerator = enumerable.table.collectionsByType.Values.GetEnumerator(
+
+                    );
                     this.enumerable = enumerable;
                 }
 

@@ -228,13 +228,10 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
             {
                 return DbExpressionBuilder.NewRow(
                     this.Slots.Where(slot => slot.IsRequiredByParent)
-                        .Select(
-                            slot =>
-                                new KeyValuePair<string, DbExpression>(
-                                    slot.CqlFieldAlias,
-                                    slot.AsCqt(row)
-                                )
-                        )
+                        .Select(slot => new KeyValuePair<string, DbExpression>(
+                            slot.CqlFieldAlias,
+                            slot.AsCqt(row)
+                        ))
                 );
             }
         }

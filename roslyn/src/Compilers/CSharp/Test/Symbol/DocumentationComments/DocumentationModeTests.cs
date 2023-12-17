@@ -410,13 +410,12 @@ class {1} {{ }}
 partial class Partial {{ }}
 ";
 
-            var trees = AllModes.Select(
-                mode =>
-                    Parse(
-                        string.Format(sourceTemplate, xml, mode),
-                        string.Format("{0}.cs", mode),
-                        GetOptions(mode)
-                    )
+            var trees = AllModes.Select(mode =>
+                Parse(
+                    string.Format(sourceTemplate, xml, mode),
+                    string.Format("{0}.cs", mode),
+                    GetOptions(mode)
+                )
             );
 
             var comp = CreateCompilation(trees.ToArray(), assemblyName: "Test");
@@ -468,13 +467,12 @@ class {1} {{ }}
 partial class Partial {{ }}
 ";
 
-            var trees = AllModes.Select(
-                mode =>
-                    Parse(
-                        string.Format(sourceTemplate, includeElement, mode),
-                        string.Format("{0}.cs", mode),
-                        GetOptions(mode)
-                    )
+            var trees = AllModes.Select(mode =>
+                Parse(
+                    string.Format(sourceTemplate, includeElement, mode),
+                    string.Format("{0}.cs", mode),
+                    GetOptions(mode)
+                )
             );
 
             var comp = CreateCompilation(

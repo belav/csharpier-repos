@@ -3427,14 +3427,13 @@ class C
                 {
                     compilation1
                         .GetDiagnostics()
-                        .Where(
-                            d =>
-                                d.Code
-                                    is not (
-                                        (int)ErrorCode.ERR_OperatorNeedsMatch
-                                        or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                        or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                                    )
+                        .Where(d =>
+                            d.Code
+                                is not (
+                                    (int)ErrorCode.ERR_OperatorNeedsMatch
+                                    or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                                    or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                                )
                         )
                         .Verify(
                             // (4,30): error CS9150: User-defined operator '%' cannot be declared checked
@@ -3497,14 +3496,13 @@ class C
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                            or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                        )
                 )
                 .Verify(
                     // (5,30): error CS9150: User-defined operator '%' cannot be declared checked
@@ -3591,14 +3589,13 @@ class C
             );
             compilation
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                            or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                        )
                 )
                 .Verify(expected);
 
@@ -3617,14 +3614,13 @@ class C
             {
                 compilation
                     .GetDiagnostics()
-                    .Where(
-                        d =>
-                            d.Code
-                                is not (
-                                    (int)ErrorCode.ERR_OperatorNeedsMatch
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                                )
+                    .Where(d =>
+                        d.Code
+                            is not (
+                                (int)ErrorCode.ERR_OperatorNeedsMatch
+                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                            )
                     )
                     .Verify(
                         // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked }}'
@@ -3686,14 +3682,13 @@ class C
             );
             compilation
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                            or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                        )
                 )
                 .Verify(expected);
 
@@ -3770,14 +3765,13 @@ class C
             );
             compilation
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                            or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                        )
                 )
                 .Verify(expected);
 
@@ -3796,14 +3790,13 @@ class C
             {
                 compilation
                     .GetDiagnostics()
-                    .Where(
-                        d =>
-                            d.Code
-                                is not (
-                                    (int)ErrorCode.ERR_OperatorNeedsMatch
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                                )
+                    .Where(d =>
+                        d.Code
+                            is not (
+                                (int)ErrorCode.ERR_OperatorNeedsMatch
+                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                            )
                     )
                     .Verify(
                         // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked }}(C, int)'
@@ -3868,14 +3861,13 @@ class C
             );
             compilation
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                            or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                        )
                 )
                 .Verify(expected);
 

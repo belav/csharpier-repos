@@ -474,13 +474,12 @@ ORDER BY [t].[Id], [o].[MainEntityManyId]
 
             modelBuilder.Entity<MainEntitySameTable>(eb =>
             {
-                eb.ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.HasPeriodStart("StartTime").HasColumnName("StartTime");
-                            ttb.HasPeriodEnd("EndTime").HasColumnName("EndTime");
-                        })
+                eb.ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.HasPeriodStart("StartTime").HasColumnName("StartTime");
+                        ttb.HasPeriodEnd("EndTime").HasColumnName("EndTime");
+                    })
                 );
 
                 eb.OwnsOne(
@@ -488,27 +487,24 @@ ORDER BY [t].[Id], [o].[MainEntityManyId]
                     oeb =>
                     {
                         oeb.WithOwner();
-                        oeb.ToTable(
-                            tb =>
-                                tb.IsTemporal(ttb =>
-                                {
-                                    ttb.HasPeriodStart("StartTime").HasColumnName("StartTime");
-                                    ttb.HasPeriodEnd("EndTime").HasColumnName("EndTime");
-                                })
+                        oeb.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.HasPeriodStart("StartTime").HasColumnName("StartTime");
+                                ttb.HasPeriodEnd("EndTime").HasColumnName("EndTime");
+                            })
                         );
                         oeb.OwnsOne(
                             x => x.Nested,
                             neb =>
                             {
                                 neb.WithOwner();
-                                neb.ToTable(
-                                    tb =>
-                                        tb.IsTemporal(ttb =>
-                                        {
-                                            ttb.HasPeriodStart("StartTime")
-                                                .HasColumnName("StartTime");
-                                            ttb.HasPeriodEnd("EndTime").HasColumnName("EndTime");
-                                        })
+                                neb.ToTable(tb =>
+                                    tb.IsTemporal(ttb =>
+                                    {
+                                        ttb.HasPeriodStart("StartTime").HasColumnName("StartTime");
+                                        ttb.HasPeriodEnd("EndTime").HasColumnName("EndTime");
+                                    })
                                 );
                             }
                         );
@@ -557,13 +553,12 @@ WHERE [v].[Capacity] IS NOT NULL AND [v].[FuelTank_Discriminator] IS NOT NULL
     {
         modelBuilder.Entity<Vehicle>(eb =>
         {
-            eb.ToTable(
-                tb =>
-                    tb.IsTemporal(ttb =>
-                    {
-                        ttb.HasPeriodStart("Start").HasColumnName("Start");
-                        ttb.HasPeriodEnd("End").HasColumnName("End");
-                    })
+            eb.ToTable(tb =>
+                tb.IsTemporal(ttb =>
+                {
+                    ttb.HasPeriodStart("Start").HasColumnName("Start");
+                    ttb.HasPeriodEnd("End").HasColumnName("End");
+                })
             );
             eb.HasDiscriminator<string>("Discriminator");
             eb.Property<string>("Discriminator").HasColumnName("Discriminator");

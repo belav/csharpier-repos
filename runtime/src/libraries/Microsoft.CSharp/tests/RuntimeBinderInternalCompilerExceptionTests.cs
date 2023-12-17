@@ -11,8 +11,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void NullaryCtor()
         {
-            RuntimeBinderInternalCompilerException rbe =
-                new RuntimeBinderInternalCompilerException();
+            RuntimeBinderInternalCompilerException rbe = new RuntimeBinderInternalCompilerException(
+
+            );
             Assert.Null(rbe.InnerException);
             Assert.Empty(rbe.Data);
             Assert.True((rbe.HResult & 0xFFFF0000) == 0x80130000); // Error from .NET

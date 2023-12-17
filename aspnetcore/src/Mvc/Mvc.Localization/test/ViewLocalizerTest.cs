@@ -99,12 +99,11 @@ public class ViewLocalizerTest
         viewLocalizer.Contextualize(viewContext);
 
         // Assert
-        htmlLocalizerFactory.Verify(
-            h =>
-                h.Create(
-                    It.Is<string>(baseName => baseName == expectedBaseName),
-                    It.Is<string>(location => location == appName)
-                )
+        htmlLocalizerFactory.Verify(h =>
+            h.Create(
+                It.Is<string>(baseName => baseName == expectedBaseName),
+                It.Is<string>(location => location == appName)
+            )
         );
     }
 

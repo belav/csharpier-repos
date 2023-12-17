@@ -266,10 +266,9 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // {
                 //     DoSomething(i, j);
                 // }
-                var operationsWithLiteralArgument = allArgumentOperations.WhereAsArray(
-                    argument =>
-                        _syntaxFacts.IsLiteralExpression(argument.Value.Syntax)
-                        && argument.ArgumentKind == ArgumentKind.Explicit
+                var operationsWithLiteralArgument = allArgumentOperations.WhereAsArray(argument =>
+                    _syntaxFacts.IsLiteralExpression(argument.Value.Syntax)
+                    && argument.ArgumentKind == ArgumentKind.Explicit
                 );
 
                 // 4. Find the default value parameters. Similarly to 3, they should be replaced by the default value.
@@ -292,8 +291,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // {
                 //     DoSomething(i, j);
                 // }
-                var operationsWithDefaultValue = allArgumentOperations.WhereAsArray(
-                    argument => argument.ArgumentKind == ArgumentKind.DefaultValue
+                var operationsWithDefaultValue = allArgumentOperations.WhereAsArray(argument =>
+                    argument.ArgumentKind == ArgumentKind.DefaultValue
                 );
 
                 // 5. All the remaining arguments, which might includes method call and a lot of other expressions.
@@ -358,9 +357,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     operationsToGenerateFreshVariablesFor.RemoveRange(operationsReadOnlyOnce);
                 var parametersToGenerateFreshVariablesFor = operationsToGenerateFreshVariablesFor
                 // We excluded arglist callees, so Parameter will always be non null
-                .SelectAsArray(
-                    argument =>
-                        (argument.Parameter!, GenerateArgumentExpression(syntaxGenerator, argument))
+                .SelectAsArray(argument =>
+                    (argument.Parameter!, GenerateArgumentExpression(syntaxGenerator, argument))
                 );
 
                 var parameterToReplaceMap = operationsWithLiteralArgument
@@ -394,15 +392,14 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // 'y' might becomes the first declaration if using dictionary instead of array.
                 var parametersWithVariableDeclarationArgument =
                     operationsWithVariableDeclarationArgument
-                        .Select(
-                            argument =>
-                                (
-                                    argument.Parameter,
-                                    callerSemanticModel
-                                        .GetSymbolInfo(argument.Value.Syntax, cancellationToken)
-                                        .GetAnySymbol()
-                                        ?.Name
-                                )
+                        .Select(argument =>
+                            (
+                                argument.Parameter,
+                                callerSemanticModel
+                                    .GetSymbolInfo(argument.Value.Syntax, cancellationToken)
+                                    .GetAnySymbol()
+                                    ?.Name
+                            )
                         )
                         .Where(parameterAndArgumentName => parameterAndArgumentName.Name != null)
                         .ToImmutableArray();
@@ -431,10 +428,9 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // This such case, just use the argument expression to parameter.
                 // Note: this might also cause semantics changes but is acceptable for a refactoring
                 var parameterToReplaceMap = allArgumentOperations
-                    .Where(
-                        argument =>
-                            argument.Value.Syntax is TExpressionSyntax
-                            && !_syntaxFacts.IsDeclarationExpression(argument.Value.Syntax)
+                    .Where(argument =>
+                        argument.Value.Syntax is TExpressionSyntax
+                        && !_syntaxFacts.IsDeclarationExpression(argument.Value.Syntax)
                     )
                     .ToImmutableDictionary(
                         // We excluded arglist callees, so Parameter will always be non null
@@ -516,15 +512,14 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // the 'i' in the caller will be considered as the referenced location
                 var allReferencedLocations = allReferences
                     .SelectMany(@ref => @ref.Locations)
-                    .Where(
-                        location =>
-                            !location.IsImplicit
-                            && calleeMethodNode.Contains(
-                                location.Location.FindNode(
-                                    getInnermostNodeForTie: true,
-                                    cancellationToken
-                                )
+                    .Where(location =>
+                        !location.IsImplicit
+                        && calleeMethodNode.Contains(
+                            location.Location.FindNode(
+                                getInnermostNodeForTie: true,
+                                cancellationToken
                             )
+                        )
                     )
                     .ToImmutableArray();
 

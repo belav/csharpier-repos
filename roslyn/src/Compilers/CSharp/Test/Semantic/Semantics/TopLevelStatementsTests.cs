@@ -4118,10 +4118,8 @@ void local()
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
-                .Where(
-                    id =>
-                        id.Identifier.ValueText == "alias1"
-                        && !id.Parent.IsKind(SyntaxKind.NameEquals)
+                .Where(id =>
+                    id.Identifier.ValueText == "alias1" && !id.Parent.IsKind(SyntaxKind.NameEquals)
                 )
                 .Single();
 
@@ -4164,10 +4162,8 @@ void local()
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
-                .Where(
-                    id =>
-                        id.Identifier.ValueText == "alias2"
-                        && !id.Parent.IsKind(SyntaxKind.NameEquals)
+                .Where(id =>
+                    id.Identifier.ValueText == "alias2" && !id.Parent.IsKind(SyntaxKind.NameEquals)
                 )
                 .Single();
 

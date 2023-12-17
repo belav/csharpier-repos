@@ -226,11 +226,10 @@ namespace Microsoft.CodeAnalysis.Editing
         {
             return symbol
                 .DeclaringSyntaxReferences.Select(sr => sr.GetSyntax())
-                .Select(
-                    n =>
-                        SyntaxGenerator
-                            .GetGenerator(_originalSolution.Workspace, n.Language)
-                            .GetDeclaration(n)
+                .Select(n =>
+                    SyntaxGenerator
+                        .GetGenerator(_originalSolution.Workspace, n.Language)
+                        .GetDeclaration(n)
                 )
                 .Where(d => d != null);
         }
@@ -503,13 +502,10 @@ namespace Microsoft.CodeAnalysis.Editing
             // get first symbol declaration that encompasses at least one of the member declarations
             var memberDecls = this.GetDeclarations(currentMember).ToList();
             var declaration = this.GetDeclarations(currentSymbol)
-                .FirstOrDefault(
-                    d =>
-                        memberDecls.Any(
-                            md =>
-                                md.SyntaxTree == d.SyntaxTree
-                                && d.FullSpan.IntersectsWith(md.FullSpan)
-                        )
+                .FirstOrDefault(d =>
+                    memberDecls.Any(md =>
+                        md.SyntaxTree == d.SyntaxTree && d.FullSpan.IntersectsWith(md.FullSpan)
+                    )
                 );
 
             if (declaration == null)

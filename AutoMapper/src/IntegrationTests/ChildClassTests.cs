@@ -79,15 +79,12 @@
                 using (var context = new TestContext())
                 {
                     var baseDTO = context
-                        .Bases.Select(
-                            b =>
-                                new BaseDTO
-                                {
-                                    Base1 = b.Base1,
-                                    BaseID = b.BaseID,
-                                    Sub = new SubDTO { Sub1 = b.Sub.Sub1, }
-                                }
-                        )
+                        .Bases.Select(b => new BaseDTO
+                        {
+                            Base1 = b.Base1,
+                            BaseID = b.BaseID,
+                            Sub = new SubDTO { Sub1 = b.Sub.Sub1, }
+                        })
                         .FirstOrDefault();
                     baseDTO.ShouldNotBeNull();
                     baseDTO.BaseID.ShouldBe(1);

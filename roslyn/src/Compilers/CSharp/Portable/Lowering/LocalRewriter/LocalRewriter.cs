@@ -433,8 +433,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var typeParameters = localFunction.TypeParameters;
                 if (
-                    typeParameters.Any(
-                        static typeParameter => typeParameter.HasUnmanagedTypeConstraint
+                    typeParameters.Any(static typeParameter =>
+                        typeParameter.HasUnmanagedTypeConstraint
                     )
                 )
                 {
@@ -448,11 +448,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             localFunction,
                             static t => t.ContainsNativeIntegerWrapperType()
                         )
-                        || typeParameters.Any(
-                            static t =>
-                                t.ConstraintTypesNoUseSiteDiagnostics.Any(
-                                    static t => t.ContainsNativeIntegerWrapperType()
-                                )
+                        || typeParameters.Any(static t =>
+                            t.ConstraintTypesNoUseSiteDiagnostics.Any(static t =>
+                                t.ContainsNativeIntegerWrapperType()
+                            )
                         )
                     )
                     {

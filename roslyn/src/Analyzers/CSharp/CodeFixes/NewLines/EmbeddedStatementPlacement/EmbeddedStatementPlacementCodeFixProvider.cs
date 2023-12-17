@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             var descendentStatements = startStatement
                 .DescendantNodesAndSelf()
                 .OfType<StatementSyntax>();
-            var badStatements = descendentStatements.Where(
-                s => EmbeddedStatementPlacementDiagnosticAnalyzer.StatementNeedsWrapping(s)
+            var badStatements = descendentStatements.Where(s =>
+                EmbeddedStatementPlacementDiagnosticAnalyzer.StatementNeedsWrapping(s)
             );
 
             // Walk from lower statements to higher so the higher up changes see the changes below.

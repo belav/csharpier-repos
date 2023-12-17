@@ -131,15 +131,12 @@ public abstract class NorthwindKeylessEntitiesQueryTestBase<TFixture> : QueryTes
             ss =>
                 ss.Set<CustomerQuery>()
                     .GroupBy(cv => cv.City)
-                    .Select(
-                        g =>
-                            new
-                            {
-                                g.Key,
-                                Count = g.Count(),
-                                Sum = g.Sum(e => e.Address.Length)
-                            }
-                    ),
+                    .Select(g => new
+                    {
+                        g.Key,
+                        Count = g.Count(),
+                        Sum = g.Sum(e => e.Address.Length)
+                    }),
             elementSorter: e => (e.Key, e.Count, e.Sum)
         );
 

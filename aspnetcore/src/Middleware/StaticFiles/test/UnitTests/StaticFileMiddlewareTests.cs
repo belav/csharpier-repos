@@ -64,11 +64,10 @@ public class StaticFileMiddlewareTests : LoggedTest
                 {
                     webHostBuilder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                                app.UseStaticFiles(
-                                    new StaticFileOptions { ServeUnknownFileTypes = true }
-                                )
+                        .Configure(app =>
+                            app.UseStaticFiles(
+                                new StaticFileOptions { ServeUnknownFileTypes = true }
+                            )
                         )
                         .UseWebRoot(AppContext.BaseDirectory);
                 })
@@ -94,14 +93,13 @@ public class StaticFileMiddlewareTests : LoggedTest
     {
         var mockSendFile = new Mock<IHttpResponseBodyFeature>();
         mockSendFile
-            .Setup(
-                m =>
-                    m.SendFileAsync(
-                        It.IsAny<string>(),
-                        It.IsAny<long>(),
-                        It.IsAny<long?>(),
-                        It.IsAny<CancellationToken>()
-                    )
+            .Setup(m =>
+                m.SendFileAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<long>(),
+                    It.IsAny<long?>(),
+                    It.IsAny<CancellationToken>()
+                )
             )
             .ThrowsAsync(new FileNotFoundException());
         mockSendFile.Setup(m => m.Stream).Returns(Stream.Null);
@@ -141,8 +139,8 @@ public class StaticFileMiddlewareTests : LoggedTest
     {
         using (var fileProvider = new PhysicalFileProvider(AppContext.BaseDirectory))
         {
-            using var host = await StaticFilesTestServer.Create(
-                app => app.UseStaticFiles(new StaticFileOptions { FileProvider = fileProvider })
+            using var host = await StaticFilesTestServer.Create(app =>
+                app.UseStaticFiles(new StaticFileOptions { FileProvider = fileProvider })
             );
             using var server = host.GetTestServer();
             var fileInfo = fileProvider.GetFileInfo("TestDocument.txt");
@@ -168,21 +166,20 @@ public class StaticFileMiddlewareTests : LoggedTest
     {
         // No exception, default provided
         using (
-            await StaticFilesTestServer.Create(
-                app => app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = null })
+            await StaticFilesTestServer.Create(app =>
+                app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = null })
             )
         ) { }
 
         // No exception, default provided
         using (
-            await StaticFilesTestServer.Create(
-                app => app.UseStaticFiles(new StaticFileOptions { FileProvider = null })
+            await StaticFilesTestServer.Create(app =>
+                app.UseStaticFiles(new StaticFileOptions { FileProvider = null })
             )
         ) { }
 
         // PathString(null) is OK.
-        using var host = await StaticFilesTestServer.Create(
-            app => app.UseStaticFiles((string)null)
+        using var host = await StaticFilesTestServer.Create(app => app.UseStaticFiles((string)null)
         );
         using var server = host.GetTestServer();
         var response = await server.CreateClient().GetAsync("/");
@@ -216,15 +213,14 @@ public class StaticFileMiddlewareTests : LoggedTest
             )
         )
         {
-            using var host = await StaticFilesTestServer.Create(
-                app =>
-                    app.UseStaticFiles(
-                        new StaticFileOptions
-                        {
-                            RequestPath = new PathString(baseUrl),
-                            FileProvider = fileProvider
-                        }
-                    )
+            using var host = await StaticFilesTestServer.Create(app =>
+                app.UseStaticFiles(
+                    new StaticFileOptions
+                    {
+                        RequestPath = new PathString(baseUrl),
+                        FileProvider = fileProvider
+                    }
+                )
             );
             using var server = host.GetTestServer();
             var fileInfo = fileProvider.GetFileInfo(Path.GetFileName(requestUrl));
@@ -258,19 +254,18 @@ public class StaticFileMiddlewareTests : LoggedTest
         using var fileProvider = new PhysicalFileProvider(
             Path.Combine(AppContext.BaseDirectory, baseDir)
         );
-        using var host = await StaticFilesTestServer.Create(
-            app =>
-                app.UseStaticFiles(
-                    new StaticFileOptions
+        using var host = await StaticFilesTestServer.Create(app =>
+            app.UseStaticFiles(
+                new StaticFileOptions
+                {
+                    RequestPath = new PathString(baseUrl),
+                    FileProvider = fileProvider,
+                    OnPrepareResponse = context =>
                     {
-                        RequestPath = new PathString(baseUrl),
-                        FileProvider = fileProvider,
-                        OnPrepareResponse = context =>
-                        {
-                            onPrepareResponseExecuted = true;
-                        }
+                        onPrepareResponseExecuted = true;
                     }
-                )
+                }
+            )
         );
         using var server = host.GetTestServer();
         var fileInfo = fileProvider.GetFileInfo(Path.GetFileName(requestUrl));
@@ -305,21 +300,20 @@ public class StaticFileMiddlewareTests : LoggedTest
         using var fileProvider = new PhysicalFileProvider(
             Path.Combine(AppContext.BaseDirectory, baseDir)
         );
-        using var host = await StaticFilesTestServer.Create(
-            app =>
-                app.UseStaticFiles(
-                    new StaticFileOptions
+        using var host = await StaticFilesTestServer.Create(app =>
+            app.UseStaticFiles(
+                new StaticFileOptions
+                {
+                    RequestPath = new PathString(baseUrl),
+                    FileProvider = fileProvider,
+                    OnPrepareResponseAsync = context =>
                     {
-                        RequestPath = new PathString(baseUrl),
-                        FileProvider = fileProvider,
-                        OnPrepareResponseAsync = context =>
-                        {
-                            onPrepareResponseExecuted = true;
+                        onPrepareResponseExecuted = true;
 
-                            return Task.CompletedTask;
-                        }
+                        return Task.CompletedTask;
                     }
-                )
+                }
+            )
         );
         using var server = host.GetTestServer();
         var fileInfo = fileProvider.GetFileInfo(Path.GetFileName(requestUrl));
@@ -355,28 +349,27 @@ public class StaticFileMiddlewareTests : LoggedTest
         using var fileProvider = new PhysicalFileProvider(
             Path.Combine(AppContext.BaseDirectory, baseDir)
         );
-        using var host = await StaticFilesTestServer.Create(
-            app =>
-                app.UseStaticFiles(
-                    new StaticFileOptions
+        using var host = await StaticFilesTestServer.Create(app =>
+            app.UseStaticFiles(
+                new StaticFileOptions
+                {
+                    RequestPath = new PathString(baseUrl),
+                    FileProvider = fileProvider,
+                    OnPrepareResponse = context =>
                     {
-                        RequestPath = new PathString(baseUrl),
-                        FileProvider = fileProvider,
-                        OnPrepareResponse = context =>
-                        {
-                            Assert.False(syncCallbackInvoked);
-                            Assert.False(asyncCallbackInvoked);
-                            syncCallbackInvoked = true;
-                        },
-                        OnPrepareResponseAsync = context =>
-                        {
-                            Assert.True(syncCallbackInvoked);
-                            Assert.False(asyncCallbackInvoked);
-                            asyncCallbackInvoked = true;
-                            return Task.CompletedTask;
-                        }
+                        Assert.False(syncCallbackInvoked);
+                        Assert.False(asyncCallbackInvoked);
+                        syncCallbackInvoked = true;
+                    },
+                    OnPrepareResponseAsync = context =>
+                    {
+                        Assert.True(syncCallbackInvoked);
+                        Assert.False(asyncCallbackInvoked);
+                        asyncCallbackInvoked = true;
+                        return Task.CompletedTask;
                     }
-                )
+                }
+            )
         );
         using var server = host.GetTestServer();
         var fileInfo = fileProvider.GetFileInfo(Path.GetFileName(requestUrl));
@@ -518,13 +511,12 @@ public class StaticFileMiddlewareTests : LoggedTest
     {
         using var host = await StaticFilesTestServer.Create(app =>
         {
-            app.Use(
-                next =>
-                    context =>
-                    {
-                        context.Response.StatusCode = StatusCodes.Status200OK;
-                        return next(context);
-                    }
+            app.Use(next =>
+                context =>
+                {
+                    context.Response.StatusCode = StatusCodes.Status200OK;
+                    return next(context);
+                }
             );
             app.UseStaticFiles();
         });
@@ -549,13 +541,12 @@ public class StaticFileMiddlewareTests : LoggedTest
 
         using var host = await StaticFilesTestServer.Create(app =>
         {
-            app.Use(
-                next =>
-                    context =>
-                    {
-                        context.Response.StatusCode = (int)errorCode;
-                        return next(context);
-                    }
+            app.Use(next =>
+                context =>
+                {
+                    context.Response.StatusCode = (int)errorCode;
+                    return next(context);
+                }
             );
 
             app.UseStaticFiles(
@@ -586,15 +577,14 @@ public class StaticFileMiddlewareTests : LoggedTest
             )
         )
         {
-            using var host = await StaticFilesTestServer.Create(
-                app =>
-                    app.UseStaticFiles(
-                        new StaticFileOptions
-                        {
-                            RequestPath = new PathString(baseUrl),
-                            FileProvider = fileProvider
-                        }
-                    )
+            using var host = await StaticFilesTestServer.Create(app =>
+                app.UseStaticFiles(
+                    new StaticFileOptions
+                    {
+                        RequestPath = new PathString(baseUrl),
+                        FileProvider = fileProvider
+                    }
+                )
             );
             using var server = host.GetTestServer();
             var fileInfo = fileProvider.GetFileInfo(Path.GetFileName(requestUrl));
@@ -678,15 +668,14 @@ public class StaticFileMiddlewareTests : LoggedTest
             )
         )
         {
-            using var host = await StaticFilesTestServer.Create(
-                app =>
-                    app.UseStaticFiles(
-                        new StaticFileOptions
-                        {
-                            RequestPath = new PathString(baseUrl),
-                            FileProvider = fileProvider
-                        }
-                    )
+            using var host = await StaticFilesTestServer.Create(app =>
+                app.UseStaticFiles(
+                    new StaticFileOptions
+                    {
+                        RequestPath = new PathString(baseUrl),
+                        FileProvider = fileProvider
+                    }
+                )
             );
             using var server = host.GetTestServer();
             var response = await server.CreateRequest(requestUrl).SendAsync(method);

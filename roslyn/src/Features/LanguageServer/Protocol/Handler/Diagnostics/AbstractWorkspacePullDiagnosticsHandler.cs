@@ -166,7 +166,9 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<
                 .Services.GetService<ISolutionCrawlerOptionsService>()
                 ?.EnableDiagnosticsInSourceGeneratedFiles == true;
         var codeAnalysisService =
-            solution.Workspace.Services.GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
+            solution.Workspace.Services.GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>(
+
+            );
 
         foreach (var project in GetProjectsInPriorityOrder(solution, context.SupportedLanguages))
             await AddDocumentsAndProjectAsync(project, cancellationToken).ConfigureAwait(false);

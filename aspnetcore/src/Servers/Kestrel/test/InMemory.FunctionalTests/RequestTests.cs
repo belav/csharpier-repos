@@ -110,9 +110,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     mockStream.Setup(s => s.CanRead).Returns(true);
                     mockStream
-                        .Setup(
-                            s =>
-                                s.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
+                        .Setup(s =>
+                            s.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
                         )
                         .Returns<Memory<byte>, CancellationToken>(
                             (buffer, token) =>

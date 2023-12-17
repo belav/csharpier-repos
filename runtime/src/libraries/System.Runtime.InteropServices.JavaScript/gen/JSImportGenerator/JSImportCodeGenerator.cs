@@ -79,8 +79,8 @@ namespace Microsoft.Interop.JavaScript
                 (_, JSTaskTypeInfo)
             )
             {
-                BoundGenerator spanArg = _marshallers.SignatureMarshallers.FirstOrDefault(
-                    m => m.TypeInfo.MarshallingAttributeInfo is JSMarshallingInfo(_, JSSpanTypeInfo)
+                BoundGenerator spanArg = _marshallers.SignatureMarshallers.FirstOrDefault(m =>
+                    m.TypeInfo.MarshallingAttributeInfo is JSMarshallingInfo(_, JSSpanTypeInfo)
                 );
                 if (spanArg != default)
                 {
@@ -269,12 +269,8 @@ namespace Microsoft.Interop.JavaScript
             var types = ((IJSMarshallingGenerator)_marshallers.ManagedReturnMarshaller.Generator)
                 .GenerateBind(_marshallers.ManagedReturnMarshaller.TypeInfo, _context)
                 .Concat(
-                    _marshallers.NativeParameterMarshallers.SelectMany(
-                        p =>
-                            ((IJSMarshallingGenerator)p.Generator).GenerateBind(
-                                p.TypeInfo,
-                                _context
-                            )
+                    _marshallers.NativeParameterMarshallers.SelectMany(p =>
+                        ((IJSMarshallingGenerator)p.Generator).GenerateBind(p.TypeInfo, _context)
                     )
                 );
 

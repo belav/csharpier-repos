@@ -88,18 +88,16 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             // Only include compiler diagnostics if we have an associated fixer that supports FixAllScope.Solution
             var fixableCompilerDiagnostics = _includeCompilerDiagnostics
                 ? allFixers
-                    .Where(
-                        codefix =>
-                            codefix
-                                .GetFixAllProvider()
-                                ?.GetSupportedFixAllScopes()
-                                ?.Contains(FixAllScope.Solution) == true
+                    .Where(codefix =>
+                        codefix
+                            .GetFixAllProvider()
+                            ?.GetSupportedFixAllScopes()
+                            ?.Contains(FixAllScope.Solution) == true
                     )
-                    .SelectMany(
-                        codefix =>
-                            codefix.FixableDiagnosticIds.Where(
-                                id => id.StartsWith("CS") || id.StartsWith("BC")
-                            )
+                    .SelectMany(codefix =>
+                        codefix.FixableDiagnosticIds.Where(id =>
+                            id.StartsWith("CS") || id.StartsWith("BC")
+                        )
                     )
                     .ToImmutableHashSet()
                 : ImmutableHashSet<string>.Empty;
@@ -231,8 +229,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             var projects =
                 options.WorkspaceType == WorkspaceType.Solution
                     ? solution.Projects
-                    : solution.Projects.Where(
-                        project => project.FilePath == options.WorkspaceFilePath
+                    : solution.Projects.Where(project =>
+                        project.FilePath == options.WorkspaceFilePath
                     );
             foreach (var project in projects)
             {
@@ -376,11 +374,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     }
 
                     var analyzers = projectAnalyzers[project.Id]
-                        .Where(
-                            analyzer =>
-                                analyzer.SupportedDiagnostics.Any(
-                                    descriptor => descriptor.Id == diagnosticId
-                                )
+                        .Where(analyzer =>
+                            analyzer.SupportedDiagnostics.Any(descriptor =>
+                                descriptor.Id == diagnosticId
+                            )
                         )
                         .ToImmutableArray();
                     await _runner
@@ -476,8 +473,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                 // Skip if the project does not contain any of the formattable paths.
                 if (
-                    !project.Documents.Any(
-                        d => d.FilePath is not null && formattablePaths.Contains(d.FilePath)
+                    !project.Documents.Any(d =>
+                        d.FilePath is not null && formattablePaths.Contains(d.FilePath)
                     )
                 )
                 {
@@ -496,8 +493,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     // Filter by excluded diagnostics
                     if (
                         !excludeDiagnostics.IsEmpty
-                        && analyzer.SupportedDiagnostics.All(
-                            descriptor => excludeDiagnostics.Contains(descriptor.Id)
+                        && analyzer.SupportedDiagnostics.All(descriptor =>
+                            excludeDiagnostics.Contains(descriptor.Id)
                         )
                     )
                     {
@@ -507,8 +504,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     // Filter by diagnostics
                     if (
                         !diagnostics.IsEmpty
-                        && !analyzer.SupportedDiagnostics.Any(
-                            descriptor => diagnostics.Contains(descriptor.Id)
+                        && !analyzer.SupportedDiagnostics.Any(descriptor =>
+                            diagnostics.Contains(descriptor.Id)
                         )
                     )
                     {

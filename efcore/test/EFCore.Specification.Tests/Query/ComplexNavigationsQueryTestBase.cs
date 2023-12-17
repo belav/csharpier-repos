@@ -64,10 +64,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l =>
-                            EF.Property<int>(EF.Property<Level2>(l, "OneToOne_Required_FK1"), "Id")
-                            == 7
+                    .Where(l =>
+                        EF.Property<int>(EF.Property<Level2>(l, "OneToOne_Required_FK1"), "Id") == 7
                     )
         );
 
@@ -78,12 +76,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level2>()
-                    .Where(
-                        l =>
-                            EF.Property<int>(
-                                EF.Property<Level1>(l, "OneToOne_Required_FK_Inverse2"),
-                                "Id"
-                            ) == 7
+                    .Where(l =>
+                        EF.Property<int>(
+                            EF.Property<Level1>(l, "OneToOne_Required_FK_Inverse2"),
+                            "Id"
+                        ) == 7
                     )
         );
 
@@ -132,10 +129,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l =>
-                            l.OneToOne_Required_FK1 == new Level2 { Id = 1 }
-                            || l.OneToOne_Required_FK1 == new Level2 { Id = 2 }
+                    .Where(l =>
+                        l.OneToOne_Required_FK1 == new Level2 { Id = 1 }
+                        || l.OneToOne_Required_FK1 == new Level2 { Id = 2 }
                     ),
             ss =>
                 ss.Set<Level1>()
@@ -149,17 +145,15 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level2>()
-                    .Where(
-                        l =>
-                            l.OneToOne_Required_FK_Inverse2 == new Level1 { Id = 1 }
-                            || l.OneToOne_Required_FK_Inverse2 == new Level1 { Id = 2 }
+                    .Where(l =>
+                        l.OneToOne_Required_FK_Inverse2 == new Level1 { Id = 1 }
+                        || l.OneToOne_Required_FK_Inverse2 == new Level1 { Id = 2 }
                     ),
             ss =>
                 ss.Set<Level2>()
-                    .Where(
-                        l =>
-                            l.OneToOne_Required_FK_Inverse2.Id == 1
-                            || l.OneToOne_Required_FK_Inverse2.Id == 2
+                    .Where(l =>
+                        l.OneToOne_Required_FK_Inverse2.Id == 1
+                        || l.OneToOne_Required_FK_Inverse2.Id == 2
                     )
         );
 
@@ -299,8 +293,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Include(
-                        l1 => l1.OneToOne_Required_PK1.OneToOne_Required_PK2.OneToOne_Required_PK3
+                    .Include(l1 =>
+                        l1.OneToOne_Required_PK1.OneToOne_Required_PK2.OneToOne_Required_PK3
                     )
         );
 
@@ -402,8 +396,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 from e1 in ss.Set<Level1>()
                 where
-                    e1.OneToOne_Optional_FK1.Name.MaybeScalar(
-                        x => x.StartsWith(e1.OneToOne_Optional_FK1.Name)
+                    e1.OneToOne_Optional_FK1.Name.MaybeScalar(x =>
+                        x.StartsWith(e1.OneToOne_Optional_FK1.Name)
                     ) == true
                 select e1
         );
@@ -443,8 +437,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 from e1 in ss.Set<Level1>()
                 where
-                    e1.OneToOne_Optional_FK1.MaybeScalar(
-                        x => x.Date.AddDays(10).AddDays(15).AddMonths(2)
+                    e1.OneToOne_Optional_FK1.MaybeScalar(x =>
+                        x.Date.AddDays(10).AddDays(15).AddMonths(2)
                     ) > new DateTime(2000, 2, 1)
                 select e1
         );
@@ -738,10 +732,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        e =>
-                            e.OneToOne_Optional_FK1.Name == "L2 05"
-                            || e.OneToOne_Optional_FK1.Name == "L2 07"
+                    .Where(e =>
+                        e.OneToOne_Optional_FK1.Name == "L2 05"
+                        || e.OneToOne_Optional_FK1.Name == "L2 07"
                     )
                     .Select(e => e.Id)
         );
@@ -774,10 +767,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        e =>
-                            e.OneToOne_Optional_FK1.Name == "L2 05"
-                            || e.OneToOne_Optional_FK1.Name != "L2 42"
+                    .Where(e =>
+                        e.OneToOne_Optional_FK1.Name == "L2 05"
+                        || e.OneToOne_Optional_FK1.Name != "L2 42"
                     )
                     .Select(e => e.Id)
         );
@@ -889,10 +881,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        e =>
-                            e.OneToOne_Optional_FK1.OneToOne_Required_FK2.OneToOne_Required_FK3
-                            == null
+                    .Where(e =>
+                        e.OneToOne_Optional_FK1.OneToOne_Required_FK2.OneToOne_Required_FK3 == null
                     )
         );
 
@@ -1054,20 +1044,16 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        e =>
-                            e.OneToOne_Required_FK1.OneToOne_Required_FK2
-                                == e.OneToOne_Required_FK1.OneToOne_Optional_FK2
-                            && e.OneToOne_Required_FK1.OneToOne_Optional_FK2.Id != 7
+                    .Where(e =>
+                        e.OneToOne_Required_FK1.OneToOne_Required_FK2
+                            == e.OneToOne_Required_FK1.OneToOne_Optional_FK2
+                        && e.OneToOne_Required_FK1.OneToOne_Optional_FK2.Id != 7
                     )
-                    .Select(
-                        e =>
-                            new
-                            {
-                                e.Name,
-                                Id = (int?)e.OneToOne_Required_FK1.OneToOne_Optional_FK2.Id
-                            }
-                    ),
+                    .Select(e => new
+                    {
+                        e.Name,
+                        Id = (int?)e.OneToOne_Required_FK1.OneToOne_Optional_FK2.Id
+                    }),
             elementSorter: e => (e.Name, e.Id)
         );
 
@@ -1099,22 +1085,19 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Select(
-                        e =>
-                            new MyOuterDto
-                            {
-                                Id = e.Id,
-                                Name = e.Name,
-                                Inner =
-                                    e.OneToOne_Optional_FK1 != null
-                                        ? new MyInnerDto
-                                        {
-                                            Id = e.OneToOne_Optional_FK1.Id,
-                                            Name = e.OneToOne_Optional_FK1.Name
-                                        }
-                                        : null
-                            }
-                    ),
+                    .Select(e => new MyOuterDto
+                    {
+                        Id = e.Id,
+                        Name = e.Name,
+                        Inner =
+                            e.OneToOne_Optional_FK1 != null
+                                ? new MyInnerDto
+                                {
+                                    Id = e.OneToOne_Optional_FK1.Id,
+                                    Name = e.OneToOne_Optional_FK1.Name
+                                }
+                                : null
+                    }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
             {
@@ -1338,8 +1321,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss => ss.Set<Level1>().SelectMany(l1 => l1.OneToOne_Required_FK1.OneToMany_Optional2),
             ss =>
                 ss.Set<Level1>()
-                    .SelectMany(
-                        l1 => l1.OneToOne_Required_FK1.OneToMany_Optional2 ?? new List<Level3>()
+                    .SelectMany(l1 =>
+                        l1.OneToOne_Required_FK1.OneToMany_Optional2 ?? new List<Level3>()
                     )
         );
 
@@ -1354,8 +1337,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     .Select(e => e.Name),
             ss =>
                 ss.Set<Level1>()
-                    .SelectMany(
-                        l1 => l1.OneToOne_Optional_FK1.OneToMany_Optional2 ?? new List<Level3>()
+                    .SelectMany(l1 =>
+                        l1.OneToOne_Optional_FK1.OneToMany_Optional2 ?? new List<Level3>()
                     )
                     .Select(e => e.Name)
         );
@@ -1393,10 +1376,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     .Where(l1 => l1.OneToOne_Required_FK1.OneToMany_Optional2.Count > 0),
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
-                            l1.OneToOne_Required_FK1.OneToMany_Optional2.MaybeScalar(x => x.Count)
-                            > 0
+                    .Where(l1 =>
+                        l1.OneToOne_Required_FK1.OneToMany_Optional2.MaybeScalar(x => x.Count) > 0
                     )
         );
 
@@ -1410,11 +1391,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     .Where(l3 => l3.OneToOne_Required_FK_Inverse3.OneToMany_Optional2.Count > 0),
             ss =>
                 ss.Set<Level3>()
-                    .Where(
-                        l3 =>
-                            l3.OneToOne_Required_FK_Inverse3.OneToMany_Optional2.MaybeScalar(
-                                x => x.Count
-                            ) > 0
+                    .Where(l3 =>
+                        l3.OneToOne_Required_FK_Inverse3.OneToMany_Optional2.MaybeScalar(x =>
+                            x.Count
+                        ) > 0
                     )
         );
 
@@ -1430,11 +1410,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     .Where(l2 => l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Count() > 0),
             ss =>
                 ss.Set<Level2>()
-                    .Where(
-                        l2 =>
-                            l2.OneToMany_Required_Inverse2.OneToMany_Optional1.MaybeScalar(
-                                x => x.Count()
-                            ) > 0
+                    .Where(l2 =>
+                        l2.OneToMany_Required_Inverse2.OneToMany_Optional1.MaybeScalar(x =>
+                            x.Count()
+                        ) > 0
                     )
         );
 
@@ -1757,8 +1736,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     async,
                     ss =>
                         ss.Set<Level4>()
-                            .Select(
-                                l4 => l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
+                            .Select(l4 =>
+                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                             )
                             .Include(l2 => l2.OneToOne_Optional_FK2),
                     elementAsserter: (e, a) =>
@@ -1806,8 +1785,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     async,
                     ss =>
                         ss.Set<Level4>()
-                            .Select(
-                                l4 => l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
+                            .Select(l4 =>
+                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                             )
                             .Include("OneToOne_Optional_FK2"),
                     elementAsserter: (e, a) =>
@@ -1830,8 +1809,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     async,
                     ss =>
                         ss.Set<Level4>()
-                            .Select(
-                                l4 => l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
+                            .Select(l4 =>
+                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                             )
                             .Include(l2 => EF.Property<Level2>(l2, "OneToOne_Optional_FK2")),
                     elementAsserter: (e, a) =>
@@ -2009,22 +1988,20 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 from l1 in ss.Set<Level1>()
                 join l2 in ss.Set<Level4>()
-                    .SelectMany(
-                        l4 =>
-                            l4.OneToOne_Required_FK_Inverse4
-                                .OneToOne_Optional_FK_Inverse3
-                                .OneToMany_Required_Self2
+                    .SelectMany(l4 =>
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Optional_FK_Inverse3
+                            .OneToMany_Required_Self2
                     )
                     on l1.Id equals l2.Level1_Optional_Id
                 select new { l1, l2 },
             ss =>
                 from l1 in ss.Set<Level1>()
                 join l2 in ss.Set<Level4>()
-                    .SelectMany(
-                        l4 =>
-                            l4.OneToOne_Required_FK_Inverse4
-                                .OneToOne_Optional_FK_Inverse3
-                                .OneToMany_Required_Self2 ?? new List<Level2>()
+                    .SelectMany(l4 =>
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Optional_FK_Inverse3
+                            .OneToMany_Required_Self2 ?? new List<Level2>()
                     )
                     on l1.Id equals l2.Level1_Optional_Id
                 select new { l1, l2 },
@@ -2046,9 +2023,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 from l1 in ss.Set<Level1>()
                 join l2 in ss.Set<Level4>()
-                    .SelectMany(
-                        l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                    .SelectMany(l4 =>
+                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty(
+
+                        )
                     )
                     on l1.Id equals l2.Level1_Optional_Id
                 select new { l1, l2 },
@@ -2069,9 +2047,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 from l2 in ss.Set<Level4>()
-                    .SelectMany(
-                        l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                    .SelectMany(l4 =>
+                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty(
+
+                        )
                     )
                 join l1 in ss.Set<Level1>() on l2.Level1_Optional_Id equals l1.Id
                 select new { l2, l1 },
@@ -2092,9 +2071,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 from l4 in ss.Set<Level1>()
-                    .SelectMany(
-                        l1 =>
-                            l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                    .SelectMany(l1 =>
+                        l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty(
+
+                        )
                     )
                 join l2 in ss.Set<Level2>() on l4.Id equals l2.Id
                 select new { l4, l2 },
@@ -2115,9 +2095,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 from l4 in ss.Set<Level1>()
-                    .SelectMany(
-                        l1 =>
-                            l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                    .SelectMany(l1 =>
+                        l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty(
+
+                        )
                     )
                 join l2 in ss.Set<Level2>() on l4.Id equals l2.Id into grouping
                 from l2 in grouping.DefaultIfEmpty()
@@ -2139,14 +2120,16 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 from l4 in ss.Set<Level1>()
-                    .SelectMany(
-                        l1 =>
-                            l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                    .SelectMany(l1 =>
+                        l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty(
+
+                        )
                     )
                 join l2 in ss.Set<Level4>()
-                    .SelectMany(
-                        l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                    .SelectMany(l4 =>
+                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty(
+
+                        )
                     )
                     on l4.Id equals l2.Id
                 select new { l4, l2 },
@@ -2167,9 +2150,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 from l3 in ss.Set<Level4>()
-                    .SelectMany(
-                        l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                    .SelectMany(l4 =>
+                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty(
+
+                        )
                     )
                 select l3.OneToOne_Required_FK_Inverse3.OneToOne_Required_PK_Inverse2
         );
@@ -2265,19 +2249,17 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
-                            l1.OneToOne_Optional_FK1.OneToMany_Optional2.Distinct()
-                                .Select(l3 => l3.Id)
-                                .Contains(6)
+                    .Where(l1 =>
+                        l1.OneToOne_Optional_FK1.OneToMany_Optional2.Distinct()
+                            .Select(l3 => l3.Id)
+                            .Contains(6)
                     ),
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
-                            l1.OneToOne_Optional_FK1.OneToMany_Optional2.MaybeScalar(
-                                x => x.Distinct().Select(l3 => l3.Id).Contains(6)
-                            ) == true
+                    .Where(l1 =>
+                        l1.OneToOne_Optional_FK1.OneToMany_Optional2.MaybeScalar(x =>
+                            x.Distinct().Select(l3 => l3.Id).Contains(6)
+                        ) == true
                     )
         );
 
@@ -2290,21 +2272,17 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
-                            l1.OneToOne_Optional_FK1.OneToMany_Optional2.Select(
-                                l3 => l3.Name.Length
-                            )
-                                .Distinct()
-                                .Contains(5)
+                    .Where(l1 =>
+                        l1.OneToOne_Optional_FK1.OneToMany_Optional2.Select(l3 => l3.Name.Length)
+                            .Distinct()
+                            .Contains(5)
                     ),
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
-                            l1.OneToOne_Optional_FK1.OneToMany_Optional2.MaybeScalar(
-                                x => x.Select(l3 => l3.Name.Length).Distinct().Contains(5)
-                            ) == true
+                    .Where(l1 =>
+                        l1.OneToOne_Optional_FK1.OneToMany_Optional2.MaybeScalar(x =>
+                            x.Select(l3 => l3.Name.Length).Distinct().Contains(5)
+                        ) == true
                     )
         );
 
@@ -2317,26 +2295,21 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
-                            l1.Id < 3
-                            && !l1.OneToMany_Optional1.Select(
-                                l2 => l2.OneToOne_Optional_FK2.OneToOne_Optional_FK3.Id
-                            )
-                                .All(l4 => ClientMethod(l4))
+                    .Where(l1 =>
+                        l1.Id < 3
+                        && !l1.OneToMany_Optional1.Select(l2 =>
+                            l2.OneToOne_Optional_FK2.OneToOne_Optional_FK3.Id
+                        )
+                            .All(l4 => ClientMethod(l4))
                     ),
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
-                            l1.Id < 3
-                            && !l1.OneToMany_Optional1.Select(
-                                l2 =>
-                                    l2.OneToOne_Optional_FK2.OneToOne_Optional_FK3.MaybeScalar(
-                                        x => x.Id
-                                    )
-                            )
-                                .All(a => true)
+                    .Where(l1 =>
+                        l1.Id < 3
+                        && !l1.OneToMany_Optional1.Select(l2 =>
+                            l2.OneToOne_Optional_FK2.OneToOne_Optional_FK3.MaybeScalar(x => x.Id)
+                        )
+                            .All(a => true)
                     ),
             assertEmpty: true
         );
@@ -2349,12 +2322,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level2>()
                     .Where(l2o => l2o.Id == 7)
-                    .Select(
-                        l2o =>
-                            ss.Set<Level2>()
-                                .OrderBy(l2i => l2i.Id)
-                                .First()
-                                .OneToOne_Required_FK_Inverse2.Name
+                    .Select(l2o =>
+                        ss.Set<Level2>()
+                            .OrderBy(l2i => l2i.Id)
+                            .First()
+                            .OneToOne_Required_FK_Inverse2.Name
                     )
         );
 
@@ -2387,22 +2359,21 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level2>()
                     .Where(l2o => l2o.Id == 7)
-                    .Where(
-                        l1 =>
-                            EF.Property<string>(
-                                ss.Set<Level2>()
-                                    .OrderBy(l2i => l2i.Id)
-                                    .First()
-                                    .OneToOne_Required_FK_Inverse2,
-                                "Name"
-                            ) == "L1 10"
-                            || EF.Property<string>(
-                                ss.Set<Level2>()
-                                    .OrderBy(l2i => l2i.Id)
-                                    .First()
-                                    .OneToOne_Required_FK_Inverse2,
-                                "Name"
-                            ) == "L1 01"
+                    .Where(l1 =>
+                        EF.Property<string>(
+                            ss.Set<Level2>()
+                                .OrderBy(l2i => l2i.Id)
+                                .First()
+                                .OneToOne_Required_FK_Inverse2,
+                            "Name"
+                        ) == "L1 10"
+                        || EF.Property<string>(
+                            ss.Set<Level2>()
+                                .OrderBy(l2i => l2i.Id)
+                                .First()
+                                .OneToOne_Required_FK_Inverse2,
+                            "Name"
+                        ) == "L1 01"
                     )
         );
 
@@ -3043,12 +3014,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level3>()
-                    .Where(
-                        l3 =>
-                            l3.OneToMany_Required_Inverse3.OneToOne_Required_FK_Inverse2.Name
-                                == "L1 10"
-                            || l3.OneToMany_Required_Inverse3.OneToOne_Required_FK_Inverse2.Name
-                                == "L1 01"
+                    .Where(l3 =>
+                        l3.OneToMany_Required_Inverse3.OneToOne_Required_FK_Inverse2.Name == "L1 10"
+                        || l3.OneToMany_Required_Inverse3.OneToOne_Required_FK_Inverse2.Name
+                            == "L1 01"
                     )
                     .OrderBy(l3 => l3.Level2_Required_Id)
                     .Skip(0)
@@ -3195,20 +3164,17 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 from l2 in ss.Set<Level2>()
                 where
-                    l2.OneToOne_Required_FK2.OneToMany_Optional3.Select(
-                        i => i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Required_FK2
+                    l2.OneToOne_Required_FK2.OneToMany_Optional3.Select(i =>
+                        i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Required_FK2
                     )
                         .Any()
                 select l2.Name,
             ss =>
                 from l2 in ss.Set<Level2>()
                 where
-                    l2.OneToOne_Required_FK2.OneToMany_Optional3.MaybeScalar(
-                        x =>
-                            x.Select(
-                                    i => i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Required_FK2
-                                )
-                                .Any()
+                    l2.OneToOne_Required_FK2.OneToMany_Optional3.MaybeScalar(x =>
+                        x.Select(i => i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Required_FK2)
+                            .Any()
                     ) == true
                 select l2.Name
         );
@@ -3221,20 +3187,17 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 from l2 in ss.Set<Level2>()
                 where
-                    l2.OneToOne_Required_FK2.OneToMany_Optional3.Select(
-                        i => i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Optional_PK2
+                    l2.OneToOne_Required_FK2.OneToMany_Optional3.Select(i =>
+                        i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Optional_PK2
                     )
                         .Any()
                 select l2.Name,
             ss =>
                 from l2 in ss.Set<Level2>()
                 where
-                    l2.OneToOne_Required_FK2.OneToMany_Optional3.MaybeScalar(
-                        x =>
-                            x.Select(
-                                    i => i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Optional_PK2
-                                )
-                                .Any()
+                    l2.OneToOne_Required_FK2.OneToMany_Optional3.MaybeScalar(x =>
+                        x.Select(i => i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Optional_PK2)
+                            .Any()
                     ) == true
                 select l2.Name
         );
@@ -3256,8 +3219,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             .Where(t => t != null)
                             .Select(l3 => l3.OneToOne_Required_PK3)
                             .Where(t => t != null)
-                            .Select(
-                                l4 => l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
+                            .Select(l4 =>
+                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                             )
                             .Include(l2 => l2.OneToOne_Optional_FK2),
                     elementAsserter: (e, a) =>
@@ -3288,12 +3251,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level2>()
-                    .Select(
-                        l2 =>
-                            ss.Set<Level2>()
-                                .OrderBy(l => l.Id)
-                                .First()
-                                .OneToOne_Required_FK_Inverse2.Name
+                    .Select(l2 =>
+                        ss.Set<Level2>()
+                            .OrderBy(l => l.Id)
+                            .First()
+                            .OneToOne_Required_FK_Inverse2.Name
                     )
         );
 
@@ -3304,12 +3266,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level2>()
-                    .Select(
-                        l2 =>
-                            ss.Set<Level2>()
-                                .OrderBy(l => l.Id)
-                                .First()
-                                .OneToOne_Required_FK_Inverse2.Name == "L1 02"
+                    .Select(l2 =>
+                        ss.Set<Level2>()
+                            .OrderBy(l => l.Id)
+                            .First()
+                            .OneToOne_Required_FK_Inverse2.Name == "L1 02"
                     )
         );
 
@@ -3320,12 +3281,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level3>()
-                    .Select(
-                        l3 =>
-                            ss.Set<Level3>()
-                                .OrderBy(l => l.Id)
-                                .First()
-                                .OneToOne_Required_FK_Inverse3.OneToOne_Required_FK_Inverse2.Name
+                    .Select(l3 =>
+                        ss.Set<Level3>()
+                            .OrderBy(l => l.Id)
+                            .First()
+                            .OneToOne_Required_FK_Inverse3.OneToOne_Required_FK_Inverse2.Name
                     )
         );
 
@@ -3787,8 +3747,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToOne_Optional_FK1.OneToOne_Optional_PK2)
-                    .Include(
-                        l1 => l1.OneToOne_Optional_PK1.OneToOne_Optional_FK2.OneToOne_Optional_PK3
+                    .Include(l1 =>
+                        l1.OneToOne_Optional_PK1.OneToOne_Optional_FK2.OneToOne_Optional_PK3
                     ),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -3820,11 +3780,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2)
                     .Include(l1 => l1.OneToOne_Optional_FK1.OneToOne_Optional_PK2)
-                    .Include(
-                        l1 => l1.OneToOne_Optional_PK1.OneToOne_Optional_FK2.OneToOne_Optional_FK3
+                    .Include(l1 =>
+                        l1.OneToOne_Optional_PK1.OneToOne_Optional_FK2.OneToOne_Optional_FK3
                     )
-                    .Include(
-                        l1 => l1.OneToOne_Optional_PK1.OneToOne_Optional_FK2.OneToOne_Optional_PK3
+                    .Include(l1 =>
+                        l1.OneToOne_Optional_PK1.OneToOne_Optional_FK2.OneToOne_Optional_PK3
                     )
                     .Include(l1 => l1.OneToOne_Optional_PK1.OneToOne_Optional_PK2),
             elementAsserter: (e, a) =>
@@ -3911,15 +3871,12 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToOne_Optional_FK1)
                     .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
-                    .Select(
-                        l1 =>
-                            new
-                            {
-                                one = l1,
-                                two = l1.OneToOne_Optional_FK1,
-                                three = l1.OneToOne_Optional_PK1
-                            }
-                    ),
+                    .Select(l1 => new
+                    {
+                        one = l1,
+                        two = l1.OneToOne_Optional_FK1,
+                        three = l1.OneToOne_Optional_PK1
+                    }),
             elementAsserter: (e, a) =>
             {
                 AssertInclude(
@@ -3946,9 +3903,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     public virtual Task Include17(bool async)
     {
         using var ctx = CreateContext();
-        var query = ctx.LevelOne.Select(
-            l1 => new { foo = l1.OneToOne_Optional_FK1, bar = l1.OneToOne_Optional_PK1 }
-        )
+        var query = ctx.LevelOne.Select(l1 => new
+        {
+            foo = l1.OneToOne_Optional_FK1,
+            bar = l1.OneToOne_Optional_PK1
+        })
             .Include(x => x.foo.OneToOne_Optional_FK2)
             .Distinct();
 
@@ -4040,10 +3999,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
 
         var query = ctx.LevelOne.OrderBy(x => x.OneToOne_Required_FK1.Name)
             .Include(x => x.OneToOne_Optional_FK1)
-            .Select(
-                l1 =>
-                    new { outer_foo = new { inner_foo = l1, inner_bar = l1.Name }, outer_bar = l1 }
-            )
+            .Select(l1 => new
+            {
+                outer_foo = new { inner_foo = l1, inner_bar = l1.Name },
+                outer_bar = l1
+            })
             .Take(10);
 
         _ = async ? await query.ToListAsync() : query.ToList();
@@ -4221,14 +4181,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 from l2 in ctx.LevelTwo
                 orderby l2.Id
                 where l2.Level1_Required_Id == l1.Id
-                select l2.OneToMany_Optional2.Select(
-                    l3 =>
-                        (
-                            from l4 in ctx.LevelFour
-                            where l4.Level3_Required_Id == l3.Id
-                            orderby l4.Id
-                            select l4
-                        ).FirstOrDefault()
+                select l2.OneToMany_Optional2.Select(l3 =>
+                    (
+                        from l4 in ctx.LevelFour
+                        where l4.Level3_Required_Id == l3.Id
+                        orderby l4.Id
+                        select l4
+                    ).FirstOrDefault()
                 )
                     .FirstOrDefault()
             )
@@ -4245,26 +4204,23 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Select(
-                        l1 =>
-                            l1.OneToMany_Optional1.OrderBy(l2 => l2.Id)
-                                .FirstOrDefault()
-                                .OneToMany_Optional2.OrderBy(l3 => l3.Id)
-                                .FirstOrDefault()
-                                .Name
+                    .Select(l1 =>
+                        l1.OneToMany_Optional1.OrderBy(l2 => l2.Id)
+                            .FirstOrDefault()
+                            .OneToMany_Optional2.OrderBy(l3 => l3.Id)
+                            .FirstOrDefault()
+                            .Name
                     ),
             ss =>
                 ss.Set<Level1>()
-                    .Select(
-                        l1 =>
-                            l1.OneToMany_Optional1.OrderBy(l2 => l2.Id)
-                                .FirstOrDefault()
-                                .Maybe(
-                                    x =>
-                                        x.OneToMany_Optional2.OrderBy(l3 => l3.Id)
-                                            .FirstOrDefault()
-                                            .Maybe(xx => xx.Name)
-                                )
+                    .Select(l1 =>
+                        l1.OneToMany_Optional1.OrderBy(l2 => l2.Id)
+                            .FirstOrDefault()
+                            .Maybe(x =>
+                                x.OneToMany_Optional2.OrderBy(l3 => l3.Id)
+                                    .FirstOrDefault()
+                                    .Maybe(xx => xx.Name)
+                            )
                     )
         );
 
@@ -4294,26 +4250,25 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
+                    .Where(l1 =>
+                        (
                             (
                                 (
-                                    (
-                                        l1.OneToOne_Optional_FK1 == null
-                                            ? null
-                                            : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2
-                                    ) == null
+                                    l1.OneToOne_Optional_FK1 == null
                                         ? null
-                                        : l1.OneToOne_Optional_FK1
-                                            .OneToOne_Optional_FK2
-                                            .OneToOne_Optional_PK3
+                                        : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2
                                 ) == null
                                     ? null
                                     : l1.OneToOne_Optional_FK1
                                         .OneToOne_Optional_FK2
                                         .OneToOne_Optional_PK3
-                                        .Name
-                            ) == "L4 01"
+                            ) == null
+                                ? null
+                                : l1.OneToOne_Optional_FK1
+                                    .OneToOne_Optional_FK2
+                                    .OneToOne_Optional_PK3
+                                    .Name
+                        ) == "L4 01"
                     )
         );
 
@@ -4324,22 +4279,21 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
-                            (
-                                l1.OneToOne_Optional_FK1 == null
+                    .Where(l1 =>
+                        (
+                            l1.OneToOne_Optional_FK1 == null
+                                ? null
+                                : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2 == null
                                     ? null
-                                    : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2 == null
+                                    : l1.OneToOne_Optional_FK1
+                                        .OneToOne_Optional_FK2
+                                        .OneToOne_Optional_PK3 == null
                                         ? null
                                         : l1.OneToOne_Optional_FK1
                                             .OneToOne_Optional_FK2
-                                            .OneToOne_Optional_PK3 == null
-                                            ? null
-                                            : l1.OneToOne_Optional_FK1
-                                                .OneToOne_Optional_FK2
-                                                .OneToOne_Optional_PK3
-                                                .Name
-                            ) == "L4 01"
+                                            .OneToOne_Optional_PK3
+                                            .Name
+                        ) == "L4 01"
                     )
         );
 
@@ -4403,15 +4357,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Required_FK1)
                     .Include(e => e.OneToMany_Required1)
-                    .Select(
-                        e =>
-                            new
-                            {
-                                e,
-                                First = e.OneToMany_Required1.OrderByDescending(e => e.Id)
-                                    .FirstOrDefault()
-                            }
-                    )
+                    .Select(e => new
+                    {
+                        e,
+                        First = e.OneToMany_Required1.OrderByDescending(e => e.Id).FirstOrDefault()
+                    })
         );
 
     [ConditionalTheory]
@@ -4425,10 +4375,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     .ThenBy(l1 => l1.OneToOne_Required_FK1.OneToOne_Required_FK2.Name),
             ss =>
                 ss.Set<Level1>()
-                    .OrderBy(
-                        l1 =>
-                            l1.OneToOne_Required_FK1.OneToMany_Required2.MaybeScalar(x => x.Count())
-                            ?? 0
+                    .OrderBy(l1 =>
+                        l1.OneToOne_Required_FK1.OneToMany_Required2.MaybeScalar(x => x.Count())
+                        ?? 0
                     )
                     .ThenBy(l1 => l1.OneToOne_Required_FK1.OneToOne_Required_FK2.Name),
             assertOrder: true
@@ -4443,10 +4392,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Where(
-                        l1 =>
-                            l1.OneToOne_Optional_FK1 != null
-                            && l1.OneToOne_Optional_FK1.Name == "L2 01"
+                    .Where(l1 =>
+                        l1.OneToOne_Optional_FK1 != null && l1.OneToOne_Optional_FK1.Name == "L2 01"
                     )
         );
 
@@ -4500,22 +4447,17 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .SelectMany(
-                        l1 =>
-                            l1.OneToMany_Optional1.DefaultIfEmpty()
-                                .SelectMany(
-                                    l2 =>
-                                        l2.OneToOne_Required_PK2.OneToMany_Optional3.DefaultIfEmpty()
-                                            .Select(
-                                                l4 =>
-                                                    new
-                                                    {
-                                                        l1Name = l1.Name,
-                                                        l2Name = l2.OneToOne_Required_PK2.Name,
-                                                        l3Name = l4.OneToOne_Optional_PK_Inverse4.Name
-                                                    }
-                                            )
-                                )
+                    .SelectMany(l1 =>
+                        l1.OneToMany_Optional1.DefaultIfEmpty()
+                            .SelectMany(l2 =>
+                                l2.OneToOne_Required_PK2.OneToMany_Optional3.DefaultIfEmpty()
+                                    .Select(l4 => new
+                                    {
+                                        l1Name = l1.Name,
+                                        l2Name = l2.OneToOne_Required_PK2.Name,
+                                        l3Name = l4.OneToOne_Optional_PK_Inverse4.Name
+                                    })
+                            )
                     )
         );
 
@@ -4553,17 +4495,14 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Select(
-                        l1 =>
-                            new
-                            {
-                                l1.Name,
-                                OptionalName = l1.OneToOne_Optional_FK1.Name,
-                                Contains = ss.Set<Level1>()
-                                    .Select(x => x.OneToOne_Optional_FK1.Name)
-                                    .Contains(l1.OneToOne_Optional_FK1.Name)
-                            }
-                    ),
+                    .Select(l1 => new
+                    {
+                        l1.Name,
+                        OptionalName = l1.OneToOne_Optional_FK1.Name,
+                        Contains = ss.Set<Level1>()
+                            .Select(x => x.OneToOne_Optional_FK1.Name)
+                            .Contains(l1.OneToOne_Optional_FK1.Name)
+                    }),
             elementSorter: e => (e.Name, e.OptionalName, e.Contains)
         );
 
@@ -4574,17 +4513,14 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Select(
-                        l1 =>
-                            new
-                            {
-                                l1.Name,
-                                OptionalName = l1.OneToOne_Optional_FK1.Name,
-                                Contains = ss.Set<Level1>()
-                                    .Select(x => x.OneToOne_Optional_FK1)
-                                    .Contains(l1.OneToOne_Optional_PK1)
-                            }
-                    ),
+                    .Select(l1 => new
+                    {
+                        l1.Name,
+                        OptionalName = l1.OneToOne_Optional_FK1.Name,
+                        Contains = ss.Set<Level1>()
+                            .Select(x => x.OneToOne_Optional_FK1)
+                            .Contains(l1.OneToOne_Optional_PK1)
+                    }),
             elementSorter: e => (e.Name, e.OptionalName, e.Contains)
         );
 
@@ -4611,41 +4547,35 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Where(l1 => l1.OneToOne_Optional_FK1 != null)
-                    .GroupBy(
-                        l1 =>
-                            new
+                    .GroupBy(l1 => new
+                    {
+                        l1.Id,
+                        l1.Date,
+                        l1.Name,
+                        InnerId = l1.OneToOne_Optional_FK1.Id,
+                        InnerDate = l1.OneToOne_Optional_FK1.Date,
+                        InnerOptionalId = l1.OneToOne_Optional_FK1.Level1_Optional_Id,
+                        InnerRequiredId = l1.OneToOne_Optional_FK1.Level1_Required_Id,
+                        InnerName = l1.OneToOne_Required_FK1.Name
+                    })
+                    .Select(g => new
+                    {
+                        NestedEntity = new Level1
+                        {
+                            Id = g.Key.Id,
+                            Name = g.Key.Name,
+                            Date = g.Key.Date,
+                            OneToOne_Optional_FK1 = new Level2
                             {
-                                l1.Id,
-                                l1.Date,
-                                l1.Name,
-                                InnerId = l1.OneToOne_Optional_FK1.Id,
-                                InnerDate = l1.OneToOne_Optional_FK1.Date,
-                                InnerOptionalId = l1.OneToOne_Optional_FK1.Level1_Optional_Id,
-                                InnerRequiredId = l1.OneToOne_Optional_FK1.Level1_Required_Id,
-                                InnerName = l1.OneToOne_Required_FK1.Name
+                                Id = g.Key.InnerId,
+                                Name = g.Key.InnerName,
+                                Date = g.Key.InnerDate,
+                                Level1_Optional_Id = g.Key.InnerOptionalId,
+                                Level1_Required_Id = g.Key.InnerRequiredId
                             }
-                    )
-                    .Select(
-                        g =>
-                            new
-                            {
-                                NestedEntity = new Level1
-                                {
-                                    Id = g.Key.Id,
-                                    Name = g.Key.Name,
-                                    Date = g.Key.Date,
-                                    OneToOne_Optional_FK1 = new Level2
-                                    {
-                                        Id = g.Key.InnerId,
-                                        Name = g.Key.InnerName,
-                                        Date = g.Key.InnerDate,
-                                        Level1_Optional_Id = g.Key.InnerOptionalId,
-                                        Level1_Required_Id = g.Key.InnerRequiredId
-                                    }
-                                },
-                                Aggregate = g.Sum(x => x.Name.Length)
-                            }
-                    )
+                        },
+                        Aggregate = g.Sum(x => x.Name.Length)
+                    })
         );
 
     [ConditionalTheory]
@@ -4679,22 +4609,19 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Select(
-                        l1 =>
-                            new Level1Dto
-                            {
-                                Id = l1.Id,
-                                Name = l1.Name,
-                                Level2 =
-                                    l1.OneToOne_Optional_FK1 == null
-                                        ? null
-                                        : new Level2Dto
-                                        {
-                                            Id = l1.OneToOne_Optional_FK1.Id,
-                                            Name = l1.OneToOne_Optional_FK1.Name,
-                                        }
-                            }
-                    )
+                    .Select(l1 => new Level1Dto
+                    {
+                        Id = l1.Id,
+                        Name = l1.Name,
+                        Level2 =
+                            l1.OneToOne_Optional_FK1 == null
+                                ? null
+                                : new Level2Dto
+                                {
+                                    Id = l1.OneToOne_Optional_FK1.Id,
+                                    Name = l1.OneToOne_Optional_FK1.Name,
+                                }
+                    })
                     .OrderBy(e => e.Level2.Name)
                     .ThenBy(e => e.Id),
             assertOrder: true,
@@ -4735,29 +4662,25 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level1>()
-                    .Select(
-                        l1 =>
-                            new
+                    .Select(l1 => new
+                    {
+                        l1.Id,
+                        l1.Name,
+                        Level2 = l1.OneToOne_Optional_FK1 == null
+                            ? null
+                            : new
                             {
-                                l1.Id,
-                                l1.Name,
-                                Level2 = l1.OneToOne_Optional_FK1 == null
+                                l1.OneToOne_Optional_FK1.Id,
+                                l1.OneToOne_Optional_FK1.Name,
+                                Level3 = l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2 == null
                                     ? null
                                     : new
                                     {
-                                        l1.OneToOne_Optional_FK1.Id,
-                                        l1.OneToOne_Optional_FK1.Name,
-                                        Level3 = l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2
-                                        == null
-                                            ? null
-                                            : new
-                                            {
-                                                l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.Id,
-                                                l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.Name
-                                            }
+                                        l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.Id,
+                                        l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.Name
                                     }
                             }
-                    )
+                    })
                     .Where(e => e.Level2.Level3.Name != "L"),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -4840,21 +4763,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             async,
             ss =>
                 ss.Set<Level2>()
-                    .Select(
-                        l2 =>
-                            new Level1Dto
-                            {
-                                Id = l2.Id,
-                                Name =
-                                    l2.OneToOne_Optional_FK2 == null
-                                        ? null
-                                        : l2.OneToOne_Optional_FK2.Name,
-                                Level2 =
-                                    l2.OneToOne_Optional_FK_Inverse2 == null
-                                        ? null
-                                        : new Level2Dto()
-                            }
-                    ),
+                    .Select(l2 => new Level1Dto
+                    {
+                        Id = l2.Id,
+                        Name =
+                            l2.OneToOne_Optional_FK2 == null ? null : l2.OneToOne_Optional_FK2.Name,
+                        Level2 = l2.OneToOne_Optional_FK_Inverse2 == null ? null : new Level2Dto()
+                    }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
             {
@@ -4928,16 +4843,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     .Include(x => x.OneToMany_Optional1)
                     .ThenInclude(x => x.OneToMany_Optional2)
                     .Where(l1 => l1.Id < 3)
-                    .Select(
-                        l1 =>
-                            new
-                            {
-                                l1.Id,
-                                Pushdown = l1.OneToMany_Optional1.Where(x => x.Name == "L2 02")
-                                    .FirstOrDefault()
-                                    .Name
-                            }
-                    )
+                    .Select(l1 => new
+                    {
+                        l1.Id,
+                        Pushdown = l1.OneToMany_Optional1.Where(x => x.Name == "L2 02")
+                            .FirstOrDefault()
+                            .Name
+                    })
         );
 
     [ConditionalTheory]
@@ -4952,16 +4864,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     .Include(x => x.OneToMany_Optional1)
                     .ThenInclude(x => x.OneToMany_Optional2)
                     .Where(l1 => l1.Id < 3)
-                    .Select(
-                        l1 =>
-                            new
-                            {
-                                l1.Id,
-                                Pushdown = l1.OneToMany_Optional1.Where(x => x.Name == "L2 02")
-                                    .FirstOrDefault()
-                                    .OneToOne_Optional_FK2
-                            }
-                    )
+                    .Select(l1 => new
+                    {
+                        l1.Id,
+                        Pushdown = l1.OneToMany_Optional1.Where(x => x.Name == "L2 02")
+                            .FirstOrDefault()
+                            .OneToOne_Optional_FK2
+                    })
         );
 
     [ConditionalTheory]
@@ -4974,16 +4883,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Where(l1 => l1.Id < 2)
-                    .Select(
-                        l1 =>
-                            new
-                            {
-                                l1.Id,
-                                Pushdown = l1.OneToMany_Optional1.Where(x => x.Name == "L2 02")
-                                    .FirstOrDefault()
-                                    .OneToMany_Optional2.ToList()
-                            }
-                    ),
+                    .Select(l1 => new
+                    {
+                        l1.Id,
+                        Pushdown = l1.OneToMany_Optional1.Where(x => x.Name == "L2 02")
+                            .FirstOrDefault()
+                            .OneToMany_Optional2.ToList()
+                    }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
             {
@@ -5002,18 +4908,15 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Where(l1 => l1.Id < 2)
-                    .Select(
-                        l1 =>
-                            new
-                            {
-                                l1.Id,
-                                Pushdown = l1.OneToMany_Optional1.Where(x => x.Name == "L2 02")
-                                    .FirstOrDefault()
-                                    .OneToMany_Optional2.OrderBy(x => x.Id)
-                                    .FirstOrDefault()
-                                    .Name
-                            }
-                    )
+                    .Select(l1 => new
+                    {
+                        l1.Id,
+                        Pushdown = l1.OneToMany_Optional1.Where(x => x.Name == "L2 02")
+                            .FirstOrDefault()
+                            .OneToMany_Optional2.OrderBy(x => x.Id)
+                            .FirstOrDefault()
+                            .Name
+                    })
         );
 
     [ConditionalTheory]
@@ -5038,15 +4941,12 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     }
                 )
                     .Distinct()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Foo = x.Id1,
-                                Bar = x.Id2,
-                                Baz = x.Id3
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        Foo = x.Id1,
+                        Bar = x.Id2,
+                        Baz = x.Id3
+                    })
                     .Take(10),
             elementSorter: e => (e.Foo, e.Bar, e.Baz)
         );
@@ -5138,9 +5038,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     async,
                     ss =>
                         ss.Set<Level1>()
-                            .Select(
-                                x => new { Subquery = ss.Set<Level2>().Where(l2 => l2.Id < 10) }
-                            )
+                            .Select(x => new
+                            {
+                                Subquery = ss.Set<Level2>().Where(l2 => l2.Id < 10)
+                            })
                             .Join(ss.Set<Level3>(), o => 7, i => i.Id, (o, i) => i)
                 ),
             "IQueryable<Level1>"

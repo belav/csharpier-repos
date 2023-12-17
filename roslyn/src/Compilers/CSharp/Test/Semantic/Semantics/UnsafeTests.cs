@@ -9203,8 +9203,7 @@ unsafe class C
             Assert.Equal(stringSymbol, summary2.Type.GetSymbol());
 
             var accessSymbolInfos = dereferences
-                .Select(
-                    syntax => model.GetSymbolInfo(((PrefixUnaryExpressionSyntax)syntax).Operand)
+                .Select(syntax => model.GetSymbolInfo(((PrefixUnaryExpressionSyntax)syntax).Operand)
                 )
                 .ToArray();
 

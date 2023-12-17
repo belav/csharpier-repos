@@ -28,16 +28,15 @@ namespace ILCompiler.DependencyAnalysis
 
             private void CreateNodeCaches()
             {
-                _typeSignatures = new NodeCache<
-                    TypeDesc,
-                    NativeLayoutTypeSignatureVertexNode
-                >(type =>
-                {
-                    return NativeLayoutTypeSignatureVertexNode.NewTypeSignatureVertexNode(
-                        _factory,
-                        type
-                    );
-                });
+                _typeSignatures = new NodeCache<TypeDesc, NativeLayoutTypeSignatureVertexNode>(
+                    type =>
+                    {
+                        return NativeLayoutTypeSignatureVertexNode.NewTypeSignatureVertexNode(
+                            _factory,
+                            type
+                        );
+                    }
+                );
 
                 _methodSignatures = new NodeCache<
                     MethodSignature,

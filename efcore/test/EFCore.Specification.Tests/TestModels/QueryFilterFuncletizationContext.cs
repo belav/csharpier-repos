@@ -48,8 +48,8 @@ public class QueryFilterFuncletizationContext : DbContext
             .HasQueryFilter(x => x.IsEnabled == Property && (Tenant + GetId() > 0));
         modelBuilder
             .Entity<ShortCircuitFilter>()
-            .HasQueryFilter(
-                x => !x.IsDeleted && (IsModerated == null || IsModerated == x.IsModerated)
+            .HasQueryFilter(x =>
+                !x.IsDeleted && (IsModerated == null || IsModerated == x.IsModerated)
             );
         modelBuilder
             .Entity<PrincipalSetFilter>()
@@ -90,8 +90,8 @@ public class QueryFilterFuncletizationContext : DbContext
         // Multiple context used in filter
         modelBuilder
             .Entity<MultiContextFilter>()
-            .HasQueryFilter(
-                e => e.IsEnabled == Property && e.BossId == new IncorrectDbContext().BossId
+            .HasQueryFilter(e =>
+                e.IsEnabled == Property && e.BossId == new IncorrectDbContext().BossId
             );
 
         modelBuilder.Entity<DeDupeFilter1>().HasQueryFilter(x => x.Tenant == Tenant);
@@ -113,8 +113,8 @@ public class QueryFilterFuncletizationContext : DbContext
     private static void SetDependentFilter(ModelBuilder modelBuilder, DbContext context) =>
         modelBuilder
             .Entity<DependentSetFilter>()
-            .HasQueryFilter(
-                p => context.Set<MultiContextFilter>().Any(b => b.BossId == p.PrincipalSetFilterId)
+            .HasQueryFilter(p =>
+                context.Set<MultiContextFilter>().Any(b => b.BossId == p.PrincipalSetFilterId)
             );
 
     #region EntityTypeConfigs

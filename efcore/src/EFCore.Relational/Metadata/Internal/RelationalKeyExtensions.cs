@@ -176,10 +176,9 @@ public static class RelationalKeyExtensions
                     var table = storeObject;
                     if (
                         key.DeclaringEntityType.GetMappingFragments(StoreObjectType.Table)
-                            .Any(
-                                t =>
-                                    t.StoreObject != table
-                                    && key.Properties.GetColumnNames(t.StoreObject) != null
+                            .Any(t =>
+                                t.StoreObject != table
+                                && key.Properties.GetColumnNames(t.StoreObject) != null
                             )
                     )
                     {

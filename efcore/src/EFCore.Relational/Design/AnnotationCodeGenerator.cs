@@ -58,12 +58,11 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     public virtual IEnumerable<IAnnotation> FilterIgnoredAnnotations(
         IEnumerable<IAnnotation> annotations
     ) =>
-        annotations.Where(
-            a =>
-                !(
-                    CoreAnnotationNames.AllNames.Contains(a.Name)
-                    || IgnoredRelationalAnnotations.Contains(a.Name)
-                )
+        annotations.Where(a =>
+            !(
+                CoreAnnotationNames.AllNames.Contains(a.Name)
+                || IgnoredRelationalAnnotations.Contains(a.Name)
+            )
         );
 
     /// <inheritdoc />

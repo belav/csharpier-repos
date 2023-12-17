@@ -235,14 +235,11 @@ namespace System.IO.Tests
 
             var files = Enumerable
                 .Range(0, filesCount)
-                .Select(
-                    i =>
-                        new
-                        {
-                            FileInWatchedDir = Path.Combine(watchedTestDirectory, $"file{i}"),
-                            FileInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"file{i}")
-                        }
-                )
+                .Select(i => new
+                {
+                    FileInWatchedDir = Path.Combine(watchedTestDirectory, $"file{i}"),
+                    FileInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"file{i}")
+                })
                 .ToArray();
 
             Array.ForEach(files, (file) => File.Create(file.FileInWatchedDir).Dispose());
@@ -267,16 +264,15 @@ namespace System.IO.Tests
             // Remove Created and Changed events as there is racecondition when create file and then observe parent folder. It receives Create and Changed event altought Watcher is not registered yet.
             if (skipOldEvents)
             {
-                events = events.Where(
-                    x =>
-                        (x.EventType & (WatcherChangeTypes.Created | WatcherChangeTypes.Changed))
-                        == 0
+                events = events.Where(x =>
+                    (x.EventType & (WatcherChangeTypes.Created | WatcherChangeTypes.Changed)) == 0
                 );
             }
 
-            var expectedEvents = files.Select(
-                file => new FiredEvent(WatcherChangeTypes.Deleted, file.FileInWatchedDir)
-            );
+            var expectedEvents = files.Select(file => new FiredEvent(
+                WatcherChangeTypes.Deleted,
+                file.FileInWatchedDir
+            ));
 
             Assert.Equal(expectedEvents, events);
         }
@@ -290,14 +286,11 @@ namespace System.IO.Tests
 
             var files = Enumerable
                 .Range(0, filesCount)
-                .Select(
-                    i =>
-                        new
-                        {
-                            FileInWatchedDir = Path.Combine(watchedTestDirectory, $"file{i}"),
-                            FileInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"file{i}")
-                        }
-                )
+                .Select(i => new
+                {
+                    FileInWatchedDir = Path.Combine(watchedTestDirectory, $"file{i}"),
+                    FileInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"file{i}")
+                })
                 .ToArray();
 
             Array.ForEach(files, (file) => File.Create(file.FileInUnwatchedDir).Dispose());
@@ -311,9 +304,10 @@ namespace System.IO.Tests
                 );
 
             List<FiredEvent> events = ExpectEvents(watcher, filesCount, action);
-            var expectedEvents = files.Select(
-                file => new FiredEvent(WatcherChangeTypes.Created, file.FileInWatchedDir)
-            );
+            var expectedEvents = files.Select(file => new FiredEvent(
+                WatcherChangeTypes.Created,
+                file.FileInWatchedDir
+            ));
 
             Assert.Equal(expectedEvents, events);
         }

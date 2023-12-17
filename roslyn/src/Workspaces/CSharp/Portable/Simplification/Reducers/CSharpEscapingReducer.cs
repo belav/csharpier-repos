@@ -66,13 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             )
             {
                 var enclosingLambdaExpression = parent
-                    .GetAncestorsOrThis(
-                        n =>
-                            (
-                                n
-                                is SimpleLambdaExpressionSyntax
-                                    or ParenthesizedLambdaExpressionSyntax
-                            )
+                    .GetAncestorsOrThis(n =>
+                        (n is SimpleLambdaExpressionSyntax or ParenthesizedLambdaExpressionSyntax)
                     )
                     .FirstOrDefault();
                 if (enclosingLambdaExpression != null)

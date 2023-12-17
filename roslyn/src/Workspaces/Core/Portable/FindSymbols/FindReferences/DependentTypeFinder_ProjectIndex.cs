@@ -85,8 +85,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 var allStates = regularDocumentStates
                     .States.Select(kvp => (kvp.Key, kvp.Value))
                     .Concat(
-                        sourceGeneratorDocumentStates.States.Select(
-                            kvp => (kvp.Key, (DocumentState)kvp.Value)
+                        sourceGeneratorDocumentStates.States.Select(kvp =>
+                            (kvp.Key, (DocumentState)kvp.Value)
                         )
                     );
 

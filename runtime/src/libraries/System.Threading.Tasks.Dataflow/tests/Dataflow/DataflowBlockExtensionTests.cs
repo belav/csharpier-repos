@@ -2021,21 +2021,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         unlinkCounts = new int[n];
                     ISourceBlock<int>[] sources = Enumerable
                         .Range(0, n)
-                        .Select(
-                            i =>
-                                new DelegatePropagator<int, int>
+                        .Select(i => new DelegatePropagator<int, int>
+                        {
+                            LinkToDelegate = (target, linkOptions) =>
+                            {
+                                Interlocked.Increment(ref linkCounts[i]);
+                                return new DelegateDisposable
                                 {
-                                    LinkToDelegate = (target, linkOptions) =>
-                                    {
-                                        Interlocked.Increment(ref linkCounts[i]);
-                                        return new DelegateDisposable
-                                        {
-                                            DisposeDelegate = () =>
-                                                Interlocked.Increment(ref unlinkCounts[i])
-                                        };
-                                    }
-                                }
-                        )
+                                    DisposeDelegate = () =>
+                                        Interlocked.Increment(ref unlinkCounts[i])
+                                };
+                            }
+                        })
                         .ToArray();
 
                     var cts = new CancellationTokenSource();
@@ -2090,14 +2087,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 branch2 = 0;
             Task<int>[] tasks = Enumerable
                 .Range(0, iterations)
-                .Select(
-                    _ =>
-                        DataflowBlock.Choose(
-                            source1,
-                            x => Interlocked.Increment(ref branch1),
-                            source2,
-                            x => Interlocked.Increment(ref branch2)
-                        )
+                .Select(_ =>
+                    DataflowBlock.Choose(
+                        source1,
+                        x => Interlocked.Increment(ref branch1),
+                        source2,
+                        x => Interlocked.Increment(ref branch2)
+                    )
                 )
                 .ToArray();
 

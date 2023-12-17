@@ -622,24 +622,22 @@ namespace MonoTests.System.ServiceModel.Description
         {
             var cd = ContractDescription.GetContract(typeof(IService));
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od => od.Messages.Any(md => md.Action == "http://tempuri.org/IServiceBase/Say")
+                cd.Operations.Any(od =>
+                    od.Messages.Any(md => md.Action == "http://tempuri.org/IServiceBase/Say")
                 ),
                 "#1"
             ); // inherited
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od =>
-                        od.SyncMethod == typeof(IService).GetMethod("Join")
-                        && od.Messages.Any(md => md.Action == "http://tempuri.org/IService/Join")
+                cd.Operations.Any(od =>
+                    od.SyncMethod == typeof(IService).GetMethod("Join")
+                    && od.Messages.Any(md => md.Action == "http://tempuri.org/IService/Join")
                 ),
                 "#2"
             ); // self
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od =>
-                        od.SyncMethod == typeof(IService2).GetMethod("Join")
-                        && od.Messages.Any(md => md.Action == "http://tempuri.org/IService/Join")
+                cd.Operations.Any(od =>
+                    od.SyncMethod == typeof(IService2).GetMethod("Join")
+                    && od.Messages.Any(md => md.Action == "http://tempuri.org/IService/Join")
                 ),
                 "#3"
             ); // callback
@@ -672,28 +670,26 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreSame(typeof(IDerivedDuplexContract), cd.ContractType, "#2");
             Assert.AreSame(typeof(IDerivedDuplexCallback), cd.CallbackContractType, "#3");
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od => od.SyncMethod == typeof(IBaseDuplexCallback).GetMethod("CallbackMethod")
+                cd.Operations.Any(od =>
+                    od.SyncMethod == typeof(IBaseDuplexCallback).GetMethod("CallbackMethod")
                 ),
                 "#4"
             );
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od =>
-                        od.SyncMethod
-                        == typeof(IDerivedDuplexCallback).GetMethod("CallbackSomething")
+                cd.Operations.Any(od =>
+                    od.SyncMethod == typeof(IDerivedDuplexCallback).GetMethod("CallbackSomething")
                 ),
                 "#5"
             );
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od => od.SyncMethod == typeof(IBaseDuplexContract).GetMethod("ContractMethod")
+                cd.Operations.Any(od =>
+                    od.SyncMethod == typeof(IBaseDuplexContract).GetMethod("ContractMethod")
                 ),
                 "#6"
             );
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od => od.SyncMethod == typeof(IDerivedDuplexContract).GetMethod("Something")
+                cd.Operations.Any(od =>
+                    od.SyncMethod == typeof(IDerivedDuplexContract).GetMethod("Something")
                 ),
                 "#7"
             );
@@ -708,17 +704,16 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreSame(typeof(ISymmetricInheritance), cd.CallbackContractType, "#3");
             Assert.AreEqual(
                 2,
-                cd.Operations.Count(
-                    od =>
-                        od.SyncMethod
-                        == typeof(IAsyncContractWithSymmetricCallbackContract).GetMethod("Foo")
+                cd.Operations.Count(od =>
+                    od.SyncMethod
+                    == typeof(IAsyncContractWithSymmetricCallbackContract).GetMethod("Foo")
                 ),
                 "#4"
             );
             Assert.AreEqual(
                 2,
-                cd.Operations.Count(
-                    od => od.SyncMethod == typeof(ISymmetricInheritance).GetMethod("Bar")
+                cd.Operations.Count(od =>
+                    od.SyncMethod == typeof(ISymmetricInheritance).GetMethod("Bar")
                 ),
                 "#5"
             );

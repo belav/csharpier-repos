@@ -1474,10 +1474,9 @@ namespace System.Data.Services.Client
                 {
                     var node = element
                         .Nodes()
-                        .Where(
-                            n =>
-                                n.NodeType == XmlNodeType.Text
-                                || n.NodeType == XmlNodeType.SignificantWhitespace
+                        .Where(n =>
+                            n.NodeType == XmlNodeType.Text
+                            || n.NodeType == XmlNodeType.SignificantWhitespace
                         )
                         .FirstOrDefault();
                     string elementValue = (node == null) ? null : ((XText)node).Value;

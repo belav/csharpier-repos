@@ -197,15 +197,14 @@ namespace Microsoft.Interop.UnitTests
         {
             return CreateCompilation(
                 sources
-                    .Select(
-                        source =>
-                            CSharpSyntaxTree.ParseText(
-                                source,
-                                new CSharpParseOptions(
-                                    LanguageVersion.Preview,
-                                    preprocessorSymbols: preprocessorSymbols
-                                )
+                    .Select(source =>
+                        CSharpSyntaxTree.ParseText(
+                            source,
+                            new CSharpParseOptions(
+                                LanguageVersion.Preview,
+                                preprocessorSymbols: preprocessorSymbols
                             )
+                        )
                     )
                     .ToArray(),
                 targetFramework,

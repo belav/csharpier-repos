@@ -590,8 +590,9 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            aliasesOfReferencedAssemblies =
-                aliasesOfReferencedAssembliesBuilder.ToImmutableAndFree();
+            aliasesOfReferencedAssemblies = aliasesOfReferencedAssembliesBuilder.ToImmutableAndFree(
+
+            );
         }
 
         /// <summary>
@@ -774,12 +775,11 @@ namespace Microsoft.CodeAnalysis
             KeyValuePair<MetadataReference, IAssemblySymbolInternal>
         > GetReferencedAssemblies()
         {
-            return ReferencedAssembliesMap.Select(
-                ra =>
-                    KeyValuePairUtil.Create(
-                        ra.Key,
-                        (IAssemblySymbolInternal)ReferencedAssemblies[ra.Value]
-                    )
+            return ReferencedAssembliesMap.Select(ra =>
+                KeyValuePairUtil.Create(
+                    ra.Key,
+                    (IAssemblySymbolInternal)ReferencedAssemblies[ra.Value]
+                )
             );
         }
 

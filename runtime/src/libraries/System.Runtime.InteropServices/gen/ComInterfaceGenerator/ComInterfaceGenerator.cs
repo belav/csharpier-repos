@@ -172,8 +172,8 @@ namespace Microsoft.Interop
                     (data, ct) =>
                         data.DeclaredMethods.SelectMany(m => m.ManagedToUnmanagedStub.Diagnostics)
                             .Union(
-                                data.DeclaredMethods.SelectMany(
-                                    m => m.UnmanagedToManagedStub.Diagnostics
+                                data.DeclaredMethods.SelectMany(m =>
+                                    m.UnmanagedToManagedStub.Diagnostics
                                 )
                             )
                 )
@@ -494,8 +494,8 @@ namespace Microsoft.Interop
                 // that is defined as a structure. These types used to work with built-in COM interop, but they do not work with
                 // source-generated interop as we now use the MemberFunction calling convention, which is more correct.
                 TypePositionInfo? managedReturnInfo =
-                    signatureContext.ElementTypeInformation.FirstOrDefault(
-                        e => e.IsManagedReturnPosition
+                    signatureContext.ElementTypeInformation.FirstOrDefault(e =>
+                        e.IsManagedReturnPosition
                     );
                 if (
                     managedReturnInfo
@@ -662,20 +662,19 @@ namespace Microsoft.Interop
         {
             var definingType = interfaceGroup.Interface.Info.Type;
             var shadowImplementations = interfaceGroup
-                .ShadowingMethods.Select(
-                    m => (Method: m, ManagedToUnmanagedStub: m.ManagedToUnmanagedStub)
+                .ShadowingMethods.Select(m =>
+                    (Method: m, ManagedToUnmanagedStub: m.ManagedToUnmanagedStub)
                 )
                 .Where(p => p.ManagedToUnmanagedStub is GeneratedStubCodeContext)
-                .Select(
-                    ctx =>
-                        (
-                            (GeneratedStubCodeContext)ctx.ManagedToUnmanagedStub
-                        ).Stub.Node.WithExplicitInterfaceSpecifier(
-                            ExplicitInterfaceSpecifier(ParseName(definingType.FullTypeName))
-                        )
+                .Select(ctx =>
+                    (
+                        (GeneratedStubCodeContext)ctx.ManagedToUnmanagedStub
+                    ).Stub.Node.WithExplicitInterfaceSpecifier(
+                        ExplicitInterfaceSpecifier(ParseName(definingType.FullTypeName))
+                    )
                 );
-            var inheritedStubs = interfaceGroup.ShadowingMethods.Select(
-                m => m.UnreachableExceptionStub
+            var inheritedStubs = interfaceGroup.ShadowingMethods.Select(m =>
+                m.UnreachableExceptionStub
             );
             return ImplementationInterfaceTemplate
                 .AddBaseListTypes(SimpleBaseType(definingType.Syntax))
@@ -710,12 +709,10 @@ namespace Microsoft.Interop
                     comInterfaceAndMethods
                         .DeclaredMethods.Select(m => m.UnmanagedToManagedStub)
                         .OfType<GeneratedStubCodeContext>()
-                        .Where(
-                            context =>
-                                context.Diagnostics.All(
-                                    diag =>
-                                        diag.Descriptor.DefaultSeverity != DiagnosticSeverity.Error
-                                )
+                        .Where(context =>
+                            context.Diagnostics.All(diag =>
+                                diag.Descriptor.DefaultSeverity != DiagnosticSeverity.Error
+                            )
                         )
                         .Select(context => context.Stub.Node)
                 )
@@ -876,12 +873,10 @@ namespace Microsoft.Interop
             var vtableSlotAssignments =
                 VirtualMethodPointerStubGenerator.GenerateVirtualMethodTableSlotAssignments(
                     interfaceMethods
-                        .DeclaredMethods.Where(
-                            context =>
-                                context.UnmanagedToManagedStub.Diagnostics.All(
-                                    diag =>
-                                        diag.Descriptor.DefaultSeverity != DiagnosticSeverity.Error
-                                )
+                        .DeclaredMethods.Where(context =>
+                            context.UnmanagedToManagedStub.Diagnostics.All(diag =>
+                                diag.Descriptor.DefaultSeverity != DiagnosticSeverity.Error
+                            )
                         )
                         .Select(context => context.GenerationContext),
                     vtableLocalName,

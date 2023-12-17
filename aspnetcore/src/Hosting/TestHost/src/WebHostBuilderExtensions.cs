@@ -91,13 +91,10 @@ public static class WebHostBuilderExtensions
         else
         {
 #pragma warning disable CS0612 // Type or member is obsolete
-            webHostBuilder.ConfigureServices(
-                s =>
-                    s.AddSingleton<IStartupConfigureServicesFilter>(
-                        new ConfigureTestServicesStartupConfigureServicesFilter(
-                            servicesConfiguration
-                        )
-                    )
+            webHostBuilder.ConfigureServices(s =>
+                s.AddSingleton<IStartupConfigureServicesFilter>(
+                    new ConfigureTestServicesStartupConfigureServicesFilter(servicesConfiguration)
+                )
             );
 #pragma warning restore CS0612 // Type or member is obsolete
         }
@@ -121,13 +118,12 @@ public static class WebHostBuilderExtensions
         ArgumentNullException.ThrowIfNull(servicesConfiguration);
 
 #pragma warning disable CS0612 // Type or member is obsolete
-        webHostBuilder.ConfigureServices(
-            s =>
-                s.AddSingleton<IStartupConfigureContainerFilter<TContainer>>(
-                    new ConfigureTestServicesStartupConfigureContainerFilter<TContainer>(
-                        servicesConfiguration
-                    )
+        webHostBuilder.ConfigureServices(s =>
+            s.AddSingleton<IStartupConfigureContainerFilter<TContainer>>(
+                new ConfigureTestServicesStartupConfigureContainerFilter<TContainer>(
+                    servicesConfiguration
                 )
+            )
         );
 #pragma warning restore CS0612 // Type or member is obsolete
 

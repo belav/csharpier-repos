@@ -1007,7 +1007,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                         this.state = State.Aborted;
                         if (shouldTrackAbort)
                         {
-                            this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowAborted();
+                            this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowAborted(
+
+                            );
                             this.Controller.Abort(reason);
                         }
                         else
@@ -1045,7 +1047,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                                 this.state = State.Aborted;
                                 if (shouldTrackAbort)
                                 {
-                                    this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowAborted();
+                                    this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowAborted(
+
+                                    );
                                     this.Controller.Abort(reason);
                                 }
                                 else
@@ -1381,7 +1385,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                         GetCompletionState();
                         if (this.completionState == ActivityInstanceState.Closed)
                         {
-                            this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowCompleted();
+                            this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowCompleted(
+
+                            );
                         }
 
                         if (this.Controller.HasPendingTrackingRecords)
@@ -5292,7 +5298,9 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     if (!this.shouldTrackAbort)
                     {
-                        this.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowUnloaded();
+                        this.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowUnloaded(
+
+                        );
                     }
 
                     this.Instance.AbortInstance(this.reason, true, this.shouldTrackAbort);
@@ -5410,7 +5418,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                         );
                     }
 
-                    this.Instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowSuspended();
+                    this.Instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowSuspended(
+
+                    );
                 }
                 finally
                 {
@@ -5688,7 +5698,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                         );
                     }
 
-                    thisPtr.parent.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowSuspended();
+                    thisPtr.parent.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowSuspended(
+
+                    );
 
                     // This is to handle a corner case where Pause is called
                     // from an event handler:

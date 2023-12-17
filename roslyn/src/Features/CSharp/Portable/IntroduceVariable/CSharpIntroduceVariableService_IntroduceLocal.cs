@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         {
             var containerToGenerateInto = expression
                 .Ancestors()
-                .FirstOrDefault(
-                    s => s is BlockSyntax or ArrowExpressionClauseSyntax or LambdaExpressionSyntax
+                .FirstOrDefault(s =>
+                    s is BlockSyntax or ArrowExpressionClauseSyntax or LambdaExpressionSyntax
                 );
 
             var newLocalNameToken = GenerateUniqueLocalName(
@@ -552,10 +552,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             // Find all the local functions within the scope that will use the new declaration.
             var localFunctions = innermostCommonBlock
                 .DescendantNodes()
-                .Where(
-                    node =>
-                        node.IsKind(SyntaxKind.LocalFunctionStatement)
-                        && matches.Any(match => match.Span.OverlapsWith(node.Span))
+                .Where(node =>
+                    node.IsKind(SyntaxKind.LocalFunctionStatement)
+                    && matches.Any(match => match.Span.OverlapsWith(node.Span))
                 );
 
             if (localFunctions.IsEmpty())
@@ -563,23 +562,22 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                 return firstStatementAffectedIndex;
             }
 
-            var localFunctionIdentifiers = localFunctions.Select(
-                node => ((LocalFunctionStatementSyntax)node).Identifier.ValueText
+            var localFunctionIdentifiers = localFunctions.Select(node =>
+                ((LocalFunctionStatementSyntax)node).Identifier.ValueText
             );
 
             // Find all calls to the applicable local functions within the scope.
             var localFunctionCalls = innermostCommonBlock
                 .DescendantNodes()
-                .Where(
-                    node =>
-                        node is InvocationExpressionSyntax invocationExpression
-                        && invocationExpression.Expression.GetRightmostName() != null
-                        && !invocationExpression.Expression.IsKind(
-                            SyntaxKind.SimpleMemberAccessExpression
-                        )
-                        && localFunctionIdentifiers.Contains(
-                            invocationExpression.Expression.GetRightmostName().Identifier.ValueText
-                        )
+                .Where(node =>
+                    node is InvocationExpressionSyntax invocationExpression
+                    && invocationExpression.Expression.GetRightmostName() != null
+                    && !invocationExpression.Expression.IsKind(
+                        SyntaxKind.SimpleMemberAccessExpression
+                    )
+                    && localFunctionIdentifiers.Contains(
+                        invocationExpression.Expression.GetRightmostName().Identifier.ValueText
+                    )
                 );
 
             if (localFunctionCalls.IsEmpty())
@@ -593,8 +591,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             var statementsInBlock = GetStatements(innermostCommonBlock);
 
             // Check if our earliest call is before all local function declarations and all matches, and if so, place our new declaration there.
-            var earliestLocalFunctionCallIndex = statementsInBlock.IndexOf(
-                s => s.Span.Contains(earliestLocalFunctionCall)
+            var earliestLocalFunctionCallIndex = statementsInBlock.IndexOf(s =>
+                s.Span.Contains(earliestLocalFunctionCall)
             );
             return Math.Min(earliestLocalFunctionCallIndex, firstStatementAffectedIndex);
         }
@@ -612,8 +610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             // Grab all the trivia before the line the next statement is on and move it to the new node.
 
             var nextStatementLeading = nextStatement.GetLeadingTrivia();
-            var precedingEndOfLine = nextStatementLeading.LastOrDefault(
-                t => t.Kind() == SyntaxKind.EndOfLineTrivia
+            var precedingEndOfLine = nextStatementLeading.LastOrDefault(t =>
+                t.Kind() == SyntaxKind.EndOfLineTrivia
             );
             if (precedingEndOfLine == default)
             {

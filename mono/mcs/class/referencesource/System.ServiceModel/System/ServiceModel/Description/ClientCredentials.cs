@@ -195,7 +195,9 @@ namespace System.ServiceModel.Description
                         if (this.securityTokenHandlerCollectionManager == null)
                         {
                             this.securityTokenHandlerCollectionManager =
-                                SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager();
+                                SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager(
+
+                                );
                         }
                     }
                 }

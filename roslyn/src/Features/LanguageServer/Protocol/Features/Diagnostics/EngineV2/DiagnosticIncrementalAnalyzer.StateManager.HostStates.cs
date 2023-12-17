@@ -118,8 +118,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     var stateSetMap = StateSetMap
                         .Where(kvp => !excludedAnalyzers.Contains(kvp.Key))
                         .ToImmutableDictionary();
-                    var orderedStateSets = OrderedStateSets.WhereAsArray(
-                        stateSet => !excludedAnalyzers.Contains(stateSet.Analyzer)
+                    var orderedStateSets = OrderedStateSets.WhereAsArray(stateSet =>
+                        !excludedAnalyzers.Contains(stateSet.Analyzer)
                     );
                     return new HostAnalyzerStateSets(stateSetMap, orderedStateSets);
                 }

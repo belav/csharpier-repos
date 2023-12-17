@@ -20,8 +20,9 @@ namespace System.Diagnostics.Tracing
     [SecuritySafeCritical]
     internal unsafe class TraceLoggingDataCollector
     {
-        internal static readonly TraceLoggingDataCollector Instance =
-            new TraceLoggingDataCollector();
+        internal static readonly TraceLoggingDataCollector Instance = new TraceLoggingDataCollector(
+
+        );
 
         private TraceLoggingDataCollector()
         {

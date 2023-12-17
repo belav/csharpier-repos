@@ -764,8 +764,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
             // Filter out the members that are implicitly declared.  They're implicit, hence we do
             // not want an explicit declaration. The only exception are fields generated from implicit tuple fields.
-            var filteredMembers = membersList.Where(
-                m => !m.IsImplicitlyDeclared || m.IsTupleField()
+            var filteredMembers = membersList.Where(m => !m.IsImplicitlyDeclared || m.IsTupleField()
             );
 
             return info.Context.AutoInsertionLocation

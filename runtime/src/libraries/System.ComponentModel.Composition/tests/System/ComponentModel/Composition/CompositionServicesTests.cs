@@ -107,10 +107,9 @@ namespace System.ComponentModel.Composition
                 "System.ComponentModel.Composition.GenericContract4(System.Int32,System.Double)+GenericContract5(System.Double,System.Int32)[][,,,,]"
             );
             expectations.Add(
-                typeof(GenericContract4<int, double>.GenericContract5<
-                    double,
-                    int
-                >).MakePointerType(),
+                typeof(GenericContract4<int, double>.GenericContract5<double, int>).MakePointerType(
+
+                ),
                 "System.ComponentModel.Composition.GenericContract4(System.Int32,System.Double)+GenericContract5(System.Double,System.Int32)*"
             );
             expectations.Add(

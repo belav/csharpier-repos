@@ -35,8 +35,8 @@ namespace System.Linq.Tests
             Assert.Equal(1, properties.Count());
 
             // Groupings
-            PropertyInfo groupingsProperty = properties.Single(
-                property => property.Name == "Groupings"
+            PropertyInfo groupingsProperty = properties.Single(property =>
+                property.Name == "Groupings"
             );
             Assert.Equal(
                 DebuggerBrowsableState.RootHidden,

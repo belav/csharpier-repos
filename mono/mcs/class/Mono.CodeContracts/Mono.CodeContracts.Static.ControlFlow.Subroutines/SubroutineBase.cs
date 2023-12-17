@@ -874,13 +874,10 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             Subroutine specializedEnsures
         )
         {
-            return subroutines.Select(
-                pair =>
-                    new Pair<EdgeTag, Subroutine>(
-                        pair.Key,
-                        pair.Value == toReplace ? specializedEnsures : pair.Value
-                    )
-            );
+            return subroutines.Select(pair => new Pair<EdgeTag, Subroutine>(
+                pair.Key,
+                pair.Value == toReplace ? specializedEnsures : pair.Value
+            ));
         }
 
         private static Predicate<Pair<EdgeTag, Subroutine>> FilterRecursiveContracts(

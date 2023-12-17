@@ -37,8 +37,8 @@ namespace Microsoft.Extensions.Logging.Test
         public void CaptureScopesDefaultsToTrue()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddLogging(
-                builder => builder.AddConfiguration(new ConfigurationBuilder().Build())
+            serviceCollection.AddLogging(builder =>
+                builder.AddConfiguration(new ConfigurationBuilder().Build())
             );
             var options = serviceCollection
                 .BuildServiceProvider()

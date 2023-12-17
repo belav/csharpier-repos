@@ -33,8 +33,9 @@ namespace Microsoft.CodeAnalysis.Remote
             return RunServiceAsync(
                 cancellationToken =>
                 {
-                    var globalOperationNotificationService =
-                        GetGlobalOperationNotificationService();
+                    var globalOperationNotificationService = GetGlobalOperationNotificationService(
+
+                    );
                     globalOperationNotificationService.OnStarted();
                     return default;
                 },
@@ -50,8 +51,9 @@ namespace Microsoft.CodeAnalysis.Remote
             return RunServiceAsync(
                 cancellationToken =>
                 {
-                    var globalOperationNotificationService =
-                        GetGlobalOperationNotificationService();
+                    var globalOperationNotificationService = GetGlobalOperationNotificationService(
+
+                    );
                     globalOperationNotificationService.OnStopped();
                     return default;
                 },
@@ -64,7 +66,9 @@ namespace Microsoft.CodeAnalysis.Remote
             =>
             (RemoteGlobalOperationNotificationService)
                 GetWorkspace()
-                    .Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>()
+                    .Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>(
+
+                    )
                     .Single()
                     .Value;
     }

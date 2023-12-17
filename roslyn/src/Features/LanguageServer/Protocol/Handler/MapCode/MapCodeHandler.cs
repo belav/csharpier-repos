@@ -72,17 +72,14 @@ internal sealed class MapCodeHandler : ILspServiceRequestHandler<MapCodeParams, 
             return new WorkspaceEdit
             {
                 DocumentChanges = uriToEditsMap
-                    .Select(
-                        kvp =>
-                            new TextDocumentEdit
-                            {
-                                TextDocument = new OptionalVersionedTextDocumentIdentifier
-                                {
-                                    Uri = kvp.Key
-                                },
-                                Edits = kvp.Value,
-                            }
-                    )
+                    .Select(kvp => new TextDocumentEdit
+                    {
+                        TextDocument = new OptionalVersionedTextDocumentIdentifier
+                        {
+                            Uri = kvp.Key
+                        },
+                        Edits = kvp.Value,
+                    })
                     .ToArray()
             };
         }

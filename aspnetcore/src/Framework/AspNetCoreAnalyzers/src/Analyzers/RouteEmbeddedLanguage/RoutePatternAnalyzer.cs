@@ -179,13 +179,12 @@ public class RoutePatternAnalyzer : DiagnosticAnalyzer
                 continue;
             }
 
-            var parameterSymbol = resolvedParameterSymbols.FirstOrDefault(
-                s =>
-                    string.Equals(
-                        s.RouteParameterName,
-                        routeParameter.Name,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+            var parameterSymbol = resolvedParameterSymbols.FirstOrDefault(s =>
+                string.Equals(
+                    s.RouteParameterName,
+                    routeParameter.Name,
+                    StringComparison.OrdinalIgnoreCase
+                )
             );
             if (parameterSymbol.Symbol != null)
             {

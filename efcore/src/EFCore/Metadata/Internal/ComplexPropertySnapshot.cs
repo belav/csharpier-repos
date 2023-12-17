@@ -237,10 +237,9 @@ public class ComplexPropertySnapshot
     ) =>
         parameterBinding.With(
             parameterBinding
-                .ConsumedProperties.Select(
-                    property =>
-                        (IPropertyBase?)complexType.FindProperty(property.Name)
-                        ?? complexType.FindComplexProperty(property.Name)!
+                .ConsumedProperties.Select(property =>
+                    (IPropertyBase?)complexType.FindProperty(property.Name)
+                    ?? complexType.FindComplexProperty(property.Name)!
                 )
                 .ToArray()
         );

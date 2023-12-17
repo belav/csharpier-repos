@@ -12,7 +12,9 @@ namespace System.Buffers.Text.Tests
             get
             {
                 foreach (
-                    ParserTestData<DateTime> testData in DateTimeFormatterTestData.ToParserTheoryDataCollection()
+                    ParserTestData<DateTime> testData in DateTimeFormatterTestData.ToParserTheoryDataCollection(
+
+                    )
                 )
                 {
                     bool roundTrippable = testData.FormatSymbol == 'O';
@@ -135,7 +137,9 @@ namespace System.Buffers.Text.Tests
                 }
 
                 foreach (
-                    ParserTestData<DateTimeOffset> testData in DateTimeOffsetFormatterTestData.ToParserTheoryDataCollection()
+                    ParserTestData<DateTimeOffset> testData in DateTimeOffsetFormatterTestData.ToParserTheoryDataCollection(
+
+                    )
                 )
                 {
                     bool roundTrippable = testData.FormatSymbol == 'O';

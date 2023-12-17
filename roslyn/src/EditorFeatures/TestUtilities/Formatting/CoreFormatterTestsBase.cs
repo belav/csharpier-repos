@@ -107,20 +107,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             var snapshot = textBuffer.CurrentSnapshot;
             var bufferGraph = new Mock<IBufferGraph>(MockBehavior.Strict);
             bufferGraph
-                .Setup(
-                    x =>
-                        x.MapUpToSnapshot(
-                            It.IsAny<SnapshotPoint>(),
-                            It.IsAny<PointTrackingMode>(),
-                            It.IsAny<PositionAffinity>(),
-                            It.IsAny<ITextSnapshot>()
-                        )
+                .Setup(x =>
+                    x.MapUpToSnapshot(
+                        It.IsAny<SnapshotPoint>(),
+                        It.IsAny<PointTrackingMode>(),
+                        It.IsAny<PositionAffinity>(),
+                        It.IsAny<ITextSnapshot>()
+                    )
                 )
                 .Returns<SnapshotPoint, PointTrackingMode, PositionAffinity, ITextSnapshot>(
                     (p, m, a, s) =>
                     {
                         if (
-                            workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>()
+                            workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>(
+
+                            )
                                 is TestFormattingRuleFactoryServiceFactory.Factory factory
                             && factory.BaseIndentation != 0
                             && factory.TextSpan.Contains(p.Position)

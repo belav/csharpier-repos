@@ -215,16 +215,15 @@ namespace Microsoft.CodeAnalysis.Completion
                         )
                         {
                             var triggeredProviders = providers
-                                .Where(
-                                    p =>
-                                        p.ShouldTriggerCompletion(
-                                            document.Project.Services,
-                                            text,
-                                            caretPosition,
-                                            trigger,
-                                            options,
-                                            passThroughOptions
-                                        )
+                                .Where(p =>
+                                    p.ShouldTriggerCompletion(
+                                        document.Project.Services,
+                                        text,
+                                        caretPosition,
+                                        trigger,
+                                        options,
+                                        passThroughOptions
+                                    )
                                 )
                                 .ToImmutableArrayOrEmpty();
 
@@ -260,7 +259,9 @@ namespace Microsoft.CodeAnalysis.Completion
             )
             {
                 var extensionManager =
-                    document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+                    document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>(
+
+                    );
                 var additionalAugmentingProviders = ArrayBuilder<CompletionProvider>.GetInstance(
                     triggeredProviders.Length
                 );
@@ -497,7 +498,9 @@ namespace Microsoft.CodeAnalysis.Completion
         )
         {
             var extensionManager =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>(
+
+                );
 
             var context = new CompletionContext(
                 provider,

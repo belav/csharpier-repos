@@ -38,12 +38,11 @@ public class QueryBugsTest : NonSharedModelTestBase
         var contextFactory = await InitializeDateTimeContextAsync();
 
         using var context = contextFactory.CreateContext();
-        var query = context.Dates.Where(
-            d =>
-                d.DateTime2_2 == DateTime.Now
-                || d.DateTime2_7 == DateTime.Now
-                || d.DateTime == DateTime.Now
-                || d.SmallDateTime == DateTime.Now
+        var query = context.Dates.Where(d =>
+            d.DateTime2_2 == DateTime.Now
+            || d.DateTime2_7 == DateTime.Now
+            || d.DateTime == DateTime.Now
+            || d.SmallDateTime == DateTime.Now
         );
 
         var results = async ? await query.ToListAsync() : query.ToList();
@@ -67,12 +66,11 @@ WHERE [d].[DateTime2_2] = GETDATE() OR [d].[DateTime2_7] = GETDATE() OR [d].[Dat
         var contextFactory = await InitializeDateTimeContextAsync();
 
         using var context = contextFactory.CreateContext();
-        var query = context.Dates.Where(
-            d =>
-                d.DateTime2_2 != DateTime.Now
-                && d.DateTime2_7 != DateTime.Now
-                && d.DateTime != DateTime.Now
-                && d.SmallDateTime != DateTime.Now
+        var query = context.Dates.Where(d =>
+            d.DateTime2_2 != DateTime.Now
+            && d.DateTime2_7 != DateTime.Now
+            && d.DateTime != DateTime.Now
+            && d.SmallDateTime != DateTime.Now
         );
 
         var results = async ? await query.ToListAsync() : query.ToList();
@@ -96,19 +94,18 @@ WHERE [d].[DateTime2_2] <> GETDATE() AND [d].[DateTime2_7] <> GETDATE() AND [d].
         var contextFactory = await InitializeDateTimeContextAsync();
 
         using var context = contextFactory.CreateContext();
-        var query = context.Dates.Where(
-            d =>
-                d.SmallDateTime == new DateTime(1970, 9, 3, 12, 0, 0)
-                && d.DateTime == new DateTime(1971, 9, 3, 12, 0, 10, 220)
-                && d.DateTime2 == new DateTime(1972, 9, 3, 12, 0, 10, 333)
-                && d.DateTime2_0 == new DateTime(1973, 9, 3, 12, 0, 10)
-                && d.DateTime2_1 == new DateTime(1974, 9, 3, 12, 0, 10, 500)
-                && d.DateTime2_2 == new DateTime(1975, 9, 3, 12, 0, 10, 660)
-                && d.DateTime2_3 == new DateTime(1976, 9, 3, 12, 0, 10, 777)
-                && d.DateTime2_4 == new DateTime(1977, 9, 3, 12, 0, 10, 888)
-                && d.DateTime2_5 == new DateTime(1978, 9, 3, 12, 0, 10, 999)
-                && d.DateTime2_6 == new DateTime(1979, 9, 3, 12, 0, 10, 111)
-                && d.DateTime2_7 == new DateTime(1980, 9, 3, 12, 0, 10, 222)
+        var query = context.Dates.Where(d =>
+            d.SmallDateTime == new DateTime(1970, 9, 3, 12, 0, 0)
+            && d.DateTime == new DateTime(1971, 9, 3, 12, 0, 10, 220)
+            && d.DateTime2 == new DateTime(1972, 9, 3, 12, 0, 10, 333)
+            && d.DateTime2_0 == new DateTime(1973, 9, 3, 12, 0, 10)
+            && d.DateTime2_1 == new DateTime(1974, 9, 3, 12, 0, 10, 500)
+            && d.DateTime2_2 == new DateTime(1975, 9, 3, 12, 0, 10, 660)
+            && d.DateTime2_3 == new DateTime(1976, 9, 3, 12, 0, 10, 777)
+            && d.DateTime2_4 == new DateTime(1977, 9, 3, 12, 0, 10, 888)
+            && d.DateTime2_5 == new DateTime(1978, 9, 3, 12, 0, 10, 999)
+            && d.DateTime2_6 == new DateTime(1979, 9, 3, 12, 0, 10, 111)
+            && d.DateTime2_7 == new DateTime(1980, 9, 3, 12, 0, 10, 222)
         );
 
         var results = async ? await query.ToListAsync() : query.ToList();
@@ -147,19 +144,18 @@ WHERE [d].[SmallDateTime] = '1970-09-03T12:00:00' AND [d].[DateTime] = '1971-09-
         var contextFactory = await InitializeDateTimeContextAsync();
 
         using var context = contextFactory.CreateContext();
-        var query = context.Dates.Where(
-            d =>
-                dateTimes.Contains(d.SmallDateTime)
-                && dateTimes.Contains(d.DateTime)
-                && dateTimes.Contains(d.DateTime2)
-                && dateTimes.Contains(d.DateTime2_0)
-                && dateTimes.Contains(d.DateTime2_1)
-                && dateTimes.Contains(d.DateTime2_2)
-                && dateTimes.Contains(d.DateTime2_3)
-                && dateTimes.Contains(d.DateTime2_4)
-                && dateTimes.Contains(d.DateTime2_5)
-                && dateTimes.Contains(d.DateTime2_6)
-                && dateTimes.Contains(d.DateTime2_7)
+        var query = context.Dates.Where(d =>
+            dateTimes.Contains(d.SmallDateTime)
+            && dateTimes.Contains(d.DateTime)
+            && dateTimes.Contains(d.DateTime2)
+            && dateTimes.Contains(d.DateTime2_0)
+            && dateTimes.Contains(d.DateTime2_1)
+            && dateTimes.Contains(d.DateTime2_2)
+            && dateTimes.Contains(d.DateTime2_3)
+            && dateTimes.Contains(d.DateTime2_4)
+            && dateTimes.Contains(d.DateTime2_5)
+            && dateTimes.Contains(d.DateTime2_6)
+            && dateTimes.Contains(d.DateTime2_7)
         );
 
         var results = async ? await query.ToListAsync() : query.ToList();
@@ -427,10 +423,9 @@ WHERE [d].[SmallDateTime] IN (
         using var context = contextFactory.CreateContext();
 
         var count = await context
-            .Persons.Where(
-                p =>
-                    p.AddressOne != null && p.AddressOne.Street.Contains("Low Street")
-                    || p.AddressTwo != null && p.AddressTwo.Street.Contains("Low Street")
+            .Persons.Where(p =>
+                p.AddressOne != null && p.AddressOne.Street.Contains("Low Street")
+                || p.AddressTwo != null && p.AddressTwo.Street.Contains("Low Street")
             )
             .CountAsync();
 
@@ -519,8 +514,8 @@ WHERE [d].[SmallDateTime] IN (
     [ConditionalFact]
     public async Task Query_when_null_key_in_database_should_throw()
     {
-        var contextFactory = await InitializeAsync<NullKeyContext>(
-            onConfiguring: o => o.EnableDetailedErrors()
+        var contextFactory = await InitializeAsync<NullKeyContext>(onConfiguring: o =>
+            o.EnableDetailedErrors()
         );
 
         using var context = contextFactory.CreateContext();
@@ -965,7 +960,9 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
             CoreStrings.NavigationCannotCreateType(
                 "Orders4",
                 typeof(MyContext3758.Customer3758).Name,
-                typeof(MyContext3758.MyInvalidCollection3758<MyContext3758.Order3758>).ShortDisplayName()
+                typeof(MyContext3758.MyInvalidCollection3758<MyContext3758.Order3758>).ShortDisplayName(
+
+                )
             ),
             Assert.Throws<InvalidOperationException>(() => query4.ToList()).Message
         );
@@ -1113,14 +1110,11 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
         using (var context = contextFactory.CreateContext())
         {
             var results = context
-                .Children.Select(
-                    c =>
-                        new
-                        {
-                            c.SelfReferenceBackNavigation,
-                            c.SelfReferenceBackNavigation.ParentBackNavigation
-                        }
-                )
+                .Children.Select(c => new
+                {
+                    c.SelfReferenceBackNavigation,
+                    c.SelfReferenceBackNavigation.ParentBackNavigation
+                })
                 .ToList();
 
             Assert.Equal(3, results.Count);
@@ -1131,23 +1125,17 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
         using (var context = contextFactory.CreateContext())
         {
             var results = context
-                .Children.Select(
-                    c =>
-                        new
-                        {
-                            SelfReferenceBackNavigation = EF.Property<MyContext3409.IChild3409>(
-                                c,
-                                "SelfReferenceBackNavigation"
-                            ),
-                            ParentBackNavigationB = EF.Property<MyContext3409.IParent3409>(
-                                EF.Property<MyContext3409.IChild3409>(
-                                    c,
-                                    "SelfReferenceBackNavigation"
-                                ),
-                                "ParentBackNavigation"
-                            )
-                        }
-                )
+                .Children.Select(c => new
+                {
+                    SelfReferenceBackNavigation = EF.Property<MyContext3409.IChild3409>(
+                        c,
+                        "SelfReferenceBackNavigation"
+                    ),
+                    ParentBackNavigationB = EF.Property<MyContext3409.IParent3409>(
+                        EF.Property<MyContext3409.IChild3409>(c, "SelfReferenceBackNavigation"),
+                        "ParentBackNavigation"
+                    )
+                })
                 .ToList();
 
             Assert.Equal(3, results.Count);
@@ -1965,8 +1953,8 @@ WHERE [e].[Permission] & CAST(17179869184 AS bigint) = CAST(17179869184 AS bigin
         {
             ClearLog();
             var query = context
-                .Entity.Where(
-                    e => e.PermissionShort.HasFlag(MyContext8538.PermissionShort.READ_WRITE)
+                .Entity.Where(e =>
+                    e.PermissionShort.HasFlag(MyContext8538.PermissionShort.READ_WRITE)
                 )
                 .ToList();
 
@@ -2790,15 +2778,10 @@ BEGIN
         using (var context = contextFactory.CreateContext())
         {
             var query = context
-                .Carts.Select(
-                    t =>
-                        new
-                        {
-                            Processing = t.Configuration != null
-                                ? !t.Configuration.Processed
-                                : (bool?)null
-                        }
-                )
+                .Carts.Select(t => new
+                {
+                    Processing = t.Configuration != null ? !t.Configuration.Processed : (bool?)null
+                })
                 .ToList();
 
             Assert.Single(query.Where(t => t.Processing == null));
@@ -3092,9 +3075,8 @@ FROM [Bases] AS [b]
     [ConditionalFact]
     public virtual async Task GroupJoin_Anonymous_projection_GroupBy_Aggregate_join_elimination()
     {
-        var contextFactory = await InitializeAsync<MyContext11818>(
-            onConfiguring: o =>
-                o.ConfigureWarnings(w => w.Log(CoreEventId.FirstWithoutOrderByAndFilterWarning))
+        var contextFactory = await InitializeAsync<MyContext11818>(onConfiguring: o =>
+            o.ConfigureWarnings(w => w.Log(CoreEventId.FirstWithoutOrderByAndFilterWarning))
         );
 
         using (var context = contextFactory.CreateContext())
@@ -3401,41 +3383,32 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
         using (var context = contextFactory.CreateContext())
         {
             var query1 = context
-                .Blogs.Select(
-                    b =>
-                        new
-                        {
-                            Collection1 = b.Posts1,
-                            Collection2 = b.Posts2,
-                            Collection3 = b.Posts3
-                        }
-                )
+                .Blogs.Select(b => new
+                {
+                    Collection1 = b.Posts1,
+                    Collection2 = b.Posts2,
+                    Collection3 = b.Posts3
+                })
                 .ToList();
 
             var query2 = context
-                .Blogs.Select(
-                    b =>
-                        new
-                        {
-                            Collection1 = b.Posts1.OrderBy(p => p.Id).First().Comments.Count,
-                            Collection2 = b.Posts2.OrderBy(p => p.Id).First().Comments.Count,
-                            Collection3 = b.Posts3.OrderBy(p => p.Id).First().Comments.Count
-                        }
-                )
+                .Blogs.Select(b => new
+                {
+                    Collection1 = b.Posts1.OrderBy(p => p.Id).First().Comments.Count,
+                    Collection2 = b.Posts2.OrderBy(p => p.Id).First().Comments.Count,
+                    Collection3 = b.Posts3.OrderBy(p => p.Id).First().Comments.Count
+                })
                 .ToList();
 
             Assert.Throws<InvalidOperationException>(
                 () =>
                     context
-                        .Blogs.Select(
-                            b =>
-                                new
-                                {
-                                    Collection1 = b.Posts1.OrderBy(p => p.Id),
-                                    Collection2 = b.Posts2.OrderBy(p => p.Id),
-                                    Collection3 = b.Posts3.OrderBy(p => p.Id)
-                                }
-                        )
+                        .Blogs.Select(b => new
+                        {
+                            Collection1 = b.Posts1.OrderBy(p => p.Id),
+                            Collection2 = b.Posts2.OrderBy(p => p.Id),
+                            Collection3 = b.Posts3.OrderBy(p => p.Id)
+                        })
                         .ToList()
             );
         }
@@ -3756,10 +3729,9 @@ FROM [Prices] AS [p]
         using (var context = contextFactory.CreateContext())
         {
             var query = context
-                .Employees.Select(
-                    e =>
-                        e.Devices.Where(d => d.Device != "foo")
-                            .Cast<MyContext12582.IEmployeeDevice12582>()
+                .Employees.Select(e =>
+                    e.Devices.Where(d => d.Device != "foo")
+                        .Cast<MyContext12582.IEmployeeDevice12582>()
                 )
                 .ToList();
 
@@ -4026,8 +3998,8 @@ FROM [Prices] AS [p]
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Schools.Include(
-                s => ((MyContext11944.ElementarySchool11944)s).Students
+            var query = context.Schools.Include(s =>
+                ((MyContext11944.ElementarySchool11944)s).Students
             );
             var result = query.ToList();
 
@@ -4040,8 +4012,8 @@ FROM [Prices] AS [p]
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Schools.Select(
-                s => ((MyContext11944.ElementarySchool11944)s).Students.Where(ss => true).ToList()
+            var query = context.Schools.Select(s =>
+                ((MyContext11944.ElementarySchool11944)s).Students.Where(ss => true).ToList()
             );
             var result = query.ToList();
 
@@ -4142,8 +4114,8 @@ WHERE [r].[MyTime] IN (
             : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-            modelBuilder.Entity<ReproEntity13118>(
-                e => e.Property("MyTime").HasColumnType("smalldatetime")
+            modelBuilder.Entity<ReproEntity13118>(e =>
+                e.Property("MyTime").HasColumnType("smalldatetime")
             );
 
         public void Seed()
@@ -4246,22 +4218,14 @@ END IN (
         using (var context = contextFactory.CreateContext())
         {
             var partners = context
-                .Partners.Select(
-                    x =>
-                        new
-                        {
-                            Addresses = x.Addresses.Select(
-                                y =>
-                                    new
-                                    {
-                                        Turnovers = y.Turnovers == null
-                                            ? null
-                                            : new { y.Turnovers.AmountIn }
-                                    }
-                            )
-                                .ToList()
-                        }
-                )
+                .Partners.Select(x => new
+                {
+                    Addresses = x.Addresses.Select(y => new
+                    {
+                        Turnovers = y.Turnovers == null ? null : new { y.Turnovers.AmountIn }
+                    })
+                        .ToList()
+                })
                 .ToList();
 
             Assert.Single(partners);
@@ -5053,9 +5017,11 @@ WHERE [c].[Name] = N'Leeds'
         using (var context = contextFactory.CreateContext())
         {
             var customers = context
-                .Customers.Select(
-                    c => new { Customer = c, CustomerAgain = MyContext8864.Get(context, c.Id) }
-                )
+                .Customers.Select(c => new
+                {
+                    Customer = c,
+                    CustomerAgain = MyContext8864.Get(context, c.Id)
+                })
                 .ToList();
 
             Assert.Equal(2, customers.Count);
@@ -5198,8 +5164,8 @@ WHERE EXISTS (
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var query = context.EntitiesReferencingEntityWithQueryFilterSelfReference.Where(
-                e => e.Name != "Foo"
+            var query = context.EntitiesReferencingEntityWithQueryFilterSelfReference.Where(e =>
+                e.Name != "Foo"
             );
             var result = query.ToList();
 
@@ -5336,12 +5302,11 @@ WHERE [r].[IsRemoved] = CAST(0 AS bit)
         {
             ClearLog();
             var query = context
-                .Parents.Where(
-                    p =>
-                        EF.Property<bool>(
-                            EF.Property<MyContext17276.IRemovable17276>(p, "RemovableEntity"),
-                            "IsRemoved"
-                        )
+                .Parents.Where(p =>
+                    EF.Property<bool>(
+                        EF.Property<MyContext17276.IRemovable17276>(p, "RemovableEntity"),
+                        "IsRemoved"
+                    )
                 )
                 .ToList();
 
@@ -5359,12 +5324,11 @@ WHERE [r].[IsRemoved] = CAST(1 AS bit)
         {
             ClearLog();
             var query = context
-                .RemovableEntities.Where(
-                    p =>
-                        EF.Property<string>(
-                            EF.Property<MyContext17276.IOwned>(p, "OwnedEntity"),
-                            "OwnedValue"
-                        ) == "Abc"
+                .RemovableEntities.Where(p =>
+                    EF.Property<string>(
+                        EF.Property<MyContext17276.IOwned>(p, "OwnedEntity"),
+                        "OwnedValue"
+                    ) == "Abc"
                 )
                 .ToList();
 
@@ -5725,9 +5689,11 @@ FROM [Blogs] AS [b]
         {
             var personsToFind = await context
                 .Persons.Where(p => p.Age >= 21)
-                .Select(
-                    p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
-                )
+                .Select(p => new MyContext17644.PersonDetailView17644
+                {
+                    Name = p.Name,
+                    Age = p.Age
+                })
                 .FirstAsync<MyContext17644.PersonView17644>();
 
             AssertSql(
@@ -5744,9 +5710,11 @@ WHERE [p].[Age] >= 21
             ClearLog();
             var personsToFind = await context
                 .Persons.Where(p => p.Age >= 21)
-                .Select(
-                    p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
-                )
+                .Select(p => new MyContext17644.PersonDetailView17644
+                {
+                    Name = p.Name,
+                    Age = p.Age
+                })
                 .FirstOrDefaultAsync<MyContext17644.PersonView17644>();
 
             AssertSql(
@@ -5763,9 +5731,11 @@ WHERE [p].[Age] >= 21
             ClearLog();
             var personsToFind = await context
                 .Persons.Where(p => p.Age >= 21)
-                .Select(
-                    p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
-                )
+                .Select(p => new MyContext17644.PersonDetailView17644
+                {
+                    Name = p.Name,
+                    Age = p.Age
+                })
                 .SingleAsync<MyContext17644.PersonView17644>();
 
             AssertSql(
@@ -5782,9 +5752,11 @@ WHERE [p].[Age] >= 21
             ClearLog();
             var personsToFind = await context
                 .Persons.Where(p => p.Age >= 21)
-                .Select(
-                    p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
-                )
+                .Select(p => new MyContext17644.PersonDetailView17644
+                {
+                    Name = p.Name,
+                    Age = p.Age
+                })
                 .SingleOrDefaultAsync<MyContext17644.PersonView17644>();
 
             AssertSql(
@@ -5802,9 +5774,11 @@ WHERE [p].[Age] >= 21
             var personsToFind = await context
                 .Persons.Where(p => p.Age >= 21)
                 .OrderBy(p => p.Id)
-                .Select(
-                    p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
-                )
+                .Select(p => new MyContext17644.PersonDetailView17644
+                {
+                    Name = p.Name,
+                    Age = p.Age
+                })
                 .LastAsync<MyContext17644.PersonView17644>();
 
             AssertSql(
@@ -5823,9 +5797,11 @@ ORDER BY [p].[Id] DESC
             var personsToFind = await context
                 .Persons.Where(p => p.Age >= 21)
                 .OrderBy(p => p.Id)
-                .Select(
-                    p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
-                )
+                .Select(p => new MyContext17644.PersonDetailView17644
+                {
+                    Name = p.Name,
+                    Age = p.Age
+                })
                 .LastOrDefaultAsync<MyContext17644.PersonView17644>();
 
             AssertSql(
@@ -5883,15 +5859,10 @@ ORDER BY [p].[Id] DESC
         using (var context = contextFactory.CreateContext())
         {
             var query = await context
-                .Entities.Select(
-                    e =>
-                        new
-                        {
-                            ThingIds = e.Values.First()
-                                .Things.Select(t => t.Subthing.ThingId)
-                                .ToList()
-                        }
-                )
+                .Entities.Select(e => new
+                {
+                    ThingIds = e.Values.First().Things.Select(t => t.Subthing.ThingId).ToList()
+                })
                 .ToListAsync();
 
             var result = Assert.Single(query);
@@ -6166,8 +6137,8 @@ CROSS JOIN (
         {
             var users = (
                 from a in context.Activities
-                let cs = context.CompetitionSeasons.First(
-                    s => s.StartDate <= a.DateTime && a.DateTime < s.EndDate
+                let cs = context.CompetitionSeasons.First(s =>
+                    s.StartDate <= a.DateTime && a.DateTime < s.EndDate
                 )
                 select new
                 {
@@ -6202,30 +6173,24 @@ ORDER BY [a].[Id], [a0].[Id], [t].[Id]
         {
             ClearLog();
             var users = context
-                .Activities.Select(
-                    a =>
-                        new
-                        {
-                            Activity = a,
-                            CompetitionSeason = context.CompetitionSeasons.First(
-                                s => s.StartDate <= a.DateTime && a.DateTime < s.EndDate
-                            )
-                        }
-                )
-                .Select(
-                    a =>
-                        new
-                        {
-                            a.Activity,
-                            CompetitionSeasonId = a.CompetitionSeason.Id,
-                            Points = a.Activity.Points
-                                ?? a.Activity.ActivityType.Points.Where(
-                                    p => p.CompetitionSeason == a.CompetitionSeason
-                                )
-                                    .Select(p => p.Points)
-                                    .SingleOrDefault()
-                        }
-                )
+                .Activities.Select(a => new
+                {
+                    Activity = a,
+                    CompetitionSeason = context.CompetitionSeasons.First(s =>
+                        s.StartDate <= a.DateTime && a.DateTime < s.EndDate
+                    )
+                })
+                .Select(a => new
+                {
+                    a.Activity,
+                    CompetitionSeasonId = a.CompetitionSeason.Id,
+                    Points = a.Activity.Points
+                        ?? a.Activity.ActivityType.Points.Where(p =>
+                            p.CompetitionSeason == a.CompetitionSeason
+                        )
+                            .Select(p => p.Points)
+                            .SingleOrDefault()
+                })
                 .ToList();
 
             AssertSql(
@@ -6310,35 +6275,27 @@ INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
         using (var context = contextFactory.CreateContext())
         {
             var container = await context
-                .Trades.Select(
-                    x =>
-                        new
+                .Trades.Select(x => new
+                {
+                    x.Id,
+                    Assets = x.Assets.AsQueryable()
+                        .Select(y => new
                         {
-                            x.Id,
-                            Assets = x.Assets.AsQueryable()
-                                .Select(
-                                    y =>
-                                        new
-                                        {
-                                            y.Id,
-                                            Contract = new
-                                            {
-                                                y.Contract.Id,
-                                                Season = new
-                                                {
-                                                    y.Contract.Season.Id,
-                                                    IsPastTradeDeadline = (
-                                                        y.Contract.Season.Games.Max(
-                                                            z => (int?)z.GameNumber
-                                                        ) ?? 0
-                                                    ) > 10
-                                                }
-                                            }
-                                        }
-                                )
-                                .ToList()
-                        }
-                )
+                            y.Id,
+                            Contract = new
+                            {
+                                y.Contract.Id,
+                                Season = new
+                                {
+                                    y.Contract.Season.Id,
+                                    IsPastTradeDeadline = (
+                                        y.Contract.Season.Games.Max(z => (int?)z.GameNumber) ?? 0
+                                    ) > 10
+                                }
+                            }
+                        })
+                        .ToList()
+                })
                 .SingleAsync();
 
             AssertSql(
@@ -6445,22 +6402,19 @@ ORDER BY [t0].[Id], [t1].[Id], [t1].[Id0]
         using (var context = contextFactory.CreateContext())
         {
             context
-                .Entities.Select(
-                    s =>
-                        new IssueContext13517.IssueEntityDto13517
-                        {
-                            Id = s.Id,
-                            RefEntity =
-                                s.RefEntity == null
-                                    ? null
-                                    : new IssueContext13517.IssueRefEntityDto13517
-                                    {
-                                        Id = s.RefEntity.Id,
-                                        Public = s.RefEntity.Public
-                                    },
-                            RefEntityId = s.RefEntityId
-                        }
-                )
+                .Entities.Select(s => new IssueContext13517.IssueEntityDto13517
+                {
+                    Id = s.Id,
+                    RefEntity =
+                        s.RefEntity == null
+                            ? null
+                            : new IssueContext13517.IssueRefEntityDto13517
+                            {
+                                Id = s.RefEntity.Id,
+                                Public = s.RefEntity.Public
+                            },
+                    RefEntityId = s.RefEntityId
+                })
                 .Single(p => p.Id == 1);
 
             AssertSql(
@@ -6793,13 +6747,12 @@ WHERE [u].[Id] IS NOT NULL
         using (var context = contextFactory.CreateContext())
         {
             var result = context
-                .BaseEntities.Select(
-                    b =>
-                        context
-                            .OtherEntities.Where(
-                                o => o.OtherEntityData == ((IssueContext19138.SubEntity19138)b).Data
-                            )
-                            .FirstOrDefault()
+                .BaseEntities.Select(b =>
+                    context
+                        .OtherEntities.Where(o =>
+                            o.OtherEntityData == ((IssueContext19138.SubEntity19138)b).Data
+                        )
+                        .FirstOrDefault()
                 )
                 .ToList();
 
@@ -6948,18 +6901,17 @@ LEFT JOIN [CustomerMemberships] AS [c0] ON [c].[Id] = [c0].[CustomerId]
         {
             modelBuilder
                 .Entity<CustomerFilter19708>()
-                .HasQueryFilter(
-                    e =>
-                        (
-                            from a in (
-                                from c in Customers
-                                join cm in CustomerMemberships on c.Id equals cm.CustomerId into g
-                                from cm in g.DefaultIfEmpty()
-                                select new { c.Id, CustomerMembershipId = (int?)cm.Id }
-                            )
-                            where a.CustomerMembershipId != null && a.Id == e.CustomerId
-                            select a
-                        ).Count() > 0
+                .HasQueryFilter(e =>
+                    (
+                        from a in (
+                            from c in Customers
+                            join cm in CustomerMemberships on c.Id equals cm.CustomerId into g
+                            from cm in g.DefaultIfEmpty()
+                            select new { c.Id, CustomerMembershipId = (int?)cm.Id }
+                        )
+                        where a.CustomerMembershipId != null && a.Id == e.CustomerId
+                        select a
+                    ).Count() > 0
                 )
                 .HasKey(e => e.CustomerId);
 
@@ -7060,9 +7012,10 @@ LEFT JOIN [CustomerMemberships] AS [c0] ON [c].[Id] = [c0].[CustomerId]
 
         using (var context = contextFactory.CreateContext())
         {
-            var originalQuery = context.Entities.Select(
-                a => new IssueContext20097.MyModel20097 { Id = a.Id }
-            );
+            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
+            {
+                Id = a.Id
+            });
             var query = IssueContext20097.AddFilter(originalQuery, 1).ToList();
 
             Assert.Single(query);
@@ -7081,9 +7034,10 @@ WHERE [e].[Id] = @__id_0
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var originalQuery = context.Entities.Select(
-                a => new IssueContext20097.MyModel20097 { Id = a.Id }
-            );
+            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
+            {
+                Id = a.Id
+            });
             var query = originalQuery
                 .Where<IssueContext20097.IHaveId20097>(a => a.Id == 1)
                 .ToList();
@@ -7102,9 +7056,10 @@ WHERE [e].[Id] = CAST(1 AS bigint)
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var originalQuery = context.Entities.Select(
-                a => new IssueContext20097.MyModel20097 { Id = a.Id }
-            );
+            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
+            {
+                Id = a.Id
+            });
             var query = originalQuery
                 .Where(a => ((IssueContext20097.IHaveId20097)a).Id == 1)
                 .ToList();
@@ -7123,9 +7078,10 @@ WHERE [e].[Id] = CAST(1 AS bigint)
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var originalQuery = context.Entities.Select(
-                a => new IssueContext20097.MyModel20097 { Id = a.Id }
-            );
+            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
+            {
+                Id = a.Id
+            });
             var query = originalQuery
                 .Where(a => (a as IssueContext20097.IHaveId20097).Id == 1)
                 .ToList();
@@ -7144,9 +7100,10 @@ WHERE [e].[Id] = CAST(1 AS bigint)
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var originalQuery = context.Entities.Select(
-                a => new IssueContext20097.MyModel20097 { Id = a.Id }
-            );
+            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
+            {
+                Id = a.Id
+            });
             var query = originalQuery
                 .Where(a => ((IssueContext20097.IHaveId20097)a).Id == 1)
                 .ToList();
@@ -7204,9 +7161,8 @@ WHERE [e].[Id] = CAST(1 AS bigint)
     [ConditionalFact]
     public virtual async Task Can_ignore_invalid_include_path_error()
     {
-        var contextFactory = await InitializeAsync<IssueContext20609>(
-            onConfiguring: o =>
-                o.ConfigureWarnings(x => x.Ignore(CoreEventId.InvalidIncludePathError))
+        var contextFactory = await InitializeAsync<IssueContext20609>(onConfiguring: o =>
+            o.ConfigureWarnings(x => x.Ignore(CoreEventId.InvalidIncludePathError))
         );
 
         using var context = contextFactory.CreateContext();
@@ -7803,14 +7759,13 @@ FROM [Businesses] AS [b]
     [ConditionalFact]
     public virtual async Task Thread_safety_in_relational_command_cache()
     {
-        var contextFactory = await InitializeAsync<MyContext21666>(
-            onConfiguring: options =>
-                ((IDbContextOptionsBuilderInfrastructure)options).AddOrUpdateExtension(
-                    options
-                        .Options.FindExtension<SqlServerOptionsExtension>()
-                        .WithConnection(null)
-                        .WithConnectionString(SqlServerTestStore.CreateConnectionString(StoreName))
-                )
+        var contextFactory = await InitializeAsync<MyContext21666>(onConfiguring: options =>
+            ((IDbContextOptionsBuilderInfrastructure)options).AddOrUpdateExtension(
+                options
+                    .Options.FindExtension<SqlServerOptionsExtension>()
+                    .WithConnection(null)
+                    .WithConnectionString(SqlServerTestStore.CreateConnectionString(StoreName))
+            )
         );
 
         var ids = new[] { 1, 2, 3 };
@@ -7855,21 +7810,20 @@ FROM [Businesses] AS [b]
         {
             Expression<
                 Func<MyContext21768.IBook21768, MyContext21768.BookViewModel21768>
-            > projection = b =>
-                new MyContext21768.BookViewModel21768
-                {
-                    FirstPage =
-                        b.FrontCover.Illustrations.FirstOrDefault(
-                            i => i.State >= MyContext21768.IllustrationState21768.Approved
-                        ) != null
-                            ? new MyContext21768.PageViewModel21768
-                            {
-                                Uri = b.FrontCover.Illustrations.FirstOrDefault(
-                                    i => i.State >= MyContext21768.IllustrationState21768.Approved
-                                ).Uri
-                            }
-                            : null,
-                };
+            > projection = b => new MyContext21768.BookViewModel21768
+            {
+                FirstPage =
+                    b.FrontCover.Illustrations.FirstOrDefault(i =>
+                        i.State >= MyContext21768.IllustrationState21768.Approved
+                    ) != null
+                        ? new MyContext21768.PageViewModel21768
+                        {
+                            Uri = b.FrontCover.Illustrations.FirstOrDefault(i =>
+                                i.State >= MyContext21768.IllustrationState21768.Approved
+                            ).Uri
+                        }
+                        : null,
+            };
 
             var result = context.Books.Where(b => b.Id == 1).Select(projection).SingleOrDefault();
 
@@ -9206,15 +9160,12 @@ FROM [CycleC] AS [c]
         using (var context = contextFactory.CreateContext())
         {
             var results = context
-                .Entities.Select(
-                    x =>
-                        new MyContext12274.OuterDTO12274
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            Inner = new MyContext12274.InnerDTO12274()
-                        }
-                )
+                .Entities.Select(x => new MyContext12274.OuterDTO12274
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Inner = new MyContext12274.InnerDTO12274()
+                })
                 .ToList();
             Assert.Equal(4, results.Count);
             Assert.False(ReferenceEquals(results[0].Inner, results[1].Inner));
@@ -9269,15 +9220,12 @@ FROM [CycleC] AS [c]
         using (var context = contextFactory.CreateContext())
         {
             var result = context
-                .Blogs.Select(
-                    e =>
-                        new
-                        {
-                            e.Id,
-                            e.Title,
-                            FirstPostName = e.Posts.Where(i => i.Name.Contains("2")).ToList()
-                        }
-                )
+                .Blogs.Select(e => new
+                {
+                    e.Id,
+                    e.Title,
+                    FirstPostName = e.Posts.Where(i => i.Name.Contains("2")).ToList()
+                })
                 .ToList();
 
             AssertSql(
@@ -9298,15 +9246,12 @@ ORDER BY [b].[Id]
         {
             ClearLog();
             var result = context
-                .Blogs.Select(
-                    e =>
-                        new
-                        {
-                            e.Id,
-                            e.Title,
-                            FirstPostName = e.Posts.OrderBy(i => i.Id).FirstOrDefault().Name
-                        }
-                )
+                .Blogs.Select(e => new
+                {
+                    e.Id,
+                    e.Title,
+                    FirstPostName = e.Posts.OrderBy(i => i.Id).FirstOrDefault().Name
+                })
                 .ToList();
 
             AssertSql(
@@ -10009,8 +9954,8 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
 
         using (var context = contextFactory.CreateContext())
         {
-            var testUser = context.Blogs.FirstOrDefault(
-                x => x.JObject["Author"].Value<string>() == "Maumar"
+            var testUser = context.Blogs.FirstOrDefault(x =>
+                x.JObject["Author"].Value<string>() == "Maumar"
             );
 
             Assert.NotNull(testUser);
@@ -10430,43 +10375,34 @@ OUTPUT INSERTED.[Id], i._Position;
             .Include(p => p.Director)
             .ThenInclude(a => a.Movies)
             .ThenInclude(p => p.Movie)
-            .Select(
-                x =>
-                    new
+            .Select(x => new
+            {
+                x.Id,
+                x.Name,
+                x.Surname,
+                x.Birthday,
+                x.Hometown,
+                x.Bio,
+                x.AvatarUrl,
+                Images = x.Images.Select(i => new
+                {
+                    i.Id,
+                    i.ImageUrl,
+                    i.Height,
+                    i.Width
+                })
+                    .ToList(),
+                KnownByFilms = x.Actor.Movies.Select(m => m.Movie)
+                    .Union(x.Director.Movies.Select(m => m.Movie))
+                    .Select(m => new
                     {
-                        x.Id,
-                        x.Name,
-                        x.Surname,
-                        x.Birthday,
-                        x.Hometown,
-                        x.Bio,
-                        x.AvatarUrl,
-                        Images = x.Images.Select(
-                            i =>
-                                new
-                                {
-                                    i.Id,
-                                    i.ImageUrl,
-                                    i.Height,
-                                    i.Width
-                                }
-                        )
-                            .ToList(),
-                        KnownByFilms = x.Actor.Movies.Select(m => m.Movie)
-                            .Union(x.Director.Movies.Select(m => m.Movie))
-                            .Select(
-                                m =>
-                                    new
-                                    {
-                                        m.Id,
-                                        m.Name,
-                                        m.PosterUrl,
-                                        m.Rating
-                                    }
-                            )
-                            .ToList()
-                    }
-            )
+                        m.Id,
+                        m.Name,
+                        m.PosterUrl,
+                        m.Rating
+                    })
+                    .ToList()
+            })
             .FirstOrDefaultAsync(x => x.Id == id);
 
         // Verify the valid generated SQL
@@ -10602,29 +10538,23 @@ ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]
 
         using var context = contextFactory.CreateContext();
         var query = context
-            .Users.Select(
-                captain =>
-                    new
+            .Users.Select(captain => new
+            {
+                CaptainRateDtos = captain
+                    .Cars.SelectMany(car0 => car0.Taxis)
+                    .OrderByDescending(taxi => taxi.DateArrived)
+                    .Take(12)
+                    .Select(taxi => new
                     {
-                        CaptainRateDtos = captain
-                            .Cars.SelectMany(car0 => car0.Taxis)
-                            .OrderByDescending(taxi => taxi.DateArrived)
-                            .Take(12)
-                            .Select(
-                                taxi =>
-                                    new
-                                    {
-                                        Rate = taxi.UserRate.Value,
-                                        UserRateText = taxi.UserTextRate,
-                                        UserId = taxi.UserEUser.Id,
-                                    }
-                            )
-                            .ToList(),
-                        ReportCount = captain
-                            .Cars.SelectMany(car1 => car1.Taxis)
-                            .Count(taxi0 => taxi0.ReportText != ""),
-                    }
-            )
+                        Rate = taxi.UserRate.Value,
+                        UserRateText = taxi.UserTextRate,
+                        UserId = taxi.UserEUser.Id,
+                    })
+                    .ToList(),
+                ReportCount = captain
+                    .Cars.SelectMany(car1 => car1.Taxis)
+                    .Count(taxi0 => taxi0.ReportText != ""),
+            })
             .SingleOrDefault();
 
         // Verify the valid generated SQL
@@ -10662,26 +10592,20 @@ ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
 
         using var context = contextFactory.CreateContext();
         var query = context
-            .Users.Select(
-                captain =>
-                    new
+            .Users.Select(captain => new
+            {
+                CaptainRateDtos = captain
+                    .Cars.SelectMany(car0 => car0.Taxis)
+                    .OrderByDescending(taxi => taxi.DateArrived)
+                    .Take(12)
+                    .Select(taxi => new
                     {
-                        CaptainRateDtos = captain
-                            .Cars.SelectMany(car0 => car0.Taxis)
-                            .OrderByDescending(taxi => taxi.DateArrived)
-                            .Take(12)
-                            .Select(
-                                taxi =>
-                                    new
-                                    {
-                                        Rate = taxi.UserRate.Value,
-                                        UserRateText = taxi.UserTextRate,
-                                        UserId = taxi.UserEUser.Id,
-                                    }
-                            )
-                            .ToList()
-                    }
-            )
+                        Rate = taxi.UserRate.Value,
+                        UserRateText = taxi.UserTextRate,
+                        UserId = taxi.UserEUser.Id,
+                    })
+                    .ToList()
+            })
             .SingleOrDefault();
 
         // Verify the valid generated SQL
@@ -10757,20 +10681,14 @@ ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
         var customerId = new Guid("1115c816-6c4c-4016-94df-d8b60a22ffa1");
         var query = context
             .Orders.Where(o => o.ExternalReferenceId == referenceId && o.CustomerId == customerId)
-            .Select(
-                o =>
-                    new
-                    {
-                        IdentityDocuments = o.IdentityDocuments.Select(
-                            id =>
-                                new
-                                {
-                                    Images = o.IdentityDocuments.SelectMany(id => id.Images)
-                                        .Select(i => new { i.Image }),
-                                }
-                        )
-                    }
-            )
+            .Select(o => new
+            {
+                IdentityDocuments = o.IdentityDocuments.Select(id => new
+                {
+                    Images = o.IdentityDocuments.SelectMany(id => id.Images)
+                        .Select(i => new { i.Image }),
+                })
+            })
             .SingleOrDefault();
 
         // Verify the valid generated SQL
@@ -10868,23 +10786,20 @@ ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
         using var context = contextFactory.CreateContext();
         var resultCollection = context
             .StudentGameMapper.OrderBy(s => s.Id)
-            .Select(
-                s =>
-                    new StudentGameResult
-                    {
-                        SportsList = (
-                            from inDoorSports in context.InDoorSports
-                            where inDoorSports.Id == s.InCategoryId
-                            select inDoorSports.Name
-                        )
-                            .Union(
-                                from outDoorSports in context.OutDoorSports
-                                where outDoorSports.Id == s.OutCategoryId
-                                select outDoorSports.Name
-                            )
-                            .ToList()
-                    }
-            )
+            .Select(s => new StudentGameResult
+            {
+                SportsList = (
+                    from inDoorSports in context.InDoorSports
+                    where inDoorSports.Id == s.InCategoryId
+                    select inDoorSports.Name
+                )
+                    .Union(
+                        from outDoorSports in context.OutDoorSports
+                        where outDoorSports.Id == s.OutCategoryId
+                        select outDoorSports.Name
+                    )
+                    .ToList()
+            })
             .Take(5) // Without this line the query works
             .ToList();
 
@@ -11332,17 +11247,16 @@ ORDER BY [t].[Id]
     ) =>
         context
             .Parents.Where(x => x.Id == parentId)
-            .Select(
-                p =>
-                    new ParentViewModel25225
-                    {
-                        Id = p.Id,
-                        Collection = p.Collection.Select(
-                            c => new CollectionViewModel25225 { Id = c.Id, ParentId = c.ParentId, }
-                        )
-                            .ToArray()
-                    }
-            );
+            .Select(p => new ParentViewModel25225
+            {
+                Id = p.Id,
+                Collection = p.Collection.Select(c => new CollectionViewModel25225
+                {
+                    Id = c.Id,
+                    ParentId = c.ParentId,
+                })
+                    .ToArray()
+            });
 
     private static void AssertParent25225(
         Guid expectedParentId,

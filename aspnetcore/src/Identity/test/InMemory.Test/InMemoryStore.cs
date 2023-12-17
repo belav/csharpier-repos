@@ -164,8 +164,8 @@ public class InMemoryStore<TUser, TRole>
     )
     {
         return Task.FromResult(
-            Roles.SingleOrDefault(
-                r => String.Equals(r.NormalizedName, roleName, StringComparison.OrdinalIgnoreCase)
+            Roles.SingleOrDefault(r =>
+                String.Equals(r.NormalizedName, roleName, StringComparison.OrdinalIgnoreCase)
             )
         );
     }
@@ -202,8 +202,8 @@ public class InMemoryStore<TUser, TRole>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        var entity = role.Claims.FirstOrDefault(
-            ur => ur.RoleId == role.Id && ur.ClaimType == claim.Type && ur.ClaimValue == claim.Value
+        var entity = role.Claims.FirstOrDefault(ur =>
+            ur.RoleId == role.Id && ur.ClaimType == claim.Type && ur.ClaimValue == claim.Value
         );
         if (entity != null)
         {

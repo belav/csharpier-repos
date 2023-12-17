@@ -52,15 +52,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             // Without the containing CodeBlockStartAction, our reported diagnostic would be classified
             // as a non-local diagnostic and would not participate in lightbulb for computing code fixes.
             =>
-            context.RegisterCodeBlockStartAction<SyntaxKind>(
-                blockStartContext =>
-                    blockStartContext.RegisterSyntaxNodeAction(
-                        SyntaxNodeAction,
-                        SyntaxKind.EqualsExpression,
-                        SyntaxKind.NotEqualsExpression,
-                        SyntaxKind.IsExpression,
-                        SyntaxKind.IsPatternExpression
-                    )
+            context.RegisterCodeBlockStartAction<SyntaxKind>(blockStartContext =>
+                blockStartContext.RegisterSyntaxNodeAction(
+                    SyntaxNodeAction,
+                    SyntaxKind.EqualsExpression,
+                    SyntaxKind.NotEqualsExpression,
+                    SyntaxKind.IsExpression,
+                    SyntaxKind.IsPatternExpression
+                )
             );
 
         private void SyntaxNodeAction(SyntaxNodeAnalysisContext syntaxContext)

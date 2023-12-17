@@ -2034,11 +2034,10 @@ namespace RootNamespace
             {
                 builder
                     .Entity<EntityWithTwoProperties>()
-                    .ToTable(
-                        tb =>
-                            tb.HasCheckConstraint("AlternateId", "AlternateId > Id")
-                                .HasName("CK_Customer_AlternateId")
-                                .HasAnnotation("foo", "bar")
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint("AlternateId", "AlternateId > Id")
+                            .HasName("CK_Customer_AlternateId")
+                            .HasAnnotation("foo", "bar")
                     );
                 builder.Ignore<EntityWithOneProperty>();
             },
@@ -2082,8 +2081,8 @@ namespace RootNamespace
             {
                 builder
                     .Entity<DerivedEntity>()
-                    .ToTable(
-                        tb => tb.HasCheckConstraint("CK_BaseEntity_AlternateId", "AlternateId > Id")
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint("CK_BaseEntity_AlternateId", "AlternateId > Id")
                     );
                 builder.Entity<BaseEntity>();
             },
@@ -2144,11 +2143,10 @@ namespace RootNamespace
             {
                 builder
                     .Entity<EntityWithOneProperty>()
-                    .ToTable(
-                        tb =>
-                            tb.HasTrigger("SomeTrigger")
-                                .HasAnnotation("foo", "bar")
-                                .HasDatabaseName("SomeTrg")
+                    .ToTable(tb =>
+                        tb.HasTrigger("SomeTrigger")
+                            .HasAnnotation("foo", "bar")
+                            .HasDatabaseName("SomeTrg")
                     );
                 builder.Ignore<EntityWithTwoProperties>();
             },
@@ -3660,14 +3658,13 @@ namespace RootNamespace
             builder =>
                 builder
                     .Entity<EntityWithStringProperty>()
-                    .ToTable(
-                        tb =>
-                            tb.IsTemporal(ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start").HasColumnName("PeriodStart");
-                                ttb.HasPeriodEnd("End").HasColumnName("PeriodEnd");
-                            })
+                    .ToTable(tb =>
+                        tb.IsTemporal(ttb =>
+                        {
+                            ttb.UseHistoryTable("HistoryTable");
+                            ttb.HasPeriodStart("Start").HasColumnName("PeriodStart");
+                            ttb.HasPeriodEnd("End").HasColumnName("PeriodEnd");
+                        })
                     ),
             AddBoilerPlate(
                 GetHeading()
@@ -3849,16 +3846,15 @@ namespace RootNamespace
                     b.HasData(new EntityWithOneProperty { Id = 1 });
                 });
 
-                builder.Entity<EntityWithStringKey>(
-                    b =>
-                        b.OwnsMany(
-                            es => es.Properties,
-                            es =>
-                            {
-                                es.HasKey(e => e.Id);
-                                es.HasOne(e => e.EntityWithOneProperty).WithOne();
-                            }
-                        )
+                builder.Entity<EntityWithStringKey>(b =>
+                    b.OwnsMany(
+                        es => es.Properties,
+                        es =>
+                        {
+                            es.HasKey(e => e.Id);
+                            es.HasOne(e => e.EntityWithOneProperty).WithOne();
+                        }
+                    )
                 );
             },
             AddBoilerPlate(
@@ -4618,12 +4614,11 @@ namespace RootNamespace
                     .OwnsMany(
                         o => o.OwnedEntities,
                         ownee =>
-                            ownee.ToTable(
-                                tb =>
-                                    tb.HasCheckConstraint(
-                                        "CK_TestOwnee_TestEnum_Enum_Constraint",
-                                        "[TestEnum] IN (0, 1, 2)"
-                                    )
+                            ownee.ToTable(tb =>
+                                tb.HasCheckConstraint(
+                                    "CK_TestOwnee_TestEnum_Enum_Constraint",
+                                    "[TestEnum] IN (0, 1, 2)"
+                                )
                             )
                     );
             },
@@ -5484,8 +5479,8 @@ namespace RootNamespace
             modelBuilder =>
                 modelBuilder
                     .Entity<BarA>(b => b.HasBaseType<BarBase>())
-                    .Entity<FooExtension<BarA>>(
-                        b => b.HasOne(x => x.Bar).WithOne().HasForeignKey<BarA>()
+                    .Entity<FooExtension<BarA>>(b =>
+                        b.HasOne(x => x.Bar).WithOne().HasForeignKey<BarA>()
                     ),
             AddBoilerPlate(
                 """
@@ -6956,56 +6951,51 @@ namespace RootNamespace
                 builder.Entity<EntityWithThreeProperties>(e =>
                 {
                     e.HasIndex(
-                        t =>
-                            new
+                        t => new
+                        {
+                            t.X,
+                            t.Y,
+                            t.Z
+                        },
+                        "IX_unspecified"
+                    );
+                    e.HasIndex(
+                            t => new
                             {
                                 t.X,
                                 t.Y,
                                 t.Z
                             },
-                        "IX_unspecified"
-                    );
-                    e.HasIndex(
-                            t =>
-                                new
-                                {
-                                    t.X,
-                                    t.Y,
-                                    t.Z
-                                },
                             "IX_empty"
                         )
                         .IsDescending();
                     e.HasIndex(
-                            t =>
-                                new
-                                {
-                                    t.X,
-                                    t.Y,
-                                    t.Z
-                                },
+                            t => new
+                            {
+                                t.X,
+                                t.Y,
+                                t.Z
+                            },
                             "IX_all_ascending"
                         )
                         .IsDescending(false, false, false);
                     e.HasIndex(
-                            t =>
-                                new
-                                {
-                                    t.X,
-                                    t.Y,
-                                    t.Z
-                                },
+                            t => new
+                            {
+                                t.X,
+                                t.Y,
+                                t.Z
+                            },
                             "IX_all_descending"
                         )
                         .IsDescending(true, true, true);
                     e.HasIndex(
-                            t =>
-                                new
-                                {
-                                    t.X,
-                                    t.Y,
-                                    t.Z
-                                },
+                            t => new
+                            {
+                                t.X,
+                                t.Y,
+                                t.Z
+                            },
                             "IX_mixed"
                         )
                         .IsDescending(false, true, false);

@@ -394,8 +394,7 @@ public class SqlServerAnnotationCodeGeneratorTest
         var annotations = modelBuilder.Model.GetAnnotations().ToDictionary(a => a.Name, a => a);
         var result = generator
             .GenerateFluentApiCalls((IModel)modelBuilder.Model, annotations)
-            .Single(
-                c => c.Method == nameof(SqlServerModelBuilderExtensions.HasPerformanceLevelSql)
+            .Single(c => c.Method == nameof(SqlServerModelBuilderExtensions.HasPerformanceLevelSql)
             );
 
         Assert.Equal("'foo'", Assert.Single(result.Arguments));

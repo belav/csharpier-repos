@@ -1666,13 +1666,12 @@ GROUP BY [o].[Id]
         {
             modelBuilder.Entity<OwnedPerson>(eb =>
             {
-                eb.ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                            ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                        })
+                eb.ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                        ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                    })
                 );
                 eb.IndexerProperty<string>("Name");
                 var ownedPerson = new OwnedPerson { Id = 1 };
@@ -1683,13 +1682,12 @@ GROUP BY [o].[Id]
                     p => p.PersonAddress,
                     ab =>
                     {
-                        ab.ToTable(
-                            tb =>
-                                tb.IsTemporal(ttb =>
-                                {
-                                    ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                                    ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                                })
+                        ab.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                            })
                         );
                         ab.IndexerProperty<string>("AddressLine");
                         ab.IndexerProperty(typeof(int), "ZipCode");
@@ -1728,15 +1726,13 @@ GROUP BY [o].[Id]
                             a => a.Country,
                             cb =>
                             {
-                                cb.ToTable(
-                                    tb =>
-                                        tb.IsTemporal(ttb =>
-                                        {
-                                            ttb.HasPeriodStart("PeriodStart")
-                                                .HasColumnName("PeriodStart");
-                                            ttb.HasPeriodEnd("PeriodEnd")
-                                                .HasColumnName("PeriodEnd");
-                                        })
+                                cb.ToTable(tb =>
+                                    tb.IsTemporal(ttb =>
+                                    {
+                                        ttb.HasPeriodStart("PeriodStart")
+                                            .HasColumnName("PeriodStart");
+                                        ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                                    })
                                 );
                                 cb.HasData(
                                     new
@@ -1778,13 +1774,12 @@ GROUP BY [o].[Id]
                     p => p.Orders,
                     ob =>
                     {
-                        ob.ToTable(
-                            tb =>
-                                tb.IsTemporal(ttb =>
-                                {
-                                    ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                                    ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                                })
+                        ob.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                            })
                         );
                         ob.IndexerProperty<DateTime>("OrderDate");
                         ob.HasData(
@@ -1824,15 +1819,13 @@ GROUP BY [o].[Id]
                             e => e.Details,
                             odb =>
                             {
-                                odb.ToTable(
-                                    tb =>
-                                        tb.IsTemporal(ttb =>
-                                        {
-                                            ttb.HasPeriodStart("PeriodStart")
-                                                .HasColumnName("PeriodStart");
-                                            ttb.HasPeriodEnd("PeriodEnd")
-                                                .HasColumnName("PeriodEnd");
-                                        })
+                                odb.ToTable(tb =>
+                                    tb.IsTemporal(ttb =>
+                                    {
+                                        ttb.HasPeriodStart("PeriodStart")
+                                            .HasColumnName("PeriodStart");
+                                        ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                                    })
                                 );
                                 odb.HasData(
                                     new
@@ -1878,13 +1871,12 @@ GROUP BY [o].[Id]
                     p => p.BranchAddress,
                     ab =>
                     {
-                        ab.ToTable(
-                            tb =>
-                                tb.IsTemporal(ttb =>
-                                {
-                                    ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                                    ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                                })
+                        ab.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                            })
                         );
                         ab.IndexerProperty<string>("BranchName").IsRequired();
                         ab.HasData(
@@ -1906,15 +1898,13 @@ GROUP BY [o].[Id]
                             a => a.Country,
                             cb =>
                             {
-                                cb.ToTable(
-                                    tb =>
-                                        tb.IsTemporal(ttb =>
-                                        {
-                                            ttb.HasPeriodStart("PeriodStart")
-                                                .HasColumnName("PeriodStart");
-                                            ttb.HasPeriodEnd("PeriodEnd")
-                                                .HasColumnName("PeriodEnd");
-                                        })
+                                cb.ToTable(tb =>
+                                    tb.IsTemporal(ttb =>
+                                    {
+                                        ttb.HasPeriodStart("PeriodStart")
+                                            .HasColumnName("PeriodStart");
+                                        ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                                    })
                                 );
                                 cb.HasData(
                                     new
@@ -1946,13 +1936,12 @@ GROUP BY [o].[Id]
                     p => p.LeafAAddress,
                     ab =>
                     {
-                        ab.ToTable(
-                            tb =>
-                                tb.IsTemporal(ttb =>
-                                {
-                                    ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                                    ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                                })
+                        ab.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                            })
                         );
                         ab.IndexerProperty<int>("LeafType");
 
@@ -1969,15 +1958,13 @@ GROUP BY [o].[Id]
                             a => a.Country,
                             cb =>
                             {
-                                cb.ToTable(
-                                    tb =>
-                                        tb.IsTemporal(ttb =>
-                                        {
-                                            ttb.HasPeriodStart("PeriodStart")
-                                                .HasColumnName("PeriodStart");
-                                            ttb.HasPeriodEnd("PeriodEnd")
-                                                .HasColumnName("PeriodEnd");
-                                        })
+                                cb.ToTable(tb =>
+                                    tb.IsTemporal(ttb =>
+                                    {
+                                        ttb.HasPeriodStart("PeriodStart")
+                                            .HasColumnName("PeriodStart");
+                                        ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                                    })
                                 );
                                 cb.HasOne(c => c.Planet)
                                     .WithMany()
@@ -2008,13 +1995,12 @@ GROUP BY [o].[Id]
                     p => p.LeafBAddress,
                     ab =>
                     {
-                        ab.ToTable(
-                            tb =>
-                                tb.IsTemporal(ttb =>
-                                {
-                                    ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                                    ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                                })
+                        ab.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                            })
                         );
                         ab.IndexerProperty<string>("LeafBType").IsRequired();
                         ab.HasData(
@@ -2030,15 +2016,13 @@ GROUP BY [o].[Id]
                             a => a.Country,
                             cb =>
                             {
-                                cb.ToTable(
-                                    tb =>
-                                        tb.IsTemporal(ttb =>
-                                        {
-                                            ttb.HasPeriodStart("PeriodStart")
-                                                .HasColumnName("PeriodStart");
-                                            ttb.HasPeriodEnd("PeriodEnd")
-                                                .HasColumnName("PeriodEnd");
-                                        })
+                                cb.ToTable(tb =>
+                                    tb.IsTemporal(ttb =>
+                                    {
+                                        ttb.HasPeriodStart("PeriodStart")
+                                            .HasColumnName("PeriodStart");
+                                        ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                                    })
                                 );
                                 cb.HasOne(c => c.Planet)
                                     .WithMany()
@@ -2087,26 +2071,24 @@ GROUP BY [o].[Id]
 
             modelBuilder.Entity<Star>(sb =>
             {
-                sb.ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                            ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                        })
+                sb.ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                        ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                    })
                 );
                 sb.HasData(new Star { Id = 1, Name = "Sol" });
                 sb.OwnsMany(
                     s => s.Composition,
                     ob =>
                     {
-                        ob.ToTable(
-                            tb =>
-                                tb.IsTemporal(ttb =>
-                                {
-                                    ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                                    ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                                })
+                        ob.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                            })
                         );
                         ob.HasKey(e => e.Id);
                         ob.HasData(
@@ -2129,25 +2111,23 @@ GROUP BY [o].[Id]
 
             modelBuilder.Entity<Barton>(b =>
             {
-                b.ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                            ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                        })
+                b.ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                        ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                    })
                 );
                 b.OwnsOne(
                     e => e.Throned,
                     b =>
                     {
-                        b.ToTable(
-                            tb =>
-                                tb.IsTemporal(ttb =>
-                                {
-                                    ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
-                                    ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
-                                })
+                        b.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.HasPeriodStart("PeriodStart").HasColumnName("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
+                            })
                         );
                         b.HasData(
                             new

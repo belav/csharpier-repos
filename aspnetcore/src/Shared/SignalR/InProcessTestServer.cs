@@ -113,11 +113,10 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                    .ConfigureLogging(
-                        builder =>
-                            builder
-                                .SetMinimumLevel(LogLevel.Trace)
-                                .AddProvider(new ForwardingLoggerProvider(_loggerFactory))
+                    .ConfigureLogging(builder =>
+                        builder
+                            .SetMinimumLevel(LogLevel.Trace)
+                            .AddProvider(new ForwardingLoggerProvider(_loggerFactory))
                     )
                     .UseStartup(typeof(TStartup))
                     .UseKestrel(o => _configureKestrelServerOptions?.Invoke(o))

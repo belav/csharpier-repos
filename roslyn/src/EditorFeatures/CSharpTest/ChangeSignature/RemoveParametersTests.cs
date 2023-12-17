@@ -275,8 +275,8 @@ class C{i}
             Assert.Null(result.ChangeSignatureFailureKind);
 
             foreach (
-                var updatedDocument in testState.Workspace.Documents.Select(
-                    d => result.UpdatedSolution.GetDocument(d.Id)
+                var updatedDocument in testState.Workspace.Documents.Select(d =>
+                    result.UpdatedSolution.GetDocument(d.Id)
                 )
             )
             {
@@ -383,8 +383,8 @@ class C{i}
             Assert.Null(result.ChangeSignatureFailureKind);
 
             foreach (
-                var updatedDocument in testState.Workspace.Documents.Select(
-                    d => result.UpdatedSolution.GetDocument(d.Id)
+                var updatedDocument in testState.Workspace.Documents.Select(d =>
+                    result.UpdatedSolution.GetDocument(d.Id)
                 )
             )
             {

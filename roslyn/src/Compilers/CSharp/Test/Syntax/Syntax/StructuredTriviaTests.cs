@@ -125,8 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(identTrivia, foundTrivia);
 
             // make sure FindLeafNodesOverlappingWithSpan does not dig into the structured trivia.
-            var resultList = identExpr.DescendantTokens(
-                t => t.FullSpan.OverlapsWith(new TextSpan(3, 18))
+            var resultList = identExpr.DescendantTokens(t =>
+                t.FullSpan.OverlapsWith(new TextSpan(3, 18))
             );
             Assert.Equal(1, resultList.Count());
         }

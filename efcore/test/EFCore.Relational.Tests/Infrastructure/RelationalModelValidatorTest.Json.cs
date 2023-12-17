@@ -258,8 +258,8 @@ public partial class RelationalModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<ValidatorJsonEntityInheritanceBase>().UseTpcMappingStrategy();
         modelBuilder.Entity<ValidatorJsonEntityInheritanceAbstract>();
-        modelBuilder.Entity<ValidatorJsonEntityInheritanceBase>(
-            b => b.Ignore(x => x.ReferenceOnBase)
+        modelBuilder.Entity<ValidatorJsonEntityInheritanceBase>(b =>
+            b.Ignore(x => x.ReferenceOnBase)
         );
 
         modelBuilder.Entity<ValidatorJsonEntityInheritanceDerived>(b =>

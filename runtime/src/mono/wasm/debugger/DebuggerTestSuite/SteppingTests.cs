@@ -2077,20 +2077,18 @@ namespace DebuggerTests
                 Assert.False(
                     pause_location["callFrames"]
                         .Value<JArray>()
-                        .Any(
-                            f =>
-                                f?["scopeChain"]?[0]?["type"]?.Value<string>()
-                                    ?.Equals("wasm-expression-stack") == true
+                        .Any(f =>
+                            f?["scopeChain"]?[0]?["type"]?.Value<string>()
+                                ?.Equals("wasm-expression-stack") == true
                         )
                 );
             else
                 Assert.True(
                     pause_location["callFrames"]
                         .Value<JArray>()
-                        .Any(
-                            f =>
-                                f?["scopeChain"]?[0]?["type"]?.Value<string>()
-                                    ?.Equals("wasm-expression-stack") == true
+                        .Any(f =>
+                            f?["scopeChain"]?[0]?["type"]?.Value<string>()
+                                ?.Equals("wasm-expression-stack") == true
                         )
                 );
             if (justMyCode && ReleaseRuntime)

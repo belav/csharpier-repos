@@ -41,11 +41,10 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
             fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(b => b.UseStartup<ErrorPageMiddlewareWebSite.Startup>());
         Client = factory
-            .WithWebHostBuilder(
-                builder =>
-                    builder.ConfigureLogging(
-                        l => l.Services.AddSingleton<ILoggerFactory>(loggerProvider)
-                    )
+            .WithWebHostBuilder(builder =>
+                builder.ConfigureLogging(l =>
+                    l.Services.AddSingleton<ILoggerFactory>(loggerProvider)
+                )
             )
             .CreateDefaultClient();
         // These tests want to verify runtime compilation and formatting in the HTML of the error page
@@ -63,14 +62,12 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
         var factory =
             _fixture.Factories.FirstOrDefault()
             ?? _fixture.WithWebHostBuilder(b => b.UseStartup<ErrorPageMiddlewareWebSite.Startup>());
-        factory = factory.WithWebHostBuilder(
-            b =>
-                b.ConfigureTestServices(
-                    serviceCollection =>
-                        serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(
-                            ConfigureRuntimeCompilationOptions
-                        )
+        factory = factory.WithWebHostBuilder(b =>
+            b.ConfigureTestServices(serviceCollection =>
+                serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(
+                    ConfigureRuntimeCompilationOptions
                 )
+            )
         );
 
         var client = factory.CreateDefaultClient();

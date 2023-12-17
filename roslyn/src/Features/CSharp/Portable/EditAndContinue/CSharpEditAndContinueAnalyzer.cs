@@ -1039,11 +1039,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             BlockSyntax newBlock
         )
         {
-            var oldUsingDeclarations = oldBlock.Statements.Where(
-                s => s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default
+            var oldUsingDeclarations = oldBlock.Statements.Where(s =>
+                s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default
             );
-            var newUsingDeclarations = newBlock.Statements.Where(
-                s => s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default
+            var newUsingDeclarations = newBlock.Statements.Where(s =>
+                s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default
             );
 
             return oldUsingDeclarations.SequenceEqual(
@@ -1091,8 +1091,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             // Check that switch statement decision tree has not changed.
-            var hasDecitionTree = oldNode.Sections.Any(
-                s => s.Labels.Any(l => l is CasePatternSwitchLabelSyntax)
+            var hasDecitionTree = oldNode.Sections.Any(s =>
+                s.Labels.Any(l => l is CasePatternSwitchLabelSyntax)
             );
             return !hasDecitionTree || AreEquivalentSwitchStatementDecisionTrees(oldNode, newNode);
         }
@@ -1313,10 +1313,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 var recordType = (INamedTypeSymbol?)
                     model.GetDeclaredSymbol(declaration.Parent, cancellationToken);
                 Contract.ThrowIfNull(recordType);
-                return recordType.InstanceConstructors.Single(
-                    ctor =>
-                        ctor.DeclaringSyntaxReferences is [var syntaxRef]
-                        && syntaxRef.GetSyntax(cancellationToken) == declaration.Parent
+                return recordType.InstanceConstructors.Single(ctor =>
+                    ctor.DeclaringSyntaxReferences is [var syntaxRef]
+                    && syntaxRef.GetSyntax(cancellationToken) == declaration.Parent
                 );
             }
 

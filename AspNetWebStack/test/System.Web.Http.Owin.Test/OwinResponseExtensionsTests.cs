@@ -98,9 +98,8 @@ namespace System.Web.Http.Owin
             Mock<IDictionary<string, object>> mock = new Mock<IDictionary<string, object>>(
                 MockBehavior.Strict
             );
-            mock.Setup(
-                    d =>
-                        d.TryGetValue("server.DisableResponseBuffering", out disableBufferingAction)
+            mock.Setup(d =>
+                    d.TryGetValue("server.DisableResponseBuffering", out disableBufferingAction)
                 )
                 .Returns(hasDisableBufferingAction);
             return mock.Object;

@@ -330,13 +330,8 @@ internal class RootCommand : CommandBase
 
         var projectFiles = Directory
             .EnumerateFiles(path, "*.*proj", SearchOption.TopDirectoryOnly)
-            .Where(
-                f =>
-                    !string.Equals(
-                        Path.GetExtension(f),
-                        ".xproj",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+            .Where(f =>
+                !string.Equals(Path.GetExtension(f), ".xproj", StringComparison.OrdinalIgnoreCase)
             )
             .Take(2)
             .ToList();

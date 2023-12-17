@@ -114,12 +114,11 @@ namespace System.Security.Cryptography.Cng.Tests
             SymmetricCngTestHelpers.VerifyMachineKey(
                 s_cngAlgorithm,
                 8 * BlockSizeBytes,
-                keyName =>
-                    new TripleDESCng(
-                        keyName,
-                        CngProvider.MicrosoftSoftwareKeyStorageProvider,
-                        CngKeyOpenOptions.MachineKey
-                    ),
+                keyName => new TripleDESCng(
+                    keyName,
+                    CngProvider.MicrosoftSoftwareKeyStorageProvider,
+                    CngKeyOpenOptions.MachineKey
+                ),
                 () => new TripleDESCng()
             );
         }

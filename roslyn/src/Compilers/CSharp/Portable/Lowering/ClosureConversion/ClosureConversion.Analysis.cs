@@ -400,10 +400,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // calculate functions which directly capture a scope
 
-                var environmentsToScopes = PooledDictionary<
-                    ClosureEnvironment,
-                    Scope
-                >.GetInstance();
+                var environmentsToScopes = PooledDictionary<ClosureEnvironment, Scope>.GetInstance(
+
+                );
 
                 VisitScopeTree(
                     ScopeTree,

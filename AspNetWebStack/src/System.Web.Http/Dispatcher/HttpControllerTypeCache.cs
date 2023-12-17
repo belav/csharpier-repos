@@ -53,8 +53,9 @@ namespace System.Web.Http.Dispatcher
 
         private Dictionary<string, ILookup<string, Type>> InitializeCache()
         {
-            IAssembliesResolver assembliesResolver =
-                _configuration.Services.GetAssembliesResolver();
+            IAssembliesResolver assembliesResolver = _configuration.Services.GetAssembliesResolver(
+
+            );
             IHttpControllerTypeResolver controllersResolver =
                 _configuration.Services.GetHttpControllerTypeResolver();
 

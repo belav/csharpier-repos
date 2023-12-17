@@ -23,8 +23,9 @@ namespace System.Data.SqlClient
     sealed internal class SqlSymmetricKeyCache
     {
         private readonly MemoryCache _cache;
-        private static readonly SqlSymmetricKeyCache _singletonInstance =
-            new SqlSymmetricKeyCache();
+        private static readonly SqlSymmetricKeyCache _singletonInstance = new SqlSymmetricKeyCache(
+
+        );
 
         private SqlSymmetricKeyCache()
         {
@@ -98,12 +99,11 @@ namespace System.Data.SqlClient
                         ||
                         // (trustedKeyPaths.Where(s => s.Equals(keyInfo.keyPath, StringComparison.InvariantCultureIgnoreCase)).Count() == 0)) {
                         (
-                            trustedKeyPaths.Any(
-                                s =>
-                                    s.Equals(
-                                        keyInfo.keyPath,
-                                        StringComparison.InvariantCultureIgnoreCase
-                                    )
+                            trustedKeyPaths.Any(s =>
+                                s.Equals(
+                                    keyInfo.keyPath,
+                                    StringComparison.InvariantCultureIgnoreCase
+                                )
                             ) == false
                         )
                     )

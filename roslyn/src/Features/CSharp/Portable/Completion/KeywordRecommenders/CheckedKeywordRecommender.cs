@@ -46,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 SyntaxToken previousToken;
 
                 if (
-                    previousPossiblySkippedToken.IsLastTokenOfNode<ExplicitInterfaceSpecifierSyntax>()
+                    previousPossiblySkippedToken.IsLastTokenOfNode<ExplicitInterfaceSpecifierSyntax>(
+
+                    )
                 )
                 {
                     var firstSpecifierToken = previousPossiblySkippedToken

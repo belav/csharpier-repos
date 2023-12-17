@@ -135,8 +135,8 @@ public abstract partial class ModelBuilderTest
                 .ToList();
 
             Assert.Equal(2, foreignKeys.Count);
-            var customerFk = foreignKeys.Single(
-                fk => fk.PrincipalEntityType.ClrType == typeof(Customer)
+            var customerFk = foreignKeys.Single(fk =>
+                fk.PrincipalEntityType.ClrType == typeof(Customer)
             );
             var orderFk = foreignKeys.Single(fk => fk.PrincipalEntityType.ClrType == typeof(Order));
             var dependentType = customerFk.DeclaringEntityType;
@@ -414,10 +414,9 @@ public abstract partial class ModelBuilderTest
             Assert.True(
                 principalType
                     .GetForeignKeys()
-                    .All(
-                        foreignKey =>
-                            principalType.FindIndex(foreignKey.Properties).IsUnique
-                            == foreignKey.IsUnique
+                    .All(foreignKey =>
+                        principalType.FindIndex(foreignKey.Properties).IsUnique
+                        == foreignKey.IsUnique
                     )
             );
         }
@@ -735,10 +734,9 @@ public abstract partial class ModelBuilderTest
             Assert.True(
                 principalType
                     .GetForeignKeys()
-                    .All(
-                        foreignKey =>
-                            principalType.FindIndex(foreignKey.Properties).IsUnique
-                            == foreignKey.IsUnique
+                    .All(foreignKey =>
+                        principalType.FindIndex(foreignKey.Properties).IsUnique
+                        == foreignKey.IsUnique
                     )
             );
         }
@@ -1026,10 +1024,9 @@ public abstract partial class ModelBuilderTest
             Assert.True(
                 principalType
                     .GetForeignKeys()
-                    .All(
-                        foreignKey =>
-                            principalType.FindIndex(foreignKey.Properties).IsUnique
-                            == foreignKey.IsUnique
+                    .All(foreignKey =>
+                        principalType.FindIndex(foreignKey.Properties).IsUnique
+                        == foreignKey.IsUnique
                     )
             );
         }
@@ -1072,10 +1069,9 @@ public abstract partial class ModelBuilderTest
             Assert.True(
                 principalType
                     .GetForeignKeys()
-                    .All(
-                        foreignKey =>
-                            principalType.FindIndex(foreignKey.Properties).IsUnique
-                            == foreignKey.IsUnique
+                    .All(foreignKey =>
+                        principalType.FindIndex(foreignKey.Properties).IsUnique
+                        == foreignKey.IsUnique
                     )
             );
         }
@@ -1154,10 +1150,9 @@ public abstract partial class ModelBuilderTest
             Assert.True(
                 principalType
                     .GetForeignKeys()
-                    .All(
-                        foreignKey =>
-                            principalType.FindIndex(foreignKey.Properties).IsUnique
-                            == foreignKey.IsUnique
+                    .All(foreignKey =>
+                        principalType.FindIndex(foreignKey.Properties).IsUnique
+                        == foreignKey.IsUnique
                     )
             );
         }
@@ -1203,10 +1198,9 @@ public abstract partial class ModelBuilderTest
             Assert.True(
                 principalType
                     .GetForeignKeys()
-                    .All(
-                        foreignKey =>
-                            principalType.FindIndex(foreignKey.Properties).IsUnique
-                            == foreignKey.IsUnique
+                    .All(foreignKey =>
+                        principalType.FindIndex(foreignKey.Properties).IsUnique
+                        == foreignKey.IsUnique
                     )
             );
         }
@@ -2807,10 +2801,9 @@ public abstract partial class ModelBuilderTest
             Assert.True(
                 principalType
                     .GetForeignKeys()
-                    .All(
-                        foreignKey =>
-                            principalType.FindIndex(foreignKey.Properties).IsUnique
-                            == foreignKey.IsUnique
+                    .All(foreignKey =>
+                        principalType.FindIndex(foreignKey.Properties).IsUnique
+                        == foreignKey.IsUnique
                     )
             );
         }
@@ -2862,10 +2855,9 @@ public abstract partial class ModelBuilderTest
             Assert.True(
                 principalType
                     .GetForeignKeys()
-                    .All(
-                        foreignKey =>
-                            principalType.FindIndex(foreignKey.Properties).IsUnique
-                            == foreignKey.IsUnique
+                    .All(foreignKey =>
+                        principalType.FindIndex(foreignKey.Properties).IsUnique
+                        == foreignKey.IsUnique
                     )
             );
         }
@@ -4260,8 +4252,8 @@ public abstract partial class ModelBuilderTest
 
             modelBuilder.Ignore<Alpha>();
 
-            modelBuilder.Entity<Quarks>(
-                b => b.HasOne<Beta>().WithOne().HasForeignKey<Quarks>("_forUp").IsRequired()
+            modelBuilder.Entity<Quarks>(b =>
+                b.HasOne<Beta>().WithOne().HasForeignKey<Quarks>("_forUp").IsRequired()
             );
 
             var fkProperty = modelBuilder
@@ -4330,8 +4322,8 @@ public abstract partial class ModelBuilderTest
                 b.Ignore(e => e.OneToOneDependentEntityId);
                 b.Ignore(e => e.NavOneToOneDependentEntityId);
             });
-            modelBuilder.Entity<OneToOneDependentEntity>(
-                b => b.Ignore(e => e.OneToOnePrincipalEntityId)
+            modelBuilder.Entity<OneToOneDependentEntity>(b =>
+                b.Ignore(e => e.OneToOnePrincipalEntityId)
             );
 
             modelBuilder
@@ -4360,8 +4352,8 @@ public abstract partial class ModelBuilderTest
                 b.Ignore(e => e.OneToOneDependentEntityId);
                 b.Ignore(e => e.NavOneToOneDependentEntityId);
             });
-            modelBuilder.Entity<OneToOneDependentEntity>(
-                b => b.Ignore(e => e.NavOneToOnePrincipalEntityId)
+            modelBuilder.Entity<OneToOneDependentEntity>(b =>
+                b.Ignore(e => e.NavOneToOnePrincipalEntityId)
             );
 
             modelBuilder
@@ -4385,8 +4377,8 @@ public abstract partial class ModelBuilderTest
         public virtual void Can_invert_relationship_if_principal_has_matching_property_with_navigation_name()
         {
             var modelBuilder = CreateModelBuilder();
-            modelBuilder.Entity<OneToOnePrincipalEntity>(
-                b => b.Ignore(e => e.OneToOneDependentEntityId)
+            modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                b.Ignore(e => e.OneToOneDependentEntityId)
             );
             modelBuilder.Entity<OneToOneDependentEntity>(b =>
             {
@@ -4415,8 +4407,8 @@ public abstract partial class ModelBuilderTest
         public virtual void Can_invert_relationship_if_principal_has_matching_property_with_entity_type_name()
         {
             var modelBuilder = CreateModelBuilder();
-            modelBuilder.Entity<OneToOnePrincipalEntity>(
-                b => b.Ignore(e => e.NavOneToOneDependentEntityId)
+            modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                b.Ignore(e => e.NavOneToOneDependentEntityId)
             );
             modelBuilder.Entity<OneToOneDependentEntity>(b =>
             {
@@ -4458,8 +4450,8 @@ public abstract partial class ModelBuilderTest
                 .WithOne(e => e.NavOneToOnePrincipalEntity)
                 .IsRequired();
 
-            modelBuilder.Entity<OneToOnePrincipalEntity>(
-                b => b.Ignore(e => e.NavOneToOneDependentEntityId)
+            modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                b.Ignore(e => e.NavOneToOneDependentEntityId)
             );
 
             modelBuilder.FinalizeModel();
@@ -4470,8 +4462,8 @@ public abstract partial class ModelBuilderTest
         {
             var modelBuilder = CreateModelBuilder();
 
-            modelBuilder.Entity<OneToOneDependentEntity>(
-                b => b.Ignore(e => e.OneToOnePrincipalEntityId)
+            modelBuilder.Entity<OneToOneDependentEntity>(b =>
+                b.Ignore(e => e.OneToOnePrincipalEntityId)
             );
 
             modelBuilder
@@ -4561,11 +4553,11 @@ public abstract partial class ModelBuilderTest
         public virtual void Throws_for_one_to_one_relationship_if_both_sides_have_matching_property_with_navigation_name()
         {
             var modelBuilder = CreateModelBuilder();
-            modelBuilder.Entity<OneToOnePrincipalEntity>(
-                b => b.Ignore(e => e.OneToOneDependentEntityId)
+            modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                b.Ignore(e => e.OneToOneDependentEntityId)
             );
-            modelBuilder.Entity<OneToOneDependentEntity>(
-                b => b.Ignore(e => e.OneToOnePrincipalEntityId)
+            modelBuilder.Entity<OneToOneDependentEntity>(b =>
+                b.Ignore(e => e.OneToOnePrincipalEntityId)
             );
 
             modelBuilder
@@ -4590,11 +4582,11 @@ public abstract partial class ModelBuilderTest
         public virtual void Throws_for_one_to_one_relationship_if_both_sides_have_matching_property_with_entity_type_name()
         {
             var modelBuilder = CreateModelBuilder();
-            modelBuilder.Entity<OneToOnePrincipalEntity>(
-                b => b.Ignore(e => e.NavOneToOneDependentEntityId)
+            modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                b.Ignore(e => e.NavOneToOneDependentEntityId)
             );
-            modelBuilder.Entity<OneToOneDependentEntity>(
-                b => b.Ignore(e => e.NavOneToOnePrincipalEntityId)
+            modelBuilder.Entity<OneToOneDependentEntity>(b =>
+                b.Ignore(e => e.NavOneToOnePrincipalEntityId)
             );
 
             modelBuilder
@@ -4619,11 +4611,11 @@ public abstract partial class ModelBuilderTest
         public virtual void Throws_for_one_to_one_relationship_if_both_sides_have_matching_property_mixed()
         {
             var modelBuilder = CreateModelBuilder();
-            modelBuilder.Entity<OneToOnePrincipalEntity>(
-                b => b.Ignore(e => e.NavOneToOneDependentEntityId)
+            modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                b.Ignore(e => e.NavOneToOneDependentEntityId)
             );
-            modelBuilder.Entity<OneToOneDependentEntity>(
-                b => b.Ignore(e => e.OneToOnePrincipalEntityId)
+            modelBuilder.Entity<OneToOneDependentEntity>(b =>
+                b.Ignore(e => e.OneToOnePrincipalEntityId)
             );
 
             modelBuilder
@@ -4815,8 +4807,8 @@ public abstract partial class ModelBuilderTest
         public virtual void Creates_one_to_one_relationship_with_single_ref_as_principal_to_dependent_if_matching_properties_are_on_the_other_side()
         {
             var modelBuilder = CreateModelBuilder();
-            modelBuilder.Entity<OneToOnePrincipalEntity>(
-                b => b.Ignore(e => e.NavOneToOneDependentEntityId)
+            modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                b.Ignore(e => e.NavOneToOneDependentEntityId)
             );
             modelBuilder.Entity<OneToOneDependentEntity>(b =>
             {

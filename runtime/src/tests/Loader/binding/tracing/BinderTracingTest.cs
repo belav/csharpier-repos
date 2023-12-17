@@ -86,11 +86,10 @@ namespace BinderTracingTests
         {
             MethodInfo[] methods = typeof(BinderTracingTest)
                 .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Where(
-                    m =>
-                        m.GetCustomAttribute<BinderTestAttribute>() != null
-                        && m.ReturnType == typeof(BindOperation)
-                        && m.GetCustomAttribute<BinderTestAttribute>().ActiveIssue == null
+                .Where(m =>
+                    m.GetCustomAttribute<BinderTestAttribute>() != null
+                    && m.ReturnType == typeof(BindOperation)
+                    && m.GetCustomAttribute<BinderTestAttribute>().ActiveIssue == null
                 )
                 .ToArray();
 

@@ -869,11 +869,11 @@ namespace System.Data.Metadata.Edm
             );
 
             // Count and Big Count must be supported for all edm types, except the strong spatial types.
-            functions.ForAllBasePrimitiveTypes(
-                type => functions.AddAggregate(PrimitiveTypeKind.Int32, "Count", type)
+            functions.ForAllBasePrimitiveTypes(type =>
+                functions.AddAggregate(PrimitiveTypeKind.Int32, "Count", type)
             );
-            functions.ForAllBasePrimitiveTypes(
-                type => functions.AddAggregate(PrimitiveTypeKind.Int64, "BigCount", type)
+            functions.ForAllBasePrimitiveTypes(type =>
+                functions.AddAggregate(PrimitiveTypeKind.Int64, "BigCount", type)
             );
 
             #endregion

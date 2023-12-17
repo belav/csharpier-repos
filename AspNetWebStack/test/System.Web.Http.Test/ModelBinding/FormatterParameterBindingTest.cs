@@ -90,8 +90,8 @@ namespace System.Web.Http.ModelBinding
             );
             binding.CallBase = true;
             binding
-                .Setup(
-                    b => b.ReadContentAsync(request, null, formatters, It.IsAny<IFormatterLogger>())
+                .Setup(b =>
+                    b.ReadContentAsync(request, null, formatters, It.IsAny<IFormatterLogger>())
                 )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
@@ -120,15 +120,14 @@ namespace System.Web.Http.ModelBinding
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter.Object.SupportedMediaTypes.Add(request.Content.Headers.ContentType);
             formatter
-                .Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            typeof(int),
-                            It.IsAny<Stream>(),
-                            request.Content,
-                            logger,
-                            cts.Token
-                        )
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        typeof(int),
+                        It.IsAny<Stream>(),
+                        request.Content,
+                        logger,
+                        cts.Token
+                    )
                 )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();

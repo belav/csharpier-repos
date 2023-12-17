@@ -171,11 +171,10 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
             var analyzers = assemblies
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => typeof(DiagnosticAnalyzer).IsAssignableFrom(type))
-                .Where(
-                    type =>
-                        type.GetCustomAttribute<DiagnosticAnalyzerAttribute>(inherit: false)
-                            is { } attribute
-                        && attribute.Languages.Contains(language)
+                .Where(type =>
+                    type.GetCustomAttribute<DiagnosticAnalyzerAttribute>(inherit: false)
+                        is { } attribute
+                    && attribute.Languages.Contains(language)
                 )
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .OfType<DiagnosticAnalyzer>()

@@ -158,8 +158,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             // Check if analyzer is shared by analyzer references from different projects.
-            var sharedAnalyzer = existing.Contains(
-                d => d.ProjectId != null && d.ProjectId != projectId
+            var sharedAnalyzer = existing.Contains(d =>
+                d.ProjectId != null && d.ProjectId != projectId
             );
             if (sharedAnalyzer)
             {

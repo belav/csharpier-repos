@@ -48,8 +48,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public override ImportingItem ToImportingItem()
         {
-            ReflectionWritableMember member =
-                this.ImportingLazyMember.ToReflectionWriteableMember();
+            ReflectionWritableMember member = this.ImportingLazyMember.ToReflectionWriteableMember(
+
+            );
             return new ImportingMember(
                 this,
                 member,

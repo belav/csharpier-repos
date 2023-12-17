@@ -134,13 +134,12 @@ public class ValueComparer<
         }
 
         var typedEquals = type.GetRuntimeMethods()
-            .FirstOrDefault(
-                m =>
-                    m.ReturnType == typeof(bool)
-                    && !m.IsStatic
-                    && nameof(object.Equals).Equals(m.Name, StringComparison.Ordinal)
-                    && m.GetParameters().Length == 1
-                    && m.GetParameters()[0].ParameterType == typeof(T)
+            .FirstOrDefault(m =>
+                m.ReturnType == typeof(bool)
+                && !m.IsStatic
+                && nameof(object.Equals).Equals(m.Name, StringComparison.Ordinal)
+                && m.GetParameters().Length == 1
+                && m.GetParameters()[0].ParameterType == typeof(T)
             );
 
         if (typedEquals != null)
@@ -169,14 +168,13 @@ public class ValueComparer<
         while (typedEquals == null && type != null)
         {
             var declaredMethods = type.GetTypeInfo().DeclaredMethods;
-            typedEquals = declaredMethods.FirstOrDefault(
-                m =>
-                    m.IsStatic
-                    && m.ReturnType == typeof(bool)
-                    && "op_Equality".Equals(m.Name, StringComparison.Ordinal)
-                    && m.GetParameters().Length == 2
-                    && m.GetParameters()[0].ParameterType == typeof(T)
-                    && m.GetParameters()[1].ParameterType == typeof(T)
+            typedEquals = declaredMethods.FirstOrDefault(m =>
+                m.IsStatic
+                && m.ReturnType == typeof(bool)
+                && "op_Equality".Equals(m.Name, StringComparison.Ordinal)
+                && m.GetParameters().Length == 2
+                && m.GetParameters()[0].ParameterType == typeof(T)
+                && m.GetParameters()[1].ParameterType == typeof(T)
             );
 
             type = type.BaseType;

@@ -8,8 +8,9 @@ namespace System.Globalization.Tests
 {
     public class KoreanCalendarGetDayOfYear
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator =
-            new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator(
+
+        );
 
         public static IEnumerable<object[]> GetDayOfYear_TestData()
         {

@@ -57,8 +57,9 @@ internal class BrokeredServiceContainer : GlobalBrokeredServiceContainer
                 new(new NoOpAuthorizationService())
         );
 
-        var mefServiceBroker =
-            exportProvider.GetExportedValue<MefServiceBrokerOfExportedServices>();
+        var mefServiceBroker = exportProvider.GetExportedValue<MefServiceBrokerOfExportedServices>(
+
+        );
         mefServiceBroker.SetContainer(container);
 
         // Register local mef services.

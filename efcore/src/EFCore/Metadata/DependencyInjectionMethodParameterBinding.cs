@@ -68,8 +68,7 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
     /// <returns>The expression tree.</returns>
     public override Expression BindToParameter(ParameterBindingInfo bindingInfo)
     {
-        var serviceInstance = bindingInfo.ServiceInstances.FirstOrDefault(
-            e => e.Type == ServiceType
+        var serviceInstance = bindingInfo.ServiceInstances.FirstOrDefault(e => e.Type == ServiceType
         );
         if (serviceInstance != null)
         {
@@ -136,10 +135,8 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
                 var entityType = (IEntityType)b.ConsumedProperties.First().DeclaringType;
                 var serviceStateProperty = entityType
                     .GetServiceProperties()
-                    .FirstOrDefault(
-                        p =>
-                            p.ParameterBinding != b
-                            && p.ParameterBinding.ServiceType == b.ServiceType
+                    .FirstOrDefault(p =>
+                        p.ParameterBinding != b && p.ParameterBinding.ServiceType == b.ServiceType
                     );
 
                 var serviceVariable = Expression.Variable(b.ServiceType, "service");

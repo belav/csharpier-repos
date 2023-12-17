@@ -499,18 +499,17 @@ namespace System.ServiceModel.Configuration
                     ).Name;
                     if (!string.IsNullOrEmpty(childExtensionElementName))
                     {
-                        parentExtensionElements.RemoveAll(
-                            element =>
-                                element != null
-                                && element.ConfigurationElementName == childExtensionElementName
+                        parentExtensionElements.RemoveAll(element =>
+                            element != null
+                            && element.ConfigurationElementName == childExtensionElementName
                         );
                     }
                 }
                 else
                 {
                     Type childExtensionElementType = childExtensionElement.GetType();
-                    parentExtensionElements.RemoveAll(
-                        element => element != null && element.GetType() == childExtensionElementType
+                    parentExtensionElements.RemoveAll(element =>
+                        element != null && element.GetType() == childExtensionElementType
                     );
                     parentExtensionElements.Add(childExtensionElement);
                 }

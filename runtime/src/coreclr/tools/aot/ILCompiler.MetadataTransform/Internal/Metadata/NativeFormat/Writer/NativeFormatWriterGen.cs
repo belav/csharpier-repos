@@ -1549,11 +1549,10 @@ namespace Internal.Metadata.NativeFormat.Writer
         internal override void Save(NativeWriter writer)
         {
             Debug.Assert(
-                Value.TrueForAll(
-                    handle =>
-                        handle == null
-                        || handle.HandleType == HandleType.ConstantStringValue
-                        || handle.HandleType == HandleType.ConstantReferenceValue
+                Value.TrueForAll(handle =>
+                    handle == null
+                    || handle.HandleType == HandleType.ConstantStringValue
+                    || handle.HandleType == HandleType.ConstantReferenceValue
                 )
             );
             writer.Write(Value);
@@ -2088,41 +2087,40 @@ namespace Internal.Metadata.NativeFormat.Writer
             );
             writer.Write(Constructor);
             Debug.Assert(
-                FixedArguments.TrueForAll(
-                    handle =>
-                        handle == null
-                        || handle.HandleType == HandleType.TypeDefinition
-                        || handle.HandleType == HandleType.TypeReference
-                        || handle.HandleType == HandleType.TypeSpecification
-                        || handle.HandleType == HandleType.ConstantBooleanArray
-                        || handle.HandleType == HandleType.ConstantBooleanValue
-                        || handle.HandleType == HandleType.ConstantByteArray
-                        || handle.HandleType == HandleType.ConstantByteValue
-                        || handle.HandleType == HandleType.ConstantCharArray
-                        || handle.HandleType == HandleType.ConstantCharValue
-                        || handle.HandleType == HandleType.ConstantDoubleArray
-                        || handle.HandleType == HandleType.ConstantDoubleValue
-                        || handle.HandleType == HandleType.ConstantEnumArray
-                        || handle.HandleType == HandleType.ConstantHandleArray
-                        || handle.HandleType == HandleType.ConstantInt16Array
-                        || handle.HandleType == HandleType.ConstantInt16Value
-                        || handle.HandleType == HandleType.ConstantInt32Array
-                        || handle.HandleType == HandleType.ConstantInt32Value
-                        || handle.HandleType == HandleType.ConstantInt64Array
-                        || handle.HandleType == HandleType.ConstantInt64Value
-                        || handle.HandleType == HandleType.ConstantReferenceValue
-                        || handle.HandleType == HandleType.ConstantSByteArray
-                        || handle.HandleType == HandleType.ConstantSByteValue
-                        || handle.HandleType == HandleType.ConstantSingleArray
-                        || handle.HandleType == HandleType.ConstantSingleValue
-                        || handle.HandleType == HandleType.ConstantStringArray
-                        || handle.HandleType == HandleType.ConstantStringValue
-                        || handle.HandleType == HandleType.ConstantUInt16Array
-                        || handle.HandleType == HandleType.ConstantUInt16Value
-                        || handle.HandleType == HandleType.ConstantUInt32Array
-                        || handle.HandleType == HandleType.ConstantUInt32Value
-                        || handle.HandleType == HandleType.ConstantUInt64Array
-                        || handle.HandleType == HandleType.ConstantUInt64Value
+                FixedArguments.TrueForAll(handle =>
+                    handle == null
+                    || handle.HandleType == HandleType.TypeDefinition
+                    || handle.HandleType == HandleType.TypeReference
+                    || handle.HandleType == HandleType.TypeSpecification
+                    || handle.HandleType == HandleType.ConstantBooleanArray
+                    || handle.HandleType == HandleType.ConstantBooleanValue
+                    || handle.HandleType == HandleType.ConstantByteArray
+                    || handle.HandleType == HandleType.ConstantByteValue
+                    || handle.HandleType == HandleType.ConstantCharArray
+                    || handle.HandleType == HandleType.ConstantCharValue
+                    || handle.HandleType == HandleType.ConstantDoubleArray
+                    || handle.HandleType == HandleType.ConstantDoubleValue
+                    || handle.HandleType == HandleType.ConstantEnumArray
+                    || handle.HandleType == HandleType.ConstantHandleArray
+                    || handle.HandleType == HandleType.ConstantInt16Array
+                    || handle.HandleType == HandleType.ConstantInt16Value
+                    || handle.HandleType == HandleType.ConstantInt32Array
+                    || handle.HandleType == HandleType.ConstantInt32Value
+                    || handle.HandleType == HandleType.ConstantInt64Array
+                    || handle.HandleType == HandleType.ConstantInt64Value
+                    || handle.HandleType == HandleType.ConstantReferenceValue
+                    || handle.HandleType == HandleType.ConstantSByteArray
+                    || handle.HandleType == HandleType.ConstantSByteValue
+                    || handle.HandleType == HandleType.ConstantSingleArray
+                    || handle.HandleType == HandleType.ConstantSingleValue
+                    || handle.HandleType == HandleType.ConstantStringArray
+                    || handle.HandleType == HandleType.ConstantStringValue
+                    || handle.HandleType == HandleType.ConstantUInt16Array
+                    || handle.HandleType == HandleType.ConstantUInt16Value
+                    || handle.HandleType == HandleType.ConstantUInt32Array
+                    || handle.HandleType == HandleType.ConstantUInt32Value
+                    || handle.HandleType == HandleType.ConstantUInt64Array
+                    || handle.HandleType == HandleType.ConstantUInt64Value
                 )
             );
             writer.Write(FixedArguments);
@@ -2577,13 +2575,12 @@ namespace Internal.Metadata.NativeFormat.Writer
             writer.Write(Kind);
             writer.Write(Name);
             Debug.Assert(
-                Constraints.TrueForAll(
-                    handle =>
-                        handle == null
-                        || handle.HandleType == HandleType.TypeDefinition
-                        || handle.HandleType == HandleType.TypeReference
-                        || handle.HandleType == HandleType.TypeSpecification
-                        || handle.HandleType == HandleType.ModifiedType
+                Constraints.TrueForAll(handle =>
+                    handle == null
+                    || handle.HandleType == HandleType.TypeDefinition
+                    || handle.HandleType == HandleType.TypeReference
+                    || handle.HandleType == HandleType.TypeSpecification
+                    || handle.HandleType == HandleType.ModifiedType
                 )
             );
             writer.Write(Constraints);
@@ -2853,13 +2850,12 @@ namespace Internal.Metadata.NativeFormat.Writer
             );
             writer.Write(Method);
             Debug.Assert(
-                GenericTypeArguments.TrueForAll(
-                    handle =>
-                        handle == null
-                        || handle.HandleType == HandleType.TypeDefinition
-                        || handle.HandleType == HandleType.TypeReference
-                        || handle.HandleType == HandleType.TypeSpecification
-                        || handle.HandleType == HandleType.ModifiedType
+                GenericTypeArguments.TrueForAll(handle =>
+                    handle == null
+                    || handle.HandleType == HandleType.TypeDefinition
+                    || handle.HandleType == HandleType.TypeReference
+                    || handle.HandleType == HandleType.TypeSpecification
+                    || handle.HandleType == HandleType.ModifiedType
                 )
             );
             writer.Write(GenericTypeArguments);
@@ -3026,24 +3022,22 @@ namespace Internal.Metadata.NativeFormat.Writer
             );
             writer.Write(ReturnType);
             Debug.Assert(
-                Parameters.TrueForAll(
-                    handle =>
-                        handle == null
-                        || handle.HandleType == HandleType.TypeDefinition
-                        || handle.HandleType == HandleType.TypeReference
-                        || handle.HandleType == HandleType.TypeSpecification
-                        || handle.HandleType == HandleType.ModifiedType
+                Parameters.TrueForAll(handle =>
+                    handle == null
+                    || handle.HandleType == HandleType.TypeDefinition
+                    || handle.HandleType == HandleType.TypeReference
+                    || handle.HandleType == HandleType.TypeSpecification
+                    || handle.HandleType == HandleType.ModifiedType
                 )
             );
             writer.Write(Parameters);
             Debug.Assert(
-                VarArgParameters.TrueForAll(
-                    handle =>
-                        handle == null
-                        || handle.HandleType == HandleType.TypeDefinition
-                        || handle.HandleType == HandleType.TypeReference
-                        || handle.HandleType == HandleType.TypeSpecification
-                        || handle.HandleType == HandleType.ModifiedType
+                VarArgParameters.TrueForAll(handle =>
+                    handle == null
+                    || handle.HandleType == HandleType.TypeDefinition
+                    || handle.HandleType == HandleType.TypeReference
+                    || handle.HandleType == HandleType.TypeSpecification
+                    || handle.HandleType == HandleType.ModifiedType
                 )
             );
             writer.Write(VarArgParameters);
@@ -3881,13 +3875,12 @@ namespace Internal.Metadata.NativeFormat.Writer
             );
             writer.Write(Type);
             Debug.Assert(
-                Parameters.TrueForAll(
-                    handle =>
-                        handle == null
-                        || handle.HandleType == HandleType.TypeDefinition
-                        || handle.HandleType == HandleType.TypeReference
-                        || handle.HandleType == HandleType.TypeSpecification
-                        || handle.HandleType == HandleType.ModifiedType
+                Parameters.TrueForAll(handle =>
+                    handle == null
+                    || handle.HandleType == HandleType.TypeDefinition
+                    || handle.HandleType == HandleType.TypeReference
+                    || handle.HandleType == HandleType.TypeSpecification
+                    || handle.HandleType == HandleType.ModifiedType
                 )
             );
             writer.Write(Parameters);
@@ -4437,12 +4430,11 @@ namespace Internal.Metadata.NativeFormat.Writer
             writer.Write(Events);
             writer.Write(GenericParameters);
             Debug.Assert(
-                Interfaces.TrueForAll(
-                    handle =>
-                        handle == null
-                        || handle.HandleType == HandleType.TypeDefinition
-                        || handle.HandleType == HandleType.TypeReference
-                        || handle.HandleType == HandleType.TypeSpecification
+                Interfaces.TrueForAll(handle =>
+                    handle == null
+                    || handle.HandleType == HandleType.TypeDefinition
+                    || handle.HandleType == HandleType.TypeReference
+                    || handle.HandleType == HandleType.TypeSpecification
                 )
             );
             writer.Write(Interfaces);
@@ -4606,13 +4598,12 @@ namespace Internal.Metadata.NativeFormat.Writer
             );
             writer.Write(GenericType);
             Debug.Assert(
-                GenericTypeArguments.TrueForAll(
-                    handle =>
-                        handle == null
-                        || handle.HandleType == HandleType.TypeDefinition
-                        || handle.HandleType == HandleType.TypeReference
-                        || handle.HandleType == HandleType.TypeSpecification
-                        || handle.HandleType == HandleType.ModifiedType
+                GenericTypeArguments.TrueForAll(handle =>
+                    handle == null
+                    || handle.HandleType == HandleType.TypeDefinition
+                    || handle.HandleType == HandleType.TypeReference
+                    || handle.HandleType == HandleType.TypeSpecification
+                    || handle.HandleType == HandleType.ModifiedType
                 )
             );
             writer.Write(GenericTypeArguments);

@@ -93,11 +93,11 @@ public class ForeignKeyAttributeConvention
 
         foreach (var inverse in inverses)
         {
-            unconfiguredNavigations.RemoveAll(
-                n => string.Equals(n.GetSimpleMemberName(), inverse, StringComparison.Ordinal)
+            unconfiguredNavigations.RemoveAll(n =>
+                string.Equals(n.GetSimpleMemberName(), inverse, StringComparison.Ordinal)
             );
-            foreignKeyNavigations.RemoveAll(
-                n => string.Equals(n.GetSimpleMemberName(), inverse, StringComparison.Ordinal)
+            foreignKeyNavigations.RemoveAll(n =>
+                string.Equals(n.GetSimpleMemberName(), inverse, StringComparison.Ordinal)
             );
         }
 
@@ -376,13 +376,12 @@ public class ForeignKeyAttributeConvention
             {
                 var conflictingFk = foreignKey
                     .DeclaringEntityType.FindForeignKeys(existingProperties)
-                    .FirstOrDefault(
-                        fk =>
-                            fk != foreignKey
-                            && fk.PrincipalEntityType == foreignKey.PrincipalEntityType
-                            && fk.GetConfigurationSource() == ConfigurationSource.DataAnnotation
-                            && fk.GetPropertiesConfigurationSource()
-                                == ConfigurationSource.DataAnnotation
+                    .FirstOrDefault(fk =>
+                        fk != foreignKey
+                        && fk.PrincipalEntityType == foreignKey.PrincipalEntityType
+                        && fk.GetConfigurationSource() == ConfigurationSource.DataAnnotation
+                        && fk.GetPropertiesConfigurationSource()
+                            == ConfigurationSource.DataAnnotation
                     );
                 if (conflictingFk != null)
                 {
@@ -571,10 +570,9 @@ public class ForeignKeyAttributeConvention
 
         var otherNavigations = navigation
             .DeclaringEntityType.GetRuntimeProperties()
-            .Values.Where(
-                p =>
-                    p.PropertyType == navigationPropertyTargetType
-                    && p.GetSimpleMemberName() != navigation.Name
+            .Values.Where(p =>
+                p.PropertyType == navigationPropertyTargetType
+                && p.GetSimpleMemberName() != navigation.Name
             )
             .OrderBy(p => p.GetSimpleMemberName());
 

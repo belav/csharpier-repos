@@ -38,8 +38,8 @@ namespace System.Net.Http.Headers
             if (parameters == null)
                 return null;
 
-            var found = parameters.Find(
-                l => string.Equals(l.Name, "q", StringComparison.OrdinalIgnoreCase)
+            var found = parameters.Find(l =>
+                string.Equals(l.Name, "q", StringComparison.OrdinalIgnoreCase)
             );
             if (found == null)
                 return null;

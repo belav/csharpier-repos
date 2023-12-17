@@ -35,11 +35,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context) =>
-            context.RegisterCompilationStartAction(
-                context =>
-                    context.RegisterSyntaxTreeAction(
-                        treeContext => AnalyzeTree(treeContext, context.Compilation.Options)
-                    )
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeTree(treeContext, context.Compilation.Options)
+                )
             );
 
         private void AnalyzeTree(
@@ -156,8 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
                     return false;
             }
 
-            endOfLineTrivia = secondBrace.LeadingTrivia.Last(
-                t => t.IsKind(SyntaxKind.EndOfLineTrivia)
+            endOfLineTrivia = secondBrace.LeadingTrivia.Last(t =>
+                t.IsKind(SyntaxKind.EndOfLineTrivia)
             );
             return endOfLineTrivia != default;
         }

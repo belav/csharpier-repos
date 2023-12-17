@@ -815,15 +815,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         // Arrange
         var target = new Mock<IRouteConstraint>();
         target
-            .Setup(
-                e =>
-                    e.Match(
-                        It.IsAny<HttpContext>(),
-                        It.IsAny<IRouter>(),
-                        It.IsAny<string>(),
-                        It.IsAny<RouteValueDictionary>(),
-                        It.IsAny<RouteDirection>()
-                    )
+            .Setup(e =>
+                e.Match(
+                    It.IsAny<HttpContext>(),
+                    It.IsAny<IRouter>(),
+                    It.IsAny<string>(),
+                    It.IsAny<RouteValueDictionary>(),
+                    It.IsAny<RouteDirection>()
+                )
             )
             .Returns(true)
             .Verifiable();

@@ -656,10 +656,9 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             // already been taken care of and removed from the list.
             // But there may still be variables that get assigned inside nested blocks or other situations; prepare declarations for those
             // and either add them to the block, or lift them if we're an expression block.
-            var unassignedVariableDeclarations = unassignedVariables.Select(
-                v =>
-                    (LocalDeclarationStatementSyntax)
-                        _g.LocalDeclarationStatement(Translate(v.Type), LookupVariableName(v))
+            var unassignedVariableDeclarations = unassignedVariables.Select(v =>
+                (LocalDeclarationStatementSyntax)
+                    _g.LocalDeclarationStatement(Translate(v.Type), LookupVariableName(v))
             );
 
             if (blockContext == ExpressionContext.Expression)
@@ -1477,10 +1476,9 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         Result = ParenthesizedLambdaExpression(
             ParameterList(
                 SeparatedList(
-                    lambda.Parameters.Select(
-                        p =>
-                            Parameter(Identifier(LookupVariableName(p)))
-                                .WithType(p.Type.IsAnonymousType() ? null : Translate(p.Type))
+                    lambda.Parameters.Select(p =>
+                        Parameter(Identifier(LookupVariableName(p)))
+                            .WithType(p.Type.IsAnonymousType() ? null : Translate(p.Type))
                     )
                 )
             ),
@@ -1862,17 +1860,15 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         // TODO: Currently matching attributes by name since we target .NET 6.0. If/when we target .NET 7.0 and above, match the type.
         if (
             node.Type.GetCustomAttributes(inherit: true)
-                .Any(
-                    a =>
-                        a.GetType().FullName
-                        == "System.Runtime.CompilerServices.RequiredMemberAttribute"
+                .Any(a =>
+                    a.GetType().FullName
+                    == "System.Runtime.CompilerServices.RequiredMemberAttribute"
                 )
             && node.Constructor is not null
             && node.Constructor.GetCustomAttributes()
-                .Any(
-                    a =>
-                        a.GetType().FullName
-                        == "System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"
+                .Any(a =>
+                    a.GetType().FullName
+                    == "System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"
                 ) != true
         )
         {
@@ -1992,29 +1988,25 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 );
 
                 var cases = List(
-                    switchNode.Cases.Select(
-                        c =>
-                            SwitchSection(
-                                labels: List<SwitchLabelSyntax>(
-                                    c.TestValues.Select(
-                                        tv => CaseSwitchLabel(Translate<ExpressionSyntax>(tv))
-                                    )
-                                ),
-                                statements: ProcessArmBody(c.Body)
-                            )
+                    switchNode.Cases.Select(c =>
+                        SwitchSection(
+                            labels: List<SwitchLabelSyntax>(
+                                c.TestValues.Select(tv =>
+                                    CaseSwitchLabel(Translate<ExpressionSyntax>(tv))
+                                )
+                            ),
+                            statements: ProcessArmBody(c.Body)
+                        )
                     )
                 );
 
                 // LINQ SwitchExpression supports non-literal labels, which C# does not support. This rewrites the switch as a series of
                 // nested ConditionalExpressions.
                 if (
-                    cases.Any(
-                        c =>
-                            c.Labels.Any(
-                                l =>
-                                    l is CaseSwitchLabelSyntax l2
-                                    && !_constantDetector.IsConstant(l2.Value)
-                            )
+                    cases.Any(c =>
+                        c.Labels.Any(l =>
+                            l is CaseSwitchLabelSyntax l2 && !_constantDetector.IsConstant(l2.Value)
+                        )
                     )
                 )
                 {
@@ -2098,10 +2090,9 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 // LINQ SwitchExpression supports non-literal labels, which C# does not support. This rewrites the switch as a series of
                 // nested ConditionalExpressions.
                 if (
-                    arms.Any(
-                        a =>
-                            a.Pattern is ConstantPatternSyntax cp
-                            && !_constantDetector.IsConstant(cp.Expression)
+                    arms.Any(a =>
+                        a.Pattern is ConstantPatternSyntax cp
+                        && !_constantDetector.IsConstant(cp.Expression)
                     )
                 )
                 {
@@ -2145,19 +2136,15 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
                 var cases = List(
                     switchNode
-                        .Cases.Select(
-                            c =>
-                                SwitchSection(
-                                    labels: List<SwitchLabelSyntax>(
-                                        c.TestValues.Select(
-                                            tv =>
-                                                CaseSwitchLabel(
-                                                    Translate<LiteralExpressionSyntax>(tv)
-                                                )
-                                        )
-                                    ),
-                                    statements: ProcessArmBody(c.Body)
-                                )
+                        .Cases.Select(c =>
+                            SwitchSection(
+                                labels: List<SwitchLabelSyntax>(
+                                    c.TestValues.Select(tv =>
+                                        CaseSwitchLabel(Translate<LiteralExpressionSyntax>(tv))
+                                    )
+                                ),
+                                statements: ProcessArmBody(c.Body)
+                            )
                         )
                         .Append(
                             SwitchSection(
@@ -2445,8 +2432,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 binding is MemberListBinding listBinding
                 && (
                     !listBinding.Member.GetMemberType().IsAssignableTo(typeof(IEnumerable))
-                    || listBinding.Initializers.Any(
-                        e => e.AddMethod.Name != "Add" || e.Arguments.Count != 1
+                    || listBinding.Initializers.Any(e =>
+                        e.AddMethod.Name != "Add" || e.Arguments.Count != 1
                     )
                 )
             )
@@ -2500,8 +2487,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             // methods. Skip these, we'll add them later outside the initializer
             if (
                 !listInit.NewExpression.Type.IsAssignableTo(typeof(IEnumerable))
-                || listInit.Initializers.Any(
-                    e => e.AddMethod.Name != "Add" || e.Arguments.Count != 1
+                || listInit.Initializers.Any(e =>
+                    e.AddMethod.Name != "Add" || e.Arguments.Count != 1
                 )
             )
             {

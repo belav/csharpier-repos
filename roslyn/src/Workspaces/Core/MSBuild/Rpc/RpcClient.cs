@@ -199,8 +199,8 @@ internal sealed class RpcClient
             Id = requestId,
             TargetObject = targetObject,
             Method = methodName,
-            Parameters = parameters.SelectAsArray(
-                static p => p is not null ? JToken.FromObject(p) : JValue.CreateNull()
+            Parameters = parameters.SelectAsArray(static p =>
+                p is not null ? JToken.FromObject(p) : JValue.CreateNull()
             )
         };
 

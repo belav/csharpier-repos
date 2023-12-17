@@ -162,10 +162,9 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
                     {
                         var diagnosticSpans = _callback
                             .GetLocationsToTag(diagnosticData)
-                            .Select(
-                                loc =>
-                                    loc.UnmappedFileSpan.GetClampedTextSpan(sourceText)
-                                        .ToSnapshotSpan(snapshot)
+                            .Select(loc =>
+                                loc.UnmappedFileSpan.GetClampedTextSpan(sourceText)
+                                    .ToSnapshotSpan(snapshot)
                             );
                         foreach (var diagnosticSpan in diagnosticSpans)
                         {

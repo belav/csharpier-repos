@@ -844,8 +844,8 @@ namespace System.Net.Http.Functional.Tests
                 .ToArray();
             Assert.Equal(count, responseHeadersStops.Length);
             foreach (
-                EventWrittenEventArgs responseHeadersStop in responseHeadersStops.Select(
-                    e => e.Event
+                EventWrittenEventArgs responseHeadersStop in responseHeadersStops.Select(e =>
+                    e.Event
                 )
             )
             {
@@ -1171,8 +1171,8 @@ namespace System.Net.Http.Functional.Tests
 
                         ValidateConnectionEstablishedClosed(events, version, expectedUri);
 
-                        var requestLeftQueueEvents = events.Where(
-                            e => e.Event.EventName == "RequestLeftQueue"
+                        var requestLeftQueueEvents = events.Where(e =>
+                            e.Event.EventName == "RequestLeftQueue"
                         );
                         var (minCount, maxCount) = version.Major switch
                         {
@@ -1340,8 +1340,9 @@ namespace System.Net.Http.Functional.Tests
                             e => events.Enqueue((e, e.ActivityId)),
                             async () =>
                             {
-                                using LoopbackProxyServer proxyServer =
-                                    LoopbackProxyServer.Create();
+                                using LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(
+
+                                );
 
                                 await LoopbackServer.CreateClientAndServerAsync(
                                     async uri =>
@@ -1472,8 +1473,8 @@ namespace System.Net.Http.Functional.Tests
 
                                     Task[] parallelConnectionTasks = Enumerable
                                         .Repeat(server, NumParallelRequests)
-                                        .Select(
-                                            _ => server.AcceptConnectionAsync(HandleConnectionAsync)
+                                        .Select(_ =>
+                                            server.AcceptConnectionAsync(HandleConnectionAsync)
                                         )
                                         .ToArray();
 

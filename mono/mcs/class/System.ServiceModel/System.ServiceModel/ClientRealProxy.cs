@@ -97,11 +97,10 @@ namespace System.ServiceModel
         IMessage DoInvoke(IMessage inputMessage)
         {
             var inmsg = (IMethodCallMessage)inputMessage;
-            var od = channel.Contract.Operations.FirstOrDefault(
-                o =>
-                    inmsg.MethodBase.Equals(o.SyncMethod)
-                    || inmsg.MethodBase.Equals(o.BeginMethod)
-                    || inmsg.MethodBase.Equals(o.EndMethod)
+            var od = channel.Contract.Operations.FirstOrDefault(o =>
+                inmsg.MethodBase.Equals(o.SyncMethod)
+                || inmsg.MethodBase.Equals(o.BeginMethod)
+                || inmsg.MethodBase.Equals(o.EndMethod)
             );
             if (od == null)
             {

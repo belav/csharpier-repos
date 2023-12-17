@@ -197,7 +197,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 {
                     for (var j = 1; j < 5; j++)
                     {
-                        using ITemporaryStreamStorageInternal storage1 = service.CreateTemporaryStreamStorage(),
+                        using ITemporaryStreamStorageInternal storage1 = service.CreateTemporaryStreamStorage(
+
+                            ),
                             storage2 = service.CreateTemporaryStreamStorage();
                         var storage3 = service.CreateTemporaryStreamStorage(); // let the finalizer run for this instance
 

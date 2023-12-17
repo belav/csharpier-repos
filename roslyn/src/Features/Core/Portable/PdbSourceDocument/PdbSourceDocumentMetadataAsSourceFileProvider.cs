@@ -158,7 +158,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     // we have is from the reference assembly. To do this we create an empty compilation,
                     // add our DLL as a reference, and use SymbolKey to map the type across.
                     var documentationProvider =
-                        sourceWorkspace.Services.GetRequiredService<IDocumentationProviderService>();
+                        sourceWorkspace.Services.GetRequiredService<IDocumentationProviderService>(
+
+                        );
                     var dllReference = IOUtilities.PerformIO(
                         () =>
                             MetadataReference.CreateFromFile(
@@ -304,16 +306,15 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             var useExtendedTimeout = _sourceLinkEnabledProjects.Contains(projectId);
             var encoding = defaultEncoding ?? Encoding.UTF8;
             var sourceFileInfoTasks = sourceDocuments
-                .Select(
-                    sd =>
-                        _pdbSourceDocumentLoaderService.LoadSourceDocumentAsync(
-                            tempFilePath,
-                            sd,
-                            encoding,
-                            telemetryMessage,
-                            useExtendedTimeout,
-                            cancellationToken
-                        )
+                .Select(sd =>
+                    _pdbSourceDocumentLoaderService.LoadSourceDocumentAsync(
+                        tempFilePath,
+                        sd,
+                        encoding,
+                        telemetryMessage,
+                        useExtendedTimeout,
+                        cancellationToken
+                    )
                 )
                 .ToArray();
             var sourceFileInfos = await Task.WhenAll(sourceFileInfoTasks).ConfigureAwait(false);
@@ -340,10 +341,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             // to the document passed in, which we just use the first document for.
             // TODO: Support results from multiple source files: https://github.com/dotnet/roslyn/issues/55834
             var firstDocumentFilePath = sourceFileInfos[0]!.FilePath;
-            var firstDocument = navigateProject.Documents.First(
-                d =>
-                    d.FilePath?.Equals(firstDocumentFilePath, StringComparison.OrdinalIgnoreCase)
-                    ?? false
+            var firstDocument = navigateProject.Documents.First(d =>
+                d.FilePath?.Equals(firstDocumentFilePath, StringComparison.OrdinalIgnoreCase)
+                ?? false
             );
             var navigateLocation = await MetadataAsSourceHelpers
                 .GetLocationInGeneratedSourceAsync(symbolId, firstDocument, cancellationToken)
@@ -355,12 +355,11 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             Contract.ThrowIfNull(navigateDocument);
             var sourceDescription =
                 sourceFileInfos
-                    .FirstOrDefault(
-                        sfi =>
-                            sfi!.FilePath?.Equals(
-                                navigateDocument.FilePath,
-                                StringComparison.OrdinalIgnoreCase
-                            ) ?? false
+                    .FirstOrDefault(sfi =>
+                        sfi!.FilePath?.Equals(
+                            navigateDocument.FilePath,
+                            StringComparison.OrdinalIgnoreCase
+                        ) ?? false
                     )
                     ?.SourceDescription ?? FeaturesResources.from_metadata;
 

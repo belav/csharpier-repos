@@ -117,8 +117,8 @@ namespace System.Reflection.PortableExecutable.Tests
 
         public static IEnumerable<object[]> AllMachineTypes()
         {
-            return ((Machine[])Enum.GetValues(typeof(Machine))).Select(
-                m => new object[] { (object)m }
+            return ((Machine[])Enum.GetValues(typeof(Machine))).Select(m =>
+                new object[] { (object)m }
             );
         }
 
@@ -712,8 +712,8 @@ namespace System.Reflection.PortableExecutable.Tests
                 FieldAttributes.Assembly,
                 metadata.GetOrAddString("_bc"),
                 metadata.GetOrAddBlob(
-                    BuildSignature(
-                        e => e.FieldSignature().Type(type: baseClassTypeDef, isValueType: false)
+                    BuildSignature(e =>
+                        e.FieldSignature().Type(type: baseClassTypeDef, isValueType: false)
                     )
                 )
             );
@@ -741,10 +741,9 @@ namespace System.Reflection.PortableExecutable.Tests
                 MethodImplAttributes.IL,
                 metadata.GetOrAddString("Foo"),
                 metadata.GetOrAddBlob(
-                    BuildSignature(
-                        e =>
-                            e.MethodSignature(isInstanceMethod: true)
-                                .Parameters(0, returnType => returnType.Void(), parameters => { })
+                    BuildSignature(e =>
+                        e.MethodSignature(isInstanceMethod: true)
+                            .Parameters(0, returnType => returnType.Void(), parameters => { })
                     )
                 ),
                 fooBodyOffset,

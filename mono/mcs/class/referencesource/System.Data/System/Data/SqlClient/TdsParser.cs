@@ -10004,8 +10004,9 @@ namespace System.Data.SqlClient
                 //
 
                 if (null == s_nicAddress)
-                    s_nicAddress =
-                        TdsParserStaticMethods.GetNetworkPhysicalAddressForTdsLoginOnly();
+                    s_nicAddress = TdsParserStaticMethods.GetNetworkPhysicalAddressForTdsLoginOnly(
+
+                    );
 
                 _physicalStateObj.WriteByteArray(s_nicAddress, s_nicAddress.Length, 0);
 

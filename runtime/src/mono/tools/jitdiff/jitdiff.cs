@@ -23,10 +23,9 @@ namespace JitDiffTools
             foreach (string fileBefore in filesBefore)
             {
                 string fileName = Path.GetFileName(fileBefore);
-                string fileAfter = filesAfter.FirstOrDefault(
-                    f =>
-                        Path.GetFileName(f)
-                            .Equals(fileName, StringComparison.InvariantCultureIgnoreCase)
+                string fileAfter = filesAfter.FirstOrDefault(f =>
+                    Path.GetFileName(f)
+                        .Equals(fileName, StringComparison.InvariantCultureIgnoreCase)
                 );
 
                 if (fileAfter != null)
@@ -108,8 +107,8 @@ namespace JitDiffTools
             foreach (FunctionInfo file1Function in file1Functions)
             {
                 // SingleOrDefault to make sure functions are unique
-                FunctionInfo file2Function = file2Functions.FirstOrDefault(
-                    f => f.Name == file1Function.Name
+                FunctionInfo file2Function = file2Functions.FirstOrDefault(f =>
+                    f.Name == file1Function.Name
                 );
                 diffItems.Add(new DiffItem(file1Function, file2Function)); // file2Function can be null here - means function was removed in file2
             }
@@ -117,8 +116,8 @@ namespace JitDiffTools
             foreach (FunctionInfo file2Function in file2Functions)
             {
                 // SingleOrDefault to make sure functions are unique
-                FunctionInfo file1Function = file1Functions.FirstOrDefault(
-                    f => f.Name == file2Function.Name
+                FunctionInfo file1Function = file1Functions.FirstOrDefault(f =>
+                    f.Name == file2Function.Name
                 );
                 if (file1Function == null)
                     diffItems.Add(new DiffItem(null, file2Function)); // function was added in file2

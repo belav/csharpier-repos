@@ -28,8 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool suppressUseSiteDiagnostics
         )
         {
-            ArrayBuilder<CustomModifier> customModifiers =
-                ArrayBuilder<CustomModifier>.GetInstance();
+            ArrayBuilder<CustomModifier> customModifiers = ArrayBuilder<CustomModifier>.GetInstance(
+
+            );
             CallingConvention callingConvention = getCallingConvention(
                 typeBinder.Compilation,
                 syntax.CallingConvention,

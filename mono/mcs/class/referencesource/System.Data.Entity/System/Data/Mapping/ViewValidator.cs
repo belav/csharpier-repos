@@ -427,12 +427,8 @@ namespace System.Data.Mapping
                 //query view, it is better to be defensive since we might have missed some path up the tree
                 //while computing the sets
                 if (
-                    setInfos.SetInfos.All(
-                        it =>
-                            (
-                                (it.Value != null)
-                                && (it.Value is DbExpressionSimpleTypeEntitySetInfo)
-                            )
+                    setInfos.SetInfos.All(it =>
+                        ((it.Value != null) && (it.Value is DbExpressionSimpleTypeEntitySetInfo))
                     )
                     && setInfos.SetInfos.Count() == 2
                 )

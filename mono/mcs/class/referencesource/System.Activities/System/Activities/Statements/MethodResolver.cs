@@ -271,11 +271,10 @@ namespace System.Activities.Statements
 
             // Convert OutArgs and InOutArgs to out/ref types before resolution
             Type[] parameterTypes = Parameters
-                .Select(
-                    argument =>
-                        argument.Direction == ArgumentDirection.In
-                            ? argument.ArgumentType
-                            : argument.ArgumentType.MakeByRefType()
+                .Select(argument =>
+                    argument.Direction == ArgumentDirection.In
+                        ? argument.ArgumentType
+                        : argument.ArgumentType.MakeByRefType()
                 )
                 .ToArray();
 

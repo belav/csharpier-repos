@@ -276,10 +276,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                         .Where(m => m.Kind == SymbolKind.Method && m.Name == "Bar")
                         .SingleOrDefault()
                         ?.GetAttributes()
-                        .Any(
-                            att =>
-                                att.AttributeClass?.Name
-                                == nameof(RequiresUnreferencedCodeAttribute)
+                        .Any(att =>
+                            att.AttributeClass?.Name == nameof(RequiresUnreferencedCodeAttribute)
                         )
                 );
             }

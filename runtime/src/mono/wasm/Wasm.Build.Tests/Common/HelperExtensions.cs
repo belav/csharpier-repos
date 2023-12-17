@@ -141,8 +141,8 @@ namespace Wasm.Build.Tests
             var env = psi.Environment;
             foreach (string name in names)
             {
-                string? key = env.Keys.FirstOrDefault(
-                    k => string.Compare(k, name, StringComparison.OrdinalIgnoreCase) == 0
+                string? key = env.Keys.FirstOrDefault(k =>
+                    string.Compare(k, name, StringComparison.OrdinalIgnoreCase) == 0
                 );
                 if (key is not null)
                     env.Remove("MSBuildSDKsPath");

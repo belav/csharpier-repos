@@ -193,8 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public static MemberDeclarationSyntax? LastOperator(
             SyntaxList<MemberDeclarationSyntax> members
         ) =>
-            members.LastOrDefault(
-                m => m is OperatorDeclarationSyntax or ConversionOperatorDeclarationSyntax
+            members.LastOrDefault(m =>
+                m is OperatorDeclarationSyntax or ConversionOperatorDeclarationSyntax
             );
 
         public static SyntaxList<TDeclaration> Insert<TDeclaration>(
@@ -239,10 +239,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             where TDeclaration : SyntaxNode =>
             declaration
                 .ChildTokens()
-                .Where(
-                    t =>
-                        t.Kind() is SyntaxKind.OpenBraceToken or SyntaxKind.CloseBraceToken
-                        && t.IsMissing
+                .Where(t =>
+                    t.Kind() is SyntaxKind.OpenBraceToken or SyntaxKind.CloseBraceToken
+                    && t.IsMissing
                 )
                 .Any();
 

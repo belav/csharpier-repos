@@ -966,43 +966,42 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         };
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                builder =>
-                    builder
-                        .UseTestServer()
-                        .Configure(app =>
-                        {
-                            app.UseAuthentication();
-                            app.Run(
-                                async (context) =>
+            .ConfigureWebHost(builder =>
+                builder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseAuthentication();
+                        app.Run(
+                            async (context) =>
+                            {
+                                // Simulate Forbidden By Multiple Authentication Schemas
+                                await context.ForbidAsync("JwtAuthSchemaOne");
+                                await context.ForbidAsync("JwtAuthSchemaTwo");
+                            }
+                        );
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services
+                            .AddAuthentication()
+                            .AddJwtBearer(
+                                "JwtAuthSchemaOne",
+                                o =>
                                 {
-                                    // Simulate Forbidden By Multiple Authentication Schemas
-                                    await context.ForbidAsync("JwtAuthSchemaOne");
-                                    await context.ForbidAsync("JwtAuthSchemaTwo");
+                                    o.Events = jwtBearerEvents;
+                                    o.UseSecurityTokenValidators = true;
+                                }
+                            )
+                            .AddJwtBearer(
+                                "JwtAuthSchemaTwo",
+                                o =>
+                                {
+                                    o.Events = jwtBearerEvents;
+                                    o.UseSecurityTokenValidators = true;
                                 }
                             );
-                        })
-                        .ConfigureServices(services =>
-                        {
-                            services
-                                .AddAuthentication()
-                                .AddJwtBearer(
-                                    "JwtAuthSchemaOne",
-                                    o =>
-                                    {
-                                        o.Events = jwtBearerEvents;
-                                        o.UseSecurityTokenValidators = true;
-                                    }
-                                )
-                                .AddJwtBearer(
-                                    "JwtAuthSchemaTwo",
-                                    o =>
-                                    {
-                                        o.Events = jwtBearerEvents;
-                                        o.UseSecurityTokenValidators = true;
-                                    }
-                                );
-                        })
+                    })
             )
             .Build();
 
@@ -1425,133 +1424,127 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
     )
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                builder =>
-                    builder
-                        .UseTestServer()
-                        .Configure(app =>
+            .ConfigureWebHost(builder =>
+                builder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        if (handlerBeforeAuth != null)
                         {
-                            if (handlerBeforeAuth != null)
+                            app.Use(handlerBeforeAuth);
+                        }
+
+                        app.UseAuthentication();
+                        app.Use(
+                            async (context, next) =>
                             {
-                                app.Use(handlerBeforeAuth);
-                            }
-
-                            app.UseAuthentication();
-                            app.Use(
-                                async (context, next) =>
+                                if (context.Request.Path == new PathString("/checkforerrors"))
                                 {
-                                    if (context.Request.Path == new PathString("/checkforerrors"))
+                                    var result = await context.AuthenticateAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    ); // this used to be "Automatic"
+                                    if (result.Failure != null)
                                     {
-                                        var result = await context.AuthenticateAsync(
-                                            JwtBearerDefaults.AuthenticationScheme
-                                        ); // this used to be "Automatic"
-                                        if (result.Failure != null)
-                                        {
-                                            throw new Exception(
-                                                "Failed to authenticate",
-                                                result.Failure
-                                            );
-                                        }
-                                        return;
-                                    }
-                                    else if (context.Request.Path == new PathString("/oauth"))
-                                    {
-                                        if (
-                                            context.User == null
-                                            || context.User.Identity == null
-                                            || !context.User.Identity.IsAuthenticated
-                                        )
-                                        {
-                                            context.Response.StatusCode = 401;
-                                            // REVIEW: no more automatic challenge
-                                            await context.ChallengeAsync(
-                                                JwtBearerDefaults.AuthenticationScheme
-                                            );
-                                            return;
-                                        }
-
-                                        var identifier = context.User.FindFirst(
-                                            ClaimTypes.NameIdentifier
+                                        throw new Exception(
+                                            "Failed to authenticate",
+                                            result.Failure
                                         );
-                                        if (identifier == null)
-                                        {
-                                            context.Response.StatusCode = 500;
-                                            return;
-                                        }
-
-                                        await context.Response.WriteAsync(identifier.Value);
                                     }
-                                    else if (context.Request.Path == new PathString("/token"))
-                                    {
-                                        var token = await context.GetTokenAsync("access_token");
-                                        await context.Response.WriteAsync(token);
-                                    }
-                                    else if (
-                                        context.Request.Path == new PathString("/unauthorized")
+                                    return;
+                                }
+                                else if (context.Request.Path == new PathString("/oauth"))
+                                {
+                                    if (
+                                        context.User == null
+                                        || context.User.Identity == null
+                                        || !context.User.Identity.IsAuthenticated
                                     )
                                     {
-                                        // Simulate Authorization failure
-                                        var result = await context.AuthenticateAsync(
-                                            JwtBearerDefaults.AuthenticationScheme
-                                        );
+                                        context.Response.StatusCode = 401;
+                                        // REVIEW: no more automatic challenge
                                         await context.ChallengeAsync(
                                             JwtBearerDefaults.AuthenticationScheme
                                         );
+                                        return;
                                     }
-                                    else if (context.Request.Path == new PathString("/forbidden"))
+
+                                    var identifier = context.User.FindFirst(
+                                        ClaimTypes.NameIdentifier
+                                    );
+                                    if (identifier == null)
                                     {
-                                        // Simulate Forbidden
-                                        await context.ForbidAsync(
-                                            JwtBearerDefaults.AuthenticationScheme
-                                        );
+                                        context.Response.StatusCode = 500;
+                                        return;
                                     }
-                                    else if (context.Request.Path == new PathString("/signIn"))
-                                    {
-                                        await Assert.ThrowsAsync<InvalidOperationException>(
-                                            () =>
-                                                context.SignInAsync(
-                                                    JwtBearerDefaults.AuthenticationScheme,
-                                                    new ClaimsPrincipal()
-                                                )
-                                        );
-                                    }
-                                    else if (context.Request.Path == new PathString("/signOut"))
-                                    {
-                                        await Assert.ThrowsAsync<InvalidOperationException>(
-                                            () =>
-                                                context.SignOutAsync(
-                                                    JwtBearerDefaults.AuthenticationScheme
-                                                )
-                                        );
-                                    }
-                                    else if (context.Request.Path == new PathString("/expiration"))
-                                    {
-                                        var authenticationResult = await context.AuthenticateAsync(
-                                            JwtBearerDefaults.AuthenticationScheme
-                                        );
-                                        await context.Response.WriteAsJsonAsync(
-                                            new
-                                            {
-                                                Expires = authenticationResult
-                                                    .Properties
-                                                    ?.ExpiresUtc,
-                                                Issued = authenticationResult.Properties?.IssuedUtc
-                                            }
-                                        );
-                                    }
-                                    else
-                                    {
-                                        await next(context);
-                                    }
+
+                                    await context.Response.WriteAsync(identifier.Value);
                                 }
-                            );
-                        })
-                        .ConfigureServices(
-                            services =>
-                                services
-                                    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                                    .AddJwtBearer(options)
-                        )
+                                else if (context.Request.Path == new PathString("/token"))
+                                {
+                                    var token = await context.GetTokenAsync("access_token");
+                                    await context.Response.WriteAsync(token);
+                                }
+                                else if (context.Request.Path == new PathString("/unauthorized"))
+                                {
+                                    // Simulate Authorization failure
+                                    var result = await context.AuthenticateAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    );
+                                    await context.ChallengeAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    );
+                                }
+                                else if (context.Request.Path == new PathString("/forbidden"))
+                                {
+                                    // Simulate Forbidden
+                                    await context.ForbidAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    );
+                                }
+                                else if (context.Request.Path == new PathString("/signIn"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(
+                                        () =>
+                                            context.SignInAsync(
+                                                JwtBearerDefaults.AuthenticationScheme,
+                                                new ClaimsPrincipal()
+                                            )
+                                    );
+                                }
+                                else if (context.Request.Path == new PathString("/signOut"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(
+                                        () =>
+                                            context.SignOutAsync(
+                                                JwtBearerDefaults.AuthenticationScheme
+                                            )
+                                    );
+                                }
+                                else if (context.Request.Path == new PathString("/expiration"))
+                                {
+                                    var authenticationResult = await context.AuthenticateAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    );
+                                    await context.Response.WriteAsJsonAsync(
+                                        new
+                                        {
+                                            Expires = authenticationResult.Properties?.ExpiresUtc,
+                                            Issued = authenticationResult.Properties?.IssuedUtc
+                                        }
+                                    );
+                                }
+                                else
+                                {
+                                    await next(context);
+                                }
+                            }
+                        );
+                    })
+                    .ConfigureServices(services =>
+                        services
+                            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                            .AddJwtBearer(options)
+                    )
             )
             .Build();
 

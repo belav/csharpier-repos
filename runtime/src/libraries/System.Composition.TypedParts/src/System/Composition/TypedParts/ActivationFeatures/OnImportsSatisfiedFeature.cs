@@ -41,12 +41,11 @@ namespace System.Composition.TypedParts.ActivationFeatures
             var partTypeAsType = partType.AsType();
             var importsSatisfiedMethods = partTypeAsType
                 .GetRuntimeMethods()
-                .Where(
-                    mi =>
-                        _attributeContext.GetDeclaredAttribute<OnImportsSatisfiedAttribute>(
-                            mi.DeclaringType,
-                            mi
-                        ) != null
+                .Where(mi =>
+                    _attributeContext.GetDeclaredAttribute<OnImportsSatisfiedAttribute>(
+                        mi.DeclaringType,
+                        mi
+                    ) != null
                 );
 
             foreach (var m in importsSatisfiedMethods)

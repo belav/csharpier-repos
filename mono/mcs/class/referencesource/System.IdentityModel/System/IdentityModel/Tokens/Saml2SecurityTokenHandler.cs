@@ -184,7 +184,9 @@ namespace System.IdentityModel.Tokens
                             SecurityTokenHandlerCollection sthc =
                                 (ContainingCollection != null)
                                     ? ContainingCollection
-                                    : SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+                                    : SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(
+
+                                    );
                             this.keyInfoSerializer = new SecurityTokenSerializerAdapter(sthc);
                         }
                     }

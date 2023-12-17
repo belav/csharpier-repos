@@ -226,17 +226,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // Only show 'Base Types' and 'Derived Types' on a class or interface.
             if (
-                nodes.Any(
-                    n =>
-                        IsAnySymbolKind(n, SymbolKind.NamedType)
-                        && IsAnyTypeKind(
-                            n,
-                            TypeKind.Class,
-                            TypeKind.Interface,
-                            TypeKind.Struct,
-                            TypeKind.Enum,
-                            TypeKind.Delegate
-                        )
+                nodes.Any(n =>
+                    IsAnySymbolKind(n, SymbolKind.NamedType)
+                    && IsAnyTypeKind(
+                        n,
+                        TypeKind.Class,
+                        TypeKind.Interface,
+                        TypeKind.Struct,
+                        TypeKind.Enum,
+                        TypeKind.Delegate
+                    )
                 )
             )
             {
@@ -257,15 +256,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // Only show 'Calls' on an applicable member in a class or struct
             if (
-                nodes.Any(
-                    n =>
-                        IsAnySymbolKind(
-                            n,
-                            SymbolKind.Event,
-                            SymbolKind.Method,
-                            SymbolKind.Property,
-                            SymbolKind.Field
-                        )
+                nodes.Any(n =>
+                    IsAnySymbolKind(
+                        n,
+                        SymbolKind.Event,
+                        SymbolKind.Method,
+                        SymbolKind.Property,
+                        SymbolKind.Field
+                    )
                 )
             )
             {
@@ -279,10 +277,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // Only show 'Is Called By' on an applicable member in a class or struct
             if (
-                nodes.Any(
-                    n =>
-                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
-                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                nodes.Any(n =>
+                    IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                    && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
                 )
             )
             {
@@ -304,10 +301,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // Show 'Implements' on a class or struct, or an applicable member in a class or struct.
             if (
-                nodes.Any(
-                    n =>
-                        IsAnySymbolKind(n, SymbolKind.NamedType)
-                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                nodes.Any(n =>
+                    IsAnySymbolKind(n, SymbolKind.NamedType)
+                    && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
                 )
             )
             {
@@ -322,17 +318,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             // Show 'Implements' on public, non-static members of a class or struct.  Note: we should
             // also show it on explicit interface impls in C#.
             if (
-                nodes.Any(
-                    n =>
-                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
-                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
-                        && !GetModifiers(n).IsStatic
+                nodes.Any(n =>
+                    IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                    && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                    && !GetModifiers(n).IsStatic
                 )
             )
             {
                 if (
-                    nodes.Any(
-                        n => CheckAccessibility(n, Accessibility.Public) || HasExplicitInterfaces(n)
+                    nodes.Any(n =>
+                        CheckAccessibility(n, Accessibility.Public) || HasExplicitInterfaces(n)
                     )
                 )
                 {
@@ -347,10 +342,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // Show 'Implemented By' on an interface.
             if (
-                nodes.Any(
-                    n =>
-                        IsAnySymbolKind(n, SymbolKind.NamedType)
-                        && IsAnyTypeKind(n, TypeKind.Interface)
+                nodes.Any(n =>
+                    IsAnySymbolKind(n, SymbolKind.NamedType) && IsAnyTypeKind(n, TypeKind.Interface)
                 )
             )
             {
@@ -364,10 +357,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // Show 'Implemented By' on any member of an interface.
             if (
-                nodes.Any(
-                    n =>
-                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
-                        && IsAnyTypeKind(n, TypeKind.Interface)
+                nodes.Any(n =>
+                    IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                    && IsAnyTypeKind(n, TypeKind.Interface)
                 )
             )
             {
@@ -381,11 +373,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // Show 'Overrides' on any applicable member of a class or struct
             if (
-                nodes.Any(
-                    n =>
-                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
-                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
-                        && GetModifiers(n).IsOverride
+                nodes.Any(n =>
+                    IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                    && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                    && GetModifiers(n).IsOverride
                 )
             )
             {
@@ -399,11 +390,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // Show 'Overridden By' on any applicable member of a class or struct
             if (
-                nodes.Any(
-                    n =>
-                        IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
-                        && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
-                        && IsOverridable(n)
+                nodes.Any(n =>
+                    IsAnySymbolKind(n, SymbolKind.Event, SymbolKind.Method, SymbolKind.Property)
+                    && IsAnyTypeKind(n, TypeKind.Class, TypeKind.Struct)
+                    && IsOverridable(n)
                 )
             )
             {

@@ -26,7 +26,9 @@ public class ILVerificationWorks
     {
 #if IL_ASSEMBLY_AVAILABLE
         System.Console.WriteLine(
-            new Mono.Linker.Tests.Cases.TestFramework.Dependencies.AssemblyWithInvalidIL().GiveMeAValue()
+            new Mono.Linker.Tests.Cases.TestFramework.Dependencies.AssemblyWithInvalidIL(
+
+            ).GiveMeAValue()
         );
 #endif
     }

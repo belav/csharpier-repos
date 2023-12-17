@@ -116,8 +116,8 @@ namespace Microsoft.CodeAnalysis.Remote
             return classifiedSpans.IsDefault
                 ? null
                 : SerializableClassifiedSpans.Dehydrate(
-                    classifiedSpans.WhereAsArray(
-                        c => textSpanIntervalTree.HasIntervalThatIntersectsWith(c.TextSpan)
+                    classifiedSpans.WhereAsArray(c =>
+                        textSpanIntervalTree.HasIntervalThatIntersectsWith(c.TextSpan)
                     )
                 );
         }
@@ -315,8 +315,8 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             lock (_cachedData)
             {
-                var data = _cachedData.FirstOrNull(
-                    d => d.id == documentKey.Id && d.checksum == checksum
+                var data = _cachedData.FirstOrNull(d =>
+                    d.id == documentKey.Id && d.checksum == checksum
                 );
                 if (data != null)
                 {

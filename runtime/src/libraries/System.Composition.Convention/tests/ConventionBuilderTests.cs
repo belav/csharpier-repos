@@ -64,8 +64,9 @@ namespace System.Composition.Convention.Tests
 
             builder.ForTypesDerivedFrom<IFoo>().Export<IFoo>();
 
-            TypeInfo fooImplWithConstructorsTypeInfo =
-                typeof(FooImplWithConstructors).GetTypeInfo();
+            TypeInfo fooImplWithConstructorsTypeInfo = typeof(FooImplWithConstructors).GetTypeInfo(
+
+            );
 
             // necessary as BuildConventionConstructorAttributes is only called for type level query for attributes
             ConstructorInfo constructor1 = fooImplWithConstructorsTypeInfo
@@ -147,9 +148,9 @@ namespace System.Composition.Convention.Tests
 
             builder
                 .ForType<FooImplWithConstructors>()
-                .SelectConstructor(
-                    param => new FooImplWithConstructors(param.Import<IEnumerable<IFoo>>())
-                );
+                .SelectConstructor(param => new FooImplWithConstructors(
+                    param.Import<IEnumerable<IFoo>>()
+                ));
 
             TypeInfo fooImplWithConstructors = typeof(FooImplWithConstructors).GetTypeInfo();
 

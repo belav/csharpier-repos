@@ -1845,8 +1845,8 @@ namespace Microsoft.CodeAnalysis
 
         private bool HasErrorsSlow()
         {
-            return new Syntax.InternalSyntax.SyntaxDiagnosticInfoList(this.Green).Any(
-                info => info.Severity == DiagnosticSeverity.Error
+            return new Syntax.InternalSyntax.SyntaxDiagnosticInfoList(this.Green).Any(info =>
+                info.Severity == DiagnosticSeverity.Error
             );
         }
 

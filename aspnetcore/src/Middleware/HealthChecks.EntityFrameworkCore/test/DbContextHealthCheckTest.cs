@@ -149,8 +149,8 @@ public class DbContextHealthCheckTest
     )
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddDbContext<TestDbContext>(
-            o => o.UseInMemoryDatabase("Test" + Interlocked.Increment(ref _testDbCounter))
+        serviceCollection.AddDbContext<TestDbContext>(o =>
+            o.UseInMemoryDatabase("Test" + Interlocked.Increment(ref _testDbCounter))
         );
 
         var builder = serviceCollection.AddHealthChecks();

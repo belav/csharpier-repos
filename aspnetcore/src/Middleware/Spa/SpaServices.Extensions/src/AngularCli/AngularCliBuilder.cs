@@ -55,8 +55,9 @@ public class AngularCliBuilder : ISpaPrerendererBuilder
             .ApplicationServices.GetRequiredService<IHostApplicationLifetime>()
             .ApplicationStopping;
         var logger = LoggerFinder.GetOrCreateLogger(appBuilder, nameof(AngularCliBuilder));
-        var diagnosticSource =
-            appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>();
+        var diagnosticSource = appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>(
+
+        );
         var scriptRunner = new NodeScriptRunner(
             sourcePath,
             _scriptName,

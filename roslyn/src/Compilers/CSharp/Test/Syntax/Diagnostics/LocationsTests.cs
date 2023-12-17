@@ -81,9 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var text = tree.GetText();
             return tree.GetLineMappings()
-                .Select(
-                    mapping =>
-                        $"[|{text.GetSubText(text.Lines.GetTextSpan(mapping.Span))}|] -> {(mapping.IsHidden ? "<hidden>" : mapping.MappedSpan)}"
+                .Select(mapping =>
+                    $"[|{text.GetSubText(text.Lines.GetTextSpan(mapping.Span))}|] -> {(mapping.IsHidden ? "<hidden>" : mapping.MappedSpan)}"
                 );
         }
 

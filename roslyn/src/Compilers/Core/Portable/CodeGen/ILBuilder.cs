@@ -746,10 +746,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             // All blocks should be reachable or, if not reachable, then blocked by finally.
             Debug.Assert(
-                AllBlocks(
-                    block =>
-                        (block.Reachability == Reachability.Reachable)
-                        || (block.Reachability == Reachability.BlockedByFinally)
+                AllBlocks(block =>
+                    (block.Reachability == Reachability.Reachable)
+                    || (block.Reachability == Reachability.BlockedByFinally)
                 )
             );
 

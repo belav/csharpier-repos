@@ -37,41 +37,37 @@ namespace System.Net.Http.Headers
         public HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue> Accept =>
             GetSpecializedCollection(
                 AcceptSlot,
-                static thisRef =>
-                    new HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue>(
-                        KnownHeaders.Accept.Descriptor,
-                        thisRef
-                    )
+                static thisRef => new HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue>(
+                    KnownHeaders.Accept.Descriptor,
+                    thisRef
+                )
             );
 
         public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptCharset =>
             GetSpecializedCollection(
                 AcceptCharsetSlot,
-                static thisRef =>
-                    new HttpHeaderValueCollection<StringWithQualityHeaderValue>(
-                        KnownHeaders.AcceptCharset.Descriptor,
-                        thisRef
-                    )
+                static thisRef => new HttpHeaderValueCollection<StringWithQualityHeaderValue>(
+                    KnownHeaders.AcceptCharset.Descriptor,
+                    thisRef
+                )
             );
 
         public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptEncoding =>
             GetSpecializedCollection(
                 AcceptEncodingSlot,
-                static thisRef =>
-                    new HttpHeaderValueCollection<StringWithQualityHeaderValue>(
-                        KnownHeaders.AcceptEncoding.Descriptor,
-                        thisRef
-                    )
+                static thisRef => new HttpHeaderValueCollection<StringWithQualityHeaderValue>(
+                    KnownHeaders.AcceptEncoding.Descriptor,
+                    thisRef
+                )
             );
 
         public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptLanguage =>
             GetSpecializedCollection(
                 AcceptLanguageSlot,
-                static thisRef =>
-                    new HttpHeaderValueCollection<StringWithQualityHeaderValue>(
-                        KnownHeaders.AcceptLanguage.Descriptor,
-                        thisRef
-                    )
+                static thisRef => new HttpHeaderValueCollection<StringWithQualityHeaderValue>(
+                    KnownHeaders.AcceptLanguage.Descriptor,
+                    thisRef
+                )
             );
 
         public AuthenticationHeaderValue? Authorization
@@ -177,11 +173,10 @@ namespace System.Net.Http.Headers
         public HttpHeaderValueCollection<EntityTagHeaderValue> IfMatch =>
             GetSpecializedCollection(
                 IfMatchSlot,
-                static thisRef =>
-                    new HttpHeaderValueCollection<EntityTagHeaderValue>(
-                        KnownHeaders.IfMatch.Descriptor,
-                        thisRef
-                    )
+                static thisRef => new HttpHeaderValueCollection<EntityTagHeaderValue>(
+                    KnownHeaders.IfMatch.Descriptor,
+                    thisRef
+                )
             );
 
         public DateTimeOffset? IfModifiedSince
@@ -199,11 +194,10 @@ namespace System.Net.Http.Headers
         public HttpHeaderValueCollection<EntityTagHeaderValue> IfNoneMatch =>
             GetSpecializedCollection(
                 IfNoneMatchSlot,
-                static thisRef =>
-                    new HttpHeaderValueCollection<EntityTagHeaderValue>(
-                        KnownHeaders.IfNoneMatch.Descriptor,
-                        thisRef
-                    )
+                static thisRef => new HttpHeaderValueCollection<EntityTagHeaderValue>(
+                    KnownHeaders.IfNoneMatch.Descriptor,
+                    thisRef
+                )
             );
 
         public RangeConditionHeaderValue? IfRange
@@ -285,31 +279,28 @@ namespace System.Net.Http.Headers
         public HttpHeaderValueCollection<TransferCodingWithQualityHeaderValue> TE =>
             GetSpecializedCollection(
                 TransferEncodingSlot,
-                static thisRef =>
-                    new HttpHeaderValueCollection<TransferCodingWithQualityHeaderValue>(
-                        KnownHeaders.TE.Descriptor,
-                        thisRef
-                    )
+                static thisRef => new HttpHeaderValueCollection<TransferCodingWithQualityHeaderValue>(
+                    KnownHeaders.TE.Descriptor,
+                    thisRef
+                )
             );
 
         public HttpHeaderValueCollection<ProductInfoHeaderValue> UserAgent =>
             GetSpecializedCollection(
                 UserAgentSlot,
-                static thisRef =>
-                    new HttpHeaderValueCollection<ProductInfoHeaderValue>(
-                        KnownHeaders.UserAgent.Descriptor,
-                        thisRef
-                    )
+                static thisRef => new HttpHeaderValueCollection<ProductInfoHeaderValue>(
+                    KnownHeaders.UserAgent.Descriptor,
+                    thisRef
+                )
             );
 
         public HttpHeaderValueCollection<NameValueWithParametersHeaderValue> Expect =>
             GetSpecializedCollection(
                 ExpectSlot,
-                static thisRef =>
-                    new HttpHeaderValueCollection<NameValueWithParametersHeaderValue>(
-                        KnownHeaders.Expect.Descriptor,
-                        thisRef
-                    )
+                static thisRef => new HttpHeaderValueCollection<NameValueWithParametersHeaderValue>(
+                    KnownHeaders.Expect.Descriptor,
+                    thisRef
+                )
             );
 
         #endregion

@@ -541,9 +541,8 @@ namespace System.Data.Mapping.Update.Internal
                 if (null != map)
                 {
                     PropagatorResult replacement;
-                    join = join.Replace(
-                        original =>
-                            map.TryGetValue(original, out replacement) ? replacement : original
+                    join = join.Replace(original =>
+                        map.TryGetValue(original, out replacement) ? replacement : original
                     );
                 }
 

@@ -280,8 +280,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             // service.  No point examining them or adding progress items for them.
             foreach (var group in GetOrderedProjectsToProcessWorker())
             {
-                var groupCopy = group.WhereAsArray(
-                    p => _host.GetNavigateToSearchService(p) != null
+                var groupCopy = group.WhereAsArray(p => _host.GetNavigateToSearchService(p) != null
                 );
                 if (!groupCopy.IsEmpty)
                     result.Add(groupCopy);
@@ -373,10 +372,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             // rest of the results following soon after as best as we can find them.
             foreach (var projectGroup in orderedProjects)
             {
-                var groups = projectGroup.GroupBy(
-                    p =>
-                        _host.GetNavigateToSearchService(p)
-                        ?? throw ExceptionUtilities.Unreachable()
+                var groups = projectGroup.GroupBy(p =>
+                    _host.GetNavigateToSearchService(p) ?? throw ExceptionUtilities.Unreachable()
                 );
 
                 if (!parallel)

@@ -173,28 +173,28 @@ namespace System.Formats.Tar.Tests
 
             if (includeBaseDirectory)
             {
-                TarEntry baseEntry = entries.FirstOrDefault(
-                    x => x.EntryType == TarEntryType.Directory && x.Name == prefix
+                TarEntry baseEntry = entries.FirstOrDefault(x =>
+                    x.EntryType == TarEntryType.Directory && x.Name == prefix
                 );
                 Assert.NotNull(baseEntry);
                 AssertEntryModeFromFileSystemEquals(baseEntry, baseDirectoryMode);
             }
 
-            TarEntry entry1 = entries.FirstOrDefault(
-                x => x.EntryType == TarEntryType.RegularFile && x.Name == prefix + fileName1
+            TarEntry entry1 = entries.FirstOrDefault(x =>
+                x.EntryType == TarEntryType.RegularFile && x.Name == prefix + fileName1
             );
             Assert.NotNull(entry1);
             AssertEntryModeFromFileSystemEquals(entry1, filename1Mode);
 
-            TarEntry directory = entries.FirstOrDefault(
-                x => x.EntryType == TarEntryType.Directory && x.Name == prefix + subDirectoryName
+            TarEntry directory = entries.FirstOrDefault(x =>
+                x.EntryType == TarEntryType.Directory && x.Name == prefix + subDirectoryName
             );
             Assert.NotNull(directory);
             AssertEntryModeFromFileSystemEquals(directory, subDirectoryMode);
 
             string actualFileName2 = subDirectoryName + fileName2; // Notice the trailing separator in subDirectoryName
-            TarEntry entry2 = entries.FirstOrDefault(
-                x => x.EntryType == TarEntryType.RegularFile && x.Name == prefix + actualFileName2
+            TarEntry entry2 = entries.FirstOrDefault(x =>
+                x.EntryType == TarEntryType.RegularFile && x.Name == prefix + actualFileName2
             );
             Assert.NotNull(entry2);
             AssertEntryModeFromFileSystemEquals(entry2, filename2Mode);

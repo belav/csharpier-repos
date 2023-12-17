@@ -222,8 +222,8 @@ public class CosmosMathTranslator : IMethodCallTranslator
                     ? ExpressionExtensions.InferTypeMapping(arguments[0])
                     : ExpressionExtensions.InferTypeMapping(arguments[0], arguments[1]);
 
-            var newArguments = arguments.Select(
-                e => _sqlExpressionFactory.ApplyTypeMapping(e, typeMapping!)
+            var newArguments = arguments.Select(e =>
+                _sqlExpressionFactory.ApplyTypeMapping(e, typeMapping!)
             );
 
             return _sqlExpressionFactory.Function(

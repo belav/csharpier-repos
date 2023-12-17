@@ -710,8 +710,8 @@ namespace Mono.CSharp
                 //
                 if (hoisted_local_params != null)
                 {
-                    var local_param = hoisted_local_params.Find(
-                        l => l.Parameter.Parameter == hp.Parameter.Parameter
+                    var local_param = hoisted_local_params.Find(l =>
+                        l.Parameter.Parameter == hp.Parameter.Parameter
                     );
                     var source = new FieldExpr(local_param.Field, Location);
                     source.InstanceExpression = new CompilerGeneratedThis(CurrentType, Location);

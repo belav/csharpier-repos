@@ -59,12 +59,11 @@ namespace Microsoft.Interop.Analyzers
                     {
                         INamedTypeSymbol type = (INamedTypeSymbol)context.Symbol;
                         AttributeData? interfaceTypeAttributeData = type.GetAttributes()
-                            .FirstOrDefault(
-                                a =>
-                                    a.AttributeClass.Equals(
-                                        interfaceTypeAttribute,
-                                        SymbolEqualityComparer.Default
-                                    )
+                            .FirstOrDefault(a =>
+                                a.AttributeClass.Equals(
+                                    interfaceTypeAttribute,
+                                    SymbolEqualityComparer.Default
+                                )
                             );
                         if (
                             type is not { TypeKind: TypeKind.Interface, IsComImport: true }
@@ -108,10 +107,9 @@ namespace Microsoft.Interop.Analyzers
                                     typeof(FxResources.Microsoft.Interop.ComInterfaceGenerator.SR)
                                 );
                             AttributeData comImportAttribute = type.GetAttributes()
-                                .First(
-                                    attr =>
-                                        attr.AttributeClass.ToDisplayString()
-                                        == TypeNames.System_Runtime_InteropServices_ComImportAttribute
+                                .First(attr =>
+                                    attr.AttributeClass.ToDisplayString()
+                                    == TypeNames.System_Runtime_InteropServices_ComImportAttribute
                                 );
                             SignatureContext targetSignatureContext = SignatureContext.Create(
                                 method,
@@ -220,8 +218,8 @@ namespace Microsoft.Interop.Analyzers
                                 out var generatorDiagnostics
                             );
 
-                            mayRequireAdditionalWork |= generatorDiagnostics.Any(
-                                diag => diag.IsFatal
+                            mayRequireAdditionalWork |= generatorDiagnostics.Any(diag =>
+                                diag.IsFatal
                             );
 
                             if (anyExplicitlyUnsupportedInfo)

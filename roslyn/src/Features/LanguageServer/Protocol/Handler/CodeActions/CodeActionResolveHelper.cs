@@ -147,15 +147,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                             .Any(docId => HasDocumentNameChange(docId, newSolution, solution))
                         || projectChange
                             .GetChangedAdditionalDocuments()
-                            .Any(
-                                docId =>
-                                    HasDocumentNameChange(docId, newSolution, solution)
-                                    || projectChange
-                                        .GetChangedAnalyzerConfigDocuments()
-                                        .Any(
-                                            docId =>
-                                                HasDocumentNameChange(docId, newSolution, solution)
-                                        )
+                            .Any(docId =>
+                                HasDocumentNameChange(docId, newSolution, solution)
+                                || projectChange
+                                    .GetChangedAnalyzerConfigDocuments()
+                                    .Any(docId =>
+                                        HasDocumentNameChange(docId, newSolution, solution)
+                                    )
                             )
                     )
                     {

@@ -28,12 +28,11 @@ public class RouteHandlerTest
                     .Configure(app =>
                     {
                         app.UseRouting();
-                        app.UseEndpoints(
-                            b =>
-                                b.MapPost(
-                                    "/EchoTodo/{id}",
-                                    (int id, Todo todo) => todo with { Id = id }
-                                )
+                        app.UseEndpoints(b =>
+                            b.MapPost(
+                                "/EchoTodo/{id}",
+                                (int id, Todo todo) => todo with { Id = id }
+                            )
                         );
                     })
                     .UseTestServer();

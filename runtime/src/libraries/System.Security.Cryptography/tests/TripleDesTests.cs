@@ -64,7 +64,9 @@ namespace System.Security.Cryptography.Tests
         public static void TripleDesCreate()
         {
             byte[] inputBytes =
-                "This is a secret message and is a sentence that is longer than a block, it ensures that multi-block functions work."u8.ToArray();
+                "This is a secret message and is a sentence that is longer than a block, it ensures that multi-block functions work."u8.ToArray(
+
+                );
             TripleDES tripleDes = TripleDES.Create();
 
             byte[] encryptedBytes;

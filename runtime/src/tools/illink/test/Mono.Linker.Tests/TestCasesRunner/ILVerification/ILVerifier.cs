@@ -73,18 +73,17 @@ public class ILVerifier : IResolver, IDisposable
         IEnumerable<VerificationResult> results
     )
     {
-        return results.Where(
-            r =>
-                r.Code switch
-                {
-                    VerifierError.None
-                    // ex. localloc cannot be statically verified by ILVerify
-                    or VerifierError.Unverifiable
-                    // initlocals must be set for verifiable methods with one or more local variables - Lots of these in class libraries
-                    or VerifierError.InitLocals
-                        => false,
-                    _ => true
-                }
+        return results.Where(r =>
+            r.Code switch
+            {
+                VerifierError.None
+                // ex. localloc cannot be statically verified by ILVerify
+                or VerifierError.Unverifiable
+                // initlocals must be set for verifiable methods with one or more local variables - Lots of these in class libraries
+                or VerifierError.InitLocals
+                    => false,
+                _ => true
+            }
         );
     }
 

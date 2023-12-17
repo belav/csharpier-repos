@@ -116,8 +116,8 @@ namespace DbLinq.PostgreSql
                     keyColRow.TableName,
                     keyColRow.TableSchema
                 );
-                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(
-                    t => constraintFullDbName == t.Name
+                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t =>
+                    constraintFullDbName == t.Name
                 );
                 if (table == null)
                 {
@@ -140,15 +140,15 @@ namespace DbLinq.PostgreSql
                 if (isPrimaryKey)
                 {
                     //A) add primary key
-                    DbLinq.Schema.Dbml.Column primaryKeyCol = table.Type.Columns.First(
-                        c => c.Name == keyColRow.ColumnName
+                    DbLinq.Schema.Dbml.Column primaryKeyCol = table.Type.Columns.First(c =>
+                        c.Name == keyColRow.ColumnName
                     );
                     primaryKeyCol.IsPrimaryKey = true;
                 }
                 else
                 {
-                    DataForeignConstraint dataForeignConstraint = foreignKeys.FirstOrDefault(
-                        f => f.ConstraintName == keyColRow.ConstraintName
+                    DataForeignConstraint dataForeignConstraint = foreignKeys.FirstOrDefault(f =>
+                        f.ConstraintName == keyColRow.ConstraintName
                     );
 
                     if (dataForeignConstraint == null)

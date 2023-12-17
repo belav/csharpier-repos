@@ -187,9 +187,8 @@ public class BodyModelBinderTests
         mockInputFormatter.Verify(
             formatter =>
                 formatter.ReadAsync(
-                    It.Is<InputFormatterContext>(
-                        ctx =>
-                            ctx.TreatEmptyInputAsDefaultValue == treatEmptyInputAsDefaultValueOption
+                    It.Is<InputFormatterContext>(ctx =>
+                        ctx.TreatEmptyInputAsDefaultValue == treatEmptyInputAsDefaultValueOption
                     )
                 ),
             Times.Once

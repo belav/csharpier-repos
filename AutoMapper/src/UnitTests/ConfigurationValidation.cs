@@ -37,10 +37,8 @@ public class ConstructorMappingValidation : NonValidatingSpecBase
     public void Should_fail_validation() =>
         new Action(
             AssertConfigurationIsValid
-        ).ShouldThrowException<AutoMapperConfigurationException>(
-            ex =>
-                ex.MemberMap.ToString()
-                    .ShouldBe("Void .ctor(ComplexType), parameter myComplexMember")
+        ).ShouldThrowException<AutoMapperConfigurationException>(ex =>
+            ex.MemberMap.ToString().ShouldBe("Void .ctor(ComplexType), parameter myComplexMember")
         );
 }
 
@@ -390,10 +388,9 @@ public class NonMemberExpressionWithSourceValidation : NonValidatingSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>(MemberList.Source)
-                    .ForMember(d => d.OtherValue, o => o.MapFrom(s => s.Value ?? ""))
+        new(c =>
+            c.CreateMap<Source, Destination>(MemberList.Source)
+                .ForMember(d => d.OtherValue, o => o.MapFrom(s => s.Value ?? ""))
         );
 
     [Fact]
@@ -418,10 +415,9 @@ public class MatchingNonMemberExpressionWithSourceValidation : NonValidatingSpec
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>(MemberList.Source)
-                    .ForMember(d => d.Value, o => o.MapFrom(s => s.Value ?? ""))
+        new(c =>
+            c.CreateMap<Source, Destination>(MemberList.Source)
+                .ForMember(d => d.Value, o => o.MapFrom(s => s.Value ?? ""))
         );
 
     [Fact]

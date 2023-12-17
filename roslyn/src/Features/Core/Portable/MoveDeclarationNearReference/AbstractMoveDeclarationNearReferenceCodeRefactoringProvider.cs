@@ -38,8 +38,9 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 return;
             }
 
-            var service =
-                document.GetRequiredLanguageService<IMoveDeclarationNearReferenceService>();
+            var service = document.GetRequiredLanguageService<IMoveDeclarationNearReferenceService>(
+
+            );
             if (
                 !await service
                     .CanMoveDeclarationNearReferenceAsync(document, declaration, cancellationToken)
@@ -66,8 +67,9 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             CancellationToken cancellationToken
         )
         {
-            var service =
-                document.GetRequiredLanguageService<IMoveDeclarationNearReferenceService>();
+            var service = document.GetRequiredLanguageService<IMoveDeclarationNearReferenceService>(
+
+            );
             return await service
                 .MoveDeclarationNearReferenceAsync(document, statement, cancellationToken)
                 .ConfigureAwait(false);

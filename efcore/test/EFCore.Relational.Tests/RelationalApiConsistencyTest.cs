@@ -344,10 +344,9 @@ public class RelationalApiConsistencyTest
             {
                 typeof(RelationalCompiledQueryCacheKeyGenerator)
                     .GetRuntimeMethods()
-                    .Single(
-                        m =>
-                            m.Name == "GenerateCacheKeyCore"
-                            && m.DeclaringType == typeof(RelationalCompiledQueryCacheKeyGenerator)
+                    .Single(m =>
+                        m.Name == "GenerateCacheKeyCore"
+                        && m.DeclaringType == typeof(RelationalCompiledQueryCacheKeyGenerator)
                     )
             };
 

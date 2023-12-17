@@ -125,13 +125,15 @@ public class OpenApiOperationGeneratorTests
     [Fact]
     public void AddsMultipleRequestFormatsFromMetadataWithRequestTypeAndOptionalBodyParameter()
     {
-        var operation = GetOpenApiOperation([Consumes(
-            typeof(InferredJsonClass),
-            "application/custom0",
-            "application/custom1",
-            IsOptional = true
-        )]
-        () => { });
+        var operation = GetOpenApiOperation(
+            [Consumes(
+                typeof(InferredJsonClass),
+                "application/custom0",
+                "application/custom1",
+                IsOptional = true
+            )]
+            () => { }
+        );
         var request = operation.RequestBody;
         Assert.NotNull(request);
         Assert.Equal(2, request.Content.Count);

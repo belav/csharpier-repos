@@ -853,17 +853,17 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         using (CreateScratch<MyContext21768>(t => { }, "21768"))
         {
             using var context = new MyContext21768();
-            Expression<Func<IBook21768, BookViewModel21768>> projection = b =>
-                new BookViewModel21768
+            Expression<Func<IBook21768, BookViewModel21768>> projection =
+                b => new BookViewModel21768
                 {
                     FirstPage =
-                        b.FrontCover.Illustrations.FirstOrDefault(
-                            i => i.State >= IllustrationState21768.Approved
+                        b.FrontCover.Illustrations.FirstOrDefault(i =>
+                            i.State >= IllustrationState21768.Approved
                         ) != null
                             ? new PageViewModel21768
                             {
-                                Uri = b.FrontCover.Illustrations.FirstOrDefault(
-                                    i => i.State >= IllustrationState21768.Approved
+                                Uri = b.FrontCover.Illustrations.FirstOrDefault(i =>
+                                    i.State >= IllustrationState21768.Approved
                                 ).Uri
                             }
                             : null,
@@ -1032,22 +1032,19 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
 
             var query = context
                 .Set<Owner20729>()
-                .Select(
-                    dtoOwner =>
-                        new
+                .Select(dtoOwner => new
+                {
+                    dtoOwner.Id,
+                    Owned2 = dtoOwner.Owned2 == null
+                        ? null
+                        : new
                         {
-                            dtoOwner.Id,
-                            Owned2 = dtoOwner.Owned2 == null
+                            Other = dtoOwner.Owned2.Other == null
                                 ? null
-                                : new
-                                {
-                                    Other = dtoOwner.Owned2.Other == null
-                                        ? null
-                                        : new { dtoOwner.Owned2.Other.Id }
-                                },
-                            Owned1 = dtoOwner.Owned1 == null ? null : new { dtoOwner.Owned1.Value }
-                        }
-                )
+                                : new { dtoOwner.Owned2.Other.Id }
+                        },
+                    Owned1 = dtoOwner.Owned1 == null ? null : new { dtoOwner.Owned1.Value }
+                })
                 .ToList();
 
             var owner = Assert.Single(query);
@@ -1653,17 +1650,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             using var context = new MyContext18435();
 
             var result = context
-                .TestEntities.Select(
-                    x =>
-                        new
-                        {
-                            x.Value,
-                            A = x.Owned.First,
-                            B = x.Owned.Second,
-                            C = x.Child.Owned.First,
-                            D = x.Child.Owned.Second
-                        }
-                )
+                .TestEntities.Select(x => new
+                {
+                    x.Value,
+                    A = x.Owned.First,
+                    B = x.Owned.Second,
+                    C = x.Child.Owned.First,
+                    D = x.Child.Owned.Second
+                })
                 .FirstOrDefault();
 
             Assert.Equal("test", result.Value);
@@ -1946,25 +1940,19 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         {
             using var context = new MyContext23360();
 
-            var userQuery = context.User.Select(
-                u =>
-                    new CommonSelectType23360
-                    {
-                        // 1. FirstName, 2. LastName
-                        FirstName = u.Forename,
-                        LastName = u.Surname,
-                    }
-            );
+            var userQuery = context.User.Select(u => new CommonSelectType23360
+            {
+                // 1. FirstName, 2. LastName
+                FirstName = u.Forename,
+                LastName = u.Surname,
+            });
 
-            var customerQuery = context.Customer.Select(
-                c =>
-                    new CommonSelectType23360
-                    {
-                        // 1. LastName, 2. FirstName
-                        LastName = c.FamilyName,
-                        FirstName = c.GivenName,
-                    }
-            );
+            var customerQuery = context.Customer.Select(c => new CommonSelectType23360
+            {
+                // 1. LastName, 2. FirstName
+                LastName = c.FamilyName,
+                FirstName = c.GivenName,
+            });
 
             var result = userQuery.Union(customerQuery).ToList();
 
@@ -2032,24 +2020,23 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
 
             var myA = context
                 .As.Where(x => x.Id == 1)
-                .Select(
-                    x =>
-                        new ADto18394
-                        {
-                            Id = x.Id,
-                            PropertyB =
-                                (x.PropertyB == null)
-                                    ? null
-                                    : new BDto18394
-                                    {
-                                        Id = x.PropertyB.Id,
-                                        PropertyCList = x.PropertyB.PropertyCList.Select(
-                                            y => new CDto18394 { Id = y.Id, SomeText = y.SomeText }
-                                        )
-                                            .ToList()
-                                    }
-                        }
-                )
+                .Select(x => new ADto18394
+                {
+                    Id = x.Id,
+                    PropertyB =
+                        (x.PropertyB == null)
+                            ? null
+                            : new BDto18394
+                            {
+                                Id = x.PropertyB.Id,
+                                PropertyCList = x.PropertyB.PropertyCList.Select(y => new CDto18394
+                                {
+                                    Id = y.Id,
+                                    SomeText = y.SomeText
+                                })
+                                    .ToList()
+                            }
+                })
                 .FirstOrDefault();
 
             Assert.Equal("TestText", myA.PropertyB.PropertyCList.First().SomeText);

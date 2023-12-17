@@ -71,10 +71,9 @@ public class SqlServerOutputClauseConvention : ITriggerAddedConvention, ITrigger
         if (
             !entityType
                 .GetDeclaredTriggers()
-                .Any(
-                    t =>
-                        t.GetTableName() == trigger.GetTableName()
-                        && t.GetTableSchema() == trigger.GetTableSchema()
+                .Any(t =>
+                    t.GetTableName() == trigger.GetTableName()
+                    && t.GetTableSchema() == trigger.GetTableSchema()
                 )
         )
         {

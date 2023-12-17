@@ -313,8 +313,9 @@ namespace System.ServiceModel.Channels
 
         static new CriticalAllocHandleSocketAddressList FromSize(int size)
         {
-            CriticalAllocHandleSocketAddressList result =
-                new CriticalAllocHandleSocketAddressList();
+            CriticalAllocHandleSocketAddressList result = new CriticalAllocHandleSocketAddressList(
+
+            );
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
             finally

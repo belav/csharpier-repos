@@ -21,16 +21,15 @@ public static class SupplyParameterFromFormServiceCollectionExtensions
     )
     {
         serviceCollection.TryAddEnumerable(
-            ServiceDescriptor.Scoped<
-                ICascadingValueSupplier,
-                SupplyParameterFromFormValueProvider
-            >(services =>
-            {
-                return new SupplyParameterFromFormValueProvider(
-                    services.GetRequiredService<IFormValueMapper>(),
-                    mappingScopeName: ""
-                );
-            })
+            ServiceDescriptor.Scoped<ICascadingValueSupplier, SupplyParameterFromFormValueProvider>(
+                services =>
+                {
+                    return new SupplyParameterFromFormValueProvider(
+                        services.GetRequiredService<IFormValueMapper>(),
+                        mappingScopeName: ""
+                    );
+                }
+            )
         );
 
         return serviceCollection;

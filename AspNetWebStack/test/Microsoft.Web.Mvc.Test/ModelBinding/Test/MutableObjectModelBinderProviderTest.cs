@@ -23,8 +23,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValueProvider = new SimpleValueProvider()
             };
 
-            MutableObjectModelBinderProvider binderProvider =
-                new MutableObjectModelBinderProvider();
+            MutableObjectModelBinderProvider binderProvider = new MutableObjectModelBinderProvider(
+
+            );
 
             // Act
             IExtensibleModelBinder binder = binderProvider.GetBinder(null, bindingContext);
@@ -47,8 +48,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } }
             };
 
-            MutableObjectModelBinderProvider binderProvider =
-                new MutableObjectModelBinderProvider();
+            MutableObjectModelBinderProvider binderProvider = new MutableObjectModelBinderProvider(
+
+            );
 
             // Act
             IExtensibleModelBinder binder = binderProvider.GetBinder(null, bindingContext);
@@ -72,8 +74,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } }
             };
 
-            MutableObjectModelBinderProvider binderProvider =
-                new MutableObjectModelBinderProvider();
+            MutableObjectModelBinderProvider binderProvider = new MutableObjectModelBinderProvider(
+
+            );
 
             // Act
             IExtensibleModelBinder binder = binderProvider.GetBinder(null, bindingContext);

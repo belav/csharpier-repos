@@ -49,15 +49,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     // https://github.com/dotnet/roslyn/issues/31381, that seems to be causing duplicate diagnostics.
                     var filteredDiagnostics = diagnostics
                         .Distinct()
-                        .WhereAsArray(
-                            d =>
-                                this.IncludeDiagnosticDuringFixAll(
-                                    d,
-                                    document,
-                                    model,
-                                    fixAllContext.CodeActionEquivalenceKey,
-                                    fixAllContext.CancellationToken
-                                )
+                        .WhereAsArray(d =>
+                            this.IncludeDiagnosticDuringFixAll(
+                                d,
+                                document,
+                                model,
+                                fixAllContext.CodeActionEquivalenceKey,
+                                fixAllContext.CancellationToken
+                            )
                         )
                         .Sort(
                             (d1, d2) => d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start

@@ -120,15 +120,14 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 var generatedMethod = await SignatureInfo
                     .GenerateMethodAsync(syntaxFactory, false, cancellationToken)
                     .ConfigureAwait(false);
-                return !existingMethods.Any(
-                    m =>
-                        SignatureComparer.Instance.HaveSameSignature(
-                            m,
-                            generatedMethod,
-                            caseSensitive: syntaxFacts.IsCaseSensitive,
-                            compareParameterName: true,
-                            isParameterCaseSensitive: syntaxFacts.IsCaseSensitive
-                        )
+                return !existingMethods.Any(m =>
+                    SignatureComparer.Instance.HaveSameSignature(
+                        m,
+                        generatedMethod,
+                        caseSensitive: syntaxFacts.IsCaseSensitive,
+                        compareParameterName: true,
+                        isParameterCaseSensitive: syntaxFacts.IsCaseSensitive
+                    )
                 );
             }
         }

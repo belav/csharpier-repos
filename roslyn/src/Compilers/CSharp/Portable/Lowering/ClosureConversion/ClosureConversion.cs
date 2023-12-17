@@ -1926,8 +1926,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_synthesizedMethods == null)
             {
-                _synthesizedMethods =
-                    ArrayBuilder<TypeCompilationState.MethodWithBody>.GetInstance();
+                _synthesizedMethods = ArrayBuilder<TypeCompilationState.MethodWithBody>.GetInstance(
+
+                );
             }
 
             _synthesizedMethods.Add(

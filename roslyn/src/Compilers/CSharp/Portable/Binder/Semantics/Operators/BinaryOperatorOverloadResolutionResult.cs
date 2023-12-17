@@ -145,8 +145,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             this.Results.Clear();
         }
 
-        public static readonly ObjectPool<BinaryOperatorOverloadResolutionResult> Pool =
-            CreatePool();
+        public static readonly ObjectPool<BinaryOperatorOverloadResolutionResult> Pool = CreatePool(
+
+        );
 
         private static ObjectPool<BinaryOperatorOverloadResolutionResult> CreatePool()
         {

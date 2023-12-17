@@ -1999,11 +1999,9 @@ namespace MonoTests
             // reference types
             t = frame.Method.GetParameters()[7].ParameterType;
             Assert.AreEqual("Tests", t.Name);
-            var nested = (
-                from nt in t.GetNestedTypes()
-                where nt.IsNestedPublic
-                select nt
-            ).ToArray();
+            var nested = (from nt in t.GetNestedTypes() where nt.IsNestedPublic select nt).ToArray(
+
+            );
             Assert.AreEqual(2, nested.Length);
             Assert.AreEqual("NestedClass", nested[0].Name);
             Assert.IsTrue(t.BaseType.IsAssignableFrom(t));
@@ -3385,12 +3383,11 @@ namespace MonoTests
             var stringType = vm.RootDomain.Corlib.GetType("System.String");
             var stringConstructor = stringType
                 .GetMethods()
-                .Single(
-                    c =>
-                        c.Name == ".ctor"
-                        && c.GetParameters().Length == 2
-                        && c.GetParameters()[0].ParameterType.Name == "Char"
-                        && c.GetParameters()[1].ParameterType.Name == "Int32"
+                .Single(c =>
+                    c.Name == ".ctor"
+                    && c.GetParameters().Length == 2
+                    && c.GetParameters()[0].ParameterType.Name == "Char"
+                    && c.GetParameters()[1].ParameterType.Name == "Int32"
                 );
             var str = stringType.NewInstance(
                 e.Thread,

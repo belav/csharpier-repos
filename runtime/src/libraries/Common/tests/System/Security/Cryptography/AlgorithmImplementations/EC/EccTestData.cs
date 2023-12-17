@@ -27,22 +27,34 @@ namespace System.Security.Cryptography.Tests
             {
                 CurveType = ECCurve.ECCurveType.PrimeShortWeierstrass,
                 Prime =
-                    "FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFF".HexToByteArray(),
+                    "FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFF".HexToByteArray(
+
+                    ),
                 A =
-                    "FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFC".HexToByteArray(),
+                    "FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFC".HexToByteArray(
+
+                    ),
                 B =
-                    "5AC635D8AA3A93E7B3EBBD55769886BC651D06B0CC53B0F63BCE3C3E27D2604B".HexToByteArray(),
+                    "5AC635D8AA3A93E7B3EBBD55769886BC651D06B0CC53B0F63BCE3C3E27D2604B".HexToByteArray(
+
+                    ),
                 Seed = "C49D360886E704936A6678E1139D26B7819F7E90".HexToByteArray(),
                 Hash = HashAlgorithmName.SHA1,
                 G = new ECPoint
                 {
                     X =
-                        "6B17D1F2E12C4247F8BCE6E563A440F277037D812DEB33A0F4A13945D898C296".HexToByteArray(),
+                        "6B17D1F2E12C4247F8BCE6E563A440F277037D812DEB33A0F4A13945D898C296".HexToByteArray(
+
+                        ),
                     Y =
-                        "4FE342E2FE1A7F9B8EE7EB4A7C0F9E162BCE33576B315ECECBB6406837BF51F5".HexToByteArray(),
+                        "4FE342E2FE1A7F9B8EE7EB4A7C0F9E162BCE33576B315ECECBB6406837BF51F5".HexToByteArray(
+
+                        ),
                 },
                 Order =
-                    "FFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551".HexToByteArray(),
+                    "FFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551".HexToByteArray(
+
+                    ),
                 Cofactor = new byte[] { 0x01 },
             };
         }
@@ -254,12 +266,18 @@ namespace System.Security.Cryptography.Tests
                 Q =
                 {
                     X =
-                        "8101ECE47464A6EAD70CF69A6E2BD3D88691A3262D22CBA4F7635EAFF26680A8".HexToByteArray(),
+                        "8101ECE47464A6EAD70CF69A6E2BD3D88691A3262D22CBA4F7635EAFF26680A8".HexToByteArray(
+
+                        ),
                     Y =
-                        "D8A12BA61D599235F67D9CB4D58F1783D3CA43E78F0A5ABAA624079936C0C3A9".HexToByteArray(),
+                        "D8A12BA61D599235F67D9CB4D58F1783D3CA43E78F0A5ABAA624079936C0C3A9".HexToByteArray(
+
+                        ),
                 },
                 D =
-                    "70A12C2DB16845ED56FF68CFC21A472B3F04D7D6851BF6349F2D7D5B3452B38A".HexToByteArray(),
+                    "70A12C2DB16845ED56FF68CFC21A472B3F04D7D6851BF6349F2D7D5B3452B38A".HexToByteArray(
+
+                    ),
             };
         }
 
@@ -273,12 +291,18 @@ namespace System.Security.Cryptography.Tests
                 Q =
                 {
                     X =
-                        "8101ECE47464A6EAD70CF69A6E2BD3D88691A3262D22CBA4F7635EAFF26680A8".HexToByteArray(),
+                        "8101ECE47464A6EAD70CF69A6E2BD3D88691A3262D22CBA4F7635EAFF26680A8".HexToByteArray(
+
+                        ),
                     Y =
-                        "D8A12BA61D599235F67D9CB4D58F1783D3CA43E78F0A5ABAA624079936C0C3A9".HexToByteArray(),
+                        "D8A12BA61D599235F67D9CB4D58F1783D3CA43E78F0A5ABAA624079936C0C3A9".HexToByteArray(
+
+                        ),
                 },
                 D =
-                    "70A12C2DB16845ED56FF68CFC21A472B3F04D7D6851BF6349F2D7D5B3452B38A".HexToByteArray(),
+                    "70A12C2DB16845ED56FF68CFC21A472B3F04D7D6851BF6349F2D7D5B3452B38A".HexToByteArray(
+
+                    ),
             };
         }
 
@@ -334,12 +358,18 @@ namespace System.Security.Cryptography.Tests
             Q =
             {
                 X =
-                    "0752770BD33E6A6EE2096CB6B120E7497B47B6C077A147CB57DAF693909D840716EEA7AA".HexToByteArray(),
+                    "0752770BD33E6A6EE2096CB6B120E7497B47B6C077A147CB57DAF693909D840716EEA7AA".HexToByteArray(
+
+                    ),
                 Y =
-                    "047DB9995C35603C5E6B2F8CDFF0EB71D37AE3431BA0849EBAB13A4C9003C7969F55CD90".HexToByteArray(),
+                    "047DB9995C35603C5E6B2F8CDFF0EB71D37AE3431BA0849EBAB13A4C9003C7969F55CD90".HexToByteArray(
+
+                    ),
             },
             D =
-                "00B4F1AE1E7FDCD4B0E82053C08A908852B26231E6C01670FCC6C3EA2C5D3FED40EDF037".HexToByteArray(),
+                "00B4F1AE1E7FDCD4B0E82053C08A908852B26231E6C01670FCC6C3EA2C5D3FED40EDF037".HexToByteArray(
+
+                ),
         };
 
         internal static readonly ECParameters C2pnb163v1Key1 = new ECParameters

@@ -1832,9 +1832,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     t.IsInterface
                     && (signature.Method.IsAbstract || signature.Method.IsVirtual)
                     && SourceUserDefinedOperatorSymbol.IsSelfConstrainedTypeParameter(
-                        (
-                            definition = signature.Method.OriginalDefinition
-                        ).ReturnType.StrippedType(),
+                        (definition = signature.Method.OriginalDefinition).ReturnType.StrippedType(
+
+                        ),
                         definition.ContainingType
                     )
                 );

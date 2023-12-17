@@ -40,8 +40,8 @@
                     htmlHelper.ViewContext
                 );
             foreach (
-                ModelClientValidationRule rule in validators.SelectMany(
-                    v => v.GetClientValidationRules()
+                ModelClientValidationRule rule in validators.SelectMany(v =>
+                    v.GetClientValidationRules()
                 )
             )
             {

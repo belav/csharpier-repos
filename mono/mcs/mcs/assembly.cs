@@ -713,7 +713,9 @@ namespace Mono.CSharp
                     if (pa.IsDefined && pa.ResolveBuilder())
                     {
                         var prop =
-                            module.PredefinedMembers.RuntimeCompatibilityWrapNonExceptionThrows.Get();
+                            module.PredefinedMembers.RuntimeCompatibilityWrapNonExceptionThrows.Get(
+
+                            );
                         if (prop != null)
                         {
                             AttributeEncoder encoder = new AttributeEncoder();

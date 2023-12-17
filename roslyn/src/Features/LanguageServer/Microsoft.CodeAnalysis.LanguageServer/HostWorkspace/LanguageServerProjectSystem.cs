@@ -333,8 +333,8 @@ internal sealed class LanguageServerProjectSystem
                 foreach (var loadedProjectInfo in loadedProjectInfos)
                 {
                     // If we already have the project, just update it
-                    var existingProject = existingProjects.Find(
-                        p => p.GetTargetFramework() == loadedProjectInfo.TargetFramework
+                    var existingProject = existingProjects.Find(p =>
+                        p.GetTargetFramework() == loadedProjectInfo.TargetFramework
                     );
 
                     if (existingProject != null)
@@ -436,8 +436,7 @@ internal sealed class LanguageServerProjectSystem
                 );
             }
 
-            return diagnosticLogItems.Any(
-                logItem => logItem.Kind is WorkspaceDiagnosticKind.Failure
+            return diagnosticLogItems.Any(logItem => logItem.Kind is WorkspaceDiagnosticKind.Failure
             )
                 ? LSP.MessageType.Error
                 : LSP.MessageType.Warning;

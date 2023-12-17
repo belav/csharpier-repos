@@ -49,8 +49,9 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
         _context = context;
         _serverPeerSettings = context.ServerPeerSettings;
         _streamIdFeature = context.ConnectionFeatures.GetRequiredFeature<IStreamIdFeature>();
-        _streamClosedFeature =
-            context.ConnectionFeatures.GetRequiredFeature<IStreamClosedFeature>();
+        _streamClosedFeature = context.ConnectionFeatures.GetRequiredFeature<IStreamClosedFeature>(
+
+        );
         _errorCodeFeature =
             context.ConnectionFeatures.GetRequiredFeature<IProtocolErrorCodeFeature>();
         _headerType = headerType ?? -1;

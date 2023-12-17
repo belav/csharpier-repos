@@ -39,10 +39,9 @@ public class CngCbcAuthenticatedEncryptorDescriptorDeserializerTests
                   <hash algorithm='SHA512' />
                   <masterKey enc:requiresEncryption='true'>{masterKey}</masterKey>
                 </descriptor>";
-        var deserializedDescriptor =
-            new CngCbcAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
-                XElement.Parse(xml)
-            );
+        var deserializedDescriptor = new CngCbcAuthenticatedEncryptorDescriptorDeserializer(
+
+        ).ImportFromXml(XElement.Parse(xml));
         var test = CreateEncryptorInstanceFromDescriptor(
             deserializedDescriptor as CngCbcAuthenticatedEncryptorDescriptor
         );

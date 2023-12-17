@@ -73,12 +73,11 @@ public class ReadonlyCollectionProperties : AutoMapperSpecBase
                 .ForMember(
                     d => d.KeyValuesOtherName,
                     o =>
-                        o.MapFrom(
-                            s =>
-                                new[]
-                                {
-                                    new KeyValueModel { Key = "key1", Value = "value1" }
-                                }
+                        o.MapFrom(s =>
+                            new[]
+                            {
+                                new KeyValueModel { Key = "key1", Value = "value1" }
+                            }
                         )
                 )
                 .Include<DomainModel, Model>();

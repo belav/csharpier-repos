@@ -43,15 +43,15 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> NullableInt16sAndDecrements()
         {
-            return NullableInt16s.Select(
-                i => new object[] { typeof(short?), i, unchecked((short?)(i - 1)) }
+            return NullableInt16s.Select(i =>
+                new object[] { typeof(short?), i, unchecked((short?)(i - 1)) }
             );
         }
 
         public static IEnumerable<object[]> NullableInt16sAndIncrements()
         {
-            return NullableInt16s.Select(
-                i => new object[] { typeof(short?), i, unchecked((short?)(i + 1)) }
+            return NullableInt16s.Select(i =>
+                new object[] { typeof(short?), i, unchecked((short?)(i + 1)) }
             );
         }
 
@@ -62,15 +62,15 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> UInt16sAndDecrements()
         {
-            return UInt16s.Select(
-                i => new object[] { typeof(ushort), i, unchecked((ushort)(i - 1)) }
+            return UInt16s.Select(i =>
+                new object[] { typeof(ushort), i, unchecked((ushort)(i - 1)) }
             );
         }
 
         public static IEnumerable<object[]> UInt16sAndIncrements()
         {
-            return UInt16s.Select(
-                i => new object[] { typeof(ushort), i, unchecked((ushort)(i + 1)) }
+            return UInt16s.Select(i =>
+                new object[] { typeof(ushort), i, unchecked((ushort)(i + 1)) }
             );
         }
 
@@ -81,15 +81,15 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> NullableUInt16sAndDecrements()
         {
-            return NullableUInt16s.Select(
-                i => new object[] { typeof(ushort?), i, unchecked((ushort?)(i - 1)) }
+            return NullableUInt16s.Select(i =>
+                new object[] { typeof(ushort?), i, unchecked((ushort?)(i - 1)) }
             );
         }
 
         public static IEnumerable<object[]> NullableUInt16sAndIncrements()
         {
-            return NullableUInt16s.Select(
-                i => new object[] { typeof(ushort?), i, unchecked((ushort?)(i + 1)) }
+            return NullableUInt16s.Select(i =>
+                new object[] { typeof(ushort?), i, unchecked((ushort?)(i + 1)) }
             );
         }
 
@@ -219,15 +219,13 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> NullableUInt64sAndDecrements()
         {
-            return NullableUInt64s.Select(
-                i => new object[] { typeof(ulong?), i, unchecked(i - 1) }
+            return NullableUInt64s.Select(i => new object[] { typeof(ulong?), i, unchecked(i - 1) }
             );
         }
 
         public static IEnumerable<object[]> NullableUInt64sAndIncrements()
         {
-            return NullableUInt64s.Select(
-                i => new object[] { typeof(ulong?), i, unchecked(i + 1) }
+            return NullableUInt64s.Select(i => new object[] { typeof(ulong?), i, unchecked(i + 1) }
             );
         }
 

@@ -280,16 +280,16 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     {
                         // try to remove default value followed by negated value, in this order
                         IEnumerable<Constant> oldDomain = _domainMap.GetDomain(currentPath);
-                        Constant defaultValue = oldDomain.FirstOrDefault(
-                            domainValue => IsDefaultValue(domainValue, currentPath)
+                        Constant defaultValue = oldDomain.FirstOrDefault(domainValue =>
+                            IsDefaultValue(domainValue, currentPath)
                         );
                         if (defaultValue != null)
                         {
                             RemoveUnusedValueFromStoreDomain(defaultValue, currentPath);
                         }
                         oldDomain = _domainMap.GetDomain(currentPath); // is case has changed
-                        Constant negatedValue = oldDomain.FirstOrDefault(
-                            domainValue => domainValue is NegatedConstant
+                        Constant negatedValue = oldDomain.FirstOrDefault(domainValue =>
+                            domainValue is NegatedConstant
                         );
                         if (negatedValue != null)
                         {
@@ -666,8 +666,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         {
             // Compute right domain query - non-simplified version of "basic view"
             // It is used below to check whether we need a default value in a case statement
-            IEnumerable<LeftCellWrapper> usedCells = _context.AllWrappersForExtent.Where(
-                w => _usedViews.Contains(w.FragmentQuery)
+            IEnumerable<LeftCellWrapper> usedCells = _context.AllWrappersForExtent.Where(w =>
+                _usedViews.Contains(w.FragmentQuery)
             );
             CellTreeNode rightDomainQuery = new OpCellTreeNode(
                 _context,
@@ -1043,8 +1043,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     // otherwise it means condition on the fragment is not satisfiable
                     if (!found)
                     {
-                        LeftCellWrapper fragment = _context.AllWrappersForExtent.First(
-                            lcr => lcr.FragmentQuery.Equals(toFill.Query)
+                        LeftCellWrapper fragment = _context.AllWrappersForExtent.First(lcr =>
+                            lcr.FragmentQuery.Equals(toFill.Query)
                         );
                         Debug.Assert(fragment != null);
 
@@ -1698,8 +1698,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             if (tile.OpKind == TileOpKind.Named)
             {
                 FragmentQuery view = ((TileNamed<FragmentQuery>)tile).NamedQuery;
-                LeftCellWrapper leftCellWrapper = context.AllWrappersForExtent.First(
-                    w => w.FragmentQuery == view
+                LeftCellWrapper leftCellWrapper = context.AllWrappersForExtent.First(w =>
+                    w.FragmentQuery == view
                 );
                 return new LeafCellTreeNode(context, leftCellWrapper);
             }
@@ -1787,8 +1787,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 where
                     domainConstraint.Variable.Identifier is MemberRestriction
                     && false
-                        == domainConstraint.Variable.Domain.All(
-                            constant => domainConstraint.Range.Contains(constant)
+                        == domainConstraint.Variable.Domain.All(constant =>
+                            domainConstraint.Range.Contains(constant)
                         )
                 select ((MemberRestriction)domainConstraint.Variable.Identifier)
                     .RestrictedMemberSlot

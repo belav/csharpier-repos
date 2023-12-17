@@ -1517,8 +1517,9 @@ namespace System.ServiceModel.Description
             static Message CreateHttpResponseMessage(HttpStatusCode code)
             {
                 Message message = new NullMessage();
-                HttpResponseMessageProperty httpResponseProperty =
-                    new HttpResponseMessageProperty();
+                HttpResponseMessageProperty httpResponseProperty = new HttpResponseMessageProperty(
+
+                );
                 httpResponseProperty.StatusCode = code;
                 message.Properties.Add(HttpResponseMessageProperty.Name, httpResponseProperty);
                 return message;

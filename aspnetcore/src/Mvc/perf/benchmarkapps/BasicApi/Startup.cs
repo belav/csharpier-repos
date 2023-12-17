@@ -72,8 +72,8 @@ namespace BasicApi
                 case "MYSQL":
                     services
                         .AddEntityFrameworkMySql()
-                        .AddDbContextPool<BasicApiContext>(
-                            options => options.UseMySql(connectionString)
+                        .AddDbContextPool<BasicApiContext>(options =>
+                            options.UseMySql(connectionString)
                         );
                     break;
 #endif
@@ -93,8 +93,8 @@ namespace BasicApi
 
                     services
                         .AddEntityFrameworkNpgsql()
-                        .AddDbContextPool<BasicApiContext>(
-                            options => options.UseNpgsql(connectionString)
+                        .AddDbContextPool<BasicApiContext>(options =>
+                            options.UseNpgsql(connectionString)
                         );
                     break;
 
@@ -102,16 +102,16 @@ namespace BasicApi
                     _isSQLite = true;
                     services
                         .AddEntityFrameworkSqlite()
-                        .AddDbContextPool<BasicApiContext>(
-                            options => options.UseSqlite("Data Source=BasicApi.db;Cache=Shared")
+                        .AddDbContextPool<BasicApiContext>(options =>
+                            options.UseSqlite("Data Source=BasicApi.db;Cache=Shared")
                         );
                     break;
 
                 case "SQLSERVER":
                     services
                         .AddEntityFrameworkSqlServer()
-                        .AddDbContextPool<BasicApiContext>(
-                            options => options.UseSqlServer(connectionString)
+                        .AddDbContextPool<BasicApiContext>(options =>
+                            options.UseSqlServer(connectionString)
                         );
                     break;
 
@@ -145,10 +145,9 @@ namespace BasicApi
             services
                 .AddMvcCore()
                 .AddAuthorization()
-                .AddNewtonsoftJson(
-                    options =>
-                        options.SerializerSettings.ContractResolver =
-                            new CamelCasePropertyNamesContractResolver()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ContractResolver =
+                        new CamelCasePropertyNamesContractResolver()
                 )
                 .AddDataAnnotations();
         }
@@ -166,20 +165,19 @@ namespace BasicApi
                 lifetime.ApplicationStopping.Register(() => DropDatabaseTables(services));
             }
 
-            app.Use(
-                next =>
-                    async context =>
+            app.Use(next =>
+                async context =>
+                {
+                    try
                     {
-                        try
-                        {
-                            await next(context);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex);
-                            throw;
-                        }
+                        await next(context);
                     }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                        throw;
+                    }
+                }
             );
 
             app.UseRouting();

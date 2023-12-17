@@ -206,8 +206,8 @@ namespace System.Web.Http.Metadata
                 throw Error.ArgumentNull("validatorProviders");
             }
 
-            return validatorProviders.SelectMany(
-                provider => provider.GetValidators(this, validatorProviders)
+            return validatorProviders.SelectMany(provider =>
+                provider.GetValidators(this, validatorProviders)
             );
         }
 

@@ -165,8 +165,8 @@ namespace System.Runtime.DurableInstancing
                     IEnumerable<XName> eventsToUnbind = null;
                     if (this.pendingOwnerEvents != null && this.pendingOwnerEvents.Count > 0)
                     {
-                        eventsToUnbind = this.pendingOwnerEvents.Select(
-                            persistenceEvent => persistenceEvent.Name
+                        eventsToUnbind = this.pendingOwnerEvents.Select(persistenceEvent =>
+                            persistenceEvent.Name
                         );
                     }
                     if (this.boundOwnerEvents != null && this.boundOwnerEvents.Count > 0)

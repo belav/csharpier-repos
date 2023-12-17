@@ -73,8 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             var dotnetExe = DotNetCoreSdk.ExePath;
             var netStandardDllPath = AppDomain
                 .CurrentDomain.GetAssemblies()
-                .FirstOrDefault(
-                    assembly => !assembly.IsDynamic && assembly.Location.EndsWith("netstandard.dll")
+                .FirstOrDefault(assembly =>
+                    !assembly.IsDynamic && assembly.Location.EndsWith("netstandard.dll")
                 )
                 .Location;
             var netStandardDllDir = Path.GetDirectoryName(netStandardDllPath);
@@ -3343,8 +3343,8 @@ class C
             parsedArgs.Errors.Verify();
             ;
             AssertEx.Equal(
-                new[] { "a.txt", "a.cs", "b.cs", "c.cs" }.Select(
-                    f => Path.Combine(WorkingDirectory, f)
+                new[] { "a.txt", "a.cs", "b.cs", "c.cs" }.Select(f =>
+                    Path.Combine(WorkingDirectory, f)
                 ),
                 parsedArgs.EmbeddedFiles.Select(f => f.Path)
             );
@@ -7896,8 +7896,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             CSharpCommandLineArguments args
         )
         {
-            var actualOrdered = args.CompilationOptions.SpecificDiagnosticOptions.OrderBy(
-                entry => entry.Key
+            var actualOrdered = args.CompilationOptions.SpecificDiagnosticOptions.OrderBy(entry =>
+                entry.Key
             );
 
             AssertEx.Equal(

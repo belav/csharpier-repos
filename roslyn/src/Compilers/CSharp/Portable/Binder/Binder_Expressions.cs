@@ -5733,8 +5733,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(!boundInitExpr.IsDefault);
 
-            ArrayBuilder<BoundExpression> initializers =
-                ArrayBuilder<BoundExpression>.GetInstance();
+            ArrayBuilder<BoundExpression> initializers = ArrayBuilder<BoundExpression>.GetInstance(
+
+            );
             if (dimension == type.Rank)
             {
                 // We are processing the nth dimension of a rank-n array. We expect that these will
@@ -6160,8 +6161,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool inLegalPosition = true;
 
             // If we are using a language version that does not restrict the position of a stackalloc expression, skip that test.
-            LanguageVersion requiredVersion =
-                MessageID.IDS_FeatureNestedStackalloc.RequiredVersion();
+            LanguageVersion requiredVersion = MessageID.IDS_FeatureNestedStackalloc.RequiredVersion(
+
+            );
             if (requiredVersion > Compilation.LanguageVersion)
             {
                 inLegalPosition =
@@ -8123,10 +8125,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 .GetInterpolatedStringHandlerData()
                                 .ArgumentPlaceholders;
                             if (
-                                handlerPlaceholders.Any(
-                                    static placeholder =>
-                                        placeholder.ArgumentIndex
-                                        == BoundInterpolatedStringArgumentPlaceholder.InstanceParameter
+                                handlerPlaceholders.Any(static placeholder =>
+                                    placeholder.ArgumentIndex
+                                    == BoundInterpolatedStringArgumentPlaceholder.InstanceParameter
                                 )
                             )
                             {
@@ -8742,8 +8743,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     elementInitializer,
                     applicableMethods: ImmutableArray<MethodSymbol>.Empty,
                     implicitReceiver,
-                    arguments: boundElementInitializerExpressions.SelectAsArray(
-                        e => BindToNaturalType(e, diagnostics)
+                    arguments: boundElementInitializerExpressions.SelectAsArray(e =>
+                        BindToNaturalType(e, diagnostics)
                     ),
                     type: GetSpecialType(SpecialType.System_Void, diagnostics, elementInitializer),
                     hasErrors: hasErrors
@@ -13720,8 +13721,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             ImmutableArray<string> argumentNames = analyzedArguments.GetNames();
-            ImmutableArray<RefKind> argumentRefKinds =
-                analyzedArguments.RefKinds.ToImmutableOrNull();
+            ImmutableArray<RefKind> argumentRefKinds = analyzedArguments.RefKinds.ToImmutableOrNull(
+
+            );
             if (!overloadResolutionResult.Succeeded)
             {
                 // If the arguments had an error reported about them then suppress further error

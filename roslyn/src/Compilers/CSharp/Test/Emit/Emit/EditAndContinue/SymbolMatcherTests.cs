@@ -2074,16 +2074,16 @@ class A
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMembers()
                 .OfType<MethodSymbol>()
-                .Where(
-                    m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
                 )
                 .ToArray();
             var members0 = compilation0
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMembers()
                 .OfType<MethodSymbol>()
-                .Where(
-                    m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
                 )
                 .ToArray();
             Assert.Equal(6, members1.Length);
@@ -2133,16 +2133,16 @@ class A
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMembers()
                 .OfType<MethodSymbol>()
-                .Where(
-                    m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
                 )
                 .ToArray();
             var members0 = compilation0
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMembers()
                 .OfType<MethodSymbol>()
-                .Where(
-                    m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
                 )
                 .ToArray();
             Assert.Equal(6, members1.Length);
@@ -2202,16 +2202,16 @@ class A
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMembers()
                 .OfType<MethodSymbol>()
-                .Where(
-                    m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
                 )
                 .ToArray();
             var members0 = compilation0
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMembers()
                 .OfType<MethodSymbol>()
-                .Where(
-                    m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
                 )
                 .ToArray();
             Assert.Equal(3, members1.Length);
@@ -2266,8 +2266,8 @@ class A
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMembers()
                 .OfType<MethodSymbol>()
-                .Where(
-                    m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
                 )
                 .ToArray();
             Assert.Equal(6, members1.Length);
@@ -2318,8 +2318,8 @@ class A
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMembers()
                 .OfType<MethodSymbol>()
-                .Where(
-                    m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
                 )
                 .ToArray();
             Assert.Equal(6, members1.Length);

@@ -15,11 +15,8 @@ public abstract class ComplianceTestBase
     {
         var concreteTests = TargetAssembly
             .GetTypes()
-            .Where(
-                c =>
-                    c.BaseType != typeof(object)
-                    && !c.IsAbstract
-                    && (c.IsPublic || c.IsNestedPublic)
+            .Where(c =>
+                c.BaseType != typeof(object) && !c.IsAbstract && (c.IsPublic || c.IsNestedPublic)
             )
             .ToList();
         var nonImplementedBases = (

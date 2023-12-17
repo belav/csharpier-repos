@@ -116,8 +116,8 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
             .Order()
             .ToList();
         foreach (
-            (string expectedFilename, bool expectFingerprint) in superSet.OrderByDescending(
-                kvp => kvp.Key
+            (string expectedFilename, bool expectFingerprint) in superSet.OrderByDescending(kvp =>
+                kvp.Key
             )
         )
         {
@@ -531,8 +531,8 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
         BootJsonData bootJson = ParseBootData(bootJsonPath);
         string spcExpectedFilename = $"System.Private.CoreLib{WasmAssemblyExtension}";
         string? spcActualFilename = bootJson
-            .resources.assembly.Keys.Where(
-                a => Path.GetFileNameWithoutExtension(a) == "System.Private.CoreLib"
+            .resources.assembly.Keys.Where(a =>
+                Path.GetFileNameWithoutExtension(a) == "System.Private.CoreLib"
             )
             .SingleOrDefault();
         if (spcActualFilename is null)

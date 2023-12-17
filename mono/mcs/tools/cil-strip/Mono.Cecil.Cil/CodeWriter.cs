@@ -287,8 +287,9 @@ namespace Mono.Cecil.Cil
             if (m_standaloneSigCache.Contains(sig))
                 return (MetadataToken)m_standaloneSigCache[sig];
 
-            StandAloneSigTable sasTable =
-                m_reflectWriter.MetadataTableWriter.GetStandAloneSigTable();
+            StandAloneSigTable sasTable = m_reflectWriter.MetadataTableWriter.GetStandAloneSigTable(
+
+            );
             StandAloneSigRow sasRow = m_reflectWriter.MetadataRowWriter.CreateStandAloneSigRow(sig);
 
             sasTable.Rows.Add(sasRow);
@@ -416,8 +417,9 @@ namespace Mono.Cecil.Cil
                 return;
             }
 
-            StandAloneSigTable sasTable =
-                m_reflectWriter.MetadataTableWriter.GetStandAloneSigTable();
+            StandAloneSigTable sasTable = m_reflectWriter.MetadataTableWriter.GetStandAloneSigTable(
+
+            );
             StandAloneSigRow sasRow = m_reflectWriter.MetadataRowWriter.CreateStandAloneSigRow(sig);
 
             sasTable.Rows.Add(sasRow);

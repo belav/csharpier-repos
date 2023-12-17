@@ -24,8 +24,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             services.AddMemoryCache();
 
             // Assert
-            var memoryCache = services.FirstOrDefault(
-                desc => desc.ServiceType == typeof(IMemoryCache)
+            var memoryCache = services.FirstOrDefault(desc =>
+                desc.ServiceType == typeof(IMemoryCache)
             );
 
             Assert.NotNull(memoryCache);
@@ -71,15 +71,15 @@ namespace Microsoft.Extensions.Caching.Distributed
 
             // Assert
             var serviceProvider = services.BuildServiceProvider();
-            var memoryCache = services.FirstOrDefault(
-                desc => desc.ServiceType == typeof(IMemoryCache)
+            var memoryCache = services.FirstOrDefault(desc =>
+                desc.ServiceType == typeof(IMemoryCache)
             );
             Assert.NotNull(memoryCache);
             Assert.Equal(ServiceLifetime.Scoped, memoryCache.Lifetime);
             Assert.IsType<TestMemoryCache>(serviceProvider.GetRequiredService<IMemoryCache>());
 
-            var distributedCache = services.FirstOrDefault(
-                desc => desc.ServiceType == typeof(IDistributedCache)
+            var distributedCache = services.FirstOrDefault(desc =>
+                desc.ServiceType == typeof(IDistributedCache)
             );
             Assert.NotNull(distributedCache);
             Assert.Equal(ServiceLifetime.Scoped, memoryCache.Lifetime);

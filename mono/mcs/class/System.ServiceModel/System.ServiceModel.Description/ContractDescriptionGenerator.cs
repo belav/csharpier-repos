@@ -307,12 +307,11 @@ namespace System.ServiceModel.Description
                 foreach (var od in icd.Operations)
                 {
                     if (
-                        !cd.Operations.Any(
-                            o =>
-                                o.Name == od.Name
-                                && o.SyncMethod == od.SyncMethod
-                                && o.BeginMethod == od.BeginMethod
-                                && o.InCallbackContract == od.InCallbackContract
+                        !cd.Operations.Any(o =>
+                            o.Name == od.Name
+                            && o.SyncMethod == od.SyncMethod
+                            && o.BeginMethod == od.BeginMethod
+                            && o.InCallbackContract == od.InCallbackContract
                         )
                     )
                         cd.Operations.Add(od);
@@ -431,8 +430,8 @@ namespace System.ServiceModel.Description
         {
             string name = oca.Name ?? (oca.AsyncPattern ? mi.Name.Substring(5) : mi.Name);
 
-            OperationDescription od = cd.Operations.FirstOrDefault(
-                o => o.Name == name && o.InCallbackContract == isCallback
+            OperationDescription od = cd.Operations.FirstOrDefault(o =>
+                o.Name == name && o.InCallbackContract == isCallback
             );
             if (od == null)
             {
@@ -585,11 +584,9 @@ namespace System.ServiceModel.Description
                 {
                     if (
                         pars.Take(pars.Length - 2)
-                            .Any(
-                                par =>
-                                    par.ParameterType.GetCustomAttribute<MessageContractAttribute>(
-                                        true
-                                    ) != null
+                            .Any(par =>
+                                par.ParameterType.GetCustomAttribute<MessageContractAttribute>(true)
+                                != null
                             )
                     )
                         return true;
@@ -600,10 +597,9 @@ namespace System.ServiceModel.Description
                 if (pars.Length > 1)
                 {
                     if (
-                        pars.Any(
-                            par =>
-                                par.ParameterType.GetCustomAttribute<MessageContractAttribute>(true)
-                                != null
+                        pars.Any(par =>
+                            par.ParameterType.GetCustomAttribute<MessageContractAttribute>(true)
+                            != null
                         )
                     )
                         return true;

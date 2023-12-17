@@ -50,9 +50,8 @@ static async Task RunAsync(
                     builder.SetMinimumLevel(serverConfiguration.MinimumLogLevel);
                     builder.AddConsole();
                     // The console logger outputs control characters on unix for colors which don't render correctly in VSCode.
-                    builder.AddSimpleConsole(
-                        formatterOptions =>
-                            formatterOptions.ColorBehavior = LoggerColorBehavior.Disabled
+                    builder.AddSimpleConsole(formatterOptions =>
+                        formatterOptions.ColorBehavior = LoggerColorBehavior.Disabled
                     );
                 })
             )
@@ -112,10 +111,9 @@ static async Task RunAsync(
 
     var analyzerPaths = new DirectoryInfo(AppContext.BaseDirectory)
         .GetFiles("*.dll")
-        .Where(
-            f =>
-                f.Name.StartsWith("Microsoft.CodeAnalysis.", StringComparison.Ordinal)
-                && !f.Name.Contains("LanguageServer", StringComparison.Ordinal)
+        .Where(f =>
+            f.Name.StartsWith("Microsoft.CodeAnalysis.", StringComparison.Ordinal)
+            && !f.Name.Contains("LanguageServer", StringComparison.Ordinal)
         )
         .Select(f => f.FullName)
         .ToImmutableArray();

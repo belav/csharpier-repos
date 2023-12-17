@@ -965,8 +965,8 @@ namespace Mono.Linker.Steps
             if (bases is null)
                 return;
 
-            var markedBaseMethods = bases.Where(
-                ov => Annotations.IsMarked(ov.Base) || IgnoreScope(ov.Base.DeclaringType.Scope)
+            var markedBaseMethods = bases.Where(ov =>
+                Annotations.IsMarked(ov.Base) || IgnoreScope(ov.Base.DeclaringType.Scope)
             );
             foreach (var ov in markedBaseMethods)
             {
@@ -1743,8 +1743,8 @@ namespace Mono.Linker.Steps
             TypeDefinition? type = inputType;
             while (type != null)
             {
-                PropertyDefinition? property = type.Properties.FirstOrDefault(
-                    p => p.Name == propertyname
+                PropertyDefinition? property = type.Properties.FirstOrDefault(p =>
+                    p.Name == propertyname
                 );
                 if (property != null)
                     return property;
@@ -1807,8 +1807,8 @@ namespace Mono.Linker.Steps
             TypeDefinition? type = inputType;
             while (type != null)
             {
-                MethodDefinition? method = type.Methods.FirstOrDefault(
-                    m => m.Name == methodname && !m.HasMetadataParameters()
+                MethodDefinition? method = type.Methods.FirstOrDefault(m =>
+                    m.Name == methodname && !m.HasMetadataParameters()
                 );
                 if (method != null)
                     return method;
@@ -2037,8 +2037,8 @@ namespace Mono.Linker.Steps
         void ProcessModuleType(AssemblyDefinition assembly)
         {
             // The <Module> type may have an initializer, in which case we want to keep it.
-            TypeDefinition? moduleType = assembly.MainModule.Types.FirstOrDefault(
-                t => t.MetadataToken.RID == 1
+            TypeDefinition? moduleType = assembly.MainModule.Types.FirstOrDefault(t =>
+                t.MetadataToken.RID == 1
             );
             if (moduleType != null && moduleType.HasMethods)
                 MarkType(moduleType, new DependencyInfo(DependencyKind.TypeInAssembly, assembly));
@@ -4584,10 +4584,8 @@ namespace Mono.Linker.Steps
             if (Annotations.GetOverrides(method) is IEnumerable<OverrideInformation> overrides)
             {
                 foreach (
-                    var @override in overrides.Where(
-                        ov =>
-                            Annotations.IsMarked(ov.Base)
-                            || IgnoreScope(ov.Base.DeclaringType.Scope)
+                    var @override in overrides.Where(ov =>
+                        Annotations.IsMarked(ov.Base) || IgnoreScope(ov.Base.DeclaringType.Scope)
                     )
                 )
                 {

@@ -41,7 +41,9 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoInsta
             // We'll mark one interface in code and one via xml, the end result should be the same
 #if IL_ASSEMBLY_COMPILED
             var tmp =
-                typeof(Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoInstanceCtor.Dependencies.NoInstanceCtorAndAssemblyPreserveAll_Lib.IFoo).ToString();
+                typeof(Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoInstanceCtor.Dependencies.NoInstanceCtorAndAssemblyPreserveAll_Lib.IFoo).ToString(
+
+                );
 #endif
         }
     }

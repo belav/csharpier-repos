@@ -235,8 +235,8 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
                     )
                     .ConfigureAwait(false);
                 return projectDiagnostics
-                    .Where(
-                        diagnostic => diagnostic.Location.SourceTree?.FilePath == document.FilePath
+                    .Where(diagnostic =>
+                        diagnostic.Location.SourceTree?.FilePath == document.FilePath
                     )
                     .ToImmutableArray();
             }

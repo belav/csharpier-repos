@@ -14,8 +14,9 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         private readonly List<object> _seenConstants = new List<object>();
         private readonly List<ParameterExpression> _seenParameters =
             new List<ParameterExpression>();
-        private readonly ExpressionFingerprintChain _currentChain =
-            new ExpressionFingerprintChain();
+        private readonly ExpressionFingerprintChain _currentChain = new ExpressionFingerprintChain(
+
+        );
         private bool _gaveUp;
 
         private FingerprintingExpressionVisitor() { }

@@ -92,8 +92,9 @@ namespace Microsoft.CodeAnalysis.Rename
         public string GetWithoutAttributeSuffix(string value)
         {
             Contract.ThrowIfTrue(this.IsError);
-            var isCaseSensitive =
-                this.Document.GetRequiredLanguageService<ISyntaxFactsService>().IsCaseSensitive;
+            var isCaseSensitive = this.Document.GetRequiredLanguageService<ISyntaxFactsService>(
+
+            ).IsCaseSensitive;
             return value.GetWithoutAttributeSuffix(isCaseSensitive)!;
         }
 
@@ -101,8 +102,9 @@ namespace Microsoft.CodeAnalysis.Rename
         {
             Contract.ThrowIfTrue(this.IsError);
 
-            var isCaseSensitive =
-                this.Document.GetRequiredLanguageService<ISyntaxFactsService>().IsCaseSensitive;
+            var isCaseSensitive = this.Document.GetRequiredLanguageService<ISyntaxFactsService>(
+
+            ).IsCaseSensitive;
             return value.TryGetWithoutAttributeSuffix(isCaseSensitive, result: out var _);
         }
 
@@ -299,12 +301,9 @@ namespace Microsoft.CodeAnalysis.Rename
                         var projectIdOfLocation = sourceDocument.Project.Id;
 
                         if (
-                            solution.Projects.Any(
-                                p =>
-                                    p.IsSubmission
-                                    && p.ProjectReferences.Any(
-                                        r => r.ProjectId == projectIdOfLocation
-                                    )
+                            solution.Projects.Any(p =>
+                                p.IsSubmission
+                                && p.ProjectReferences.Any(r => r.ProjectId == projectIdOfLocation)
                             )
                         )
                             return new SymbolicRenameInfo(

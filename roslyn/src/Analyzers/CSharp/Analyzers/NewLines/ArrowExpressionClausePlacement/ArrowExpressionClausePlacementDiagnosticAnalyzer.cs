@@ -34,11 +34,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ArrowExpressionClausePlacement
             DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context) =>
-            context.RegisterCompilationStartAction(
-                context =>
-                    context.RegisterSyntaxTreeAction(
-                        treeContext => AnalyzeTree(treeContext, context.Compilation.Options)
-                    )
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeTree(treeContext, context.Compilation.Options)
+                )
             );
 
         private void AnalyzeTree(
@@ -132,13 +131,12 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ArrowExpressionClausePlacement
                     return true;
 
                 if (
-                    nextToken.LeadingTrivia.Any(
-                        static t =>
-                            t.Kind()
-                                is SyntaxKind.IfDirectiveTrivia
-                                    or SyntaxKind.ElseDirectiveTrivia
-                                    or SyntaxKind.ElifDirectiveTrivia
-                                    or SyntaxKind.EndIfDirectiveTrivia
+                    nextToken.LeadingTrivia.Any(static t =>
+                        t.Kind()
+                            is SyntaxKind.IfDirectiveTrivia
+                                or SyntaxKind.ElseDirectiveTrivia
+                                or SyntaxKind.ElifDirectiveTrivia
+                                or SyntaxKind.EndIfDirectiveTrivia
                     )
                 )
                 {

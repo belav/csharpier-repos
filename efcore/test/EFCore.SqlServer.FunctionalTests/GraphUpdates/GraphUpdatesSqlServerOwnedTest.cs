@@ -383,9 +383,11 @@ public class GraphUpdatesSqlServerOwnedTest
 
                 b.HasOne(e => e.SingleComposite)
                     .WithOne(e => e.Back)
-                    .HasForeignKey<OptionalSingleComposite2>(
-                        e => new { e.BackId, e.ParentAlternateId }
-                    )
+                    .HasForeignKey<OptionalSingleComposite2>(e => new
+                    {
+                        e.BackId,
+                        e.ParentAlternateId
+                    })
                     .HasPrincipalKey<OptionalSingleAk1>(e => new { e.Id, e.AlternateId });
             });
 

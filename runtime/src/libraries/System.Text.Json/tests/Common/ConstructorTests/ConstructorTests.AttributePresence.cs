@@ -123,7 +123,9 @@ namespace System.Text.Json.Serialization.Tests
 
             await RunTestAsync<PublicParameterizedCtor_WithAttribute>();
             await RunTestAsync<Struct_PublicParameterizedConstructor_WithAttribute>();
-            await RunTestAsync<PrivateParameterlessConstructor_PublicParameterizedCtor_WithAttribute>();
+            await RunTestAsync<PrivateParameterlessConstructor_PublicParameterizedCtor_WithAttribute>(
+
+            );
         }
 
         [Fact]
@@ -204,12 +206,24 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             await RunTestAsync<MultiplePublicParameterizedCtor_WithMultipleAttributes>();
-            await RunTestAsync<PublicParameterlessConstructor_PublicParameterizedCtor_WithMultipleAttributes>();
-            await RunTestAsync<PrivateParameterlessCtor_InternalParameterizedCtor_WithMultipleAttributes>();
-            await RunTestAsync<ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes>();
-            await RunTestAsync<PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes>();
-            await RunTestAsync<PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes>();
-            await RunTestAsync<Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes>();
+            await RunTestAsync<PublicParameterlessConstructor_PublicParameterizedCtor_WithMultipleAttributes>(
+
+            );
+            await RunTestAsync<PrivateParameterlessCtor_InternalParameterizedCtor_WithMultipleAttributes>(
+
+            );
+            await RunTestAsync<ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes>(
+
+            );
+            await RunTestAsync<PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes>(
+
+            );
+            await RunTestAsync<PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes>(
+
+            );
+            await RunTestAsync<Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes>(
+
+            );
             await RunTestAsync<Point_2D_Struct_WithMultipleAttributes>();
             await RunTestAsync<Point_2D_Struct_WithMultipleAttributes_OneNonPublic>();
         }

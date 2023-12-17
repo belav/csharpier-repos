@@ -155,10 +155,9 @@ public static class MvcCoreServiceCollectionExtensions
         // These are consumed only when creating action descriptors, then they can be deallocated
         services.TryAddSingleton<ApplicationModelFactory>();
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<
-                IApplicationModelProvider,
-                DefaultApplicationModelProvider
-            >()
+            ServiceDescriptor.Transient<IApplicationModelProvider, DefaultApplicationModelProvider>(
+
+            )
         );
         services.TryAddEnumerable(
             ServiceDescriptor.Transient<
@@ -186,10 +185,9 @@ public static class MvcCoreServiceCollectionExtensions
 
         // Will be cached by the DefaultActionSelector
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<
-                IActionConstraintProvider,
-                DefaultActionConstraintProvider
-            >()
+            ServiceDescriptor.Transient<IActionConstraintProvider, DefaultActionConstraintProvider>(
+
+            )
         );
 
         // Policies for Endpoints
@@ -292,10 +290,9 @@ public static class MvcCoreServiceCollectionExtensions
             IActionResultExecutor<VirtualFileResult>,
             VirtualFileResultExecutor
         >();
-        services.TryAddSingleton<
-            IActionResultExecutor<FileStreamResult>,
-            FileStreamResultExecutor
-        >();
+        services.TryAddSingleton<IActionResultExecutor<FileStreamResult>, FileStreamResultExecutor>(
+
+        );
         services.TryAddSingleton<
             IActionResultExecutor<FileContentResult>,
             FileContentResultExecutor

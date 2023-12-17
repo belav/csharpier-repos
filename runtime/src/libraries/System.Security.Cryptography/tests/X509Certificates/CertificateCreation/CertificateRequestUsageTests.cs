@@ -15,7 +15,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             X509Extension sanExtension = new X509Extension(
                 "2.5.29.17",
-                "302387047F00000187100000000000000000000000000000000182096C6F63616C686F7374".HexToByteArray(),
+                "302387047F00000187100000000000000000000000000000000182096C6F63616C686F7374".HexToByteArray(
+
+                ),
                 false
             );
 

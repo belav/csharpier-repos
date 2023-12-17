@@ -69,8 +69,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (document == null)
                 return null;
 
-            var service =
-                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>(
+
+            );
 
             // We should use the options passed in by LSP instead of the document's options.
             var formattingOptions = await ProtocolConversions

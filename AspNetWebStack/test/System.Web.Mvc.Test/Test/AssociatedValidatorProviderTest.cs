@@ -50,13 +50,8 @@ namespace System.Web.Mvc.Test
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
             provider
-                .Setup(
-                    p =>
-                        p.AbstractGetValidators(
-                            metadata,
-                            context,
-                            It.IsAny<IEnumerable<Attribute>>()
-                        )
+                .Setup(p =>
+                    p.AbstractGetValidators(metadata, context, It.IsAny<IEnumerable<Attribute>>())
                 )
                 .Callback<ModelMetadata, ControllerContext, IEnumerable<Attribute>>(
                     (m, c, attributes) => callbackAttributes = attributes
@@ -86,13 +81,8 @@ namespace System.Web.Mvc.Test
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
             provider
-                .Setup(
-                    p =>
-                        p.AbstractGetValidators(
-                            metadata,
-                            context,
-                            It.IsAny<IEnumerable<Attribute>>()
-                        )
+                .Setup(p =>
+                    p.AbstractGetValidators(metadata, context, It.IsAny<IEnumerable<Attribute>>())
                 )
                 .Callback<ModelMetadata, ControllerContext, IEnumerable<Attribute>>(
                     (m, c, attributes) => callbackAttributes = attributes
@@ -122,13 +112,8 @@ namespace System.Web.Mvc.Test
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
             provider
-                .Setup(
-                    p =>
-                        p.AbstractGetValidators(
-                            metadata,
-                            context,
-                            It.IsAny<IEnumerable<Attribute>>()
-                        )
+                .Setup(p =>
+                    p.AbstractGetValidators(metadata, context, It.IsAny<IEnumerable<Attribute>>())
                 )
                 .Callback<ModelMetadata, ControllerContext, IEnumerable<Attribute>>(
                     (m, c, attributes) => callbackAttributes = attributes

@@ -1781,12 +1781,11 @@ namespace System.Linq.Parallel.Tests
             int seen = 0;
             foreach (
                 var pOuter in labeled
-                    .Item.Select(
-                        x =>
-                            KeyValuePair.Create(
-                                x % GroupFactor,
-                                KeyValuePair.Create((KeyFactor - 1) - x % KeyFactor, x)
-                            )
+                    .Item.Select(x =>
+                        KeyValuePair.Create(
+                            x % GroupFactor,
+                            KeyValuePair.Create((KeyFactor - 1) - x % KeyFactor, x)
+                        )
                     )
                     .OrderBy(o => o.Key)
                     .ThenBy(o => o.Value.Key)
@@ -1838,12 +1837,11 @@ namespace System.Linq.Parallel.Tests
             int seen = 0;
             foreach (
                 var pOuter in labeled
-                    .Item.Select(
-                        x =>
-                            KeyValuePair.Create(
-                                x % GroupFactor,
-                                KeyValuePair.Create((KeyFactor - 1) - x % KeyFactor, x)
-                            )
+                    .Item.Select(x =>
+                        KeyValuePair.Create(
+                            x % GroupFactor,
+                            KeyValuePair.Create((KeyFactor - 1) - x % KeyFactor, x)
+                        )
                     )
                     .OrderByDescending(o => o.Key)
                     .ThenByDescending(o => o.Value.Key)
@@ -1895,12 +1893,11 @@ namespace System.Linq.Parallel.Tests
             int seen = 0;
             Assert.All(
                 labeled
-                    .Item.Select(
-                        x =>
-                            KeyValuePair.Create(
-                                x % GroupFactor,
-                                KeyValuePair.Create((KeyFactor - 1) - x % KeyFactor, x)
-                            )
+                    .Item.Select(x =>
+                        KeyValuePair.Create(
+                            x % GroupFactor,
+                            KeyValuePair.Create((KeyFactor - 1) - x % KeyFactor, x)
+                        )
                     )
                     .OrderBy(o => o.Key)
                     .ThenBy(o => o.Value.Key)
@@ -1957,12 +1954,11 @@ namespace System.Linq.Parallel.Tests
             int seen = 0;
             Assert.All(
                 labeled
-                    .Item.Select(
-                        x =>
-                            KeyValuePair.Create(
-                                x % GroupFactor,
-                                KeyValuePair.Create((KeyFactor - 1) - x % KeyFactor, x)
-                            )
+                    .Item.Select(x =>
+                        KeyValuePair.Create(
+                            x % GroupFactor,
+                            KeyValuePair.Create((KeyFactor - 1) - x % KeyFactor, x)
+                        )
                     )
                     .OrderByDescending(o => o.Key)
                     .ThenByDescending(o => o.Value.Key)

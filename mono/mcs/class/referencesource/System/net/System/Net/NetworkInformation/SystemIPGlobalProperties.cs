@@ -597,8 +597,9 @@ namespace System.Net.NetworkInformation
 
         private static UnicastIPAddressInformationCollection GetUnicastAddressTable()
         {
-            UnicastIPAddressInformationCollection rval =
-                new UnicastIPAddressInformationCollection();
+            UnicastIPAddressInformationCollection rval = new UnicastIPAddressInformationCollection(
+
+            );
 
             NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
             for (int i = 0; i < interfaces.Length; ++i)

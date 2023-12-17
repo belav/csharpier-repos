@@ -315,10 +315,9 @@ public abstract class OperatorsProceduralQueryTestBase : NonSharedModelTestBase
     {
         var distinctTypes = types.Distinct().ToList();
         var possibleLeafBinaries = Binaries
-            .Where(
-                x =>
-                    distinctTypes.Contains(x.InputTypes.Left)
-                    && distinctTypes.Contains(x.InputTypes.Right)
+            .Where(x =>
+                distinctTypes.Contains(x.InputTypes.Left)
+                && distinctTypes.Contains(x.InputTypes.Right)
             )
             .ToList();
         var possibleLeafUnaries = Unaries.Where(x => distinctTypes.Contains(x.InputType)).ToList();
@@ -333,10 +332,9 @@ public abstract class OperatorsProceduralQueryTestBase : NonSharedModelTestBase
             .ToList();
 
         var possibleBinaries = Binaries
-            .Where(
-                x =>
-                    distinctTypesWithNesting.Contains(x.InputTypes.Left)
-                    && distinctTypesWithNesting.Contains(x.InputTypes.Right)
+            .Where(x =>
+                distinctTypesWithNesting.Contains(x.InputTypes.Left)
+                && distinctTypesWithNesting.Contains(x.InputTypes.Right)
             )
             .ToList();
         var possibleUnaries = Unaries

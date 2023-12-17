@@ -18,13 +18,15 @@ namespace System.Tests
         [Fact]
         public static void StructWithDoubleFieldNotTightlyPackedZeroCompareTest()
         {
-            StructWithDoubleFieldNotTightlyPacked obj1 =
-                new StructWithDoubleFieldNotTightlyPacked();
+            StructWithDoubleFieldNotTightlyPacked obj1 = new StructWithDoubleFieldNotTightlyPacked(
+
+            );
             obj1.value1 = 1;
             obj1.value2 = 0.0;
 
-            StructWithDoubleFieldNotTightlyPacked obj2 =
-                new StructWithDoubleFieldNotTightlyPacked();
+            StructWithDoubleFieldNotTightlyPacked obj2 = new StructWithDoubleFieldNotTightlyPacked(
+
+            );
             obj2.value1 = 1;
             obj2.value2 = -0.0;
 
@@ -50,13 +52,15 @@ namespace System.Tests
         [Fact]
         public static void StructWithDoubleFieldNotTightlyPackedNaNCompareTest()
         {
-            StructWithDoubleFieldNotTightlyPacked obj1 =
-                new StructWithDoubleFieldNotTightlyPacked();
+            StructWithDoubleFieldNotTightlyPacked obj1 = new StructWithDoubleFieldNotTightlyPacked(
+
+            );
             obj1.value1 = 1;
             obj1.value2 = double.NaN;
 
-            StructWithDoubleFieldNotTightlyPacked obj2 =
-                new StructWithDoubleFieldNotTightlyPacked();
+            StructWithDoubleFieldNotTightlyPacked obj2 = new StructWithDoubleFieldNotTightlyPacked(
+
+            );
             obj2.value1 = 1;
             obj2.value2 = -double.NaN;
 

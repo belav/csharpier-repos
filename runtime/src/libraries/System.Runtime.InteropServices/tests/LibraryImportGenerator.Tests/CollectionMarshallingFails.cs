@@ -235,37 +235,28 @@ namespace LibraryImportGenerator.IntegrationTests
         public void SingleDimensionalOutArray_EnsureAllCleaned()
         {
             BoolStruct[] arr = new BoolStruct[10]
-                .Select(
-                    _ =>
-                        new BoolStruct()
-                        {
-                            b1 = true,
-                            b2 = true,
-                            b3 = false
-                        }
-                )
+                .Select(_ => new BoolStruct()
+                {
+                    b1 = true,
+                    b2 = true,
+                    b3 = false
+                })
                 .ToArray();
             BoolStructNative[] nativeArr = new BoolStruct[10]
-                .Select(
-                    _ =>
-                        new BoolStructNative()
-                        {
-                            b1 = 1,
-                            b2 = 1,
-                            b3 = 0
-                        }
-                )
+                .Select(_ => new BoolStructNative()
+                {
+                    b1 = 1,
+                    b2 = 1,
+                    b3 = 0
+                })
                 .ToArray();
             BoolStructNative[] nativeNegated = new BoolStruct[10]
-                .Select(
-                    _ =>
-                        new BoolStructNative()
-                        {
-                            b1 = 0,
-                            b2 = 0,
-                            b3 = 1
-                        }
-                )
+                .Select(_ => new BoolStructNative()
+                {
+                    b1 = 0,
+                    b2 = 0,
+                    b3 = 1
+                })
                 .ToArray();
             foreach (var throwOn in new int[] { 0, 1, 5, 9 })
             {
@@ -303,15 +294,12 @@ namespace LibraryImportGenerator.IntegrationTests
                 BoolStructOutMarshaller.Marshaller.UnmarshallingFailsIndex = throwOn;
                 BoolStructOutMarshaller.Marshaller.ExpectedFreedValues = Enumerable
                     .Range(0, 100)
-                    .Select(
-                        _ =>
-                            new BoolStructNative()
-                            {
-                                b1 = 1,
-                                b2 = 1,
-                                b3 = 1
-                            }
-                    )
+                    .Select(_ => new BoolStructNative()
+                    {
+                        b1 = 1,
+                        b2 = 1,
+                        b3 = 1
+                    })
                     .ToArray();
                 // https://github.com/dotnet/runtime/issues/93423
                 //NegateBoolStructInMarshaller.Marshaller.ExpectedFreedValues = Enumerable.Range(0, 100).Select(_ => new BoolStructNative() { b1 = 0, b2 = 0, b3 = 0 }).ToArray();
@@ -333,15 +321,12 @@ namespace LibraryImportGenerator.IntegrationTests
             BoolStructOutMarshaller.Marshaller.UnmarshallingFailsIndex = -1;
             BoolStructOutMarshaller.Marshaller.ExpectedFreedValues = Enumerable
                 .Range(0, 100)
-                .Select(
-                    _ =>
-                        new BoolStructNative()
-                        {
-                            b1 = 1,
-                            b2 = 1,
-                            b3 = 1
-                        }
-                )
+                .Select(_ => new BoolStructNative()
+                {
+                    b1 = 1,
+                    b2 = 1,
+                    b3 = 1
+                })
                 .ToArray();
             // https://github.com/dotnet/runtime/issues/93423
             //NegateBoolStructInMarshaller.Marshaller.UnmarshallingFailsIndex = -1;

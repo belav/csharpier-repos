@@ -326,8 +326,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
 
                 QuicException ex = await AssertThrowsQuicExceptionAsync(
                     QuicError.ConnectionAborted,
@@ -375,8 +376,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
 
                 await connection.CloseAsync(GeneralProtocolError);
             });
@@ -415,8 +417,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
 
                 stream.Abort(GeneralProtocolError);
                 await semaphore.WaitAsync();
@@ -506,8 +509,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
 
                 await stream.ReadRequestBodyAsync();
                 await stream.SendResponseHeadersAsync();
@@ -555,8 +559,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
                 HttpRequestData request = await stream.ReadRequestDataAsync();
                 await stream.SendResponseHeadersAsync();
 
@@ -622,8 +627,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
                 HttpRequestData request = await stream.ReadRequestDataAsync(false);
                 var body = await stream.ReadRequestBodyAsync(data.Length);
                 await stream.SendResponseHeadersAsync();
@@ -674,8 +680,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
                 HttpRequestData request = await stream.ReadRequestDataAsync(false);
                 await stream.SendResponseHeadersAsync();
 
@@ -753,11 +760,13 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
                 await stream.HandleRequestAsync();
-                await using Http3LoopbackStream stream2 =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream2 = await connection.AcceptRequestStreamAsync(
+
+                );
                 await stream2.HandleRequestAsync();
             });
 
@@ -799,8 +808,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
 
                 // Receive headers and unblock the client.
                 await stream.ReadRequestDataAsync(false);
@@ -1037,8 +1047,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
 
                 HttpRequestData request = await stream.ReadRequestDataAsync().ConfigureAwait(false);
 
@@ -1136,8 +1147,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
 
                 HttpRequestData request = await stream.ReadRequestDataAsync().ConfigureAwait(false);
 
@@ -1241,8 +1253,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
                 await stream.HandleRequestAsync();
             });
 
@@ -1473,8 +1486,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 connection = (Http3LoopbackConnection)
                     await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream =
-                    await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync(
+
+                );
 
                 HttpRequestData request = await stream.ReadRequestDataAsync().ConfigureAwait(false);
 

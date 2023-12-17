@@ -147,8 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // Assert that the cheap check for "this" is equivalent to the expensive check for "this".
             Debug.Assert(
                 (GetThisProxy(_displayClassVariables) != null)
-                    == _displayClassVariables.Values.Any(
-                        v => v.Kind == DisplayClassVariableKind.This
+                    == _displayClassVariables.Values.Any(v =>
+                        v.Kind == DisplayClassVariableKind.This
                     )
             );
         }
@@ -2035,8 +2035,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             if (
                 checkForPrimaryConstructor
-                && displayClassVariablesBuilder.Values.FirstOrDefault(
-                    v => v.Kind == DisplayClassVariableKind.This
+                && displayClassVariablesBuilder.Values.FirstOrDefault(v =>
+                    v.Kind == DisplayClassVariableKind.This
                 )
                     is { } thisProxy
             )
@@ -2451,8 +2451,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableDictionary<string, DisplayClassVariable> displayClassVariables
         )
         {
-            return displayClassVariables.Values.FirstOrDefault(
-                v => v.Kind == DisplayClassVariableKind.This
+            return displayClassVariables.Values.FirstOrDefault(v =>
+                v.Kind == DisplayClassVariableKind.This
             );
         }
 
@@ -2670,12 +2670,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         || instance
                             .Type.GetMembers()
                             .OfType<FieldSymbol>()
-                            .Any(
-                                static f =>
-                                    GeneratedNameParser.TryParsePrimaryConstructorParameterFieldName(
-                                        f.Name,
-                                        out _
-                                    )
+                            .Any(static f =>
+                                GeneratedNameParser.TryParsePrimaryConstructorParameterFieldName(
+                                    f.Name,
+                                    out _
+                                )
                             )
                 );
             }

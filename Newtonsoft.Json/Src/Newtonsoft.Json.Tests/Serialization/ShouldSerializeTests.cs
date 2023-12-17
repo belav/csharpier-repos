@@ -446,11 +446,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsTrue(
                 traceWriter
                     .GetTraceMessages()
-                    .Any(
-                        m =>
-                            m.EndsWith(
-                                "Verbose ShouldDeserialize result for property 'Name' on Newtonsoft.Json.Tests.Serialization.ShouldDeserializeTestClass: True. Path 'Name'."
-                            )
+                    .Any(m =>
+                        m.EndsWith(
+                            "Verbose ShouldDeserialize result for property 'Name' on Newtonsoft.Json.Tests.Serialization.ShouldDeserializeTestClass: True. Path 'Name'."
+                        )
                     )
             );
         }
@@ -479,11 +478,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsTrue(
                 traceWriter
                     .GetTraceMessages()
-                    .Any(
-                        m =>
-                            m.EndsWith(
-                                "Verbose ShouldDeserialize result for property 'Name' on Newtonsoft.Json.Tests.Serialization.ShouldDeserializeTestClass: False. Path 'Name'."
-                            )
+                    .Any(m =>
+                        m.EndsWith(
+                            "Verbose ShouldDeserialize result for property 'Name' on Newtonsoft.Json.Tests.Serialization.ShouldDeserializeTestClass: False. Path 'Name'."
+                        )
                     )
             );
         }

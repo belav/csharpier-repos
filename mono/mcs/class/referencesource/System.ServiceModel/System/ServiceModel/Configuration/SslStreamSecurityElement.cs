@@ -45,8 +45,9 @@ namespace System.ServiceModel.Configuration
 
         protected internal override BindingElement CreateBindingElement()
         {
-            SslStreamSecurityBindingElement sslBindingElement =
-                new SslStreamSecurityBindingElement();
+            SslStreamSecurityBindingElement sslBindingElement = new SslStreamSecurityBindingElement(
+
+            );
 
             this.ApplyConfiguration(sslBindingElement);
             return sslBindingElement;

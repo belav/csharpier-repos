@@ -1410,8 +1410,9 @@ namespace System.Data.OleDb
             {
                 if (null != propSet)
                 {
-                    UnsafeNativeMethods.ICommandProperties icommandProperties =
-                        ICommandProperties();
+                    UnsafeNativeMethods.ICommandProperties icommandProperties = ICommandProperties(
+
+                    );
                     OleDbHResult hr = icommandProperties.SetProperties(
                         propSet.PropertySetCount,
                         propSet

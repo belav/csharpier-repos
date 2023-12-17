@@ -412,8 +412,9 @@ namespace System.ServiceModel.Security
 
                     if (!encryptBeforeSign && id != null)
                     {
-                        XmlDictionaryReader decryptedHeaderReader =
-                            decryptedHeader.GetHeaderReader();
+                        XmlDictionaryReader decryptedHeaderReader = decryptedHeader.GetHeaderReader(
+
+                        );
                         headerSigned = EnsureDigestValidityIfIdMatches(
                             signedInfo,
                             id,

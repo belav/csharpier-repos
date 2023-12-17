@@ -174,15 +174,14 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             return CreateSignatureHelpItems(
                 accessibleSymbols
-                    .Select(
-                        s =>
-                            Convert(
-                                s,
-                                lessThanToken,
-                                semanticModel,
-                                structuralTypeDisplayService,
-                                documentationCommentFormattingService
-                            )
+                    .Select(s =>
+                        Convert(
+                            s,
+                            lessThanToken,
+                            semanticModel,
+                            structuralTypeDisplayService,
+                            documentationCommentFormattingService
+                        )
                     )
                     .ToList(),
                 textSpan,
@@ -272,14 +271,13 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     GetSeparatorParts(),
                     GetPostambleParts(),
                     namedType
-                        .TypeParameters.Select(
-                            p =>
-                                Convert(
-                                    p,
-                                    semanticModel,
-                                    position,
-                                    documentationCommentFormattingService
-                                )
+                        .TypeParameters.Select(p =>
+                            Convert(
+                                p,
+                                semanticModel,
+                                position,
+                                documentationCommentFormattingService
+                            )
                         )
                         .ToList()
                 );
@@ -304,14 +302,13 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     GetSeparatorParts(),
                     GetPostambleParts(method, semanticModel, position),
                     method
-                        .TypeParameters.Select(
-                            p =>
-                                Convert(
-                                    p,
-                                    semanticModel,
-                                    position,
-                                    documentationCommentFormattingService
-                                )
+                        .TypeParameters.Select(p =>
+                            Convert(
+                                p,
+                                semanticModel,
+                                position,
+                                documentationCommentFormattingService
+                            )
                         )
                         .ToList()
                 );

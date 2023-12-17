@@ -437,9 +437,9 @@ public class SqlServerMetadataBuilderExtensionsTest
             Assert
                 .Throws<ArgumentException>(
                     () =>
-                        new PropertyBuilder(
-                            (IMutableProperty)propertyBuilder.Metadata
-                        ).UseSequence()
+                        new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata).UseSequence(
+
+                        )
                 )
                 .Message
         );

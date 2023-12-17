@@ -365,14 +365,11 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        var aspnetcorev2Log = TestSink.Writes.First(
-            w => w.Message.Contains("Description: IIS ASP.NET Core Module V2. Commit:")
+        var aspnetcorev2Log = TestSink.Writes.First(w =>
+            w.Message.Contains("Description: IIS ASP.NET Core Module V2. Commit:")
         );
-        var aspnetcoreHandlerLog = TestSink.Writes.First(
-            w =>
-                w.Message.Contains(
-                    "Description: IIS ASP.NET Core Module V2 Request Handler. Commit:"
-                )
+        var aspnetcoreHandlerLog = TestSink.Writes.First(w =>
+            w.Message.Contains("Description: IIS ASP.NET Core Module V2 Request Handler. Commit:")
         );
 
         var processIdPattern = new Regex("Process Id: (\\d+)\\.", RegexOptions.Singleline);

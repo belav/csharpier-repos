@@ -305,10 +305,9 @@ public class ProjectionBuilder : IProjectionBuilder
                 { ConstructorMap: { CanResolve: true } constructorMap }
                     => New(
                         constructorMap.Ctor,
-                        constructorMap.CtorParams.Select(
-                            map =>
-                                TryProjectMember(map, map.DefaultValue(null))
-                                ?? Default(map.DestinationType)
+                        constructorMap.CtorParams.Select(map =>
+                            TryProjectMember(map, map.DefaultValue(null))
+                            ?? Default(map.DestinationType)
                         )
                     ),
                 _ => New(typeMap.DestinationType)
@@ -375,14 +374,13 @@ public class ProjectionBuilder : IProjectionBuilder
         )
         {
             var letMapInfos = _savedPaths
-                .Select(
-                    path =>
-                        (
-                            path.LetExpression,
-                            MapFromSource: path.GetSourceExpression(instanceParameter),
-                            Property: path.GetPropertyDescription(),
-                            path.Marker
-                        )
+                .Select(path =>
+                    (
+                        path.LetExpression,
+                        MapFromSource: path.GetSourceExpression(instanceParameter),
+                        Property: path.GetPropertyDescription(),
+                        path.Marker
+                    )
                 )
                 .ToArray();
             var properties = letMapInfos
@@ -490,9 +488,10 @@ public class ProjectionBuilder : IProjectionBuilder
             {
                 var visitor = new GePropertiesVisitor(target);
                 visitor.Visit(expression);
-                return visitor.Members.Select(
-                    member => new PropertyDescription(member.Name, member.GetMemberType())
-                );
+                return visitor.Members.Select(member => new PropertyDescription(
+                    member.Name,
+                    member.GetMemberType()
+                ));
             }
         }
 

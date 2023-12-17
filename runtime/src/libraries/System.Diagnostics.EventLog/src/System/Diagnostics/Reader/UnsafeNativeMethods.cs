@@ -422,8 +422,9 @@ namespace Microsoft.Win32
                         _value.Domain = Marshal.StringToCoTaskMemUni(managed.Domain);
                         _passwordHandle = managed.Password;
                         _passwordHandle.DangerousAddRef(ref _passwordHandleAddRefd);
-                        _value.Password = _originalHandleValue =
-                            _passwordHandle.DangerousGetHandle();
+                        _value.Password = _originalHandleValue = _passwordHandle.DangerousGetHandle(
+
+                        );
                         _value.Flags = managed.Flags;
                     }
 

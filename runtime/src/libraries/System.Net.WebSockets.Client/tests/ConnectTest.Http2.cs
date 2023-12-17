@@ -37,8 +37,8 @@ namespace System.Net.WebSockets.Client.Tests
             yield return Options(options => options.HttpVersion = HttpVersion.Version20);
             yield return Options(options => options.HttpVersion = HttpVersion.Version30);
             yield return Options(options => options.HttpVersion = new Version(2, 1));
-            yield return Options(
-                options => options.HttpVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher
+            yield return Options(options =>
+                options.HttpVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher
             );
 
             static object[] Options(Action<ClientWebSocketOptions> configureOptions) =>

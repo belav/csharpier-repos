@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         ) =>
             (
                 null,
-                new CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProvider()
+                new CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProvider(
+
+                )
             );
 
         private async Task TestInMethodAsync(string initialMethodBody, string expectedMethodBody)

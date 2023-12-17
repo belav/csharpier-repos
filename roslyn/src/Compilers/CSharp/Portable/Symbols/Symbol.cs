@@ -538,8 +538,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     SyntaxNode parent = location.SourceTree.GetRoot();
                     SyntaxNode found = null;
                     foreach (
-                        var descendant in parent.DescendantNodesAndSelf(
-                            c => c.Location.SourceSpan.Contains(location.SourceSpan)
+                        var descendant in parent.DescendantNodesAndSelf(c =>
+                            c.Location.SourceSpan.Contains(location.SourceSpan)
                         )
                     )
                     {
@@ -754,9 +754,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             return true;
                         case MethodKind.PropertyGet:
                         case MethodKind.PropertySet:
-                            return (
-                                (PropertySymbol)method.AssociatedSymbol
-                            ).CanCallMethodsDirectly();
+                            return ((PropertySymbol)method.AssociatedSymbol).CanCallMethodsDirectly(
+
+                            );
                         default:
                             return false;
                     }

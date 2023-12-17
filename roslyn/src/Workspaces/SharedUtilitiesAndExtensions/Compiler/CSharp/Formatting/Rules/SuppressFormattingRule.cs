@@ -453,8 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     includeDirectives: true
                 );
 
-                var endDirective = pragmaWarningDirectiveTrivia.GetNextDirective(
-                    trivia => IsFormatDirective(trivia, SyntaxKind.RestoreKeyword)
+                var endDirective = pragmaWarningDirectiveTrivia.GetNextDirective(trivia =>
+                    IsFormatDirective(trivia, SyntaxKind.RestoreKeyword)
                 );
                 var endToken = endDirective is null
                     ? (

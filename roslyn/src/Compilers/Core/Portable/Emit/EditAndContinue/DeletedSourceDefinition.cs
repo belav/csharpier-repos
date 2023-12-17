@@ -56,9 +56,10 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             ImmutableArray<IParameterDefinition> parameters
         )
         {
-            return parameters.SelectAsArray(
-                p => new DeletedSourceParameterDefinition(p, _typesUsedByDeletedMembers)
-            );
+            return parameters.SelectAsArray(p => new DeletedSourceParameterDefinition(
+                p,
+                _typesUsedByDeletedMembers
+            ));
         }
 
         [return: NotNullIfNotNull(nameof(typeReference))]

@@ -27,17 +27,14 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
                         async,
                         ss =>
                             ss.Set<CustomerQuery>()
-                                .Select(
-                                    cq =>
-                                        new
-                                        {
-                                            cq.City,
-                                            cq.CompanyName,
-                                            OrderDetailIds = ss.Set<Customer>()
-                                                .Where(c => c.City == cq.City)
-                                                .ToList()
-                                        }
-                                )
+                                .Select(cq => new
+                                {
+                                    cq.City,
+                                    cq.CompanyName,
+                                    OrderDetailIds = ss.Set<Customer>()
+                                        .Where(c => c.City == cq.City)
+                                        .ToList()
+                                })
                                 .OrderBy(x => x.City)
                                 .Take(2)
                     )
@@ -64,16 +61,13 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
                         ss =>
                             ss.Set<Customer>()
                                 .OrderBy(c => c.CustomerID)
-                                .Select(
-                                    c =>
-                                        new
-                                        {
-                                            c.City,
-                                            Collection = ss.Set<CustomerQuery>()
-                                                .Where(cq => cq.City == c.City)
-                                                .ToList(),
-                                        }
-                                )
+                                .Select(c => new
+                                {
+                                    c.City,
+                                    Collection = ss.Set<CustomerQuery>()
+                                        .Where(cq => cq.City == c.City)
+                                        .ToList(),
+                                })
                     )
             )
         ).Message;

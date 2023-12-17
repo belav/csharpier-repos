@@ -40,15 +40,12 @@ public class TemporalManyToManyQuerySqlServerFixture : ManyToManyQueryFixtureBas
         modelBuilder.Entity<EntityThree>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder
             .Entity<EntityCompositeKey>()
-            .HasKey(
-                e =>
-                    new
-                    {
-                        e.Key1,
-                        e.Key2,
-                        e.Key3
-                    }
-            );
+            .HasKey(e => new
+            {
+                e.Key1,
+                e.Key2,
+                e.Key3
+            });
         modelBuilder.Entity<EntityRoot>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder.Entity<EntityBranch>().HasBaseType<EntityRoot>();
         modelBuilder.Entity<EntityLeaf>().HasBaseType<EntityBranch>();
@@ -63,15 +60,12 @@ public class TemporalManyToManyQuerySqlServerFixture : ManyToManyQueryFixtureBas
         modelBuilder.Entity<UnidirectionalEntityThree>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder
             .Entity<UnidirectionalEntityCompositeKey>()
-            .HasKey(
-                e =>
-                    new
-                    {
-                        e.Key1,
-                        e.Key2,
-                        e.Key3
-                    }
-            );
+            .HasKey(e => new
+            {
+                e.Key1,
+                e.Key2,
+                e.Key3
+            });
         modelBuilder.Entity<UnidirectionalEntityRoot>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder.Entity<UnidirectionalEntityBranch>().HasBaseType<UnidirectionalEntityRoot>();
         modelBuilder.Entity<UnidirectionalEntityLeaf>().HasBaseType<UnidirectionalEntityBranch>();
@@ -218,15 +212,12 @@ public class TemporalManyToManyQuerySqlServerFixture : ManyToManyQueryFixtureBas
                 l =>
                     l.HasOne(x => x.Composite)
                         .WithMany(x => x.JoinThreeFull)
-                        .HasForeignKey(
-                            e =>
-                                new
-                                {
-                                    e.CompositeId1,
-                                    e.CompositeId2,
-                                    e.CompositeId3
-                                }
-                        )
+                        .HasForeignKey(e => new
+                        {
+                            e.CompositeId1,
+                            e.CompositeId2,
+                            e.CompositeId3
+                        })
                         .IsRequired(),
                 r => r.HasOne(x => x.Three).WithMany(x => x.JoinCompositeKeyFull).IsRequired()
             )
@@ -256,15 +247,12 @@ public class TemporalManyToManyQuerySqlServerFixture : ManyToManyQueryFixtureBas
                 l =>
                     l.HasOne(x => x.Composite)
                         .WithMany(x => x.JoinLeafFull)
-                        .HasForeignKey(
-                            e =>
-                                new
-                                {
-                                    e.CompositeId1,
-                                    e.CompositeId2,
-                                    e.CompositeId3
-                                }
-                        )
+                        .HasForeignKey(e => new
+                        {
+                            e.CompositeId1,
+                            e.CompositeId2,
+                            e.CompositeId3
+                        })
             )
             .ToTable(tb => tb.IsTemporal());
 
@@ -395,15 +383,12 @@ public class TemporalManyToManyQuerySqlServerFixture : ManyToManyQueryFixtureBas
                 l =>
                     l.HasOne(x => x.Composite)
                         .WithMany(x => x.JoinThreeFull)
-                        .HasForeignKey(
-                            e =>
-                                new
-                                {
-                                    e.CompositeId1,
-                                    e.CompositeId2,
-                                    e.CompositeId3
-                                }
-                        )
+                        .HasForeignKey(e => new
+                        {
+                            e.CompositeId1,
+                            e.CompositeId2,
+                            e.CompositeId3
+                        })
                         .IsRequired(),
                 r => r.HasOne(x => x.Three).WithMany(x => x.JoinCompositeKeyFull).IsRequired()
             )
@@ -433,15 +418,12 @@ public class TemporalManyToManyQuerySqlServerFixture : ManyToManyQueryFixtureBas
                 l =>
                     l.HasOne(x => x.Composite)
                         .WithMany(x => x.JoinLeafFull)
-                        .HasForeignKey(
-                            e =>
-                                new
-                                {
-                                    e.CompositeId1,
-                                    e.CompositeId2,
-                                    e.CompositeId3
-                                }
-                        )
+                        .HasForeignKey(e => new
+                        {
+                            e.CompositeId1,
+                            e.CompositeId2,
+                            e.CompositeId3
+                        })
             )
             .ToTable(tb => tb.IsTemporal());
 

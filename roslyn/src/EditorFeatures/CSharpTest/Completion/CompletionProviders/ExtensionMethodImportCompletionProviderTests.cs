@@ -579,9 +579,10 @@ namespace Baz
 
         public static IEnumerable<object[]> DerivableTypeKindsWithReferenceTypeData =>
             CombineWithReferenceTypeData(
-                (new[] { "class", "interface", "abstract class" }).Select(
-                    kind => new List<object>() { kind }
-                )
+                (new[] { "class", "interface", "abstract class" }).Select(kind => new List<object>()
+                {
+                    kind
+                })
             );
 
         [MemberData(nameof(DerivableTypeKindsWithReferenceTypeData))]

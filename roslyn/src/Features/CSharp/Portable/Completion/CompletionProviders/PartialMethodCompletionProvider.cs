@@ -97,8 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var declarations = method
                 .DeclaringSyntaxReferences.Select(r => r.GetSyntax())
                 .OfType<MethodDeclarationSyntax>();
-            return declarations.Any(
-                d => d.Body == null && d.Modifiers.Any(SyntaxKind.PartialKeyword)
+            return declarations.Any(d =>
+                d.Body == null && d.Modifiers.Any(SyntaxKind.PartialKeyword)
             );
         }
 

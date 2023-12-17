@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 var parameter = originalParameterList[i];
                 if (parameter is ExistingParameter existingParameter)
                 {
-                    var updatedIndex = updatedParameterList.IndexOf(
-                        p => p is ExistingParameter ep && ep.Symbol.Equals(existingParameter.Symbol)
+                    var updatedIndex = updatedParameterList.IndexOf(p =>
+                        p is ExistingParameter ep && ep.Symbol.Equals(existingParameter.Symbol)
                     );
                     if (updatedIndex >= 0)
                     {
@@ -70,8 +70,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ChangeSignatureLogger.LogTransformationInformation(
                 numOriginalParameters: originalListOfParameters.Length,
                 numParametersAdded: updatedListOfParameters.Count(p => p is AddedParameter),
-                numParametersRemoved: originalListOfParameters.Count(
-                    p => !updatedListOfParameters.Contains(p)
+                numParametersRemoved: originalListOfParameters.Count(p =>
+                    !updatedListOfParameters.Contains(p)
                 ),
                 anyParametersReordered: AnyParametersReordered(
                     originalListOfParameters,

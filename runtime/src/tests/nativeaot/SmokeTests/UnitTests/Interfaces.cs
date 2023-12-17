@@ -1412,8 +1412,9 @@ public class Interfaces
             }
 
             {
-                DerivedWithOverriddenUnusedVirtual b =
-                    new SuperDerivedWithOverriddenUnusedVirtual();
+                DerivedWithOverriddenUnusedVirtual b = new SuperDerivedWithOverriddenUnusedVirtual(
+
+                );
                 if (b.GetFoo().State != "SuperDerivedWithOverriddenUnusedVirtual")
                     throw new Exception();
             }

@@ -564,18 +564,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             Contract.ThrowIfNull(_solution);
             return _solution
                 .Projects.OfType<EnvDTE.Project>()
-                .First(
-                    p =>
-                        string.Compare(
-                            p.FileName,
-                            nameOrFileName,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
-                        || string.Compare(
-                            p.Name,
-                            nameOrFileName,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                .First(p =>
+                    string.Compare(p.FileName, nameOrFileName, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    || string.Compare(p.Name, nameOrFileName, StringComparison.OrdinalIgnoreCase)
+                        == 0
                 );
         }
 
@@ -724,10 +717,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void WaitForBuildToFinish()
         {
-            var buildManager = GetGlobalService<
-                SVsSolutionBuildManager,
-                IVsSolutionBuildManager2
-            >();
+            var buildManager = GetGlobalService<SVsSolutionBuildManager, IVsSolutionBuildManager2>(
+
+            );
             using (var semaphore = new SemaphoreSlim(1))
             using (var solutionEvents = new UpdateSolutionEvents(buildManager))
             {
@@ -1059,8 +1051,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             var fullFilePath = Path.Combine(projectPath, relativeFilePath);
 
             var projectItems = project.ProjectItems.Cast<EnvDTE.ProjectItem>();
-            var document = projectItems.FirstOrDefault(
-                d => d.get_FileNames(1).Equals(fullFilePath)
+            var document = projectItems.FirstOrDefault(d => d.get_FileNames(1).Equals(fullFilePath)
             );
 
             if (document == null)
@@ -1113,9 +1104,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 Helper.HangMitigatingTimeout
             );
 
-            var solutionRestoreService = InvokeOnUIThread(
-                cancellationToken =>
-                    GetComponentModel().GetExtensions<IVsSolutionRestoreService2>().Single()
+            var solutionRestoreService = InvokeOnUIThread(cancellationToken =>
+                GetComponentModel().GetExtensions<IVsSolutionRestoreService2>().Single()
             );
             var nominateProjectTask = solutionRestoreService.NominateProjectAsync(
                 GetProject(projectName).FullName,

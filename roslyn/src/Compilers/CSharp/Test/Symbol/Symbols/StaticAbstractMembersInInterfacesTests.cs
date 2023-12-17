@@ -9612,13 +9612,12 @@ interface I13
             );
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_UnimplementedInterfaceMember
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_UnimplementedInterfaceMember
+                        )
                 )
                 .Verify(
                     // (4,26): error CS0562: The parameter of a unary operator must be the containing type
@@ -10125,15 +10124,13 @@ interface I13
             );
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)
-                                    ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
-                                or (int)ErrorCode.ERR_UnimplementedInterfaceMember
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
+                            or (int)ErrorCode.ERR_UnimplementedInterfaceMember
+                        )
                 )
                 .Verify(
                     // (4,26): error CS0563: One of the parameters of a binary operator must be the containing type
@@ -10295,15 +10292,13 @@ interface I13
             );
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)
-                                    ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
-                                or (int)ErrorCode.ERR_UnimplementedInterfaceMember
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
+                            or (int)ErrorCode.ERR_UnimplementedInterfaceMember
+                        )
                 )
                 .Verify(
                     // (4,26): error CS0563: One of the parameters of a binary operator must be the containing type
@@ -10475,13 +10470,12 @@ interface I14
             );
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_UnimplementedInterfaceMember
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_UnimplementedInterfaceMember
+                        )
                 )
                 .Verify(
                     // (4,26): error CS0564: The first operand of an overloaded shift operator must have the same type as the containing type
@@ -11086,15 +11080,13 @@ interface I13
             );
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)
-                                    ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
-                                or (int)ErrorCode.ERR_UnimplementedInterfaceMember
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
+                            or (int)ErrorCode.ERR_UnimplementedInterfaceMember
+                        )
                 )
                 .Verify(
                     // (4,26): error CS0563: One of the parameters of a binary operator must be the containing type
@@ -11265,15 +11257,13 @@ interface I13
             );
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)
-                                    ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
-                                or (int)ErrorCode.ERR_UnimplementedInterfaceMember
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
+                            or (int)ErrorCode.ERR_UnimplementedInterfaceMember
+                        )
                 )
                 .Verify(
                     // (4,26): error CS0563: One of the parameters of a binary operator must be the containing type
@@ -13929,8 +13919,8 @@ public partial interface I1
             {
                 compilation1
                     .GetDiagnostics()
-                    .Where(
-                        d => d.Code is not (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                    .Where(d =>
+                        d.Code is not (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
                     )
                     .Verify(
                         // (8,13): error CS8926: A static virtual or abstract interface member can be accessed only on a type parameter.
@@ -14534,14 +14524,13 @@ class Test
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
-                                or (int)
-                                    ErrorCode.ERR_GenericConstraintNotSatisfiedInterfaceWithStaticAbstractMembers
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                            or (int)
+                                ErrorCode.ERR_GenericConstraintNotSatisfiedInterfaceWithStaticAbstractMembers
+                        )
                 )
                 .Verify(
                     // (12,13): error CS8926: A static virtual or abstract interface member can be accessed only on a type parameter.
@@ -17074,14 +17063,13 @@ class Test
 
             compilation3
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                        )
                 )
                 .Verify(
                     // (12,33): error CS8919: Target runtime doesn't support static abstract members in interfaces.
@@ -17257,11 +17245,10 @@ class Test
 
                 compilation3
                     .GetDiagnostics()
-                    .Where(
-                        d =>
-                            d.Code
-                                is not (int)
-                                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation
+                    .Where(d =>
+                        d.Code
+                            is not (int)
+                                ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation
                     )
                     .Verify(builder.ToArrayAndFree());
             }
@@ -17591,13 +17578,12 @@ class Test
             {
                 compilation3
                     .GetDiagnostics()
-                    .Where(
-                        d =>
-                            d.Code
-                                is not (
-                                    (int)ErrorCode.ERR_OperatorNeedsMatch
-                                    or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
-                                )
+                    .Where(d =>
+                        d.Code
+                            is not (
+                                (int)ErrorCode.ERR_OperatorNeedsMatch
+                                or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                            )
                     )
                     .Verify(
                         // (12,33): error CS8703: The modifier 'virtual' is not valid for this item in C# 10.0. Please use language version '11.0' or greater.
@@ -24824,15 +24810,14 @@ public interface I2<T> where T : I2<T>
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_BadIncDecRetType
-                                or (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.ERR_OpTFRetType
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_BadIncDecRetType
+                            or (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.ERR_OpTFRetType
+                        )
                 )
                 .Verify(
                     // (8,10): error CS0535: 'C1' does not implement interface member 'I1<C1>.operator +(C1)'
@@ -25086,15 +25071,14 @@ public interface I2<T> where T : I2<T>
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_BadIncDecRetType
-                                or (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.ERR_OpTFRetType
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_BadIncDecRetType
+                            or (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.ERR_OpTFRetType
+                        )
                 )
                 .Verify(
                     // (14,24): error CS0558: User-defined operator 'C2.operator +(C2)' must be declared static and public
@@ -25328,15 +25312,14 @@ public interface I2<T> where T : I2<T>
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                            or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                        )
                 )
                 .Verify(
                     // (8,10): error CS0535: 'C1' does not implement interface member 'I1<C1>.operator >>(C1, int)'
@@ -25609,15 +25592,14 @@ public interface I2<T> where T : I2<T>
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                            or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                        )
                 )
                 .Verify(
                     // (14,24): error CS0558: User-defined operator 'C2.operator >>(C2, int)' must be declared static and public
@@ -25798,14 +25780,13 @@ interface I14 : I1
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_OpTFRetType
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_OpTFRetType
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                        )
                 )
                 .Verify(
                     // (12,17): error CS0558: User-defined operator 'I3.operator +(I1)' must be declared static and public
@@ -26071,14 +26052,13 @@ interface I14 : I1
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_OpTFRetType
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_OpTFRetType
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                        )
                 )
                 .Verify(
                     // (12,17): error CS0558: User-defined operator 'I3.operator +(I1)' must be declared static and public
@@ -26469,13 +26449,12 @@ interface I14 : I1
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                        )
                 )
                 .Verify(expected);
 
@@ -26839,13 +26818,12 @@ interface I14 : I1
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                        )
                 )
                 .Verify(expected);
 
@@ -27063,14 +27041,13 @@ public interface I2<T> where T : I2<T>
 
             compilation2
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.ERR_OpTFRetType
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.ERR_OpTFRetType
+                        )
                 )
                 .Verify(expected2);
 
@@ -27148,14 +27125,13 @@ public interface I2<T> where T : I2<T>
 
             compilation3
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.ERR_OpTFRetType
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.ERR_OpTFRetType
+                        )
                 )
                 .Verify(expected3);
         }
@@ -27264,14 +27240,13 @@ public interface I2<T> where T : I2<T>
                 {
                     compilation2
                         .GetDiagnostics()
-                        .Where(
-                            d =>
-                                d.Code
-                                    is not (
-                                        (int)ErrorCode.ERR_OperatorNeedsMatch
-                                        or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                        or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                                    )
+                        .Where(d =>
+                            d.Code
+                                is not (
+                                    (int)ErrorCode.ERR_OperatorNeedsMatch
+                                    or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                                    or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                                )
                         )
                         .Verify(
                             // (4,15): error CS8936: Feature 'static abstract members in interfaces' is not available in C# 10.0. Please use language version 11.0 or greater.
@@ -27336,14 +27311,13 @@ public interface I2<T> where T : I2<T>
             {
                 compilation2
                     .GetDiagnostics()
-                    .Where(
-                        d =>
-                            d.Code
-                                is not (
-                                    (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                                )
+                    .Where(d =>
+                        d.Code
+                            is not (
+                                (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                            )
                     )
                     .Verify(
                         // (4,15): error CS8936: Feature 'static abstract members in interfaces' is not available in C# 10.0. Please use language version 11.0 or greater.
@@ -27392,15 +27366,14 @@ public interface I2<T> where T : I2<T>
                 {
                     compilation3
                         .GetDiagnostics()
-                        .Where(
-                            d =>
-                                d.Code
-                                    is not (
-                                        (int)ErrorCode.ERR_OperatorNeedsMatch
-                                        or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                        or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                                        or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
-                                    )
+                        .Where(d =>
+                            d.Code
+                                is not (
+                                    (int)ErrorCode.ERR_OperatorNeedsMatch
+                                    or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                                    or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                                    or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                                )
                         )
                         .Verify(
                             // (4,15): error CS8936: Feature 'static abstract members in interfaces' is not available in C# 10.0. Please use language version 11.0 or greater.
@@ -27465,14 +27438,13 @@ public interface I2<T> where T : I2<T>
             {
                 compilation3
                     .GetDiagnostics()
-                    .Where(
-                        d =>
-                            d.Code
-                                is not (
-                                    (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                                )
+                    .Where(d =>
+                        d.Code
+                            is not (
+                                (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                            )
                     )
                     .Verify(
                         // (4,15): error CS8936: Feature 'static abstract members in interfaces' is not available in C# 10.0. Please use language version 11.0 or greater.
@@ -27573,14 +27545,13 @@ public interface I1<T> where T : I1<T>
 
             compilation2
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.ERR_OpTFRetType
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.ERR_OpTFRetType
+                        )
                 )
                 .Verify(
                     // (4,34): error CS8929: 'Test1.operator +(Test1)' cannot implement interface member 'I1<Test1>.operator +(Test1)' in type 'Test1' because the target runtime doesn't support static abstract members in interfaces.
@@ -27606,14 +27577,13 @@ public interface I1<T> where T : I1<T>
 
             compilation3
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.ERR_OpTFRetType
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.ERR_OpTFRetType
+                        )
                 )
                 .Verify(
                     // (9,32): error CS8919: Target runtime doesn't support static abstract members in interfaces.
@@ -27704,15 +27674,14 @@ public interface I1<T> where T : I1<T>
 
             compilation2
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                            or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                        )
                 )
                 .Verify(
                     // (4,34): error CS8929: 'Test1.operator >>(Test1, int)' cannot implement interface member 'I1<Test1>.operator >>(Test1, int)' in type 'Test1' because the target runtime doesn't support static abstract members in interfaces.
@@ -27738,15 +27707,14 @@ public interface I1<T> where T : I1<T>
 
             compilation3
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                            or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                        )
                 )
                 .Verify(
                     // (9,32): error CS8919: Target runtime doesn't support static abstract members in interfaces.
@@ -27832,14 +27800,13 @@ public interface I1
 
             compilation3
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_OpTFRetType
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_OpTFRetType
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                        )
                 )
                 .Verify(
                     // (4,27): error CS8919: Target runtime doesn't support static abstract members in interfaces.
@@ -27951,14 +27918,13 @@ public interface I1
 
             compilation3
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
-                                or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_CheckedOperatorNeedsMatch
+                            or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                        )
                 )
                 .Verify(
                     // (4,27): error CS8919: Target runtime doesn't support static abstract members in interfaces.
@@ -32428,14 +32394,13 @@ class
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.WRN_ExternMethodNoImplementation
-                                or (int)ErrorCode.ERR_OpTFRetType
-                                or (int)ErrorCode.ERR_OperatorNeedsMatch
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.WRN_ExternMethodNoImplementation
+                            or (int)ErrorCode.ERR_OpTFRetType
+                            or (int)ErrorCode.ERR_OperatorNeedsMatch
+                        )
                 )
                 .Verify(
                     // (16,35): error CS0106: The modifier 'private' is not valid for this item
@@ -32674,14 +32639,13 @@ struct
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.WRN_ExternMethodNoImplementation
-                                or (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.WRN_ExternMethodNoImplementation
+                            or (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                        )
                 )
                 .Verify(
                     // (16,35): error CS0106: The modifier 'private' is not valid for this item
@@ -32784,14 +32748,13 @@ class C2 : I1<C2>
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OpTFRetType
-                                or (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OpTFRetType
+                            or (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                        )
                 )
                 .Verify(
                     // (9,20): error CS0540: 'C1.I1<int>.operator -(I1<int>)': containing type does not implement interface 'I1<int>'
@@ -32880,13 +32843,12 @@ struct C2 : I1<C2>
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (
-                                (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
-                            )
+                .Where(d =>
+                    d.Code
+                        is not (
+                            (int)ErrorCode.ERR_OperatorNeedsMatch
+                            or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                        )
                 )
                 .Verify(
                     // (9,23): error CS0540: 'C1.I1<string>.operator %(I1<string>, int)': containing type does not implement interface 'I1<string>'
@@ -44044,11 +44006,10 @@ class C<T>
 
             compilation1
                 .GetDiagnostics()
-                .Where(
-                    d =>
-                        d.Code
-                            is not (int)
-                                ErrorCode.ERR_GenericConstraintNotSatisfiedInterfaceWithStaticAbstractMembers
+                .Where(d =>
+                    d.Code
+                        is not (int)
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedInterfaceWithStaticAbstractMembers
                 )
                 .Verify(
                     // (4,39): error CS0552: 'I1.implicit operator bool(I1)': user-defined conversions to or from an interface are not allowed
@@ -47320,15 +47281,14 @@ interface C
 
                 compilation1
                     .GetDiagnostics()
-                    .Where(
-                        d =>
-                            d.Code
-                                is not (
-                                    (int)ErrorCode.ERR_OperatorNeedsMatch
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutEquals
-                                    or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
-                                    or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
-                                )
+                    .Where(d =>
+                        d.Code
+                            is not (
+                                (int)ErrorCode.ERR_OperatorNeedsMatch
+                                or (int)ErrorCode.WRN_EqualityOpWithoutEquals
+                                or (int)ErrorCode.WRN_EqualityOpWithoutGetHashCode
+                                or (int)ErrorCode.ERR_BadAbstractEqualityOperatorSignature
+                            )
                     )
                     .Verify(
                         // (4,39): error CS9150: User-defined operator '%' cannot be declared checked

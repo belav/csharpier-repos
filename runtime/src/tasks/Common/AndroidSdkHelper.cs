@@ -59,11 +59,10 @@ internal sealed class AndroidSdkHelper
     {
         return Directory
             .GetDirectories(Path.Combine(androidSdkDir, "platforms"))
-            .Select(
-                file =>
-                    int.TryParse(Path.GetFileName(file).Replace("android-", ""), out int apiLevel)
-                        ? apiLevel
-                        : -1
+            .Select(file =>
+                int.TryParse(Path.GetFileName(file).Replace("android-", ""), out int apiLevel)
+                    ? apiLevel
+                    : -1
             )
             .OrderByDescending(v => v)
             .FirstOrDefault()

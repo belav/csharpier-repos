@@ -130,12 +130,11 @@ namespace System.Web.Razor.Test
             mockEngine.Object.ParseTemplate(reader, cancelToken: source.Token);
 
             // Assert
-            mockEngine.Verify(
-                e =>
-                    e.ParseTemplateCore(
-                        It.Is<SeekableTextReader>(l => l.ReadToEnd() == "foo"),
-                        source.Token
-                    )
+            mockEngine.Verify(e =>
+                e.ParseTemplateCore(
+                    It.Is<SeekableTextReader>(l => l.ReadToEnd() == "foo"),
+                    source.Token
+                )
             );
         }
 
@@ -160,15 +159,14 @@ namespace System.Web.Razor.Test
             );
 
             // Assert
-            mockEngine.Verify(
-                e =>
-                    e.GenerateCodeCore(
-                        It.Is<SeekableTextReader>(l => l.ReadToEnd() == "foo"),
-                        className,
-                        ns,
-                        src,
-                        source.Token
-                    )
+            mockEngine.Verify(e =>
+                e.GenerateCodeCore(
+                    It.Is<SeekableTextReader>(l => l.ReadToEnd() == "foo"),
+                    className,
+                    ns,
+                    src,
+                    source.Token
+                )
             );
         }
 

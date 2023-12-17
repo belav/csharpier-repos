@@ -980,8 +980,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new ErrorPerson2 { FirstName = "Scott", LastName = "Guthrie" },
             };
 
-            Dictionary<string, IEnumerable<IErrorPerson2>> dictionary = data.GroupBy(
-                    person => person.FirstName
+            Dictionary<string, IEnumerable<IErrorPerson2>> dictionary = data.GroupBy(person =>
+                    person.FirstName
                 )
                 .ToDictionary(group => @group.Key, group => @group.Cast<IErrorPerson2>());
             string output = JsonConvert.SerializeObject(dictionary, Formatting.None, settings);
@@ -1005,8 +1005,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new ErrorPerson2 { FirstName = "James", LastName = "Newton-King" },
             };
 
-            Dictionary<string, IEnumerable<IErrorPerson2>> dictionary = data.GroupBy(
-                    person => person.FirstName
+            Dictionary<string, IEnumerable<IErrorPerson2>> dictionary = data.GroupBy(person =>
+                    person.FirstName
                 )
                 .ToDictionary(group => @group.Key, group => @group.Cast<IErrorPerson2>());
             string output = JsonConvert.SerializeObject(dictionary, Formatting.None, settings);

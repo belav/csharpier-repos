@@ -283,14 +283,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 if (diagnostics != null)
                 {
                     return diagnostics
-                        .Where(
-                            d =>
-                                d != null
-                                && diagnosticIds.Contains(d.Id)
-                                && (
-                                    filterSpan == null
-                                    || filterSpan.Value.Contains(d.Location.SourceSpan)
-                                )
+                        .Where(d =>
+                            d != null
+                            && diagnosticIds.Contains(d.Id)
+                            && (
+                                filterSpan == null
+                                || filterSpan.Value.Contains(d.Location.SourceSpan)
+                            )
                         )
                         .ToImmutableArray();
                 }

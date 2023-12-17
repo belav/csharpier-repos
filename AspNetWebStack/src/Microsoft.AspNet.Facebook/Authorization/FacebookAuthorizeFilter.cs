@@ -359,10 +359,9 @@ namespace Microsoft.AspNet.Facebook.Authorization
             // Declined permissions and skipped permissions can persist through multiple pages.  So we need to cross check
             // them against the current pages permissions, this will determine if we should invoke the denied permission hook.
             bool deniedPermissions = missingPermissions
-                .Where(
-                    permission =>
-                        declinedPermissions.Contains(permission)
-                        || skippedPermissions.Contains(permission)
+                .Where(permission =>
+                    declinedPermissions.Contains(permission)
+                    || skippedPermissions.Contains(permission)
                 )
                 .Any();
 

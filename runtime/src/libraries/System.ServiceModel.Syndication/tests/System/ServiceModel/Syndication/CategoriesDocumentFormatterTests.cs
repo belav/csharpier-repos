@@ -36,8 +36,9 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateInlineCategoriesDocument_Invoke_ReturnsExpected()
         {
             var formatter = new Formatter();
-            InlineCategoriesDocument document =
-                formatter.CreateInlineCategoriesDocumentEntryPoint();
+            InlineCategoriesDocument document = formatter.CreateInlineCategoriesDocumentEntryPoint(
+
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.Categories);

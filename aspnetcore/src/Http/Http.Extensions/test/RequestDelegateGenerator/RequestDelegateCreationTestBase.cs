@@ -118,11 +118,10 @@ public abstract class RequestDelegateCreationTestBase : LoggedTest
         {
             return staticEndpointSteps
                 .SelectMany(step => step.Outputs)
-                .Select(
-                    output =>
-                        Assert.IsType<RequestDelegateGenerator.StaticRouteHandlerModel.Endpoint>(
-                            output.Value
-                        )
+                .Select(output =>
+                    Assert.IsType<RequestDelegateGenerator.StaticRouteHandlerModel.Endpoint>(
+                        output.Value
+                    )
                 )
                 .ToArray();
         }

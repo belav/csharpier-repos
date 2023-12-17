@@ -33,8 +33,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockKvpBinder = new Mock<IExtensibleModelBinder>();
             mockKvpBinder
-                .Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                .Setup(o =>
+                    o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)

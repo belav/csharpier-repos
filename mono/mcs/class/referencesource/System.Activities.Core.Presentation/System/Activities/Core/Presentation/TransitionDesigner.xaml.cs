@@ -526,13 +526,12 @@ namespace System.Activities.Core.Presentation
             this.addNewTransitionLabel.Visibility = Visibility.Visible;
             this.addNewTransitionBox.ViewModel.ComboBoxItems = new ObservableCollection<string>(
                 GetAvailableStates()
-                    .Select(
-                        modelItem =>
-                            (
-                                modelItem
-                                    .Properties[StateDesigner.DisplayNamePropertyName]
-                                    .ComputedValue as string
-                            )
+                    .Select(modelItem =>
+                        (
+                            modelItem
+                                .Properties[StateDesigner.DisplayNamePropertyName]
+                                .ComputedValue as string
+                        )
                     )
                     .Where(displayName => !string.IsNullOrEmpty(displayName))
                     .Distinct()
@@ -713,13 +712,12 @@ namespace System.Activities.Core.Presentation
                 }
             }
 
-            return availableStates.OrderBy(
-                modelItem =>
-                    modelItem.Properties[StateDesigner.DisplayNamePropertyName].Value == null
-                        ? SR.EmptyName
-                        : modelItem
-                            .Properties[StateDesigner.DisplayNamePropertyName]
-                            .Value.GetCurrentValue()
+            return availableStates.OrderBy(modelItem =>
+                modelItem.Properties[StateDesigner.DisplayNamePropertyName].Value == null
+                    ? SR.EmptyName
+                    : modelItem
+                        .Properties[StateDesigner.DisplayNamePropertyName]
+                        .Value.GetCurrentValue()
             );
         }
 

@@ -1020,10 +1020,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             Action<NetCoreAppBuilder> appCustomizer
         )
         {
-            var component = SharedState.CreateComponentWithNoDependencies(
-                b =>
-                    b.WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
-                        .WithCustomizer(appCustomizer)
+            var component = SharedState.CreateComponentWithNoDependencies(b =>
+                b.WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
+                    .WithCustomizer(appCustomizer)
             );
 
             DotNetCli dotnet;
@@ -1101,10 +1100,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             Action<NetCoreAppBuilder> appCustomizer
         )
         {
-            var component = SharedState.CreateComponentWithNoDependencies(
-                b =>
-                    b.WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
-                        .WithCustomizer(appCustomizer)
+            var component = SharedState.CreateComponentWithNoDependencies(b =>
+                b.WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
+                    .WithCustomizer(appCustomizer)
             );
 
             TestApp app;

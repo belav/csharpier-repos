@@ -39,11 +39,10 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
         protected sealed override void InitializeWorker(AnalysisContext context) =>
-            context.RegisterCompilationStartAction(
-                context =>
-                    context.RegisterSyntaxTreeAction(
-                        treeContext => AnalyzeTree(treeContext, context.Compilation.Options)
-                    )
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeTree(treeContext, context.Compilation.Options)
+                )
             );
 
         private void AnalyzeTree(

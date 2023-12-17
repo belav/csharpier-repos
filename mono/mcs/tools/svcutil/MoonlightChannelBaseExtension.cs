@@ -389,9 +389,9 @@ namespace Mono.ServiceContractTool
                 new CodeArrayCreateExpression(
                     typeof(object),
                     inArgs
-                        .ConvertAll<CodeExpression>(
-                            decl => new CodeArgumentReferenceExpression(decl.Name)
-                        )
+                        .ConvertAll<CodeExpression>(decl => new CodeArgumentReferenceExpression(
+                            decl.Name
+                        ))
                         .ToArray()
                 )
             );
@@ -450,9 +450,9 @@ namespace Mono.ServiceContractTool
                 new CodeArrayCreateExpression(
                     typeof(object),
                     inArgs
-                        .ConvertAll<CodeExpression>(
-                            decl => new CodeArgumentReferenceExpression(decl.Name)
-                        )
+                        .ConvertAll<CodeExpression>(decl => new CodeArgumentReferenceExpression(
+                            decl.Name
+                        ))
                         .ToArray()
                 ),
                 new CodeArgumentReferenceExpression("asyncCallback"),

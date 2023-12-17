@@ -325,18 +325,13 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
         var testAssembly = GetTestAssemblies();
         var metadataAttributes = testAssembly
             .SelectMany(a => a.GetCustomAttributes<WebApplicationFactoryContentRootAttribute>())
-            .Where(
-                a =>
-                    string.Equals(
-                        a.Key,
-                        tEntryPointAssemblyFullName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || string.Equals(
-                        a.Key,
-                        tEntryPointAssemblyName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+            .Where(a =>
+                string.Equals(
+                    a.Key,
+                    tEntryPointAssemblyFullName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                || string.Equals(a.Key, tEntryPointAssemblyName, StringComparison.OrdinalIgnoreCase)
             )
             .OrderBy(a => a.Priority)
             .ToArray();
@@ -375,11 +370,10 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
             var entryPointAssemblyName = typeof(TEntryPoint).Assembly.GetName().Name;
 
             // Find the list of projects referencing TEntryPoint.
-            var candidates = context.CompileLibraries.Where(
-                library =>
-                    library.Dependencies.Any(
-                        d => string.Equals(d.Name, entryPointAssemblyName, StringComparison.Ordinal)
-                    )
+            var candidates = context.CompileLibraries.Where(library =>
+                library.Dependencies.Any(d =>
+                    string.Equals(d.Name, entryPointAssemblyName, StringComparison.Ordinal)
+                )
             );
 
             var testAssemblies = new List<Assembly>();

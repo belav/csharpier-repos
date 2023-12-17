@@ -46,18 +46,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             bool expectNullResult = false
         )
         {
-            return RunTestAsync(
-                path =>
-                    TestAsync(
-                        path,
-                        pdbLocation,
-                        sourceLocation,
-                        metadataSource,
-                        symbolMatcher,
-                        preprocessorSymbols,
-                        buildReferenceAssembly,
-                        expectNullResult
-                    )
+            return RunTestAsync(path =>
+                TestAsync(
+                    path,
+                    pdbLocation,
+                    sourceLocation,
+                    metadataSource,
+                    symbolMatcher,
+                    preprocessorSymbols,
+                    buildReferenceAssembly,
+                    expectNullResult
+                )
             );
         }
 

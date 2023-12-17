@@ -538,11 +538,10 @@ public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     {
         var applyEntityConfigurationMethod = typeof(ModelBuilder)
             .GetMethods()
-            .Single(
-                e =>
-                    e is { Name: nameof(ApplyConfiguration), ContainsGenericParameters: true }
-                    && e.GetParameters().SingleOrDefault()?.ParameterType.GetGenericTypeDefinition()
-                        == typeof(IEntityTypeConfiguration<>)
+            .Single(e =>
+                e is { Name: nameof(ApplyConfiguration), ContainsGenericParameters: true }
+                && e.GetParameters().SingleOrDefault()?.ParameterType.GetGenericTypeDefinition()
+                    == typeof(IEntityTypeConfiguration<>)
             );
 
         foreach (var type in assembly.GetConstructibleTypes().OrderBy(t => t.FullName))

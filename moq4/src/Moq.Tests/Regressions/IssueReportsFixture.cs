@@ -330,10 +330,9 @@ namespace Moq.Tests.Regressions
             [Fact]
             public void Mock_Of_recursive_with_argument_matchers()
             {
-                var foo = Mock.Of<IFoo>(
-                    f =>
-                        f.Foo(It.Is<int>(i => i == 1)).Name == "One"
-                        && f.Foo(It.Is<int>(i => i == 2)).Name == "Two"
+                var foo = Mock.Of<IFoo>(f =>
+                    f.Foo(It.Is<int>(i => i == 1)).Name == "One"
+                    && f.Foo(It.Is<int>(i => i == 2)).Name == "Two"
                 );
                 Assert.Equal("One", foo.Foo(1).Name);
                 Assert.Equal("Two", foo.Foo(2).Name);
@@ -1434,10 +1433,9 @@ namespace Moq.Tests.Regressions
             [Fact]
             public void WhenQueryingWithTwoIndexes_ThenSetsThemDirectly2()
             {
-                var foo = Mock.Of<IFoo>(
-                    x =>
-                        x[0] == Mock.Of<IBar>(b => b.Value == "hello")
-                        && x[1] == Mock.Of<IBar>(b => b.Value == "goodbye")
+                var foo = Mock.Of<IFoo>(x =>
+                    x[0] == Mock.Of<IBar>(b => b.Value == "hello")
+                    && x[1] == Mock.Of<IBar>(b => b.Value == "goodbye")
                 );
 
                 Assert.Equal("hello", foo[0].Value); // These pass no problem
@@ -1592,8 +1590,8 @@ namespace Moq.Tests.Regressions
                 // becomes relevant once Moq starts supporting custom implementations of
                 // `IDefaultValueProvider`. Then it might no longer be a given that `null`
                 // is the default return value that no one would want to explicitly set up.
-                var userProvider = Mock.Of<IUserProvider>(
-                    p => p.GetUserByEmail("alice@example.com") == null
+                var userProvider = Mock.Of<IUserProvider>(p =>
+                    p.GetUserByEmail("alice@example.com") == null
                 );
                 var user = userProvider.GetUserByEmail("alice@example.com");
                 Assert.Null(user);
@@ -2834,8 +2832,8 @@ namespace Moq.Tests.Regressions
             public void SetupSequencePhraseConvertsExpressionToDescriptiveString()
             {
                 var setupSequence = new Mock<IFoo>().SetupSequence(x => x.DoThings(null));
-                var setupGenericSequence = new Mock<IFoo>().SetupSequence(
-                    x => x.DoThings<object>(null)
+                var setupGenericSequence = new Mock<IFoo>().SetupSequence(x =>
+                    x.DoThings<object>(null)
                 );
 
                 Assert.Equal("x => x.DoThings(null)", setupSequence.ToString());
@@ -2925,8 +2923,8 @@ namespace Moq.Tests.Regressions
             [Fact]
             public void SetupAllProperties_can_process_Items_property_2()
             {
-                var httpContext = Mock.Of<HttpContext>(
-                    c => c.Items == new Dictionary<object, object>()
+                var httpContext = Mock.Of<HttpContext>(c =>
+                    c.Items == new Dictionary<object, object>()
                 );
                 Assert.NotNull(httpContext.Items);
             }
@@ -3354,15 +3352,14 @@ namespace Moq.Tests.Regressions
             {
                 var loggerMock = new Mock<ILogger>();
                 loggerMock
-                    .Setup(
-                        m =>
-                            m.Log<object>(
-                                It.IsAny<LogLevel>(),
-                                It.IsAny<EventId>(),
-                                It.IsAny<object>(),
-                                It.IsAny<Exception>(),
-                                It.IsAny<Func<object, Exception, string>>()
-                            )
+                    .Setup(m =>
+                        m.Log<object>(
+                            It.IsAny<LogLevel>(),
+                            It.IsAny<EventId>(),
+                            It.IsAny<object>(),
+                            It.IsAny<Exception>(),
+                            It.IsAny<Func<object, Exception, string>>()
+                        )
                     )
                     .Verifiable();
 
@@ -3383,15 +3380,14 @@ namespace Moq.Tests.Regressions
             {
                 var loggerMock = new Mock<ILogger>();
                 loggerMock
-                    .Setup(
-                        m =>
-                            m.Log<It.IsAnyType>(
-                                It.IsAny<LogLevel>(),
-                                It.IsAny<EventId>(),
-                                It.IsAny<It.IsAnyType>(),
-                                It.IsAny<Exception>(),
-                                It.IsAny<Func<It.IsAnyType, Exception, string>>()
-                            )
+                    .Setup(m =>
+                        m.Log<It.IsAnyType>(
+                            It.IsAny<LogLevel>(),
+                            It.IsAny<EventId>(),
+                            It.IsAny<It.IsAnyType>(),
+                            It.IsAny<Exception>(),
+                            It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                        )
                     )
                     .Verifiable();
 
@@ -3514,8 +3510,8 @@ namespace Moq.Tests.Regressions
             {
                 Guid originalItemId = Guid.NewGuid();
                 var session = new Mock<ISession>();
-                session.Setup(
-                    x => x.QueryOverExpression<IItem>(item => item.Id == originalItemId).List()
+                session.Setup(x =>
+                    x.QueryOverExpression<IItem>(item => item.Id == originalItemId).List()
                 );
 
                 _ = session
@@ -3528,8 +3524,8 @@ namespace Moq.Tests.Regressions
             {
                 Guid originalItemId = Guid.NewGuid();
                 var session = new Mock<ISession>();
-                session.Setup(
-                    x => x.QueryOverExpression<IItem>(item => item.Id == originalItemId).List()
+                session.Setup(x =>
+                    x.QueryOverExpression<IItem>(item => item.Id == originalItemId).List()
                 );
 
                 var copiedItemId = originalItemId;
@@ -4114,14 +4110,13 @@ namespace Moq.Tests.Regressions
             public void Pass_byte_array_directly()
             {
                 Mock<IHardware> hwMock = new Mock<IHardware>();
-                hwMock.Setup(
-                    m => m.Transmit(It.IsAny<IntPtr>(), It.IsAny<byte[]>(), It.IsAny<byte[]>())
+                hwMock.Setup(m =>
+                    m.Transmit(It.IsAny<IntPtr>(), It.IsAny<byte[]>(), It.IsAny<byte[]>())
                 );
 
                 DoWork(hwMock.Object, new byte[] { 1, 2, 3 });
 
-                hwMock.Verify(
-                    m => m.Transmit((IntPtr)1, new byte[] { 1, 2, 3 }, It.IsAny<byte[]>())
+                hwMock.Verify(m => m.Transmit((IntPtr)1, new byte[] { 1, 2, 3 }, It.IsAny<byte[]>())
                 );
             }
 
@@ -4129,21 +4124,20 @@ namespace Moq.Tests.Regressions
             public void Pass_byte_array_indirectly_via_method_call()
             {
                 Mock<IHardware> hwMock = new Mock<IHardware>();
-                hwMock.Setup(
-                    m => m.Transmit(It.IsAny<IntPtr>(), It.IsAny<byte[]>(), It.IsAny<byte[]>())
+                hwMock.Setup(m =>
+                    m.Transmit(It.IsAny<IntPtr>(), It.IsAny<byte[]>(), It.IsAny<byte[]>())
                 );
 
                 DoWork(hwMock.Object, new byte[] { 1, 2, 3 });
 
                 string inputAsString = Convert.ToBase64String(new byte[] { 1, 2, 3 });
 
-                hwMock.Verify(
-                    m =>
-                        m.Transmit(
-                            (IntPtr)1,
-                            Convert.FromBase64String(inputAsString),
-                            It.IsAny<byte[]>()
-                        )
+                hwMock.Verify(m =>
+                    m.Transmit(
+                        (IntPtr)1,
+                        Convert.FromBase64String(inputAsString),
+                        It.IsAny<byte[]>()
+                    )
                 );
             }
         }
@@ -4664,8 +4658,7 @@ namespace Moq.Tests.Regressions
             public void Test()
             {
                 var target = new Mock<IFoo>();
-                target.Setup(
-                    t => t.Submit(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())
+                target.Setup(t => t.Submit(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())
                 );
 
                 var e = Assert.Throws<MockException>(() => target.VerifyAll());

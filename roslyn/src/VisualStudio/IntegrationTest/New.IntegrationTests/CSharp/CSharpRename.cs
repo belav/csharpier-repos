@@ -86,9 +86,10 @@ class Program
                 var tags = await TestServices.Editor.GetRenameTagsAsync(
                     HangMitigatingCancellationToken
                 );
-                var tagSpans = tags.SelectAsArray(
-                    tag => new TextSpan(tag.Span.Start, tag.Span.Length)
-                );
+                var tagSpans = tags.SelectAsArray(tag => new TextSpan(
+                    tag.Span.Start,
+                    tag.Span.Length
+                ));
                 AssertEx.SetEqual(renameSpans, tagSpans);
 
                 await TestServices.Input.SendWithoutActivateAsync(

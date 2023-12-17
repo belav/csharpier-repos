@@ -864,7 +864,9 @@ namespace System.Runtime.Serialization.DataContracts
         {
             SchemaImporter importer = new SchemaImporter(
                 schemaSet,
-                Array.Empty<XmlQualifiedName>() /* Needs to be empty, not null for 'elements' to be used. */
+                Array.Empty<XmlQualifiedName>(
+
+                ) /* Needs to be empty, not null for 'elements' to be used. */
                 ,
                 elements,
                 this,

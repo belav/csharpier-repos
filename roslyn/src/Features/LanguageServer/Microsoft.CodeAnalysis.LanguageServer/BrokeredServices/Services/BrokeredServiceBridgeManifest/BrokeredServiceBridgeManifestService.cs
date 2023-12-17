@@ -59,20 +59,19 @@ internal class BrokeredServiceBridgeManifest
                     .GetRequiredServiceBrokerContainer()
                     .GetRegisteredServices()
                     .Select(s => s.Key)
-                    .Where(
-                        s =>
-                            s.Name.StartsWith(
-                                "Microsoft.CodeAnalysis.LanguageServer.",
-                                StringComparison.Ordinal
-                            )
-                            || s.Name.StartsWith(
-                                "Microsoft.VisualStudio.LanguageServer.",
-                                StringComparison.Ordinal
-                            )
-                            || s.Name.StartsWith(
-                                "Microsoft.VisualStudio.LanguageServices.",
-                                StringComparison.Ordinal
-                            )
+                    .Where(s =>
+                        s.Name.StartsWith(
+                            "Microsoft.CodeAnalysis.LanguageServer.",
+                            StringComparison.Ordinal
+                        )
+                        || s.Name.StartsWith(
+                            "Microsoft.VisualStudio.LanguageServer.",
+                            StringComparison.Ordinal
+                        )
+                        || s.Name.StartsWith(
+                            "Microsoft.VisualStudio.LanguageServices.",
+                            StringComparison.Ordinal
+                        )
                     )
                     .ToImmutableArray();
         _logger.LogDebug(

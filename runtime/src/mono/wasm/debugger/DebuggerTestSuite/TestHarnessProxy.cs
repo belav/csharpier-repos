@@ -111,19 +111,18 @@ namespace DebuggerTests
                         {
                             if (options.WebServerUseCors)
                             {
-                                services.AddCors(
-                                    o =>
-                                        o.AddPolicy(
-                                            "AnyCors",
-                                            builder =>
-                                            {
-                                                builder
-                                                    .AllowAnyOrigin()
-                                                    .AllowAnyMethod()
-                                                    .AllowAnyHeader()
-                                                    .WithExposedHeaders("*");
-                                            }
-                                        )
+                                services.AddCors(o =>
+                                    o.AddPolicy(
+                                        "AnyCors",
+                                        builder =>
+                                        {
+                                            builder
+                                                .AllowAnyOrigin()
+                                                .AllowAnyMethod()
+                                                .AllowAnyHeader()
+                                                .WithExposedHeaders("*");
+                                        }
+                                    )
                                 );
                             }
                             services.AddSingleton(Options.Create(options));

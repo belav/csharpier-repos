@@ -59,7 +59,9 @@ namespace Microsoft.Interop.Analyzers
                     return;
 
                 TargetFrameworkSettings targetFramework =
-                    context.Options.AnalyzerConfigOptionsProvider.GlobalOptions.GetTargetFrameworkSettings();
+                    context.Options.AnalyzerConfigOptionsProvider.GlobalOptions.GetTargetFrameworkSettings(
+
+                    );
 
                 StubEnvironment env = new StubEnvironment(
                     context.Compilation,
@@ -139,8 +141,7 @@ namespace Microsoft.Interop.Analyzers
                 );
             AttributeData dllImportAttribute = method
                 .GetAttributes()
-                .First(
-                    attr => attr.AttributeClass.ToDisplayString() == TypeNames.DllImportAttribute
+                .First(attr => attr.AttributeClass.ToDisplayString() == TypeNames.DllImportAttribute
                 );
             SignatureContext targetSignatureContext = SignatureContext.Create(
                 method,
@@ -231,10 +232,9 @@ namespace Microsoft.Interop.Analyzers
 
             AttributeData? bestFitMappingContainingType = method
                 .ContainingType.GetAttributes()
-                .FirstOrDefault(
-                    attr =>
-                        attr.AttributeClass.ToDisplayString()
-                        == TypeNames.System_Runtime_InteropServices_BestFitMappingAttribute
+                .FirstOrDefault(attr =>
+                    attr.AttributeClass.ToDisplayString()
+                    == TypeNames.System_Runtime_InteropServices_BestFitMappingAttribute
                 );
             if (bestFitMappingContainingType is not null)
             {
@@ -243,10 +243,9 @@ namespace Microsoft.Interop.Analyzers
 
             AttributeData? bestFitMappingContainingAssembly = method
                 .ContainingAssembly.GetAttributes()
-                .FirstOrDefault(
-                    attr =>
-                        attr.AttributeClass.ToDisplayString()
-                        == TypeNames.System_Runtime_InteropServices_BestFitMappingAttribute
+                .FirstOrDefault(attr =>
+                    attr.AttributeClass.ToDisplayString()
+                    == TypeNames.System_Runtime_InteropServices_BestFitMappingAttribute
                 );
             if (bestFitMappingContainingAssembly is not null)
             {

@@ -1462,11 +1462,10 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 )
                 {
                     var matchingCaseWhenClauses = caseExpression
-                        .WhenClauses.Where(
-                            wc =>
-                                discriminatorValues.Contains(
-                                    (string)((SqlConstantExpression)wc.Result).Value!
-                                )
+                        .WhenClauses.Where(wc =>
+                            discriminatorValues.Contains(
+                                (string)((SqlConstantExpression)wc.Result).Value!
+                            )
                         )
                         .ToList();
 
@@ -1509,8 +1508,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                     : _sqlExpressionFactory.In(
                         discriminatorColumn,
                         concreteEntityTypes
-                            .Select(
-                                et => _sqlExpressionFactory.Constant(et.GetDiscriminatorValue())
+                            .Select(et => _sqlExpressionFactory.Constant(et.GetDiscriminatorValue())
                             )
                             .ToArray()
                     );
@@ -1710,13 +1708,12 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 {
                     condition = allRequiredNonPkProperties
                         .Select(p => projection.BindProperty(p))
-                        .Select(
-                            c =>
-                                (SqlExpression)
-                                    _sqlExpressionFactory.NotEqual(
-                                        c,
-                                        _sqlExpressionFactory.Constant(null)
-                                    )
+                        .Select(c =>
+                            (SqlExpression)
+                                _sqlExpressionFactory.NotEqual(
+                                    c,
+                                    _sqlExpressionFactory.Constant(null)
+                                )
                         )
                         .Aggregate((a, b) => _sqlExpressionFactory.AndAlso(a, b));
                 }
@@ -1730,13 +1727,12 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                     var atLeastOneNonNullValueInNullableColumnsCondition =
                         nonPrincipalSharedNonPkProperties
                             .Select(p => projection.BindProperty(p))
-                            .Select(
-                                c =>
-                                    (SqlExpression)
-                                        _sqlExpressionFactory.NotEqual(
-                                            c,
-                                            _sqlExpressionFactory.Constant(null)
-                                        )
+                            .Select(c =>
+                                (SqlExpression)
+                                    _sqlExpressionFactory.NotEqual(
+                                        c,
+                                        _sqlExpressionFactory.Constant(null)
+                                    )
                             )
                             .Aggregate((a, b) => _sqlExpressionFactory.OrElse(a, b));
 
@@ -2374,16 +2370,12 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                         if (requiredNonPkProperties.Count > 0)
                         {
                             condition = requiredNonPkProperties
-                                .Select(
-                                    p =>
-                                        Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                                            CreatePropertyAccessExpression(
-                                                nonNullEntityReference,
-                                                p
-                                            ),
-                                            Expression.Constant(null, p.ClrType.MakeNullable()),
-                                            nodeType != ExpressionType.Equal
-                                        )
+                                .Select(p =>
+                                    Infrastructure.ExpressionExtensions.CreateEqualsExpression(
+                                        CreatePropertyAccessExpression(nonNullEntityReference, p),
+                                        Expression.Constant(null, p.ClrType.MakeNullable()),
+                                        nodeType != ExpressionType.Equal
+                                    )
                                 )
                                 .Aggregate(
                                     (l, r) =>
@@ -2406,16 +2398,12 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                             // - if entity is to be null, all the properties must be null
                             // - if the entity is to be not null, at least one property must be not null
                             var optionalPropertiesCondition = allNonPrincipalSharedNonPkProperties
-                                .Select(
-                                    p =>
-                                        Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                                            CreatePropertyAccessExpression(
-                                                nonNullEntityReference,
-                                                p
-                                            ),
-                                            Expression.Constant(null, p.ClrType.MakeNullable()),
-                                            nodeType != ExpressionType.Equal
-                                        )
+                                .Select(p =>
+                                    Infrastructure.ExpressionExtensions.CreateEqualsExpression(
+                                        CreatePropertyAccessExpression(nonNullEntityReference, p),
+                                        Expression.Constant(null, p.ClrType.MakeNullable()),
+                                        nodeType != ExpressionType.Equal
+                                    )
                                 )
                                 .Aggregate(
                                     (l, r) =>
@@ -2448,13 +2436,12 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
 
                 result = Visit(
                     nullComparedEntityTypePrimaryKeyProperties
-                        .Select(
-                            p =>
-                                Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                                    CreatePropertyAccessExpression(nonNullEntityReference, p),
-                                    Expression.Constant(null, p.ClrType.MakeNullable()),
-                                    nodeType != ExpressionType.Equal
-                                )
+                        .Select(p =>
+                            Infrastructure.ExpressionExtensions.CreateEqualsExpression(
+                                CreatePropertyAccessExpression(nonNullEntityReference, p),
+                                Expression.Constant(null, p.ClrType.MakeNullable()),
+                                nodeType != ExpressionType.Equal
+                            )
                         )
                         .Aggregate(
                             (l, r) =>
@@ -2524,13 +2511,12 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
 
             result = Visit(
                 primaryKeyProperties
-                    .Select(
-                        p =>
-                            Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                                CreatePropertyAccessExpression(left, p),
-                                CreatePropertyAccessExpression(right, p),
-                                nodeType != ExpressionType.Equal
-                            )
+                    .Select(p =>
+                        Infrastructure.ExpressionExtensions.CreateEqualsExpression(
+                            CreatePropertyAccessExpression(left, p),
+                            CreatePropertyAccessExpression(right, p),
+                            nodeType != ExpressionType.Equal
+                        )
                     )
                     .Aggregate(
                         (l, r) =>
@@ -2712,8 +2698,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             }
 
             case MemberInitExpression memberInitExpression
-                when memberInitExpression.Bindings.SingleOrDefault(
-                    mb => mb.Member.Name == property.Name
+                when memberInitExpression.Bindings.SingleOrDefault(mb =>
+                    mb.Member.Name == property.Name
                 )
                     is MemberAssignment memberAssignment:
                 return memberAssignment.Expression;
@@ -2748,8 +2734,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 ),
 
             MemberInitExpression memberInitExpression
-                when memberInitExpression.Bindings.SingleOrDefault(
-                    mb => mb.Member.Name == complexProperty.Name
+                when memberInitExpression.Bindings.SingleOrDefault(mb =>
+                    mb.Member.Name == complexProperty.Name
                 )
                     is MemberAssignment memberAssignment
                 => memberAssignment.Expression,
@@ -2829,10 +2815,9 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             NewArrayExpression e => e.Expressions.All(CanEvaluate),
             MemberInitExpression e
                 => CanEvaluate(e.NewExpression)
-                    && e.Bindings.All(
-                        mb =>
-                            mb is MemberAssignment memberAssignment
-                            && CanEvaluate(memberAssignment.Expression)
+                    && e.Bindings.All(mb =>
+                        mb is MemberAssignment memberAssignment
+                        && CanEvaluate(memberAssignment.Expression)
                     ),
             _ => false
         };

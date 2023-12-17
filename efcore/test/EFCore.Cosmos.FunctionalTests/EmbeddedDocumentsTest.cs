@@ -463,15 +463,14 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
         var options = Fixture.CreateOptions(
             modelBuilder =>
             {
-                modelBuilder.Entity<Person>(
-                    eb =>
-                        eb.OwnsMany(
-                            v => v.Addresses,
-                            b =>
-                            {
-                                b.Property<Guid>("Id");
-                            }
-                        )
+                modelBuilder.Entity<Person>(eb =>
+                    eb.OwnsMany(
+                        v => v.Addresses,
+                        b =>
+                        {
+                            b.Property<Guid>("Id");
+                        }
+                    )
                 );
             },
             seed: false
@@ -614,8 +613,8 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
         var options = Fixture.CreateOptions();
         using (var context = new EmbeddedTransportationContext(options))
         {
-            var bike = await context.Vehicles.SingleAsync(
-                v => v.Name == "Trek Pro Fit Madone 6 Series"
+            var bike = await context.Vehicles.SingleAsync(v =>
+                v.Name == "Trek Pro Fit Madone 6 Series"
             );
 
             bike.Operator = new Operator { Name = "Chris Horner" };
@@ -630,8 +629,8 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
 
         using (var context = new EmbeddedTransportationContext(options))
         {
-            var bike = await context.Vehicles.SingleAsync(
-                v => v.Name == "Trek Pro Fit Madone 6 Series"
+            var bike = await context.Vehicles.SingleAsync(v =>
+                v.Name == "Trek Pro Fit Madone 6 Series"
             );
             Assert.Equal("repairman", bike.Operator.Name);
         }
@@ -643,8 +642,8 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
         var options = Fixture.CreateOptions();
         using (var context = new EmbeddedTransportationContext(options))
         {
-            var bike = await context.Vehicles.SingleAsync(
-                v => v.Name == "Trek Pro Fit Madone 6 Series"
+            var bike = await context.Vehicles.SingleAsync(v =>
+                v.Name == "Trek Pro Fit Madone 6 Series"
             );
 
             var newBike = new Vehicle
@@ -663,8 +662,8 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
 
         using (var context = new EmbeddedTransportationContext(options))
         {
-            var bike = await context.Vehicles.SingleAsync(
-                v => v.Name == "Trek Pro Fit Madone 6 Series"
+            var bike = await context.Vehicles.SingleAsync(v =>
+                v.Name == "Trek Pro Fit Madone 6 Series"
             );
 
             Assert.Equal(2, bike.SeatingCapacity);
@@ -769,19 +768,18 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
             modelBuilder.Ignore<SolidRocket>();
 
             modelBuilder.Entity<PersonBase>();
-            modelBuilder.Entity<Person>(
-                eb =>
-                    eb.OwnsMany(
-                        v => v.Addresses,
-                        b =>
-                        {
-                            b.ToJsonProperty("Stored Addresses");
-                            b.OwnsOne(a => a.AddressTitle)
-                                .Property(a => a.Title)
-                                .HasValueGenerator<TitleGenerator>()
-                                .IsRequired();
-                        }
-                    )
+            modelBuilder.Entity<Person>(eb =>
+                eb.OwnsMany(
+                    v => v.Addresses,
+                    b =>
+                    {
+                        b.ToJsonProperty("Stored Addresses");
+                        b.OwnsOne(a => a.AddressTitle)
+                            .Property(a => a.Title)
+                            .HasValueGenerator<TitleGenerator>()
+                            .IsRequired();
+                    }
+                )
             );
         }
     }

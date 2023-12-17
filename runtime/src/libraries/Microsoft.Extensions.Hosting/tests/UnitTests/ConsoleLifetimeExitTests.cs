@@ -141,8 +141,8 @@ namespace Microsoft.Extensions.Hosting.Tests
                 async () =>
                 {
                     await Host.CreateDefaultBuilder()
-                        .ConfigureHostOptions(
-                            o => o.ShutdownTimeout = TimeSpan.FromMilliseconds(100)
+                        .ConfigureHostOptions(o =>
+                            o.ShutdownTimeout = TimeSpan.FromMilliseconds(100)
                         )
                         .ConfigureServices(
                             (hostContext, services) =>

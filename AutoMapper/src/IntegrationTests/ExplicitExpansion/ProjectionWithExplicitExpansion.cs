@@ -300,8 +300,7 @@ public class ConstructorExplicitExpansion
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c => c.CreateProjection<Entity, Dto>().ForCtorParam("Name", o => o.ExplicitExpansion())
+        new(c => c.CreateProjection<Entity, Dto>().ForCtorParam("Name", o => o.ExplicitExpansion())
         );
 
     [Fact]

@@ -16,13 +16,12 @@ public class TemporalGearsOfWarQuerySqlServerFixture : GearsOfWarQuerySqlServerF
         modelBuilder.Entity<City>().ToTable(tb => tb.IsTemporal());
         modelBuilder
             .Entity<CogTag>()
-            .ToTable(
-                tb =>
-                    tb.IsTemporal(ttb =>
-                    {
-                        ttb.HasPeriodStart("PeriodStart").HasPrecision(0);
-                        ttb.HasPeriodEnd("PeriodEnd").HasPrecision(0);
-                    })
+            .ToTable(tb =>
+                tb.IsTemporal(ttb =>
+                {
+                    ttb.HasPeriodStart("PeriodStart").HasPrecision(0);
+                    ttb.HasPeriodEnd("PeriodEnd").HasPrecision(0);
+                })
             );
         modelBuilder.Entity<Faction>().ToTable(tb => tb.IsTemporal());
         modelBuilder.Entity<Gear>().ToTable(tb => tb.IsTemporal());

@@ -503,7 +503,9 @@ namespace System.Formats.Tar.Tests
         }
 
         public static IEnumerable<object[]> WriteEntry_UsingTarEntry_FromTarReader_IntoTarWriter_Async_TheoryData() =>
-            TarWriter_WriteEntry_Tests.WriteEntry_UsingTarEntry_FromTarReader_IntoTarWriter_TheoryData();
+            TarWriter_WriteEntry_Tests.WriteEntry_UsingTarEntry_FromTarReader_IntoTarWriter_TheoryData(
+
+            );
 
         [Theory]
         [MemberData(nameof(WriteEntry_UsingTarEntry_FromTarReader_IntoTarWriter_Async_TheoryData))]

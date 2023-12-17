@@ -1001,8 +1001,11 @@ this should fail";
             Compile = compile;
             if (Compile == null)
             {
-                Compile = path =>
-                    new CompiledViewDescriptor { RelativePath = path, Item = CreateForView(path), };
+                Compile = path => new CompiledViewDescriptor
+                {
+                    RelativePath = path,
+                    Item = CreateForView(path),
+                };
             }
         }
 

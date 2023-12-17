@@ -492,7 +492,9 @@ namespace Microsoft.CodeAnalysis.CodeActions
                         {
                             var editorWorkspace = workspace;
                             var navigationService =
-                                editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>();
+                                editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>(
+
+                                );
 
                             if (
                                 await navigationService

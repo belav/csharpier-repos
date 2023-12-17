@@ -593,10 +593,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             }
         }
 
-        var exceptionLog = TestSink.Writes.Where(
-            w =>
-                string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
-                && (w.Exception is InvalidDataException ide)
+        var exceptionLog = TestSink.Writes.Where(w =>
+            string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
+            && (w.Exception is InvalidDataException ide)
         );
         Assert.Single(exceptionLog);
         Assert.Equal(
@@ -641,10 +640,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             }
         }
 
-        var exceptionLog = TestSink.Writes.Where(
-            w =>
-                string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
-                && (w.Exception is InvalidDataException ide)
+        var exceptionLog = TestSink.Writes.Where(w =>
+            string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
+            && (w.Exception is InvalidDataException ide)
         );
         Assert.Single(exceptionLog);
         Assert.Equal(
@@ -712,10 +710,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             }
         }
 
-        var exceptionLog = TestSink.Writes.Where(
-            w =>
-                string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
-                && (w.Exception is InvalidDataException ide)
+        var exceptionLog = TestSink.Writes.Where(w =>
+            string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
+            && (w.Exception is InvalidDataException ide)
         );
         Assert.Single(exceptionLog);
         Assert.Equal(
@@ -1350,9 +1347,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 LoggerFactory
             );
 
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<InheritedHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<InheritedHub>>(
+
+            );
 
             using (var client = new TestClient())
             {
@@ -1457,9 +1454,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 LoggerFactory
             );
 
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<InheritedHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<InheritedHub>>(
+
+            );
 
             using (var client = new TestClient())
             {
@@ -1491,9 +1488,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 LoggerFactory
             );
 
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<InheritedHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<InheritedHub>>(
+
+            );
 
             using (var client = new TestClient())
             {
@@ -2568,9 +2565,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 null,
                 LoggerFactory
             );
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<StreamingHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<StreamingHub>>(
+
+            );
             var invocationBinder = new Mock<IInvocationBinder>();
             invocationBinder
                 .Setup(b => b.GetStreamItemType(It.IsAny<string>()))
@@ -2630,9 +2627,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 null,
                 LoggerFactory
             );
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<StreamingHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<StreamingHub>>(
+
+            );
 
             using (var client = new TestClient())
             {
@@ -2707,9 +2704,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     }),
                 LoggerFactory
             );
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<StreamingHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<StreamingHub>>(
+
+            );
 
             using (var client = new TestClient())
             {
@@ -3439,8 +3436,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         {
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
-                    services.Configure<HubOptions>(
-                        options => options.KeepAliveInterval = TimeSpan.FromMilliseconds(100)
+                    services.Configure<HubOptions>(options =>
+                        options.KeepAliveInterval = TimeSpan.FromMilliseconds(100)
                     ),
                 LoggerFactory
             );
@@ -3556,8 +3553,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             var timeProvider = new FakeTimeProvider();
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
-                    services.Configure<HubOptions>(
-                        options => options.ClientTimeoutInterval = timeout
+                    services.Configure<HubOptions>(options =>
+                        options.ClientTimeoutInterval = timeout
                     ),
                 LoggerFactory
             );
@@ -3598,8 +3595,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             var timeProvider = new FakeTimeProvider();
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
-                    services.Configure<HubOptions>(
-                        options => options.ClientTimeoutInterval = timeout
+                    services.Configure<HubOptions>(options =>
+                        options.ClientTimeoutInterval = timeout
                     ),
                 LoggerFactory
             );
@@ -3631,8 +3628,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.Configure<HubOptions>(
-                        options => options.ClientTimeoutInterval = timeout
+                    services.Configure<HubOptions>(options =>
+                        options.ClientTimeoutInterval = timeout
                     );
 
                     services.AddSingleton(state);
@@ -3674,8 +3671,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             var timeProvider = new FakeTimeProvider();
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
-                    services.Configure<HubOptions>(
-                        options => options.ClientTimeoutInterval = timeout
+                    services.Configure<HubOptions>(options =>
+                        options.ClientTimeoutInterval = timeout
                     ),
                 LoggerFactory
             );
@@ -3990,9 +3987,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 },
                 LoggerFactory
             );
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<StreamingHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<StreamingHub>>(
+
+            );
 
             using (var client = new TestClient(new NewtonsoftJsonHubProtocol()))
             {
@@ -4043,9 +4040,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 },
                 LoggerFactory
             );
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<StreamingHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<StreamingHub>>(
+
+            );
 
             using (var client = new TestClient())
             {
@@ -4085,9 +4082,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 },
                 LoggerFactory
             );
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<StreamingHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<StreamingHub>>(
+
+            );
 
             using (var client = new TestClient())
             {
@@ -4127,9 +4124,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 },
                 LoggerFactory
             );
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<StreamingHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<StreamingHub>>(
+
+            );
 
             using (var client = new TestClient())
             {
@@ -5031,10 +5028,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         }
 
         Assert.Single(
-            TestSink.Writes.Where(
-                w =>
-                    w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                    && w.EventId.Name == "ClosingStreamWithBindingError"
+            TestSink.Writes.Where(w =>
+                w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                && w.EventId.Name == "ClosingStreamWithBindingError"
             )
         );
     }
@@ -5068,10 +5064,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         }
 
         Assert.Single(
-            TestSink.Writes.Where(
-                w =>
-                    w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                    && w.EventId.Name == "UnexpectedCompletion"
+            TestSink.Writes.Where(w =>
+                w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                && w.EventId.Name == "UnexpectedCompletion"
             )
         );
     }
@@ -5334,10 +5329,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         }
 
         Assert.Single(
-            TestSink.Writes.Where(
-                w =>
-                    w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                    && w.EventId.Name == "ClosingStreamWithBindingError"
+            TestSink.Writes.Where(w =>
+                w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                && w.EventId.Name == "ClosingStreamWithBindingError"
             )
         );
     }
@@ -5390,10 +5384,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         }
 
         Assert.Single(
-            TestSink.Writes.Where(
-                w =>
-                    w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                    && w.EventId.Name == "ClosingStreamWithBindingError"
+            TestSink.Writes.Where(w =>
+                w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                && w.EventId.Name == "ClosingStreamWithBindingError"
             )
         );
     }
@@ -5766,16 +5759,14 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 services =>
                     services
                         .AddSignalR()
-                        .AddNewtonsoftJsonProtocol(
-                            o =>
-                                o.PayloadSerializerSettings =
-                                    protocolOptions.PayloadSerializerSettings
+                        .AddNewtonsoftJsonProtocol(o =>
+                            o.PayloadSerializerSettings = protocolOptions.PayloadSerializerSettings
                         ),
                 LoggerFactory
             );
-            var connectionHandler = serviceProvider.GetService<
-                HubConnectionHandler<StreamingHub>
-            >();
+            var connectionHandler = serviceProvider.GetService<HubConnectionHandler<StreamingHub>>(
+
+            );
             var invocationBinder = new Mock<IInvocationBinder>();
             invocationBinder
                 .Setup(b => b.GetStreamItemType(It.IsAny<string>()))
@@ -5820,9 +5811,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         {
             services.AddSingleton(callerService);
         });
-        var connectionHandler = serviceProvider.GetService<
-            HubConnectionHandler<CallerServiceHub>
-        >();
+        var connectionHandler = serviceProvider.GetService<HubConnectionHandler<CallerServiceHub>>(
+
+        );
 
         using (StartVerifiableLog())
         {
@@ -6341,9 +6332,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             provider.AddKeyedScoped<Service1>("service1");
             provider.AddKeyedScoped<Service1>("service2");
         });
-        var connectionHandler = serviceProvider.GetService<
-            HubConnectionHandler<KeyedServicesHub>
-        >();
+        var connectionHandler = serviceProvider.GetService<HubConnectionHandler<KeyedServicesHub>>(
+
+        );
 
         using (var client = new TestClient())
         {
@@ -6370,9 +6361,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             provider.AddKeyedScoped<Service1>("service1");
             provider.AddKeyedScoped<Service1>("service2");
         });
-        var connectionHandler = serviceProvider.GetService<
-            HubConnectionHandler<KeyedServicesHub>
-        >();
+        var connectionHandler = serviceProvider.GetService<HubConnectionHandler<KeyedServicesHub>>(
+
+        );
 
         using (var client = new TestClient())
         {
@@ -6400,9 +6391,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             provider.AddKeyedScoped<Service1>("service2");
             provider.AddScoped<Service2>();
         });
-        var connectionHandler = serviceProvider.GetService<
-            HubConnectionHandler<KeyedServicesHub>
-        >();
+        var connectionHandler = serviceProvider.GetService<HubConnectionHandler<KeyedServicesHub>>(
+
+        );
 
         using (var client = new TestClient())
         {
@@ -6429,9 +6420,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             provider.AddKeyedScoped<Service1>("service1");
             provider.AddKeyedScoped<Service1>("service2");
         });
-        var connectionHandler = serviceProvider.GetService<
-            HubConnectionHandler<KeyedServicesHub>
-        >();
+        var connectionHandler = serviceProvider.GetService<HubConnectionHandler<KeyedServicesHub>>(
+
+        );
 
         using (var client = new TestClient())
         {
@@ -6458,9 +6449,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             provider.AddKeyedScoped<Service1>("service1");
             provider.AddKeyedScoped<Service1>("service2");
         });
-        var connectionHandler = serviceProvider.GetService<
-            HubConnectionHandler<KeyedServicesHub>
-        >();
+        var connectionHandler = serviceProvider.GetService<HubConnectionHandler<KeyedServicesHub>>(
+
+        );
 
         using (var client = new TestClient())
         {

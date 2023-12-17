@@ -143,10 +143,9 @@ public class GlobalDatabaseTest
         }
 
         var serviceProvider = new ServiceCollection()
-            .AddDbContext<BooFooContext>(
-                b =>
-                    b.UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot)
-                        .EnableServiceProviderCaching(false)
+            .AddDbContext<BooFooContext>(b =>
+                b.UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot)
+                    .EnableServiceProviderCaching(false)
             )
             .BuildServiceProvider(validateScopes: true);
 

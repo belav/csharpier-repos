@@ -488,8 +488,8 @@ namespace System.Formats.Tar.Tests
                 string entryPath = Path.TrimEndingDirectorySeparator(
                     Path.GetFullPath(Path.Join(root.Path, entry.Name))
                 );
-                FileSystemInfo fsi = fileSystemEntries.SingleOrDefault(
-                    file => file.FullName == entryPath
+                FileSystemInfo fsi = fileSystemEntries.SingleOrDefault(file =>
+                    file.FullName == entryPath
                 );
                 Assert.NotNull(fsi);
                 if (entry.EntryType is TarEntryType.RegularFile or TarEntryType.V7RegularFile)

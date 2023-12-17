@@ -152,7 +152,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             var currentDocument =
                 currentTextBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             var textDiffService =
-                workspace.CurrentSolution.Services.GetRequiredService<IDocumentTextDifferencingService>();
+                workspace.CurrentSolution.Services.GetRequiredService<IDocumentTextDifferencingService>(
+
+                );
             var changes = await textDiffService
                 .GetTextChangesAsync(currentDocument, priorDocument, CancellationToken.None)
                 .ConfigureAwait(false);

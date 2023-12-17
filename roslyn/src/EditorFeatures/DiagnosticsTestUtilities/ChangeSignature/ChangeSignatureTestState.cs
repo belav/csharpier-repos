@@ -98,7 +98,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             get
             {
                 return (TestChangeSignatureOptionsService)
-                    InvocationDocument.Project.Solution.Services.GetRequiredService<IChangeSignatureOptionsService>();
+                    InvocationDocument.Project.Solution.Services.GetRequiredService<IChangeSignatureOptionsService>(
+
+                    );
             }
         }
 

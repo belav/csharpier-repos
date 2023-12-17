@@ -59,13 +59,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             return builder
-                .Select(
-                    kvp =>
-                        new KeyValuePair<string, ImmutableArray<Lazy<TInterface, TMetadata>>>(
-                            kvp.Key,
-                            kvp.Value.ToImmutableAndFree()
-                        )
-                )
+                .Select(kvp => new KeyValuePair<
+                    string,
+                    ImmutableArray<Lazy<TInterface, TMetadata>>
+                >(kvp.Key, kvp.Value.ToImmutableAndFree()))
                 .ToImmutableDictionary();
         }
 

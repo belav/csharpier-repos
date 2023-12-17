@@ -156,33 +156,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 
             var project = document.Project;
             return xamlDiagnostics
-                .Value.Select(
-                    d =>
-                        new VSDiagnostic()
+                .Value.Select(d => new VSDiagnostic()
+                {
+                    Code = d.Code,
+                    Message = d.Message ?? string.Empty,
+                    ExpandedMessage = d.ExtendedMessage,
+                    Severity = ConvertDiagnosticSeverity(d.Severity),
+                    Range = ProtocolConversions.TextSpanToRange(
+                        new TextSpan(d.Offset, d.Length),
+                        text
+                    ),
+                    Tags = ConvertTags(d),
+                    Source = d.Tool,
+                    CodeDescription = ProtocolConversions.HelpLinkToCodeDescription(
+                        d.GetHelpLinkUri()
+                    ),
+                    Projects =
+                    [
+                        new VSDiagnosticProjectInformation
                         {
-                            Code = d.Code,
-                            Message = d.Message ?? string.Empty,
-                            ExpandedMessage = d.ExtendedMessage,
-                            Severity = ConvertDiagnosticSeverity(d.Severity),
-                            Range = ProtocolConversions.TextSpanToRange(
-                                new TextSpan(d.Offset, d.Length),
-                                text
-                            ),
-                            Tags = ConvertTags(d),
-                            Source = d.Tool,
-                            CodeDescription = ProtocolConversions.HelpLinkToCodeDescription(
-                                d.GetHelpLinkUri()
-                            ),
-                            Projects =
-                            [
-                                new VSDiagnosticProjectInformation
-                                {
-                                    ProjectIdentifier = project.Id.Id.ToString(),
-                                    ProjectName = project.Name,
-                                },
-                            ],
-                        }
-                )
+                            ProjectIdentifier = project.Id.Id.ToString(),
+                            ProjectName = project.Name,
+                        },
+                    ],
+                })
                 .ToArray();
         }
 

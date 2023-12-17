@@ -16,8 +16,8 @@ public class CosmosConcurrencyTest : IClassFixture<CosmosConcurrencyTest.CosmosF
 
     [ConditionalFact]
     public virtual Task Adding_the_same_entity_twice_results_in_DbUpdateException() =>
-        ConcurrencyTestAsync<DbUpdateException>(
-            ctx => ctx.Customers.Add(new Customer { Id = "1", Name = "CreatedTwice", })
+        ConcurrencyTestAsync<DbUpdateException>(ctx =>
+            ctx.Customers.Add(new Customer { Id = "1", Name = "CreatedTwice", })
         );
 
     [ConditionalFact]

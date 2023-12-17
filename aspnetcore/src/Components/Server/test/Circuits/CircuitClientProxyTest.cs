@@ -15,13 +15,12 @@ public class CircuitClientProxyTest
         bool? isCancelled = null;
         var clientProxy = new Mock<IClientProxy>();
         clientProxy
-            .Setup(
-                c =>
-                    c.SendCoreAsync(
-                        It.IsAny<string>(),
-                        It.IsAny<object[]>(),
-                        It.IsAny<CancellationToken>()
-                    )
+            .Setup(c =>
+                c.SendCoreAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<object[]>(),
+                    It.IsAny<CancellationToken>()
+                )
             )
             .Callback(
                 (string _, object[] __, CancellationToken token) =>
@@ -44,13 +43,9 @@ public class CircuitClientProxyTest
     public void Transfer_SetsConnected()
     {
         // Arrange
-        var clientProxy = Mock.Of<IClientProxy>(
-            c =>
-                c.SendCoreAsync(
-                    It.IsAny<string>(),
-                    It.IsAny<object[]>(),
-                    It.IsAny<CancellationToken>()
-                ) == Task.CompletedTask
+        var clientProxy = Mock.Of<IClientProxy>(c =>
+            c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>())
+            == Task.CompletedTask
         );
         var circuitClient = new CircuitClientProxy(clientProxy, "connection0");
         circuitClient.SetDisconnected();

@@ -190,10 +190,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (!this.IsMinimizing)
             {
-                return SpecializedCollections.EmptyDictionary<
-                    INamespaceOrTypeSymbol,
-                    IAliasSymbol
-                >();
+                return SpecializedCollections.EmptyDictionary<INamespaceOrTypeSymbol, IAliasSymbol>(
+
+                );
             }
 
             // Walk up the ancestors from the current position. If this is a speculative

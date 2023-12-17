@@ -33,16 +33,13 @@ internal static class OmniSharpInlineHintsService
                 cancellationToken
             )
             .ConfigureAwait(false);
-        return hints.SelectAsArray(
-            static h =>
-                new OmniSharpInlineHint(
-                    h.Span,
-                    h.Ranking,
-                    h.DisplayParts,
-                    h.ReplacementTextChange,
-                    h.GetDescriptionAsync
-                )
-        );
+        return hints.SelectAsArray(static h => new OmniSharpInlineHint(
+            h.Span,
+            h.Ranking,
+            h.DisplayParts,
+            h.ReplacementTextChange,
+            h.GetDescriptionAsync
+        ));
     }
 }
 

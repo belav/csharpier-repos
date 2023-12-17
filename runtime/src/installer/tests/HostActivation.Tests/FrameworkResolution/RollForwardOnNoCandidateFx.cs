@@ -72,8 +72,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [Fact]
         public void ExactMatchOnRelease_NoSettings()
         {
-            RunTestWithOneFramework(
-                    runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3")
+            RunTestWithOneFramework(runtimeConfig =>
+                    runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
         }
@@ -94,12 +94,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             bool? applyPatches
         )
         {
-            RunTestWithOneFramework(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.0")
+            RunTestWithOneFramework(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.0")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
         }
@@ -123,12 +122,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             string requestedVersion = "5.0.0";
-            CommandResult result = RunTestWithOneFramework(
-                runtimeConfig =>
-                    runtimeConfig
-                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                        .WithApplyPatches(applyPatches)
-                        .WithFramework(MicrosoftNETCoreApp, requestedVersion)
+            CommandResult result = RunTestWithOneFramework(runtimeConfig =>
+                runtimeConfig
+                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                    .WithApplyPatches(applyPatches)
+                    .WithFramework(MicrosoftNETCoreApp, requestedVersion)
             );
             if (passes)
             {
@@ -160,12 +158,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             string requestedVersion = "4.1.0";
-            CommandResult result = RunTestWithOneFramework(
-                runtimeConfig =>
-                    runtimeConfig
-                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                        .WithApplyPatches(applyPatches)
-                        .WithFramework(MicrosoftNETCoreApp, requestedVersion)
+            CommandResult result = RunTestWithOneFramework(runtimeConfig =>
+                runtimeConfig
+                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                    .WithApplyPatches(applyPatches)
+                    .WithFramework(MicrosoftNETCoreApp, requestedVersion)
             );
             if (passes)
             {
@@ -191,12 +188,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void NeverRollBackOnRelease(int? rollForwardOnNoCandidateFx, bool? applyPatches)
         {
             string requestedVersion = "5.1.4";
-            RunTestWithOneFramework(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, requestedVersion)
+            RunTestWithOneFramework(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, requestedVersion)
                 )
                 .ShouldFailToFindCompatibleFrameworkVersion(MicrosoftNETCoreApp, requestedVersion);
         }
@@ -205,12 +201,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [Fact]
         public void RollForwardDisabledOnCandidateFxAndDisabledApplyPatches_FailsToRollPatches()
         {
-            RunTestWithOneFramework(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(0)
-                            .WithApplyPatches(false)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.0")
+            RunTestWithOneFramework(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(0)
+                        .WithApplyPatches(false)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.0")
                 )
                 .Should()
                 .Fail()
@@ -223,12 +218,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [Fact]
         public void RollForwardDisabledOnCandidateFxAndDisabledApplyPatches_MatchesExact()
         {
-            RunTestWithOneFramework(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(0)
-                            .WithApplyPatches(false)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.3")
+            RunTestWithOneFramework(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(0)
+                        .WithApplyPatches(false)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.3")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
         }
@@ -239,11 +233,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void RollForwardOnMinorDisabledOnNoCandidateFx_FailsToRoll()
         {
             string requestedVersion = "5.0.0";
-            RunTestWithOneFramework(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(0)
-                            .WithFramework(MicrosoftNETCoreApp, requestedVersion)
+            RunTestWithOneFramework(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(0)
+                        .WithFramework(MicrosoftNETCoreApp, requestedVersion)
                 )
                 // Will still attempt roll forward to latest patch
                 .ShouldFailToFindCompatibleFrameworkVersion(MicrosoftNETCoreApp, requestedVersion)
@@ -254,9 +247,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [Fact]
         public void PreReleaseReference_CanRollToRelease()
         {
-            RunTestWithOneFramework(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.0-preview.1")
+            RunTestWithOneFramework(runtimeConfig =>
+                    runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.0-preview.1")
                 )
                 .Should()
                 .Pass()
@@ -284,9 +276,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [Fact]
         public void ExactMatchOnPreRelease_NoSettings()
         {
-            RunTestWithPreReleaseFramework(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3-preview.2")
+            RunTestWithPreReleaseFramework(runtimeConfig =>
+                    runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3-preview.2")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3-preview.2");
         }
@@ -297,9 +288,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [Fact]
         public void RollForwardToPreRelease_CanRollOnPatch()
         {
-            RunTestWithPreReleaseFramework(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.2-preview.2")
+            RunTestWithPreReleaseFramework(runtimeConfig =>
+                    runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.2-preview.2")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3-preview.2");
         }
@@ -316,12 +306,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [InlineData(2, true)]
         public void RollForwardToPreRelease(int? rollForwardOnNoCandidateFx, bool? applyPatches)
         {
-            RunTestWithPreReleaseFramework(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.3-preview.1")
+            RunTestWithPreReleaseFramework(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.3-preview.1")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3-preview.2");
         }
@@ -342,12 +331,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             bool? applyPatches
         )
         {
-            RunTestWithPreReleaseFramework(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.0")
+            RunTestWithPreReleaseFramework(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.0")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3-preview.2");
         }
@@ -369,12 +357,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             string requestedVersion = "5.0.0";
-            CommandResult result = RunTestWithPreReleaseFramework(
-                runtimeConfig =>
-                    runtimeConfig
-                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                        .WithApplyPatches(applyPatches)
-                        .WithFramework(MicrosoftNETCoreApp, requestedVersion)
+            CommandResult result = RunTestWithPreReleaseFramework(runtimeConfig =>
+                runtimeConfig
+                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                    .WithApplyPatches(applyPatches)
+                    .WithFramework(MicrosoftNETCoreApp, requestedVersion)
             );
             if (passes)
             {
@@ -405,12 +392,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             string requestedVersion = "4.1.0";
-            CommandResult result = RunTestWithPreReleaseFramework(
-                runtimeConfig =>
-                    runtimeConfig
-                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                        .WithApplyPatches(applyPatches)
-                        .WithFramework(MicrosoftNETCoreApp, requestedVersion)
+            CommandResult result = RunTestWithPreReleaseFramework(runtimeConfig =>
+                runtimeConfig
+                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                    .WithApplyPatches(applyPatches)
+                    .WithFramework(MicrosoftNETCoreApp, requestedVersion)
             );
             if (passes)
             {
@@ -436,12 +422,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void NeverRollBackOnPreRelease(int? rollForwardOnNoCandidateFx, bool? applyPatches)
         {
             string requestedVersion = "5.1.3-preview.9";
-            RunTestWithPreReleaseFramework(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, requestedVersion)
+            RunTestWithPreReleaseFramework(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, requestedVersion)
                 )
                 .ShouldFailToFindCompatibleFrameworkVersion(MicrosoftNETCoreApp, requestedVersion);
         }
@@ -495,12 +480,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "4.1.1")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "4.1.1")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -522,12 +506,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "4.0.0")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "4.0.0")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -549,12 +532,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "4.4.0")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "4.4.0")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -576,12 +558,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "3.0.0")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "3.0.0")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -605,12 +586,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.2")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.2")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -633,12 +613,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "5.0.0")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "5.0.0")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -661,12 +640,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "6.2.0")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "6.2.0")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -692,12 +670,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "5.2.2")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "5.2.2")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -720,12 +697,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "2.3.0")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "2.3.0")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -746,12 +722,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.1-preview.1")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.1-preview.1")
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -773,12 +748,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.3-preview.1")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.3-preview.1")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -797,12 +771,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string resolvedFramework
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithApplyPatches(applyPatches)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.3-preview.0")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithApplyPatches(applyPatches)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.3-preview.0")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -820,11 +793,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             int? rollForwardOnNoCandidateFx
         )
         {
-            RunTestWithManyVersions(
-                    runtimeConfig =>
-                        runtimeConfig
-                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                            .WithFramework(MicrosoftNETCoreApp, "6.1.0")
+            RunTestWithManyVersions(runtimeConfig =>
+                    runtimeConfig
+                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                        .WithFramework(MicrosoftNETCoreApp, "6.1.0")
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "6.1.1");
         }

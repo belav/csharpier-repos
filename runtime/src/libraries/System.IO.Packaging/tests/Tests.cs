@@ -1881,10 +1881,9 @@ namespace System.IO.Packaging.Tests
                         var nonRelationshipParts = package
                             .GetParts()
                             .Cast<ZipPackagePart>()
-                            .Where(
-                                p =>
-                                    p.ContentType
-                                    != "application/vnd.openxmlformats-package.relationships+xml"
+                            .Where(p =>
+                                p.ContentType
+                                != "application/vnd.openxmlformats-package.relationships+xml"
                             );
                         int relationshipsBefore = nonRelationshipParts
                             .Select(p => p.GetRelationships().Count())

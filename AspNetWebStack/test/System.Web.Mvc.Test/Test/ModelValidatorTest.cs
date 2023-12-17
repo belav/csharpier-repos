@@ -87,8 +87,9 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void GetModelValidator_DoesNotReadPropertyValues()
         {
-            ModelValidatorProvider[] originalProviders =
-                ModelValidatorProviders.Providers.ToArray();
+            ModelValidatorProvider[] originalProviders = ModelValidatorProviders.Providers.ToArray(
+
+            );
             try
             {
                 // Arrange

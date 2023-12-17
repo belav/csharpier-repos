@@ -40,8 +40,8 @@ namespace System.Data.Metadata.Edm
                 //for each mapping fragment of Type we are interested in within the given set
                 //Check use of IsOfTypes in Code review
                 foreach (
-                    StorageTypeMapping typeMap in extentMap.TypeMappings.Where(
-                        map => map.Types.Union(map.IsOfTypes).Contains(entityType)
+                    StorageTypeMapping typeMap in extentMap.TypeMappings.Where(map =>
+                        map.Types.Union(map.IsOfTypes).Contains(entityType)
                     )
                 )
                 {
@@ -66,22 +66,21 @@ namespace System.Data.Metadata.Edm
                     mappingCollection.EdmItemCollection,
                     true /*includeAbstractTypes*/
                 )
-                .SelectMany(
-                    edmType =>
-                        edmType.EdmEquals(childEntityType)
-                            ? GetMappingsForEntitySetAndType(
-                                mappingCollection,
-                                container,
-                                entitySet,
-                                (edmType as EntityTypeBase)
-                            )
-                            : GetIsTypeOfMappingsForEntitySetAndType(
-                                mappingCollection,
-                                container,
-                                entitySet,
-                                (edmType as EntityTypeBase),
-                                childEntityType
-                            )
+                .SelectMany(edmType =>
+                    edmType.EdmEquals(childEntityType)
+                        ? GetMappingsForEntitySetAndType(
+                            mappingCollection,
+                            container,
+                            entitySet,
+                            (edmType as EntityTypeBase)
+                        )
+                        : GetIsTypeOfMappingsForEntitySetAndType(
+                            mappingCollection,
+                            container,
+                            entitySet,
+                            (edmType as EntityTypeBase),
+                            childEntityType
+                        )
                 )
                 .ToList();
         }
@@ -107,8 +106,7 @@ namespace System.Data.Metadata.Edm
             )
             {
                 if (
-                    mapping.IsOfTypes.Any(
-                        parentType => parentType.IsAssignableFrom(childEntityType)
+                    mapping.IsOfTypes.Any(parentType => parentType.IsAssignableFrom(childEntityType)
                     ) || mapping.Types.Contains(childEntityType)
                 )
                 {
@@ -138,8 +136,8 @@ namespace System.Data.Metadata.Edm
                 if (entitySetMapping != null) //could be association set mapping
                 {
                     foreach (
-                        var v in entitySetMapping.ModificationFunctionMappings.Where(
-                            functionMap => functionMap.EntityType.Equals(entityType)
+                        var v in entitySetMapping.ModificationFunctionMappings.Where(functionMap =>
+                            functionMap.EntityType.Equals(entityType)
                         )
                     )
                     {

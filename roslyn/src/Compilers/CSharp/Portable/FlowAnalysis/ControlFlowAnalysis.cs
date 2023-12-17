@@ -156,10 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // way that jumps out of the region are computed.
             get
             {
-                return ExitPoints.WhereAsArray(
-                    s =>
-                        s.IsKind(SyntaxKind.ReturnStatement)
-                        || s.IsKind(SyntaxKind.YieldBreakStatement)
+                return ExitPoints.WhereAsArray(s =>
+                    s.IsKind(SyntaxKind.ReturnStatement) || s.IsKind(SyntaxKind.YieldBreakStatement)
                 );
             }
         }

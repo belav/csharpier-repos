@@ -971,24 +971,18 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFilters(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFilters(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad
+                    )
                 )
                 .Returns(authenticationContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthorizationFilters(
-                            context,
-                            filterInfo.AuthorizationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)
                 )
                 .Returns(authorizationContext)
                 .Verifiable();
@@ -997,37 +991,34 @@ namespace System.Web.Mvc.Test
                 .Returns(parameters)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeActionMethodWithFilters(
-                            context,
-                            filterInfo.ActionFilters,
-                            ad,
-                            parameters
-                        )
+                .Setup(h =>
+                    h.PublicInvokeActionMethodWithFilters(
+                        context,
+                        filterInfo.ActionFilters,
+                        ad,
+                        parameters
+                    )
                 )
                 .Returns(postContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFiltersChallenge(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad,
-                            actionResult
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFiltersChallenge(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad,
+                        actionResult
+                    )
                 )
                 .Returns(authenticationChallengeContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeActionResultWithFilters(
-                            context,
-                            filterInfo.ResultFilters,
-                            challengeResult
-                        )
+                .Setup(h =>
+                    h.PublicInvokeActionResultWithFilters(
+                        context,
+                        filterInfo.ResultFilters,
+                        challengeResult
+                    )
                 )
                 .Returns((ResultExecutedContext)null)
                 .Verifiable();
@@ -1074,24 +1065,18 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFilters(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFilters(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad
+                    )
                 )
                 .Returns(authenticationContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthorizationFilters(
-                            context,
-                            filterInfo.AuthorizationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)
                 )
                 .Returns(authorizationContext)
                 .Verifiable();
@@ -1133,24 +1118,18 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFilters(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFilters(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad
+                    )
                 )
                 .Returns(authenticationContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthorizationFilters(
-                            context,
-                            filterInfo.AuthorizationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)
                 )
                 .Returns(authorizationContext)
                 .Verifiable();
@@ -1444,24 +1423,18 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFilters(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFilters(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad
+                    )
                 )
                 .Throws(exception)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeExceptionFilters(
-                            context,
-                            filterInfo.ExceptionFilters,
-                            exception
-                        )
+                .Setup(h =>
+                    h.PublicInvokeExceptionFilters(context, filterInfo.ExceptionFilters, exception)
                 )
                 .Returns(exContext)
                 .Verifiable();
@@ -1501,35 +1474,24 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFilters(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFilters(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad
+                    )
                 )
                 .Returns(authenticationContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthorizationFilters(
-                            context,
-                            filterInfo.AuthorizationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)
                 )
                 .Throws(exception)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeExceptionFilters(
-                            context,
-                            filterInfo.ExceptionFilters,
-                            exception
-                        )
+                .Setup(h =>
+                    h.PublicInvokeExceptionFilters(context, filterInfo.ExceptionFilters, exception)
                 )
                 .Returns(exContext)
                 .Verifiable();
@@ -1591,25 +1553,23 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFilters(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFilters(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad
+                    )
                 )
                 .Returns(authenticationContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFiltersChallenge(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad,
-                            actionResult
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFiltersChallenge(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad,
+                        actionResult
+                    )
                 )
                 .Returns(authenticationChallengeContext)
                 .Verifiable();
@@ -1657,36 +1617,29 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFilters(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFilters(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad
+                    )
                 )
                 .Returns(authenticationContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthorizationFilters(
-                            context,
-                            filterInfo.AuthorizationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)
                 )
                 .Returns(authorizationContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFiltersChallenge(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad,
-                            actionResult
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFiltersChallenge(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad,
+                        actionResult
+                    )
                 )
                 .Returns(authenticationChallengeContext)
                 .Verifiable();
@@ -1717,8 +1670,8 @@ namespace System.Web.Mvc.Test
             Mock<ControllerActionInvokerHelper> mockHelper =
                 new Mock<ControllerActionInvokerHelper>() { CallBase = true };
             mockHelper
-                .Setup(
-                    h => h.PublicCreateActionResult(controllerContext, mockAd.Object, "hello world")
+                .Setup(h =>
+                    h.PublicCreateActionResult(controllerContext, mockAd.Object, "hello world")
                 )
                 .Returns(expectedResult);
             ControllerActionInvokerHelper helper = mockHelper.Object;
@@ -1885,24 +1838,18 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFilters(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFilters(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad
+                    )
                 )
                 .Returns(authenticationContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthorizationFilters(
-                            context,
-                            filterInfo.AuthorizationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)
                 )
                 .Returns(
                     delegate(
@@ -2051,24 +1998,18 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFilters(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFilters(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad
+                    )
                 )
                 .Returns(authenticationContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthorizationFilters(
-                            context,
-                            filterInfo.AuthorizationFilters,
-                            ad
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)
                 )
                 .Returns(authorizationContext)
                 .Verifiable();
@@ -2077,48 +2018,40 @@ namespace System.Web.Mvc.Test
                 .Returns(parameters)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeActionMethodWithFilters(
-                            context,
-                            filterInfo.ActionFilters,
-                            ad,
-                            parameters
-                        )
+                .Setup(h =>
+                    h.PublicInvokeActionMethodWithFilters(
+                        context,
+                        filterInfo.ActionFilters,
+                        ad,
+                        parameters
+                    )
                 )
                 .Returns(postContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeActionResultWithFilters(
-                            context,
-                            filterInfo.ResultFilters,
-                            actionResult
-                        )
+                .Setup(h =>
+                    h.PublicInvokeActionResultWithFilters(
+                        context,
+                        filterInfo.ResultFilters,
+                        actionResult
+                    )
                 )
                 .Throws(exception)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeAuthenticationFiltersChallenge(
-                            context,
-                            filterInfo.AuthenticationFilters,
-                            ad,
-                            actionResult
-                        )
+                .Setup(h =>
+                    h.PublicInvokeAuthenticationFiltersChallenge(
+                        context,
+                        filterInfo.AuthenticationFilters,
+                        ad,
+                        actionResult
+                    )
                 )
                 .Returns(authenticationChallengeContext)
                 .Verifiable();
             mockHelper
-                .Setup(
-                    h =>
-                        h.PublicInvokeExceptionFilters(
-                            context,
-                            filterInfo.ExceptionFilters,
-                            exception
-                        )
+                .Setup(h =>
+                    h.PublicInvokeExceptionFilters(context, filterInfo.ExceptionFilters, exception)
                 )
                 .Returns(exContext)
                 .Verifiable();
@@ -3227,7 +3160,9 @@ namespace System.Web.Mvc.Test
             var context = new ControllerContext();
             context.RouteData = new RouteData();
             context.RouteData.Route =
-                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
+                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>(
+
+                );
 
             // Simulate a match that binds the action parameter
             context.RouteData.AddDirectRouteMatches(
@@ -3268,7 +3203,9 @@ namespace System.Web.Mvc.Test
             var context = new ControllerContext();
             context.RouteData = new RouteData();
             context.RouteData.Route =
-                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
+                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>(
+
+                );
 
             // Simulate a match that binds the action parameter
             context.RouteData.AddDirectRouteMatches(
@@ -3304,7 +3241,9 @@ namespace System.Web.Mvc.Test
             var context = new ControllerContext();
             context.RouteData = new RouteData();
             context.RouteData.Route =
-                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
+                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>(
+
+                );
 
             // Simulate a match that binds the action parameter
             context.RouteData.AddDirectRouteMatches(

@@ -206,8 +206,8 @@ public class NonNullableNavigationConventionTest
 
     protected IServiceProvider CreateServiceProvider() =>
         InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(
-                _ => CreateLogger()
+            new ServiceCollection().AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(_ =>
+                CreateLogger()
             )
         );
 

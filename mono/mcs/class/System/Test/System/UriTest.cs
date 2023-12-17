@@ -1374,10 +1374,9 @@ namespace MonoTests.System
             {
                 Assert.AreEqual(
                     "file:///d:/myhost/ext",
-                    new Uri(
-                        new Uri("file:///c:/localhost/bar"),
-                        "file:///d:/myhost/ext"
-                    ).ToString(),
+                    new Uri(new Uri("file:///c:/localhost/bar"), "file:///d:/myhost/ext").ToString(
+
+                    ),
                     "#2-w"
                 );
                 Assert.AreEqual(

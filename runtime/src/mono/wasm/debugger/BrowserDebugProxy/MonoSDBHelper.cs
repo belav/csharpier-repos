@@ -3250,16 +3250,14 @@ namespace Microsoft.WebAssembly.Diagnostics
                     var attrValue = retDebuggerCmdReader.ReadInt32(); //attrs
                     //Console.WriteLine($"{propertyNameStr} - {attrValue}");
                     if (
-                        ret.Where(
-                                attribute =>
-                                    attribute["name"].Value<string>().Equals(propertyNameStr)
+                        ret.Where(attribute =>
+                                attribute["name"].Value<string>().Equals(propertyNameStr)
                             )
                             .Any()
                     )
                     {
-                        var attr = ret.Where(
-                                attribute =>
-                                    attribute["name"].Value<string>().Equals(propertyNameStr)
+                        var attr = ret.Where(attribute =>
+                                attribute["name"].Value<string>().Equals(propertyNameStr)
                             )
                             .First();
 

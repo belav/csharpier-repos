@@ -18,7 +18,9 @@ namespace Mono.Linker.Tests.Cases.TestFramework
         {
 #if IL_ASSEMBLY_AVAILABLE
             Console.WriteLine(
-                new Mono.Linker.Tests.Cases.TestFramework.Dependencies.ILAssemblySample().GiveMeAValue()
+                new Mono.Linker.Tests.Cases.TestFramework.Dependencies.ILAssemblySample(
+
+                ).GiveMeAValue()
             );
 #endif
         }

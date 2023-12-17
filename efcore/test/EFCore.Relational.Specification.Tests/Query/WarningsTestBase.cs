@@ -51,8 +51,8 @@ public abstract class WarningsTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
         var query = context
-            .Customers.Where(
-                c => c.CustomerID == "ALFKI" && c.Orders.FirstOrDefault().OrderID > 1000
+            .Customers.Where(c =>
+                c.CustomerID == "ALFKI" && c.Orders.FirstOrDefault().OrderID > 1000
             )
             .ToList();
         Assert.Single(query);
@@ -82,10 +82,9 @@ public abstract class WarningsTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
         var query1 = context
-            .Customers.Where(
-                c =>
-                    c.CustomerID == "ALFKI"
-                    && c.Orders.OrderBy(o => o.OrderID).LastOrDefault().OrderID > 1000
+            .Customers.Where(c =>
+                c.CustomerID == "ALFKI"
+                && c.Orders.OrderBy(o => o.OrderID).LastOrDefault().OrderID > 1000
             )
             .ToList();
         Assert.NotNull(query1);

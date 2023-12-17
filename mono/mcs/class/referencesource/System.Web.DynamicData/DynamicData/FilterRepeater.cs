@@ -350,13 +350,9 @@
         {
             // Add all the specific filters as where parameters
             return GetFilterControls()
-                .Select(
-                    filter =>
-                        (Parameter)
-                            new DynamicControlParameter(filter.UniqueID)
-                            {
-                                Name = filter.DataField,
-                            }
+                .Select(filter =>
+                    (Parameter)
+                        new DynamicControlParameter(filter.UniqueID) { Name = filter.DataField, }
                 );
         }
 

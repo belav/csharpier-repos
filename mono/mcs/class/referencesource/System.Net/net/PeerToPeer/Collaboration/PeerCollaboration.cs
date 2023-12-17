@@ -727,8 +727,9 @@ namespace System.Net.PeerToPeer.Collaboration
             // Convert PeerApplication.Guid into native GUID struct
             //
 
-            PEER_APPLICATION_REGISTRATION_INFO appRegInfo =
-                new PEER_APPLICATION_REGISTRATION_INFO();
+            PEER_APPLICATION_REGISTRATION_INFO appRegInfo = new PEER_APPLICATION_REGISTRATION_INFO(
+
+            );
             appRegInfo.application.guid = CollaborationHelperFunctions.ConvertGuidToGUID(
                 application.Id
             );

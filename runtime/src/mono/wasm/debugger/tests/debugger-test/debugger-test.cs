@@ -1794,7 +1794,9 @@ public class GenericCustomAttributeDecoratedClassInheritsFromNonUserCodeClassTha
     public static void Run()
     {
         var myVar =
-            new GenericCustomAttributeDecoratedClassInheritsFromNonUserCodeClassThatInheritsFromNormalClass();
+            new GenericCustomAttributeDecoratedClassInheritsFromNonUserCodeClassThatInheritsFromNormalClass(
+
+            );
         myVar.CallMethod();
     }
 

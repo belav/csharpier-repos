@@ -361,15 +361,12 @@ public partial class RoutePatternParserTests
     private static XElement CreateDiagnosticsElement(SourceText text, RoutePatternTree tree) =>
         new XElement(
             "Diagnostics",
-            tree.Diagnostics.Select(
-                d =>
-                    new XElement(
-                        "Diagnostic",
-                        new XAttribute("Message", d.Message),
-                        new XAttribute("Span", d.Span),
-                        GetTextAttribute(text, d.Span)
-                    )
-            )
+            tree.Diagnostics.Select(d => new XElement(
+                "Diagnostic",
+                new XAttribute("Message", d.Message),
+                new XAttribute("Span", d.Span),
+                GetTextAttribute(text, d.Span)
+            ))
         );
 
     private static XAttribute GetTextAttribute(SourceText text, TextSpan span) =>

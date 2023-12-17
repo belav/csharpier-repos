@@ -3482,18 +3482,18 @@ namespace System.Text.Tests
             RemoteExecutor
                 .Invoke(() => // Uses lots of memory
                 {
-                    AssertExtensions.ThrowsAny<
-                        ArgumentOutOfRangeException,
-                        OutOfMemoryException
-                    >(() =>
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        sb.Append(new char[2_000_000_000]);
-                        sb.Length--;
-                        string s = new string('x', 500_000_000);
-                        sb.Append(s); // This should throw, not AV
-                    });
-                })
+                    AssertExtensions.ThrowsAny<ArgumentOutOfRangeException, OutOfMemoryException>(
+                        () =>
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            sb.Append(new char[2_000_000_000]);
+                            sb.Length--;
+                            string s = new string('x', 500_000_000);
+                            sb.Append(s); // This should throw, not AV
+                        }
+                    );
+                }
+                )
                 .Dispose();
         }
     }

@@ -70,8 +70,8 @@ internal static class MinimizeUtil
 
             var idToFilePathMap = directories
                 .AsParallel()
-                .SelectMany(
-                    unitDirPath => walkDirectory(unitDirPath, sourceDirectory, destinationDirectory)
+                .SelectMany(unitDirPath =>
+                    walkDirectory(unitDirPath, sourceDirectory, destinationDirectory)
                 )
                 .GroupBy(pair => pair.mvid)
                 .ToDictionary(

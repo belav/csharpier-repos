@@ -154,14 +154,11 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
         var query = context
             .Set<MostExpensiveProduct>()
             .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters())
-            .Select(
-                mep =>
-                    new MostExpensiveProduct
-                    {
-                        TenMostExpensiveProducts = "Foo",
-                        UnitPrice = mep.UnitPrice
-                    }
-            );
+            .Select(mep => new MostExpensiveProduct
+            {
+                TenMostExpensiveProducts = "Foo",
+                UnitPrice = mep.UnitPrice
+            });
 
         Assert.Equal(
             RelationalStrings.FromSqlNonComposable,
@@ -188,14 +185,11 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters());
 
         var actual = (async ? await query.ToListAsync() : query.ToList())
-            .Select(
-                mep =>
-                    new MostExpensiveProduct
-                    {
-                        TenMostExpensiveProducts = "Foo",
-                        UnitPrice = mep.UnitPrice
-                    }
-            )
+            .Select(mep => new MostExpensiveProduct
+            {
+                TenMostExpensiveProducts = "Foo",
+                UnitPrice = mep.UnitPrice
+            })
             .ToArray();
 
         Assert.Equal(10, actual.Length);

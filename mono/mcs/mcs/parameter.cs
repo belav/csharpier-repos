@@ -1418,8 +1418,9 @@ namespace Mono.CSharp
     /// </summary>
     public class ParametersCompiled : AParametersCollection
     {
-        public static readonly ParametersCompiled EmptyReadOnlyParameters =
-            new ParametersCompiled();
+        public static readonly ParametersCompiled EmptyReadOnlyParameters = new ParametersCompiled(
+
+        );
 
         // Used by C# 2.0 delegates
         public static readonly ParametersCompiled Undefined = new ParametersCompiled();

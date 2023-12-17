@@ -330,8 +330,8 @@ public partial class HttpConnectionTests
                     });
                     return longPollResult.Task;
                 });
-                httpHandler.OnLongPollDelete(
-                    cancellationToken => ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                httpHandler.OnLongPollDelete(cancellationToken =>
+                    ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
                 );
 
                 httpHandler.OnSocketSend(

@@ -13,8 +13,9 @@ namespace System.Web.Http.ValueProviders.Providers
 {
     public class RouteDataValueProviderFactoryTest
     {
-        private readonly RouteDataValueProviderFactory _factory =
-            new RouteDataValueProviderFactory();
+        private readonly RouteDataValueProviderFactory _factory = new RouteDataValueProviderFactory(
+
+        );
 
         [Fact]
         public void GetValueProvider_WhenActionContextParameterIsNull_Throws()

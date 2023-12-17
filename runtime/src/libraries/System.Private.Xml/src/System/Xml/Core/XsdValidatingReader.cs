@@ -3094,8 +3094,9 @@ namespace System.Xml
 
                             case XmlNodeType.EndElement:
                                 _atomicValue = _validator.ValidateEndElement(_xmlSchemaInfo); //?? pop namespaceManager scope
-                                _originalAtomicValueString =
-                                    GetOriginalAtomicValueStringOfElement();
+                                _originalAtomicValueString = GetOriginalAtomicValueStringOfElement(
+
+                                );
                                 if (_xmlSchemaInfo.IsDefault)
                                 {
                                     // The atomicValue returned is a default value

@@ -304,7 +304,9 @@ namespace LibraryImportGenerator.UnitTests
                     // Our diagnostic suppressor
                     new ShapeBreakingDiagnosticSuppressor(),
                     // Each of the analyzers the suppressor supports suppressing diagnostics from
-                    new Microsoft.CodeQuality.Analyzers.QualityGuidelines.MarkMembersAsStaticAnalyzer()
+                    new Microsoft.CodeQuality.Analyzers.QualityGuidelines.MarkMembersAsStaticAnalyzer(
+
+                    )
                 };
             }
 

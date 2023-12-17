@@ -86,8 +86,8 @@ public static class MvcRazorPagesMvcCoreBuilderExtensions
             );
         }
 
-        builder.Services.Configure<RazorPagesOptions>(
-            options => options.RootDirectory = rootDirectory
+        builder.Services.Configure<RazorPagesOptions>(options =>
+            options.RootDirectory = rootDirectory
         );
         return builder;
     }
@@ -118,10 +118,9 @@ public static class MvcRazorPagesMvcCoreBuilderExtensions
         services.TryAddSingleton<PageActionEndpointDataSourceIdProvider>();
 
         // Action description and invocation
-        var actionDescriptorProvider = services.FirstOrDefault(
-            f =>
-                f.ServiceType == typeof(IActionDescriptorProvider)
-                && f.ImplementationType == typeof(PageActionDescriptorProvider)
+        var actionDescriptorProvider = services.FirstOrDefault(f =>
+            f.ServiceType == typeof(IActionDescriptorProvider)
+            && f.ImplementationType == typeof(PageActionDescriptorProvider)
         );
 
         if (actionDescriptorProvider is null)

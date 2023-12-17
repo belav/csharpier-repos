@@ -318,8 +318,8 @@ public class MvcCoreServiceCollectionExtensionsTest
         int expectedServiceRegistrationCount
     )
     {
-        var serviceDescriptors = services.Where(
-            serviceDescriptor => serviceDescriptor.ServiceType == serviceType
+        var serviceDescriptors = services.Where(serviceDescriptor =>
+            serviceDescriptor.ServiceType == serviceType
         );
         var actual = serviceDescriptors.Count();
 
@@ -337,8 +337,8 @@ public class MvcCoreServiceCollectionExtensionsTest
     )
     {
         var matches = services
-            .Where(
-                sd => sd.ServiceType == serviceType && sd.ImplementationType == implementationType
+            .Where(sd =>
+                sd.ServiceType == serviceType && sd.ImplementationType == implementationType
             )
             .ToArray();
 

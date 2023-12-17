@@ -65,14 +65,14 @@ public class ValidatorCacheTest
         Assert.NotSame(validators1, validators2);
 
         var requiredValidator = Assert.Single(
-            validators2.Where(
-                v => (v as DataAnnotationsModelValidator).Attribute is RequiredAttribute
+            validators2.Where(v =>
+                (v as DataAnnotationsModelValidator).Attribute is RequiredAttribute
             )
         );
         Assert.Contains(requiredValidator, validators1); // cached
         var stringLengthValidator = Assert.Single(
-            validators2.Where(
-                v => (v as DataAnnotationsModelValidator).Attribute is StringLengthAttribute
+            validators2.Where(v =>
+                (v as DataAnnotationsModelValidator).Attribute is StringLengthAttribute
             )
         );
         Assert.DoesNotContain(stringLengthValidator, validators1); // not cached

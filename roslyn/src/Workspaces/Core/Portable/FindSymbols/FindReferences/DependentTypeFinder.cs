@@ -624,8 +624,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // and we're passed in 'B, C, E' as the project to search, then this set
             // will be A, B, C, E.
             var allProjectsThatTheseProjectsDependOn = projects
-                .SelectMany(
-                    p => dependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(p.Id)
+                .SelectMany(p =>
+                    dependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(p.Id)
                 )
                 .Concat(projects.Select(p => p.Id))
                 .ToSet();

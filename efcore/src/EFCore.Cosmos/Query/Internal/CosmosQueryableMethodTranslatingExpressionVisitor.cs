@@ -134,10 +134,8 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
                                 .Properties;
                             var idProperty = entityType
                                 .GetProperties()
-                                .First(
-                                    p =>
-                                        p.GetJsonPropertyName()
-                                        == StoreKeyConvention.IdPropertyJsonName
+                                .First(p =>
+                                    p.GetJsonPropertyName() == StoreKeyConvention.IdPropertyJsonName
                                 );
 
                             if (

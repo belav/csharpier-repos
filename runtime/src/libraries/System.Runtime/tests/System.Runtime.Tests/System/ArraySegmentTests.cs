@@ -918,8 +918,8 @@ namespace System.Tests
                 (array: new[] { 3, 4, 5, 6 }, index: 1, count: 0) // Non-empty array, count == 0
             };
 
-            return arraySegments.Select(
-                aseg => new object[] { new ArraySegment<int>(aseg.array, aseg.index, aseg.count) }
+            return arraySegments.Select(aseg =>
+                new object[] { new ArraySegment<int>(aseg.array, aseg.index, aseg.count) }
             );
         }
     }

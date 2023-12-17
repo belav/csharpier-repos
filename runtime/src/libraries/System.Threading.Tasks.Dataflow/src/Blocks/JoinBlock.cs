@@ -1834,9 +1834,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
             // so that _taskForInputProcessing will be visibly set in the task loop.
             _taskForInputProcessing = new Task(
                 static thisSharedResources =>
-                    (
-                        (JoinBlockTargetSharedResources)thisSharedResources!
-                    ).ProcessMessagesLoopCore(),
+                    ((JoinBlockTargetSharedResources)thisSharedResources!).ProcessMessagesLoopCore(
+
+                    ),
                 this,
                 Common.GetCreationOptionsForTask(isReplacementReplica)
             );

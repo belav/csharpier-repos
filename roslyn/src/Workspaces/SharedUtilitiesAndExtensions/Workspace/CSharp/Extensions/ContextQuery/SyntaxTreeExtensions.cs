@@ -1107,8 +1107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             {
                 // Check if there's a 'new()' constraint.  If there isn't, or we're before it, then
                 // this is a type parameter constraint context.
-                var firstConstructorConstraint = constraintClause.Constraints.FirstOrDefault(
-                    t => t is ConstructorConstraintSyntax
+                var firstConstructorConstraint = constraintClause.Constraints.FirstOrDefault(t =>
+                    t is ConstructorConstraintSyntax
                 );
                 if (
                     firstConstructorConstraint == null
@@ -2766,8 +2766,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     }
 
                     // void M() { const int i = |
-                    var localDeclaration =
-                        equalsValue.GetAncestor<LocalDeclarationStatementSyntax>();
+                    var localDeclaration = equalsValue.GetAncestor<LocalDeclarationStatementSyntax>(
+
+                    );
                     if (localDeclaration != null)
                     {
                         return localDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword);
@@ -3594,8 +3595,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
                     if (
                         parentMemberAccess.Parent.IsKind(SyntaxKind.Argument)
-                        && parentMemberAccess.Parent.IsChildNode<ArgumentListSyntax>(
-                            a => a.Arguments.FirstOrDefault()
+                        && parentMemberAccess.Parent.IsChildNode<ArgumentListSyntax>(a =>
+                            a.Arguments.FirstOrDefault()
                         )
                     )
                     {
@@ -3616,8 +3617,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
                     if (
                         parentQualifiedName.Parent.IsKind(SyntaxKind.Argument)
-                        && parentQualifiedName.Parent.IsChildNode<ArgumentListSyntax>(
-                            a => a.Arguments.FirstOrDefault()
+                        && parentQualifiedName.Parent.IsChildNode<ArgumentListSyntax>(a =>
+                            a.Arguments.FirstOrDefault()
                         )
                     )
                     {

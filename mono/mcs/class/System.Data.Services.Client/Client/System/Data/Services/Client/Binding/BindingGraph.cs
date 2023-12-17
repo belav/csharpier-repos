@@ -289,10 +289,9 @@ namespace System.Data.Services.Client
         public void RemoveNonTrackedEntities()
         {
             foreach (
-                var entity in this.graph.Select(
-                    o =>
-                        BindingEntityInfo.IsEntityType(o.GetType())
-                        && !this.observer.IsContextTrackingEntity(o)
+                var entity in this.graph.Select(o =>
+                    BindingEntityInfo.IsEntityType(o.GetType())
+                    && !this.observer.IsContextTrackingEntity(o)
                 )
             )
             {

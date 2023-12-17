@@ -1029,8 +1029,8 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, string[]>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request => request.QueryString = new QueryString(queryString)
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            request.QueryString = new QueryString(queryString)
         );
         var modelState = testContext.ModelState;
 

@@ -79,8 +79,9 @@ namespace System.ServiceModel.Channels
                             CallbackContextHeaderNamespace
                         )
                     );
-                    ChannelProtectionRequirements requirements =
-                        new ChannelProtectionRequirements();
+                    ChannelProtectionRequirements requirements = new ChannelProtectionRequirements(
+
+                    );
                     requirements.IncomingSignatureParts.AddParts(header);
                     requirements.IncomingEncryptionParts.AddParts(header);
                     requirements.OutgoingSignatureParts.AddParts(header);
@@ -101,8 +102,9 @@ namespace System.ServiceModel.Channels
                             CallbackContextHeaderNamespace
                         )
                     );
-                    ChannelProtectionRequirements requirements =
-                        new ChannelProtectionRequirements();
+                    ChannelProtectionRequirements requirements = new ChannelProtectionRequirements(
+
+                    );
                     requirements.IncomingSignatureParts.AddParts(header);
                     requirements.OutgoingSignatureParts.AddParts(header);
                     requirements.MakeReadOnly();

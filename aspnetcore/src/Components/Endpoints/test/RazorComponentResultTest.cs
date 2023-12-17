@@ -513,16 +513,16 @@ public class RazorComponentResultTest
 
     public static DefaultHttpContext GetTestHttpContext(string environmentName = null)
     {
-        var mockWebHostEnvironment = Mock.Of<IWebHostEnvironment>(
-            x => x.EnvironmentName == (environmentName ?? Environments.Production)
+        var mockWebHostEnvironment = Mock.Of<IWebHostEnvironment>(x =>
+            x.EnvironmentName == (environmentName ?? Environments.Production)
         );
         var serviceCollection = new ServiceCollection()
             .AddAntiforgery()
             .AddSingleton(new DiagnosticListener("test"))
             .AddSingleton<IWebHostEnvironment>(mockWebHostEnvironment)
             .AddSingleton<EndpointHtmlRenderer>()
-            .AddSingleton<IComponentPrerenderer>(
-                services => services.GetRequiredService<EndpointHtmlRenderer>()
+            .AddSingleton<IComponentPrerenderer>(services =>
+                services.GetRequiredService<EndpointHtmlRenderer>()
             )
             .AddSingleton<NavigationManager, FakeNavigationManager>()
             .AddSingleton<ServerComponentSerializer>()
@@ -530,8 +530,8 @@ public class RazorComponentResultTest
             .AddSingleton<IDataProtectionProvider, FakeDataProtectionProvider>()
             .AddSingleton<HttpContextFormDataProvider>()
             .AddSingleton<ComponentStatePersistenceManager>()
-            .AddSingleton<PersistentComponentState>(
-                sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State
+            .AddSingleton<PersistentComponentState>(sp =>
+                sp.GetRequiredService<ComponentStatePersistenceManager>().State
             )
             .AddSingleton<AntiforgeryStateProvider, EndpointAntiforgeryStateProvider>()
             .AddLogging();

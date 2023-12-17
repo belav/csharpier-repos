@@ -1492,8 +1492,8 @@ namespace System.Text.Json.Serialization.Tests
                         {
                             if (jti.Type == typeof(ClassWithTwoExtensionDataLikeProperties))
                             {
-                                JsonPropertyInfo propertyInfo = jti.Properties.First(
-                                    prop => prop.Name == "ExtensionData2"
+                                JsonPropertyInfo propertyInfo = jti.Properties.First(prop =>
+                                    prop.Name == "ExtensionData2"
                                 );
                                 propertyInfo.IsExtensionData = true;
                             }
@@ -1573,8 +1573,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.NotNull(fieldInfo);
             Assert.Same(fieldInfo, fieldPropInfo.AttributeProvider);
 
-            JsonPropertyInfo propertyPropInfo = jti.Properties.First(
-                prop => prop.Name == "Property"
+            JsonPropertyInfo propertyPropInfo = jti.Properties.First(prop => prop.Name == "Property"
             );
             PropertyInfo propInfo = typeof(ClassWithFieldsAndProperties).GetProperty("Property");
             Assert.NotNull(propInfo);

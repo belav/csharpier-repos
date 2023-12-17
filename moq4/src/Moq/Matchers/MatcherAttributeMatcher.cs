@@ -121,18 +121,15 @@ namespace Moq.Matchers
                 var genericArgs = call.Method.GetGenericArguments();
 
                 method = call.Method.DeclaringType.GetMethods(call.Method.Name)
-                    .Where(
-                        m =>
-                            m.IsGenericMethodDefinition
-                            && m.GetGenericArguments().Length
-                                == call.Method.GetGenericMethodDefinition()
-                                    .GetGenericArguments()
-                                    .Length
-                            && expectedParametersTypes.SequenceEqual(
-                                m.MakeGenericMethod(genericArgs)
-                                    .GetParameters()
-                                    .Select(p => p.ParameterType)
-                            )
+                    .Where(m =>
+                        m.IsGenericMethodDefinition
+                        && m.GetGenericArguments().Length
+                            == call.Method.GetGenericMethodDefinition().GetGenericArguments().Length
+                        && expectedParametersTypes.SequenceEqual(
+                            m.MakeGenericMethod(genericArgs)
+                                .GetParameters()
+                                .Select(p => p.ParameterType)
+                        )
                     )
                     .Select(m => m.MakeGenericMethod(genericArgs))
                     .FirstOrDefault();
@@ -165,8 +162,8 @@ namespace Moq.Matchers
         public bool Matches(object argument, Type parameterType)
         {
             // use matcher Expression to get extra arguments
-            var extraArgs = this.expression.Arguments.Select(
-                ae => ((ConstantExpression)ae.PartialEval()).Value
+            var extraArgs = this.expression.Arguments.Select(ae =>
+                ((ConstantExpression)ae.PartialEval()).Value
             );
             var args = new[] { argument }.Concat(extraArgs).ToArray();
             // for static and non-static method

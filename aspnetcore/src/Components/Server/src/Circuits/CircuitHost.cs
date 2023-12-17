@@ -950,7 +950,9 @@ internal partial class CircuitHost : IAsyncDisposable
                         // We only do this if we have no root components. Otherwise, the state would have been
                         // provided during the start up process
                         var appLifetime =
-                            _scope.ServiceProvider.GetRequiredService<ComponentStatePersistenceManager>();
+                            _scope.ServiceProvider.GetRequiredService<ComponentStatePersistenceManager>(
+
+                            );
                         await appLifetime.RestoreStateAsync(store);
                     }
 

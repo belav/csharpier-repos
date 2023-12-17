@@ -36,8 +36,9 @@ namespace System.IdentityModel.Configuration
             StoreLocation.LocalMachine;
 #pragma warning restore 1591
 
-        ClaimsAuthenticationManager _claimsAuthenticationManager =
-            new ClaimsAuthenticationManager();
+        ClaimsAuthenticationManager _claimsAuthenticationManager = new ClaimsAuthenticationManager(
+
+        );
         ClaimsAuthorizationManager _claimsAuthorizationManager = new ClaimsAuthorizationManager();
         bool _isInitialized;
         SecurityTokenHandlerCollectionManager _securityTokenHandlerCollectionManager;
@@ -515,7 +516,9 @@ namespace System.IdentityModel.Configuration
             // handlers for the system.
             //
             SecurityTokenHandlerCollectionManager manager =
-                SecurityTokenHandlerCollectionManager.CreateEmptySecurityTokenHandlerCollectionManager();
+                SecurityTokenHandlerCollectionManager.CreateEmptySecurityTokenHandlerCollectionManager(
+
+                );
 
             if (serviceElement != null)
             {

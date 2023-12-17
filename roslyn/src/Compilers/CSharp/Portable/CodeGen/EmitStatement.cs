@@ -1581,13 +1581,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 //   lengthConstant -> corresponding label
                 _builder.EmitIntegerSwitchJumpTable(
                     lengthBasedSwitchInfo
-                        .LengthBasedJumpTable.LengthCaseLabels.Select(
-                            p =>
-                                new KeyValuePair<ConstantValue, object>(
-                                    ConstantValue.Create(p.value),
-                                    p.label
-                                )
-                        )
+                        .LengthBasedJumpTable.LengthCaseLabels.Select(p => new KeyValuePair<
+                            ConstantValue,
+                            object
+                        >(ConstantValue.Create(p.value), p.label))
                         .ToArray(),
                     fallThroughLabel,
                     stringLength,
@@ -1639,13 +1636,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     //   charConstant -> corresponding label
                     _builder.EmitIntegerSwitchJumpTable(
                         charJumpTable
-                            .CharCaseLabels.Select(
-                                p =>
-                                    new KeyValuePair<ConstantValue, object>(
-                                        ConstantValue.Create(p.value),
-                                        p.label
-                                    )
-                            )
+                            .CharCaseLabels.Select(p => new KeyValuePair<ConstantValue, object>(
+                                ConstantValue.Create(p.value),
+                                p.label
+                            ))
                             .ToArray(),
                         fallThroughLabel,
                         charTemp,
@@ -1673,13 +1667,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     //   stringConstant -> corresponding label
                     EmitStringSwitchJumpTable(
                         stringJumpTable
-                            .StringCaseLabels.Select(
-                                p =>
-                                    new KeyValuePair<ConstantValue, object>(
-                                        ConstantValue.Create(p.value),
-                                        p.label
-                                    )
-                            )
+                            .StringCaseLabels.Select(p => new KeyValuePair<ConstantValue, object>(
+                                ConstantValue.Create(p.value),
+                                p.label
+                            ))
                             .ToArray(),
                         fallThroughLabel,
                         keyTemp,

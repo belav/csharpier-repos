@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.CommentSelection
             {
                 AssertEx.Equal(
                     expectedSpans,
-                    textView.Selection.SelectedSpans.Select(
-                        snapshotSpan => TextSpan.FromBounds(snapshotSpan.Start, snapshotSpan.End)
+                    textView.Selection.SelectedSpans.Select(snapshotSpan =>
+                        TextSpan.FromBounds(snapshotSpan.Start, snapshotSpan.End)
                     )
                 );
             }

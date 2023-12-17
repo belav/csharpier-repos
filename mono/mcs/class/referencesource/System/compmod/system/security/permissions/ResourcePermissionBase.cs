@@ -749,9 +749,9 @@ namespace System.Security.Permissions
                 //The wildcard and "." entries can be merged as
                 //any other entry.
                 Hashtable newContents = CreateHashtable();
-                IDictionaryEnumerator contentEnumerator = (
-                    (Hashtable)currentContent
-                ).GetEnumerator();
+                IDictionaryEnumerator contentEnumerator = ((Hashtable)currentContent).GetEnumerator(
+
+                );
                 IDictionaryEnumerator targetContentEnumerator = (
                     (Hashtable)targetContent
                 ).GetEnumerator();

@@ -78,13 +78,12 @@ namespace System.Web.Mvc.Html.Test
             MetadataHelper metadataHelper = new MetadataHelper();
 
             metadataHelper
-                .MetadataProvider.Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            typeof(Model),
-                            "PropertyName"
-                        )
+                .MetadataProvider.Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        typeof(Model),
+                        "PropertyName"
+                    )
                 )
                 .Returns(metadataHelper.Metadata.Object)
                 .Verifiable();
@@ -110,8 +109,8 @@ namespace System.Web.Mvc.Html.Test
                 "Custom property name from metadata"
             );
             metadataHelper
-                .MetadataProvider.Setup(
-                    p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
+                .MetadataProvider.Setup(p =>
+                    p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
                 )
                 .Returns(metadataHelper.Metadata.Object);
 
@@ -343,13 +342,12 @@ namespace System.Web.Mvc.Html.Test
                     .Setup(p => p.GetMetadataForProperties(It.IsAny<object>(), It.IsAny<Type>()))
                     .Returns(new ModelMetadata[0]);
                 MetadataProvider
-                    .Setup(
-                        p =>
-                            p.GetMetadataForProperty(
-                                It.IsAny<Func<object>>(),
-                                It.IsAny<Type>(),
-                                It.IsAny<string>()
-                            )
+                    .Setup(p =>
+                        p.GetMetadataForProperty(
+                            It.IsAny<Func<object>>(),
+                            It.IsAny<Type>(),
+                            It.IsAny<string>()
+                        )
                     )
                     .Returns(Metadata.Object);
                 MetadataProvider

@@ -1135,19 +1135,14 @@ namespace System.Activities.Statements
                                                             {
                                                                 Input = parent,
                                                             },
-                                                            Right = new InArgument<Type>(
-                                                                context =>
-                                                                    typeof(System.Activities.Statements.TransactionScope)
+                                                            Right = new InArgument<Type>(context =>
+                                                                typeof(System.Activities.Statements.TransactionScope)
                                                             )
                                                         },
                                                         Right = new Equal<string, string, bool>
                                                         {
-                                                            Left = new InArgument<string>(
-                                                                env =>
-                                                                    parent
-                                                                        .Get(env)
-                                                                        .GetType()
-                                                                        .FullName
+                                                            Left = new InArgument<string>(env =>
+                                                                parent.Get(env).GetType().FullName
                                                             ),
                                                             Right =
                                                                 "System.ServiceModel.Activities.TransactedReceiveScope"
@@ -1681,7 +1676,9 @@ namespace System.Activities.Statements
                 bool persistOnClose = false;
 
                 foreach (
-                    System.Workflow.ComponentModel.Activity activity in interopBody.CollectNestedActivities()
+                    System.Workflow.ComponentModel.Activity activity in interopBody.CollectNestedActivities(
+
+                    )
                 )
                 {
                     if (activity.PersistOnClose)

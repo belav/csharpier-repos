@@ -431,18 +431,22 @@ namespace System.Text.Json.Serialization.Tests
             yield return WrapArgs(
                 Enumerable
                     .Range(0, 10)
-                    .Select(
-                        i => new AsyncEnumerableElement(i, $"lorem ipsum dolor: {i}", (i % 2 == 0))
-                    ),
+                    .Select(i => new AsyncEnumerableElement(
+                        i,
+                        $"lorem ipsum dolor: {i}",
+                        (i % 2 == 0)
+                    )),
                 3,
                 100
             );
             yield return WrapArgs(
                 Enumerable
                     .Range(0, 100)
-                    .Select(
-                        i => new AsyncEnumerableElement(i, $"lorem ipsum dolor: {i}", (i % 2 == 0))
-                    ),
+                    .Select(i => new AsyncEnumerableElement(
+                        i,
+                        $"lorem ipsum dolor: {i}",
+                        (i % 2 == 0)
+                    )),
                 20,
                 100
             );

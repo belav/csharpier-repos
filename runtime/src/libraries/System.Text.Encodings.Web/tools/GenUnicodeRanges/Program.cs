@@ -156,11 +156,8 @@ namespace GenDefinedCharList
             return new String(
                 blockName
                     .ToCharArray()
-                    .Where(
-                        c =>
-                            ('A' <= c && c <= 'Z')
-                            || ('a' <= c && c <= 'z')
-                            || ('0' <= c && c <= '9')
+                    .Where(c =>
+                        ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || ('0' <= c && c <= '9')
                     )
                     .ToArray()
             );

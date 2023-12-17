@@ -603,8 +603,9 @@ namespace Microsoft.CodeAnalysis
         {
             // This is a cache similar to one used by native compiler in MetaImport::GetTypeOfTypeRef.
             // TypeRef tokens are unique only within a Module
-            ConcurrentDictionary<TypeReferenceHandle, TypeSymbol> cache =
-                GetTypeRefHandleToTypeMap();
+            ConcurrentDictionary<TypeReferenceHandle, TypeSymbol> cache = GetTypeRefHandleToTypeMap(
+
+            );
             TypeSymbol result;
 
             if (cache != null && cache.TryGetValue(typeRef, out result))

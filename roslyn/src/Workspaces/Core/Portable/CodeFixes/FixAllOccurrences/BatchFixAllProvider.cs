@@ -255,8 +255,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                                         .GetProjectChanges()
                                         .SelectMany(p => p.GetChangedDocuments());
                                     changedDocuments.AddRange(
-                                        changedDocumentIds.Select(
-                                            id => changedSolution.GetRequiredDocument(id)
+                                        changedDocumentIds.Select(id =>
+                                            changedSolution.GetRequiredDocument(id)
                                         )
                                     );
                                 }

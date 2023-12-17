@@ -253,11 +253,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             // Assert
             var optionsProps = options.GetType().GetProperties().ToDictionary(p => p.Name);
-            var assertions = expectedValues.Select(
-                _ =>
-                    new Action<KeyValuePair<string, object>>(
-                        kvp => Assert.Equal(kvp.Value, optionsProps[kvp.Key].GetValue(options))
-                    )
+            var assertions = expectedValues.Select(_ => new Action<KeyValuePair<string, object>>(
+                kvp => Assert.Equal(kvp.Value, optionsProps[kvp.Key].GetValue(options))
+            )
             );
             Assert.Collection(expectedValues, assertions.ToArray());
         }
@@ -317,11 +315,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             // Assert
             var optionsProps = options.GetType().GetProperties().ToDictionary(p => p.Name);
-            var assertions = expectedValues.Select(
-                _ =>
-                    new Action<KeyValuePair<string, object>>(
-                        kvp => Assert.Equal(kvp.Value, optionsProps[kvp.Key].GetValue(options))
-                    )
+            var assertions = expectedValues.Select(_ => new Action<KeyValuePair<string, object>>(
+                kvp => Assert.Equal(kvp.Value, optionsProps[kvp.Key].GetValue(options))
+            )
             );
             Assert.Collection(expectedValues, assertions.ToArray());
         }
@@ -371,10 +367,9 @@ namespace Microsoft.Extensions.Options.Tests
                 }
             );
 
-            services.AddSingleton<
-                IOptionsFactory<OptionsWithoutDefaultCtor>,
-                CustomOptionsFactory
-            >();
+            services.AddSingleton<IOptionsFactory<OptionsWithoutDefaultCtor>, CustomOptionsFactory>(
+
+            );
 
             var sp = services.BuildServiceProvider();
             var optionsWithoutDefaultCtor = sp.GetRequiredService<

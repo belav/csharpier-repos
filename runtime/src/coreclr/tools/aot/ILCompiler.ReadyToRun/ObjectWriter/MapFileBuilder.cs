@@ -164,8 +164,9 @@ namespace ILCompiler.PEWriter
 
         private void WriteRelocTypeStatistics(StreamWriter writer)
         {
-            KeyValuePair<RelocType, int>[] relocTypeCounts =
-                _outputInfoBuilder.RelocCounts.ToArray();
+            KeyValuePair<RelocType, int>[] relocTypeCounts = _outputInfoBuilder.RelocCounts.ToArray(
+
+            );
             Array.Sort(relocTypeCounts, (a, b) => b.Value.CompareTo(a.Value));
 
             WriteTitle(writer, "Reloc Type Statistics");

@@ -627,13 +627,12 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var refLocationsInOtherDocuments = new List<LocationForAffectedSymbol>();
 
             var refLocations = await Task.WhenAll(
-                    declaredSymbols.Select(
-                        declaredSymbol =>
-                            FindReferenceLocationsForSymbolAsync(
-                                document,
-                                declaredSymbol,
-                                cancellationToken
-                            )
+                    declaredSymbols.Select(declaredSymbol =>
+                        FindReferenceLocationsForSymbolAsync(
+                            document,
+                            declaredSymbol,
+                            cancellationToken
+                        )
                     )
                 )
                 .ConfigureAwait(false);
@@ -677,9 +676,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                 FatalError.ReportNonFatalError(
                     new SyncNamespaceDocumentsNotInSolutionException(
                         refLocationsInOtherDocuments
-                            .Where(
-                                loc =>
-                                    !solutionWithChangedNamespace.ContainsDocument(loc.Document.Id)
+                            .Where(loc =>
+                                !solutionWithChangedNamespace.ContainsDocument(loc.Document.Id)
                             )
                             .Distinct()
                             .SelectAsArray(loc => loc.Document.Id)
@@ -690,17 +688,14 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var refLocationGroups = refLocationsInSolution.GroupBy(loc => loc.Document.Id);
 
             var fixedDocuments = await Task.WhenAll(
-                    refLocationGroups.Select(
-                        refInOneDocument =>
-                            FixReferencingDocumentAsync(
-                                solutionWithChangedNamespace.GetRequiredDocument(
-                                    refInOneDocument.Key
-                                ),
-                                refInOneDocument,
-                                newNamespace,
-                                fallbackOptions,
-                                cancellationToken
-                            )
+                    refLocationGroups.Select(refInOneDocument =>
+                        FixReferencingDocumentAsync(
+                            solutionWithChangedNamespace.GetRequiredDocument(refInOneDocument.Key),
+                            refInOneDocument,
+                            newNamespace,
+                            fallbackOptions,
+                            cancellationToken
+                        )
                     )
                 )
                 .ConfigureAwait(false);
@@ -762,13 +757,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                 referencedSymbols
                     .Where(refSymbol => refSymbol.Definition.Equals(symbol))
                     .SelectMany(refSymbol => refSymbol.Locations)
-                    .Select(
-                        location =>
-                            new LocationForAffectedSymbol(
-                                location,
-                                isReferenceToExtensionMethod: false
-                            )
-                    )
+                    .Select(location => new LocationForAffectedSymbol(
+                        location,
+                        isReferenceToExtensionMethod: false
+                    ))
             );
 
             // So far we only have references to types declared in affected namespace. We also need to
@@ -792,13 +784,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                         builder.AddRange(
                             referencedMethodSymbols
                                 .SelectMany(refSymbol => refSymbol.Locations)
-                                .Select(
-                                    location =>
-                                        new LocationForAffectedSymbol(
-                                            location,
-                                            isReferenceToExtensionMethod: true
-                                        )
-                                )
+                                .Select(location => new LocationForAffectedSymbol(
+                                    location,
+                                    isReferenceToExtensionMethod: true
+                                ))
                         );
                     }
                 }
@@ -1114,12 +1103,11 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                 .ConfigureAwait(false);
             var result = (
                 fixedDocument,
-                containers.SelectAsArray(
-                    c =>
-                        root.GetCurrentNode(c)
-                        ?? throw new InvalidOperationException(
-                            "Can't get SyntaxNode from GetCurrentNode."
-                        )
+                containers.SelectAsArray(c =>
+                    root.GetCurrentNode(c)
+                    ?? throw new InvalidOperationException(
+                        "Can't get SyntaxNode from GetCurrentNode."
+                    )
                 )
             );
 
@@ -1160,13 +1148,12 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var documentsToProcess = documentsToProcessBuilder.ToImmutableAndFree();
 
             var changeDocuments = await Task.WhenAll(
-                    documentsToProcess.Select(
-                        doc =>
-                            RemoveUnnecessaryImportsWorkerAsync(
-                                doc,
-                                CreateImports(doc, names, withFormatterAnnotation: false),
-                                cancellationToken
-                            )
+                    documentsToProcess.Select(doc =>
+                        RemoveUnnecessaryImportsWorkerAsync(
+                            doc,
+                            CreateImports(doc, names, withFormatterAnnotation: false),
+                            cancellationToken
+                        )
                     )
                 )
                 .ConfigureAwait(false);
@@ -1193,8 +1180,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                     .RemoveUnnecessaryImportsAsync(
                         doc,
                         import =>
-                            importsToRemove.Any(
-                                importToRemove => syntaxFacts.AreEquivalent(importToRemove, import)
+                            importsToRemove.Any(importToRemove =>
+                                syntaxFacts.AreEquivalent(importToRemove, import)
                             ),
                         formattingOptions,
                         token

@@ -29,9 +29,9 @@ public class TestServerTests
                 webBuilder
                     .ConfigureServices(services =>
                     {
-                        services.AddSingleton<IServer>(
-                            serviceProvider => new TestServer(serviceProvider)
-                        );
+                        services.AddSingleton<IServer>(serviceProvider => new TestServer(
+                            serviceProvider
+                        ));
                     })
                     .Configure(app => { });
             })
@@ -115,25 +115,20 @@ public class TestServerTests
     public async Task ServicesCanBeOverridenForTestingAsync()
     {
         var builder = new WebHostBuilder()
-            .ConfigureServices(
-                s =>
-                    s.AddSingleton<
-                        IServiceProviderFactory<ThirdPartyContainer>,
-                        ThirdPartyContainerServiceProviderFactory
-                    >()
+            .ConfigureServices(s =>
+                s.AddSingleton<
+                    IServiceProviderFactory<ThirdPartyContainer>,
+                    ThirdPartyContainerServiceProviderFactory
+                >()
             )
             .UseStartup<ThirdPartyContainerStartup>()
-            .ConfigureTestServices(
-                services =>
-                    services.AddSingleton(
-                        new SimpleService { Message = "OverridesConfigureServices" }
-                    )
+            .ConfigureTestServices(services =>
+                services.AddSingleton(new SimpleService { Message = "OverridesConfigureServices" })
             )
-            .ConfigureTestContainer<ThirdPartyContainer>(
-                container =>
-                    container.Services.AddSingleton(
-                        new TestService { Message = "OverridesConfigureContainer" }
-                    )
+            .ConfigureTestContainer<ThirdPartyContainer>(container =>
+                container.Services.AddSingleton(
+                    new TestService { Message = "OverridesConfigureContainer" }
+                )
             );
 
         var host = new TestServer(builder);
@@ -152,11 +147,10 @@ public class TestServerTests
             container.Services.AddSingleton(new TestService { Message = "ConfigureContainer" });
 
         public void Configure(IApplicationBuilder app) =>
-            app.Run(
-                ctx =>
-                    ctx.Response.WriteAsync(
-                        $"{ctx.RequestServices.GetRequiredService<SimpleService>().Message}, {ctx.RequestServices.GetRequiredService<TestService>().Message}"
-                    )
+            app.Run(ctx =>
+                ctx.Response.WriteAsync(
+                    $"{ctx.RequestServices.GetRequiredService<SimpleService>().Message}, {ctx.RequestServices.GetRequiredService<TestService>().Message}"
+                )
             );
     }
 
@@ -615,8 +609,9 @@ public class TestServerTests
             {
                 app.Run(context =>
                 {
-                    var accessor =
-                        app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
+                    var accessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>(
+
+                    );
                     return context.Response.WriteAsync(
                         "HasContext:" + (accessor.HttpContext != null)
                     );

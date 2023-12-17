@@ -94,8 +94,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
         {
             var idProperty = _readItemExpression
                 .EntityType.GetProperties()
-                .FirstOrDefault(
-                    p => p.GetJsonPropertyName() == StoreKeyConvention.IdPropertyJsonName
+                .FirstOrDefault(p =>
+                    p.GetJsonPropertyName() == StoreKeyConvention.IdPropertyJsonName
                 );
 
             if (TryGetParameterValue(idProperty, out var value))

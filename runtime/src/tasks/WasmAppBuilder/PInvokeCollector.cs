@@ -130,11 +130,11 @@ internal sealed class PInvokeCollector
         {
             if ((method.Attributes & MethodAttributes.PinvokeImpl) != 0)
             {
-                var dllimport = method.CustomAttributes.First(
-                    attr => attr.AttributeType.Name == "DllImportAttribute"
+                var dllimport = method.CustomAttributes.First(attr =>
+                    attr.AttributeType.Name == "DllImportAttribute"
                 );
-                var wasmLinkage = method.CustomAttributes.Any(
-                    attr => attr.AttributeType.Name == "WasmImportLinkageAttribute"
+                var wasmLinkage = method.CustomAttributes.Any(attr =>
+                    attr.AttributeType.Name == "WasmImportLinkageAttribute"
                 );
                 var module = (string)dllimport.ConstructorArguments[0].Value!;
                 var entrypoint = (string)

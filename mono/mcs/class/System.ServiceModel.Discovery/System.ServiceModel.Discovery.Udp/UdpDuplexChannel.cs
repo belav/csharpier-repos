@@ -310,11 +310,10 @@ namespace System.ServiceModel.Discovery.Udp
                 var ip = IPAddress.Parse(LocalAddress.Uri.Host);
                 bool isMulticast = NetworkInterface
                     .GetAllNetworkInterfaces()
-                    .Any(
-                        nic =>
-                            nic.SupportsMulticast
-                            && nic.GetIPProperties()
-                                .MulticastAddresses.Any(mca => mca.Address.Equals(ip))
+                    .Any(nic =>
+                        nic.SupportsMulticast
+                        && nic.GetIPProperties()
+                            .MulticastAddresses.Any(mca => mca.Address.Equals(ip))
                     );
                 int port = LocalAddress.Uri.Port;
                 if (isMulticast)

@@ -69,22 +69,21 @@ public class TypeDetails
         {
             var publicNoArgMethods = GetPublicNoArgMethods();
             var noArgExtensionMethods = GetNoArgExtensionMethods(
-                Config.SourceExtensionMethods.Where(
-                    m => !_nameToMember.ContainsKey(m.Name) && Config.ShouldMapMethod(m)
+                Config.SourceExtensionMethods.Where(m =>
+                    !_nameToMember.ContainsKey(m.Name) && Config.ShouldMapMethod(m)
                 )
             );
             return accessors.Concat(publicNoArgMethods).Concat(noArgExtensionMethods);
         }
         IEnumerable<MethodInfo> GetPublicNoArgMethods() =>
             Type.GetMethods(BindingFlags.Instance | BindingFlags.Public)
-                .Where(
-                    m =>
-                        m.DeclaringType != typeof(object)
-                        && m.ReturnType != typeof(void)
-                        && !m.IsGenericMethodDefinition
-                        && !_nameToMember.ContainsKey(m.Name)
-                        && Config.ShouldMapMethod(m)
-                        && m.GetParameters().Length == 0
+                .Where(m =>
+                    m.DeclaringType != typeof(object)
+                    && m.ReturnType != typeof(void)
+                    && !m.IsGenericMethodDefinition
+                    && !_nameToMember.ContainsKey(m.Name)
+                    && Config.ShouldMapMethod(m)
+                    && m.GetParameters().Length == 0
                 );
         void CheckPrePostfixes(MemberInfo member)
         {
@@ -101,10 +100,9 @@ public class TypeDetails
         {
             var extensionMethods =
                 (IEnumerable<MemberInfo>)
-                    sourceExtensionMethodSearch.Where(
-                        method =>
-                            !method.ContainsGenericParameters
-                            && method.FirstParameterType().IsAssignableFrom(Type)
+                    sourceExtensionMethodSearch.Where(method =>
+                        !method.ContainsGenericParameters
+                        && method.FirstParameterType().IsAssignableFrom(Type)
                     );
             var genericInterfaces = Type.GetInterfaces().Where(t => t.IsGenericType);
             if (Type.IsInterface && Type.IsGenericType)
@@ -264,21 +262,18 @@ public class TypeDetails
         Func<PropertyInfo, bool> propertyAvailableFor
     ) =>
         GetTypeInheritance()
-            .SelectMany(
-                type =>
-                    type.GetProperties(TypeExtensions.InstanceFlags)
-                        .Where(
-                            property =>
-                                propertyAvailableFor(property) && Config.ShouldMapProperty(property)
-                        )
+            .SelectMany(type =>
+                type.GetProperties(TypeExtensions.InstanceFlags)
+                    .Where(property =>
+                        propertyAvailableFor(property) && Config.ShouldMapProperty(property)
+                    )
             );
 
     private IEnumerable<MemberInfo> GetFields(Func<FieldInfo, bool> fieldAvailableFor) =>
         GetTypeInheritance()
-            .SelectMany(
-                type =>
-                    type.GetFields(TypeExtensions.InstanceFlags)
-                        .Where(field => fieldAvailableFor(field) && Config.ShouldMapField(field))
+            .SelectMany(type =>
+                type.GetFields(TypeExtensions.InstanceFlags)
+                    .Where(field => fieldAvailableFor(field) && Config.ShouldMapField(field))
             );
 }
 

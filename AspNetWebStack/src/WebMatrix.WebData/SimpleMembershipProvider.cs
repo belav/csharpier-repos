@@ -562,12 +562,8 @@ namespace WebMatrix.WebData
                             + " WHERE [ConfirmationToken] = @0",
                         accountConfirmationToken
                     )
-                    .Where(
-                        r =>
-                            ((string)r[1]).Equals(
-                                accountConfirmationToken,
-                                StringComparison.Ordinal
-                            )
+                    .Where(r =>
+                        ((string)r[1]).Equals(accountConfirmationToken, StringComparison.Ordinal)
                     )
                     .ToList();
                 Debug.Assert(

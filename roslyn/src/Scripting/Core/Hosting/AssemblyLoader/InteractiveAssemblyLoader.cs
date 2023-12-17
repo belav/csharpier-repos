@@ -330,8 +330,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                         if (!identity.IsStrongName)
                         {
-                            conflictingLoadedAssemblyOpt = loadedInfos.FirstOrDefault(
-                                info => !info.Identity.IsStrongName
+                            conflictingLoadedAssemblyOpt = loadedInfos.FirstOrDefault(info =>
+                                !info.Identity.IsStrongName
                             );
                         }
 

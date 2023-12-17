@@ -2368,10 +2368,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 MemberNames = default,
                 OptionsCallback = options =>
                     Assert.Null(
-                        options.FirstOrDefault(
-                            i =>
-                                i.Id
-                                == GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId
+                        options.FirstOrDefault(i =>
+                            i.Id
+                            == GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId
                         )
                     ),
                 LanguageVersion = LanguageVersion.CSharp6,
@@ -3099,10 +3098,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 MemberNames = default,
                 OptionsCallback = options =>
                     Assert.Null(
-                        options.FirstOrDefault(
-                            i =>
-                                i.Id
-                                == GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                        options.FirstOrDefault(i =>
+                            i.Id
+                            == GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
                         )
                     ),
                 LanguageVersion = LanguageVersion.CSharp6,

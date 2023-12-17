@@ -84,12 +84,10 @@ namespace System.Net.Http
 
             IEnumerable<CookieHeaderValue> cookieHeaderValues = GetCookies(headers);
             CookieHeaderValue[] matches = cookieHeaderValues
-                .Where(
-                    header =>
-                        header.Cookies.Any(
-                            state =>
-                                String.Equals(state.Name, name, StringComparison.OrdinalIgnoreCase)
-                        )
+                .Where(header =>
+                    header.Cookies.Any(state =>
+                        String.Equals(state.Name, name, StringComparison.OrdinalIgnoreCase)
+                    )
                 )
                 .ToArray();
             return new Collection<CookieHeaderValue>(matches);

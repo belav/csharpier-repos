@@ -274,8 +274,8 @@ public class ExpressionPrinterTest
                     Expression.Constant("Foo"),
                     typeof(string)
                         .GetMethods()
-                        .Single(
-                            m => m.Name == nameof(string.ToUpper) && m.GetParameters().Count() == 0
+                        .Single(m =>
+                            m.Name == nameof(string.ToUpper) && m.GetParameters().Count() == 0
                         )
                 )
             )
@@ -293,9 +293,8 @@ public class ExpressionPrinterTest
                     Expression.Constant("Foobar"),
                     typeof(string)
                         .GetMethods()
-                        .Single(
-                            m =>
-                                m.Name == nameof(string.Substring) && m.GetParameters().Count() == 2
+                        .Single(m =>
+                            m.Name == nameof(string.Substring) && m.GetParameters().Count() == 2
                         ),
                     Expression.Constant(0),
                     Expression.Constant(4)

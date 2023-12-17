@@ -1117,9 +1117,8 @@ public class InternalEntityTypeBuilderTest
         Assert.Empty(
             dependentEntityBuilder
                 .Metadata.GetForeignKeys()
-                .Where(
-                    foreignKey =>
-                        foreignKey.Properties.SequenceEqual(relationshipBuilder.Metadata.Properties)
+                .Where(foreignKey =>
+                    foreignKey.Properties.SequenceEqual(relationshipBuilder.Metadata.Properties)
                 )
         );
     }

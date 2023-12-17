@@ -5061,8 +5061,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            ArrayBuilder<BoundStatement> boundStatements =
-                ArrayBuilder<BoundStatement>.GetInstance();
+            ArrayBuilder<BoundStatement> boundStatements = ArrayBuilder<BoundStatement>.GetInstance(
+
+            );
             var first = true;
             foreach (var statement in compilationUnit.Members)
             {

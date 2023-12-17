@@ -372,15 +372,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             static bool anyUnexpectedRequiredModifiers(ParamInfo<TypeSymbol>[] propertyParams)
             {
-                return propertyParams.Any(
-                    p =>
-                        (
-                            !p.RefCustomModifiers.IsDefaultOrEmpty
-                            && p.RefCustomModifiers.Any(
-                                static m =>
-                                    !m.IsOptional && !m.Modifier.IsWellKnownTypeInAttribute()
-                            )
-                        ) || p.CustomModifiers.AnyRequired()
+                return propertyParams.Any(p =>
+                    (
+                        !p.RefCustomModifiers.IsDefaultOrEmpty
+                        && p.RefCustomModifiers.Any(static m =>
+                            !m.IsOptional && !m.Modifier.IsWellKnownTypeInAttribute()
+                        )
+                    ) || p.CustomModifiers.AnyRequired()
                 );
             }
         }

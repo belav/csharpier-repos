@@ -21,10 +21,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         public MetadataReference ResolveMetadataReference(
             MetadataReferenceInfo metadataReferenceInfo
         ) =>
-            Compilation.References.Single(
-                x =>
-                    x.GetModuleVersionId() == metadataReferenceInfo.ModuleVersionId
-                    && x.Properties.Aliases.SingleOrDefault() == metadataReferenceInfo.ExternAlias
+            Compilation.References.Single(x =>
+                x.GetModuleVersionId() == metadataReferenceInfo.ModuleVersionId
+                && x.Properties.Aliases.SingleOrDefault() == metadataReferenceInfo.ExternAlias
             );
 
         public SourceText ResolveSourceText(SourceTextInfo sourceTextInfo) =>

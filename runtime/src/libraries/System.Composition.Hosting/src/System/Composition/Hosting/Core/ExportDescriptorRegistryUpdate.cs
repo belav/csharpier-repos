@@ -167,16 +167,13 @@ namespace System.Composition.Hosting.Core
             ExportDescriptor[] definitions;
             if (_partDefinitions.TryGetValue(contract, out definitions))
                 return definitions
-                    .Select(
-                        d =>
-                            new ExportDescriptorPromise(
-                                contract,
-                                "Preexisting",
-                                false,
-                                s_noDependencies,
-                                _ => d
-                            )
-                    )
+                    .Select(d => new ExportDescriptorPromise(
+                        contract,
+                        "Preexisting",
+                        false,
+                        s_noDependencies,
+                        _ => d
+                    ))
                     .ToArray();
 
             UpdateResult updateResult;

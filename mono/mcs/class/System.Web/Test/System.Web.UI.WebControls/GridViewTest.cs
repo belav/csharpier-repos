@@ -1721,9 +1721,9 @@ namespace MonoTests.System.Web.UI.WebControls
         [Test]
         public void GridView_RenderAllowPaging()
         {
-            string RenderedPageHtml = new WebTest(
-                PageInvoker.CreateOnLoad(RenderAllowPaging)
-            ).Run();
+            string RenderedPageHtml = new WebTest(PageInvoker.CreateOnLoad(RenderAllowPaging)).Run(
+
+            );
             string RenderedControlHtml = HtmlDiff.GetControlFromPageHtml(RenderedPageHtml);
             string OriginControlHtml =
                 "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">Item</th>\r\n\t\t</tr><tr>\r\n\t\t\t<td>Norway</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>Sweden</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td><table>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td><span>1</span></td><td><a href=\"javascript:__doPostBack(&#39;ctl01&#39;,&#39;Page$2&#39;)\">2</a></td>\r\n\t\t\t\t</tr>\r\n\t\t\t</table></td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>";
@@ -1753,9 +1753,9 @@ namespace MonoTests.System.Web.UI.WebControls
         [Category("NunitWeb")]
         public void GridView_RenderAllowPaging2()
         {
-            string RenderedPageHtml = new WebTest(
-                PageInvoker.CreateOnLoad(RenderAllowPaging2)
-            ).Run();
+            string RenderedPageHtml = new WebTest(PageInvoker.CreateOnLoad(RenderAllowPaging2)).Run(
+
+            );
             string RenderedControlHtml = HtmlDiff.GetControlFromPageHtml(RenderedPageHtml);
             string OriginControlHtml =
                 "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">Item</th>\r\n\t\t</tr><tr>\r\n\t\t\t<td>France</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>Italy</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td><table>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td><a href=\"javascript:__doPostBack(&#39;ctl01&#39;,&#39;Page$1&#39;)\">1</a></td><td><span>2</span></td><td><a href=\"javascript:__doPostBack(&#39;ctl01&#39;,&#39;Page$3&#39;)\">3</a></td><td><a href=\"javascript:__doPostBack(&#39;ctl01&#39;,&#39;Page$4&#39;)\">4</a></td><td><a href=\"javascript:__doPostBack(&#39;ctl01&#39;,&#39;Page$5&#39;)\">...</a></td><td><a href=\"javascript:__doPostBack(&#39;ctl01&#39;,&#39;Page$Last&#39;)\">&gt;&gt;</a></td>\r\n\t\t\t\t</tr>\r\n\t\t\t</table></td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>";

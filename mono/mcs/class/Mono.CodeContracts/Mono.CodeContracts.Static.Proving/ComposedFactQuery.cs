@@ -172,8 +172,7 @@ namespace Mono.CodeContracts.Static.Proving
         )
         {
             return elements
-                .Select(
-                    fact => fact.IsTrueImply(pc, positiveAssumptions, negativeAssumptions, goal)
+                .Select(fact => fact.IsTrueImply(pc, positiveAssumptions, negativeAssumptions, goal)
                 )
                 .FirstOrDefault(factResult => !factResult.IsTop);
         }

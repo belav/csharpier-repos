@@ -67,13 +67,10 @@ public class IEnumerableAggregateProjections
         using (var context = new Context())
         {
             var result = ProjectTo<CustomerViewModel>(
-                    context.Customers.Select(
-                        customer =>
-                            new CustomerItemCodes
-                            {
-                                ItemCodes = customer.Items.Select(item => item.Code)
-                            }
-                    )
+                    context.Customers.Select(customer => new CustomerItemCodes
+                    {
+                        ItemCodes = customer.Items.Select(item => item.Code)
+                    })
                 )
                 .Single();
 

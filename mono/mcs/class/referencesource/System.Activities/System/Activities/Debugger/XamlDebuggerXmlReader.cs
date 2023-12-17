@@ -584,8 +584,9 @@ namespace System.Activities.Debugger
                                 {
                                     // For Value Node with known line info, we want to route the value setting process through this Reader.
                                     // Therefore we need to go back to the member node and replace the XamlMemberInvoker.
-                                    XamlNode startMemberNodeForValue =
-                                        this.bufferedXamlNodes.Peek();
+                                    XamlNode startMemberNodeForValue = this.bufferedXamlNodes.Peek(
+
+                                    );
                                     XamlMember xamlMemberForValue = startMemberNodeForValue.Member;
                                     XamlMemberInvoker newXamlMemberInvoker =
                                         new ValueNodeXamlMemberInvoker(

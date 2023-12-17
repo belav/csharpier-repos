@@ -184,21 +184,20 @@ namespace Microsoft.CodeAnalysis.Completion
                 languageServices.SolutionServices.GetRequiredService<IExtensionManager>();
 
             var providers = _providerManager.GetFilteredProviders(project, roles, trigger, options);
-            return providers.Any(
-                p =>
-                    extensionManager.PerformFunction(
-                        p,
-                        () =>
-                            p.ShouldTriggerCompletion(
-                                languageServices,
-                                text,
-                                caretPosition,
-                                trigger,
-                                options,
-                                passThroughOptions
-                            ),
-                        defaultValue: false
-                    )
+            return providers.Any(p =>
+                extensionManager.PerformFunction(
+                    p,
+                    () =>
+                        p.ShouldTriggerCompletion(
+                            languageServices,
+                            text,
+                            caretPosition,
+                            trigger,
+                            options,
+                            passThroughOptions
+                        ),
+                    defaultValue: false
+                )
             );
         }
 
@@ -270,7 +269,9 @@ namespace Microsoft.CodeAnalysis.Completion
                 return CompletionDescription.Empty;
 
             var extensionManager =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>(
+
+                );
 
             // We don't need SemanticModel here, just want to make sure it won't get GC'd before CompletionProviders are able to get it.
             (document, var semanticModel) = await GetDocumentWithFrozenPartialSemanticsAsync(
@@ -316,7 +317,9 @@ namespace Microsoft.CodeAnalysis.Completion
             if (provider != null)
             {
                 var extensionManager =
-                    document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+                    document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>(
+
+                    );
 
                 // We don't need SemanticModel here, just want to make sure it won't get GC'd before CompletionProviders are able to get it.
                 (document, var semanticModel) = await GetDocumentWithFrozenPartialSemanticsAsync(
@@ -372,13 +375,12 @@ namespace Microsoft.CodeAnalysis.Completion
         {
             using var helper = new PatternMatchHelper(filterText);
             var filterDataList = new SegmentedList<MatchResult>(
-                items.Select(
-                    item =>
-                        helper.GetMatchResult(
-                            item,
-                            includeMatchSpans: false,
-                            CultureInfo.CurrentCulture
-                        )
+                items.Select(item =>
+                    helper.GetMatchResult(
+                        item,
+                        includeMatchSpans: false,
+                        CultureInfo.CurrentCulture
+                    )
                 )
             );
 
@@ -419,13 +421,12 @@ namespace Microsoft.CodeAnalysis.Completion
 
             using var completionPatternMatchers = new PatternMatchHelper(filterText);
             builder.AddRange(
-                filteredItems.Select(
-                    item =>
-                        completionPatternMatchers.GetMatchResult(
-                            item,
-                            includeMatchSpans: false,
-                            CultureInfo.CurrentCulture
-                        )
+                filteredItems.Select(item =>
+                    completionPatternMatchers.GetMatchResult(
+                        item,
+                        includeMatchSpans: false,
+                        CultureInfo.CurrentCulture
+                    )
                 )
             );
         }

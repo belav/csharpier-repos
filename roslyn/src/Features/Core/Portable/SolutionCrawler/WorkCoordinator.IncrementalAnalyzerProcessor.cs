@@ -90,10 +90,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                     // event and worker queues
                     _documentTracker =
-                        _registration.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+                        _registration.Workspace.Services.GetRequiredService<IDocumentTrackingService>(
+
+                        );
 
                     var globalNotificationService = _registration
-                        .Workspace.Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>()
+                        .Workspace.Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>(
+
+                        )
                         .FirstOrDefault()
                         ?.Value;
 
@@ -581,8 +585,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             ._normalPriorityProcessor.GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
 
-                        var projectItems = items.Select(
-                            i => i.ToProjectWorkItem(EmptyAsyncToken.Instance)
+                        var projectItems = items.Select(i =>
+                            i.ToProjectWorkItem(EmptyAsyncToken.Instance)
                         );
                         _incrementalAnalyzerProcessor
                             ._lowPriorityProcessor.GetTestAccessor()
@@ -628,14 +632,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             {
                                 // Sort list so DiagnosticIncrementalAnalyzers (if any) come first.
                                 analyzers = _analyzerProviders
-                                    .Select(
-                                        p =>
-                                            (
-                                                analyzer: p.Value.CreateIncrementalAnalyzer(
-                                                    workspace
-                                                ),
-                                                highPriorityForActiveFile: p.Metadata.HighPriorityForActiveFile
-                                            )
+                                    .Select(p =>
+                                        (
+                                            analyzer: p.Value.CreateIncrementalAnalyzer(workspace),
+                                            highPriorityForActiveFile: p.Metadata.HighPriorityForActiveFile
+                                        )
                                     )
                                     .Where(t => t.analyzer != null)
                                     .OrderBy(t => t.analyzer!.Priority)

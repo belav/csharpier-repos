@@ -120,10 +120,8 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
         )
         {
             foreach (
-                var c in typeSymbol.GetConstructorsOnType(
-                    filter: m =>
-                        (m.DeclaredAccessibility == Accessibility.Public)
-                        && m.Parameters.Length == 0
+                var c in typeSymbol.GetConstructorsOnType(filter: m =>
+                    (m.DeclaredAccessibility == Accessibility.Public) && m.Parameters.Length == 0
                 )
             )
                 GetReflectionAccessDiagnosticsForMethod(diagnosticContext, c);

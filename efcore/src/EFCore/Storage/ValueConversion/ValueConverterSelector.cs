@@ -151,16 +151,15 @@ public class ValueConverterSelector : IValueConverterSelector
             {
                 yield return _converters.GetOrAdd(
                     (modelClrType, typeof(byte[])),
-                    static k =>
-                        new ValueConverterInfo(
-                            k.ModelClrType,
-                            typeof(byte[]),
-                            _ =>
-                                new BoolToZeroOneConverter<byte>().ComposeWith(
-                                    NumberToBytesConverter<byte>.DefaultInfo.Create()
-                                ),
-                            new ConverterMappingHints(size: 1)
-                        )
+                    static k => new ValueConverterInfo(
+                        k.ModelClrType,
+                        typeof(byte[]),
+                        _ =>
+                            new BoolToZeroOneConverter<byte>().ComposeWith(
+                                NumberToBytesConverter<byte>.DefaultInfo.Create()
+                            ),
+                        new ConverterMappingHints(size: 1)
+                    )
                 );
             }
         }
@@ -352,22 +351,19 @@ public class ValueConverterSelector : IValueConverterSelector
                     )
                     : _converters.GetOrAdd(
                         (modelClrType, typeof(byte[])),
-                        static k =>
-                            new ValueConverterInfo(
-                                k.ModelClrType,
-                                typeof(byte[]),
-                                i =>
-                                    (
-                                        i.ModelClrType == typeof(DateTime)
-                                            ? DateTimeToBinaryConverter.DefaultInfo.Create()
-                                            : i.ModelClrType == typeof(TimeSpan)
-                                                ? TimeSpanToTicksConverter.DefaultInfo.Create()
-                                                : TimeOnlyToTicksConverter.DefaultInfo.Create()
-                                    ).ComposeWith(
-                                        NumberToBytesConverter<long>.DefaultInfo.Create()
-                                    ),
-                                NumberToBytesConverter<long>.DefaultInfo.MappingHints
-                            )
+                        static k => new ValueConverterInfo(
+                            k.ModelClrType,
+                            typeof(byte[]),
+                            i =>
+                                (
+                                    i.ModelClrType == typeof(DateTime)
+                                        ? DateTimeToBinaryConverter.DefaultInfo.Create()
+                                        : i.ModelClrType == typeof(TimeSpan)
+                                            ? TimeSpanToTicksConverter.DefaultInfo.Create()
+                                            : TimeOnlyToTicksConverter.DefaultInfo.Create()
+                                ).ComposeWith(NumberToBytesConverter<long>.DefaultInfo.Create()),
+                            NumberToBytesConverter<long>.DefaultInfo.MappingHints
+                        )
                     );
             }
         }
@@ -385,16 +381,15 @@ public class ValueConverterSelector : IValueConverterSelector
             {
                 yield return _converters.GetOrAdd(
                     (modelClrType, typeof(byte[])),
-                    static k =>
-                        new ValueConverterInfo(
-                            k.ModelClrType,
-                            typeof(byte[]),
-                            _ =>
-                                new DateOnlyToStringConverter().ComposeWith(
-                                    StringToBytesConverter.DefaultInfo.Create()
-                                ),
-                            StringToBytesConverter.DefaultInfo.MappingHints
-                        )
+                    static k => new ValueConverterInfo(
+                        k.ModelClrType,
+                        typeof(byte[]),
+                        _ =>
+                            new DateOnlyToStringConverter().ComposeWith(
+                                StringToBytesConverter.DefaultInfo.Create()
+                            ),
+                        StringToBytesConverter.DefaultInfo.MappingHints
+                    )
                 );
             }
         }

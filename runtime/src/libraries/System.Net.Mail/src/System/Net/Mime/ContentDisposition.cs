@@ -25,9 +25,9 @@ namespace System.Net.Mime
         private bool _isPersisted;
 
         private static readonly TrackingValidationObjectDictionary.ValidateAndParseValue s_dateParser =
-            new TrackingValidationObjectDictionary.ValidateAndParseValue(
-                v => new SmtpDateTime(v.ToString()!)
-            );
+            new TrackingValidationObjectDictionary.ValidateAndParseValue(v => new SmtpDateTime(
+                v.ToString()!
+            ));
 
         // this will throw a FormatException if the value supplied is not a valid SmtpDateTime
 

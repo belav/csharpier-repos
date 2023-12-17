@@ -77,12 +77,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         )
         {
             if (
-                typeName?.FirstAncestorOrSelf<SyntaxNode>(
-                    a =>
-                        a.Kind()
-                            is SyntaxKind.DeclarationExpression
-                                or SyntaxKind.VariableDeclaration
-                                or SyntaxKind.ForEachStatement
+                typeName?.FirstAncestorOrSelf<SyntaxNode>(a =>
+                    a.Kind()
+                        is SyntaxKind.DeclarationExpression
+                            or SyntaxKind.VariableDeclaration
+                            or SyntaxKind.ForEachStatement
                 )
                 is not { } declaration
             )

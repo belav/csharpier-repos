@@ -48,7 +48,9 @@ namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
         public static void Main()
         {
             var foo =
-                new DebuggerDisplayAttributeOnAssemblyUsingTargetTypeNameInOtherAssembly_Lib.GenericType<int>();
+                new DebuggerDisplayAttributeOnAssemblyUsingTargetTypeNameInOtherAssembly_Lib.GenericType<int>(
+
+                );
             foo.PropertyOnGenericType = 1;
         }
     }

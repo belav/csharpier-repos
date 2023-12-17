@@ -910,8 +910,8 @@ namespace MonoTests.System.Runtime.Serialization
                 msg + "b"
             );
 
-            var ca = l.FirstOrDefault(
-                a => a.Name == "System.Runtime.Serialization.DataContractAttribute"
+            var ca = l.FirstOrDefault(a =>
+                a.Name == "System.Runtime.Serialization.DataContractAttribute"
             );
             Assert.IsNotNull(ca, msg + "b");
             Assert.AreEqual(2, ca.Arguments.Count, msg + "d");

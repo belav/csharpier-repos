@@ -138,15 +138,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         async,
                         ss =>
                             ss.Set<JsonEntityBasic>()
-                                .Select(
-                                    x =>
-                                        new
-                                        {
-                                            x,
-                                            x.OwnedReferenceRoot,
-                                            x.OwnedCollectionRoot
-                                        }
-                                )
+                                .Select(x => new
+                                {
+                                    x,
+                                    x.OwnedReferenceRoot,
+                                    x.OwnedCollectionRoot
+                                })
                     )
             )
         ).Message;
@@ -175,20 +172,13 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Root1 = x.OwnedReferenceRoot,
-                                Leaf1 = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedReferenceLeaf,
-                                Root2 = x.OwnedReferenceRoot,
-                                Leaf2 = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedReferenceLeaf,
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        Root1 = x.OwnedReferenceRoot,
+                        Leaf1 = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf,
+                        Root2 = x.OwnedReferenceRoot,
+                        Leaf2 = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf,
+                    })
                     .AsNoTracking(),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -208,16 +198,13 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Root1 = x.OwnedReferenceRoot,
-                                Branch1 = x.OwnedReferenceRoot.OwnedReferenceBranch,
-                                Root2 = x.OwnedReferenceRoot,
-                                Branch2 = x.OwnedReferenceRoot.OwnedReferenceBranch,
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        Root1 = x.OwnedReferenceRoot,
+                        Branch1 = x.OwnedReferenceRoot.OwnedReferenceBranch,
+                        Root2 = x.OwnedReferenceRoot,
+                        Branch2 = x.OwnedReferenceRoot.OwnedReferenceBranch,
+                    })
                     .AsNoTracking(),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -339,21 +326,18 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                x.OwnedReferenceRoot.OwnedReferenceBranch,
-                                x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf,
-                                x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf,
-                                x.OwnedReferenceRoot.OwnedCollectionBranch,
-                                x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedReferenceLeaf
-                                    .SomethingSomething
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        x.OwnedReferenceRoot.OwnedReferenceBranch,
+                        x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf,
+                        x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf,
+                        x.OwnedReferenceRoot.OwnedCollectionBranch,
+                        x.OwnedReferenceRoot
+                            .OwnedReferenceBranch
+                            .OwnedReferenceLeaf
+                            .SomethingSomething
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -374,15 +358,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf,
-                                x.OwnedReferenceRoot,
-                                x
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf,
+                        x.OwnedReferenceRoot,
+                        x
+                    })
                     .AsNoTracking(),
             elementAsserter: (e, a) =>
             {
@@ -411,12 +392,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            x.OwnedReferenceRoot
-                                .OwnedReferenceBranch
-                                .OwnedReferenceLeaf
-                                .SomethingSomething
+                    .Select(x =>
+                        x.OwnedReferenceRoot
+                            .OwnedReferenceBranch
+                            .OwnedReferenceLeaf
+                            .SomethingSomething
                     )
                     .Take(3)
                     .Distinct()
@@ -448,17 +428,14 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Entity = x.OwnedReferenceRoot,
-                                Scalar = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedReferenceLeaf
-                                    .SomethingSomething
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        Entity = x.OwnedReferenceRoot,
+                        Scalar = x.OwnedReferenceRoot
+                            .OwnedReferenceBranch
+                            .OwnedReferenceLeaf
+                            .SomethingSomething
+                    })
                     .Take(10)
                     .Distinct()
                     .Select(x => new { x.Entity.OwnedReferenceBranch, x.Scalar.Length })
@@ -482,32 +459,26 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Root = x.OwnedReferenceRoot,
-                                Scalar = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedReferenceLeaf
-                                    .SomethingSomething
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        Root = x.OwnedReferenceRoot,
+                        Scalar = x.OwnedReferenceRoot
+                            .OwnedReferenceBranch
+                            .OwnedReferenceLeaf
+                            .SomethingSomething
+                    })
                     .Take(10)
                     .Distinct()
                     .Select(x => new { Branch = x.Root.OwnedReferenceBranch, x.Scalar.Length })
                     .OrderBy(x => x.Length)
                     .Take(10)
                     .Distinct()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Branch.OwnedReferenceLeaf,
-                                x.Branch.OwnedCollectionLeaf,
-                                x.Length
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Branch.OwnedReferenceLeaf,
+                        x.Branch.OwnedCollectionLeaf,
+                        x.Length
+                    })
                     .AsNoTracking(),
             elementSorter: e =>
                 (e.OwnedReferenceLeaf.SomethingSomething, e.OwnedCollectionLeaf.Count, e.Length),
@@ -621,19 +592,16 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityCustomNaming>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                root = x,
-                                referece = x.OwnedReferenceRoot,
-                                nested_reference = x.OwnedReferenceRoot.OwnedReferenceBranch,
-                                collection = x.OwnedCollectionRoot,
-                                nested_collection = x.OwnedReferenceRoot.OwnedCollectionBranch,
-                                scalar = x.OwnedReferenceRoot.Name,
-                                nested_scalar = x.OwnedReferenceRoot.OwnedReferenceBranch.Fraction,
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        root = x,
+                        referece = x.OwnedReferenceRoot,
+                        nested_reference = x.OwnedReferenceRoot.OwnedReferenceBranch,
+                        collection = x.OwnedCollectionRoot,
+                        nested_collection = x.OwnedReferenceRoot.OwnedCollectionBranch,
+                        scalar = x.OwnedReferenceRoot.Name,
+                        nested_scalar = x.OwnedReferenceRoot.OwnedReferenceBranch.Fraction,
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.root.Id,
             elementAsserter: (e, a) =>
@@ -763,13 +731,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            ss.Set<JsonEntityBasic>()
-                                .OrderBy(xx => xx.Id)
-                                .Select(xx => xx.OwnedReferenceRoot)
-                                .FirstOrDefault()
-                                .OwnedReferenceBranch
+                    .Select(x =>
+                        ss.Set<JsonEntityBasic>()
+                            .OrderBy(xx => xx.Id)
+                            .Select(xx => xx.OwnedReferenceRoot)
+                            .FirstOrDefault()
+                            .OwnedReferenceBranch
                     )
                     .AsNoTracking()
         );
@@ -784,13 +751,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            ss.Set<JsonEntityBasic>()
-                                .OrderBy(xx => xx.Id)
-                                .Select(xx => xx.OwnedReferenceRoot)
-                                .FirstOrDefault()
-                                .OwnedReferenceBranch.Date
+                    .Select(x =>
+                        ss.Set<JsonEntityBasic>()
+                            .OrderBy(xx => xx.Id)
+                            .Select(xx => xx.OwnedReferenceRoot)
+                            .FirstOrDefault()
+                            .OwnedReferenceBranch.Date
                     )
         );
 
@@ -804,23 +770,21 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            ss.Set<JsonEntityBasic>()
-                                .OrderBy(xx => xx.Id)
-                                .Select(xx => xx.OwnedReferenceRoot)
-                                .FirstOrDefault()
-                                .OwnedReferenceBranch
-                            == ss.Set<JsonEntityBasic>()
-                                .OrderByDescending(x => x.Id)
-                                .Select(
-                                    x =>
-                                        ss.Set<JsonEntityBasic>()
-                                            .OrderBy(xx => xx.Id)
-                                            .Select(xx => xx.OwnedReferenceRoot)
-                                            .FirstOrDefault()
-                                            .OwnedReferenceBranch
-                                )
+                    .Select(x =>
+                        ss.Set<JsonEntityBasic>()
+                            .OrderBy(xx => xx.Id)
+                            .Select(xx => xx.OwnedReferenceRoot)
+                            .FirstOrDefault()
+                            .OwnedReferenceBranch
+                        == ss.Set<JsonEntityBasic>()
+                            .OrderByDescending(x => x.Id)
+                            .Select(x =>
+                                ss.Set<JsonEntityBasic>()
+                                    .OrderBy(xx => xx.Id)
+                                    .Select(xx => xx.OwnedReferenceRoot)
+                                    .FirstOrDefault()
+                                    .OwnedReferenceBranch
+                            )
                     )
         );
 
@@ -832,22 +796,18 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            ss.Set<JsonEntityBasic>()
-                                .OrderBy(xx => xx.Id)
-                                .Select(
-                                    xx =>
-                                        new
-                                        {
-                                            x.OwnedReferenceRoot.OwnedCollectionBranch,
-                                            xx.OwnedReferenceRoot,
-                                            xx.OwnedReferenceRoot.OwnedReferenceBranch,
-                                            xx.OwnedReferenceRoot.Name,
-                                            x.OwnedReferenceRoot.OwnedReferenceBranch.Enum
-                                        }
-                                )
-                                .FirstOrDefault()
+                    .Select(x =>
+                        ss.Set<JsonEntityBasic>()
+                            .OrderBy(xx => xx.Id)
+                            .Select(xx => new
+                            {
+                                x.OwnedReferenceRoot.OwnedCollectionBranch,
+                                xx.OwnedReferenceRoot,
+                                xx.OwnedReferenceRoot.OwnedReferenceBranch,
+                                xx.OwnedReferenceRoot.Name,
+                                x.OwnedReferenceRoot.OwnedReferenceBranch.Enum
+                            })
+                            .FirstOrDefault()
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -869,22 +829,18 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            ss.Set<JsonEntityBasic>()
-                                .OrderBy(xx => xx.Id)
-                                .Select(
-                                    xx =>
-                                        new
-                                        {
-                                            x.OwnedReferenceRoot.OwnedCollectionBranch,
-                                            xx.OwnedReferenceRoot,
-                                            xx.OwnedReferenceRoot.OwnedReferenceBranch,
-                                            xx.OwnedReferenceRoot.Name,
-                                            x.OwnedReferenceRoot.OwnedReferenceBranch.Enum
-                                        }
-                                )
-                                .FirstOrDefault()
+                    .Select(x =>
+                        ss.Set<JsonEntityBasic>()
+                            .OrderBy(xx => xx.Id)
+                            .Select(xx => new
+                            {
+                                x.OwnedReferenceRoot.OwnedCollectionBranch,
+                                xx.OwnedReferenceRoot,
+                                xx.OwnedReferenceRoot.OwnedReferenceBranch,
+                                xx.OwnedReferenceRoot.Name,
+                                x.OwnedReferenceRoot.OwnedReferenceBranch.Enum
+                            })
+                            .FirstOrDefault()
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -908,23 +864,19 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            ss.Set<JsonEntityBasic>()
-                                .OrderBy(xx => xx.Id)
-                                .Select(
-                                    xx =>
-                                        new
-                                        {
-                                            x.OwnedReferenceRoot.OwnedCollectionBranch,
-                                            xx.OwnedReferenceRoot,
-                                            xx.OwnedReferenceRoot.OwnedReferenceBranch,
-                                            xx.OwnedReferenceRoot.Name,
-                                            x.OwnedReferenceRoot.OwnedReferenceBranch.Enum
-                                        }
-                                )
-                                .FirstOrDefault()
-                                .OwnedCollectionBranch
+                    .Select(x =>
+                        ss.Set<JsonEntityBasic>()
+                            .OrderBy(xx => xx.Id)
+                            .Select(xx => new
+                            {
+                                x.OwnedReferenceRoot.OwnedCollectionBranch,
+                                xx.OwnedReferenceRoot,
+                                xx.OwnedReferenceRoot.OwnedReferenceBranch,
+                                xx.OwnedReferenceRoot.Name,
+                                x.OwnedReferenceRoot.OwnedReferenceBranch.Enum
+                            })
+                            .FirstOrDefault()
+                            .OwnedCollectionBranch
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -951,15 +903,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityInheritanceBase>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                x.ReferenceOnBase,
-                                x.CollectionOnBase
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        x.ReferenceOnBase,
+                        x.CollectionOnBase
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -978,17 +927,14 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityInheritanceBase>()
                     .OfType<JsonEntityInheritanceDerived>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                x.ReferenceOnBase,
-                                x.ReferenceOnDerived,
-                                x.CollectionOnBase,
-                                x.CollectionOnDerived
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        x.ReferenceOnBase,
+                        x.ReferenceOnDerived,
+                        x.CollectionOnBase,
+                        x.CollectionOnDerived
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -1008,9 +954,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf.Parent.Date
+                    .Select(x =>
+                        x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf.Parent.Date
                     )
         );
 
@@ -1063,8 +1008,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x => x.OwnedCollectionRoot.AsQueryable().ElementAt(1).OwnedCollectionBranch
+                    .Select(x =>
+                        x.OwnedCollectionRoot.AsQueryable().ElementAt(1).OwnedCollectionBranch
                     )
                     .AsNoTracking(),
             elementAsserter: (e, a) => AssertCollection(e, a, ordered: true)
@@ -1077,11 +1022,10 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.AsQueryable()
-                                .ElementAtOrDefault(1)
-                                .OwnedCollectionBranch
+                    .Select(x =>
+                        x.OwnedCollectionRoot.AsQueryable()
+                            .ElementAtOrDefault(1)
+                            .OwnedCollectionBranch
                     )
                     .AsNoTracking(),
             elementAsserter: (e, a) => AssertCollection(e, a, ordered: true)
@@ -1131,11 +1075,10 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot[0].OwnedReferenceBranch.OwnedCollectionLeaf[
-                                MyMethod(x.Id)
-                            ]
+                    .Select(x =>
+                        x.OwnedCollectionRoot[0].OwnedReferenceBranch.OwnedCollectionLeaf[
+                            MyMethod(x.Id)
+                        ]
                     )
                     .AsNoTracking()
         );
@@ -1212,8 +1155,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x => x.OwnedCollectionRoot[0].OwnedCollectionBranch[prm].OwnedReferenceLeaf
+                    .Select(x =>
+                        x.OwnedCollectionRoot[0].OwnedCollectionBranch[prm].OwnedReferenceLeaf
                     )
                     .AsNoTracking()
         );
@@ -1230,8 +1173,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x => x.OwnedCollectionRoot[0].OwnedCollectionBranch[prm].OwnedCollectionLeaf
+                    .Select(x =>
+                        x.OwnedCollectionRoot[0].OwnedCollectionBranch[prm].OwnedCollectionLeaf
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -1251,16 +1194,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                x.OwnedCollectionRoot[0]
-                                    .OwnedCollectionBranch[prm]
-                                    .OwnedCollectionLeaf
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        x.OwnedCollectionRoot[0].OwnedCollectionBranch[prm].OwnedCollectionLeaf
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -1338,10 +1276,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Where(
-                        x =>
-                            x.OwnedCollectionRoot[ss.Set<JsonEntityBasic>().Max(x => x.Id)].Name
-                            == "e1_c2"
+                    .Where(x =>
+                        x.OwnedCollectionRoot[ss.Set<JsonEntityBasic>().Max(x => x.Id)].Name
+                        == "e1_c2"
                     )
                     .Select(x => new { x.Id, x }),
             elementSorter: e => e.Id,
@@ -1373,12 +1310,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Where(
-                        x =>
-                            x.OwnedCollectionRoot[1]
-                                .OwnedCollectionBranch[prm]
-                                .OwnedCollectionLeaf[x.Id - 1]
-                                .SomethingSomething == "e1_c2_c1_c1"
+                    .Where(x =>
+                        x.OwnedCollectionRoot[1]
+                            .OwnedCollectionBranch[prm]
+                            .OwnedCollectionLeaf[x.Id - 1]
+                            .SomethingSomething == "e1_c2_c1_c1"
                     )
         );
     }
@@ -1390,15 +1326,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                CollectionElement = x.OwnedCollectionRoot.Select(xx => xx.Number)
-                                    .ElementAt(0)
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        CollectionElement = x.OwnedCollectionRoot.Select(xx => xx.Number)
+                            .ElementAt(0)
+                    })
         );
 
     [ConditionalTheory]
@@ -1408,11 +1341,10 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Where(
-                        j =>
-                            j.OwnedReferenceRoot.OwnedCollectionBranch.Any(
-                                b => b.OwnedReferenceLeaf.SomethingSomething == "e1_r_c1_r"
-                            )
+                    .Where(j =>
+                        j.OwnedReferenceRoot.OwnedCollectionBranch.Any(b =>
+                            b.OwnedReferenceLeaf.SomethingSomething == "e1_r_c1_r"
+                        )
                     )
         );
 
@@ -1423,13 +1355,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Where(
-                        j =>
-                            j.OwnedReferenceRoot.OwnedCollectionBranch.Where(
-                                o => o.Enum == JsonEnum.Three
-                            )
-                                .ElementAt(0)
-                                .OwnedReferenceLeaf.SomethingSomething == "e1_r_c2_r"
+                    .Where(j =>
+                        j.OwnedReferenceRoot.OwnedCollectionBranch.Where(o =>
+                            o.Enum == JsonEnum.Three
+                        )
+                            .ElementAt(0)
+                            .OwnedReferenceLeaf.SomethingSomething == "e1_r_c2_r"
                     )
         );
 
@@ -1440,11 +1371,10 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Where(
-                        j =>
-                            j.OwnedReferenceRoot.OwnedCollectionBranch.Skip(1)
-                                .ElementAt(0)
-                                .OwnedReferenceLeaf.SomethingSomething == "e1_r_c2_r"
+                    .Where(j =>
+                        j.OwnedReferenceRoot.OwnedCollectionBranch.Skip(1)
+                            .ElementAt(0)
+                            .OwnedReferenceLeaf.SomethingSomething == "e1_r_c2_r"
                     )
         );
 
@@ -1455,14 +1385,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Where(
-                        j =>
-                            j.OwnedReferenceRoot.OwnedCollectionBranch.OrderByDescending(
-                                b => b.Date
-                            )
-                                .Skip(1)
-                                .ElementAt(0)
-                                .OwnedReferenceLeaf.SomethingSomething == "e1_r_c1_r"
+                    .Where(j =>
+                        j.OwnedReferenceRoot.OwnedCollectionBranch.OrderByDescending(b => b.Date)
+                            .Skip(1)
+                            .ElementAt(0)
+                            .OwnedReferenceLeaf.SomethingSomething == "e1_r_c1_r"
                     )
         );
 
@@ -1478,11 +1405,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Where(
-                        j =>
-                            j.OwnedReferenceRoot.OwnedCollectionBranch.Distinct()
-                                .Count(b => b.OwnedReferenceLeaf.SomethingSomething == "e1_r_c2_r")
-                            == 1
+                    .Where(j =>
+                        j.OwnedReferenceRoot.OwnedCollectionBranch.Distinct()
+                            .Count(b => b.OwnedReferenceLeaf.SomethingSomething == "e1_r_c2_r") == 1
                     )
         );
 
@@ -1517,8 +1442,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x => x.OwnedCollectionRoot.Select(xx => new { xx.Name, xx.Number }).ToList()
+                    .Select(x =>
+                        x.OwnedCollectionRoot.Select(xx => new { xx.Name, xx.Number }).ToList()
                     )
         );
 
@@ -1532,11 +1457,10 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.Where(xx => xx.Name == "Foo")
-                                .Select(xx => new { xx.Name, xx.Number })
-                                .ToList()
+                    .Select(x =>
+                        x.OwnedCollectionRoot.Where(xx => xx.Name == "Foo")
+                            .Select(xx => new { xx.Name, xx.Number })
+                            .ToList()
                     )
         );
 
@@ -1550,11 +1474,10 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.Where(xx => xx.Name == "Foo")
-                                .Select(xx => new { xx.Names, xx.Numbers })
-                                .ToList()
+                    .Select(x =>
+                        x.OwnedCollectionRoot.Where(xx => xx.Name == "Foo")
+                            .Select(xx => new { xx.Names, xx.Numbers })
+                            .ToList()
                     )
         );
 
@@ -1588,15 +1511,13 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.Select(
-                                xx =>
-                                    xx.OwnedCollectionBranch.Where(
-                                        xxx => xxx.Date != new DateTime(2000, 1, 1)
-                                    )
-                                        .ToList()
+                    .Select(x =>
+                        x.OwnedCollectionRoot.Select(xx =>
+                            xx.OwnedCollectionBranch.Where(xxx =>
+                                xxx.Date != new DateTime(2000, 1, 1)
                             )
+                                .ToList()
+                        )
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -1617,24 +1538,19 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.Select(
-                                xx =>
-                                    xx.OwnedCollectionBranch.Select(
-                                        xxx =>
-                                            new
-                                            {
-                                                xxx.Date,
-                                                xxx.Enum,
-                                                xxx.Enums,
-                                                xxx.Fraction,
-                                                xxx.OwnedReferenceLeaf,
-                                                xxx.OwnedCollectionLeaf
-                                            }
-                                    )
-                                        .ToList()
-                            )
+                    .Select(x =>
+                        x.OwnedCollectionRoot.Select(xx =>
+                            xx.OwnedCollectionBranch.Select(xxx => new
+                            {
+                                xxx.Date,
+                                xxx.Enum,
+                                xxx.Enums,
+                                xxx.Fraction,
+                                xxx.OwnedReferenceLeaf,
+                                xxx.OwnedCollectionLeaf
+                            })
+                                .ToList()
+                        )
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -1673,8 +1589,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x => x.OwnedCollectionRoot.OrderBy(xx => xx.Name).Skip(1).Take(5).ToList()
+                    .Select(x =>
+                        x.OwnedCollectionRoot.OrderBy(xx => xx.Name).Skip(1).Take(5).ToList()
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -1691,24 +1607,20 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.OrderBy(xx => xx.Name)
-                                .Skip(1)
-                                .Take(5)
-                                .Select(
-                                    xx =>
-                                        new
-                                        {
-                                            xx.Name,
-                                            xx.Names,
-                                            xx.Number,
-                                            xx.Numbers,
-                                            xx.OwnedCollectionBranch,
-                                            xx.OwnedReferenceBranch
-                                        }
-                                )
-                                .ToList()
+                    .Select(x =>
+                        x.OwnedCollectionRoot.OrderBy(xx => xx.Name)
+                            .Skip(1)
+                            .Take(5)
+                            .Select(xx => new
+                            {
+                                xx.Name,
+                                xx.Names,
+                                xx.Number,
+                                xx.Numbers,
+                                xx.OwnedCollectionBranch,
+                                xx.OwnedReferenceBranch
+                            })
+                            .ToList()
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -1745,13 +1657,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.OrderBy(xx => xx.Name)
-                                .Skip(1)
-                                .Take(5)
-                                .Select(xx => xx.OwnedReferenceBranch)
-                                .ToList()
+                    .Select(x =>
+                        x.OwnedCollectionRoot.OrderBy(xx => xx.Name)
+                            .Skip(1)
+                            .Take(5)
+                            .Select(xx => xx.OwnedReferenceBranch)
+                            .ToList()
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -1795,12 +1706,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf.Where(
-                                xx => xx.SomethingSomething != "Baz"
-                            )
-                                .ToList()
+                    .Select(x =>
+                        x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf.Where(xx =>
+                            xx.SomethingSomething != "Baz"
+                        )
+                            .ToList()
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -1815,25 +1725,21 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                First = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf.Where(
-                                    xx => xx.SomethingSomething != "Baz"
-                                )
-                                    .ToList(),
-                                Second = x.OwnedCollectionRoot.Distinct().ToList(),
-                                Third = x.OwnedCollectionRoot.Select(
-                                    xx =>
-                                        xx.OwnedCollectionBranch.Where(
-                                            xxx => xxx.Date != new DateTime(2000, 1, 1)
-                                        )
-                                            .ToList()
-                                ),
-                                Fourth = x.EntityCollection.ToList()
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        First = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf.Where(
+                            xx => xx.SomethingSomething != "Baz"
+                        )
+                            .ToList(),
+                        Second = x.OwnedCollectionRoot.Distinct().ToList(),
+                        Third = x.OwnedCollectionRoot.Select(xx =>
+                            xx.OwnedCollectionBranch.Where(xxx =>
+                                xxx.Date != new DateTime(2000, 1, 1)
+                            )
+                                .ToList()
+                        ),
+                        Fourth = x.EntityCollection.ToList()
+                    })
                     .AsNoTracking(),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1858,15 +1764,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                First = x.OwnedReferenceRoot.OwnedCollectionBranch.Distinct()
-                                    .ToList(),
-                                Second = x.EntityCollection.ToList()
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        First = x.OwnedReferenceRoot.OwnedCollectionBranch.Distinct().ToList(),
+                        Second = x.EntityCollection.ToList()
+                    })
                     .AsNoTracking(),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1884,15 +1786,14 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                First = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf.Distinct()
-                                    .ToList(),
-                                Second = x.EntityCollection.ToList()
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        First = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf.Distinct(
+
+                        )
+                            .ToList(),
+                        Second = x.EntityCollection.ToList()
+                    })
                     .AsNoTracking(),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1980,16 +1881,13 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                CollectionElement = x.OwnedCollectionRoot[prm]
-                                    .OwnedCollectionBranch.Select(xx => "Foo")
-                                    .ElementAt(0)
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        CollectionElement = x.OwnedCollectionRoot[prm]
+                            .OwnedCollectionBranch.Select(xx => "Foo")
+                            .ElementAt(0)
+                    })
         );
     }
 
@@ -2003,25 +1901,23 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        j =>
-                            j.OwnedCollectionRoot[prm + j.Id]
-                                .OwnedCollectionBranch.Select(
-                                    b => b.OwnedReferenceLeaf.SomethingSomething
-                                )
-                                .ElementAt(0)
+                    .Select(j =>
+                        j.OwnedCollectionRoot[prm + j.Id]
+                            .OwnedCollectionBranch.Select(b =>
+                                b.OwnedReferenceLeaf.SomethingSomething
+                            )
+                            .ElementAt(0)
                     ),
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        j =>
-                            j.OwnedCollectionRoot.Count > prm + j.Id
-                                ? j.OwnedCollectionRoot[prm + j.Id]
-                                    .OwnedCollectionBranch.Select(
-                                        b => b.OwnedReferenceLeaf.SomethingSomething
-                                    )
-                                    .ElementAt(0)
-                                : null
+                    .Select(j =>
+                        j.OwnedCollectionRoot.Count > prm + j.Id
+                            ? j.OwnedCollectionRoot[prm + j.Id]
+                                .OwnedCollectionBranch.Select(b =>
+                                    b.OwnedReferenceLeaf.SomethingSomething
+                                )
+                                .ElementAt(0)
+                            : null
                     )
         );
     }
@@ -2034,10 +1930,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .AsNoTracking()
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.Select(xx => xx.OwnedCollectionBranch)
-                                .ElementAt(0)
+                    .Select(x =>
+                        x.OwnedCollectionRoot.Select(xx => xx.OwnedCollectionBranch).ElementAt(0)
                     ),
             elementAsserter: (e, a) =>
             {
@@ -2057,9 +1951,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<JsonEntityBasic>()
                     .AsNoTracking()
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.Select(xx => xx.OwnedReferenceBranch).ElementAt(0)
+                    .Select(x =>
+                        x.OwnedCollectionRoot.Select(xx => xx.OwnedReferenceBranch).ElementAt(0)
                     )
         );
 
@@ -2074,10 +1967,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 ss.Set<JsonEntityBasic>()
                     .AsNoTracking()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.Select(xx => new { xx.OwnedReferenceBranch })
-                                .ElementAt(0)
+                    .Select(x =>
+                        x.OwnedCollectionRoot.Select(xx => new { xx.OwnedReferenceBranch })
+                            .ElementAt(0)
                     ),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -2095,10 +1987,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            x.OwnedCollectionRoot.Select(xx => new JsonEntityBasic { Id = x.Id })
-                                .ElementAt(0)
+                    .Select(x =>
+                        x.OwnedCollectionRoot.Select(xx => new JsonEntityBasic { Id = x.Id })
+                            .ElementAt(0)
                     )
         );
 
@@ -2111,18 +2002,15 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                Duplicate1 = x.OwnedCollectionRoot[0].OwnedReferenceBranch,
-                                Original = x.OwnedCollectionRoot[0],
-                                Duplicate2 = x.OwnedCollectionRoot[0]
-                                    .OwnedReferenceBranch
-                                    .OwnedCollectionLeaf
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        Duplicate1 = x.OwnedCollectionRoot[0].OwnedReferenceBranch,
+                        Original = x.OwnedCollectionRoot[0],
+                        Duplicate2 = x.OwnedCollectionRoot[0]
+                            .OwnedReferenceBranch
+                            .OwnedCollectionLeaf
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -2144,18 +2032,15 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                Duplicate1 = x.OwnedReferenceRoot.OwnedCollectionBranch[1],
-                                Original = x.OwnedReferenceRoot,
-                                Duplicate2 = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedCollectionLeaf[prm]
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        Duplicate1 = x.OwnedReferenceRoot.OwnedCollectionBranch[1],
+                        Original = x.OwnedReferenceRoot,
+                        Duplicate2 = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf[
+                            prm
+                        ]
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -2180,19 +2065,16 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                DuplicateMix = x.OwnedReferenceRoot
-                                    .OwnedCollectionBranch[0]
-                                    .OwnedCollectionLeaf[prm],
-                                DuplicatePrm = x.OwnedReferenceRoot.OwnedCollectionBranch[prm],
-                                x.Id,
-                                Original = x.OwnedReferenceRoot.OwnedCollectionBranch,
-                                DuplicateConstant = x.OwnedReferenceRoot.OwnedCollectionBranch[0],
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        DuplicateMix = x.OwnedReferenceRoot
+                            .OwnedCollectionBranch[0]
+                            .OwnedCollectionLeaf[prm],
+                        DuplicatePrm = x.OwnedReferenceRoot.OwnedCollectionBranch[prm],
+                        x.Id,
+                        Original = x.OwnedReferenceRoot.OwnedCollectionBranch,
+                        DuplicateConstant = x.OwnedReferenceRoot.OwnedCollectionBranch[0],
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -2299,9 +2181,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x => new { x, Collection = x.OwnedCollectionRoot[1].OwnedCollectionBranch }
-                    )
+                    .Select(x => new
+                    {
+                        x,
+                        Collection = x.OwnedCollectionRoot[1].OwnedCollectionBranch
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.x.Id,
             elementAsserter: (e, a) =>
@@ -2320,14 +2204,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                Collection = x.OwnedCollectionRoot[1].OwnedCollectionBranch
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        Collection = x.OwnedCollectionRoot[1].OwnedCollectionBranch
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -2349,10 +2230,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new { x, Collection = x.OwnedCollectionRoot[prm].OwnedCollectionBranch }
-                    )
+                    .Select(x => new
+                    {
+                        x,
+                        Collection = x.OwnedCollectionRoot[prm].OwnedCollectionBranch
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.x.Id,
             elementAsserter: (e, a) =>
@@ -2375,14 +2257,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                Collection = x.OwnedCollectionRoot[prm].OwnedCollectionBranch
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        Collection = x.OwnedCollectionRoot[prm].OwnedCollectionBranch
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -2403,16 +2282,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x,
-                                CollectionElement = x.OwnedCollectionRoot[1].OwnedCollectionBranch[
-                                    prm
-                                ],
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x,
+                        CollectionElement = x.OwnedCollectionRoot[1].OwnedCollectionBranch[prm],
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.x.Id,
             elementAsserter: (e, a) =>
@@ -2435,16 +2309,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                CollectionElement = x.OwnedCollectionRoot[1].OwnedCollectionBranch[
-                                    prm
-                                ],
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        CollectionElement = x.OwnedCollectionRoot[1].OwnedCollectionBranch[prm],
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -2464,16 +2333,13 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x,
-                                CollectionElement = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedCollectionLeaf[1]
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x,
+                        CollectionElement = x.OwnedReferenceRoot
+                            .OwnedReferenceBranch
+                            .OwnedCollectionLeaf[1]
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.x.Id,
             elementAsserter: (e, a) =>
@@ -2492,16 +2358,13 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                CollectionElement = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedCollectionLeaf[1]
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        CollectionElement = x.OwnedReferenceRoot
+                            .OwnedReferenceBranch
+                            .OwnedCollectionLeaf[1]
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -2523,36 +2386,25 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x,
-                                CollectionElement1 = x.OwnedCollectionRoot[
-                                    prm
-                                ].OwnedCollectionBranch[1],
-                                CollectionElement2 = x.OwnedCollectionRoot[1]
-                                    .OwnedCollectionBranch[1]
-                                    .OwnedReferenceLeaf,
-                                CollectionElement3 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
-                                CollectionElement4 = x.OwnedCollectionRoot[
-                                    prm
-                                ].OwnedReferenceBranch,
-                                CollectionElement5 = x.OwnedCollectionRoot[
-                                    prm
-                                ].OwnedCollectionBranch[x.Id],
-                                CollectionElement6 = x.OwnedCollectionRoot[x.Id]
-                                    .OwnedCollectionBranch[1]
-                                    .OwnedReferenceLeaf,
-                                CollectionElement7 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
-                                CollectionElement8 = x.OwnedCollectionRoot[
-                                    x.Id
-                                ].OwnedReferenceBranch,
-                                CollectionElement9 = x.OwnedCollectionRoot[
-                                    x.Id
-                                ].OwnedCollectionBranch[x.Id],
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x,
+                        CollectionElement1 = x.OwnedCollectionRoot[prm].OwnedCollectionBranch[1],
+                        CollectionElement2 = x.OwnedCollectionRoot[1]
+                            .OwnedCollectionBranch[1]
+                            .OwnedReferenceLeaf,
+                        CollectionElement3 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
+                        CollectionElement4 = x.OwnedCollectionRoot[prm].OwnedReferenceBranch,
+                        CollectionElement5 = x.OwnedCollectionRoot[prm].OwnedCollectionBranch[x.Id],
+                        CollectionElement6 = x.OwnedCollectionRoot[x.Id]
+                            .OwnedCollectionBranch[1]
+                            .OwnedReferenceLeaf,
+                        CollectionElement7 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
+                        CollectionElement8 = x.OwnedCollectionRoot[x.Id].OwnedReferenceBranch,
+                        CollectionElement9 = x.OwnedCollectionRoot[x.Id].OwnedCollectionBranch[
+                            x.Id
+                        ],
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.x.Id,
             elementAsserter: (e, a) =>
@@ -2583,36 +2435,25 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Id,
-                                CollectionElement1 = x.OwnedCollectionRoot[
-                                    prm
-                                ].OwnedCollectionBranch[1],
-                                CollectionElement2 = x.OwnedCollectionRoot[1]
-                                    .OwnedCollectionBranch[1]
-                                    .OwnedReferenceLeaf,
-                                CollectionElement3 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
-                                CollectionElement4 = x.OwnedCollectionRoot[
-                                    prm
-                                ].OwnedReferenceBranch,
-                                CollectionElement5 = x.OwnedCollectionRoot[
-                                    prm
-                                ].OwnedCollectionBranch[x.Id],
-                                CollectionElement6 = x.OwnedCollectionRoot[x.Id]
-                                    .OwnedCollectionBranch[1]
-                                    .OwnedReferenceLeaf,
-                                CollectionElement7 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
-                                CollectionElement8 = x.OwnedCollectionRoot[
-                                    x.Id
-                                ].OwnedReferenceBranch,
-                                CollectionElement9 = x.OwnedCollectionRoot[
-                                    x.Id
-                                ].OwnedCollectionBranch[x.Id],
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Id,
+                        CollectionElement1 = x.OwnedCollectionRoot[prm].OwnedCollectionBranch[1],
+                        CollectionElement2 = x.OwnedCollectionRoot[1]
+                            .OwnedCollectionBranch[1]
+                            .OwnedReferenceLeaf,
+                        CollectionElement3 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
+                        CollectionElement4 = x.OwnedCollectionRoot[prm].OwnedReferenceBranch,
+                        CollectionElement5 = x.OwnedCollectionRoot[prm].OwnedCollectionBranch[x.Id],
+                        CollectionElement6 = x.OwnedCollectionRoot[x.Id]
+                            .OwnedCollectionBranch[1]
+                            .OwnedReferenceLeaf,
+                        CollectionElement7 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
+                        CollectionElement8 = x.OwnedCollectionRoot[x.Id].OwnedReferenceBranch,
+                        CollectionElement9 = x.OwnedCollectionRoot[x.Id].OwnedCollectionBranch[
+                            x.Id
+                        ],
+                    })
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -2649,13 +2490,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Where(
-                        x =>
-                            x.OwnedReferenceRoot.Name
-                            != x.OwnedReferenceRoot
-                                .OwnedReferenceBranch
-                                .OwnedReferenceLeaf
-                                .SomethingSomething
+                    .Where(x =>
+                        x.OwnedReferenceRoot.Name
+                        != x.OwnedReferenceRoot
+                            .OwnedReferenceBranch
+                            .OwnedReferenceLeaf
+                            .SomethingSomething
                     )
                     .Select(x => x.Name)
         );
@@ -2799,14 +2639,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf,
-                                x.EntityCollection
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf,
+                        x.EntityCollection
+                    })
                     .AsNoTracking(),
             elementAsserter: (e, a) =>
             {
@@ -2840,21 +2677,18 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Reference1 = x.OwnedReferenceRoot,
-                                Reference2 = x.OwnedCollectionRoot[0].OwnedReferenceBranch,
-                                x.EntityCollection,
-                                Reference3 = x.OwnedCollectionRoot[1]
-                                    .OwnedReferenceBranch
-                                    .OwnedReferenceLeaf,
-                                Reference4 = x.OwnedCollectionRoot[0]
-                                    .OwnedCollectionBranch[0]
-                                    .OwnedReferenceLeaf,
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        Reference1 = x.OwnedReferenceRoot,
+                        Reference2 = x.OwnedCollectionRoot[0].OwnedReferenceBranch,
+                        x.EntityCollection,
+                        Reference3 = x.OwnedCollectionRoot[1]
+                            .OwnedReferenceBranch
+                            .OwnedReferenceLeaf,
+                        Reference4 = x.OwnedCollectionRoot[0]
+                            .OwnedCollectionBranch[0]
+                            .OwnedReferenceLeaf,
+                    })
                     .AsNoTracking(),
             elementAsserter: (e, a) =>
             {
@@ -2875,14 +2709,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf,
-                                x.EntityCollection
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf,
+                        x.EntityCollection
+                    })
                     .AsNoTracking(),
             elementAsserter: (e, a) =>
             {
@@ -2916,15 +2747,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                JsonCollectionElement = x.OwnedCollectionRoot[0],
-                                x.EntityReference,
-                                x.EntityCollection
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        JsonCollectionElement = x.OwnedCollectionRoot[0],
+                        x.EntityReference,
+                        x.EntityCollection
+                    })
                     .AsNoTracking(),
             elementAsserter: (e, a) =>
             {
@@ -2943,27 +2771,20 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityBasic>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Collection1 = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedCollectionLeaf,
-                                x.EntityReference,
-                                Reference1 = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedReferenceLeaf,
-                                x.EntityCollection,
-                                Reference2 = x.OwnedReferenceRoot
-                                    .OwnedReferenceBranch
-                                    .OwnedCollectionLeaf[0],
-                                Collection2 = x.OwnedReferenceRoot.OwnedCollectionBranch,
-                                Collection3 = x.OwnedCollectionRoot,
-                                Reference3 = x.OwnedCollectionRoot[0].OwnedReferenceBranch,
-                                Collection4 = x.OwnedCollectionRoot[0].OwnedCollectionBranch
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        Collection1 = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf,
+                        x.EntityReference,
+                        Reference1 = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf,
+                        x.EntityCollection,
+                        Reference2 = x.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf[
+                            0
+                        ],
+                        Collection2 = x.OwnedReferenceRoot.OwnedCollectionBranch,
+                        Collection3 = x.OwnedCollectionRoot,
+                        Reference3 = x.OwnedCollectionRoot[0].OwnedReferenceBranch,
+                        Collection4 = x.OwnedCollectionRoot[0].OwnedCollectionBranch
+                    })
                     .AsNoTracking(),
             elementAsserter: (e, a) =>
             {
@@ -3002,38 +2823,35 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityAllTypes>()
-                    .Select(
-                        x =>
-                            new
-                            {
-                                x.Reference.TestDefaultString,
-                                x.Reference.TestMaxLengthString,
-                                x.Reference.TestBoolean,
-                                x.Reference.TestByte,
-                                x.Reference.TestCharacter,
-                                x.Reference.TestDateTime,
-                                x.Reference.TestDateTimeOffset,
-                                x.Reference.TestDecimal,
-                                x.Reference.TestDouble,
-                                x.Reference.TestGuid,
-                                x.Reference.TestInt16,
-                                x.Reference.TestInt32,
-                                x.Reference.TestInt64,
-                                x.Reference.TestSignedByte,
-                                x.Reference.TestSingle,
-                                x.Reference.TestTimeSpan,
-                                x.Reference.TestDateOnly,
-                                x.Reference.TestTimeOnly,
-                                x.Reference.TestUnsignedInt16,
-                                x.Reference.TestUnsignedInt32,
-                                x.Reference.TestUnsignedInt64,
-                                x.Reference.TestEnum,
-                                x.Reference.TestEnumWithIntConverter,
-                                x.Reference.TestNullableEnum,
-                                x.Reference.TestNullableEnumWithIntConverter,
-                                x.Reference.TestNullableEnumWithConverterThatHandlesNulls,
-                            }
-                    )
+                    .Select(x => new
+                    {
+                        x.Reference.TestDefaultString,
+                        x.Reference.TestMaxLengthString,
+                        x.Reference.TestBoolean,
+                        x.Reference.TestByte,
+                        x.Reference.TestCharacter,
+                        x.Reference.TestDateTime,
+                        x.Reference.TestDateTimeOffset,
+                        x.Reference.TestDecimal,
+                        x.Reference.TestDouble,
+                        x.Reference.TestGuid,
+                        x.Reference.TestInt16,
+                        x.Reference.TestInt32,
+                        x.Reference.TestInt64,
+                        x.Reference.TestSignedByte,
+                        x.Reference.TestSingle,
+                        x.Reference.TestTimeSpan,
+                        x.Reference.TestDateOnly,
+                        x.Reference.TestTimeOnly,
+                        x.Reference.TestUnsignedInt16,
+                        x.Reference.TestUnsignedInt32,
+                        x.Reference.TestUnsignedInt64,
+                        x.Reference.TestEnum,
+                        x.Reference.TestEnumWithIntConverter,
+                        x.Reference.TestNullableEnum,
+                        x.Reference.TestNullableEnumWithIntConverter,
+                        x.Reference.TestNullableEnumWithConverterThatHandlesNulls,
+                    })
         );
 
     [ConditionalTheory]
@@ -3091,13 +2909,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityAllTypes>()
-                    .Where(
-                        x =>
-                            (
-                                !x.Reference.TestBoolean
-                                    ? x.Reference.TestMaxLengthString
-                                    : x.Reference.TestDefaultString
-                            ) == "MyDefaultStringInReference1"
+                    .Where(x =>
+                        (
+                            !x.Reference.TestBoolean
+                                ? x.Reference.TestMaxLengthString
+                                : x.Reference.TestDefaultString
+                        ) == "MyDefaultStringInReference1"
                     )
         );
 
@@ -3134,10 +2951,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityAllTypes>()
-                    .Where(
-                        x =>
-                            x.Reference.TestDateTimeOffset
-                            != new DateTimeOffset(new DateTime(2000, 1, 4), new TimeSpan(3, 2, 0))
+                    .Where(x =>
+                        x.Reference.TestDateTimeOffset
+                        != new DateTimeOffset(new DateTime(2000, 1, 4), new TimeSpan(3, 2, 0))
                     )
         );
 
@@ -3302,10 +3118,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityAllTypes>()
-                    .Where(
-                        x =>
-                            x.Reference.TestNullableEnumWithConverterThatHandlesNulls
-                            != JsonEnum.One
+                    .Where(x =>
+                        x.Reference.TestNullableEnumWithConverterThatHandlesNulls != JsonEnum.One
                     )
         );
 

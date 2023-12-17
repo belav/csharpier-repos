@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal static class SharedInputNodes
     {
-        public static readonly InputNode<Compilation> Compilation = new InputNode<Compilation>(
-            b => ImmutableArray.Create(b.Compilation)
+        public static readonly InputNode<Compilation> Compilation = new InputNode<Compilation>(b =>
+            ImmutableArray.Create(b.Compilation)
         );
 
         public static readonly InputNode<CompilationOptions> CompilationOptions =
@@ -32,13 +32,13 @@ namespace Microsoft.CodeAnalysis
         public static readonly InputNode<AdditionalText> AdditionalTexts =
             new InputNode<AdditionalText>(b => b.DriverState.AdditionalTexts);
 
-        public static readonly InputNode<SyntaxTree> SyntaxTrees = new InputNode<SyntaxTree>(
-            b => b.Compilation.SyntaxTrees.ToImmutableArray()
+        public static readonly InputNode<SyntaxTree> SyntaxTrees = new InputNode<SyntaxTree>(b =>
+            b.Compilation.SyntaxTrees.ToImmutableArray()
         );
 
         public static readonly InputNode<AnalyzerConfigOptionsProvider> AnalyzerConfigOptions =
-            new InputNode<AnalyzerConfigOptionsProvider>(
-                b => ImmutableArray.Create(b.DriverState.OptionsProvider)
+            new InputNode<AnalyzerConfigOptionsProvider>(b =>
+                ImmutableArray.Create(b.DriverState.OptionsProvider)
             );
 
         public static readonly InputNode<MetadataReference> MetadataReferences =

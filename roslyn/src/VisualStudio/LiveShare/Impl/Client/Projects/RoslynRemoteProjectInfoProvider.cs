@@ -94,16 +94,15 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
                 // This is also the case for files for which TypeScript adds the generated TypeScript buffer to a different project.
                 var filesTasks = project
                     .SourceFiles.Where(f => f.Scheme != SystemUriSchemeExternal)
-                    .Where(
-                        f => !_secondaryBufferFileExtensions.Any(ext => f.LocalPath.EndsWith(ext))
+                    .Where(f =>
+                        !_secondaryBufferFileExtensions.Any(ext => f.LocalPath.EndsWith(ext))
                     )
-                    .Select(
-                        f =>
-                            lspClient.ProtocolConverter.FromProtocolUriAsync(
-                                f,
-                                false,
-                                cancellationToken
-                            )
+                    .Select(f =>
+                        lspClient.ProtocolConverter.FromProtocolUriAsync(
+                            f,
+                            false,
+                            cancellationToken
+                        )
                     );
                 var files = await Task.WhenAll(filesTasks).ConfigureAwait(false);
                 var projectInfo = CreateProjectInfo(
@@ -128,18 +127,17 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
             var projectId = ProjectId.CreateNewId();
             var checksumAlgorithm = SourceHashAlgorithms.Default;
 
-            var docInfos = files.SelectAsArray(
-                path =>
-                    DocumentInfo.Create(
-                        DocumentId.CreateNewId(projectId),
-                        name: Path.GetFileNameWithoutExtension(path),
-                        loader: new WorkspaceFileTextLoaderNoException(
-                            services,
-                            path,
-                            defaultEncoding: null
-                        ),
-                        filePath: path
-                    )
+            var docInfos = files.SelectAsArray(path =>
+                DocumentInfo.Create(
+                    DocumentId.CreateNewId(projectId),
+                    name: Path.GetFileNameWithoutExtension(path),
+                    loader: new WorkspaceFileTextLoaderNoException(
+                        services,
+                        path,
+                        defaultEncoding: null
+                    ),
+                    filePath: path
+                )
             );
 
             return ProjectInfo.Create(

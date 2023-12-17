@@ -644,8 +644,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     return (EnvDTE.CodeElement)
                         CodeEvent.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.VariableDeclarator:
-                    var baseFieldDeclaration =
-                        node.FirstAncestorOrSelf<BaseFieldDeclarationSyntax>();
+                    var baseFieldDeclaration = node.FirstAncestorOrSelf<BaseFieldDeclarationSyntax>(
+
+                    );
                     if (baseFieldDeclaration != null)
                     {
                         if (baseFieldDeclaration.Kind() == SyntaxKind.FieldDeclaration)
@@ -1511,8 +1512,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             {
                 // In this case, we're going to replace the existing comment.
                 var firstIndex = leadingTriviaList.FindIndex(t => t == commentList[0]);
-                var lastIndex = leadingTriviaList.FindIndex(
-                    t => t == commentList[commentList.Count - 1]
+                var lastIndex = leadingTriviaList.FindIndex(t =>
+                    t == commentList[commentList.Count - 1]
                 );
                 var count = lastIndex - firstIndex + 1;
 
@@ -1657,8 +1658,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             if (documentationComment != null)
             {
                 // In this case, we're going to replace the existing XML doc comment.
-                var index = leadingTriviaList.FindIndex(
-                    t => t == documentationComment.ParentTrivia
+                var index = leadingTriviaList.FindIndex(t => t == documentationComment.ParentTrivia
                 );
                 leadingTriviaList.RemoveAt(index);
 
@@ -3847,8 +3847,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
             var triviaList = nextToken.LeadingTrivia;
 
-            var lastNonWhitespaceTrivia = triviaList.LastOrDefault(
-                trivia => !trivia.IsWhitespaceOrEndOfLine()
+            var lastNonWhitespaceTrivia = triviaList.LastOrDefault(trivia =>
+                !trivia.IsWhitespaceOrEndOfLine()
             );
             if (lastNonWhitespaceTrivia.Kind() == SyntaxKind.EndRegionDirectiveTrivia)
             {

@@ -386,8 +386,8 @@ namespace T2
 
             // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Contains(expected_in_lookupNames[0], actual_lookupNames);
@@ -471,8 +471,8 @@ class Test
                 lookupResult.Free();
                 return result;
             });
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Contains(expected_in_lookupNames[0], actual_lookupNames);
@@ -541,8 +541,8 @@ class Test
 
             // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
             var actual_lookupSymbols = GetLookupSymbols(testSrc, name: "F", arity: 0);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Contains(expected_in_lookupNames[0], actual_lookupNames);
@@ -667,11 +667,11 @@ class Test
             // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
             var actual_lookupSymbols = model.LookupSymbols(GetPositionForBinding(tree));
             var actual_lookupSymbols_ignoreAcc = model.LookupSymbols(GetPositionForBinding(tree));
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
-            var actual_lookupSymbols_ignoreAcc_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_ignoreAcc_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.DoesNotContain(not_expected_in_lookup[0], actual_lookupNames);
@@ -768,8 +768,8 @@ class B : A
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Equal('{', testSrc[GetPositionForBinding(testSrc)]);
@@ -812,8 +812,8 @@ class B : A
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Equal('}', testSrc[GetPositionForBinding(testSrc)]);
@@ -861,8 +861,8 @@ class MyClass
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Contains(expected_in_lookupNames[0], actual_lookupNames);
@@ -902,8 +902,8 @@ class MyClass
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.DoesNotContain(not_expected_in_lookupNames[0], actual_lookupNames);
@@ -941,8 +941,8 @@ class MyClass
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.DoesNotContain(not_expected_in_lookupNames[0], actual_lookupNames);
@@ -977,8 +977,8 @@ class MyClass
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Contains(expected_in_lookupNames[0], actual_lookupNames);
@@ -1014,8 +1014,8 @@ class C
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.NotEmpty(actual_lookupNames);
@@ -1051,8 +1051,8 @@ class Program
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Contains(expected_in_lookupNames[0], actual_lookupNames);
@@ -1183,8 +1183,8 @@ class Program
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Contains(expected_in_lookupNames[0], actual_lookupNames);
@@ -1218,8 +1218,8 @@ class Program
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.Contains(expected_in_lookupNames[0], actual_lookupNames);
@@ -1267,8 +1267,8 @@ class Program
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.NotEmpty(actual_lookupNames);
@@ -1299,8 +1299,8 @@ class Program
 
             // Get the list of LookupSymbols at the location at the end of the /*pos*/ tag
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
-                e => e.ToTestDisplayString()
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
             );
 
             Assert.NotEmpty(actual_lookupNames);

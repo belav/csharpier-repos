@@ -19,8 +19,8 @@ public class PropertyMap : MemberMap
         DestinationMember = inheritedMappedProperty.DestinationMember;
         if (DestinationMember.DeclaringType.ContainsGenericParameters)
         {
-            DestinationMember = typeMap.DestinationSetters.Single(
-                m => m.Name == DestinationMember.Name
+            DestinationMember = typeMap.DestinationSetters.Single(m =>
+                m.Name == DestinationMember.Name
             );
         }
         DestinationType = inheritedMappedProperty.DestinationType;

@@ -768,11 +768,10 @@ namespace CSharpSyntaxGenerator
             Write(
                 CommaJoin(
                     nd.Kinds.Count == 1 ? $"SyntaxKind.{nd.Kinds[0].Name}" : "kind",
-                    nodeFields.Select(
-                        f =>
-                            f.Type == "SyntaxList<SyntaxToken>" || IsAnyList(f.Type)
-                                ? $"{CamelCase(f.Name)}.Node"
-                                : CamelCase(f.Name)
+                    nodeFields.Select(f =>
+                        f.Type == "SyntaxList<SyntaxToken>" || IsAnyList(f.Type)
+                            ? $"{CamelCase(f.Name)}.Node"
+                            : CamelCase(f.Name)
                     ),
                     // values are at end
                     valueFields.Select(f => CamelCase(f.Name)),
@@ -1100,8 +1099,8 @@ namespace CSharpSyntaxGenerator
 
                     var relevantNodes = nodeFields
                         .Select((field, index) => (field, index))
-                        .Where(
-                            t => t.field.Type is not "SyntaxToken" and not "SyntaxList<SyntaxToken>"
+                        .Where(t =>
+                            t.field.Type is not "SyntaxToken" and not "SyntaxList<SyntaxToken>"
                         );
                     if (!relevantNodes.Any())
                     {
@@ -1154,8 +1153,8 @@ namespace CSharpSyntaxGenerator
 
                     var relevantNodes = nodeFields
                         .Select((field, index) => (field, index))
-                        .Where(
-                            t => t.field.Type is not "SyntaxToken" and not "SyntaxList<SyntaxToken>"
+                        .Where(t =>
+                            t.field.Type is not "SyntaxToken" and not "SyntaxList<SyntaxToken>"
                         );
                     if (!relevantNodes.Any())
                     {
@@ -1890,11 +1889,10 @@ namespace CSharpSyntaxGenerator
             Write(
                 CommaJoin(
                     nd.Kinds.Count > 1 ? "kind" : "",
-                    nd.Fields.Select(
-                        f =>
-                            factoryWithNoAutoCreatableTokenFields.Contains(f)
-                                ? CamelCase(f.Name)
-                                : GetDefaultValue(nd, f)
+                    nd.Fields.Select(f =>
+                        factoryWithNoAutoCreatableTokenFields.Contains(f)
+                            ? CamelCase(f.Name)
+                            : GetDefaultValue(nd, f)
                     )
                 )
             );
@@ -1905,13 +1903,12 @@ namespace CSharpSyntaxGenerator
         private Field DetermineMinimalOptionalField(Node nd)
         {
             // first if there is a single list, then choose the list because it would not have been optional
-            int listCount = nd.Fields.Count(
-                f => IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f)
+            int listCount = nd.Fields.Count(f =>
+                IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f)
             );
             if (listCount == 1)
             {
-                return nd.Fields.First(
-                    f => IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f)
+                return nd.Fields.First(f => IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f)
                 );
             }
             else
@@ -1966,8 +1963,8 @@ namespace CSharpSyntaxGenerator
 
             if (
                 withStringNames
-                && minimalFactoryfields.Count(
-                    f => IsRequiredFactoryField(nd, f) && CanAutoConvertFromString(f)
+                && minimalFactoryfields.Count(f =>
+                    IsRequiredFactoryField(nd, f) && CanAutoConvertFromString(f)
                 ) == 0
             )
                 return; // no string-name overload necessary

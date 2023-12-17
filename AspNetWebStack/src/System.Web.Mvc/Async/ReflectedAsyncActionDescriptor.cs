@@ -150,13 +150,12 @@ namespace System.Web.Mvc.Async
                 // to simplify the logic, force the rest of the pipeline to execute in an asynchronous callback
                 listener.SetContinuation(
                     () =>
-                        ThreadPool.QueueUserWorkItem(
-                            _ =>
-                                asyncResult.MarkCompleted(
-                                    false /* completedSynchronously */
-                                    ,
-                                    asyncCallback
-                                )
+                        ThreadPool.QueueUserWorkItem(_ =>
+                            asyncResult.MarkCompleted(
+                                false /* completedSynchronously */
+                                ,
+                                asyncCallback
+                            )
                         )
                 );
 

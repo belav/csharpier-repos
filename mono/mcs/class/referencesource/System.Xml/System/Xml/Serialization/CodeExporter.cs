@@ -33,8 +33,9 @@ namespace System.Xml.Serialization
         CodeCompileUnit codeCompileUnit;
         bool rootExported;
         TypeScope scope;
-        CodeAttributeDeclarationCollection includeMetadata =
-            new CodeAttributeDeclarationCollection();
+        CodeAttributeDeclarationCollection includeMetadata = new CodeAttributeDeclarationCollection(
+
+        );
         CodeGenerationOptions options;
         CodeDomProvider codeProvider;
         CodeAttributeDeclaration generatedCodeAttribute;

@@ -141,9 +141,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Completion
 
             var index = arguments.Any()
                 ? arguments.IndexOf(
-                    arguments.Single(
-                        argument =>
-                            argument.FullSpan.Start <= position && argument.FullSpan.End >= position
+                    arguments.Single(argument =>
+                        argument.FullSpan.Start <= position && argument.FullSpan.End >= position
                     )
                 )
                 : 0;

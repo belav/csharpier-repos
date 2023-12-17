@@ -16,18 +16,15 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var store = new List<string>();
-            var loggerFactory = TestLoggerBuilder.Create(
-                builder =>
-                    builder
-                        .AddProvider(
-                            new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
-                        )
-                        .AddProvider(
-                            new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store)
-                        )
-                        .AddProvider(
-                            new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)
-                        )
+            var loggerFactory = TestLoggerBuilder.Create(builder =>
+                builder
+                    .AddProvider(
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+                    )
+                    .AddProvider(new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store))
+                    .AddProvider(
+                        new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)
+                    )
             );
 
             var logger = loggerFactory.CreateLogger("Test");
@@ -54,22 +51,17 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var store = new List<string>();
-            var loggerFactory = TestLoggerBuilder.Create(
-                builder =>
-                    builder
-                        .AddProvider(
-                            new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
-                        )
-                        .AddProvider(
-                            new CustomLoggerProvider(
-                                "provider2",
-                                ThrowExceptionAt.BeginScope,
-                                store
-                            )
-                        )
-                        .AddProvider(
-                            new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)
-                        )
+            var loggerFactory = TestLoggerBuilder.Create(builder =>
+                builder
+                    .AddProvider(
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+                    )
+                    .AddProvider(
+                        new CustomLoggerProvider("provider2", ThrowExceptionAt.BeginScope, store)
+                    )
+                    .AddProvider(
+                        new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)
+                    )
             );
 
             var logger = loggerFactory.CreateLogger("Test");
@@ -96,18 +88,17 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var store = new List<string>();
-            var loggerFactory = TestLoggerBuilder.Create(
-                builder =>
-                    builder
-                        .AddProvider(
-                            new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
-                        )
-                        .AddProvider(
-                            new CustomLoggerProvider("provider2", ThrowExceptionAt.IsEnabled, store)
-                        )
-                        .AddProvider(
-                            new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)
-                        )
+            var loggerFactory = TestLoggerBuilder.Create(builder =>
+                builder
+                    .AddProvider(
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+                    )
+                    .AddProvider(
+                        new CustomLoggerProvider("provider2", ThrowExceptionAt.IsEnabled, store)
+                    )
+                    .AddProvider(
+                        new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)
+                    )
             );
 
             var logger = loggerFactory.CreateLogger("Test");
@@ -137,15 +128,10 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var store = new List<string>();
-            var loggerFactory = TestLoggerBuilder.Create(
-                builder =>
-                    builder
-                        .AddProvider(
-                            new CustomLoggerProvider("provider1", ThrowExceptionAt.Log, store)
-                        )
-                        .AddProvider(
-                            new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store)
-                        )
+            var loggerFactory = TestLoggerBuilder.Create(builder =>
+                builder
+                    .AddProvider(new CustomLoggerProvider("provider1", ThrowExceptionAt.Log, store))
+                    .AddProvider(new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store))
             );
 
             var logger = loggerFactory.CreateLogger("Test");
@@ -240,8 +226,8 @@ namespace Microsoft.Extensions.Logging.Test
             var factory = TestLoggerBuilder.Create(builder =>
             {
                 builder.AddProvider(provider.Object);
-                builder.Services.Configure<LoggerFilterOptions>(
-                    options => options.CaptureScopes = false
+                builder.Services.Configure<LoggerFilterOptions>(options =>
+                    options.CaptureScopes = false
                 );
             });
 
@@ -278,8 +264,8 @@ namespace Microsoft.Extensions.Logging.Test
             var factory = TestLoggerBuilder.Create(builder =>
             {
                 builder.AddProvider(provider.Object);
-                builder.Services.Configure<LoggerFilterOptions>(
-                    options => options.CaptureScopes = false
+                builder.Services.Configure<LoggerFilterOptions>(options =>
+                    options.CaptureScopes = false
                 );
             });
 

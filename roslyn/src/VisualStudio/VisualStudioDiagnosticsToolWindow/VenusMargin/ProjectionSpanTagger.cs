@@ -72,13 +72,10 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
 
                 return allSpans
                     .Where(s => spans.Any(ss => ss.IntersectsWith(s)))
-                    .Select(
-                        s =>
-                            new TagSpan<TextMarkerTag>(
-                                new SnapshotSpan(spans.First().Snapshot, s),
-                                ProjectionSpanTag.Instance
-                            )
-                    );
+                    .Select(s => new TagSpan<TextMarkerTag>(
+                        new SnapshotSpan(spans.First().Snapshot, s),
+                        ProjectionSpanTag.Instance
+                    ));
             }
 
             public void Dispose()

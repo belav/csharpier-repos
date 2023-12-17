@@ -292,12 +292,13 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
                 pb.OwnsOne(p => p.Address).Property(p => p.ZipCode).HasColumnName("ZipCode");
             });
 
-            modelBuilder.Entity<LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails>(eb =>
-            {
-                eb.HasKey(l => new { l.ProfileId }).HasName("PK_LoginDetails");
+            modelBuilder.Entity<LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails>(
+                eb =>
+                {
+                    eb.HasKey(l => new { l.ProfileId }).HasName("PK_LoginDetails");
 
-                eb.HasOne(d => d.Login).WithOne().HasConstraintName("FK_LoginDetails_Login");
-            });
+                    eb.HasOne(d => d.Login).WithOne().HasConstraintName("FK_LoginDetails_Login");
+                });
         }
     }
 }

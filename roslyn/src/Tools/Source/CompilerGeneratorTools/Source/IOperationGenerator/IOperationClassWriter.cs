@@ -359,14 +359,13 @@ namespace IOperationGenerator
             //  3. No internal nodes.
             List<AbstractNode> elementsToKind = _tree
                 .Types.OfType<AbstractNode>()
-                .Where(
-                    n =>
-                        (
-                            (n is Node && (n.OperationKind?.Include != false))
-                            || n.OperationKind?.Include == true
-                        )
-                        && (n.OperationKind?.Entries is null || n.OperationKind?.Entries.Count == 0)
-                        && !n.IsInternal
+                .Where(n =>
+                    (
+                        (n is Node && (n.OperationKind?.Include != false))
+                        || n.OperationKind?.Include == true
+                    )
+                    && (n.OperationKind?.Entries is null || n.OperationKind?.Entries.Count == 0)
+                    && !n.IsInternal
                 )
                 .ToList();
 
@@ -644,8 +643,8 @@ namespace IOperationGenerator
 
                     Outdent();
 
-                    List<Property> propsToInitialize = type.Properties.Where(
-                        p => !p.SkipGeneration && !p.MakeAbstract
+                    List<Property> propsToInitialize = type.Properties.Where(p =>
+                        !p.SkipGeneration && !p.MakeAbstract
                     )
                         .ToList();
 
@@ -1246,8 +1245,8 @@ namespace IOperationGenerator
             bool includeSkipGenerationProperties = false
         )
         {
-            var properties = node.Properties.Where(
-                p => !p.SkipGeneration || includeSkipGenerationProperties
+            var properties = node.Properties.Where(p =>
+                !p.SkipGeneration || includeSkipGenerationProperties
             )
                 .ToList();
 
@@ -1259,8 +1258,7 @@ namespace IOperationGenerator
                 if (@base is null)
                     break;
                 properties.AddRange(
-                    @base.Properties.Where(
-                        p => !p.SkipGeneration || includeSkipGenerationProperties
+                    @base.Properties.Where(p => !p.SkipGeneration || includeSkipGenerationProperties
                     )
                 );
             }

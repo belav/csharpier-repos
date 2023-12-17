@@ -683,13 +683,12 @@ public class DbContextOptionsBuilder : IDbContextOptionsBuilderInfrastructure
     >()
         where TCurrentImplementation : TService
         where TNewImplementation : TService =>
-        WithOption(
-            e =>
-                e.WithReplacedService(
-                    typeof(TService),
-                    typeof(TNewImplementation),
-                    typeof(TCurrentImplementation)
-                )
+        WithOption(e =>
+            e.WithReplacedService(
+                typeof(TService),
+                typeof(TNewImplementation),
+                typeof(TCurrentImplementation)
+            )
         );
 
     /// <summary>

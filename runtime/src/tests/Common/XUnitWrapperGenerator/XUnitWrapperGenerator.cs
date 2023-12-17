@@ -151,8 +151,8 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                         compilation.GetAssemblyOrModuleSymbol(reference)
                     )!;
                     ImmutableArray<ITestInfo> tests = ImmutableArray.CreateRange(
-                        testMethods.SelectMany(
-                            method => GetTestMethodInfosForMethod(method, configOptions, aliasMap)
+                        testMethods.SelectMany(method =>
+                            GetTestMethodInfosForMethod(method, configOptions, aliasMap)
                         )
                     );
                     if (
@@ -1250,10 +1250,9 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                         continue;
                     }
                     var argsAsCode = ImmutableArray.CreateRange(
-                        args.Select(
-                            a =>
-                                a.ToCSharpString()
-                                + (a.Type!.SpecialType == SpecialType.System_Single ? "F" : "")
+                        args.Select(a =>
+                            a.ToCSharpString()
+                            + (a.Type!.SpecialType == SpecialType.System_Single ? "F" : "")
                         )
                     );
                     testCasesBuilder.Add(new BasicTestMethod(method, alias, arguments: argsAsCode));
@@ -1395,9 +1394,8 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
     {
         string condition = string.Join(
             "&&",
-            values.Select(
-                v =>
-                    $"{externAlias}::{conditionType.ToDisplayString(FullyQualifiedWithoutGlobalNamespace)}.{v.Value}"
+            values.Select(v =>
+                $"{externAlias}::{conditionType.ToDisplayString(FullyQualifiedWithoutGlobalNamespace)}.{v.Value}"
             )
         );
         if (negate)

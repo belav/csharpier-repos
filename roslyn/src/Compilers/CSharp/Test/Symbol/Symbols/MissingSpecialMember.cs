@@ -117,6 +117,7 @@ public class Program
             );
 
             comp.VerifyEmitDiagnostics(
+
             // the DebuggerHidden attribute is optional.
             );
         }

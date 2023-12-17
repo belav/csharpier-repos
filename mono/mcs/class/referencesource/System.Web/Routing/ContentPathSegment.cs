@@ -16,8 +16,8 @@
             get
             {
                 //
-                return Subsegments.Any<PathSubsegment>(
-                    seg => (seg is ParameterSubsegment) && (((ParameterSubsegment)seg).IsCatchAll)
+                return Subsegments.Any<PathSubsegment>(seg =>
+                    (seg is ParameterSubsegment) && (((ParameterSubsegment)seg).IsCatchAll)
                 );
             }
         }

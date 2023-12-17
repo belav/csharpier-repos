@@ -436,8 +436,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             catch (CompilationErrorException e)
             {
                 return ImmutableArray.CreateRange(
-                    e.Diagnostics.Where(
-                        d => d.Severity is DiagnosticSeverity.Error or DiagnosticSeverity.Warning
+                    e.Diagnostics.Where(d =>
+                        d.Severity is DiagnosticSeverity.Error or DiagnosticSeverity.Warning
                     )
                 );
             }

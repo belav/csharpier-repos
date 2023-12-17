@@ -295,7 +295,9 @@ namespace System.ServiceModel.Description
                             else if (!syncContextRegistered)
                             {
                                 SynchronizationContextWorkflowSchedulerService syncSchedulerService =
-                                    workflowRuntimeBehavior.WorkflowRuntime.GetService<SynchronizationContextWorkflowSchedulerService>();
+                                    workflowRuntimeBehavior.WorkflowRuntime.GetService<SynchronizationContextWorkflowSchedulerService>(
+
+                                    );
                                 Fx.Assert(
                                     syncSchedulerService != null,
                                     "Wrong Synchronization Context Set"

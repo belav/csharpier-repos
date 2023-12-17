@@ -5092,12 +5092,9 @@ namespace System.Data
                 ObjectID,
                 filterExpression
             );
-            return new Select(
-                this,
-                filterExpression,
-                "",
-                DataViewRowState.CurrentRows
-            ).SelectRows();
+            return new Select(this, filterExpression, "", DataViewRowState.CurrentRows).SelectRows(
+
+            );
         }
 
         /// <devdoc>

@@ -55,8 +55,8 @@ namespace System.ServiceModel.Activities.Presentation
                         {
                             new If
                             {
-                                Condition = new InArgument<bool>(
-                                    ctx => sendReply.Get(ctx).Request != null
+                                Condition = new InArgument<bool>(ctx =>
+                                    sendReply.Get(ctx).Request != null
                                 ),
                                 Then = new Sequence
                                 {
@@ -73,10 +73,9 @@ namespace System.ServiceModel.Activities.Presentation
                                                 Argument = activityInTree,
                                                 Handler = new If
                                                 {
-                                                    Condition = new InArgument<bool>(
-                                                        ctx =>
-                                                            activityInTree.Get(ctx)
-                                                            == sendReply.Get(ctx).Request
+                                                    Condition = new InArgument<bool>(ctx =>
+                                                        activityInTree.Get(ctx)
+                                                        == sendReply.Get(ctx).Request
                                                     ),
                                                     Then = new Assign<bool>
                                                     {
@@ -88,22 +87,21 @@ namespace System.ServiceModel.Activities.Presentation
                                         },
                                         new AssertValidation
                                         {
-                                            Assertion = new InArgument<bool>(
-                                                ctx => requestInTree.Get(ctx)
+                                            Assertion = new InArgument<bool>(ctx =>
+                                                requestInTree.Get(ctx)
                                             ),
                                             IsWarning = false,
-                                            Message = new InArgument<string>(
-                                                ctx =>
-                                                    string.Format(
-                                                        CultureInfo.CurrentCulture,
-                                                        System
-                                                            .Activities
-                                                            .Core
-                                                            .Presentation
-                                                            .SR
-                                                            .UnrootedRequestInSendReply,
-                                                        sendReply.Get(ctx).DisplayName
-                                                    )
+                                            Message = new InArgument<string>(ctx =>
+                                                string.Format(
+                                                    CultureInfo.CurrentCulture,
+                                                    System
+                                                        .Activities
+                                                        .Core
+                                                        .Presentation
+                                                        .SR
+                                                        .UnrootedRequestInSendReply,
+                                                    sendReply.Get(ctx).DisplayName
+                                                )
                                             )
                                         }
                                     }

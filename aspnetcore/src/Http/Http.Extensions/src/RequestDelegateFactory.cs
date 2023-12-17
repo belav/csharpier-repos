@@ -1286,8 +1286,8 @@ public static partial class RequestDelegateFactory
                 );
         }
         else if (
-            parameter.CustomAttributes.Any(
-                a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
+            parameter.CustomAttributes.Any(a =>
+                typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
             )
         )
         {

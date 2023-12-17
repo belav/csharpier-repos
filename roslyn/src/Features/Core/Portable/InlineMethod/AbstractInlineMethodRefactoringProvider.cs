@@ -367,10 +367,9 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             var statementContainsInvocation =
                 calleeInvocationNode
                     .GetAncestors()
-                    .TakeWhile(
-                        node =>
-                            !_syntaxFacts.IsAnonymousFunctionExpression(node)
-                            && !_syntaxFacts.IsLocalFunctionStatement(node)
+                    .TakeWhile(node =>
+                        !_syntaxFacts.IsAnonymousFunctionExpression(node)
+                        && !_syntaxFacts.IsLocalFunctionStatement(node)
                     )
                     .FirstOrDefault(node => node is TStatementSyntax) as TStatementSyntax;
 

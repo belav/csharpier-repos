@@ -87,7 +87,9 @@ namespace System.IdentityModel.Tokens
                             SecurityTokenHandlerCollection sthc =
                                 (ContainingCollection != null)
                                     ? ContainingCollection
-                                    : SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+                                    : SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(
+
+                                    );
                             _keyInfoSerializer = new SecurityTokenSerializerAdapter(sthc);
                         }
                     }

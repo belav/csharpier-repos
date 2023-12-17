@@ -25,54 +25,48 @@ public class Program
                 (context, service) =>
                     responseMessage = responseMessage ?? GetResponseMessage(context)
             )
-            .ConfigureKestrel(
-                options =>
-                    options
-                        .Configure(options.ConfigurationLoader.Configuration)
-                        .Endpoint(
-                            "HTTP",
-                            endpointOptions =>
-                            {
-                                if (
-                                    responseMessage == null
-                                    && !string.Equals(
-                                        "KestrelEndPointSettingValue",
-                                        endpointOptions.ConfigSection["KestrelEndPointSettingName"]
-                                    )
-                                )
-                                {
-                                    responseMessage = "Default Kestrel configuration not read.";
-                                }
-                            }
-                        )
-            )
-            .Configure(
-                app =>
-                    app.Run(context =>
-                    {
-                        // Verify allowed hosts were loaded
-                        var hostFilteringOptions = app.ApplicationServices.GetRequiredService<
-                            IOptions<HostFilteringOptions>
-                        >();
-                        var hosts = string.Join(',', hostFilteringOptions.Value.AllowedHosts);
-                        if (
-                            responseMessage == null
-                            && !string.Equals(
-                                "example.com,127.0.0.1",
-                                hosts,
-                                StringComparison.Ordinal
-                            )
-                        )
+            .ConfigureKestrel(options =>
+                options
+                    .Configure(options.ConfigurationLoader.Configuration)
+                    .Endpoint(
+                        "HTTP",
+                        endpointOptions =>
                         {
-                            responseMessage = "AllowedHosts not loaded into Options.";
+                            if (
+                                responseMessage == null
+                                && !string.Equals(
+                                    "KestrelEndPointSettingValue",
+                                    endpointOptions.ConfigSection["KestrelEndPointSettingName"]
+                                )
+                            )
+                            {
+                                responseMessage = "Default Kestrel configuration not read.";
+                            }
                         }
+                    )
+            )
+            .Configure(app =>
+                app.Run(context =>
+                {
+                    // Verify allowed hosts were loaded
+                    var hostFilteringOptions = app.ApplicationServices.GetRequiredService<
+                        IOptions<HostFilteringOptions>
+                    >();
+                    var hosts = string.Join(',', hostFilteringOptions.Value.AllowedHosts);
+                    if (
+                        responseMessage == null
+                        && !string.Equals("example.com,127.0.0.1", hosts, StringComparison.Ordinal)
+                    )
+                    {
+                        responseMessage = "AllowedHosts not loaded into Options.";
+                    }
 
-                        var hostingEnvironment =
-                            app.ApplicationServices.GetRequiredService<IHostEnvironment>();
-                        return context.Response.WriteAsync(
-                            responseMessage ?? hostingEnvironment.ApplicationName
-                        );
-                    })
+                    var hostingEnvironment =
+                        app.ApplicationServices.GetRequiredService<IHostEnvironment>();
+                    return context.Response.WriteAsync(
+                        responseMessage ?? hostingEnvironment.ApplicationName
+                    );
+                })
             )
             .Build()
             .Run();

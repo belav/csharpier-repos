@@ -873,8 +873,9 @@ namespace System.Net
             int port = uri.Port;
             CookieCollection? cookies = null;
 
-            var domainAttributeMatchAnyCookieVariant =
-                new System.Collections.Generic.List<string>();
+            var domainAttributeMatchAnyCookieVariant = new System.Collections.Generic.List<string>(
+
+            );
             System.Collections.Generic.List<string>? domainAttributeMatchOnlyCookieVariantPlain =
                 null;
 

@@ -3618,10 +3618,9 @@ class C
             Assert.False(
                 tree.GetRoot()
                     .DescendantTokens()
-                    .Any(
-                        t =>
-                            t.LeadingTrivia.Any(SyntaxKind.ConflictMarkerTrivia)
-                            || t.TrailingTrivia.Any(SyntaxKind.ConflictMarkerTrivia)
+                    .Any(t =>
+                        t.LeadingTrivia.Any(SyntaxKind.ConflictMarkerTrivia)
+                        || t.TrailingTrivia.Any(SyntaxKind.ConflictMarkerTrivia)
                     )
             );
         }

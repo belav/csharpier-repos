@@ -35,7 +35,9 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
     {
         public static void Main()
         {
-            InterfaceTypeInOtherUsedOnlyByCopiedAssemblyExplicit_Copy.ToKeepReferenceAtCompileTime();
+            InterfaceTypeInOtherUsedOnlyByCopiedAssemblyExplicit_Copy.ToKeepReferenceAtCompileTime(
+
+            );
         }
     }
 }

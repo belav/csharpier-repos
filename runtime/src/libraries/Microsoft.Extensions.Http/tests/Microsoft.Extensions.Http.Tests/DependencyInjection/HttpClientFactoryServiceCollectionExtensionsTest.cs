@@ -85,9 +85,10 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(
-                _ => new HttpClient() { Timeout = TimeSpan.FromSeconds(42) }
-            );
+            serviceCollection.AddTransient(_ => new HttpClient()
+            {
+                Timeout = TimeSpan.FromSeconds(42)
+            });
 
             // Act
             serviceCollection.AddHttpClient();
@@ -1241,8 +1242,9 @@ namespace Microsoft.Extensions.DependencyInjection
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 // Act
-                var client =
-                    scope.ServiceProvider.GetRequiredService<TypedClientWithScopedService>();
+                var client = scope.ServiceProvider.GetRequiredService<TypedClientWithScopedService>(
+
+                );
 
                 // Assert
                 var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com/");

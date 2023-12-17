@@ -36,8 +36,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal InstructionDecoder()
         {
             // Should be passed by the ExpressionCompiler as an argument to this constructor.
-            _useReferencedAssembliesOnly =
-                ExpressionCompiler.GetUseReferencedAssembliesOnlySetting();
+            _useReferencedAssembliesOnly = ExpressionCompiler.GetUseReferencedAssembliesOnlySetting(
+
+            );
         }
 
         internal MakeAssemblyReferencesKind GetMakeAssemblyReferencesKind()

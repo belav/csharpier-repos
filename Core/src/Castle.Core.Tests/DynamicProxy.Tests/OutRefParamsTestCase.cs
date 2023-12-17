@@ -400,8 +400,8 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Can_query_MethodInvocationTarget_for_overridden_class_method_having_a_generic_by_ref_parameter()
         {
-            var interceptor = new WithCallbackInterceptor(
-                invocation => _ = invocation.MethodInvocationTarget
+            var interceptor = new WithCallbackInterceptor(invocation =>
+                _ = invocation.MethodInvocationTarget
             );
             var proxy = generator.CreateClassProxy<DerivedFactory>(interceptor);
             proxy.Create<object>(out _);

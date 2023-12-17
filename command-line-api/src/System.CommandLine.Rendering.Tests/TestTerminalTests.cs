@@ -149,10 +149,9 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal
                 .Events.Should()
-                .Contain(
-                    e =>
-                        e is TestTerminal.ContentWritten
-                        && ((TestTerminal.ContentWritten)e).Content == "text"
+                .Contain(e =>
+                    e is TestTerminal.ContentWritten
+                    && ((TestTerminal.ContentWritten)e).Content == "text"
                 );
         }
     }

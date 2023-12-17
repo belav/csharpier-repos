@@ -74,29 +74,26 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
         {
             var blockFactories = new Func<ConcurrentQueue<Tuple<int, int>>, ITargetBlock<int>>[]
             {
-                q =>
-                    new ActionBlock<int>(
-                        i => q.Enqueue(Tuple.Create(i, Task.CurrentId.Value)),
-                        options
-                    ),
-                q =>
-                    new TransformBlock<int, int>(
-                        i =>
-                        {
-                            q.Enqueue(Tuple.Create(i, Task.CurrentId.Value));
-                            return i;
-                        },
-                        options
-                    ),
-                q =>
-                    new TransformManyBlock<int, int>(
-                        i =>
-                        {
-                            q.Enqueue(Tuple.Create(i, Task.CurrentId.Value));
-                            return new[] { i };
-                        },
-                        options
-                    )
+                q => new ActionBlock<int>(
+                    i => q.Enqueue(Tuple.Create(i, Task.CurrentId.Value)),
+                    options
+                ),
+                q => new TransformBlock<int, int>(
+                    i =>
+                    {
+                        q.Enqueue(Tuple.Create(i, Task.CurrentId.Value));
+                        return i;
+                    },
+                    options
+                ),
+                q => new TransformManyBlock<int, int>(
+                    i =>
+                    {
+                        q.Enqueue(Tuple.Create(i, Task.CurrentId.Value));
+                        return new[] { i };
+                    },
+                    options
+                )
             };
 
             foreach (var factory in blockFactories)
@@ -250,8 +247,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             {
                 Assert.AreEqual(scheduler, TaskScheduler.Current);
 
-                action = new ActionBlock<int>(
-                    i => Assert.AreNotEqual(scheduler, TaskScheduler.Current)
+                action = new ActionBlock<int>(i =>
+                    Assert.AreNotEqual(scheduler, TaskScheduler.Current)
                 );
                 Assert.IsTrue(action.Post(1));
                 action.Complete();

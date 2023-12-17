@@ -102,8 +102,8 @@ public class SqlServerJsonPostprocessor : ExpressionVisitor
                                 .Any(x => IsKeyColumn(x, table))
                             ||
                             // Condition 2: a column type in the WITH clause is a SQL Server "CLR type" (e.g. hierarchy id).
-                            openJsonExpression.ColumnInfos.Any(
-                                c => c.TypeMapping.StoreType is "hierarchyid"
+                            openJsonExpression.ColumnInfos.Any(c =>
+                                c.TypeMapping.StoreType is "hierarchyid"
                             )
                         )
                     )

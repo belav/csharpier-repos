@@ -30,8 +30,9 @@ namespace System.Reflection.TypeLoading.Ecma
             Debug.Assert(location != null);
 
             _location = location;
-            _neverAccessThisExceptThroughAssemblyDefinitionProperty =
-                reader.GetAssemblyDefinition();
+            _neverAccessThisExceptThroughAssemblyDefinitionProperty = reader.GetAssemblyDefinition(
+
+            );
 
             _manifestModule = new EcmaModule(this, location, peReader, reader);
         }

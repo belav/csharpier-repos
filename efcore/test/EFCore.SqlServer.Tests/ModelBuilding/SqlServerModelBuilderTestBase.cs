@@ -287,15 +287,11 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
         [InlineData(false)]
         public virtual void Can_avoid_attributes_when_discovering_properties(bool useAttributes)
         {
-            var modelBuilder = CreateModelBuilder(
-                c =>
-                    c.Conventions.Replace(
-                        s =>
-                            new PropertyDiscoveryConvention(
-                                s.GetService<ProviderConventionSetBuilderDependencies>()!,
-                                useAttributes
-                            )
-                    )
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Conventions.Replace(s => new PropertyDiscoveryConvention(
+                    s.GetService<ProviderConventionSetBuilderDependencies>()!,
+                    useAttributes
+                ))
             );
             modelBuilder.Entity<SqlVariantEntity>();
 
@@ -640,10 +636,8 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
             modelBuilder
                 .Entity<Child>()
                 .HasBaseType(null)
-                .ToTable(
-                    tb =>
-                        tb.HasCheckConstraint("CK_ChildBase_LargeId", "Id > 1000")
-                            .HasName("CK_LargeId")
+                .ToTable(tb =>
+                    tb.HasCheckConstraint("CK_ChildBase_LargeId", "Id > 1000").HasName("CK_LargeId")
                 );
             modelBuilder
                 .Entity<ChildBase>()
@@ -1713,14 +1707,13 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
 
             modelBuilder
                 .Entity<Customer>()
-                .ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.UseHistoryTable("HistoryTable", "historySchema");
-                            ttb.HasPeriodStart("MyPeriodStart").HasColumnName("PeriodStartColumn");
-                            ttb.HasPeriodEnd("MyPeriodEnd").HasColumnName("PeriodEndColumn");
-                        })
+                .ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("HistoryTable", "historySchema");
+                        ttb.HasPeriodStart("MyPeriodStart").HasColumnName("PeriodStartColumn");
+                        ttb.HasPeriodEnd("MyPeriodEnd").HasColumnName("PeriodEndColumn");
+                    })
                 );
 
             modelBuilder.FinalizeModel();
@@ -1756,26 +1749,24 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
 
             modelBuilder
                 .Entity<Customer>()
-                .ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.UseHistoryTable("HistoryTable", "historySchema");
-                            ttb.HasPeriodStart("MyPeriodStart");
-                            ttb.HasPeriodEnd("MyPeriodEnd");
-                        })
+                .ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("HistoryTable", "historySchema");
+                        ttb.HasPeriodStart("MyPeriodStart");
+                        ttb.HasPeriodEnd("MyPeriodEnd");
+                    })
                 );
 
             modelBuilder
                 .Entity<Customer>()
-                .ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.UseHistoryTable("ChangedHistoryTable", "changedHistorySchema");
-                            ttb.HasPeriodStart("ChangedMyPeriodStart");
-                            ttb.HasPeriodEnd("ChangedMyPeriodEnd");
-                        })
+                .ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("ChangedHistoryTable", "changedHistorySchema");
+                        ttb.HasPeriodStart("ChangedMyPeriodStart");
+                        ttb.HasPeriodEnd("ChangedMyPeriodEnd");
+                    })
                 );
 
             modelBuilder.FinalizeModel();
@@ -1811,27 +1802,25 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
 
             modelBuilder
                 .Entity<Customer>()
-                .ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.UseHistoryTable("HistoryTable", "historySchema");
-                            ttb.HasPeriodStart("MyPeriodStart").HasColumnName("PeriodStartColumn");
-                            ttb.HasPeriodEnd("MyPeriodEnd").HasColumnName("PeriodEndColumn");
-                        })
+                .ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("HistoryTable", "historySchema");
+                        ttb.HasPeriodStart("MyPeriodStart").HasColumnName("PeriodStartColumn");
+                        ttb.HasPeriodEnd("MyPeriodEnd").HasColumnName("PeriodEndColumn");
+                    })
                 );
 
             modelBuilder
                 .Entity<Customer>()
-                .ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.UseHistoryTable("ChangedHistoryTable", "changedHistorySchema");
-                            ttb.HasPeriodStart("MyPeriodStart")
-                                .HasColumnName("ChangedPeriodStartColumn");
-                            ttb.HasPeriodEnd("MyPeriodEnd").HasColumnName("ChangedPeriodEndColumn");
-                        })
+                .ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("ChangedHistoryTable", "changedHistorySchema");
+                        ttb.HasPeriodStart("MyPeriodStart")
+                            .HasColumnName("ChangedPeriodStartColumn");
+                        ttb.HasPeriodEnd("MyPeriodEnd").HasColumnName("ChangedPeriodEndColumn");
+                    })
                 );
 
             modelBuilder.FinalizeModel();
@@ -1870,14 +1859,13 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
 
             modelBuilder
                 .Entity<Customer>()
-                .ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.UseHistoryTable("HistoryTable", schema: null);
-                            ttb.HasPeriodStart("Start").HasColumnName("PeriodStartColumn");
-                            ttb.HasPeriodEnd("End").HasColumnName("PeriodEndColumn");
-                        })
+                .ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("HistoryTable", schema: null);
+                        ttb.HasPeriodStart("Start").HasColumnName("PeriodStartColumn");
+                        ttb.HasPeriodEnd("End").HasColumnName("PeriodEndColumn");
+                    })
                 );
 
             modelBuilder
@@ -1934,14 +1922,13 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
 
             modelBuilder
                 .Entity<Customer>()
-                .ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.UseHistoryTable("HistoryTable", schema: null);
-                            ttb.HasPeriodStart("Start");
-                            ttb.HasPeriodEnd("End");
-                        })
+                .ToTable(tb =>
+                    tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("HistoryTable", schema: null);
+                        ttb.HasPeriodStart("Start");
+                        ttb.HasPeriodEnd("End");
+                    })
                 );
 
             modelBuilder.FinalizeModel();

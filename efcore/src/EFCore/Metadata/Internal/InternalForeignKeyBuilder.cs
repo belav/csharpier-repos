@@ -810,16 +810,15 @@ public class InternalForeignKeyBuilder
 
         conflictingNavigationsFound =
             compatibleRelationship != null
-            || resolvableRelationships.Any(
-                r =>
-                    (
-                        r.Resolution
-                        & (
-                            Resolution.ResetToDependent
-                            | Resolution.ResetToPrincipal
-                            | Resolution.Remove
-                        )
-                    ) != 0
+            || resolvableRelationships.Any(r =>
+                (
+                    r.Resolution
+                    & (
+                        Resolution.ResetToDependent
+                        | Resolution.ResetToPrincipal
+                        | Resolution.Remove
+                    )
+                ) != 0
             );
 
         if (
@@ -1232,16 +1231,14 @@ public class InternalForeignKeyBuilder
             .SingleOrDefault(fk => fk.IsOwnership);
         var invertedOwnerships = declaringType
             .GetDeclaredReferencingForeignKeys()
-            .Where(
-                fk =>
-                    fk.IsOwnership
-                    && fk.DeclaringEntityType.ClrType == Metadata.PrincipalEntityType.ClrType
+            .Where(fk =>
+                fk.IsOwnership
+                && fk.DeclaringEntityType.ClrType == Metadata.PrincipalEntityType.ClrType
             )
             .ToList();
 
         if (
-            invertedOwnerships.Any(
-                fk => !configurationSource.Overrides(fk.GetConfigurationSource())
+            invertedOwnerships.Any(fk => !configurationSource.Overrides(fk.GetConfigurationSource())
             )
         )
         {
@@ -1976,21 +1973,17 @@ public class InternalForeignKeyBuilder
         using var batch = Metadata.DeclaringEntityType.Model.DelayConventions();
 
         var temporaryProperties = Metadata
-            .Properties.Where(
-                p =>
-                    (p.IsShadowProperty() || p.DeclaringType.IsPropertyBag && p.IsIndexerProperty())
-                    && ConfigurationSource.Convention.Overrides(p.GetConfigurationSource())
+            .Properties.Where(p =>
+                (p.IsShadowProperty() || p.DeclaringType.IsPropertyBag && p.IsIndexerProperty())
+                && ConfigurationSource.Convention.Overrides(p.GetConfigurationSource())
             )
             .ToList();
 
         var keysToDetach = temporaryProperties
-            .SelectMany(
-                p =>
-                    p.GetContainingKeys()
-                        .Where(
-                            k =>
-                                ConfigurationSource.Convention.Overrides(k.GetConfigurationSource())
-                        )
+            .SelectMany(p =>
+                p.GetContainingKeys()
+                    .Where(k => ConfigurationSource.Convention.Overrides(k.GetConfigurationSource())
+                    )
             )
             .Distinct()
             .ToList();
@@ -2330,8 +2323,8 @@ public class InternalForeignKeyBuilder
             dependentEntityType.BaseType != null
             && !principalEntityType.IsAssignableFrom(dependentEntityType)
             && configurationSource != ConfigurationSource.Explicit // let it throw for explicit
-            && properties.Any(
-                p => p.GetContainingKeys().Any(k => k.DeclaringEntityType != dependentEntityType)
+            && properties.Any(p =>
+                p.GetContainingKeys().Any(k => k.DeclaringEntityType != dependentEntityType)
             )
         )
         {
@@ -2572,10 +2565,9 @@ public class InternalForeignKeyBuilder
                 Metadata
                     .GetPropertiesConfigurationSource()
                     .Overrides(ConfigurationSource.DataAnnotation)
-                && Metadata.Properties.All(
-                    p =>
-                        ConfigurationSource.Convention.Overrides(p.GetTypeConfigurationSource())
-                        && (p.IsShadowProperty() || p.IsIndexerProperty())
+                && Metadata.Properties.All(p =>
+                    ConfigurationSource.Convention.Overrides(p.GetTypeConfigurationSource())
+                    && (p.IsShadowProperty() || p.IsIndexerProperty())
                 )
             )
             {
@@ -2886,12 +2878,8 @@ public class InternalForeignKeyBuilder
         using var batch = Metadata.DeclaringEntityType.Model.DelayConventions();
 
         var referencingSkipNavigations = Metadata
-            .ReferencingSkipNavigations?.Select(
-                n =>
-                    (
-                        Navigation: n,
-                        ConfigurationSource: n.GetForeignKeyConfigurationSource()!.Value
-                    )
+            .ReferencingSkipNavigations?.Select(n =>
+                (Navigation: n, ConfigurationSource: n.GetForeignKeyConfigurationSource()!.Value)
             )
             .ToList();
 
@@ -3608,10 +3596,9 @@ public class InternalForeignKeyBuilder
         // this should be replaced with reference counting
         // Issue #15898
         var temporaryProperties = dependentProperties
-            ?.Where(
-                p =>
-                    p.GetConfigurationSource() == ConfigurationSource.Convention
-                    && ((IConventionProperty)p).IsImplicitlyCreated()
+            ?.Where(p =>
+                p.GetConfigurationSource() == ConfigurationSource.Convention
+                && ((IConventionProperty)p).IsImplicitlyCreated()
             )
             .ToList();
         var tempIndex =
@@ -3623,10 +3610,9 @@ public class InternalForeignKeyBuilder
                 : null;
 
         var temporaryKeyProperties = principalProperties
-            ?.Where(
-                p =>
-                    p.GetConfigurationSource() == ConfigurationSource.Convention
-                    && ((IConventionProperty)p).IsImplicitlyCreated()
+            ?.Where(p =>
+                p.GetConfigurationSource() == ConfigurationSource.Convention
+                && ((IConventionProperty)p).IsImplicitlyCreated()
             )
             .ToList();
         var keyTempIndex =
@@ -3774,11 +3760,9 @@ public class InternalForeignKeyBuilder
                             dependentEntityType,
                             shouldThrow: false
                         )
-                        && dependentProperties.All(
-                            p =>
-                                ConfigurationSource.Convention.Overrides(
-                                    p.GetTypeConfigurationSource()
-                                ) && (p.IsShadowProperty() || p.IsIndexerProperty())
+                        && dependentProperties.All(p =>
+                            ConfigurationSource.Convention.Overrides(p.GetTypeConfigurationSource())
+                            && (p.IsShadowProperty() || p.IsIndexerProperty())
                         )
                     )
                 )

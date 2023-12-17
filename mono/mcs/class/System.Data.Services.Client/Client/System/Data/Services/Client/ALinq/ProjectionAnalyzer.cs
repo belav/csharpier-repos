@@ -736,10 +736,9 @@ namespace System.Data.Services.Client
                 if (
                     ClientType.CheckElementTypeIsEntity(iv.Expression.Type)
                     || IsCollectionProducingExpression(iv.Expression)
-                    || iv.Arguments.Any(
-                        a =>
-                            ClientType.CheckElementTypeIsEntity(a.Type)
-                            || IsCollectionProducingExpression(a)
+                    || iv.Arguments.Any(a =>
+                        ClientType.CheckElementTypeIsEntity(a.Type)
+                        || IsCollectionProducingExpression(a)
                     )
                 )
                 {

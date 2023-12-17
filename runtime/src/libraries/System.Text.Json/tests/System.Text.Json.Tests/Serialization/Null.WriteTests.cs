@@ -368,11 +368,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             return typeof(JsonMetadataServices)
                 .GetProperties(BindingFlags.Public | BindingFlags.Static)
-                .Where(
-                    prop =>
-                        prop.PropertyType.IsGenericType
-                        && prop.PropertyType.GetGenericTypeDefinition() == typeof(JsonConverter<>)
-                        && !prop.PropertyType.GetGenericArguments()[0].IsValueType
+                .Where(prop =>
+                    prop.PropertyType.IsGenericType
+                    && prop.PropertyType.GetGenericTypeDefinition() == typeof(JsonConverter<>)
+                    && !prop.PropertyType.GetGenericArguments()[0].IsValueType
                 )
                 .Select(prop => new object?[] { prop.GetValue(null) });
         }

@@ -1200,11 +1200,10 @@ public class ValidationWithRecordIntegrationTests
             ParameterType = typeof(ValidateSomeProperties),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-                request.QueryString = new QueryString(
-                    $"?{nameof(ValidateSomeProperties.NeverValidBecauseType)}.{nameof(NeverValid.NeverValidProperty)}=1"
-                )
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            request.QueryString = new QueryString(
+                $"?{nameof(ValidateSomeProperties.NeverValidBecauseType)}.{nameof(NeverValid.NeverValidProperty)}=1"
+            )
         );
 
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -1255,11 +1254,10 @@ public class ValidationWithRecordIntegrationTests
             ParameterType = typeof(ValidateSomeProperties),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-                request.QueryString = new QueryString(
-                    $"?{nameof(ValidateSomeProperties.NeverValidBecauseAttribute)}=1"
-                )
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            request.QueryString = new QueryString(
+                $"?{nameof(ValidateSomeProperties.NeverValidBecauseAttribute)}=1"
+            )
         );
 
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -1298,11 +1296,10 @@ public class ValidationWithRecordIntegrationTests
             ParameterType = typeof(ValidateSomeProperties),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-                request.QueryString = new QueryString(
-                    $"?{nameof(ValidateSomeProperties.ValidateNever)}=1"
-                )
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            request.QueryString = new QueryString(
+                $"?{nameof(ValidateSomeProperties.ValidateNever)}=1"
+            )
         );
 
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -1438,11 +1435,10 @@ public class ValidationWithRecordIntegrationTests
             ParameterType = typeof(ValidateSomePropertiesSometimes),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-                request.QueryString = new QueryString(
-                    $"?{nameof(ValidateSomePropertiesSometimes.Control)}=1"
-                )
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            request.QueryString = new QueryString(
+                $"?{nameof(ValidateSomePropertiesSometimes.Control)}=1"
+            )
         );
 
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();

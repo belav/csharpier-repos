@@ -249,14 +249,13 @@ public class GlobalVersionTests : IISFunctionalTestBase
                 var moduleNodes = config
                     .DescendantNodesAndSelf()
                     .OfType<XElement>()
-                    .Where(
-                        element =>
-                            element.Name == "add"
-                            && element
-                                .Attribute("name")
-                                ?.Value
-                                .StartsWith("AspNetCoreModule", StringComparison.Ordinal) == true
-                            && element.Attribute("image") != null
+                    .Where(element =>
+                        element.Name == "add"
+                        && element
+                            .Attribute("name")
+                            ?.Value
+                            .StartsWith("AspNetCoreModule", StringComparison.Ordinal) == true
+                        && element.Attribute("image") != null
                     );
 
                 var sourceDirectory = new DirectoryInfo(

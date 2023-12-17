@@ -74,15 +74,15 @@ namespace System.Linq.Tests
             var dex = new HashSet<string>(excludedMethods);
 
             var aMethods = a.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(
-                    m => m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute))
+                .Where(m =>
+                    m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute))
                 )
                 .ToLookup(m => m.Name);
 
             MethodComparer mc = new MethodComparer();
             var bMethods = b.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(
-                    m => m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute))
+                .Where(m =>
+                    m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute))
                 )
                 .ToLookup(m => m, mc);
 

@@ -219,9 +219,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var actual = compilation
                 .GetBoundReferenceManager()
                 .GetReferencedAssemblyAliases()
-                .Select(
-                    t =>
-                        $"{t.Item1.Identity.Name}, Version={t.Item1.Identity.Version}{(t.Item2.IsEmpty ? "" : ": " + string.Join(",", t.Item2))}"
+                .Select(t =>
+                    $"{t.Item1.Identity.Name}, Version={t.Item1.Identity.Version}{(t.Item2.IsEmpty ? "" : ": " + string.Join(",", t.Item2))}"
                 );
 
             AssertEx.Equal(expectedAssembliesAndAliases, actual, itemInspector: s => '"' + s + '"');
@@ -235,9 +234,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var actual = compilation
                 .GetBoundReferenceManager()
                 .GetReferencedAssemblyAliases()
-                .Select(
-                    t =>
-                        $"{t.Item1.Identity.Name}{(t.Item2.IsEmpty ? "" : ": " + string.Join(",", t.Item2))}"
+                .Select(t =>
+                    $"{t.Item1.Identity.Name}{(t.Item2.IsEmpty ? "" : ": " + string.Join(",", t.Item2))}"
                 );
 
             AssertEx.Equal(expectedAssembliesAndAliases, actual, itemInspector: s => '"' + s + '"');
@@ -379,10 +377,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
 
             var compilation = createCompilation();
-            var roots = ArrayBuilder<(
-                IOperation operation,
-                ISymbol associatedSymbol
-            )>.GetInstance();
+            var roots = ArrayBuilder<(IOperation operation, ISymbol associatedSymbol)>.GetInstance(
+
+            );
             var stopWatch = new Stopwatch();
             if (!System.Diagnostics.Debugger.IsAttached)
             {

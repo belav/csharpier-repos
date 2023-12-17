@@ -151,8 +151,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 // If the runtime doesn't support adding new types then we expect every row number for any type that is
                 // emitted will be less than or equal to the number of rows in the original metadata.
-                var highestEmittedTypeDefRow = emitResult.ChangedTypes.Max(
-                    t => MetadataTokens.GetRowNumber(t)
+                var highestEmittedTypeDefRow = emitResult.ChangedTypes.Max(t =>
+                    MetadataTokens.GetRowNumber(t)
                 );
                 var highestExistingTypeDefRow = emitResult
                     .Baseline.OriginalMetadata.GetMetadataReader()
@@ -1090,8 +1090,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             foreach (var partialTypeEdits in updatesByPartialType)
             {
                 Debug.Assert(
-                    partialTypeEdits.All(
-                        edit => edit.SyntaxMapTree is null == edit.SyntaxMap is null
+                    partialTypeEdits.All(edit =>
+                        edit.SyntaxMapTree is null == edit.SyntaxMap is null
                     )
                 );
 
@@ -1520,11 +1520,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         }
                         else
                         {
-                            var updatedMethodTokens = emitResult.UpdatedMethods.SelectAsArray(
-                                h => MetadataTokens.GetToken(h)
+                            var updatedMethodTokens = emitResult.UpdatedMethods.SelectAsArray(h =>
+                                MetadataTokens.GetToken(h)
                             );
-                            var changedTypeTokens = emitResult.ChangedTypes.SelectAsArray(
-                                h => MetadataTokens.GetToken(h)
+                            var changedTypeTokens = emitResult.ChangedTypes.SelectAsArray(h =>
+                                MetadataTokens.GetToken(h)
                             );
 
                             // Determine all active statements whose span changed and exception region span deltas.
@@ -1936,12 +1936,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             //   new = old – delta
             exceptionRegionUpdates = nonRemappableRegions.SelectAsArray(
                 r => r.Region.IsExceptionRegion,
-                r =>
-                    new ManagedExceptionRegionUpdate(
-                        r.Method,
-                        -r.Region.OldSpan.Span.GetLineDelta(r.Region.NewSpan.Span),
-                        r.Region.NewSpan.Span.ToSourceSpan()
-                    )
+                r => new ManagedExceptionRegionUpdate(
+                    r.Method,
+                    -r.Region.OldSpan.Span.GetLineDelta(r.Region.NewSpan.Span),
+                    r.Region.NewSpan.Span.ToSourceSpan()
+                )
             );
         }
     }

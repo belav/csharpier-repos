@@ -548,7 +548,9 @@ namespace Microsoft.CodeAnalysis.Collections
                         {
                             // The chain of entries forms a loop; which means a concurrent update has happened.
                             // Break out of the loop and throw, rather than looping forever.
-                            ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
+                            ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported(
+
+                            );
                         }
                     }
                 }
@@ -593,7 +595,9 @@ namespace Microsoft.CodeAnalysis.Collections
                         {
                             // The chain of entries forms a loop; which means a concurrent update has happened.
                             // Break out of the loop and throw, rather than looping forever.
-                            ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
+                            ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported(
+
+                            );
                         }
                     }
                 }
@@ -632,7 +636,9 @@ namespace Microsoft.CodeAnalysis.Collections
                     {
                         // The chain of entries forms a loop; which means a concurrent update has happened.
                         // Break out of the loop and throw, rather than looping forever.
-                        ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
+                        ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported(
+
+                        );
                     }
                 }
             }
@@ -773,7 +779,9 @@ namespace Microsoft.CodeAnalysis.Collections
                     {
                         // The chain of entries forms a loop; which means a concurrent update has happened.
                         // Break out of the loop and throw, rather than looping forever.
-                        ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
+                        ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported(
+
+                        );
                     }
                 }
             }
@@ -856,7 +864,9 @@ namespace Microsoft.CodeAnalysis.Collections
                     {
                         // The chain of entries forms a loop; which means a concurrent update has happened.
                         // Break out of the loop and throw, rather than looping forever.
-                        ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
+                        ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported(
+
+                        );
                     }
                 }
             }
@@ -1248,7 +1258,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     if (_index == 0 || (_index == _dictionary._count + 1))
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen(
+
+                        );
                     }
 
                     if (_getEnumeratorRetType == DictEntry)
@@ -1277,7 +1289,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     if (_index == 0 || (_index == _dictionary._count + 1))
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen(
+
+                        );
                     }
 
                     return new DictionaryEntry(_current.Key, _current.Value);
@@ -1290,7 +1304,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     if (_index == 0 || (_index == _dictionary._count + 1))
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen(
+
+                        );
                     }
 
                     return _current.Key;
@@ -1303,7 +1319,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     if (_index == 0 || (_index == _dictionary._count + 1))
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen(
+
+                        );
                     }
 
                     return _current.Value;
@@ -1469,7 +1487,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     if (_version != _dictionary._version)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion(
+
+                        );
                     }
 
                     while ((uint)_index < (uint)_dictionary._count)
@@ -1496,7 +1516,9 @@ namespace Microsoft.CodeAnalysis.Collections
                     {
                         if (_index == 0 || (_index == _dictionary._count + 1))
                         {
-                            ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen();
+                            ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen(
+
+                            );
                         }
 
                         return _currentKey;
@@ -1507,7 +1529,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     if (_version != _dictionary._version)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion(
+
+                        );
                     }
 
                     _index = 0;
@@ -1674,7 +1698,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     if (_version != _dictionary._version)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion(
+
+                        );
                     }
 
                     while ((uint)_index < (uint)_dictionary._count)
@@ -1700,7 +1726,9 @@ namespace Microsoft.CodeAnalysis.Collections
                     {
                         if (_index == 0 || (_index == _dictionary._count + 1))
                         {
-                            ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen();
+                            ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen(
+
+                            );
                         }
 
                         return _currentValue;
@@ -1711,7 +1739,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     if (_version != _dictionary._version)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion(
+
+                        );
                     }
 
                     _index = 0;

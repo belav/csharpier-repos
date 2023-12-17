@@ -40,7 +40,9 @@ namespace System.Data.EntityModel.Emitters
         {
             base.EmitProperties(typeDecl);
             foreach (
-                NavigationProperty navigationProperty in Item.GetDeclaredOnlyMembers<NavigationProperty>()
+                NavigationProperty navigationProperty in Item.GetDeclaredOnlyMembers<NavigationProperty>(
+
+                )
             )
             {
                 NavigationPropertyEmitter navigationPropertyEmitter = new NavigationPropertyEmitter(

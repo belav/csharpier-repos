@@ -426,7 +426,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override bool ConvertInsufficientExecutionStackExceptionToCancelledByStackGuardException()
             {
-                return _parent.ConvertInsufficientExecutionStackExceptionToCancelledByStackGuardException();
+                return _parent.ConvertInsufficientExecutionStackExceptionToCancelledByStackGuardException(
+
+                );
             }
 
             public override BoundNode VisitBlock(BoundBlock node)

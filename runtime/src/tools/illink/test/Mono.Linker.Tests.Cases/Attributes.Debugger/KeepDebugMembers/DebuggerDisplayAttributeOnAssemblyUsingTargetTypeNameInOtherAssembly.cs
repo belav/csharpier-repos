@@ -44,8 +44,9 @@ namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
     {
         public static void Main()
         {
-            var foo =
-                new DebuggerDisplayAttributeOnAssemblyUsingTargetTypeNameInOtherAssembly_Lib();
+            var foo = new DebuggerDisplayAttributeOnAssemblyUsingTargetTypeNameInOtherAssembly_Lib(
+
+            );
             foo.Property = 1;
         }
     }

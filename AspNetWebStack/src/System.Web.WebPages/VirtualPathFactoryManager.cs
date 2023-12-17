@@ -77,8 +77,7 @@ namespace System.Web.WebPages
         internal T CreateInstanceOfType<T>(string virtualPath)
             where T : class
         {
-            var virtualPathFactory = _virtualPathFactories.FirstOrDefault(
-                f => f.Exists(virtualPath)
+            var virtualPathFactory = _virtualPathFactories.FirstOrDefault(f => f.Exists(virtualPath)
             );
             if (virtualPathFactory != null)
             {

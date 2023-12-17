@@ -48,8 +48,9 @@ namespace System.Web.Services.Discovery
         #region Fields
 
         private IList additionalInformation = new ArrayList();
-        private DiscoveryClientDocumentCollection documents =
-            new DiscoveryClientDocumentCollection();
+        private DiscoveryClientDocumentCollection documents = new DiscoveryClientDocumentCollection(
+
+        );
         private DiscoveryExceptionDictionary errors = new DiscoveryExceptionDictionary();
         private DiscoveryClientReferenceCollection references =
             new DiscoveryClientReferenceCollection();

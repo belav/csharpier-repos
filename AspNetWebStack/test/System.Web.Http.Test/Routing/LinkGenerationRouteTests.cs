@@ -64,8 +64,9 @@ namespace System.Web.Http.Routing
         private class InnerRoute : IHttpRoute
         {
             private readonly IHttpRouteData _routeData = new Mock<IHttpRouteData>().Object;
-            private readonly IHttpVirtualPathData _virtualPathData =
-                new Mock<IHttpVirtualPathData>().Object;
+            private readonly IHttpVirtualPathData _virtualPathData = new Mock<IHttpVirtualPathData>(
+
+            ).Object;
 
             public InnerRoute()
             {

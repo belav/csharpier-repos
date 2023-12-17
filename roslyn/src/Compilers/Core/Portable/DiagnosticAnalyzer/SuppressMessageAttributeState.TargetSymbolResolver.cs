@@ -241,8 +241,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     switch (_scope)
                     {
                         case TargetScope.Namespace:
-                            singleResult = candidateMembers.FirstOrDefault(
-                                s => s.Kind == SymbolKind.Namespace
+                            singleResult = candidateMembers.FirstOrDefault(s =>
+                                s.Kind == SymbolKind.Namespace
                             );
                             break;
 
@@ -260,17 +260,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             }
                             else if (isEvent)
                             {
-                                singleResult = candidateMembers.FirstOrDefault(
-                                    s => s.Kind == SymbolKind.Event
+                                singleResult = candidateMembers.FirstOrDefault(s =>
+                                    s.Kind == SymbolKind.Event
                                 );
                             }
                             else
                             {
-                                singleResult = candidateMembers.FirstOrDefault(
-                                    s =>
-                                        s.Kind
-                                            is not SymbolKind.Namespace
-                                                and not SymbolKind.NamedType
+                                singleResult = candidateMembers.FirstOrDefault(s =>
+                                    s.Kind is not SymbolKind.Namespace and not SymbolKind.NamedType
                                 );
                             }
                             break;
@@ -915,8 +912,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             )
             {
                 return (INamedTypeSymbol)
-                    candidateMembers.FirstOrDefault(
-                        s => s.Kind == SymbolKind.NamedType && ((INamedTypeSymbol)s).Arity == arity
+                    candidateMembers.FirstOrDefault(s =>
+                        s.Kind == SymbolKind.NamedType && ((INamedTypeSymbol)s).Arity == arity
                     );
             }
 
@@ -925,8 +922,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             )
             {
                 return (INamespaceOrTypeSymbol)
-                    candidateMembers.FirstOrDefault(
-                        s => s.Kind is SymbolKind.Namespace or SymbolKind.NamedType
+                    candidateMembers.FirstOrDefault(s =>
+                        s.Kind is SymbolKind.Namespace or SymbolKind.NamedType
                     );
             }
 

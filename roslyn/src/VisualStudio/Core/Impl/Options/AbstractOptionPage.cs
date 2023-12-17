@@ -112,8 +112,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             OptionLogger.Log(changedOptions);
 
             s_optionStore.GlobalOptions.SetGlobalOptions(
-                changedOptions.SelectAsArray(
-                    entry => KeyValuePairUtil.Create(entry.key, entry.newValue)
+                changedOptions.SelectAsArray(entry =>
+                    KeyValuePairUtil.Create(entry.key, entry.newValue)
                 )
             );
 

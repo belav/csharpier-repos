@@ -154,8 +154,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project._projectSystemProjectFactory.ApplyChangeToWorkspace(
-                            w => _documentAddAction(w, documentInfo)
+                        _project._projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
+                            _documentAddAction(w, documentInfo)
                         );
                         _project
                             ._projectSystemProjectFactory.RaiseOnDocumentsAddedMaybeAsync(
@@ -287,8 +287,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 else
                 {
                     // right now, assumption is dynamically generated file can never be opened in editor
-                    _project._projectSystemProjectFactory.ApplyChangeToWorkspace(
-                        w => _documentAddAction(w, documentInfo)
+                    _project._projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
+                        _documentAddAction(w, documentInfo)
                     );
                 }
             }
@@ -374,8 +374,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project._projectSystemProjectFactory.ApplyChangeToWorkspace(
-                            w => _documentRemoveAction(w, documentId)
+                        _project._projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
+                            _documentRemoveAction(w, documentId)
                         );
                     }
                 }
@@ -541,28 +541,30 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
 
                     await _project
-                        ._projectSystemProjectFactory.ApplyBatchChangeToWorkspaceAsync(solutionChanges =>
-                        {
-                            foreach (var (documentId, textLoader) in documentsToChange)
+                        ._projectSystemProjectFactory.ApplyBatchChangeToWorkspaceAsync(
+                            solutionChanges =>
                             {
-                                if (
-                                    !_project._projectSystemProjectFactory.Workspace.IsDocumentOpen(
-                                        documentId
-                                    )
-                                )
+                                foreach (var (documentId, textLoader) in documentsToChange)
                                 {
-                                    solutionChanges.UpdateSolutionForDocumentAction(
-                                        _documentTextLoaderChangedAction(
-                                            solutionChanges.Solution,
-                                            documentId,
-                                            textLoader
-                                        ),
-                                        _documentChangedWorkspaceKind,
-                                        SpecializedCollections.SingletonEnumerable(documentId)
-                                    );
+                                    if (
+                                        !_project._projectSystemProjectFactory.Workspace.IsDocumentOpen(
+                                            documentId
+                                        )
+                                    )
+                                    {
+                                        solutionChanges.UpdateSolutionForDocumentAction(
+                                            _documentTextLoaderChangedAction(
+                                                solutionChanges.Solution,
+                                                documentId,
+                                                textLoader
+                                            ),
+                                            _documentChangedWorkspaceKind,
+                                            SpecializedCollections.SingletonEnumerable(documentId)
+                                        );
+                                    }
                                 }
                             }
-                        })
+                        )
                         .ConfigureAwait(false);
 
                     documentsToChange.Free();

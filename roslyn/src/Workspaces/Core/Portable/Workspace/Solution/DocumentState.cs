@@ -689,8 +689,9 @@ namespace Microsoft.CodeAnalysis
                 encoding = null;
             }
 
-            var syntaxTreeFactory =
-                LanguageServices.GetRequiredService<ISyntaxTreeFactoryService>();
+            var syntaxTreeFactory = LanguageServices.GetRequiredService<ISyntaxTreeFactoryService>(
+
+            );
 
             Contract.ThrowIfNull(_options);
             var (text, treeAndVersion) = CreateTreeWithLazyText(

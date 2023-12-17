@@ -419,8 +419,8 @@ public class ViewComponentResultTest
         };
         var result = Task.FromResult<IHtmlContent>(new HtmlContentBuilder().AppendHtml(expected));
 
-        var helper = Mock.Of<IViewComponentHelper>(
-            h => h.InvokeAsync(It.IsAny<Type>(), It.IsAny<object>()) == result
+        var helper = Mock.Of<IViewComponentHelper>(h =>
+            h.InvokeAsync(It.IsAny<Type>(), It.IsAny<object>()) == result
         );
 
         var httpContext = new DefaultHttpContext();
@@ -463,8 +463,8 @@ public class ViewComponentResultTest
         };
         var result = Task.FromResult<IHtmlContent>(new HtmlContentBuilder().AppendHtml(expected));
 
-        var helper = Mock.Of<IViewComponentHelper>(
-            h => h.InvokeAsync(It.IsAny<Type>(), It.IsAny<object>()) == result
+        var helper = Mock.Of<IViewComponentHelper>(h =>
+            h.InvokeAsync(It.IsAny<Type>(), It.IsAny<object>()) == result
         );
 
         var httpContext = new DefaultHttpContext();

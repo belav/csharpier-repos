@@ -457,13 +457,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
             // After the RequestAborted token is tripped, the connection reset should be logged.
             // On Linux and macOS, the connection close is still sometimes observed as a FIN despite the LingerState.
-            var presShutdownTransportLogs = TestSink.Writes.Where(
-                w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+            var presShutdownTransportLogs = TestSink.Writes.Where(w =>
+                w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
             );
-            var connectionResetLogs = presShutdownTransportLogs.Where(
-                w =>
-                    w.EventId == connectionResetEventId
-                    || (!TestPlatformHelper.IsWindows && w.EventId == connectionFinEventId)
+            var connectionResetLogs = presShutdownTransportLogs.Where(w =>
+                w.EventId == connectionResetEventId
+                || (!TestPlatformHelper.IsWindows && w.EventId == connectionFinEventId)
             );
 
             Assert.NotEmpty(connectionResetLogs);
@@ -472,15 +471,14 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             await appCompletedTcs.Task.DefaultTimeout();
         }
 
-        var coreLogs = TestSink.Writes.Where(
-            w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections"
+        var coreLogs = TestSink.Writes.Where(w =>
+            w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections"
         );
         Assert.Single(coreLogs.Where(w => w.EventId == connectionStopEventId));
 
-        var transportLogs = TestSink.Writes.Where(
-            w =>
-                w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel"
-                || w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+        var transportLogs = TestSink.Writes.Where(w =>
+            w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel"
+            || w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
         );
 
         Assert.Empty(transportLogs.Where(w => w.LogLevel > LogLevel.Debug));
@@ -517,14 +515,14 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        var transportLogs = TestSink.Writes.Where(
-            w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+        var transportLogs = TestSink.Writes.Where(w =>
+            w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
         );
 
         // The "Microsoft.AspNetCore.Server.Kestrel" logger may contain info level logs because resetting the connection can cause
         // partial headers to be read leading to a bad request.
-        var coreLogs = TestSink.Writes.Where(
-            w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel"
+        var coreLogs = TestSink.Writes.Where(w =>
+            w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel"
         );
 
         Assert.Empty(transportLogs.Where(w => w.LogLevel > LogLevel.Debug));

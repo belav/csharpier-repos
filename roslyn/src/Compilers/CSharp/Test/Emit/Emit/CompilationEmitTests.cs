@@ -1185,12 +1185,8 @@ public class C
                         "MemberReference:Void System.Diagnostics.DebuggableAttribute..ctor(DebuggingModes)",
                         "MemberReference:Void System.Runtime.CompilerServices.ReferenceAssemblyAttribute..ctor()"
                     },
-                    attributes.Select(
-                        a =>
-                            MetadataReaderUtils.Dump(
-                                reader,
-                                reader.GetCustomAttribute(a).Constructor
-                            )
+                    attributes.Select(a =>
+                        MetadataReaderUtils.Dump(reader, reader.GetCustomAttribute(a).Constructor)
                     )
                 );
             };
@@ -1214,12 +1210,8 @@ public class C
                 var reader = assembly.GetMetadataReader();
                 var attributes = reader.GetAssemblyDefinition().GetCustomAttributes();
                 AssertEx.SetEqual(
-                    attributes.Select(
-                        a =>
-                            MetadataReaderUtils.Dump(
-                                reader,
-                                reader.GetCustomAttribute(a).Constructor
-                            )
+                    attributes.Select(a =>
+                        MetadataReaderUtils.Dump(reader, reader.GetCustomAttribute(a).Constructor)
                     ),
                     new string[]
                     {
@@ -1260,12 +1252,8 @@ public class C
                         "MemberReference:Void System.Diagnostics.DebuggableAttribute..ctor(DebuggingModes)",
                         "MemberReference:Void System.Runtime.CompilerServices.ReferenceAssemblyAttribute..ctor()"
                     },
-                    attributes.Select(
-                        a =>
-                            MetadataReaderUtils.Dump(
-                                reader,
-                                reader.GetCustomAttribute(a).Constructor
-                            )
+                    attributes.Select(a =>
+                        MetadataReaderUtils.Dump(reader, reader.GetCustomAttribute(a).Constructor)
                     )
                 );
             };
@@ -3778,8 +3766,8 @@ public class Class1 : CppCli.CppBase2, CppCli.CppInterface1
             var cciExplicit = class1TypeDef.GetExplicitImplementationOverrides(context);
             var cciMethods = class1TypeDef
                 .GetMethods(context)
-                .Where(
-                    m => ((MethodSymbol)m.GetInternalSymbol()).MethodKind != MethodKind.Constructor
+                .Where(m =>
+                    ((MethodSymbol)m.GetInternalSymbol()).MethodKind != MethodKind.Constructor
                 );
 
             context.Diagnostics.Verify();
@@ -7118,6 +7106,7 @@ public class Program
             );
             // Before the bug was fixed, the PrivateImplementationDetails classes clashed, resulting in the commented-out error below.
             comp3.VerifyDiagnostics(
+
             ////// error CS0101: The namespace '<global namespace>' already contains a definition for '<PrivateImplementationDetails>'
             ////Diagnostic(ErrorCode.ERR_DuplicateNameInNS).WithArguments("<PrivateImplementationDetails>", "<global namespace>").WithLocation(1, 1)
             );

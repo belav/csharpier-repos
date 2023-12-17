@@ -190,10 +190,9 @@ namespace System.Configuration
                         && SecurityManager.SecurityEnabled
                     )
                     {
-                        new FileIOPermission(
-                            FileIOPermissionAccess.PathDiscovery,
-                            fileName
-                        ).Demand();
+                        new FileIOPermission(FileIOPermissionAccess.PathDiscovery, fileName).Demand(
+
+                        );
                     }
                     return fileName;
                 }
@@ -230,10 +229,9 @@ namespace System.Configuration
                         && SecurityManager.SecurityEnabled
                     )
                     {
-                        new FileIOPermission(
-                            FileIOPermissionAccess.PathDiscovery,
-                            fileName
-                        ).Demand();
+                        new FileIOPermission(FileIOPermissionAccess.PathDiscovery, fileName).Demand(
+
+                        );
                     }
                     return fileName;
                 }
@@ -267,10 +265,9 @@ namespace System.Configuration
                         && SecurityManager.SecurityEnabled
                     )
                     {
-                        new FileIOPermission(
-                            FileIOPermissionAccess.PathDiscovery,
-                            fileName
-                        ).Demand();
+                        new FileIOPermission(FileIOPermissionAccess.PathDiscovery, fileName).Demand(
+
+                        );
                     }
                     return fileName;
                 }
@@ -312,10 +309,9 @@ namespace System.Configuration
                         && SecurityManager.SecurityEnabled
                     )
                     {
-                        new FileIOPermission(
-                            FileIOPermissionAccess.PathDiscovery,
-                            fileName
-                        ).Demand();
+                        new FileIOPermission(FileIOPermissionAccess.PathDiscovery, fileName).Demand(
+
+                        );
                     }
                     return fileName;
                 }
@@ -352,10 +348,9 @@ namespace System.Configuration
                         && SecurityManager.SecurityEnabled
                     )
                     {
-                        new FileIOPermission(
-                            FileIOPermissionAccess.PathDiscovery,
-                            fileName
-                        ).Demand();
+                        new FileIOPermission(FileIOPermissionAccess.PathDiscovery, fileName).Demand(
+
+                        );
                     }
                     return fileName;
                 }

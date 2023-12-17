@@ -131,24 +131,22 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestToString()
         {
-            DataflowTestHelpers.TestToString(
-                nameFormat =>
-                    nameFormat != null
-                        ? new BatchedJoinBlock<int, string>(
-                            2,
-                            new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
-                        )
-                        : new BatchedJoinBlock<int, string>(2)
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new BatchedJoinBlock<int, string>(
+                        2,
+                        new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new BatchedJoinBlock<int, string>(2)
             );
 
-            DataflowTestHelpers.TestToString(
-                nameFormat =>
-                    nameFormat != null
-                        ? new BatchedJoinBlock<int, string, double>(
-                            3,
-                            new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
-                        )
-                        : new BatchedJoinBlock<int, string, double>(3)
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new BatchedJoinBlock<int, string, double>(
+                        3,
+                        new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new BatchedJoinBlock<int, string, double>(3)
             );
         }
 

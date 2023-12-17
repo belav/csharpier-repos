@@ -249,11 +249,10 @@ namespace Microsoft.CodeAnalysis.Telemetry
                         PiiValue pii => new TelemetryPiiProperty(pii.Value),
                         IEnumerable<object> items
                             => new TelemetryComplexProperty(
-                                items.Select(
-                                    item =>
-                                        (item is PiiValue pii)
-                                            ? new TelemetryPiiProperty(pii.Value)
-                                            : item
+                                items.Select(item =>
+                                    (item is PiiValue pii)
+                                        ? new TelemetryPiiProperty(pii.Value)
+                                        : item
                                 )
                             ),
                         _ => value

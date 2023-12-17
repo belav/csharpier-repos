@@ -427,8 +427,9 @@ namespace System.Workflow.Activities.Rules
 
         private delegate Operation ComputePrecedence(CodeExpression expresssion);
 
-        private static Dictionary<Type, ComputePrecedence> precedenceMap =
-            InitializePrecedenceMap();
+        private static Dictionary<Type, ComputePrecedence> precedenceMap = InitializePrecedenceMap(
+
+        );
 
         private static Dictionary<Type, ComputePrecedence> InitializePrecedenceMap()
         {

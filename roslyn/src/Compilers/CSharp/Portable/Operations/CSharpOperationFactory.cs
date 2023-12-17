@@ -2077,8 +2077,8 @@ namespace Microsoft.CodeAnalysis.Operations
                     expr
                 )
                 .GetPublicSymbol();
-            ImmutableArray<IOperation> elements = expr.Elements.SelectAsArray(
-                e => CreateBoundCollectionExpressionElement(e)
+            ImmutableArray<IOperation> elements = expr.Elements.SelectAsArray(e =>
+                CreateBoundCollectionExpressionElement(e)
             );
             return new CollectionExpressionOperation(
                 constructMethod,
@@ -2573,8 +2573,9 @@ namespace Microsoft.CodeAnalysis.Operations
                 BinaryOperatorKind operatorKind = Helper.DeriveBinaryOperatorKind(
                     boundBinaryOperator.OperatorKind
                 );
-                IMethodSymbol operatorMethod =
-                    boundBinaryOperator.LogicalOperator.GetPublicSymbol();
+                IMethodSymbol operatorMethod = boundBinaryOperator.LogicalOperator.GetPublicSymbol(
+
+                );
                 IMethodSymbol unaryOperatorMethod =
                     boundBinaryOperator.OperatorKind.Operator() == CSharp.BinaryOperatorKind.And
                         ? boundBinaryOperator.FalseOperator.GetPublicSymbol()
@@ -3505,7 +3506,9 @@ namespace Microsoft.CodeAnalysis.Operations
             DisposeOperationInfo disposeOperationInfo =
                 boundUsingStatement.PatternDisposeInfoOpt is object
                     ? new DisposeOperationInfo(
-                        disposeMethod: boundUsingStatement.PatternDisposeInfoOpt.Method.GetPublicSymbol(),
+                        disposeMethod: boundUsingStatement.PatternDisposeInfoOpt.Method.GetPublicSymbol(
+
+                        ),
                         disposeArguments: CreateDisposeArguments(
                             boundUsingStatement.PatternDisposeInfoOpt
                         )
@@ -4495,8 +4498,9 @@ namespace Microsoft.CodeAnalysis.Operations
                 BoundSwitchSection,
                 ISwitchCaseOperation
             >(boundSwitchStatement.SwitchSections);
-            ImmutableArray<ILocalSymbol> locals =
-                boundSwitchStatement.InnerLocals.GetPublicSymbols();
+            ImmutableArray<ILocalSymbol> locals = boundSwitchStatement.InnerLocals.GetPublicSymbols(
+
+            );
             ILabelSymbol exitLabel = boundSwitchStatement.BreakLabel.GetPublicSymbol();
             SyntaxNode syntax = boundSwitchStatement.Syntax;
             bool isImplicit = boundSwitchStatement.WasCompilerGenerated;

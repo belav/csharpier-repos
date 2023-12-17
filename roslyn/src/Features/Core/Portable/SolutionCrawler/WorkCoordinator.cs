@@ -534,15 +534,15 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 .GetSourceGeneratedDocumentsAsync(_shutdownToken)
                                 .ConfigureAwait(false);
                             var oldProjectSourceGeneratedDocumentsById =
-                                oldProjectSourceGeneratedDocuments.ToDictionary(
-                                    static document => document.Id
+                                oldProjectSourceGeneratedDocuments.ToDictionary(static document =>
+                                    document.Id
                                 );
                             var newProjectSourceGeneratedDocuments = await newProject
                                 .GetSourceGeneratedDocumentsAsync(_shutdownToken)
                                 .ConfigureAwait(false);
                             var newProjectSourceGeneratedDocumentsById =
-                                newProjectSourceGeneratedDocuments.ToDictionary(
-                                    static document => document.Id
+                                newProjectSourceGeneratedDocuments.ToDictionary(static document =>
+                                    document.Id
                                 );
 
                             foreach (
@@ -864,8 +864,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 Document newDocument
             )
             {
-                var differenceService =
-                    newDocument.GetLanguageService<IDocumentDifferenceService>();
+                var differenceService = newDocument.GetLanguageService<IDocumentDifferenceService>(
+
+                );
 
                 if (differenceService == null)
                 {

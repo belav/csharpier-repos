@@ -75,7 +75,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     var document = solution.GetRequiredDocument(documentId);
 
                     var service =
-                        document.GetRequiredLanguageService<IConvertTupleToStructCodeRefactoringProvider>();
+                        document.GetRequiredLanguageService<IConvertTupleToStructCodeRefactoringProvider>(
+
+                        );
                     var fallbackOptions = GetClientOptionsProvider(callbackId);
 
                     var updatedSolution = await service

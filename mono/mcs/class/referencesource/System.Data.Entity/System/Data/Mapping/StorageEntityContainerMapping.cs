@@ -204,9 +204,9 @@ namespace System.Data.Mapping
         {
             get
             {
-                return new List<StorageSetMapping>(
-                    this.m_associationSetMappings.Values
-                ).AsReadOnly();
+                return new List<StorageSetMapping>(this.m_associationSetMappings.Values).AsReadOnly(
+
+                );
             }
         }
 
@@ -300,17 +300,15 @@ namespace System.Data.Mapping
             IEnumerable<StorageAssociationSetMapping> associationSetMappings =
                 m_associationSetMappings
                     .Values.Cast<StorageAssociationSetMapping>()
-                    .Where(
-                        w => ((w.StoreEntitySet != null) && (w.StoreEntitySet == storeEntitySet))
+                    .Where(w => ((w.StoreEntitySet != null) && (w.StoreEntitySet == storeEntitySet))
                     );
             //From this again filter the ones that have the specified EntitySet on atleast one end
-            associationSetMappings = associationSetMappings.Where(
-                associationSetMap =>
-                    (
-                        (associationSetMap.Set as AssociationSet).AssociationSetEnds.Any(
-                            associationSetEnd => associationSetEnd.EntitySet == edmEntitySet
-                        )
+            associationSetMappings = associationSetMappings.Where(associationSetMap =>
+                (
+                    (associationSetMap.Set as AssociationSet).AssociationSetEnds.Any(
+                        associationSetEnd => associationSetEnd.EntitySet == edmEntitySet
                     )
+                )
             );
             return associationSetMappings;
         }

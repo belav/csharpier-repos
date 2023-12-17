@@ -247,11 +247,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         var comments = context
                             .Tree.GetRoot()
                             .DescendantTrivia()
-                            .Where(
-                                t =>
-                                    t.IsKind(SyntaxKind.SingleLineCommentTrivia)
-                                    || t.IsKind(SyntaxKind.MultiLineCommentTrivia)
-                                    || t.IsKind(VisualBasic.SyntaxKind.CommentTrivia)
+                            .Where(t =>
+                                t.IsKind(SyntaxKind.SingleLineCommentTrivia)
+                                || t.IsKind(SyntaxKind.MultiLineCommentTrivia)
+                                || t.IsKind(VisualBasic.SyntaxKind.CommentTrivia)
                             );
 
                         foreach (var comment in comments)
@@ -337,8 +336,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             public override void Initialize(AnalysisContext analysisContext)
             {
-                analysisContext.RegisterCompilationStartAction(
-                    context => AssemblyName = context.Compilation.AssemblyName
+                analysisContext.RegisterCompilationStartAction(context =>
+                    AssemblyName = context.Compilation.AssemblyName
                 );
 
                 analysisContext.RegisterSymbolAction(

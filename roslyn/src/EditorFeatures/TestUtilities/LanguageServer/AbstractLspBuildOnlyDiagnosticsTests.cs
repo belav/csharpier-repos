@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.LanguageServer
         public void TestExportedDiagnosticIds()
         {
             var attribute =
-                this.LspBuildOnlyDiagnosticsType.GetCustomAttribute<LspBuildOnlyDiagnosticsAttribute>();
+                this.LspBuildOnlyDiagnosticsType.GetCustomAttribute<LspBuildOnlyDiagnosticsAttribute>(
+
+                );
 
             var actualDiagnosticCodes = attribute.BuildOnlyDiagnostics;
             var missing = ExpectedDiagnosticCodes
@@ -43,8 +45,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.LanguageServer
                 var enumMembers = ErrorCodeType.GetFields(
                     BindingFlags.Public | BindingFlags.Static
                 );
-                var enumMember = enumMembers.First(
-                    m => Convert.ToInt32(m.GetValue(null)) == codeValue
+                var enumMember = enumMembers.First(m =>
+                    Convert.ToInt32(m.GetValue(null)) == codeValue
                 );
 
                 errorMessage.AppendLine(

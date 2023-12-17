@@ -99,10 +99,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             // the method symbols for the getter and setter, we don't want to generate them twice.
 
             var members = GetMembers(namedType)
-                .Where(
-                    s =>
-                        s.Kind != SymbolKind.Property
-                        || PropertyGenerator.CanBeGenerated((IPropertySymbol)s)
+                .Where(s =>
+                    s.Kind != SymbolKind.Property
+                    || PropertyGenerator.CanBeGenerated((IPropertySymbol)s)
                 )
                 .ToImmutableArray();
             if (namedType.IsRecord)
@@ -166,10 +165,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 members = members.Remove(primaryConstructor);
 
                 // remove any fields/properties that were created by the primary constructor
-                members = members.WhereAsArray(
-                    m =>
-                        m is not IPropertySymbol and not IFieldSymbol
-                        || !primaryConstructor.Parameters.Any(static (p, m) => p.Name == m.Name, m)
+                members = members.WhereAsArray(m =>
+                    m is not IPropertySymbol and not IFieldSymbol
+                    || !primaryConstructor.Parameters.Any(static (p, m) => p.Name == m.Name, m)
                 );
             }
 

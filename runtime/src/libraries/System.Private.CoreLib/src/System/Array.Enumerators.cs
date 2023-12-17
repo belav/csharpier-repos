@@ -49,7 +49,9 @@ namespace System
                 {
                     if (index < 0)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumNotStarted();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumNotStarted(
+
+                        );
                     }
                     else
                     {

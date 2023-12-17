@@ -175,12 +175,11 @@ namespace Microsoft.CodeAnalysis.Rename
                 options,
                 fallbackOptions,
                 renameLocations.Locations,
-                renameLocations.ImplicitLocations.SelectAsArray(
-                    loc => SerializableReferenceLocation.Dehydrate(loc, cancellationToken)
+                renameLocations.ImplicitLocations.SelectAsArray(loc =>
+                    SerializableReferenceLocation.Dehydrate(loc, cancellationToken)
                 ),
-                renameLocations.ReferencedSymbols.SelectAsArray(
-                    sym =>
-                        SerializableSymbolAndProjectId.Dehydrate(solution, sym, cancellationToken)
+                renameLocations.ReferencedSymbols.SelectAsArray(sym =>
+                    SerializableSymbolAndProjectId.Dehydrate(solution, sym, cancellationToken)
                 )
             );
         }

@@ -253,8 +253,7 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
 
             // Look for all return statements, but if we find a new node that can have the async modifier we stop
             // because that will have its own diagnostic and fix, if applicable
-            var returns = node.DescendantNodes(
-                    n => n == node || !IsAsyncSupportingFunctionSyntax(n)
+            var returns = node.DescendantNodes(n => n == node || !IsAsyncSupportingFunctionSyntax(n)
                 )
                 .OfType<TReturnStatementSyntax>();
 

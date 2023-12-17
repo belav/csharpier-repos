@@ -1244,7 +1244,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     if (_index == 0 || _index == _list._size + 1)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen();
+                        ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen(
+
+                        );
                     }
                     return Current;
                 }

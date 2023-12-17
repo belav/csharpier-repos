@@ -41,13 +41,11 @@ namespace System.CommandLine.Benchmarks
 
             // if anything has failed, it's an error
             if (
-                result.Any(
-                    summary =>
-                        summary.HasCriticalValidationErrors
-                        || summary.Reports.Any(
-                            report =>
-                                !report.BuildResult.IsBuildSuccess || !report.ExecuteResults.Any()
-                        )
+                result.Any(summary =>
+                    summary.HasCriticalValidationErrors
+                    || summary.Reports.Any(report =>
+                        !report.BuildResult.IsBuildSuccess || !report.ExecuteResults.Any()
+                    )
                 )
             )
                 return 1;

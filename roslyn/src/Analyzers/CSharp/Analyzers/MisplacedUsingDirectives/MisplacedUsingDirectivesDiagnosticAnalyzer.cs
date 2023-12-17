@@ -139,14 +139,13 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             // compilation unit (including ExternAlias).
             return compilationUnit
                 .ChildNodes()
-                .Any(
-                    t =>
-                        t.Kind()
-                            is not (
-                                SyntaxKind.UsingDirective
-                                or SyntaxKind.NamespaceDeclaration
-                                or SyntaxKind.FileScopedNamespaceDeclaration
-                            )
+                .Any(t =>
+                    t.Kind()
+                        is not (
+                            SyntaxKind.UsingDirective
+                            or SyntaxKind.NamespaceDeclaration
+                            or SyntaxKind.FileScopedNamespaceDeclaration
+                        )
                 );
         }
 

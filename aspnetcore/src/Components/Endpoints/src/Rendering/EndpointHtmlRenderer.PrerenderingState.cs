@@ -47,7 +47,9 @@ internal partial class EndpointHtmlRenderer
                 {
                     InteractiveServerRenderMode
                         => new ProtectedPrerenderComponentApplicationStore(
-                            _httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>()
+                            _httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>(
+
+                            )
                         ),
                     InteractiveWebAssemblyRenderMode => new PrerenderComponentApplicationStore(),
                     _ => throw new InvalidOperationException("Invalid configured render mode."),

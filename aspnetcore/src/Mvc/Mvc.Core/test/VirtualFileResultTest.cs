@@ -50,8 +50,8 @@ public class VirtualFileResultTest : VirtualFileResultTestBase
     {
         // Arrange
         var webHostFileProvider = Mock.Of<IFileProvider>();
-        var webHostEnvironment = Mock.Of<IWebHostEnvironment>(
-            e => e.WebRootFileProvider == webHostFileProvider
+        var webHostEnvironment = Mock.Of<IWebHostEnvironment>(e =>
+            e.WebRootFileProvider == webHostFileProvider
         );
 
         var result = new VirtualFileResult("some-path", "text/plain");
@@ -69,8 +69,8 @@ public class VirtualFileResultTest : VirtualFileResultTestBase
         // Arrange
         var webHostFileProvider = Mock.Of<IFileProvider>();
         var fileProvider = Mock.Of<IFileProvider>();
-        var webHostEnvironment = Mock.Of<IWebHostEnvironment>(
-            e => e.WebRootFileProvider == webHostFileProvider
+        var webHostEnvironment = Mock.Of<IWebHostEnvironment>(e =>
+            e.WebRootFileProvider == webHostFileProvider
         );
 
         var result = new VirtualFileResult("some-path", "text/plain")

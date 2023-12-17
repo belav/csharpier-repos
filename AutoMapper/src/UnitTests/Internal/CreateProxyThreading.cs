@@ -9,12 +9,11 @@ public class CreateProxyThreading
     {
         var tasks = Enumerable
             .Range(0, 5)
-            .Select(
-                i =>
-                    Task.Factory.StartNew(() =>
-                    {
-                        ProxyGenerator.GetProxyType(typeof(ISomeDto));
-                    })
+            .Select(i =>
+                Task.Factory.StartNew(() =>
+                {
+                    ProxyGenerator.GetProxyType(typeof(ISomeDto));
+                })
             )
             .ToArray();
         Task.WaitAll(tasks);

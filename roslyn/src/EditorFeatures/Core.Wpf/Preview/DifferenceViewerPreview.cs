@@ -194,7 +194,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                             ),
                             0 /*scope count*/
                             ,
-                            Array.Empty<Guid>() /*scopes*/
+                            Array.Empty<Guid>(
+
+                            ) /*scopes*/
                             ,
                             out var cmdGuid,
                             out var cmdId,
@@ -215,7 +217,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                             ),
                             0 /*scope count*/
                             ,
-                            Array.Empty<Guid>() /*scopes*/
+                            Array.Empty<Guid>(
+
+                            ) /*scopes*/
                             ,
                             out _,
                             out _,

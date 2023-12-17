@@ -308,8 +308,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         )
                         {
                             (
-                                _typeParameterNamesBuilder ??=
-                                    ImmutableArray.CreateBuilder<string>()
+                                _typeParameterNamesBuilder ??= ImmutableArray.CreateBuilder<string>(
+
+                                )
                             ).Add(name);
                             _comment._typeParameterTexts.Add(name, TrimEachLine(typeParamText));
                         }
@@ -327,8 +328,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             )
                             {
                                 (
-                                    _exceptionTypesBuilder ??=
-                                        ImmutableArray.CreateBuilder<string>()
+                                    _exceptionTypesBuilder ??= ImmutableArray.CreateBuilder<string>(
+
+                                    )
                                 ).Add(type);
                                 (
                                     _exceptionTextBuilders ??=

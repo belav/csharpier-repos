@@ -201,7 +201,9 @@ namespace System.ServiceModel.Description
                             if (bindingElement != null)
                             {
                                 this.readerQuotas =
-                                    bindingElement.GetIndividualProperty<XmlDictionaryReaderQuotas>();
+                                    bindingElement.GetIndividualProperty<XmlDictionaryReaderQuotas>(
+
+                                    );
                             }
                         }
                     }
@@ -1482,8 +1484,9 @@ namespace System.ServiceModel.Description
                     : base(callback, state)
                 {
                     message = MetadataReferenceRetriever.CreateGetMessage(messageVersion);
-                    ((IClientChannel)metadataClient).OperationTimeout =
-                        timeoutHelper.RemainingTime();
+                    ((IClientChannel)metadataClient).OperationTimeout = timeoutHelper.RemainingTime(
+
+                    );
                     IAsyncResult result = metadataClient.BeginGet(
                         message,
                         Fx.ThunkCallback(new AsyncCallback(this.RequestCallback)),
@@ -1538,9 +1541,9 @@ namespace System.ServiceModel.Description
                                 new InvalidOperationException(
                                     SR.GetString(
                                         SR.SFxBadMetadataReference,
-                                        (
-                                            (IClientChannel)metadataClient
-                                        ).RemoteAddress.Uri.ToString()
+                                        ((IClientChannel)metadataClient).RemoteAddress.Uri.ToString(
+
+                                        )
                                     )
                                 )
                             );

@@ -894,8 +894,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (hasNonGenericMethod && hasGenericMethod)
                 {
-                    symbols = symbols.WhereAsArray(
-                        s => s.Kind != SymbolKind.Method || ((MethodSymbol)s).Arity == 0
+                    symbols = symbols.WhereAsArray(s =>
+                        s.Kind != SymbolKind.Method || ((MethodSymbol)s).Arity == 0
                     );
                 }
             }
@@ -960,8 +960,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         typeArgumentListSyntax,
                         symbol
                     );
-                    return symbols.SelectAsArray(
-                        sym => ConstructWithCrefTypeParameters(arity, typeArgumentListSyntax, sym)
+                    return symbols.SelectAsArray(sym =>
+                        ConstructWithCrefTypeParameters(arity, typeArgumentListSyntax, sym)
                     );
                 }
             }
@@ -1199,7 +1199,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Should be in a WithCrefTypeParametersBinder.
                     Debug.Assert(
                         typeArgumentSyntax.ContainsDiagnostics
-                            || !typeArgumentSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics()
+                            || !typeArgumentSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics(
+
+                            )
                             || (
                                 !unusedDiagnostics.HasAnyErrors()
                                 && typeArgument.Type is CrefTypeParameterSymbol

@@ -717,8 +717,8 @@ public partial class HubConnectionTests
             var builder = new HubConnectionBuilder().WithUrl("http://example.com");
             var innerConnection = new TestConnection();
 
-            var delegateConnectionFactory = new DelegateConnectionFactory(
-                endPoint => innerConnection.StartAsync()
+            var delegateConnectionFactory = new DelegateConnectionFactory(endPoint =>
+                innerConnection.StartAsync()
             );
             builder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 

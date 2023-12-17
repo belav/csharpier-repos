@@ -369,8 +369,8 @@ RoOt = TruE"
             var config = ParseConfigFile(
                 string.Join(
                     Environment.NewLine,
-                    AnalyzerConfig.ReservedValues.Select(
-                        v => "MY_KEY" + (index++) + " = " + v.ToUpperInvariant()
+                    AnalyzerConfig.ReservedValues.Select(v =>
+                        "MY_KEY" + (index++) + " = " + v.ToUpperInvariant()
                     )
                 )
             );

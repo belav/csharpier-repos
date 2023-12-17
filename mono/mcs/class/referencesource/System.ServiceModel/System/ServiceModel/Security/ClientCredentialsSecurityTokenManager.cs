@@ -547,7 +547,9 @@ namespace System.ServiceModel
             if (parent.ServiceCertificate.SslCertificateAuthentication != null)
             {
                 return new X509SecurityTokenAuthenticator(
-                    parent.ServiceCertificate.SslCertificateAuthentication.GetCertificateValidator(),
+                    parent.ServiceCertificate.SslCertificateAuthentication.GetCertificateValidator(
+
+                    ),
                     false
                 );
             }

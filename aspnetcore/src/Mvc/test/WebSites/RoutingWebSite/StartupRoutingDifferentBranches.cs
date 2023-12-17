@@ -107,8 +107,8 @@ public class StartupRoutingDifferentBranches
 
     protected virtual void ConfigureRoutingServices(IServiceCollection services)
     {
-        services.AddRouting(
-            options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
+        services.AddRouting(options =>
+            options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
         );
     }
 }

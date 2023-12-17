@@ -68,8 +68,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         {
             //Put user code to initialize the page here
             base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
-            System.Web.UI.WebControls.TableStyle myStyle =
-                new System.Web.UI.WebControls.TableStyle();
+            System.Web.UI.WebControls.TableStyle myStyle = new System.Web.UI.WebControls.TableStyle(
+
+            );
             try
             {
                 base.GHTActiveSubTest = GHTSubTest1;

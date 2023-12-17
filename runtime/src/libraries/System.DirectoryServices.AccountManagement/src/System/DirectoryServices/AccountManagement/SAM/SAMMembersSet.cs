@@ -175,8 +175,9 @@ namespace System.DirectoryServices.AccountManagement
                         // Transform the "WinNT://BUILTIN/foo" path to "WinNT://machineName/foo"
                         string builtinADsPath = nativeMember.ADsPath;
 
-                        UnsafeNativeMethods.Pathname pathCracker =
-                            new UnsafeNativeMethods.Pathname();
+                        UnsafeNativeMethods.Pathname pathCracker = new UnsafeNativeMethods.Pathname(
+
+                        );
                         UnsafeNativeMethods.IADsPathname pathName =
                             (UnsafeNativeMethods.IADsPathname)pathCracker;
 

@@ -210,8 +210,8 @@ namespace System.ServiceModel
             ContractDescription contract =
                 this.host.ImplementedContracts == null
                     ? null
-                    : this.host.ImplementedContracts.Values.FirstOrDefault(
-                        implementedContract => implementedContract.ContractType == contractType
+                    : this.host.ImplementedContracts.Values.FirstOrDefault(implementedContract =>
+                        implementedContract.ContractType == contractType
                     );
             if (contract == null)
             {
@@ -307,15 +307,11 @@ namespace System.ServiceModel
             {
                 // don't generate endpoints for contracts that serve as the base type for other reflected contracts
                 IEnumerable<ContractDescription> contracts = this.host.ImplementedContracts.Values;
-                IEnumerable<ContractDescription> mostSpecificContracts = contracts.Where(
-                    contract =>
-                        contracts.All(
-                            otherContract =>
-                                object.ReferenceEquals(contract, otherContract)
-                                || !contract.ContractType.IsAssignableFrom(
-                                    otherContract.ContractType
-                                )
-                        )
+                IEnumerable<ContractDescription> mostSpecificContracts = contracts.Where(contract =>
+                    contracts.All(otherContract =>
+                        object.ReferenceEquals(contract, otherContract)
+                        || !contract.ContractType.IsAssignableFrom(otherContract.ContractType)
+                    )
                 );
 
                 foreach (var uri in this.host.BaseAddresses)

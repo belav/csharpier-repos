@@ -96,13 +96,10 @@ namespace System.Collections.Immutable.Tests
             map = map.AddRange(
                 Enumerable
                     .Range(1, 100)
-                    .Select(
-                        n =>
-                            new KeyValuePair<int, GenericParameterHelper>(
-                                n,
-                                new GenericParameterHelper()
-                            )
-                    )
+                    .Select(n => new KeyValuePair<int, GenericParameterHelper>(
+                        n,
+                        new GenericParameterHelper()
+                    ))
             );
             CollectionAssertAreEquivalent(
                 map.Select(kv => kv.Key).ToList(),

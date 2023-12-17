@@ -150,10 +150,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         internal void AddOrReplaceRelatedLocation(RelatedLocation location)
         {
             var existingRelatedLocation = RelatedLocations
-                .Where(
-                    rl =>
-                        rl.ConflictCheckSpan == location.ConflictCheckSpan
-                        && rl.DocumentId == location.DocumentId
+                .Where(rl =>
+                    rl.ConflictCheckSpan == location.ConflictCheckSpan
+                    && rl.DocumentId == location.DocumentId
                 )
                 .FirstOrNull();
             if (existingRelatedLocation != null)

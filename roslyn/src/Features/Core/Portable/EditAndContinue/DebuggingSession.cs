@@ -786,8 +786,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     Debug.Assert(oldProject.SupportsEditAndContinue());
                     Debug.Assert(newProject.SupportsEditAndContinue());
 
-                    var analyzer =
-                        newProject.Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                    var analyzer = newProject.Services.GetRequiredService<IEditAndContinueAnalyzer>(
+
+                    );
 
                     await foreach (
                         var documentId in EditSession
@@ -876,8 +877,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         // translate active statements from base solution to the new solution, if the documents they are contained in changed:
                         foreach (var (projectId, index) in indices)
                         {
-                            spans[index] =
-                                documentBaseActiveStatements.SelectAsArray(activeStatement =>
+                            spans[index] = documentBaseActiveStatements.SelectAsArray(
+                                activeStatement =>
                                 {
                                     LinePositionSpan span;
                                     DocumentId? unmappedDocumentId;
@@ -889,8 +890,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                         )
                                     )
                                     {
-                                        (unmappedDocumentId, span) = newSpans.Single(
-                                            ns => ns.unmappedDocumentId.ProjectId == projectId
+                                        (unmappedDocumentId, span) = newSpans.Single(ns =>
+                                            ns.unmappedDocumentId.ProjectId == projectId
                                         );
                                     }
                                     else

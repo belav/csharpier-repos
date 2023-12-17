@@ -411,8 +411,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 CancellationToken cancellationToken
             )
             {
-                return variables.SelectAsArray(
-                    v => CreateDeclarationStatement(v, initialValue: null, cancellationToken)
+                return variables.SelectAsArray(v =>
+                    CreateDeclarationStatement(v, initialValue: null, cancellationToken)
                 );
             }
 

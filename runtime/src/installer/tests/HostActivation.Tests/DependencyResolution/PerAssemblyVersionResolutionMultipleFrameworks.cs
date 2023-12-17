@@ -195,21 +195,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string frameworkWins
         )
         {
-            var app = SharedState.CreateTestFrameworkReferenceApp(
-                b =>
-                    b.WithPackage(
-                        TestVersionsPackage,
-                        "1.0.0",
-                        lib =>
-                            lib.WithAssemblyGroup(
-                                null,
-                                g =>
-                                    g.WithAsset(
-                                        testAssemblyName + ".dll",
-                                        rf => rf.WithVersion(appAsmVersion, appFileVersion)
-                                    )
-                            )
-                    )
+            var app = SharedState.CreateTestFrameworkReferenceApp(b =>
+                b.WithPackage(
+                    TestVersionsPackage,
+                    "1.0.0",
+                    lib =>
+                        lib.WithAssemblyGroup(
+                            null,
+                            g =>
+                                g.WithAsset(
+                                    testAssemblyName + ".dll",
+                                    rf => rf.WithVersion(appAsmVersion, appFileVersion)
+                                )
+                        )
+                )
             );
             if (runtimeConfigCustomizer is not null)
             {
@@ -259,21 +258,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string frameworkWins
         )
         {
-            var component = SharedState.CreateComponentWithNoDependencies(
-                b =>
-                    b.WithPackage(
-                        TestVersionsPackage,
-                        "1.0.0",
-                        lib =>
-                            lib.WithAssemblyGroup(
-                                null,
-                                g =>
-                                    g.WithAsset(
-                                        testAssemblyName + ".dll",
-                                        rf => rf.WithVersion(appAsmVersion, appFileVersion)
-                                    )
-                            )
-                    )
+            var component = SharedState.CreateComponentWithNoDependencies(b =>
+                b.WithPackage(
+                    TestVersionsPackage,
+                    "1.0.0",
+                    lib =>
+                        lib.WithAssemblyGroup(
+                            null,
+                            g =>
+                                g.WithAsset(
+                                    testAssemblyName + ".dll",
+                                    rf => rf.WithVersion(appAsmVersion, appFileVersion)
+                                )
+                        )
+                )
             );
             if (runtimeConfigCustomizer is not null)
             {

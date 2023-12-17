@@ -118,12 +118,11 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
 
             foreach (
                 var argumentNamespace in current
-                    .Arguments.Where(
-                        a =>
-                            a
-                                is not null
-                                    and not NestedClosureCodeFragment
-                                    and not PropertyAccessorCodeFragment
+                    .Arguments.Where(a =>
+                        a
+                            is not null
+                                and not NestedClosureCodeFragment
+                                and not PropertyAccessorCodeFragment
                     )
                     .SelectMany(a => a!.GetType().GetNamespaces())
             )

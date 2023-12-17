@@ -75,8 +75,8 @@ namespace System.ServiceModel.Dispatcher
             XElement firstTr = null;
             int rowspan = 0;
             foreach (
-                OperationHelpInformation operationHelpInfo in operations.OrderBy(
-                    o => FilterQueryVariables(o.UriTemplate)
+                OperationHelpInformation operationHelpInfo in operations.OrderBy(o =>
+                    FilterQueryVariables(o.UriTemplate)
                 )
             )
             {

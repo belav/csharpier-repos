@@ -29,8 +29,9 @@ internal class ServiceBrokerFactory
     private BrokeredServiceContainer? _container;
     private readonly ExportProvider _exportProvider;
     private Task _bridgeCompletionTask;
-    private readonly CancellationTokenSource _cancellationTokenSource =
-        new CancellationTokenSource();
+    private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource(
+
+    );
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

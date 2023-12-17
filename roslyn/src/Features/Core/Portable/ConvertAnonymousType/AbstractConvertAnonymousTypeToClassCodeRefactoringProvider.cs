@@ -330,8 +330,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                             : (TNameSyntax)
                                 g.GenericName(
                                     classNameToken,
-                                    classSymbol.TypeParameters.Select(
-                                        tp => g.IdentifierName(tp.Name)
+                                    classSymbol.TypeParameters.Select(tp =>
+                                        g.IdentifierName(tp.Name)
                                     )
                                 );
 
@@ -374,9 +374,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                     Accessibility.Public,
                     modifiers: default,
                     typeName,
-                    properties.SelectAsArray(
-                        prop =>
-                            CodeGenerationSymbolFactory.CreateParameterSymbol(prop.Type, prop.Name)
+                    properties.SelectAsArray(prop =>
+                        CodeGenerationSymbolFactory.CreateParameterSymbol(prop.Type, prop.Name)
                     ),
                     isPrimaryConstructor: true
                 );
@@ -475,8 +474,7 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                 .GetMembers()
                 .OfType<IPropertySymbol>()
                 .ToImmutableArray();
-            var newProperties = originalProperties.SelectAsArray(
-                p => GenerateProperty(document, p)
+            var newProperties = originalProperties.SelectAsArray(p => GenerateProperty(document, p)
             );
 
             // If we changed the names of any properties, record that name mapping.  We'll

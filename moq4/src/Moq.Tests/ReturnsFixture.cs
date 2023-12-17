@@ -169,14 +169,13 @@ namespace Moq.Tests
         public void PassesFourArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Returns((string s1, string s2, string s3, string s4) => s1 + s2 + s3 + s4);
 
@@ -188,15 +187,14 @@ namespace Moq.Tests
         public void PassesFiveArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Returns(
                     (string s1, string s2, string s3, string s4, string s5) =>
@@ -211,16 +209,15 @@ namespace Moq.Tests
         public void PassesSixArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Returns(
                     (string s1, string s2, string s3, string s4, string s5, string s6) =>
@@ -242,17 +239,16 @@ namespace Moq.Tests
         public void PassesSevenArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Returns(
                     (string s1, string s2, string s3, string s4, string s5, string s6, string s7) =>
@@ -275,18 +271,17 @@ namespace Moq.Tests
         public void PassesEightArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Returns(
                     (

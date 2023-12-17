@@ -128,13 +128,14 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                             await triggerResponseWrite.Task;
                         });
 
-                        HttpRequestException ex =
-                            await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                        HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
+                            async () =>
                             {
                                 Task<HttpResponseMessage> t = client.GetAsync(url);
                                 await triggerRequestWait.Task;
                                 var _ = await t;
-                            });
+                            }
+                        );
                         Assert.IsType<IOException>(ex.InnerException);
                         Assert.NotNull(ex.InnerException.InnerException);
                         Assert.Contains(

@@ -147,8 +147,8 @@ namespace Castle.Components.DictionaryAdapter
             {
                 this.adapter = adapter;
                 this.readOnlyProperties = adapter
-                    .This.Properties.Values.Where(
-                        pd => !pd.Property.CanWrite || pd.IsDynamicProperty
+                    .This.Properties.Values.Where(pd =>
+                        !pd.Property.CanWrite || pd.IsDynamicProperty
                     )
                     .ToDictionary(pd => pd, pd => GetEffectivePropertyValue(pd));
             }

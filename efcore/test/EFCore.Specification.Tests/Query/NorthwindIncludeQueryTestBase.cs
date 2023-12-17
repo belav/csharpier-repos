@@ -104,11 +104,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     .Include(c => c.Orders)
                     .ThenInclude(o => o.OrderDetails)
                     .Where(c => c.CustomerID.StartsWith("W"))
-                    .OrderByDescending(
-                        c =>
-                            c.Orders.OrderByDescending(oo => oo.OrderDate)
-                                .FirstOrDefault()
-                                .OrderDate
+                    .OrderByDescending(c =>
+                        c.Orders.OrderByDescending(oo => oo.OrderDate).FirstOrDefault().OrderDate
                     ),
             asserter: (e, a) =>
                 AssertInclude(
@@ -491,11 +488,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<Customer>()
                     .Include(c => c.Orders)
                     .Where(c => c.CustomerID.StartsWith("W"))
-                    .OrderByDescending(
-                        c =>
-                            c.Orders.OrderByDescending(oo => oo.OrderDate)
-                                .FirstOrDefault()
-                                .OrderDate
+                    .OrderByDescending(c =>
+                        c.Orders.OrderByDescending(oo => oo.OrderDate).FirstOrDefault().OrderDate
                     ),
             asserter: (e, a) => AssertInclude(e, a, new ExpectedInclude<Customer>(c => c.Orders))
         );
@@ -573,11 +567,10 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<Customer>()
                     .Include(c => c.Orders)
                     .Where(c => c.CustomerID == "ALFKI")
-                    .OrderBy(
-                        c =>
-                            c.Orders.OrderBy(o => o.EmployeeID)
-                                .Select(o => o.OrderDate)
-                                .FirstOrDefault()
+                    .OrderBy(c =>
+                        c.Orders.OrderBy(o => o.EmployeeID)
+                            .Select(o => o.OrderDate)
+                            .FirstOrDefault()
                     ),
             asserter: (e, a) => AssertInclude(e, a, new ExpectedInclude<Customer>(c => c.Orders))
         );
@@ -1836,11 +1829,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
             ss =>
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
-                    .Include(
-                        c =>
-                            c.Orders.OrderBy(o => o.OrderID)
-                                .Skip(1)
-                                .OrderByDescending(o => o.OrderDate)
+                    .Include(c =>
+                        c.Orders.OrderBy(o => o.OrderID).Skip(1).OrderByDescending(o => o.OrderDate)
                     ),
             elementAsserter: (e, a) =>
                 AssertInclude(

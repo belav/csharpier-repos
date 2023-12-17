@@ -41,12 +41,11 @@ public partial class ParserTests
             );
             parserResult
                 .Errors.Should()
-                .ContainSingle(
-                    e =>
-                        e.Message
-                        == LocalizationResources.UnrecognizedCommandOrArgument(
-                            CliRootCommand.ExecutablePath
-                        )
+                .ContainSingle(e =>
+                    e.Message
+                    == LocalizationResources.UnrecognizedCommandOrArgument(
+                        CliRootCommand.ExecutablePath
+                    )
                 );
         }
 

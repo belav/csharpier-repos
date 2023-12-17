@@ -416,8 +416,8 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
     )
     {
         foreach (
-            var group in parameter.ContainingType.DeclaringSyntaxReferences.GroupBy(
-                r => r.SyntaxTree
+            var group in parameter.ContainingType.DeclaringSyntaxReferences.GroupBy(r =>
+                r.SyntaxTree
             )
         )
         {

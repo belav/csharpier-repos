@@ -16,8 +16,7 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<MyContext32310>(seed: Seed32310);
         await using var context = contextFactory.CreateContext();
 
-        var query = context.Pubs.Where(
-            u => u.Visits.DaysVisited.Contains(new DateOnly(2023, 1, 1))
+        var query = context.Pubs.Where(u => u.Visits.DaysVisited.Contains(new DateOnly(2023, 1, 1))
         );
 
         var result = async ? await query.FirstOrDefaultAsync()! : query.FirstOrDefault()!;
@@ -236,19 +235,16 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         {
             var result = context
                 .Entities.OrderBy(x => x.Id)
-                .Select(
-                    x =>
-                        new
-                        {
-                            x,
-                            x.Json,
-                            x.Json.OptionalReference,
-                            x.Json.RequiredReference,
-                            NestedOptional = x.Json.OptionalReference.Nested,
-                            NestedRequired = x.Json.RequiredReference.Nested,
-                            x.Json.Collection,
-                        }
-                )
+                .Select(x => new
+                {
+                    x,
+                    x.Json,
+                    x.Json.OptionalReference,
+                    x.Json.RequiredReference,
+                    NestedOptional = x.Json.OptionalReference.Nested,
+                    NestedRequired = x.Json.RequiredReference.Nested,
+                    x.Json.Collection,
+                })
                 .AsNoTracking()
                 .ToList();
 
@@ -343,14 +339,11 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         {
             var query = context
                 .Entities.OrderBy(x => x.Id)
-                .Select(
-                    x =>
-                        new
-                        {
-                            ArrayElement = x.Reference.IntArray[0],
-                            ListElement = x.Reference.ListOfString[1]
-                        }
-                );
+                .Select(x => new
+                {
+                    ArrayElement = x.Reference.IntArray[0],
+                    ListElement = x.Reference.ListOfString[1]
+                });
 
             var result = async ? await query.ToListAsync() : query.ToList();
         }
@@ -405,10 +398,9 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         using (var context = contextFactory.CreateContext())
         {
             var query = context
-                .Entities.Where(
-                    x =>
-                        x.Reference.IntArray.AsQueryable().ElementAt(0) == 1
-                        || x.Reference.ListOfString.AsQueryable().ElementAt(1) == "Bar"
+                .Entities.Where(x =>
+                    x.Reference.IntArray.AsQueryable().ElementAt(0) == 1
+                    || x.Reference.ListOfString.AsQueryable().ElementAt(1) == "Bar"
                 )
                 .OrderBy(e => e.Id);
 
@@ -816,14 +808,11 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities.Select(
-                x =>
-                    new
-                    {
-                        ShadowString = EF.Property<string>(x.Reference, "ShadowString"),
-                        ShadowInt = EF.Property<int>(x.ReferenceWithCtor, "Shadow_Int"),
-                    }
-            );
+            var query = context.Entities.Select(x => new
+            {
+                ShadowString = EF.Property<string>(x.Reference, "ShadowString"),
+                ShadowInt = EF.Property<int>(x.ReferenceWithCtor, "Shadow_Int"),
+            });
 
             var result = async ? await query.ToListAsync() : query.ToList();
 

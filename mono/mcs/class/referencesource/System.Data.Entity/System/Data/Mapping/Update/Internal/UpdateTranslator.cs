@@ -896,10 +896,10 @@ namespace System.Data.Mapping.Update.Internal
 
                 // add function parameters
                 IEnumerable<KeyValuePair<string, TypeUsage>> functionParams =
-                    functionMapping.Function.Parameters.Select(
-                        paramInfo =>
-                            new KeyValuePair<string, TypeUsage>(paramInfo.Name, paramInfo.TypeUsage)
-                    );
+                    functionMapping.Function.Parameters.Select(paramInfo => new KeyValuePair<
+                        string,
+                        TypeUsage
+                    >(paramInfo.Name, paramInfo.TypeUsage));
 
                 // construct DbFunctionCommandTree including implict return type
                 DbFunctionCommandTree tree = new DbFunctionCommandTree(

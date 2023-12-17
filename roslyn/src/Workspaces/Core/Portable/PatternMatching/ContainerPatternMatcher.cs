@@ -28,10 +28,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 _containerSplitCharacters = containerSplitCharacters;
 
                 _patternSegments = patternParts
-                    .Select(
-                        text =>
-                            new PatternSegment(text.Trim(), allowFuzzyMatching: allowFuzzyMatching)
-                    )
+                    .Select(text => new PatternSegment(
+                        text.Trim(),
+                        allowFuzzyMatching: allowFuzzyMatching
+                    ))
                     .ToArray();
 
                 _invalidPattern =

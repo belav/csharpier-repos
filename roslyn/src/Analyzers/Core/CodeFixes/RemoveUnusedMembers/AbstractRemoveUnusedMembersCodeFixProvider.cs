@@ -60,8 +60,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var declarationService =
-                document.GetRequiredLanguageService<ISymbolDeclarationService>();
+            var declarationService = document.GetRequiredLanguageService<ISymbolDeclarationService>(
+
+            );
 
             // Compute declarators to remove, and also track common field declarators.
             foreach (var diagnostic in diagnostics)

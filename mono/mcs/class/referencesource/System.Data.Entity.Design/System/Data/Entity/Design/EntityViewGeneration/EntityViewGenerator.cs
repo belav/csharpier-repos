@@ -343,8 +343,8 @@ namespace System.Data.Entity.Design
             IList<EdmSchemaError> schemaErrors
         )
         {
-            IEnumerable<EdmSchemaError> warningsToRemove = schemaErrors.Where(
-                s => s.ErrorCode == ERRORCODE_MAPPINGALLQUERYVIEWATCOMPILETIME
+            IEnumerable<EdmSchemaError> warningsToRemove = schemaErrors.Where(s =>
+                s.ErrorCode == ERRORCODE_MAPPINGALLQUERYVIEWATCOMPILETIME
             ); // When EntityContainerMapping only has QueryView, the mapping is valid
 
             return schemaErrors.Except(warningsToRemove).ToList();
@@ -470,7 +470,9 @@ namespace System.Data.Entity.Design
             compileUnit.Namespaces.Add(codeNamespace);
 
             foreach (
-                var storageEntityContainerMapping in mappingCollection.GetItems<StorageEntityContainerMapping>()
+                var storageEntityContainerMapping in mappingCollection.GetItems<StorageEntityContainerMapping>(
+
+                )
             )
             {
                 //Throw warning when containerMapping contains query view for bug 547285.

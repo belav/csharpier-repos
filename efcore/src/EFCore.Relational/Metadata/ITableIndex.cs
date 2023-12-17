@@ -82,9 +82,8 @@ public interface ITableIndex : IAnnotatable
                 ", ",
                 Enumerable
                     .Range(0, Columns.Count)
-                    .Select(
-                        i =>
-                            $@"'{Columns[i].Name}'{(
+                    .Select(i =>
+                        $@"'{Columns[i].Name}'{(
                                 MappedIndexes.First() is not RuntimeIndex
                                 && IsDescending is not null
                                 && (IsDescending.Count == 0 || IsDescending[i])

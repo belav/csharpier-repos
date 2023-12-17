@@ -191,8 +191,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void AddRange_IOrderedCollection()
         {
             var list = ImmutableSegmentedList<int>.Empty;
-            ImmutableSegmentedList<int>.Builder builder =
-                ImmutableSegmentedList.CreateBuilder<int>();
+            ImmutableSegmentedList<int>.Builder builder = ImmutableSegmentedList.CreateBuilder<int>(
+
+            );
             builder.Add(1);
 
             list = list.AddRange(builder);
@@ -977,10 +978,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 "_root"
             )!;
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
-                    == DebuggerBrowsableState.RootHidden
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                == DebuggerBrowsableState.RootHidden
             );
             double[]? items = itemProperty.GetValue(info.Instance) as double[];
             Assert.Equal(list, items);

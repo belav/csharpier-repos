@@ -7,10 +7,9 @@ public class ForCtorParamValidation : AutoMapperSpecBase
     record Destination(DateTime Value);
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>()
-                    .ForCtorParam("Value", o => o.MapFrom(s => DateTime.MinValue))
+        new(c =>
+            c.CreateMap<Source, Destination>()
+                .ForCtorParam("Value", o => o.MapFrom(s => DateTime.MinValue))
         );
 
     [Fact]
@@ -32,11 +31,10 @@ public class ForCtorParam_MapFrom_String : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
-                    .ForCtorParam("value1", o => o.MapFrom("Value"))
-                    .ForCtorParam("key1", o => o.MapFrom("Key"))
+        new(c =>
+            c.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
+                .ForCtorParam("value1", o => o.MapFrom("Value"))
+                .ForCtorParam("key1", o => o.MapFrom("Key"))
         );
 
     [Fact]
@@ -63,10 +61,9 @@ public class ForCtorParam_MapFrom_ProjectTo : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateProjection<Source, Destination>()
-                    .ForCtorParam("value", o => o.MapFrom(s => s.Value1))
+        new(c =>
+            c.CreateProjection<Source, Destination>()
+                .ForCtorParam("value", o => o.MapFrom(s => s.Value1))
         );
 
     [Fact]
@@ -120,20 +117,19 @@ public class When_configuring__non_generic_ctor_param_members : AutoMapperSpecBa
     [Fact]
     public void Should_resolve_using_custom_func()
     {
-        var mapper = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<Source, Dest>()
-                    .ForCtorParam(
-                        "thing",
-                        opt =>
-                            opt.MapFrom(
-                                (src, ctxt) =>
-                                {
-                                    var rev = src.Value + 3;
-                                    return rev;
-                                }
-                            )
-                    )
+        var mapper = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Dest>()
+                .ForCtorParam(
+                    "thing",
+                    opt =>
+                        opt.MapFrom(
+                            (src, ctxt) =>
+                            {
+                                var rev = src.Value + 3;
+                                return rev;
+                            }
+                        )
+                )
         ).CreateMapper();
 
         var dest = mapper.Map<Source, Dest>(new Source { Value = 5 });
@@ -145,10 +141,9 @@ public class When_configuring__non_generic_ctor_param_members : AutoMapperSpecBa
     public void Should_resolve_using_custom_func_with_correct_ResolutionContext()
     {
         const string itemKey = "key";
-        var mapper = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<Source, Dest>()
-                    .ForCtorParam("thing", opt => opt.MapFrom((src, ctx) => ctx.Items[itemKey]))
+        var mapper = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Dest>()
+                .ForCtorParam("thing", opt => opt.MapFrom((src, ctx) => ctx.Items[itemKey]))
         ).CreateMapper();
 
         var dest = mapper.Map<Source, Dest>(

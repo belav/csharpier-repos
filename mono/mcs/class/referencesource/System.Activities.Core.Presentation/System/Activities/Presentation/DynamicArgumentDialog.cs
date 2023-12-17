@@ -60,13 +60,9 @@ namespace System.Activities.Presentation
             DynamicArgumentDesignerOptions options
         )
         {
-            return new DynamicArgumentDialog(
-                activity,
-                data,
-                context,
-                owner,
-                options
-            ).ShowOkCancel();
+            return new DynamicArgumentDialog(activity, data, context, owner, options).ShowOkCancel(
+
+            );
         }
 
         protected override void OnWorkflowElementDialogClosed(bool? dialogResult)

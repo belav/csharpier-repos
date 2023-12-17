@@ -44,16 +44,14 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var factory = new Mock<ILoggerFactory>();
             factory
-                .Setup(
-                    f =>
-                        f.CreateLogger(
-                            It.Is<string>(
-                                x =>
-                                    x.Equals(
-                                        "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType>"
-                                    )
+                .Setup(f =>
+                    f.CreateLogger(
+                        It.Is<string>(x =>
+                            x.Equals(
+                                "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType>"
                             )
                         )
+                    )
                 )
                 .Returns(new Mock<ILogger>().Object);
 
@@ -74,16 +72,14 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var factory = new Mock<ILoggerFactory>();
             factory
-                .Setup(
-                    f =>
-                        f.CreateLogger(
-                            It.Is<string>(
-                                x =>
-                                    x.Equals(
-                                        "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType, Microsoft.Extensions.Logging.Test.SecondTestType>"
-                                    )
+                .Setup(f =>
+                    f.CreateLogger(
+                        It.Is<string>(x =>
+                            x.Equals(
+                                "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType, Microsoft.Extensions.Logging.Test.SecondTestType>"
                             )
                         )
+                    )
                 )
                 .Returns(new Mock<ILogger>().Object);
 
@@ -183,13 +179,12 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var factory = new Mock<ILoggerFactory>();
             factory
-                .Setup(
-                    f =>
-                        f.CreateLogger(
-                            It.Is<string>(
-                                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
-                            )
+                .Setup(f =>
+                    f.CreateLogger(
+                        It.Is<string>(x =>
+                            x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
                         )
+                    )
                 )
                 .Returns(new Mock<ILogger>().Object);
 
@@ -210,13 +205,12 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var factory = new Mock<ILoggerFactory>();
             factory
-                .Setup(
-                    f =>
-                        f.CreateLogger(
-                            It.Is<string>(
-                                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
-                            )
+                .Setup(f =>
+                    f.CreateLogger(
+                        It.Is<string>(x =>
+                            x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
                         )
+                    )
                 )
                 .Returns(new Mock<ILogger>().Object);
 

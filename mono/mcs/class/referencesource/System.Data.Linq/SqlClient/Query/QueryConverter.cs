@@ -2454,8 +2454,8 @@ namespace System.Data.Linq.SqlClient
                     SqlExpression expr = this.VisitExpression(value);
                     List<SqlExpression> list = values
                         .OfType<object>()
-                        .Select(
-                            v => sql.ValueFromObject(v, elemType, true, this.dominatingExpression)
+                        .Select(v =>
+                            sql.ValueFromObject(v, elemType, true, this.dominatingExpression)
                         )
                         .ToList();
                     return this.GenerateInExpression(expr, list);

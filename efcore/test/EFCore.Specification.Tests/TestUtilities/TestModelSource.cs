@@ -46,21 +46,19 @@ public class TestModelSource : ModelSource
         Action<ModelBuilder> onModelCreating,
         Action<ModelConfigurationBuilder> configureConventions = null
     ) =>
-        p =>
-            new TestModelSource(
-                configureConventions,
-                (mb, c) => onModelCreating(mb),
-                p.GetRequiredService<ModelSourceDependencies>()
-            );
+        p => new TestModelSource(
+            configureConventions,
+            (mb, c) => onModelCreating(mb),
+            p.GetRequiredService<ModelSourceDependencies>()
+        );
 
     public static Func<IServiceProvider, IModelSource> GetFactory(
         Action<ModelBuilder, DbContext> onModelCreating,
         Action<ModelConfigurationBuilder> configureConventions = null
     ) =>
-        p =>
-            new TestModelSource(
-                configureConventions,
-                onModelCreating,
-                p.GetRequiredService<ModelSourceDependencies>()
-            );
+        p => new TestModelSource(
+            configureConventions,
+            onModelCreating,
+            p.GetRequiredService<ModelSourceDependencies>()
+        );
 }

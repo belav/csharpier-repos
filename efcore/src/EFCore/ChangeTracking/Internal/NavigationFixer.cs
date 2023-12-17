@@ -249,10 +249,9 @@ public class NavigationFixer : INavigationFixer
                         && (
                             entry
                                 .EntityType.GetNavigations()
-                                .All(
-                                    n =>
-                                        n == navigation
-                                        || !ReferenceEquals(oldTargetEntry.Entity, entry[n])
+                                .All(n =>
+                                    n == navigation
+                                    || !ReferenceEquals(oldTargetEntry.Entity, entry[n])
                                 )
                         )
                     )

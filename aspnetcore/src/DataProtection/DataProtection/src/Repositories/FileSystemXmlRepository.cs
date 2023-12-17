@@ -98,13 +98,12 @@ public class FileSystemXmlRepository : IXmlRepository
         // Must be non-empty and contain only a-zA-Z0-9, hyphen, and underscore.
         return (
             !String.IsNullOrEmpty(filename)
-            && filename.All(
-                c =>
-                    c == '-'
-                    || c == '_'
-                    || ('0' <= c && c <= '9')
-                    || ('A' <= c && c <= 'Z')
-                    || ('a' <= c && c <= 'z')
+            && filename.All(c =>
+                c == '-'
+                || c == '_'
+                || ('0' <= c && c <= '9')
+                || ('A' <= c && c <= 'Z')
+                || ('a' <= c && c <= 'z')
             )
         );
     }

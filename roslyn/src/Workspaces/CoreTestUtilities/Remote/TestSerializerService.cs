@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
         > s_wellKnownReferences = ImmutableDictionary
             .Create<string, MetadataReference>()
             .AddRange(
-                s_wellKnownReferenceNames.Select(
-                    pair => KeyValuePairUtil.Create(pair.Value, pair.Key)
+                s_wellKnownReferenceNames.Select(pair =>
+                    KeyValuePairUtil.Create(pair.Value, pair.Key)
                 )
             );
 

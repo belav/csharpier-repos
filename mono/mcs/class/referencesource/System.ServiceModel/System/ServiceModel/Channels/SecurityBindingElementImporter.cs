@@ -326,8 +326,9 @@ namespace System.ServiceModel.Channels
                 isContractAssociatedWithAtLeastOneOtherBinding = false;
             }
 
-            ICollection<XmlElement> endpointBindingAssertions =
-                policyContext.GetBindingAssertions();
+            ICollection<XmlElement> endpointBindingAssertions = policyContext.GetBindingAssertions(
+
+            );
             this.ImportProtectionAssertions(
                 endpointBindingAssertions,
                 out endpointSignedParts,

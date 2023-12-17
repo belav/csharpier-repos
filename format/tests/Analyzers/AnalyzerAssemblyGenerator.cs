@@ -61,9 +61,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 CancellationToken.None
             );
             references.AddRange(
-                netcoreMetadataReferences.Where(
-                    reference =>
-                        Path.GetFileName(reference.Display) != "System.Collections.Immutable.dll"
+                netcoreMetadataReferences.Where(reference =>
+                    Path.GetFileName(reference.Display) != "System.Collections.Immutable.dll"
                 )
             );
 
@@ -142,10 +141,9 @@ public class {typeName} : DiagnosticAnalyzer
             if (!result.Success)
             {
                 var failures = result
-                    .Diagnostics.Where(
-                        diagnostic =>
-                            diagnostic.IsWarningAsError
-                            || diagnostic.Severity == DiagnosticSeverity.Error
+                    .Diagnostics.Where(diagnostic =>
+                        diagnostic.IsWarningAsError
+                        || diagnostic.Severity == DiagnosticSeverity.Error
                     )
                     .Select(diagnostic => $"{diagnostic.Id}: {diagnostic.GetMessage()}");
 

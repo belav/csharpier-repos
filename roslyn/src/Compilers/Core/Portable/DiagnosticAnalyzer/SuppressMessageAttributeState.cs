@@ -121,10 +121,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             _compilation = compilation;
             _localSuppressionsBySymbol =
-                new ConcurrentDictionary<
-                    ISymbol,
-                    ImmutableDictionary<string, SuppressMessageInfo>
-                >();
+                new ConcurrentDictionary<ISymbol, ImmutableDictionary<string, SuppressMessageInfo>>(
+
+                );
         }
 
         public Diagnostic ApplySourceSuppressions(Diagnostic diagnostic)

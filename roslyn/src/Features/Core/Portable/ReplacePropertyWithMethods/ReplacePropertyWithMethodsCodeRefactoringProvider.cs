@@ -205,10 +205,9 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 && property
                     .ContainingType.GetMembers(SetPrefix + name)
                     .OfType<IMethodSymbol>()
-                    .Any(
-                        m =>
-                            m.Parameters.Length == 1
-                            && comparer.Equals(m.Parameters[0].Type, property.Type)
+                    .Any(m =>
+                        m.Parameters.Length == 1
+                        && comparer.Equals(m.Parameters[0].Type, property.Type)
                     );
         }
 
@@ -338,8 +337,9 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
         {
             if (references != null)
             {
-                var syntaxFacts =
-                    originalDocument.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = originalDocument.GetRequiredLanguageService<ISyntaxFactsService>(
+
+                );
 
                 // We may hit a location multiple times due to how we do FAR for linked symbols, but each linked symbol
                 // is allowed to report the entire set of references it think it is compatible with.  So ensure we're

@@ -75,9 +75,8 @@ namespace System.Web.WebPages
                     var attributes = (RazorDirectiveAttribute[])
                         type.GetCustomAttributes(typeof(RazorDirectiveAttribute), inherit: false);
                     var directiveAttributes = attributes
-                        .Where(
-                            attr =>
-                                StringComparer.OrdinalIgnoreCase.Equals("sessionstate", attr.Name)
+                        .Where(attr =>
+                            StringComparer.OrdinalIgnoreCase.Equals("sessionstate", attr.Name)
                         )
                         .ToList();
 

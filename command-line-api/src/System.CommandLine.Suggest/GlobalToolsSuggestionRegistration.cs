@@ -41,9 +41,9 @@ namespace System.CommandLine.Suggest
                 return Array.Empty<Registration>();
             }
 
-            return _filesNameWithoutExtensionUnderDotnetProfileTools.Select(
-                p => new Registration(Path.Combine(_nullableToolsShimPath, p))
-            );
+            return _filesNameWithoutExtensionUnderDotnetProfileTools.Select(p => new Registration(
+                Path.Combine(_nullableToolsShimPath, p)
+            ));
         }
 
         public Registration FindRegistration(FileInfo soughtExecutable)

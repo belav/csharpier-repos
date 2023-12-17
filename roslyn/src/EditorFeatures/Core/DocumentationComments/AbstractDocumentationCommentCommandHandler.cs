@@ -140,15 +140,17 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return false;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document == null)
             {
                 return false;
             }
 
-            var service =
-                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>(
+
+            );
             var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
             var options = subjectBuffer.GetDocumentationCommentOptions(
                 _editorOptionsService,
@@ -305,8 +307,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return CommandState.Unavailable;
             }
 
-            var service =
-                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>(
+
+            );
 
             var isValidTargetMember = false;
             _uiThreadOperationExecutor.Execute(
@@ -387,15 +390,17 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             // Allow nextHandler() to run and then insert exterior trivia if necessary.
             nextHandler();
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document == null)
             {
                 return;
             }
 
-            var service =
-                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>(
+
+            );
 
             InsertExteriorTriviaIfNeeded(
                 service,
@@ -439,15 +444,17 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document == null)
             {
                 return;
             }
 
-            var service =
-                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>(
+
+            );
 
             // Allow nextHandler() to run and the insert exterior trivia if necessary.
             nextHandler();
@@ -473,8 +480,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document == null)
             {
                 return;
@@ -523,8 +531,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             CancellationToken cancellationToken
         )
         {
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document == null)
             {
                 return false;

@@ -203,8 +203,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                     {
                         DataContext: InheritanceMarginGlyphViewModel inheritanceMarginViewModel
                     }
-                && inheritanceMarginViewModel.MenuItemViewModels.Any(
-                    static vm => vm is TargetMenuItemViewModel
+                && inheritanceMarginViewModel.MenuItemViewModels.Any(static vm =>
+                    vm is TargetMenuItemViewModel
                 )
             )
             {

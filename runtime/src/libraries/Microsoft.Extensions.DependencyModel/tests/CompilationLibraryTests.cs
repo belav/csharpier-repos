@@ -23,12 +23,11 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             var fail = new Mock<ICompilationAssemblyResolver>();
             var success = new Mock<ICompilationAssemblyResolver>();
             success
-                .Setup(
-                    r =>
-                        r.TryResolveAssemblyPaths(
-                            It.IsAny<CompilationLibrary>(),
-                            It.IsAny<List<string>>()
-                        )
+                .Setup(r =>
+                    r.TryResolveAssemblyPaths(
+                        It.IsAny<CompilationLibrary>(),
+                        It.IsAny<List<string>>()
+                    )
                 )
                 .Callback(
                     (CompilationLibrary l, List<string> a) =>

@@ -26,8 +26,9 @@ namespace System.Workflow.Runtime.Tracking
     {
         #region Private Data Members
 
-        private ActivityTrackingLocationCollection _match =
-            new ActivityTrackingLocationCollection();
+        private ActivityTrackingLocationCollection _match = new ActivityTrackingLocationCollection(
+
+        );
         private ActivityTrackingLocationCollection _exclude =
             new ActivityTrackingLocationCollection();
         private TrackingAnnotationCollection _annotations = new TrackingAnnotationCollection();

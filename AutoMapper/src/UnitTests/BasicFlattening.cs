@@ -244,10 +244,9 @@ public class FlatteningWithSourceValidation : NonValidatingSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            cfg =>
-                cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source)
-                    .ForMember(d => d.Id, o => o.MapFrom(s => s.AnotherId))
+        new(cfg =>
+            cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source)
+                .ForMember(d => d.Id, o => o.MapFrom(s => s.AnotherId))
         );
 
     [Fact]

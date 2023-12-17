@@ -55,8 +55,9 @@ namespace MonoTests.System.Xml
             XmlSchemaSimpleType testType = new XmlSchemaSimpleType();
             testType.Name = "TestType";
 
-            XmlSchemaSimpleTypeRestriction testTypeRestriction =
-                new XmlSchemaSimpleTypeRestriction();
+            XmlSchemaSimpleTypeRestriction testTypeRestriction = new XmlSchemaSimpleTypeRestriction(
+
+            );
             testTypeRestriction.BaseTypeName = new XmlQualifiedName(
                 "string",
                 "http://www.w3.org/2001/XMLSchema"

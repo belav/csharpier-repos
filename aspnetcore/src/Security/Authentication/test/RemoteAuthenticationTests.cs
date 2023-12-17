@@ -48,24 +48,23 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
     )
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(app =>
-                        {
-                            app.Use(
-                                async (context, next) =>
+            .ConfigureWebHost(webHostBuilder =>
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                if (testpath != null)
                                 {
-                                    if (testpath != null)
-                                    {
-                                        await testpath(context);
-                                    }
-                                    await next(context);
+                                    await testpath(context);
                                 }
-                            );
-                        })
-                        .ConfigureServices(configureServices)
+                                await next(context);
+                            }
+                        );
+                    })
+                    .ConfigureServices(configureServices)
             )
             .Build();
         await host.StartAsync();
@@ -113,8 +112,7 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
         using var host = await CreateHostWithServices(
             services =>
             {
-                var builder = services.AddAuthentication(
-                    o => o.DefaultSignInScheme = DefaultScheme
+                var builder = services.AddAuthentication(o => o.DefaultSignInScheme = DefaultScheme
                 );
                 RegisterAuth(builder, o => o.SignInScheme = null);
             },

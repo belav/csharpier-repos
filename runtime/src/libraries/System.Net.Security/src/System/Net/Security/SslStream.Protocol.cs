@@ -297,8 +297,9 @@ namespace System.Net.Security
                 {
                     issuers = GetRequestCertificateAuthorities();
                     remoteCert = CertificateValidationPal.GetRemoteCertificate(_securityContext);
-                    _sslAuthenticationOptions.ClientCertificates ??=
-                        new X509CertificateCollection();
+                    _sslAuthenticationOptions.ClientCertificates ??= new X509CertificateCollection(
+
+                    );
                     clientCertificate = _sslAuthenticationOptions.CertSelectionDelegate(
                         this,
                         _sslAuthenticationOptions.TargetHost,

@@ -195,14 +195,13 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 );
 
                                 conflictLocations = conflictResolution
-                                    .RelatedLocations.Where(
-                                        loc =>
-                                            documentIdsThatGetsAnnotatedAndRenamed.Contains(
-                                                loc.DocumentId
-                                            )
-                                            && loc.Type
-                                                == RelatedLocationType.PossiblyResolvableConflict
-                                            && loc.IsReference
+                                    .RelatedLocations.Where(loc =>
+                                        documentIdsThatGetsAnnotatedAndRenamed.Contains(
+                                            loc.DocumentId
+                                        )
+                                        && loc.Type
+                                            == RelatedLocationType.PossiblyResolvableConflict
+                                        && loc.IsReference
                                     )
                                     .Select(loc => new ConflictLocationInfo(loc))
                                     .ToImmutableHashSet();
@@ -219,13 +218,12 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 conflictLocations = conflictLocations
                                     .Concat(
                                         conflictResolution
-                                            .RelatedLocations.Where(
-                                                loc =>
-                                                    documentIdsThatGetsAnnotatedAndRenamed.Contains(
-                                                        loc.DocumentId
-                                                    )
-                                                    && loc.Type
-                                                        == RelatedLocationType.PossiblyResolvableConflict
+                                            .RelatedLocations.Where(loc =>
+                                                documentIdsThatGetsAnnotatedAndRenamed.Contains(
+                                                    loc.DocumentId
+                                                )
+                                                && loc.Type
+                                                    == RelatedLocationType.PossiblyResolvableConflict
                                             )
                                             .Select(loc => new ConflictLocationInfo(loc))
                                     )
@@ -242,22 +240,20 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                             {
                                 // After phase 2, if there are still conflicts then remove the conflict locations from being expanded
                                 var unresolvedLocations = conflictResolution
-                                    .RelatedLocations.Where(
-                                        l => (l.Type & RelatedLocationType.UnresolvedConflict) != 0
+                                    .RelatedLocations.Where(l =>
+                                        (l.Type & RelatedLocationType.UnresolvedConflict) != 0
                                     )
-                                    .Select(
-                                        l => Tuple.Create(l.ComplexifiedTargetSpan, l.DocumentId)
+                                    .Select(l =>
+                                        Tuple.Create(l.ComplexifiedTargetSpan, l.DocumentId)
                                     )
                                     .Distinct();
 
                                 conflictLocations = conflictLocations
-                                    .Where(
-                                        l =>
-                                            !unresolvedLocations.Any(
-                                                c =>
-                                                    c.Item2 == l.DocumentId
-                                                    && c.Item1.Contains(l.OriginalIdentifierSpan)
-                                            )
+                                    .Where(l =>
+                                        !unresolvedLocations.Any(c =>
+                                            c.Item2 == l.DocumentId
+                                            && c.Item1.Contains(l.OriginalIdentifierSpan)
+                                        )
                                     )
                                     .ToImmutableHashSet();
                             }
@@ -344,11 +340,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     {
                         var definitionLocations = _renameLocationSet.Symbol.Locations;
                         var definitionDocuments = definitionLocations
-                            .Select(
-                                l =>
-                                    conflictResolution.OldSolution.GetRequiredDocument(
-                                        l.SourceTree!
-                                    )
+                            .Select(l =>
+                                conflictResolution.OldSolution.GetRequiredDocument(l.SourceTree!)
                             )
                             .Distinct();
 
@@ -402,8 +395,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 // only check if rename thinks it was successful
                 if (
                     conflictResolution.ReplacementTextValid
-                    && conflictResolution.RelatedLocations.All(
-                        loc => (loc.Type & RelatedLocationType.UnresolvableConflict) == 0
+                    && conflictResolution.RelatedLocations.All(loc =>
+                        (loc.Type & RelatedLocationType.UnresolvableConflict) == 0
                     )
                 )
                 {
@@ -708,8 +701,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                             .ConfigureAwait(false);
                     }
 
-                    return conflictResolution.RelatedLocations.Any(
-                        r => r.Type == RelatedLocationType.PossiblyResolvableConflict
+                    return conflictResolution.RelatedLocations.Any(r =>
+                        r.Type == RelatedLocationType.PossiblyResolvableConflict
                     );
                 }
                 catch (Exception e)
@@ -766,14 +759,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 return syntaxRoot
                     .DescendantNodesAndTokens(descendIntoTrivia: true)
                     .Where(_renameAnnotations.HasAnnotations<RenameActionAnnotation>)
-                    .Select(
-                        s =>
-                            (
-                                s,
-                                _renameAnnotations
-                                    .GetAnnotations<RenameActionAnnotation>(s)
-                                    .Single()
-                            )
+                    .Select(s =>
+                        (s, _renameAnnotations.GetAnnotations<RenameActionAnnotation>(s).Single())
                     );
             }
 
@@ -806,14 +793,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
                             hasConflict = true;
 
-                            var newLocationTasks = newReferencedSymbols.Select(
-                                async symbol =>
-                                    await GetSymbolLocationAsync(
-                                            solution,
-                                            symbol,
-                                            _cancellationToken
-                                        )
-                                        .ConfigureAwait(false)
+                            var newLocationTasks = newReferencedSymbols.Select(async symbol =>
+                                await GetSymbolLocationAsync(solution, symbol, _cancellationToken)
+                                    .ConfigureAwait(false)
                             );
                             var newLocations = (
                                 await Task.WhenAll(newLocationTasks).ConfigureAwait(false)
@@ -832,8 +814,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                         originalReference.DocumentId
                                     );
                                 if (
-                                    newLocations.Any(
-                                        loc => loc.SourceSpan.Start == adjustedStartPosition
+                                    newLocations.Any(loc =>
+                                        loc.SourceSpan.Start == adjustedStartPosition
                                     )
                                 )
                                 {
@@ -952,8 +934,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                                 overridingSymbol.GetOverriddenMember();
                                             if (
                                                 overriddenSymbol == null
-                                                || !overriddenSymbol.Locations.All(
-                                                    loc => loc.IsInMetadata
+                                                || !overriddenSymbol.Locations.All(loc =>
+                                                    loc.IsInMetadata
                                                 )
                                             )
                                             {
@@ -1034,8 +1016,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 // When using (not declaring) an alias, the alias symbol and the target symbol are returned
                 // by GetSymbolsTouchingPosition
                 if (newReferencedSymbols.Length >= 2)
-                    newReferencedSymbols = newReferencedSymbols.WhereAsArray(
-                        a => a.Kind != SymbolKind.Alias
+                    newReferencedSymbols = newReferencedSymbols.WhereAsArray(a =>
+                        a.Kind != SymbolKind.Alias
                     );
 
                 return newReferencedSymbols;
@@ -1212,10 +1194,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
                         // Get all rename locations for the current document.
                         var allTextSpansInSingleSourceTree = renameLocations
-                            .Where(
-                                l =>
-                                    l.DocumentId == documentId
-                                    && ShouldIncludeLocation(renameLocations, l)
+                            .Where(l =>
+                                l.DocumentId == documentId
+                                && ShouldIncludeLocation(renameLocations, l)
                             )
                             .ToImmutableDictionary(l => l.Location.SourceSpan);
 

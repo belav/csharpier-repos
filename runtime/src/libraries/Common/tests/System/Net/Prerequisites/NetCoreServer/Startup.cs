@@ -50,19 +50,18 @@ namespace NetCoreServer
                         })
             );
 #endif
-            services.AddCors(
-                o =>
-                    o.AddPolicy(
-                        "AnyCors",
-                        builder =>
-                        {
-                            builder
-                                .AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader()
-                                .WithExposedHeaders("*");
-                        }
-                    )
+            services.AddCors(o =>
+                o.AddPolicy(
+                    "AnyCors",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .WithExposedHeaders("*");
+                    }
+                )
             );
         }
 

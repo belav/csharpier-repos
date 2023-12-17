@@ -92,8 +92,8 @@ namespace Moq.Tests
         [Fact]
         public async Task Mock_Of__property_of__completed_ValueTask()
         {
-            var person = Mock.Of<IPerson>(
-                p => p.GetFriendValueTaskAsync().Result.Name == NameOfFriend
+            var person = Mock.Of<IPerson>(p =>
+                p.GetFriendValueTaskAsync().Result.Name == NameOfFriend
             );
             var friend = await person.GetFriendValueTaskAsync();
             Assert.Equal(NameOfFriend, friend.Name);
@@ -102,10 +102,9 @@ namespace Moq.Tests
         [Fact]
         public async Task Mock_Of__properties_of__completed_Task()
         {
-            var person = Mock.Of<IPerson>(
-                p =>
-                    p.GetFriendTaskAsync().Result.Name == NameOfFriend
-                    && p.GetFriendTaskAsync().Result.Friend == SecondFriend
+            var person = Mock.Of<IPerson>(p =>
+                p.GetFriendTaskAsync().Result.Name == NameOfFriend
+                && p.GetFriendTaskAsync().Result.Friend == SecondFriend
             );
             var friend = await person.GetFriendTaskAsync();
             Assert.Equal(NameOfFriend, friend.Name);
@@ -115,10 +114,9 @@ namespace Moq.Tests
         [Fact]
         public async Task Mock_Of__properties_of__completed_ValueTask()
         {
-            var person = Mock.Of<IPerson>(
-                p =>
-                    p.GetFriendValueTaskAsync().Result.Name == NameOfFriend
-                    && p.GetFriendValueTaskAsync().Result.Friend == SecondFriend
+            var person = Mock.Of<IPerson>(p =>
+                p.GetFriendValueTaskAsync().Result.Name == NameOfFriend
+                && p.GetFriendValueTaskAsync().Result.Friend == SecondFriend
             );
             var friend = await person.GetFriendValueTaskAsync();
             Assert.Equal(NameOfFriend, friend.Name);

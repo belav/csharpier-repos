@@ -173,8 +173,8 @@ namespace Microsoft.Web.Mvc
                 }
             }
 
-            IEnumerable<MvcHtmlString> radioButtons = selectList.Select(
-                item => htmlHelper.RadioButton(name, item.Value, item.Selected, htmlAttributes)
+            IEnumerable<MvcHtmlString> radioButtons = selectList.Select(item =>
+                htmlHelper.RadioButton(name, item.Value, item.Selected, htmlAttributes)
             );
 
             return radioButtons.ToArray();

@@ -146,8 +146,8 @@ public class CertificateForwardingTests
                     .UseTestServer()
                     .ConfigureServices(services =>
                     {
-                        services.AddCertificateForwarding(
-                            options => options.CertificateHeader = "X-ARR-ClientCert"
+                        services.AddCertificateForwarding(options =>
+                            options.CertificateHeader = "X-ARR-ClientCert"
                         );
                     })
                     .Configure(app =>
@@ -196,8 +196,8 @@ public class CertificateForwardingTests
                     .UseTestServer()
                     .ConfigureServices(services =>
                     {
-                        services.AddCertificateForwarding(
-                            options => options.CertificateHeader = "some-random-header"
+                        services.AddCertificateForwarding(options =>
+                            options.CertificateHeader = "some-random-header"
                         );
                     })
                     .Configure(app =>

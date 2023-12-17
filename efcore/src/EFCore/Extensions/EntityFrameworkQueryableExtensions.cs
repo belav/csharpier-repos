@@ -2682,30 +2682,24 @@ public static class EntityFrameworkQueryableExtensions
         typeof(EntityFrameworkQueryableExtensions)
             .GetTypeInfo()
             .GetDeclaredMethods(nameof(Include))
-            .Single(
-                mi =>
-                    mi.GetGenericArguments().Length == 2
-                    && mi.GetParameters()
-                        .Any(
-                            pi =>
-                                pi.Name == "navigationPropertyPath"
-                                && pi.ParameterType != typeof(string)
-                        )
+            .Single(mi =>
+                mi.GetGenericArguments().Length == 2
+                && mi.GetParameters()
+                    .Any(pi =>
+                        pi.Name == "navigationPropertyPath" && pi.ParameterType != typeof(string)
+                    )
             );
 
     internal static readonly MethodInfo NotQuiteIncludeMethodInfo =
         typeof(EntityFrameworkQueryableExtensions)
             .GetTypeInfo()
             .GetDeclaredMethods(nameof(NotQuiteInclude))
-            .Single(
-                mi =>
-                    mi.GetGenericArguments().Length == 2
-                    && mi.GetParameters()
-                        .Any(
-                            pi =>
-                                pi.Name == "navigationPropertyPath"
-                                && pi.ParameterType != typeof(string)
-                        )
+            .Single(mi =>
+                mi.GetGenericArguments().Length == 2
+                && mi.GetParameters()
+                    .Any(pi =>
+                        pi.Name == "navigationPropertyPath" && pi.ParameterType != typeof(string)
+                    )
             );
 
     /// <summary>
@@ -2799,12 +2793,9 @@ public static class EntityFrameworkQueryableExtensions
         typeof(EntityFrameworkQueryableExtensions)
             .GetTypeInfo()
             .GetDeclaredMethods(nameof(ThenInclude))
-            .Single(
-                mi =>
-                    mi.GetGenericArguments().Length == 3
-                    && mi.GetParameters()[0]
-                        .ParameterType.GenericTypeArguments[1]
-                        .IsGenericParameter
+            .Single(mi =>
+                mi.GetGenericArguments().Length == 3
+                && mi.GetParameters()[0].ParameterType.GenericTypeArguments[1].IsGenericParameter
             );
 
     /// <summary>
@@ -2925,14 +2916,11 @@ public static class EntityFrameworkQueryableExtensions
         typeof(EntityFrameworkQueryableExtensions)
             .GetTypeInfo()
             .GetDeclaredMethods(nameof(Include))
-            .Single(
-                mi =>
-                    mi.GetParameters()
-                        .Any(
-                            pi =>
-                                pi.Name == "navigationPropertyPath"
-                                && pi.ParameterType == typeof(string)
-                        )
+            .Single(mi =>
+                mi.GetParameters()
+                    .Any(pi =>
+                        pi.Name == "navigationPropertyPath" && pi.ParameterType == typeof(string)
+                    )
             );
 
     /// <summary>

@@ -264,8 +264,8 @@ namespace System.Formats.Tar.Tests
 
             for (int i = 0; i < 10; i++)
             {
-                int filesCount = entries.Count(
-                    e => e.EntryType == actualEntryType && e.Name.StartsWith($"{i}/")
+                int filesCount = entries.Count(e =>
+                    e.EntryType == actualEntryType && e.Name.StartsWith($"{i}/")
                 );
                 Assert.Equal(10, filesCount);
             }

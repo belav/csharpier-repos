@@ -293,7 +293,9 @@
                 else
                 {
                     SecurityTokenHandlerCollection sthc =
-                        SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+                        SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(
+
+                        );
                     if (sthc.CanWriteToken(_securityToken))
                     {
                         {

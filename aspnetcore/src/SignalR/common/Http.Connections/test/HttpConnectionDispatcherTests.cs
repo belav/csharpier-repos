@@ -987,13 +987,12 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
 
             var mockStream = new Mock<Stream>();
             mockStream
-                .Setup(
-                    m =>
-                        m.CopyToAsync(
-                            It.IsAny<Stream>(),
-                            It.IsAny<int>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(m =>
+                    m.CopyToAsync(
+                        It.IsAny<Stream>(),
+                        It.IsAny<int>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Throws(new IOException());
 
@@ -3952,8 +3951,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                     Url = new Uri(url + "/foo"),
                     Transports = transportType,
                     DefaultTransferFormat = TransferFormat.Text,
-                    HttpMessageHandlerFactory = handler =>
-                        new GetNegotiateHttpHandler(handler, stream)
+                    HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(
+                        handler,
+                        stream
+                    )
                 },
                 LoggerFactory
             );

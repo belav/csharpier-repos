@@ -328,11 +328,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 SharedState.DotNetWithNETCoreAppReleaseAndPreRelease,
                 SharedState.FrameworkReferenceApp,
                 new TestSettings()
-                    .WithRuntimeConfigCustomizer(
-                        runtimeConfig =>
-                            runtimeConfig
-                                .WithApplyPatches(applyPatches)
-                                .WithFramework(MicrosoftNETCoreApp, frameworkReferenceVersion)
+                    .WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig
+                            .WithApplyPatches(applyPatches)
+                            .WithFramework(MicrosoftNETCoreApp, frameworkReferenceVersion)
                     )
                     // Using command line, so that it's possible to mix rollForward and applyPatches
                     .With(RollForwardSetting(SettingLocation.CommandLine, rollForward))

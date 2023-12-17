@@ -256,7 +256,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void NameWithNumericString()
         {
             X500DistinguishedName dn = new X500DistinguishedName(
-                "30283117301506052901020203120C313233203635342037383930310D300B0603550403130454657374".HexToByteArray()
+                "30283117301506052901020203120C313233203635342037383930310D300B0603550403130454657374".HexToByteArray(
+
+                )
             );
 
             Assert.Equal(

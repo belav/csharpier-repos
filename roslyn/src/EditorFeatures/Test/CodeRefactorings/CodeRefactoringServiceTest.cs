@@ -63,10 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 CancellationToken.None
             );
 
-            var stubRefactoringAction = refactorings.Single(
-                refactoring =>
-                    refactoring.CodeActions.FirstOrDefault().action?.Title
-                    == nameof(StubRefactoring)
+            var stubRefactoringAction = refactorings.Single(refactoring =>
+                refactoring.CodeActions.FirstOrDefault().action?.Title == nameof(StubRefactoring)
             );
             Assert.True(stubRefactoringAction is object);
         }
@@ -232,8 +230,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 .Project;
 
             // Verify available refactorings for .txt additional document
-            var txtAdditionalDocument = project.AdditionalDocuments.Single(
-                t => t.Name == "test.txt"
+            var txtAdditionalDocument = project.AdditionalDocuments.Single(t => t.Name == "test.txt"
             );
             var txtRefactorings = await refactoringService.GetRefactoringsAsync(
                 txtAdditionalDocument,
@@ -269,8 +266,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             );
 
             // Verify available refactorings for .log additional document
-            var logAdditionalDocument = project.AdditionalDocuments.Single(
-                t => t.Name == "test.log"
+            var logAdditionalDocument = project.AdditionalDocuments.Single(t => t.Name == "test.log"
             );
             var logRefactorings = await refactoringService.GetRefactoringsAsync(
                 logAdditionalDocument,
@@ -318,8 +314,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 .Project;
 
             // Verify available refactorings for .editorconfig document
-            var editorConfig = project.AnalyzerConfigDocuments.Single(
-                t => t.Name == ".editorconfig"
+            var editorConfig = project.AnalyzerConfigDocuments.Single(t => t.Name == ".editorconfig"
             );
             var editorConfigRefactorings = await refactoringService.GetRefactoringsAsync(
                 editorConfig,
@@ -353,8 +348,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             );
 
             // Verify available refactorings for .globalconfig document
-            var globalConfig = project.AnalyzerConfigDocuments.Single(
-                t => t.Name == ".globalconfig"
+            var globalConfig = project.AnalyzerConfigDocuments.Single(t => t.Name == ".globalconfig"
             );
             var globalConfigRefactorings = await refactoringService.GetRefactoringsAsync(
                 globalConfig,

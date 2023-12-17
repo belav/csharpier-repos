@@ -268,8 +268,8 @@ namespace System.Web.Configuration
                 // Dev10 bug 734918
                 // We should not fail when the w3svc service is not installed.
                 ServiceController[] services = ServiceController.GetServices();
-                ServiceController controller = services.SingleOrDefault(
-                    s => String.Equals(s.ServiceName, "W3SVC", StringComparison.OrdinalIgnoreCase)
+                ServiceController controller = services.SingleOrDefault(s =>
+                    String.Equals(s.ServiceName, "W3SVC", StringComparison.OrdinalIgnoreCase)
                 );
                 if (controller == null)
                 {

@@ -171,12 +171,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     return true;
 
                 return isOpenDocument
-                    && previousData.Items.Any(
-                        static d =>
-                            d.Severity
-                                is DiagnosticSeverity.Error
-                                    or DiagnosticSeverity.Warning
-                                    or DiagnosticSeverity.Info
+                    && previousData.Items.Any(static d =>
+                        d.Severity
+                            is DiagnosticSeverity.Error
+                                or DiagnosticSeverity.Warning
+                                or DiagnosticSeverity.Info
                     );
             }
         }
@@ -379,10 +378,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     }
                     else if (!analyzersFullAnalysisEnabled)
                     {
-                        stateSets = stateSets.WhereAsArray(
-                            s =>
-                                s.Analyzer.IsCompilerAnalyzer()
-                                || s.Analyzer.IsWorkspaceDiagnosticAnalyzer()
+                        stateSets = stateSets.WhereAsArray(s =>
+                            s.Analyzer.IsCompilerAnalyzer()
+                            || s.Analyzer.IsWorkspaceDiagnosticAnalyzer()
                         );
                     }
 

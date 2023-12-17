@@ -13,10 +13,8 @@ public class UseDestinationValueNullable : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>()
-                    .ForMember(d => d.Value, o => o.UseDestinationValue())
+        new(c =>
+            c.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.UseDestinationValue())
         );
 
     [Fact]
@@ -220,12 +218,11 @@ public class DontUseDestinationValue : NonValidatingSpecBase
 
         new Action(
             () => Mapper.Map<Organization>(orgDto)
-        ).ShouldThrowException<AutoMapperMappingException>(
-            ex =>
-                ex.InnerException.Message.ShouldStartWith(
-                    typeof(CollectionController<Branch, short, EventArgs>)
-                        + " needs to have a constructor with 0 args or only optional args"
-                )
+        ).ShouldThrowException<AutoMapperMappingException>(ex =>
+            ex.InnerException.Message.ShouldStartWith(
+                typeof(CollectionController<Branch, short, EventArgs>)
+                    + " needs to have a constructor with 0 args or only optional args"
+            )
         );
     }
 }

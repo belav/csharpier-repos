@@ -29,15 +29,14 @@ public class MiddlewareTests
                     .Configure(app =>
                     {
                         app.UseRewriter(options);
-                        app.Run(
-                            context =>
-                                context.Response.WriteAsync(
-                                    context.Request.Scheme
-                                        + "://"
-                                        + context.Request.Host
-                                        + context.Request.Path
-                                        + context.Request.QueryString
-                                )
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Scheme
+                                    + "://"
+                                    + context.Request.Host
+                                    + context.Request.Path
+                                    + context.Request.QueryString
+                            )
                         );
                     });
             })
@@ -68,15 +67,14 @@ public class MiddlewareTests
                     .Configure(app =>
                     {
                         app.UseRewriter(options);
-                        app.Run(
-                            context =>
-                                context.Response.WriteAsync(
-                                    context.Request.Scheme
-                                        + "://"
-                                        + context.Request.Host
-                                        + context.Request.Path
-                                        + context.Request.QueryString
-                                )
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Scheme
+                                    + "://"
+                                    + context.Request.Host
+                                    + context.Request.Path
+                                    + context.Request.QueryString
+                            )
                         );
                     });
             })
@@ -105,15 +103,14 @@ public class MiddlewareTests
                     .Configure(app =>
                     {
                         app.UseRewriter(options);
-                        app.Run(
-                            context =>
-                                context.Response.WriteAsync(
-                                    context.Request.Scheme
-                                        + "://"
-                                        + context.Request.Host
-                                        + context.Request.Path
-                                        + context.Request.QueryString
-                                )
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Scheme
+                                    + "://"
+                                    + context.Request.Host
+                                    + context.Request.Path
+                                    + context.Request.QueryString
+                            )
                         );
                     });
             })
@@ -142,15 +139,14 @@ public class MiddlewareTests
                     .Configure(app =>
                     {
                         app.UseRewriter(options);
-                        app.Run(
-                            context =>
-                                context.Response.WriteAsync(
-                                    context.Request.Scheme
-                                        + "://"
-                                        + context.Request.Host
-                                        + context.Request.Path
-                                        + context.Request.QueryString
-                                )
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Scheme
+                                    + "://"
+                                    + context.Request.Host
+                                    + context.Request.Path
+                                    + context.Request.QueryString
+                            )
                         );
                     });
             })
@@ -801,11 +797,10 @@ public class MiddlewareTests
                     .Configure(app =>
                     {
                         app.UseRewriter(options);
-                        app.Run(
-                            context =>
-                                context.Response.WriteAsync(
-                                    context.Request.Path + context.Request.QueryString
-                                )
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Path + context.Request.QueryString
+                            )
                         );
                     });
             })
@@ -832,11 +827,10 @@ public class MiddlewareTests
                     .Configure(app =>
                     {
                         app.UseRewriter(options);
-                        app.Run(
-                            context =>
-                                context.Response.WriteAsync(
-                                    context.Request.Path + context.Request.QueryString
-                                )
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Path + context.Request.QueryString
+                            )
                         );
                     });
             })

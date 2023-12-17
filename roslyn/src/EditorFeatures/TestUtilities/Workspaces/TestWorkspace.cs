@@ -301,15 +301,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         public TServiceInterface GetService<TServiceInterface>(string contentType, string name)
         {
-            var values = ExportProvider.GetExports<
-                TServiceInterface,
-                OrderableContentTypeMetadata
-            >();
+            var values = ExportProvider.GetExports<TServiceInterface, OrderableContentTypeMetadata>(
+
+            );
             return values
-                .Single(
-                    value =>
-                        value.Metadata.Name == name
-                        && value.Metadata.ContentTypes.Contains(contentType)
+                .Single(value =>
+                    value.Metadata.Name == name && value.Metadata.ContentTypes.Contains(contentType)
                 )
                 .Value;
         }
@@ -673,8 +670,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 }
 
                 // Find and insert the span from the corresponding document
-                var documentWithSpan = baseDocuments.FirstOrDefault(
-                    d => d.AnnotatedSpans.ContainsKey(spanName)
+                var documentWithSpan = baseDocuments.FirstOrDefault(d =>
+                    d.AnnotatedSpans.ContainsKey(spanName)
                 );
                 if (documentWithSpan == null)
                 {

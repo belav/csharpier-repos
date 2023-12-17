@@ -44,8 +44,9 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             if (typeName == null)
                 return;
 
-            var service =
-                document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>();
+            var service = document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>(
+
+            );
             var actions = await service
                 .GenerateDefaultConstructorsAsync(
                     document,

@@ -46,9 +46,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
                         pathsToSearch.AddRange(
                             new DirectoryInfo(installs)
                                 .EnumerateDirectories()
-                                .Select(
-                                    install =>
-                                        Path.Combine(install.FullName, "MSBuild", "Current", "Bin")
+                                .Select(install =>
+                                    Path.Combine(install.FullName, "MSBuild", "Current", "Bin")
                                 )
                         );
                     }

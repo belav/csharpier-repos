@@ -159,8 +159,8 @@ namespace Microsoft.Extensions.Hosting
             Action<HostOptions> configureOptions
         )
         {
-            return hostBuilder.ConfigureServices(
-                collection => collection.Configure(configureOptions)
+            return hostBuilder.ConfigureServices(collection =>
+                collection.Configure(configureOptions)
             );
         }
 
@@ -245,12 +245,9 @@ namespace Microsoft.Extensions.Hosting
                         ApplyDefaultAppConfiguration(hostingContext, config, args)
                 )
                 .ConfigureServices(AddDefaultServices)
-                .UseServiceProviderFactory(
-                    context =>
-                        new DefaultServiceProviderFactory(
-                            CreateDefaultServiceProviderOptions(context)
-                        )
-                );
+                .UseServiceProviderFactory(context => new DefaultServiceProviderFactory(
+                    CreateDefaultServiceProviderOptions(context)
+                ));
         }
 
         private static void ApplyDefaultHostConfiguration(
@@ -432,8 +429,8 @@ namespace Microsoft.Extensions.Hosting
         [UnsupportedOSPlatform("tvos")]
         public static IHostBuilder UseConsoleLifetime(this IHostBuilder hostBuilder)
         {
-            return hostBuilder.ConfigureServices(
-                collection => collection.AddSingleton<IHostLifetime, ConsoleLifetime>()
+            return hostBuilder.ConfigureServices(collection =>
+                collection.AddSingleton<IHostLifetime, ConsoleLifetime>()
             );
         }
 

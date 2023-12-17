@@ -234,8 +234,8 @@ namespace Roslyn.Services.CSharp.Debugging
             if (arrayCreation.InitializerOpt != null)
             {
                 var flags = ExpressionType.Invalid;
-                arrayCreation.InitializerOpt.Expressions.Do(
-                    e => CollectExpressionTerms(position, e, terms, ref flags)
+                arrayCreation.InitializerOpt.Expressions.Do(e =>
+                    CollectExpressionTerms(position, e, terms, ref flags)
                 );
 
                 validTerm &= (flags & ExpressionType.ValidTerm) == ExpressionType.ValidTerm;

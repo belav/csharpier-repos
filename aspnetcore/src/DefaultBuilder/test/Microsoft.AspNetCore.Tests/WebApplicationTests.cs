@@ -1596,8 +1596,8 @@ public class WebApplicationTests
         // services callbacks
         using var listener = new HostingListener(hostBuilder =>
         {
-            hostBuilder.ConfigureAppConfiguration(
-                config => config.Add(new RandomConfigurationSource())
+            hostBuilder.ConfigureAppConfiguration(config =>
+                config.Add(new RandomConfigurationSource())
             );
         });
 
@@ -2066,30 +2066,27 @@ public class WebApplicationTests
         var builder = createBuilder();
 
         Assert.Single(
-            builder.Services.Where(
-                descriptor =>
-                    descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
+            builder.Services.Where(descriptor =>
+                descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
             )
         );
         // IWebHostEnvironment is added by ConfigureWebHostDefaults
         Assert.Single(
-            builder.Services.Where(
-                descriptor => descriptor.ServiceType == typeof(IWebHostEnvironment)
+            builder.Services.Where(descriptor =>
+                descriptor.ServiceType == typeof(IWebHostEnvironment)
             )
         );
         Assert.Single(
-            builder.Services.Where(
-                descriptor =>
-                    descriptor.ServiceType
-                    == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
+            builder.Services.Where(descriptor =>
+                descriptor.ServiceType == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
             )
         );
         Assert.Single(
             builder.Services.Where(descriptor => descriptor.ServiceType == typeof(IServer))
         );
         Assert.Single(
-            builder.Services.Where(
-                descriptor => descriptor.ServiceType == typeof(EndpointDataSource)
+            builder.Services.Where(descriptor =>
+                descriptor.ServiceType == typeof(EndpointDataSource)
             )
         );
 
@@ -2113,31 +2110,28 @@ public class WebApplicationTests
         var builder = WebApplication.CreateEmptyBuilder(new());
 
         Assert.Empty(
-            builder.Services.Where(
-                descriptor =>
-                    descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
+            builder.Services.Where(descriptor =>
+                descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
             )
         );
         Assert.Empty(
-            builder.Services.Where(
-                descriptor =>
-                    descriptor.ServiceType
-                    == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
+            builder.Services.Where(descriptor =>
+                descriptor.ServiceType == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
             )
         );
         Assert.Empty(
             builder.Services.Where(descriptor => descriptor.ServiceType == typeof(IServer))
         );
         Assert.Empty(
-            builder.Services.Where(
-                descriptor => descriptor.ServiceType == typeof(EndpointDataSource)
+            builder.Services.Where(descriptor =>
+                descriptor.ServiceType == typeof(EndpointDataSource)
             )
         );
 
         // These services are still necessary
         Assert.Single(
-            builder.Services.Where(
-                descriptor => descriptor.ServiceType == typeof(IWebHostEnvironment)
+            builder.Services.Where(descriptor =>
+                descriptor.ServiceType == typeof(IWebHostEnvironment)
             )
         );
     }

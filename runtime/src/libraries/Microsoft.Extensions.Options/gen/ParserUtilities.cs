@@ -41,10 +41,9 @@ namespace Microsoft.Extensions.Options.Generators
             SyntaxKind modifierToSearch,
             CancellationToken token
         ) =>
-            property.DeclaringSyntaxReferences.Any(
-                x =>
-                    x.GetSyntax(token) is PropertyDeclarationSyntax syntax
-                    && syntax.Modifiers.Any(m => m.IsKind(modifierToSearch))
+            property.DeclaringSyntaxReferences.Any(x =>
+                x.GetSyntax(token) is PropertyDeclarationSyntax syntax
+                && syntax.Modifiers.Any(m => m.IsKind(modifierToSearch))
             );
 
         internal static Location? GetLocation(this ISymbol symbol)
@@ -97,14 +96,13 @@ namespace Microsoft.Extensions.Options.Generators
                 if (
                     type.GetMembers(propertyName)
                         .OfType<IPropertySymbol>()
-                        .Any(
-                            property =>
-                                property.Type.SpecialType == returnType
-                                && property.DeclaredAccessibility == Accessibility.Public
-                                && property.Kind == SymbolKind.Property
-                                && !property.IsStatic
-                                && property.GetMethod != null
-                                && property.Parameters.IsEmpty
+                        .Any(property =>
+                            property.Type.SpecialType == returnType
+                            && property.DeclaredAccessibility == Accessibility.Public
+                            && property.Kind == SymbolKind.Property
+                            && !property.IsStatic
+                            && property.GetMethod != null
+                            && property.Parameters.IsEmpty
                         )
                 )
                 {
@@ -122,13 +120,12 @@ namespace Microsoft.Extensions.Options.Generators
                     interfaceType
                         .GetMembers(propertyName)
                         .OfType<IPropertySymbol>()
-                        .Any(
-                            property =>
-                                property.Type.SpecialType == returnType
-                                && property.Kind == SymbolKind.Property
-                                && !property.IsStatic
-                                && property.GetMethod != null
-                                && property.Parameters.IsEmpty
+                        .Any(property =>
+                            property.Type.SpecialType == returnType
+                            && property.Kind == SymbolKind.Property
+                            && !property.IsStatic
+                            && property.GetMethod != null
+                            && property.Parameters.IsEmpty
                         )
                 )
                 {

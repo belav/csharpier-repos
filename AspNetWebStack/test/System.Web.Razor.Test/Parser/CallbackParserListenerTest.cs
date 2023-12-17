@@ -47,35 +47,45 @@ namespace System.Web.Razor.Test.Parser
         [Fact]
         public void ListenerConstructedWithAllCallbacksCallsCallbackOnEndSpan()
         {
-            RunOnEndSpanTest(
-                spanCallback => new CallbackVisitor(spanCallback, _ => { }, _ => { }, _ => { })
-            );
+            RunOnEndSpanTest(spanCallback => new CallbackVisitor(
+                spanCallback,
+                _ => { },
+                _ => { },
+                _ => { }
+            ));
         }
 
         [Fact]
         public void ListenerConstructedWithAllCallbacksCallsCallbackOnError()
         {
-            RunOnErrorTest(
-                errorCallback => new CallbackVisitor(_ => { }, errorCallback, _ => { }, _ => { })
-            );
+            RunOnErrorTest(errorCallback => new CallbackVisitor(
+                _ => { },
+                errorCallback,
+                _ => { },
+                _ => { }
+            ));
         }
 
         [Fact]
         public void ListenerConstructedWithAllCallbacksCallsCallbackOnStartBlock()
         {
-            RunOnStartBlockTest(
-                startBlockCallback =>
-                    new CallbackVisitor(_ => { }, _ => { }, startBlockCallback, _ => { })
-            );
+            RunOnStartBlockTest(startBlockCallback => new CallbackVisitor(
+                _ => { },
+                _ => { },
+                startBlockCallback,
+                _ => { }
+            ));
         }
 
         [Fact]
         public void ListenerConstructedWithAllCallbacksCallsCallbackOnEndBlock()
         {
-            RunOnEndBlockTest(
-                endBlockCallback =>
-                    new CallbackVisitor(_ => { }, _ => { }, _ => { }, endBlockCallback)
-            );
+            RunOnEndBlockTest(endBlockCallback => new CallbackVisitor(
+                _ => { },
+                _ => { },
+                _ => { },
+                endBlockCallback
+            ));
         }
 
         [Fact]
@@ -93,8 +103,12 @@ namespace System.Web.Razor.Test.Parser
         {
             RunSyncContextTest(
                 BlockType.Template,
-                startBlockCallback =>
-                    new CallbackVisitor(_ => { }, _ => { }, startBlockCallback, _ => { }),
+                startBlockCallback => new CallbackVisitor(
+                    _ => { },
+                    _ => { },
+                    startBlockCallback,
+                    _ => { }
+                ),
                 (listener, expected) =>
                     listener.VisitStartBlock(new BlockBuilder() { Type = expected }.Build())
             );
@@ -105,8 +119,12 @@ namespace System.Web.Razor.Test.Parser
         {
             RunSyncContextTest(
                 BlockType.Template,
-                endBlockCallback =>
-                    new CallbackVisitor(_ => { }, _ => { }, _ => { }, endBlockCallback),
+                endBlockCallback => new CallbackVisitor(
+                    _ => { },
+                    _ => { },
+                    _ => { },
+                    endBlockCallback
+                ),
                 (listener, expected) =>
                     listener.VisitEndBlock(new BlockBuilder() { Type = expected }.Build())
             );

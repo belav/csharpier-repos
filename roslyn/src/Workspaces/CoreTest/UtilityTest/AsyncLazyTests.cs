@@ -231,21 +231,20 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var cancellationTokenSource = new CancellationTokenSource();
 
-            var lazy = AsyncLazy.Create(
-                c =>
-                    Task.Run(
-                        (Func<object>)(
-                            () =>
+            var lazy = AsyncLazy.Create(c =>
+                Task.Run(
+                    (Func<object>)(
+                        () =>
+                        {
+                            cancellationTokenSource.Cancel();
+                            while (true)
                             {
-                                cancellationTokenSource.Cancel();
-                                while (true)
-                                {
-                                    c.ThrowIfCancellationRequested();
-                                }
+                                c.ThrowIfCancellationRequested();
                             }
-                        ),
-                        c
-                    )
+                        }
+                    ),
+                    c
+                )
             );
 
             var task = lazy.GetValueAsync(cancellationTokenSource.Token);

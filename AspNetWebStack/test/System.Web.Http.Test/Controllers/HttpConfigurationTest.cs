@@ -268,14 +268,13 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             Mock<ITraceWriter> mockTracer = new Mock<ITraceWriter>() { CallBase = true };
             mockTracer
-                .Setup(
-                    m =>
-                        m.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
+                .Setup(m =>
+                    m.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
                 )
                 .Callback(() =>
                 {
@@ -317,14 +316,13 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             Mock<ITraceWriter> mockTracer = new Mock<ITraceWriter>() { CallBase = true };
             mockTracer
-                .Setup(
-                    m =>
-                        m.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
+                .Setup(m =>
+                    m.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
                 )
                 .Callback(() =>
                 {
@@ -367,14 +365,13 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             Mock<ITraceWriter> mockTracer = new Mock<ITraceWriter>() { CallBase = true };
             mockTracer
-                .Setup(
-                    m =>
-                        m.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
+                .Setup(m =>
+                    m.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
                 )
                 .Callback(() =>
                 {

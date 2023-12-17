@@ -98,7 +98,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             _debuggingSession ?? throw new NoSessionException();
 
         private IActiveStatementTrackingService GetActiveStatementTrackingService() =>
-            WorkspaceProvider.Value.Workspace.Services.GetRequiredService<IActiveStatementTrackingService>();
+            WorkspaceProvider.Value.Workspace.Services.GetRequiredService<IActiveStatementTrackingService>(
+
+            );
 
         internal void Disable() => _disabled = true;
 
@@ -398,16 +400,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var designTimeSolution = workspace.CurrentSolution;
             var solution = GetCurrentCompileTimeSolution(designTimeSolution);
             var activeStatementSpanProvider = GetActiveStatementSpanProvider(solution);
-            var (moduleUpdates, diagnosticData, rudeEdits, syntaxError) =
-                await GetDebuggingSession()
-                    .EmitSolutionUpdateAsync(
-                        solution,
-                        activeStatementSpanProvider,
-                        _diagnosticService,
-                        _diagnosticUpdateSource,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+            var (moduleUpdates, diagnosticData, rudeEdits, syntaxError) = await GetDebuggingSession(
+
+                )
+                .EmitSolutionUpdateAsync(
+                    solution,
+                    activeStatementSpanProvider,
+                    _diagnosticService,
+                    _diagnosticUpdateSource,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Only store the solution if we have any changes to apply, otherwise CommitUpdatesAsync/DiscardUpdatesAsync won't be called.
             if (moduleUpdates.Status == ModuleUpdateStatus.Ready)

@@ -29,10 +29,9 @@ public class CorsStartup
                 "AllowAll",
                 policy =>
                     policy
-                        .SetIsOriginAllowed(
-                            host =>
-                                host.StartsWith("http://localhost:", StringComparison.Ordinal)
-                                || host.StartsWith("http://127.0.0.1:", StringComparison.Ordinal)
+                        .SetIsOriginAllowed(host =>
+                            host.StartsWith("http://localhost:", StringComparison.Ordinal)
+                            || host.StartsWith("http://127.0.0.1:", StringComparison.Ordinal)
                         )
                         .AllowAnyHeader()
                         .WithExposedHeaders("MyCustomHeader")

@@ -43,10 +43,9 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
                     <value>{masterKey}</value>
                   </masterKey>
                 </descriptor>";
-        var deserializedDescriptor =
-            new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
-                XElement.Parse(xml)
-            );
+        var deserializedDescriptor = new ManagedAuthenticatedEncryptorDescriptorDeserializer(
+
+        ).ImportFromXml(XElement.Parse(xml));
         var test = CreateEncryptorInstanceFromDescriptor(
             deserializedDescriptor as ManagedAuthenticatedEncryptorDescriptor
         );
@@ -90,10 +89,9 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
                     <value>{masterKey}</value>
                   </masterKey>
                 </descriptor>";
-        var deserializedDescriptor =
-            new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
-                XElement.Parse(xml)
-            );
+        var deserializedDescriptor = new ManagedAuthenticatedEncryptorDescriptorDeserializer(
+
+        ).ImportFromXml(XElement.Parse(xml));
         var test = CreateEncryptorInstanceFromDescriptor(
             deserializedDescriptor as ManagedAuthenticatedEncryptorDescriptor
         );
@@ -129,10 +127,9 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
                 </descriptor>";
 
         // Act
-        var deserializedDescriptor =
-            new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
-                XElement.Parse(xml)
-            );
+        var deserializedDescriptor = new ManagedAuthenticatedEncryptorDescriptorDeserializer(
+
+        ).ImportFromXml(XElement.Parse(xml));
         var managedDescriptor = (ManagedAuthenticatedEncryptorDescriptor)deserializedDescriptor;
 
         // Assert

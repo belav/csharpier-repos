@@ -92,8 +92,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 cachedEntry.Properties["cost"].Value = appDefaultCost;
                 cachedEntry.Properties["replInterval"].Value = appDefaultInterval;
                 if (schedule != null)
-                    cachedEntry.Properties[nameof(schedule)].Value =
-                        schedule.GetUnmanagedSchedule();
+                    cachedEntry.Properties[nameof(schedule)].Value = schedule.GetUnmanagedSchedule(
+
+                    );
             }
             catch (COMException e)
             {

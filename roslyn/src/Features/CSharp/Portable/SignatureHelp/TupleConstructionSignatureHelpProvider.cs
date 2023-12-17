@@ -288,16 +288,15 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             var separatorParts = GetSeparatorParts().ToTaggedText();
 
             var items = tupleTypes
-                .Select(
-                    tupleType =>
-                        Convert(
-                            tupleType,
-                            prefixParts,
-                            suffixParts,
-                            separatorParts,
-                            semanticModel,
-                            position
-                        )
+                .Select(tupleType =>
+                    Convert(
+                        tupleType,
+                        prefixParts,
+                        suffixParts,
+                        separatorParts,
+                        semanticModel,
+                        position
+                    )
                 )
                 .ToList();
 

@@ -23,11 +23,10 @@ public class ControllerTest
         {
             return typeof(Controller)
                 .GetTypeInfo()
-                .DeclaredMethods.Where(
-                    method =>
-                        method.IsPublic
-                        && !method.IsSpecialName
-                        && !method.Name.Equals("Dispose", StringComparison.OrdinalIgnoreCase)
+                .DeclaredMethods.Where(method =>
+                    method.IsPublic
+                    && !method.IsSpecialName
+                    && !method.Name.Equals("Dispose", StringComparison.OrdinalIgnoreCase)
                 )
                 .Select(method => new[] { method });
         }

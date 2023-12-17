@@ -787,11 +787,10 @@ End Module
             var document = CreateDocument(codeWithoutMarker, LanguageNames.VisualBasic);
             var codeCleanups = CodeCleaner
                 .GetDefaultProviders(document)
-                .WhereAsArray(
-                    p =>
-                        p.Name
-                            is PredefinedCodeCleanupProviderNames.FixIncorrectTokens
-                                or PredefinedCodeCleanupProviderNames.Format
+                .WhereAsArray(p =>
+                    p.Name
+                        is PredefinedCodeCleanupProviderNames.FixIncorrectTokens
+                            or PredefinedCodeCleanupProviderNames.Format
                 );
 
             var cleanDocument = await CodeCleaner.CleanupAsync(

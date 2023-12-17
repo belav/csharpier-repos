@@ -39,8 +39,9 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentException(WorkspacesResources.Unrecognized_language_name);
             }
 
-            var commandLineParser =
-                languageServices.GetRequiredService<ICommandLineParserService>();
+            var commandLineParser = languageServices.GetRequiredService<ICommandLineParserService>(
+
+            );
             var commandLineArguments = commandLineParser.Parse(
                 commandLineArgs,
                 projectDirectory,
@@ -89,8 +90,8 @@ namespace Microsoft.CodeAnalysis
                 .ResolveMetadataReferences(commandLineMetadataReferenceResolver)
                 .Distinct()
                 .ToList();
-            var unresolvedMetadataReferences = boundMetadataReferences.FirstOrDefault(
-                r => r is UnresolvedMetadataReference
+            var unresolvedMetadataReferences = boundMetadataReferences.FirstOrDefault(r =>
+                r is UnresolvedMetadataReference
             );
             if (unresolvedMetadataReferences != null)
             {
@@ -114,8 +115,8 @@ namespace Microsoft.CodeAnalysis
                 .ResolveAnalyzerReferences(analyzerLoader)
                 .Distinct()
                 .ToList();
-            var unresolvedAnalyzerReferences = boundAnalyzerReferences.FirstOrDefault(
-                r => r is UnresolvedAnalyzerReference
+            var unresolvedAnalyzerReferences = boundAnalyzerReferences.FirstOrDefault(r =>
+                r is UnresolvedAnalyzerReference
             );
             if (unresolvedAnalyzerReferences != null)
             {

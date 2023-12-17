@@ -466,22 +466,20 @@ namespace System.Linq.Parallel.Tests
             Assert.Equal(
                 count / 2,
                 query
-                    .Min(
-                        x =>
-                            x >= count / 2
-                                ? DelegatedComparable.Delegate(x, Comparer<int>.Default)
-                                : null
+                    .Min(x =>
+                        x >= count / 2
+                            ? DelegatedComparable.Delegate(x, Comparer<int>.Default)
+                            : null
                     )
                     .Value
             );
             Assert.Equal(
                 count - 1,
                 query
-                    .Min(
-                        x =>
-                            x >= count / 2
-                                ? DelegatedComparable.Delegate(x, ReverseComparer.Instance)
-                                : null
+                    .Min(x =>
+                        x >= count / 2
+                            ? DelegatedComparable.Delegate(x, ReverseComparer.Instance)
+                            : null
                     )
                     .Value
             );

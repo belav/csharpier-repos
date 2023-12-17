@@ -1105,8 +1105,9 @@ namespace System.Net.Quic.Tests
                 },
                 async serverConnection =>
                 {
-                    await using QuicStream stream =
-                        await serverConnection.AcceptInboundStreamAsync();
+                    await using QuicStream stream = await serverConnection.AcceptInboundStreamAsync(
+
+                    );
 
                     var buffer = new byte[4096];
                     int receivedBytes = 0,
@@ -1133,12 +1134,11 @@ namespace System.Net.Quic.Tests
             return from bufferCount in new[] { 1, 2, 3, 10 }
                 let writes = Enumerable
                     .Range(0, 5)
-                    .Select(
-                        _ =>
-                            Enumerable
-                                .Range(0, bufferCount)
-                                .Select(_ => bufferSizes[r.Next(bufferSizes.Length)])
-                                .ToArray()
+                    .Select(_ =>
+                        Enumerable
+                            .Range(0, bufferCount)
+                            .Select(_ => bufferSizes[r.Next(bufferSizes.Length)])
+                            .ToArray()
                     )
                     .ToArray()
                 select new object[] { writes };

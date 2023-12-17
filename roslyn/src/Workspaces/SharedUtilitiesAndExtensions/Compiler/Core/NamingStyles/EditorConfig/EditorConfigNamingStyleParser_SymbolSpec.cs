@@ -575,8 +575,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
             return string.Join(
                 ", ",
-                accessibilities.Select(
-                    accessibility => accessibility.ToEditorConfigString(languageName)
+                accessibilities.Select(accessibility =>
+                    accessibility.ToEditorConfigString(languageName)
                 )
             );
         }

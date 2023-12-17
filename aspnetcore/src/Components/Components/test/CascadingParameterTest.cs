@@ -641,9 +641,9 @@ public class CascadingParameterTest
     {
         // Arrange
         var services = new ServiceCollection();
-        services.AddCascadingValue(
-            _ => new MyParamType("Hello from services (this should be overridden)")
-        );
+        services.AddCascadingValue(_ => new MyParamType(
+            "Hello from services (this should be overridden)"
+        ));
         var renderer = new TestRenderer(services.BuildServiceProvider());
         var component = new TestComponent(builder =>
         {
@@ -969,15 +969,21 @@ public class CascadingParameterTest
         var services = new ServiceCollection();
 
         // Act
-        services.TryAddCascadingValue(
-            _ => new CascadingValueSource<Type1>("Name1", new Type1(), false)
-        );
-        services.TryAddCascadingValue(
-            _ => new CascadingValueSource<Type1>("Name2", new Type1(), false)
-        );
-        services.TryAddCascadingValue(
-            _ => new CascadingValueSource<Type2>("Name3", new Type2(), false)
-        );
+        services.TryAddCascadingValue(_ => new CascadingValueSource<Type1>(
+            "Name1",
+            new Type1(),
+            false
+        ));
+        services.TryAddCascadingValue(_ => new CascadingValueSource<Type1>(
+            "Name2",
+            new Type1(),
+            false
+        ));
+        services.TryAddCascadingValue(_ => new CascadingValueSource<Type2>(
+            "Name3",
+            new Type2(),
+            false
+        ));
 
         // Assert
         Assert.Equal(2, services.Count());
@@ -1023,8 +1029,8 @@ public class CascadingParameterTest
 
     private static T FindComponent<T>(CapturedBatch batch, out int componentId)
     {
-        var componentFrame = batch.ReferenceFrames.Single(
-            frame => frame.FrameType == RenderTreeFrameType.Component && frame.Component is T
+        var componentFrame = batch.ReferenceFrames.Single(frame =>
+            frame.FrameType == RenderTreeFrameType.Component && frame.Component is T
         );
         componentId = componentFrame.ComponentId;
         return (T)componentFrame.Component;

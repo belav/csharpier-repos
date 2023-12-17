@@ -9,8 +9,8 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddDbContext<MyContext>(
-            options => options.UseSqlite($"Data Source = DatabaseErrorPageSample.db")
+        services.AddDbContext<MyContext>(options =>
+            options.UseSqlite($"Data Source = DatabaseErrorPageSample.db")
         );
     }
 

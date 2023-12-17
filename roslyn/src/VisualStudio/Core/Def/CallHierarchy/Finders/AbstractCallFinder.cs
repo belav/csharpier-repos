@@ -204,14 +204,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
                     if (caller.CallingSymbol.Kind == SymbolKind.Field)
                     {
                         initializerLocations.AddRange(
-                            caller.Locations.Select(
-                                loc =>
-                                    new CallHierarchyDetail(
-                                        this.Provider,
-                                        loc,
-                                        project.Solution.Workspace
-                                    )
-                            )
+                            caller.Locations.Select(loc => new CallHierarchyDetail(
+                                this.Provider,
+                                loc,
+                                project.Solution.Workspace
+                            ))
                         );
                     }
                     else

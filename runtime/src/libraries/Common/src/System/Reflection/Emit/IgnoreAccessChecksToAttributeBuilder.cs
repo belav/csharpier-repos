@@ -83,10 +83,9 @@ namespace System.Reflection.Emit
 
             // Find the ctor that takes only AttributeTargets
             ConstructorInfo attributeUsageConstructorInfo =
-                attributeUsageTypeInfo.DeclaredConstructors.Single(
-                    c =>
-                        c.GetParameters().Length == 1
-                        && c.GetParameters()[0].ParameterType == typeof(AttributeTargets)
+                attributeUsageTypeInfo.DeclaredConstructors.Single(c =>
+                    c.GetParameters().Length == 1
+                    && c.GetParameters()[0].ParameterType == typeof(AttributeTargets)
                 );
 
             // Find the property to set AllowMultiple

@@ -75,8 +75,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             serviceCollection.BuildServiceProvider().GetService<IEnumerable<IFakeOuterService>>();
 
-            var callsiteBuiltEvent = _listener.EventData.Single(
-                e => e.EventName == "CallSiteBuilt"
+            var callsiteBuiltEvent = _listener.EventData.Single(e => e.EventName == "CallSiteBuilt"
             );
 
             Assert.Equal(
@@ -218,8 +217,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             serviceProvider.GetService<IFakeService>();
 
-            var expressionTreeGeneratedEvent = _listener.EventData.Single(
-                e => e.EventName == "ExpressionTreeGenerated"
+            var expressionTreeGeneratedEvent = _listener.EventData.Single(e =>
+                e.EventName == "ExpressionTreeGenerated"
             );
 
             Assert.Equal(
@@ -244,8 +243,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             serviceProvider.GetService<IFakeService>();
 
-            var expressionTreeGeneratedEvent = _listener.EventData.Single(
-                e => e.EventName == "DynamicMethodBuilt"
+            var expressionTreeGeneratedEvent = _listener.EventData.Single(e =>
+                e.EventName == "DynamicMethodBuilt"
             );
 
             Assert.Equal(
@@ -269,8 +268,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 scope.ServiceProvider.GetService<IFakeService>();
             }
 
-            var scopeDisposedEvent = _listener.EventData.Single(
-                e => e.EventName == "ScopeDisposed"
+            var scopeDisposedEvent = _listener.EventData.Single(e => e.EventName == "ScopeDisposed"
             );
 
             Assert.Equal(1, GetProperty<int>(scopeDisposedEvent, "scopedServicesResolved"));
@@ -285,8 +283,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             DependencyInjectionEventSource.Log.ServiceRealizationFailed(exception, 1234);
 
             var eventName = nameof(DependencyInjectionEventSource.Log.ServiceRealizationFailed);
-            var serviceRealizationFailedEvent = _listener.EventData.Single(
-                e => e.EventName == eventName
+            var serviceRealizationFailedEvent = _listener.EventData.Single(e =>
+                e.EventName == eventName
             );
 
             Assert.Equal(
@@ -331,8 +329,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             using ServiceProvider provider = serviceCollection.BuildServiceProvider();
 
-            EventWrittenEventArgs serviceProviderBuiltEvent = _listener.EventData.Single(
-                e => e.EventName == "ServiceProviderBuilt"
+            EventWrittenEventArgs serviceProviderBuiltEvent = _listener.EventData.Single(e =>
+                e.EventName == "ServiceProviderBuilt"
             );
             GetProperty<int>(serviceProviderBuiltEvent, "serviceProviderHashCode"); // assert hashcode exists as an int
             Assert.Equal(4, GetProperty<int>(serviceProviderBuiltEvent, "singletonServices"));
@@ -342,8 +340,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             Assert.Equal(1, GetProperty<int>(serviceProviderBuiltEvent, "openGenericsServices"));
             Assert.Equal(7, serviceProviderBuiltEvent.EventId);
 
-            EventWrittenEventArgs serviceProviderDescriptorsEvent = _listener.EventData.Single(
-                e => e.EventName == "ServiceProviderDescriptors"
+            EventWrittenEventArgs serviceProviderDescriptorsEvent = _listener.EventData.Single(e =>
+                e.EventName == "ServiceProviderDescriptors"
             );
             Assert.Equal(
                 string.Join(
@@ -428,13 +426,13 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             _listener.EnableEvents(DependencyInjectionEventSource.Log, EventLevel.Verbose);
 
-            EventWrittenEventArgs serviceProviderBuiltEvent = _listener.EventData.Single(
-                e => e.EventName == "ServiceProviderBuilt"
+            EventWrittenEventArgs serviceProviderBuiltEvent = _listener.EventData.Single(e =>
+                e.EventName == "ServiceProviderBuilt"
             );
             Assert.Equal(1, GetProperty<int>(serviceProviderBuiltEvent, "singletonServices"));
 
-            EventWrittenEventArgs serviceProviderDescriptorsEvent = _listener.EventData.Single(
-                e => e.EventName == "ServiceProviderDescriptors"
+            EventWrittenEventArgs serviceProviderDescriptorsEvent = _listener.EventData.Single(e =>
+                e.EventName == "ServiceProviderDescriptors"
             );
             Assert.NotNull(
                 JObject.Parse(GetProperty<string>(serviceProviderDescriptorsEvent, "descriptors"))

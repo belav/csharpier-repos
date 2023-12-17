@@ -428,7 +428,9 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 // 1, 2, 3, 4, 5 encrypted with CFB8 but padded with block-size padding.
                 byte[] ciphertext = "68C272ACF16BE005A361DB1C147CA3AD".HexToByteArray();
                 aes.Key =
-                    "3279CE2E9669A54E038AA62818672150D0B5A13F6757C27F378115501F83B119".HexToByteArray();
+                    "3279CE2E9669A54E038AA62818672150D0B5A13F6757C27F378115501F83B119".HexToByteArray(
+
+                    );
                 aes.IV = new byte[16];
                 aes.Padding = PaddingMode.PKCS7;
                 aes.Mode = CipherMode.CFB;

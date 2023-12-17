@@ -168,8 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 return null;
             }
 
-            var accessibleIndexers = indexers.WhereAsArray(
-                m => m.IsAccessibleWithin(within, throughType: expressionType)
+            var accessibleIndexers = indexers.WhereAsArray(m =>
+                m.IsAccessibleWithin(within, throughType: expressionType)
             );
             if (!accessibleIndexers.Any())
             {
@@ -192,15 +192,14 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             return CreateSignatureHelpItems(
                 accessibleIndexers
-                    .Select(
-                        p =>
-                            Convert(
-                                p,
-                                openBrace,
-                                semanticModel,
-                                structuralTypeDisplayService,
-                                documentationCommentFormattingService
-                            )
+                    .Select(p =>
+                        Convert(
+                            p,
+                            openBrace,
+                            semanticModel,
+                            structuralTypeDisplayService,
+                            documentationCommentFormattingService
+                        )
                     )
                     .ToList(),
                 textSpan,
@@ -379,14 +378,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetSeparatorParts(),
                 GetPostambleParts(),
                 indexer
-                    .Parameters.Select(
-                        p =>
-                            Convert(
-                                p,
-                                semanticModel,
-                                position,
-                                documentationCommentFormattingService
-                            )
+                    .Parameters.Select(p =>
+                        Convert(p, semanticModel, position, documentationCommentFormattingService)
                     )
                     .ToList()
             );

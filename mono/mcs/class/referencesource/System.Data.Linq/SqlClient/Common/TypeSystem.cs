@@ -177,8 +177,8 @@ namespace System.Data.Linq.SqlClient
                     .GetMethods(BindingFlags.Static | BindingFlags.Public)
                     .ToLookup(m => m.Name);
             }
-            MethodInfo mi = _sequenceMethods[name].FirstOrDefault(
-                m => ArgsMatchExact(m, args, typeArgs)
+            MethodInfo mi = _sequenceMethods[name].FirstOrDefault(m =>
+                ArgsMatchExact(m, args, typeArgs)
             );
             if (mi == null)
                 return null;
@@ -210,8 +210,8 @@ namespace System.Data.Linq.SqlClient
                     .GetMethods(BindingFlags.Static | BindingFlags.Public)
                     .ToLookup(m => m.Name);
             }
-            MethodInfo mi = _queryMethods[name].FirstOrDefault(
-                m => ArgsMatchExact(m, args, typeArgs)
+            MethodInfo mi = _queryMethods[name].FirstOrDefault(m =>
+                ArgsMatchExact(m, args, typeArgs)
             );
             if (mi == null)
                 throw Error.NoMethodInTypeMatchingArguments(typeof(Queryable));

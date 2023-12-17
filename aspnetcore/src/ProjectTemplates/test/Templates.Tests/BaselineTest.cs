@@ -126,9 +126,8 @@ public class BaselineTest : LoggedTest
             {
                 var namespaceDeclarationPrefix = "namespace ";
                 var namespaceDeclaration = File.ReadLines(file)
-                    .SingleOrDefault(
-                        line =>
-                            line.StartsWith(namespaceDeclarationPrefix, StringComparison.Ordinal)
+                    .SingleOrDefault(line =>
+                        line.StartsWith(namespaceDeclarationPrefix, StringComparison.Ordinal)
                     )
                     ?.Substring(namespaceDeclarationPrefix.Length);
 

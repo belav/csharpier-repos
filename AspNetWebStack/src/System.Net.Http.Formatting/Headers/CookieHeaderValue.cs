@@ -99,8 +99,8 @@ namespace System.Net.Http.Headers
                     return null;
                 }
 
-                CookieState cookie = Cookies.FirstOrDefault(
-                    c => String.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase)
+                CookieState cookie = Cookies.FirstOrDefault(c =>
+                    String.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase)
                 );
                 if (cookie == null)
                 {

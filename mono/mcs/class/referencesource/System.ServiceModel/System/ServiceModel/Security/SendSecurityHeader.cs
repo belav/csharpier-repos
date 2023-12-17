@@ -855,8 +855,9 @@ namespace System.ServiceModel.Security
                     );
                 }
             }
-            SendSecurityHeaderElement[] basicTokensXml =
-                elementContainer.GetBasicSupportingTokens();
+            SendSecurityHeaderElement[] basicTokensXml = elementContainer.GetBasicSupportingTokens(
+
+            );
             if (basicTokensXml != null)
             {
                 for (int i = 0; i < basicTokensXml.Length; ++i)

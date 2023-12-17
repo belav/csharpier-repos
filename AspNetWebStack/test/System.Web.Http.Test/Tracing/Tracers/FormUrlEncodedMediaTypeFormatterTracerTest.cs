@@ -25,8 +25,9 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            FormUrlEncodedMediaTypeFormatter innerFormatter =
-                new FormUrlEncodedMediaTypeFormatter();
+            FormUrlEncodedMediaTypeFormatter innerFormatter = new FormUrlEncodedMediaTypeFormatter(
+
+            );
             innerFormatter.MaxDepth = innerFormatter.MaxDepth + 1;
             FormUrlEncodedMediaTypeFormatterTracer tracer =
                 new FormUrlEncodedMediaTypeFormatterTracer(
@@ -44,8 +45,9 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            FormUrlEncodedMediaTypeFormatter innerFormatter =
-                new FormUrlEncodedMediaTypeFormatter();
+            FormUrlEncodedMediaTypeFormatter innerFormatter = new FormUrlEncodedMediaTypeFormatter(
+
+            );
             innerFormatter.ReadBufferSize = innerFormatter.ReadBufferSize + 1;
             FormUrlEncodedMediaTypeFormatterTracer tracer =
                 new FormUrlEncodedMediaTypeFormatterTracer(

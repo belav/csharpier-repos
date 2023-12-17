@@ -11,8 +11,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 {
     internal sealed class TypeIndex(IEnumerable<TypeSpec> typeSpecs)
     {
-        private readonly Dictionary<TypeRef, TypeSpec> _index = typeSpecs.ToDictionary(
-            spec => spec.TypeRef
+        private readonly Dictionary<TypeRef, TypeSpec> _index = typeSpecs.ToDictionary(spec =>
+            spec.TypeRef
         );
 
         public bool CanBindTo(TypeRef typeRef) =>

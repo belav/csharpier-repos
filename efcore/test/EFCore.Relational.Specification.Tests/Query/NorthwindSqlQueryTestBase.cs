@@ -47,15 +47,14 @@ public abstract class NorthwindSqlQueryTestBase<TFixture> : IClassFixture<TFixtu
         using var context = CreateContext();
         var query = context
             .Set<Order>()
-            .Where(
-                e =>
-                    context
-                        .Database.SqlQuery<int>(
-                            NormalizeDelimitersInInterpolatedString(
-                                @$"SELECT [ProductID] AS [Value] FROM [Products]"
-                            )
+            .Where(e =>
+                context
+                    .Database.SqlQuery<int>(
+                        NormalizeDelimitersInInterpolatedString(
+                            @$"SELECT [ProductID] AS [Value] FROM [Products]"
                         )
-                        .Contains(e.OrderID)
+                    )
+                    .Contains(e.OrderID)
             );
 
         var result = async ? await query.ToListAsync() : query.ToList();

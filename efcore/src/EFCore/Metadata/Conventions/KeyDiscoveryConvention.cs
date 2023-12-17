@@ -85,10 +85,9 @@ public class KeyDiscoveryConvention
         {
             var candidateProperties = entityType
                 .GetProperties()
-                .Where(
-                    p =>
-                        !p.IsImplicitlyCreated()
-                        || !ConfigurationSource.Convention.Overrides(p.GetConfigurationSource())
+                .Where(p =>
+                    !p.IsImplicitlyCreated()
+                    || !ConfigurationSource.Convention.Overrides(p.GetConfigurationSource())
                 );
             keyProperties = DiscoverKeyProperties(entityType, candidateProperties).ToList();
             if (keyProperties.Count > 1)
@@ -188,17 +187,16 @@ public class KeyDiscoveryConvention
         Check.NotNull(entityType, nameof(entityType));
 
         // ReSharper disable PossibleMultipleEnumeration
-        var keyProperties = candidateProperties.Where(
-            p => string.Equals(p.Name, KeySuffix, StringComparison.OrdinalIgnoreCase)
+        var keyProperties = candidateProperties.Where(p =>
+            string.Equals(p.Name, KeySuffix, StringComparison.OrdinalIgnoreCase)
         );
         if (!keyProperties.Any())
         {
             var entityTypeName = entityType.ShortName();
-            keyProperties = candidateProperties.Where(
-                p =>
-                    p.Name.Length == entityTypeName.Length + KeySuffix.Length
-                    && p.Name.StartsWith(entityTypeName, StringComparison.OrdinalIgnoreCase)
-                    && p.Name.EndsWith(KeySuffix, StringComparison.OrdinalIgnoreCase)
+            keyProperties = candidateProperties.Where(p =>
+                p.Name.Length == entityTypeName.Length + KeySuffix.Length
+                && p.Name.StartsWith(entityTypeName, StringComparison.OrdinalIgnoreCase)
+                && p.Name.EndsWith(KeySuffix, StringComparison.OrdinalIgnoreCase)
             );
         }
 

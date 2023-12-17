@@ -57,12 +57,16 @@ public partial class Startup
 #if FORWARDCOMPAT
     private async Task ContentRootPath(HttpContext ctx) =>
         await ctx.Response.WriteAsync(
-            ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>().ContentRootPath
+            ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>(
+
+            ).ContentRootPath
         );
 
     private async Task WebRootPath(HttpContext ctx) =>
         await ctx.Response.WriteAsync(
-            ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>().WebRootPath
+            ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>(
+
+            ).WebRootPath
         );
 #else
     private async Task ContentRootPath(HttpContext ctx) =>

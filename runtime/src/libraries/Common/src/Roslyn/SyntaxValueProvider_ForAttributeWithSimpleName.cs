@@ -181,8 +181,7 @@ internal static partial class SyntaxValueProviderExtensions
                         )
                     )
             )
-            .Where(
-                tuple => tuple.Item2.Length > 0
+            .Where(tuple => tuple.Item2.Length > 0
             )
         /*.WithTrackingName("result_ForAttribute")*/;
 

@@ -223,8 +223,8 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new();
             TestResolver resolver = new(JsonTypeInfo.CreateJsonTypeInfo);
 
-            IJsonTypeInfoResolver resolverWithModifier = resolver.WithAddedModifier(
-                _ => modifierInvocationCount++
+            IJsonTypeInfoResolver resolverWithModifier = resolver.WithAddedModifier(_ =>
+                modifierInvocationCount++
             );
 
             Assert.NotNull(resolverWithModifier.GetTypeInfo(typeof(int), options));
@@ -244,8 +244,8 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new();
             TestResolver resolver = new((_, _) => null);
 
-            IJsonTypeInfoResolver resolverWithModifier = resolver.WithAddedModifier(
-                _ => modifierInvocationCount++
+            IJsonTypeInfoResolver resolverWithModifier = resolver.WithAddedModifier(_ =>
+                modifierInvocationCount++
             );
 
             Assert.Null(resolverWithModifier.GetTypeInfo(typeof(int), options));
@@ -265,8 +265,8 @@ namespace System.Text.Json.Serialization.Tests
 
             IJsonTypeInfoResolver resolverWithModifier = resolver
                 .WithAddedModifier(_ => modifier1InvocationCount++)
-                .WithAddedModifier(
-                    _ => Assert.Equal(modifier1InvocationCount, ++modifier2InvocationCount)
+                .WithAddedModifier(_ =>
+                    Assert.Equal(modifier1InvocationCount, ++modifier2InvocationCount)
                 ); // Validates order of modifier evaluation.
 
             Assert.NotNull(resolverWithModifier.GetTypeInfo(typeof(int), options));
@@ -282,13 +282,13 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new();
             TestResolver resolver = new(JsonTypeInfo.CreateJsonTypeInfo);
 
-            IJsonTypeInfoResolver resolverWithModifier = resolver.WithAddedModifier(
-                _ => modifier1InvocationCount++
+            IJsonTypeInfoResolver resolverWithModifier = resolver.WithAddedModifier(_ =>
+                modifier1InvocationCount++
             );
 
             IJsonTypeInfoResolver resolverWithChainedModifier =
-                resolverWithModifier.WithAddedModifier(
-                    _ => Assert.Equal(modifier1InvocationCount, ++modifier2InvocationCount)
+                resolverWithModifier.WithAddedModifier(_ =>
+                    Assert.Equal(modifier1InvocationCount, ++modifier2InvocationCount)
                 ); // Validates order of modifier evaluation.
 
             Assert.NotSame(resolverWithModifier, resolverWithChainedModifier);

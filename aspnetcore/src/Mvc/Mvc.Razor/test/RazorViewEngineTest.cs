@@ -713,12 +713,11 @@ public class RazorViewEngineTest
             )
             .Verifiable();
         expander1
-            .Setup(
-                e =>
-                    e.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(e =>
+                e.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Callback(
                 (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
@@ -732,12 +731,11 @@ public class RazorViewEngineTest
 
         var expander2 = new Mock<IViewLocationExpander>();
         expander2
-            .Setup(
-                e =>
-                    e.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(e =>
+                e.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Callback(
                 (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
@@ -796,12 +794,11 @@ public class RazorViewEngineTest
             )
             .Verifiable();
         expander1
-            .Setup(
-                e =>
-                    e.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(e =>
+                e.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Callback(
                 (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
@@ -815,12 +812,11 @@ public class RazorViewEngineTest
 
         var expander2 = new Mock<IViewLocationExpander>();
         expander2
-            .Setup(
-                e =>
-                    e.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(e =>
+                e.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Callback(
                 (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
@@ -860,12 +856,11 @@ public class RazorViewEngineTest
 
         var expander = new Mock<IViewLocationExpander>();
         expander
-            .Setup(
-                e =>
-                    e.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(e =>
+                e.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Returns(new[] { @"Views\Home\Index.cshtml" });
 
@@ -1025,12 +1020,11 @@ public class RazorViewEngineTest
             )
             .Verifiable();
         expander
-            .Setup(
-                v =>
-                    v.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(v =>
+                v.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Returns(expandedLocations)
             .Verifiable();
@@ -1089,12 +1083,11 @@ public class RazorViewEngineTest
             )
             .Verifiable();
         expander
-            .Setup(
-                v =>
-                    v.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(v =>
+                v.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Returns(expandedLocations)
             .Verifiable();
@@ -1235,12 +1228,11 @@ public class RazorViewEngineTest
             )
             .Verifiable();
         expander
-            .Setup(
-                e =>
-                    e.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(e =>
+                e.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Returns(
                 (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
@@ -1300,12 +1292,11 @@ public class RazorViewEngineTest
             )
             .Verifiable();
         expander
-            .Setup(
-                e =>
-                    e.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(e =>
+                e.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Returns(
                 (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
@@ -1921,12 +1912,11 @@ public class RazorViewEngineTest
             .Verifiable();
 
         expander
-            .Setup(
-                e =>
-                    e.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(e =>
+                e.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Returns(expected);
 
@@ -1959,12 +1949,11 @@ public class RazorViewEngineTest
             .Verifiable();
 
         expander
-            .Setup(
-                e =>
-                    e.ExpandViewLocations(
-                        It.IsAny<ViewLocationExpanderContext>(),
-                        It.IsAny<IEnumerable<string>>()
-                    )
+            .Setup(e =>
+                e.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                )
             )
             .Returns(expected);
 

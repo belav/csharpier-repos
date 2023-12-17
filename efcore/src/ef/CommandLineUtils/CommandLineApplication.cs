@@ -217,18 +217,18 @@ internal class CommandLineApplication
 
         if (isLongOption)
         {
-            option = command.Options.SingleOrDefault(
-                opt => string.Equals(opt.LongName, optionName, StringComparison.Ordinal)
+            option = command.Options.SingleOrDefault(opt =>
+                string.Equals(opt.LongName, optionName, StringComparison.Ordinal)
             );
         }
         else
         {
             option =
-                command.Options.SingleOrDefault(
-                    opt => string.Equals(opt.ShortName, optionName, StringComparison.Ordinal)
+                command.Options.SingleOrDefault(opt =>
+                    string.Equals(opt.ShortName, optionName, StringComparison.Ordinal)
                 )
-                ?? command.Options.SingleOrDefault(
-                    opt => string.Equals(opt.SymbolName, optionName, StringComparison.Ordinal)
+                ?? command.Options.SingleOrDefault(opt =>
+                    string.Equals(opt.SymbolName, optionName, StringComparison.Ordinal)
                 );
         }
 
@@ -390,8 +390,8 @@ internal class CommandLineApplication
         }
         else
         {
-            target = Commands.SingleOrDefault(
-                cmd => string.Equals(cmd.Name, commandName, StringComparison.OrdinalIgnoreCase)
+            target = Commands.SingleOrDefault(cmd =>
+                string.Equals(cmd.Name, commandName, StringComparison.OrdinalIgnoreCase)
             );
 
             if (target != null)

@@ -298,8 +298,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesCachedContent_IfVaryHeader_Matches()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context => context.Response.Headers.Vary = HeaderNames.From
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Response.Headers.Vary = HeaderNames.From
         );
 
         foreach (var builder in builders)
@@ -323,8 +323,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesFreshContent_IfVaryHeader_Mismatches()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context => context.Response.Headers.Vary = HeaderNames.From
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Response.Headers.Vary = HeaderNames.From
         );
 
         foreach (var builder in builders)
@@ -349,9 +349,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesCachedContent_IfVaryQueryKeys_Matches()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "query" }
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "query" }
         );
 
         foreach (var builder in builders)
@@ -374,13 +373,12 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesCachedContent_IfVaryQueryKeysExplicit_Matches_QueryKeyCaseInsensitive()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[]
-                {
-                    "QueryA",
-                    "queryb"
-                }
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[]
+            {
+                "QueryA",
+                "queryb"
+            }
         );
 
         foreach (var builder in builders)
@@ -403,9 +401,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesCachedContent_IfVaryQueryKeyStar_Matches_QueryKeyCaseInsensitive()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "*" }
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "*" }
         );
 
         foreach (var builder in builders)
@@ -428,13 +425,12 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesCachedContent_IfVaryQueryKeyExplicit_Matches_OrderInsensitive()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[]
-                {
-                    "QueryB",
-                    "QueryA"
-                }
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[]
+            {
+                "QueryB",
+                "QueryA"
+            }
         );
 
         foreach (var builder in builders)
@@ -457,9 +453,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesCachedContent_IfVaryQueryKeyStar_Matches_OrderInsensitive()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "*" }
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "*" }
         );
 
         foreach (var builder in builders)
@@ -482,9 +477,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesFreshContent_IfVaryQueryKey_Mismatches()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "query" }
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "query" }
         );
 
         foreach (var builder in builders)
@@ -507,13 +501,12 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesFreshContent_IfVaryQueryKeyExplicit_Mismatch_QueryKeyCaseSensitive()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[]
-                {
-                    "QueryA",
-                    "QueryB"
-                }
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[]
+            {
+                "QueryA",
+                "QueryB"
+            }
         );
 
         foreach (var builder in builders)
@@ -536,9 +529,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesFreshContent_IfVaryQueryKeyStar_Mismatch_QueryKeyValueCaseSensitive()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "*" }
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[] { "*" }
         );
 
         foreach (var builder in builders)
@@ -616,8 +608,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesFreshContent_IfSetCookie_IsSpecified()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context => context.Response.Headers.SetCookie = "cookieName=cookieValue"
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Response.Headers.SetCookie = "cookieName=cookieValue"
         );
 
         foreach (var builder in builders)
@@ -688,9 +680,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesFreshContent_IfInitialResponseContainsNoStore()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Response.Headers.CacheControl = CacheControlHeaderValue.NoStoreString
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Response.Headers.CacheControl = CacheControlHeaderValue.NoStoreString
         );
 
         foreach (var builder in builders)
@@ -798,9 +789,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesCachedContent_IfIfNoneMatch_NotSatisfied()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-                context.Response.GetTypedHeaders().ETag = new EntityTagHeaderValue("\"E1\"")
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Response.GetTypedHeaders().ETag = new EntityTagHeaderValue("\"E1\"")
         );
 
         foreach (var builder in builders)
@@ -898,8 +888,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesCachedContent_WithoutReplacingCachedVaryBy_OnCacheMiss()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context => context.Response.Headers.Vary = HeaderNames.From
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Response.Headers.Vary = HeaderNames.From
         );
 
         foreach (var builder in builders)
@@ -926,8 +916,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesFreshContent_IfCachedVaryByUpdated_OnCacheMiss()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context => context.Response.Headers.Vary = context.Request.Headers.Pragma
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Response.Headers.Vary = context.Request.Headers.Pragma
         );
 
         foreach (var builder in builders)
@@ -969,8 +959,8 @@ public class ResponseCachingTests
     [Fact]
     public async Task ServesCachedContent_IfCachedVaryByNotUpdated_OnCacheMiss()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context => context.Response.Headers.Vary = context.Request.Headers.Pragma
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+            context.Response.Headers.Vary = context.Request.Headers.Pragma
         );
 
         foreach (var builder in builders)

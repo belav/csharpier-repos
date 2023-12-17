@@ -268,11 +268,10 @@ namespace System.Xaml
         public static IEnumerable<XamlMember> GetConstructorArguments(this XamlType type)
         {
             return type.GetAllMembers()
-                .Where(
-                    m =>
-                        m.UnderlyingMember != null
-                        && m.GetCustomAttributeProvider()
-                            .GetCustomAttribute<ConstructorArgumentAttribute>(false) != null
+                .Where(m =>
+                    m.UnderlyingMember != null
+                    && m.GetCustomAttributeProvider()
+                        .GetCustomAttribute<ConstructorArgumentAttribute>(false) != null
                 );
         }
 
@@ -294,8 +293,8 @@ namespace System.Xaml
                             mismatch = true;
                 if (mismatch)
                     continue;
-                return args.OrderBy(
-                    c => pis.FindParameterWithName(c.ConstructorArgumentName()).Position
+                return args.OrderBy(c =>
+                    pis.FindParameterWithName(c.ConstructorArgumentName()).Position
                 );
             }
             return null;

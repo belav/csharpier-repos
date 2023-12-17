@@ -157,8 +157,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             // if-chains/checks and easily converting them over to a switch.  So not offering the
             // feature on simple if-statements seems like an acceptable compromise to take to ensure
             // the overall user experience isn't degraded.
-            var labelCount = sections.Sum(
-                section => section.Labels.IsDefault ? 1 : section.Labels.Length
+            var labelCount = sections.Sum(section =>
+                section.Labels.IsDefault ? 1 : section.Labels.Length
             );
             if (labelCount < 2)
             {
@@ -179,15 +179,15 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 
             // There must be at least one return statement
             if (
-                !sections.Any(
-                    static section => GetSwitchArmKind(section.Body) == OperationKind.Return
+                !sections.Any(static section =>
+                    GetSwitchArmKind(section.Body) == OperationKind.Return
                 )
             )
                 return false;
 
             if (
-                !sections.All(
-                    section => CanConvertSectionForSwitchExpression(supportsOrPattern, section)
+                !sections.All(section =>
+                    CanConvertSectionForSwitchExpression(supportsOrPattern, section)
                 )
             )
                 return false;

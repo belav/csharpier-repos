@@ -1291,12 +1291,11 @@ class Test
             );
 
             var actualNamespaces = EnumerateNamespaces(compilation)
-                .Where(
-                    ns =>
-                        !ns.StartsWith("System", StringComparison.Ordinal)
-                        && !ns.StartsWith("Windows", StringComparison.Ordinal)
-                        && !ns.StartsWith("FxResources", StringComparison.Ordinal)
-                        && !ns.StartsWith("Microsoft", StringComparison.Ordinal)
+                .Where(ns =>
+                    !ns.StartsWith("System", StringComparison.Ordinal)
+                    && !ns.StartsWith("Windows", StringComparison.Ordinal)
+                    && !ns.StartsWith("FxResources", StringComparison.Ordinal)
+                    && !ns.StartsWith("Microsoft", StringComparison.Ordinal)
                 );
             var expectedNamespaces = new[] { "Ns", "Ns.Ms" };
             Assert.True(
@@ -1371,12 +1370,11 @@ namespace N1
             );
 
             var actualNamespaces = EnumerateNamespaces(compilation)
-                .Where(
-                    ns =>
-                        !ns.StartsWith("System", StringComparison.Ordinal)
-                        && !ns.StartsWith("Windows", StringComparison.Ordinal)
-                        && !ns.StartsWith("FxResources", StringComparison.Ordinal)
-                        && !ns.StartsWith("Microsoft", StringComparison.Ordinal)
+                .Where(ns =>
+                    !ns.StartsWith("System", StringComparison.Ordinal)
+                    && !ns.StartsWith("Windows", StringComparison.Ordinal)
+                    && !ns.StartsWith("FxResources", StringComparison.Ordinal)
+                    && !ns.StartsWith("Microsoft", StringComparison.Ordinal)
                 );
             var expectedNamespaces = new[] { "N1", "N1.N2", "N1.N2.N3" };
             Assert.True(
@@ -1451,12 +1449,11 @@ namespace N1
             );
 
             var actualNamespaces = EnumerateNamespaces(compilation)
-                .Where(
-                    ns =>
-                        !ns.StartsWith("System", StringComparison.Ordinal)
-                        && !ns.StartsWith("Windows", StringComparison.Ordinal)
-                        && !ns.StartsWith("FxResources", StringComparison.Ordinal)
-                        && !ns.StartsWith("Microsoft", StringComparison.Ordinal)
+                .Where(ns =>
+                    !ns.StartsWith("System", StringComparison.Ordinal)
+                    && !ns.StartsWith("Windows", StringComparison.Ordinal)
+                    && !ns.StartsWith("FxResources", StringComparison.Ordinal)
+                    && !ns.StartsWith("Microsoft", StringComparison.Ordinal)
                 );
             var expectedNamespaces = new[] { "N1", "N1.N2", "N1.N2.N3" };
             Assert.True(

@@ -94,8 +94,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                     language == LanguageNames.CSharp ? ".cs" : ".vb"
                 );
                 var selectedMembers =
-                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(
-                        vm => vm.Symbol
+                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(vm => vm.Symbol
                     );
 
                 if (viewModel.DestinationName.IsNew)
@@ -130,20 +129,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
         {
             var membersInType = selectedType
                 .GetMembers()
-                .WhereAsArray(
-                    member => MemberAndDestinationValidator.IsMemberValid(member) && member.IsStatic
+                .WhereAsArray(member =>
+                    MemberAndDestinationValidator.IsMemberValid(member) && member.IsStatic
                 );
 
             var memberViewModels = membersInType.SelectAsArray(
-                member =>
-                    new SymbolViewModel<ISymbol>(member, glyphService)
-                    {
-                        // The member(s) user selected will be checked at the beginning.
-                        IsChecked = selectedNodeSymbols.Any(
-                            SymbolEquivalenceComparer.Instance.Equals,
-                            member
-                        ),
-                    }
+                member => new SymbolViewModel<ISymbol>(member, glyphService)
+                {
+                    // The member(s) user selected will be checked at the beginning.
+                    IsChecked = selectedNodeSymbols.Any(
+                        SymbolEquivalenceComparer.Instance.Equals,
+                        member
+                    ),
+                }
             );
 
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -223,21 +221,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                 .GetAllTypes(cancellationToken)
                 // only take symbols that are the same kind of type (class, module)
                 // and remove non-static types only when the current type is static
-                .Where(
-                    t =>
-                        t.TypeKind == currentType.TypeKind
-                        && (t.IsStaticType() || !currentType.IsStaticType())
+                .Where(t =>
+                    t.TypeKind == currentType.TypeKind
+                    && (t.IsStaticType() || !currentType.IsStaticType())
                 )
                 .SelectMany(t =>
                 {
                     // for partially declared classes, we may want multiple entries for a single type.
                     // filter to those actually in a real file, and that is not our current location.
-                    return t.Locations.Where(
-                        l =>
-                            l.IsInSource
-                            && (
-                                currentType.Name != t.Name || GetFile(l) != currentDocument.FilePath
-                            )
+                    return t.Locations.Where(l =>
+                        l.IsInSource
+                        && (currentType.Name != t.Name || GetFile(l) != currentDocument.FilePath)
                     )
                         .Select(l => new TypeNameItem(history.Contains(t), GetFile(l), t));
                 })

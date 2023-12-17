@@ -158,8 +158,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             }
 
             foreach (
-                var (analyzerId, average, stddev) in rawPerformanceData.OrderByDescending(
-                    k => k.average
+                var (analyzerId, average, stddev) in rawPerformanceData.OrderByDescending(k =>
+                    k.average
                 )
             )
             {

@@ -25,14 +25,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         public void TestArgumentProviderOrder()
         {
             var exportProvider =
-                EditorTestCompositions.EditorFeaturesWpf.ExportProviderFactory.CreateExportProvider();
+                EditorTestCompositions.EditorFeaturesWpf.ExportProviderFactory.CreateExportProvider(
+
+                );
             var argumentProviderExports = exportProvider.GetExports<
                 ArgumentProvider,
                 CompletionProviderMetadata
             >();
             var orderedCSharpArgumentProviders = ExtensionOrderer.Order(
-                argumentProviderExports.Where(
-                    export => export.Metadata.Language == LanguageNames.CSharp
+                argumentProviderExports.Where(export =>
+                    export.Metadata.Language == LanguageNames.CSharp
                 )
             );
 
@@ -73,8 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
                 CompletionProviderMetadata
             >();
             var orderedCSharpArgumentProviders = ExtensionOrderer.Order(
-                argumentProviderExports.Where(
-                    export => export.Metadata.Language == LanguageNames.CSharp
+                argumentProviderExports.Where(export =>
+                    export.Metadata.Language == LanguageNames.CSharp
                 )
             );
 
@@ -133,8 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
                 CompletionProviderMetadata
             >();
             var orderedCSharpArgumentProviders = ExtensionOrderer.Order(
-                argumentProviderExports.Where(
-                    export => export.Metadata.Language == LanguageNames.CSharp
+                argumentProviderExports.Where(export =>
+                    export.Metadata.Language == LanguageNames.CSharp
                 )
             );
             var firstArgumentProvider = orderedCSharpArgumentProviders.First();
@@ -152,8 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
                 CompletionProviderMetadata
             >();
             var orderedCSharpArgumentProviders = ExtensionOrderer.Order(
-                argumentProviderExports.Where(
-                    export => export.Metadata.Language == LanguageNames.CSharp
+                argumentProviderExports.Where(export =>
+                    export.Metadata.Language == LanguageNames.CSharp
                 )
             );
             var lastArgumentProvider = orderedCSharpArgumentProviders.Last();
@@ -170,8 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
                 ArgumentProvider,
                 CompletionProviderMetadata
             >();
-            var csharpArgumentProviders = argumentProviderExports.Where(
-                export => export.Metadata.Language == LanguageNames.CSharp
+            var csharpArgumentProviders = argumentProviderExports.Where(export =>
+                export.Metadata.Language == LanguageNames.CSharp
             );
             foreach (var export in csharpArgumentProviders)
             {

@@ -3179,12 +3179,11 @@ class Test
             var pid = (
                 (NamedTypeSymbol)
                     comp.GlobalNamespace.GetMembers()
-                        .Single(
-                            s =>
-                                s.Name.StartsWith(
-                                    "<PrivateImplementationDetails>",
-                                    StringComparison.Ordinal
-                                )
+                        .Single(s =>
+                            s.Name.StartsWith(
+                                "<PrivateImplementationDetails>",
+                                StringComparison.Ordinal
+                            )
                         )
             );
             var member = pid.GetMembers(

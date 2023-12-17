@@ -1470,8 +1470,8 @@ namespace System.Web.Http.Owin
                     exceptionLoggerMock.Verify(
                         l =>
                             l.LogAsync(
-                                It.Is<ExceptionLoggerContext>(
-                                    c => exceptionContextMatches(c.ExceptionContext)
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    exceptionContextMatches(c.ExceptionContext)
                                 ),
                                 expectedCancellationToken
                             ),
@@ -1799,14 +1799,13 @@ namespace System.Web.Http.Owin
                     mock.Verify(
                         l =>
                             l.LogAsync(
-                                It.Is<ExceptionLoggerContext>(
-                                    c =>
-                                        c.ExceptionContext != null
-                                        && c.ExceptionContext.Exception == expectedOriginalException
-                                        && c.ExceptionContext.CatchBlock
-                                            == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
-                                        && c.ExceptionContext.Request != null
-                                        && c.ExceptionContext.Response == expectedOriginalResponse
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedOriginalException
+                                    && c.ExceptionContext.CatchBlock
+                                        == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
+                                    && c.ExceptionContext.Request != null
+                                    && c.ExceptionContext.Response == expectedOriginalResponse
                                 ),
                                 expectedCancellationToken
                             ),
@@ -1815,14 +1814,13 @@ namespace System.Web.Http.Owin
                     mock.Verify(
                         l =>
                             l.LogAsync(
-                                It.Is<ExceptionLoggerContext>(
-                                    c =>
-                                        c.ExceptionContext != null
-                                        && c.ExceptionContext.Exception == expectedErrorException
-                                        && c.ExceptionContext.CatchBlock
-                                            == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError
-                                        && c.ExceptionContext.Request != null
-                                        && c.ExceptionContext.Response == expectedErrorResponse
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedErrorException
+                                    && c.ExceptionContext.CatchBlock
+                                        == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError
+                                    && c.ExceptionContext.Request != null
+                                    && c.ExceptionContext.Response == expectedErrorResponse
                                 ),
                                 expectedCancellationToken
                             ),
@@ -1883,14 +1881,13 @@ namespace System.Web.Http.Owin
                     mock.Verify(
                         l =>
                             l.LogAsync(
-                                It.Is<ExceptionLoggerContext>(
-                                    c =>
-                                        c.ExceptionContext != null
-                                        && c.ExceptionContext.Exception == expectedOriginalException
-                                        && c.ExceptionContext.CatchBlock
-                                            == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
-                                        && c.ExceptionContext.Request != null
-                                        && c.ExceptionContext.Response == expectedOriginalResponse
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedOriginalException
+                                    && c.ExceptionContext.CatchBlock
+                                        == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
+                                    && c.ExceptionContext.Request != null
+                                    && c.ExceptionContext.Response == expectedOriginalResponse
                                 ),
                                 expectedCancellationToken
                             ),
@@ -1902,14 +1899,13 @@ namespace System.Web.Http.Owin
                     mock.Verify(
                         l =>
                             l.LogAsync(
-                                It.Is<ExceptionLoggerContext>(
-                                    c =>
-                                        c.ExceptionContext != null
-                                        && c.ExceptionContext.Exception == expectedErrorException
-                                        && c.ExceptionContext.CatchBlock
-                                            == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError
-                                        && c.ExceptionContext.Request != null
-                                        && c.ExceptionContext.Response == expectedErrorResponse
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedErrorException
+                                    && c.ExceptionContext.CatchBlock
+                                        == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError
+                                    && c.ExceptionContext.Request != null
+                                    && c.ExceptionContext.Response == expectedErrorResponse
                                 ),
                                 expectedCancellationToken
                             ),
@@ -2290,12 +2286,11 @@ namespace System.Web.Http.Owin
         private static IExceptionHandler CreateExceptionHandler(IHttpActionResult result)
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-            mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Callback<ExceptionHandlerContext, CancellationToken>((c, i) => c.Result = result)
                 .Returns(Task.FromResult(0));
@@ -2336,8 +2331,8 @@ namespace System.Web.Http.Owin
             >(MockBehavior.Strict);
             object disableBufferingValue = disableBuffering;
             environmentMock
-                .Setup(
-                    d => d.TryGetValue("server.DisableRequestBuffering", out disableBufferingValue)
+                .Setup(d =>
+                    d.TryGetValue("server.DisableRequestBuffering", out disableBufferingValue)
                 )
                 .Returns(true);
             IDictionary<string, object> environment = environmentMock.Object;
@@ -2386,8 +2381,8 @@ namespace System.Web.Http.Owin
             >(MockBehavior.Strict);
             object disableBufferingValue = disableBuffering;
             environmentMock
-                .Setup(
-                    d => d.TryGetValue("server.DisableResponseBuffering", out disableBufferingValue)
+                .Setup(d =>
+                    d.TryGetValue("server.DisableResponseBuffering", out disableBufferingValue)
                 )
                 .Returns(true);
             IDictionary<string, object> environment = environmentMock.Object;
@@ -2433,24 +2428,22 @@ namespace System.Web.Http.Owin
         {
             Mock<MediaTypeFormatter> mock = new Mock<MediaTypeFormatter>();
             mock.Setup(f => f.CanWriteType(It.IsAny<Type>())).Returns(true);
-            mock.Setup(
-                    f =>
-                        f.GetPerRequestFormatterInstance(
-                            It.IsAny<Type>(),
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<MediaTypeHeaderValue>()
-                        )
+            mock.Setup(f =>
+                    f.GetPerRequestFormatterInstance(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<MediaTypeHeaderValue>()
+                    )
                 )
                 .Returns(mock.Object);
-            mock.Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+            mock.Setup(f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Returns(CreateFaultedTask(exception));
             return mock.Object;
@@ -2540,12 +2533,11 @@ namespace System.Web.Http.Owin
         private static Mock<IExceptionHandler> CreateStubExceptionHandlerMock()
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-            mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(Task.FromResult(0));
             return mock;
@@ -2559,12 +2551,8 @@ namespace System.Web.Http.Owin
         private static Mock<IExceptionLogger> CreateStubExceptionLoggerMock()
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(l =>
+                    l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns(Task.FromResult(0));
             return mock;

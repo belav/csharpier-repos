@@ -5235,8 +5235,8 @@ public class PropertyEntryTest
             b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
         });
 
-        builder.Entity<NotifyingWotty>(
-            b => b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications)
+        builder.Entity<NotifyingWotty>(b =>
+            b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications)
         );
 
         builder.Entity<FullyNotifyingWotty>(b =>

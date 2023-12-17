@@ -76,8 +76,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 //add new row
                 tbl1.Rows.Add(new System.Web.UI.WebControls.TableRow());
                 tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
-                System.Web.UI.WebControls.TableRow tblRow =
-                    new System.Web.UI.WebControls.TableRow();
+                System.Web.UI.WebControls.TableRow tblRow = new System.Web.UI.WebControls.TableRow(
+
+                );
                 tbl.Rows.Add(tblRow);
                 //add row from one table to another
                 tbl.Rows.Add(tbl1.Rows[0]);

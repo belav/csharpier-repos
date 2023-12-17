@@ -38,8 +38,8 @@ namespace System.Web.Mvc.Test
                 CallBase = true
             };
             mockHelper
-                .Setup(
-                    b => b.PublicOnModelUpdating(controllerContext, It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.PublicOnModelUpdating(controllerContext, It.IsAny<ModelBindingContext>())
                 )
                 .Returns(false);
             DefaultModelBinderHelper helper = mockHelper.Object;
@@ -89,8 +89,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -144,8 +144,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -348,8 +348,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             mockIntBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -368,8 +368,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockStringBinder = new Mock<IModelBinder>();
             mockStringBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -431,8 +431,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -474,8 +474,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -522,8 +522,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -571,8 +571,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -622,8 +622,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -1017,8 +1017,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -1202,8 +1202,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -1250,8 +1250,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -1299,8 +1299,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -1356,8 +1356,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -2088,8 +2088,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -2186,8 +2186,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
             mockInnerBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -2270,8 +2270,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockStringBinder = new Mock<IModelBinder>();
             mockStringBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -2287,8 +2287,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             mockIntBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -2408,8 +2408,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             mockIntBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -2428,8 +2428,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockStringBinder = new Mock<IModelBinder>();
             mockStringBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -2550,8 +2550,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             mockIntBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -2566,8 +2566,8 @@ namespace System.Web.Mvc.Test
 
             Mock<IModelBinder> mockStringBinder = new Mock<IModelBinder>();
             mockStringBinder
-                .Setup(
-                    b => b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
+                .Setup(b =>
+                    b.BindModel(It.IsAny<ControllerContext>(), It.IsAny<ModelBindingContext>())
                 )
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
@@ -3166,12 +3166,8 @@ namespace System.Web.Mvc.Test
                 Mock<ModelValidator> validator = new Mock<ModelValidator>(metadata, context);
                 provider = new Mock<ModelValidatorProvider>();
                 provider
-                    .Setup(
-                        p =>
-                            p.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
+                    .Setup(p =>
+                        p.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
                     )
                     .Returns(new ModelValidator[] { validator.Object });
                 ModelValidatorProviders.Providers.Add(provider.Object);

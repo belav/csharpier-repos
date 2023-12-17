@@ -43,8 +43,8 @@ namespace Moq.Tests
             var mock = new Mock<IWarehouse>();
 
             //setup - expectations
-            mock.Setup(
-                    x => x.HasInventory(It.IsAny<string>(), It.IsInRange(0, 100, Range.Inclusive))
+            mock.Setup(x =>
+                    x.HasInventory(It.IsAny<string>(), It.IsInRange(0, 100, Range.Inclusive))
                 )
                 .Returns(false);
             mock.Setup(x => x.Remove(It.IsAny<string>(), It.IsAny<int>()))

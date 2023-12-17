@@ -393,10 +393,9 @@ public class CustomParsingTests
         var parseResult = command.Parse(commandLine);
 
         parseResult
-            .Errors.Single(
-                e =>
-                    e.SymbolResult is OptionResult optResult
-                    && optResult.Option == optionThatDependsOnOptionWithError
+            .Errors.Single(e =>
+                e.SymbolResult is OptionResult optResult
+                && optResult.Option == optionThatDependsOnOptionWithError
             )
             .Message.Should()
             .Be("one two");

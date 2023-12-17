@@ -54,16 +54,15 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         public static IEnumerable<object[]> AllServiceDescriptors =>
             ServiceDescriptors
                 .Instance.GetTestAccessor()
-                .Descriptors.Select(
-                    descriptor =>
-                        new object[]
-                        {
-                            descriptor.Key,
-                            descriptor.Value.descriptor64,
-                            descriptor.Value.descriptor64ServerGC,
-                            descriptor.Value.descriptorCoreClr64,
-                            descriptor.Value.descriptorCoreClr64ServerGC
-                        }
+                .Descriptors.Select(descriptor =>
+                    new object[]
+                    {
+                        descriptor.Key,
+                        descriptor.Value.descriptor64,
+                        descriptor.Value.descriptor64ServerGC,
+                        descriptor.Value.descriptorCoreClr64,
+                        descriptor.Value.descriptorCoreClr64ServerGC
+                    }
                 );
 
         private static Dictionary<Type, MemberInfo> GetAllParameterTypesOfRemoteApis()
@@ -412,14 +411,11 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     {
                         // custom abstract types must be explicitly listed in MessagePackFormatters.AbstractTypeFormatters
                         if (
-                            !MessagePackFormatters.Formatters.Any(
-                                formatter =>
-                                    formatter.GetType()
-                                        is { IsGenericType: true }
-                                            and var formatterType
-                                    && formatterType.GetGenericTypeDefinition()
-                                        == typeof(ForceTypelessFormatter<>)
-                                    && formatterType.GenericTypeArguments[0] == type
+                            !MessagePackFormatters.Formatters.Any(formatter =>
+                                formatter.GetType() is { IsGenericType: true } and var formatterType
+                                && formatterType.GetGenericTypeDefinition()
+                                    == typeof(ForceTypelessFormatter<>)
+                                && formatterType.GenericTypeArguments[0] == type
                             )
                         )
                         {
@@ -483,8 +479,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 .Descriptors.Where(d => d.Value.descriptor64.ClientInterface != null)
                 .Select(d => d.Key);
 
-            var callbackDispatcherServiceTypes = callbackDispatchers.Select(
-                d => d.Metadata.ServiceInterface
+            var callbackDispatcherServiceTypes = callbackDispatchers.Select(d =>
+                d.Metadata.ServiceInterface
             );
             AssertEx.SetEqual(descriptorsWithCallbackServiceTypes, callbackDispatcherServiceTypes);
         }

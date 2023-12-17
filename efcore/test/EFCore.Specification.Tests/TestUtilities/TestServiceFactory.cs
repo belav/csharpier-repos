@@ -85,10 +85,9 @@ public class TestServiceFactory
                     serviceCollection.AddSingleton(ServiceType, ImplementationType);
 
                     var constructors = ImplementationType.GetConstructors();
-                    var constructor = constructors.FirstOrDefault(
-                        c =>
-                            c.GetParameters().Length
-                            == constructors.Max(c2 => c2.GetParameters().Length)
+                    var constructor = constructors.FirstOrDefault(c =>
+                        c.GetParameters().Length
+                        == constructors.Max(c2 => c2.GetParameters().Length)
                     );
 
                     if (constructor == null)

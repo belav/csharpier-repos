@@ -145,8 +145,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 OutermostBlockStatements = blockFacts.GetExecutableBlockStatements(OutermostBlock);
 
                 var allAffectedStatements = new HashSet<TStatementSyntax>(
-                    referencingStatements.SelectMany(
-                        expr => expr.GetAncestorsOrThis<TStatementSyntax>()
+                    referencingStatements.SelectMany(expr =>
+                        expr.GetAncestorsOrThis<TStatementSyntax>()
                     )
                 );
                 FirstStatementAffectedInInnermostBlock = InnermostBlockStatements

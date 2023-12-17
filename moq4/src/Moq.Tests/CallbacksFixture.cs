@@ -115,14 +115,13 @@ namespace Moq.Tests
             string callbackArg2 = null;
             string callbackArg3 = null;
             string callbackArg4 = null;
-            mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (string s1, string s2, string s3, string s4) =>
@@ -150,15 +149,14 @@ namespace Moq.Tests
             string callbackArg3 = null;
             string callbackArg4 = null;
             string callbackArg5 = null;
-            mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5) =>
@@ -189,16 +187,15 @@ namespace Moq.Tests
             string callbackArg4 = null;
             string callbackArg5 = null;
             string callbackArg6 = null;
-            mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5, string s6) =>
@@ -232,17 +229,16 @@ namespace Moq.Tests
             string callbackArg5 = null;
             string callbackArg6 = null;
             string callbackArg7 = null;
-            mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5, string s6, string s7) =>
@@ -279,18 +275,17 @@ namespace Moq.Tests
             string callbackArg6 = null;
             string callbackArg7 = null;
             string callbackArg8 = null;
-            mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (
@@ -401,14 +396,13 @@ namespace Moq.Tests
             string callbackArg2 = null;
             string callbackArg3 = null;
             string callbackArg4 = null;
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (string s1, string s2, string s3, string s4) =>
@@ -437,15 +431,14 @@ namespace Moq.Tests
             string callbackArg3 = null;
             string callbackArg4 = null;
             string callbackArg5 = null;
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5) =>
@@ -477,16 +470,15 @@ namespace Moq.Tests
             string callbackArg4 = null;
             string callbackArg5 = null;
             string callbackArg6 = null;
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5, string s6) =>
@@ -521,17 +513,16 @@ namespace Moq.Tests
             string callbackArg5 = null;
             string callbackArg6 = null;
             string callbackArg7 = null;
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5, string s6, string s7) =>
@@ -569,18 +560,17 @@ namespace Moq.Tests
             string callbackArg6 = null;
             string callbackArg7 = null;
             string callbackArg8 = null;
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback(
                     (

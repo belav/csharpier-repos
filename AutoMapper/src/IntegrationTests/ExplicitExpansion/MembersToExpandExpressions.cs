@@ -32,25 +32,24 @@ public class MembersToExpandExpressions : AutoMapperSpecBase, IAsyncLifetime
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            cfg =>
-                cfg.CreateProjection<Source, Dto>()
-                    .ForMember(
-                        dto => dto.InnerDescFlattened,
-                        conf =>
-                        {
-                            conf.ExplicitExpansion();
-                            conf.MapFrom(_ => _.Inner.Desc);
-                        }
-                    )
-                    .ForMember(
-                        dto => dto.DeepFlattened,
-                        conf =>
-                        {
-                            conf.ExplicitExpansion();
-                            conf.MapFrom(_ => _.Inner.Deep.Desc);
-                        }
-                    )
+        new(cfg =>
+            cfg.CreateProjection<Source, Dto>()
+                .ForMember(
+                    dto => dto.InnerDescFlattened,
+                    conf =>
+                    {
+                        conf.ExplicitExpansion();
+                        conf.MapFrom(_ => _.Inner.Desc);
+                    }
+                )
+                .ForMember(
+                    dto => dto.DeepFlattened,
+                    conf =>
+                    {
+                        conf.ExplicitExpansion();
+                        conf.MapFrom(_ => _.Inner.Deep.Desc);
+                    }
+                )
         );
 
     public class TestContext : LocalDbContext

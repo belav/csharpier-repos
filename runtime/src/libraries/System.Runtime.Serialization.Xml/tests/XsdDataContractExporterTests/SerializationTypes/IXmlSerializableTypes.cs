@@ -298,8 +298,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             TypedDataSet ds = new TypedDataSet();
             System.Xml.Schema.XmlSchemaComplexType type =
                 new System.Xml.Schema.XmlSchemaComplexType();
-            System.Xml.Schema.XmlSchemaSequence sequence =
-                new System.Xml.Schema.XmlSchemaSequence();
+            System.Xml.Schema.XmlSchemaSequence sequence = new System.Xml.Schema.XmlSchemaSequence(
+
+            );
             xs.Add(ds.GetSchemaSerializable());
             if (PublishLegacyWSDL())
             {

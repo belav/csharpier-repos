@@ -530,8 +530,8 @@ public class TagHelperOutputExtensionsTest
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
         var attributes = tagHelperOutput
-            .Attributes.Where(
-                item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+            .Attributes.Where(item =>
+                item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
             )
             .ToList();
 
@@ -559,8 +559,8 @@ public class TagHelperOutputExtensionsTest
         );
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
-        var attributes = tagHelperOutput.Attributes.Where(
-            item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+        var attributes = tagHelperOutput.Attributes.Where(item =>
+            item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
         );
 
         // Act
@@ -588,8 +588,8 @@ public class TagHelperOutputExtensionsTest
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
-        var attributes = tagHelperOutput.Attributes.Where(
-            item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+        var attributes = tagHelperOutput.Attributes.Where(item =>
+            item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
         );
 
         // Act

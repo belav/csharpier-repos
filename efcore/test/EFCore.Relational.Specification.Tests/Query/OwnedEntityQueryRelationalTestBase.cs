@@ -51,14 +51,11 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
                             oob =>
                             {
                                 oob.ToTable(nameof(Leaf24777));
-                                oob.HasKey(
-                                    x =>
-                                        new
-                                        {
-                                            ProductCommissionRulesetId = x.ModdleAId,
-                                            x.UnitThreshold
-                                        }
-                                );
+                                oob.HasKey(x => new
+                                {
+                                    ProductCommissionRulesetId = x.ModdleAId,
+                                    x.UnitThreshold
+                                });
                                 oob.Property(x => x.ModdleAId).ValueGeneratedNever();
                                 oob.Property(x => x.UnitThreshold).ValueGeneratedNever();
                                 oob.WithOwner().HasForeignKey(e => e.ModdleAId);
@@ -162,16 +159,13 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
                     b =>
                     {
                         b.WithOwner(e => e.Location).HasForeignKey(e => e.LocationId);
-                        b.HasKey(
-                            e =>
-                                new
-                                {
-                                    e.LocationId,
-                                    e.ExternalId,
-                                    e.VisualNumber,
-                                    e.TokenGroupId
-                                }
-                        );
+                        b.HasKey(e => new
+                        {
+                            e.LocationId,
+                            e.ExternalId,
+                            e.VisualNumber,
+                            e.TokenGroupId
+                        });
                     }
                 );
     }
@@ -319,15 +313,14 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
         var query = context
             .RotRutCases.AsNoTracking()
             .OrderBy(e => e.Id)
-            .Select(
-                e =>
-                    e.Rot == null
-                        ? null
-                        : new RotDto
-                        {
-                            MyApartmentNo = e.Rot.ApartmentNo,
-                            MyServiceType = e.Rot.ServiceType
-                        }
+            .Select(e =>
+                e.Rot == null
+                    ? null
+                    : new RotDto
+                    {
+                        MyApartmentNo = e.Rot.ApartmentNo,
+                        MyServiceType = e.Rot.ServiceType
+                    }
             );
 
         var result = async ? await query.ToListAsync() : query.ToList();
@@ -358,15 +351,14 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
         var query = context
             .RotRutCases.AsNoTracking()
             .OrderBy(e => e.Id)
-            .Select(
-                e =>
-                    e.Rot != null
-                        ? new RotDto
-                        {
-                            MyApartmentNo = e.Rot.ApartmentNo,
-                            MyServiceType = e.Rot.ServiceType
-                        }
-                        : null
+            .Select(e =>
+                e.Rot != null
+                    ? new RotDto
+                    {
+                        MyApartmentNo = e.Rot.ApartmentNo,
+                        MyServiceType = e.Rot.ServiceType
+                    }
+                    : null
             );
 
         var result = async ? await query.ToListAsync() : query.ToList();
@@ -631,9 +623,8 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
 
     protected override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
         base.AddOptions(builder)
-            .ConfigureWarnings(
-                c =>
-                    c.Log(RelationalEventId.OptionalDependentWithoutIdentifyingPropertyWarning)
-                        .Log(RelationalEventId.OptionalDependentWithAllNullPropertiesWarning)
+            .ConfigureWarnings(c =>
+                c.Log(RelationalEventId.OptionalDependentWithoutIdentifyingPropertyWarning)
+                    .Log(RelationalEventId.OptionalDependentWithAllNullPropertiesWarning)
             );
 }

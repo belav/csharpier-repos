@@ -1167,15 +1167,13 @@ public class SqlServerModelValidatorTest : RelationalModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Dog>()
-            .ToTable(
-                tb =>
-                    tb.IsTemporal(
-                        ttb =>
-                            ttb.HasPeriodStart("Start")
-                                .HasColumnName("StartColumn")
-                                .GetInfrastructure()
-                                .ValueGeneratedNever()
-                    )
+            .ToTable(tb =>
+                tb.IsTemporal(ttb =>
+                    ttb.HasPeriodStart("Start")
+                        .HasColumnName("StartColumn")
+                        .GetInfrastructure()
+                        .ValueGeneratedNever()
+                )
             );
 
         VerifyError(
@@ -1263,13 +1261,12 @@ public class SqlServerModelValidatorTest : RelationalModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Human>()
-            .ToTable(
-                tb =>
-                    tb.IsTemporal(ttb =>
-                    {
-                        ttb.HasPeriodStart("Start").HasPrecision(2);
-                        ttb.HasPeriodEnd("End").HasPrecision(2);
-                    })
+            .ToTable(tb =>
+                tb.IsTemporal(ttb =>
+                {
+                    ttb.HasPeriodStart("Start").HasPrecision(2);
+                    ttb.HasPeriodEnd("End").HasPrecision(2);
+                })
             );
 
         Validate(modelBuilder);
@@ -1286,22 +1283,20 @@ public class SqlServerModelValidatorTest : RelationalModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Owner>(b =>
         {
-            b.ToTable(
-                tb =>
+            b.ToTable(tb =>
+                tb.IsTemporal(ttb =>
+                {
+                    ttb.HasPeriodStart("Start").HasColumnName("Start").HasPrecision(2);
+                    ttb.HasPeriodEnd("End").HasColumnName("End").HasPrecision(2);
+                })
+            );
+            b.OwnsOne(x => x.Owned)
+                .ToTable(tb =>
                     tb.IsTemporal(ttb =>
                     {
                         ttb.HasPeriodStart("Start").HasColumnName("Start").HasPrecision(2);
                         ttb.HasPeriodEnd("End").HasColumnName("End").HasPrecision(2);
                     })
-            );
-            b.OwnsOne(x => x.Owned)
-                .ToTable(
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.HasPeriodStart("Start").HasColumnName("Start").HasPrecision(2);
-                            ttb.HasPeriodEnd("End").HasColumnName("End").HasPrecision(2);
-                        })
                 );
         });
 

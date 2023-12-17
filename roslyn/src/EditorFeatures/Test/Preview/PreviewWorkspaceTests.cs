@@ -149,8 +149,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             using var previewWorkspace = new PreviewWorkspace(
                 EditorTestCompositions.EditorFeatures.GetHostServices()
             );
-            var service =
-                previewWorkspace.Services.GetService<ISolutionCrawlerRegistrationService>();
+            var service = previewWorkspace.Services.GetService<ISolutionCrawlerRegistrationService>(
+
+            );
             var registrationService = Assert.IsType<SolutionCrawlerRegistrationService>(service);
             Assert.False(registrationService.Register(previewWorkspace));
 
@@ -259,13 +260,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
 
             // set up tagger for both buffers
             var leftBuffer = diffView
-                .Viewer.LeftView.BufferGraph.GetTextBuffers(
-                    t => t.ContentType.IsOfType(ContentTypeNames.CSharpContentType)
+                .Viewer.LeftView.BufferGraph.GetTextBuffers(t =>
+                    t.ContentType.IsOfType(ContentTypeNames.CSharpContentType)
                 )
                 .First();
             var rightBuffer = diffView
-                .Viewer.RightView.BufferGraph.GetTextBuffers(
-                    t => t.ContentType.IsOfType(ContentTypeNames.CSharpContentType)
+                .Viewer.RightView.BufferGraph.GetTextBuffers(t =>
+                    t.ContentType.IsOfType(ContentTypeNames.CSharpContentType)
                 )
                 .First();
 

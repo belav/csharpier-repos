@@ -73,8 +73,8 @@ public class HeaderModelBinderIntegrationTest
             ParameterType = typeof(Person)
         };
 
-        var testContext = GetModelBindingTestContext(
-            request => request.Headers.Add("Header", new[] { "someValue" })
+        var testContext = GetModelBindingTestContext(request =>
+            request.Headers.Add("Header", new[] { "someValue" })
         );
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
             testContext.HttpContext.RequestServices
@@ -118,8 +118,8 @@ public class HeaderModelBinderIntegrationTest
             ParameterType = typeof(Person)
         };
 
-        var testContext = GetModelBindingTestContext(
-            request => request.Headers.Add("Header", new[] { "someValue" })
+        var testContext = GetModelBindingTestContext(request =>
+            request.Headers.Add("Header", new[] { "someValue" })
         );
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
             testContext.HttpContext.RequestServices
@@ -167,8 +167,8 @@ public class HeaderModelBinderIntegrationTest
             ParameterType = typeof(ListContainer1),
         };
 
-        var testContext = GetModelBindingTestContext(
-            request => request.Headers.Add("Header", new[] { "someValue" })
+        var testContext = GetModelBindingTestContext(request =>
+            request.Headers.Add("Header", new[] { "someValue" })
         );
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
             testContext.HttpContext.RequestServices
@@ -217,8 +217,8 @@ public class HeaderModelBinderIntegrationTest
             ParameterType = typeof(ListContainer2),
         };
 
-        var testContext = GetModelBindingTestContext(
-            request => request.Headers.Add("Header", new[] { "someValue" })
+        var testContext = GetModelBindingTestContext(request =>
+            request.Headers.Add("Header", new[] { "someValue" })
         );
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
             testContext.HttpContext.RequestServices

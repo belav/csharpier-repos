@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return _memberModel;
             }
 
-            var attributeOrParameter = node.FirstAncestorOrSelf<SyntaxNode>(
-                static n => n.Kind() is SyntaxKind.Attribute or SyntaxKind.Parameter
+            var attributeOrParameter = node.FirstAncestorOrSelf<SyntaxNode>(static n =>
+                n.Kind() is SyntaxKind.Attribute or SyntaxKind.Parameter
             );
 
             if (

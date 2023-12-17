@@ -19,18 +19,17 @@ public class When_adding_a_condition_for_all_members : AutoMapperSpecBase
         new(cfg =>
         {
             cfg.CreateMap<Source, Destination>()
-                .ForAllMembers(
-                    o =>
-                        o.Condition(
-                            (source, destination, sourceProperty, destinationProperty) =>
-                            {
-                                source.ShouldBeSameAs(_source);
-                                destination.ShouldBeSameAs(_destination);
-                                ((int)sourceProperty).ShouldBe(3);
-                                ((int)destinationProperty).ShouldBe(7);
-                                return true;
-                            }
-                        )
+                .ForAllMembers(o =>
+                    o.Condition(
+                        (source, destination, sourceProperty, destinationProperty) =>
+                        {
+                            source.ShouldBeSameAs(_source);
+                            destination.ShouldBeSameAs(_destination);
+                            ((int)sourceProperty).ShouldBe(3);
+                            ((int)destinationProperty).ShouldBe(7);
+                            return true;
+                        }
+                    )
                 );
         });
 
@@ -42,10 +41,9 @@ public class When_ignoring_all_properties_with_an_inaccessible_setter_and_explic
     : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<SourceClass, DestinationClass>()
-                    .IgnoreAllPropertiesWithAnInaccessibleSetter()
+        new(c =>
+            c.CreateMap<SourceClass, DestinationClass>()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter()
         );
 
     interface Interface

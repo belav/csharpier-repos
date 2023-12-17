@@ -56,10 +56,8 @@ namespace MonoTests.System.ServiceModel.Discovery
             TransportBindingElement tbe = null;
             Assert.IsTrue(
                 de.Binding.CreateBindingElements()
-                    .Any(
-                        be =>
-                            (tbe = be as TransportBindingElement) != null
-                            && tbe.Scheme == "soap.udp"
+                    .Any(be =>
+                        (tbe = be as TransportBindingElement) != null && tbe.Scheme == "soap.udp"
                     ),
                 "#12-2"
             );

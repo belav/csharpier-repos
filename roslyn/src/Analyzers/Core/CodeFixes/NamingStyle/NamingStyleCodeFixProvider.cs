@@ -205,7 +205,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
 
                 operations.Add(codeAction);
                 var factory =
-                    _startingSolution.Services.GetService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
+                    _startingSolution.Services.GetService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>(
+
+                    );
                 if (factory is not null)
                 {
                     operations.Add(

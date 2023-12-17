@@ -129,17 +129,16 @@ namespace System.Web.Http.ModelBinding
             );
 
             // Warning binder for HttpContent.
-            pb.Add(
-                parameter =>
-                    typeof(HttpContent).IsAssignableFrom(parameter.ParameterType)
-                        ? parameter.BindAsError(
-                            Error.Format(
-                                SRResources.ParameterBindingIllegalType,
-                                parameter.ParameterType.Name,
-                                parameter.ParameterName
-                            )
+            pb.Add(parameter =>
+                typeof(HttpContent).IsAssignableFrom(parameter.ParameterType)
+                    ? parameter.BindAsError(
+                        Error.Format(
+                            SRResources.ParameterBindingIllegalType,
+                            parameter.ParameterType.Name,
+                            parameter.ParameterName
                         )
-                        : null
+                    )
+                    : null
             );
 
             return pb;

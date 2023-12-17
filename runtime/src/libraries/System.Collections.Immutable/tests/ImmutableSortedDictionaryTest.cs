@@ -132,13 +132,10 @@ namespace System.Collections.Immutable.Tests
                 .AddRange(
                     Enumerable
                         .Range(1, 100)
-                        .Select(
-                            n =>
-                                new KeyValuePair<int, GenericParameterHelper>(
-                                    n,
-                                    new GenericParameterHelper(n)
-                                )
-                        )
+                        .Select(n => new KeyValuePair<int, GenericParameterHelper>(
+                            n,
+                            new GenericParameterHelper(n)
+                        ))
                 );
             ImmutableDictionary<int, GenericParameterHelper> unsortedMap =
                 sortedMap.ToImmutableDictionary();
@@ -528,10 +525,9 @@ namespace System.Collections.Immutable.Tests
                 "_root"
             );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                == DebuggerBrowsableState.RootHidden
             );
             KeyValuePair<int, int>[] items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<int, int>[];

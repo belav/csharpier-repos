@@ -62,7 +62,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                     static documentServiceProvider =>
                     {
                         var impl =
-                            documentServiceProvider.GetService<IRazorDocumentExcerptServiceImplementation>();
+                            documentServiceProvider.GetService<IRazorDocumentExcerptServiceImplementation>(
+
+                            );
                         return (impl != null) ? new RazorDocumentExcerptServiceWrapper(impl) : null;
                     },
                     _innerDocumentServiceProvider

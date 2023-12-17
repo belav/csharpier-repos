@@ -872,14 +872,11 @@ public abstract class FieldMappingTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
         var posts = context
             .Set<TPost>()
-            .Select(
-                p =>
-                    new
-                    {
-                        Prop1 = EF.Property<int>(p, property1),
-                        Prop2 = EF.Property<string>(p, property2)
-                    }
-            )
+            .Select(p => new
+            {
+                Prop1 = EF.Property<int>(p, property1),
+                Prop2 = EF.Property<string>(p, property2)
+            })
             .AsTracking(tracking)
             .ToList();
 

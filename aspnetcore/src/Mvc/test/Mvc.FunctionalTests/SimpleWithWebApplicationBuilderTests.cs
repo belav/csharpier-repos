@@ -141,7 +141,9 @@ public class SimpleWithWebApplicationBuilderTests
         // Arrange
         var expected = "Development";
         using var client =
-            new WebApplicationFactory<SimpleWebSiteWithWebApplicationBuilder.Program>().CreateClient();
+            new WebApplicationFactory<SimpleWebSiteWithWebApplicationBuilder.Program>(
+
+            ).CreateClient();
 
         // Act
         var content = await client.GetStringAsync("http://localhost/environment");
@@ -266,9 +268,9 @@ public class SimpleWithWebApplicationBuilderTests
 
         using var client = _fixture.CreateDefaultClient();
         var antiforgery = _fixture.Services.GetRequiredService<IAntiforgery>();
-        var antiforgeryOptions = _fixture.Services.GetRequiredService<
-            IOptions<AntiforgeryOptions>
-        >();
+        var antiforgeryOptions = _fixture.Services.GetRequiredService<IOptions<AntiforgeryOptions>>(
+
+        );
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         client.DefaultRequestHeaders.Add(
             "Cookie",

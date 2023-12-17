@@ -1785,8 +1785,9 @@ namespace System.ServiceModel
                     service.Description.Behaviors.Add(new ApplyHostConfigurationBehavior());
                     if (
                         this.multipleSiteBindingsEnabled
-                        && service.Description.Behaviors.Find<UseRequestHeadersForMetadataAddressBehavior>()
-                            == null
+                        && service.Description.Behaviors.Find<UseRequestHeadersForMetadataAddressBehavior>(
+
+                        ) == null
                     )
                     {
                         service.Description.Behaviors.Add(

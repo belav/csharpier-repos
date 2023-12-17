@@ -287,7 +287,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 action: c =>
                 {
                     var refactorNotifyServices =
-                        this.ComponentModel.DefaultExportProvider.GetExportedValues<IRefactorNotifyService>();
+                        this.ComponentModel.DefaultExportProvider.GetExportedValues<IRefactorNotifyService>(
+
+                        );
 
                     if (
                         !ContainedLanguageCodeSupport.TryRenameElement(

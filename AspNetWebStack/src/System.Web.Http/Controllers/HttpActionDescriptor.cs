@@ -35,8 +35,9 @@ namespace System.Web.Http.Controllers
 
         private static readonly ResponseMessageResultConverter _responseMessageResultConverter =
             new ResponseMessageResultConverter();
-        private static readonly VoidResultConverter _voidResultConverter =
-            new VoidResultConverter();
+        private static readonly VoidResultConverter _voidResultConverter = new VoidResultConverter(
+
+        );
 
         protected HttpActionDescriptor()
         {
@@ -79,8 +80,9 @@ namespace System.Web.Http.Controllers
                     ServicesContainer controllerServices = _controllerDescriptor
                         .Configuration
                         .Services;
-                    IActionValueBinder actionValueBinder =
-                        controllerServices.GetActionValueBinder();
+                    IActionValueBinder actionValueBinder = controllerServices.GetActionValueBinder(
+
+                    );
                     HttpActionBinding actionBinding = actionValueBinder.GetBinding(this);
                     _actionBinding = actionBinding;
                 }

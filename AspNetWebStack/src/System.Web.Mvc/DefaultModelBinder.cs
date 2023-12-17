@@ -362,8 +362,8 @@ namespace System.Web.Mvc
                 // Convert FormatExceptions (type conversion failures) into InvalidValue messages
                 foreach (
                     ModelError error in modelState
-                        .Errors.Where(
-                            err => String.IsNullOrEmpty(err.ErrorMessage) && err.Exception != null
+                        .Errors.Where(err =>
+                            String.IsNullOrEmpty(err.ErrorMessage) && err.Exception != null
                         )
                         .ToList()
                 )

@@ -187,11 +187,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
                     .Take(2)
-                    .Select(
-                        c =>
-                            c.Orders.OrderBy(o => o.OrderID)
-                                .Select(o => o.CustomerID)
-                                .FirstOrDefault()
+                    .Select(c =>
+                        c.Orders.OrderBy(o => o.OrderID).Select(o => o.CustomerID).FirstOrDefault()
                     )
         );
 
@@ -205,11 +202,10 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     .Where(e => e.CustomerID.StartsWith("F"))
                     .OrderBy(c => c.CustomerID)
                     .Take(2)
-                    .Select(
-                        c =>
-                            c.Orders.OrderBy(o => o.OrderID)
-                                .Select(o => new { o.CustomerID, o.OrderID })
-                                .FirstOrDefault()
+                    .Select(c =>
+                        c.Orders.OrderBy(o => o.OrderID)
+                            .Select(o => new { o.CustomerID, o.OrderID })
+                            .FirstOrDefault()
                     ),
             assertOrder: true
         );
@@ -226,14 +222,14 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     .Where(e => e.CustomerID.StartsWith("F"))
                     .OrderBy(c => c.CustomerID)
                     .Take(2)
-                    .Select(
-                        c =>
-                            c.Orders.OrderBy(o => o.OrderID)
-                                .Select(
-                                    o =>
-                                        new { o.CustomerID, OrderID = ClientFunction(o.OrderID, 5) }
-                                )
-                                .FirstOrDefault()
+                    .Select(c =>
+                        c.Orders.OrderBy(o => o.OrderID)
+                            .Select(o => new
+                            {
+                                o.CustomerID,
+                                OrderID = ClientFunction(o.OrderID, 5)
+                            })
+                            .FirstOrDefault()
                     ),
             assertOrder: true
         );
@@ -338,14 +334,10 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
             async,
             ss =>
                 ss.Set<Order>()
-                    .Select(
-                        o =>
-                            new
-                            {
-                                Total = o.OrderDetails.Sum(od => od.Quantity)
-                                    + o.OrderDetails.Count()
-                            }
-                    ),
+                    .Select(o => new
+                    {
+                        Total = o.OrderDetails.Sum(od => od.Quantity) + o.OrderDetails.Count()
+                    }),
             elementSorter: e => e.Total
         );
 
@@ -798,11 +790,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
             ss =>
                 ss.Set<Customer>()
                     .Where(e => e.CustomerID.StartsWith("A"))
-                    .Select(
-                        c =>
-                            ss.Set<Order>()
-                                .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                .Customer.City
+                    .Select(c =>
+                        ss.Set<Order>().FirstOrDefault(o => o.CustomerID == "ALFKI").Customer.City
                     )
         );
 
@@ -816,8 +805,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
             ss =>
                 ss.Set<Customer>()
                     .Where(e => e.CustomerID.StartsWith("A"))
-                    .Select(
-                        c => ss.Set<Order>().SingleOrDefault(o => o.OrderID == 10643).Customer.City
+                    .Select(c =>
+                        ss.Set<Order>().SingleOrDefault(o => o.OrderID == 10643).Customer.City
                     )
         );
 
@@ -831,27 +820,25 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
             ss =>
                 ss.Set<Customer>()
                     .Where(e => e.CustomerID.StartsWith("A"))
-                    .Select(
-                        c =>
-                            EF.Property<string>(
-                                EF.Property<Customer>(
-                                    ss.Set<Order>().FirstOrDefault(oo => oo.CustomerID == "ALFKI"),
-                                    "Customer"
-                                ),
-                                "City"
-                            )
+                    .Select(c =>
+                        EF.Property<string>(
+                            EF.Property<Customer>(
+                                ss.Set<Order>().FirstOrDefault(oo => oo.CustomerID == "ALFKI"),
+                                "Customer"
+                            ),
+                            "City"
+                        )
                     ),
             ss =>
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("A"))
-                    .Select(
-                        c =>
-                            ss.Set<Order>().FirstOrDefault(o => o.CustomerID == "ALFKI").Customer
-                            != null
-                                ? ss.Set<Order>()
-                                    .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                    .Customer.City
-                                : null
+                    .Select(c =>
+                        ss.Set<Order>().FirstOrDefault(o => o.CustomerID == "ALFKI").Customer
+                        != null
+                            ? ss.Set<Order>()
+                                .FirstOrDefault(o => o.CustomerID == "ALFKI")
+                                .Customer.City
+                            : null
                     )
         );
 
@@ -865,12 +852,11 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
             ss =>
                 ss.Set<Customer>()
                     .Where(e => e.CustomerID.StartsWith("A"))
-                    .Select(
-                        c =>
-                            ss.Set<Order>()
-                                .OrderBy(o => o.CustomerID)
-                                .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                .Customer.City
+                    .Select(c =>
+                        ss.Set<Order>()
+                            .OrderBy(o => o.CustomerID)
+                            .FirstOrDefault(o => o.CustomerID == "ALFKI")
+                            .Customer.City
                     )
         );
 
@@ -941,8 +927,7 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                                         ss.Set<OrderDetail>()
                                             .OrderByDescending(o => o.OrderID)
                                             .ThenBy(o => o.ProductID)
-                                            .FirstOrDefault(
-                                                orderDetail => orderDetail.Quantity == 1
+                                            .FirstOrDefault(orderDetail => orderDetail.Quantity == 1
                                             )
                                     )
                                 select p

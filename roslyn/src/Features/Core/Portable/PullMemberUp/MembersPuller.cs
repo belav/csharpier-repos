@@ -444,7 +444,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             using var _ = PooledHashSet<SyntaxNode>.GetInstance(out var sourceImports);
 
             var syntaxFacts =
-                destinationEditor.OriginalDocument.GetRequiredLanguageService<ISyntaxFactsService>();
+                destinationEditor.OriginalDocument.GetRequiredLanguageService<ISyntaxFactsService>(
+
+                );
 
             // Remove some original members since we are pulling members into class.
             // Note: If the user chooses to make the member abstract, then the original member will be changed to an override,
@@ -475,16 +477,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
 
                     sourceImports.AddRange(
                         GetImports(syntax, syntaxFacts)
-                            .Select(
-                                import =>
-                                    import
-                                        .WithoutLeadingTrivia()
-                                        .WithTrailingTrivia(
-                                            originalMemberEditor
-                                                .Generator
-                                                .ElasticCarriageReturnLineFeed
-                                        )
-                                        .WithAdditionalAnnotations(s_removableImportAnnotation)
+                            .Select(import =>
+                                import
+                                    .WithoutLeadingTrivia()
+                                    .WithTrailingTrivia(
+                                        originalMemberEditor.Generator.ElasticCarriageReturnLineFeed
+                                    )
+                                    .WithAdditionalAnnotations(s_removableImportAnnotation)
                             )
                     );
 
@@ -514,9 +513,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             // Change the destination to abstract class if needed.
             if (
                 !result.Destination.IsAbstract
-                && result.MemberAnalysisResults.Any(
-                    static analysis =>
-                        analysis.Member.IsAbstract || analysis.MakeMemberDeclarationAbstract
+                && result.MemberAnalysisResults.Any(static analysis =>
+                    analysis.Member.IsAbstract || analysis.MakeMemberDeclarationAbstract
                 )
             )
             {
@@ -559,7 +557,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             );
 
             var removeImportsService =
-                destinationEditor.OriginalDocument.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>();
+                destinationEditor.OriginalDocument.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>(
+
+                );
             var destinationDocument = await removeImportsService
                 .RemoveUnnecessaryImportsAsync(
                     destinationEditor.GetChangedDocument(),
@@ -643,16 +643,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         {
             return start
                 .AncestorsAndSelf()
-                .Where(
-                    node =>
-                        node is ICompilationUnitSyntax
-                        || syntaxFacts.IsBaseNamespaceDeclaration(node)
+                .Where(node =>
+                    node is ICompilationUnitSyntax || syntaxFacts.IsBaseNamespaceDeclaration(node)
                 )
-                .SelectMany(
-                    node =>
-                        node is ICompilationUnitSyntax
-                            ? syntaxFacts.GetImportsOfCompilationUnit(node)
-                            : syntaxFacts.GetImportsOfBaseNamespaceDeclaration(node)
+                .SelectMany(node =>
+                    node is ICompilationUnitSyntax
+                        ? syntaxFacts.GetImportsOfCompilationUnit(node)
+                        : syntaxFacts.GetImportsOfBaseNamespaceDeclaration(node)
                 )
                 .ToImmutableArray();
         }

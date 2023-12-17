@@ -419,13 +419,12 @@ namespace System.Web.Http.Results
                 IEnumerable<MediaTypeFormatter> expectedFormatters = CreateFormatters();
 
                 Mock<IContentNegotiator> spy = new Mock<IContentNegotiator>();
-                spy.Setup(
-                        n =>
-                            n.Negotiate(
-                                typeof(ModelStateDictionary),
-                                expectedRequest,
-                                expectedFormatters
-                            )
+                spy.Setup(n =>
+                        n.Negotiate(
+                            typeof(ModelStateDictionary),
+                            expectedRequest,
+                            expectedFormatters
+                        )
                     )
                     .Returns(negotiationResult);
                 IContentNegotiator contentNegotiator = spy.Object;
@@ -496,8 +495,8 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
                 Mock<IContentNegotiator> spy = new Mock<IContentNegotiator>();
-                spy.Setup(
-                        n => n.Negotiate(typeof(HttpError), expectedRequest, It.Is(formattersMatch))
+                spy.Setup(n =>
+                        n.Negotiate(typeof(HttpError), expectedRequest, It.Is(formattersMatch))
                     )
                     .Returns(negotiationResult);
                 IContentNegotiator contentNegotiator = spy.Object;

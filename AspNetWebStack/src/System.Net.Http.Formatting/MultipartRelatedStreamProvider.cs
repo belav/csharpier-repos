@@ -128,8 +128,8 @@ namespace System.Net.Http
             }
 
             // Look for parameter
-            return parentContentType.Parameters.FirstOrDefault(
-                nvp => String.Equals(nvp.Name, parameterName, StringComparison.OrdinalIgnoreCase)
+            return parentContentType.Parameters.FirstOrDefault(nvp =>
+                String.Equals(nvp.Name, parameterName, StringComparison.OrdinalIgnoreCase)
             );
         }
     }

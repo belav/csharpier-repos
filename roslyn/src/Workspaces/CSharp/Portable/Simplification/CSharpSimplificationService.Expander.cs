@@ -226,8 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                         if (parameters.Length > 0 && parameters.Any(p => p.Type == null))
                         {
-                            var parameterSymbols = node.ParameterList.Parameters.Select(
-                                p => _semanticModel.GetDeclaredSymbol(p, _cancellationToken)
+                            var parameterSymbols = node.ParameterList.Parameters.Select(p =>
+                                _semanticModel.GetDeclaredSymbol(p, _cancellationToken)
                             )
                                 .ToArray();
 
@@ -1019,13 +1019,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                     ((IdentifierNameSyntax)newNode).Identifier,
                                     SyntaxFactory.TypeArgumentList(
                                         SyntaxFactory.SeparatedList(
-                                            typeArguments.Select(
-                                                p =>
-                                                    SyntaxFactory.ParseTypeName(
-                                                        p.ToDisplayString(
-                                                            s_typeNameFormatWithGenerics
-                                                        )
-                                                    )
+                                            typeArguments.Select(p =>
+                                                SyntaxFactory.ParseTypeName(
+                                                    p.ToDisplayString(s_typeNameFormatWithGenerics)
+                                                )
                                             )
                                         )
                                     )

@@ -2480,15 +2480,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 ObsoleteKind != ObsoleteAttributeKind.None
                 || GetMembers()
-                    .All(
-                        m =>
-                            m
-                                is not MethodSymbol
-                                {
-                                    MethodKind: MethodKind.Constructor,
-                                    ObsoleteKind: ObsoleteAttributeKind.None
-                                } method
-                            || !method.ShouldCheckRequiredMembers()
+                    .All(m =>
+                        m
+                            is not MethodSymbol
+                            {
+                                MethodKind: MethodKind.Constructor,
+                                ObsoleteKind: ObsoleteAttributeKind.None
+                            } method
+                        || !method.ShouldCheckRequiredMembers()
                     )
             )
             {

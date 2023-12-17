@@ -251,8 +251,8 @@ public static class RelationalForeignKeyExtensions
                     .Where(t => t != null);
                 if (
                     foreignKey.GetConstraintName() != null
-                    && derivedTables.All(
-                        t => foreignKey.GetConstraintName(t!.Value, principalTable) == null
+                    && derivedTables.All(t =>
+                        foreignKey.GetConstraintName(t!.Value, principalTable) == null
                     )
                 )
                 {

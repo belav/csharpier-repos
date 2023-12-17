@@ -209,8 +209,8 @@ namespace TypeSystemTests
             IEnumerable<MethodDesc> derivedClassMethods = derivedClassType
                 .GetMethods()
                 .Where(m => string.Equals(m.Name, "Method"));
-            IEnumerable<bool> matches = derivedClassMethods.Select(
-                m => matchingSignature.Equals(m.Signature)
+            IEnumerable<bool> matches = derivedClassMethods.Select(m =>
+                matchingSignature.Equals(m.Signature)
             );
             int matchCount = matches.Select(b => b ? 1 : 0).Sum();
             Assert.Equal(1, matchCount);

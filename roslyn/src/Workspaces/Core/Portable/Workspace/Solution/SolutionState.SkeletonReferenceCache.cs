@@ -211,11 +211,8 @@ internal partial class SolutionState
             var lazy = s_compilationToSkeletonSet.GetValue(
                 compilation,
                 compilation =>
-                    AsyncLazy.Create(
-                        cancellationToken =>
-                            Task.FromResult(
-                                CreateSkeletonSet(services, compilation, cancellationToken)
-                            )
+                    AsyncLazy.Create(cancellationToken =>
+                        Task.FromResult(CreateSkeletonSet(services, compilation, cancellationToken))
                     )
             );
 

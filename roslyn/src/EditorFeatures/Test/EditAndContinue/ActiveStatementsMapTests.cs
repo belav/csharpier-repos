@@ -283,8 +283,8 @@ S5();
                     "[127..131) -> (5,0)-(5,4) #4",
                     "[134..138) -> (6,0)-(6,4) #1"
                 },
-                oldSpans.Select(
-                    s => $"{s.UnmappedSpan} -> {s.Statement.Span} #{s.Statement.Ordinal}"
+                oldSpans.Select(s =>
+                    $"{s.UnmappedSpan} -> {s.Statement.Span} #{s.Statement.Ordinal}"
                 )
             );
         }

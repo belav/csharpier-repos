@@ -133,8 +133,8 @@ namespace ABIStress
                         int numRejected = tcel.FailureReasons.Values.Sum();
                         Console.WriteLine("{0} rejected tailcalls. Breakdown:", numRejected);
                         foreach (
-                            var (reason, count) in tcel.FailureReasons.OrderByDescending(
-                                kvp => kvp.Value
+                            var (reason, count) in tcel.FailureReasons.OrderByDescending(kvp =>
+                                kvp.Value
                             )
                         )
                             Console.WriteLine(

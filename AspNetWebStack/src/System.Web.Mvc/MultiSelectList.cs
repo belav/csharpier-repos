@@ -342,8 +342,8 @@ namespace System.Web.Mvc
 
             // We use StringComparison.CurrentCulture because the group name is used to display as the value of
             // optgroup HTML tag's label attribute.
-            SelectListGroup group = _groups.FirstOrDefault(
-                g => String.Equals(g.Name, groupName, StringComparison.CurrentCulture)
+            SelectListGroup group = _groups.FirstOrDefault(g =>
+                String.Equals(g.Name, groupName, StringComparison.CurrentCulture)
             );
             if (group == null)
             {

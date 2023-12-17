@@ -36,21 +36,19 @@ namespace System.Runtime.Serialization.Formatters.Tests
             {
                 IEnumerable<MethodInfo> x = typeof(EqualityExtensions)
                     .GetMethods()
-                    ?.Where(
-                        m =>
-                            m.Name == "IsEqual"
-                            && m.GetParameters().Length == 3
-                            && m.IsGenericMethodDefinition
+                    ?.Where(m =>
+                        m.Name == "IsEqual"
+                        && m.GetParameters().Length == 3
+                        && m.IsGenericMethodDefinition
                     );
 
                 MethodInfo method = typeof(EqualityExtensions)
                     .GetMethods()
-                    ?.SingleOrDefault(
-                        m =>
-                            m.Name == "IsEqual"
-                            && m.GetParameters().Length == 3
-                            && m.GetParameters()[0].ParameterType.Name == extendedType.Name
-                            && m.IsGenericMethodDefinition
+                    ?.SingleOrDefault(m =>
+                        m.Name == "IsEqual"
+                        && m.GetParameters().Length == 3
+                        && m.GetParameters()[0].ParameterType.Name == extendedType.Name
+                        && m.IsGenericMethodDefinition
                     );
 
                 // If extension method found, make it generic and return

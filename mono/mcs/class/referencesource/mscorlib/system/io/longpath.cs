@@ -386,8 +386,9 @@ namespace System.IO
 
             String tempPath = Path.AddLongPathPrefix(fullPath);
 
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
-                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA(
+
+            );
             int dataInitialised = File.FillAttributeInfo(tempPath, ref data, false, false);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
@@ -408,8 +409,9 @@ namespace System.IO
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 
             String tempPath = Path.AddLongPathPrefix(fullPath);
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
-                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA(
+
+            );
             int dataInitialised = File.FillAttributeInfo(tempPath, ref data, false, false);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
@@ -430,8 +432,9 @@ namespace System.IO
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 
             String tempPath = Path.AddLongPathPrefix(fullPath);
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
-                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA(
+
+            );
             int dataInitialised = File.FillAttributeInfo(tempPath, ref data, false, false);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
@@ -496,8 +499,9 @@ namespace System.IO
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 
             String tempPath = Path.AddLongPathPrefix(fullPath);
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
-                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA(
+
+            );
             int dataInitialised = File.FillAttributeInfo(tempPath, ref data, false, true); // return error
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, path); // from FileInfo.
@@ -824,8 +828,9 @@ namespace System.IO
             // future version we will add a new flag to control this behavior,
             // but for now we're much safer if we err on the conservative side.
             // This applies to symbolic links and mount points.
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
-                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA(
+
+            );
             int dataInitialised = File.FillAttributeInfo(longPath, ref data, false, true);
             if (dataInitialised != 0)
             {

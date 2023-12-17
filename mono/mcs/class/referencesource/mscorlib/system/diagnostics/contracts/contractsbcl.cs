@@ -483,7 +483,9 @@ namespace System.Runtime.CompilerServices
                         innerException
                     );
                     foreach (
-                        EventHandler<ContractFailedEventArgs> handler in contractFailedEventLocal.GetInvocationList()
+                        EventHandler<ContractFailedEventArgs> handler in contractFailedEventLocal.GetInvocationList(
+
+                        )
                     )
                     {
                         try

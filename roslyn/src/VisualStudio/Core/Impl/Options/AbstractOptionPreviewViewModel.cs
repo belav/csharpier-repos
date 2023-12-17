@@ -66,8 +66,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _contentTypeRegistryService = _componentModel.GetService<IContentTypeRegistryService>();
             _textBufferFactoryService = _componentModel.GetService<ITextBufferFactoryService>();
             _textEditorFactoryService = _componentModel.GetService<ITextEditorFactoryService>();
-            _projectionBufferFactory =
-                _componentModel.GetService<IProjectionBufferFactoryService>();
+            _projectionBufferFactory = _componentModel.GetService<IProjectionBufferFactoryService>(
+
+            );
             _editorOptions = _componentModel.GetService<IEditorOptionsFactoryService>();
 
             this.Language = language;
@@ -135,15 +136,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             var referenceAssemblies = Thread
                 .GetDomain()
                 .GetAssemblies()
-                .Where(
-                    x => references.Contains(x.GetName(true).Name, StringComparer.OrdinalIgnoreCase)
+                .Where(x =>
+                    references.Contains(x.GetName(true).Name, StringComparer.OrdinalIgnoreCase)
                 )
-                .Select(
-                    a =>
-                        metadataService.GetReference(
-                            a.Location,
-                            MetadataReferenceProperties.Assembly
-                        )
+                .Select(a =>
+                    metadataService.GetReference(a.Location, MetadataReferenceProperties.Assembly)
                 );
 
             project = project.WithMetadataReferences(referenceAssemblies);

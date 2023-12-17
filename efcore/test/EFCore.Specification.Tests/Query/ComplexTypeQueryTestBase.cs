@@ -146,15 +146,14 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.ShippingAddress
-                            == new Address
-                            {
-                                AddressLine1 = "804 S. Lakeshore Road",
-                                ZipCode = 38654,
-                                Country = new Country { FullName = "United States", Code = "US" }
-                            }
+                    .Where(c =>
+                        c.ShippingAddress
+                        == new Address
+                        {
+                            AddressLine1 = "804 S. Lakeshore Road",
+                            ZipCode = 38654,
+                            Country = new Country { FullName = "United States", Code = "US" }
+                        }
                     )
         );
 
@@ -195,12 +194,11 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            ss.Set<Customer>()
-                                .Select(c => c.ShippingAddress)
-                                .OrderBy(a => a.ZipCode)
-                                .First() == address
+                    .Where(c =>
+                        ss.Set<Customer>()
+                            .Select(c => c.ShippingAddress)
+                            .OrderBy(a => a.ZipCode)
+                            .First() == address
                     )
         );
     }
@@ -371,10 +369,9 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
                     .Where(cg => cg.OptionalCustomer!.ShippingAddress.ZipCode != 07728),
             ss =>
                 ss.Set<ValuedCustomerGroup>()
-                    .Where(
-                        cg =>
-                            cg.OptionalCustomer == null
-                            || cg.OptionalCustomer.ShippingAddress.ZipCode != 07728
+                    .Where(cg =>
+                        cg.OptionalCustomer == null
+                        || cg.OptionalCustomer.ShippingAddress.ZipCode != 07728
                     )
         );
     }
@@ -464,19 +461,14 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
             async,
             ss =>
                 ss.Set<ValuedCustomer>()
-                    .Where(
-                        c =>
-                            c.ShippingAddress
-                            == new AddressStruct
-                            {
-                                AddressLine1 = "804 S. Lakeshore Road",
-                                ZipCode = 38654,
-                                Country = new CountryStruct
-                                {
-                                    FullName = "United States",
-                                    Code = "US"
-                                }
-                            }
+                    .Where(c =>
+                        c.ShippingAddress
+                        == new AddressStruct
+                        {
+                            AddressLine1 = "804 S. Lakeshore Road",
+                            ZipCode = 38654,
+                            Country = new CountryStruct { FullName = "United States", Code = "US" }
+                        }
                     )
         );
 
@@ -512,12 +504,11 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
             async,
             ss =>
                 ss.Set<ValuedCustomer>()
-                    .Where(
-                        c =>
-                            ss.Set<ValuedCustomer>()
-                                .Select(c => c.ShippingAddress)
-                                .OrderBy(a => a.ZipCode)
-                                .First() == address
+                    .Where(c =>
+                        ss.Set<ValuedCustomer>()
+                            .Select(c => c.ShippingAddress)
+                            .OrderBy(a => a.ZipCode)
+                            .First() == address
                     )
         );
     }
@@ -537,11 +528,8 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
             async,
             ss =>
                 ss.Set<ValuedCustomer>()
-                    .Where(
-                        c =>
-                            ss.Set<ValuedCustomer>()
-                                .Select(c => c.ShippingAddress)
-                                .Contains(address)
+                    .Where(c =>
+                        ss.Set<ValuedCustomer>().Select(c => c.ShippingAddress).Contains(address)
                     )
         );
     }

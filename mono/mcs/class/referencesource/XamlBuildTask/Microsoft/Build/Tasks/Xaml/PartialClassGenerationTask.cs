@@ -314,8 +314,8 @@ namespace Microsoft.Build.Tasks.Xaml
             IList<ITaskItem> applicationMarkup = null;
             if (this.ApplicationMarkup != null)
             {
-                applicationMarkup = this.ApplicationMarkup.Select(
-                    i => new DelegatingTaskItem(i) as ITaskItem
+                applicationMarkup = this.ApplicationMarkup.Select(i =>
+                    new DelegatingTaskItem(i) as ITaskItem
                 )
                     .ToList();
             }

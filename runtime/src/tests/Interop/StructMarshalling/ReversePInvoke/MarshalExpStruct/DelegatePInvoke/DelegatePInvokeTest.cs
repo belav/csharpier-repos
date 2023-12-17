@@ -226,8 +226,9 @@ public class Test_DelegatePInvokeTest
                     64.0F,
                     6.4
                 );
-                DelegateCdeclByRef_U caller_U =
-                    Get_MarshalStructAsParam_AsExpByRefU_Cdecl_FuncPtr();
+                DelegateCdeclByRef_U caller_U = Get_MarshalStructAsParam_AsExpByRefU_Cdecl_FuncPtr(
+
+                );
                 Console.WriteLine("Calling Get_MarshalStructAsParam_AsExpByRefU_Cdecl_FuncPtr...");
                 Assert.True(caller_U(ref sourceU));
                 Assert.True(
@@ -811,8 +812,9 @@ public class Test_DelegatePInvokeTest
                     32.0F,
                     3.2
                 );
-                DelegateCdeclByVal_U caller_U =
-                    Get_MarshalStructAsParam_AsExpByValU_Cdecl_FuncPtr();
+                DelegateCdeclByVal_U caller_U = Get_MarshalStructAsParam_AsExpByValU_Cdecl_FuncPtr(
+
+                );
                 Console.WriteLine("Calling Get_MarshalStructAsParam_AsExpByValU_Cdecl_FuncPtr...");
                 Assert.True(caller_U(sourceU));
                 Assert.True(

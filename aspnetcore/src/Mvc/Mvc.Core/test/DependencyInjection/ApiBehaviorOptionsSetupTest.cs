@@ -78,8 +78,8 @@ public class ApiBehaviorOptionsSetupTest
         var link = "http://mylink";
         var actionContext = GetActionContext();
 
-        var factory = GetProblemDetailsFactory(
-            options => options.ClientErrorMapping[400].Link = link
+        var factory = GetProblemDetailsFactory(options =>
+            options.ClientErrorMapping[400].Link = link
         );
 
         // Act
@@ -106,17 +106,16 @@ public class ApiBehaviorOptionsSetupTest
     {
         // Arrange
         var actionContext = GetActionContext();
-        var factory = Mock.Of<ProblemDetailsFactory>(
-            m =>
-                m.CreateValidationProblemDetails(
-                    It.IsAny<HttpContext>(),
-                    It.IsAny<ModelStateDictionary>(),
-                    null,
-                    null,
-                    null,
-                    null,
-                    null
-                ) == new ValidationProblemDetails { Status = 422, }
+        var factory = Mock.Of<ProblemDetailsFactory>(m =>
+            m.CreateValidationProblemDetails(
+                It.IsAny<HttpContext>(),
+                It.IsAny<ModelStateDictionary>(),
+                null,
+                null,
+                null,
+                null,
+                null
+            ) == new ValidationProblemDetails { Status = 422, }
         );
 
         // Act

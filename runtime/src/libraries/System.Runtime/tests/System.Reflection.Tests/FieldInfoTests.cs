@@ -71,8 +71,8 @@ namespace System.Reflection.Tests
         public static void CustomAttributes(Type type, string expectedToString)
         {
             FieldInfo fieldInfo = GetField(typeof(FieldInfoTests), "fieldWithAttributes");
-            CustomAttributeData attributeData = fieldInfo.CustomAttributes.First(
-                attribute => attribute.AttributeType.Equals(type)
+            CustomAttributeData attributeData = fieldInfo.CustomAttributes.First(attribute =>
+                attribute.AttributeType.Equals(type)
             );
             Assert.Equal(expectedToString, attributeData.ToString());
         }

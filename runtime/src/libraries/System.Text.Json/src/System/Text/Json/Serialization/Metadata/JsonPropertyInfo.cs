@@ -632,12 +632,16 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 if (ParentTypeInfo.DetermineUsesParameterizedConstructor())
                 {
-                    ThrowHelper.ThrowNotSupportedException_ObjectCreationHandlingPropertyDoesNotSupportParameterizedConstructors();
+                    ThrowHelper.ThrowNotSupportedException_ObjectCreationHandlingPropertyDoesNotSupportParameterizedConstructors(
+
+                    );
                 }
 
                 if (Options.ReferenceHandlingStrategy != ReferenceHandlingStrategy.None)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_ObjectCreationHandlingPropertyCannotAllowReferenceHandling();
+                    ThrowHelper.ThrowInvalidOperationException_ObjectCreationHandlingPropertyCannotAllowReferenceHandling(
+
+                    );
                 }
             }
 

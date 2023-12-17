@@ -22,11 +22,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void FrameworkAndIncludedFrameworksIsInvalid()
         {
             RunFrameworkDependentTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                        runtimeConfig =>
-                            runtimeConfig
-                                .WithFramework(MicrosoftNETCoreApp, "5.1.2")
-                                .WithIncludedFramework(MicrosoftNETCoreApp, "5.1.2")
+                    new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig
+                            .WithFramework(MicrosoftNETCoreApp, "5.1.2")
+                            .WithIncludedFramework(MicrosoftNETCoreApp, "5.1.2")
                     )
                 )
                 .Should()
@@ -40,9 +39,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void SelfContainedCanHaveIncludedFrameworks()
         {
             RunSelfContainedTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                        runtimeConfig =>
-                            runtimeConfig.WithIncludedFramework(MicrosoftNETCoreApp, "5.1.2")
+                    new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig.WithIncludedFramework(MicrosoftNETCoreApp, "5.1.2")
                     )
                 )
                 .Should()
@@ -54,8 +52,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void IncludedFrameworkMustSpecifyName()
         {
             RunSelfContainedTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                        runtimeConfig => runtimeConfig.WithIncludedFramework(null, "5.1.2")
+                    new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig.WithIncludedFramework(null, "5.1.2")
                     )
                 )
                 .Should()
@@ -67,14 +65,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void OtherPropertiesAreIgnoredOnIncludedFramework()
         {
             RunSelfContainedTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                        runtimeConfig =>
-                            runtimeConfig.WithIncludedFramework(
-                                new RuntimeConfig.Framework(MicrosoftNETCoreApp, "5.1.2")
-                                    .WithApplyPatches(false) // Properties which are otherwise parsed on frameworks are ignored
-                                    .WithRollForward("invalid") // in case of included frameworks. (so invalid values will be accepted)
-                                    .WithRollForwardOnNoCandidateFx(42)
-                            )
+                    new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig.WithIncludedFramework(
+                            new RuntimeConfig.Framework(MicrosoftNETCoreApp, "5.1.2")
+                                .WithApplyPatches(false) // Properties which are otherwise parsed on frameworks are ignored
+                                .WithRollForward("invalid") // in case of included frameworks. (so invalid values will be accepted)
+                                .WithRollForwardOnNoCandidateFx(42)
+                        )
                     )
                 )
                 .Should()

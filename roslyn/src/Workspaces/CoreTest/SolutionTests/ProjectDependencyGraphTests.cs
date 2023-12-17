@@ -104,13 +104,12 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var actualResult = string.Join(
                 " ",
                 projectIds
-                    .Select(
-                        group =>
-                            string.Concat(
-                                group
-                                    .Select(p => solution.GetRequiredProject(p).AssemblyName)
-                                    .OrderBy(n => n)
-                            )
+                    .Select(group =>
+                        string.Concat(
+                            group
+                                .Select(p => solution.GetRequiredProject(p).AssemblyName)
+                                .OrderBy(n => n)
+                        )
                     )
                     .OrderBy(n => n)
             );
@@ -718,8 +717,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             Assert.Same(dependencyGraph, solution.State.GetProjectDependencyGraph());
 
             b = solution.GetProjectsByName("B").Single();
-            var remainingBToC = b.ProjectReferences.Single(
-                reference => reference.ProjectId == c.Id
+            var remainingBToC = b.ProjectReferences.Single(reference => reference.ProjectId == c.Id
             );
             solution = solution.RemoveProjectReference(b.Id, remainingBToC);
             Assert.NotSame(dependencyGraph, solution.State.GetProjectDependencyGraph());

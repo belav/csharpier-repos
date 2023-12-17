@@ -34,9 +34,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             ParseOptions parseOptions = null;
             if (features != null)
             {
-                var featuresMapped = features.Select(
-                    x => new KeyValuePair<string, string>(x, string.Empty)
-                );
+                var featuresMapped = features.Select(x => new KeyValuePair<string, string>(
+                    x,
+                    string.Empty
+                ));
                 parseOptions = new CSharpParseOptions().WithFeatures(featuresMapped);
             }
 

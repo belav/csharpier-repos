@@ -114,7 +114,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var (list, isIncomplete, resultId) = completionListResult.Value;
 
             var creationService =
-                document.Project.Solution.Services.GetRequiredService<ILspCompletionResultCreationService>();
+                document.Project.Solution.Services.GetRequiredService<ILspCompletionResultCreationService>(
+
+                );
             return await creationService
                 .ConvertToLspCompletionListAsync(
                     document,
@@ -321,9 +323,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 .Concat(
                     matchResultsBuilder
                         .Skip(completionListMaxSize)
-                        .Where(
-                            match =>
-                                match.CompletionItem.Rules.MatchPriority == MatchPriority.Preselect
+                        .Where(match =>
+                            match.CompletionItem.Rules.MatchPriority == MatchPriority.Preselect
                         )
                 )
                 .Select(matchResult => matchResult.CompletionItem)

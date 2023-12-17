@@ -1646,8 +1646,8 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnorePatternWhitespace)
+                    .Where(o =>
+                        Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnorePatternWhitespace)
                     )
         );
 
@@ -1670,13 +1670,12 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        o =>
-                            Regex.IsMatch(
-                                o.CustomerID,
-                                "^T",
-                                RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
-                            )
+                    .Where(o =>
+                        Regex.IsMatch(
+                            o.CustomerID,
+                            "^T",
+                            RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
+                        )
                     )
         );
 
@@ -1711,13 +1710,12 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
                     async,
                     ss =>
                         ss.Set<Customer>()
-                            .Where(
-                                o =>
-                                    Regex.IsMatch(
-                                        o.CustomerID,
-                                        "^T",
-                                        RegexOptions.IgnoreCase | RegexOptions.RightToLeft
-                                    )
+                            .Where(o =>
+                                Regex.IsMatch(
+                                    o.CustomerID,
+                                    "^T",
+                                    RegexOptions.IgnoreCase | RegexOptions.RightToLeft
+                                )
                             )
                 )
         );
@@ -1750,9 +1748,8 @@ WHERE ((c["Discriminator"] = "Customer") AND STRINGEQUALS(c["CustomerID"], "alFk
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            string.Equals(c.CustomerID, "alFkI", StringComparison.OrdinalIgnoreCase)
+                    .Where(c =>
+                        string.Equals(c.CustomerID, "alFkI", StringComparison.OrdinalIgnoreCase)
                     )
         );
 

@@ -336,10 +336,9 @@ namespace Microsoft.Interop.Analyzers
                     parameter.Type.SpecialType == SpecialType.System_Boolean
                     && !parameter
                         .GetAttributes()
-                        .Any(
-                            attr =>
-                                attr.AttributeClass?.ToDisplayString()
-                                == TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
+                        .Any(attr =>
+                            attr.AttributeClass?.ToDisplayString()
+                            == TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
                         )
                 )
                 {
@@ -364,10 +363,9 @@ namespace Microsoft.Interop.Analyzers
                 methodSymbol.ReturnType.SpecialType == SpecialType.System_Boolean
                 && !methodSymbol
                     .GetReturnTypeAttributes()
-                    .Any(
-                        attr =>
-                            attr.AttributeClass?.ToDisplayString()
-                            == TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
+                    .Any(attr =>
+                        attr.AttributeClass?.ToDisplayString()
+                        == TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
                     )
             )
             {
@@ -410,10 +408,9 @@ namespace Microsoft.Interop.Analyzers
                 && IsHResultLikeType(methodSymbol.ReturnType)
                 && !methodSymbol
                     .GetReturnTypeAttributes()
-                    .Any(
-                        attr =>
-                            attr.AttributeClass?.ToDisplayString()
-                            == TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
+                    .Any(attr =>
+                        attr.AttributeClass?.ToDisplayString()
+                        == TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
                     )
             )
             {

@@ -583,24 +583,23 @@ namespace System.Web.Http.ModelBinding
 
             foreach (ExpectedTraceRecord expectedRecord in expectedRecords)
             {
-                TraceRecord beginTrace = actualRecords.SingleOrDefault(
-                    r =>
-                        String.Equals(
-                            r.Category,
-                            expectedRecord.Category,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && String.Equals(
-                            r.Operator,
-                            expectedRecord.OperatorName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && String.Equals(
-                            r.Operation,
-                            expectedRecord.OperationName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && r.Kind == TraceKind.Begin
+                TraceRecord beginTrace = actualRecords.SingleOrDefault(r =>
+                    String.Equals(
+                        r.Category,
+                        expectedRecord.Category,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        r.Operator,
+                        expectedRecord.OperatorName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        r.Operation,
+                        expectedRecord.OperationName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && r.Kind == TraceKind.Begin
                 );
 
                 if (beginTrace == null)
@@ -615,24 +614,23 @@ namespace System.Web.Http.ModelBinding
                     );
                 }
 
-                TraceRecord endTrace = actualRecords.SingleOrDefault(
-                    r =>
-                        String.Equals(
-                            r.Category,
-                            expectedRecord.Category,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && String.Equals(
-                            r.Operator,
-                            expectedRecord.OperatorName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && String.Equals(
-                            r.Operation,
-                            expectedRecord.OperationName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && r.Kind == TraceKind.End
+                TraceRecord endTrace = actualRecords.SingleOrDefault(r =>
+                    String.Equals(
+                        r.Category,
+                        expectedRecord.Category,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        r.Operator,
+                        expectedRecord.OperatorName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        r.Operation,
+                        expectedRecord.OperationName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && r.Kind == TraceKind.End
                 );
 
                 if (endTrace == null)
@@ -698,23 +696,22 @@ namespace System.Web.Http.ModelBinding
                     continue;
                 }
 
-                ExpectedTraceRecord expectedTrace = expectedRecords.FirstOrDefault(
-                    r =>
-                        String.Equals(
-                            r.Category,
-                            actualRecord.Category,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && String.Equals(
-                            r.OperatorName,
-                            actualRecord.Operator,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && String.Equals(
-                            r.OperationName,
-                            actualRecord.Operation,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                ExpectedTraceRecord expectedTrace = expectedRecords.FirstOrDefault(r =>
+                    String.Equals(
+                        r.Category,
+                        actualRecord.Category,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        r.OperatorName,
+                        actualRecord.Operator,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        r.OperationName,
+                        actualRecord.Operation,
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 );
 
                 if (expectedTrace == null)
@@ -744,24 +741,23 @@ namespace System.Web.Http.ModelBinding
             int traceBeginPos = 0;
             foreach (ExpectedTraceRecord expectedRecord in expectedRecords)
             {
-                TraceRecord beginTrace = actualRecords.SingleOrDefault(
-                    r =>
-                        String.Equals(
-                            r.Category,
-                            expectedRecord.Category,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && String.Equals(
-                            r.Operator,
-                            expectedRecord.OperatorName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && String.Equals(
-                            r.Operation,
-                            expectedRecord.OperationName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && object.Equals(r.Kind, expectedRecord.TraceKind)
+                TraceRecord beginTrace = actualRecords.SingleOrDefault(r =>
+                    String.Equals(
+                        r.Category,
+                        expectedRecord.Category,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        r.Operator,
+                        expectedRecord.OperatorName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        r.Operation,
+                        expectedRecord.OperationName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && object.Equals(r.Kind, expectedRecord.TraceKind)
                 );
 
                 // Ignore record of a ReflectionTypeLoadException to allow test to succeed in Visual Studio. The record is an

@@ -92,14 +92,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
         protected override bool HasDocumentationComment(MemberDeclarationSyntax member) =>
             member
                 .GetFirstToken()
-                .LeadingTrivia.Any(
-                    t =>
-                        t
-                            is
-                            (
-                                kind: SyntaxKind.SingleLineDocumentationCommentTrivia
-                                    or SyntaxKind.MultiLineDocumentationCommentTrivia
-                            )
+                .LeadingTrivia.Any(t =>
+                    t
+                        is
+                        (
+                            kind: SyntaxKind.SingleLineDocumentationCommentTrivia
+                                or SyntaxKind.MultiLineDocumentationCommentTrivia
+                        )
                 );
 
         protected override int GetPrecedingDocumentationCommentCount(MemberDeclarationSyntax member)
@@ -194,8 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                 .Where(n => n.Kind() is SyntaxKind.ThrowExpression or SyntaxKind.ThrowStatement);
 
             var usings = member.GetEnclosingUsingDirectives();
-            var hasUsingSystem = usings.Any(
-                u => u.Name is IdentifierNameSyntax { Identifier.ValueText: nameof(System) }
+            var hasUsingSystem = usings.Any(u =>
+                u.Name is IdentifierNameSyntax { Identifier.ValueText: nameof(System) }
             );
 
             using var _ = PooledHashSet<string>.GetInstance(out var seenExceptionTypes);

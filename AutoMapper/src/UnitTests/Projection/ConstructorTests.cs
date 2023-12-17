@@ -124,10 +124,9 @@ public class ConstructorMapFrom : AutoMapperSpecBase
     record Destination(bool Value) { }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            cfg =>
-                cfg.CreateProjection<Source, Destination>()
-                    .ForCtorParam(nameof(Destination.Value), o => o.MapFrom(s => s.Value == 5))
+        new(cfg =>
+            cfg.CreateProjection<Source, Destination>()
+                .ForCtorParam(nameof(Destination.Value), o => o.MapFrom(s => s.Value == 5))
         );
 
     [Fact]

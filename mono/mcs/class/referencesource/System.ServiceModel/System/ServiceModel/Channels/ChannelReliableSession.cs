@@ -743,8 +743,9 @@ namespace System.ServiceModel.Channels
             {
                 SendReceiveReliableRequestor sendReceiveRequestor =
                     new SendReceiveReliableRequestor();
-                sendReceiveRequestor.TimeoutIsSafe =
-                    !this.ChannelSupportsOneCreateSequenceAttempt();
+                sendReceiveRequestor.TimeoutIsSafe = !this.ChannelSupportsOneCreateSequenceAttempt(
+
+                );
                 this.requestor = sendReceiveRequestor;
             }
             else

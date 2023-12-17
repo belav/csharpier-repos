@@ -309,8 +309,8 @@ namespace System.Web.Mvc.Html
             }
 
             foreach (
-                ModelMetadata propertyMetadata in modelMetadata.Properties.Where(
-                    pm => ShouldShow(pm, templateInfo)
+                ModelMetadata propertyMetadata in modelMetadata.Properties.Where(pm =>
+                    ShouldShow(pm, templateInfo)
                 )
             )
             {

@@ -21,8 +21,8 @@ public class EditFormTest
         services.AddAntiforgery();
         services.AddLogging();
         services.AddSingleton<ComponentStatePersistenceManager>();
-        services.AddSingleton(
-            services => services.GetRequiredService<ComponentStatePersistenceManager>().State
+        services.AddSingleton(services =>
+            services.GetRequiredService<ComponentStatePersistenceManager>().State
         );
         services.AddSingleton<AntiforgeryStateProvider, DefaultAntiforgeryStateProvider>();
         _testRenderer = new(services.BuildServiceProvider());

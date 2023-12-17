@@ -202,21 +202,20 @@ namespace ILCompiler.DependencyAnalysis
                 _inlinedThreadStatiscNode = new ThreadStaticsNode(_inlinedThreadStatics, this);
             }
 
-            _typeThreadStaticIndices = new NodeCache<
-                MetadataType,
-                TypeThreadStaticIndexNode
-            >(type =>
-            {
-                if (
-                    _inlinedThreadStatics.IsComputed()
-                    && _inlinedThreadStatics.GetOffsets().ContainsKey(type)
-                )
+            _typeThreadStaticIndices = new NodeCache<MetadataType, TypeThreadStaticIndexNode>(
+                type =>
                 {
-                    return new TypeThreadStaticIndexNode(type, _inlinedThreadStatiscNode);
-                }
+                    if (
+                        _inlinedThreadStatics.IsComputed()
+                        && _inlinedThreadStatics.GetOffsets().ContainsKey(type)
+                    )
+                    {
+                        return new TypeThreadStaticIndexNode(type, _inlinedThreadStatiscNode);
+                    }
 
-                return new TypeThreadStaticIndexNode(type, null);
-            });
+                    return new TypeThreadStaticIndexNode(type, null);
+                }
+            );
 
             _GCStaticEETypes = new NodeCache<GCPointerMap, GCStaticEETypeNode>(
                 (GCPointerMap gcMap) =>
@@ -291,13 +290,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _unboxingStubs = new NodeCache<MethodDesc, IMethodNode>(CreateUnboxingStubNode);
 
-            _methodAssociatedData = new NodeCache<
-                IMethodNode,
-                MethodAssociatedDataNode
-            >(methodNode =>
-            {
-                return new MethodAssociatedDataNode(methodNode);
-            });
+            _methodAssociatedData = new NodeCache<IMethodNode, MethodAssociatedDataNode>(
+                methodNode =>
+                {
+                    return new MethodAssociatedDataNode(methodNode);
+                }
+            );
 
             _fatFunctionPointers = new NodeCache<MethodKey, FatFunctionPointerNode>(method =>
             {
@@ -314,26 +312,24 @@ namespace ILCompiler.DependencyAnalysis
                 return new GenericVirtualMethodImplNode(method);
             });
 
-            _genericMethodEntries = new NodeCache<
-                MethodDesc,
-                GenericMethodsHashtableEntryNode
-            >(method =>
-            {
-                return new GenericMethodsHashtableEntryNode(method);
-            });
+            _genericMethodEntries = new NodeCache<MethodDesc, GenericMethodsHashtableEntryNode>(
+                method =>
+                {
+                    return new GenericMethodsHashtableEntryNode(method);
+                }
+            );
 
             _gvmTableEntries = new NodeCache<TypeDesc, TypeGVMEntriesNode>(type =>
             {
                 return new TypeGVMEntriesNode(type);
             });
 
-            _delegateTargetMethods = new NodeCache<
-                MethodDesc,
-                DelegateTargetVirtualMethodNode
-            >(method =>
-            {
-                return new DelegateTargetVirtualMethodNode(method);
-            });
+            _delegateTargetMethods = new NodeCache<MethodDesc, DelegateTargetVirtualMethodNode>(
+                method =>
+                {
+                    return new DelegateTargetVirtualMethodNode(method);
+                }
+            );
 
             _reflectedMethods = new NodeCache<MethodDesc, ReflectedMethodNode>(method =>
             {
@@ -428,26 +424,27 @@ namespace ILCompiler.DependencyAnalysis
                 );
             });
 
-            _frozenConstructedRuntimeTypeNodes = new NodeCache<
-                TypeDesc,
-                FrozenRuntimeTypeNode
-            >(key =>
-            {
-                return new FrozenRuntimeTypeNode(key, constructed: true);
-            });
+            _frozenConstructedRuntimeTypeNodes = new NodeCache<TypeDesc, FrozenRuntimeTypeNode>(
+                key =>
+                {
+                    return new FrozenRuntimeTypeNode(key, constructed: true);
+                }
+            );
 
             _frozenNecessaryRuntimeTypeNodes = new NodeCache<TypeDesc, FrozenRuntimeTypeNode>(key =>
             {
                 return new FrozenRuntimeTypeNode(key, constructed: false);
             });
 
-            _interfaceDispatchCells = new NodeCache<
-                DispatchCellKey,
-                InterfaceDispatchCellNode
-            >(callSiteCell =>
-            {
-                return new InterfaceDispatchCellNode(callSiteCell.Target, callSiteCell.CallsiteId);
-            });
+            _interfaceDispatchCells = new NodeCache<DispatchCellKey, InterfaceDispatchCellNode>(
+                callSiteCell =>
+                {
+                    return new InterfaceDispatchCellNode(
+                        callSiteCell.Target,
+                        callSiteCell.CallsiteId
+                    );
+                }
+            );
 
             _interfaceDispatchMaps = new NodeCache<TypeDesc, InterfaceDispatchMapNode>(
                 (TypeDesc type) =>
@@ -541,13 +538,12 @@ namespace ILCompiler.DependencyAnalysis
                 }
             );
 
-            _delegateMarshalingDataNodes = new NodeCache<
-                DefType,
-                DelegateMarshallingDataNode
-            >(type =>
-            {
-                return new DelegateMarshallingDataNode(type);
-            });
+            _delegateMarshalingDataNodes = new NodeCache<DefType, DelegateMarshallingDataNode>(
+                type =>
+                {
+                    return new DelegateMarshallingDataNode(type);
+                }
+            );
 
             _structMarshalingDataNodes = new NodeCache<DefType, StructMarshallingDataNode>(type =>
             {
@@ -595,13 +591,12 @@ namespace ILCompiler.DependencyAnalysis
                 return new ModuleMetadataNode(module);
             });
 
-            _inlineableStringResources = new NodeCache<
-                EcmaModule,
-                InlineableStringsResourceNode
-            >(module =>
-            {
-                return new InlineableStringsResourceNode(module);
-            });
+            _inlineableStringResources = new NodeCache<EcmaModule, InlineableStringsResourceNode>(
+                module =>
+                {
+                    return new InlineableStringsResourceNode(module);
+                }
+            );
 
             _customAttributesWithMetadata = new NodeCache<
                 ReflectableCustomAttribute,

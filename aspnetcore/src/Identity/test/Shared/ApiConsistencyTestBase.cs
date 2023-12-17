@@ -15,8 +15,8 @@ public abstract class ApiConsistencyTestBase
             where
                 type.IsVisible
                 && !type.IsSealed
-                && type.DeclaredConstructors.Any(
-                    c => c.IsPublic || c.IsFamily || c.IsFamilyOrAssembly
+                && type.DeclaredConstructors.Any(c =>
+                    c.IsPublic || c.IsFamily || c.IsFamilyOrAssembly
                 )
                 && type.Namespace != null
                 && !type.Namespace.EndsWith(".Compiled", StringComparison.Ordinal)

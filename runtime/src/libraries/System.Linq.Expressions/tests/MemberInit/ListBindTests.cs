@@ -370,12 +370,11 @@ namespace System.Linq.Expressions.Tests
                 typeof(ListWrapper<int>).GetProperty(nameof(ListWrapper<int>.ListProperty)),
                 Enumerable
                     .Range(0, 3)
-                    .Select(
-                        i =>
-                            Expression.ElementInit(
-                                typeof(List<int>).GetMethod("Add"),
-                                Expression.Constant(i)
-                            )
+                    .Select(i =>
+                        Expression.ElementInit(
+                            typeof(List<int>).GetMethod("Add"),
+                            Expression.Constant(i)
+                        )
                     )
             );
             Assert.NotSame(
@@ -399,12 +398,11 @@ namespace System.Linq.Expressions.Tests
                 typeof(ListWrapper<int>).GetProperty(nameof(ListWrapper<int>.ListProperty)),
                 Enumerable
                     .Range(0, 3)
-                    .Select(
-                        i =>
-                            Expression.ElementInit(
-                                typeof(List<int>).GetMethod("Add"),
-                                Expression.Constant(i)
-                            )
+                    .Select(i =>
+                        Expression.ElementInit(
+                            typeof(List<int>).GetMethod("Add"),
+                            Expression.Constant(i)
+                        )
                     )
             );
             Assert.NotSame(
@@ -430,12 +428,11 @@ namespace System.Linq.Expressions.Tests
                 typeof(ListWrapper<int>).GetProperty(nameof(ListWrapper<int>.ListProperty)),
                 Enumerable
                     .Range(0, 3)
-                    .Select(
-                        i =>
-                            Expression.ElementInit(
-                                typeof(List<int>).GetMethod("Add"),
-                                Expression.Constant(i)
-                            )
+                    .Select(i =>
+                        Expression.ElementInit(
+                            typeof(List<int>).GetMethod("Add"),
+                            Expression.Constant(i)
+                        )
                     )
             );
             AssertExtensions.Throws<ArgumentNullException>(
@@ -449,12 +446,11 @@ namespace System.Linq.Expressions.Tests
         {
             ElementInit[] initializers = Enumerable
                 .Range(0, 3)
-                .Select(
-                    i =>
-                        Expression.ElementInit(
-                            typeof(List<int>).GetMethod("Add"),
-                            Expression.Constant(i)
-                        )
+                .Select(i =>
+                    Expression.ElementInit(
+                        typeof(List<int>).GetMethod("Add"),
+                        Expression.Constant(i)
+                    )
                 )
                 .ToArray();
             MemberListBinding binding = Expression.ListBind(

@@ -201,8 +201,8 @@ namespace System.Composition.Hosting.Core
             if (_oversuppliedTargets != null)
             {
                 var list = Formatters.ReadableList(
-                    _oversuppliedTargets.Select(
-                        t => SR.Format(SR.Dependency_QuoteParameter, t.Origin)
+                    _oversuppliedTargets.Select(t =>
+                        SR.Format(SR.Dependency_QuoteParameter, t.Origin)
                     )
                 );
                 message.AppendFormat(SR.Dependency_TooManyExports, Contract, list);

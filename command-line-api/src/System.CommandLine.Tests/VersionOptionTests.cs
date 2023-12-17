@@ -105,8 +105,8 @@ namespace System.CommandLine.Tests
 
             result
                 .Errors.Should()
-                .Contain(
-                    e => e.Message == "--version option cannot be combined with other arguments."
+                .Contain(e =>
+                    e.Message == "--version option cannot be combined with other arguments."
                 );
         }
 
@@ -165,8 +165,8 @@ namespace System.CommandLine.Tests
 
             result
                 .Errors.Should()
-                .ContainSingle(
-                    e => e.Message == "-v option cannot be combined with other arguments."
+                .ContainSingle(e =>
+                    e.Message == "-v option cannot be combined with other arguments."
                 );
         }
     }

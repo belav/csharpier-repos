@@ -127,8 +127,8 @@ namespace System.Web.Razor.Parser
                 NextToken();
                 using (Context.StartBlock())
                 {
-                    IEnumerable<VBSymbol> syms = ReadWhile(
-                        sym => sym.Type == VBSymbolType.WhiteSpace
+                    IEnumerable<VBSymbol> syms = ReadWhile(sym =>
+                        sym.Type == VBSymbolType.WhiteSpace
                     );
                     if (At(VBSymbolType.Transition))
                     {

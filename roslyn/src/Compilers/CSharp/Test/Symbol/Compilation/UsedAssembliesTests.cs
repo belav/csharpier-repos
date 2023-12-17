@@ -137,30 +137,28 @@ public class C2
                 var comp2 = comp.RemoveAllReferences()
                     .AddReferences(
                         used.Concat(
-                            comp.References.Where(
-                                r => r.Properties.Kind == MetadataImageKind.Module
+                            comp.References.Where(r => r.Properties.Kind == MetadataImageKind.Module
                             )
                         )
                     );
 
                 if (
-                    !after.Any(
-                        d => ErrorFacts.GetSeverity((ErrorCode)d.Code) == DiagnosticSeverity.Error
+                    !after.Any(d =>
+                        ErrorFacts.GetSeverity((ErrorCode)d.Code) == DiagnosticSeverity.Error
                     )
                 )
                 {
                     CompileAndVerify(comp2, verify: Verification.Skipped)
-                        .Diagnostics.Where(
-                            d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion
+                        .Diagnostics.Where(d =>
+                            d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion
                         )
                         .Verify(after);
 
                     if (specificReferencesToAssert is object)
                     {
-                        var tryRemove = specificReferencesToAssert.Where(
-                            reference =>
-                                reference.Properties.Kind == MetadataImageKind.Assembly
-                                && !used.Contains(reference)
+                        var tryRemove = specificReferencesToAssert.Where(reference =>
+                            reference.Properties.Kind == MetadataImageKind.Assembly
+                            && !used.Contains(reference)
                         );
                         if (tryRemove.Count() > 1)
                         {
@@ -168,8 +166,8 @@ public class C2
                             {
                                 var comp3 = comp.RemoveReferences(reference);
                                 CompileAndVerify(comp3, verify: Verification.Skipped)
-                                    .Diagnostics.Where(
-                                        d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion
+                                    .Diagnostics.Where(d =>
+                                        d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion
                                     )
                                     .Verify(after);
                             }
@@ -523,10 +521,9 @@ public class C2
 
                 if (specificReferencesToAssert is object)
                 {
-                    var tryRemove = specificReferencesToAssert.Where(
-                        reference =>
-                            reference.Properties.Kind == MetadataImageKind.Assembly
-                            && !used.Contains(reference)
+                    var tryRemove = specificReferencesToAssert.Where(reference =>
+                        reference.Properties.Kind == MetadataImageKind.Assembly
+                        && !used.Contains(reference)
                     );
                     if (tryRemove.Count() > 1)
                     {
@@ -546,8 +543,7 @@ public class C2
                 var comp2 = comp.RemoveAllReferences()
                     .AddReferences(
                         used.Concat(
-                            comp.References.Where(
-                                r => r.Properties.Kind == MetadataImageKind.Module
+                            comp.References.Where(r => r.Properties.Kind == MetadataImageKind.Module
                             )
                         )
                     );

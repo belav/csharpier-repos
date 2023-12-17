@@ -41,8 +41,9 @@ namespace MonoTests.System.Windows.Forms
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetClipboardContentTestException()
         {
-            DataGridViewColumnHeaderClipboardCell cell =
-                new DataGridViewColumnHeaderClipboardCell();
+            DataGridViewColumnHeaderClipboardCell cell = new DataGridViewColumnHeaderClipboardCell(
+
+            );
 
             using (DataGridView dgv = new DataGridView())
             {

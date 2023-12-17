@@ -34,14 +34,13 @@ namespace System.Text.RegularExpressions.Tests
                     .GetRegexesAsync(
                         engine,
                         cases
-                            .Select(
-                                c =>
-                                    (
-                                        c.Pattern,
-                                        (CultureInfo?)null,
-                                        (RegexOptions?)c.Options,
-                                        (TimeSpan?)null
-                                    )
+                            .Select(c =>
+                                (
+                                    c.Pattern,
+                                    (CultureInfo?)null,
+                                    (RegexOptions?)c.Options,
+                                    (TimeSpan?)null
+                                )
                             )
                             .ToArray()
                     )
@@ -6796,33 +6795,32 @@ namespace System.Text.RegularExpressions.Tests
                 Task.WaitAll(
                     Enumerable
                         .Range(0, b.ParticipantCount)
-                        .Select(
-                            _ =>
-                                Task.Factory.StartNew(
-                                    () =>
+                        .Select(_ =>
+                            Task.Factory.StartNew(
+                                () =>
+                                {
+                                    b.SignalAndWait();
+                                    for (int i = 0; i < IterationsPerTask; i++)
                                     {
-                                        b.SignalAndWait();
-                                        for (int i = 0; i < IterationsPerTask; i++)
-                                        {
-                                            Match m = r.Match(Input);
-                                            Assert.NotNull(m);
-                                            Assert.True(m.Success);
-                                            Assert.Equal("abcdefghijklmnx", m.Value);
+                                        Match m = r.Match(Input);
+                                        Assert.NotNull(m);
+                                        Assert.True(m.Success);
+                                        Assert.Equal("abcdefghijklmnx", m.Value);
 
-                                            m = m.NextMatch();
-                                            Assert.NotNull(m);
-                                            Assert.True(m.Success);
-                                            Assert.Equal("nmlkjihgfedcbax", m.Value);
+                                        m = m.NextMatch();
+                                        Assert.NotNull(m);
+                                        Assert.True(m.Success);
+                                        Assert.Equal("nmlkjihgfedcbax", m.Value);
 
-                                            m = m.NextMatch();
-                                            Assert.NotNull(m);
-                                            Assert.False(m.Success);
-                                        }
-                                    },
-                                    CancellationToken.None,
-                                    TaskCreationOptions.LongRunning,
-                                    TaskScheduler.Default
-                                )
+                                        m = m.NextMatch();
+                                        Assert.NotNull(m);
+                                        Assert.False(m.Success);
+                                    }
+                                },
+                                CancellationToken.None,
+                                TaskCreationOptions.LongRunning,
+                                TaskScheduler.Default
+                            )
                         )
                         .ToArray()
                 );

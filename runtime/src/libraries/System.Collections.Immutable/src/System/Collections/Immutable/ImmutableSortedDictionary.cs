@@ -190,13 +190,10 @@ namespace System.Collections.Immutable
             return ImmutableSortedDictionary<TKey, TValue>
                 .Empty.WithComparers(keyComparer, valueComparer)
                 .AddRange(
-                    source.Select(
-                        element =>
-                            new KeyValuePair<TKey, TValue>(
-                                keySelector(element),
-                                elementSelector(element)
-                            )
-                    )
+                    source.Select(element => new KeyValuePair<TKey, TValue>(
+                        keySelector(element),
+                        elementSelector(element)
+                    ))
                 );
         }
 

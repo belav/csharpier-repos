@@ -98,8 +98,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 {
                     foreach (ArrayKind arrayKind in Enum.GetValues(typeof(ArrayKind)))
                     {
-                        var genericParamsConfigBuilder =
-                            ArrayBuilder<TypeNameConfig[]>.GetInstance();
+                        var genericParamsConfigBuilder = ArrayBuilder<TypeNameConfig[]>.GetInstance(
+
+                        );
                         genericParamsConfigBuilder.Add(null);
                         if (typeParamStackDepth < 2)
                         {
@@ -109,7 +110,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         }
 
                         foreach (
-                            var genericParamsConfig in genericParamsConfigBuilder.ToImmutableAndFree()
+                            var genericParamsConfig in genericParamsConfigBuilder.ToImmutableAndFree(
+
+                            )
                         )
                         {
                             builder.Add(

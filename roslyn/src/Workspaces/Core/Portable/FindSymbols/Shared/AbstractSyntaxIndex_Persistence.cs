@@ -159,10 +159,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             var directivesChecksum = s_ppDirectivesToChecksum.GetValue(
                 project.ParseOptions!,
-                static parseOptions =>
-                    new StrongBox<Checksum>(
-                        CodeAnalysis.Checksum.Create(parseOptions.PreprocessorSymbolNames)
-                    )
+                static parseOptions => new StrongBox<Checksum>(
+                    CodeAnalysis.Checksum.Create(parseOptions.PreprocessorSymbolNames)
+                )
             );
 
             var textChecksum = CodeAnalysis.Checksum.Create(

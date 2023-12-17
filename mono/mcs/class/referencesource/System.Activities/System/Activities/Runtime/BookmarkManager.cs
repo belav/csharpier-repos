@@ -129,8 +129,9 @@ namespace System.Activities.Runtime
                 return;
             }
 
-            List<ExclusiveHandle> handles =
-                owningInstance.PropertyManager.FindAll<ExclusiveHandle>();
+            List<ExclusiveHandle> handles = owningInstance.PropertyManager.FindAll<ExclusiveHandle>(
+
+            );
 
             if (handles == null)
             {

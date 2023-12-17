@@ -210,20 +210,19 @@ internal abstract partial class AbstractFullyQualifyService<TSimpleNameSyntax>
 
             var validSymbols = matchingTypes
                 .OfType<INamedTypeSymbol>()
-                .Where(
-                    s =>
-                        IsValidNamedTypeSearchResult(
-                            semanticModel,
-                            arity,
-                            inAttributeContext,
-                            looksGeneric,
-                            s
-                        )
-                        && s.IsEditorBrowsable(
-                            hideAdvancedMembers,
-                            semanticModel.Compilation,
-                            editorBrowserInfo
-                        )
+                .Where(s =>
+                    IsValidNamedTypeSearchResult(
+                        semanticModel,
+                        arity,
+                        inAttributeContext,
+                        looksGeneric,
+                        s
+                    )
+                    && s.IsEditorBrowsable(
+                        hideAdvancedMembers,
+                        semanticModel.Compilation,
+                        editorBrowserInfo
+                    )
                 )
                 .ToImmutableArray();
 
@@ -233,8 +232,8 @@ internal abstract partial class AbstractFullyQualifyService<TSimpleNameSyntax>
             var currentSymbolInfo = semanticModel.GetSymbolInfo(simpleName, cancellationToken);
             if (currentSymbolInfo.CandidateReason == CandidateReason.WrongArity)
             {
-                validSymbols = validSymbols.WhereAsArray(
-                    s => !currentSymbolInfo.CandidateSymbols.Contains(s)
+                validSymbols = validSymbols.WhereAsArray(s =>
+                    !currentSymbolInfo.CandidateSymbols.Contains(s)
                 );
             }
 
@@ -266,20 +265,15 @@ internal abstract partial class AbstractFullyQualifyService<TSimpleNameSyntax>
 
             return symbols
                 .OfType<INamespaceSymbol>()
-                .Where(
-                    n =>
-                        !n.IsGlobalNamespace
-                        && HasAccessibleTypes(n, semanticModel, cancellationToken)
+                .Where(n =>
+                    !n.IsGlobalNamespace && HasAccessibleTypes(n, semanticModel, cancellationToken)
                 )
-                .Select(
-                    n =>
-                        new SymbolResult(
-                            n,
-                            BindsWithoutErrors(n, rightName, isAttributeName)
-                                ? NamespaceWithNoErrorsWeight
-                                : NamespaceWithErrorsWeight
-                        )
-                )
+                .Select(n => new SymbolResult(
+                    n,
+                    BindsWithoutErrors(n, rightName, isAttributeName)
+                        ? NamespaceWithNoErrorsWeight
+                        : NamespaceWithErrorsWeight
+                ))
                 .ToImmutableArray();
         }
     }
@@ -457,8 +451,8 @@ internal abstract partial class AbstractFullyQualifyService<TSimpleNameSyntax>
     private static IEnumerable<SymbolResult> FilterAndSort(IEnumerable<SymbolResult> symbols) =>
         symbols
             .Distinct()
-            .Where(
-                n => n.Symbol is INamedTypeSymbol or INamespaceSymbol { IsGlobalNamespace: false }
+            .Where(n =>
+                n.Symbol is INamedTypeSymbol or INamespaceSymbol { IsGlobalNamespace: false }
             )
             .Order();
 }

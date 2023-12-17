@@ -552,8 +552,9 @@ namespace System.Web.Compilation
             property.Type = GetProfilePropertyType(typeName);
             property.Attributes = MemberAttributes.Public;
 
-            CodeAttributeDeclarationCollection collection =
-                new CodeAttributeDeclarationCollection();
+            CodeAttributeDeclarationCollection collection = new CodeAttributeDeclarationCollection(
+
+            );
             GetProfileProviderAttribute(ps, collection, pset.Provider);
             GetProfileSettingsSerializeAsAttribute(ps, collection, pset.SerializeAs);
 

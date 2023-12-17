@@ -77,8 +77,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
         )
         {
             var generator = editor.Generator;
-            var declaratorsByField = declarators.GroupBy(
-                g => g.FirstAncestorOrSelf<TFieldDeclarationSyntax>()!
+            var declaratorsByField = declarators.GroupBy(g =>
+                g.FirstAncestorOrSelf<TFieldDeclarationSyntax>()!
             );
 
             foreach (var fieldDeclarators in declaratorsByField)

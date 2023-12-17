@@ -767,8 +767,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         // This handles the quirks of creating integer primary keys using autoincrement, not default rowid behavior.
         if (operation.PrimaryKey?.Columns.Length == 1)
         {
-            var columnOp = operation.Columns.FirstOrDefault(
-                o => o.Name == operation.PrimaryKey.Columns[0]
+            var columnOp = operation.Columns.FirstOrDefault(o =>
+                o.Name == operation.PrimaryKey.Columns[0]
             );
             if (columnOp != null)
             {

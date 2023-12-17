@@ -1152,12 +1152,9 @@ namespace System.Security.Permissions
         {
             if (!CodeAccessSecurityEngine.QuickCheckForAllDemands())
             {
-                new FileIOPermission(
-                    access,
-                    fullPathList,
-                    checkForDuplicates,
-                    needFullPath
-                ).Demand();
+                new FileIOPermission(access, fullPathList, checkForDuplicates, needFullPath).Demand(
+
+                );
             }
             else
             {

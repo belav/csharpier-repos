@@ -116,7 +116,9 @@ namespace System.ServiceModel.Description
                                 serviceType
                             );
                             foreach (
-                                ContractDescription inheritedContract in contractDescription.GetInheritedContracts()
+                                ContractDescription inheritedContract in contractDescription.GetInheritedContracts(
+
+                                )
                             )
                             {
                                 UpdateContractDescriptionWithAttributesFromServiceType(

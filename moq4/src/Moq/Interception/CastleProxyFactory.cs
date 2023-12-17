@@ -428,8 +428,8 @@ namespace Moq
                     var implementedInterfaces = proxyType.GetInterfaces();
                     var candidateMethods = new HashSet<MethodInfo>();
                     foreach (
-                        var implementedInterface in implementedInterfaces.Where(
-                            i => declaringType.IsAssignableFrom(i)
+                        var implementedInterface in implementedInterfaces.Where(i =>
+                            declaringType.IsAssignableFrom(i)
                         )
                     )
                     {
@@ -471,8 +471,8 @@ namespace Moq
                         // Now we have a candidate override. We need to check if it is less specific than any others
                         // that we have already found earlier:
                         if (
-                            candidateMethods.Any(
-                                cm => implementedInterface.IsAssignableFrom(cm.DeclaringType)
+                            candidateMethods.Any(cm =>
+                                implementedInterface.IsAssignableFrom(cm.DeclaringType)
                             )
                         )
                             continue;
@@ -481,8 +481,7 @@ namespace Moq
                         // remove all less specific overrides from it:
                         candidateMethods.ExceptWith(
                             candidateMethods
-                                .Where(
-                                    cm => cm.DeclaringType.IsAssignableFrom(implementedInterface)
+                                .Where(cm => cm.DeclaringType.IsAssignableFrom(implementedInterface)
                                 )
                                 .ToArray()
                         );

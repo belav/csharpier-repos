@@ -1050,10 +1050,9 @@ class Test
                     .Single(s => s.Name.StartsWith("<Run>", StringComparison.Ordinal));
             IEnumerable<IGrouping<TypeSymbol, FieldSymbol>> spillFieldsByType = stateMachineClass
                 .GetMembers()
-                .Where(
-                    m =>
-                        m.Kind == SymbolKind.Field
-                        && m.Name.StartsWith("<>7__wrap", StringComparison.Ordinal)
+                .Where(m =>
+                    m.Kind == SymbolKind.Field
+                    && m.Name.StartsWith("<>7__wrap", StringComparison.Ordinal)
                 )
                 .Cast<FieldSymbol>()
                 .GroupBy(x => x.Type);
@@ -1062,13 +1061,12 @@ class Test
             Assert.Equal(
                 1,
                 spillFieldsByType
-                    .Single(
-                        x =>
-                            TypeSymbol.Equals(
-                                x.Key,
-                                comp.GetSpecialType(SpecialType.System_Int32),
-                                TypeCompareKind.ConsiderEverything2
-                            )
+                    .Single(x =>
+                        TypeSymbol.Equals(
+                            x.Key,
+                            comp.GetSpecialType(SpecialType.System_Int32),
+                            TypeCompareKind.ConsiderEverything2
+                        )
                     )
                     .Count()
             );

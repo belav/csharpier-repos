@@ -13,8 +13,9 @@ namespace Microsoft.CodeAnalysis.Host
 {
     internal class NoOpPersistentStorage : IChecksummedPersistentStorage
     {
-        private static readonly IChecksummedPersistentStorage Instance =
-            new NoOpPersistentStorage();
+        private static readonly IChecksummedPersistentStorage Instance = new NoOpPersistentStorage(
+
+        );
 
         private NoOpPersistentStorage() { }
 

@@ -760,8 +760,9 @@ namespace ILCompiler
                             );
                         }
 
-                        compositeImageSettings.PublicKey =
-                            compositeStrongNameKey.ToImmutableArray();
+                        compositeImageSettings.PublicKey = compositeStrongNameKey.ToImmutableArray(
+
+                        );
                     }
 
                     //

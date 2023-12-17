@@ -96,7 +96,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             >(CommitCharacterArrayComparer.Instance);
 
             var creationService =
-                document.Project.Solution.Services.GetRequiredService<ILspCompletionResultCreationService>();
+                document.Project.Solution.Services.GetRequiredService<ILspCompletionResultCreationService>(
+
+                );
             var completionService = document.GetRequiredLanguageService<CompletionService>();
 
             var defaultSpan = list.Span;

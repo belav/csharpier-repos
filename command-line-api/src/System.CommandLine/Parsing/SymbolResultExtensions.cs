@@ -12,8 +12,8 @@ namespace System.CommandLine.Parsing
             yield return commandResult;
 
             foreach (
-                var item in commandResult.Children.FlattenBreadthFirst(
-                    o => o.SymbolResultTree.GetChildren(o)
+                var item in commandResult.Children.FlattenBreadthFirst(o =>
+                    o.SymbolResultTree.GetChildren(o)
                 )
             )
             {

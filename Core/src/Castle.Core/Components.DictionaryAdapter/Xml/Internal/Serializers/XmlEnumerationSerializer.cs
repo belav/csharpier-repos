@@ -18,8 +18,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlEnumerationSerializer : XmlStringSerializer
     {
-        public static new readonly XmlEnumerationSerializer Instance =
-            new XmlEnumerationSerializer();
+        public static new readonly XmlEnumerationSerializer Instance = new XmlEnumerationSerializer(
+
+        );
 
         protected XmlEnumerationSerializer() { }
 

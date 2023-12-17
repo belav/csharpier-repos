@@ -83,30 +83,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
                 .Returns(ImmutableArray<string>.Empty);
             installerServiceMock.Setup(i => i.TryGetPackageSources()).Returns(packageSources);
             installerServiceMock
-                .Setup(
-                    s =>
-                        s.TryInstallPackageAsync(
-                            It.IsAny<Workspace>(),
-                            It.IsAny<DocumentId>(),
-                            It.IsAny<string>(),
-                            "NuGetPackage",
-                            It.IsAny<string>(),
-                            It.IsAny<bool>(),
-                            It.IsAny<IProgress<CodeAnalysisProgress>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.TryInstallPackageAsync(
+                        It.IsAny<Workspace>(),
+                        It.IsAny<DocumentId>(),
+                        It.IsAny<string>(),
+                        "NuGetPackage",
+                        It.IsAny<string>(),
+                        It.IsAny<bool>(),
+                        It.IsAny<IProgress<CodeAnalysisProgress>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(Task.FromResult(true));
 
             var packageServiceMock = new Mock<ISymbolSearchService>(MockBehavior.Strict);
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindReferenceAssembliesWithTypeAsync(
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindReferenceAssembliesWithTypeAsync(
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -115,14 +113,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
                         )
                 );
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindPackagesWithTypeAsync(
-                            PackageSourceHelper.NugetOrgSourceName,
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindPackagesWithTypeAsync(
+                        PackageSourceHelper.NugetOrgSourceName,
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -168,30 +165,28 @@ class C
                 .Returns(ImmutableArray<string>.Empty);
             installerServiceMock.Setup(i => i.TryGetPackageSources()).Returns(packageSources);
             installerServiceMock
-                .Setup(
-                    s =>
-                        s.TryInstallPackageAsync(
-                            It.IsAny<Workspace>(),
-                            It.IsAny<DocumentId>(),
-                            It.IsAny<string>(),
-                            "NuGetPackage",
-                            It.IsAny<string>(),
-                            It.IsAny<bool>(),
-                            It.IsAny<IProgress<CodeAnalysisProgress>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.TryInstallPackageAsync(
+                        It.IsAny<Workspace>(),
+                        It.IsAny<DocumentId>(),
+                        It.IsAny<string>(),
+                        "NuGetPackage",
+                        It.IsAny<string>(),
+                        It.IsAny<bool>(),
+                        It.IsAny<IProgress<CodeAnalysisProgress>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(Task.FromResult(true));
 
             var packageServiceMock = new Mock<ISymbolSearchService>(MockBehavior.Strict);
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindReferenceAssembliesWithTypeAsync(
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindReferenceAssembliesWithTypeAsync(
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -200,14 +195,13 @@ class C
                         )
                 );
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindPackagesWithTypeAsync(
-                            "nuget.org",
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindPackagesWithTypeAsync(
+                        "nuget.org",
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -249,30 +243,28 @@ class C
                 .Returns(ImmutableArray<string>.Empty);
             installerServiceMock.Setup(i => i.TryGetPackageSources()).Returns(NugetPackageSources);
             installerServiceMock
-                .Setup(
-                    s =>
-                        s.TryInstallPackageAsync(
-                            It.IsAny<Workspace>(),
-                            It.IsAny<DocumentId>(),
-                            It.IsAny<string>(),
-                            "NuGetPackage",
-                            It.IsAny<string>(),
-                            It.IsAny<bool>(),
-                            It.IsAny<IProgress<CodeAnalysisProgress>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.TryInstallPackageAsync(
+                        It.IsAny<Workspace>(),
+                        It.IsAny<DocumentId>(),
+                        It.IsAny<string>(),
+                        "NuGetPackage",
+                        It.IsAny<string>(),
+                        It.IsAny<bool>(),
+                        It.IsAny<IProgress<CodeAnalysisProgress>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(SpecializedTasks.True);
 
             var packageServiceMock = new Mock<ISymbolSearchService>(MockBehavior.Strict);
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindReferenceAssembliesWithTypeAsync(
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindReferenceAssembliesWithTypeAsync(
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -281,14 +273,13 @@ class C
                         )
                 );
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindPackagesWithTypeAsync(
-                            PackageSourceHelper.NugetOrgSourceName,
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindPackagesWithTypeAsync(
+                        PackageSourceHelper.NugetOrgSourceName,
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -330,30 +321,28 @@ class C
                 .Returns(ImmutableArray<string>.Empty);
             installerServiceMock.Setup(i => i.TryGetPackageSources()).Returns(NugetPackageSources);
             installerServiceMock
-                .Setup(
-                    s =>
-                        s.TryInstallPackageAsync(
-                            It.IsAny<Workspace>(),
-                            It.IsAny<DocumentId>(),
-                            It.IsAny<string>(),
-                            "NuGetPackage",
-                            It.IsAny<string>(),
-                            It.IsAny<bool>(),
-                            It.IsAny<IProgress<CodeAnalysisProgress>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.TryInstallPackageAsync(
+                        It.IsAny<Workspace>(),
+                        It.IsAny<DocumentId>(),
+                        It.IsAny<string>(),
+                        "NuGetPackage",
+                        It.IsAny<string>(),
+                        It.IsAny<bool>(),
+                        It.IsAny<IProgress<CodeAnalysisProgress>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(SpecializedTasks.True);
 
             var packageServiceMock = new Mock<ISymbolSearchService>(MockBehavior.Strict);
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindReferenceAssembliesWithTypeAsync(
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindReferenceAssembliesWithTypeAsync(
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -362,14 +351,13 @@ class C
                         )
                 );
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindPackagesWithTypeAsync(
-                            PackageSourceHelper.NugetOrgSourceName,
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindPackagesWithTypeAsync(
+                        PackageSourceHelper.NugetOrgSourceName,
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -410,13 +398,12 @@ class C
 
             var packageServiceMock = new Mock<ISymbolSearchService>(MockBehavior.Strict);
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindReferenceAssembliesWithTypeAsync(
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindReferenceAssembliesWithTypeAsync(
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -425,14 +412,13 @@ class C
                         )
                 );
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindPackagesWithTypeAsync(
-                            PackageSourceHelper.NugetOrgSourceName,
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindPackagesWithTypeAsync(
+                        PackageSourceHelper.NugetOrgSourceName,
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -466,23 +452,13 @@ class C
                 .Setup(i => i.IsInstalled(It.IsAny<ProjectId>(), "NuGetPackage"))
                 .Returns(false);
             installerServiceMock
-                .Setup(
-                    i =>
-                        i.GetProjectsWithInstalledPackage(
-                            It.IsAny<Solution>(),
-                            "NuGetPackage",
-                            "1.0"
-                        )
+                .Setup(i =>
+                    i.GetProjectsWithInstalledPackage(It.IsAny<Solution>(), "NuGetPackage", "1.0")
                 )
                 .Returns(ImmutableArray<Project>.Empty);
             installerServiceMock
-                .Setup(
-                    i =>
-                        i.GetProjectsWithInstalledPackage(
-                            It.IsAny<Solution>(),
-                            "NuGetPackage",
-                            "2.0"
-                        )
+                .Setup(i =>
+                    i.GetProjectsWithInstalledPackage(It.IsAny<Solution>(), "NuGetPackage", "2.0")
                 )
                 .Returns(ImmutableArray<Project>.Empty);
             installerServiceMock.Setup(i => i.TryGetPackageSources()).Returns(NugetPackageSources);
@@ -492,13 +468,12 @@ class C
 
             var packageServiceMock = new Mock<ISymbolSearchService>(MockBehavior.Strict);
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindReferenceAssembliesWithTypeAsync(
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindReferenceAssembliesWithTypeAsync(
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -507,14 +482,13 @@ class C
                         )
                 );
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindPackagesWithTypeAsync(
-                            PackageSourceHelper.NugetOrgSourceName,
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindPackagesWithTypeAsync(
+                        PackageSourceHelper.NugetOrgSourceName,
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -567,30 +541,28 @@ class C
                 .Returns(ImmutableArray<string>.Empty);
             installerServiceMock.Setup(i => i.TryGetPackageSources()).Returns(NugetPackageSources);
             installerServiceMock
-                .Setup(
-                    s =>
-                        s.TryInstallPackageAsync(
-                            It.IsAny<Workspace>(),
-                            It.IsAny<DocumentId>(),
-                            It.IsAny<string>(),
-                            "NuGetPackage", /*versionOpt*/
-                            null,
-                            It.IsAny<bool>(),
-                            It.IsAny<IProgress<CodeAnalysisProgress>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.TryInstallPackageAsync(
+                        It.IsAny<Workspace>(),
+                        It.IsAny<DocumentId>(),
+                        It.IsAny<string>(),
+                        "NuGetPackage", /*versionOpt*/
+                        null,
+                        It.IsAny<bool>(),
+                        It.IsAny<IProgress<CodeAnalysisProgress>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(SpecializedTasks.True);
 
             var packageServiceMock = new Mock<ISymbolSearchService>(MockBehavior.Strict);
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindReferenceAssembliesWithTypeAsync(
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindReferenceAssembliesWithTypeAsync(
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -599,14 +571,13 @@ class C
                         )
                 );
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindPackagesWithTypeAsync(
-                            PackageSourceHelper.NugetOrgSourceName,
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindPackagesWithTypeAsync(
+                        PackageSourceHelper.NugetOrgSourceName,
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -645,13 +616,8 @@ class C
                 .Setup(i => i.IsInstalled(It.IsAny<ProjectId>(), "NuGetPackage"))
                 .Returns(false);
             installerServiceMock
-                .Setup(
-                    i =>
-                        i.GetProjectsWithInstalledPackage(
-                            It.IsAny<Solution>(),
-                            "NuGetPackage",
-                            "1.0"
-                        )
+                .Setup(i =>
+                    i.GetProjectsWithInstalledPackage(It.IsAny<Solution>(), "NuGetPackage", "1.0")
                 )
                 .Returns(ImmutableArray<Project>.Empty);
             installerServiceMock.Setup(i => i.TryGetPackageSources()).Returns(NugetPackageSources);
@@ -659,30 +625,28 @@ class C
                 .Setup(s => s.GetInstalledVersions("NuGetPackage"))
                 .Returns(ImmutableArray.Create("1.0"));
             installerServiceMock
-                .Setup(
-                    s =>
-                        s.TryInstallPackageAsync(
-                            It.IsAny<Workspace>(),
-                            It.IsAny<DocumentId>(),
-                            It.IsAny<string>(),
-                            "NuGetPackage",
-                            "1.0",
-                            It.IsAny<bool>(),
-                            It.IsAny<IProgress<CodeAnalysisProgress>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.TryInstallPackageAsync(
+                        It.IsAny<Workspace>(),
+                        It.IsAny<DocumentId>(),
+                        It.IsAny<string>(),
+                        "NuGetPackage",
+                        "1.0",
+                        It.IsAny<bool>(),
+                        It.IsAny<IProgress<CodeAnalysisProgress>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(SpecializedTasks.True);
 
             var packageServiceMock = new Mock<ISymbolSearchService>(MockBehavior.Strict);
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindReferenceAssembliesWithTypeAsync(
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindReferenceAssembliesWithTypeAsync(
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -691,14 +655,13 @@ class C
                         )
                 );
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindPackagesWithTypeAsync(
-                            PackageSourceHelper.NugetOrgSourceName,
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindPackagesWithTypeAsync(
+                        PackageSourceHelper.NugetOrgSourceName,
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -737,13 +700,8 @@ class C
                 .Setup(i => i.IsInstalled(It.IsAny<ProjectId>(), "NuGetPackage"))
                 .Returns(false);
             installerServiceMock
-                .Setup(
-                    i =>
-                        i.GetProjectsWithInstalledPackage(
-                            It.IsAny<Solution>(),
-                            "NuGetPackage",
-                            "1.0"
-                        )
+                .Setup(i =>
+                    i.GetProjectsWithInstalledPackage(It.IsAny<Solution>(), "NuGetPackage", "1.0")
                 )
                 .Returns(ImmutableArray<Project>.Empty);
             installerServiceMock.Setup(i => i.TryGetPackageSources()).Returns(NugetPackageSources);
@@ -751,30 +709,28 @@ class C
                 .Setup(s => s.GetInstalledVersions("NuGetPackage"))
                 .Returns(ImmutableArray.Create("1.0"));
             installerServiceMock
-                .Setup(
-                    s =>
-                        s.TryInstallPackageAsync(
-                            It.IsAny<Workspace>(),
-                            It.IsAny<DocumentId>(),
-                            It.IsAny<string>(),
-                            "NuGetPackage",
-                            "1.0",
-                            It.IsAny<bool>(),
-                            It.IsAny<IProgress<CodeAnalysisProgress>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.TryInstallPackageAsync(
+                        It.IsAny<Workspace>(),
+                        It.IsAny<DocumentId>(),
+                        It.IsAny<string>(),
+                        "NuGetPackage",
+                        "1.0",
+                        It.IsAny<bool>(),
+                        It.IsAny<IProgress<CodeAnalysisProgress>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(SpecializedTasks.False);
 
             var packageServiceMock = new Mock<ISymbolSearchService>(MockBehavior.Strict);
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindReferenceAssembliesWithTypeAsync(
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindReferenceAssembliesWithTypeAsync(
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -783,14 +739,13 @@ class C
                         )
                 );
             packageServiceMock
-                .Setup(
-                    s =>
-                        s.FindPackagesWithTypeAsync(
-                            PackageSourceHelper.NugetOrgSourceName,
-                            "NuGetType",
-                            0,
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(s =>
+                    s.FindPackagesWithTypeAsync(
+                        PackageSourceHelper.NugetOrgSourceName,
+                        "NuGetType",
+                        0,
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>

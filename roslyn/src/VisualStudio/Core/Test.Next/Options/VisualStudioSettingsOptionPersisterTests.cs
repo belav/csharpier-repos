@@ -180,7 +180,9 @@ public class VisualStudioSettingsOptionPersisterTests
     public void SettingsChangeEvent()
     {
         var exportProvider =
-            VisualStudioTestCompositions.LanguageServices.ExportProviderFactory.CreateExportProvider();
+            VisualStudioTestCompositions.LanguageServices.ExportProviderFactory.CreateExportProvider(
+
+            );
         var fallbacks = exportProvider
             .GetExports<IVisualStudioStorageReadFallback, OptionNameMetadata>()
             .ToImmutableDictionary(item => item.Metadata.ConfigName, item => item);

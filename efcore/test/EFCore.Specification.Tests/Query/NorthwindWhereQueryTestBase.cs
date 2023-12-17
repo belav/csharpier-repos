@@ -314,8 +314,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c => c.City == new City { InstanceFieldValue = "London" }.InstanceFieldValue
+                    .Where(c =>
+                        c.City == new City { InstanceFieldValue = "London" }.InstanceFieldValue
                     )
         );
 
@@ -323,9 +323,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.City == new City { InstanceFieldValue = "Seattle" }.InstanceFieldValue
+                    .Where(c =>
+                        c.City == new City { InstanceFieldValue = "Seattle" }.InstanceFieldValue
                     )
         );
     }
@@ -541,10 +540,9 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
                         ss.Set<Customer>()
                             .OrderBy(c1 => c1.CustomerID)
                             .Take(5)
-                            .Where(
-                                c1 =>
-                                    ss.Set<Customer>()
-                                        .Any(c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon)
+                            .Where(c1 =>
+                                ss.Set<Customer>()
+                                    .Any(c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon)
                             )
                 )
         );
@@ -582,10 +580,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
                     async,
                     ss =>
                         ss.Set<Customer>()
-                            .Where(
-                                c =>
-                                    c.CustomerID != "ALFKI"
-                                    == (c.IsLondon && c.CustomerID != "AROUT")
+                            .Where(c =>
+                                c.CustomerID != "ALFKI" == (c.IsLondon && c.CustomerID != "AROUT")
                             )
                 ),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))
@@ -600,13 +596,12 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
                     async,
                     ss =>
                         ss.Set<Customer>()
-                            .Where(
-                                c =>
-                                    c.CustomerID != "ALFKI"
-                                    && (
-                                        c.CustomerID == "MAUMAR"
-                                        || (c.CustomerID != "AROUT" && c.IsLondon)
-                                    )
+                            .Where(c =>
+                                c.CustomerID != "ALFKI"
+                                && (
+                                    c.CustomerID == "MAUMAR"
+                                    || (c.CustomerID != "AROUT" && c.IsLondon)
+                                )
                             )
                 ),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))
@@ -1495,10 +1490,9 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Product>()
-                    .Where(
-                        p =>
-                            p.ProductID < productId
-                            && (flag ? p.UnitsInStock >= 20 : p.UnitsInStock < 20)
+                    .Where(p =>
+                        p.ProductID < productId
+                        && (flag ? p.UnitsInStock >= 20 : p.UnitsInStock < 20)
                     )
         );
     }
@@ -1544,8 +1538,7 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c => new { x = c.City, y = c.Country } == new { x = "London", y = "UK" }
+                    .Where(c => new { x = c.City, y = c.Country } == new { x = "London", y = "UK" }
                     ),
             ss => ss.Set<Customer>().Where(c => c.City == "London" && c.Country == "UK")
         );
@@ -1578,10 +1571,9 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new Tuple<string, string>(c.City, c.Country)
-                            == new Tuple<string, string>("London", "UK")
+                    .Where(c =>
+                        new Tuple<string, string>(c.City, c.Country)
+                        == new Tuple<string, string>("London", "UK")
                     ),
             ss => ss.Set<Customer>().Where(c => c.City == "London" && c.Country == "UK")
         );
@@ -1593,10 +1585,9 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new Tuple<string, string>(c.City, c.Country)
-                            != new Tuple<string, string>("London", "UK")
+                    .Where(c =>
+                        new Tuple<string, string>(c.City, c.Country)
+                        != new Tuple<string, string>("London", "UK")
                     ),
             ss => ss.Set<Customer>().Where(c => c.City != "London" || c.Country != "UK")
         );
@@ -1716,18 +1707,17 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<OrderDetail>()
-                    .Where(
-                        od =>
-                            ss.Set<Product>()
-                                .OrderBy(p => p.ProductID)
-                                .Take(1)
-                                .Select(p => p.ProductID)
-                                .Contains(od.ProductID)
-                            || ss.Set<Order>()
-                                .OrderBy(o => o.OrderID)
-                                .Take(1)
-                                .Select(o => o.OrderID)
-                                .Contains(od.OrderID)
+                    .Where(od =>
+                        ss.Set<Product>()
+                            .OrderBy(p => p.ProductID)
+                            .Take(1)
+                            .Select(p => p.ProductID)
+                            .Contains(od.ProductID)
+                        || ss.Set<Order>()
+                            .OrderBy(o => o.OrderID)
+                            .Take(1)
+                            .Select(o => o.OrderID)
+                            .Contains(od.OrderID)
                     )
         );
 
@@ -1738,18 +1728,17 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<OrderDetail>()
-                    .Where(
-                        od =>
-                            ss.Set<Product>()
-                                .OrderBy(p => p.ProductID)
-                                .Take(20)
-                                .Select(p => p.ProductID)
-                                .Contains(od.ProductID)
-                            && ss.Set<Order>()
-                                .OrderBy(o => o.OrderID)
-                                .Take(10)
-                                .Select(o => o.OrderID)
-                                .Contains(od.OrderID)
+                    .Where(od =>
+                        ss.Set<Product>()
+                            .OrderBy(p => p.ProductID)
+                            .Take(20)
+                            .Select(p => p.ProductID)
+                            .Contains(od.ProductID)
+                        && ss.Set<Order>()
+                            .OrderBy(o => o.OrderID)
+                            .Take(10)
+                            .Select(o => o.OrderID)
+                            .Contains(od.OrderID)
                     )
         );
 
@@ -1778,10 +1767,9 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.Orders.OrderBy(o => o.OrderID).FirstOrDefault()
-                            == new Order { OrderID = 10276 }
+                    .Where(c =>
+                        c.Orders.OrderBy(o => o.OrderID).FirstOrDefault()
+                        == new Order { OrderID = 10276 }
                     ),
             ss =>
                 ss.Set<Customer>()
@@ -1875,13 +1863,12 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            ss.Set<Order>()
-                                .Where(o => o.CustomerID == "John Doe")
-                                .Select(o => o.CustomerID)
-                                .FirstOrDefault()
-                                .Length == 0
+                    .Where(c =>
+                        ss.Set<Order>()
+                            .Where(o => o.CustomerID == "John Doe")
+                            .Select(o => o.CustomerID)
+                            .FirstOrDefault()
+                            .Length == 0
                     ),
             ss => ss.Set<Customer>().Where(c => false),
             assertEmpty: true
@@ -1941,12 +1928,11 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Select(
-                        c =>
-                            ss.Set<Order>()
-                                .Where(o => o.CustomerID == c.CustomerID)
-                                .Select(o => o.CustomerID)
-                                .ToList()
+                    .Select(c =>
+                        ss.Set<Order>()
+                            .Where(o => o.CustomerID == c.CustomerID)
+                            .Select(o => o.CustomerID)
+                            .ToList()
                     )
                     .Where(e => e.Contains("ALFKI"))
         );
@@ -1972,12 +1958,11 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Select(
-                        c =>
-                            ss.Set<Order>()
-                                .Where(o => o.CustomerID == c.CustomerID)
-                                .Select(o => o.CustomerID)
-                                .ToArray()
+                    .Select(c =>
+                        ss.Set<Order>()
+                            .Where(o => o.CustomerID == c.CustomerID)
+                            .Select(o => o.CustomerID)
+                            .ToArray()
                     )
                     .Where(e => e.Contains("ALFKI"))
         );
@@ -1990,8 +1975,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             ss =>
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
-                    .Select(
-                        c => ss.Set<Order>().Where(o => o.CustomerID == c.CustomerID).AsEnumerable()
+                    .Select(c =>
+                        ss.Set<Order>().Where(o => o.CustomerID == c.CustomerID).AsEnumerable()
                     )
                     .Where(e => e.Count() == 0),
             assertOrder: true,
@@ -2005,12 +1990,11 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Select(
-                        c =>
-                            ss.Set<Order>()
-                                .Where(o => o.CustomerID == c.CustomerID)
-                                .Select(o => o.CustomerID)
-                                .AsEnumerable()
+                    .Select(c =>
+                        ss.Set<Order>()
+                            .Where(o => o.CustomerID == c.CustomerID)
+                            .Select(o => o.CustomerID)
+                            .AsEnumerable()
                     )
                     .Where(e => e.Contains("ALFKI"))
         );
@@ -2022,17 +2006,14 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Select(
-                        c =>
-                            new
-                            {
-                                c.CustomerID,
-                                Subquery = ss.Set<Order>()
-                                    .Where(o => o.CustomerID == c.CustomerID)
-                                    .Select(o => o.CustomerID)
-                                    .AsEnumerable()
-                            }
-                    )
+                    .Select(c => new
+                    {
+                        c.CustomerID,
+                        Subquery = ss.Set<Order>()
+                            .Where(o => o.CustomerID == c.CustomerID)
+                            .Select(o => o.CustomerID)
+                            .AsEnumerable()
+                    })
                     .Where(e => !e.Subquery.Contains("ALFKI")),
             elementSorter: e => e.CustomerID,
             elementAsserter: (e, a) => AssertCollection(e.Subquery, a.Subquery)
@@ -2209,12 +2190,11 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.CustomerID == "ALFKI"
-                            || c.CustomerID == "ANATR"
-                            || c.CustomerID == "ANTON"
-                            || c.CustomerID == "ANATR"
+                    .Where(c =>
+                        c.CustomerID == "ALFKI"
+                        || c.CustomerID == "ANATR"
+                        || c.CustomerID == "ANTON"
+                        || c.CustomerID == "ANATR"
                     )
         );
 
@@ -2227,12 +2207,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.Region == "WA"
-                            || c.Region == "OR"
-                            || c.Region == null
-                            || c.Region == "BC"
+                    .Where(c =>
+                        c.Region == "WA" || c.Region == "OR" || c.Region == null || c.Region == "BC"
                     )
         );
 
@@ -2245,10 +2221,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID)
-                            || c.CustomerID == "ANTON"
+                    .Where(c =>
+                        new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID) || c.CustomerID == "ANTON"
                     )
         );
 
@@ -2261,11 +2235,10 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.CustomerID == "ANTON"
-                            || new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID)
-                            || c.CustomerID == "ALFKI"
+                    .Where(c =>
+                        c.CustomerID == "ANTON"
+                        || new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID)
+                        || c.CustomerID == "ALFKI"
                     )
         );
 
@@ -2278,10 +2251,9 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID)
-                            || new[] { "ALFKI", "ANTON" }.Contains(c.CustomerID)
+                    .Where(c =>
+                        new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID)
+                        || new[] { "ALFKI", "ANTON" }.Contains(c.CustomerID)
                     )
         );
 
@@ -2294,10 +2266,9 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            !new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID)
-                            && !new[] { "ALFKI", "ANTON" }.Contains(c.CustomerID)
+                    .Where(c =>
+                        !new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID)
+                        && !new[] { "ALFKI", "ANTON" }.Contains(c.CustomerID)
                     )
         );
 
@@ -2313,8 +2284,7 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c => c.CustomerID != prm1 && c.CustomerID != prm2 && c.CustomerID != prm3
+                    .Where(c => c.CustomerID != prm1 && c.CustomerID != prm2 && c.CustomerID != prm3
                     )
         );
     }
@@ -2332,8 +2302,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c => new[] { prm1, prm2 }.Contains(c.CustomerID) || c.CustomerID == "ANTON"
+                    .Where(c =>
+                        new[] { prm1, prm2 }.Contains(c.CustomerID) || c.CustomerID == "ANTON"
                     )
         );
     }
@@ -2350,12 +2320,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.Region == "WA"
-                            || c.Region == "OR"
-                            || c.Region == prm
-                            || c.Region == "BC"
+                    .Where(c =>
+                        c.Region == "WA" || c.Region == "OR" || c.Region == prm || c.Region == "BC"
                     )
         );
     }
@@ -2388,11 +2354,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.CustomerID == prm1
-                            || array.Contains(c.CustomerID)
-                            || c.CustomerID == prm2
+                    .Where(c =>
+                        c.CustomerID == prm1 || array.Contains(c.CustomerID) || c.CustomerID == prm2
                     )
         );
     }
@@ -2404,10 +2367,9 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID)
-                            && (c.CustomerID == "ANATR" || c.CustomerID == "ANTON")
+                    .Where(c =>
+                        new[] { "ALFKI", "ANATR" }.Contains(c.CustomerID)
+                        && (c.CustomerID == "ANATR" || c.CustomerID == "ANTON")
                     )
         );
 
@@ -2418,10 +2380,9 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            (c.Region != "WA" && c.Region != "OR" && c.Region != null)
-                            || (c.Region != "WA" && c.Region != null)
+                    .Where(c =>
+                        (c.Region != "WA" && c.Region != "OR" && c.Region != null)
+                        || (c.Region != "WA" && c.Region != null)
                     )
         );
 
@@ -2575,8 +2536,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
                     .Where(c => c.Orders.Select(o => new { o.OrderID }).ElementAt(3) != null),
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c => c.Orders.Select(o => new { o.OrderID }).ElementAtOrDefault(3) != null
+                    .Where(c =>
+                        c.Orders.Select(o => new { o.OrderID }).ElementAtOrDefault(3) != null
                     )
         );
 
@@ -2587,13 +2548,13 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c => c.Orders.Select(o => new { o.OrderID }).ElementAtOrDefault(7) == null
+                    .Where(c =>
+                        c.Orders.Select(o => new { o.OrderID }).ElementAtOrDefault(7) == null
                     ),
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c => c.Orders.Select(o => new { o.OrderID }).ElementAtOrDefault(7) == null
+                    .Where(c =>
+                        c.Orders.Select(o => new { o.OrderID }).ElementAtOrDefault(7) == null
                     )
         );
 

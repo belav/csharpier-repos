@@ -116,8 +116,8 @@ public abstract partial class ModelBuilderTest
                 .Entity<Product>()
                 .HasMany(p => p.Categories)
                 .WithMany(c => c.Products)
-                .UsingEntity<ProductCategory>(
-                    pcb => pcb.HasKey(pc => new { pc.ProductId, pc.CategoryId })
+                .UsingEntity<ProductCategory>(pcb =>
+                    pcb.HasKey(pc => new { pc.ProductId, pc.CategoryId })
                 );
 
             var productType = model.FindEntityType(typeof(Product))!;
@@ -335,8 +335,8 @@ public abstract partial class ModelBuilderTest
                 .Entity<Product>()
                 .HasMany(p => p.Categories)
                 .WithMany(c => c.Products)
-                .UsingEntity<ProductCategory>(
-                    pcb => pcb.HasKey(pc => new { pc.ProductId, pc.CategoryId })
+                .UsingEntity<ProductCategory>(pcb =>
+                    pcb.HasKey(pc => new { pc.ProductId, pc.CategoryId })
                 );
 
             Assert.Equal(typeof(Product), manyToMany.Metadata.ClrType);

@@ -49,90 +49,72 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 // Metadata references
                 var addedMetadataReferenceChanges = projectChanges
                     .GetAddedMetadataReferences()
-                    .Select(
-                        r =>
-                            new MetadataReferenceChange(
-                                r,
-                                projectId,
-                                projectName,
-                                isAdded: true,
-                                engine: engine
-                            )
-                    );
+                    .Select(r => new MetadataReferenceChange(
+                        r,
+                        projectId,
+                        projectName,
+                        isAdded: true,
+                        engine: engine
+                    ));
                 builder.AddRange(addedMetadataReferenceChanges);
 
                 var removedMetadataReferenceChanges = projectChanges
                     .GetRemovedMetadataReferences()
-                    .Select(
-                        r =>
-                            new MetadataReferenceChange(
-                                r,
-                                projectId,
-                                projectName,
-                                isAdded: false,
-                                engine: engine
-                            )
-                    );
+                    .Select(r => new MetadataReferenceChange(
+                        r,
+                        projectId,
+                        projectName,
+                        isAdded: false,
+                        engine: engine
+                    ));
                 builder.AddRange(removedMetadataReferenceChanges);
 
                 // Project references
                 var addedProjectReferenceChanges = projectChanges
                     .GetAddedProjectReferences()
-                    .Select(
-                        r =>
-                            new ProjectReferenceChange(
-                                r,
-                                newSolution.GetProject(r.ProjectId).Name,
-                                projectId,
-                                projectName,
-                                isAdded: true,
-                                engine: engine
-                            )
-                    );
+                    .Select(r => new ProjectReferenceChange(
+                        r,
+                        newSolution.GetProject(r.ProjectId).Name,
+                        projectId,
+                        projectName,
+                        isAdded: true,
+                        engine: engine
+                    ));
                 builder.AddRange(addedProjectReferenceChanges);
 
                 var removedProjectReferenceChanges = projectChanges
                     .GetRemovedProjectReferences()
-                    .Select(
-                        r =>
-                            new ProjectReferenceChange(
-                                r,
-                                oldSolution.GetProject(r.ProjectId).Name,
-                                projectId,
-                                projectName,
-                                isAdded: false,
-                                engine: engine
-                            )
-                    );
+                    .Select(r => new ProjectReferenceChange(
+                        r,
+                        oldSolution.GetProject(r.ProjectId).Name,
+                        projectId,
+                        projectName,
+                        isAdded: false,
+                        engine: engine
+                    ));
                 builder.AddRange(removedProjectReferenceChanges);
 
                 // Analyzer references
                 var addedAnalyzerReferenceChanges = projectChanges
                     .GetAddedAnalyzerReferences()
-                    .Select(
-                        r =>
-                            new AnalyzerReferenceChange(
-                                r,
-                                projectId,
-                                projectName,
-                                isAdded: true,
-                                engine: engine
-                            )
-                    );
+                    .Select(r => new AnalyzerReferenceChange(
+                        r,
+                        projectId,
+                        projectName,
+                        isAdded: true,
+                        engine: engine
+                    ));
                 builder.AddRange(addedAnalyzerReferenceChanges);
 
                 var removedAnalyzerReferenceChanges = projectChanges
                     .GetRemovedAnalyzerReferences()
-                    .Select(
-                        r =>
-                            new AnalyzerReferenceChange(
-                                r,
-                                projectId,
-                                projectName,
-                                isAdded: false,
-                                engine: engine
-                            )
-                    );
+                    .Select(r => new AnalyzerReferenceChange(
+                        r,
+                        projectId,
+                        projectName,
+                        isAdded: false,
+                        engine: engine
+                    ));
                 builder.AddRange(removedAnalyzerReferenceChanges);
             }
         }

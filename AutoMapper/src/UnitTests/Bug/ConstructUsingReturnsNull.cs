@@ -23,8 +23,8 @@ public class ConstructUsingReturnsNull : AutoMapperSpecBase
     {
         new Action(
             () => Mapper.Map<Source, Destination>(new Source())
-        ).ShouldThrowException<AutoMapperMappingException>(
-            ex => ex.InnerException.ShouldBeOfType<NullReferenceException>()
+        ).ShouldThrowException<AutoMapperMappingException>(ex =>
+            ex.InnerException.ShouldBeOfType<NullReferenceException>()
         );
     }
 }

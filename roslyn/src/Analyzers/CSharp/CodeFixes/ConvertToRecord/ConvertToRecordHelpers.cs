@@ -379,10 +379,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         // https://github.com/dotnet/roslyn/issues/54286
                         var positionalParam = param
                             .ContainingSymbol.ContainingType.GetMembers()
-                            .FirstOrDefault(
-                                member =>
-                                    member.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-                                    == param.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
+                            .FirstOrDefault(member =>
+                                member.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
+                                == param.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
                             );
                         if (positionalParam is IPropertySymbol property)
                         {
@@ -1093,15 +1092,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     &&
                     // found the correct binding, add any members we equate in the rest of the binary condition
                     // if we were in a binary condition at all, and signal failure if any condition is bad
-                    additionalConditions.All(
-                        otherCondition =>
-                            TryAddEqualizedFieldsForCondition(
-                                otherCondition,
-                                successRequirement,
-                                currentObject,
-                                otherVar,
-                                builder
-                            )
+                    additionalConditions.All(otherCondition =>
+                        TryAddEqualizedFieldsForCondition(
+                            otherCondition,
+                            successRequirement,
+                            currentObject,
+                            otherVar,
+                            builder
+                        )
                     )
                 )
                 {

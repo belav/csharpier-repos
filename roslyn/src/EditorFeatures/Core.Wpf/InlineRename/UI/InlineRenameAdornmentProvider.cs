@@ -93,21 +93,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         )
         {
             // Create it for the view if we don't already have one
-            textView.GetOrCreateAutoClosingProperty(
-                v =>
-                    new InlineRenameAdornmentManager(
-                        _renameService,
-                        _editorFormatMapService,
-                        _dashboardColorUpdater,
-                        v,
-                        _globalOptionService,
-                        _themeingService,
-                        _asyncQuickInfoBroker,
-                        _listenerProvider,
-                        _threadingContext,
-                        _smartRenameSessionFactory
-                    )
-            );
+            textView.GetOrCreateAutoClosingProperty(v => new InlineRenameAdornmentManager(
+                _renameService,
+                _editorFormatMapService,
+                _dashboardColorUpdater,
+                v,
+                _globalOptionService,
+                _themeingService,
+                _asyncQuickInfoBroker,
+                _listenerProvider,
+                _threadingContext,
+                _smartRenameSessionFactory
+            ));
         }
 
         public void SubjectBuffersDisconnected(
@@ -119,8 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             // Do we still have any buffers alive?
             if (
                 textView
-                    .BufferGraph.GetTextBuffers(
-                        b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
+                    .BufferGraph.GetTextBuffers(b =>
+                        b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
                     )
                     .Any()
             )

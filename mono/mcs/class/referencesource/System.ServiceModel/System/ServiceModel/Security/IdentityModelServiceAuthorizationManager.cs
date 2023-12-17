@@ -693,8 +693,8 @@ namespace System.ServiceModel.Security
         )
         {
             System.Security.Claims.Claim authenticationMethodClaim =
-                claimsIdentity.Claims.FirstOrDefault(
-                    claim => claim.Type == System.Security.Claims.ClaimTypes.AuthenticationMethod
+                claimsIdentity.Claims.FirstOrDefault(claim =>
+                    claim.Type == System.Security.Claims.ClaimTypes.AuthenticationMethod
                 );
 
             if (authenticationMethodClaim == null)
@@ -718,8 +718,8 @@ namespace System.ServiceModel.Security
             // the issuer for this claim should always be the default issuer.
             string issuerName = ClaimsIdentity.DefaultIssuer;
             System.Security.Claims.Claim authenticationInstantClaim =
-                claimsIdentity.Claims.FirstOrDefault(
-                    claim => claim.Type == System.Security.Claims.ClaimTypes.AuthenticationInstant
+                claimsIdentity.Claims.FirstOrDefault(claim =>
+                    claim.Type == System.Security.Claims.ClaimTypes.AuthenticationInstant
                 );
 
             if (authenticationInstantClaim == null)

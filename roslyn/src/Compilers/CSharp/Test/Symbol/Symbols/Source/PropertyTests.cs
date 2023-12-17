@@ -2157,21 +2157,20 @@ class Program
                 Assert.Equal(1, getters.Count(getter => getter.Parameters.Length == 2));
 
                 Assert.True(
-                    getters.Any(
-                        getter => getter.Parameters[0].Type.SpecialType == SpecialType.System_Int32
+                    getters.Any(getter =>
+                        getter.Parameters[0].Type.SpecialType == SpecialType.System_Int32
                     )
                 );
                 Assert.True(
-                    getters.Any(
-                        getter => getter.Parameters[0].Type.SpecialType == SpecialType.System_String
+                    getters.Any(getter =>
+                        getter.Parameters[0].Type.SpecialType == SpecialType.System_String
                     )
                 );
                 Assert.True(
-                    getters.Any(
-                        getter =>
-                            getter.Parameters.Length == 2
-                            && getter.Parameters[0].Type.SpecialType == SpecialType.System_Int32
-                            && getter.Parameters[1].Type.SpecialType == SpecialType.System_String
+                    getters.Any(getter =>
+                        getter.Parameters.Length == 2
+                        && getter.Parameters[0].Type.SpecialType == SpecialType.System_Int32
+                        && getter.Parameters[1].Type.SpecialType == SpecialType.System_String
                     )
                 );
             };
@@ -2979,9 +2978,8 @@ End Class";
             var explicitOverrides = typeDef.GetExplicitImplementationOverrides(context);
             Assert.Equal(2, explicitOverrides.Count());
             Assert.True(
-                explicitOverrides.All(
-                    @override =>
-                        ReferenceEquals(@class, @override.ContainingType.GetInternalSymbol())
+                explicitOverrides.All(@override =>
+                    ReferenceEquals(@class, @override.ContainingType.GetInternalSymbol())
                 )
             );
 
@@ -3055,9 +3053,8 @@ End Class";
             var explicitOverrides = typeDef.GetExplicitImplementationOverrides(context);
             Assert.Equal(1, explicitOverrides.Count());
             Assert.True(
-                explicitOverrides.All(
-                    @override =>
-                        ReferenceEquals(@class, @override.ContainingType.GetInternalSymbol())
+                explicitOverrides.All(@override =>
+                    ReferenceEquals(@class, @override.ContainingType.GetInternalSymbol())
                 )
             );
 

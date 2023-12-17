@@ -87,7 +87,9 @@ public class UseEndpointRoutingStartup
                             var graphWriter =
                                 httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
                             var dataSource =
-                                httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
+                                httpContext.RequestServices.GetRequiredService<EndpointDataSource>(
+
+                                );
                             graphWriter.Write(dataSource, writer);
                         }
 

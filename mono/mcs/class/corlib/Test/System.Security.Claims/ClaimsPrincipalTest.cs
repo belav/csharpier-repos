@@ -82,10 +82,8 @@ namespace MonoTests.System.Security.Claims
             Assert.IsNotNull(p.Claims, "#6");
             Assert.AreEqual(1, p.Claims.Count(), "#7");
             Assert.IsTrue(
-                p.Claims.Any(
-                    claim =>
-                        claim.Type == ClaimsIdentity.DefaultNameClaimType
-                        && claim.Value == "test_name"
+                p.Claims.Any(claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "test_name"
                 ),
                 "#8"
             );
@@ -146,10 +144,8 @@ namespace MonoTests.System.Security.Claims
             Assert.IsNotNull(p.Claims, "#6");
             Assert.AreEqual(1, p.Claims.Count(), "#7");
             Assert.IsTrue(
-                p.Claims.Any(
-                    claim =>
-                        claim.Type == ClaimsIdentity.DefaultNameClaimType
-                        && claim.Value == "test_name"
+                p.Claims.Any(claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "test_name"
                 ),
                 "#8"
             );
@@ -205,10 +201,9 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(baseId3, p.Identity, "#5");
 
             Assert.IsTrue(
-                p.Claims.Any(
-                    claim =>
-                        claim.Type == ClaimsIdentity.DefaultNameClaimType
-                        && claim.Value == "generic_name"
+                p.Claims.Any(claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType
+                    && claim.Value == "generic_name"
                 ),
                 "#6"
             );
@@ -255,18 +250,16 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(baseId1, p.Identity, "#5");
 
             Assert.IsTrue(
-                p.Claims.Any(
-                    claim =>
-                        claim.Type == ClaimsIdentity.DefaultNameClaimType
-                        && claim.Value == "generic_name2"
+                p.Claims.Any(claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType
+                    && claim.Value == "generic_name2"
                 ),
                 "#6"
             );
             Assert.IsTrue(
-                p.Claims.Any(
-                    claim =>
-                        claim.Type == ClaimsIdentity.DefaultNameClaimType
-                        && claim.Value == "generic_name3"
+                p.Claims.Any(claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType
+                    && claim.Value == "generic_name3"
                 ),
                 "#7"
             );

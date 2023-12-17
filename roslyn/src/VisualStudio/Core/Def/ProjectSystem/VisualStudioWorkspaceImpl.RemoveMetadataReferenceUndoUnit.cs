@@ -35,8 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 {
                     var reference = fromProject
                         .MetadataReferences.OfType<PortableExecutableReference>()
-                        .FirstOrDefault(
-                            p => StringComparer.OrdinalIgnoreCase.Equals(p.FilePath!, _filePath)
+                        .FirstOrDefault(p =>
+                            StringComparer.OrdinalIgnoreCase.Equals(p.FilePath!, _filePath)
                         );
 
                     if (reference != null)

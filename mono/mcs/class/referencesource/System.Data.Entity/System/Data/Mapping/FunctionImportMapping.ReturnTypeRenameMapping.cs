@@ -67,11 +67,10 @@ namespace System.Data.Mapping
         {
             const bool includeAbstractTypes = false;
             return this.EntityTypes.Concat(
-                this.IsOfTypeEntityTypes.SelectMany(
-                    entityType =>
-                        MetadataHelper
-                            .GetTypeAndSubtypesOf(entityType, itemCollection, includeAbstractTypes)
-                            .Cast<EntityType>()
+                this.IsOfTypeEntityTypes.SelectMany(entityType =>
+                    MetadataHelper
+                        .GetTypeAndSubtypesOf(entityType, itemCollection, includeAbstractTypes)
+                        .Cast<EntityType>()
                 )
             );
         }

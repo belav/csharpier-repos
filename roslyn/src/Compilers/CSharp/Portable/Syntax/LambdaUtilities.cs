@@ -412,11 +412,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static bool AreEquivalentIgnoringLambdaBodies(SyntaxNode oldNode, SyntaxNode newNode)
         {
             // all tokens that don't belong to a lambda body:
-            var oldTokens = oldNode.DescendantTokens(
-                node => node == oldNode || !IsLambdaBodyStatementOrExpression(node)
+            var oldTokens = oldNode.DescendantTokens(node =>
+                node == oldNode || !IsLambdaBodyStatementOrExpression(node)
             );
-            var newTokens = newNode.DescendantTokens(
-                node => node == newNode || !IsLambdaBodyStatementOrExpression(node)
+            var newTokens = newNode.DescendantTokens(node =>
+                node == newNode || !IsLambdaBodyStatementOrExpression(node)
             );
 
             return oldTokens.SequenceEqual(newTokens, SyntaxFactory.AreEquivalent);

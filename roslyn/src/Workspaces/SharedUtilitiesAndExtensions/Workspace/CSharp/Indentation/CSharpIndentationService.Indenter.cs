@@ -159,8 +159,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                     is { RawKind: (int)SyntaxKind.CloseBraceToken, Parent: InterpolationSyntax }
             )
             {
-                var interpolatedExpression =
-                    token.GetAncestor<InterpolatedStringExpressionSyntax>();
+                var interpolatedExpression = token.GetAncestor<InterpolatedStringExpressionSyntax>(
+
+                );
                 Contract.ThrowIfNull(interpolatedExpression);
                 if (
                     interpolatedExpression.StringStartToken.IsKind(

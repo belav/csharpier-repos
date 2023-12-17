@@ -104,13 +104,12 @@ namespace System.Web.Mvc.Test
             mockViewContext.Setup(c => c.Writer).Returns(writer);
             mockViewContext.Setup(c => c.HttpContext.Response.Output).Returns(TextWriter.Null);
             mockViewContext
-                .Setup(
-                    c =>
-                        c.HttpContext.Server.Execute(
-                            It.IsAny<IHttpHandler>(),
-                            It.IsAny<TextWriter>(),
-                            true
-                        )
+                .Setup(c =>
+                    c.HttpContext.Server.Execute(
+                        It.IsAny<IHttpHandler>(),
+                        It.IsAny<TextWriter>(),
+                        true
+                    )
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (_h, _w, _pf) =>

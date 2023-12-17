@@ -64,12 +64,11 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
             >()
         );
 
-        var compilerProvider = services.FirstOrDefault(
-            f =>
-                f.ServiceType == typeof(IViewCompilerProvider)
-                && f.ImplementationType?.Assembly == typeof(IViewCompilerProvider).Assembly
-                && f.ImplementationType.FullName
-                    == "Microsoft.AspNetCore.Mvc.Razor.Compilation.DefaultViewCompilerProvider"
+        var compilerProvider = services.FirstOrDefault(f =>
+            f.ServiceType == typeof(IViewCompilerProvider)
+            && f.ImplementationType?.Assembly == typeof(IViewCompilerProvider).Assembly
+            && f.ImplementationType.FullName
+                == "Microsoft.AspNetCore.Mvc.Razor.Compilation.DefaultViewCompilerProvider"
         );
 
         if (compilerProvider != null)
@@ -80,10 +79,9 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
 
         services.TryAddSingleton<IViewCompilerProvider, RuntimeViewCompilerProvider>();
 
-        var actionDescriptorProvider = services.FirstOrDefault(
-            f =>
-                f.ServiceType == typeof(IActionDescriptorProvider)
-                && f.ImplementationType == typeof(CompiledPageActionDescriptorProvider)
+        var actionDescriptorProvider = services.FirstOrDefault(f =>
+            f.ServiceType == typeof(IActionDescriptorProvider)
+            && f.ImplementationType == typeof(CompiledPageActionDescriptorProvider)
         );
 
         if (actionDescriptorProvider != null)

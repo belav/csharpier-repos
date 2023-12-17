@@ -311,8 +311,8 @@ public class ControllerBinderDelegateProviderTest
         mockBinder.Verify(
             o =>
                 o.BindModelAsync(
-                    It.Is<ModelBindingContext>(
-                        context => context.ModelMetadata == modelMetadata.Object
+                    It.Is<ModelBindingContext>(context =>
+                        context.ModelMetadata == modelMetadata.Object
                     )
                 ),
             Times.Once()
@@ -360,8 +360,8 @@ public class ControllerBinderDelegateProviderTest
         mockBinder.Verify(
             o =>
                 o.BindModelAsync(
-                    It.Is<ModelBindingContext>(
-                        context => context.ModelMetadata == modelMetadata.Object
+                    It.Is<ModelBindingContext>(context =>
+                        context.ModelMetadata == modelMetadata.Object
                     )
                 ),
             Times.Once()
@@ -545,14 +545,13 @@ public class ControllerBinderDelegateProviderTest
         var factory = GetModelBinderFactory("Hello");
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var mockValidator = new Mock<IObjectModelValidator>(MockBehavior.Strict);
-        mockValidator.Setup(
-            o =>
-                o.Validate(
-                    It.IsAny<ActionContext>(),
-                    It.IsAny<ValidationStateDictionary>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()
-                )
+        mockValidator.Setup(o =>
+            o.Validate(
+                It.IsAny<ActionContext>(),
+                It.IsAny<ValidationStateDictionary>(),
+                It.IsAny<string>(),
+                It.IsAny<object>()
+            )
         );
 
         var parameterBinder = new ParameterBinder(
@@ -1170,17 +1169,16 @@ public class ControllerBinderDelegateProviderTest
             NullLoggerFactory.Instance
         );
         parameterBinder
-            .Setup(
-                p =>
-                    p.BindModelAsync(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<IModelBinder>(),
-                        It.IsAny<IValueProvider>(),
-                        It.IsAny<ParameterDescriptor>(),
-                        It.IsAny<ModelMetadata>(),
-                        null,
-                        null
-                    )
+            .Setup(p =>
+                p.BindModelAsync(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<IModelBinder>(),
+                    It.IsAny<IValueProvider>(),
+                    It.IsAny<ParameterDescriptor>(),
+                    It.IsAny<ModelMetadata>(),
+                    null,
+                    null
+                )
             )
             .Returns(
                 (

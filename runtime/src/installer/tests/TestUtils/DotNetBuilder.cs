@@ -106,9 +106,9 @@ namespace Microsoft.DotNet.CoreSetup.Test
             else
             {
                 foreach (
-                    var dir in new DirectoryInfo(
-                        Path.Combine(_path, "host", "fxr")
-                    ).GetDirectories()
+                    var dir in new DirectoryInfo(Path.Combine(_path, "host", "fxr")).GetDirectories(
+
+                    )
                 )
                 {
                     dir.Delete(recursive: true);

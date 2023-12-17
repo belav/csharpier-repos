@@ -78,8 +78,8 @@ public static class Extensions
         source.ToCore<TDestination>(
             configuration,
             parameters,
-            membersToExpand.Select(
-                memberName => ReflectionHelper.GetMemberPath(typeof(TDestination), memberName)
+            membersToExpand.Select(memberName =>
+                ReflectionHelper.GetMemberPath(typeof(TDestination), memberName)
             )
         );
 
@@ -117,8 +117,8 @@ public static class Extensions
             destinationType,
             configuration,
             parameters,
-            membersToExpand.Select(
-                memberName => ReflectionHelper.GetMemberPath(destinationType, memberName)
+            membersToExpand.Select(memberName =>
+                ReflectionHelper.GetMemberPath(destinationType, memberName)
             )
         );
 

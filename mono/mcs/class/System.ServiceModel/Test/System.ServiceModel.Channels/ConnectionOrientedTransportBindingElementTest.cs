@@ -50,8 +50,9 @@ namespace MonoTests.System.ServiceModel.Channels
             PolicyConversionContext conversion_context = new CustomPolicyConversionContext();
             export_extension.ExportPolicy(new WsdlExporter(), conversion_context);
 
-            PolicyAssertionCollection binding_assertions =
-                conversion_context.GetBindingAssertions();
+            PolicyAssertionCollection binding_assertions = conversion_context.GetBindingAssertions(
+
+            );
             BindingElementCollection binding_elements = conversion_context.BindingElements;
             Assert.AreEqual(2, binding_assertions.Count, "#A0");
             Assert.AreEqual(0, binding_elements.Count, "#A1");
@@ -110,8 +111,9 @@ namespace MonoTests.System.ServiceModel.Channels
             PolicyConversionContext conversion_context = new CustomPolicyConversionContext();
             export_extension.ExportPolicy(new WsdlExporter(), conversion_context);
 
-            PolicyAssertionCollection binding_assertions =
-                conversion_context.GetBindingAssertions();
+            PolicyAssertionCollection binding_assertions = conversion_context.GetBindingAssertions(
+
+            );
             BindingElementCollection binding_elements = conversion_context.BindingElements;
             Assert.AreEqual(3, binding_assertions.Count, "#A0");
             Assert.AreEqual(0, binding_elements.Count, "#A1");
@@ -188,8 +190,9 @@ namespace MonoTests.System.ServiceModel.Channels
             );
             export_extension.ExportPolicy(new WsdlExporter(), conversion_context);
 
-            PolicyAssertionCollection binding_assertions =
-                conversion_context.GetBindingAssertions();
+            PolicyAssertionCollection binding_assertions = conversion_context.GetBindingAssertions(
+
+            );
             BindingElementCollection binding_elements = conversion_context.BindingElements;
             Assert.AreEqual(0, binding_assertions.Count, "#A0");
             Assert.AreEqual(1, binding_elements.Count, "#A1");
@@ -207,8 +210,9 @@ namespace MonoTests.System.ServiceModel.Channels
             );
             export_extension.ExportPolicy(new WsdlExporter(), conversion_context);
 
-            PolicyAssertionCollection binding_assertions =
-                conversion_context.GetBindingAssertions();
+            PolicyAssertionCollection binding_assertions = conversion_context.GetBindingAssertions(
+
+            );
             BindingElementCollection binding_elements = conversion_context.BindingElements;
             Assert.AreEqual(1, binding_assertions.Count, "#A0");
             Assert.AreEqual(1, binding_elements.Count, "#A1");

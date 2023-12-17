@@ -23,14 +23,13 @@ namespace System.Text.RegularExpressions.Tests
                     .GetRegexesAsync(
                         engine,
                         cases
-                            .Select(
-                                c =>
-                                    (
-                                        c.Pattern,
-                                        (CultureInfo?)null,
-                                        (RegexOptions?)RegexOptions.None,
-                                        (TimeSpan?)null
-                                    )
+                            .Select(c =>
+                                (
+                                    c.Pattern,
+                                    (CultureInfo?)null,
+                                    (RegexOptions?)RegexOptions.None,
+                                    (TimeSpan?)null
+                                )
                             )
                             .ToArray()
                     )

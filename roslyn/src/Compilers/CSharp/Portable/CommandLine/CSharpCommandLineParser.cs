@@ -929,13 +929,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // An error will be reported by the assembly manager anyways.
                                 metadataReferences.AddRange(
                                     ParseSeparatedPaths(value)
-                                        .Select(
-                                            path =>
-                                                new CommandLineReference(
-                                                    path,
-                                                    MetadataReferenceProperties.Module
-                                                )
-                                        )
+                                        .Select(path => new CommandLineReference(
+                                            path,
+                                            MetadataReferenceProperties.Module
+                                        ))
                                 );
                                 resourcesOrModulesSpecified = true;
                             }

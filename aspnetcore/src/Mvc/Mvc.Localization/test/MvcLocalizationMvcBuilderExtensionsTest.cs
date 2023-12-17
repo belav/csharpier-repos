@@ -23,8 +23,8 @@ public class MvcLocalizationMvcBuilderExtensionsTest
         builder2.AddMvcLocalization(LanguageViewLocationExpanderFormat.SubFolder);
 
         var builder3 = new TestMvcBuilder();
-        builder3.AddMvcLocalization(
-            localizationOptionsSetupAction: l => l.ResourcesPath = "Resources"
+        builder3.AddMvcLocalization(localizationOptionsSetupAction: l =>
+            l.ResourcesPath = "Resources"
         );
 
         var builder4 = new TestMvcBuilder();
@@ -43,8 +43,8 @@ public class MvcLocalizationMvcBuilderExtensionsTest
         // Assert
         var services = mvcBuilder.Services;
         // Base localization services
-        var service = services.FirstOrDefault(
-            sd => sd.ServiceType == typeof(IStringLocalizerFactory)
+        var service = services.FirstOrDefault(sd =>
+            sd.ServiceType == typeof(IStringLocalizerFactory)
         );
         Assert.NotNull(service);
         Assert.Equal(ServiceLifetime.Singleton, service.Lifetime);
@@ -56,14 +56,14 @@ public class MvcLocalizationMvcBuilderExtensionsTest
         Assert.Equal(typeof(StringLocalizer<>), service.ImplementationType);
 
         // View localization services
-        service = services.FirstOrDefault(
-            sd => sd.ServiceType == typeof(IConfigureOptions<MvcDataAnnotationsLocalizationOptions>)
+        service = services.FirstOrDefault(sd =>
+            sd.ServiceType == typeof(IConfigureOptions<MvcDataAnnotationsLocalizationOptions>)
         );
         Assert.NotNull(service);
         Assert.Equal(ServiceLifetime.Transient, service.Lifetime);
 
-        service = services.FirstOrDefault(
-            sd => sd.ServiceType == typeof(IConfigureOptions<RazorViewEngineOptions>)
+        service = services.FirstOrDefault(sd =>
+            sd.ServiceType == typeof(IConfigureOptions<RazorViewEngineOptions>)
         );
         Assert.NotNull(service);
         Assert.Equal(ServiceLifetime.Singleton, service.Lifetime);
@@ -91,8 +91,8 @@ public class MvcLocalizationMvcBuilderExtensionsTest
         var builder = new TestMvcBuilder();
 
         // Act
-        builder.AddMvcLocalization(
-            localizationOptionsSetupAction: options => options.ResourcesPath = "TestResources"
+        builder.AddMvcLocalization(localizationOptionsSetupAction: options =>
+            options.ResourcesPath = "TestResources"
         );
 
         // Assert
@@ -121,9 +121,8 @@ public class MvcLocalizationMvcBuilderExtensionsTest
         );
 
         // Act
-        builder.AddMvcLocalization(
-            dataAnnotationsLocalizationOptionsSetupAction: options =>
-                options.DataAnnotationLocalizerProvider = dataAnnotationLocalizerProvider
+        builder.AddMvcLocalization(dataAnnotationsLocalizationOptionsSetupAction: options =>
+            options.DataAnnotationLocalizerProvider = dataAnnotationLocalizerProvider
         );
 
         // Assert

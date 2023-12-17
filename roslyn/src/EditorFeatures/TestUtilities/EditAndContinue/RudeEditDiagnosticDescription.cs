@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             {
                 (_squiggle != null) ? "\"" + _squiggle.Replace("\r\n", "\\r\\n") + "\"" : "null"
             }.Concat(
-                _arguments.Select(
-                    a => tryGetResource?.Invoke(a) is { } ? $"GetResource(\"{a}\")" : $"\"{a}\""
+                _arguments.Select(a =>
+                    tryGetResource?.Invoke(a) is { } ? $"GetResource(\"{a}\")" : $"\"{a}\""
                 )
             );
 

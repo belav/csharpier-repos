@@ -35,11 +35,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             );
         private readonly MetadataReference _windowsRuntimeUIXamlRef =
             MetadataReference.CreateFromImage(
-                ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime_UI_Xaml.AsImmutableOrNull()
+                ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime_UI_Xaml.AsImmutableOrNull(
+
+                )
             );
         private readonly MetadataReference _interopServicesWindowsRuntimeRef =
             MetadataReference.CreateFromImage(
-                TestMetadata.ResourcesNet451.SystemRuntimeInteropServicesWindowsRuntime.AsImmutableOrNull()
+                TestMetadata.ResourcesNet451.SystemRuntimeInteropServicesWindowsRuntime.AsImmutableOrNull(
+
+                )
             );
 
         private void AppendMembers(

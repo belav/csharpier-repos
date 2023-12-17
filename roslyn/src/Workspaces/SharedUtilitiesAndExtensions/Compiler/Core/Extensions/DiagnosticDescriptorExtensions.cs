@@ -155,11 +155,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 !descriptor.IsEnabledByDefault
                 || descriptor
                     .ImmutableCustomTags()
-                    .Any(
-                        static tag =>
-                            tag
-                                is WellKnownDiagnosticTags.Compiler
-                                    or WellKnownDiagnosticTags.NotConfigurable
+                    .Any(static tag =>
+                        tag
+                            is WellKnownDiagnosticTags.Compiler
+                                or WellKnownDiagnosticTags.NotConfigurable
                     )
             )
             {
@@ -250,11 +249,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 !descriptor.IsEnabledByDefault
                 || descriptor
                     .ImmutableCustomTags()
-                    .Any(
-                        static tag =>
-                            tag
-                                is WellKnownDiagnosticTags.Compiler
-                                    or WellKnownDiagnosticTags.NotConfigurable
+                    .Any(static tag =>
+                        tag
+                            is WellKnownDiagnosticTags.Compiler
+                                or WellKnownDiagnosticTags.NotConfigurable
                     )
             )
             {
@@ -309,11 +307,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 !descriptor.IsEnabledByDefault
                 || descriptor
                     .ImmutableCustomTags()
-                    .Any(
-                        static tag =>
-                            tag
-                                is WellKnownDiagnosticTags.Compiler
-                                    or WellKnownDiagnosticTags.NotConfigurable
+                    .Any(static tag =>
+                        tag
+                            is WellKnownDiagnosticTags.Compiler
+                                or WellKnownDiagnosticTags.NotConfigurable
                     )
             )
             {

@@ -275,8 +275,7 @@ namespace System.CommandLine.Rendering.Tests
                 }
 
                 var formatter = new TextSpanFormatter();
-                formatter.AddFormatter<DateTime>(
-                    d => $"{d:d} {ForegroundColorSpan.DarkGray()}{d:t}"
+                formatter.AddFormatter<DateTime>(d => $"{d:d} {ForegroundColorSpan.DarkGray()}{d:t}"
                 );
 
                 Add(new ContentView(""));

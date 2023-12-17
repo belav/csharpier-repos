@@ -50,6 +50,8 @@ public class AutoValidateAntiforgeryTokenAttribute : Attribute, IFilterFactory, 
     /// <inheritdoc />
     public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
     {
-        return serviceProvider.GetRequiredService<AutoValidateAntiforgeryTokenAuthorizationFilter>();
+        return serviceProvider.GetRequiredService<AutoValidateAntiforgeryTokenAuthorizationFilter>(
+
+        );
     }
 }

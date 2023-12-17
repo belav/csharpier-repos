@@ -3706,11 +3706,10 @@ class B
                     Assert.False(
                         assembly
                             .GetAttributes()
-                            .Any(
-                                attr =>
-                                    attr.IsTargetAttribute(
-                                        AttributeDescription.InternalsVisibleToAttribute
-                                    )
+                            .Any(attr =>
+                                attr.IsTargetAttribute(
+                                    AttributeDescription.InternalsVisibleToAttribute
+                                )
                             )
                     );
                 }

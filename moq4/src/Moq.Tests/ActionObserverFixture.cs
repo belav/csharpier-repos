@@ -203,8 +203,7 @@ namespace Moq.Tests
                 AssertReconstructable(
                     "x => x[It.Is<int>(i => i == 0), It.Is<int>(i => i == 2)] = It.Is<int>(i => i == 3)",
                     x =>
-                        x[It.Is<int>(i => i == 0), It.Is<int>(i => i == 2)] = It.Is<int>(
-                            i => i == 3
+                        x[It.Is<int>(i => i == 0), It.Is<int>(i => i == 2)] = It.Is<int>(i => i == 3
                         )
                 );
             }

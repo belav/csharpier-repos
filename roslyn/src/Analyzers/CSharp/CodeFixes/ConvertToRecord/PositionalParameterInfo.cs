@@ -43,27 +43,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             using var _ = ArrayBuilder<PositionalParameterInfo>.GetInstance(out var resultBuilder);
 
             // get all declared property symbols, put inherited property symbols first
-            var symbols = properties.SelectAsArray(
-                p => semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken)
+            var symbols = properties.SelectAsArray(p =>
+                semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken)
             );
 
             // add inherited properties from a potential base record first
             var inheritedProperties = GetInheritedPositionalParams(type, cancellationToken);
             resultBuilder.AddRange(
-                inheritedProperties.Select(
-                    property =>
-                        new PositionalParameterInfo(
-                            Declaration: null,
-                            property,
-                            KeepAsOverride: false
-                        )
-                )
+                inheritedProperties.Select(property => new PositionalParameterInfo(
+                    Declaration: null,
+                    property,
+                    KeepAsOverride: false
+                ))
             );
 
             // The user may not know about init or be converting code from before init was introduced.
             // In this case we can convert set properties to init ones
-            var allowSetToInitConversion = !symbols.Any(
-                symbol => symbol.SetMethod is IMethodSymbol { IsInitOnly: true }
+            var allowSetToInitConversion = !symbols.Any(symbol =>
+                symbol.SetMethod is IMethodSymbol { IsInitOnly: true }
             );
 
             resultBuilder.AddRange(
@@ -110,8 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             if (baseType != null && baseType.TryGetPrimaryConstructor(out var basePrimary))
             {
                 return basePrimary
-                    .Parameters.Select(
-                        param => param.GetAssociatedSynthesizedRecordProperty(cancellationToken)
+                    .Parameters.Select(param =>
+                        param.GetAssociatedSynthesizedRecordProperty(cancellationToken)
                     )
                     .WhereNotNull()
                     .AsImmutable();

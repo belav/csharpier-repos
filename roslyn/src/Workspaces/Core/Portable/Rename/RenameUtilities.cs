@@ -125,8 +125,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         .Except(projectIdsOfRenameSymbolDeclaration)
                         .IsEmpty();
                     Contract.ThrowIfFalse(isSubset);
-                    return projectIdsOfRenameSymbolDeclaration.SelectMany(
-                        p => solution.GetRequiredProject(p).Documents
+                    return projectIdsOfRenameSymbolDeclaration.SelectMany(p =>
+                        solution.GetRequiredProject(p).Documents
                     );
                 }
                 else
@@ -135,16 +135,14 @@ namespace Microsoft.CodeAnalysis.Rename
                     // the rename symbol.  Other projects should not be affected by the rename.
                     var relevantProjects = projectIdsOfRenameSymbolDeclaration
                         .Concat(
-                            projectIdsOfRenameSymbolDeclaration.SelectMany(
-                                p =>
-                                    solution
-                                        .GetProjectDependencyGraph()
-                                        .GetProjectsThatDirectlyDependOnThisProject(p)
+                            projectIdsOfRenameSymbolDeclaration.SelectMany(p =>
+                                solution
+                                    .GetProjectDependencyGraph()
+                                    .GetProjectsThatDirectlyDependOnThisProject(p)
                             )
                         )
                         .Distinct();
-                    return relevantProjects.SelectMany(
-                        p => solution.GetRequiredProject(p).Documents
+                    return relevantProjects.SelectMany(p => solution.GetRequiredProject(p).Documents
                     );
                 }
             }

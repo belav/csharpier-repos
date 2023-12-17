@@ -31,12 +31,11 @@ namespace System.Web.Razor.Generator
         {
             _writer = context.CreateCodeWriter();
 
-            string prefix = context.BuildCodeString(
-                cw =>
-                    cw.WriteHelperHeaderPrefix(
-                        context.Host.GeneratedClassContext.TemplateTypeName,
-                        context.Host.StaticHelpers
-                    )
+            string prefix = context.BuildCodeString(cw =>
+                cw.WriteHelperHeaderPrefix(
+                    context.Host.GeneratedClassContext.TemplateTypeName,
+                    context.Host.StaticHelpers
+                )
             );
 
             _writer.WriteLinePragma(

@@ -47,8 +47,8 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
 
             // as an example, let's return 404 if specific requirement has failed
             if (
-                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(
-                    requirement => requirement is SampleRequirement
+                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(requirement =>
+                    requirement is SampleRequirement
                 )
             )
             {
@@ -59,8 +59,8 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 return;
             }
             else if (
-                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(
-                    requirement => requirement is SampleWithCustomMessageRequirement
+                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(requirement =>
+                    requirement is SampleWithCustomMessageRequirement
                 )
             )
             {

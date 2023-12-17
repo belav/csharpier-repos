@@ -475,8 +475,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         )
         {
             var pdbStreamConverted = new MemoryStream();
-            var converter = new PdbConverter(
-                diagnostic => Assert.True(false, diagnostic.ToString())
+            var converter = new PdbConverter(diagnostic => Assert.True(false, diagnostic.ToString())
             );
 
             peStreamOriginal.Position = 0;
@@ -680,10 +679,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     || e.Name == "defunct"
                     || e.Name == "local"
                         && e.Attributes()
-                            .Any(
-                                a =>
-                                    a.Name.LocalName == "name"
-                                    && a.Value.StartsWith("$VB$ResumableLocal_")
+                            .Any(a =>
+                                a.Name.LocalName == "name"
+                                && a.Value.StartsWith("$VB$ResumableLocal_")
                             )
                 select e
             );

@@ -31,8 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public EncapsulateFieldTestState(TestWorkspace workspace)
         {
             Workspace = workspace;
-            _testDocument = Workspace.Documents.Single(
-                d => d.CursorPosition.HasValue || d.SelectedSpans.Any()
+            _testDocument = Workspace.Documents.Single(d =>
+                d.CursorPosition.HasValue || d.SelectedSpans.Any()
             );
             TargetDocument = Workspace.CurrentSolution.GetDocument(_testDocument.Id);
 

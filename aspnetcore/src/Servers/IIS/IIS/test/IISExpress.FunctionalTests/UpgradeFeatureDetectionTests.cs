@@ -75,9 +75,8 @@ public class UpgradeFeatureDetectionTests : IISFunctionalTestBase
         if (disableWebSocket)
         {
             // For IIS, we need to modify the apphost.config file
-            deploymentParameters.AddServerConfigAction(
-                element =>
-                    element.Descendants("webSocket").Single().SetAttributeValue("enabled", "false")
+            deploymentParameters.AddServerConfigAction(element =>
+                element.Descendants("webSocket").Single().SetAttributeValue("enabled", "false")
             );
         }
 

@@ -50,8 +50,8 @@ namespace IlasmPortablePdbTests
                     var dbgDirEntries = peReader.ReadDebugDirectory();
                     Assert.False(dbgDirEntries.IsEmpty);
 
-                    var dbgEntry = dbgDirEntries.FirstOrDefault(
-                        dbgEntry => dbgEntry.IsPortableCodeView
+                    var dbgEntry = dbgDirEntries.FirstOrDefault(dbgEntry =>
+                        dbgEntry.IsPortableCodeView
                     );
                     Assert.True(dbgEntry.DataSize > 0);
 

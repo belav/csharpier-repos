@@ -108,16 +108,13 @@ namespace Microsoft.CodeAnalysis
                 var oldText = oldDocumentText.GetSubText(
                     TextSpan.FromBounds(startLineStartPosition, endLineEndPosition)
                 );
-                var adjustedChanges = changePartition.Select(
-                    c =>
-                        new TextChange(
-                            TextSpan.FromBounds(
-                                c.Span.Start - startLineStartPosition,
-                                c.Span.End - startLineStartPosition
-                            ),
-                            c.NewText
-                        )
-                );
+                var adjustedChanges = changePartition.Select(c => new TextChange(
+                    TextSpan.FromBounds(
+                        c.Span.Start - startLineStartPosition,
+                        c.Span.End - startLineStartPosition
+                    ),
+                    c.NewText
+                ));
                 var newText = oldText.WithChanges(adjustedChanges);
 
                 var warningText = GetConflictCommentText(

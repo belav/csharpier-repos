@@ -55,8 +55,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         private ViewTarget m_viewTarget;
         private FragmentQuery m_leftFragmentQuery; // Fragment query corresponding to the left cell query of the cell
 
-        internal static readonly IComparer<LeftCellWrapper> Comparer =
-            new LeftCellWrapperComparer();
+        internal static readonly IComparer<LeftCellWrapper> Comparer = new LeftCellWrapperComparer(
+
+        );
         internal static readonly IComparer<LeftCellWrapper> OriginalCellIdComparer =
             new CellIdComparer();
         #endregion

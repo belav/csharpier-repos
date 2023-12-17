@@ -187,13 +187,10 @@ WHERE "o"."OrderDate" IS NOT NULL
             ss =>
                 ss.Set<Order>()
                     .Where(o => o.OrderDate != null)
-                    .Select(
-                        o =>
-                            new Order
-                            {
-                                OrderDate = o.OrderDate.Value.AddTicks(10 * TimeSpan.TicksPerSecond)
-                            }
-                    ),
+                    .Select(o => new Order
+                    {
+                        OrderDate = o.OrderDate.Value.AddTicks(10 * TimeSpan.TicksPerSecond)
+                    }),
             e => e.OrderDate
         );
 

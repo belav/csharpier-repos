@@ -29,8 +29,9 @@ namespace System.ComponentModel.Composition.AttributedModel
                 typeof(PartWithoutImports)
             );
 
-            PartWithoutImports partWithoutImports =
-                container.GetExportedValue<PartWithoutImports>();
+            PartWithoutImports partWithoutImports = container.GetExportedValue<PartWithoutImports>(
+
+            );
             Assert.NotNull(partWithoutImports);
 
             Assert.True(partWithoutImports.ImportsSatisfiedInvoked);

@@ -309,9 +309,8 @@ namespace Mono.Debugger.Soft
 
             return Method
                 .GetLocals()
-                .Where(
-                    l =>
-                        l.LiveRangeStart <= location.ILOffset && l.LiveRangeEnd >= location.ILOffset
+                .Where(l =>
+                    l.LiveRangeStart <= location.ILOffset && l.LiveRangeEnd >= location.ILOffset
                 )
                 .ToList();
         }
@@ -326,11 +325,10 @@ namespace Mono.Debugger.Soft
 
             return Method
                 .GetLocals()
-                .Where(
-                    l =>
-                        l.LiveRangeStart <= location.ILOffset
-                        && l.LiveRangeEnd >= location.ILOffset
-                        && l.Name == name
+                .Where(l =>
+                    l.LiveRangeStart <= location.ILOffset
+                    && l.LiveRangeEnd >= location.ILOffset
+                    && l.Name == name
                 )
                 .FirstOrDefault();
         }

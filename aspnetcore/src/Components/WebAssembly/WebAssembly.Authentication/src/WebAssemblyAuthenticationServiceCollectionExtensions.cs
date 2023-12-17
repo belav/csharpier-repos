@@ -78,10 +78,9 @@ public static class WebAssemblyAuthenticationServiceCollectionExtensions
     >(IServiceCollection services)
         where TRemoteAuthenticationState : RemoteAuthenticationState
     {
-        services.TryAddScoped(
-            static sp =>
-                (IRemoteAuthenticationService<TRemoteAuthenticationState>)
-                    sp.GetRequiredService<AuthenticationStateProvider>()
+        services.TryAddScoped(static sp =>
+            (IRemoteAuthenticationService<TRemoteAuthenticationState>)
+                sp.GetRequiredService<AuthenticationStateProvider>()
         );
     }
 

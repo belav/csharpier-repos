@@ -30,8 +30,9 @@ public class WebTransportHandshakeTests : Http3TestBase
             var success = true;
 
 #pragma warning disable CA2252 // WebTransport is a preview feature
-            var webTransportFeature =
-                context.Features.GetRequiredFeature<IHttpWebTransportFeature>();
+            var webTransportFeature = context.Features.GetRequiredFeature<IHttpWebTransportFeature>(
+
+            );
 
             success &= webTransportFeature.IsWebTransportRequest;
 

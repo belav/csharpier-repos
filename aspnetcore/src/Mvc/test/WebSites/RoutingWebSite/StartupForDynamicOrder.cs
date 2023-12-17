@@ -34,8 +34,8 @@ public class StartupForDynamicOrder
         services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
         // Used by some controllers defined in this project.
-        services.Configure<RouteOptions>(
-            options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
+        services.Configure<RouteOptions>(options =>
+            options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
         );
     }
 

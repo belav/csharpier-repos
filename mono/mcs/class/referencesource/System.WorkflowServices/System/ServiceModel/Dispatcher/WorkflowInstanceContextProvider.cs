@@ -48,7 +48,9 @@ namespace System.ServiceModel.Dispatcher
                 if (!hasCheckedForExtension)
                 {
                     this.instanceLifeTimeManager =
-                        this.serviceHostBase.Extensions.Find<WorkflowInstanceLifetimeManagerExtension>();
+                        this.serviceHostBase.Extensions.Find<WorkflowInstanceLifetimeManagerExtension>(
+
+                        );
                     hasCheckedForExtension = true;
                 }
                 return this.instanceLifeTimeManager;

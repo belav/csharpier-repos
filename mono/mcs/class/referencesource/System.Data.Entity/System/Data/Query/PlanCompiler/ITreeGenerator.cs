@@ -2104,11 +2104,10 @@ namespace System.Data.Query.PlanCompiler
             List<DbExpression> predicates = new List<DbExpression>(
                 typeFilter
                     .ToEnumerable()
-                    .Select(
-                        tf =>
-                            tf.Value
-                                ? resultBinding.Variable.IsOfOnly(tf.Key)
-                                : resultBinding.Variable.IsOf(tf.Key)
+                    .Select(tf =>
+                        tf.Value
+                            ? resultBinding.Variable.IsOfOnly(tf.Key)
+                            : resultBinding.Variable.IsOf(tf.Key)
                     )
                     .ToList()
             );

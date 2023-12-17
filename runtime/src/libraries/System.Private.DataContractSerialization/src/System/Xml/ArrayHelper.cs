@@ -201,8 +201,9 @@ namespace System.Xml
 
     internal sealed class Int16ArrayHelperWithString : ArrayHelper<string, short>
     {
-        public static readonly Int16ArrayHelperWithString Instance =
-            new Int16ArrayHelperWithString();
+        public static readonly Int16ArrayHelperWithString Instance = new Int16ArrayHelperWithString(
+
+        );
 
         protected override int ReadArray(
             XmlDictionaryReader reader,
@@ -264,8 +265,9 @@ namespace System.Xml
 
     internal sealed class Int32ArrayHelperWithString : ArrayHelper<string, int>
     {
-        public static readonly Int32ArrayHelperWithString Instance =
-            new Int32ArrayHelperWithString();
+        public static readonly Int32ArrayHelperWithString Instance = new Int32ArrayHelperWithString(
+
+        );
 
         protected override int ReadArray(
             XmlDictionaryReader reader,
@@ -327,8 +329,9 @@ namespace System.Xml
 
     internal sealed class Int64ArrayHelperWithString : ArrayHelper<string, long>
     {
-        public static readonly Int64ArrayHelperWithString Instance =
-            new Int64ArrayHelperWithString();
+        public static readonly Int64ArrayHelperWithString Instance = new Int64ArrayHelperWithString(
+
+        );
 
         protected override int ReadArray(
             XmlDictionaryReader reader,

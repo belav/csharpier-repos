@@ -207,12 +207,11 @@ namespace System.Text.RegularExpressions
             int distance = 0;
             TryFindRawFixedSets(root, results, ref distance, thorough);
 #if DEBUG
-            results.ForEach(
-                r =>
-                    Debug.Assert(
-                        !r.Negated && r.Chars is null && r.Range is null,
-                        $"{nameof(TryFindRawFixedSets)} should have only populated {nameof(r.Set)} and {nameof(r.Distance)}"
-                    )
+            results.ForEach(r =>
+                Debug.Assert(
+                    !r.Negated && r.Chars is null && r.Range is null,
+                    $"{nameof(TryFindRawFixedSets)} should have only populated {nameof(r.Set)} and {nameof(r.Distance)}"
+                )
             );
 #endif
 

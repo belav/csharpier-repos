@@ -312,8 +312,8 @@ namespace Microsoft.CodeAnalysis
                 )
                 {
                     return generatorDriver.AddAdditionalTexts(
-                        additionalDocuments.SelectAsArray(
-                            static documentState => documentState.AdditionalText
+                        additionalDocuments.SelectAsArray(static documentState =>
+                            documentState.AdditionalText
                         )
                     );
                 }
@@ -334,8 +334,8 @@ namespace Microsoft.CodeAnalysis
                 )
                 {
                     return generatorDriver.RemoveAdditionalTexts(
-                        additionalDocuments.SelectAsArray(
-                            static documentState => documentState.AdditionalText
+                        additionalDocuments.SelectAsArray(static documentState =>
+                            documentState.AdditionalText
                         )
                     );
                 }

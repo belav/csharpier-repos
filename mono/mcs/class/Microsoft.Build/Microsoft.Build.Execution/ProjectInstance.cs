@@ -253,13 +253,9 @@ namespace Microsoft.Build.Execution
                     foreach (var p in pge.Properties)
                         // do not allow overwriting reserved or well-known properties by user
                         if (
-                            !this.properties.Any(
-                                _ =>
-                                    (_.Value.IsImmutable)
-                                    && _.Key.Equals(
-                                        p.Name,
-                                        StringComparison.InvariantCultureIgnoreCase
-                                    )
+                            !this.properties.Any(_ =>
+                                (_.Value.IsImmutable)
+                                && _.Key.Equals(p.Name, StringComparison.InvariantCultureIgnoreCase)
                             )
                         )
                             if (EvaluateCondition(p.Condition))
@@ -329,8 +325,8 @@ namespace Microsoft.Build.Execution
                 Directory,
                 assignRecurse,
                 t =>
-                    all_evaluated_items.Any(
-                        i => i.EvaluatedInclude == t.ItemSpec && itemTypeCheck(i.ItemType)
+                    all_evaluated_items.Any(i =>
+                        i.EvaluatedInclude == t.ItemSpec && itemTypeCheck(i.ItemType)
                     )
             );
         }
@@ -346,16 +342,16 @@ namespace Microsoft.Build.Execution
                     {
                         if (!EvaluateCondition(ige.Condition) || !EvaluateCondition(p.Condition))
                             continue;
-                        Func<string, ProjectItemInstance> creator = s =>
-                            new ProjectItemInstance(
-                                this,
-                                p.ItemType,
-                                p.Metadata.Select(
-                                    m => new KeyValuePair<string, string>(m.Name, m.Value)
-                                )
-                                    .ToList(),
-                                s
-                            );
+                        Func<string, ProjectItemInstance> creator = s => new ProjectItemInstance(
+                            this,
+                            p.ItemType,
+                            p.Metadata.Select(m => new KeyValuePair<string, string>(
+                                m.Name,
+                                m.Value
+                            ))
+                                .ToList(),
+                            s
+                        );
                         foreach (
                             var item in GetAllItems(
                                 p.Include,
@@ -669,8 +665,8 @@ namespace Microsoft.Build.Execution
                 )
             )
                 return new ProjectPropertyInstance(name, true, extensions_path_override);
-            return properties.Values.FirstOrDefault(
-                p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+            return properties.Values.FirstOrDefault(p =>
+                p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
             );
         }
 
@@ -689,8 +685,8 @@ namespace Microsoft.Build.Execution
 
         public bool RemoveProperty(string name)
         {
-            var removed = properties.Values.FirstOrDefault(
-                p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+            var removed = properties.Values.FirstOrDefault(p =>
+                p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
             );
             if (removed == null)
                 return false;
@@ -738,16 +734,16 @@ namespace Microsoft.Build.Execution
             string name
         )
         {
-            var md = item.Metadata.FirstOrDefault(
-                m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+            var md = item.Metadata.FirstOrDefault(m =>
+                m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
             );
             return md != null ? ProjectCollection.Escape(md.EvaluatedValue) : null;
         }
 
         public static string GetMetadataValueEscaped(ProjectItemInstance item, string name)
         {
-            var md = item.Metadata.FirstOrDefault(
-                m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+            var md = item.Metadata.FirstOrDefault(m =>
+                m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
             );
             return md != null ? ProjectCollection.Escape(md.EvaluatedValue) : null;
         }

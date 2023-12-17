@@ -65,7 +65,9 @@ namespace System
                 array.NativeLength
                 * (nuint)
                     (uint)
-                        array.GetElementSize() /* force zero-extension */
+                        array.GetElementSize(
+
+                        ) /* force zero-extension */
             ;
 
             if (RuntimeHelpers.ObjectHasReferences(array))

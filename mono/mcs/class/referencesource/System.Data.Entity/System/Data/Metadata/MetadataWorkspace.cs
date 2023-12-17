@@ -268,8 +268,8 @@ namespace System.Data.Metadata.Edm
                                         Helper.GetCommaDelimitedString(
                                             SupportedEdmVersions
                                                 .Where(e => e != XmlConstants.UndefinedVersion)
-                                                .Select(
-                                                    e => e.ToString(CultureInfo.InvariantCulture)
+                                                .Select(e =>
+                                                    e.ToString(CultureInfo.InvariantCulture)
                                                 )
                                         )
                                     )
@@ -531,11 +531,8 @@ namespace System.Data.Metadata.Edm
                             _foundAssemblyWithAttribute
                             || MetadataAssemblyHelper
                                 .GetNonSystemReferencedAssemblies(callingAssembly)
-                                .Any(
-                                    a =>
-                                        ObjectItemAttributeAssemblyLoader.IsSchemaAttributePresent(
-                                            a
-                                        )
+                                .Any(a =>
+                                    ObjectItemAttributeAssemblyLoader.IsSchemaAttributePresent(a)
                                 )
                         )
                     )

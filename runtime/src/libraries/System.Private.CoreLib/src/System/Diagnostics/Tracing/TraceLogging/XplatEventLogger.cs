@@ -66,10 +66,9 @@ namespace System.Diagnostics.Tracing
             '\"',
             '\\'
         };
-        private static readonly Dictionary<char, string> seq_mapping = new Dictionary<
-            char,
-            string
-        >()
+        private static readonly Dictionary<char, string> seq_mapping = new Dictionary<char, string>(
+
+        )
         {
             { '\b', "b" },
             { '\f', "f" },

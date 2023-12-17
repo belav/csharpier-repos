@@ -95,8 +95,8 @@ namespace Mono.Linker.Tests.TestCases
             {
                 if (
                     type.Name == "Program"
-                    && type.CustomAttributes.Any(
-                        attr => attr.AttributeType.Name == nameof(CompilerGeneratedAttribute)
+                    && type.CustomAttributes.Any(attr =>
+                        attr.AttributeType.Name == nameof(CompilerGeneratedAttribute)
                     )
                 )
                     return type;

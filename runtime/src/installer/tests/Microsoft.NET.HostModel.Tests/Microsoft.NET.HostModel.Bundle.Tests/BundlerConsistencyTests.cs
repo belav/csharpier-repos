@@ -110,15 +110,14 @@ namespace Microsoft.NET.HostModel.Tests
 
             // Exact duplicates are not duplicated in the bundle
             bundler
-                .BundleManifest.Files.Where(
-                    entry => entry.RelativePath.Equals("rel/app.repeat.dll")
+                .BundleManifest.Files.Where(entry => entry.RelativePath.Equals("rel/app.repeat.dll")
                 )
                 .Single()
                 .Type.Should()
                 .Be(FileType.Assembly);
             bundler
-                .BundleManifest.Files.Where(
-                    entry => entry.RelativePath.Equals("rel/system.repeat.dll")
+                .BundleManifest.Files.Where(entry =>
+                    entry.RelativePath.Equals("rel/system.repeat.dll")
                 )
                 .Single()
                 .Type.Should()
@@ -159,15 +158,13 @@ namespace Microsoft.NET.HostModel.Tests
             bundler.GenerateBundle(fileSpecs);
 
             bundler
-                .BundleManifest.Files.Where(
-                    entry => entry.RelativePath.Equals("rel/app.repeat.dll")
+                .BundleManifest.Files.Where(entry => entry.RelativePath.Equals("rel/app.repeat.dll")
                 )
                 .Single()
                 .Type.Should()
                 .Be(FileType.Assembly);
             bundler
-                .BundleManifest.Files.Where(
-                    entry => entry.RelativePath.Equals("rel/app.Repeat.dll")
+                .BundleManifest.Files.Where(entry => entry.RelativePath.Equals("rel/app.Repeat.dll")
                 )
                 .Single()
                 .Type.Should()
@@ -285,8 +282,8 @@ namespace Microsoft.NET.HostModel.Tests
                     .Type.Should()
                     .Be(FileType.DepsJson);
                 bundler
-                    .BundleManifest.Files.Where(
-                        entry => entry.RelativePath.Equals(runtimeConfigName)
+                    .BundleManifest.Files.Where(entry =>
+                        entry.RelativePath.Equals(runtimeConfigName)
                     )
                     .Single()
                     .Type.Should()
@@ -396,9 +393,8 @@ namespace Microsoft.NET.HostModel.Tests
                 OperatingSystem.IsLinux() && RuntimeInformation.OSArchitecture == Architecture.Arm64
                     ? 4096
                     : 16;
-            bundler.BundleManifest.Files.ForEach(
-                file =>
-                    Assert.True((file.Type != FileType.Assembly) || (file.Offset % alignment == 0))
+            bundler.BundleManifest.Files.ForEach(file =>
+                Assert.True((file.Type != FileType.Assembly) || (file.Offset % alignment == 0))
             );
         }
 

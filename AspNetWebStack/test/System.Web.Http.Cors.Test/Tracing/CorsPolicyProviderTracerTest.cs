@@ -20,9 +20,8 @@ namespace System.Web.Http.Cors.Tracing
             Mock<ITraceWriter> traceWriterMock = new Mock<ITraceWriter>();
             Mock<ICorsPolicyProvider> policyProviderMock = new Mock<ICorsPolicyProvider>();
             policyProviderMock
-                .Setup(
-                    f =>
-                        f.GetCorsPolicyAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
+                .Setup(f =>
+                    f.GetCorsPolicyAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
                 )
                 .Returns(() =>
                 {
@@ -46,14 +45,13 @@ namespace System.Web.Http.Cors.Tracing
             TraceRecord endTrace = null;
             Mock<ITraceWriter> traceWriterMock = new Mock<ITraceWriter>();
             traceWriterMock
-                .Setup(
-                    t =>
-                        t.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
+                .Setup(t =>
+                    t.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
                 )
                 .Callback<HttpRequestMessage, string, TraceLevel, Action<TraceRecord>>(
                     (request, category, level, traceAction) =>

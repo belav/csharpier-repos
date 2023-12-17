@@ -259,15 +259,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 {
                     var projects = projectsAndDiagnosticsToFixMap.Keys;
                     var tasks = projects
-                        .Select(
-                            p =>
-                                AddProjectFixesAsync(
-                                    p,
-                                    projectsAndDiagnosticsToFixMap[p],
-                                    bag,
-                                    fixAllState,
-                                    cancellationToken
-                                )
+                        .Select(p =>
+                            AddProjectFixesAsync(
+                                p,
+                                projectsAndDiagnosticsToFixMap[p],
+                                bag,
+                                fixAllState,
+                                cancellationToken
+                            )
                         )
                         .ToArray();
 

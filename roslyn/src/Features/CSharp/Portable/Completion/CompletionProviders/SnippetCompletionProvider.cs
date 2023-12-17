@@ -237,17 +237,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var snippets = service.GetSnippetsIfAvailable();
             if (context.CompletionOptions.ShouldShowNewSnippetExperience(context.Document))
             {
-                snippets = snippets.Where(
-                    snippet => !s_snippetsWithReplacements.Contains(snippet.Shortcut)
+                snippets = snippets.Where(snippet =>
+                    !s_snippetsWithReplacements.Contains(snippet.Shortcut)
                 );
             }
 
             if (isPreProcessorContext)
             {
-                snippets = snippets.Where(
-                    snippet =>
-                        snippet.Shortcut != null
-                        && snippet.Shortcut.StartsWith("#", StringComparison.Ordinal)
+                snippets = snippets.Where(snippet =>
+                    snippet.Shortcut != null
+                    && snippet.Shortcut.StartsWith("#", StringComparison.Ordinal)
                 );
             }
 

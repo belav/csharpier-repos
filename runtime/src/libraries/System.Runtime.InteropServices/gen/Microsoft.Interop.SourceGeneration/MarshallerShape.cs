@@ -274,8 +274,8 @@ namespace Microsoft.Interop
             // static void Free(TNative unmanaged)
             return type.GetMembers(ShapeMemberNames.Free)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m => m is { IsStatic: true, Parameters.Length: 1, ReturnsVoid: true }
+                .FirstOrDefault(m =>
+                    m is { IsStatic: true, Parameters.Length: 1, ReturnsVoid: true }
                 );
         }
 
@@ -289,12 +289,11 @@ namespace Microsoft.Interop
             // static ref readonly TOther GetPinnableReference(TManaged managed)
             return type.GetMembers(ShapeMemberNames.GetPinnableReference)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m =>
-                        m
-                            is { IsStatic: true, Parameters.Length: 1 }
-                                and ({ ReturnsByRef: true } or { ReturnsByRefReadonly: true })
-                        && SymbolEqualityComparer.Default.Equals(m.Parameters[0].Type, managedType)
+                .FirstOrDefault(m =>
+                    m
+                        is { IsStatic: true, Parameters.Length: 1 }
+                            and ({ ReturnsByRef: true } or { ReturnsByRefReadonly: true })
+                    && SymbolEqualityComparer.Default.Equals(m.Parameters[0].Type, managedType)
                 );
         }
 
@@ -351,13 +350,9 @@ namespace Microsoft.Interop
                 // static TNative ConvertToUnmanaged(TManaged managed)
                 return type.GetMembers(ShapeMemberNames.Value.Stateless.ConvertToUnmanaged)
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m is { IsStatic: true, Parameters.Length: 1, ReturnsVoid: false }
-                            && SymbolEqualityComparer.Default.Equals(
-                                managedType,
-                                m.Parameters[0].Type
-                            )
+                    .FirstOrDefault(m =>
+                        m is { IsStatic: true, Parameters.Length: 1, ReturnsVoid: false }
+                        && SymbolEqualityComparer.Default.Equals(managedType, m.Parameters[0].Type)
                     );
             }
 
@@ -372,13 +367,9 @@ namespace Microsoft.Interop
                         ShapeMemberNames.Value.Stateless.ConvertToUnmanaged
                     )
                     .OfType<IMethodSymbol>()
-                    .Where(
-                        m =>
-                            m is { IsStatic: true, Parameters.Length: 2, ReturnsVoid: false }
-                            && SymbolEqualityComparer.Default.Equals(
-                                managedType,
-                                m.Parameters[0].Type
-                            )
+                    .Where(m =>
+                        m is { IsStatic: true, Parameters.Length: 2, ReturnsVoid: false }
+                        && SymbolEqualityComparer.Default.Equals(managedType, m.Parameters[0].Type)
                     );
 
                 foreach (IMethodSymbol method in methods)
@@ -400,10 +391,9 @@ namespace Microsoft.Interop
                 // static TManaged ConvertToManaged(TNative unmanaged)
                 return type.GetMembers(ShapeMemberNames.Value.Stateless.ConvertToManaged)
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m is { IsStatic: true, Parameters.Length: 1, ReturnsVoid: false }
-                            && SymbolEqualityComparer.Default.Equals(managedType, m.ReturnType)
+                    .FirstOrDefault(m =>
+                        m is { IsStatic: true, Parameters.Length: 1, ReturnsVoid: false }
+                        && SymbolEqualityComparer.Default.Equals(managedType, m.ReturnType)
                     );
             }
 
@@ -415,10 +405,9 @@ namespace Microsoft.Interop
                 // static TManaged ConvertToManagedFinally(TNative unmanaged)
                 return type.GetMembers(ShapeMemberNames.Value.Stateless.ConvertToManagedFinally)
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m is { IsStatic: true, Parameters.Length: 1, ReturnsVoid: false }
-                            && SymbolEqualityComparer.Default.Equals(managedType, m.ReturnType)
+                    .FirstOrDefault(m =>
+                        m is { IsStatic: true, Parameters.Length: 1, ReturnsVoid: false }
+                        && SymbolEqualityComparer.Default.Equals(managedType, m.ReturnType)
                     );
             }
         }
@@ -438,12 +427,11 @@ namespace Microsoft.Interop
                             .AllocateContainerForUnmanagedElements
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m is { IsStatic: true, Parameters.Length: 2, ReturnsVoid: false }
-                            && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
-                            && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
-                            && m.Parameters[1].RefKind == RefKind.Out
+                    .FirstOrDefault(m =>
+                        m is { IsStatic: true, Parameters.Length: 2, ReturnsVoid: false }
+                        && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
+                        && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
+                        && m.Parameters[1].RefKind == RefKind.Out
                     );
             }
 
@@ -461,12 +449,11 @@ namespace Microsoft.Interop
                             .AllocateContainerForUnmanagedElements
                     )
                     .OfType<IMethodSymbol>()
-                    .Where(
-                        m =>
-                            m is { IsStatic: true, Parameters.Length: 3, ReturnsVoid: false }
-                            && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
-                            && m.Parameters[2].Type.SpecialType == SpecialType.System_Int32
-                            && m.Parameters[2].RefKind == RefKind.Out
+                    .Where(m =>
+                        m is { IsStatic: true, Parameters.Length: 3, ReturnsVoid: false }
+                        && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
+                        && m.Parameters[2].Type.SpecialType == SpecialType.System_Int32
+                        && m.Parameters[2].RefKind == RefKind.Out
                     );
 
                 foreach (IMethodSymbol method in methods)
@@ -491,20 +478,19 @@ namespace Microsoft.Interop
                         ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesSource
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m
-                                is {
-                                    IsStatic: true,
-                                    Parameters.Length: 1,
-                                    ReturnsVoid: false,
-                                    ReturnType: INamedTypeSymbol returnType
-                                }
-                            && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
-                            && SymbolEqualityComparer.Default.Equals(
-                                readOnlySpanOfT,
-                                returnType.ConstructedFrom
-                            )
+                    .FirstOrDefault(m =>
+                        m
+                            is {
+                                IsStatic: true,
+                                Parameters.Length: 1,
+                                ReturnsVoid: false,
+                                ReturnType: INamedTypeSymbol returnType
+                            }
+                        && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
+                        && SymbolEqualityComparer.Default.Equals(
+                            readOnlySpanOfT,
+                            returnType.ConstructedFrom
+                        )
                     );
             }
 
@@ -518,20 +504,19 @@ namespace Microsoft.Interop
                         ShapeMemberNames.LinearCollection.Stateless.GetUnmanagedValuesDestination
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m
-                                is {
-                                    IsStatic: true,
-                                    Parameters.Length: 2,
-                                    ReturnsVoid: false,
-                                    ReturnType: INamedTypeSymbol returnType
-                                }
-                            && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
-                            && SymbolEqualityComparer.Default.Equals(
-                                spanOfT,
-                                returnType.ConstructedFrom
-                            )
+                    .FirstOrDefault(m =>
+                        m
+                            is {
+                                IsStatic: true,
+                                Parameters.Length: 2,
+                                ReturnsVoid: false,
+                                ReturnType: INamedTypeSymbol returnType
+                            }
+                        && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
+                        && SymbolEqualityComparer.Default.Equals(
+                            spanOfT,
+                            returnType.ConstructedFrom
+                        )
                     );
             }
 
@@ -548,11 +533,10 @@ namespace Microsoft.Interop
                             .AllocateContainerForManagedElements
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m is { IsStatic: true, Parameters.Length: 2, ReturnsVoid: false }
-                            && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
-                            && managedType.IsConstructedFromEqualTypes(m.ReturnType)
+                    .FirstOrDefault(m =>
+                        m is { IsStatic: true, Parameters.Length: 2, ReturnsVoid: false }
+                        && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
+                        && managedType.IsConstructedFromEqualTypes(m.ReturnType)
                     );
             }
 
@@ -569,11 +553,10 @@ namespace Microsoft.Interop
                             .AllocateContainerForManagedElementsFinally
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m is { IsStatic: true, Parameters.Length: 2, ReturnsVoid: false }
-                            && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
-                            && managedType.IsConstructedFromEqualTypes(m.ReturnType)
+                    .FirstOrDefault(m =>
+                        m is { IsStatic: true, Parameters.Length: 2, ReturnsVoid: false }
+                        && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
+                        && managedType.IsConstructedFromEqualTypes(m.ReturnType)
                     );
             }
 
@@ -588,20 +571,19 @@ namespace Microsoft.Interop
                         ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesDestination
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m
-                                is {
-                                    IsStatic: true,
-                                    Parameters.Length: 1,
-                                    ReturnsVoid: false,
-                                    ReturnType: INamedTypeSymbol returnType
-                                }
-                            && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
-                            && SymbolEqualityComparer.Default.Equals(
-                                spanOfT,
-                                returnType.ConstructedFrom
-                            )
+                    .FirstOrDefault(m =>
+                        m
+                            is {
+                                IsStatic: true,
+                                Parameters.Length: 1,
+                                ReturnsVoid: false,
+                                ReturnType: INamedTypeSymbol returnType
+                            }
+                        && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
+                        && SymbolEqualityComparer.Default.Equals(
+                            spanOfT,
+                            returnType.ConstructedFrom
+                        )
                     );
             }
 
@@ -615,20 +597,19 @@ namespace Microsoft.Interop
                         ShapeMemberNames.LinearCollection.Stateless.GetUnmanagedValuesSource
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m
-                                is {
-                                    IsStatic: true,
-                                    Parameters.Length: 2,
-                                    ReturnsVoid: false,
-                                    ReturnType: INamedTypeSymbol returnType
-                                }
-                            && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
-                            && SymbolEqualityComparer.Default.Equals(
-                                readOnlySpanOfT,
-                                returnType.ConstructedFrom
-                            )
+                    .FirstOrDefault(m =>
+                        m
+                            is {
+                                IsStatic: true,
+                                Parameters.Length: 2,
+                                ReturnsVoid: false,
+                                ReturnType: INamedTypeSymbol returnType
+                            }
+                        && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
+                        && SymbolEqualityComparer.Default.Equals(
+                            readOnlySpanOfT,
+                            returnType.ConstructedFrom
+                        )
                     );
             }
         }
@@ -844,10 +825,9 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(ShapeMemberNames.Value.Stateful.FromManaged)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m =>
-                        m is { IsStatic: false, Parameters.Length: 1, ReturnsVoid: true }
-                        && SymbolEqualityComparer.Default.Equals(managedType, m.Parameters[0].Type)
+                .FirstOrDefault(m =>
+                    m is { IsStatic: false, Parameters.Length: 1, ReturnsVoid: true }
+                    && SymbolEqualityComparer.Default.Equals(managedType, m.Parameters[0].Type)
                 );
         }
 
@@ -861,10 +841,9 @@ namespace Microsoft.Interop
                     ShapeMemberNames.Value.Stateful.FromManaged
                 )
                 .OfType<IMethodSymbol>()
-                .Where(
-                    m =>
-                        m is { IsStatic: false, Parameters.Length: 2, ReturnsVoid: true }
-                        && SymbolEqualityComparer.Default.Equals(managedType, m.Parameters[0].Type)
+                .Where(m =>
+                    m is { IsStatic: false, Parameters.Length: 2, ReturnsVoid: true }
+                    && SymbolEqualityComparer.Default.Equals(managedType, m.Parameters[0].Type)
                 );
 
             foreach (IMethodSymbol method in methods)
@@ -888,17 +867,16 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(ShapeMemberNames.Value.Stateful.ToManaged)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m =>
-                        m
-                            is {
-                                IsStatic: false,
-                                Parameters.Length: 0,
-                                ReturnsVoid: false,
-                                ReturnsByRef: false,
-                                ReturnsByRefReadonly: false
-                            }
-                        && SymbolEqualityComparer.Default.Equals(managedType, m.ReturnType)
+                .FirstOrDefault(m =>
+                    m
+                        is {
+                            IsStatic: false,
+                            Parameters.Length: 0,
+                            ReturnsVoid: false,
+                            ReturnsByRef: false,
+                            ReturnsByRefReadonly: false
+                        }
+                    && SymbolEqualityComparer.Default.Equals(managedType, m.ReturnType)
                 );
         }
 
@@ -909,17 +887,16 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(ShapeMemberNames.Value.Stateful.ToManagedFinally)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m =>
-                        m
-                            is {
-                                IsStatic: false,
-                                Parameters.Length: 0,
-                                ReturnsVoid: false,
-                                ReturnsByRef: false,
-                                ReturnsByRefReadonly: false
-                            }
-                        && SymbolEqualityComparer.Default.Equals(managedType, m.ReturnType)
+                .FirstOrDefault(m =>
+                    m
+                        is {
+                            IsStatic: false,
+                            Parameters.Length: 0,
+                            ReturnsVoid: false,
+                            ReturnsByRef: false,
+                            ReturnsByRefReadonly: false
+                        }
+                    && SymbolEqualityComparer.Default.Equals(managedType, m.ReturnType)
                 );
         }
 
@@ -927,16 +904,15 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(ShapeMemberNames.Value.Stateful.ToUnmanaged)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m =>
-                        m
-                            is {
-                                IsStatic: false,
-                                Parameters.Length: 0,
-                                ReturnsVoid: false,
-                                ReturnsByRef: false,
-                                ReturnsByRefReadonly: false
-                            }
+                .FirstOrDefault(m =>
+                    m
+                        is {
+                            IsStatic: false,
+                            Parameters.Length: 0,
+                            ReturnsVoid: false,
+                            ReturnsByRef: false,
+                            ReturnsByRefReadonly: false
+                        }
                 );
         }
 
@@ -993,8 +969,8 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(ShapeMemberNames.Value.Stateful.Free)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m => m is { IsStatic: false, Parameters.Length: 0, ReturnsVoid: true }
+                .FirstOrDefault(m =>
+                    m is { IsStatic: false, Parameters.Length: 0, ReturnsVoid: true }
                 );
         }
 
@@ -1002,8 +978,8 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(ShapeMemberNames.Value.Stateful.OnInvoked)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m => m is { IsStatic: false, Parameters.Length: 0, ReturnsVoid: true }
+                .FirstOrDefault(m =>
+                    m is { IsStatic: false, Parameters.Length: 0, ReturnsVoid: true }
                 );
         }
 
@@ -1014,12 +990,11 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(ShapeMemberNames.GetPinnableReference)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m =>
-                        m
-                            is { IsStatic: true, Parameters.Length: 1 }
-                                and ({ ReturnsByRef: true } or { ReturnsByRefReadonly: true })
-                        && SymbolEqualityComparer.Default.Equals(m.Parameters[0].Type, managedType)
+                .FirstOrDefault(m =>
+                    m
+                        is { IsStatic: true, Parameters.Length: 1 }
+                            and ({ ReturnsByRef: true } or { ReturnsByRefReadonly: true })
+                    && SymbolEqualityComparer.Default.Equals(m.Parameters[0].Type, managedType)
                 );
         }
 
@@ -1027,11 +1002,10 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(ShapeMemberNames.GetPinnableReference)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(
-                    m =>
-                        m
-                            is { IsStatic: false, Parameters.Length: 0 }
-                                and ({ ReturnsByRef: true } or { ReturnsByRefReadonly: true })
+                .FirstOrDefault(m =>
+                    m
+                        is { IsStatic: false, Parameters.Length: 0 }
+                            and ({ ReturnsByRef: true } or { ReturnsByRefReadonly: true })
                 );
         }
 
@@ -1047,19 +1021,18 @@ namespace Microsoft.Interop
                         ShapeMemberNames.LinearCollection.Stateful.GetManagedValuesSource
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m
-                                is {
-                                    IsStatic: false,
-                                    Parameters.Length: 0,
-                                    ReturnsVoid: false,
-                                    ReturnType: INamedTypeSymbol returnType
-                                }
-                            && SymbolEqualityComparer.Default.Equals(
-                                readOnlySpanOfT,
-                                returnType.ConstructedFrom
-                            )
+                    .FirstOrDefault(m =>
+                        m
+                            is {
+                                IsStatic: false,
+                                Parameters.Length: 0,
+                                ReturnsVoid: false,
+                                ReturnType: INamedTypeSymbol returnType
+                            }
+                        && SymbolEqualityComparer.Default.Equals(
+                            readOnlySpanOfT,
+                            returnType.ConstructedFrom
+                        )
                     );
             }
 
@@ -1073,19 +1046,18 @@ namespace Microsoft.Interop
                         ShapeMemberNames.LinearCollection.Stateful.GetUnmanagedValuesDestination
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m
-                                is {
-                                    IsStatic: false,
-                                    Parameters.Length: 0,
-                                    ReturnsVoid: false,
-                                    ReturnType: INamedTypeSymbol returnType
-                                }
-                            && SymbolEqualityComparer.Default.Equals(
-                                spanOfT,
-                                returnType.ConstructedFrom
-                            )
+                    .FirstOrDefault(m =>
+                        m
+                            is {
+                                IsStatic: false,
+                                Parameters.Length: 0,
+                                ReturnsVoid: false,
+                                ReturnType: INamedTypeSymbol returnType
+                            }
+                        && SymbolEqualityComparer.Default.Equals(
+                            spanOfT,
+                            returnType.ConstructedFrom
+                        )
                     );
             }
 
@@ -1099,20 +1071,19 @@ namespace Microsoft.Interop
                         ShapeMemberNames.LinearCollection.Stateful.GetManagedValuesDestination
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m
-                                is {
-                                    IsStatic: false,
-                                    Parameters.Length: 1,
-                                    ReturnsVoid: false,
-                                    ReturnType: INamedTypeSymbol returnType
-                                }
-                            && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32
-                            && SymbolEqualityComparer.Default.Equals(
-                                spanOfT,
-                                returnType.ConstructedFrom
-                            )
+                    .FirstOrDefault(m =>
+                        m
+                            is {
+                                IsStatic: false,
+                                Parameters.Length: 1,
+                                ReturnsVoid: false,
+                                ReturnType: INamedTypeSymbol returnType
+                            }
+                        && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32
+                        && SymbolEqualityComparer.Default.Equals(
+                            spanOfT,
+                            returnType.ConstructedFrom
+                        )
                     );
             }
 
@@ -1126,20 +1097,19 @@ namespace Microsoft.Interop
                         ShapeMemberNames.LinearCollection.Stateful.GetUnmanagedValuesSource
                     )
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(
-                        m =>
-                            m
-                                is {
-                                    IsStatic: false,
-                                    Parameters.Length: 1,
-                                    ReturnsVoid: false,
-                                    ReturnType: INamedTypeSymbol returnType
-                                }
-                            && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32
-                            && SymbolEqualityComparer.Default.Equals(
-                                readOnlySpanOfT,
-                                returnType.ConstructedFrom
-                            )
+                    .FirstOrDefault(m =>
+                        m
+                            is {
+                                IsStatic: false,
+                                Parameters.Length: 1,
+                                ReturnsVoid: false,
+                                ReturnType: INamedTypeSymbol returnType
+                            }
+                        && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32
+                        && SymbolEqualityComparer.Default.Equals(
+                            readOnlySpanOfT,
+                            returnType.ConstructedFrom
+                        )
                     );
             }
         }

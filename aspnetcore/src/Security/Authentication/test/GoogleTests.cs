@@ -1409,116 +1409,114 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     )
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                builder =>
-                    builder
-                        .UseTestServer()
-                        .Configure(app =>
-                        {
-                            app.UseAuthentication();
-                            app.Use(
-                                async (context, next) =>
+            .ConfigureWebHost(builder =>
+                builder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseAuthentication();
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                var req = context.Request;
+                                var res = context.Response;
+                                if (req.Path == new PathString("/challenge"))
                                 {
-                                    var req = context.Request;
-                                    var res = context.Response;
-                                    if (req.Path == new PathString("/challenge"))
-                                    {
-                                        await context.ChallengeAsync();
-                                    }
-                                    else if (req.Path == new PathString("/challengeFacebook"))
-                                    {
-                                        await context.ChallengeAsync("Facebook");
-                                    }
-                                    else if (req.Path == new PathString("/tokens"))
-                                    {
-                                        var result = await context.AuthenticateAsync(
-                                            TestExtensions.CookieAuthenticationScheme
-                                        );
-                                        var tokens = result.Properties.GetTokens();
-                                        await res.DescribeAsync(tokens);
-                                    }
-                                    else if (req.Path == new PathString("/me"))
-                                    {
-                                        await res.DescribeAsync(context.User);
-                                    }
-                                    else if (req.Path == new PathString("/authenticate"))
-                                    {
-                                        var result = await context.AuthenticateAsync(
-                                            TestExtensions.CookieAuthenticationScheme
-                                        );
-                                        await res.DescribeAsync(result.Principal);
-                                    }
-                                    else if (req.Path == new PathString("/authenticateGoogle"))
-                                    {
-                                        var result = await context.AuthenticateAsync("Google");
-                                        await res.DescribeAsync(result?.Principal);
-                                    }
-                                    else if (req.Path == new PathString("/authenticateFacebook"))
-                                    {
-                                        var result = await context.AuthenticateAsync("Facebook");
-                                        await res.DescribeAsync(result?.Principal);
-                                    }
-                                    else if (req.Path == new PathString("/unauthorized"))
-                                    {
-                                        // Simulate Authorization failure
-                                        var result = await context.AuthenticateAsync("Google");
-                                        await context.ChallengeAsync("Google");
-                                    }
-                                    else if (req.Path == new PathString("/unauthorizedAuto"))
-                                    {
-                                        var result = await context.AuthenticateAsync("Google");
-                                        await context.ChallengeAsync("Google");
-                                    }
-                                    else if (req.Path == new PathString("/401"))
-                                    {
-                                        res.StatusCode = 401;
-                                    }
-                                    else if (req.Path == new PathString("/signIn"))
-                                    {
-                                        await Assert.ThrowsAsync<InvalidOperationException>(
-                                            () =>
-                                                context.SignInAsync("Google", new ClaimsPrincipal())
-                                        );
-                                    }
-                                    else if (req.Path == new PathString("/signOut"))
-                                    {
-                                        await Assert.ThrowsAsync<InvalidOperationException>(
-                                            () => context.SignOutAsync("Google")
-                                        );
-                                    }
-                                    else if (req.Path == new PathString("/forbid"))
-                                    {
-                                        await Assert.ThrowsAsync<InvalidOperationException>(
-                                            () => context.ForbidAsync("Google")
-                                        );
-                                    }
-                                    else if (testpath != null)
-                                    {
-                                        await testpath(context);
-                                    }
-                                    else
-                                    {
-                                        await next(context);
-                                    }
+                                    await context.ChallengeAsync();
                                 }
-                            );
-                        })
-                        .ConfigureServices(services =>
-                        {
-                            services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
-                            services
-                                .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
-                                .AddCookie(
-                                    TestExtensions.CookieAuthenticationScheme,
-                                    o => o.ForwardChallenge = GoogleDefaults.AuthenticationScheme
-                                )
-                                .AddGoogle(configureOptions)
-                                .AddFacebook(o =>
+                                else if (req.Path == new PathString("/challengeFacebook"))
                                 {
-                                    o.ClientId = "Test ClientId";
-                                    o.ClientSecret = "Test AppSecrent";
-                                });
-                        })
+                                    await context.ChallengeAsync("Facebook");
+                                }
+                                else if (req.Path == new PathString("/tokens"))
+                                {
+                                    var result = await context.AuthenticateAsync(
+                                        TestExtensions.CookieAuthenticationScheme
+                                    );
+                                    var tokens = result.Properties.GetTokens();
+                                    await res.DescribeAsync(tokens);
+                                }
+                                else if (req.Path == new PathString("/me"))
+                                {
+                                    await res.DescribeAsync(context.User);
+                                }
+                                else if (req.Path == new PathString("/authenticate"))
+                                {
+                                    var result = await context.AuthenticateAsync(
+                                        TestExtensions.CookieAuthenticationScheme
+                                    );
+                                    await res.DescribeAsync(result.Principal);
+                                }
+                                else if (req.Path == new PathString("/authenticateGoogle"))
+                                {
+                                    var result = await context.AuthenticateAsync("Google");
+                                    await res.DescribeAsync(result?.Principal);
+                                }
+                                else if (req.Path == new PathString("/authenticateFacebook"))
+                                {
+                                    var result = await context.AuthenticateAsync("Facebook");
+                                    await res.DescribeAsync(result?.Principal);
+                                }
+                                else if (req.Path == new PathString("/unauthorized"))
+                                {
+                                    // Simulate Authorization failure
+                                    var result = await context.AuthenticateAsync("Google");
+                                    await context.ChallengeAsync("Google");
+                                }
+                                else if (req.Path == new PathString("/unauthorizedAuto"))
+                                {
+                                    var result = await context.AuthenticateAsync("Google");
+                                    await context.ChallengeAsync("Google");
+                                }
+                                else if (req.Path == new PathString("/401"))
+                                {
+                                    res.StatusCode = 401;
+                                }
+                                else if (req.Path == new PathString("/signIn"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(
+                                        () => context.SignInAsync("Google", new ClaimsPrincipal())
+                                    );
+                                }
+                                else if (req.Path == new PathString("/signOut"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(
+                                        () => context.SignOutAsync("Google")
+                                    );
+                                }
+                                else if (req.Path == new PathString("/forbid"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(
+                                        () => context.ForbidAsync("Google")
+                                    );
+                                }
+                                else if (testpath != null)
+                                {
+                                    await testpath(context);
+                                }
+                                else
+                                {
+                                    await next(context);
+                                }
+                            }
+                        );
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
+                        services
+                            .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
+                            .AddCookie(
+                                TestExtensions.CookieAuthenticationScheme,
+                                o => o.ForwardChallenge = GoogleDefaults.AuthenticationScheme
+                            )
+                            .AddGoogle(configureOptions)
+                            .AddFacebook(o =>
+                            {
+                                o.ClientId = "Test ClientId";
+                                o.ClientSecret = "Test AppSecrent";
+                            });
+                    })
             )
             .Build();
 

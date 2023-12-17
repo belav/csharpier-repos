@@ -358,11 +358,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     : RefKind.None;
                 _packedFlags.SetRefKind(refKind);
                 _packedFlags.SetIsVolatile(
-                    customModifiersArray.Any(
-                        static m =>
-                            !m.IsOptional
-                            && ((CSharpCustomModifier)m).ModifierSymbol.SpecialType
-                                == SpecialType.System_Runtime_CompilerServices_IsVolatile
+                    customModifiersArray.Any(static m =>
+                        !m.IsOptional
+                        && ((CSharpCustomModifier)m).ModifierSymbol.SpecialType
+                            == SpecialType.System_Runtime_CompilerServices_IsVolatile
                     )
                 );
 

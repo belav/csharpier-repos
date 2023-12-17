@@ -314,7 +314,9 @@ namespace System.ServiceModel.Discovery
         {
             OnEndFind(result);
             var cb =
-                OperationContext.Current.GetCallbackChannel<IDiscoveryTargetCallbackContractApril2005>();
+                OperationContext.Current.GetCallbackChannel<IDiscoveryTargetCallbackContractApril2005>(
+
+                );
             cb.ReplyFind(CreateFindResponseApril2005());
         }
 

@@ -15,9 +15,11 @@ public static class EntityExtensions
             StartTime = session.StartTime,
             EndTime = session.EndTime,
             Speakers = session
-                .SessionSpeakers?.Select(
-                    ss => new ConferenceDTO.Speaker { Id = ss.SpeakerId, Name = ss.Speaker.Name }
-                )
+                .SessionSpeakers?.Select(ss => new ConferenceDTO.Speaker
+                {
+                    Id = ss.SpeakerId,
+                    Name = ss.Speaker.Name
+                })
                 .ToList(),
             TrackId = session.TrackId,
             Track = new ConferenceDTO.Track
@@ -36,9 +38,11 @@ public static class EntityExtensions
             Bio = speaker.Bio,
             WebSite = speaker.WebSite,
             Sessions = speaker
-                .SessionSpeakers?.Select(
-                    ss => new ConferenceDTO.Session { Id = ss.SessionId, Title = ss.Session.Title }
-                )
+                .SessionSpeakers?.Select(ss => new ConferenceDTO.Session
+                {
+                    Id = ss.SessionId,
+                    Title = ss.Session.Title
+                })
                 .ToList()
         };
 
@@ -51,16 +55,13 @@ public static class EntityExtensions
             UserName = attendee.UserName,
             EmailAddress = attendee.EmailAddress,
             Sessions = attendee
-                .SessionsAttendees?.Select(
-                    sa =>
-                        new ConferenceDTO.Session
-                        {
-                            Id = sa.SessionId,
-                            Title = sa.Session.Title,
-                            StartTime = sa.Session.StartTime,
-                            EndTime = sa.Session.EndTime
-                        }
-                )
+                .SessionsAttendees?.Select(sa => new ConferenceDTO.Session
+                {
+                    Id = sa.SessionId,
+                    Title = sa.Session.Title,
+                    StartTime = sa.Session.StartTime,
+                    EndTime = sa.Session.EndTime
+                })
                 .ToList()
         };
 }

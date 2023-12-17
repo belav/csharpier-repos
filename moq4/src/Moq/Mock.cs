@@ -297,8 +297,8 @@ namespace Moq
             var errors = new List<MockException>();
 
             foreach (
-                var setup in this.MutableSetups.FindAll(
-                    setup => !setup.IsConditional && predicate(setup)
+                var setup in this.MutableSetups.FindAll(setup =>
+                    !setup.IsConditional && predicate(setup)
                 )
             )
             {
@@ -448,8 +448,8 @@ namespace Moq
             if (!verifiedMocks.Add(mock))
                 return;
 
-            var unverifiedInvocations = mock.MutableInvocations.ToArray(
-                invocation => !invocation.IsVerified
+            var unverifiedInvocations = mock.MutableInvocations.ToArray(invocation =>
+                !invocation.IsVerified
             );
 
             var innerMocks = mock.MutableSetups.FindAllInnerMocks();
@@ -469,8 +469,8 @@ namespace Moq
                         // sub-object (inner mock); and that sub-object has to have received at least
                         // one call:
                         var wasTransitiveInvocation =
-                            mock.MutableSetups.FindLastInnerMock(
-                                setup => setup.Matches(unverifiedInvocations[i])
+                            mock.MutableSetups.FindLastInnerMock(setup =>
+                                setup.Matches(unverifiedInvocations[i])
                             )
                                 is Mock innerMock
                             && innerMock.MutableInvocations.Any();
@@ -713,8 +713,8 @@ namespace Moq
                                 if (
                                     setter.CanOverride()
                                     && ProxyFactory.Instance.IsMethodVisible(setter, out _)
-                                    && targetMock.MutableSetups.FindLast(
-                                        s => s is StubbedPropertiesSetup
+                                    && targetMock.MutableSetups.FindLast(s =>
+                                        s is StubbedPropertiesSetup
                                     )
                                         is StubbedPropertiesSetup sps
                                 )

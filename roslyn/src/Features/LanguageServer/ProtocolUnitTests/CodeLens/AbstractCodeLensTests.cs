@@ -46,8 +46,8 @@ public abstract class AbstractCodeLensTests : AbstractLanguageServerProtocolTest
         AssertEx.NotNull(actualCodeLenses);
         Assert.NotEmpty(actualCodeLenses);
 
-        var matchingCodeLenses = actualCodeLenses.Where(
-            actualCodeLens => actualCodeLens.Range == expectedCodeLens.Range
+        var matchingCodeLenses = actualCodeLenses.Where(actualCodeLens =>
+            actualCodeLens.Range == expectedCodeLens.Range
         );
         Assert.Single(matchingCodeLenses);
 
@@ -86,11 +86,10 @@ public abstract class AbstractCodeLensTests : AbstractLanguageServerProtocolTest
 
         var matchingCodeLenses = actualCodeLenses
             .Where(actualCodeLens => actualCodeLens.Range == expectedCodeLens.Range)
-            .Where(
-                actualCodeLens =>
-                    actualCodeLens.Command != null
-                    && actualCodeLens.Command.CommandIdentifier
-                        == CodeLensHandler.RunTestsCommandIdentifier
+            .Where(actualCodeLens =>
+                actualCodeLens.Command != null
+                && actualCodeLens.Command.CommandIdentifier
+                    == CodeLensHandler.RunTestsCommandIdentifier
             );
         foreach (var title in commandTitles)
         {

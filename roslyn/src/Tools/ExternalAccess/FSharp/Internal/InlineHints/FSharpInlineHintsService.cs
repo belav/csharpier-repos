@@ -42,9 +42,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.InlineHints
             var hints = await _service
                 .GetInlineHintsAsync(document, textSpan, cancellationToken)
                 .ConfigureAwait(false);
-            return hints.SelectAsArray(
-                h => new InlineHint(h.Span, h.DisplayParts, (d, c) => h.GetDescriptionAsync(d, c))
-            );
+            return hints.SelectAsArray(h => new InlineHint(
+                h.Span,
+                h.DisplayParts,
+                (d, c) => h.GetDescriptionAsync(d, c)
+            ));
         }
     }
 }

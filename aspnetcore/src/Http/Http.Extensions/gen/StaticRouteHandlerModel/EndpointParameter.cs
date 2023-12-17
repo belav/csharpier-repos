@@ -306,15 +306,12 @@ internal class EndpointParameter
                 }
                 return;
             }
-            EndpointParameters = matchedProperties.Select(
-                matchedParameter =>
-                    new EndpointParameter(
-                        endpoint,
-                        matchedParameter.Property,
-                        matchedParameter.Parameter,
-                        wellKnownTypes
-                    )
-            );
+            EndpointParameters = matchedProperties.Select(matchedParameter => new EndpointParameter(
+                endpoint,
+                matchedParameter.Property,
+                matchedParameter.Parameter,
+                wellKnownTypes
+            ));
             if (isDefaultConstructor == true)
             {
                 var parameterList = string.Join(
@@ -833,9 +830,8 @@ internal class EndpointParameter
             return false;
         }
 
-        var constructors = type.Constructors.Where(
-            constructor =>
-                constructor.DeclaredAccessibility == Accessibility.Public && !constructor.IsStatic
+        var constructors = type.Constructors.Where(constructor =>
+            constructor.DeclaredAccessibility == Accessibility.Public && !constructor.IsStatic
         );
         var numOfConstructors = constructors.Count();
         // When leveraging parameterless constructors, we want to ensure we only emit for writable
@@ -860,9 +856,10 @@ internal class EndpointParameter
             if (parameters.Length == 0)
             {
                 isDefaultConstructor = true;
-                matchedProperties = writableProperties.Select(
-                    property => new ConstructorParameter(property, null)
-                );
+                matchedProperties = writableProperties.Select(property => new ConstructorParameter(
+                    property,
+                    null
+                ));
                 return true;
             }
 
@@ -894,9 +891,10 @@ internal class EndpointParameter
         if (type.IsValueType)
         {
             isDefaultConstructor = true;
-            matchedProperties = writableProperties.Select(
-                property => new ConstructorParameter(property, null)
-            );
+            matchedProperties = writableProperties.Select(property => new ConstructorParameter(
+                property,
+                null
+            ));
             return true;
         }
 

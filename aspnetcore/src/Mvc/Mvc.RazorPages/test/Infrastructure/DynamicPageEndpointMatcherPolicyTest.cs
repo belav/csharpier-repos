@@ -92,12 +92,11 @@ public class DynamicPageEndpointMatcherPolicyTest
 
         var loader = new Mock<PageLoader>();
         loader
-            .Setup(
-                l =>
-                    l.LoadAsync(
-                        It.IsAny<PageActionDescriptor>(),
-                        It.IsAny<EndpointMetadataCollection>()
-                    )
+            .Setup(l =>
+                l.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                )
             )
             .Returns(
                 (PageActionDescriptor descriptor, EndpointMetadataCollection endpoint) =>

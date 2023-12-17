@@ -321,8 +321,8 @@ namespace System.Reflection.Tests
         public void DeclaredProperties(Type type, string name)
         {
             TypeInfo typeInfo = type.GetTypeInfo();
-            IEnumerable<string> properties = typeInfo.DeclaredProperties.Select(
-                property => property.Name
+            IEnumerable<string> properties = typeInfo.DeclaredProperties.Select(property =>
+                property.Name
             );
             Assert.Contains(name, properties);
             Assert.Equal(name, typeInfo.GetDeclaredProperty(name).Name);

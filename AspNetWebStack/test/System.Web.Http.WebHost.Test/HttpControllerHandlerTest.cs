@@ -963,15 +963,14 @@ namespace System.Web.Http.WebHost
             }
 
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Returns(tcs.Task);
 
@@ -1042,15 +1041,14 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Throws(new NotSupportedException("Expected error"));
 
@@ -1126,15 +1124,14 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Throws(new HttpResponseException(errorResponse));
 
@@ -1176,15 +1173,14 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Throws(new HttpResponseException(errorResponse));
 
@@ -1228,15 +1224,14 @@ namespace System.Web.Http.WebHost
 
             // This formatter throws on any write attempt
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Returns(tcs.Task);
 
@@ -1286,15 +1281,14 @@ namespace System.Web.Http.WebHost
 
             // This formatter throws on any write attempt
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Throws(new NotSupportedException("Expected error"));
 
@@ -1342,13 +1336,12 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             negotiatorMock
-                .Setup(
-                    m =>
-                        m.Negotiate(
-                            It.IsAny<Type>(),
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>()
-                        )
+                .Setup(m =>
+                    m.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
                 )
                 .Returns(
                     (Type t, HttpRequestMessage r, IEnumerable<MediaTypeFormatter> f) =>
@@ -1372,15 +1365,14 @@ namespace System.Web.Http.WebHost
 
             // This formatter throws on any write attempt
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Throws(new NotSupportedException("Expected error"));
 
@@ -1431,15 +1423,14 @@ namespace System.Web.Http.WebHost
 
             // This formatter throws on any write attempt
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Throws(new NotSupportedException("Expected error"));
 
@@ -1513,15 +1504,14 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Throws(new NotSupportedException("Expected error"));
 
@@ -1564,15 +1554,14 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock
-                .Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Returns(tcs.Task);
 
@@ -1605,12 +1594,8 @@ namespace System.Web.Http.WebHost
             Exception expectedException = CreateException();
 
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(l =>
+                    l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns(Task.FromResult(0));
             IExceptionLogger logger = mock.Object;
@@ -1639,14 +1624,13 @@ namespace System.Web.Http.WebHost
                 mock.Verify(
                     l =>
                         l.LogAsync(
-                            It.Is<ExceptionLoggerContext>(
-                                c =>
-                                    c.ExceptionContext != null
-                                    && c.ExceptionContext.Exception == expectedException
-                                    && c.ExceptionContext.CatchBlock
-                                        == WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent
-                                    && c.ExceptionContext.Request == expectedRequest
-                                    && c.ExceptionContext.Response == expectedResponse
+                            It.Is<ExceptionLoggerContext>(c =>
+                                c.ExceptionContext != null
+                                && c.ExceptionContext.Exception == expectedException
+                                && c.ExceptionContext.CatchBlock
+                                    == WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent
+                                && c.ExceptionContext.Request == expectedRequest
+                                && c.ExceptionContext.Response == expectedResponse
                             ),
                             expectedCancellationToken
                         ),
@@ -1735,8 +1719,8 @@ namespace System.Web.Http.WebHost
                 loggerMock.Verify(
                     l =>
                         l.LogAsync(
-                            It.Is<ExceptionLoggerContext>(
-                                c => exceptionContextMatches(c.ExceptionContext)
+                            It.Is<ExceptionLoggerContext>(c =>
+                                exceptionContextMatches(c.ExceptionContext)
                             ),
                             expectedCancellationToken
                         ),
@@ -1745,8 +1729,8 @@ namespace System.Web.Http.WebHost
                 handlerMock.Verify(
                     l =>
                         l.HandleAsync(
-                            It.Is<ExceptionHandlerContext>(
-                                c => exceptionContextMatches(c.ExceptionContext)
+                            It.Is<ExceptionHandlerContext>(c =>
+                                exceptionContextMatches(c.ExceptionContext)
                             ),
                             expectedCancellationToken
                         ),
@@ -1806,12 +1790,11 @@ namespace System.Web.Http.WebHost
                     MockBehavior.Strict
                 );
                 handlerMock
-                    .Setup(
-                        h =>
-                            h.HandleAsync(
-                                It.IsAny<ExceptionHandlerContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
+                    .Setup(h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
                     )
                     .Returns<ExceptionHandlerContext, CancellationToken>(
                         (c, i) =>
@@ -1910,12 +1893,11 @@ namespace System.Web.Http.WebHost
                     MockBehavior.Strict
                 );
                 handlerMock
-                    .Setup(
-                        h =>
-                            h.HandleAsync(
-                                It.IsAny<ExceptionHandlerContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
+                    .Setup(h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
                     )
                     .Returns<ExceptionHandlerContext, CancellationToken>(
                         (c, i) =>
@@ -1945,14 +1927,13 @@ namespace System.Web.Http.WebHost
                 loggerMock.Verify(
                     l =>
                         l.LogAsync(
-                            It.Is<ExceptionLoggerContext>(
-                                c =>
-                                    c.ExceptionContext != null
-                                    && c.ExceptionContext.Exception == expectedOriginalException
-                                    && c.ExceptionContext.CatchBlock
-                                        == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
-                                    && c.ExceptionContext.Request == expectedRequest
-                                    && c.ExceptionContext.Response == expectedOriginalResponse
+                            It.Is<ExceptionLoggerContext>(c =>
+                                c.ExceptionContext != null
+                                && c.ExceptionContext.Exception == expectedOriginalException
+                                && c.ExceptionContext.CatchBlock
+                                    == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+                                && c.ExceptionContext.Request == expectedRequest
+                                && c.ExceptionContext.Response == expectedOriginalResponse
                             ),
                             expectedCancellationToken
                         ),
@@ -1961,14 +1942,13 @@ namespace System.Web.Http.WebHost
                 loggerMock.Verify(
                     l =>
                         l.LogAsync(
-                            It.Is<ExceptionLoggerContext>(
-                                c =>
-                                    c.ExceptionContext != null
-                                    && c.ExceptionContext.Exception == expectedErrorException
-                                    && c.ExceptionContext.CatchBlock
-                                        == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError
-                                    && c.ExceptionContext.Request == expectedRequest
-                                    && c.ExceptionContext.Response == expectedErrorResponse
+                            It.Is<ExceptionLoggerContext>(c =>
+                                c.ExceptionContext != null
+                                && c.ExceptionContext.Exception == expectedErrorException
+                                && c.ExceptionContext.CatchBlock
+                                    == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError
+                                && c.ExceptionContext.Request == expectedRequest
+                                && c.ExceptionContext.Response == expectedErrorResponse
                             ),
                             expectedCancellationToken
                         ),
@@ -1998,12 +1978,11 @@ namespace System.Web.Http.WebHost
                     MockBehavior.Strict
                 );
                 handlerMock
-                    .Setup(
-                        h =>
-                            h.HandleAsync(
-                                It.IsAny<ExceptionHandlerContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
+                    .Setup(h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
                     )
                     .Returns<ExceptionHandlerContext, CancellationToken>(
                         (c, i) =>
@@ -2035,14 +2014,13 @@ namespace System.Web.Http.WebHost
                 loggerMock.Verify(
                     l =>
                         l.LogAsync(
-                            It.Is<ExceptionLoggerContext>(
-                                c =>
-                                    c.ExceptionContext != null
-                                    && c.ExceptionContext.Exception == expectedOriginalException
-                                    && c.ExceptionContext.CatchBlock
-                                        == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
-                                    && c.ExceptionContext.Request == expectedRequest
-                                    && c.ExceptionContext.Response == expectedOriginalResponse
+                            It.Is<ExceptionLoggerContext>(c =>
+                                c.ExceptionContext != null
+                                && c.ExceptionContext.Exception == expectedOriginalException
+                                && c.ExceptionContext.CatchBlock
+                                    == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+                                && c.ExceptionContext.Request == expectedRequest
+                                && c.ExceptionContext.Response == expectedOriginalResponse
                             ),
                             expectedCancellationToken
                         ),
@@ -2051,14 +2029,13 @@ namespace System.Web.Http.WebHost
                 loggerMock.Verify(
                     l =>
                         l.LogAsync(
-                            It.Is<ExceptionLoggerContext>(
-                                c =>
-                                    c.ExceptionContext != null
-                                    && c.ExceptionContext.Exception == expectedErrorException
-                                    && c.ExceptionContext.CatchBlock
-                                        == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError
-                                    && c.ExceptionContext.Request == expectedRequest
-                                    && c.ExceptionContext.Response == expectedErrorResponse
+                            It.Is<ExceptionLoggerContext>(c =>
+                                c.ExceptionContext != null
+                                && c.ExceptionContext.Exception == expectedErrorException
+                                && c.ExceptionContext.CatchBlock
+                                    == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError
+                                && c.ExceptionContext.Request == expectedRequest
+                                && c.ExceptionContext.Response == expectedErrorResponse
                             ),
                             expectedCancellationToken
                         ),
@@ -2098,14 +2075,13 @@ namespace System.Web.Http.WebHost
                 loggerMock.Verify(
                     l =>
                         l.LogAsync(
-                            It.Is<ExceptionLoggerContext>(
-                                c =>
-                                    c.ExceptionContext != null
-                                    && c.ExceptionContext.Exception == expectedException
-                                    && c.ExceptionContext.CatchBlock
-                                        == WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength
-                                    && c.ExceptionContext.Request == expectedRequest
-                                    && c.ExceptionContext.Response == expectedResponse
+                            It.Is<ExceptionLoggerContext>(c =>
+                                c.ExceptionContext != null
+                                && c.ExceptionContext.Exception == expectedException
+                                && c.ExceptionContext.CatchBlock
+                                    == WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength
+                                && c.ExceptionContext.Request == expectedRequest
+                                && c.ExceptionContext.Response == expectedResponse
                             ),
                             expectedCancellationToken
                         ),
@@ -2480,12 +2456,11 @@ namespace System.Web.Http.WebHost
         private static Mock<IExceptionHandler> CreateStubExceptionHandlerMock()
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-            mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(Task.FromResult(0));
             return mock;
@@ -2499,12 +2474,8 @@ namespace System.Web.Http.WebHost
         private static Mock<IExceptionLogger> CreateStubExceptionLoggerMock()
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(l =>
+                    l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns(Task.FromResult(0));
             return mock;

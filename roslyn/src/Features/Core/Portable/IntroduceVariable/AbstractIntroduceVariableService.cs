@@ -509,8 +509,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             CancellationToken cancellationToken
         )
         {
-            var semanticFacts =
-                semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
+            var semanticFacts = semanticDocument.Document.GetLanguageService<ISemanticFactsService>(
+
+            );
 
             var semanticModel = semanticDocument.SemanticModel;
             var baseName = semanticFacts.GenerateNameForExpression(
@@ -540,8 +541,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
         {
             var semanticModel = semanticDocument.SemanticModel;
 
-            var semanticFacts =
-                semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
+            var semanticFacts = semanticDocument.Document.GetLanguageService<ISemanticFactsService>(
+
+            );
             var baseName = semanticFacts.GenerateNameForExpression(
                 semanticModel,
                 expression,

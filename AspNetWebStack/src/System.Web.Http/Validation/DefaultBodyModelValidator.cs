@@ -363,7 +363,9 @@ namespace System.Web.Http.Validation
                     {
                         modelKey = validationContext.RootPrefix;
                         foreach (
-                            IBodyModelValidatorKeyBuilder keyBuilder in validationContext.KeyBuilders.Reverse()
+                            IBodyModelValidatorKeyBuilder keyBuilder in validationContext.KeyBuilders.Reverse(
+
+                            )
                         )
                         {
                             modelKey = keyBuilder.AppendTo(modelKey);

@@ -75,16 +75,10 @@ namespace Microsoft.CodeAnalysis.Remote
                         .GetSourceLocationsAsync(project, query, cancellationToken)
                         .ConfigureAwait(false);
 
-                    return results.SelectAsArray(
-                        r =>
-                            new UnitTestingSourceLocation(
-                                new DocumentIdSpan(
-                                    r.DocumentSpan.Document.Id,
-                                    r.DocumentSpan.SourceSpan
-                                ),
-                                r.Span
-                            )
-                    );
+                    return results.SelectAsArray(r => new UnitTestingSourceLocation(
+                        new DocumentIdSpan(r.DocumentSpan.Document.Id, r.DocumentSpan.SourceSpan),
+                        r.Span
+                    ));
                 },
                 cancellationToken
             );

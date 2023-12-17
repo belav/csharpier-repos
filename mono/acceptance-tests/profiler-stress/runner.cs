@@ -113,12 +113,11 @@ namespace Mono.Profiling.Tests.Stress
             var benchmarks = Directory
                 .EnumerateFiles(benchDir, "*.benchmark")
                 .Select(Benchmark.Load)
-                .Where(
-                    b =>
-                        !b.OnlyExplicit
-                        && b.ClientCommandLine == null
-                        && IsSupported(b)
-                        && regex.IsMatch(b.Name)
+                .Where(b =>
+                    !b.OnlyExplicit
+                    && b.ClientCommandLine == null
+                    && IsSupported(b)
+                    && regex.IsMatch(b.Name)
                 )
                 .OrderBy(b => b.Name)
                 .ToArray();

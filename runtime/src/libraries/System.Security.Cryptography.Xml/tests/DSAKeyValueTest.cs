@@ -82,9 +82,8 @@ namespace System.Security.Cryptography.Xml.Tests
                     "Seed",
                     "PgenCounter"
                 }
-                    .Select(
-                        elementName =>
-                            xmlkey.SelectSingleNode($"/schema:DSAKeyValue/schema:{elementName}", ns)
+                    .Select(elementName =>
+                        xmlkey.SelectSingleNode($"/schema:DSAKeyValue/schema:{elementName}", ns)
                     )
                     .Where(element => element != null);
 

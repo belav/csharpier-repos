@@ -205,12 +205,8 @@ public static class TagHelperOutputExtensions
 
             var arrayOfClasses = currentClassValue
                 .Split(SpaceChars, StringSplitOptions.RemoveEmptyEntries)
-                .SelectMany(
-                    perhapsEncoded =>
-                        perhapsEncoded.Split(
-                            encodedSpaceChars,
-                            StringSplitOptions.RemoveEmptyEntries
-                        )
+                .SelectMany(perhapsEncoded =>
+                    perhapsEncoded.Split(encodedSpaceChars, StringSplitOptions.RemoveEmptyEntries)
                 )
                 .ToArray();
 
@@ -292,9 +288,8 @@ public static class TagHelperOutputExtensions
 
         var listOfClasses = currentClassValue
             .Split(SpaceChars, StringSplitOptions.RemoveEmptyEntries)
-            .SelectMany(
-                perhapsEncoded =>
-                    perhapsEncoded.Split(encodedSpaceChars, StringSplitOptions.RemoveEmptyEntries)
+            .SelectMany(perhapsEncoded =>
+                perhapsEncoded.Split(encodedSpaceChars, StringSplitOptions.RemoveEmptyEntries)
             )
             .ToList();
 

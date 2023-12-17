@@ -47,12 +47,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider
-                    .Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
+                    .Setup(vp =>
+                        vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
                     )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
@@ -165,12 +161,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider
-                    .Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
+                    .Setup(vp =>
+                        vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
                     )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
@@ -540,12 +532,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider
-                    .Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
+                    .Setup(vp =>
+                        vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
                     )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
@@ -611,12 +599,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider
-                    .Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
+                    .Setup(vp =>
+                        vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
                     )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
@@ -671,12 +655,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider
-                    .Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
+                    .Setup(vp =>
+                        vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
                     )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
@@ -742,12 +722,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider
-                    .Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
+                    .Setup(vp =>
+                        vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
                     )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
@@ -1474,12 +1450,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider
-                    .Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
+                    .Setup(vp =>
+                        vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
                     )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
@@ -1546,12 +1518,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider
-                    .Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
+                    .Setup(vp =>
+                        vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
                     )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);

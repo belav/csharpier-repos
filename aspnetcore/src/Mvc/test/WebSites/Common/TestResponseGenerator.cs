@@ -28,11 +28,8 @@ public class TestResponseGenerator
         if (query.ContainsKey("link"))
         {
             var values = query
-                .Where(
-                    kvp =>
-                        kvp.Key != "link"
-                        && kvp.Key != "link_action"
-                        && kvp.Key != "link_controller"
+                .Where(kvp =>
+                    kvp.Key != "link" && kvp.Key != "link_action" && kvp.Key != "link_controller"
                 )
                 .ToDictionary(
                     kvp => kvp.Key.Substring("link_".Length),

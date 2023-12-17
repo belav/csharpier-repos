@@ -184,10 +184,8 @@ namespace Microsoft.Build.Evaluation
         public ICollection<Project> GetLoadedProjects(string fullPath)
         {
             return LoadedProjects
-                .Where(
-                    p =>
-                        p.FullPath != null
-                        && Path.GetFullPath(p.FullPath) == Path.GetFullPath(fullPath)
+                .Where(p =>
+                    p.FullPath != null && Path.GetFullPath(p.FullPath) == Path.GetFullPath(fullPath)
                 )
                 .ToList();
         }

@@ -10898,8 +10898,9 @@ namespace System.Xml.Linq
                     XElement e = source as XElement;
                     if (e != null)
                     {
-                        LineInfoEndElementAnnotation a =
-                            e.Annotation<LineInfoEndElementAnnotation>();
+                        LineInfoEndElementAnnotation a = e.Annotation<LineInfoEndElementAnnotation>(
+
+                        );
                         if (a != null)
                         {
                             return a.lineNumber;
@@ -10929,8 +10930,9 @@ namespace System.Xml.Linq
                     XElement e = source as XElement;
                     if (e != null)
                     {
-                        LineInfoEndElementAnnotation a =
-                            e.Annotation<LineInfoEndElementAnnotation>();
+                        LineInfoEndElementAnnotation a = e.Annotation<LineInfoEndElementAnnotation>(
+
+                        );
                         if (a != null)
                         {
                             return a.linePosition;

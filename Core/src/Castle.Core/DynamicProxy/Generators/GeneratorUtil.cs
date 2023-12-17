@@ -107,10 +107,9 @@ namespace Castle.DynamicProxy.Generators
                 if (
                     parameter
                         .GetCustomAttributes(false)
-                        .Any(
-                            x =>
-                                x.GetType().FullName
-                                == "System.Runtime.CompilerServices.IsReadOnlyAttribute"
+                        .Any(x =>
+                            x.GetType().FullName
+                            == "System.Runtime.CompilerServices.IsReadOnlyAttribute"
                         )
                 )
                 {

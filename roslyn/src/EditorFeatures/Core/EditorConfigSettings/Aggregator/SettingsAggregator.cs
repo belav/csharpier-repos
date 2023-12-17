@@ -85,12 +85,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings
             >();
             providers.Add(commonProvider);
             var solution = workspace.CurrentSolution;
-            var supportsCSharp = solution.Projects.Any(
-                p => p.Language.Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase)
+            var supportsCSharp = solution.Projects.Any(p =>
+                p.Language.Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase)
             );
-            var supportsVisualBasic = solution.Projects.Any(
-                p =>
-                    p.Language.Equals(LanguageNames.VisualBasic, StringComparison.OrdinalIgnoreCase)
+            var supportsVisualBasic = solution.Projects.Any(p =>
+                p.Language.Equals(LanguageNames.VisualBasic, StringComparison.OrdinalIgnoreCase)
             );
             if (supportsCSharp)
             {

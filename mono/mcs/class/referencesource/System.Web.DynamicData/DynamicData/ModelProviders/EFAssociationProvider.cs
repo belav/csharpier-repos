@@ -37,8 +37,8 @@ namespace System.Web.DynamicData.ModelProviders
             {
                 EntityType value = (EntityType)
                     navigationProperty
-                        .ToEndMember.TypeUsage.EdmType.MetadataProperties.Single(
-                            prop => prop.Name == "ElementType"
+                        .ToEndMember.TypeUsage.EdmType.MetadataProperties.Single(prop =>
+                            prop.Name == "ElementType"
                         )
                         .Value;
                 ToTable = parentEntityModel.TableEndLookup[value];
@@ -95,8 +95,8 @@ namespace System.Web.DynamicData.ModelProviders
                 else
                 {
                     // If any of the foreign keys are also PKs, set the flag
-                    IsPrimaryKeyInThisTable = foreignKeyNames.Any(
-                        fkName => primaryKeyNames.Contains(fkName, StringComparer.OrdinalIgnoreCase)
+                    IsPrimaryKeyInThisTable = foreignKeyNames.Any(fkName =>
+                        primaryKeyNames.Contains(fkName, StringComparer.OrdinalIgnoreCase)
                     );
                 }
 
@@ -181,8 +181,8 @@ namespace System.Web.DynamicData.ModelProviders
                     AssociationType relationshipType = (AssociationType)
                         navigationProperty.RelationshipType;
                     ReferentialConstraint constraint =
-                        relationshipType.ReferentialConstraints.FirstOrDefault(
-                            c => c.ToRole == navigationProperty.ToEndMember
+                        relationshipType.ReferentialConstraints.FirstOrDefault(c =>
+                            c.ToRole == navigationProperty.ToEndMember
                         );
                     if (constraint != null)
                     {

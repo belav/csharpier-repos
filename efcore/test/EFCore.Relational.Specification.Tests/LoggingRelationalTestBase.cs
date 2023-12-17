@@ -50,8 +50,8 @@ public abstract class LoggingRelationalTestBase<TBuilder, TExtension> : LoggingT
     public void Logs_context_initialization_migrations_history_table_schema() =>
         Assert.Equal(
             ExpectedMessage("MigrationsHistoryTable=mySchema.MyHistory " + DefaultOptions),
-            ActualMessage(
-                s => CreateOptionsBuilder(s, b => b.MigrationsHistoryTable("MyHistory", "mySchema"))
+            ActualMessage(s =>
+                CreateOptionsBuilder(s, b => b.MigrationsHistoryTable("MyHistory", "mySchema"))
             )
         );
 
@@ -145,20 +145,19 @@ public abstract class LoggingRelationalTestBase<TBuilder, TExtension> : LoggingT
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables.ToString(),
-                definition.GenerateMessage(
-                    l =>
-                        l.Log(
-                            definition.Level,
-                            definition.EventId,
-                            definition.MessageFormat,
-                            "{'FavoritePersonId'}",
-                            nameof(Cat),
-                            nameof(Person),
-                            "{'FavoritePersonId'}",
-                            nameof(Cat),
-                            "{'Id'}",
-                            nameof(Person)
-                        )
+                definition.GenerateMessage(l =>
+                    l.Log(
+                        definition.Level,
+                        definition.EventId,
+                        definition.MessageFormat,
+                        "{'FavoritePersonId'}",
+                        nameof(Cat),
+                        nameof(Person),
+                        "{'FavoritePersonId'}",
+                        nameof(Cat),
+                        "{'Id'}",
+                        nameof(Person)
+                    )
                 ),
                 "RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables"
             ),

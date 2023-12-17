@@ -46,21 +46,20 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task ThrowsIfClientIdMissing()
     {
-        using var host = await CreateHost(
-            services =>
-                services
-                    .AddAuthentication()
-                    .AddOAuth(
-                        "weeblie",
-                        o =>
-                        {
-                            o.SignInScheme = "whatever";
-                            o.CallbackPath = "/";
-                            o.ClientSecret = "whatever";
-                            o.TokenEndpoint = "/";
-                            o.AuthorizationEndpoint = "/";
-                        }
-                    )
+        using var host = await CreateHost(services =>
+            services
+                .AddAuthentication()
+                .AddOAuth(
+                    "weeblie",
+                    o =>
+                    {
+                        o.SignInScheme = "whatever";
+                        o.CallbackPath = "/";
+                        o.ClientSecret = "whatever";
+                        o.TokenEndpoint = "/";
+                        o.AuthorizationEndpoint = "/";
+                    }
+                )
         );
         using var server = host.GetTestServer();
         await Assert.ThrowsAsync<ArgumentException>(
@@ -72,21 +71,20 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task ThrowsIfClientSecretMissing()
     {
-        using var host = await CreateHost(
-            services =>
-                services
-                    .AddAuthentication()
-                    .AddOAuth(
-                        "weeblie",
-                        o =>
-                        {
-                            o.SignInScheme = "whatever";
-                            o.ClientId = "Whatever;";
-                            o.CallbackPath = "/";
-                            o.TokenEndpoint = "/";
-                            o.AuthorizationEndpoint = "/";
-                        }
-                    )
+        using var host = await CreateHost(services =>
+            services
+                .AddAuthentication()
+                .AddOAuth(
+                    "weeblie",
+                    o =>
+                    {
+                        o.SignInScheme = "whatever";
+                        o.ClientId = "Whatever;";
+                        o.CallbackPath = "/";
+                        o.TokenEndpoint = "/";
+                        o.AuthorizationEndpoint = "/";
+                    }
+                )
         );
         using var server = host.GetTestServer();
         await Assert.ThrowsAsync<ArgumentException>(
@@ -98,21 +96,20 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task ThrowsIfCallbackPathMissing()
     {
-        using var host = await CreateHost(
-            services =>
-                services
-                    .AddAuthentication()
-                    .AddOAuth(
-                        "weeblie",
-                        o =>
-                        {
-                            o.ClientId = "Whatever;";
-                            o.ClientSecret = "Whatever;";
-                            o.TokenEndpoint = "/";
-                            o.AuthorizationEndpoint = "/";
-                            o.SignInScheme = "eh";
-                        }
-                    )
+        using var host = await CreateHost(services =>
+            services
+                .AddAuthentication()
+                .AddOAuth(
+                    "weeblie",
+                    o =>
+                    {
+                        o.ClientId = "Whatever;";
+                        o.ClientSecret = "Whatever;";
+                        o.TokenEndpoint = "/";
+                        o.AuthorizationEndpoint = "/";
+                        o.SignInScheme = "eh";
+                    }
+                )
         );
         using var server = host.GetTestServer();
         await Assert.ThrowsAsync<ArgumentException>(
@@ -124,21 +121,20 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task ThrowsIfTokenEndpointMissing()
     {
-        using var host = await CreateHost(
-            services =>
-                services
-                    .AddAuthentication()
-                    .AddOAuth(
-                        "weeblie",
-                        o =>
-                        {
-                            o.ClientId = "Whatever;";
-                            o.ClientSecret = "Whatever;";
-                            o.CallbackPath = "/";
-                            o.AuthorizationEndpoint = "/";
-                            o.SignInScheme = "eh";
-                        }
-                    )
+        using var host = await CreateHost(services =>
+            services
+                .AddAuthentication()
+                .AddOAuth(
+                    "weeblie",
+                    o =>
+                    {
+                        o.ClientId = "Whatever;";
+                        o.ClientSecret = "Whatever;";
+                        o.CallbackPath = "/";
+                        o.AuthorizationEndpoint = "/";
+                        o.SignInScheme = "eh";
+                    }
+                )
         );
         using var server = host.GetTestServer();
         await Assert.ThrowsAsync<ArgumentException>(
@@ -150,21 +146,20 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task ThrowsIfAuthorizationEndpointMissing()
     {
-        using var host = await CreateHost(
-            services =>
-                services
-                    .AddAuthentication()
-                    .AddOAuth(
-                        "weeblie",
-                        o =>
-                        {
-                            o.ClientId = "Whatever;";
-                            o.ClientSecret = "Whatever;";
-                            o.CallbackPath = "/";
-                            o.TokenEndpoint = "/";
-                            o.SignInScheme = "eh";
-                        }
-                    )
+        using var host = await CreateHost(services =>
+            services
+                .AddAuthentication()
+                .AddOAuth(
+                    "weeblie",
+                    o =>
+                    {
+                        o.ClientId = "Whatever;";
+                        o.ClientSecret = "Whatever;";
+                        o.CallbackPath = "/";
+                        o.TokenEndpoint = "/";
+                        o.SignInScheme = "eh";
+                    }
+                )
         );
         using var server = host.GetTestServer();
         await Assert.ThrowsAsync<ArgumentException>(
@@ -355,27 +350,24 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task HandleRequestAsync_RedirectsToAccessDeniedPathWhenExplicitlySet()
     {
-        using var host = await CreateHost(
-            s =>
-                s.AddAuthentication()
-                    .AddOAuth(
-                        "Weblie",
-                        opt =>
-                        {
-                            opt.ClientId = "Test Id";
-                            opt.ClientSecret = "secret";
-                            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                            opt.AuthorizationEndpoint = "https://example.com/provider/login";
-                            opt.TokenEndpoint = "https://example.com/provider/token";
-                            opt.CallbackPath = "/oauth-callback";
-                            opt.AccessDeniedPath = "/access-denied";
-                            opt.StateDataFormat = new TestStateDataFormat();
-                            opt.Events.OnRemoteFailure = context =>
-                                throw new InvalidOperationException(
-                                    "This event should not be called."
-                                );
-                        }
-                    )
+        using var host = await CreateHost(s =>
+            s.AddAuthentication()
+                .AddOAuth(
+                    "Weblie",
+                    opt =>
+                    {
+                        opt.ClientId = "Test Id";
+                        opt.ClientSecret = "secret";
+                        opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                        opt.AuthorizationEndpoint = "https://example.com/provider/login";
+                        opt.TokenEndpoint = "https://example.com/provider/token";
+                        opt.CallbackPath = "/oauth-callback";
+                        opt.AccessDeniedPath = "/access-denied";
+                        opt.StateDataFormat = new TestStateDataFormat();
+                        opt.Events.OnRemoteFailure = context =>
+                            throw new InvalidOperationException("This event should not be called.");
+                    }
+                )
         );
 
         using var server = host.GetTestServer();
@@ -394,33 +386,31 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task HandleRequestAsync_InvokesAccessDeniedEvent()
     {
-        using var host = await CreateHost(
-            s =>
-                s.AddAuthentication()
-                    .AddOAuth(
-                        "Weblie",
-                        opt =>
+        using var host = await CreateHost(s =>
+            s.AddAuthentication()
+                .AddOAuth(
+                    "Weblie",
+                    opt =>
+                    {
+                        opt.ClientId = "Test Id";
+                        opt.ClientSecret = "secret";
+                        opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                        opt.AuthorizationEndpoint = "https://example.com/provider/login";
+                        opt.TokenEndpoint = "https://example.com/provider/token";
+                        opt.CallbackPath = "/oauth-callback";
+                        opt.StateDataFormat = new TestStateDataFormat();
+                        opt.Events = new OAuthEvents()
                         {
-                            opt.ClientId = "Test Id";
-                            opt.ClientSecret = "secret";
-                            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                            opt.AuthorizationEndpoint = "https://example.com/provider/login";
-                            opt.TokenEndpoint = "https://example.com/provider/token";
-                            opt.CallbackPath = "/oauth-callback";
-                            opt.StateDataFormat = new TestStateDataFormat();
-                            opt.Events = new OAuthEvents()
+                            OnAccessDenied = context =>
                             {
-                                OnAccessDenied = context =>
-                                {
-                                    Assert.Equal("testvalue", context.Properties.Items["testkey"]);
-                                    context.Response.StatusCode =
-                                        StatusCodes.Status406NotAcceptable;
-                                    context.HandleResponse();
-                                    return Task.CompletedTask;
-                                }
-                            };
-                        }
-                    )
+                                Assert.Equal("testvalue", context.Properties.Items["testkey"]);
+                                context.Response.StatusCode = StatusCodes.Status406NotAcceptable;
+                                context.HandleResponse();
+                                return Task.CompletedTask;
+                            }
+                        };
+                    }
+                )
         );
 
         using var server = host.GetTestServer();
@@ -436,37 +426,35 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task HandleRequestAsync_InvokesRemoteFailureEventWhenAccessDeniedPathIsNotExplicitlySet()
     {
-        using var host = await CreateHost(
-            s =>
-                s.AddAuthentication()
-                    .AddOAuth(
-                        "Weblie",
-                        opt =>
+        using var host = await CreateHost(s =>
+            s.AddAuthentication()
+                .AddOAuth(
+                    "Weblie",
+                    opt =>
+                    {
+                        opt.ClientId = "Test Id";
+                        opt.ClientSecret = "secret";
+                        opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                        opt.AuthorizationEndpoint = "https://example.com/provider/login";
+                        opt.TokenEndpoint = "https://example.com/provider/token";
+                        opt.CallbackPath = "/oauth-callback";
+                        opt.StateDataFormat = new TestStateDataFormat();
+                        opt.Events = new OAuthEvents()
                         {
-                            opt.ClientId = "Test Id";
-                            opt.ClientSecret = "secret";
-                            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                            opt.AuthorizationEndpoint = "https://example.com/provider/login";
-                            opt.TokenEndpoint = "https://example.com/provider/token";
-                            opt.CallbackPath = "/oauth-callback";
-                            opt.StateDataFormat = new TestStateDataFormat();
-                            opt.Events = new OAuthEvents()
+                            OnRemoteFailure = context =>
                             {
-                                OnRemoteFailure = context =>
-                                {
-                                    Assert.Equal(
-                                        "Access was denied by the resource owner or by the remote server.",
-                                        context.Failure.Message
-                                    );
-                                    Assert.Equal("testvalue", context.Properties.Items["testkey"]);
-                                    context.Response.StatusCode =
-                                        StatusCodes.Status406NotAcceptable;
-                                    context.HandleResponse();
-                                    return Task.CompletedTask;
-                                }
-                            };
-                        }
-                    )
+                                Assert.Equal(
+                                    "Access was denied by the resource owner or by the remote server.",
+                                    context.Failure.Message
+                                );
+                                Assert.Equal("testvalue", context.Properties.Items["testkey"]);
+                                context.Response.StatusCode = StatusCodes.Status406NotAcceptable;
+                                context.HandleResponse();
+                                return Task.CompletedTask;
+                            }
+                        };
+                    }
+                )
         );
 
         using var server = host.GetTestServer();
@@ -482,34 +470,32 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task RemoteAuthenticationFailed_OAuthError_IncludesProperties()
     {
-        using var host = await CreateHost(
-            s =>
-                s.AddAuthentication()
-                    .AddOAuth(
-                        "Weblie",
-                        opt =>
+        using var host = await CreateHost(s =>
+            s.AddAuthentication()
+                .AddOAuth(
+                    "Weblie",
+                    opt =>
+                    {
+                        opt.ClientId = "Test Id";
+                        opt.ClientSecret = "secret";
+                        opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                        opt.AuthorizationEndpoint = "https://example.com/provider/login";
+                        opt.TokenEndpoint = "https://example.com/provider/token";
+                        opt.CallbackPath = "/oauth-callback";
+                        opt.StateDataFormat = new TestStateDataFormat();
+                        opt.Events = new OAuthEvents()
                         {
-                            opt.ClientId = "Test Id";
-                            opt.ClientSecret = "secret";
-                            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                            opt.AuthorizationEndpoint = "https://example.com/provider/login";
-                            opt.TokenEndpoint = "https://example.com/provider/token";
-                            opt.CallbackPath = "/oauth-callback";
-                            opt.StateDataFormat = new TestStateDataFormat();
-                            opt.Events = new OAuthEvents()
+                            OnRemoteFailure = context =>
                             {
-                                OnRemoteFailure = context =>
-                                {
-                                    Assert.Contains("custom_error", context.Failure.Message);
-                                    Assert.Equal("testvalue", context.Properties.Items["testkey"]);
-                                    context.Response.StatusCode =
-                                        StatusCodes.Status406NotAcceptable;
-                                    context.HandleResponse();
-                                    return Task.CompletedTask;
-                                }
-                            };
-                        }
-                    )
+                                Assert.Contains("custom_error", context.Failure.Message);
+                                Assert.Equal("testvalue", context.Properties.Items["testkey"]);
+                                context.Response.StatusCode = StatusCodes.Status406NotAcceptable;
+                                context.HandleResponse();
+                                return Task.CompletedTask;
+                            }
+                        };
+                    }
+                )
         );
 
         using var server = host.GetTestServer();
@@ -527,59 +513,58 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [InlineData(HttpStatusCode.BadRequest)]
     public async Task ExchangeCodeAsync_ChecksForErrorInformation(HttpStatusCode httpStatusCode)
     {
-        using var host = await CreateHost(
-            s =>
-                s.AddAuthentication()
-                    .AddOAuth(
-                        "Weblie",
-                        opt =>
+        using var host = await CreateHost(s =>
+            s.AddAuthentication()
+                .AddOAuth(
+                    "Weblie",
+                    opt =>
+                    {
+                        ConfigureDefaults(opt);
+                        opt.StateDataFormat = new TestStateDataFormat();
+                        opt.BackchannelHttpHandler = new TestHttpMessageHandler
                         {
-                            ConfigureDefaults(opt);
-                            opt.StateDataFormat = new TestStateDataFormat();
-                            opt.BackchannelHttpHandler = new TestHttpMessageHandler
+                            Sender = req =>
                             {
-                                Sender = req =>
+                                if (
+                                    req.RequestUri.AbsoluteUri
+                                    == "https://example.com/provider/token"
+                                )
                                 {
-                                    if (
-                                        req.RequestUri.AbsoluteUri
-                                        == "https://example.com/provider/token"
-                                    )
-                                    {
-                                        return ReturnJsonResponse(
-                                            new
-                                            {
-                                                error = "incorrect_client_credentials",
-                                                error_description = "The client_id and/or client_secret passed are incorrect.",
-                                                error_uri = "https://example.com/troubleshooting-oauth-app-access-token-request-errors/#incorrect-client-credentials",
-                                            },
-                                            httpStatusCode
-                                        );
-                                    }
+                                    return ReturnJsonResponse(
+                                        new
+                                        {
+                                            error = "incorrect_client_credentials",
+                                            error_description = "The client_id and/or client_secret passed are incorrect.",
+                                            error_uri = "https://example.com/troubleshooting-oauth-app-access-token-request-errors/#incorrect-client-credentials",
+                                        },
+                                        httpStatusCode
+                                    );
+                                }
 
-                                    return null;
-                                }
-                            };
-                            opt.Events = new OAuthEvents()
+                                return null;
+                            }
+                        };
+                        opt.Events = new OAuthEvents()
+                        {
+                            OnRemoteFailure = context =>
                             {
-                                OnRemoteFailure = context =>
-                                {
-                                    Assert.Equal(
-                                        "incorrect_client_credentials",
-                                        context.Failure.Data["error"]
-                                    );
-                                    Assert.Equal(
-                                        "The client_id and/or client_secret passed are incorrect.",
-                                        context.Failure.Data["error_description"]
-                                    );
-                                    Assert.Equal(
-                                        "https://example.com/troubleshooting-oauth-app-access-token-request-errors/#incorrect-client-credentials",
-                                        context.Failure.Data["error_uri"]
-                                    );
-                                    return Task.CompletedTask;
-                                }
-                            };
-                        }
-                    )
+                                Assert.Equal(
+                                    "incorrect_client_credentials",
+                                    context.Failure.Data["error"]
+                                );
+                                Assert.Equal(
+                                    "The client_id and/or client_secret passed are incorrect.",
+                                    context.Failure.Data["error_description"]
+                                );
+                                Assert.Equal(
+                                    "https://example.com/troubleshooting-oauth-app-access-token-request-errors/#incorrect-client-credentials",
+                                    context.Failure.Data["error_uri"]
+                                );
+                                return Task.CompletedTask;
+                            }
+                        };
+                    }
+                )
         );
 
         using var server = host.GetTestServer();
@@ -595,50 +580,49 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     [Fact]
     public async Task ExchangeCodeAsync_FallbackToBasicErrorReporting_WhenErrorInformationIsNotPresent()
     {
-        using var host = await CreateHost(
-            s =>
-                s.AddAuthentication()
-                    .AddOAuth(
-                        "Weblie",
-                        opt =>
+        using var host = await CreateHost(s =>
+            s.AddAuthentication()
+                .AddOAuth(
+                    "Weblie",
+                    opt =>
+                    {
+                        ConfigureDefaults(opt);
+                        opt.StateDataFormat = new TestStateDataFormat();
+                        opt.BackchannelHttpHandler = new TestHttpMessageHandler
                         {
-                            ConfigureDefaults(opt);
-                            opt.StateDataFormat = new TestStateDataFormat();
-                            opt.BackchannelHttpHandler = new TestHttpMessageHandler
+                            Sender = req =>
                             {
-                                Sender = req =>
+                                if (
+                                    req.RequestUri.AbsoluteUri
+                                    == "https://example.com/provider/token"
+                                )
                                 {
-                                    if (
-                                        req.RequestUri.AbsoluteUri
-                                        == "https://example.com/provider/token"
-                                    )
-                                    {
-                                        return ReturnJsonResponse(
-                                            new
-                                            {
-                                                ErrorCode = "ThisIsCustomErrorCode",
-                                                ErrorDescription = "ThisIsCustomErrorDescription"
-                                            },
-                                            HttpStatusCode.BadRequest
-                                        );
-                                    }
-
-                                    return null;
-                                }
-                            };
-                            opt.Events = new OAuthEvents()
-                            {
-                                OnRemoteFailure = context =>
-                                {
-                                    Assert.StartsWith(
-                                        "OAuth token endpoint failure:",
-                                        context.Failure.Message
+                                    return ReturnJsonResponse(
+                                        new
+                                        {
+                                            ErrorCode = "ThisIsCustomErrorCode",
+                                            ErrorDescription = "ThisIsCustomErrorDescription"
+                                        },
+                                        HttpStatusCode.BadRequest
                                     );
-                                    return Task.CompletedTask;
                                 }
-                            };
-                        }
-                    )
+
+                                return null;
+                            }
+                        };
+                        opt.Events = new OAuthEvents()
+                        {
+                            OnRemoteFailure = context =>
+                            {
+                                Assert.StartsWith(
+                                    "OAuth token endpoint failure:",
+                                    context.Failure.Message
+                                );
+                                return Task.CompletedTask;
+                            }
+                        };
+                    }
+                )
         );
 
         using var server = host.GetTestServer();
@@ -657,24 +641,23 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
     )
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                builder =>
-                    builder
-                        .UseTestServer()
-                        .Configure(app =>
-                        {
-                            app.UseAuthentication();
-                            app.Use(
-                                async (context, next) =>
+            .ConfigureWebHost(builder =>
+                builder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseAuthentication();
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                if (handler == null || !await handler(context))
                                 {
-                                    if (handler == null || !await handler(context))
-                                    {
-                                        await next(context);
-                                    }
+                                    await next(context);
                                 }
-                            );
-                        })
-                        .ConfigureServices(configureServices)
+                            }
+                        );
+                    })
+                    .ConfigureServices(configureServices)
             )
             .Build();
         await host.StartAsync();

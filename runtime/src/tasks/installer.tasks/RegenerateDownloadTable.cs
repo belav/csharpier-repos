@@ -64,8 +64,8 @@ namespace Microsoft.DotNet.Build.Tasks
                     .Skip(1)
                     .TakeWhile(line => line != End(LinksComment))
                     .Where(line => line.StartsWith("[") && line.Contains("]:"))
-                    .Select(
-                        line => line.Substring(1, line.IndexOf("]:", StringComparison.Ordinal) - 1)
+                    .Select(line =>
+                        line.Substring(1, line.IndexOf("]:", StringComparison.Ordinal) - 1)
                     )
                     .ToArray();
 

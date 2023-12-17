@@ -74,14 +74,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 // and eventually report a diagnostic on the local declaration node.
                 // Without the containing CodeBlockStartAction, our reported diagnostic would be classified
                 // as a non-local diagnostic and would not participate in lightbulb for computing code fixes.
-                context.RegisterCodeBlockStartAction<SyntaxKind>(
-                    blockStartContext =>
-                        blockStartContext.RegisterSyntaxNodeAction(
-                            ctx => SyntaxNodeAction(ctx, expressionType),
-                            SyntaxKind.SimpleLambdaExpression,
-                            SyntaxKind.ParenthesizedLambdaExpression,
-                            SyntaxKind.AnonymousMethodExpression
-                        )
+                context.RegisterCodeBlockStartAction<SyntaxKind>(blockStartContext =>
+                    blockStartContext.RegisterSyntaxNodeAction(
+                        ctx => SyntaxNodeAction(ctx, expressionType),
+                        SyntaxKind.SimpleLambdaExpression,
+                        SyntaxKind.ParenthesizedLambdaExpression,
+                        SyntaxKind.AnonymousMethodExpression
+                    )
                 );
             });
         }

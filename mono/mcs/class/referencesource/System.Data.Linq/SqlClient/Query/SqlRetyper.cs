@@ -290,8 +290,8 @@ namespace System.Data.Linq.SqlClient
 
                 // coerce each one
                 foreach (
-                    SqlWhen when in c.Whens.Where(
-                        w => w.Value.SqlType != type && !w.Value.SqlType.IsRuntimeOnlyType
+                    SqlWhen when in c.Whens.Where(w =>
+                        w.Value.SqlType != type && !w.Value.SqlType.IsRuntimeOnlyType
                     )
                 )
                 {
@@ -330,8 +330,8 @@ namespace System.Data.Linq.SqlClient
 
                 // coerce each one
                 foreach (
-                    SqlWhen when in c.Whens.Where(
-                        w => w.Value.SqlType != type && !w.Value.SqlType.IsRuntimeOnlyType
+                    SqlWhen when in c.Whens.Where(w =>
+                        w.Value.SqlType != type && !w.Value.SqlType.IsRuntimeOnlyType
                     )
                 )
                 {

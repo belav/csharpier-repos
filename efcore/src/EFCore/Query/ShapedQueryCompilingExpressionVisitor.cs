@@ -454,13 +454,12 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                             Constant(primaryKey),
                             NewArrayInit(
                                 typeof(object),
-                                primaryKey.Properties.Select(
-                                    p =>
-                                        valueBufferExpression.CreateValueBufferReadValueExpression(
-                                            typeof(object),
-                                            p.GetIndex(),
-                                            p
-                                        )
+                                primaryKey.Properties.Select(p =>
+                                    valueBufferExpression.CreateValueBufferReadValueExpression(
+                                        typeof(object),
+                                        p.GetIndex(),
+                                        p
+                                    )
                                 )
                             ),
                             Constant(!shaper.IsNullable),
@@ -507,16 +506,15 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                         expressions.Add(
                             IfThen(
                                 primaryKey
-                                    .Properties.Select(
-                                        p =>
-                                            NotEqual(
-                                                valueBufferExpression.CreateValueBufferReadValueExpression(
-                                                    typeof(object),
-                                                    p.GetIndex(),
-                                                    p
-                                                ),
-                                                Constant(null)
-                                            )
+                                    .Properties.Select(p =>
+                                        NotEqual(
+                                            valueBufferExpression.CreateValueBufferReadValueExpression(
+                                                typeof(object),
+                                                p.GetIndex(),
+                                                p
+                                            ),
+                                            Constant(null)
+                                        )
                                     )
                                     .Aggregate(AndAlso),
                                 MaterializeEntity(
@@ -538,16 +536,15 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                         expressions.Add(
                             IfThenElse(
                                 primaryKey
-                                    .Properties.Select(
-                                        p =>
-                                            NotEqual(
-                                                valueBufferExpression.CreateValueBufferReadValueExpression(
-                                                    typeof(object),
-                                                    p.GetIndex(),
-                                                    p
-                                                ),
-                                                Constant(null)
-                                            )
+                                    .Properties.Select(p =>
+                                        NotEqual(
+                                            valueBufferExpression.CreateValueBufferReadValueExpression(
+                                                typeof(object),
+                                                p.GetIndex(),
+                                                p
+                                            ),
+                                            Constant(null)
+                                        )
                                     )
                                     .Aggregate(AndAlso),
                                 MaterializeEntity(
@@ -563,13 +560,12 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                                         keyValuesVariable,
                                         NewArrayInit(
                                             typeof(object),
-                                            primaryKey.Properties.Select(
-                                                p =>
-                                                    valueBufferExpression.CreateValueBufferReadValueExpression(
-                                                        typeof(object),
-                                                        p.GetIndex(),
-                                                        p
-                                                    )
+                                            primaryKey.Properties.Select(p =>
+                                                valueBufferExpression.CreateValueBufferReadValueExpression(
+                                                    typeof(object),
+                                                    p.GetIndex(),
+                                                    p
+                                                )
                                             )
                                         )
                                     ),
@@ -759,16 +755,15 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                             runtimeEntityType,
                             NewArrayInit(
                                 typeof(object),
-                                shadowProperties.Select(
-                                    p =>
-                                        Convert(
-                                            valueBufferExpression.CreateValueBufferReadValueExpression(
-                                                p.ClrType,
-                                                p.GetIndex(),
-                                                p
-                                            ),
-                                            typeof(object)
-                                        )
+                                shadowProperties.Select(p =>
+                                    Convert(
+                                        valueBufferExpression.CreateValueBufferReadValueExpression(
+                                            p.ClrType,
+                                            p.GetIndex(),
+                                            p
+                                        ),
+                                        typeof(object)
+                                    )
                                 )
                             )
                         )

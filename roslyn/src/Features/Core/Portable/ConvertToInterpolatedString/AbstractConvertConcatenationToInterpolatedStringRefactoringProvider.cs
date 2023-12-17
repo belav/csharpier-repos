@@ -81,10 +81,9 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
         CollectPiecesDown(syntaxFacts, pieces, top, semanticModel, cancellationToken);
 
         var stringLiterals = pieces
-            .Where(
-                x =>
-                    syntaxFacts.IsStringLiteralExpression(x)
-                    || syntaxFacts.IsCharacterLiteralExpression(x)
+            .Where(x =>
+                syntaxFacts.IsStringLiteralExpression(x)
+                || syntaxFacts.IsCharacterLiteralExpression(x)
             )
             .ToImmutableArray();
 

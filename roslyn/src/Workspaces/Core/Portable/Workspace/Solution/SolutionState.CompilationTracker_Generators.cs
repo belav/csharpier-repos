@@ -207,8 +207,8 @@ internal partial class SolutionState
                 infos.Length == generatorInfo.Documents.Count
                 && documentsToAddOrUpdate.Count == 0
                 && compilationWithStaleGeneratedTrees != null
-                && generatorInfo.Documents.States.All(
-                    kvp => kvp.Value.ParseOptions.Equals(this.ProjectState.ParseOptions)
+                && generatorInfo.Documents.States.All(kvp =>
+                    kvp.Value.ParseOptions.Equals(this.ProjectState.ParseOptions)
                 )
             )
             {
@@ -341,7 +341,9 @@ internal partial class SolutionState
                     static documentState => documentState.AdditionalText
                 );
                 var compilationFactory =
-                    this.ProjectState.LanguageServices.GetRequiredService<ICompilationFactoryService>();
+                    this.ProjectState.LanguageServices.GetRequiredService<ICompilationFactoryService>(
+
+                    );
 
                 generatorInfo = generatorInfo.WithDriver(
                     compilationFactory.CreateGeneratorDriver(
@@ -429,8 +431,8 @@ internal partial class SolutionState
             // and the prior generated trees are identical.
             if (compilationWithStaleGeneratedTrees != null)
             {
-                var generatedTreeCount = runResult.Results.Sum(
-                    r => IsGeneratorRunResultToIgnore(r) ? 0 : r.GeneratedSources.Length
+                var generatedTreeCount = runResult.Results.Sum(r =>
+                    IsGeneratorRunResultToIgnore(r) ? 0 : r.GeneratedSources.Length
                 );
 
                 if (generatorInfo.Documents.Count != generatedTreeCount)

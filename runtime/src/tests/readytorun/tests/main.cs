@@ -523,7 +523,9 @@ public class Program
     static void TestDefaultVsExactStaticVirtualMethodImplementation()
     {
         Assert.AreEqual(
-            CallDefaultVsExactStaticVirtual<DefaultVsExactStaticVirtualClass>.CallMethodOnGenericType(),
+            CallDefaultVsExactStaticVirtual<DefaultVsExactStaticVirtualClass>.CallMethodOnGenericType(
+
+            ),
             "DefaultVsExactStaticVirtualMethod"
         );
         // Naively one would expect that the following should do, however Roslyn fails to compile it claiming that the type DVESVC doesn't contain 'Method':

@@ -134,8 +134,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 case FixAllScope.ContainingType
                 or FixAllScope.ContainingMember:
                     Contract.ThrowIfNull(Document);
-                    var spanMappingService =
-                        Document.GetLanguageService<IFixAllSpanMappingService>();
+                    var spanMappingService = Document.GetLanguageService<IFixAllSpanMappingService>(
+
+                    );
                     if (spanMappingService is null)
                         return ImmutableDictionary<
                             Document,
@@ -146,12 +147,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                         .GetFixAllSpansAsync(Document, _selectionSpan, Scope, cancellationToken)
                         .ConfigureAwait(false);
                     return spansByDocument
-                        .Select(
-                            kvp =>
-                                KeyValuePairUtil.Create(
-                                    kvp.Key,
-                                    new Optional<ImmutableArray<TextSpan>>(kvp.Value)
-                                )
+                        .Select(kvp =>
+                            KeyValuePairUtil.Create(
+                                kvp.Key,
+                                new Optional<ImmutableArray<TextSpan>>(kvp.Value)
+                            )
                         )
                         .ToImmutableDictionaryOrEmpty();
 

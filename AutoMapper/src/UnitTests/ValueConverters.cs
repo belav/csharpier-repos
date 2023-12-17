@@ -166,13 +166,12 @@ public class ValueConverters
         }
 
         protected override MapperConfiguration CreateConfiguration() =>
-            new(
-                cfg =>
-                    cfg.CreateMap<Source, Dest>()
-                        .ForMember(
-                            d => d.ValueFoo1,
-                            opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
-                        )
+            new(cfg =>
+                cfg.CreateMap<Source, Dest>()
+                    .ForMember(
+                        d => d.ValueFoo1,
+                        opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
+                    )
             );
 
         [Fact]

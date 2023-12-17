@@ -361,10 +361,9 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
     private static bool HasInternalAttribute(ISymbol symbol) =>
         symbol
             .GetAttributes()
-            .Any(
-                a =>
-                    a.AttributeClass!.ToDisplayString()
-                    == "Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkInternalAttribute"
+            .Any(a =>
+                a.AttributeClass!.ToDisplayString()
+                == "Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkInternalAttribute"
             );
 
     private static bool IsInInternalNamespace(ISymbol symbol)

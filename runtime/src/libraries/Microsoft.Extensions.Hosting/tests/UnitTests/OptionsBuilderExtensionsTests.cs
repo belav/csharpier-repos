@@ -281,11 +281,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         private async void CanValidateOptionsEagerly_AddOptionsWithValidateOnStart_IValidateOptions()
         {
-            var hostBuilder = CreateHostBuilder(
-                services =>
-                    services
-                        .AddOptionsWithValidateOnStart<ComplexOptions, ComplexOptionsValidator>()
-                        .Configure(o => o.Boolean = false)
+            var hostBuilder = CreateHostBuilder(services =>
+                services
+                    .AddOptionsWithValidateOnStart<ComplexOptions, ComplexOptionsValidator>()
+                    .Configure(o => o.Boolean = false)
             );
 
             using (var host = hostBuilder.Build())
@@ -471,15 +470,15 @@ namespace Microsoft.Extensions.Hosting.Tests
             {
 #if NETCOREAPP
                 Assert.True(
-                    e.Failures.FirstOrDefault(
-                        predicate: f => f.Contains(error, StringComparison.CurrentCulture)
+                    e.Failures.FirstOrDefault(predicate: f =>
+                        f.Contains(error, StringComparison.CurrentCulture)
                     ) != null,
                     "Did not find: " + error + " " + e.Failures.First()
                 );
 #else
                 Assert.True(
-                    e.Failures.FirstOrDefault(
-                        predicate: f => f.IndexOf(error, StringComparison.CurrentCulture) >= 0
+                    e.Failures.FirstOrDefault(predicate: f =>
+                        f.IndexOf(error, StringComparison.CurrentCulture) >= 0
                     ) != null,
                     "Did not find: " + error + " " + e.Failures.First()
                 );

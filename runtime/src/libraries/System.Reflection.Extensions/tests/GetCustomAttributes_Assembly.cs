@@ -27,35 +27,32 @@ namespace System.Reflection.Tests
 
             Assert.Equal(
                 1,
-                attributes.Count(
-                    attr =>
-                        attr.ToString()
-                            .Equals(
-                                "System.Reflection.Tests.MyAttribute_Single single",
-                                StringComparison.Ordinal
-                            )
+                attributes.Count(attr =>
+                    attr.ToString()
+                        .Equals(
+                            "System.Reflection.Tests.MyAttribute_Single single",
+                            StringComparison.Ordinal
+                        )
                 )
             );
             Assert.Equal(
                 1,
-                attributes.Count(
-                    attr =>
-                        attr.ToString()
-                            .Equals(
-                                "System.Reflection.Tests.MyAttribute_AllowMultiple multiple1",
-                                StringComparison.Ordinal
-                            )
+                attributes.Count(attr =>
+                    attr.ToString()
+                        .Equals(
+                            "System.Reflection.Tests.MyAttribute_AllowMultiple multiple1",
+                            StringComparison.Ordinal
+                        )
                 )
             );
             Assert.Equal(
                 1,
-                attributes.Count(
-                    attr =>
-                        attr.ToString()
-                            .Equals(
-                                "System.Reflection.Tests.MyAttribute_AllowMultiple multiple2",
-                                StringComparison.Ordinal
-                            )
+                attributes.Count(attr =>
+                    attr.ToString()
+                        .Equals(
+                            "System.Reflection.Tests.MyAttribute_AllowMultiple multiple2",
+                            StringComparison.Ordinal
+                        )
                 )
             );
         }
@@ -114,24 +111,22 @@ namespace System.Reflection.Tests
             Assert.Equal(2, attributes.Count());
             Assert.Equal(
                 1,
-                attributes.Count(
-                    attr =>
-                        attr.ToString()
-                            .Equals(
-                                "System.Reflection.Tests.MyAttribute_AllowMultiple multiple1",
-                                StringComparison.Ordinal
-                            )
+                attributes.Count(attr =>
+                    attr.ToString()
+                        .Equals(
+                            "System.Reflection.Tests.MyAttribute_AllowMultiple multiple1",
+                            StringComparison.Ordinal
+                        )
                 )
             );
             Assert.Equal(
                 1,
-                attributes.Count(
-                    attr =>
-                        attr.ToString()
-                            .Equals(
-                                "System.Reflection.Tests.MyAttribute_AllowMultiple multiple1",
-                                StringComparison.Ordinal
-                            )
+                attributes.Count(attr =>
+                    attr.ToString()
+                        .Equals(
+                            "System.Reflection.Tests.MyAttribute_AllowMultiple multiple1",
+                            StringComparison.Ordinal
+                        )
                 )
             );
 
@@ -182,24 +177,22 @@ namespace System.Reflection.Tests
             Assert.Equal(2, attributes.Count());
             Assert.Equal(
                 1,
-                attributes.Count(
-                    attr =>
-                        attr.ToString()
-                            .Equals(
-                                "System.Reflection.Tests.MyAttribute_AllowMultiple multiple1",
-                                StringComparison.Ordinal
-                            )
+                attributes.Count(attr =>
+                    attr.ToString()
+                        .Equals(
+                            "System.Reflection.Tests.MyAttribute_AllowMultiple multiple1",
+                            StringComparison.Ordinal
+                        )
                 )
             );
             Assert.Equal(
                 1,
-                attributes.Count(
-                    attr =>
-                        attr.ToString()
-                            .Equals(
-                                "System.Reflection.Tests.MyAttribute_AllowMultiple multiple2",
-                                StringComparison.Ordinal
-                            )
+                attributes.Count(attr =>
+                    attr.ToString()
+                        .Equals(
+                            "System.Reflection.Tests.MyAttribute_AllowMultiple multiple2",
+                            StringComparison.Ordinal
+                        )
                 )
             );
 

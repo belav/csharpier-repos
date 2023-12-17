@@ -141,8 +141,9 @@ namespace System.ServiceModel.Activities
 
         protected override void OnUninitialize(HandleInitializationContext context)
         {
-            SendReceiveExtension sendReceiveExtension =
-                context.GetExtension<SendReceiveExtension>();
+            SendReceiveExtension sendReceiveExtension = context.GetExtension<SendReceiveExtension>(
+
+            );
             if (sendReceiveExtension != null)
             {
                 if (this.InstanceKey != null)

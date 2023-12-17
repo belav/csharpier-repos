@@ -15,8 +15,8 @@ public class XunitLoggerProviderTest
     {
         var testTestOutputHelper = new TestTestOutputHelper();
 
-        var loggerFactory = CreateTestLogger(
-            builder => builder.SetMinimumLevel(LogLevel.Trace).AddXunit(testTestOutputHelper)
+        var loggerFactory = CreateTestLogger(builder =>
+            builder.SetMinimumLevel(LogLevel.Trace).AddXunit(testTestOutputHelper)
         );
 
         var logger = loggerFactory.CreateLogger("TestCategory");
@@ -36,8 +36,8 @@ public class XunitLoggerProviderTest
     public void LoggerProviderDoesNotWriteLogMessagesBelowMinimumLevel()
     {
         var testTestOutputHelper = new TestTestOutputHelper();
-        var loggerFactory = CreateTestLogger(
-            builder => builder.AddXunit(testTestOutputHelper, LogLevel.Warning)
+        var loggerFactory = CreateTestLogger(builder =>
+            builder.AddXunit(testTestOutputHelper, LogLevel.Warning)
         );
 
         var logger = loggerFactory.CreateLogger("TestCategory");

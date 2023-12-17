@@ -209,12 +209,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // Must contain equivalents named types residing in different assemblies.
             Contract.ThrowIfFalse(
-                equivalentTypesWithDifferingAssemblies.All(
-                    kvp =>
-                        !SymbolEquivalenceComparer.Instance.Equals(
-                            kvp.Key.ContainingAssembly,
-                            kvp.Value.ContainingAssembly
-                        )
+                equivalentTypesWithDifferingAssemblies.All(kvp =>
+                    !SymbolEquivalenceComparer.Instance.Equals(
+                        kvp.Key.ContainingAssembly,
+                        kvp.Value.ContainingAssembly
+                    )
                 )
             );
 

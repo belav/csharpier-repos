@@ -127,9 +127,10 @@ public class OpenIdConnectHandler
             // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
             message = new OpenIdConnectMessage(
-                Request.Query.Select(
-                    pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray())
-                )
+                Request.Query.Select(pair => new KeyValuePair<string, string[]>(
+                    pair.Key,
+                    pair.Value.ToArray()
+                ))
             );
 #pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
         }
@@ -150,9 +151,10 @@ public class OpenIdConnectHandler
             // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
             message = new OpenIdConnectMessage(
-                form.Select(
-                    pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray())
-                )
+                form.Select(pair => new KeyValuePair<string, string[]>(
+                    pair.Key,
+                    pair.Value.ToArray()
+                ))
             );
 #pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
         }
@@ -354,9 +356,10 @@ public class OpenIdConnectHandler
         // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
         var message = new OpenIdConnectMessage(
-            Request.Query.Select(
-                pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray())
-            )
+            Request.Query.Select(pair => new KeyValuePair<string, string[]>(
+                pair.Key,
+                pair.Value.ToArray()
+            ))
         );
 #pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
 
@@ -605,9 +608,10 @@ public class OpenIdConnectHandler
             // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
             authorizationResponse = new OpenIdConnectMessage(
-                Request.Query.Select(
-                    pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray())
-                )
+                Request.Query.Select(pair => new KeyValuePair<string, string[]>(
+                    pair.Key,
+                    pair.Value.ToArray()
+                ))
             );
 #pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
 
@@ -644,9 +648,10 @@ public class OpenIdConnectHandler
             // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
             authorizationResponse = new OpenIdConnectMessage(
-                form.Select(
-                    pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray())
-                )
+                form.Select(pair => new KeyValuePair<string, string[]>(
+                    pair.Key,
+                    pair.Value.ToArray()
+                ))
             );
 #pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
         }

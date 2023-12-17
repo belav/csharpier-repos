@@ -340,8 +340,8 @@ internal sealed class LspWorkspaceManager : IDocumentChangeTracker, ILspService
         registeredWorkspaces = registeredWorkspaces
             .Where(workspace => workspace.Kind != WorkspaceKind.MiscellaneousFiles)
             .Concat(
-                registeredWorkspaces.Where(
-                    workspace => workspace.Kind == WorkspaceKind.MiscellaneousFiles
+                registeredWorkspaces.Where(workspace =>
+                    workspace.Kind == WorkspaceKind.MiscellaneousFiles
                 )
             )
             .ToImmutableArray();

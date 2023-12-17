@@ -343,8 +343,9 @@ namespace System.Web.Http
         class MyBaseController : ApiController
         {
             public static IHttpActionSelector SelectorBase = new Mock<IHttpActionSelector>().Object;
-            public static IActionValueBinder ActionValueBinderBase =
-                new Mock<IActionValueBinder>().Object;
+            public static IActionValueBinder ActionValueBinderBase = new Mock<IActionValueBinder>(
+
+            ).Object;
         }
 
         class MyConfigDerived1Attribute : Attribute, IControllerConfiguration
@@ -447,8 +448,9 @@ namespace System.Web.Http
         [MyControllerWithCustomFormatterConfig]
         class MyControllerWithCustomFormatter : ApiController
         {
-            public static MediaTypeFormatter CustomFormatter =
-                new Mock<MediaTypeFormatter>().Object;
+            public static MediaTypeFormatter CustomFormatter = new Mock<MediaTypeFormatter>(
+
+            ).Object;
         }
     }
 }

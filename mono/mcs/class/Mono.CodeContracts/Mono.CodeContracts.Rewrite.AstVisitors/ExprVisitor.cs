@@ -135,13 +135,12 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors
         {
             return this.VisitCollection(
                 e,
-                exprs =>
-                    new ExprCompareLessThan(
-                        e.MethodInfo,
-                        exprs.First(),
-                        exprs.ElementAt(1),
-                        e.Signage
-                    ),
+                exprs => new ExprCompareLessThan(
+                    e.MethodInfo,
+                    exprs.First(),
+                    exprs.ElementAt(1),
+                    e.Signage
+                ),
                 e.Left,
                 e.Right
             );
@@ -151,13 +150,12 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors
         {
             return this.VisitCollection(
                 e,
-                exprs =>
-                    new ExprCompareGreaterThan(
-                        e.MethodInfo,
-                        exprs.First(),
-                        exprs.ElementAt(1),
-                        e.Signage
-                    ),
+                exprs => new ExprCompareGreaterThan(
+                    e.MethodInfo,
+                    exprs.First(),
+                    exprs.ElementAt(1),
+                    e.Signage
+                ),
                 e.Left,
                 e.Right
             );
@@ -177,14 +175,13 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors
         {
             return this.VisitCollection(
                 e,
-                exprs =>
-                    new ExprAdd(
-                        e.MethodInfo,
-                        exprs.First(),
-                        exprs.ElementAt(1),
-                        e.Signage,
-                        e.Overflow
-                    ),
+                exprs => new ExprAdd(
+                    e.MethodInfo,
+                    exprs.First(),
+                    exprs.ElementAt(1),
+                    e.Signage,
+                    e.Overflow
+                ),
                 e.Left,
                 e.Right
             );
@@ -194,14 +191,13 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors
         {
             return this.VisitCollection(
                 e,
-                exprs =>
-                    new ExprSub(
-                        e.MethodInfo,
-                        exprs.First(),
-                        exprs.ElementAt(1),
-                        e.Signage,
-                        e.Overflow
-                    ),
+                exprs => new ExprSub(
+                    e.MethodInfo,
+                    exprs.First(),
+                    exprs.ElementAt(1),
+                    e.Signage,
+                    e.Overflow
+                ),
                 e.Left,
                 e.Right
             );

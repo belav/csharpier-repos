@@ -61,12 +61,11 @@ namespace System.ServiceModel.Activities.Presentation
                         section
                             .Bindings.BindingCollections.OrderBy(p => p.BindingName)
                             .Select<BindingCollectionElement, BindingDescriptor>(
-                                p =>
-                                    new BindingDescriptor()
-                                    {
-                                        BindingName = p.BindingName,
-                                        Value = p
-                                    }
+                                p => new BindingDescriptor()
+                                {
+                                    BindingName = p.BindingName,
+                                    Value = p
+                                }
                             )
                     );
                 }

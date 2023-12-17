@@ -3191,8 +3191,8 @@ WHERE [m].[Timeline] = '1902-01-02T10:00:00.1234567+01:30'
 
         var query = context
             .Set<Mission>()
-            .Where(
-                m => m.Timeline == EF.Functions.AtTimeZone(new DateTime(10, 5, 3, 12, 0, 0), "UTC")
+            .Where(m =>
+                m.Timeline == EF.Functions.AtTimeZone(new DateTime(10, 5, 3, 12, 0, 0), "UTC")
             );
 
         var missions = async ? await query.ToListAsync() : query.ToList();
@@ -3248,10 +3248,9 @@ WHERE [m].[Timeline] = @__dateTime_1 AT TIME ZONE @__timeZone_2
 
         var query = context
             .Set<CogTag>()
-            .Where(
-                ct =>
-                    EF.Functions.AtTimeZone(ct.IssueDate, "UTC")
-                    == new DateTimeOffset(15, 3, 7, 0, 0, 0, TimeSpan.Zero)
+            .Where(ct =>
+                EF.Functions.AtTimeZone(ct.IssueDate, "UTC")
+                == new DateTimeOffset(15, 3, 7, 0, 0, 0, TimeSpan.Zero)
             );
 
         var missions = async ? await query.ToListAsync() : query.ToList();
@@ -6865,7 +6864,9 @@ ORDER BY [g].[Nickname], [g].[SquadId]
 
     public override async Task Multiple_includes_with_client_method_around_entity_and_also_projecting_included_collection()
     {
-        await base.Multiple_includes_with_client_method_around_entity_and_also_projecting_included_collection();
+        await base.Multiple_includes_with_client_method_around_entity_and_also_projecting_included_collection(
+
+        );
 
         AssertSql(
             """
@@ -9462,8 +9463,8 @@ WHERE [l].[Discriminator] = N'LocustCommander' AND [g].[Nickname] IS NOT NULL AN
     public async Task FreeText_with_binary_column()
     {
         using var context = CreateContext();
-        var result = await context.Missions.SingleAsync(
-            e => EF.Functions.FreeText(EF.Property<byte[]>(e, "BriefingDocument"), "bombing")
+        var result = await context.Missions.SingleAsync(e =>
+            EF.Functions.FreeText(EF.Property<byte[]>(e, "BriefingDocument"), "bombing")
         );
 
         Assert.Equal(1, result.Id);
@@ -9482,8 +9483,8 @@ WHERE FREETEXT([m].[BriefingDocument], N'bombing')
     public async Task FreeText_with_binary_column_and_language_term()
     {
         using var context = CreateContext();
-        var result = await context.Missions.SingleAsync(
-            e => EF.Functions.FreeText(EF.Property<byte[]>(e, "BriefingDocument"), "bombing", 1033)
+        var result = await context.Missions.SingleAsync(e =>
+            EF.Functions.FreeText(EF.Property<byte[]>(e, "BriefingDocument"), "bombing", 1033)
         );
 
         Assert.Equal(1, result.Id);
@@ -9502,8 +9503,8 @@ WHERE FREETEXT([m].[BriefingDocument], N'bombing', LANGUAGE 1033)
     public async Task Contains_with_binary_column()
     {
         using var context = CreateContext();
-        var result = await context.Missions.SingleAsync(
-            e => EF.Functions.Contains(EF.Property<byte[]>(e, "BriefingDocument"), "bomb")
+        var result = await context.Missions.SingleAsync(e =>
+            EF.Functions.Contains(EF.Property<byte[]>(e, "BriefingDocument"), "bomb")
         );
 
         Assert.Equal(1, result.Id);
@@ -9522,8 +9523,8 @@ WHERE CONTAINS([m].[BriefingDocument], N'bomb')
     public async Task Contains_with_binary_column_and_language_term()
     {
         using var context = CreateContext();
-        var result = await context.Missions.SingleAsync(
-            e => EF.Functions.Contains(EF.Property<byte[]>(e, "BriefingDocument"), "bomb", 1033)
+        var result = await context.Missions.SingleAsync(e =>
+            EF.Functions.Contains(EF.Property<byte[]>(e, "BriefingDocument"), "bomb", 1033)
         );
 
         Assert.Equal(1, result.Id);

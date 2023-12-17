@@ -1770,8 +1770,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 Assert.True(subpat is IPropertySubpatternOperation);
             }
 
-            IEnumerable<IOperation> children =
-                operation.DeconstructionSubpatterns.Cast<IOperation>();
+            IEnumerable<IOperation> children = operation.DeconstructionSubpatterns.Cast<IOperation>(
+
+            );
             children = children.Concat(operation.PropertySubpatterns);
 
             AssertEx.Equal(children, operation.ChildOperations);

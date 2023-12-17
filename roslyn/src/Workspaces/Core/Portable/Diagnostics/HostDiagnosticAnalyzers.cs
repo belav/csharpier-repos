@@ -230,8 +230,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IReadOnlyList<AnalyzerReference> projectAnalyzerReferences
         ) =>
             CreateAnalyzerReferencesMap(
-                projectAnalyzerReferences.Where(
-                    reference => !_hostAnalyzerReferencesMap.ContainsKey(reference.Id)
+                projectAnalyzerReferences.Where(reference =>
+                    !_hostAnalyzerReferencesMap.ContainsKey(reference.Id)
                 )
             );
 

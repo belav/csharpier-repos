@@ -194,16 +194,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         )
         {
             return s_attributeMap
-                .Where(
-                    x => x.elementName == tagName && !existingAttributes.Contains(x.attributeName)
+                .Where(x =>
+                    x.elementName == tagName && !existingAttributes.Contains(x.attributeName)
                 )
-                .Select(
-                    x =>
-                        CreateCompletionItem(
-                            x.attributeName,
-                            beforeCaretText: x.text,
-                            afterCaretText: "\""
-                        )
+                .Select(x =>
+                    CreateCompletionItem(
+                        x.attributeName,
+                        beforeCaretText: x.text,
+                        afterCaretText: "\""
+                    )
                 );
         }
 
@@ -260,13 +259,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             var names = GetParameters(symbol).Select(p => p.Name);
 
-            return names.Select(
-                p =>
-                    CreateCompletionItem(
-                        displayText: FormatParameter(ParameterReferenceElementName, p),
-                        beforeCaretText: FormatParameterRefTag(ParameterReferenceElementName, p),
-                        afterCaretText: string.Empty
-                    )
+            return names.Select(p =>
+                CreateCompletionItem(
+                    displayText: FormatParameter(ParameterReferenceElementName, p),
+                    beforeCaretText: FormatParameterRefTag(ParameterReferenceElementName, p),
+                    afterCaretText: string.Empty
+                )
             );
         }
 
@@ -274,16 +272,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             var names = symbol.GetAllTypeParameters().Select(t => t.Name);
 
-            return names.Select(
-                t =>
-                    CreateCompletionItem(
-                        displayText: FormatParameter(TypeParameterReferenceElementName, t),
-                        beforeCaretText: FormatParameterRefTag(
-                            TypeParameterReferenceElementName,
-                            t
-                        ),
-                        afterCaretText: string.Empty
-                    )
+            return names.Select(t =>
+                CreateCompletionItem(
+                    displayText: FormatParameter(TypeParameterReferenceElementName, t),
+                    beforeCaretText: FormatParameterRefTag(TypeParameterReferenceElementName, t),
+                    afterCaretText: string.Empty
+                )
             );
         }
 

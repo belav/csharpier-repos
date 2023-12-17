@@ -1755,8 +1755,8 @@ namespace System.Data.Services.Client
 
         internal IEnumerable<LinkDescriptor> GetLinks(object source, string sourceProperty)
         {
-            return this.bindings.Values.Where(
-                o => (o.Source == source) && (o.SourceProperty == sourceProperty)
+            return this.bindings.Values.Where(o =>
+                (o.Source == source) && (o.SourceProperty == sourceProperty)
             );
         }
 
@@ -3093,8 +3093,8 @@ namespace System.Data.Services.Client
 
                 EpmSourcePathSegment matchedSegment =
                     currentSegment != null
-                        ? currentSegment.SubProperties.SingleOrDefault(
-                            s => s.PropertyName == property.PropertyName
+                        ? currentSegment.SubProperties.SingleOrDefault(s =>
+                            s.PropertyName == property.PropertyName
                         )
                         : null;
 
@@ -3250,8 +3250,8 @@ namespace System.Data.Services.Client
 
                 this.DetachExistingLink(existing, false);
                 Debug.Assert(
-                    !this.bindings.Values.Any(
-                        o => (o.Source == source) && (o.SourceProperty == sourceProperty)
+                    !this.bindings.Values.Any(o =>
+                        (o.Source == source) && (o.SourceProperty == sourceProperty)
                     ),
                     "only expecting one"
                 );
@@ -5715,14 +5715,14 @@ namespace System.Data.Services.Client
                         && (
                             0 == changesetIndex
                             || 0 < queryCount
-                            || this.ChangedEntries.Any(
-                                o => o.ContentGeneratedForSave && 0 == o.SaveResultWasProcessed
+                            || this.ChangedEntries.Any(o =>
+                                o.ContentGeneratedForSave && 0 == o.SaveResultWasProcessed
                             )
                                 && (
                                     !IsFlagSet(this.options, SaveChangesOptions.Batch)
                                     || null
-                                        == this.ChangedEntries.FirstOrDefault(
-                                            o => null != o.SaveError
+                                        == this.ChangedEntries.FirstOrDefault(o =>
+                                            null != o.SaveError
                                         )
                                 )
                         )

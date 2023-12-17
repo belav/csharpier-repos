@@ -186,8 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             if (pragma)
             {
-                return fixes.FirstOrDefault(
-                    f => f is AbstractSuppressionCodeFixProvider.PragmaWarningCodeAction
+                return fixes.FirstOrDefault(f =>
+                    f is AbstractSuppressionCodeFixProvider.PragmaWarningCodeAction
                 );
             }
 

@@ -127,12 +127,11 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
         private static IEnumerable<string> FindProjectFiles(string basePath) =>
             Directory
                 .EnumerateFileSystemEntries(basePath, "*.*proj", SearchOption.TopDirectoryOnly)
-                .Where(
-                    f =>
-                        !DnxProjectExtension.Equals(
-                            Path.GetExtension(f),
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                .Where(f =>
+                    !DnxProjectExtension.Equals(
+                        Path.GetExtension(f),
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 );
 
         private static string? FindMatchingFile(

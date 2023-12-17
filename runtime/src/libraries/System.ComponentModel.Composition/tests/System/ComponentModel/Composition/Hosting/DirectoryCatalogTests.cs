@@ -595,10 +595,9 @@ namespace System.ComponentModel.Composition
                         (part, export) =>
                             new Tuple<ComposablePartDefinition, ExportDefinition>(part, export)
                     )
-                    .Where(
-                        partAndExport =>
-                            partAndExport.Item2.ContractName
-                            == AttributedModelServices.GetContractName(typeof(MyExport))
+                    .Where(partAndExport =>
+                        partAndExport.Item2.ContractName
+                        == AttributedModelServices.GetContractName(typeof(MyExport))
                     );
 
             Assert.True(matchingExports.SequenceEqual(expectedMatchingExports));

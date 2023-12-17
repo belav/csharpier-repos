@@ -93,7 +93,9 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ProxyInterfaceWithGenericMethodWithTwoGenericParametersWhereOneIsBaseToAnother()
         {
-            generator.CreateInterfaceProxyWithoutTarget<GenericMethodWhereOneGenParamInheritsTheOther>();
+            generator.CreateInterfaceProxyWithoutTarget<GenericMethodWhereOneGenParamInheritsTheOther>(
+
+            );
         }
 
         [Test]

@@ -79,10 +79,9 @@ namespace Microsoft.CodeAnalysis.Wrapping
         ) =>
             declaration
                 .GetDiagnostics()
-                .Any(
-                    d =>
-                        d.Severity == DiagnosticSeverity.Error
-                        && d.Location.SourceSpan.OverlapsWith(headerSpan)
+                .Any(d =>
+                    d.Severity == DiagnosticSeverity.Error
+                    && d.Location.SourceSpan.OverlapsWith(headerSpan)
                 );
     }
 }

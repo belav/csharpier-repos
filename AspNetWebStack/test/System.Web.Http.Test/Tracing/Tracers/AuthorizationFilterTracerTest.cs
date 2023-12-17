@@ -25,13 +25,12 @@ namespace System.Web.Http.Tracing.Tracers
                 CallBase = true
             };
             mockFilter
-                .Setup(
-                    f =>
-                        f.ExecuteAuthorizationFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>(),
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
+                .Setup(f =>
+                    f.ExecuteAuthorizationFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>(),
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
                 )
                 .Returns(Task.FromResult(response));
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
@@ -104,13 +103,12 @@ namespace System.Web.Http.Tracing.Tracers
                 new TaskCompletionSource<HttpResponseMessage>(response);
             tcs.TrySetException(exception);
             mockAttr
-                .Setup(
-                    a =>
-                        a.ExecuteAuthorizationFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>(),
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
+                .Setup(a =>
+                    a.ExecuteAuthorizationFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>(),
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
                 )
                 .Returns(tcs.Task);
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()

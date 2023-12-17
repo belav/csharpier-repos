@@ -290,9 +290,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                     .Select(argument => (collector: Clone(), argument))
                     .ToImmutableArray();
 
-                var tasks = collectorsAndArgumentMap.Select(
-                    pair =>
-                        Task.Run(() => pair.collector.VisitAsync(pair.argument, cancellationToken))
+                var tasks = collectorsAndArgumentMap.Select(pair =>
+                    Task.Run(() => pair.collector.VisitAsync(pair.argument, cancellationToken))
                 );
 
                 await Task.WhenAll(tasks).ConfigureAwait(false);

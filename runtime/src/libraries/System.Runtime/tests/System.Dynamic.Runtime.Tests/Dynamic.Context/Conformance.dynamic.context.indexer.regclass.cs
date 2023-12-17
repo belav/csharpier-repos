@@ -1539,8 +1539,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             dynamic dy = mc;
             byte p1 = 10;
             int p2 = p1;
-            var result = list.Where(
-                    p => !p._field1.HasValue && !((MyStruct?)dy[p1]).HasValue && p._field2 == dy[p2]
+            var result = list.Where(p =>
+                    !p._field1.HasValue && !((MyStruct?)dy[p1]).HasValue && p._field2 == dy[p2]
                 )
                 .Select(p => p._field3)
                 .Average();

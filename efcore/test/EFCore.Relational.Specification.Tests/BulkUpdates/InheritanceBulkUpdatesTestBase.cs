@@ -83,14 +83,13 @@ public abstract class InheritanceBulkUpdatesTestBase<TFixture> : BulkUpdatesTest
             async,
             ss =>
                 ss.Set<Animal>()
-                    .Where(
-                        e =>
-                            e
-                            == ss.Set<Animal>()
-                                .GroupBy(e => e.CountryId)
-                                .Where(g => g.Count() < 3)
-                                .Select(g => g.First())
-                                .FirstOrDefault()
+                    .Where(e =>
+                        e
+                        == ss.Set<Animal>()
+                            .GroupBy(e => e.CountryId)
+                            .Where(g => g.Count() < 3)
+                            .Select(g => g.First())
+                            .FirstOrDefault()
                     ),
             rowsAffectedCount: 2
         );
@@ -102,13 +101,12 @@ public abstract class InheritanceBulkUpdatesTestBase<TFixture> : BulkUpdatesTest
             async,
             ss =>
                 ss.Set<Animal>()
-                    .Where(
-                        e =>
-                            ss.Set<Animal>()
-                                .GroupBy(e => e.CountryId)
-                                .Where(g => g.Count() < 3)
-                                .Select(g => g.First())
-                                .Any(i => i == e)
+                    .Where(e =>
+                        ss.Set<Animal>()
+                            .GroupBy(e => e.CountryId)
+                            .Where(g => g.Count() < 3)
+                            .Select(g => g.First())
+                            .Any(i => i == e)
                     ),
             rowsAffectedCount: 2
         );

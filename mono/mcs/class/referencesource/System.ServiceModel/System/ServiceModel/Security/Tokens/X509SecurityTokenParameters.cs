@@ -143,10 +143,14 @@ namespace System.ServiceModel.Security.Tokens
 
                         if (result == null)
                             result =
-                                token.CreateKeyIdentifierClause<X509IssuerSerialKeyIdentifierClause>();
+                                token.CreateKeyIdentifierClause<X509IssuerSerialKeyIdentifierClause>(
+
+                                );
                         if (result == null)
                             result =
-                                token.CreateKeyIdentifierClause<X509ThumbprintKeyIdentifierClause>();
+                                token.CreateKeyIdentifierClause<X509ThumbprintKeyIdentifierClause>(
+
+                                );
                     }
                     else
                         result = token.CreateKeyIdentifierClause<LocalIdKeyIdentifierClause>();

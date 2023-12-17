@@ -242,7 +242,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 .Should()
                 .Pass()
                 .And.HaveStdOutContaining(
-                    $"hostfxr_path: {(useDotNetRoot ? sharedState.HostFxrPath : hostFxrPath)}".ToLower()
+                    $"hostfxr_path: {(useDotNetRoot ? sharedState.HostFxrPath : hostFxrPath)}".ToLower(
+
+                    )
                 );
         }
 

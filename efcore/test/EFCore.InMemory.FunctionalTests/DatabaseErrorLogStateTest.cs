@@ -68,14 +68,14 @@ public class DatabaseErrorLogStateTest
 
     [ConditionalFact]
     public Task Query_logs_DatabaseErrorLogState_during_LINQ_enumeration() =>
-        Query_logs_DatabaseErrorLogState_test(
-            c => c.Blogs.OrderBy(b => b.Name).Where(b => b.Url.StartsWith("http://")).ToList()
+        Query_logs_DatabaseErrorLogState_test(c =>
+            c.Blogs.OrderBy(b => b.Name).Where(b => b.Url.StartsWith("http://")).ToList()
         );
 
     [ConditionalFact]
     public Task Query_logs_DatabaseErrorLogState_during_LINQ_enumeration_async() =>
-        Query_logs_DatabaseErrorLogState_test(
-            c => c.Blogs.OrderBy(b => b.Name).Where(b => b.Url.StartsWith("http://")).ToListAsync()
+        Query_logs_DatabaseErrorLogState_test(c =>
+            c.Blogs.OrderBy(b => b.Name).Where(b => b.Url.StartsWith("http://")).ToListAsync()
         );
 
     [ConditionalFact]

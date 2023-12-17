@@ -1404,8 +1404,8 @@ class c
             Assert.NotNull(file);
             Assert.True(
                 file.DescendantNodes()
-                    .Any(
-                        n => n.Kind() == SyntaxKind.LocalFunctionStatement && !n.ContainsDiagnostics
+                    .Any(n =>
+                        n.Kind() == SyntaxKind.LocalFunctionStatement && !n.ContainsDiagnostics
                     )
             );
             Assert.False(file.HasErrors);

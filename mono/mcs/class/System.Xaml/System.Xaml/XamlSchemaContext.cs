@@ -222,14 +222,14 @@ namespace System.Xaml
             {
                 ret = XamlLanguage.SpecialNames.Find(name, xamlNamespace);
                 if (ret == null)
-                    ret = XamlLanguage.AllTypes.FirstOrDefault(
-                        t => TypeMatches(t, xamlNamespace, name, typeArguments)
+                    ret = XamlLanguage.AllTypes.FirstOrDefault(t =>
+                        TypeMatches(t, xamlNamespace, name, typeArguments)
                     );
                 if (ret != null)
                     return ret;
             }
-            ret = run_time_types.FirstOrDefault(
-                t => TypeMatches(t, xamlNamespace, name, typeArguments)
+            ret = run_time_types.FirstOrDefault(t =>
+                TypeMatches(t, xamlNamespace, name, typeArguments)
             );
             if (ret == null)
                 ret = GetAllXamlTypes(xamlNamespace)

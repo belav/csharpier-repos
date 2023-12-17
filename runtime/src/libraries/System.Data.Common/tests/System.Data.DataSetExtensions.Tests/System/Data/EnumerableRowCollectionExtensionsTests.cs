@@ -80,8 +80,8 @@ namespace System.Data
             var (table, one, two, three) = InstantiateTable();
 
             EnumerableRowCollection<DataRow> source = table.Cast<DataRow>();
-            var orderedBackwards = source.OrderByDescending(
-                row => int.Parse((string)row.ItemArray[0])
+            var orderedBackwards = source.OrderByDescending(row =>
+                int.Parse((string)row.ItemArray[0])
             );
             Assert.Equal(new DataRow[] { three, two, one }, orderedBackwards);
 
@@ -126,8 +126,8 @@ namespace System.Data
                 .OrderByDescending(row => int.Parse((string)row.ItemArray[0]));
 
             DataRow zero = table.Rows.Add(0);
-            var orderedBackwardsAgain = orderedSource.ThenByDescending(
-                row => int.Parse((string)row.ItemArray[0])
+            var orderedBackwardsAgain = orderedSource.ThenByDescending(row =>
+                int.Parse((string)row.ItemArray[0])
             );
             Assert.Equal(new DataRow[] { three, two, one, zero }, orderedBackwardsAgain);
 

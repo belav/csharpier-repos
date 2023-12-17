@@ -35,8 +35,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeLens
             WellKnownLspServerKinds serverKind
         )
         {
-            var notificationManager =
-                lspServices.GetRequiredService<IClientLanguageServerManager>();
+            var notificationManager = lspServices.GetRequiredService<IClientLanguageServerManager>(
+
+            );
             var lspWorkspaceManager = lspServices.GetRequiredService<LspWorkspaceManager>();
 
             return new CodeLensRefreshQueue(

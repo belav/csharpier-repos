@@ -495,6 +495,7 @@ partial class Program
             model
                 .GetDiagnostics()
                 .Verify(
+
                 //// (1,1): hidden CS8019: Unnecessary using directive.
                 //// using System.Runtime.InteropServices;
                 //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Runtime.InteropServices;").WithLocation(1, 1)
@@ -525,6 +526,7 @@ partial class Program
             model
                 .GetDiagnostics()
                 .Verify(
+
                 //// (1,1): hidden CS8019: Unnecessary using directive.
                 //// using System.Runtime.InteropServices;
                 //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Runtime.InteropServices;").WithLocation(1, 1)

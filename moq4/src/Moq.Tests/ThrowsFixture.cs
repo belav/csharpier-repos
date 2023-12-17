@@ -47,14 +47,13 @@ namespace Moq.Tests
         public void PassesFourArgumentsToThrows()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Throws(
                     (string s1, string s2, string s3, string s4) => new Exception(s1 + s2 + s3 + s4)
@@ -70,15 +69,14 @@ namespace Moq.Tests
         public void PassesFiveArgumentsToThrows()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Throws(
                     (string s1, string s2, string s3, string s4, string s5) =>
@@ -95,16 +93,15 @@ namespace Moq.Tests
         public void PassesSixArgumentsToThrows()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Throws(
                     (string s1, string s2, string s3, string s4, string s5, string s6) =>
@@ -121,17 +118,16 @@ namespace Moq.Tests
         public void PassesSevenArgumentsToThrows()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Throws(
                     (string s1, string s2, string s3, string s4, string s5, string s6, string s7) =>
@@ -157,18 +153,17 @@ namespace Moq.Tests
         public void PassesEightArgumentsToThrows()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Throws(
                     (

@@ -109,8 +109,9 @@ namespace System.Text.Json.Serialization.Tests
                 options,
                 overload: overload
             );
-            await using IAsyncEnumerator<int> asyncEnumerator =
-                asyncEnumerable.GetAsyncEnumerator();
+            await using IAsyncEnumerator<int> asyncEnumerator = asyncEnumerable.GetAsyncEnumerator(
+
+            );
 
             for (int i = 0; i < 20; i++)
             {
@@ -347,45 +348,36 @@ namespace System.Text.Json.Serialization.Tests
             yield return WrapArgs(
                 Enumerable
                     .Range(0, 10)
-                    .Select(
-                        i =>
-                            new
-                            {
-                                Field1 = i,
-                                Field2 = $"lorem ipsum dolor: {i}",
-                                Field3 = i % 2 == 0
-                            }
-                    ),
+                    .Select(i => new
+                    {
+                        Field1 = i,
+                        Field2 = $"lorem ipsum dolor: {i}",
+                        Field3 = i % 2 == 0
+                    }),
                 100,
                 DeserializeAsyncEnumerableOverload.JsonSerializerOptions
             );
             yield return WrapArgs(
                 Enumerable
                     .Range(0, 10)
-                    .Select(
-                        i =>
-                            new
-                            {
-                                Field1 = i,
-                                Field2 = $"lorem ipsum dolor: {i}",
-                                Field3 = i % 2 == 0
-                            }
-                    ),
+                    .Select(i => new
+                    {
+                        Field1 = i,
+                        Field2 = $"lorem ipsum dolor: {i}",
+                        Field3 = i % 2 == 0
+                    }),
                 100,
                 DeserializeAsyncEnumerableOverload.JsonTypeInfo
             );
             yield return WrapArgs(
                 Enumerable
                     .Range(0, 100)
-                    .Select(
-                        i =>
-                            new
-                            {
-                                Field1 = i,
-                                Field2 = $"lorem ipsum dolor: {i}",
-                                Field3 = i % 2 == 0
-                            }
-                    ),
+                    .Select(i => new
+                    {
+                        Field1 = i,
+                        Field2 = $"lorem ipsum dolor: {i}",
+                        Field3 = i % 2 == 0
+                    }),
                 500,
                 DeserializeAsyncEnumerableOverload.JsonSerializerOptions
             );

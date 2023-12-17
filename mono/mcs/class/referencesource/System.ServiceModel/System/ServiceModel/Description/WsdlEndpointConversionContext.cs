@@ -75,7 +75,9 @@ namespace System.ServiceModel.Description
             get
             {
                 foreach (
-                    IWsdlExportExtension extension in endpoint.Behaviors.FindAll<IWsdlExportExtension>()
+                    IWsdlExportExtension extension in endpoint.Behaviors.FindAll<IWsdlExportExtension>(
+
+                    )
                 )
                 {
                     yield return extension;
@@ -91,7 +93,9 @@ namespace System.ServiceModel.Description
                 }
 
                 foreach (
-                    IWsdlExportExtension extension in endpoint.Contract.Behaviors.FindAll<IWsdlExportExtension>()
+                    IWsdlExportExtension extension in endpoint.Contract.Behaviors.FindAll<IWsdlExportExtension>(
+
+                    )
                 )
                 {
                     yield return extension;

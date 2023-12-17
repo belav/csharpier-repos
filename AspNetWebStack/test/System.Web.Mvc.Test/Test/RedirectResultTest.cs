@@ -82,12 +82,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
             mockResponse
-                .Setup(
-                    o =>
-                        o.Redirect(
-                            _baseUrl,
-                            false /* endResponse */
-                        )
+                .Setup(o =>
+                    o.Redirect(
+                        _baseUrl,
+                        false /* endResponse */
+                    )
                 )
                 .Verifiable();
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
@@ -112,12 +111,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
             mockResponse
-                .Setup(
-                    o =>
-                        o.RedirectPermanent(
-                            _baseUrl,
-                            false /* endResponse */
-                        )
+                .Setup(o =>
+                    o.RedirectPermanent(
+                        _baseUrl,
+                        false /* endResponse */
+                    )
                 )
                 .Verifiable();
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
@@ -159,8 +157,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             RouteData routeData = new RouteData();
-            routeData.DataTokens[ControllerContext.ParentActionViewContextToken] =
-                new ViewContext();
+            routeData.DataTokens[ControllerContext.ParentActionViewContextToken] = new ViewContext(
+
+            );
             ControllerContext context = new ControllerContext(
                 new Mock<HttpContextBase>().Object,
                 routeData,

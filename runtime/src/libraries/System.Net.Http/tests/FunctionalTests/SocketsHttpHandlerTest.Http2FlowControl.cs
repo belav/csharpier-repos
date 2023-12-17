@@ -46,8 +46,8 @@ namespace System.Net.Http.Functional.Tests
             SettingsFrame clientSettingsFrame = await connection
                 .ReadSettingsAsync()
                 .ConfigureAwait(false);
-            SettingsEntry entry = clientSettingsFrame.Entries.First(
-                e => e.SettingId == SettingId.InitialWindowSize
+            SettingsEntry entry = clientSettingsFrame.Entries.First(e =>
+                e.SettingId == SettingId.InitialWindowSize
             );
 
             Assert.Equal(WindowSize, (int)entry.Value);

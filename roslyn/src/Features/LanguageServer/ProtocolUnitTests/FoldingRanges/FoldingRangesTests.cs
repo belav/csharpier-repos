@@ -32,9 +32,8 @@ using System.Linq;|}";
             );
             var expected = testLspServer
                 .GetLocations("foldingRange")
-                .Select(
-                    location =>
-                        CreateFoldingRange(LSP.FoldingRangeKind.Imports, location.Range, "...")
+                .Select(location =>
+                    CreateFoldingRange(LSP.FoldingRangeKind.Imports, location.Range, "...")
                 )
                 .ToArray();
 
@@ -55,8 +54,8 @@ comment */|}";
             );
             var expected = testLspServer
                 .GetLocations("foldingRange")
-                .Select(
-                    location => CreateFoldingRange(LSP.FoldingRangeKind.Comment, location.Range, "")
+                .Select(location =>
+                    CreateFoldingRange(LSP.FoldingRangeKind.Comment, location.Range, "")
                 )
                 .ToArray();
 
@@ -77,9 +76,8 @@ comment */|}";
             );
             var expected = testLspServer
                 .GetLocations("foldingRange")
-                .Select(
-                    location =>
-                        CreateFoldingRange(LSP.FoldingRangeKind.Region, location.Range, "ARegion")
+                .Select(location =>
+                    CreateFoldingRange(LSP.FoldingRangeKind.Region, location.Range, "ARegion")
                 )
                 .ToArray();
 

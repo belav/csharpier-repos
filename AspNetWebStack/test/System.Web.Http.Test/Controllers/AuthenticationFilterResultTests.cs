@@ -546,12 +546,11 @@ namespace System.Web.Http.Controllers
         )
         {
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
-            mock.Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Callback<HttpAuthenticationContext, CancellationToken>(
                     (c, t) =>
@@ -560,12 +559,11 @@ namespace System.Web.Http.Controllers
                     }
                 )
                 .Returns(() => Task.FromResult<object>(null));
-            mock.Setup(
-                    f =>
-                        f.ChallengeAsync(
-                            It.IsAny<HttpAuthenticationChallengeContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(f =>
+                    f.ChallengeAsync(
+                        It.IsAny<HttpAuthenticationChallengeContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(() => Task.FromResult<object>(null));
             return mock.Object;
@@ -577,12 +575,11 @@ namespace System.Web.Http.Controllers
         )
         {
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
-            mock.Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Callback<HttpAuthenticationContext, CancellationToken>(
                     (c, t) =>
@@ -591,12 +588,11 @@ namespace System.Web.Http.Controllers
                     }
                 )
                 .Returns(() => Task.FromResult<object>(null));
-            mock.Setup(
-                    f =>
-                        f.ChallengeAsync(
-                            It.IsAny<HttpAuthenticationChallengeContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(f =>
+                    f.ChallengeAsync(
+                        It.IsAny<HttpAuthenticationChallengeContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Callback<HttpAuthenticationChallengeContext, CancellationToken>(
                     (c, t) =>
@@ -613,20 +609,18 @@ namespace System.Web.Http.Controllers
         )
         {
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
-            mock.Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(() => Task.FromResult<object>(null));
-            mock.Setup(
-                    f =>
-                        f.ChallengeAsync(
-                            It.IsAny<HttpAuthenticationChallengeContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(f =>
+                    f.ChallengeAsync(
+                        It.IsAny<HttpAuthenticationChallengeContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Callback<HttpAuthenticationChallengeContext, CancellationToken>(
                     (c, t) =>
@@ -690,20 +684,18 @@ namespace System.Web.Http.Controllers
         private static IAuthenticationFilter CreateStubFilter()
         {
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>(MockBehavior.Strict);
-            mock.Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(() => Task.FromResult<object>(null));
-            mock.Setup(
-                    f =>
-                        f.ChallengeAsync(
-                            It.IsAny<HttpAuthenticationChallengeContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(f =>
+                    f.ChallengeAsync(
+                        It.IsAny<HttpAuthenticationChallengeContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(() => Task.FromResult<object>(null));
             return mock.Object;

@@ -1503,40 +1503,39 @@ namespace System.Threading.Tasks.Tests
             // Exception handling
             //
             var c = Task.Factory.StartNew(() => { })
-                .ContinueWith(
-                    _ =>
-                        Task.Factory.StartNew(() =>
-                        {
-                            Task.Factory.StartNew(
-                                delegate
-                                {
-                                    throw new Exception("uh oh #1");
-                                },
-                                TaskCreationOptions.AttachedToParent
-                            );
-                            Task.Factory.StartNew(
-                                delegate
-                                {
-                                    throw new Exception("uh oh #2");
-                                },
-                                TaskCreationOptions.AttachedToParent
-                            );
-                            Task.Factory.StartNew(
-                                delegate
-                                {
-                                    throw new Exception("uh oh #3");
-                                },
-                                TaskCreationOptions.AttachedToParent
-                            );
-                            Task.Factory.StartNew(
-                                delegate
-                                {
-                                    throw new Exception("uh oh #4");
-                                },
-                                TaskCreationOptions.AttachedToParent
-                            );
-                            return 1;
-                        })
+                .ContinueWith(_ =>
+                    Task.Factory.StartNew(() =>
+                    {
+                        Task.Factory.StartNew(
+                            delegate
+                            {
+                                throw new Exception("uh oh #1");
+                            },
+                            TaskCreationOptions.AttachedToParent
+                        );
+                        Task.Factory.StartNew(
+                            delegate
+                            {
+                                throw new Exception("uh oh #2");
+                            },
+                            TaskCreationOptions.AttachedToParent
+                        );
+                        Task.Factory.StartNew(
+                            delegate
+                            {
+                                throw new Exception("uh oh #3");
+                            },
+                            TaskCreationOptions.AttachedToParent
+                        );
+                        Task.Factory.StartNew(
+                            delegate
+                            {
+                                throw new Exception("uh oh #4");
+                            },
+                            TaskCreationOptions.AttachedToParent
+                        );
+                        return 1;
+                    })
                 )
                 .Unwrap();
 

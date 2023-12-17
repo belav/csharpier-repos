@@ -77,10 +77,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 {
                     EntityType type = (EntityType)
                         ((RefType)endMember.TypeUsage.EdmType).ElementType;
-                    type.KeyMembers.All(
-                        member =>
-                            associationkeys.Add(new Pair<EdmMember, EntityType>(member, type))
-                            || true /* prevent early termination */
+                    type.KeyMembers.All(member =>
+                        associationkeys.Add(new Pair<EdmMember, EntityType>(member, type)) || true /* prevent early termination */
                     );
                 }
 
@@ -286,7 +284,9 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
                     StructuralType structuralType = (StructuralType)possibleType;
                     foreach (
-                        EdmProperty childProperty in structuralType.GetDeclaredOnlyMembers<EdmProperty>()
+                        EdmProperty childProperty in structuralType.GetDeclaredOnlyMembers<EdmProperty>(
+
+                        )
                     )
                     {
                         MemberPath childPath = new MemberPath(currentPath, childProperty);

@@ -79,7 +79,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             var editorFormatMap = _editorFormatMapService.GetEditorFormatMap(textView);
 
             var document =
-                wpfTextViewHost.TextView.TextBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                wpfTextViewHost.TextView.TextBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+                );
             if (document == null)
             {
                 return null;

@@ -484,9 +484,9 @@ namespace MonoTests.System.Web.UI.WebControls
         [Category("NunitWeb")]
         public void ObjectDataSource_EnablePaging()
         {
-            string html = new WebTest(
-                PageInvoker.CreateOnLoad(new PageDelegate(EnablePaging))
-            ).Run();
+            string html = new WebTest(PageInvoker.CreateOnLoad(new PageDelegate(EnablePaging))).Run(
+
+            );
             string newHtml = HtmlDiff.GetControlFromPageHtml(html);
             string origHtml =
                 "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">Name</th><th scope=\"col\">Number</th>\r\n\t\t</tr><tr>\r\n\t\t\t<td>Number0</td><td>0</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>Number1</td><td>1</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>Number2</td><td>2</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>Number3</td><td>3</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>Number4</td><td>4</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td colspan=\"2\"><table>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td><span>1</span></td><td><a href=\"javascript:__doPostBack(&#39;ctl01&#39;,&#39;Page$2&#39;)\">2</a></td><td><a href=\"javascript:__doPostBack(&#39;ctl01&#39;,&#39;Page$3&#39;)\">3</a></td><td><a href=\"javascript:__doPostBack(&#39;ctl01&#39;,&#39;Page$4&#39;)\">4</a></td>\r\n\t\t\t\t</tr>\r\n\t\t\t</table></td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>";
@@ -522,9 +522,9 @@ namespace MonoTests.System.Web.UI.WebControls
         [Category("NunitWeb")]
         public void ObjectDataSource_Delete()
         {
-            string html = new WebTest(
-                PageInvoker.CreateOnLoad(new PageDelegate(DeleteMethod))
-            ).Run();
+            string html = new WebTest(PageInvoker.CreateOnLoad(new PageDelegate(DeleteMethod))).Run(
+
+            );
             string newHtml = HtmlDiff.GetControlFromPageHtml(html);
             string origHtml =
                 "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<td>ID</td><td>1002</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>FName</td><td>Melanie</td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>LName</td><td>Talmadge</td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>";
@@ -567,9 +567,9 @@ namespace MonoTests.System.Web.UI.WebControls
         [Category("NunitWeb")]
         public void ObjectDataSource_Select()
         {
-            string html = new WebTest(
-                PageInvoker.CreateOnLoad(new PageDelegate(SelectMethod))
-            ).Run();
+            string html = new WebTest(PageInvoker.CreateOnLoad(new PageDelegate(SelectMethod))).Run(
+
+            );
         }
 
         public static void SelectMethod(Page p)
@@ -622,9 +622,9 @@ namespace MonoTests.System.Web.UI.WebControls
         [Category("NunitWeb")]
         public void ObjectDataSource_Insert()
         {
-            string html = new WebTest(
-                PageInvoker.CreateOnLoad(new PageDelegate(InsertMethod))
-            ).Run();
+            string html = new WebTest(PageInvoker.CreateOnLoad(new PageDelegate(InsertMethod))).Run(
+
+            );
         }
 
         public static void InsertMethod(Page p)
@@ -650,9 +650,9 @@ namespace MonoTests.System.Web.UI.WebControls
         [Category("NunitWeb")]
         public void ObjectDataSource_Update()
         {
-            string html = new WebTest(
-                PageInvoker.CreateOnLoad(new PageDelegate(UpdateMethod))
-            ).Run();
+            string html = new WebTest(PageInvoker.CreateOnLoad(new PageDelegate(UpdateMethod))).Run(
+
+            );
         }
 
         public static void UpdateMethod(Page p)

@@ -130,8 +130,7 @@ public class ZipFile_Create_Stream : ZipFileTestBase
         using ZipArchive archive = new(destination);
         foreach (ZipArchiveEntry actualEntry in archive.Entries)
         {
-            string expectedFile = expected.Single(
-                i => Path.GetFileName(i).Equals(actualEntry.Name)
+            string expectedFile = expected.Single(i => Path.GetFileName(i).Equals(actualEntry.Name)
             );
             Assert.StartsWith("normal", actualEntry.FullName);
             Assert.Equal(new FileInfo(expectedFile).Length, actualEntry.Length);

@@ -703,8 +703,8 @@ namespace System.ServiceProcess
                     // So we capture the session id at this point
                     WTSSESSION_NOTIFICATION sessionNotification = new WTSSESSION_NOTIFICATION();
                     Marshal.PtrToStructure(eventData, sessionNotification);
-                    ThreadPool.QueueUserWorkItem(
-                        _ => DeferredSessionChange(eventType, sessionNotification.sessionId)
+                    ThreadPool.QueueUserWorkItem(_ =>
+                        DeferredSessionChange(eventType, sessionNotification.sessionId)
                     );
                     break;
                 }

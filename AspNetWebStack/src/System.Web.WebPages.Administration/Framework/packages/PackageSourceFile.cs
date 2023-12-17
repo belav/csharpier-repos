@@ -47,10 +47,9 @@ namespace System.Web.WebPages.Administration.PackageManager
                 var document = XDocument.Load(stream);
                 var root = document.Root;
 
-                return (
-                    from element in root.Elements()
-                    select ParsePackageSource(element)
-                ).ToList();
+                return (from element in root.Elements() select ParsePackageSource(element)).ToList(
+
+                );
             }
         }
 

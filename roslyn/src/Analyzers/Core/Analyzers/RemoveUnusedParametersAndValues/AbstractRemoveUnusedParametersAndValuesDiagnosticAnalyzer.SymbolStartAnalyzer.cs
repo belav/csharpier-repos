@@ -251,7 +251,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                 // Don't flag MEF import constructors with ImportingConstructor attribute.
                 yield return compilation.SystemCompositionImportingConstructorAttribute();
-                yield return compilation.SystemComponentModelCompositionImportingConstructorAttribute();
+                yield return compilation.SystemComponentModelCompositionImportingConstructorAttribute(
+
+                );
             }
 
             private bool IsUnusedParameterCandidate(

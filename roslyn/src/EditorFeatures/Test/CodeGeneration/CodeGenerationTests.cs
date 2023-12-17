@@ -238,17 +238,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             var parameterSymbols = GetParameterSymbols(parameters, testContext);
             var parsedStatements = testContext.ParseStatements(statements);
 
-            var methods = operatorKinds.Select(
-                kind =>
-                    CodeGenerationSymbolFactory.CreateOperatorSymbol(
-                        attributes: default,
-                        accessibility,
-                        modifiers,
-                        GetTypeSymbol(returnType)(testContext.SemanticModel),
-                        kind,
-                        parameterSymbols,
-                        parsedStatements
-                    )
+            var methods = operatorKinds.Select(kind =>
+                CodeGenerationSymbolFactory.CreateOperatorSymbol(
+                    attributes: default,
+                    accessibility,
+                    modifiers,
+                    GetTypeSymbol(returnType)(testContext.SemanticModel),
+                    kind,
+                    parameterSymbols,
+                    parsedStatements
+                )
             );
 
             testContext.Result = await testContext.Service.AddMembersAsync(

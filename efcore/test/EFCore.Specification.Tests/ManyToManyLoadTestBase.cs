@@ -1507,16 +1507,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture> : IClassFixture<T
             .Query()
             .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
             .OrderBy(e => e.Id)
-            .Select(
-                e =>
-                    new
-                    {
-                        e.Id,
-                        e.Name,
-                        Count1 = e.OneSkipShared.Count,
-                        Count3 = e.ThreeSkipFull.Count
-                    }
-            );
+            .Select(e => new
+            {
+                e.Id,
+                e.Name,
+                Count1 = e.OneSkipShared.Count,
+                Count3 = e.ThreeSkipFull.Count
+            });
 
         var projected = async ? await queryable.ToListAsync() : queryable.ToList();
 
@@ -1611,8 +1608,7 @@ public abstract partial class ManyToManyLoadTestBase<TFixture> : IClassFixture<T
     {
         using var context = Fixture.CreateContext();
 
-        var queryable = context.EntityOnes.Include(
-            e => e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2)
+        var queryable = context.EntityOnes.Include(e => e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2)
         );
         var left = async
             ? await queryable.SingleAsync(e => e.Id == 1)

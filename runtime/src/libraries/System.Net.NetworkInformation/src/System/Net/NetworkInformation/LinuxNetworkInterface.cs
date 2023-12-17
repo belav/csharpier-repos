@@ -114,10 +114,9 @@ namespace System.Net.NetworkInformation
                     if (nii->NumAddressBytes > 0)
                     {
                         lni._physicalAddress = new PhysicalAddress(
-                            new ReadOnlySpan<byte>(
-                                nii->AddressBytes,
-                                nii->NumAddressBytes
-                            ).ToArray()
+                            new ReadOnlySpan<byte>(nii->AddressBytes, nii->NumAddressBytes).ToArray(
+
+                            )
                         );
                     }
 

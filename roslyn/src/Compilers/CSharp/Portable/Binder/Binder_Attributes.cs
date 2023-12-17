@@ -315,8 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
 
                     if (
-                        attributeConstructor.Parameters.Any(
-                            static p => p.RefKind is RefKind.In or RefKind.RefReadOnlyParameter
+                        attributeConstructor.Parameters.Any(static p =>
+                            p.RefKind is RefKind.In or RefKind.RefReadOnlyParameter
                         )
                     )
                     {
@@ -1085,9 +1085,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (builder == null)
                         {
-                            builder = ArrayBuilder<
-                                KeyValuePair<string, TypedConstant>
-                            >.GetInstance();
+                            builder = ArrayBuilder<KeyValuePair<string, TypedConstant>>.GetInstance(
+
+                            );
                         }
 
                         builder.Add(kv.Value);

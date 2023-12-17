@@ -1653,8 +1653,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
         public void Modified_Entry_Removing_Outputs_Records_Removed_Step_State()
         {
             ImmutableArray<int> values = ImmutableArray.Create(1, 2, 3);
-            var inputNode = new InputNode<ImmutableArray<int>>(
-                _ => ImmutableArray.Create(values)
+            var inputNode = new InputNode<ImmutableArray<int>>(_ => ImmutableArray.Create(values)
             ).WithTrackingName("Input");
             var transformNode = new TransformNode<ImmutableArray<int>, int>(
                 inputNode,
@@ -1697,8 +1696,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
         public void Modified_Entry_Adding_Outputs_Records_Added_Step_State()
         {
             ImmutableArray<int> values = ImmutableArray<int>.Empty;
-            var inputNode = new InputNode<ImmutableArray<int>>(
-                _ => ImmutableArray.Create(values)
+            var inputNode = new InputNode<ImmutableArray<int>>(_ => ImmutableArray.Create(values)
             ).WithTrackingName("Input");
             var transformNode = new TransformNode<ImmutableArray<int>, int>(
                 inputNode,

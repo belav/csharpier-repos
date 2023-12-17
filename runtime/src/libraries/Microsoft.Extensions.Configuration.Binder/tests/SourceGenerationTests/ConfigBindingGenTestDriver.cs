@@ -187,8 +187,9 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             ExpectedDiagnostics expectedDiags
         )
         {
-            ImmutableArray<Diagnostic> outputDiagnostics =
-                result.OutputCompilation.GetDiagnostics();
+            ImmutableArray<Diagnostic> outputDiagnostics = result.OutputCompilation.GetDiagnostics(
+
+            );
 
             if (expectedDiags is ExpectedDiagnostics.None)
             {

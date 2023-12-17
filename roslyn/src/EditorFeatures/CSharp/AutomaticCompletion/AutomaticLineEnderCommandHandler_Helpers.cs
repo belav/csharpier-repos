@@ -746,11 +746,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                         .ToImmutableArray();
                     if (!otherAccessors.IsEmpty)
                     {
-                        return !otherAccessors.Any(
-                            static accessor =>
-                                accessor.Body == null
-                                && accessor.ExpressionBody == null
-                                && !accessor.SemicolonToken.IsMissing
+                        return !otherAccessors.Any(static accessor =>
+                            accessor.Body == null
+                            && accessor.ExpressionBody == null
+                            && !accessor.SemicolonToken.IsMissing
                         );
                     }
                 }

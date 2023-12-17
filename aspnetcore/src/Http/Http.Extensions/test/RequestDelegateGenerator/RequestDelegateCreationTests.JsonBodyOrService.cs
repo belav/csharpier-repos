@@ -324,8 +324,8 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(
-                options => options.ThrowOnBadRequest = true
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
             );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -357,8 +357,8 @@ app.MapPost("/", (TestService svc) => svc.TestServiceMethod());
         var serviceProvider = CreateServiceProvider(
             (serviceCollection) =>
             {
-                serviceCollection.ConfigureHttpJsonOptions(
-                    o => o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default
+                serviceCollection.ConfigureHttpJsonOptions(o =>
+                    o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default
                 );
                 serviceCollection.AddSingleton(new TestService());
             }

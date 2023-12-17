@@ -117,8 +117,8 @@ namespace System.ComponentModel.Composition.Registration
             bool matchedConvention = false;
 
             foreach (
-                PartBuilder builder in _conventions.Where(
-                    c => c.SelectType(type.UnderlyingSystemType)
+                PartBuilder builder in _conventions.Where(c =>
+                    c.SelectType(type.UnderlyingSystemType)
                 )
             )
             {

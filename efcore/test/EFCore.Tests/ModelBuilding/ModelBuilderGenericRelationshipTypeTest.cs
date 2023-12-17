@@ -49,9 +49,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.Entity<TEntity>(
-                entityTypeBuilder =>
-                    buildAction(new GenericTypeTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
+            ModelBuilder.Entity<TEntity>(entityTypeBuilder =>
+                buildAction(new GenericTypeTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
             );
             return this;
         }
@@ -326,11 +325,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
         ) =>
             new GenericTypeTestEntityTypeBuilder<TRightEntity>(
-                CollectionCollectionBuilder.UsingEntity<TJoinEntity>(
-                    e =>
-                        configureJoinEntityType(
-                            new GenericTypeTestEntityTypeBuilder<TJoinEntity>(e)
-                        )
+                CollectionCollectionBuilder.UsingEntity<TJoinEntity>(e =>
+                    configureJoinEntityType(new GenericTypeTestEntityTypeBuilder<TJoinEntity>(e))
                 )
             );
 

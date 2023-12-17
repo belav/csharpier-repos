@@ -2828,7 +2828,9 @@ namespace System.Activities.Core.Presentation
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.ItemMove))
             {
                 foreach (
-                    ModelItem selectedModelItem in this.Context.Items.GetValue<Selection>().SelectedObjects
+                    ModelItem selectedModelItem in this.Context.Items.GetValue<Selection>(
+
+                    ).SelectedObjects
                 )
                 {
                     UIElement shapeToMove = this.modelItemToUIElement[selectedModelItem];

@@ -138,8 +138,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             )
             {
                 var innerMatch = root.FindNode(span, getInnermostNodeForTie: true);
-                return innerMatch?.FirstAncestorOrSelf<SyntaxNode>(
-                    node => ifGenerator.IsIfOrElseIf(node) && node.Span == span
+                return innerMatch?.FirstAncestorOrSelf<SyntaxNode>(node =>
+                    ifGenerator.IsIfOrElseIf(node) && node.Span == span
                 );
             }
         }

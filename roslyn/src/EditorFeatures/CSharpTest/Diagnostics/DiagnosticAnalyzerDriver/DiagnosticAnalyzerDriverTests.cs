@@ -132,29 +132,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 foreach (var method in methodNames)
                 {
                     Assert.False(
-                        ideEngineAnalyzer.CallLog.Any(
-                            e =>
-                                e.CallerName == method
-                                && e.MethodKind == MethodKind.DelegateInvoke
-                                && e.ReturnsVoid
+                        ideEngineAnalyzer.CallLog.Any(e =>
+                            e.CallerName == method
+                            && e.MethodKind == MethodKind.DelegateInvoke
+                            && e.ReturnsVoid
                         )
                     );
                     Assert.False(
-                        ideEngineAnalyzer.CallLog.Any(
-                            e =>
-                                e.CallerName == method
-                                && e.MethodKind == MethodKind.DelegateInvoke
-                                && !e.ReturnsVoid
+                        ideEngineAnalyzer.CallLog.Any(e =>
+                            e.CallerName == method
+                            && e.MethodKind == MethodKind.DelegateInvoke
+                            && !e.ReturnsVoid
                         )
                     );
                     Assert.True(
-                        ideEngineAnalyzer.CallLog.Any(
-                            e => e.CallerName == method && e.SymbolKind == SymbolKind.NamedType
+                        ideEngineAnalyzer.CallLog.Any(e =>
+                            e.CallerName == method && e.SymbolKind == SymbolKind.NamedType
                         )
                     );
                     Assert.False(
-                        ideEngineAnalyzer.CallLog.Any(
-                            e => e.CallerName == method && e.SymbolKind == SymbolKind.Property
+                        ideEngineAnalyzer.CallLog.Any(e =>
+                            e.CallerName == method && e.SymbolKind == SymbolKind.Property
                         )
                     );
                 }
@@ -174,29 +172,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             foreach (var method in methodNames)
             {
                 Assert.False(
-                    compilerEngineAnalyzer.CallLog.Any(
-                        e =>
-                            e.CallerName == method
-                            && e.MethodKind == MethodKind.DelegateInvoke
-                            && e.ReturnsVoid
+                    compilerEngineAnalyzer.CallLog.Any(e =>
+                        e.CallerName == method
+                        && e.MethodKind == MethodKind.DelegateInvoke
+                        && e.ReturnsVoid
                     )
                 );
                 Assert.False(
-                    compilerEngineAnalyzer.CallLog.Any(
-                        e =>
-                            e.CallerName == method
-                            && e.MethodKind == MethodKind.DelegateInvoke
-                            && !e.ReturnsVoid
+                    compilerEngineAnalyzer.CallLog.Any(e =>
+                        e.CallerName == method
+                        && e.MethodKind == MethodKind.DelegateInvoke
+                        && !e.ReturnsVoid
                     )
                 );
                 Assert.True(
-                    compilerEngineAnalyzer.CallLog.Any(
-                        e => e.CallerName == method && e.SymbolKind == SymbolKind.NamedType
+                    compilerEngineAnalyzer.CallLog.Any(e =>
+                        e.CallerName == method && e.SymbolKind == SymbolKind.NamedType
                     )
                 );
                 Assert.False(
-                    compilerEngineAnalyzer.CallLog.Any(
-                        e => e.CallerName == method && e.SymbolKind == SymbolKind.Property
+                    compilerEngineAnalyzer.CallLog.Any(e =>
+                        e.CallerName == method && e.SymbolKind == SymbolKind.Property
                     )
                 );
             }
@@ -207,26 +203,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
         {
             var source = TestResource.AllInOneCSharpCode;
 
-            await ThrowingDiagnosticAnalyzer<SyntaxKind>.VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(async analyzer =>
-            {
-                using var workspace = TestWorkspace.CreateCSharp(
-                    source,
-                    TestOptions.Regular,
-                    composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
-                );
+            await ThrowingDiagnosticAnalyzer<SyntaxKind>.VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(
+                async analyzer =>
+                {
+                    using var workspace = TestWorkspace.CreateCSharp(
+                        source,
+                        TestOptions.Regular,
+                        composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
+                    );
 
-                var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create(analyzer));
-                workspace.TryApplyChanges(
-                    workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
-                );
+                    var analyzerReference = new AnalyzerImageReference(
+                        ImmutableArray.Create(analyzer)
+                    );
+                    workspace.TryApplyChanges(
+                        workspace.CurrentSolution.WithAnalyzerReferences(
+                            new[] { analyzerReference }
+                        )
+                    );
 
-                var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
-                return await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
-                    workspace,
-                    document,
-                    new TextSpan(0, document.GetTextAsync().Result.Length)
-                );
-            });
+                    var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
+                    return await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
+                        workspace,
+                        document,
+                        new TextSpan(0, document.GetTextAsync().Result.Length)
+                    );
+                }
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/908621")]
@@ -425,8 +427,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     ideEngineDocument,
                     new TextSpan(0, ideEngineDocument.GetTextAsync().Result.Length)
                 );
-                var diagnosticsFromAnalyzer = diagnostics.Where(
-                    d => d.Id == CodeBlockAnalyzerFactory.Descriptor.Id
+                var diagnosticsFromAnalyzer = diagnostics.Where(d =>
+                    d.Id == CodeBlockAnalyzerFactory.Descriptor.Id
                 );
                 Assert.Equal(2, diagnosticsFromAnalyzer.Count());
             }
@@ -457,8 +459,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 var diagnostics = compilerEngineCompilation.GetAnalyzerDiagnostics(
                     new[] { analyzer }
                 );
-                var diagnosticsFromAnalyzer = diagnostics.Where(
-                    d => d.Id == CodeBlockAnalyzerFactory.Descriptor.Id
+                var diagnosticsFromAnalyzer = diagnostics.Where(d =>
+                    d.Id == CodeBlockAnalyzerFactory.Descriptor.Id
                 );
                 Assert.Equal(4, diagnosticsFromAnalyzer.Count());
             }

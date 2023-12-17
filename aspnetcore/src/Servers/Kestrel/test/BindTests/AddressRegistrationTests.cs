@@ -221,8 +221,8 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             host.Start();
 
             foreach (
-                var testUrl in testUrls.Select(
-                    testUrl => $"{testUrl}:{(testPort == 0 ? host.GetPort() : testPort)}"
+                var testUrl in testUrls.Select(testUrl =>
+                    $"{testUrl}:{(testPort == 0 ? host.GetPort() : testPort)}"
                 )
             )
             {
@@ -252,8 +252,8 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
         RegisterAddresses_Success(addressInput, new[] { testUrl }, testPort);
 
     private Task RegisterAddresses_StaticPort_Success(string addressInput, string[] testUrls) =>
-        RunTestWithStaticPort(
-            port => RegisterAddresses_Success($"{addressInput}:{port}", testUrls, port)
+        RunTestWithStaticPort(port =>
+            RegisterAddresses_Success($"{addressInput}:{port}", testUrls, port)
         );
 
     [Fact]
@@ -388,8 +388,8 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
     }
 
     private Task RegisterIPEndPoint_StaticPort_Success(IPAddress address, string testUrl) =>
-        RunTestWithStaticPort(
-            port => RegisterIPEndPoint_Success(new IPEndPoint(address, port), testUrl, port)
+        RunTestWithStaticPort(port =>
+            RegisterIPEndPoint_Success(new IPEndPoint(address, port), testUrl, port)
         );
 
     [Fact]
@@ -434,8 +434,8 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             await host.StartAsync();
 
             foreach (
-                var testUrl in testUrls.Select(
-                    testUrl => $"{testUrl}:{(testPort == 0 ? host.GetPort() : testPort)}"
+                var testUrl in testUrls.Select(testUrl =>
+                    $"{testUrl}:{(testPort == 0 ? host.GetPort() : testPort)}"
                 )
             )
             {
@@ -491,8 +491,8 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             await host.StartAsync();
 
             foreach (
-                var testUrl in testUrls.Select(
-                    testUrl => $"{testUrl}:{(testPort == 0 ? host.GetPort() : testPort)}"
+                var testUrl in testUrls.Select(testUrl =>
+                    $"{testUrl}:{(testPort == 0 ? host.GetPort() : testPort)}"
                 )
             )
             {
@@ -658,11 +658,10 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
                 Assert.Equal(expectedMessage, exception.Message);
                 Assert.Equal(
                     0,
-                    LogMessages.Count(
-                        log =>
-                            log.LogLevel == LogLevel.Critical
-                            && log.Exception is null
-                            && log.Message.EndsWith(expectedMessage, StringComparison.Ordinal)
+                    LogMessages.Count(log =>
+                        log.LogLevel == LogLevel.Critical
+                        && log.Exception is null
+                        && log.Message.EndsWith(expectedMessage, StringComparison.Ordinal)
                     )
                 );
                 await host.StopAsync();
@@ -708,11 +707,10 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
                 Assert.Equal(expectedMessage, exception.Message);
                 Assert.Equal(
                     0,
-                    LogMessages.Count(
-                        log =>
-                            log.LogLevel == LogLevel.Critical
-                            && log.Exception is null
-                            && log.Message.EndsWith(expectedMessage, StringComparison.Ordinal)
+                    LogMessages.Count(log =>
+                        log.LogLevel == LogLevel.Critical
+                        && log.Exception is null
+                        && log.Message.EndsWith(expectedMessage, StringComparison.Ordinal)
                     )
                 );
 
@@ -1201,14 +1199,13 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
                     );
                     Assert.Equal(
                         0,
-                        LogMessages.Count(
-                            log =>
-                                log.LogLevel == LogLevel.Critical
-                                && log.Exception is null
-                                && log.Message.EndsWith(
-                                    CoreStrings.FormatEndpointAlreadyInUse(thisAddressString),
-                                    StringComparison.Ordinal
-                                )
+                        LogMessages.Count(log =>
+                            log.LogLevel == LogLevel.Critical
+                            && log.Exception is null
+                            && log.Message.EndsWith(
+                                CoreStrings.FormatEndpointAlreadyInUse(thisAddressString),
+                                StringComparison.Ordinal
+                            )
                         )
                     );
                     break;

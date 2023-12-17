@@ -64,8 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         )
         {
             var topmostUsingStatements = diagnostics
-                .Select(
-                    d => (UsingStatementSyntax)d.AdditionalLocations[0].FindNode(cancellationToken)
+                .Select(d =>
+                    (UsingStatementSyntax)d.AdditionalLocations[0].FindNode(cancellationToken)
                 )
                 .ToSet();
             var blocks = topmostUsingStatements.Select(u => (BlockSyntax)u.Parent);
@@ -91,8 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         {
             if (originalBlock.Statements.Count == currentBlock.Statements.Count)
             {
-                var statementToUpdateIndex = originalBlock.Statements.IndexOf(
-                    s => topmostUsingStatements.Contains(s)
+                var statementToUpdateIndex = originalBlock.Statements.IndexOf(s =>
+                    topmostUsingStatements.Contains(s)
                 );
                 var statementToUpdate = currentBlock.Statements[statementToUpdateIndex];
 
@@ -172,8 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                     }
 
                     if (
-                        openBraceLeadingTrivia.Any(
-                            t => t.IsSingleOrMultiLineComment() || t.IsDirective
+                        openBraceLeadingTrivia.Any(t =>
+                            t.IsSingleOrMultiLineComment() || t.IsDirective
                         )
                     )
                     {

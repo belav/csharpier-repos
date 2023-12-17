@@ -893,8 +893,9 @@ class A
             Operation operation
         )
         {
-            var textUndoHistoryRegistry =
-                exportProvider.GetExportedValue<ITextUndoHistoryRegistry>();
+            var textUndoHistoryRegistry = exportProvider.GetExportedValue<ITextUndoHistoryRegistry>(
+
+            );
             var editorOperationsFactory =
                 exportProvider.GetExportedValue<IEditorOperationsFactoryService>();
             var editorOptionsService = exportProvider.GetExportedValue<EditorOptionsService>();
@@ -917,13 +918,12 @@ class A
             AssertEx.SetEqual(expectedChanges, edits.TextChanges);
 
             var trackingSpans = edits
-                .TrackingSpans.Select(
-                    textSpan =>
-                        AbstractCommentSelectionBase<Operation>.CreateTrackingSpan(
-                            edits.ResultOperation,
-                            textView.TextBuffer.CurrentSnapshot,
-                            textSpan.TrackingTextSpan
-                        )
+                .TrackingSpans.Select(textSpan =>
+                    AbstractCommentSelectionBase<Operation>.CreateTrackingSpan(
+                        edits.ResultOperation,
+                        textView.TextBuffer.CurrentSnapshot,
+                        textSpan.TrackingTextSpan
+                    )
                 )
                 .ToList();
 

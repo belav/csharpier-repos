@@ -2246,26 +2246,28 @@ namespace System.Net.Http.Functional.Tests
                                     );
 
                                     // First server connects but doesn't send any response yet
-                                    Task serverTask1 =
-                                        server1.AcceptConnectionAsync(async connection1 =>
+                                    Task serverTask1 = server1.AcceptConnectionAsync(
+                                        async connection1 =>
                                         {
                                             await unblockServers.Task;
-                                        });
+                                        }
+                                    );
 
                                     // Second server connects and sends some but not all headers
-                                    Task serverTask2 =
-                                        server2.AcceptConnectionAsync(async connection2 =>
+                                    Task serverTask2 = server2.AcceptConnectionAsync(
+                                        async connection2 =>
                                         {
                                             await connection2.ReadRequestDataAsync();
                                             await connection2.SendPartialResponseHeadersAsync(
                                                 HttpStatusCode.OK
                                             );
                                             await unblockServers.Task;
-                                        });
+                                        }
+                                    );
 
                                     // Third server connects and sends all headers and some but not all of the body
-                                    Task serverTask3 =
-                                        server3.AcceptConnectionAsync(async connection3 =>
+                                    Task serverTask3 = server3.AcceptConnectionAsync(
+                                        async connection3 =>
                                         {
                                             await connection3.ReadRequestDataAsync();
                                             await connection3.SendResponseAsync(
@@ -2285,7 +2287,8 @@ namespace System.Net.Http.Functional.Tests
                                                 "1234567890",
                                                 isFinal: true
                                             );
-                                        });
+                                        }
+                                    );
 
                                     // Make three requests
                                     Task<HttpResponseMessage> get1,

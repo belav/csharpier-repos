@@ -681,8 +681,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             CancellationToken cancellationToken
         )
         {
-            var document =
-                SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document is null)
             {
                 // Couldn't identify the current document
@@ -946,8 +947,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 return;
             }
 
-            var document =
-                SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document is null)
             {
                 // It's unclear if/how this state would occur, but if it does we would throw an exception trying to
@@ -1044,8 +1046,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 return;
             }
 
-            var document =
-                SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document is null)
             {
                 // Couldn't identify the current document
@@ -1402,8 +1405,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 return;
             }
 
-            var existingReferenceNames = originalProject.MetadataReferences.Select(
-                r => Path.GetFileNameWithoutExtension(r.Display)
+            var existingReferenceNames = originalProject.MetadataReferences.Select(r =>
+                Path.GetFileNameWithoutExtension(r.Display)
             );
             var workspace = originalProject.Solution.Workspace;
             var projectId = originalProject.Id;

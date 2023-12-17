@@ -60,22 +60,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             return document
                 .GetVisibleCodeBlocks(cancellationToken)
-                .Select(
-                    tuple =>
-                        new TextSpanAndCookie
-                        {
-                            CodeSpan = new VsTextSpan
-                            {
-                                iStartLine = snapshot.GetLineNumberFromPosition(tuple.Item1.Start),
-                                iStartIndex = 0,
-                                iEndLine = snapshot.GetLineNumberFromPosition(tuple.Item1.End),
-                                iEndIndex =
-                                    tuple.Item1.End
-                                    - snapshot.GetLineFromPosition(tuple.Item1.End).Start,
-                            },
-                            ulHTMLCookie = tuple.Item2,
-                        }
-                )
+                .Select(tuple => new TextSpanAndCookie
+                {
+                    CodeSpan = new VsTextSpan
+                    {
+                        iStartLine = snapshot.GetLineNumberFromPosition(tuple.Item1.Start),
+                        iStartIndex = 0,
+                        iEndLine = snapshot.GetLineNumberFromPosition(tuple.Item1.End),
+                        iEndIndex =
+                            tuple.Item1.End - snapshot.GetLineFromPosition(tuple.Item1.End).Start,
+                    },
+                    ulHTMLCookie = tuple.Item2,
+                })
                 .ToArray();
         }
     }

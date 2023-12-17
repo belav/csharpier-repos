@@ -81,8 +81,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             async,
             ss =>
                 ss.Set<EntityTwo>()
-                    .OrderByDescending(
-                        e => e.SelfSkipSharedLeft.LongCount(e => e.Name.StartsWith("L"))
+                    .OrderByDescending(e =>
+                        e.SelfSkipSharedLeft.LongCount(e => e.Name.StartsWith("L"))
                     )
                     .ThenBy(e => e.Id),
             assertOrder: true
@@ -166,8 +166,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             async,
             ss =>
                 ss.Set<EntityOne>()
-                    .Select(
-                        e => e.SelfSkipPayloadRight.OrderBy(i => i.Id).Take(1).SingleOrDefault()
+                    .Select(e => e.SelfSkipPayloadRight.OrderBy(i => i.Id).Take(1).SingleOrDefault()
                     )
         );
 
@@ -574,11 +573,10 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             async,
             ss =>
                 ss.Set<EntityCompositeKey>()
-                    .Include(
-                        e =>
-                            EF.Property<ICollection<EntityTwo>>(e, "TwoSkipShared")
-                                .OrderBy(i => i.Id)
-                                .Take(2)
+                    .Include(e =>
+                        EF.Property<ICollection<EntityTwo>>(e, "TwoSkipShared")
+                            .OrderBy(i => i.Id)
+                            .Take(2)
                     ),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -716,17 +714,15 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             async,
             ss =>
                 ss.Set<EntityOne>()
-                    .Include(
-                        e =>
-                            EF.Property<ICollection<EntityTwo>>(e, "TwoSkip")
-                                .OrderBy(i => i.Id)
-                                .Skip(1)
-                                .Take(2)
+                    .Include(e =>
+                        EF.Property<ICollection<EntityTwo>>(e, "TwoSkip")
+                            .OrderBy(i => i.Id)
+                            .Skip(1)
+                            .Take(2)
                     )
-                    .ThenInclude<EntityOne, EntityTwo, IEnumerable<EntityThree>>(
-                        e =>
-                            EF.Property<ICollection<EntityThree>>(e, "ThreeSkipFull")
-                                .Where(i => i.Id < 10)
+                    .ThenInclude<EntityOne, EntityTwo, IEnumerable<EntityThree>>(e =>
+                        EF.Property<ICollection<EntityThree>>(e, "ThreeSkipFull")
+                            .Where(i => i.Id < 10)
                     ),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -1145,11 +1141,10 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             async,
             ss =>
                 ss.Set<UnidirectionalEntityOne>()
-                    .Where(
-                        e =>
-                            e.ThreeSkipPayloadFullShared.Contains(
-                                new UnidirectionalEntityThree { Id = 1 }
-                            )
+                    .Where(e =>
+                        e.ThreeSkipPayloadFullShared.Contains(
+                            new UnidirectionalEntityThree { Id = 1 }
+                        )
                     ),
             ss =>
                 ss.Set<UnidirectionalEntityOne>()
@@ -1557,33 +1552,30 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                             async,
                             ss =>
                                 ss.Set<UnidirectionalEntityTwo>()
-                                    .Include(
-                                        e =>
-                                            EF.Property<IEnumerable<UnidirectionalEntityOne>>(
-                                                    e,
-                                                    "UnidirectionalEntityOne"
-                                                )
-                                                .Where(i => i.Id < 10)
+                                    .Include(e =>
+                                        EF.Property<IEnumerable<UnidirectionalEntityOne>>(
+                                                e,
+                                                "UnidirectionalEntityOne"
+                                            )
+                                            .Where(i => i.Id < 10)
                                     )
                                     .ThenInclude(e => e.BranchSkip)
-                                    .Include(
-                                        e =>
-                                            EF.Property<IEnumerable<UnidirectionalEntityOne>>(
-                                                    e,
-                                                    "UnidirectionalEntityOne"
-                                                )
-                                                .Where(i => i.Id < 20)
+                                    .Include(e =>
+                                        EF.Property<IEnumerable<UnidirectionalEntityOne>>(
+                                                e,
+                                                "UnidirectionalEntityOne"
+                                            )
+                                            .Where(i => i.Id < 20)
                                     )
                                     .ThenInclude<
                                         UnidirectionalEntityTwo,
                                         UnidirectionalEntityOne,
                                         ICollection<UnidirectionalEntityThree>
-                                    >(
-                                        e =>
-                                            EF.Property<ICollection<UnidirectionalEntityThree>>(
-                                                e,
-                                                "UnidirectionalEntityThree"
-                                            )
+                                    >(e =>
+                                        EF.Property<ICollection<UnidirectionalEntityThree>>(
+                                            e,
+                                            "UnidirectionalEntityThree"
+                                        )
                                     )
                         )
                 )

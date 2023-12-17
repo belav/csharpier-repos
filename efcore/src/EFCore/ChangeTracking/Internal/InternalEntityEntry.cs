@@ -1572,15 +1572,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
                     !asProperty.ClrType.IsNullableType()
                     || asProperty
                         .GetContainingForeignKeys()
-                        .Any(
-                            fk =>
-                                fk
-                                    is {
-                                        IsRequired: true,
-                                        DeleteBehavior: DeleteBehavior.Cascade
-                                            or DeleteBehavior.ClientCascade
-                                    }
-                                && fk.DeclaringEntityType.IsAssignableFrom(EntityType)
+                        .Any(fk =>
+                            fk
+                                is {
+                                    IsRequired: true,
+                                    DeleteBehavior: DeleteBehavior.Cascade
+                                        or DeleteBehavior.ClientCascade
+                                }
+                            && fk.DeclaringEntityType.IsAssignableFrom(EntityType)
                         )
                 )
             )
@@ -1970,8 +1969,8 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             }
         }
 
-        var cascadeFk = fks.FirstOrDefault(
-            fk => fk.DeleteBehavior is DeleteBehavior.Cascade or DeleteBehavior.ClientCascade
+        var cascadeFk = fks.FirstOrDefault(fk =>
+            fk.DeleteBehavior is DeleteBehavior.Cascade or DeleteBehavior.ClientCascade
         );
         if (
             cascadeFk != null
@@ -2029,10 +2028,9 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         {
             var property = EntityType
                 .GetFlattenedProperties()
-                .FirstOrDefault(
-                    p =>
-                        (EntityState != EntityState.Modified || IsModified(p))
-                        && _stateData.IsPropertyFlagged(p.GetIndex(), PropertyFlag.Null)
+                .FirstOrDefault(p =>
+                    (EntityState != EntityState.Modified || IsModified(p))
+                    && _stateData.IsPropertyFlagged(p.GetIndex(), PropertyFlag.Null)
                 );
 
             if (property != null)

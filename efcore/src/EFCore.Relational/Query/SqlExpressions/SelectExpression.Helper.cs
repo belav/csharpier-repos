@@ -895,9 +895,10 @@ public sealed partial class SelectExpression
                     // In other cases (like VisitChildren), we just reuse the same table references and update the SelectExpression inside it.
                     // We initially assign old SelectExpression in table references and later update it once we construct clone
                     var newTableReferences = selectExpression
-                        ._tableReferences.Select(
-                            e => new TableReferenceExpression(selectExpression, e.Alias)
-                        )
+                        ._tableReferences.Select(e => new TableReferenceExpression(
+                            selectExpression,
+                            e.Alias
+                        ))
                         .ToList();
                     Check.DebugAssert(
                         newTables
@@ -1144,13 +1145,12 @@ public sealed partial class SelectExpression
                         var identityMap = true;
                         for (var i = 0; i < selectExpression.Projection.Count; i++)
                         {
-                            var newIndex = innerProjections.FindIndex(
-                                e =>
-                                    string.Equals(
-                                        e,
-                                        selectExpression.Projection[i].Alias,
-                                        StringComparison.Ordinal
-                                    )
+                            var newIndex = innerProjections.FindIndex(e =>
+                                string.Equals(
+                                    e,
+                                    selectExpression.Projection[i].Alias,
+                                    StringComparison.Ordinal
+                                )
                             );
                             if (newIndex == -1)
                             {
@@ -1233,8 +1233,8 @@ public sealed partial class SelectExpression
 
                     {
                         result.Alias = tpcTablesExpression.Alias;
-                        var tableIndex = selectExpression._tables.FindIndex(
-                            teb => ReferenceEquals(UnwrapJoinExpression(teb), tpcTablesExpression)
+                        var tableIndex = selectExpression._tables.FindIndex(teb =>
+                            ReferenceEquals(UnwrapJoinExpression(teb), tpcTablesExpression)
                         );
                         var table = selectExpression._tables[tableIndex];
                         selectExpression._tables[tableIndex] = (TableExpressionBase)

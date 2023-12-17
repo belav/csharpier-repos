@@ -122,7 +122,9 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             Assert.NotNull(NestedGenericTypesContext.Default);
             var original =
-                new MyContainingGenericClass<int>.MyNestedGenericClass<int>.MyNestedGenericNestedGenericClass<int>()
+                new MyContainingGenericClass<int>.MyNestedGenericClass<int>.MyNestedGenericNestedGenericClass<int>(
+
+                )
                 {
                     DataT = 1,
                     DataT1 = 10,

@@ -167,8 +167,8 @@ public class InMemoryDatabaseTest
 
         await inMemoryDatabase.SaveChangesAsync(new[] { entityEntry });
 
-        var (Level, _, Message, _, _) = loggerFactory.Log.Single(
-            t => t.Id.Id == InMemoryEventId.ChangesSaved.Id
+        var (Level, _, Message, _, _) = loggerFactory.Log.Single(t =>
+            t.Id.Id == InMemoryEventId.ChangesSaved.Id
         );
 
         Assert.Equal(LogLevel.Information, Level);

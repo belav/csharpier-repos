@@ -438,9 +438,8 @@ namespace System.Linq.Expressions.Tests
                     StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
                 )
                 .Where(line => !line.StartsWith("//"))
-                .Select(
-                    beforeLambdaUniquifierRemoval =>
-                        normalizeRegex.Replace(beforeLambdaUniquifierRemoval, "lambda_method")
+                .Select(beforeLambdaUniquifierRemoval =>
+                    normalizeRegex.Replace(beforeLambdaUniquifierRemoval, "lambda_method")
                 );
 
             return string.Join("\n", lines);
@@ -527,8 +526,9 @@ namespace System.Linq.Expressions.Tests
                 d,
                 e
             ) => a + b + c + d + e;
-            Func<int, int, int, int, int, int> fiveParameterFunc =
-                fiveParameterExpression.Compile();
+            Func<int, int, int, int, int, int> fiveParameterFunc = fiveParameterExpression.Compile(
+
+            );
             Assert.Equal(6, fiveParameterFunc(2, 2, 1, 1, 0));
 
             Expression<Func<int, int, int>> callExpression = (a, b) => Add(a, b);

@@ -71,8 +71,9 @@ namespace MonoTests.System.Data.OleDb
 
         public static void Main()
         {
-            OleDbCommandBuilder_DeriveParameters_O tc =
-                new OleDbCommandBuilder_DeriveParameters_O();
+            OleDbCommandBuilder_DeriveParameters_O tc = new OleDbCommandBuilder_DeriveParameters_O(
+
+            );
             try
             {
                 tc.BeginTest("OleDbCommandBuilder_DeriveParameters_O");

@@ -376,14 +376,14 @@ public class ExecutionStrategyTest : IDisposable
 
     [ConditionalFact]
     public Task ExecuteAsync_Action_throws_for_an_existing_transaction() =>
-        ExecuteAsync_throws_for_an_existing_transaction(
-            e => e.ExecuteAsync(() => (Task)Task.FromResult(1))
+        ExecuteAsync_throws_for_an_existing_transaction(e =>
+            e.ExecuteAsync(() => (Task)Task.FromResult(1))
         );
 
     [ConditionalFact]
     public Task ExecuteAsync_Func_throws_for_an_existing_transaction() =>
-        ExecuteAsync_throws_for_an_existing_transaction(
-            e => e.ExecuteAsync(ct => Task.FromResult(1), CancellationToken.None)
+        ExecuteAsync_throws_for_an_existing_transaction(e =>
+            e.ExecuteAsync(ct => Task.FromResult(1), CancellationToken.None)
         );
 
     private async Task ExecuteAsync_throws_for_an_existing_transaction(
@@ -409,14 +409,14 @@ public class ExecutionStrategyTest : IDisposable
 
     [ConditionalFact]
     public async Task ExecuteAsync_Action_throws_for_an_ambient_transaction() =>
-        await ExecuteAsync_throws_for_an_ambient_transaction(
-            e => e.ExecuteAsync(() => (Task)Task.FromResult(1))
+        await ExecuteAsync_throws_for_an_ambient_transaction(e =>
+            e.ExecuteAsync(() => (Task)Task.FromResult(1))
         );
 
     [ConditionalFact]
     public async Task ExecuteAsync_Func_throws_for_an_ambient_transaction() =>
-        await ExecuteAsync_throws_for_an_ambient_transaction(
-            e => e.ExecuteAsync(ct => Task.FromResult(1), CancellationToken.None)
+        await ExecuteAsync_throws_for_an_ambient_transaction(e =>
+            e.ExecuteAsync(ct => Task.FromResult(1), CancellationToken.None)
         );
 
     private async Task ExecuteAsync_throws_for_an_ambient_transaction(
@@ -442,14 +442,14 @@ public class ExecutionStrategyTest : IDisposable
 
     [ConditionalFact]
     public async Task ExecuteAsync_Action_throws_for_an_enlisted_transaction() =>
-        await ExecuteAsync_throws_for_an_enlisted_transaction(
-            e => e.ExecuteAsync(() => (Task)Task.FromResult(1))
+        await ExecuteAsync_throws_for_an_enlisted_transaction(e =>
+            e.ExecuteAsync(() => (Task)Task.FromResult(1))
         );
 
     [ConditionalFact]
     public async Task ExecuteAsync_Func_throws_for_an_enlisted_transaction() =>
-        await ExecuteAsync_throws_for_an_enlisted_transaction(
-            e => e.ExecuteAsync(ct => Task.FromResult(1), CancellationToken.None)
+        await ExecuteAsync_throws_for_an_enlisted_transaction(e =>
+            e.ExecuteAsync(ct => Task.FromResult(1), CancellationToken.None)
         );
 
     private async Task ExecuteAsync_throws_for_an_enlisted_transaction(

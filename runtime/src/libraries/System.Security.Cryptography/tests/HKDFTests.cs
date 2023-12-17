@@ -486,7 +486,9 @@ namespace System.Security.Cryptography.Tests
                         Name = "SHA3-256 with salt and info",
                         Hash = HashAlgorithmName.SHA3_256,
                         Ikm =
-                            "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F".HexToByteArray(),
+                            "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F".HexToByteArray(
+
+                            ),
                         Salt = "mysalt"u8.ToArray(),
                         Info = "myinfo"u8.ToArray(),
                         Okm = "35bd9d1c75cf7e30".HexToByteArray(),
@@ -500,7 +502,9 @@ namespace System.Security.Cryptography.Tests
                         Name = "SHA3-384 with salt and info",
                         Hash = HashAlgorithmName.SHA3_384,
                         Ikm =
-                            "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F".HexToByteArray(),
+                            "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F".HexToByteArray(
+
+                            ),
                         Salt = "mysalt"u8.ToArray(),
                         Info = "myinfo"u8.ToArray(),
                         Okm = "323a8ab50c7190c8".HexToByteArray(),
@@ -514,7 +518,9 @@ namespace System.Security.Cryptography.Tests
                         Name = "SHA3-512 with salt and info",
                         Hash = HashAlgorithmName.SHA3_512,
                         Ikm =
-                            "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F".HexToByteArray(),
+                            "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F".HexToByteArray(
+
+                            ),
                         Salt = "mysalt"u8.ToArray(),
                         Info = "myinfo"u8.ToArray(),
                         Okm = "27693b36a489e9f1".HexToByteArray(),
@@ -869,7 +875,9 @@ namespace System.Security.Cryptography.Tests
                     "0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b".HexToByteArray();
                 ReadOnlySpan<byte> salt = "000102030405060708090a0b0c".HexToByteArray();
                 byte[] expectedPrk =
-                    "077709362c2e32df0ddc3f0dc47bba6390b6c73bb50f9c3122ec844ad7c2b3e5".HexToByteArray();
+                    "077709362c2e32df0ddc3f0dc47bba6390b6c73bb50f9c3122ec844ad7c2b3e5".HexToByteArray(
+
+                    );
 
                 int length =
                     Math.Max(ikm.Length, expectedPrk.Length) + Math.Max(ikmOffset, outputOffset);
@@ -893,7 +901,9 @@ namespace System.Security.Cryptography.Tests
                     "0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b".HexToByteArray();
                 ReadOnlySpan<byte> salt = "000102030405060708090a0b0c".HexToByteArray();
                 byte[] expectedPrk =
-                    "077709362c2e32df0ddc3f0dc47bba6390b6c73bb50f9c3122ec844ad7c2b3e5".HexToByteArray();
+                    "077709362c2e32df0ddc3f0dc47bba6390b6c73bb50f9c3122ec844ad7c2b3e5".HexToByteArray(
+
+                    );
 
                 int length =
                     Math.Max(ikm.Length, expectedPrk.Length) + Math.Max(saltOffset, outputOffset);
@@ -919,7 +929,9 @@ namespace System.Security.Cryptography.Tests
                     + "f0f1f2f3f4f5f6f7f8f9fafbfcfdfeff"
                 ).HexToByteArray();
                 ReadOnlySpan<byte> prk =
-                    "06a6b88c5853361a06104c9ceb35b45cef760014904671014a193f40c15fc244".HexToByteArray();
+                    "06a6b88c5853361a06104c9ceb35b45cef760014904671014a193f40c15fc244".HexToByteArray(
+
+                    );
                 byte[] expectedOkm = (
                     "b11e398dc80327a1c8e7f78c596a49344f012eda2d4efad8a050cc4c19afa97c"
                     + "59045a99cac7827271cb41c65e590e09da3275600c2f09b8367793a9aca3db71"
@@ -950,9 +962,13 @@ namespace System.Security.Cryptography.Tests
                     + "f0f1f2f3f4f5f6f7f8f9fafbfcfdfeff"
                 ).HexToByteArray();
                 ReadOnlySpan<byte> prk =
-                    "06a6b88c5853361a06104c9ceb35b45cef760014904671014a193f40c15fc244".HexToByteArray();
+                    "06a6b88c5853361a06104c9ceb35b45cef760014904671014a193f40c15fc244".HexToByteArray(
+
+                    );
                 byte[] expectedOkm =
-                    "b11e398dc80327a1c8e7f78c596a49344f012eda2d4efad8a050cc4c19afa97c".HexToByteArray();
+                    "b11e398dc80327a1c8e7f78c596a49344f012eda2d4efad8a050cc4c19afa97c".HexToByteArray(
+
+                    );
 
                 int length =
                     Math.Max(info.Length, expectedOkm.Length) + Math.Max(infoOffset, outputOffset);
@@ -978,7 +994,9 @@ namespace System.Security.Cryptography.Tests
                     + "f0f1f2f3f4f5f6f7f8f9fafbfcfdfeff"
                 ).HexToByteArray();
                 ReadOnlySpan<byte> prk =
-                    "06a6b88c5853361a06104c9ceb35b45cef760014904671014a193f40c15fc244".HexToByteArray();
+                    "06a6b88c5853361a06104c9ceb35b45cef760014904671014a193f40c15fc244".HexToByteArray(
+
+                    );
                 byte[] expectedOkm = (
                     "b11e398dc80327a1c8e7f78c596a49344f012eda2d4efad8a050cc4c19afa97c"
                     + "59045a99cac7827271cb41c65e590e09da3275600c2f09b8367793a9aca3db71"

@@ -4494,7 +4494,9 @@ namespace MonoTests.System
 
             Assert.AreEqual(
                 "",
-                "\x9\xa\xb\xc\xd\x20\x85\xa0\x1680\x2000\x2001\x2002\x2003\x2004\x2005\x2006\x2007\x2008\x2009\x200a\x2028\x2029\x202f\x205f\x3000".Trim(),
+                "\x9\xa\xb\xc\xd\x20\x85\xa0\x1680\x2000\x2001\x2002\x2003\x2004\x2005\x2006\x2007\x2008\x2009\x200a\x2028\x2029\x202f\x205f\x3000".Trim(
+
+                ),
                 "net_4_0 changes #1"
             );
         }

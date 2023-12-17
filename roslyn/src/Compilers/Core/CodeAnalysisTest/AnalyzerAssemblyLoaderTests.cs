@@ -433,13 +433,12 @@ Delta: Gamma: Beta: Test B
                     .Select(x => (x.simpleName, x.version, getExpectedLoadPath(x.path)))
                     .ToArray(),
                 assemblies
-                    .Select(
-                        assembly =>
-                            (
-                                assembly.GetName().Name!,
-                                assembly.GetName().Version!.ToString(),
-                                assembly.Location
-                            )
+                    .Select(assembly =>
+                        (
+                            assembly.GetName().Name!,
+                            assembly.GetName().Version!.ToString(),
+                            assembly.Location
+                        )
                     )
                     .OrderBy(static x => x)
                     .ToArray()

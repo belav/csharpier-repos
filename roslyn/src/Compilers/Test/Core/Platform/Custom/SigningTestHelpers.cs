@@ -71,8 +71,9 @@ namespace Roslyn.Test.Utilities
         {
             try
             {
-                IClrStrongName strongName =
-                    new DesktopStrongNameProvider().GetStrongNameInterface();
+                IClrStrongName strongName = new DesktopStrongNameProvider().GetStrongNameInterface(
+
+                );
 
                 //EDMAURER use marshal to be safe?
                 fixed (byte* p = keyBlob)

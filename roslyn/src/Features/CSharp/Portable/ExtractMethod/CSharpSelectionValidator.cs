@@ -72,12 +72,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 );
                 if (statementRange == null)
                 {
-                    selectionInfo = selectionInfo.WithStatus(
-                        s =>
-                            s.With(
-                                succeeded: false,
-                                CSharpFeaturesResources.Cannot_determine_valid_range_of_statements_to_extract
-                            )
+                    selectionInfo = selectionInfo.WithStatus(s =>
+                        s.With(
+                            succeeded: false,
+                            CSharpFeaturesResources.Cannot_determine_valid_range_of_statements_to_extract
+                        )
                     );
                     return (null, selectionInfo.Status);
                 }
@@ -93,12 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     // check control flow only if we are extracting statement level, not expression
                     // level. you can not have goto that moves control out of scope in expression level
                     // (even in lambda)
-                    selectionInfo = selectionInfo.WithStatus(
-                        s =>
-                            s.With(
-                                succeeded: true,
-                                CSharpFeaturesResources.Not_all_code_paths_return
-                            )
+                    selectionInfo = selectionInfo.WithStatus(s =>
+                        s.With(succeeded: true, CSharpFeaturesResources.Not_all_code_paths_return)
                     );
                 }
             }
@@ -141,24 +136,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 // Cannot extract a local function from a global statement in script code
                 if (localFunction && options is { Kind: SourceCodeKind.Script })
                 {
-                    return selectionInfo.WithStatus(
-                        s =>
-                            s.With(
-                                succeeded: false,
-                                CSharpFeaturesResources.Selection_cannot_include_global_statements
-                            )
+                    return selectionInfo.WithStatus(s =>
+                        s.With(
+                            succeeded: false,
+                            CSharpFeaturesResources.Selection_cannot_include_global_statements
+                        )
                     );
                 }
 
                 // Cannot extract a method from a top-level statement in normal code
                 if (!localFunction && options is { Kind: SourceCodeKind.Regular })
                 {
-                    return selectionInfo.WithStatus(
-                        s =>
-                            s.With(
-                                succeeded: false,
-                                CSharpFeaturesResources.Selection_cannot_include_top_level_statements
-                            )
+                    return selectionInfo.WithStatus(s =>
+                        s.With(
+                            succeeded: false,
+                            CSharpFeaturesResources.Selection_cannot_include_top_level_statements
+                        )
                     );
                 }
             }
@@ -175,12 +168,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             or SyntaxKind.ThisConstructorInitializer
                     )
                     {
-                        return selectionInfo.WithStatus(
-                            s =>
-                                s.With(
-                                    succeeded: false,
-                                    CSharpFeaturesResources.Selection_cannot_be_in_constructor_initializer
-                                )
+                        return selectionInfo.WithStatus(s =>
+                            s.With(
+                                succeeded: false,
+                                CSharpFeaturesResources.Selection_cannot_be_in_constructor_initializer
+                            )
                         );
                     }
 
@@ -214,17 +206,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             return AssignFinalSpan(
                 selectionInfo
-                    .With(
-                        s =>
-                            s.FirstTokenInFinalSpan = assign.Right.GetFirstToken(
-                                includeZeroWidth: true
-                            )
+                    .With(s =>
+                        s.FirstTokenInFinalSpan = assign.Right.GetFirstToken(includeZeroWidth: true)
                     )
-                    .With(
-                        s =>
-                            s.LastTokenInFinalSpan = assign.Right.GetLastToken(
-                                includeZeroWidth: true
-                            )
+                    .With(s =>
+                        s.LastTokenInFinalSpan = assign.Right.GetLastToken(includeZeroWidth: true)
                     ),
                 text
             );
@@ -268,13 +254,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             {
                 // couldn't find any valid node
                 return selectionInfo
-                    .WithStatus(
-                        s =>
-                            new OperationStatus(
-                                succeeded: false,
-                                CSharpFeaturesResources.Selection_does_not_contain_a_valid_node
-                            )
-                    )
+                    .WithStatus(s => new OperationStatus(
+                        succeeded: false,
+                        CSharpFeaturesResources.Selection_does_not_contain_a_valid_node
+                    ))
                     .With(s => s.FirstTokenInFinalSpan = default)
                     .With(s => s.LastTokenInFinalSpan = default);
             }
@@ -287,15 +270,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             return selectionInfo
                 .With(s => s.SelectionInExpression = firstValidNode is ExpressionSyntax)
                 .With(s => s.SelectionInSingleStatement = firstValidNode is StatementSyntax)
-                .With(
-                    s =>
-                        s.FirstTokenInFinalSpan = firstValidNode.GetFirstToken(
-                            includeZeroWidth: true
-                        )
+                .With(s =>
+                    s.FirstTokenInFinalSpan = firstValidNode.GetFirstToken(includeZeroWidth: true)
                 )
-                .With(
-                    s =>
-                        s.LastTokenInFinalSpan = firstValidNode.GetLastToken(includeZeroWidth: true)
+                .With(s =>
+                    s.LastTokenInFinalSpan = firstValidNode.GetLastToken(includeZeroWidth: true)
                 );
         }
 
@@ -430,9 +409,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 || selectionInfo.LastTokenInFinalSpan.IsMissing
             )
             {
-                selectionInfo = selectionInfo.WithStatus(
-                    s =>
-                        s.With(succeeded: false, CSharpFeaturesResources.Contains_invalid_selection)
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(succeeded: false, CSharpFeaturesResources.Contains_invalid_selection)
                 );
             }
 
@@ -446,48 +424,44 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 && commonNode.HasDiagnostics()
             )
             {
-                selectionInfo = selectionInfo.WithStatus(
-                    s =>
-                        s.With(
-                            succeeded: false,
-                            CSharpFeaturesResources.The_selection_contains_syntactic_errors
-                        )
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: false,
+                        CSharpFeaturesResources.The_selection_contains_syntactic_errors
+                    )
                 );
             }
 
             var tokens = root.DescendantTokens(selectionInfo.FinalSpan);
             if (tokens.ContainPreprocessorCrossOver(selectionInfo.FinalSpan))
             {
-                selectionInfo = selectionInfo.WithStatus(
-                    s =>
-                        s.With(
-                            succeeded: true,
-                            CSharpFeaturesResources.Selection_can_not_cross_over_preprocessor_directives
-                        )
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: true,
+                        CSharpFeaturesResources.Selection_can_not_cross_over_preprocessor_directives
+                    )
                 );
             }
 
             // TODO : check whether this can be handled by control flow analysis engine
             if (tokens.Any(t => t.Kind() == SyntaxKind.YieldKeyword))
             {
-                selectionInfo = selectionInfo.WithStatus(
-                    s =>
-                        s.With(
-                            succeeded: true,
-                            CSharpFeaturesResources.Selection_can_not_contain_a_yield_statement
-                        )
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: true,
+                        CSharpFeaturesResources.Selection_can_not_contain_a_yield_statement
+                    )
                 );
             }
 
             // TODO : check behavior of control flow analysis engine around exception and exception handling.
             if (tokens.ContainArgumentlessThrowWithoutEnclosingCatch(selectionInfo.FinalSpan))
             {
-                selectionInfo = selectionInfo.WithStatus(
-                    s =>
-                        s.With(
-                            succeeded: true,
-                            CSharpFeaturesResources.Selection_can_not_contain_throw_statement
-                        )
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: true,
+                        CSharpFeaturesResources.Selection_can_not_contain_throw_statement
+                    )
                 );
             }
 
@@ -496,23 +470,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 && commonNode.PartOfConstantInitializerExpression()
             )
             {
-                selectionInfo = selectionInfo.WithStatus(
-                    s =>
-                        s.With(
-                            succeeded: false,
-                            CSharpFeaturesResources.Selection_can_not_be_part_of_constant_initializer_expression
-                        )
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: false,
+                        CSharpFeaturesResources.Selection_can_not_be_part_of_constant_initializer_expression
+                    )
                 );
             }
 
             if (commonNode.IsUnsafeContext())
             {
-                selectionInfo = selectionInfo.WithStatus(
-                    s =>
-                        s.With(
-                            s.Succeeded,
-                            CSharpFeaturesResources.The_selected_code_is_inside_an_unsafe_context
-                        )
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        s.Succeeded,
+                        CSharpFeaturesResources.The_selected_code_is_inside_an_unsafe_context
+                    )
                 );
             }
 
@@ -521,12 +493,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             // https://github.com/dotnet/roslyn/issues/9244
             if (commonNode.Kind() == SyntaxKind.IsPatternExpression)
             {
-                selectionInfo = selectionInfo.WithStatus(
-                    s =>
-                        s.With(
-                            succeeded: false,
-                            CSharpFeaturesResources.Selection_can_not_contain_a_pattern_expression
-                        )
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: false,
+                        CSharpFeaturesResources.Selection_can_not_contain_a_pattern_expression
+                    )
                 );
             }
 
@@ -546,17 +517,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             {
                 // simple expression case
                 return selectionInfo
-                    .With(
-                        s =>
-                            s.FirstTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetFirstToken(
-                                includeZeroWidth: true
-                            )
+                    .With(s =>
+                        s.FirstTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetFirstToken(
+                            includeZeroWidth: true
+                        )
                     )
-                    .With(
-                        s =>
-                            s.LastTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetLastToken(
-                                includeZeroWidth: true
-                            )
+                    .With(s =>
+                        s.LastTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetLastToken(
+                            includeZeroWidth: true
+                        )
                     );
             }
 
@@ -572,12 +541,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             if (range == null)
             {
-                return selectionInfo.WithStatus(
-                    s =>
-                        s.With(
-                            succeeded: false,
-                            CSharpFeaturesResources.No_valid_statement_range_to_extract
-                        )
+                return selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: false,
+                        CSharpFeaturesResources.No_valid_statement_range_to_extract
+                    )
                 );
             }
 
@@ -593,42 +561,33 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     return selectionInfo
                         .With(s => s.SelectionInExpression = true)
-                        .With(
-                            s =>
-                                s.FirstTokenInFinalSpan = expression.GetFirstToken(
-                                    includeZeroWidth: true
-                                )
+                        .With(s =>
+                            s.FirstTokenInFinalSpan = expression.GetFirstToken(
+                                includeZeroWidth: true
+                            )
                         )
-                        .With(
-                            s =>
-                                s.LastTokenInFinalSpan = expression.GetLastToken(
-                                    includeZeroWidth: true
-                                )
+                        .With(s =>
+                            s.LastTokenInFinalSpan = expression.GetLastToken(includeZeroWidth: true)
                         );
                 }
 
                 // single statement case
                 return selectionInfo
                     .With(s => s.SelectionInSingleStatement = true)
-                    .With(
-                        s =>
-                            s.FirstTokenInFinalSpan = statement1.GetFirstToken(
-                                includeZeroWidth: true
-                            )
+                    .With(s =>
+                        s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true)
                     )
-                    .With(
-                        s =>
-                            s.LastTokenInFinalSpan = statement1.GetLastToken(includeZeroWidth: true)
+                    .With(s =>
+                        s.LastTokenInFinalSpan = statement1.GetLastToken(includeZeroWidth: true)
                     );
             }
 
             // move only statements inside of the block
             return selectionInfo
-                .With(
-                    s => s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true)
+                .With(s =>
+                    s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true)
                 )
-                .With(
-                    s => s.LastTokenInFinalSpan = statement2.GetLastToken(includeZeroWidth: true)
+                .With(s => s.LastTokenInFinalSpan = statement2.GetLastToken(includeZeroWidth: true)
                 );
         }
 
@@ -654,8 +613,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     )
                     : selectionInfo.LastTokenInFinalSpan.FullSpan.End;
 
-            return selectionInfo.With(
-                s => s.FinalSpan = GetAdjustedSpan(text, TextSpan.FromBounds(start, end))
+            return selectionInfo.With(s =>
+                s.FinalSpan = GetAdjustedSpan(text, TextSpan.FromBounds(start, end))
             );
         }
 
@@ -680,14 +639,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             var returnableConstructPairs = returnStatements
-                .Select(
-                    r =>
-                        (
-                            r,
-                            r.GetAncestors<SyntaxNode>()
-                                .Where(a => a.IsReturnableConstruct())
-                                .FirstOrDefault()
-                        )
+                .Select(r =>
+                    (
+                        r,
+                        r.GetAncestors<SyntaxNode>()
+                            .Where(a => a.IsReturnableConstruct())
+                            .FirstOrDefault()
+                    )
                 )
                 .Where(p => p.Item2 != null);
 

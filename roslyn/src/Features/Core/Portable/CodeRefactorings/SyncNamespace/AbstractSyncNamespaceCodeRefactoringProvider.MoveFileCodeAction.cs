@@ -97,9 +97,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                     parts,
                     ImmutableArray<string>.Empty
                 );
-                return candidateFolders.SelectAsArray(
-                    folders => new MoveFileCodeAction(state, folders)
-                );
+                return candidateFolders.SelectAsArray(folders => new MoveFileCodeAction(
+                    state,
+                    folders
+                ));
             }
 
             /// <summary>
@@ -152,12 +153,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 // "<ROOT>\A\B\C\D" as the default path.
                 var defaultPathBasedOnCurrentFolder = currentFolder.AddRange(parts);
                 if (
-                    builder.All(
-                        folders =>
-                            !folders.SequenceEqual(
-                                defaultPathBasedOnCurrentFolder,
-                                PathUtilities.Comparer
-                            )
+                    builder.All(folders =>
+                        !folders.SequenceEqual(
+                            defaultPathBasedOnCurrentFolder,
+                            PathUtilities.Comparer
+                        )
                     )
                 )
                 {

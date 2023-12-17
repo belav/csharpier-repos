@@ -47,8 +47,9 @@ namespace MonoTests.System.ServiceModel.Description
         [Test]
         public void ClientCertificate()
         {
-            X509CertificateInitiatorServiceCredential cc =
-                new ServiceCredentials().ClientCertificate;
+            X509CertificateInitiatorServiceCredential cc = new ServiceCredentials(
+
+            ).ClientCertificate;
             Assert.IsNull(cc.Certificate, "#1");
             Assert.AreEqual(
                 X509CertificateValidationMode.ChainTrust,
@@ -112,8 +113,9 @@ namespace MonoTests.System.ServiceModel.Description
         [Test]
         public void SecureConversationAuthentication()
         {
-            SecureConversationServiceCredential sc =
-                new ServiceCredentials().SecureConversationAuthentication;
+            SecureConversationServiceCredential sc = new ServiceCredentials(
+
+            ).SecureConversationAuthentication;
             Assert.AreEqual(5, sc.SecurityContextClaimTypes.Count, "#1");
             Collection<Type> types = new Collection<Type>(
                 new Type[]

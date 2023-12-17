@@ -3696,11 +3696,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     return ApplyTypeMappingsOnValuesExpression(
                         valuesExpression,
                         stripOrdering: _currentSelectExpression is { Limit: null, Offset: null }
-                            && !_currentSelectExpression.Projection.Any(
-                                p =>
-                                    p.Expression
-                                        is ColumnExpression { Name: ValuesOrderingColumnName } c
-                                    && c.Table == valuesExpression
+                            && !_currentSelectExpression.Projection.Any(p =>
+                                p.Expression
+                                    is ColumnExpression { Name: ValuesOrderingColumnName } c
+                                && c.Table == valuesExpression
                             )
                     );
 

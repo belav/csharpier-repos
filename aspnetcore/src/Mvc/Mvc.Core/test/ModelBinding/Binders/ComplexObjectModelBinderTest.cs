@@ -254,8 +254,8 @@ public class ComplexObjectModelBinderTest
 
         originalValueProvider
             .Setup(o => o.Filter(It.IsAny<BindingSource>()))
-            .Returns<BindingSource>(
-                source => source == BindingSource.Query ? originalValueProvider.Object : null
+            .Returns<BindingSource>(source =>
+                source == BindingSource.Query ? originalValueProvider.Object : null
             );
 
         var bindingContext = CreateContext(GetMetadataForType(modelType));

@@ -261,13 +261,10 @@ namespace Microsoft.CodeAnalysis
             }
 
             return reverseReferencesMap
-                .Select(
-                    kvp =>
-                        new KeyValuePair<ProjectId, ImmutableHashSet<ProjectId>>(
-                            kvp.Key,
-                            kvp.Value.ToImmutableHashSet()
-                        )
-                )
+                .Select(kvp => new KeyValuePair<ProjectId, ImmutableHashSet<ProjectId>>(
+                    kvp.Key,
+                    kvp.Value.ToImmutableHashSet()
+                ))
                 .ToImmutableDictionary();
         }
 

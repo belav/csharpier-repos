@@ -280,8 +280,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             {
                 var contextId = document
                     .GetLinkedDocumentIds()
-                    .FirstOrDefault(
-                        id => !supportedPlatforms.InvalidProjects.Contains(id.ProjectId)
+                    .FirstOrDefault(id => !supportedPlatforms.InvalidProjects.Contains(id.ProjectId)
                     );
                 if (contextId != null)
                 {

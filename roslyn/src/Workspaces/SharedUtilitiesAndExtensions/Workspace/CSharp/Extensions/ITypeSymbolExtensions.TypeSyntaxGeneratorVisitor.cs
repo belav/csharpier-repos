@@ -174,8 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                             // syntax, so strip it off
                             symbol.Signature.UnmanagedCallingConventionTypes.IsEmpty
                                 ? null
-                                : symbol.Signature.UnmanagedCallingConventionTypes.Select(
-                                    type => GetConventionForString(type.Name["CallConv".Length..])
+                                : symbol.Signature.UnmanagedCallingConventionTypes.Select(type =>
+                                    GetConventionForString(type.Name["CallConv".Length..])
                                 ),
 
                         _
@@ -202,14 +202,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
 
                 var parameters = symbol
-                    .Signature.Parameters.Select(
-                        p =>
-                            (
-                                p.Type,
-                                RefKindModifiers: CSharpSyntaxGeneratorInternal.GetParameterModifiers(
-                                    p.RefKind
-                                )
+                    .Signature.Parameters.Select(p =>
+                        (
+                            p.Type,
+                            RefKindModifiers: CSharpSyntaxGeneratorInternal.GetParameterModifiers(
+                                p.RefKind
                             )
+                        )
                     )
                     .Concat(
                         SpecializedCollections.SingletonEnumerable(
@@ -222,11 +221,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                             )
                         )
                     )
-                    .SelectAsArray(
-                        t =>
-                            SyntaxFactory
-                                .FunctionPointerParameter(t.Type.GenerateTypeSyntax())
-                                .WithModifiers(t.RefKindModifiers)
+                    .SelectAsArray(t =>
+                        SyntaxFactory
+                            .FunctionPointerParameter(t.Type.GenerateTypeSyntax())
+                            .WithModifiers(t.RefKindModifiers)
                     );
 
                 return AddInformationTo(

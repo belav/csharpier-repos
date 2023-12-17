@@ -1951,18 +1951,17 @@ namespace System.Collections.Immutable.Tests
         public static IEnumerable<object[]> RemoveData()
         {
             return SharedEqualityComparers<int>()
-                .SelectMany(
-                    comparer =>
-                        new[]
-                        {
-                            new object[] { s_manyElements, 1, comparer },
-                            new object[] { s_manyElements, 2, comparer },
-                            new object[] { s_manyElements, 3, comparer },
-                            new object[] { s_manyElements, 4, comparer },
-                            new object[] { new int[0], 4, comparer },
-                            new object[] { new int[] { 1, 4 }, 4, comparer },
-                            new object[] { s_oneElement, 1, comparer }
-                        }
+                .SelectMany(comparer =>
+                    new[]
+                    {
+                        new object[] { s_manyElements, 1, comparer },
+                        new object[] { s_manyElements, 2, comparer },
+                        new object[] { s_manyElements, 3, comparer },
+                        new object[] { s_manyElements, 4, comparer },
+                        new object[] { new int[0], 4, comparer },
+                        new object[] { new int[] { 1, 4 }, 4, comparer },
+                        new object[] { s_oneElement, 1, comparer }
+                    }
                 );
         }
 
@@ -2071,92 +2070,71 @@ namespace System.Collections.Immutable.Tests
         public static IEnumerable<object[]> RemoveRangeEnumerableData()
         {
             return SharedEqualityComparers<int?>()
-                .SelectMany(
-                    comparer =>
-                        new[]
+                .SelectMany(comparer =>
+                    new[]
+                    {
+                        new object[] { Array.Empty<int?>(), Array.Empty<int?>(), comparer },
+                        new object[] { Array.Empty<int?>(), new int?[] { 1 }, comparer },
+                        new object[] { new int?[] { 1 }, Array.Empty<int?>(), comparer },
+                        new object[] { new int?[] { 1, 2, 3 }, new int?[] { 2, 3, 4 }, comparer },
+                        new object[]
                         {
-                            new object[] { Array.Empty<int?>(), Array.Empty<int?>(), comparer },
-                            new object[] { Array.Empty<int?>(), new int?[] { 1 }, comparer },
-                            new object[] { new int?[] { 1 }, Array.Empty<int?>(), comparer },
-                            new object[]
-                            {
-                                new int?[] { 1, 2, 3 },
-                                new int?[] { 2, 3, 4 },
-                                comparer
-                            },
-                            new object[]
-                            {
-                                Enumerable.Range(1, 5).Cast<int?>(),
-                                Enumerable.Range(6, 5).Cast<int?>(),
-                                comparer
-                            },
-                            new object[] { new int?[] { 1, 2, 3 }, new int?[] { 2 }, comparer },
-                            new object[]
-                            {
-                                new int?[] { 1, 2, 3 },
-                                new int?[] { 1, 3, 5 },
-                                comparer
-                            },
-                            new object[]
-                            {
-                                Enumerable.Range(1, 10).Cast<int?>(),
-                                new int?[] { 2, 4, 5, 7, 10 },
-                                comparer
-                            },
-                            new object[]
-                            {
-                                Enumerable.Range(1, 10).Cast<int?>(),
-                                new int?[] { 1, 2, 4, 5, 7, 10 },
-                                comparer
-                            },
-                            new object[] { new int?[] { 1, 2, 3 }, new int?[] { 5 }, comparer },
-                            new object[] { new int?[] { 1, 2, 2, 3 }, new int?[] { 2 }, comparer },
-                            new object[]
-                            {
-                                new int?[] { 1, 2, 2, 3 },
-                                new int?[] { 2, 2 },
-                                comparer
-                            },
-                            new object[]
-                            {
-                                new int?[] { 1, 2, 2, 3 },
-                                new int?[] { 2, 2, 2 },
-                                comparer
-                            },
-                            new object[] { new int?[] { 1, 2, 3 }, new int?[] { 42 }, comparer },
-                            new object[]
-                            {
-                                new int?[] { 1, 2, 3 },
-                                new int?[] { 42, 42 },
-                                comparer
-                            },
-                            new object[]
-                            {
-                                new int?[] { 1, 2, 3 },
-                                new int?[] { 42, 42, 42 },
-                                comparer
-                            },
-                            new object[] { new int?[] { null }, new int?[] { 1 }, comparer },
-                            new object[] { new int?[] { 1 }, new int?[] { null }, comparer },
-                            new object[]
-                            {
-                                new int?[] { 1, null, 2, null },
-                                new int?[] { 1, null },
-                                comparer
-                            },
-                            new object[]
-                            {
-                                new int?[] { 1, null, 2 },
-                                new int?[] { 1, null, null },
-                                comparer
-                            },
-                            new object[]
-                            {
-                                new int?[] { 1, null, 2, null },
-                                new int?[] { 1, null, null },
-                                comparer
-                            },
-                        }
+                            Enumerable.Range(1, 5).Cast<int?>(),
+                            Enumerable.Range(6, 5).Cast<int?>(),
+                            comparer
+                        },
+                        new object[] { new int?[] { 1, 2, 3 }, new int?[] { 2 }, comparer },
+                        new object[] { new int?[] { 1, 2, 3 }, new int?[] { 1, 3, 5 }, comparer },
+                        new object[]
+                        {
+                            Enumerable.Range(1, 10).Cast<int?>(),
+                            new int?[] { 2, 4, 5, 7, 10 },
+                            comparer
+                        },
+                        new object[]
+                        {
+                            Enumerable.Range(1, 10).Cast<int?>(),
+                            new int?[] { 1, 2, 4, 5, 7, 10 },
+                            comparer
+                        },
+                        new object[] { new int?[] { 1, 2, 3 }, new int?[] { 5 }, comparer },
+                        new object[] { new int?[] { 1, 2, 2, 3 }, new int?[] { 2 }, comparer },
+                        new object[] { new int?[] { 1, 2, 2, 3 }, new int?[] { 2, 2 }, comparer },
+                        new object[]
+                        {
+                            new int?[] { 1, 2, 2, 3 },
+                            new int?[] { 2, 2, 2 },
+                            comparer
+                        },
+                        new object[] { new int?[] { 1, 2, 3 }, new int?[] { 42 }, comparer },
+                        new object[] { new int?[] { 1, 2, 3 }, new int?[] { 42, 42 }, comparer },
+                        new object[]
+                        {
+                            new int?[] { 1, 2, 3 },
+                            new int?[] { 42, 42, 42 },
+                            comparer
+                        },
+                        new object[] { new int?[] { null }, new int?[] { 1 }, comparer },
+                        new object[] { new int?[] { 1 }, new int?[] { null }, comparer },
+                        new object[]
+                        {
+                            new int?[] { 1, null, 2, null },
+                            new int?[] { 1, null },
+                            comparer
+                        },
+                        new object[]
+                        {
+                            new int?[] { 1, null, 2 },
+                            new int?[] { 1, null, null },
+                            comparer
+                        },
+                        new object[]
+                        {
+                            new int?[] { 1, null, 2, null },
+                            new int?[] { 1, null, null },
+                            comparer
+                        },
+                    }
                 );
         }
 
@@ -2435,17 +2413,16 @@ namespace System.Collections.Immutable.Tests
         public static IEnumerable<object[]> ReplaceData()
         {
             return SharedEqualityComparers<int>()
-                .SelectMany(
-                    comparer =>
-                        new[]
-                        {
-                            new object[] { s_oneElement, 1, 5, comparer },
-                            new object[] { s_manyElements, 1, 6, comparer },
-                            new object[] { s_manyElements, 2, 6, comparer },
-                            new object[] { s_manyElements, 3, 6, comparer },
-                            new object[] { new[] { 1, 3, 3, 4 }, 3, 2, comparer },
-                            new object[] { s_manyElements, 2, 10, comparer }
-                        }
+                .SelectMany(comparer =>
+                    new[]
+                    {
+                        new object[] { s_oneElement, 1, 5, comparer },
+                        new object[] { s_manyElements, 1, 6, comparer },
+                        new object[] { s_manyElements, 2, 6, comparer },
+                        new object[] { s_manyElements, 3, 6, comparer },
+                        new object[] { new[] { 1, 3, 3, 4 }, 3, 2, comparer },
+                        new object[] { s_manyElements, 2, 10, comparer }
+                    }
                 );
         }
 
@@ -2890,25 +2867,24 @@ namespace System.Collections.Immutable.Tests
         public static IEnumerable<object[]> SortData()
         {
             return SharedComparers<int>()
-                .SelectMany(
-                    comparer =>
-                        new[]
+                .SelectMany(comparer =>
+                    new[]
+                    {
+                        new object[] { new[] { 2, 4, 1, 3 }, 0, 4, comparer },
+                        new object[] { new[] { 1 }, 0, 1, comparer },
+                        new object[] { new int[0], 0, 0, comparer },
+                        new object[] { new[] { 2, 4, 1, 3 }, 1, 2, comparer },
+                        new object[] { new[] { 2, 4, 1, 3 }, 4, 0, comparer },
+                        new object[]
                         {
-                            new object[] { new[] { 2, 4, 1, 3 }, 0, 4, comparer },
-                            new object[] { new[] { 1 }, 0, 1, comparer },
-                            new object[] { new int[0], 0, 0, comparer },
-                            new object[] { new[] { 2, 4, 1, 3 }, 1, 2, comparer },
-                            new object[] { new[] { 2, 4, 1, 3 }, 4, 0, comparer },
-                            new object[]
-                            {
-                                new[] { "c", "B", "a" },
-                                0,
-                                3,
-                                StringComparer.OrdinalIgnoreCase
-                            },
-                            new object[] { new[] { "c", "B", "a" }, 0, 3, StringComparer.Ordinal },
-                            new object[] { new[] { 1, 2, 3, 4, 6, 5, 7, 8, 9, 10 }, 4, 2, comparer }
-                        }
+                            new[] { "c", "B", "a" },
+                            0,
+                            3,
+                            StringComparer.OrdinalIgnoreCase
+                        },
+                        new object[] { new[] { "c", "B", "a" }, 0, 3, StringComparer.Ordinal },
+                        new object[] { new[] { 1, 2, 3, 4, 6, 5, 7, 8, 9, 10 }, 4, 2, comparer }
+                    }
                 );
         }
 
@@ -3257,9 +3233,8 @@ namespace System.Collections.Immutable.Tests
             return SharedComparers<int>()
                 .OfType<IEqualityComparer>()
                 .Except(new IEqualityComparer[] { null })
-                .SelectMany(
-                    comparer =>
-                        enumerables.Select(enumerable => new object[] { enumerable, comparer })
+                .SelectMany(comparer =>
+                    enumerables.Select(enumerable => new object[] { enumerable, comparer })
                 );
         }
 
@@ -3533,24 +3508,23 @@ namespace System.Collections.Immutable.Tests
             return SharedComparers<int>()
                 .OfType<IComparer>()
                 .Except(new IComparer[] { null })
-                .SelectMany(
-                    comparer =>
-                        new[]
+                .SelectMany(comparer =>
+                    new[]
+                    {
+                        new object[] { new[] { 1, 2, 3 }, new[] { 1, 2, 3, 4 }, comparer },
+                        new object[]
                         {
-                            new object[] { new[] { 1, 2, 3 }, new[] { 1, 2, 3, 4 }, comparer },
-                            new object[]
-                            {
-                                new[] { 1, 2, 3 },
-                                ImmutableArray.Create(1, 2, 3, 4),
-                                comparer
-                            },
-                            new object[]
-                            {
-                                new[] { 1, 2, 3 },
-                                new List<int> { 1, 2, 3 },
-                                comparer
-                            }
+                            new[] { 1, 2, 3 },
+                            ImmutableArray.Create(1, 2, 3, 4),
+                            comparer
+                        },
+                        new object[]
+                        {
+                            new[] { 1, 2, 3 },
+                            new List<int> { 1, 2, 3 },
+                            comparer
                         }
+                    }
                 );
         }
 
@@ -3675,10 +3649,9 @@ namespace System.Collections.Immutable.Tests
             ImmutableArray<int> array = ImmutableArray.Create(1, 2, 3, 4);
             FieldInfo itemField = typeof(ImmutableArray<int>)
                 .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
-                .Single(
-                    fi =>
-                        fi.GetCustomAttribute<DebuggerBrowsableAttribute>()?.State
-                        == DebuggerBrowsableState.RootHidden
+                .Single(fi =>
+                    fi.GetCustomAttribute<DebuggerBrowsableAttribute>()?.State
+                    == DebuggerBrowsableState.RootHidden
                 );
             int[] items = itemField.GetValue(array) as int[];
             Assert.Equal(array, items);

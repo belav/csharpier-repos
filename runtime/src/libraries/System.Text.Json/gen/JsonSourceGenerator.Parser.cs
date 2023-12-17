@@ -2020,10 +2020,8 @@ namespace System.Text.Json.SourceGeneration
                 if (
                     converterType is not INamedTypeSymbol namedConverterType
                     || !_knownSymbols.JsonConverterType.IsAssignableFrom(namedConverterType)
-                    || !namedConverterType.Constructors.Any(
-                        c =>
-                            c.Parameters.Length == 0
-                            && IsSymbolAccessibleWithin(c, within: contextType)
+                    || !namedConverterType.Constructors.Any(c =>
+                        c.Parameters.Length == 0 && IsSymbolAccessibleWithin(c, within: contextType)
                     )
                 )
                 {

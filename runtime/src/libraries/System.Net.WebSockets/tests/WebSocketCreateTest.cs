@@ -592,8 +592,8 @@ namespace System.Net.WebSockets.Tests
             .WebSockets
             .EchoServers;
         public static readonly object[][] EchoServersAndBoolean = EchoServers
-            .SelectMany(
-                o => new object[][] { new object[] { o[0], false }, new object[] { o[0], true } }
+            .SelectMany(o =>
+                new object[][] { new object[] { o[0], false }, new object[] { o[0], true } }
             )
             .ToArray();
 

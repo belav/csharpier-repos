@@ -60,8 +60,8 @@ public abstract class ManagementTests<TStartup, TContext>
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupTestEmailSender(emails);
 
-        var server = ServerFactory.WithWebHostBuilder(
-            whb => whb.ConfigureServices(ConfigureTestServices)
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
         );
         var client = server.CreateClient();
 
@@ -85,8 +85,8 @@ public abstract class ManagementTests<TStartup, TContext>
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupTestEmailSender(emails);
 
-        var server = ServerFactory.WithWebHostBuilder(
-            whb => whb.ConfigureServices(ConfigureTestServices)
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
         );
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -119,8 +119,8 @@ public abstract class ManagementTests<TStartup, TContext>
                 IdentityConstants.ApplicationScheme
             );
 
-        var server = ServerFactory.WithWebHostBuilder(
-            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureTestServices(ConfigureTestServices)
         );
 
         var client = server.CreateClient();
@@ -160,8 +160,8 @@ public abstract class ManagementTests<TStartup, TContext>
                     IdentityConstants.ApplicationScheme
                 );
 
-        var server = ServerFactory.WithWebHostBuilder(
-            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureTestServices(ConfigureTestServices)
         );
 
         var client = server.CreateClient();
@@ -213,8 +213,8 @@ public abstract class ManagementTests<TStartup, TContext>
                     IdentityConstants.ApplicationScheme
                 );
 
-        var server = ServerFactory.WithWebHostBuilder(
-            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureTestServices(ConfigureTestServices)
         );
 
         var client = server.CreateClient();
@@ -239,8 +239,8 @@ public abstract class ManagementTests<TStartup, TContext>
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupTestThirdPartyLogin();
 
-        var server = ServerFactory.WithWebHostBuilder(
-            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureTestServices(ConfigureTestServices)
         );
 
         var client = server.CreateClient();
@@ -269,8 +269,8 @@ public abstract class ManagementTests<TStartup, TContext>
                     IdentityConstants.ApplicationScheme
                 );
 
-        var server = ServerFactory.WithWebHostBuilder(
-            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureTestServices(ConfigureTestServices)
         );
 
         var client = server.CreateClient();

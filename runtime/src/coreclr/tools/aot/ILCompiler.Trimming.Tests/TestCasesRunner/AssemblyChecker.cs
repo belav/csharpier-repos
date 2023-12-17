@@ -344,12 +344,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
             var expected = original
                 .Assembly.MainModule.AllDefinedTypes()
-                .SelectMany(
-                    t =>
-                        GetCustomAttributeCtorValues<string>(
-                            t,
-                            nameof(KeptModuleReferenceAttribute)
-                        )
+                .SelectMany(t =>
+                    GetCustomAttributeCtorValues<string>(t, nameof(KeptModuleReferenceAttribute))
                 )
                 .ToArray();
 
@@ -517,10 +513,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
         private void VerifyBaseType(TypeDefinition src, TypeDefinition linked)
         {
             string expectedBaseName;
-            var expectedBaseGenericAttr = src.CustomAttributes.FirstOrDefault(
-                w =>
-                    w.AttributeType.Name == nameof(KeptBaseTypeAttribute)
-                    && w.ConstructorArguments.Count > 1
+            var expectedBaseGenericAttr = src.CustomAttributes.FirstOrDefault(w =>
+                w.AttributeType.Name == nameof(KeptBaseTypeAttribute)
+                && w.ConstructorArguments.Count > 1
             );
             if (expectedBaseGenericAttr != null)
             {
@@ -550,8 +545,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         private void VerifyInterfaces(TypeDefinition src, TypeDefinition linked)
         {
             var expectedInterfaces = new HashSet<string>(
-                src.CustomAttributes.Where(
-                    w => w.AttributeType.Name == nameof(KeptInterfaceAttribute)
+                src.CustomAttributes.Where(w =>
+                    w.AttributeType.Name == nameof(KeptInterfaceAttribute)
                 )
                     .Select(FormatBaseOrInterfaceAttributeValue)
             );
@@ -716,8 +711,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
 
             if (
-                src.CustomAttributes.Any(
-                    attr => attr.AttributeType.Name == nameof(KeptEventAddMethodAttribute)
+                src.CustomAttributes.Any(attr =>
+                    attr.AttributeType.Name == nameof(KeptEventAddMethodAttribute)
                 )
             )
             {
@@ -734,8 +729,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
 
             if (
-                src.CustomAttributes.Any(
-                    attr => attr.AttributeType.Name == nameof(KeptEventRemoveMethodAttribute)
+                src.CustomAttributes.Any(attr =>
+                    attr.AttributeType.Name == nameof(KeptEventRemoveMethodAttribute)
                 )
             )
             {
@@ -792,8 +787,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         private void VerifyMemberBackingField(IMemberDefinition src, TypeDesc? linkedType)
         {
-            var keptBackingFieldAttribute = src.CustomAttributes.FirstOrDefault(
-                attr => attr.AttributeType.Name == nameof(KeptBackingFieldAttribute)
+            var keptBackingFieldAttribute = src.CustomAttributes.FirstOrDefault(attr =>
+                attr.AttributeType.Name == nameof(KeptBackingFieldAttribute)
             );
             if (keptBackingFieldAttribute == null)
                 return;
@@ -1028,15 +1023,15 @@ namespace Mono.Linker.Tests.TestCasesRunner
             Func<CustomAttribute, string[]> getExpectFromSequenceAttribute
         )
         {
-            var expectedSequenceAttribute = src.CustomAttributes.FirstOrDefault(
-                attr => attr.AttributeType.Name == sequenceAttributeName
+            var expectedSequenceAttribute = src.CustomAttributes.FirstOrDefault(attr =>
+                attr.AttributeType.Name == sequenceAttributeName
             );
             var linkedValues = valueCollector(linked);
             var srcValues = valueCollector(src);
 
             if (
-                src.CustomAttributes.Any(
-                    attr => attr.AttributeType.Name == expectModifiedAttributeName
+                src.CustomAttributes.Any(attr =>
+                    attr.AttributeType.Name == expectModifiedAttributeName
                 )
             )
             {
@@ -1072,8 +1067,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             var expected = original
                 .MainModule.AllDefinedTypes()
-                .SelectMany(
-                    t => GetCustomAttributeCtorValues<string>(t, nameof(KeptReferenceAttribute))
+                .SelectMany(t =>
+                    GetCustomAttributeCtorValues<string>(t, nameof(KeptReferenceAttribute))
                 )
                 .Select(ReduceAssemblyFileNameOrNameToNameOnly)
                 .ToArray();
@@ -1115,8 +1110,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             var expectedResourceNames = original
                 .MainModule.AllDefinedTypes()
-                .SelectMany(
-                    t => GetCustomAttributeCtorValues<string>(t, nameof(KeptResourceAttribute))
+                .SelectMany(t =>
+                    GetCustomAttributeCtorValues<string>(t, nameof(KeptResourceAttribute))
                 )
                 .ToList();
 
@@ -1149,13 +1144,12 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             var expectedTypes = original
                 .MainModule.AllDefinedTypes()
-                .SelectMany(
-                    t =>
-                        GetCustomAttributeCtorValues<TypeReference>(
-                                t,
-                                nameof(KeptExportedTypeAttribute)
-                            )
-                            .Select(l => l?.FullName ?? "<null>")
+                .SelectMany(t =>
+                    GetCustomAttributeCtorValues<TypeReference>(
+                            t,
+                            nameof(KeptExportedTypeAttribute)
+                        )
+                        .Select(l => l?.FullName ?? "<null>")
                 )
                 .ToArray();
 
@@ -1359,8 +1353,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             )
             {
                 var name = srcDefinition.Name.Substring(1, srcDefinition.Name.IndexOf('>') - 1);
-                var fixedField = srcDefinition.DeclaringType.Fields.FirstOrDefault(
-                    f => f.Name == name
+                var fixedField = srcDefinition.DeclaringType.Fields.FirstOrDefault(f =>
+                    f.Name == name
                 );
                 if (fixedField == null)
                     Assert.Fail($"Could not locate original fixed field for {srcDefinition}");
@@ -1496,8 +1490,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     if (checkNames)
                     {
                         if (
-                            srcp.CustomAttributes.Any(
-                                attr => attr.AttributeType.Name == nameof(RemovedNameValueAttribute)
+                            srcp.CustomAttributes.Any(attr =>
+                                attr.AttributeType.Name == nameof(RemovedNameValueAttribute)
                             )
                         )
                         {
@@ -1535,8 +1529,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     if (checkNames)
                     {
                         if (
-                            srcp.CustomAttributes.Any(
-                                attr => attr.AttributeType.Name == nameof(RemovedNameValueAttribute)
+                            srcp.CustomAttributes.Any(attr =>
+                                attr.AttributeType.Name == nameof(RemovedNameValueAttribute)
                             )
                         )
                             linked
@@ -1591,13 +1585,13 @@ namespace Mono.Linker.Tests.TestCasesRunner
         )
         {
             var removals = provider
-                .CustomAttributes.Where(
-                    attr => attr.AttributeType.Name == nameof(RemovedPseudoAttributeAttribute)
+                .CustomAttributes.Where(attr =>
+                    attr.AttributeType.Name == nameof(RemovedPseudoAttributeAttribute)
                 )
                 .ToArray();
             var adds = provider
-                .CustomAttributes.Where(
-                    attr => attr.AttributeType.Name == nameof(AddedPseudoAttributeAttribute)
+                .CustomAttributes.Where(attr =>
+                    attr.AttributeType.Name == nameof(AddedPseudoAttributeAttribute)
                 )
                 .ToArray();
 
@@ -1618,9 +1612,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             where T : class
         {
             return provider
-                .CustomAttributes.Where(
-                    w =>
-                        w.AttributeType.Name == attributeName && w.Constructor.Parameters.Count == 1
+                .CustomAttributes.Where(w =>
+                    w.AttributeType.Name == attributeName && w.Constructor.Parameters.Count == 1
                 )
                 .Select(l => l.ConstructorArguments[0].Value as T);
         }
@@ -1924,13 +1917,12 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 return;
             }
 
-            var originalPropertyMember = originalType.Properties.FirstOrDefault(
-                m => m.Name == memberName
+            var originalPropertyMember = originalType.Properties.FirstOrDefault(m =>
+                m.Name == memberName
             );
             if (originalPropertyMember != null)
             {
-                var linkedProperty = linkedType.Properties.FirstOrDefault(
-                    m => m.Name == memberName
+                var linkedProperty = linkedType.Properties.FirstOrDefault(m => m.Name == memberName
                 );
                 if (linkedProperty == null)
                     Assert.Fail(
@@ -1941,13 +1933,13 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 return;
             }
 
-            var originalMethodMember = originalType.Methods.FirstOrDefault(
-                m => m.GetSignature() == memberName
+            var originalMethodMember = originalType.Methods.FirstOrDefault(m =>
+                m.GetSignature() == memberName
             );
             if (originalMethodMember != null)
             {
-                var linkedMethod = linkedType.Methods.FirstOrDefault(
-                    m => m.GetSignature() == memberName
+                var linkedMethod = linkedType.Methods.FirstOrDefault(m =>
+                    m.GetSignature() == memberName
                 );
                 if (linkedMethod == null)
                     Assert.Fail(
@@ -1989,8 +1981,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             string expectedAttributeTypeName
         )
         {
-            var match = provider.CustomAttributes.FirstOrDefault(
-                attr => attr.AttributeType.FullName == expectedAttributeTypeName
+            var match = provider.CustomAttributes.FirstOrDefault(attr =>
+                attr.AttributeType.FullName == expectedAttributeTypeName
             );
             if (match == null)
                 Assert.Fail(
@@ -2003,8 +1995,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             string expectedAttributeTypeName
         )
         {
-            var match = provider.CustomAttributes.FirstOrDefault(
-                attr => attr.AttributeType.FullName == expectedAttributeTypeName
+            var match = provider.CustomAttributes.FirstOrDefault(attr =>
+                attr.AttributeType.FullName == expectedAttributeTypeName
             );
             if (match != null)
                 Assert.Fail(
@@ -2143,8 +2135,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
                 // We will find the matching type from the original assembly first that way we can confirm
                 // that the name defined in the attribute corresponds to a member that actually existed
-                var originalFieldMember = originalType.Fields.FirstOrDefault(
-                    m => m.Name == memberName
+                var originalFieldMember = originalType.Fields.FirstOrDefault(m =>
+                    m.Name == memberName
                 );
                 if (originalFieldMember != null)
                 {
@@ -2157,13 +2149,13 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     continue;
                 }
 
-                var originalPropertyMember = originalType.Properties.FirstOrDefault(
-                    m => m.Name == memberName
+                var originalPropertyMember = originalType.Properties.FirstOrDefault(m =>
+                    m.Name == memberName
                 );
                 if (originalPropertyMember != null)
                 {
-                    var linkedProperty = linkedType.Properties.FirstOrDefault(
-                        m => m.Name == memberName
+                    var linkedProperty = linkedType.Properties.FirstOrDefault(m =>
+                        m.Name == memberName
                     );
                     if (linkedProperty != null)
                         Assert.Fail(
@@ -2173,13 +2165,13 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     continue;
                 }
 
-                var originalMethodMember = originalType.Methods.FirstOrDefault(
-                    m => m.GetSignature() == memberName
+                var originalMethodMember = originalType.Methods.FirstOrDefault(m =>
+                    m.GetSignature() == memberName
                 );
                 if (originalMethodMember != null)
                 {
-                    var linkedMethod = linkedType.Methods.FirstOrDefault(
-                        m => m.GetSignature() == memberName
+                    var linkedMethod = linkedType.Methods.FirstOrDefault(m =>
+                        m.GetSignature() == memberName
                     );
                     if (linkedMethod != null)
                         Assert.Fail(
@@ -2256,13 +2248,12 @@ namespace Mono.Linker.Tests.TestCasesRunner
             TypeDefinition linkedType
         )
         {
-            var originalPropertyMember = originalType.Properties.FirstOrDefault(
-                m => m.Name == memberName
+            var originalPropertyMember = originalType.Properties.FirstOrDefault(m =>
+                m.Name == memberName
             );
             if (originalPropertyMember != null)
             {
-                var linkedProperty = linkedType.Properties.FirstOrDefault(
-                    m => m.Name == memberName
+                var linkedProperty = linkedType.Properties.FirstOrDefault(m => m.Name == memberName
                 );
                 if (linkedProperty == null)
                     Assert.Fail(
@@ -2298,13 +2289,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
             out MethodDefinition? linkedMethod
         )
         {
-            originalMethod = originalType.Methods.FirstOrDefault(
-                m => m.GetSignature() == memberName
+            originalMethod = originalType.Methods.FirstOrDefault(m => m.GetSignature() == memberName
             );
             if (originalMethod != null)
             {
-                linkedMethod = linkedType.Methods.FirstOrDefault(
-                    m => m.GetSignature() == memberName
+                linkedMethod = linkedType.Methods.FirstOrDefault(m => m.GetSignature() == memberName
                 );
                 if (linkedMethod == null)
                     Assert.Fail(

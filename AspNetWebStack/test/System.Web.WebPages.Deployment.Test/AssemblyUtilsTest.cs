@@ -122,8 +122,9 @@ namespace System.Web.WebPages.Deployment.Test
             var binDirectory = @"X:\test\project";
             TestFileSystem fileSystem = new TestFileSystem();
             fileSystem.AddFile(Path.Combine(binDirectory, "System.Web.WebPages.Deployment.dll"));
-            Func<string, AssemblyName> getAssembyName = _ =>
-                new AssemblyName(AssemblyName("1.0.0.0"));
+            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName(
+                AssemblyName("1.0.0.0")
+            );
 
             // Act
             var binVersion = AssemblyUtils.GetVersionFromBin(
@@ -163,10 +164,9 @@ namespace System.Web.WebPages.Deployment.Test
             var binDirectory = @"X:\test\project";
             TestFileSystem fileSystem = new TestFileSystem();
             fileSystem.AddFile(Path.Combine(binDirectory, "System.Web.WebPages.Deployment.dll"));
-            Func<string, AssemblyName> getAssembyName = _ =>
-                new AssemblyName(
-                    "System.Web.WebPages.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
-                );
+            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName(
+                "System.Web.WebPages.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+            );
 
             // Act
             var binVersion = AssemblyUtils.GetVersionFromBin(

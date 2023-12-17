@@ -14,8 +14,9 @@ namespace System.Web.Http
         [Fact]
         public void Default_Constructor()
         {
-            HttpParameterDescriptor parameterDescriptor =
-                new Mock<HttpParameterDescriptor>().Object;
+            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>(
+
+            ).Object;
 
             Assert.Null(parameterDescriptor.ParameterName);
             Assert.Null(parameterDescriptor.ParameterType);

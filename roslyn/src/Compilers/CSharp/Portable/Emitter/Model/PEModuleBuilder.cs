@@ -955,11 +955,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
                 if (builder is object)
                 {
-                    orderedForwardedTypes = orderedForwardedTypes.OrderBy(
-                        t =>
-                            t.OriginalDefinition.ToDisplayString(
-                                SymbolDisplayFormat.QualifiedNameArityFormat
-                            )
+                    orderedForwardedTypes = orderedForwardedTypes.OrderBy(t =>
+                        t.OriginalDefinition.ToDisplayString(
+                            SymbolDisplayFormat.QualifiedNameArityFormat
+                        )
                     );
                 }
 
@@ -1721,8 +1720,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             if (!mustBeTranslated)
             {
 #if DEBUG
-                return @params.SelectAsArray<ParameterSymbol, Cci.IParameterTypeInformation>(
-                    p => p.GetCciAdapter()
+                return @params.SelectAsArray<ParameterSymbol, Cci.IParameterTypeInformation>(p =>
+                    p.GetCciAdapter()
                 );
 #else
                 return StaticCast<Cci.IParameterTypeInformation>.From(@params);

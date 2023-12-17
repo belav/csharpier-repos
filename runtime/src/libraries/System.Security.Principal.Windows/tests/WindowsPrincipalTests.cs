@@ -40,8 +40,8 @@ public class WindowsPrincipalTests
         {
             WindowsPrincipal principal = new WindowsPrincipal(id);
 
-            int manualCount = principal.Claims.Count(
-                c => c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim)
+            int manualCount = principal.Claims.Count(c =>
+                c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim)
             );
             int autoCount = principal.DeviceClaims.Count();
 
@@ -56,8 +56,8 @@ public class WindowsPrincipalTests
         {
             WindowsPrincipal principal = new WindowsPrincipal(id);
             Claim[] allClaims = principal.Claims.ToArray();
-            int deviceCount = allClaims.Count(
-                c => c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim)
+            int deviceCount = allClaims.Count(c =>
+                c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim)
             );
             int manualCount = allClaims.Length - deviceCount;
             int autoCount = principal.UserClaims.Count();

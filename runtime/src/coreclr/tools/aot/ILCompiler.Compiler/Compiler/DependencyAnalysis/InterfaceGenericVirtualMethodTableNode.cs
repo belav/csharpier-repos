@@ -195,7 +195,9 @@ namespace ILCompiler.DependencyAnalysis
             foreach (var interestingEntry in factory.MetadataManager.GetTypeGVMEntries())
             {
                 foreach (
-                    var typeGVMEntryInfo in interestingEntry.ScanForInterfaceGenericVirtualMethodEntries()
+                    var typeGVMEntryInfo in interestingEntry.ScanForInterfaceGenericVirtualMethodEntries(
+
+                    )
                 )
                 {
                     AddGenericVirtualMethodImplementation(

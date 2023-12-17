@@ -36,11 +36,10 @@ namespace System.Web.Http.ApiExplorer
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             Collection<ApiDescription> apis = config.Services.GetApiExplorer().ApiDescriptions;
-            ApiDescription expectedApi = apis.FirstOrDefault(
-                api =>
-                    api.ActionDescriptor.ActionName == actionName
-                    && api.ResponseDescription.DeclaredType == declaredType
-                    && api.ResponseDescription.ResponseType == responseType
+            ApiDescription expectedApi = apis.FirstOrDefault(api =>
+                api.ActionDescriptor.ActionName == actionName
+                && api.ResponseDescription.DeclaredType == declaredType
+                && api.ResponseDescription.ResponseType == responseType
             );
 
             Assert.NotNull(expectedApi);

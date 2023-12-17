@@ -70,8 +70,9 @@ namespace Dynamic.Tests
         [Fact]
         public void InterfaceWithTwoMembers_InBaseClass()
         {
-            dynamic d =
-                new SubClassOfExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass();
+            dynamic d = new SubClassOfExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass(
+
+            );
             Assert.Throws<RuntimeBinderException>(() => d.Foo());
 
             var x = Helpers.Cast<BaseInterfaceWithTwoMembers>(d);

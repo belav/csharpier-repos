@@ -65,7 +65,9 @@ namespace System.ServiceModel
                         {
                             aspNetPermissionSet.PermitOnly();
                             aspNetSecurityContext =
-                                System.Runtime.PartialTrustHelpers.CaptureSecurityContextNoIdentityFlow();
+                                System.Runtime.PartialTrustHelpers.CaptureSecurityContextNoIdentityFlow(
+
+                                );
                         }
                         finally
                         {

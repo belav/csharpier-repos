@@ -248,8 +248,8 @@ public class StoreKeyConvention
             )
             || (
                 previousPrimaryKey != null
-                && previousPrimaryKey.Properties.Any(
-                    p => p.GetJsonPropertyName() == IdPropertyJsonName
+                && previousPrimaryKey.Properties.Any(p =>
+                    p.GetJsonPropertyName() == IdPropertyJsonName
                 )
             )
         )

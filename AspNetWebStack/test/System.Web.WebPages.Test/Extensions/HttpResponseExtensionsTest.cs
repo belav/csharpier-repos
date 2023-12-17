@@ -89,11 +89,8 @@ namespace Microsoft.WebPages.Test.Helpers
 
             var cache = new Mock<HttpCachePolicyBase>();
             cache
-                .Setup(
-                    c =>
-                        c.SetCacheability(
-                            It.Is<HttpCacheability>(p => p == HttpCacheability.Public)
-                        )
+                .Setup(c =>
+                    c.SetCacheability(It.Is<HttpCacheability>(p => p == HttpCacheability.Public))
                 )
                 .Verifiable();
             cache

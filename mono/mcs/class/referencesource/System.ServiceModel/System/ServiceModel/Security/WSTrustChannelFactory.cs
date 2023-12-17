@@ -66,7 +66,9 @@ namespace System.ServiceModel.Security
         SecurityTokenResolver _securityTokenResolver;
         SecurityTokenResolver _useKeyTokenResolver;
         SecurityTokenHandlerCollectionManager _securityTokenHandlerCollectionManager =
-            SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager();
+            SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager(
+
+            );
 
         //
         // These serializers determine how the channels serialize RST and RSTR messages.

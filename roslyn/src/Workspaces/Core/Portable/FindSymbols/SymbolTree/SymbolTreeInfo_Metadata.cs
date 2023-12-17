@@ -189,15 +189,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 var asyncLazy = s_peReferenceToInfo.GetValue(
                     reference,
                     id =>
-                        AsyncLazy.Create(
-                            c =>
-                                CreateMetadataSymbolTreeInfoAsync(
-                                    services,
-                                    solutionKey,
-                                    reference,
-                                    checksum,
-                                    c
-                                )
+                        AsyncLazy.Create(c =>
+                            CreateMetadataSymbolTreeInfoAsync(
+                                services,
+                                solutionKey,
+                                reference,
+                                checksum,
+                                c
+                            )
                         )
                 );
 
@@ -219,22 +218,20 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 var asyncLazy = s_metadataIdToSymbolTreeInfo.GetValue(
                     metadataId,
                     metadataId =>
-                        AsyncLazy.Create(
-                            cancellationToken =>
-                                LoadOrCreateAsync(
-                                    services,
-                                    solutionKey,
-                                    checksum,
-                                    createAsync: checksum =>
-                                        new ValueTask<SymbolTreeInfo>(
-                                            new MetadataInfoCreator(
-                                                checksum,
-                                                GetMetadataNoThrow(reference)
-                                            ).Create()
-                                        ),
-                                    keySuffix: GetMetadataKeySuffix(reference),
-                                    cancellationToken
-                                )
+                        AsyncLazy.Create(cancellationToken =>
+                            LoadOrCreateAsync(
+                                services,
+                                solutionKey,
+                                checksum,
+                                createAsync: checksum => new ValueTask<SymbolTreeInfo>(
+                                    new MetadataInfoCreator(
+                                        checksum,
+                                        GetMetadataNoThrow(reference)
+                                    ).Create()
+                                ),
+                                keySuffix: GetMetadataKeySuffix(reference),
+                                cancellationToken
+                            )
                         )
                 );
 

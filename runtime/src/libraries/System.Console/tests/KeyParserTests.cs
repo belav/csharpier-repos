@@ -60,8 +60,8 @@ public class KeyParserTests
     }
 
     public static IEnumerable<object[]> AsciiCharactersArguments =>
-        Terminals.SelectMany(
-            terminal => AsciiKeys.Select(tuple => new object[] { terminal, tuple.ch, tuple.key })
+        Terminals.SelectMany(terminal =>
+            AsciiKeys.Select(tuple => new object[] { terminal, tuple.ch, tuple.key })
         );
 
     [Theory]
@@ -249,9 +249,8 @@ public class KeyParserTests
     }
 
     public static IEnumerable<object[]> VTSequencesArguments =>
-        Terminals.SelectMany(
-            terminal =>
-                VTSequences.Select(tuple => new object[] { terminal, tuple.chars, tuple.key })
+        Terminals.SelectMany(terminal =>
+            VTSequences.Select(tuple => new object[] { terminal, tuple.chars, tuple.key })
         );
 
     [Theory]
@@ -462,11 +461,8 @@ public class KeyParserTests
     }
 
     public static IEnumerable<object[]> EdgeCaseScenariosArguments =>
-        Terminals.SelectMany(
-            terminal =>
-                EdgeCaseScenarios.Select(
-                    tuple => new object[] { terminal, tuple.chars, tuple.keys }
-                )
+        Terminals.SelectMany(terminal =>
+            EdgeCaseScenarios.Select(tuple => new object[] { terminal, tuple.chars, tuple.keys })
         );
 
     [Theory]

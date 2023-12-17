@@ -202,10 +202,9 @@ namespace System.ServiceModel.Channels.Security
                     security_initiator
                 ).DecryptMessage(); // FIXME: supply SecurityMessageProperty (if any)
             else
-                return new RecipientSecureMessageDecryptor(
-                    msg,
-                    security_recipient
-                ).DecryptMessage();
+                return new RecipientSecureMessageDecryptor(msg, security_recipient).DecryptMessage(
+
+                );
         }
     }
 }

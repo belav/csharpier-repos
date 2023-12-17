@@ -45,9 +45,8 @@ public class FormTagHelperTest
         );
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GeneratePageForm(viewContext, null, "page-handler", null, null, null, null)
+            .Setup(mock =>
+                mock.GeneratePageForm(viewContext, null, "page-handler", null, null, null, null)
             )
             .Returns(new TagBuilder("form"))
             .Verifiable();
@@ -397,16 +396,15 @@ public class FormTagHelperTest
         );
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateForm(
-                        It.IsAny<ViewContext>(),
-                        It.IsAny<string>(),
-                        It.IsAny<string>(),
-                        It.IsAny<object>(),
-                        It.IsAny<string>(),
-                        It.IsAny<object>()
-                    )
+            .Setup(mock =>
+                mock.GenerateForm(
+                    It.IsAny<ViewContext>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<object>(),
+                    It.IsAny<string>(),
+                    It.IsAny<object>()
+                )
             )
             .Returns(new TagBuilder("form"));
 
@@ -460,16 +458,15 @@ public class FormTagHelperTest
 
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateForm(
-                        It.IsAny<ViewContext>(),
-                        It.IsAny<string>(),
-                        It.IsAny<string>(),
-                        It.IsAny<object>(),
-                        It.IsAny<string>(),
-                        It.IsAny<object>()
-                    )
+            .Setup(mock =>
+                mock.GenerateForm(
+                    It.IsAny<ViewContext>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<object>(),
+                    It.IsAny<string>(),
+                    It.IsAny<object>()
+                )
             )
             .Callback<ViewContext, string, string, object, string, object>(
                 (viewContext, actionName, controllerName, routeValues, method, htmlAttributes) =>
@@ -537,16 +534,15 @@ public class FormTagHelperTest
         );
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateForm(
-                        viewContext,
-                        "Index",
-                        "Home",
-                        It.IsAny<IDictionary<string, object>>(),
-                        null,
-                        null
-                    )
+            .Setup(mock =>
+                mock.GenerateForm(
+                    viewContext,
+                    "Index",
+                    "Home",
+                    It.IsAny<IDictionary<string, object>>(),
+                    null,
+                    null
+                )
             )
             .Returns(new TagBuilder("form"))
             .Verifiable();
@@ -659,9 +655,8 @@ public class FormTagHelperTest
         var expectedRouteValues = new Dictionary<string, object> { { "area", "Admin" } };
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateForm(viewContext, "Index", "Home", expectedRouteValues, null, null)
+            .Setup(mock =>
+                mock.GenerateForm(viewContext, "Index", "Home", expectedRouteValues, null, null)
             )
             .Returns(new TagBuilder("form"))
             .Verifiable();
@@ -714,9 +709,8 @@ public class FormTagHelperTest
         var expectedRouteValues = new Dictionary<string, object> { { "area", string.Empty } };
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateForm(viewContext, "Index", "Home", expectedRouteValues, null, null)
+            .Setup(mock =>
+                mock.GenerateForm(viewContext, "Index", "Home", expectedRouteValues, null, null)
             )
             .Returns(new TagBuilder("form"))
             .Verifiable();
@@ -769,9 +763,8 @@ public class FormTagHelperTest
         var expectedRouteValues = new Dictionary<string, object> { { "area", "Admin" } };
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateForm(viewContext, "Index", "Home", expectedRouteValues, null, null)
+            .Setup(mock =>
+                mock.GenerateForm(viewContext, "Index", "Home", expectedRouteValues, null, null)
             )
             .Returns(new TagBuilder("form"))
             .Verifiable();
@@ -823,15 +816,14 @@ public class FormTagHelperTest
         );
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateRouteForm(
-                        viewContext,
-                        "Default",
-                        It.Is<RouteValueDictionary>(m => string.Equals(m["name"], "value")),
-                        null,
-                        null
-                    )
+            .Setup(mock =>
+                mock.GenerateRouteForm(
+                    viewContext,
+                    "Default",
+                    It.Is<RouteValueDictionary>(m => string.Equals(m["name"], "value")),
+                    null,
+                    null
+                )
             )
             .Returns(new TagBuilder("form"))
             .Verifiable();
@@ -880,17 +872,16 @@ public class FormTagHelperTest
         );
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GeneratePageForm(
-                        viewContext,
-                        "/Home/Admin/Post",
-                        "page-handler",
-                        null,
-                        "hello-world",
-                        null,
-                        null
-                    )
+            .Setup(mock =>
+                mock.GeneratePageForm(
+                    viewContext,
+                    "/Home/Admin/Post",
+                    "page-handler",
+                    null,
+                    "hello-world",
+                    null,
+                    null
+                )
             )
             .Returns(new TagBuilder("form"))
             .Verifiable();
@@ -931,17 +922,16 @@ public class FormTagHelperTest
         );
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GeneratePageForm(
-                        viewContext,
-                        "/Home/Admin/Post",
-                        "page-handler",
-                        It.IsAny<object>(),
-                        "hello-world",
-                        null,
-                        null
-                    )
+            .Setup(mock =>
+                mock.GeneratePageForm(
+                    viewContext,
+                    "/Home/Admin/Post",
+                    "page-handler",
+                    It.IsAny<object>(),
+                    "hello-world",
+                    null,
+                    null
+                )
             )
             .Callback(
                 (

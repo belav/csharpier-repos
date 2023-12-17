@@ -147,8 +147,8 @@ internal partial class InlineCompletionsHandler
             return null;
         }
 
-        var matchingSnippetInfo = snippetInfo.First(
-            s => wordText.Equals(s.Shortcut, StringComparison.OrdinalIgnoreCase)
+        var matchingSnippetInfo = snippetInfo.First(s =>
+            wordText.Equals(s.Shortcut, StringComparison.OrdinalIgnoreCase)
         );
 
         var parsedSnippet = _xmlSnippetParser.GetParsedXmlSnippet(matchingSnippetInfo, context);

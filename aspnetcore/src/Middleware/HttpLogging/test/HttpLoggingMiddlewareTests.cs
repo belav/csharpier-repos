@@ -2155,8 +2155,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     private IOptionsMonitor<HttpLoggingOptions> CreateOptionsAccessor()
     {
         var options = new HttpLoggingOptions();
-        var optionsAccessor = Mock.Of<IOptionsMonitor<HttpLoggingOptions>>(
-            o => o.CurrentValue == options
+        var optionsAccessor = Mock.Of<IOptionsMonitor<HttpLoggingOptions>>(o =>
+            o.CurrentValue == options
         );
         return optionsAccessor;
     }

@@ -151,8 +151,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 // RazorCSharp has an HTMLX base type but should not be associated with
                 // the HTML host type, so we check for it first.
                 if (
-                    projectionBuffer.SourceBuffers.Any(
-                        b => b.ContentType.IsOfType(Razor) || b.ContentType.IsOfType(LegacyRazor)
+                    projectionBuffer.SourceBuffers.Any(b =>
+                        b.ContentType.IsOfType(Razor) || b.ContentType.IsOfType(LegacyRazor)
                     )
                 )
                 {
@@ -162,11 +162,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 // For TypeScript hosted in HTML the source buffers will have type names
                 // HTMLX and TypeScript.
                 if (
-                    projectionBuffer.SourceBuffers.Any(
-                        b =>
-                            b.ContentType.IsOfType(HTML)
-                            || b.ContentType.IsOfType(WebForms)
-                            || b.ContentType.IsOfType(HTMLX)
+                    projectionBuffer.SourceBuffers.Any(b =>
+                        b.ContentType.IsOfType(HTML)
+                        || b.ContentType.IsOfType(WebForms)
+                        || b.ContentType.IsOfType(HTMLX)
                     )
                 )
                 {

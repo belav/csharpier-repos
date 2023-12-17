@@ -43,21 +43,20 @@ public class BootResourceCachingTest : ServerTestBase<AspNetSiteServerFixture>
         WaitUntilLoaded();
         var initialResourcesRequested = GetAndClearRequestedPaths();
         Assert.NotEmpty(
-            initialResourcesRequested.Where(
-                path => path.EndsWith("/blazor.boot.json", StringComparison.Ordinal)
+            initialResourcesRequested.Where(path =>
+                path.EndsWith("/blazor.boot.json", StringComparison.Ordinal)
             )
         );
         Assert.NotEmpty(
-            initialResourcesRequested.Where(
-                path => path.EndsWith("/dotnet.native.wasm", StringComparison.Ordinal)
+            initialResourcesRequested.Where(path =>
+                path.EndsWith("/dotnet.native.wasm", StringComparison.Ordinal)
             )
         );
         Assert.NotEmpty(
             initialResourcesRequested.Where(path => path.EndsWith(".js", StringComparison.Ordinal))
         );
         Assert.NotEmpty(
-            initialResourcesRequested.Where(
-                path => path.EndsWith(".wasm", StringComparison.Ordinal)
+            initialResourcesRequested.Where(path => path.EndsWith(".wasm", StringComparison.Ordinal)
             )
         );
 
@@ -69,25 +68,24 @@ public class BootResourceCachingTest : ServerTestBase<AspNetSiteServerFixture>
         WaitUntilLoaded();
         var subsequentResourcesRequested = GetAndClearRequestedPaths();
         Assert.NotEmpty(
-            initialResourcesRequested.Where(
-                path => path.EndsWith("/blazor.boot.json", StringComparison.Ordinal)
+            initialResourcesRequested.Where(path =>
+                path.EndsWith("/blazor.boot.json", StringComparison.Ordinal)
             )
         );
         Assert.Empty(
-            subsequentResourcesRequested.Where(
-                path => path.EndsWith("/dotnet.native.wasm", StringComparison.Ordinal)
+            subsequentResourcesRequested.Where(path =>
+                path.EndsWith("/dotnet.native.wasm", StringComparison.Ordinal)
             )
         );
         Assert.NotEmpty(
-            subsequentResourcesRequested.Where(
-                path => path.EndsWith(".js", StringComparison.Ordinal)
+            subsequentResourcesRequested.Where(path =>
+                path.EndsWith(".js", StringComparison.Ordinal)
             )
         );
         Assert.Empty(
-            subsequentResourcesRequested.Where(
-                path =>
-                    path.EndsWith(".wasm", StringComparison.Ordinal)
-                    && !path.EndsWith("/dotnet.native.wasm", StringComparison.Ordinal)
+            subsequentResourcesRequested.Where(path =>
+                path.EndsWith(".wasm", StringComparison.Ordinal)
+                && !path.EndsWith("/dotnet.native.wasm", StringComparison.Ordinal)
             )
         );
     }
@@ -99,11 +97,11 @@ public class BootResourceCachingTest : ServerTestBase<AspNetSiteServerFixture>
         Navigate("/");
         WaitUntilLoaded();
         var cacheEntryUrls1 = GetCacheEntryUrls();
-        var cacheEntryForComponentsDll = cacheEntryUrls1.Single(
-            url => url.Contains("/Microsoft.AspNetCore.Components.wasm")
+        var cacheEntryForComponentsDll = cacheEntryUrls1.Single(url =>
+            url.Contains("/Microsoft.AspNetCore.Components.wasm")
         );
-        var cacheEntryForDotNetWasm = cacheEntryUrls1.Single(
-            url => url.Contains("/dotnet.native.wasm")
+        var cacheEntryForDotNetWasm = cacheEntryUrls1.Single(url =>
+            url.Contains("/dotnet.native.wasm")
         );
         var cacheEntryForDotNetWasmWithChangedHash = cacheEntryForDotNetWasm.Replace(
             ".sha256-",

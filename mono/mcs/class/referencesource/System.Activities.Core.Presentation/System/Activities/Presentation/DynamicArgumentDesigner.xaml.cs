@@ -589,8 +589,8 @@ namespace System.Activities.Presentation
                     DataGridRow row = entry.Row;
                     string newName = e.NewValue as string;
 
-                    bool duplicates = this.DynamicArguments.Any<DynamicArgumentWrapperObject>(
-                        p => string.Equals(p.Name, newName) && p != entry
+                    bool duplicates = this.DynamicArguments.Any<DynamicArgumentWrapperObject>(p =>
+                        string.Equals(p.Name, newName) && p != entry
                     );
                     if (duplicates || string.IsNullOrEmpty(newName))
                     {
@@ -669,17 +669,16 @@ namespace System.Activities.Presentation
                     DynamicArgumentWrapperObject,
                     string
                 >(p => (string)p.Name)
-                    .Where<string>(
-                        p =>
-                            0
-                            == string.Compare(
-                                p,
-                                0,
-                                this.ArgumentPrefix,
-                                0,
-                                this.ArgumentPrefix.Length,
-                                StringComparison.Ordinal
-                            )
+                    .Where<string>(p =>
+                        0
+                        == string.Compare(
+                            p,
+                            0,
+                            this.ArgumentPrefix,
+                            0,
+                            this.ArgumentPrefix.Length,
+                            StringComparison.Ordinal
+                        )
                     )
                     .Select(p => p.Substring(this.ArgumentPrefix.Length));
 

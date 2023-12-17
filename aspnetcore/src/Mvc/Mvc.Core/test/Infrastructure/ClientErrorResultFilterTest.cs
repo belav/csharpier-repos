@@ -37,12 +37,8 @@ public class ClientErrorResultFilterTest
         var context = GetContext(actionResult);
         var factory = new Mock<IClientErrorFactory>();
         factory
-            .Setup(
-                f =>
-                    f.GetClientError(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<IClientErrorActionResult>()
-                    )
+            .Setup(f =>
+                f.GetClientError(It.IsAny<ActionContext>(), It.IsAny<IClientErrorActionResult>())
             )
             .Returns((IActionResult)null)
             .Verifiable();
@@ -113,10 +109,9 @@ public class ClientErrorResultFilterTest
 
     private static ClientErrorResultFilter GetFilter()
     {
-        var factory = Mock.Of<IClientErrorFactory>(
-            f =>
-                f.GetClientError(It.IsAny<ActionContext>(), It.IsAny<IClientErrorActionResult>())
-                == Result
+        var factory = Mock.Of<IClientErrorFactory>(f =>
+            f.GetClientError(It.IsAny<ActionContext>(), It.IsAny<IClientErrorActionResult>())
+            == Result
         );
 
         return new ClientErrorResultFilter(factory, NullLogger<ClientErrorResultFilter>.Instance);

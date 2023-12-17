@@ -301,15 +301,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 fieldsInvolvedInCycles.AddRange(
                     graph
                         .Keys.GroupBy(static f => f.DeclaringCompilation)
-                        .SelectMany(
-                            static g =>
-                                g.OrderByDescending(
-                                    (f1, f2) =>
-                                        g.Key.CompareSourceLocations(
-                                            f1.ErrorLocation,
-                                            f2.ErrorLocation
-                                        )
-                                )
+                        .SelectMany(static g =>
+                            g.OrderByDescending(
+                                (f1, f2) =>
+                                    g.Key.CompareSourceLocations(f1.ErrorLocation, f2.ErrorLocation)
+                            )
                         )
                 );
             }

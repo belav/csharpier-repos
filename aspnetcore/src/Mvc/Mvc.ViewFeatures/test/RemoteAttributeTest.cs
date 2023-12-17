@@ -504,11 +504,10 @@ public class RemoteAttributeTest
         serviceCollection.AddRouting();
 
         serviceCollection.AddSingleton<IInlineConstraintResolver>(
-            provider =>
-                new DefaultInlineConstraintResolver(
-                    provider.GetRequiredService<IOptions<RouteOptions>>(),
-                    provider
-                )
+            provider => new DefaultInlineConstraintResolver(
+                provider.GetRequiredService<IOptions<RouteOptions>>(),
+                provider
+            )
         );
 
         return serviceCollection;

@@ -1180,8 +1180,8 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 globalConfigOptions = analyzerConfigSet.GlobalConfigOptions;
-                sourceFileAnalyzerConfigOptions = Arguments.SourceFiles.SelectAsArray(
-                    f => analyzerConfigSet.GetOptionsForSourcePath(f.Path)
+                sourceFileAnalyzerConfigOptions = Arguments.SourceFiles.SelectAsArray(f =>
+                    analyzerConfigSet.GetOptionsForSourcePath(f.Path)
                 );
 
                 foreach (var sourceFileAnalyzerConfigOption in sourceFileAnalyzerConfigOptions)
@@ -1370,8 +1370,8 @@ namespace Microsoft.CodeAnalysis
                 // https://github.com/dotnet/roslyn/issues/31916: The compiler currently doesn't support
                 // configuring diagnostic reporting on additional text files individually.
                 ImmutableArray<AnalyzerConfigOptionsResult> additionalFileAnalyzerOptions =
-                    additionalTextFiles.SelectAsArray(
-                        f => analyzerConfigSet.GetOptionsForSourcePath(f.Path)
+                    additionalTextFiles.SelectAsArray(f =>
+                        analyzerConfigSet.GetOptionsForSourcePath(f.Path)
                     );
 
                 foreach (var result in additionalFileAnalyzerOptions)
@@ -2153,15 +2153,12 @@ namespace Microsoft.CodeAnalysis
             );
             errors = diagnostics
                 .ToReadOnlyAndFree()
-                .SelectAsArray(
-                    diag =>
-                        new DiagnosticInfo(
-                            messageProvider,
-                            diag.IsWarningAsError,
-                            diag.Code,
-                            (object[])diag.Arguments
-                        )
-                );
+                .SelectAsArray(diag => new DiagnosticInfo(
+                    messageProvider,
+                    diag.IsWarningAsError,
+                    diag.Code,
+                    (object[])diag.Arguments
+                ));
             return stream;
         }
 

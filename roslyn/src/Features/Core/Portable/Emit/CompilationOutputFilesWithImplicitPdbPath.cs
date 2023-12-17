@@ -56,8 +56,8 @@ namespace Microsoft.CodeAnalysis.Emit
             using (var peReader = new PEReader(assemblyStream))
             {
                 var debugDirectory = peReader.ReadDebugDirectory();
-                var embeddedPdbEntry = debugDirectory.FirstOrDefault(
-                    e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb
+                var embeddedPdbEntry = debugDirectory.FirstOrDefault(e =>
+                    e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb
                 );
                 if (embeddedPdbEntry.DataSize != 0)
                 {
@@ -66,8 +66,8 @@ namespace Microsoft.CodeAnalysis.Emit
                     );
                 }
 
-                var codeViewEntry = debugDirectory.FirstOrDefault(
-                    e => e.Type == DebugDirectoryEntryType.CodeView
+                var codeViewEntry = debugDirectory.FirstOrDefault(e =>
+                    e.Type == DebugDirectoryEntryType.CodeView
                 );
                 if (codeViewEntry.DataSize == 0)
                 {

@@ -24,26 +24,25 @@ public class InheritanceData : ISetSource
         WireUp(Animals, Countries);
 
         AnimalQueries = Animals
-            .Select(
-                a =>
-                    a is Eagle
-                        ? (AnimalQuery)
-                            new EagleQuery
-                            {
-                                Name = a.Name,
-                                CountryId = a.CountryId,
-                                EagleId = ((Bird)a).EagleId,
-                                IsFlightless = ((Bird)a).IsFlightless,
-                                Group = ((Eagle)a).Group,
-                            }
-                        : new KiwiQuery
+            .Select(a =>
+                a is Eagle
+                    ? (AnimalQuery)
+                        new EagleQuery
                         {
                             Name = a.Name,
                             CountryId = a.CountryId,
                             EagleId = ((Bird)a).EagleId,
                             IsFlightless = ((Bird)a).IsFlightless,
-                            FoundOn = ((Kiwi)a).FoundOn,
+                            Group = ((Eagle)a).Group,
                         }
+                    : new KiwiQuery
+                    {
+                        Name = a.Name,
+                        CountryId = a.CountryId,
+                        EagleId = ((Bird)a).EagleId,
+                        IsFlightless = ((Bird)a).IsFlightless,
+                        FoundOn = ((Kiwi)a).FoundOn,
+                    }
             )
             .ToList();
     }

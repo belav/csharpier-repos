@@ -75,8 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                             SemanticEditKind.Delete,
                             symbolProvider: c =>
                                 c.GetMember<INamedTypeSymbol>("C")
-                                    .InstanceConstructors.FirstOrDefault(
-                                        c => c.Parameters.Length == 1
+                                    .InstanceConstructors.FirstOrDefault(c =>
+                                        c.Parameters.Length == 1
                                     ),
                             newSymbolProvider: c => c.GetMember("C")
                         ),
@@ -143,8 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                             SemanticEditKind.Delete,
                             symbolProvider: c =>
                                 c.GetMember<INamedTypeSymbol>("C")
-                                    .InstanceConstructors.FirstOrDefault(
-                                        c => c.Parameters.Length == 1
+                                    .InstanceConstructors.FirstOrDefault(c =>
+                                        c.Parameters.Length == 1
                                     ),
                             newSymbolProvider: c => c.GetMember("C")
                         ),
@@ -7514,12 +7514,11 @@ class C
             Assert.Equal(7, baseAttributeCount);
             Assert.Equal(2, baseParameterCount);
 
-            var attributeTypeDefHandle = reader0.TypeDefinitions.Single(
-                d =>
-                    reader0.StringComparer.Equals(
-                        reader0.GetTypeDefinition(d).Name,
-                        "MetadataUpdateOriginalTypeAttribute"
-                    )
+            var attributeTypeDefHandle = reader0.TypeDefinitions.Single(d =>
+                reader0.StringComparer.Equals(
+                    reader0.GetTypeDefinition(d).Name,
+                    "MetadataUpdateOriginalTypeAttribute"
+                )
             );
             var attributeCtorDefHandle = reader0.MethodDefinitions.Single(d =>
             {
@@ -15546,8 +15545,8 @@ class C
 
             // No CDIs should be emitted, specifically not PortableCustomDebugInfoKinds.TypeDefinitionDocuments
             Assert.Empty(
-                pdbReader.CustomDebugInformation.Select(
-                    cdi => pdbReader.GetGuid(pdbReader.GetCustomDebugInformation(cdi).Kind)
+                pdbReader.CustomDebugInformation.Select(cdi =>
+                    pdbReader.GetGuid(pdbReader.GetCustomDebugInformation(cdi).Kind)
                 )
             );
         }
@@ -21927,10 +21926,9 @@ class C
                             SemanticEditKind.Delete,
                             symbolProvider: c =>
                                 c.GetMembers("C.M")
-                                    .FirstOrDefault(
-                                        m =>
-                                            m.GetParameterTypes()[0].SpecialType
-                                            == SpecialType.System_Int32
+                                    .FirstOrDefault(m =>
+                                        m.GetParameterTypes()[0].SpecialType
+                                        == SpecialType.System_Int32
                                     )
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
@@ -21939,10 +21937,9 @@ class C
                             SemanticEditKind.Insert,
                             symbolProvider: c =>
                                 c.GetMembers("C.M")
-                                    .FirstOrDefault(
-                                        m =>
-                                            m.GetParameterTypes()[0].SpecialType
-                                            == SpecialType.System_Boolean
+                                    .FirstOrDefault(m =>
+                                        m.GetParameterTypes()[0].SpecialType
+                                        == SpecialType.System_Boolean
                                     )
                                     ?.ISymbol
                         ),
@@ -22007,10 +22004,9 @@ class C
                             SemanticEditKind.Delete,
                             symbolProvider: c =>
                                 c.GetMembers("C.M")
-                                    .FirstOrDefault(
-                                        m =>
-                                            m.GetParameterTypes()[0].SpecialType
-                                            == SpecialType.System_Boolean
+                                    .FirstOrDefault(m =>
+                                        m.GetParameterTypes()[0].SpecialType
+                                        == SpecialType.System_Boolean
                                     )
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
@@ -22019,10 +22015,9 @@ class C
                             SemanticEditKind.Insert,
                             symbolProvider: c =>
                                 c.GetMembers("C.M")
-                                    .FirstOrDefault(
-                                        m =>
-                                            m.GetParameterTypes()[0].SpecialType
-                                            == SpecialType.System_Int32
+                                    .FirstOrDefault(m =>
+                                        m.GetParameterTypes()[0].SpecialType
+                                        == SpecialType.System_Int32
                                     )
                                     ?.ISymbol
                         ),
@@ -22105,10 +22100,9 @@ class C
                             SemanticEditKind.Delete,
                             symbolProvider: c =>
                                 c.GetMembers("C.M")
-                                    .FirstOrDefault(
-                                        m =>
-                                            m.GetTypeOrReturnType().SpecialType
-                                            == SpecialType.System_String
+                                    .FirstOrDefault(m =>
+                                        m.GetTypeOrReturnType().SpecialType
+                                        == SpecialType.System_String
                                     )
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
@@ -22117,10 +22111,9 @@ class C
                             SemanticEditKind.Insert,
                             symbolProvider: c =>
                                 c.GetMembers("C.M")
-                                    .FirstOrDefault(
-                                        m =>
-                                            m.GetTypeOrReturnType().SpecialType
-                                            == SpecialType.System_Int32
+                                    .FirstOrDefault(m =>
+                                        m.GetTypeOrReturnType().SpecialType
+                                        == SpecialType.System_Int32
                                     )
                                     ?.ISymbol
                         ),
@@ -22188,10 +22181,9 @@ class C
                             SemanticEditKind.Delete,
                             symbolProvider: c =>
                                 c.GetMembers("C.M")
-                                    .FirstOrDefault(
-                                        m =>
-                                            m.GetTypeOrReturnType().SpecialType
-                                            == SpecialType.System_Int32
+                                    .FirstOrDefault(m =>
+                                        m.GetTypeOrReturnType().SpecialType
+                                        == SpecialType.System_Int32
                                     )
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
@@ -22200,10 +22192,9 @@ class C
                             SemanticEditKind.Insert,
                             symbolProvider: c =>
                                 c.GetMembers("C.M")
-                                    .FirstOrDefault(
-                                        m =>
-                                            m.GetTypeOrReturnType().SpecialType
-                                            == SpecialType.System_String
+                                    .FirstOrDefault(m =>
+                                        m.GetTypeOrReturnType().SpecialType
+                                        == SpecialType.System_String
                                     )
                                     ?.ISymbol
                         ),

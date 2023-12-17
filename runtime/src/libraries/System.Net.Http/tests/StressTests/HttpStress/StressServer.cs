@@ -267,16 +267,15 @@ namespace HttpStress
                     (string name, StringValues values)[] headersToEcho = context
                         .Request.Headers.Where(h => h.Key.StartsWith("header-"))
                         // kestrel does not seem to be splitting comma separated header values, handle here
-                        .Select(
-                            h =>
-                                (
-                                    h.Key,
-                                    new StringValues(
-                                        h.Value.SelectMany(v => v.Split(','))
-                                            .Select(x => x.Trim())
-                                            .ToArray()
-                                    )
+                        .Select(h =>
+                            (
+                                h.Key,
+                                new StringValues(
+                                    h.Value.SelectMany(v => v.Split(','))
+                                        .Select(x => x.Trim())
+                                        .ToArray()
                                 )
+                            )
                         )
                         .ToArray();
 

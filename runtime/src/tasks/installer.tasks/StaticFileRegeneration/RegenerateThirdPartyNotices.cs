@@ -57,16 +57,13 @@ namespace Microsoft.DotNet.Build.Tasks
                             item.GetMetadata("Branch")
                             ?? throw new ArgumentException($"{item.ItemSpec} specifies no Branch.");
 
-                        return PotentialTpnPaths.Select(
-                            path =>
-                                new
-                                {
-                                    Repo = repo,
-                                    Branch = branch,
-                                    PotentialPath = path,
-                                    Url = $"{GitHubRawContentBaseUrl}{repo}/{branch}/{path}"
-                                }
-                        );
+                        return PotentialTpnPaths.Select(path => new
+                        {
+                            Repo = repo,
+                            Branch = branch,
+                            PotentialPath = path,
+                            Url = $"{GitHubRawContentBaseUrl}{repo}/{branch}/{path}"
+                        });
                     })
                     .Select(async c =>
                     {

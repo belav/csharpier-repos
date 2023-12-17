@@ -66,7 +66,9 @@ namespace System.ServiceModel.Routing
                         messageRpc.EventTraceActivity,
                         messageRpc.UniqueID,
                         messageRpc.Message.Headers.Action,
-                        messageRpc.OperationContext.EndpointDispatcher.EndpointAddress.Uri.ToString(),
+                        messageRpc.OperationContext.EndpointDispatcher.EndpointAddress.Uri.ToString(
+
+                        ),
                         (messageRpc.Transaction != null).ToString()
                     );
                 }

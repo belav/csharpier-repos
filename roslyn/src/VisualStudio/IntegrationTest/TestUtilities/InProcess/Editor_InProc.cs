@@ -309,8 +309,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     .GetTags(new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length))
                     .Where(t => filter(t.Tag))
                     .Cast<IMappingTagSpan<ITag>>();
-                return tags.Select(
-                        tag => $"{tag.Tag}:{PrintSpan(tag.Span.GetSpans(view.TextBuffer).Single())}"
+                return tags.Select(tag =>
+                        $"{tag.Tag}:{PrintSpan(tag.Span.GetSpans(view.TextBuffer).Single())}"
                     )
                     .ToArray();
             });
@@ -458,13 +458,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     )
                 );
                 return classifiedSpans
-                    .Select(
-                        x =>
-                            new ClassifiedToken(
-                                x.Span.GetText().ToString(),
-                                x.ClassificationType.Classification
-                            )
-                    )
+                    .Select(x => new ClassifiedToken(
+                        x.Span.GetText().ToString(),
+                        x.ClassificationType.Classification
+                    ))
                     .ToArray();
             }
 

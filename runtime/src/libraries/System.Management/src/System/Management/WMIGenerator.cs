@@ -7420,9 +7420,9 @@ namespace System.Management
                             beginningExpression
                         )
                     );
-                    cmie2.Method.MethodName = PrivateNamesUsed[
-                        "ToDMTFTimeIntervalMethod"
-                    ].ToString();
+                    cmie2.Method.MethodName = PrivateNamesUsed["ToDMTFTimeIntervalMethod"].ToString(
+
+                    );
                     return cmie2;
 
                 case "System.Management.ManagementPath":
@@ -8285,8 +8285,9 @@ namespace System.Management
             string exceptVar = "e";
             CodeCatchClause catchblock = new CodeCatchClause(exceptVar);
 
-            CodeObjectCreateExpression codeThrowExceptionWithArgs =
-                new CodeObjectCreateExpression();
+            CodeObjectCreateExpression codeThrowExceptionWithArgs = new CodeObjectCreateExpression(
+
+            );
             codeThrowExceptionWithArgs.CreateType = new CodeTypeReference(
                 PublicNamesUsed["ArgumentOutOfRangeException"].ToString()
             );
@@ -9740,8 +9741,9 @@ namespace System.Management
             string exceptVar = "e";
             CodeCatchClause catchblock = new CodeCatchClause(exceptVar);
 
-            CodeObjectCreateExpression codeThrowExceptionWithArgs =
-                new CodeObjectCreateExpression();
+            CodeObjectCreateExpression codeThrowExceptionWithArgs = new CodeObjectCreateExpression(
+
+            );
             codeThrowExceptionWithArgs.CreateType = new CodeTypeReference(
                 PublicNamesUsed["ArgumentOutOfRangeException"].ToString()
             );

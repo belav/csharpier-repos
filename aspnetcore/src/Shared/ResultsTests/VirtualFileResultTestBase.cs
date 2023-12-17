@@ -505,8 +505,8 @@ public abstract class VirtualFileResultTestBase
     {
         var services = new ServiceCollection();
 
-        var hostingEnvironment = Mock.Of<IWebHostEnvironment>(
-            e => e.WebRootFileProvider == webRootFileProvider
+        var hostingEnvironment = Mock.Of<IWebHostEnvironment>(e =>
+            e.WebRootFileProvider == webRootFileProvider
         );
 
         services.AddSingleton<IWebHostEnvironment>(hostingEnvironment);

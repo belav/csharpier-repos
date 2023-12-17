@@ -133,8 +133,9 @@ public partial class HttpConnectionTests
                     {
                         await connection.StartAsync().DefaultTimeout();
 
-                        var feature =
-                            connection.Features.Get<IConnectionInherentKeepAliveFeature>();
+                        var feature = connection.Features.Get<IConnectionInherentKeepAliveFeature>(
+
+                        );
                         Assert.NotNull(feature);
                         Assert.Equal(expectedValue, feature.HasInherentKeepAlive);
                     }
@@ -170,7 +171,9 @@ public partial class HttpConnectionTests
 
                     // user agent version should come from version embedded in assembly metadata
                     var assemblyVersion =
-                        typeof(Constants).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                        typeof(Constants).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>(
+
+                        );
 
                     Assert.Contains(assemblyVersion.InformationalVersion, userAgentHeader);
 

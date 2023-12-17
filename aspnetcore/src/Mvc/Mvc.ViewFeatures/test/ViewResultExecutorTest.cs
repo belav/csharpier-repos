@@ -27,24 +27,22 @@ public class ViewResultExecutorTest
         var viewName = "my-view";
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                e =>
-                    e.GetView( /*executingFilePath*/
-                        null,
-                        viewName, /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.GetView( /*executingFilePath*/
+                    null,
+                    viewName, /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.NotFound(viewName, Enumerable.Empty<string>()))
             .Verifiable();
         viewEngine
-            .Setup(
-                e =>
-                    e.FindView(
-                        context,
-                        viewName, /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.FindView(
+                    context,
+                    viewName, /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.Found(viewName, Mock.Of<IView>()))
             .Verifiable();
@@ -129,23 +127,21 @@ public class ViewResultExecutorTest
         var viewName = "myview";
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                e =>
-                    e.GetView( /*executingFilePath*/
-                        null,
-                        "myview", /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.GetView( /*executingFilePath*/
+                    null,
+                    "myview", /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.NotFound("myview", expectedLocations));
         viewEngine
-            .Setup(
-                e =>
-                    e.FindView(
-                        context,
-                        "myview", /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.FindView(
+                    context,
+                    "myview", /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.NotFound("myview", Enumerable.Empty<string>()));
 
@@ -177,23 +173,21 @@ public class ViewResultExecutorTest
         var viewName = "myview";
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                e =>
-                    e.GetView( /*executingFilePath*/
-                        null,
-                        "myview", /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.GetView( /*executingFilePath*/
+                    null,
+                    "myview", /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.NotFound("myview", Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                e =>
-                    e.FindView(
-                        context,
-                        "myview", /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.FindView(
+                    context,
+                    "myview", /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.NotFound("myview", expectedLocations));
 
@@ -225,23 +219,21 @@ public class ViewResultExecutorTest
         var viewName = "myview";
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                e =>
-                    e.GetView( /*executingFilePath*/
-                        null,
-                        "myview", /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.GetView( /*executingFilePath*/
+                    null,
+                    "myview", /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.NotFound("myview", new[] { "location1", "location2" }));
         viewEngine
-            .Setup(
-                e =>
-                    e.FindView(
-                        context,
-                        "myview", /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.FindView(
+                    context,
+                    "myview", /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.NotFound("myview", new[] { "location3", "location4" }));
 
@@ -309,23 +301,21 @@ public class ViewResultExecutorTest
         var viewName = "myview";
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                e =>
-                    e.GetView( /*executingFilePath*/
-                        null,
-                        "myview", /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.GetView( /*executingFilePath*/
+                    null,
+                    "myview", /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.NotFound("myview", Enumerable.Empty<string>()));
         viewEngine
-            .Setup(
-                e =>
-                    e.FindView(
-                        context,
-                        "myview", /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.FindView(
+                    context,
+                    "myview", /*isMainPage*/
+                    true
+                )
             )
             .Returns(ViewEngineResult.NotFound("myview", new string[] { "location/myview" }));
 
@@ -419,25 +409,23 @@ public class ViewResultExecutorTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                e =>
-                    e.GetView( /*executingFilePath*/
-                        null,
-                        It.IsAny<string>(), /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    true
+                )
             )
             .Returns<string, string, bool>(
                 (path, name, partial) => ViewEngineResult.NotFound(name, Enumerable.Empty<string>())
             );
         viewEngine
-            .Setup(
-                e =>
-                    e.FindView(
-                        It.IsAny<ActionContext>(),
-                        It.IsAny<string>(), /*isMainPage*/
-                        true
-                    )
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    true
+                )
             )
             .Returns<ActionContext, string, bool>(
                 (context, name, partial) => ViewEngineResult.Found(name, Mock.Of<IView>())

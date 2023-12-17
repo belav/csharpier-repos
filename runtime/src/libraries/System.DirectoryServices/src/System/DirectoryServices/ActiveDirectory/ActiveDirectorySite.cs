@@ -765,8 +765,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                         else
                             // replace with the new value
-                            NTDSSiteEntry.Properties["schedule"].Value =
-                                value.GetUnmanagedSchedule();
+                            NTDSSiteEntry.Properties["schedule"].Value = value.GetUnmanagedSchedule(
+
+                            );
                     }
                     catch (COMException e)
                     {

@@ -374,8 +374,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 containerPart
             );
 
-            return symbolAndProjectIds.WhereAsArray(
-                t => containerPatternMatcher.Matches(GetContainer(t))
+            return symbolAndProjectIds.WhereAsArray(t =>
+                containerPatternMatcher.Matches(GetContainer(t))
             );
         }
 

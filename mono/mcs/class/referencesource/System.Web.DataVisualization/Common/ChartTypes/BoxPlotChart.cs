@@ -2016,8 +2016,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 foreach (string val in attrValues)
                 {
                     boxPlotSeries.Points.AddY(0.0);
-                    boxPlotSeries.Points[pointIndex++][CustomPropertyName.BoxPlotSeries] =
-                        val.Trim();
+                    boxPlotSeries.Points[pointIndex++][CustomPropertyName.BoxPlotSeries] = val.Trim(
+
+                    );
                 }
             }
 

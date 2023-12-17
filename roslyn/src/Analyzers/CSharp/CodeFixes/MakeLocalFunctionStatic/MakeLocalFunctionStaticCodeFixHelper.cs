@@ -126,8 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     (node, generator) =>
                     {
                         var currentInvocation = (InvocationExpressionSyntax)node;
-                        var seenNamedArgument = currentInvocation.ArgumentList.Arguments.Any(
-                            a => a.NameColon != null
+                        var seenNamedArgument = currentInvocation.ArgumentList.Arguments.Any(a =>
+                            a.NameColon != null
                         );
                         var seenDefaultArgumentValue =
                             currentInvocation.ArgumentList.Arguments.Count
@@ -136,16 +136,15 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                         // Add all the non-this parameters to the end.  If there is a 'this' parameter, add it to the start.
                         var newArguments = parameterAndCapturedSymbols
                             .Where(p => !p.symbol.IsThisParameter())
-                            .Select(
-                                symbolAndCapture =>
-                                    (ArgumentSyntax)
-                                        generator.Argument(
-                                            seenNamedArgument || seenDefaultArgumentValue
-                                                ? symbolAndCapture.symbol.Name
-                                                : null,
-                                            symbolAndCapture.symbol.RefKind,
-                                            symbolAndCapture.capture.Name.ToIdentifierName()
-                                        )
+                            .Select(symbolAndCapture =>
+                                (ArgumentSyntax)
+                                    generator.Argument(
+                                        seenNamedArgument || seenDefaultArgumentValue
+                                            ? symbolAndCapture.symbol.Name
+                                            : null,
+                                        symbolAndCapture.symbol.RefKind,
+                                        symbolAndCapture.capture.Name.ToIdentifierName()
+                                    )
                             );
 
                         var newArgumentsList = currentInvocation.ArgumentList.Arguments.AddRange(

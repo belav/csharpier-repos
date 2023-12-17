@@ -181,13 +181,12 @@ public class A { }";
                 supportedOptions.Sum(option => option is IPerLanguageValuedOption ? 2 : 1),
                 expectedValues.Count
             );
-            var optionsAndLanguageToVerify = supportedOptions.SelectManyAsArray(
-                option =>
-                    option is IPerLanguageValuedOption
-                        ? DidChangeConfigurationNotificationHandler.SupportedLanguages.SelectAsArray(
-                            lang => (option, lang)
-                        )
-                        : SpecializedCollections.SingletonEnumerable((option, string.Empty))
+            var optionsAndLanguageToVerify = supportedOptions.SelectManyAsArray(option =>
+                option is IPerLanguageValuedOption
+                    ? DidChangeConfigurationNotificationHandler.SupportedLanguages.SelectAsArray(
+                        lang => (option, lang)
+                    )
+                    : SpecializedCollections.SingletonEnumerable((option, string.Empty))
             );
 
             for (var i = 0; i < expectedValues.Count; i++)
@@ -254,8 +253,8 @@ public class A { }";
             {
                 ReceivedWorkspaceConfigurationRequest = true;
                 var expectConfigurationItemsNumber =
-                    DidChangeConfigurationNotificationHandler.SupportedOptions.Sum(
-                        option => option is IPerLanguageValuedOption ? 2 : 1
+                    DidChangeConfigurationNotificationHandler.SupportedOptions.Sum(option =>
+                        option is IPerLanguageValuedOption ? 2 : 1
                     );
                 Assert.Equal(expectConfigurationItemsNumber, configurationParams!.Items.Length);
                 Assert.Equal(expectConfigurationItemsNumber, MockClientSideValues.Count);

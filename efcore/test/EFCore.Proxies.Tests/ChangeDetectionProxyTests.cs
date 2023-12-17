@@ -34,8 +34,8 @@ public class ChangeDetectionProxyTests
     [ConditionalFact]
     public void Throws_if_non_virtual_indexer_property()
     {
-        using var context = new ChangeContext<ChangeNonVirtualIndexer>(
-            entityBuilderAction: b => b.IndexerProperty<int>("Snoopy")
+        using var context = new ChangeContext<ChangeNonVirtualIndexer>(entityBuilderAction: b =>
+            b.IndexerProperty<int>("Snoopy")
         );
         Assert.Equal(
             ProxiesStrings.NonVirtualIndexerProperty(nameof(ChangeNonVirtualIndexer)),
@@ -65,8 +65,8 @@ public class ChangeDetectionProxyTests
     [ConditionalFact]
     public void Throws_if_dictionary_type_with_additional_properties()
     {
-        using var context = new SharedChangeContext<Dictionary<string, int>>(
-            b => b.IndexerProperty<int>("Snoopy")
+        using var context = new SharedChangeContext<Dictionary<string, int>>(b =>
+            b.IndexerProperty<int>("Snoopy")
         );
 
         Assert.Equal(

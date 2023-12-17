@@ -2373,17 +2373,16 @@ public class SqlNullabilityProcessor
                         // (a ?? b ?? c) == null -> a == null && b == null && c == null
                         // (a ?? b ?? c) != null -> a != null || b != null || c != null
                         return sqlFunctionExpression
-                            .Arguments.Select(
-                                a =>
-                                    ProcessNullNotNull(
-                                        _sqlExpressionFactory.MakeUnary(
-                                            sqlUnaryExpression.OperatorType,
-                                            a,
-                                            typeof(bool),
-                                            sqlUnaryExpression.TypeMapping
-                                        )!,
-                                        operandNullable
-                                    )
+                            .Arguments.Select(a =>
+                                ProcessNullNotNull(
+                                    _sqlExpressionFactory.MakeUnary(
+                                        sqlUnaryExpression.OperatorType,
+                                        a,
+                                        typeof(bool),
+                                        sqlUnaryExpression.TypeMapping
+                                    )!,
+                                    operandNullable
+                                )
                             )
                             .Aggregate(
                                 (l, r) =>
@@ -2440,17 +2439,16 @@ public class SqlNullabilityProcessor
                     if (nullabilityPropagationElements.Count > 0)
                     {
                         var result = nullabilityPropagationElements
-                            .Select(
-                                e =>
-                                    ProcessNullNotNull(
-                                        _sqlExpressionFactory.MakeUnary(
-                                            sqlUnaryExpression.OperatorType,
-                                            e,
-                                            sqlUnaryExpression.Type,
-                                            sqlUnaryExpression.TypeMapping
-                                        )!,
-                                        operandNullable
-                                    )
+                            .Select(e =>
+                                ProcessNullNotNull(
+                                    _sqlExpressionFactory.MakeUnary(
+                                        sqlUnaryExpression.OperatorType,
+                                        e,
+                                        sqlUnaryExpression.Type,
+                                        sqlUnaryExpression.TypeMapping
+                                    )!,
+                                    operandNullable
+                                )
                             )
                             .Aggregate(
                                 (r, e) =>

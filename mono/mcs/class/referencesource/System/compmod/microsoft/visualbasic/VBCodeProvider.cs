@@ -3411,11 +3411,9 @@ namespace Microsoft.VisualBasic
                 // Create an empty assembly.  This is so that the file will have permissions that
                 // we can later access with our current credential.<
 
-                new FileStream(
-                    options.OutputAssembly,
-                    FileMode.Create,
-                    FileAccess.ReadWrite
-                ).Close();
+                new FileStream(options.OutputAssembly, FileMode.Create, FileAccess.ReadWrite).Close(
+
+                );
                 createdEmptyAssembly = true;
             }
 

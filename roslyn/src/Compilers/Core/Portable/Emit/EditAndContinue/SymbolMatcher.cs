@@ -181,15 +181,12 @@ namespace Microsoft.CodeAnalysis.Emit
             {
                 builder.Add(
                     key,
-                    values.SelectAsArray(
-                        value =>
-                            new AnonymousTypeValue(
-                                value.Name,
-                                value.UniqueIndex,
-                                (Cci.ITypeDefinition?)MapDefinition(value.Type)
-                                    ?? throw ExceptionUtilities.UnexpectedValue(value.Type)
-                            )
-                    )
+                    values.SelectAsArray(value => new AnonymousTypeValue(
+                        value.Name,
+                        value.UniqueIndex,
+                        (Cci.ITypeDefinition?)MapDefinition(value.Type)
+                            ?? throw ExceptionUtilities.UnexpectedValue(value.Type)
+                    ))
                 );
             }
 

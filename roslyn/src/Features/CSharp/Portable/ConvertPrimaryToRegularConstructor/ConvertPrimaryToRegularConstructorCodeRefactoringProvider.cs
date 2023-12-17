@@ -118,8 +118,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
 
         // Get the named type and all its parameters for use during the rewrite.
         var namedType = semanticModel.GetRequiredDeclaredSymbol(typeDeclaration, cancellationToken);
-        var parameters = parameterList.Parameters.SelectAsArray(
-            p => semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken)
+        var parameters = parameterList.Parameters.SelectAsArray(p =>
+            semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken)
         );
 
         // We may have to update multiple files (in the case of a partial type).  Use a solution-editor to make that
@@ -134,8 +134,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             is [PrimaryConstructorBaseTypeSyntax type, ..]
             ? type
             : null;
-        var methodTargetingAttributes = typeDeclaration.AttributeLists.Where(
-            list => list.Target?.Identifier.ValueText == "method"
+        var methodTargetingAttributes = typeDeclaration.AttributeLists.Where(list =>
+            list.Target?.Identifier.ValueText == "method"
         );
 
         // Find the references to all the parameters.  This will help us determine how they're used and what change we
@@ -271,8 +271,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                         n => namedType.Name != n && !namedType.GetMembers(n).Any()
                     );
 
-                    var isWrittenTo = parameterReferences[parameter].Any(
-                        r => r.IsWrittenTo(semanticModel, cancellationToken)
+                    var isWrittenTo = parameterReferences[parameter].Any(r =>
+                        r.IsWrittenTo(semanticModel, cancellationToken)
                     );
                     var synthesizedField = CodeGenerationSymbolFactory.CreateFieldSymbol(
                         existingField,
@@ -401,11 +401,10 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                 {
                     var currentTypeDeclaration = (TypeDeclarationSyntax)current;
                     var fieldsInOrder = parameters
-                        .Select(
-                            p =>
-                                parameterToSynthesizedFields.TryGetValue(p, out var field)
-                                    ? field
-                                    : null
+                        .Select(p =>
+                            parameterToSynthesizedFields.TryGetValue(p, out var field)
+                                ? field
+                                : null
                         )
                         .WhereNotNull();
                     var codeGenService =
@@ -434,10 +433,9 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                         .WithAdditionalAnnotations(constructorAnnotation);
 
                     // If there is an existing non-static constructor, place it before that
-                    var firstConstructorIndex = currentTypeDeclaration.Members.IndexOf(
-                        m =>
-                            m is ConstructorDeclarationSyntax c
-                            && !c.Modifiers.Any(SyntaxKind.StaticKeyword)
+                    var firstConstructorIndex = currentTypeDeclaration.Members.IndexOf(m =>
+                        m is ConstructorDeclarationSyntax c
+                        && !c.Modifiers.Any(SyntaxKind.StaticKeyword)
                     );
                     if (firstConstructorIndex >= 0)
                     {
@@ -450,12 +448,12 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                     }
 
                     // No constructors.  Place after any fields if present, or any properties if there are no fields.
-                    var lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(
-                        m => m is FieldDeclarationSyntax
+                    var lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(m =>
+                        m is FieldDeclarationSyntax
                     );
                     if (lastFieldOrProperty < 0)
-                        lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(
-                            m => m is PropertyDeclarationSyntax
+                        lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(m =>
+                            m is PropertyDeclarationSyntax
                         );
 
                     if (lastFieldOrProperty >= 0)
@@ -654,8 +652,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             // Next, actually assign to all the fields/properties that were previously referencing any primary
             // constructor parameters.
             foreach (
-                var (fieldOrProperty, initializer) in initializedFieldsAndProperties.OrderBy(
-                    i => i.initializer.SpanStart
+                var (fieldOrProperty, initializer) in initializedFieldsAndProperties.OrderBy(i =>
+                    i.initializer.SpanStart
                 )
             )
             {
@@ -681,11 +679,10 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
 
             var constructorDeclaration = ConstructorDeclaration(
                 List(
-                    methodTargetingAttributes.Select(
-                        a =>
-                            a.WithTarget(null)
-                                .WithoutTrivia()
-                                .WithAdditionalAnnotations(Formatter.Annotation)
+                    methodTargetingAttributes.Select(a =>
+                        a.WithTarget(null)
+                            .WithoutTrivia()
+                            .WithAdditionalAnnotations(Formatter.Annotation)
                     )
                 ),
                 TokenList(Token(SyntaxKind.PublicKeyword).WithAppendedTrailingTrivia(Space)),

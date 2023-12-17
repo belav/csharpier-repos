@@ -160,8 +160,8 @@ namespace Microsoft.CodeAnalysis.Classification
             var semanticSet = semanticClassifications.Select(s => s.TextSpan).ToSet();
 
             allClassifications.AddRange(
-                syntacticClassifications.Where(
-                    s => s.TextSpan.OverlapsWith(textSpan) && !semanticSet.Contains(s.TextSpan)
+                syntacticClassifications.Where(s =>
+                    s.TextSpan.OverlapsWith(textSpan) && !semanticSet.Contains(s.TextSpan)
                 )
             );
             allClassifications.Sort((s1, s2) => s1.TextSpan.Start - s2.TextSpan.Start);

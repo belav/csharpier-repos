@@ -3580,8 +3580,9 @@ namespace System.ComponentModel
 
         class MemberDescriptorComparer : IComparer
         {
-            public static readonly MemberDescriptorComparer Instance =
-                new MemberDescriptorComparer();
+            public static readonly MemberDescriptorComparer Instance = new MemberDescriptorComparer(
+
+            );
 
             // When we change the comparers to ordinal string comparison, it fails Properties1/Events1: potential breaking change
             [SuppressMessage(

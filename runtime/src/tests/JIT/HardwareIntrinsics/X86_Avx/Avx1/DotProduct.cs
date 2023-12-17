@@ -38,13 +38,9 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     if (
                         !floatTable.CheckResult(
                             (x, y, z) =>
-                                z.All(
-                                    result =>
-                                        result
-                                        == (x[0] * y[0])
-                                            + (x[1] * y[1])
-                                            + (x[2] * y[2])
-                                            + (x[3] * y[3])
+                                z.All(result =>
+                                    result
+                                    == (x[0] * y[0]) + (x[1] * y[1]) + (x[2] * y[2]) + (x[3] * y[3])
                                 )
                         )
                     )
@@ -64,9 +60,8 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     if (
                         !floatTable.CheckResult(
                             (x, y, z) =>
-                                z.All(
-                                    result =>
-                                        result == (x[0] * y[0]) + (x[1] * y[1]) + (x[2] * y[2])
+                                z.All(result =>
+                                    result == (x[0] * y[0]) + (x[1] * y[1]) + (x[2] * y[2])
                                 )
                         )
                     )
@@ -137,13 +132,9 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     if (
                         !floatTable.CheckResult(
                             (x, y, z) =>
-                                z.All(
-                                    result =>
-                                        result
-                                        == (x[0] * y[0])
-                                            + (x[1] * y[1])
-                                            + (x[2] * y[2])
-                                            + (x[3] * y[3])
+                                z.All(result =>
+                                    result
+                                    == (x[0] * y[0]) + (x[1] * y[1]) + (x[2] * y[2]) + (x[3] * y[3])
                                 )
                         )
                     )

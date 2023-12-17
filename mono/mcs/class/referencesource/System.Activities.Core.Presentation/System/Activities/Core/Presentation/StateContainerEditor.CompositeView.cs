@@ -125,14 +125,15 @@ namespace System.Activities.Core.Presentation
 
             HashSet<Connector> connectorsToDelete = new HashSet<Connector>();
             List<ModelItem> allStateModelItemsToDelete = new List<ModelItem>();
-            IEnumerable<ModelItem> selectedStateModelItems =
-                this.Context.Items.GetValue<Selection>()
-                    .SelectedObjects.Where<ModelItem>(
-                        (p) =>
-                        {
-                            return p.ItemType == typeof(State);
-                        }
-                    );
+            IEnumerable<ModelItem> selectedStateModelItems = this.Context.Items.GetValue<Selection>(
+
+            )
+                .SelectedObjects.Where<ModelItem>(
+                    (p) =>
+                    {
+                        return p.ItemType == typeof(State);
+                    }
+                );
 
             foreach (ModelItem stateModelItem in itemsToDelete)
             {
@@ -208,8 +209,8 @@ namespace System.Activities.Core.Presentation
                     string errorMessage;
                     IEnumerable<ModelItem> selectedStateModelItems =
                         this.Context.Items.GetValue<Selection>().SelectedObjects;
-                    return selectedStateModelItems.All(
-                        item => CanPasteTransition(item, out errorMessage)
+                    return selectedStateModelItems.All(item =>
+                        CanPasteTransition(item, out errorMessage)
                     );
                 }
                 else

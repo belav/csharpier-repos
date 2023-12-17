@@ -896,13 +896,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         )
         {
             var oldTrivia = oldArgument.GetLeadingTrivia();
-            var oldOnlyHasWhitespaceTrivia = oldTrivia.All(
-                t => t.IsKind(SyntaxKind.WhitespaceTrivia)
+            var oldOnlyHasWhitespaceTrivia = oldTrivia.All(t =>
+                t.IsKind(SyntaxKind.WhitespaceTrivia)
             );
 
             var newTrivia = newArgument.GetLeadingTrivia();
-            var newOnlyHasWhitespaceTrivia = newTrivia.All(
-                t => t.IsKind(SyntaxKind.WhitespaceTrivia)
+            var newOnlyHasWhitespaceTrivia = newTrivia.All(t =>
+                t.IsKind(SyntaxKind.WhitespaceTrivia)
             );
 
             if (oldOnlyHasWhitespaceTrivia && newOnlyHasWhitespaceTrivia)
@@ -1039,10 +1039,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
             var paramNodes = node.DescendantNodes(descendIntoTrivia: true)
                 .OfType<XmlElementSyntax>()
-                .Where(
-                    e =>
-                        e.StartTag.Name.ToString()
-                        == DocumentationCommentXmlNames.ParameterElementName
+                .Where(e =>
+                    e.StartTag.Name.ToString() == DocumentationCommentXmlNames.ParameterElementName
                 );
 
             var permutedParamNodes = VerifyAndPermuteParamNodes(
@@ -1093,8 +1091,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             var i = 0;
             foreach (var paramNode in paramNodes)
             {
-                var nameAttribute = paramNode.StartTag.Attributes.FirstOrDefault(
-                    a => a.Name.ToString().Equals("name", StringComparison.OrdinalIgnoreCase)
+                var nameAttribute = paramNode.StartTag.Attributes.FirstOrDefault(a =>
+                    a.Name.ToString().Equals("name", StringComparison.OrdinalIgnoreCase)
                 );
                 if (nameAttribute == null)
                 {

@@ -913,8 +913,8 @@ namespace System.Data.Entity.Design.Common
             }
 
             foreach (
-                EdmFunction functionImport in container.FunctionImports.Where(
-                    fi => fi.IsComposableAttribute
+                EdmFunction functionImport in container.FunctionImports.Where(fi =>
+                    fi.IsComposableAttribute
                 )
             )
             {
@@ -1005,8 +1005,8 @@ namespace System.Data.Entity.Design.Common
         private void WriteExtendedPropertyAttributes(MetadataItem item)
         {
             foreach (
-                MetadataProperty property in item.MetadataProperties.Where(
-                    p => p.PropertyKind == PropertyKind.Extended
+                MetadataProperty property in item.MetadataProperties.Where(p =>
+                    p.PropertyKind == PropertyKind.Extended
                 )
             )
             {

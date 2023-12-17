@@ -90,13 +90,12 @@ public class UserManagerTest
             .Returns(Task.FromResult(user.UserName))
             .Verifiable();
         store
-            .Setup(
-                s =>
-                    s.SetNormalizedUserNameAsync(
-                        user,
-                        normalizer.NormalizeName(user.UserName),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.SetNormalizedUserNameAsync(
+                    user,
+                    normalizer.NormalizeName(user.UserName),
+                    CancellationToken.None
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -158,24 +157,22 @@ public class UserManagerTest
             .Returns(Task.FromResult(user.Email))
             .Verifiable();
         store
-            .Setup(
-                s =>
-                    s.SetNormalizedEmailAsync(
-                        user,
-                        normalizer.NormalizeEmail(user.Email),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.SetNormalizedEmailAsync(
+                    user,
+                    normalizer.NormalizeEmail(user.Email),
+                    CancellationToken.None
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(
-                s =>
-                    s.SetNormalizedUserNameAsync(
-                        user,
-                        normalizer.NormalizeName(user.UserName),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.SetNormalizedUserNameAsync(
+                    user,
+                    normalizer.NormalizeName(user.UserName),
+                    CancellationToken.None
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -221,13 +218,12 @@ public class UserManagerTest
             .Returns(Task.FromResult(user.UserName))
             .Verifiable();
         store
-            .Setup(
-                s =>
-                    s.SetNormalizedUserNameAsync(
-                        user,
-                        normalizer.NormalizeName(user.UserName),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.SetNormalizedUserNameAsync(
+                    user,
+                    normalizer.NormalizeName(user.UserName),
+                    CancellationToken.None
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -261,24 +257,22 @@ public class UserManagerTest
             .Returns(Task.FromResult(user.Email))
             .Verifiable();
         store
-            .Setup(
-                s =>
-                    s.SetNormalizedUserNameAsync(
-                        user,
-                        normalizer.NormalizeName(user.UserName),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.SetNormalizedUserNameAsync(
+                    user,
+                    normalizer.NormalizeName(user.UserName),
+                    CancellationToken.None
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(
-                s =>
-                    s.SetNormalizedEmailAsync(
-                        user,
-                        normalizer.NormalizeEmail(user.Email),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.SetNormalizedEmailAsync(
+                    user,
+                    normalizer.NormalizeEmail(user.Email),
+                    CancellationToken.None
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -312,13 +306,12 @@ public class UserManagerTest
             .Returns(Task.FromResult("foo"))
             .Verifiable();
         store
-            .Setup(
-                s =>
-                    s.SetNormalizedUserNameAsync(
-                        user,
-                        normalizer.NormalizeName("foo"),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.SetNormalizedUserNameAsync(
+                    user,
+                    normalizer.NormalizeName("foo"),
+                    CancellationToken.None
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -364,12 +357,8 @@ public class UserManagerTest
         var store = new Mock<IUserStore<PocoUser>>();
         var user = new PocoUser { UserName = "Foo" };
         store
-            .Setup(
-                s =>
-                    s.FindByNameAsync(
-                        normalizer.NormalizeName(user.UserName),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.FindByNameAsync(normalizer.NormalizeName(user.UserName), CancellationToken.None)
             )
             .Returns(Task.FromResult(user))
             .Verifiable();
@@ -412,12 +401,8 @@ public class UserManagerTest
         var store = new Mock<IUserEmailStore<PocoUser>>();
         var user = new PocoUser { Email = "Foo" };
         store
-            .Setup(
-                s =>
-                    s.FindByEmailAsync(
-                        normalizer.NormalizeEmail(user.Email),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.FindByEmailAsync(normalizer.NormalizeEmail(user.Email), CancellationToken.None)
             )
             .Returns(Task.FromResult(user))
             .Verifiable();
@@ -510,20 +495,20 @@ public class UserManagerTest
         var user = new PocoUser { UserName = "Foo" };
         var roles = new string[] { "A", "B", "C", "C" };
         store
-            .Setup(
-                s => s.AddToRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
+            .Setup(s =>
+                s.AddToRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(
-                s => s.AddToRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
+            .Setup(s =>
+                s.AddToRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(
-                s => s.AddToRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
+            .Setup(s =>
+                s.AddToRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -533,20 +518,17 @@ public class UserManagerTest
             .ReturnsAsync(IdentityResult.Success)
             .Verifiable();
         store
-            .Setup(
-                s => s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(false))
             .Verifiable();
         store
-            .Setup(
-                s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(false))
             .Verifiable();
         store
-            .Setup(
-                s => s.IsInRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
             )
             .Returns(Task.FromResult(false))
             .Verifiable();
@@ -621,14 +603,13 @@ public class UserManagerTest
         var user = new PocoUser { UserName = "Foo" };
         var roles = new[] { "A", "B", "C" };
         store
-            .Setup(
-                s => s.AddToRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
+            .Setup(s =>
+                s.AddToRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(
-                s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
@@ -651,35 +632,20 @@ public class UserManagerTest
         var user = new PocoUser { UserName = "Foo" };
         var roles = new[] { "A", "B", "C" };
         store
-            .Setup(
-                s =>
-                    s.RemoveFromRoleAsync(
-                        user,
-                        normalizer.NormalizeName("A"),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.RemoveFromRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(
-                s =>
-                    s.RemoveFromRoleAsync(
-                        user,
-                        normalizer.NormalizeName("B"),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.RemoveFromRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(
-                s =>
-                    s.RemoveFromRoleAsync(
-                        user,
-                        normalizer.NormalizeName("C"),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.RemoveFromRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -688,20 +654,17 @@ public class UserManagerTest
             .ReturnsAsync(IdentityResult.Success)
             .Verifiable();
         store
-            .Setup(
-                s => s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
         store
-            .Setup(
-                s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
         store
-            .Setup(
-                s => s.IsInRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
@@ -724,25 +687,18 @@ public class UserManagerTest
         var user = new PocoUser { UserName = "Foo" };
         var roles = new string[] { "A", "B", "C" };
         store
-            .Setup(
-                s =>
-                    s.RemoveFromRoleAsync(
-                        user,
-                        normalizer.NormalizeName("A"),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.RemoveFromRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(
-                s => s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
         store
-            .Setup(
-                s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(false))
             .Verifiable();
@@ -789,8 +745,8 @@ public class UserManagerTest
         var user = new PocoUser { UserName = "Foo" };
         var claim = new Claim("1", "1");
         store
-            .Setup(
-                s => s.AddClaimsAsync(user, It.IsAny<IEnumerable<Claim>>(), CancellationToken.None)
+            .Setup(s =>
+                s.AddClaimsAsync(user, It.IsAny<IEnumerable<Claim>>(), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -817,14 +773,13 @@ public class UserManagerTest
         var claim = new Claim("1", "1");
         var newClaim = new Claim("1", "2");
         store
-            .Setup(
-                s =>
-                    s.ReplaceClaimAsync(
-                        user,
-                        It.IsAny<Claim>(),
-                        It.IsAny<Claim>(),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.ReplaceClaimAsync(
+                    user,
+                    It.IsAny<Claim>(),
+                    It.IsAny<Claim>(),
+                    CancellationToken.None
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -959,13 +914,8 @@ public class UserManagerTest
         var user = new PocoUser { UserName = "Foo" };
         var claim = new Claim("1", "1");
         store
-            .Setup(
-                s =>
-                    s.RemoveClaimsAsync(
-                        user,
-                        It.IsAny<IEnumerable<Claim>>(),
-                        CancellationToken.None
-                    )
+            .Setup(s =>
+                s.RemoveClaimsAsync(user, It.IsAny<IEnumerable<Claim>>(), CancellationToken.None)
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -1155,15 +1105,14 @@ public class UserManagerTest
         var services = new ServiceCollection().AddSingleton<IConfiguration>(config).AddLogging();
 
         services
-            .AddIdentity<PocoUser, PocoRole>(
-                o =>
-                    o.Tokens.ProviderMap.Add(
-                        "A",
-                        new TokenProviderDescriptor(typeof(ATokenProvider))
-                        {
-                            ProviderInstance = provider
-                        }
-                    )
+            .AddIdentity<PocoUser, PocoRole>(o =>
+                o.Tokens.ProviderMap.Add(
+                    "A",
+                    new TokenProviderDescriptor(typeof(ATokenProvider))
+                    {
+                        ProviderInstance = provider
+                    }
+                )
             )
             .AddUserStore<NoopUserStore>();
         var manager = services.BuildServiceProvider().GetService<UserManager<PocoUser>>();
@@ -1278,15 +1227,14 @@ public class UserManagerTest
         var services = new ServiceCollection().AddSingleton<IConfiguration>(config).AddLogging();
 
         services
-            .AddIdentity<PocoUser, PocoRole>(
-                o =>
-                    o.Tokens.ProviderMap.Add(
-                        TokenOptions.DefaultProvider,
-                        new TokenProviderDescriptor(typeof(ATokenProvider))
-                        {
-                            ProviderInstance = provider
-                        }
-                    )
+            .AddIdentity<PocoUser, PocoRole>(o =>
+                o.Tokens.ProviderMap.Add(
+                    TokenOptions.DefaultProvider,
+                    new TokenProviderDescriptor(typeof(ATokenProvider))
+                    {
+                        ProviderInstance = provider
+                    }
+                )
             )
             .AddUserStore<NoopUserStore>()
             .AddDefaultTokenProviders();

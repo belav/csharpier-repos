@@ -23,8 +23,8 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = GetFormHelper(out writer);
 
             // Act
-            IDisposable formDisposable = htmlHelper.BeginForm<FormController>(
-                action => action.About()
+            IDisposable formDisposable = htmlHelper.BeginForm<FormController>(action =>
+                action.About()
             );
             formDisposable.Dispose();
 

@@ -761,8 +761,9 @@ namespace System.Workflow.ComponentModel
                         )
                         {
                             if (activityBind.UserData[UserDataKeys.BindDataSource] == null)
-                                activityBind.UserData[UserDataKeys.BindDataSource] =
-                                    new Hashtable();
+                                activityBind.UserData[UserDataKeys.BindDataSource] = new Hashtable(
+
+                                );
 
                             ((Hashtable)activityBind.UserData[UserDataKeys.BindDataSource])[
                                 activity.QualifiedName

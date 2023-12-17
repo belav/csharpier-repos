@@ -228,9 +228,9 @@ namespace MonoTests.System.Web.UI.WebControls
         [Category("NunitWeb")]
         public void SiteMapPath_RenderStyles()
         {
-            string RenderedPageHtml = new WebTest(
-                PageInvoker.CreateOnLoad(DoTestStylesRender)
-            ).Run();
+            string RenderedPageHtml = new WebTest(PageInvoker.CreateOnLoad(DoTestStylesRender)).Run(
+
+            );
             string RenderedControlHtml = HtmlDiff.GetControlFromPageHtml(RenderedPageHtml);
             string OriginControlHtml =
                 "<span style=\"background-color:Red;\"><a href=\"#ctl01_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/NunitWeb/WebResource.axd?d=4RHYfeNnynkXiM59uthjZg2&amp;t=633802729995006876\" style=\"border-width:0px;\" /></a><span><a title=\"test\" href=\"/NunitWeb/MyPageWithMaster.aspx\" style=\"background-color:Beige;border-color:Purple;\">root</a></span><span style=\"background-color:RoyalBlue;\"> &gt; </span><span style=\"background-color:Pink;border-color:Purple;\">node1</span><a id=\"ctl01_SkipLink\"></a></span>";

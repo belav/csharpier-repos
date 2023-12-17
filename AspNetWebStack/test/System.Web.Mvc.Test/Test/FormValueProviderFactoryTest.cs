@@ -24,8 +24,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues =
                 new Mock<MockableUnvalidatedRequestValues>();
-            FormValueProviderFactory factory = new FormValueProviderFactory(
-                _ => mockUnvalidatedValues.Object
+            FormValueProviderFactory factory = new FormValueProviderFactory(_ =>
+                mockUnvalidatedValues.Object
             );
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
@@ -50,8 +50,8 @@ namespace System.Web.Mvc.Test
             Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues =
                 new Mock<MockableUnvalidatedRequestValues>();
             mockUnvalidatedValues.Setup(o => o.Form).Returns(_unvalidatedBackingStore);
-            FormValueProviderFactory factory = new FormValueProviderFactory(
-                _ => mockUnvalidatedValues.Object
+            FormValueProviderFactory factory = new FormValueProviderFactory(_ =>
+                mockUnvalidatedValues.Object
             );
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();

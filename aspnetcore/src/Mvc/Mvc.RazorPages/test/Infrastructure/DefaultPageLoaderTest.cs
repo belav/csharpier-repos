@@ -28,8 +28,8 @@ public class DefaultPageLoaderTest
     public DefaultPageLoaderTest()
     {
         var actionDescriptors = new ActionDescriptorCollection(Array.Empty<ActionDescriptor>(), 1);
-        ActionDescriptorCollectionProvider = Mock.Of<IActionDescriptorCollectionProvider>(
-            v => v.ActionDescriptors == actionDescriptors
+        ActionDescriptorCollectionProvider = Mock.Of<IActionDescriptorCollectionProvider>(v =>
+            v.ActionDescriptors == actionDescriptors
         );
     }
 

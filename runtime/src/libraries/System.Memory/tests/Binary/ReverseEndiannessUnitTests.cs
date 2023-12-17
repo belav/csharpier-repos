@@ -151,26 +151,20 @@ namespace System.Buffers.Binary.Tests
                 {
                     Enumerable
                         .Range(0, length)
-                        .Select(
-                            _ =>
-                                new UInt128(
-                                    (ulong)r.NextInt64(long.MinValue, long.MaxValue),
-                                    (ulong)r.NextInt64(long.MinValue, long.MaxValue)
-                                )
-                        )
+                        .Select(_ => new UInt128(
+                            (ulong)r.NextInt64(long.MinValue, long.MaxValue),
+                            (ulong)r.NextInt64(long.MinValue, long.MaxValue)
+                        ))
                         .ToArray()
                 };
                 yield return new object[]
                 {
                     Enumerable
                         .Range(0, length)
-                        .Select(
-                            _ =>
-                                new Int128(
-                                    (ulong)r.NextInt64(long.MinValue, long.MaxValue),
-                                    (ulong)r.NextInt64(long.MinValue, long.MaxValue)
-                                )
-                        )
+                        .Select(_ => new Int128(
+                            (ulong)r.NextInt64(long.MinValue, long.MaxValue),
+                            (ulong)r.NextInt64(long.MinValue, long.MaxValue)
+                        ))
                         .ToArray()
                 };
             }

@@ -187,14 +187,13 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                     // otherwise, emit as `(T1 x, T2 y, T3 z) = ...`.  Note, the 'T's will get simplified to 'var' if that matches the user's preference.
                     return TupleExpression(
                         SeparatedList(
-                            localTypesAndDesignations.SelectAsArray(
-                                t =>
-                                    Argument(
-                                        DeclarationExpression(
-                                            t.type.GenerateTypeSyntax(),
-                                            t.designation
-                                        )
+                            localTypesAndDesignations.SelectAsArray(t =>
+                                Argument(
+                                    DeclarationExpression(
+                                        t.type.GenerateTypeSyntax(),
+                                        t.designation
                                     )
+                                )
                             )
                         )
                     );
@@ -207,8 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                     var varPreference = simplifierOptions.GetUseVarPreference();
 
                     // If the user likes 'var' for intrinsics, and all the elements would be intrinsic.  Then use
-                    var isIntrinsic = tupleType.TupleElements.All(
-                        f => f.Type?.SpecialType != SpecialType.None
+                    var isIntrinsic = tupleType.TupleElements.All(f =>
+                        f.Type?.SpecialType != SpecialType.None
                     );
                     if (isIntrinsic)
                         return varPreference.HasFlag(UseVarPreference.ForBuiltInTypes);

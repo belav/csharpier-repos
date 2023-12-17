@@ -18,8 +18,8 @@ public class PropertyNamedType
         var config = new MapperConfiguration(c => c.CreateMap<Source, Destination>());
         new Action(
             config.AssertConfigurationIsValid
-        ).ShouldThrowException<AutoMapperConfigurationException>(
-            ex => ex.Errors[0].UnmappedPropertyNames[0].ShouldBe("Type")
+        ).ShouldThrowException<AutoMapperConfigurationException>(ex =>
+            ex.Errors[0].UnmappedPropertyNames[0].ShouldBe("Type")
         );
     }
 }

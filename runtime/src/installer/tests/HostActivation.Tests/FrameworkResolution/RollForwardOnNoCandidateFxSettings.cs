@@ -26,16 +26,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             string requestedVersion = "4.0.0";
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                        runtimeConfig =>
-                            runtimeConfig.WithFramework(MicrosoftNETCoreApp, requestedVersion)
+                    new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, requestedVersion)
                     )
                 )
                 .ShouldFailToFindCompatibleFrameworkVersion(MicrosoftNETCoreApp, requestedVersion);
 
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
+                    new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
                     )
                 )
                 .Should()
@@ -53,9 +52,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             RunTest(
                     new TestSettings()
-                        .WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
                         )
                         .With(RollForwardOnNoCandidateFxSetting(location, 2))
                 )
@@ -71,9 +69,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             RunTest(
                     new TestSettings()
-                        .WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
                         )
                         .With(RollForwardOnNoCandidateFxSetting(settingLocation, 0))
                         .WithCommandLine(
@@ -99,14 +96,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             RunTest(
                     new TestSettings()
-                        .WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(
-                                    new RuntimeConfig.Framework(
-                                        MicrosoftNETCoreApp,
-                                        "4.0.0"
-                                    ).WithRollForwardOnNoCandidateFx(2)
-                                )
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithFramework(
+                                new RuntimeConfig.Framework(
+                                    MicrosoftNETCoreApp,
+                                    "4.0.0"
+                                ).WithRollForwardOnNoCandidateFx(2)
+                            )
                         )
                         .With(RollForwardOnNoCandidateFxSetting(settingLocation, 0))
                 )
@@ -125,11 +121,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             RunTest(
                     new TestSettings()
-                        .WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig
-                                    .WithRollForwardOnNoCandidateFx(2)
-                                    .WithFramework(MicrosoftNETCoreApp, "4.0.0")
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig
+                                .WithRollForwardOnNoCandidateFx(2)
+                                .WithFramework(MicrosoftNETCoreApp, "4.0.0")
                         )
                         .With(RollForwardOnNoCandidateFxSetting(settingLocation, 0))
                 )
@@ -148,9 +143,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             RunTest(
                     new TestSettings()
-                        .WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
                         )
                         .With(RollForwardOnNoCandidateFxSetting(settingLocation, 0))
                         .WithEnvironment(
@@ -178,24 +172,21 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             RunTest(
                     new TestSettings()
-                        .WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(
-                                    new RuntimeConfig.Framework(MiddleWare, "2.1.0")
-                                )
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithFramework(
+                                new RuntimeConfig.Framework(MiddleWare, "2.1.0")
+                            )
                         )
                         .With(RollForwardOnNoCandidateFxSetting(settingLocation, 1, MiddleWare))
-                        .WithDotnetCustomizer(
-                            dotnetCustomizer =>
-                                dotnetCustomizer
-                                    .Framework(MiddleWare)
-                                    .RuntimeConfig(
-                                        runtimeConfig =>
-                                            runtimeConfig
-                                                .WithRollForwardOnNoCandidateFx(2)
-                                                .GetFramework(MicrosoftNETCoreApp)
-                                                .Version = "4.0.0"
-                                    )
+                        .WithDotnetCustomizer(dotnetCustomizer =>
+                            dotnetCustomizer
+                                .Framework(MiddleWare)
+                                .RuntimeConfig(runtimeConfig =>
+                                    runtimeConfig
+                                        .WithRollForwardOnNoCandidateFx(2)
+                                        .GetFramework(MicrosoftNETCoreApp)
+                                        .Version = "4.0.0"
+                                )
                         )
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(
@@ -218,20 +209,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             RunTest(
                     new TestSettings()
-                        .WithRuntimeConfigCustomizer(
-                            runtimeConfig => runtimeConfig.WithFramework(MiddleWare, "1.0.0")
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithFramework(MiddleWare, "1.0.0")
                         )
                         .With(RollForwardOnNoCandidateFxSetting(settingLocation, 2, MiddleWare))
-                        .WithDotnetCustomizer(
-                            dotnetCustomizer =>
-                                dotnetCustomizer
-                                    .Framework(MiddleWare)
-                                    .RuntimeConfig(
-                                        runtimeConfig =>
-                                            runtimeConfig
-                                                .GetFramework(MicrosoftNETCoreApp)
-                                                .Version = "4.0.0"
-                                    )
+                        .WithDotnetCustomizer(dotnetCustomizer =>
+                            dotnetCustomizer
+                                .Framework(MiddleWare)
+                                .RuntimeConfig(runtimeConfig =>
+                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
+                                        "4.0.0"
+                                )
                         )
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(
@@ -254,23 +242,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             RunTest(
                     new TestSettings()
-                        .WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(
-                                    new RuntimeConfig.Framework(MiddleWare, "2.1.2")
-                                )
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithFramework(
+                                new RuntimeConfig.Framework(MiddleWare, "2.1.2")
+                            )
                         )
                         .With(RollForwardOnNoCandidateFxSetting(settingLocation, 0, MiddleWare))
-                        .WithDotnetCustomizer(
-                            dotnetCustomizer =>
-                                dotnetCustomizer
-                                    .Framework(MiddleWare)
-                                    .RuntimeConfig(
-                                        runtimeConfig =>
-                                            runtimeConfig
-                                                .GetFramework(MicrosoftNETCoreApp)
-                                                .Version = "5.0.0"
-                                    )
+                        .WithDotnetCustomizer(dotnetCustomizer =>
+                            dotnetCustomizer
+                                .Framework(MiddleWare)
+                                .RuntimeConfig(runtimeConfig =>
+                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
+                                        "5.0.0"
+                                )
                         )
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(

@@ -411,8 +411,7 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<IOperation> operationBlocks,
             OperationKind kind
         ) =>
-            operationBlocks.HasAnyOperationDescendant(
-                predicate: operation => operation.Kind == kind
+            operationBlocks.HasAnyOperationDescendant(predicate: operation => operation.Kind == kind
             );
 
         public static bool IsNumericLiteral(this IOperation operation) =>

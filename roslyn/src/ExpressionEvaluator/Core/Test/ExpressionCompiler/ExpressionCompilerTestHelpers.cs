@@ -394,9 +394,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         {
             return typeDef
                 .GetMethods()
-                .First(
-                    h =>
-                        reader.StringComparer.Equals(reader.GetMethodDefinition(h).Name, methodName)
+                .First(h =>
+                    reader.StringComparer.Equals(reader.GetMethodDefinition(h).Name, methodName)
                 );
         }
 
@@ -557,15 +556,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             }
             var scopes = ArrayBuilder<ISymUnmanagedScope>.GetInstance();
             method.GetAllScopes(scopes);
-            var result = scopes.SelectAsArray(
-                s =>
-                    new Scope(
-                        s.GetStartOffset(),
-                        s.GetEndOffset(),
-                        ImmutableArray.CreateRange(s.GetLocals().Select(l => l.GetName())),
-                        isEndInclusive
-                    )
-            );
+            var result = scopes.SelectAsArray(s => new Scope(
+                s.GetStartOffset(),
+                s.GetEndOffset(),
+                ImmutableArray.CreateRange(s.GetLocals().Select(l => l.GetName())),
+                isEndInclusive
+            ));
             scopes.Free();
             return result;
         }
@@ -751,12 +747,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            methodName
-                        )
+                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
+                    metadataReader.StringComparer.Equals(
+                        metadataReader.GetMethodDefinition(h).Name,
+                        methodName
+                    )
                 );
                 var methodToken = metadataReader.GetToken(methodHandle);
 

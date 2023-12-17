@@ -778,13 +778,12 @@ namespace System.Collections.Tests
 
         public static IEnumerable<object[]> HasAllSet_TestData() =>
             HasAnySet_TestData()
-                .Select(
-                    parameters =>
-                        new object[]
-                        {
-                            ((bool[])parameters[0]).Select(bit => !bit).ToArray(),
-                            !(bool)parameters[1]
-                        }
+                .Select(parameters =>
+                    new object[]
+                    {
+                        ((bool[])parameters[0]).Select(bit => !bit).ToArray(),
+                        !(bool)parameters[1]
+                    }
                 );
 
         public static IEnumerable<object[]> HasAnySet_TestData()

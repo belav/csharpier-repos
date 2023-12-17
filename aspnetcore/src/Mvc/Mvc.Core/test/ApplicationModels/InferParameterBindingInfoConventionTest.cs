@@ -661,8 +661,8 @@ public class InferParameterBindingInfoConventionTest
         var actionName = nameof(ParameterBindingController.ServiceParameter);
         var parameter = GetParameterModel(typeof(ParameterBindingController), actionName);
         // Using any built-in type defined in the Test action
-        var serviceProvider = Mock.Of<IServiceProviderIsService>(
-            s => s.IsService(typeof(IApplicationModelProvider)) == true
+        var serviceProvider = Mock.Of<IServiceProviderIsService>(s =>
+            s.IsService(typeof(IApplicationModelProvider)) == true
         );
         var convention = GetConvention(serviceProviderIsService: serviceProvider);
 
@@ -681,8 +681,8 @@ public class InferParameterBindingInfoConventionTest
         var actionName = nameof(ParameterBindingController.IEnumerableServiceParameter);
         var parameter = GetParameterModel(typeof(ParameterBindingController), actionName);
         // Using any built-in type defined in the Test action
-        var serviceProvider = Mock.Of<IServiceProviderIsService>(
-            s => s.IsService(typeof(IApplicationModelProvider)) == true
+        var serviceProvider = Mock.Of<IServiceProviderIsService>(s =>
+            s.IsService(typeof(IApplicationModelProvider)) == true
         );
         var convention = GetConvention(serviceProviderIsService: serviceProvider);
 

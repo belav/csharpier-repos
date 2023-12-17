@@ -1807,8 +1807,7 @@ namespace Microsoft.Extensions
 #if BUILDING_SOURCE_GENERATOR_TESTS
             var ex = Assert.Throws<NotSupportedException>(
                 () =>
-                    config.Get<ClassOverridingVirtualProperty>(
-                        b => b.BindNonPublicProperties = true
+                    config.Get<ClassOverridingVirtualProperty>(b => b.BindNonPublicProperties = true
                     )
             );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
@@ -1822,8 +1821,8 @@ namespace Microsoft.Extensions
             );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
-            var test = config.Get<ClassOverridingVirtualProperty>(
-                b => b.BindNonPublicProperties = true
+            var test = config.Get<ClassOverridingVirtualProperty>(b =>
+                b.BindNonPublicProperties = true
             );
             Assert.Equal("a", test.ExposePrivatePropertyValue());
 

@@ -85,8 +85,8 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.Dictionaries
                 () => definitionAccessor.ResolveDependencies("value", valueContract, true),
                 deps =>
                 {
-                    var items = deps.Select(
-                            d => Tuple.Create(d.Target.Origin, d.Target.GetDescriptor())
+                    var items = deps.Select(d =>
+                            Tuple.Create(d.Target.Origin, d.Target.GetDescriptor())
                         )
                         .ToArray();
                     var isValidated = false;

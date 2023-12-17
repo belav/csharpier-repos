@@ -2149,8 +2149,9 @@ namespace System.Activities
                     Expression<Func<LocationReference>> locationReferenceLambda = Expression.Lambda<
                         Func<LocationReference>
                     >(locationReferenceExpression);
-                    Func<LocationReference> locationReferenceFunc =
-                        locationReferenceLambda.Compile();
+                    Func<LocationReference> locationReferenceFunc = locationReferenceLambda.Compile(
+
+                    );
                     locationReference = locationReferenceFunc();
                 }
                 catch (Exception e)

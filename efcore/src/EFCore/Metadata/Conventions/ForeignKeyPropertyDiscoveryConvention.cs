@@ -362,10 +362,9 @@ public class ForeignKeyPropertyDiscoveryConvention
                             out foreignKeyProperties
                         )
                         && foreignKeyProperties != null
-                        && foreignKeyProperties.Any(
-                            p =>
-                                !dependentPk.Properties.Contains(p)
-                                || p.Name.Equals("Id", StringComparison.OrdinalIgnoreCase)
+                        && foreignKeyProperties.Any(p =>
+                            !dependentPk.Properties.Contains(p)
+                            || p.Name.Equals("Id", StringComparison.OrdinalIgnoreCase)
                         )
                     )
                     {
@@ -571,10 +570,9 @@ public class ForeignKeyPropertyDiscoveryConvention
         if (
             matchFound
             && foreignKeyProperties.Length != 1
-            && foreignKeyProperties.All(
-                p =>
-                    p.IsImplicitlyCreated()
-                    && ConfigurationSource.Convention.Overrides(p.GetConfigurationSource())
+            && foreignKeyProperties.All(p =>
+                p.IsImplicitlyCreated()
+                && ConfigurationSource.Convention.Overrides(p.GetConfigurationSource())
             )
         )
         {
@@ -613,10 +611,9 @@ public class ForeignKeyPropertyDiscoveryConvention
         )
         {
             if (
-                propertiesToReference.All(
-                    p =>
-                        !p.IsImplicitlyCreated()
-                        || p.GetConfigurationSource().Overrides(ConfigurationSource.DataAnnotation)
+                propertiesToReference.All(p =>
+                    !p.IsImplicitlyCreated()
+                    || p.GetConfigurationSource().Overrides(ConfigurationSource.DataAnnotation)
                 )
             )
             {
@@ -865,8 +862,8 @@ public class ForeignKeyPropertyDiscoveryConvention
         var isRequired = relationshipBuilder.Metadata.IsRequired;
         using var batch = context.DelayConventions();
         foreach (
-            var property in relationshipBuilder.Metadata.Properties.Where(
-                p => p.ClrType.IsNullableType()
+            var property in relationshipBuilder.Metadata.Properties.Where(p =>
+                p.ClrType.IsNullableType()
             )
         )
         {
@@ -1097,12 +1094,11 @@ public class ForeignKeyPropertyDiscoveryConvention
                                 .DeclaringEntityType.GetDerivedTypes()
                                 .SelectMany(et => et.FindDeclaredForeignKeys(foreignKeyProperties))
                         )
-                        .FirstOrDefault(
-                            fk =>
-                                fk != foreignKey
-                                && ConfigurationSource.Convention.Overrides(
-                                    fk.GetPropertiesConfigurationSource()
-                                )
+                        .FirstOrDefault(fk =>
+                            fk != foreignKey
+                            && ConfigurationSource.Convention.Overrides(
+                                fk.GetPropertiesConfigurationSource()
+                            )
                         );
                     if (conflictingForeignKey != null)
                     {
@@ -1147,12 +1143,10 @@ public class ForeignKeyPropertyDiscoveryConvention
                 {
                     var conflictingFk = entityType
                         .GetDeclaredForeignKeys()
-                        .FirstOrDefault(
-                            otherForeignKey =>
-                                otherForeignKey != foreignKey
-                                && otherForeignKey.PrincipalEntityType
-                                    == foreignKey.PrincipalEntityType
-                                && otherForeignKey.GetPropertiesConfigurationSource() == null
+                        .FirstOrDefault(otherForeignKey =>
+                            otherForeignKey != foreignKey
+                            && otherForeignKey.PrincipalEntityType == foreignKey.PrincipalEntityType
+                            && otherForeignKey.GetPropertiesConfigurationSource() == null
                         );
                     if (conflictingFk != null)
                     {

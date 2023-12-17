@@ -35,8 +35,9 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             ImmutableArray<SpellCheckSpan> GetSpans()
             {
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                var classifier =
-                    document.GetRequiredLanguageService<ISyntaxClassificationService>();
+                var classifier = document.GetRequiredLanguageService<ISyntaxClassificationService>(
+
+                );
                 var virtualCharService =
                     document.GetRequiredLanguageService<IVirtualCharLanguageService>();
 

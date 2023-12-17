@@ -300,8 +300,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
                     var namespaceMembers = syntaxFacts.GetMembersOfBaseNamespaceDeclaration(
                         namespaceNode
                     );
-                    return namespaceMembers.SelectAsArray(
-                        member => semanticModel.GetDeclaredSymbol(member, cancellationToken)
+                    return namespaceMembers.SelectAsArray(member =>
+                        semanticModel.GetDeclaredSymbol(member, cancellationToken)
                     );
                 case TCompilationUnitSyntax compilationUnit:
                     var compilationUnitMembers = syntaxFacts.GetMembersOfCompilationUnit(
@@ -311,8 +311,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
                     // This is supported if the selected type is the only member declared in the global namespace in this document.
                     // (See `TryAnalyzeNamedTypeAsync`)
                     Debug.Assert(compilationUnitMembers.Count == 1);
-                    return compilationUnitMembers.SelectAsArray(
-                        member => semanticModel.GetDeclaredSymbol(member, cancellationToken)
+                    return compilationUnitMembers.SelectAsArray(member =>
+                        semanticModel.GetDeclaredSymbol(member, cancellationToken)
                     );
 
                 default:
@@ -483,10 +483,9 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
 
             return compilation
                 .GlobalNamespace.GetAllNamespaces(cancellationToken)
-                .Where(
-                    n =>
-                        n.NamespaceKind == NamespaceKind.Module
-                        && n.ContainingAssembly == compilation.Assembly
+                .Where(n =>
+                    n.NamespaceKind == NamespaceKind.Module
+                    && n.ContainingAssembly == compilation.Assembly
                 )
                 .Select(GetQualifiedName);
         }

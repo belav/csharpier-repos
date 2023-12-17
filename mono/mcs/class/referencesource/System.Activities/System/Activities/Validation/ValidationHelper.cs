@@ -65,8 +65,8 @@ namespace System.Activities.Validation
                     if (requiredArguments.Count() > 0)
                     {
                         if (
-                            requiredArguments.All(
-                                localArgument => CheckIfArgumentIsBound(localArgument, inputs)
+                            requiredArguments.All(localArgument =>
+                                CheckIfArgumentIsBound(localArgument, inputs)
                             )
                         )
                         {
@@ -82,8 +82,8 @@ namespace System.Activities.Validation
                             (a) => !a.IsRequired
                         );
                         if (
-                            optionalArguments.Any(
-                                localArgument => CheckIfArgumentIsBound(localArgument, inputs)
+                            optionalArguments.Any(localArgument =>
+                                CheckIfArgumentIsBound(localArgument, inputs)
                             )
                         )
                         {
@@ -114,8 +114,8 @@ namespace System.Activities.Validation
                         overloadGroups[configuredGroupName]
                     );
                     Predicate<RuntimeArgument> checkIfArgumentIsBound =
-                        new Predicate<RuntimeArgument>(
-                            localArgument => CheckIfArgumentIsBound(localArgument, inputs)
+                        new Predicate<RuntimeArgument>(localArgument =>
+                            CheckIfArgumentIsBound(localArgument, inputs)
                         );
 
                     List<string> disjointGroups = null;

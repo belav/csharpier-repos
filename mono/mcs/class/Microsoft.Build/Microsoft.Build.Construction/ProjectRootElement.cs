@@ -345,13 +345,12 @@ namespace Microsoft.Build.Construction
         )
         {
             var @group = ItemGroups
-                .Where(
-                    p =>
-                        string.IsNullOrEmpty(p.Condition)
-                        && p.Items.Where(
-                            s => s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
-                        )
-                            .FirstOrDefault() != null
+                .Where(p =>
+                    string.IsNullOrEmpty(p.Condition)
+                    && p.Items.Where(s =>
+                        s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
+                    )
+                        .FirstOrDefault() != null
                 )
                 .FirstOrDefault();
             if (@group == null)
@@ -362,13 +361,12 @@ namespace Microsoft.Build.Construction
         public ProjectItemDefinitionElement AddItemDefinition(string itemType)
         {
             var @group = ItemDefinitionGroups
-                .Where(
-                    p =>
-                        string.IsNullOrEmpty(p.Condition)
-                        && p.ItemDefinitions.Where(
-                            s => s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
-                        )
-                            .FirstOrDefault() != null
+                .Where(p =>
+                    string.IsNullOrEmpty(p.Condition)
+                    && p.ItemDefinitions.Where(s =>
+                        s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
+                    )
+                        .FirstOrDefault() != null
                 )
                 .FirstOrDefault();
             if (@group == null)
@@ -406,10 +404,9 @@ namespace Microsoft.Build.Construction
                     if (parentGroup == null)
                         parentGroup = @group;
                     var property = @group
-                        .Properties.Where(
-                            p =>
-                                string.IsNullOrEmpty(p.Condition)
-                                && p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                        .Properties.Where(p =>
+                            string.IsNullOrEmpty(p.Condition)
+                            && p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
                         )
                         .FirstOrDefault();
                     if (property != null)

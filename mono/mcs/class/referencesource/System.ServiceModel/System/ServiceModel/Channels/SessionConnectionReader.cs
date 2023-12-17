@@ -768,8 +768,9 @@ namespace System.ServiceModel.Channels
                 }
 
                 String primaryIdentity = String.Empty;
-                SecurityMessageProperty clientSecurity =
-                    securityUpgradeAcceptor.GetRemoteSecurity();
+                SecurityMessageProperty clientSecurity = securityUpgradeAcceptor.GetRemoteSecurity(
+
+                );
                 if (clientSecurity != null)
                 {
                     primaryIdentity = GetIdentityNameFromContext(clientSecurity);

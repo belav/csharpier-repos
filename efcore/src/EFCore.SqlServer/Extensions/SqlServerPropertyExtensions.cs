@@ -874,17 +874,16 @@ public static class SqlServerPropertyExtensions
                 && table.StoreObjectType == StoreObjectType.Table
                 && !property
                     .GetContainingForeignKeys()
-                    .Any(
-                        fk =>
-                            !fk.IsBaseLinking()
-                            || (
-                                StoreObjectIdentifier.Create(
-                                    fk.PrincipalEntityType,
-                                    StoreObjectType.Table
-                                )
-                                    is StoreObjectIdentifier principal
-                                && fk.GetConstraintName(table, principal) != null
+                    .Any(fk =>
+                        !fk.IsBaseLinking()
+                        || (
+                            StoreObjectIdentifier.Create(
+                                fk.PrincipalEntityType,
+                                StoreObjectType.Table
                             )
+                                is StoreObjectIdentifier principal
+                            && fk.GetConstraintName(table, principal) != null
+                        )
                     )
                 ? SqlServerValueGenerationStrategy.IdentityColumn
                 : SqlServerValueGenerationStrategy.None;
@@ -898,17 +897,13 @@ public static class SqlServerPropertyExtensions
             || property.GetComputedColumnSql(storeObject) != null
             || property
                 .GetContainingForeignKeys()
-                .Any(
-                    fk =>
-                        !fk.IsBaseLinking()
-                        || (
-                            StoreObjectIdentifier.Create(
-                                fk.PrincipalEntityType,
-                                StoreObjectType.Table
-                            )
-                                is StoreObjectIdentifier principal
-                            && fk.GetConstraintName(table, principal) != null
-                        )
+                .Any(fk =>
+                    !fk.IsBaseLinking()
+                    || (
+                        StoreObjectIdentifier.Create(fk.PrincipalEntityType, StoreObjectType.Table)
+                            is StoreObjectIdentifier principal
+                        && fk.GetConstraintName(table, principal) != null
+                    )
                 )
         )
         {

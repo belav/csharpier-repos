@@ -1567,8 +1567,8 @@ namespace System.Diagnostics.CodeAnalysis
 
         private static CSharpCompilationOptions CheckForTopLevelStatements(SyntaxTree[] syntaxTrees)
         {
-            bool hasTopLevelStatements = syntaxTrees.Any(
-                s => s.GetRoot().ChildNodes().OfType<GlobalStatementSyntax>().Any()
+            bool hasTopLevelStatements = syntaxTrees.Any(s =>
+                s.GetRoot().ChildNodes().OfType<GlobalStatementSyntax>().Any()
             );
 
             var options = hasTopLevelStatements ? TestOptions.ReleaseExe : TestOptions.ReleaseDll;
@@ -1597,8 +1597,8 @@ namespace System.Diagnostics.CodeAnalysis
             var compileDiagnostics = comp.GetDiagnostics();
             var emitDiagnostics = comp.GetEmitDiagnostics();
 
-            var resolvedReferences = comp.References.Where(
-                r => r.Properties.Kind == MetadataImageKind.Assembly
+            var resolvedReferences = comp.References.Where(r =>
+                r.Properties.Kind == MetadataImageKind.Assembly
             );
 
             if (
@@ -1611,18 +1611,17 @@ namespace System.Diagnostics.CodeAnalysis
                     assertSubset(used, resolvedReferences);
 
                     if (
-                        !compileDiagnostics.Any(
-                            d =>
-                                d.Code == (int)ErrorCode.HDN_UnusedExternAlias
-                                || d.Code == (int)ErrorCode.HDN_UnusedUsingDirective
+                        !compileDiagnostics.Any(d =>
+                            d.Code == (int)ErrorCode.HDN_UnusedExternAlias
+                            || d.Code == (int)ErrorCode.HDN_UnusedUsingDirective
                         )
                     )
                     {
                         var comp2 = comp.RemoveAllReferences()
                             .AddReferences(
                                 used.Concat(
-                                    comp.References.Where(
-                                        r => r.Properties.Kind == MetadataImageKind.Module
+                                    comp.References.Where(r =>
+                                        r.Properties.Kind == MetadataImageKind.Module
                                     )
                                 )
                             );
@@ -1632,15 +1631,12 @@ namespace System.Diagnostics.CodeAnalysis
                             .Verify(
                                 emitDiagnostics
                                     .Where(d => shouldCompare(d))
-                                    .Select(
-                                        d =>
-                                            new DiagnosticDescription(
-                                                d,
-                                                errorCodeOnly: false,
-                                                includeDefaultSeverity: false,
-                                                includeEffectiveSeverity: false
-                                            )
-                                    )
+                                    .Select(d => new DiagnosticDescription(
+                                        d,
+                                        errorCodeOnly: false,
+                                        includeDefaultSeverity: false,
+                                        includeEffectiveSeverity: false
+                                    ))
                                     .ToArray()
                             );
                     }

@@ -72,11 +72,10 @@ namespace Microsoft.CodeAnalysis
             s_isObsoleteCreateTextOverriden
                 .GetValue(
                     GetType(),
-                    _ =>
-                        new StrongBox<bool>(
-                            new Func<Stream, Workspace, SourceText>(CreateText).Method.DeclaringType
-                                != typeof(FileTextLoader)
-                        )
+                    _ => new StrongBox<bool>(
+                        new Func<Stream, Workspace, SourceText>(CreateText).Method.DeclaringType
+                            != typeof(FileTextLoader)
+                    )
                 )
                 .Value;
 #pragma warning restore

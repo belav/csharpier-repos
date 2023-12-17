@@ -160,11 +160,11 @@ namespace System.Text.Json.Serialization.Tests
                     polyOptions.TypeDiscriminatorPropertyName
                 );
                 Assert.Equal(
-                    expected: derivedTypeAttributes.Select(
-                        attr => (attr.DerivedType, attr.TypeDiscriminator)
+                    expected: derivedTypeAttributes.Select(attr =>
+                        (attr.DerivedType, attr.TypeDiscriminator)
                     ),
-                    actual: polyOptions.DerivedTypes.Select(
-                        attr => (attr.DerivedType, attr.TypeDiscriminator)
+                    actual: polyOptions.DerivedTypes.Select(attr =>
+                        (attr.DerivedType, attr.TypeDiscriminator)
                     )
                 );
             }

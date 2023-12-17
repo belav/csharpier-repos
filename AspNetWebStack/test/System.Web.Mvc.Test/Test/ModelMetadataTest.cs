@@ -445,8 +445,9 @@ namespace System.Web.Mvc.Test
         public void SimpleDisplayTextReturnsFirstPropertyNullDisplayTextForNonNullModelWithNullDisplayColumnPropertyValue()
         {
             // Arrange
-            SimpleDisplayTextModelWithoutToString model =
-                new SimpleDisplayTextModelWithoutToString();
+            SimpleDisplayTextModelWithoutToString model = new SimpleDisplayTextModelWithoutToString(
+
+            );
             EmptyModelMetadataProvider propertyProvider = new EmptyModelMetadataProvider();
             ModelMetadata propertyMetadata = propertyProvider.GetMetadataForProperty(
                 () => model.FirstProperty,
@@ -456,12 +457,8 @@ namespace System.Web.Mvc.Test
             propertyMetadata.NullDisplayText = "Null Display Text";
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             provider
-                .Setup(
-                    p =>
-                        p.GetMetadataForProperties(
-                            model,
-                            typeof(SimpleDisplayTextModelWithoutToString)
-                        )
+                .Setup(p =>
+                    p.GetMetadataForProperties(model, typeof(SimpleDisplayTextModelWithoutToString))
                 )
                 .Returns(new[] { propertyMetadata });
             ModelMetadata metadata = new ModelMetadata(
@@ -693,13 +690,12 @@ namespace System.Web.Mvc.Test
             ViewDataDictionary viewData = new ViewDataDictionary();
             viewData["Object"] = model;
             provider
-                .Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback<Func<object>, Type, string>(
                     (accessor, type, propertyName) =>
@@ -728,13 +724,12 @@ namespace System.Web.Mvc.Test
             ViewDataDictionary viewData = new ViewDataDictionary();
             viewData["Object"] = model;
             provider
-                .Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback<Func<object>, Type, string>(
                     (accessor, type, propertyName) =>
@@ -763,13 +758,12 @@ namespace System.Web.Mvc.Test
             ViewDataDictionary viewData = new ViewDataDictionary();
             viewData["Object"] = model;
             provider
-                .Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Returns<Func<object>, Type, string>(
                     (accessor, type, propertyName) =>
@@ -912,13 +906,12 @@ namespace System.Web.Mvc.Test
             ViewDataDictionary<DummyContactModel> viewData =
                 new ViewDataDictionary<DummyContactModel>(model);
             provider
-                .Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback<Func<object>, Type, string>(
                     (accessor, type, propertyName) =>
@@ -950,13 +943,12 @@ namespace System.Web.Mvc.Test
             DummyContactModel model = new DummyContactModel { FirstName = "Test" };
             ViewDataDictionary<object> viewData = new ViewDataDictionary<object>();
             provider
-                .Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback<Func<object>, Type, string>(
                     (accessor, type, propertyName) =>
@@ -1144,13 +1136,12 @@ namespace System.Web.Mvc.Test
             ViewDataDictionary<DummyContactModel> viewData =
                 new ViewDataDictionary<DummyContactModel>();
             provider
-                .Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback<Func<object>, Type, string>(
                     (accessor, type, propertyName) =>
@@ -1184,13 +1175,12 @@ namespace System.Web.Mvc.Test
                 derivedModel
             );
             provider
-                .Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback<Func<object>, Type, string>(
                     (accessor, type, propertyName) =>
@@ -1234,13 +1224,12 @@ namespace System.Web.Mvc.Test
             DerivedModel derivedModel = new DerivedModel();
             ViewDataDictionary<DerivedModel> viewData = new ViewDataDictionary<DerivedModel>();
             provider
-                .Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
                 )
                 .Callback<Func<object>, Type, string>(
                     (accessor, type, propertyName) =>

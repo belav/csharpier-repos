@@ -81,8 +81,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // flatten and merge -  ( expr1 + "A" ) + ("B" + expr2) ===> (expr1 + "AB" + expr2)
-            ArrayBuilder<BoundExpression> leftFlattened =
-                ArrayBuilder<BoundExpression>.GetInstance();
+            ArrayBuilder<BoundExpression> leftFlattened = ArrayBuilder<BoundExpression>.GetInstance(
+
+            );
             ArrayBuilder<BoundExpression> rightFlattened =
                 ArrayBuilder<BoundExpression>.GetInstance();
 

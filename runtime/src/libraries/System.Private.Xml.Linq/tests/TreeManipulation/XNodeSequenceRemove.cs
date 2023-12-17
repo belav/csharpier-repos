@@ -1093,11 +1093,10 @@ namespace XLinqTests
 
             // Create array of parents
             IEnumerable<XContainer> parents = toRemove
-                .Select(
-                    x =>
-                        (x == null)
-                            ? (XContainer)null
-                            : (x.Parent != null ? (XContainer)x.Parent : (XContainer)x.Document)
+                .Select(x =>
+                    (x == null)
+                        ? (XContainer)null
+                        : (x.Parent != null ? (XContainer)x.Parent : (XContainer)x.Document)
                 )
                 .ToList();
 

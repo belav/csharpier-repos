@@ -43,8 +43,8 @@ public class IdentityOptionsTest
     [Fact]
     public void CanCustomizeIdentityOptions()
     {
-        var services = new ServiceCollection().Configure<IdentityOptions>(
-            options => options.Password.RequiredLength = -1
+        var services = new ServiceCollection().Configure<IdentityOptions>(options =>
+            options.Password.RequiredLength = -1
         );
         services.AddIdentity<PocoUser, PocoRole>();
         var serviceProvider = services.BuildServiceProvider();

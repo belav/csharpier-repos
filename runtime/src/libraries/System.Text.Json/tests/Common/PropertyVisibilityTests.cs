@@ -791,7 +791,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(@"{""MyProp"":false}", serialized);
 
             serialized = await Serializer.SerializeWrapper(
-                new DerivedClass_With_Ignored_NewProperty_Of_DifferentType_And_ConflictingPropertyName()
+                new DerivedClass_With_Ignored_NewProperty_Of_DifferentType_And_ConflictingPropertyName(
+
+                )
             );
             Assert.Equal(@"{""MyProp"":null}", serialized);
 

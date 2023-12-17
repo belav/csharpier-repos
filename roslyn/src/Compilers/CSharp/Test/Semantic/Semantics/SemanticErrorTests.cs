@@ -27840,6 +27840,7 @@ class C
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
+
                 // Do not report the following warning:
                 // (5,34): warning CS1720: Expression will always cause a System.NullReferenceException because the default value of 'string' is null
                 //         System.Console.WriteLine(default(string).IsNull());

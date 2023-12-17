@@ -30,8 +30,9 @@ namespace System.Web.Http
 {
     public class ApiControllerTest
     {
-        private readonly HttpActionContext _actionContextInstance =
-            ContextUtil.CreateActionContext();
+        private readonly HttpActionContext _actionContextInstance = ContextUtil.CreateActionContext(
+
+        );
         private readonly HttpConfiguration _configurationInstance = new HttpConfiguration();
         private readonly HttpActionDescriptor _actionDescriptorInstance =
             new Mock<HttpActionDescriptor>() { CallBase = true }.Object;
@@ -53,12 +54,11 @@ namespace System.Web.Http
 
             Mock<IHttpActionInvoker> mockInvoker = new Mock<IHttpActionInvoker>();
             mockInvoker
-                .Setup(
-                    invoker =>
-                        invoker.InvokeActionAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(invoker =>
+                    invoker.InvokeActionAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(() =>
                 {
@@ -428,12 +428,11 @@ namespace System.Web.Http
             Mock<IActionValueBinder> binderMock = new Mock<IActionValueBinder>();
             Mock<HttpActionBinding> actionBindingMock = new Mock<HttpActionBinding>();
             actionBindingMock
-                .Setup(
-                    b =>
-                        b.ExecuteBindingAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(b =>
+                    b.ExecuteBindingAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -471,12 +470,11 @@ namespace System.Web.Http
             Mock<IAuthenticationFilter> authenticationFilterMock =
                 new Mock<IAuthenticationFilter>();
             authenticationFilterMock
-                .Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Callback(() =>
                 {
@@ -496,12 +494,11 @@ namespace System.Web.Http
                     return response;
                 });
             authenticationFilterMock
-                .Setup(
-                    f =>
-                        f.ChallengeAsync(
-                            It.IsAny<HttpAuthenticationChallengeContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(f =>
+                    f.ChallengeAsync(
+                        It.IsAny<HttpAuthenticationChallengeContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Callback<HttpAuthenticationChallengeContext, CancellationToken>(
                     (c, t) =>
@@ -536,12 +533,11 @@ namespace System.Web.Http
             ApiController controller = controllerMock.Object;
             var invokerMock = new Mock<IHttpActionInvoker>();
             invokerMock
-                .Setup(
-                    i =>
-                        i.InvokeActionAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(i =>
+                    i.InvokeActionAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(
                     () =>
@@ -626,8 +622,8 @@ namespace System.Web.Http
             actionDescriptorMock.GetFilterPipeline().ToList();
 
             // Assert
-            filterProviderMock.Verify(
-                fp => fp.GetFilters(_configurationInstance, actionDescriptorMock)
+            filterProviderMock.Verify(fp =>
+                fp.GetFilters(_configurationInstance, actionDescriptorMock)
             );
         }
 
@@ -777,13 +773,12 @@ namespace System.Web.Http
             ApiController controller = new ExceptionlessController();
             Mock<IActionFilter> filterMock = new Mock<IActionFilter>();
             filterMock
-                .Setup(
-                    f =>
-                        f.ExecuteActionFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>(),
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
+                .Setup(f =>
+                    f.ExecuteActionFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>(),
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
                 )
                 .Callback(() =>
                 {
@@ -810,13 +805,12 @@ namespace System.Web.Http
             ApiController controller = new ExceptionlessController();
             Mock<IAuthorizationFilter> filterMock = new Mock<IAuthorizationFilter>();
             filterMock
-                .Setup(
-                    f =>
-                        f.ExecuteAuthorizationFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>(),
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
+                .Setup(f =>
+                    f.ExecuteAuthorizationFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>(),
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
                 )
                 .Callback(() =>
                 {
@@ -843,12 +837,11 @@ namespace System.Web.Http
             ApiController controller = new ExceptionlessController();
             Mock<IAuthenticationFilter> filterMock = new Mock<IAuthenticationFilter>();
             filterMock
-                .Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Callback(() =>
                 {
@@ -875,21 +868,19 @@ namespace System.Web.Http
             ApiController controller = new ExceptionlessController();
             Mock<IAuthenticationFilter> filterMock = new Mock<IAuthenticationFilter>();
             filterMock
-                .Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(() => Task.FromResult<object>(null));
             filterMock
-                .Setup(
-                    f =>
-                        f.ChallengeAsync(
-                            It.IsAny<HttpAuthenticationChallengeContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(f =>
+                    f.ChallengeAsync(
+                        It.IsAny<HttpAuthenticationChallengeContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Callback(() =>
                 {
@@ -941,12 +932,11 @@ namespace System.Web.Http
                 }
 
                 Mock<IExceptionFilter> spy = new Mock<IExceptionFilter>();
-                spy.Setup(
-                        f =>
-                            f.ExecuteExceptionFilterAsync(
-                                It.IsAny<HttpActionExecutedContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
+                spy.Setup(f =>
+                        f.ExecuteExceptionFilterAsync(
+                            It.IsAny<HttpActionExecutedContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
                     )
                     .Returns<HttpActionExecutedContext, CancellationToken>(
                         (c, i) =>
@@ -981,12 +971,8 @@ namespace System.Web.Http
                 MockBehavior.Strict
             );
             exceptionLoggerMock
-                .Setup(
-                    h =>
-                        h.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(h =>
+                    h.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns<ExceptionLoggerContext, CancellationToken>(
                     (c, i) =>
@@ -1001,12 +987,11 @@ namespace System.Web.Http
                 MockBehavior.Strict
             );
             exceptionHandlerMock
-                .Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns<ExceptionHandlerContext, CancellationToken>(
                     (c, i) =>
@@ -1620,13 +1605,12 @@ namespace System.Web.Http
         {
             Mock<IAuthorizationFilter> filterMock = new Mock<IAuthorizationFilter>();
             filterMock
-                .Setup(
-                    f =>
-                        f.ExecuteAuthorizationFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            CancellationToken.None,
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
+                .Setup(f =>
+                    f.ExecuteAuthorizationFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        CancellationToken.None,
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
                 )
                 .Returns(implementation)
                 .Verifiable();
@@ -1644,13 +1628,12 @@ namespace System.Web.Http
         {
             Mock<IActionFilter> filterMock = new Mock<IActionFilter>();
             filterMock
-                .Setup(
-                    f =>
-                        f.ExecuteActionFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            CancellationToken.None,
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
+                .Setup(f =>
+                    f.ExecuteActionFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        CancellationToken.None,
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
                 )
                 .Returns(implementation)
                 .Verifiable();
@@ -1685,12 +1668,11 @@ namespace System.Web.Http
         private static IExceptionFilter CreateStubExceptionFilter()
         {
             Mock<IExceptionFilter> mock = new Mock<IExceptionFilter>(MockBehavior.Strict);
-            mock.Setup(
-                    f =>
-                        f.ExecuteExceptionFilterAsync(
-                            It.IsAny<HttpActionExecutedContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(f =>
+                    f.ExecuteExceptionFilterAsync(
+                        It.IsAny<HttpActionExecutedContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(Task.FromResult(0));
             return mock.Object;

@@ -727,8 +727,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var exitLocation = method.DeclaringSyntaxReferences.IsEmpty
                             ? null
                             : method.TryGetFirstLocation();
-                        bool constructorEnforcesRequiredMembers =
-                            method.ShouldCheckRequiredMembers();
+                        bool constructorEnforcesRequiredMembers = method.ShouldCheckRequiredMembers(
+
+                        );
 
                         // Required properties can be attributed MemberNotNull, indicating that if the property is set, the field will be set as well.
                         // If we're enforcing required members (ie, the constructor is not attributed with SetsRequiredMembers), we also want to
@@ -1273,8 +1274,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 includeCurrentTypeRequiredMembers: true,
                                 includeBaseRequiredMembers: true
                             )
-                                => containingType.AllRequiredMembers.SelectManyAsArray(
-                                    static kvp => getAllMembersToBeDefaulted(kvp.Value)
+                                => containingType.AllRequiredMembers.SelectManyAsArray(static kvp =>
+                                    getAllMembersToBeDefaulted(kvp.Value)
                                 ),
 
                             (
@@ -2052,11 +2053,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     return true;
                 }
-                return compilation.SyntaxTrees.Any(
-                    static tree =>
-                        ((CSharpSyntaxTree)tree).IsNullableAnalysisEnabled(
-                            new Text.TextSpan(0, tree.Length)
-                        ) == true
+                return compilation.SyntaxTrees.Any(static tree =>
+                    ((CSharpSyntaxTree)tree).IsNullableAnalysisEnabled(
+                        new Text.TextSpan(0, tree.Length)
+                    ) == true
                 );
             }
 #endif
@@ -5616,8 +5616,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (arg, self) => self.VisitRvalueWithState(arg),
                 this
             );
-            var argumentsWithAnnotations = argumentTypes.SelectAsArray(
-                arg => arg.ToTypeWithAnnotations(compilation)
+            var argumentsWithAnnotations = argumentTypes.SelectAsArray(arg =>
+                arg.ToTypeWithAnnotations(compilation)
             );
 
             if (argumentsWithAnnotations.All(argType => argType.HasType))
@@ -11409,7 +11409,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     {
                         operandType = completion(
-                            targetTypeWithNullability.Type.GetNullableUnderlyingTypeWithAnnotations()
+                            targetTypeWithNullability.Type.GetNullableUnderlyingTypeWithAnnotations(
+
+                            )
                         );
                         conversion = Conversion.MakeNullableConversion(
                             ConversionKind.ImplicitNullable,

@@ -8,8 +8,9 @@ namespace System.Globalization.Tests
 {
     public class GregorianCalendarAddMonths
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator =
-            new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator(
+
+        );
 
         private const int MaxMonths = 120000;
 

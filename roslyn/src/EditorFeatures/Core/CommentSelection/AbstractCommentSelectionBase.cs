@@ -173,26 +173,24 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             if (edits.TrackingSpans.Any())
             {
                 // Create tracking spans to track the text changes.
-                var trackingSpans = edits.TrackingSpans.SelectAsArray(
-                    textSpan =>
-                        (
-                            originalSpan: textSpan,
-                            trackingSpan: CreateTrackingSpan(
-                                edits.ResultOperation,
-                                originalSnapshot,
-                                textSpan.TrackingTextSpan
-                            )
+                var trackingSpans = edits.TrackingSpans.SelectAsArray(textSpan =>
+                    (
+                        originalSpan: textSpan,
+                        trackingSpan: CreateTrackingSpan(
+                            edits.ResultOperation,
+                            originalSnapshot,
+                            textSpan.TrackingTextSpan
                         )
+                    )
                 );
 
                 // Convert the tracking spans into snapshot spans for formatting and selection.
-                var trackingSnapshotSpans = trackingSpans.Select(
-                    s =>
-                        CreateSnapshotSpan(
-                            subjectBuffer.CurrentSnapshot,
-                            s.trackingSpan,
-                            s.originalSpan
-                        )
+                var trackingSnapshotSpans = trackingSpans.Select(s =>
+                    CreateSnapshotSpan(
+                        subjectBuffer.CurrentSnapshot,
+                        s.trackingSpan,
+                        s.originalSpan
+                    )
                 );
 
                 if (edits.ResultOperation == Operation.Uncomment && document.SupportsSyntaxTree)
@@ -214,12 +212,8 @@ namespace Microsoft.CodeAnalysis.CommentSelection
                         document.Project.Services,
                         explicitFormat: false
                     );
-                    var formattingSpans = trackingSnapshotSpans.Select(
-                        change =>
-                            CommonFormattingHelpers.GetFormattingSpan(
-                                newRoot,
-                                change.Span.ToTextSpan()
-                            )
+                    var formattingSpans = trackingSnapshotSpans.Select(change =>
+                        CommonFormattingHelpers.GetFormattingSpan(newRoot, change.Span.ToTextSpan())
                     );
                     var formattedChanges = Formatter.GetFormattedTextChanges(
                         newRoot,

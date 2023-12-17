@@ -452,8 +452,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 .ConfigureAwait(true);
 
             // Call out to various new document formatters to tweak what they want
-            var formattingService =
-                addedDocument.GetLanguageService<INewDocumentFormattingService>();
+            var formattingService = addedDocument.GetLanguageService<INewDocumentFormattingService>(
+
+            );
             if (formattingService is not null)
             {
                 addedDocument = await formattingService

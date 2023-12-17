@@ -17,8 +17,9 @@ namespace System.Web.Http
         private readonly HttpActionContext _actionContext;
         private readonly Mock<HttpActionDescriptor> _actionDescriptorMock =
             new Mock<HttpActionDescriptor>();
-        private readonly ApiControllerActionInvoker _actionInvoker =
-            new ApiControllerActionInvoker();
+        private readonly ApiControllerActionInvoker _actionInvoker = new ApiControllerActionInvoker(
+
+        );
         private readonly HttpControllerContext _controllerContext;
         private readonly HttpRequestMessage _request = new HttpRequestMessage();
         private readonly Mock<IActionResultConverter> _converterMock =
@@ -48,13 +49,12 @@ namespace System.Web.Http
         {
             var cts = new CancellationTokenSource();
             _actionDescriptorMock
-                .Setup(
-                    ad =>
-                        ad.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(ad =>
+                    ad.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(Task.FromResult((object)null));
 
@@ -76,13 +76,12 @@ namespace System.Web.Http
         {
             var value = new object();
             _actionDescriptorMock
-                .Setup(
-                    ad =>
-                        ad.ExecuteAsync(
-                            _actionContext.ControllerContext,
-                            _actionContext.ActionArguments,
-                            CancellationToken.None
-                        )
+                .Setup(ad =>
+                    ad.ExecuteAsync(
+                        _actionContext.ControllerContext,
+                        _actionContext.ActionArguments,
+                        CancellationToken.None
+                    )
                 )
                 .Returns(Task.FromResult(value));
 
@@ -99,13 +98,12 @@ namespace System.Web.Http
         {
             var expectedResponse = new HttpResponseMessage();
             _actionDescriptorMock
-                .Setup(
-                    ad =>
-                        ad.ExecuteAsync(
-                            _actionContext.ControllerContext,
-                            _actionContext.ActionArguments,
-                            CancellationToken.None
-                        )
+                .Setup(ad =>
+                    ad.ExecuteAsync(
+                        _actionContext.ControllerContext,
+                        _actionContext.ActionArguments,
+                        CancellationToken.None
+                    )
                 )
                 .Returns(Task.FromResult(new object()));
             _converterMock
@@ -125,13 +123,12 @@ namespace System.Web.Http
         {
             HttpResponseMessage response = new HttpResponseMessage();
             _actionDescriptorMock
-                .Setup(
-                    ad =>
-                        ad.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            CancellationToken.None
-                        )
+                .Setup(ad =>
+                    ad.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        CancellationToken.None
+                    )
                 )
                 .Throws(new HttpResponseException(response));
 
@@ -149,13 +146,12 @@ namespace System.Web.Http
         {
             Exception expectedException = new Exception();
             _actionDescriptorMock
-                .Setup(
-                    ad =>
-                        ad.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            CancellationToken.None
-                        )
+                .Setup(ad =>
+                    ad.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        CancellationToken.None
+                    )
                 )
                 .Throws(expectedException);
 
@@ -177,13 +173,12 @@ namespace System.Web.Http
                 IHttpActionResult result = CreateStubResult(expectedResponse);
                 _actionDescriptorMock.Setup(d => d.ReturnType).Returns(typeof(IHttpActionResult));
                 _actionDescriptorMock
-                    .Setup(
-                        d =>
-                            d.ExecuteAsync(
-                                _actionContext.ControllerContext,
-                                _actionContext.ActionArguments,
-                                cancellationToken
-                            )
+                    .Setup(d =>
+                        d.ExecuteAsync(
+                            _actionContext.ControllerContext,
+                            _actionContext.ActionArguments,
+                            cancellationToken
+                        )
                     )
                     .Returns(Task.FromResult((object)result));
 
@@ -215,13 +210,12 @@ namespace System.Web.Http
                         .Setup(d => d.ReturnType)
                         .Returns(typeof(IHttpActionResult));
                     _actionDescriptorMock
-                        .Setup(
-                            d =>
-                                d.ExecuteAsync(
-                                    It.IsAny<HttpControllerContext>(),
-                                    It.IsAny<IDictionary<string, object>>(),
-                                    It.IsAny<CancellationToken>()
-                                )
+                        .Setup(d =>
+                            d.ExecuteAsync(
+                                It.IsAny<HttpControllerContext>(),
+                                It.IsAny<IDictionary<string, object>>(),
+                                It.IsAny<CancellationToken>()
+                            )
                         )
                         .Returns(Task.FromResult((object)result));
 
@@ -256,13 +250,12 @@ namespace System.Web.Http
                             .Setup(d => d.ReturnType)
                             .Returns(typeof(IHttpActionResult));
                         _actionDescriptorMock
-                            .Setup(
-                                d =>
-                                    d.ExecuteAsync(
-                                        It.IsAny<HttpControllerContext>(),
-                                        It.IsAny<IDictionary<string, object>>(),
-                                        It.IsAny<CancellationToken>()
-                                    )
+                            .Setup(d =>
+                                d.ExecuteAsync(
+                                    It.IsAny<HttpControllerContext>(),
+                                    It.IsAny<IDictionary<string, object>>(),
+                                    It.IsAny<CancellationToken>()
+                                )
                             )
                             .Returns(Task.FromResult((object)result));
 
@@ -288,13 +281,12 @@ namespace System.Web.Http
                 HttpStatusCode.Ambiguous
             );
             _actionDescriptorMock
-                .Setup(
-                    d =>
-                        d.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(d =>
+                    d.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Throws(expectedException);
 
@@ -314,13 +306,12 @@ namespace System.Web.Http
             // Arrange
             _actionDescriptorMock.Setup(d => d.ReturnType).Returns(typeof(IHttpActionResult));
             _actionDescriptorMock
-                .Setup(
-                    d =>
-                        d.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(d =>
+                    d.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(Task.FromResult<object>(null));
 
@@ -344,13 +335,12 @@ namespace System.Web.Http
             _actionDescriptorMock.Setup(d => d.ReturnType).Returns(typeof(IHttpActionResult));
             IHttpActionResult emptyResult = CreateStubResult(null);
             _actionDescriptorMock
-                .Setup(
-                    d =>
-                        d.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(d =>
+                    d.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(Task.FromResult((object)emptyResult));
 
@@ -373,13 +363,12 @@ namespace System.Web.Http
             // Arrange
             _actionDescriptorMock.Setup(d => d.ReturnType).Returns(typeof(IHttpActionResult));
             _actionDescriptorMock
-                .Setup(
-                    d =>
-                        d.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(d =>
+                    d.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        It.IsAny<CancellationToken>()
+                    )
                 )
                 .Returns(Task.FromResult(new object()));
 
@@ -405,13 +394,12 @@ namespace System.Web.Http
 
                 _actionDescriptorMock.Setup(d => d.ReturnType).Returns(typeof(object));
                 _actionDescriptorMock
-                    .Setup(
-                        d =>
-                            d.ExecuteAsync(
-                                It.IsAny<HttpControllerContext>(),
-                                It.IsAny<IDictionary<string, object>>(),
-                                It.IsAny<CancellationToken>()
-                            )
+                    .Setup(d =>
+                        d.ExecuteAsync(
+                            It.IsAny<HttpControllerContext>(),
+                            It.IsAny<IDictionary<string, object>>(),
+                            It.IsAny<CancellationToken>()
+                        )
                     )
                     .Returns(Task.FromResult((object)result));
 
@@ -442,13 +430,12 @@ namespace System.Web.Http
                     .SetupGet(d => d.ResultConverter)
                     .Returns(new ValueResultConverter<Widget>());
                 _actionDescriptorMock
-                    .Setup(
-                        d =>
-                            d.ExecuteAsync(
-                                It.IsAny<HttpControllerContext>(),
-                                It.IsAny<IDictionary<string, object>>(),
-                                It.IsAny<CancellationToken>()
-                            )
+                    .Setup(d =>
+                        d.ExecuteAsync(
+                            It.IsAny<HttpControllerContext>(),
+                            It.IsAny<IDictionary<string, object>>(),
+                            It.IsAny<CancellationToken>()
+                        )
                     )
                     .Returns(Task.FromResult((object)result));
 
@@ -472,13 +459,12 @@ namespace System.Web.Http
 
                 _actionDescriptorMock.Setup(d => d.ReturnType).Returns(typeof(object));
                 _actionDescriptorMock
-                    .Setup(
-                        d =>
-                            d.ExecuteAsync(
-                                It.IsAny<HttpControllerContext>(),
-                                It.IsAny<IDictionary<string, object>>(),
-                                It.IsAny<CancellationToken>()
-                            )
+                    .Setup(d =>
+                        d.ExecuteAsync(
+                            It.IsAny<HttpControllerContext>(),
+                            It.IsAny<IDictionary<string, object>>(),
+                            It.IsAny<CancellationToken>()
+                        )
                     )
                     .Returns(Task.FromResult((object)mockActionResult.Object));
 

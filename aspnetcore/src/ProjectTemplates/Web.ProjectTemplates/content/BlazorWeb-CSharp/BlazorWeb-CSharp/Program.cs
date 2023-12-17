@@ -72,16 +72,16 @@ var connectionString =
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 #if (UseLocalDB)
-        options.UseSqlServer(connectionString)
+    options.UseSqlServer(connectionString)
 );
 #else
-        options.UseSqlite(connectionString));
+    options.UseSqlite(connectionString));
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder
-    .Services.AddIdentityCore<ApplicationUser>(
-        options => options.SignIn.RequireConfirmedAccount = true
+    .Services.AddIdentityCore<ApplicationUser>(options =>
+        options.SignIn.RequireConfirmedAccount = true
     )
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()

@@ -40,14 +40,13 @@ namespace System.Web.Mvc.Test
                 .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName))
                 .Returns(new ViewEngineResult(view.Object, viewEngine.Object));
             viewEngine
-                .Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ControllerContext>(),
-                            _viewName,
-                            _masterName,
-                            It.IsAny<bool>()
-                        )
+                .Setup(e =>
+                    e.FindView(
+                        It.IsAny<ControllerContext>(),
+                        _viewName,
+                        _masterName,
+                        It.IsAny<bool>()
+                    )
                 )
                 .Callback<ControllerContext, string, string, bool>(
                     (controllerContext, viewName, masterName, useCache) =>
@@ -109,14 +108,13 @@ namespace System.Web.Mvc.Test
                 .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName))
                 .Returns(new ViewEngineResult(new[] { "location1", "location2" }));
             viewEngine
-                .Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ControllerContext>(),
-                            _viewName,
-                            _masterName,
-                            It.IsAny<bool>()
-                        )
+                .Setup(e =>
+                    e.FindView(
+                        It.IsAny<ControllerContext>(),
+                        _viewName,
+                        _masterName,
+                        It.IsAny<bool>()
+                    )
                 )
                 .Callback<ControllerContext, string, string, bool>(
                     (controllerContext, viewName, masterName, useCache) =>
@@ -178,14 +176,13 @@ namespace System.Web.Mvc.Test
                 .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName))
                 .Returns(new ViewEngineResult(view.Object, viewEngine.Object));
             viewEngine
-                .Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ControllerContext>(),
-                            _viewName,
-                            _masterName,
-                            It.IsAny<bool>()
-                        )
+                .Setup(e =>
+                    e.FindView(
+                        It.IsAny<ControllerContext>(),
+                        _viewName,
+                        _masterName,
+                        It.IsAny<bool>()
+                    )
                 )
                 .Callback<ControllerContext, string, string, bool>(
                     (controllerContext, viewName, masterName, useCache) =>

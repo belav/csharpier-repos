@@ -301,11 +301,10 @@ namespace System.Diagnostics.Tests
                             Environment
                                 .GetEnvironmentVariables()
                                 .Cast<DictionaryEntry>()
-                                .Select(
-                                    e =>
-                                        Convert.ToBase64String(
-                                            Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
-                                        )
+                                .Select(e =>
+                                    Convert.ToBase64String(
+                                        Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                    )
                                 )
                         )
                     );
@@ -383,11 +382,10 @@ namespace System.Diagnostics.Tests
                             Environment
                                 .GetEnvironmentVariables()
                                 .Cast<DictionaryEntry>()
-                                .Select(
-                                    e =>
-                                        Convert.ToBase64String(
-                                            Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
-                                        )
+                                .Select(e =>
+                                    Convert.ToBase64String(
+                                        Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                    )
                                 )
                         )
                     );
@@ -425,11 +423,10 @@ namespace System.Diagnostics.Tests
                     Console.Write(
                         string.Join(
                             ItemSeparator,
-                            new ProcessStartInfo().Environment.Select(
-                                e =>
-                                    Convert.ToBase64String(
-                                        Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
-                                    )
+                            new ProcessStartInfo().Environment.Select(e =>
+                                Convert.ToBase64String(
+                                    Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                )
                             )
                         )
                     );
@@ -472,11 +469,10 @@ namespace System.Diagnostics.Tests
                             ItemSeparator,
                             new ProcessStartInfo()
                                 .EnvironmentVariables.Cast<DictionaryEntry>()
-                                .Select(
-                                    e =>
-                                        Convert.ToBase64String(
-                                            Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
-                                        )
+                                .Select(e =>
+                                    Convert.ToBase64String(
+                                        Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                    )
                                 )
                         )
                     );
@@ -785,8 +781,8 @@ namespace System.Diagnostics.Tests
             psi.EnvironmentVariables.Add("NewKey2", "NewValue2");
 
             // Environment and EnvironmentVariables should be equal, but have different enumeration types.
-            IEnumerable<KeyValuePair<string, string>> allEnvironment = psi.Environment.OrderBy(
-                k => k.Key
+            IEnumerable<KeyValuePair<string, string>> allEnvironment = psi.Environment.OrderBy(k =>
+                k.Key
             );
             IEnumerable<DictionaryEntry> allDictionary =
                 psi.EnvironmentVariables.Cast<DictionaryEntry>().OrderBy(k => k.Key);

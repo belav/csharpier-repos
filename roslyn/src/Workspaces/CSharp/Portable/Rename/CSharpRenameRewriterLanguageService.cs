@@ -146,15 +146,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 _renameAnnotations = parameters.RenameAnnotations;
 
                 _aliasSymbol = _renamedSymbol as IAliasSymbol;
-                _renamableDeclarationLocation = _renamedSymbol.Locations.FirstOrDefault(
-                    loc => loc.IsInSource && loc.SourceTree == _semanticModel.SyntaxTree
+                _renamableDeclarationLocation = _renamedSymbol.Locations.FirstOrDefault(loc =>
+                    loc.IsInSource && loc.SourceTree == _semanticModel.SyntaxTree
                 );
                 _isVerbatim = _replacementText.StartsWith("@", StringComparison.Ordinal);
 
                 _simplificationService =
-                    parameters.Document.Project.Services.GetRequiredService<ISimplificationService>();
+                    parameters.Document.Project.Services.GetRequiredService<ISimplificationService>(
+
+                    );
                 _semanticFactsService =
-                    parameters.Document.Project.Services.GetRequiredService<ISemanticFactsService>();
+                    parameters.Document.Project.Services.GetRequiredService<ISemanticFactsService>(
+
+                    );
             }
 
             public override SyntaxNode? Visit(SyntaxNode? node)
@@ -165,8 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 }
 
                 var isInConflictLambdaBody = false;
-                var lambdas = node.GetAncestorsOrThis(
-                    n => n is SimpleLambdaExpressionSyntax or ParenthesizedLambdaExpressionSyntax
+                var lambdas = node.GetAncestorsOrThis(n =>
+                    n is SimpleLambdaExpressionSyntax or ParenthesizedLambdaExpressionSyntax
                 );
                 if (lambdas.Count() != 0)
                 {
@@ -325,11 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 var oldSpan = originalNode.Span;
                 var expandParameter =
                     originalNode
-                        .GetAncestorsOrThis(
-                            n =>
-                                n
-                                    is SimpleLambdaExpressionSyntax
-                                        or ParenthesizedLambdaExpressionSyntax
+                        .GetAncestorsOrThis(n =>
+                            n is SimpleLambdaExpressionSyntax or ParenthesizedLambdaExpressionSyntax
                         )
                         .Count() == 0;
 
@@ -1028,10 +1029,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                         // or parameter. Report a conflict if the matching local/parameter is not
                         // a delegate type.
 
-                        var relevantLocals = newReferencedSymbols.Where(
-                            s =>
-                                s.MatchesKind(SymbolKind.Local, SymbolKind.Parameter)
-                                && s.Name == token.ValueText
+                        var relevantLocals = newReferencedSymbols.Where(s =>
+                            s.MatchesKind(SymbolKind.Local, SymbolKind.Parameter)
+                            && s.Name == token.ValueText
                         );
 
                         if (relevantLocals.Count() != 1)
@@ -1110,8 +1110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
                     visitor.Visit(memberDeclaration);
                     conflicts.AddRange(
-                        visitor.ConflictingTokens.Select(
-                            t => reverseMappedLocations[t.GetLocation()]
+                        visitor.ConflictingTokens.Select(t =>
+                            reverseMappedLocations[t.GetLocation()]
                         )
                     );
 
@@ -1134,8 +1134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                         visitor = new LocalConflictVisitor(token);
                         visitor.Visit(memberDeclaration);
                         conflicts.AddRange(
-                            visitor.ConflictingTokens.Select(
-                                t => reverseMappedLocations[t.GetLocation()]
+                            visitor.ConflictingTokens.Select(t =>
+                                reverseMappedLocations[t.GetLocation()]
                             )
                         );
                     }
@@ -1148,8 +1148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
                     visitor.Visit(memberDeclaration);
                     conflicts.AddRange(
-                        visitor.ConflictingTokens.Select(
-                            t => reverseMappedLocations[t.GetLocation()]
+                        visitor.ConflictingTokens.Select(t =>
+                            reverseMappedLocations[t.GetLocation()]
                         )
                     );
                 }
@@ -1602,11 +1602,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             var possibleLambdaExpression =
                 enclosingStatement == null
                     ? token
-                        .GetAncestors(
-                            n =>
-                                n
-                                    is SimpleLambdaExpressionSyntax
-                                        or ParenthesizedLambdaExpressionSyntax
+                        .GetAncestors(n =>
+                            n is SimpleLambdaExpressionSyntax or ParenthesizedLambdaExpressionSyntax
                         )
                         .FirstOrDefault()
                     : null;
@@ -1721,8 +1718,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 return originalSemanticModel;
             }
 
-            var nodeToSpeculate = node.GetAncestorsOrThis(
-                    n => SpeculationAnalyzer.CanSpeculateOnNode(n)
+            var nodeToSpeculate = node.GetAncestorsOrThis(n =>
+                    SpeculationAnalyzer.CanSpeculateOnNode(n)
                 )
                 .LastOrDefault();
             if (nodeToSpeculate == null)

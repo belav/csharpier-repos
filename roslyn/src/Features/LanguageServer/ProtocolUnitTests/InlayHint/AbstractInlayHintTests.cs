@@ -52,8 +52,8 @@ public abstract class AbstractInlayHintTests : AbstractLanguageServerProtocolTes
 
             foreach (var location in locations)
             {
-                var matchingInlayHints = actualInlayHints.Where(
-                    actualInlayHints => actualInlayHints.Position == location.Range.Start
+                var matchingInlayHints = actualInlayHints.Where(actualInlayHints =>
+                    actualInlayHints.Position == location.Range.Start
                 );
                 Assert.Single(matchingInlayHints);
 

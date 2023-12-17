@@ -23,25 +23,24 @@ public static class FunctionalTestsServiceCollectionExtensions
     )
         where TContext : DbContext
     {
-        var descriptor = services.SingleOrDefault(
-            d => d.ServiceType == typeof(DbContextOptions<TContext>)
+        var descriptor = services.SingleOrDefault(d =>
+            d.ServiceType == typeof(DbContextOptions<TContext>)
         );
         if (descriptor != null)
         {
             services.Remove(descriptor);
         }
 
-        services.AddScoped(
-            p =>
-                DbContextOptionsFactory<TContext>(
-                    p,
-                    (sp, options) =>
-                        options
-                            .ConfigureWarnings(
-                                b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
-                            )
-                            .UseSqlite(connection)
-                )
+        services.AddScoped(p =>
+            DbContextOptionsFactory<TContext>(
+                p,
+                (sp, options) =>
+                    options
+                        .ConfigureWarnings(b =>
+                            b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                        )
+                        .UseSqlite(connection)
+            )
         );
 
         return services;

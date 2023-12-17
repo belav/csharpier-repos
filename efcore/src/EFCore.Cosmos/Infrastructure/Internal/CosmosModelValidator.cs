@@ -249,8 +249,8 @@ public class CosmosModelValidator : ModelValidator
                 }
                 else if (analyticalTtl != currentAnalyticalTtl)
                 {
-                    var conflictingEntityType = mappedTypes.First(
-                        et => et.GetAnalyticalStoreTimeToLive() != null
+                    var conflictingEntityType = mappedTypes.First(et =>
+                        et.GetAnalyticalStoreTimeToLive() != null
                     );
                     throw new InvalidOperationException(
                         CosmosStrings.AnalyticalTTLMismatch(
@@ -273,8 +273,8 @@ public class CosmosModelValidator : ModelValidator
                 }
                 else if (defaultTtl != currentDefaultTtl)
                 {
-                    var conflictingEntityType = mappedTypes.First(
-                        et => et.GetDefaultTimeToLive() != null
+                    var conflictingEntityType = mappedTypes.First(et =>
+                        et.GetDefaultTimeToLive() != null
                     );
                     throw new InvalidOperationException(
                         CosmosStrings.DefaultTTLMismatch(
@@ -405,8 +405,8 @@ public class CosmosModelValidator : ModelValidator
 
             var idProperty = entityType
                 .GetProperties()
-                .FirstOrDefault(
-                    p => p.GetJsonPropertyName() == StoreKeyConvention.IdPropertyJsonName
+                .FirstOrDefault(p =>
+                    p.GetJsonPropertyName() == StoreKeyConvention.IdPropertyJsonName
                 );
             if (idProperty == null)
             {
@@ -491,8 +491,8 @@ public class CosmosModelValidator : ModelValidator
         {
             foreach (var key in entityType.GetDeclaredKeys())
             {
-                var mutableProperty = key.Properties.FirstOrDefault(
-                    p => p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
+                var mutableProperty = key.Properties.FirstOrDefault(p =>
+                    p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
                 );
                 if (mutableProperty != null && !mutableProperty.IsOrdinalKeyProperty())
                 {

@@ -49,8 +49,8 @@ internal sealed class SlimWebHostBuilder : WebHostBuilderBase, ISupportsStartup
                 // REVIEW: This is bad since we don't own this type. Anybody could add one of these and it would mess things up
                 // We need to flow this differently
                 services.TryAddSingleton(sp => new DiagnosticListener("Microsoft.AspNetCore"));
-                services.TryAddSingleton<DiagnosticSource>(
-                    sp => sp.GetRequiredService<DiagnosticListener>()
+                services.TryAddSingleton<DiagnosticSource>(sp =>
+                    sp.GetRequiredService<DiagnosticListener>()
                 );
                 services.TryAddSingleton(sp => new ActivitySource("Microsoft.AspNetCore"));
                 services.TryAddSingleton(DistributedContextPropagator.Current);

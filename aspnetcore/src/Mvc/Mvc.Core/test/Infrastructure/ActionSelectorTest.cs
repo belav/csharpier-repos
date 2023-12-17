@@ -1069,20 +1069,16 @@ public class ActionSelectorTest
         var comparer = new RouteValueEqualityComparer();
 
         return actions
-            .Where(
-                a => a.RouteValues.Any(kvp => kvp.Key == "area" && comparer.Equals(kvp.Value, area))
+            .Where(a =>
+                a.RouteValues.Any(kvp => kvp.Key == "area" && comparer.Equals(kvp.Value, area))
             )
-            .Where(
-                a =>
-                    a.RouteValues.Any(
-                        kvp => kvp.Key == "controller" && comparer.Equals(kvp.Value, controller)
-                    )
+            .Where(a =>
+                a.RouteValues.Any(kvp =>
+                    kvp.Key == "controller" && comparer.Equals(kvp.Value, controller)
+                )
             )
-            .Where(
-                a =>
-                    a.RouteValues.Any(
-                        kvp => kvp.Key == "action" && comparer.Equals(kvp.Value, action)
-                    )
+            .Where(a =>
+                a.RouteValues.Any(kvp => kvp.Key == "action" && comparer.Equals(kvp.Value, action))
             );
     }
 

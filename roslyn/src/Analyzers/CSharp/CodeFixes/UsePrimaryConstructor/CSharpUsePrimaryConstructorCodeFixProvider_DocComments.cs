@@ -189,8 +189,8 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             // then add the constructor comments.  If the type decl already had a summary tag then convert the
             // constructor's summary tag to a 'remarks' tag to keep around the info while not stomping on the
             // existing summary.
-            var constructorContents = typeStructure.Content.Any(
-                n => n is XmlElementSyntax { StartTag.Name.LocalName.ValueText: s_summaryTagName }
+            var constructorContents = typeStructure.Content.Any(n =>
+                n is XmlElementSyntax { StartTag.Name.LocalName.ValueText: s_summaryTagName }
             )
                 ? ConvertSummaryToRemarks(constructorStructure.Content)
                 : constructorStructure.Content;
@@ -218,8 +218,8 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             // `<param name="x">` doc comments.
 
             // Keep the <param> tags ordered by the order they are in the constructor parameters.
-            var orderedKVPs = properties.OrderBy(
-                kvp => constructor.Parameters.FirstOrDefault(p => p.Name == kvp.Value)?.Ordinal
+            var orderedKVPs = properties.OrderBy(kvp =>
+                constructor.Parameters.FirstOrDefault(p => p.Name == kvp.Value)?.Ordinal
             );
             using var _1 = ArrayBuilder<(
                 string parameterName,
@@ -227,8 +227,8 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             )>.GetInstance(out var docCommentsToMove);
             foreach (var (memberName, parameterName) in orderedKVPs)
             {
-                var (removedMember, memberDeclaration) = removedMembers.FirstOrDefault(
-                    kvp => kvp.Key.Name == memberName
+                var (removedMember, memberDeclaration) = removedMembers.FirstOrDefault(kvp =>
+                    kvp.Key.Name == memberName
                 );
                 if (removedMember is null)
                     continue;

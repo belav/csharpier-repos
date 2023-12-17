@@ -84,11 +84,10 @@ namespace Microsoft.Extensions.Http
 
             serviceCollection
                 .AddHttpClient("ConfiguredByBuilder")
-                .UseSocketsHttpHandler(
-                    builder =>
-                        builder.Configure(
-                            (handler, _) => handler.ConnectTimeout = TimeSpan.FromSeconds(10)
-                        )
+                .UseSocketsHttpHandler(builder =>
+                    builder.Configure(
+                        (handler, _) => handler.ConnectTimeout = TimeSpan.FromSeconds(10)
+                    )
                 );
 
             var services = serviceCollection.BuildServiceProvider();
@@ -117,9 +116,8 @@ namespace Microsoft.Extensions.Http
 
             serviceCollection
                 .AddHttpClient(SectionName)
-                .UseSocketsHttpHandler(
-                    builder =>
-                        builder.Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
+                .UseSocketsHttpHandler(builder =>
+                    builder.Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
                 );
 
             var services = serviceCollection.BuildServiceProvider();
@@ -251,17 +249,16 @@ namespace Microsoft.Extensions.Http
 
             serviceCollection
                 .AddHttpClient("ActionAfterIConfiguration")
-                .UseSocketsHttpHandler(
-                    builder =>
-                        builder
-                            .Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
-                            .Configure(
-                                (handler, _) =>
-                                {
-                                    handler.ConnectTimeout = TimeSpan.FromSeconds(10); // will overwrite value from IConfiguration
-                                    handler.SslOptions = allowAllCertsSslOptions;
-                                }
-                            )
+                .UseSocketsHttpHandler(builder =>
+                    builder
+                        .Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
+                        .Configure(
+                            (handler, _) =>
+                            {
+                                handler.ConnectTimeout = TimeSpan.FromSeconds(10); // will overwrite value from IConfiguration
+                                handler.SslOptions = allowAllCertsSslOptions;
+                            }
+                        )
                 );
 
             var services = serviceCollection.BuildServiceProvider();
@@ -298,17 +295,16 @@ namespace Microsoft.Extensions.Http
 
             serviceCollection
                 .AddHttpClient("IConfigurationAfterAction")
-                .UseSocketsHttpHandler(
-                    builder =>
-                        builder
-                            .Configure(
-                                (handler, _) =>
-                                {
-                                    handler.ConnectTimeout = TimeSpan.FromSeconds(10); // will be overwrittten by IConfiguration
-                                    handler.SslOptions = allowAllCertsSslOptions;
-                                }
-                            )
-                            .Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
+                .UseSocketsHttpHandler(builder =>
+                    builder
+                        .Configure(
+                            (handler, _) =>
+                            {
+                                handler.ConnectTimeout = TimeSpan.FromSeconds(10); // will be overwrittten by IConfiguration
+                                handler.SslOptions = allowAllCertsSslOptions;
+                            }
+                        )
+                        .Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
                 );
 
             var services = serviceCollection.BuildServiceProvider();

@@ -243,8 +243,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 && afterSourceTree.FilePath == declarationList.FirstOrDefault()?.SyntaxTree.FilePath
             )
             {
-                var afterMember = declarationList.LastOrDefault(
-                    m => m.SpanStart <= info.Context.AfterThisLocation.SourceSpan.Start
+                var afterMember = declarationList.LastOrDefault(m =>
+                    m.SpanStart <= info.Context.AfterThisLocation.SourceSpan.Start
                 );
                 if (afterMember != null)
                 {
@@ -264,8 +264,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                     == declarationList.FirstOrDefault()?.SyntaxTree.FilePath
             )
             {
-                var beforeMember = declarationList.FirstOrDefault(
-                    m => m.Span.End >= info.Context.BeforeThisLocation.SourceSpan.End
+                var beforeMember = declarationList.FirstOrDefault(m =>
+                    m.Span.End >= info.Context.BeforeThisLocation.SourceSpan.End
                 );
                 if (beforeMember != null)
                 {

@@ -121,13 +121,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             var textSpan = pSpan[0];
 
                             var textSnapshot = subjectBuffer.CurrentSnapshot;
-                            var document =
-                                textSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                            var document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+                            );
 
                             if (document != null)
                             {
                                 var languageDebugInfo =
-                                    document.Project.Services.GetService<ILanguageDebugInfoService>();
+                                    document.Project.Services.GetService<ILanguageDebugInfoService>(
+
+                                    );
                                 if (languageDebugInfo != null)
                                 {
                                     var spanOpt = textSnapshot.TryGetSpan(textSpan);

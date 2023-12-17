@@ -278,8 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetWellKnownAttributeDataStringField(
-                    data => data.AssemblyFileVersionAttributeSetting
+                return GetWellKnownAttributeDataStringField(data =>
+                    data.AssemblyFileVersionAttributeSetting
                 );
             }
         }
@@ -288,8 +288,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetWellKnownAttributeDataStringField(
-                    data => data.AssemblyTitleAttributeSetting
+                return GetWellKnownAttributeDataStringField(data =>
+                    data.AssemblyTitleAttributeSetting
                 );
             }
         }
@@ -298,8 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetWellKnownAttributeDataStringField(
-                    data => data.AssemblyDescriptionAttributeSetting
+                return GetWellKnownAttributeDataStringField(data =>
+                    data.AssemblyDescriptionAttributeSetting
                 );
             }
         }
@@ -308,8 +308,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetWellKnownAttributeDataStringField(
-                    data => data.AssemblyCompanyAttributeSetting
+                return GetWellKnownAttributeDataStringField(data =>
+                    data.AssemblyCompanyAttributeSetting
                 );
             }
         }
@@ -318,8 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetWellKnownAttributeDataStringField(
-                    data => data.AssemblyProductAttributeSetting
+                return GetWellKnownAttributeDataStringField(data =>
+                    data.AssemblyProductAttributeSetting
                 );
             }
         }
@@ -328,8 +328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetWellKnownAttributeDataStringField(
-                    data => data.AssemblyInformationalVersionAttributeSetting
+                return GetWellKnownAttributeDataStringField(data =>
+                    data.AssemblyInformationalVersionAttributeSetting
                 );
             }
         }
@@ -338,8 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetWellKnownAttributeDataStringField(
-                    data => data.AssemblyCopyrightAttributeSetting
+                return GetWellKnownAttributeDataStringField(data =>
+                    data.AssemblyCopyrightAttributeSetting
                 );
             }
         }
@@ -348,8 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetWellKnownAttributeDataStringField(
-                    data => data.AssemblyTrademarkAttributeSetting
+                return GetWellKnownAttributeDataStringField(data =>
+                    data.AssemblyTrademarkAttributeSetting
                 );
             }
         }
@@ -410,8 +410,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return GetWellKnownAttributeDataStringField(
-                    data => data.AssemblyCultureAttributeSetting
+                return GetWellKnownAttributeDataStringField(data =>
+                    data.AssemblyCultureAttributeSetting
                 );
             }
         }
@@ -1261,7 +1261,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     try
                     {
                         foreach (
-                            var referencedModuleName in m.Module.GetReferencedManagedModulesOrThrow()
+                            var referencedModuleName in m.Module.GetReferencedManagedModulesOrThrow(
+
+                            )
                         )
                         {
                             // Do not report error for this module twice
@@ -2010,8 +2012,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(
                 _lazyOmittedAttributeIndices == null
-                    || !_lazyOmittedAttributeIndices.Any(
-                        i => i < 0 || i >= this.GetAttributes().Length
+                    || !_lazyOmittedAttributeIndices.Any(i =>
+                        i < 0 || i >= this.GetAttributes().Length
                     )
             );
             Debug.Assert(_lazySourceAttributesBag.IsSealed);

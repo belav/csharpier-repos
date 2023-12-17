@@ -35,24 +35,22 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        "some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    "some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
             .Verifiable();
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found("Components/Invoke/some-view", view.Object))
             .Verifiable();
@@ -88,13 +86,12 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/Default", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/Default", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found("Components/Invoke/Default", view.Object))
             .Verifiable();
@@ -129,13 +126,12 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/Default", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/Default", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found("Components/Invoke/Default", view.Object))
             .Verifiable();
@@ -183,24 +179,22 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        "some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    "some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound("some-view", new[] { "location1", "location2" }))
             .Verifiable();
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(
                 ViewEngineResult.NotFound("Components/Invoke/some-view", Enumerable.Empty<string>())
@@ -241,24 +235,22 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        "some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    "some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
             .Verifiable();
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(
                 ViewEngineResult.NotFound(
@@ -304,24 +296,22 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        "some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    "some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound("some-view", new[] { "location1", "location2" }))
             .Verifiable();
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(
                 ViewEngineResult.NotFound(
@@ -361,24 +351,22 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        "some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    "some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
             .Verifiable();
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found("Components/Invoke/some-view", view.Object))
             .Verifiable();
@@ -411,24 +399,22 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        "some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    "some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
             .Verifiable();
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found("Components/Invoke/some-view", view))
             .Verifiable();
@@ -460,24 +446,22 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        "some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    "some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
             .Verifiable();
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found("Components/Invoke/some-view", view))
             .Verifiable();
@@ -527,26 +511,24 @@ public class ViewViewComponentResultTest
 
         var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        "some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    "some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(
                 ViewEngineResult.NotFound("some-view", new[] { "view-location1", "view-location2" })
             )
             .Verifiable();
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        "Components/Invoke/some-view", /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "Components/Invoke/some-view", /*isMainPage*/
+                    false
+                )
             )
             .Returns(
                 ViewEngineResult.NotFound(
@@ -619,13 +601,12 @@ public class ViewViewComponentResultTest
         var expectedViewName = $"Components/{shortName}/Default";
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.FindView(
-                        It.IsAny<ActionContext>(),
-                        expectedViewName, /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    expectedViewName, /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found(expectedViewName, new Mock<IView>().Object))
             .Verifiable();
@@ -650,13 +631,12 @@ public class ViewViewComponentResultTest
         // Arrange
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(
-                v =>
-                    v.GetView( /*executingFilePath*/
-                        null,
-                        viewName, /*isMainPage*/
-                        false
-                    )
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    viewName, /*isMainPage*/
+                    false
+                )
             )
             .Returns(ViewEngineResult.Found(viewName, new Mock<IView>().Object))
             .Verifiable();

@@ -166,7 +166,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
                         // Get the cross language service
                         _targetLanguageService =
-                            _generateTypeOptionsResult.Project.Services.GetService<IGenerateTypeService>();
+                            _generateTypeOptionsResult.Project.Services.GetService<IGenerateTypeService>(
+
+                            );
                     }
 
                     if (_generateTypeOptionsResult.IsNewFile)
@@ -510,8 +512,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 if (projectToBeUpdated != triggeringProject)
                 {
                     if (
-                        !triggeringProject.ProjectReferences.Any(
-                            pr => pr.ProjectId == projectToBeUpdated.Id
+                        !triggeringProject.ProjectReferences.Any(pr =>
+                            pr.ProjectId == projectToBeUpdated.Id
                         )
                     )
                     {
@@ -820,13 +822,12 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 IList<TArgumentSyntax> argumentList
             )
             {
-                var types = argumentList.Select(
-                    a =>
-                        _service.DetermineArgumentType(
-                            _semanticDocument.SemanticModel,
-                            a,
-                            _cancellationToken
-                        )
+                var types = argumentList.Select(a =>
+                    _service.DetermineArgumentType(
+                        _semanticDocument.SemanticModel,
+                        a,
+                        _cancellationToken
+                    )
                 );
                 return types.SelectAsArray(FixType);
             }
@@ -837,8 +838,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             {
                 var syntaxFacts =
                     _semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
-                return argumentList.SelectAsArray(
-                    a => (TExpressionSyntax)syntaxFacts.GetExpressionOfArgument(a)
+                return argumentList.SelectAsArray(a =>
+                    (TExpressionSyntax)syntaxFacts.GetExpressionOfArgument(a)
                 );
             }
 
@@ -870,8 +871,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
                     var membersArray = members.ToImmutableArray();
                     var symbol =
-                        membersArray.FirstOrDefault(
-                            m => m.Name.Equals(expectedFieldName, StringComparison.Ordinal)
+                        membersArray.FirstOrDefault(m =>
+                            m.Name.Equals(expectedFieldName, StringComparison.Ordinal)
                         ) ?? membersArray.FirstOrDefault();
                     if (symbol != null)
                     {

@@ -19,9 +19,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
     {
         private static readonly MethodInfo GetItemMethodInfo = typeof(JObject)
             .GetRuntimeProperties()
-            .Single(
-                pi =>
-                    pi.Name == "Item" && pi.GetIndexParameters()[0].ParameterType == typeof(string)
+            .Single(pi =>
+                pi.Name == "Item" && pi.GetIndexParameters()[0].ParameterType == typeof(string)
             )
             .GetMethod;
 
@@ -31,11 +30,10 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
 
         private static readonly MethodInfo JTokenToObjectWithSerializerMethodInfo = typeof(JToken)
             .GetRuntimeMethods()
-            .Single(
-                mi =>
-                    mi.Name == nameof(JToken.ToObject)
-                    && mi.GetParameters().Length == 1
-                    && mi.IsGenericMethodDefinition
+            .Single(mi =>
+                mi.Name == nameof(JToken.ToObject)
+                && mi.GetParameters().Length == 1
+                && mi.IsGenericMethodDefinition
             );
 
         private static readonly MethodInfo CollectionAccessorAddMethodInfo =
@@ -478,8 +476,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                 : (Expression)Constant(null, typeof(InternalEntityEntry));
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
-            var concreteEntityTypeVariable = shaperBlock.Variables.Single(
-                v => v.Type == typeof(IEntityType)
+            var concreteEntityTypeVariable = shaperBlock.Variables.Single(v =>
+                v.Type == typeof(IEntityType)
             );
             var inverseNavigation = navigation.Inverse;
             var fixup = GenerateFixup(

@@ -62,26 +62,23 @@ public class StaticFileMiddlewareTests : LoggedTest
                         // Routing first => static files noops
                         app.UseRouting();
 
-                        app.Use(
-                            next =>
-                                context =>
-                                {
-                                    // Assign an endpoint, this will make the default files noop.
-                                    context.SetEndpoint(
-                                        new Endpoint(
-                                            (c) =>
-                                            {
-                                                return context.Response.WriteAsync(
-                                                    "Hi from endpoint."
-                                                );
-                                            },
-                                            new EndpointMetadataCollection(),
-                                            "test"
-                                        )
-                                    );
+                        app.Use(next =>
+                            context =>
+                            {
+                                // Assign an endpoint, this will make the default files noop.
+                                context.SetEndpoint(
+                                    new Endpoint(
+                                        (c) =>
+                                        {
+                                            return context.Response.WriteAsync("Hi from endpoint.");
+                                        },
+                                        new EndpointMetadataCollection(),
+                                        "test"
+                                    )
+                                );
 
-                                    return next(context);
-                                }
+                                return next(context);
+                            }
                         );
 
                         app.UseStaticFiles();
@@ -169,11 +166,10 @@ public class StaticFileMiddlewareTests : LoggedTest
                     .UseKestrel()
                     .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
                     .UseWebRoot(Path.Combine(AppContext.BaseDirectory, baseDir))
-                    .Configure(
-                        app =>
-                            app.UseStaticFiles(
-                                new StaticFileOptions { RequestPath = new PathString(baseUrl), }
-                            )
+                    .Configure(app =>
+                        app.UseStaticFiles(
+                            new StaticFileOptions { RequestPath = new PathString(baseUrl), }
+                        )
                     );
             })
             .Build();
@@ -220,11 +216,10 @@ public class StaticFileMiddlewareTests : LoggedTest
                     .UseKestrel()
                     .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
                     .UseWebRoot(Path.Combine(AppContext.BaseDirectory, baseDir))
-                    .Configure(
-                        app =>
-                            app.UseStaticFiles(
-                                new StaticFileOptions { RequestPath = new PathString(baseUrl), }
-                            )
+                    .Configure(app =>
+                        app.UseStaticFiles(
+                            new StaticFileOptions { RequestPath = new PathString(baseUrl), }
+                        )
                     );
             })
             .Build();

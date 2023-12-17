@@ -1575,6 +1575,7 @@ namespace System.Data.OleDb
 
                 // @devnote: releasing row handles occurs next time user calls read, skip, or close
                 GetRowHandles( /*skipCount*/
+
                 );
             }
             return ((_currentRow <= (int)_rowFetchedCount) && _isRead);

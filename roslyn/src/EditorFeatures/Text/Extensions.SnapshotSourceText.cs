@@ -108,13 +108,12 @@ namespace Microsoft.CodeAnalysis.Text
                     var tempTextBufferCloneService = textBufferCloneService;
                     snapshot = s_textSnapshotMap.GetValue(
                         editorSnapshot,
-                        s =>
-                            new SnapshotSourceText(
-                                tempTextBufferCloneService,
-                                s,
-                                SourceHashAlgorithms.OpenDocumentChecksumAlgorithm,
-                                container
-                            )
+                        s => new SnapshotSourceText(
+                            tempTextBufferCloneService,
+                            s,
+                            SourceHashAlgorithms.OpenDocumentChecksumAlgorithm,
+                            container
+                        )
                     );
                 }
 
@@ -138,13 +137,12 @@ namespace Microsoft.CodeAnalysis.Text
                 Contract.ThrowIfFalse(editorSnapshot.TextBuffer == container.GetTextBuffer());
                 return s_textSnapshotMap.GetValue(
                     editorSnapshot,
-                    s =>
-                        new SnapshotSourceText(
-                            textBufferCloneService,
-                            s,
-                            SourceHashAlgorithms.OpenDocumentChecksumAlgorithm,
-                            container
-                        )
+                    s => new SnapshotSourceText(
+                        textBufferCloneService,
+                        s,
+                        SourceHashAlgorithms.OpenDocumentChecksumAlgorithm,
+                        container
+                    )
                 );
             }
 

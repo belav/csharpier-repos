@@ -36,8 +36,9 @@ public abstract class ApplicationPartFactory
     {
         ArgumentNullException.ThrowIfNull(assembly);
 
-        var provideAttribute =
-            assembly.GetCustomAttribute<ProvideApplicationPartFactoryAttribute>();
+        var provideAttribute = assembly.GetCustomAttribute<ProvideApplicationPartFactoryAttribute>(
+
+        );
         if (provideAttribute == null)
         {
             return DefaultApplicationPartFactory.Instance;

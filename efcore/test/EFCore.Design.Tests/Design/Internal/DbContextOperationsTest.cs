@@ -162,8 +162,8 @@ public class DbContextOperationsTest
         private static TestWebHost BuildWebHost(string[] args) =>
             new(
                 new ServiceCollection()
-                    .AddDbContextFactory<TestContextFromFactory>(
-                        b => b.UseInMemoryDatabase("In-memory test database")
+                    .AddDbContextFactory<TestContextFromFactory>(b =>
+                        b.UseInMemoryDatabase("In-memory test database")
                     )
                     .BuildServiceProvider(validateScopes: true)
             );
@@ -172,11 +172,8 @@ public class DbContextOperationsTest
     private static class TestProgramRelational
     {
         private static TestWebHost BuildWebHost(string[] args) =>
-            CreateWebHost(
-                b =>
-                    b.UseSqlServer(
-                        @"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0"
-                    )
+            CreateWebHost(b =>
+                b.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0")
             );
     }
 
@@ -207,8 +204,8 @@ public class DbContextOperationsTest
     ) =>
         new(
             new ServiceCollection()
-                .AddDbContext<TestContext>(
-                    b => configureProvider(b.EnableServiceProviderCaching(false))
+                .AddDbContext<TestContext>(b =>
+                    configureProvider(b.EnableServiceProviderCaching(false))
                 )
                 .BuildServiceProvider(validateScopes: true)
         );

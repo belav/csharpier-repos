@@ -447,8 +447,10 @@ namespace System.Net.Http
 
             return request.CreateErrorResponse(
                 statusCode,
-                includeErrorDetail =>
-                    new HttpError(exception, includeErrorDetail) { Message = message }
+                includeErrorDetail => new HttpError(exception, includeErrorDetail)
+                {
+                    Message = message
+                }
             );
         }
 

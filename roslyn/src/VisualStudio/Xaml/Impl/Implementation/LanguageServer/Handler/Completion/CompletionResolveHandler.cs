@@ -106,9 +106,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 .ConfigureAwait(false);
 
             vsCompletionItem.Description = new ClassifiedTextElement(
-                description.Select(
-                    tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
-                )
+                description.Select(tp => new ClassifiedTextRun(
+                    tp.Tag.ToClassificationTypeName(),
+                    tp.Text
+                ))
             );
             return vsCompletionItem;
         }

@@ -81,8 +81,8 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
                 return translation;
             }
 
-            var argumentsPropagateNullability = dbFunction.Parameters.Select(
-                p => p.PropagatesNullability
+            var argumentsPropagateNullability = dbFunction.Parameters.Select(p =>
+                p.PropagatesNullability
             );
 
             return dbFunction.IsBuiltIn

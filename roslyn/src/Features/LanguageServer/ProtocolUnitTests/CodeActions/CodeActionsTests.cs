@@ -71,8 +71,8 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper)
             testLspServer,
             CreateCodeActionParams(caretLocation)
         );
-        var useImplicitType = results.FirstOrDefault(
-            r => r.Title == CSharpAnalyzersResources.Use_implicit_type
+        var useImplicitType = results.FirstOrDefault(r =>
+            r.Title == CSharpAnalyzersResources.Use_implicit_type
         );
 
         AssertJsonEquals(expected, useImplicitType);
@@ -129,10 +129,9 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper)
             FeaturesResources.Introduce_constant
             + '|'
             + string.Format(FeaturesResources.Introduce_constant_for_0, "1");
-        var introduceConstant = topLevelAction.Children.FirstOrDefault(
-            r =>
-                ((JObject)r.Data!).ToObject<CodeActionResolveData>()!.UniqueIdentifier
-                == expectedChildActionTitle
+        var introduceConstant = topLevelAction.Children.FirstOrDefault(r =>
+            ((JObject)r.Data!).ToObject<CodeActionResolveData>()!.UniqueIdentifier
+            == expectedChildActionTitle
         );
 
         AssertJsonEquals(expected, introduceConstant);
@@ -171,8 +170,8 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper)
         };
 
         var results = await RunGetCodeActionsAsync(testLspServer, codeActionParams);
-        var addImport = results.FirstOrDefault(
-            r => r.Title.Contains($"using System.Threading.Tasks")
+        var addImport = results.FirstOrDefault(r =>
+            r.Title.Contains($"using System.Threading.Tasks")
         );
         Assert.Equal(1, addImport.Diagnostics!.Length);
         Assert.Equal(AddImportDiagnosticIds.CS0103, addImport.Diagnostics.Single().Code!.Value);

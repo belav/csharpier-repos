@@ -80,8 +80,8 @@ namespace System.Net.Http.Headers
             {
                 if (
                     connectionclose == true
-                    || Connection.Find(
-                        l => string.Equals(l, "close", StringComparison.OrdinalIgnoreCase)
+                    || Connection.Find(l =>
+                        string.Equals(l, "close", StringComparison.OrdinalIgnoreCase)
                     ) != null
                 )
                     return true;
@@ -105,8 +105,8 @@ namespace System.Net.Http.Headers
         {
             get
             {
-                return Connection.Find(
-                        l => string.Equals(l, "Keep-Alive", StringComparison.OrdinalIgnoreCase)
+                return Connection.Find(l =>
+                        string.Equals(l, "Keep-Alive", StringComparison.OrdinalIgnoreCase)
                     ) != null;
             }
         }
@@ -129,8 +129,8 @@ namespace System.Net.Http.Headers
                 if (expectContinue.HasValue)
                     return expectContinue;
 
-                var found = TransferEncoding.Find(
-                    l => string.Equals(l.Value, "100-continue", StringComparison.OrdinalIgnoreCase)
+                var found = TransferEncoding.Find(l =>
+                    string.Equals(l.Value, "100-continue", StringComparison.OrdinalIgnoreCase)
                 );
                 return found != null ? true : (bool?)null;
             }
@@ -245,8 +245,8 @@ namespace System.Net.Http.Headers
                 if (transferEncodingChunked.HasValue)
                     return transferEncodingChunked;
 
-                var found = TransferEncoding.Find(
-                    l => string.Equals(l.Value, "chunked", StringComparison.OrdinalIgnoreCase)
+                var found = TransferEncoding.Find(l =>
+                    string.Equals(l.Value, "chunked", StringComparison.OrdinalIgnoreCase)
                 );
                 return found != null ? true : (bool?)null;
             }

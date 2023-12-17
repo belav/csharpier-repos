@@ -124,8 +124,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_IsReadOnly()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(i =>
+                i % 2 == 0
             );
             foreach (IList<int> grouping in oddsEvens)
             {
@@ -136,8 +136,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_NotSupported()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(i =>
+                i % 2 == 0
             );
             foreach (IList<int> grouping in oddsEvens)
             {
@@ -153,8 +153,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_IndexerGetter()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(i =>
+                i % 2 == 0
             );
             var e = oddsEvens.GetEnumerator();
 
@@ -172,8 +172,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_IndexGetterOutOfRange()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(i =>
+                i % 2 == 0
             );
             var e = oddsEvens.GetEnumerator();
 
@@ -186,8 +186,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_ICollection_Contains()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(i =>
+                i % 2 == 0
             );
             var e = oddsEvens.GetEnumerator();
 
@@ -209,8 +209,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_IndexOf()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(i =>
+                i % 2 == 0
             );
             var e = oddsEvens.GetEnumerator();
 

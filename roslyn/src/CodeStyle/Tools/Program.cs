@@ -191,12 +191,11 @@ namespace CodeStyleConfigFileGenerator
                         )
                         {
                             Debug.Assert(
-                                rule.CustomTags.Any(
-                                    c =>
-                                        c == s_neverTag
-                                        || c == s_whenExplicitlyEnabledTag
-                                        || c == s_recommendedTag
-                                        || c == s_highlyRecommendedTag
+                                rule.CustomTags.Any(c =>
+                                    c == s_neverTag
+                                    || c == s_whenExplicitlyEnabledTag
+                                    || c == s_recommendedTag
+                                    || c == s_highlyRecommendedTag
                                 ),
                                 $"DiagnosticDescriptor for '{rule.Id}' must have a {nameof(EnforceOnBuild)} custom tag"
                             );

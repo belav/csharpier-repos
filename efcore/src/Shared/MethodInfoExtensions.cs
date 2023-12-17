@@ -13,17 +13,16 @@ internal static class MethodInfoExtensions
         && method
             .DeclaringType.GetInterfaces()
             .Append(method.DeclaringType)
-            .Any(
-                t =>
-                    t == typeof(IList)
-                    || (
-                        t.IsGenericType
-                        && t.GetGenericTypeDefinition() is Type genericType
-                        && (
-                            genericType == typeof(ICollection<>)
-                            || genericType == typeof(IReadOnlySet<>)
-                            || genericType == typeof(IImmutableSet<>)
-                        )
+            .Any(t =>
+                t == typeof(IList)
+                || (
+                    t.IsGenericType
+                    && t.GetGenericTypeDefinition() is Type genericType
+                    && (
+                        genericType == typeof(ICollection<>)
+                        || genericType == typeof(IReadOnlySet<>)
+                        || genericType == typeof(IImmutableSet<>)
                     )
+                )
             );
 }

@@ -42,10 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             var lastNormal = members
                 .OfType<FieldDeclarationSyntax>()
-                .Where(
-                    f =>
-                        !f.Modifiers.Any(SyntaxKind.ReadOnlyKeyword)
-                        && !f.Modifiers.Any(SyntaxKind.ConstKeyword)
+                .Where(f =>
+                    !f.Modifiers.Any(SyntaxKind.ReadOnlyKeyword)
+                    && !f.Modifiers.Any(SyntaxKind.ConstKeyword)
                 )
                 .LastOrDefault();
 

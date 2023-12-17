@@ -20,12 +20,9 @@ public class CustomSchemaTest : IClassFixture<ScratchDatabaseFixture>
         services
             .AddLogging()
             .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
-            .AddDbContext<CustomVersionDbContext>(
-                o =>
-                    o.UseSqlite(fixture.Connection)
-                        .ConfigureWarnings(
-                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
-                        )
+            .AddDbContext<CustomVersionDbContext>(o =>
+                o.UseSqlite(fixture.Connection)
+                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
             )
             .AddIdentity<IdentityUser, IdentityRole>(o =>
             {

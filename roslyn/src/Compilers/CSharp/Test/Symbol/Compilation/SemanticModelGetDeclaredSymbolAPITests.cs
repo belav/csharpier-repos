@@ -1546,10 +1546,9 @@ class D<T>
             Assert.Equal(
                 9,
                 symbolsInC
-                    .Where(
-                        s =>
-                            s.ContainingType == null
-                            || s.ContainingType.SpecialType != SpecialType.System_Object
+                    .Where(s =>
+                        s.ContainingType == null
+                        || s.ContainingType.SpecialType != SpecialType.System_Object
                     )
                     .Count()
             );
@@ -1557,27 +1556,23 @@ class D<T>
             Assert.True(symbolsInC.Any(s => s.Name == "B" && s.Kind == SymbolKind.NamedType));
             Assert.True(symbolsInC.Any(s => s.Name == "C" && s.Kind == SymbolKind.NamedType));
             Assert.True(
-                symbolsInC.Any(
-                    s =>
-                        s.Name == "M" && s.Kind == SymbolKind.Method && s.ContainingType.Name == "A"
+                symbolsInC.Any(s =>
+                    s.Name == "M" && s.Kind == SymbolKind.Method && s.ContainingType.Name == "A"
                 )
             );
             Assert.True(
-                symbolsInC.Any(
-                    s =>
-                        s.Name == "M" && s.Kind == SymbolKind.Method && s.ContainingType.Name == "B"
+                symbolsInC.Any(s =>
+                    s.Name == "M" && s.Kind == SymbolKind.Method && s.ContainingType.Name == "B"
                 )
             );
             Assert.True(
-                symbolsInC.Any(
-                    s =>
-                        s.Name == "M" && s.Kind == SymbolKind.Method && s.ContainingType.Name == "C"
+                symbolsInC.Any(s =>
+                    s.Name == "M" && s.Kind == SymbolKind.Method && s.ContainingType.Name == "C"
                 )
             );
             Assert.True(
-                symbolsInC.Any(
-                    s =>
-                        s.Name == "F" && s.Kind == SymbolKind.Method && s.ContainingType.Name == "C"
+                symbolsInC.Any(s =>
+                    s.Name == "F" && s.Kind == SymbolKind.Method && s.ContainingType.Name == "C"
                 )
             );
             Assert.True(symbolsInC.Any(s => s.Name == "System" && s.Kind == SymbolKind.Namespace));

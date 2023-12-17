@@ -3373,8 +3373,8 @@ namespace System.Activities
 
             // Check if the inputParameters collection matches the expected inputs for activityDelegate
             IEnumerable<RuntimeDelegateArgument> expectedParameters =
-                activityDelegate.RuntimeDelegateArguments.Where(
-                    p => ArgumentDirectionHelper.IsIn(p.Direction)
+                activityDelegate.RuntimeDelegateArguments.Where(p =>
+                    ArgumentDirectionHelper.IsIn(p.Direction)
                 );
             int expectedParameterCount = expectedParameters.Count();
             if (

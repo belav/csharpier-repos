@@ -353,8 +353,8 @@ class Class : Interface
 
             var @class = (NamedTypeSymbol)global.GetMembers("Class").Single();
             var classImplicitImplementation = @class.Indexers.Single(p => p.Parameters.Length == 2);
-            var classImplicitImplementationBase = @class.Indexers.Single(
-                p => p.Parameters.Length == 1
+            var classImplicitImplementationBase = @class.Indexers.Single(p =>
+                p.Parameters.Length == 1
             );
 
             var implementingIndexer = @class.FindImplementationForInterfaceMember(interfaceIndexer);
@@ -2572,10 +2572,8 @@ Explicit implementation
                 .GetMembers()
                 .OfType<MethodSymbol>()
                 .Where(m => m.MethodKind == MethodKind.ExplicitInterfaceImplementation)
-                .Single(
-                    m =>
-                        m.ExplicitInterfaceImplementations.Single().MethodKind
-                        == MethodKind.EventAdd
+                .Single(m =>
+                    m.ExplicitInterfaceImplementations.Single().MethodKind == MethodKind.EventAdd
                 );
 
             Assert.Equal(

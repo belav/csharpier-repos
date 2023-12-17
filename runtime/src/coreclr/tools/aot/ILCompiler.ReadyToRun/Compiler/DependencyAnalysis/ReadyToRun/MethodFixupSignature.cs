@@ -70,7 +70,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 list =
                     list
-                    ?? new DependencyAnalysisFramework.DependencyNodeCore<NodeFactory>.DependencyList();
+                    ?? new DependencyAnalysisFramework.DependencyNodeCore<NodeFactory>.DependencyList(
+
+                    );
                 try
                 {
                     factory.DetectGenericCycles(_method.Method, canonMethod);

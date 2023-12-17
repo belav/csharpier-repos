@@ -155,15 +155,12 @@ public class HotReloadServiceTests
                 "TestAssembly",
                 Array.Empty<PageComponentBuilder>(),
                 types
-                    .Select(
-                        t =>
-                            new ComponentBuilder
-                            {
-                                AssemblyName = "TestAssembly",
-                                ComponentType = t,
-                                RenderMode = t.GetCustomAttribute<RenderModeAttribute>()
-                            }
-                    )
+                    .Select(t => new ComponentBuilder
+                    {
+                        AssemblyName = "TestAssembly",
+                        ComponentType = t,
+                        RenderMode = t.GetCustomAttribute<RenderModeAttribute>()
+                    })
                     .ToArray()
             )
         );

@@ -13,8 +13,8 @@ public class OwnedQuerySqliteTest
     {
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
             base.AddOptions(
-                builder.ConfigureWarnings(
-                    b => b.Ignore(SqliteEventId.CompositeKeyWithValueGeneration)
+                builder.ConfigureWarnings(b =>
+                    b.Ignore(SqliteEventId.CompositeKeyWithValueGeneration)
                 )
             );
 

@@ -2538,6 +2538,7 @@ namespace MonoTests.System.Linq
         {
             if (source != null && cursor == null)
                 throw new InvalidOperationException( /* GetEnumerator not called yet */
+
                 );
             if (source == null && cursor == null)
                 throw new ObjectDisposedException(GetType().FullName);

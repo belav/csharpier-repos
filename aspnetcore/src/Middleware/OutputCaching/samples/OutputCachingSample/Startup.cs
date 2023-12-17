@@ -9,14 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOutputCache(options =>
 {
     // Define policies for all requests which are not configured per endpoint or per request
-    options.AddBasePolicy(
-        builder =>
-            builder
-                .With(c => c.HttpContext.Request.Path.StartsWithSegments("/js"))
-                .Expire(TimeSpan.FromDays(1))
+    options.AddBasePolicy(builder =>
+        builder
+            .With(c => c.HttpContext.Request.Path.StartsWithSegments("/js"))
+            .Expire(TimeSpan.FromDays(1))
     );
-    options.AddBasePolicy(
-        builder => builder.With(c => c.HttpContext.Request.Path.StartsWithSegments("/js")).NoCache()
+    options.AddBasePolicy(builder =>
+        builder.With(c => c.HttpContext.Request.Path.StartsWithSegments("/js")).NoCache()
     );
 
     options.AddPolicy("NoCache", b => b.NoCache());
@@ -58,15 +57,14 @@ app.MapPost(
 app.MapGet("/query", Gravatar.WriteGravatar).CacheOutput(p => p.SetVaryByQuery("culture"));
 
 app.MapGet("/vary", Gravatar.WriteGravatar)
-    .CacheOutput(
-        c =>
-            c.VaryByValue(
-                (context) =>
-                    new KeyValuePair<string, string>(
-                        "time",
-                        (DateTime.Now.Second % 2).ToString(CultureInfo.InvariantCulture)
-                    )
-            )
+    .CacheOutput(c =>
+        c.VaryByValue(
+            (context) =>
+                new KeyValuePair<string, string>(
+                    "time",
+                    (DateTime.Now.Second % 2).ToString(CultureInfo.InvariantCulture)
+                )
+        )
     );
 
 long requests = 0;

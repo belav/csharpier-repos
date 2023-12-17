@@ -32,8 +32,8 @@ public static class WebHostBuilderHttpSysExtensions
             services.AddSingleton<IServer>(services => services.GetRequiredService<MessagePump>());
             if (HttpApi.SupportsDelegation)
             {
-                services.AddSingleton<IServerDelegationFeature>(
-                    services => services.GetRequiredService<MessagePump>()
+                services.AddSingleton<IServerDelegationFeature>(services =>
+                    services.GetRequiredService<MessagePump>()
                 );
             }
             services.AddTransient<AuthenticationHandler>();

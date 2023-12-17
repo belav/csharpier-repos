@@ -27,8 +27,9 @@ public class InheritanceRelationshipsContext : PoolableDbContext
     public static void Seed(InheritanceRelationshipsContext context)
     {
         var baseCollectionsOnBase = InheritanceRelationshipsData.CreateBaseCollectionsOnBase();
-        var baseCollectionsOnDerived =
-            InheritanceRelationshipsData.CreateBaseCollectionsOnDerived();
+        var baseCollectionsOnDerived = InheritanceRelationshipsData.CreateBaseCollectionsOnDerived(
+
+        );
         var baseEntities = InheritanceRelationshipsData.CreateBaseEntities();
         var baseReferencesOnBase = InheritanceRelationshipsData.CreateBaseReferencesOnBase();
         var baseReferencesOnDerived = InheritanceRelationshipsData.CreateBaseReferencesOnDerived();

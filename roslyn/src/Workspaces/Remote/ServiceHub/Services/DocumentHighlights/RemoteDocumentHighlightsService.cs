@@ -52,13 +52,12 @@ namespace Microsoft.CodeAnalysis.Remote
                         )
                         .ConfigureAwait(false);
                     var documentsToSearch = await documentIdsToSearch
-                        .SelectAsArrayAsync(
-                            id =>
-                                solution.GetDocumentAsync(
-                                    id,
-                                    includeSourceGenerated: true,
-                                    cancellationToken
-                                )
+                        .SelectAsArrayAsync(id =>
+                            solution.GetDocumentAsync(
+                                id,
+                                includeSourceGenerated: true,
+                                cancellationToken
+                            )
                         )
                         .ConfigureAwait(false);
                     var documentsToSearchSet = ImmutableHashSet.CreateRange(

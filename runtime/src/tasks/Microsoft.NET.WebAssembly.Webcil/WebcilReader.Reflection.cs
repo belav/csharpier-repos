@@ -16,8 +16,8 @@ public sealed partial class WebcilReader
     // Helpers to call into System.Reflection.Metadata internals
     internal static class Reflection
     {
-        private static readonly Lazy<MethodInfo> s_readUtf8NullTerminated =
-            new Lazy<MethodInfo>(() =>
+        private static readonly Lazy<MethodInfo> s_readUtf8NullTerminated = new Lazy<MethodInfo>(
+            () =>
             {
                 var mi = typeof(BlobReader).GetMethod(
                     "ReadUtf8NullTerminated",
@@ -30,7 +30,8 @@ public sealed partial class WebcilReader
                     );
                 }
                 return mi;
-            });
+            }
+        );
 
         internal static string? ReadUtf8NullTerminated(ref BlobReader reader)
         {

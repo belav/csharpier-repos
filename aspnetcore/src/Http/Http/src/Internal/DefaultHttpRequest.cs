@@ -15,10 +15,14 @@ internal sealed class DefaultHttpRequest : HttpRequest
     // Lambdas hoisted to static readonly fields to improve inlining https://github.com/dotnet/roslyn/issues/13624
     private static readonly Func<IFeatureCollection, IHttpRequestFeature?> _nullRequestFeature =
         f => null;
-    private static readonly Func<IFeatureCollection, IQueryFeature?> _newQueryFeature = f =>
-        new QueryFeature(f);
-    private static readonly Func<DefaultHttpRequest, IFormFeature> _newFormFeature = r =>
-        new FormFeature(r, r._context.FormOptions ?? FormOptions.Default, r._context.GetEndpoint());
+    private static readonly Func<IFeatureCollection, IQueryFeature?> _newQueryFeature =
+        f => new QueryFeature(f);
+    private static readonly Func<DefaultHttpRequest, IFormFeature> _newFormFeature =
+        r => new FormFeature(
+            r,
+            r._context.FormOptions ?? FormOptions.Default,
+            r._context.GetEndpoint()
+        );
     private static readonly Func<
         IFeatureCollection,
         IRequestCookiesFeature

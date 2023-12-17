@@ -86,10 +86,9 @@ public abstract class DiagnosticAnalyzerRunner
                 // We want to KEEP errors because we might have written bad code. But sometimes we leave warnings in to make the
                 // test code more convenient
                 diags = diags
-                    .Where(
-                        d =>
-                            d.Severity == DiagnosticSeverity.Error
-                            || analyzer.SupportedDiagnostics.Any(s => s.Id.Equals(d.Id))
+                    .Where(d =>
+                        d.Severity == DiagnosticSeverity.Error
+                        || analyzer.SupportedDiagnostics.Any(s => s.Id.Equals(d.Id))
                     )
                     .ToImmutableArray();
 

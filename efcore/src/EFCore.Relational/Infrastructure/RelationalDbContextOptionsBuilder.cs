@@ -95,12 +95,9 @@ public abstract class RelationalDbContextOptionsBuilder<TBuilder, TExtension>
     /// <param name="assemblyName">The name of the assembly.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public virtual TBuilder MigrationsAssembly(string? assemblyName) =>
-        WithOption(
-            e =>
-                (TExtension)
-                    e.WithMigrationsAssembly(
-                        Check.NullButNotEmpty(assemblyName, nameof(assemblyName))
-                    )
+        WithOption(e =>
+            (TExtension)
+                e.WithMigrationsAssembly(Check.NullButNotEmpty(assemblyName, nameof(assemblyName)))
         );
 
     /// <summary>
@@ -117,11 +114,9 @@ public abstract class RelationalDbContextOptionsBuilder<TBuilder, TExtension>
         Check.NotEmpty(tableName, nameof(tableName));
         Check.NullButNotEmpty(schema, nameof(schema));
 
-        return WithOption(
-            e =>
-                (TExtension)
-                    e.WithMigrationsHistoryTableName(tableName)
-                        .WithMigrationsHistoryTableSchema(schema)
+        return WithOption(e =>
+            (TExtension)
+                e.WithMigrationsHistoryTableName(tableName).WithMigrationsHistoryTableSchema(schema)
         );
     }
 
@@ -159,12 +154,11 @@ public abstract class RelationalDbContextOptionsBuilder<TBuilder, TExtension>
     public virtual TBuilder ExecutionStrategy(
         Func<ExecutionStrategyDependencies, IExecutionStrategy> getExecutionStrategy
     ) =>
-        WithOption(
-            e =>
-                (TExtension)
-                    e.WithExecutionStrategyFactory(
-                        Check.NotNull(getExecutionStrategy, nameof(getExecutionStrategy))
-                    )
+        WithOption(e =>
+            (TExtension)
+                e.WithExecutionStrategyFactory(
+                    Check.NotNull(getExecutionStrategy, nameof(getExecutionStrategy))
+                )
         );
 
     /// <summary>

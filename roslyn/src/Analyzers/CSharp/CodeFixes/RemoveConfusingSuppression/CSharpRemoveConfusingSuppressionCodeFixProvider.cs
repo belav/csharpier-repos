@@ -101,8 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveConfusingSuppression
 
                 var isNode = updatedNode
                     .DescendantNodesAndSelf()
-                    .First(
-                        n => n.Kind() is SyntaxKind.IsExpression or SyntaxKind.IsPatternExpression
+                    .First(n =>
+                        n.Kind() is SyntaxKind.IsExpression or SyntaxKind.IsPatternExpression
                     );
                 var left = isNode switch
                 {

@@ -579,10 +579,9 @@ namespace System
             }
 
             if (!isFullTrust)
-                new EnvironmentPermission(
-                    EnvironmentPermissionAccess.Read,
-                    vars.ToString()
-                ).Demand();
+                new EnvironmentPermission(EnvironmentPermissionAccess.Read, vars.ToString()).Demand(
+
+                );
 #endif // !FEATURE_CORECLR
 
             blob.Length = 0;
@@ -612,10 +611,9 @@ namespace System
             {
                 // In future release of operating systems, you might be able to rename a machine without
                 // rebooting.  Therefore, don't cache this machine name.
-                new EnvironmentPermission(
-                    EnvironmentPermissionAccess.Read,
-                    "COMPUTERNAME"
-                ).Demand();
+                new EnvironmentPermission(EnvironmentPermissionAccess.Read, "COMPUTERNAME").Demand(
+
+                );
                 StringBuilder buf = new StringBuilder(MaxMachineNameLength);
                 int len = MaxMachineNameLength;
                 if (Win32Native.GetComputerName(buf, ref len) == 0)
@@ -943,10 +941,9 @@ namespace System
 
 #if !FEATURE_CORECLR
             if (!isFullTrust)
-                new EnvironmentPermission(
-                    EnvironmentPermissionAccess.Read,
-                    vars.ToString()
-                ).Demand();
+                new EnvironmentPermission(EnvironmentPermissionAccess.Read, vars.ToString()).Demand(
+
+                );
 #endif
             return table;
         }

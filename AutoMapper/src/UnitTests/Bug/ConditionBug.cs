@@ -73,17 +73,16 @@
             }
 
             protected override MapperConfiguration CreateConfiguration() =>
-                new(
-                    cfg =>
-                        cfg.CreateMap<Source, Destination>()
-                            .ForMember(
-                                d => d.Value,
-                                opt =>
-                                {
-                                    opt.PreCondition(src => src.Value.HasValue);
-                                    opt.MapFrom(src => src.Value.Value + 10);
-                                }
-                            )
+                new(cfg =>
+                    cfg.CreateMap<Source, Destination>()
+                        .ForMember(
+                            d => d.Value,
+                            opt =>
+                            {
+                                opt.PreCondition(src => src.Value.HasValue);
+                                opt.MapFrom(src => src.Value.Value + 10);
+                            }
+                        )
                 );
 
             [Fact]
@@ -127,17 +126,16 @@
             }
 
             protected override MapperConfiguration CreateConfiguration() =>
-                new(
-                    cfg =>
-                        cfg.CreateMap<Source, Destination>()
-                            .ForMember(
-                                itemDTO => itemDTO.BasePrice,
-                                config =>
-                                {
-                                    config.PreCondition(item => item.HasBasePrice);
-                                    config.MapFrom(item => item.BasePrice);
-                                }
-                            )
+                new(cfg =>
+                    cfg.CreateMap<Source, Destination>()
+                        .ForMember(
+                            itemDTO => itemDTO.BasePrice,
+                            config =>
+                            {
+                                config.PreCondition(item => item.HasBasePrice);
+                                config.MapFrom(item => item.BasePrice);
+                            }
+                        )
                 );
 
             [Fact]

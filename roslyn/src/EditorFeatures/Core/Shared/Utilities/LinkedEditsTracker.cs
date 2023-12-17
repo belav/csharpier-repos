@@ -53,13 +53,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         public void AddSpans(NormalizedSnapshotSpanCollection snapshotSpanCollection)
         {
             // TODO: custom tracking spans!
-            var newTrackingSpans = snapshotSpanCollection.Select(
-                ss =>
-                    ss.Snapshot.CreateTrackingSpan(
-                        ss,
-                        SpanTrackingMode.EdgeInclusive,
-                        TrackingFidelityMode.Forward
-                    )
+            var newTrackingSpans = snapshotSpanCollection.Select(ss =>
+                ss.Snapshot.CreateTrackingSpan(
+                    ss,
+                    SpanTrackingMode.EdgeInclusive,
+                    TrackingFidelityMode.Forward
+                )
             );
             AddSpans(newTrackingSpans);
         }
@@ -112,8 +111,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 from trackingSpan in _trackingSpans
                 let mappedSpan = trackingSpan.GetSpan(args.After)
                 where
-                    intersection.All(
-                        intersectionSpan => mappedSpan.IntersectsWith(intersectionSpan)
+                    intersection.All(intersectionSpan => mappedSpan.IntersectsWith(intersectionSpan)
                     )
                 select trackingSpan;
 

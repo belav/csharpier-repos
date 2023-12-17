@@ -63,8 +63,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             }
 
             var document = context.GetRequiredDocument();
-            var completionService =
-                document.Project.Services.GetRequiredService<CompletionService>();
+            var completionService = document.Project.Services.GetRequiredService<CompletionService>(
+
+            );
 
             // Find the matching completion item in the completion list
             var selectedItem = cacheEntry.CompletionList.ItemsList.FirstOrDefault(
@@ -80,7 +81,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (selectedItem is not null)
             {
                 var creationService =
-                    document.Project.Solution.Services.GetRequiredService<ILspCompletionResultCreationService>();
+                    document.Project.Solution.Services.GetRequiredService<ILspCompletionResultCreationService>(
+
+                    );
                 await creationService
                     .ResolveAsync(
                         completionItem,

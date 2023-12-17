@@ -25,8 +25,8 @@ public class RemoveControllerActionDescriptorProvider : IActionDescriptorProvide
         {
             if (item is ControllerActionDescriptor controllerActionDescriptor)
             {
-                var controllerToRemove = _controllerTypes.SingleOrDefault(
-                    c => c.ControllerType == controllerActionDescriptor.ControllerTypeInfo
+                var controllerToRemove = _controllerTypes.SingleOrDefault(c =>
+                    c.ControllerType == controllerActionDescriptor.ControllerTypeInfo
                 );
                 if (controllerToRemove != null)
                 {

@@ -1583,7 +1583,9 @@ namespace System.Data.Objects.DataClasses
                                     "entityToAdd should be set if attachedRelatedEnd is set"
                                 );
 
-                                attachedRelatedEnd.WrappedOwner.Context.ObjectStateManager.DegradePromotedRelationships();
+                                attachedRelatedEnd.WrappedOwner.Context.ObjectStateManager.DegradePromotedRelationships(
+
+                                );
 
                                 // Remove the source entity from the target related end
                                 attachedRelatedEnd.FixupOtherEndOfRelationshipForRemove(
@@ -1609,7 +1611,9 @@ namespace System.Data.Objects.DataClasses
                     }
                     finally
                     {
-                        attachedRelatedEnd.WrappedOwner.Context.ObjectStateManager.TransactionManager.EndAddTracking();
+                        attachedRelatedEnd.WrappedOwner.Context.ObjectStateManager.TransactionManager.EndAddTracking(
+
+                        );
                     }
                 }
             }

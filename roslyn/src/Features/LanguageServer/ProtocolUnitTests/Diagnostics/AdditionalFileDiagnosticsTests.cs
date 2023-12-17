@@ -53,9 +53,8 @@ public class AdditionalFileDiagnosticsTests : AbstractPullDiagnosticTestsBase
                 @$"C:\Test.txt: [{MockAdditionalFileDiagnosticAnalyzer.Id}]",
                 @"C:\CSProj1.csproj: []"
             },
-            results.Select(
-                r =>
-                    $"{r.Uri.LocalPath}: [{string.Join(", ", r.Diagnostics.Select(d => d.Code?.Value?.ToString()))}]"
+            results.Select(r =>
+                $"{r.Uri.LocalPath}: [{string.Join(", ", r.Diagnostics.Select(d => d.Code?.Value?.ToString()))}]"
             )
         );
 

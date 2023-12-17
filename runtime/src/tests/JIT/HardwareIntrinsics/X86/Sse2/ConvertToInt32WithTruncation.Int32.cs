@@ -21,7 +21,9 @@ namespace JIT.HardwareIntrinsics.X86
         private static void ConvertToInt32WithTruncationInt32Vector128Double()
         {
             var test =
-                new SimdScalarUnaryOpConvertTest__ConvertToInt32WithTruncationInt32Vector128Double();
+                new SimdScalarUnaryOpConvertTest__ConvertToInt32WithTruncationInt32Vector128Double(
+
+                );
 
             if (test.IsSupported && (true))
             {
@@ -300,7 +302,9 @@ namespace JIT.HardwareIntrinsics.X86
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassLclFldScenario));
 
             var test =
-                new SimdScalarUnaryOpConvertTest__ConvertToInt32WithTruncationInt32Vector128Double();
+                new SimdScalarUnaryOpConvertTest__ConvertToInt32WithTruncationInt32Vector128Double(
+
+                );
             var result = Sse2.ConvertToInt32WithTruncation(test._fld);
 
             ValidateResult(test._fld, result);

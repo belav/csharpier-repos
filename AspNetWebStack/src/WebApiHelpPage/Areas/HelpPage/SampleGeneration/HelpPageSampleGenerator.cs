@@ -370,8 +370,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                 {
                     case SampleDirection.Request:
                         ApiParameterDescription requestBodyParameter =
-                            api.ParameterDescriptions.FirstOrDefault(
-                                p => p.Source == ApiParameterSource.FromBody
+                            api.ParameterDescriptions.FirstOrDefault(p =>
+                                p.Source == ApiParameterSource.FromBody
                             );
                         type =
                             requestBodyParameter == null

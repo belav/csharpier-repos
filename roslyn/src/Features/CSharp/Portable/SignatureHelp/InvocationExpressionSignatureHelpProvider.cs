@@ -177,8 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             // if the symbol could be bound, replace that item in the symbol list
             if (currentSymbol?.IsGenericMethod == true)
             {
-                methods = methods.SelectAsArray(
-                    m => Equals(currentSymbol.OriginalDefinition, m) ? currentSymbol : m
+                methods = methods.SelectAsArray(m =>
+                    Equals(currentSymbol.OriginalDefinition, m) ? currentSymbol : m
                 );
             }
 

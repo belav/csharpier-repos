@@ -324,19 +324,18 @@ namespace System.IO.Compression.Tests
                             if (entry == null) //entry not found
                             {
                                 string entryNameOtherSlash = FlipSlashes(entryName);
-                                bool isEmpty = !files.Any(
-                                    f =>
-                                        f.IsFile
-                                        && (
-                                            f.FullName.StartsWith(
-                                                entryName,
-                                                StringComparison.OrdinalIgnoreCase
-                                            )
-                                            || f.FullName.StartsWith(
-                                                entryNameOtherSlash,
-                                                StringComparison.OrdinalIgnoreCase
-                                            )
+                                bool isEmpty = !files.Any(f =>
+                                    f.IsFile
+                                    && (
+                                        f.FullName.StartsWith(
+                                            entryName,
+                                            StringComparison.OrdinalIgnoreCase
                                         )
+                                        || f.FullName.StartsWith(
+                                            entryNameOtherSlash,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                    )
                                 );
                                 if (requireExplicit || isEmpty)
                                 {

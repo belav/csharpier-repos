@@ -220,8 +220,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
         }
 
         return GetAllBaseTypesInclusiveAscending()
-            .FirstOrDefault(
-                i => otherEntityType.GetAllBaseTypesInclusiveAscending().Any(j => j == i)
+            .FirstOrDefault(i =>
+                otherEntityType.GetAllBaseTypesInclusiveAscending().Any(j => j == i)
             );
     }
 

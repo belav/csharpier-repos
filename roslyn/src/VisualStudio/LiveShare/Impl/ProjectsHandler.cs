@@ -50,8 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
                 {
                     Name = project.Name,
                     SourceFiles = project
-                        .Documents.Select(
-                            d => requestContext.ProtocolConverter.ToProtocolUri(new Uri(d.FilePath))
+                        .Documents.Select(d =>
+                            requestContext.ProtocolConverter.ToProtocolUri(new Uri(d.FilePath))
                         )
                         .ToArray(),
                     Language = project.Language

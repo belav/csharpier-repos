@@ -490,8 +490,8 @@ namespace System.Data.Mapping.ViewGeneration
                     if (i == pkColumns.Count)
                     {
                         yield return pkFkInfo
-                            .Item1.AssociationSetEnds.Where(
-                                ase => ase.Name == pkFkInfo.Item2.ToRole.Name
+                            .Item1.AssociationSetEnds.Where(ase =>
+                                ase.Name == pkFkInfo.Item2.ToRole.Name
                             )
                             .Single()
                             .EntitySet;

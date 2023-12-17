@@ -87,8 +87,9 @@ namespace System.ServiceModel.Channels
                     "credentialsManager"
                 );
 
-            TransportSecurityProtocolFactory protocolFactory =
-                new TransportSecurityProtocolFactory();
+            TransportSecurityProtocolFactory protocolFactory = new TransportSecurityProtocolFactory(
+
+            );
             if (isForService)
                 base.ApplyAuditBehaviorSettings(context, protocolFactory);
             base.ConfigureProtocolFactory(

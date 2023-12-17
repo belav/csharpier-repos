@@ -607,23 +607,22 @@ public abstract class NorthwindCompiledQueryTestBase<TFixture> : IClassFixture<T
             ) =>
                 context
                     .Set<Customer>()
-                    .Where(
-                        c =>
-                            c.CustomerID == s1
-                            || c.CustomerID == s2
-                            || c.CustomerID == s3
-                            || c.CustomerID == s4
-                            || c.CustomerID == s5
-                            || c.CustomerID == s6
-                            || c.CustomerID == s7
-                            || c.CustomerID == s8
-                            || c.CustomerID == s9
-                            || c.CustomerID == s10
-                            || c.CustomerID == s11
-                            || c.CustomerID == s12
-                            || c.CustomerID == s13
-                            || c.CustomerID == s14
-                            || c.CustomerID == s15
+                    .Where(c =>
+                        c.CustomerID == s1
+                        || c.CustomerID == s2
+                        || c.CustomerID == s3
+                        || c.CustomerID == s4
+                        || c.CustomerID == s5
+                        || c.CustomerID == s6
+                        || c.CustomerID == s7
+                        || c.CustomerID == s8
+                        || c.CustomerID == s9
+                        || c.CustomerID == s10
+                        || c.CustomerID == s11
+                        || c.CustomerID == s12
+                        || c.CustomerID == s13
+                        || c.CustomerID == s14
+                        || c.CustomerID == s15
                     )
         );
 
@@ -648,23 +647,22 @@ public abstract class NorthwindCompiledQueryTestBase<TFixture> : IClassFixture<T
             ) =>
                 context
                     .Set<Customer>()
-                    .Where(
-                        c =>
-                            c.CustomerID == s1
-                            || c.CustomerID == s2
-                            || c.CustomerID == s3
-                            || c.CustomerID == s4
-                            || c.CustomerID == s5
-                            || c.CustomerID == s6
-                            || c.CustomerID == s7
-                            || c.CustomerID == s8
-                            || c.CustomerID == s9
-                            || c.CustomerID == s10
-                            || c.CustomerID == s11
-                            || c.CustomerID == s12
-                            || c.CustomerID == s13
-                            || c.CustomerID == s14
-                            || c.CustomerID == s15
+                    .Where(c =>
+                        c.CustomerID == s1
+                        || c.CustomerID == s2
+                        || c.CustomerID == s3
+                        || c.CustomerID == s4
+                        || c.CustomerID == s5
+                        || c.CustomerID == s6
+                        || c.CustomerID == s7
+                        || c.CustomerID == s8
+                        || c.CustomerID == s9
+                        || c.CustomerID == s10
+                        || c.CustomerID == s11
+                        || c.CustomerID == s12
+                        || c.CustomerID == s13
+                        || c.CustomerID == s14
+                        || c.CustomerID == s15
                     )
                     .Include(c => c.Orders)
         );
@@ -690,23 +688,22 @@ public abstract class NorthwindCompiledQueryTestBase<TFixture> : IClassFixture<T
             ) =>
                 context
                     .Set<Customer>()
-                    .Count(
-                        c =>
-                            c.CustomerID == s1
-                            || c.CustomerID == s2
-                            || c.CustomerID == s3
-                            || c.CustomerID == s4
-                            || c.CustomerID == s5
-                            || c.CustomerID == s6
-                            || c.CustomerID == s7
-                            || c.CustomerID == s8
-                            || c.CustomerID == s9
-                            || c.CustomerID == s10
-                            || c.CustomerID == s11
-                            || c.CustomerID == s12
-                            || c.CustomerID == s13
-                            || c.CustomerID == s14
-                            || c.CustomerID == s15
+                    .Count(c =>
+                        c.CustomerID == s1
+                        || c.CustomerID == s2
+                        || c.CustomerID == s3
+                        || c.CustomerID == s4
+                        || c.CustomerID == s5
+                        || c.CustomerID == s6
+                        || c.CustomerID == s7
+                        || c.CustomerID == s8
+                        || c.CustomerID == s9
+                        || c.CustomerID == s10
+                        || c.CustomerID == s11
+                        || c.CustomerID == s12
+                        || c.CustomerID == s13
+                        || c.CustomerID == s14
+                        || c.CustomerID == s15
                     )
         );
 
@@ -731,23 +728,22 @@ public abstract class NorthwindCompiledQueryTestBase<TFixture> : IClassFixture<T
             ) =>
                 context
                     .Set<Customer>()
-                    .Where(
-                        c =>
-                            c.CustomerID == s1
-                            || c.CustomerID == s2
-                            || c.CustomerID == s3
-                            || c.CustomerID == s4
-                            || c.CustomerID == s5
-                            || c.CustomerID == s6
-                            || c.CustomerID == s7
-                            || c.CustomerID == s8
-                            || c.CustomerID == s9
-                            || c.CustomerID == s10
-                            || c.CustomerID == s11
-                            || c.CustomerID == s12
-                            || c.CustomerID == s13
-                            || c.CustomerID == s14
-                            || c.CustomerID == s15
+                    .Where(c =>
+                        c.CustomerID == s1
+                        || c.CustomerID == s2
+                        || c.CustomerID == s3
+                        || c.CustomerID == s4
+                        || c.CustomerID == s5
+                        || c.CustomerID == s6
+                        || c.CustomerID == s7
+                        || c.CustomerID == s8
+                        || c.CustomerID == s9
+                        || c.CustomerID == s10
+                        || c.CustomerID == s11
+                        || c.CustomerID == s12
+                        || c.CustomerID == s13
+                        || c.CustomerID == s14
+                        || c.CustomerID == s15
                     )
         );
 
@@ -772,23 +768,22 @@ public abstract class NorthwindCompiledQueryTestBase<TFixture> : IClassFixture<T
             ) =>
                 context
                     .Set<Customer>()
-                    .Where(
-                        c =>
-                            c.CustomerID == s1
-                            || c.CustomerID == s2
-                            || c.CustomerID == s3
-                            || c.CustomerID == s4
-                            || c.CustomerID == s5
-                            || c.CustomerID == s6
-                            || c.CustomerID == s7
-                            || c.CustomerID == s8
-                            || c.CustomerID == s9
-                            || c.CustomerID == s10
-                            || c.CustomerID == s11
-                            || c.CustomerID == s12
-                            || c.CustomerID == s13
-                            || c.CustomerID == s14
-                            || c.CustomerID == s15
+                    .Where(c =>
+                        c.CustomerID == s1
+                        || c.CustomerID == s2
+                        || c.CustomerID == s3
+                        || c.CustomerID == s4
+                        || c.CustomerID == s5
+                        || c.CustomerID == s6
+                        || c.CustomerID == s7
+                        || c.CustomerID == s8
+                        || c.CustomerID == s9
+                        || c.CustomerID == s10
+                        || c.CustomerID == s11
+                        || c.CustomerID == s12
+                        || c.CustomerID == s13
+                        || c.CustomerID == s14
+                        || c.CustomerID == s15
                     )
                     .Include(c => c.Orders)
         );
@@ -814,23 +809,22 @@ public abstract class NorthwindCompiledQueryTestBase<TFixture> : IClassFixture<T
             ) =>
                 context
                     .Set<Customer>()
-                    .Count(
-                        c =>
-                            c.CustomerID == s1
-                            || c.CustomerID == s2
-                            || c.CustomerID == s3
-                            || c.CustomerID == s4
-                            || c.CustomerID == s5
-                            || c.CustomerID == s6
-                            || c.CustomerID == s7
-                            || c.CustomerID == s8
-                            || c.CustomerID == s9
-                            || c.CustomerID == s10
-                            || c.CustomerID == s11
-                            || c.CustomerID == s12
-                            || c.CustomerID == s13
-                            || c.CustomerID == s14
-                            || c.CustomerID == s15
+                    .Count(c =>
+                        c.CustomerID == s1
+                        || c.CustomerID == s2
+                        || c.CustomerID == s3
+                        || c.CustomerID == s4
+                        || c.CustomerID == s5
+                        || c.CustomerID == s6
+                        || c.CustomerID == s7
+                        || c.CustomerID == s8
+                        || c.CustomerID == s9
+                        || c.CustomerID == s10
+                        || c.CustomerID == s11
+                        || c.CustomerID == s12
+                        || c.CustomerID == s13
+                        || c.CustomerID == s14
+                        || c.CustomerID == s15
                     )
         );
 
@@ -855,22 +849,21 @@ public abstract class NorthwindCompiledQueryTestBase<TFixture> : IClassFixture<T
             ) =>
                 context
                     .Set<Customer>()
-                    .Count(
-                        c =>
-                            c.CustomerID == s1
-                            || c.CustomerID == s2
-                            || c.CustomerID == s3
-                            || c.CustomerID == s4
-                            || c.CustomerID == s5
-                            || c.CustomerID == s6
-                            || c.CustomerID == s7
-                            || c.CustomerID == s8
-                            || c.CustomerID == s9
-                            || c.CustomerID == s10
-                            || c.CustomerID == s11
-                            || c.CustomerID == s12
-                            || c.CustomerID == s13
-                            || c.CustomerID == s14
+                    .Count(c =>
+                        c.CustomerID == s1
+                        || c.CustomerID == s2
+                        || c.CustomerID == s3
+                        || c.CustomerID == s4
+                        || c.CustomerID == s5
+                        || c.CustomerID == s6
+                        || c.CustomerID == s7
+                        || c.CustomerID == s8
+                        || c.CustomerID == s9
+                        || c.CustomerID == s10
+                        || c.CustomerID == s11
+                        || c.CustomerID == s12
+                        || c.CustomerID == s13
+                        || c.CustomerID == s14
                     )
         );
 

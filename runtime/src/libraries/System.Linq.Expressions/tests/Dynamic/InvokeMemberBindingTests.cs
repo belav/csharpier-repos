@@ -520,18 +520,17 @@ namespace System.Dynamic.Tests
         {
             object[] testObjects = Enumerable
                 .Range(0, 4)
-                .Select(
-                    _ =>
-                        Activator.CreateInstance(
-                            AssemblyBuilder
-                                .DefineDynamicAssembly(
-                                    new AssemblyName("TestAssembly"),
-                                    AssemblyBuilderAccess.RunAndCollect
-                                )
-                                .DefineDynamicModule("TestModule")
-                                .DefineType("TestType", TypeAttributes.Public)
-                                .CreateType()
-                        )
+                .Select(_ =>
+                    Activator.CreateInstance(
+                        AssemblyBuilder
+                            .DefineDynamicAssembly(
+                                new AssemblyName("TestAssembly"),
+                                AssemblyBuilderAccess.RunAndCollect
+                            )
+                            .DefineDynamicModule("TestModule")
+                            .DefineType("TestType", TypeAttributes.Public)
+                            .CreateType()
+                    )
                 )
                 .ToArray();
             return testObjects.SelectMany(i => testObjects.Select(j => new[] { i, j }));

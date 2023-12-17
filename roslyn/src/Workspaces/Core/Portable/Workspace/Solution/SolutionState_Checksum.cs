@@ -154,13 +154,12 @@ namespace Microsoft.CodeAnalysis
                     // requested set of projects if applicable.
                     var orderedProjectIds = GetOrCreateSortedProjectIds(ProjectIds);
                     var projectChecksumTasks = orderedProjectIds
-                        .Select(
-                            id =>
-                                (
-                                    state: ProjectStates[id],
-                                    mustCompute: projectsToInclude == null
-                                        || projectsToInclude.Contains(id)
-                                )
+                        .Select(id =>
+                            (
+                                state: ProjectStates[id],
+                                mustCompute: projectsToInclude == null
+                                    || projectsToInclude.Contains(id)
+                            )
                         )
                         .Where(t => RemoteSupportedLanguages.IsSupported(t.state.Language))
                         .Select(async t =>

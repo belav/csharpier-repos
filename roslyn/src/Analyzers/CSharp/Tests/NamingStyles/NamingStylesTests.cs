@@ -1438,7 +1438,9 @@ namespace Microsoft.CodeAnalysis.Host
 
             var previewOperations = await action.GetPreviewOperationsAsync(CancellationToken.None);
             Assert.Empty(
-                previewOperations.OfType<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>()
+                previewOperations.OfType<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>(
+
+                )
             );
 
             var commitOperations = await action.GetOperationsAsync(CancellationToken.None);
@@ -1467,7 +1469,9 @@ namespace Microsoft.CodeAnalysis.Host
 
             var previewOperations = await action.GetPreviewOperationsAsync(CancellationToken.None);
             Assert.Empty(
-                previewOperations.OfType<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>()
+                previewOperations.OfType<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>(
+
+                )
             );
 
             var commitOperations = await action.GetOperationsAsync(CancellationToken.None);
@@ -1502,7 +1506,9 @@ namespace Microsoft.CodeAnalysis.Host
 
             var previewOperations = await action.GetPreviewOperationsAsync(CancellationToken.None);
             Assert.Empty(
-                previewOperations.OfType<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>()
+                previewOperations.OfType<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>(
+
+                )
             );
 
             var commitOperations = await action.GetOperationsAsync(CancellationToken.None);

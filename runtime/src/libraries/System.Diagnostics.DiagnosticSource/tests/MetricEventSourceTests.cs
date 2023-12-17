@@ -3583,21 +3583,18 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var beginReportEvents = events
                 .Where(e => e.EventName == "BeginInstrumentReporting")
-                .Select(
-                    e =>
-                        new
-                        {
-                            MeterName = e.Payload[1].ToString(),
-                            MeterVersion = e.Payload[2].ToString(),
-                            InstrumentName = e.Payload[3].ToString(),
-                            InstrumentType = e.Payload[4].ToString(),
-                            Unit = e.Payload[5].ToString(),
-                            Description = e.Payload[6].ToString(),
-                            InstrumentTags = e.Payload[7].ToString(),
-                            MeterTags = e.Payload[8].ToString(),
-                            ScopeHash = e.Payload[9].ToString()
-                        }
-                )
+                .Select(e => new
+                {
+                    MeterName = e.Payload[1].ToString(),
+                    MeterVersion = e.Payload[2].ToString(),
+                    InstrumentName = e.Payload[3].ToString(),
+                    InstrumentType = e.Payload[4].ToString(),
+                    Unit = e.Payload[5].ToString(),
+                    Description = e.Payload[6].ToString(),
+                    InstrumentTags = e.Payload[7].ToString(),
+                    MeterTags = e.Payload[8].ToString(),
+                    ScopeHash = e.Payload[9].ToString()
+                })
                 .ToArray();
 
             foreach (Instrument i in expectedInstruments)
@@ -3631,21 +3628,18 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var beginReportEvents = events
                 .Where(e => e.EventName == "EndInstrumentReporting")
-                .Select(
-                    e =>
-                        new
-                        {
-                            MeterName = e.Payload[1].ToString(),
-                            MeterVersion = e.Payload[2].ToString(),
-                            InstrumentName = e.Payload[3].ToString(),
-                            InstrumentType = e.Payload[4].ToString(),
-                            Unit = e.Payload[5].ToString(),
-                            Description = e.Payload[6].ToString(),
-                            InstrumentTags = e.Payload[7].ToString(),
-                            MeterTags = e.Payload[8].ToString(),
-                            ScopeHash = e.Payload[9].ToString()
-                        }
-                )
+                .Select(e => new
+                {
+                    MeterName = e.Payload[1].ToString(),
+                    MeterVersion = e.Payload[2].ToString(),
+                    InstrumentName = e.Payload[3].ToString(),
+                    InstrumentType = e.Payload[4].ToString(),
+                    Unit = e.Payload[5].ToString(),
+                    Description = e.Payload[6].ToString(),
+                    InstrumentTags = e.Payload[7].ToString(),
+                    MeterTags = e.Payload[8].ToString(),
+                    ScopeHash = e.Payload[9].ToString()
+                })
                 .ToArray();
 
             foreach (Instrument i in expectedInstruments)
@@ -3705,21 +3699,18 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var publishEvents = events
                 .Where(e => e.EventName == "InstrumentPublished")
-                .Select(
-                    e =>
-                        new
-                        {
-                            MeterName = e.Payload[1].ToString(),
-                            MeterVersion = e.Payload[2].ToString(),
-                            InstrumentName = e.Payload[3].ToString(),
-                            InstrumentType = e.Payload[4].ToString(),
-                            Unit = e.Payload[5].ToString(),
-                            Description = e.Payload[6].ToString(),
-                            InstrumentTags = e.Payload[7].ToString(),
-                            MeterTags = e.Payload[8].ToString(),
-                            ScopeHash = e.Payload[9].ToString()
-                        }
-                )
+                .Select(e => new
+                {
+                    MeterName = e.Payload[1].ToString(),
+                    MeterVersion = e.Payload[2].ToString(),
+                    InstrumentName = e.Payload[3].ToString(),
+                    InstrumentType = e.Payload[4].ToString(),
+                    Unit = e.Payload[5].ToString(),
+                    Description = e.Payload[6].ToString(),
+                    InstrumentTags = e.Payload[7].ToString(),
+                    MeterTags = e.Payload[8].ToString(),
+                    ScopeHash = e.Payload[9].ToString()
+                })
                 .ToArray();
 
             foreach (Instrument i in expectedInstruments)
@@ -3798,26 +3789,20 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var counterEvents = events
                 .Where(e => e.EventName == eventName)
-                .Select(
-                    e =>
-                        new
-                        {
-                            MeterName = e.Payload[1].ToString(),
-                            MeterVersion = e.Payload[2].ToString(),
-                            InstrumentName = e.Payload[3].ToString(),
-                            Unit = e.Payload[4].ToString(),
-                            Tags = e.Payload[5].ToString(),
-                            Rate = e.Payload[6].ToString(),
-                            Value = e.Payload[7].ToString()
-                        }
-                )
+                .Select(e => new
+                {
+                    MeterName = e.Payload[1].ToString(),
+                    MeterVersion = e.Payload[2].ToString(),
+                    InstrumentName = e.Payload[3].ToString(),
+                    Unit = e.Payload[4].ToString(),
+                    Tags = e.Payload[5].ToString(),
+                    Rate = e.Payload[6].ToString(),
+                    Value = e.Payload[7].ToString()
+                })
                 .ToArray();
             var filteredEvents = counterEvents
-                .Where(
-                    e =>
-                        e.MeterName == meterName
-                        && e.InstrumentName == instrumentName
-                        && e.Tags == tags
+                .Where(e =>
+                    e.MeterName == meterName && e.InstrumentName == instrumentName && e.Tags == tags
                 )
                 .ToArray();
             Assert.True(filteredEvents.Length >= expected.Length);
@@ -3838,23 +3823,17 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var counterEvents = events
                 .Where(e => e.EventName == "CounterRateValuePublished")
-                .Select(
-                    e =>
-                        new
-                        {
-                            MeterName = e.Payload[1].ToString(),
-                            MeterVersion = e.Payload[2].ToString(),
-                            InstrumentName = e.Payload[3].ToString(),
-                            Tags = e.Payload[5].ToString()
-                        }
-                )
+                .Select(e => new
+                {
+                    MeterName = e.Payload[1].ToString(),
+                    MeterVersion = e.Payload[2].ToString(),
+                    InstrumentName = e.Payload[3].ToString(),
+                    Tags = e.Payload[5].ToString()
+                })
                 .ToArray();
             var filteredEvents = counterEvents
-                .Where(
-                    e =>
-                        e.MeterName == meterName
-                        && e.InstrumentName == instrumentName
-                        && e.Tags == tags
+                .Where(e =>
+                    e.MeterName == meterName && e.InstrumentName == instrumentName && e.Tags == tags
                 )
                 .ToArray();
             Assert.Equal(0, filteredEvents.Length);
@@ -3871,25 +3850,19 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var counterEvents = events
                 .Where(e => e.EventName == "GaugeValuePublished")
-                .Select(
-                    e =>
-                        new
-                        {
-                            MeterName = e.Payload[1].ToString(),
-                            MeterVersion = e.Payload[2].ToString(),
-                            InstrumentName = e.Payload[3].ToString(),
-                            Unit = e.Payload[4].ToString(),
-                            Tags = e.Payload[5].ToString(),
-                            Value = e.Payload[6].ToString(),
-                        }
-                )
+                .Select(e => new
+                {
+                    MeterName = e.Payload[1].ToString(),
+                    MeterVersion = e.Payload[2].ToString(),
+                    InstrumentName = e.Payload[3].ToString(),
+                    Unit = e.Payload[4].ToString(),
+                    Tags = e.Payload[5].ToString(),
+                    Value = e.Payload[6].ToString(),
+                })
                 .ToArray();
             var filteredEvents = counterEvents
-                .Where(
-                    e =>
-                        e.MeterName == meterName
-                        && e.InstrumentName == instrumentName
-                        && e.Tags == tags
+                .Where(e =>
+                    e.MeterName == meterName && e.InstrumentName == instrumentName && e.Tags == tags
                 )
                 .ToArray();
             Assert.True(filteredEvents.Length >= expectedValues.Length);
@@ -3911,27 +3884,21 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var counterEvents = events
                 .Where(e => e.EventName == "HistogramValuePublished")
-                .Select(
-                    e =>
-                        new
-                        {
-                            MeterName = e.Payload[1].ToString(),
-                            MeterVersion = e.Payload[2].ToString(),
-                            InstrumentName = e.Payload[3].ToString(),
-                            Unit = e.Payload[4].ToString(),
-                            Tags = e.Payload[5].ToString(),
-                            Quantiles = (string)e.Payload[6],
-                            Count = e.Payload[7].ToString(),
-                            Sum = e.Payload[8].ToString()
-                        }
-                )
+                .Select(e => new
+                {
+                    MeterName = e.Payload[1].ToString(),
+                    MeterVersion = e.Payload[2].ToString(),
+                    InstrumentName = e.Payload[3].ToString(),
+                    Unit = e.Payload[4].ToString(),
+                    Tags = e.Payload[5].ToString(),
+                    Quantiles = (string)e.Payload[6],
+                    Count = e.Payload[7].ToString(),
+                    Sum = e.Payload[8].ToString()
+                })
                 .ToArray();
             var filteredEvents = counterEvents
-                .Where(
-                    e =>
-                        e.MeterName == meterName
-                        && e.InstrumentName == instrumentName
-                        && e.Tags == tags
+                .Where(e =>
+                    e.MeterName == meterName && e.InstrumentName == instrumentName && e.Tags == tags
                 )
                 .ToArray();
             Assert.True(filteredEvents.Length >= expected.Length);
@@ -3953,23 +3920,17 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var counterEvents = events
                 .Where(e => e.EventName == "HistogramValuePublished")
-                .Select(
-                    e =>
-                        new
-                        {
-                            MeterName = e.Payload[1].ToString(),
-                            MeterVersion = e.Payload[2].ToString(),
-                            InstrumentName = e.Payload[3].ToString(),
-                            Tags = e.Payload[5].ToString()
-                        }
-                )
+                .Select(e => new
+                {
+                    MeterName = e.Payload[1].ToString(),
+                    MeterVersion = e.Payload[2].ToString(),
+                    InstrumentName = e.Payload[3].ToString(),
+                    Tags = e.Payload[5].ToString()
+                })
                 .ToArray();
             var filteredEvents = counterEvents
-                .Where(
-                    e =>
-                        e.MeterName == meterName
-                        && e.InstrumentName == instrumentName
-                        && e.Tags == tags
+                .Where(e =>
+                    e.MeterName == meterName && e.InstrumentName == instrumentName && e.Tags == tags
                 )
                 .ToArray();
             Assert.Equal(0, filteredEvents.Length);
@@ -4041,18 +4002,15 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var counterEvents = events
                 .Where(e => e.EventName == "MultipleSessionsConfiguredIncorrectlyError")
-                .Select(
-                    e =>
-                        new
-                        {
-                            ExpectedMaxHistograms = e.Payload[1].ToString(),
-                            ActualMaxHistograms = e.Payload[2].ToString(),
-                            ExpectedMaxTimeSeries = e.Payload[3].ToString(),
-                            ActualMaxTimeSeries = e.Payload[4].ToString(),
-                            ExpectedRefreshInterval = e.Payload[5].ToString(),
-                            ActualRefreshInterval = e.Payload[6].ToString(),
-                        }
-                )
+                .Select(e => new
+                {
+                    ExpectedMaxHistograms = e.Payload[1].ToString(),
+                    ActualMaxHistograms = e.Payload[2].ToString(),
+                    ExpectedMaxTimeSeries = e.Payload[3].ToString(),
+                    ActualMaxTimeSeries = e.Payload[4].ToString(),
+                    ExpectedRefreshInterval = e.Payload[5].ToString(),
+                    ActualRefreshInterval = e.Payload[6].ToString(),
+                })
                 .ToArray();
             var filteredEvents = counterEvents;
             Assert.Single(filteredEvents);

@@ -97,8 +97,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     return false;
 
                 // Too noisy to offer introduce-local on `this/me`.
-                var syntaxFacts =
-                    document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = document.Document.GetRequiredLanguageService<ISyntaxFactsService>(
+
+                );
                 if (syntaxFacts.IsThisExpression(Expression))
                     return false;
 
@@ -248,10 +249,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
                     var declaration = equalsValue
                         .AncestorsAndSelf()
-                        .FirstOrDefault(
-                            n =>
-                                syntaxFacts.IsLocalDeclarationStatement(n)
-                                || syntaxFacts.IsFieldDeclaration(n)
+                        .FirstOrDefault(n =>
+                            syntaxFacts.IsLocalDeclarationStatement(n)
+                            || syntaxFacts.IsFieldDeclaration(n)
                         );
                     if (declaration == null)
                         return false;

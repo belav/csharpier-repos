@@ -119,12 +119,11 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
             // to the preferred default key's expiration date (allowing for skew) and that it will
             // remain valid one propagation cycle from now? If so, the caller doesn't need to add a
             // new key.
-            callerShouldGenerateNewKey = !allKeys.Any(
-                key =>
-                    key.ActivationDate
-                        <= (preferredDefaultKey.ExpirationDate + _maxServerToServerClockSkew)
-                    && !key.IsExpired(now + _keyPropagationWindow)
-                    && !key.IsRevoked
+            callerShouldGenerateNewKey = !allKeys.Any(key =>
+                key.ActivationDate
+                    <= (preferredDefaultKey.ExpirationDate + _maxServerToServerClockSkew)
+                && !key.IsExpired(now + _keyPropagationWindow)
+                && !key.IsRevoked
             );
 
             if (callerShouldGenerateNewKey)

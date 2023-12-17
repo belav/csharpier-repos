@@ -16,10 +16,8 @@ public abstract class LoggingTestBase
     public void Logs_context_initialization_no_tracking() =>
         Assert.Equal(
             ExpectedMessage("NoTracking " + DefaultOptions),
-            ActualMessage(
-                s =>
-                    CreateOptionsBuilder(s)
-                        .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+            ActualMessage(s =>
+                CreateOptionsBuilder(s).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
             )
         );
 

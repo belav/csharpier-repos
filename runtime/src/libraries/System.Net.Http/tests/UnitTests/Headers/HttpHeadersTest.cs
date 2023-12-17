@@ -2576,8 +2576,8 @@ namespace System.Net.Http.Tests
 
             KeyValuePair<string, string>[] entries = enumerateNonValidated
                 ? headers
-                    .NonValidated.Select(
-                        pair => KeyValuePair.Create(pair.Key, Assert.Single(pair.Value))
+                    .NonValidated.Select(pair =>
+                        KeyValuePair.Create(pair.Key, Assert.Single(pair.Value))
                     )
                     .ToArray()
                 : headers

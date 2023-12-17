@@ -36,11 +36,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context) =>
-            context.RegisterCompilationStartAction(
-                context =>
-                    context.RegisterSyntaxTreeAction(
-                        treeContext => AnalyzeTree(treeContext, context.Compilation.Options)
-                    )
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeTree(treeContext, context.Compilation.Options)
+                )
             );
 
         private void AnalyzeTree(
@@ -110,8 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
                 return;
 
             if (
-                thisOrBaseKeyword.LeadingTrivia.Any(
-                    t => !t.IsWhitespaceOrEndOfLine() && !t.IsSingleOrMultiLineComment()
+                thisOrBaseKeyword.LeadingTrivia.Any(t =>
+                    !t.IsWhitespaceOrEndOfLine() && !t.IsSingleOrMultiLineComment()
                 )
             )
                 return;

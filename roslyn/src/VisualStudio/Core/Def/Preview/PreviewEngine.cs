@@ -142,12 +142,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             // Documents
             // (exclude unchangeable ones if they will be ignored when applied to workspace.)
-            var changedDocuments = projectChanges.SelectMany(
-                p =>
-                    p.GetChangedDocuments(
-                        onlyGetDocumentsWithTextChanges: true,
-                        _oldSolution.Workspace.IgnoreUnchangeableDocumentsWhenApplyingChanges
-                    )
+            var changedDocuments = projectChanges.SelectMany(p =>
+                p.GetChangedDocuments(
+                    onlyGetDocumentsWithTextChanges: true,
+                    _oldSolution.Workspace.IgnoreUnchangeableDocumentsWhenApplyingChanges
+                )
             );
             var addedDocuments = projectChanges.SelectMany(p => p.GetAddedDocuments());
             var removedDocuments = projectChanges.SelectMany(p => p.GetRemovedDocuments());
@@ -158,14 +157,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             allDocumentsWithChanges.AddRange(removedDocuments);
 
             // Additional Documents
-            var changedAdditionalDocuments = projectChanges.SelectMany(
-                p => p.GetChangedAdditionalDocuments()
+            var changedAdditionalDocuments = projectChanges.SelectMany(p =>
+                p.GetChangedAdditionalDocuments()
             );
-            var addedAdditionalDocuments = projectChanges.SelectMany(
-                p => p.GetAddedAdditionalDocuments()
+            var addedAdditionalDocuments = projectChanges.SelectMany(p =>
+                p.GetAddedAdditionalDocuments()
             );
-            var removedAdditionalDocuments = projectChanges.SelectMany(
-                p => p.GetRemovedAdditionalDocuments()
+            var removedAdditionalDocuments = projectChanges.SelectMany(p =>
+                p.GetRemovedAdditionalDocuments()
             );
 
             allDocumentsWithChanges.AddRange(changedAdditionalDocuments);
@@ -173,14 +172,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             allDocumentsWithChanges.AddRange(removedAdditionalDocuments);
 
             // AnalyzerConfig Documents
-            var changedAnalyzerConfigDocuments = projectChanges.SelectMany(
-                p => p.GetChangedAnalyzerConfigDocuments()
+            var changedAnalyzerConfigDocuments = projectChanges.SelectMany(p =>
+                p.GetChangedAnalyzerConfigDocuments()
             );
-            var addedAnalyzerConfigDocuments = projectChanges.SelectMany(
-                p => p.GetAddedAnalyzerConfigDocuments()
+            var addedAnalyzerConfigDocuments = projectChanges.SelectMany(p =>
+                p.GetAddedAnalyzerConfigDocuments()
             );
-            var removedAnalyzerConfigDocuments = projectChanges.SelectMany(
-                p => p.GetRemovedAnalyzerConfigDocuments()
+            var removedAnalyzerConfigDocuments = projectChanges.SelectMany(p =>
+                p.GetRemovedAnalyzerConfigDocuments()
             );
 
             allDocumentsWithChanges.AddRange(changedAnalyzerConfigDocuments);

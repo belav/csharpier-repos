@@ -114,8 +114,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     return AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
                 }
 
-                var document =
-                    triggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document = triggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+                );
                 if (document == null)
                 {
                     return AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
@@ -277,8 +278,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 if (session is null)
                     throw new ArgumentNullException(nameof(session));
 
-                var document =
-                    triggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document = triggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+                );
                 if (document == null)
                     return VSCompletionContext.Empty;
 
@@ -475,7 +477,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     // We only reach here when expanded items are disabled, but user requested them explicitly via expander.
                     // In this case, enable expanded items and trigger the completion only for them.
                     var document =
-                        initialTriggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                        initialTriggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+                        );
                     if (document != null)
                     {
                         // User selected expander explicitly, which means we need to collect and return
@@ -553,8 +557,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 document.Project.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
             );
             var completionItemList = session.CreateCompletionList(
-                completionList.ItemsList.Select(
-                    i => Convert(document, i, filterSet, triggerLocation, cancellationToken)
+                completionList.ItemsList.Select(i =>
+                    Convert(document, i, filterSet, triggerLocation, cancellationToken)
                 )
             );
 

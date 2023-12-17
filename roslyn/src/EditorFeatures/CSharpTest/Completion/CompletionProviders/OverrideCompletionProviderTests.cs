@@ -2918,8 +2918,8 @@ End Class
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.ItemsList.First(
-                i => CompareItems(i.DisplayText, "Bar[int bay]")
+            var completionItem = completionList.ItemsList.First(i =>
+                CompareItems(i.DisplayText, "Bar[int bay]")
             );
 
             if (
@@ -3242,8 +3242,8 @@ int bar;
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.ItemsList.First(
-                i => CompareItems(i.DisplayText, "Equals(object obj)")
+            var completionItem = completionList.ItemsList.First(i =>
+                CompareItems(i.DisplayText, "Equals(object obj)")
             );
 
             if (
@@ -3329,8 +3329,8 @@ int bar;
                 cursorPosition,
                 triggerInfo
             );
-            var completionItem = completionList.ItemsList.First(
-                i => CompareItems(i.DisplayText, "Equals(object obj)")
+            var completionItem = completionList.ItemsList.First(i =>
+                CompareItems(i.DisplayText, "Equals(object obj)")
             );
 
             if (

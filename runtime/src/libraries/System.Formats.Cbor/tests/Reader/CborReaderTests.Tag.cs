@@ -251,7 +251,9 @@ namespace System.Formats.Cbor.Tests
                         CultureInfo.InvariantCulture
                     );
                     byte[] data =
-                        "c07821323032302d30342d30395431343a33313a32312e333533353934312b30313a3030".HexToByteArray();
+                        "c07821323032302d30342d30395431343a33313a32312e333533353934312b30313a3030".HexToByteArray(
+
+                        );
 
                     // Install a non-Gregorian calendar
                     var culture = new CultureInfo("he-IL");

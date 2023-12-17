@@ -532,18 +532,17 @@ namespace Microsoft.Extensions.Options.Tests
             using Barrier barrier = new(participantCount: 2);
             Task<FakeOptions>[] instanceTasks = Enumerable
                 .Range(0, 2)
-                .Select(
-                    _ =>
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                barrier.SignalAndWait();
-                                return monitor.Get("someName");
-                            },
-                            CancellationToken.None,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default
-                        )
+                .Select(_ =>
+                    Task.Factory.StartNew(
+                        () =>
+                        {
+                            barrier.SignalAndWait();
+                            return monitor.Get("someName");
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
                 )
                 .ToArray();
 

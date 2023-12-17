@@ -91,8 +91,9 @@ namespace System.Net.Mail
             new HeaderInfo(MailHeaderID.XSender, "X-Sender", true, true, true)
         };
 
-        private static readonly Dictionary<string, int> s_headerDictionary =
-            CreateHeaderDictionary();
+        private static readonly Dictionary<string, int> s_headerDictionary = CreateHeaderDictionary(
+
+        );
 
         private static Dictionary<string, int> CreateHeaderDictionary()
         {

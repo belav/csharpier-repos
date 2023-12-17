@@ -173,8 +173,8 @@ namespace System.Diagnostics.Tests
         )]
         public void ProcessStart_UseShellExecute_OnUnix_SuccessWhenProgramInstalled(bool isFolder)
         {
-            string programToOpen = s_allowedProgramsToRun.FirstOrDefault(
-                program => IsProgramInstalled(program)
+            string programToOpen = s_allowedProgramsToRun.FirstOrDefault(program =>
+                IsProgramInstalled(program)
             );
             string fileToOpen;
             if (isFolder)

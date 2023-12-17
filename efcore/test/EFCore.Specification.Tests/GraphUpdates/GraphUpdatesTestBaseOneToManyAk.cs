@@ -962,14 +962,13 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
 
                     Assert.True(
-                        orphaned.All(
-                            e =>
-                                context.Entry(e).State
-                                == (
-                                    Fixture.ForceClientNoAction
-                                        ? EntityState.Unchanged
-                                        : EntityState.Modified
-                                )
+                        orphaned.All(e =>
+                            context.Entry(e).State
+                            == (
+                                Fixture.ForceClientNoAction
+                                    ? EntityState.Unchanged
+                                    : EntityState.Modified
+                            )
                         )
                     );
                 }
@@ -1085,8 +1084,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                             cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged)
                         );
                         Assert.True(
-                            cascadeRemovedC.All(
-                                e => context.Entry(e).State == EntityState.Unchanged
+                            cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Unchanged
                             )
                         );
                     }

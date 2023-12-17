@@ -274,8 +274,9 @@ namespace System.Net.Sockets.Tests
         public async Task DoAsyncOperation_OnBothOriginalAndClone_ThrowsInvalidOperationException()
         {
             // Not applicable for synchronous operations:
-            (Socket client, Socket originalServer) =
-                SocketTestExtensions.CreateConnectedSocketPair();
+            (Socket client, Socket originalServer) = SocketTestExtensions.CreateConnectedSocketPair(
+
+            );
 
             using (client)
             using (originalServer)

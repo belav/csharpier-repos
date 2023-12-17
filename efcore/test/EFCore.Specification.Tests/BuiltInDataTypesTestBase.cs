@@ -30,14 +30,11 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
 
         var query = context
             .Set<EmailTemplate>()
-            .Select(
-                t =>
-                    new EmailTemplateDto
-                    {
-                        Id = t.Id,
-                        TemplateType = (EmailTemplateTypeDto)t.TemplateType
-                    }
-            )
+            .Select(t => new EmailTemplateDto
+            {
+                Id = t.Id,
+                TemplateType = (EmailTemplateTypeDto)t.TemplateType
+            })
             .Where(t => t.TemplateType == templateType);
 
         var results = async ? await query.ToListAsync() : query.ToList();
@@ -54,14 +51,11 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         using var context = CreateContext();
         var query = context
             .Set<EmailTemplate>()
-            .Select(
-                t =>
-                    new EmailTemplateDto
-                    {
-                        Id = t.Id,
-                        TemplateType = (EmailTemplateTypeDto)t.TemplateType
-                    }
-            )
+            .Select(t => new EmailTemplateDto
+            {
+                Id = t.Id,
+                TemplateType = (EmailTemplateTypeDto)t.TemplateType
+            })
             .Where(t => t.TemplateType == EmailTemplateTypeDto.PasswordResetRequest);
 
         var results = async ? await query.ToListAsync() : query.ToList();
@@ -268,10 +262,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var param1 = (short)-1234;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<short>(e, nameof(BuiltInDataTypes.TestInt16)) == param1
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<short>(e, nameof(BuiltInDataTypes.TestInt16)) == param1
                 )
                 .ToList()
                 .Single()
@@ -280,10 +273,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var param2 = -123456789;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<int>(e, nameof(BuiltInDataTypes.TestInt32)) == param2
+            set.Where(e =>
+                    e.Id == 11 && EF.Property<int>(e, nameof(BuiltInDataTypes.TestInt32)) == param2
                 )
                 .ToList()
                 .Single()
@@ -294,10 +285,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         {
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<long>(e, nameof(BuiltInDataTypes.TestInt64)) == param3
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<long>(e, nameof(BuiltInDataTypes.TestInt64)) == param3
                     )
                     .ToList()
                     .Single()
@@ -309,10 +299,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         {
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble)) == param4
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble)) == param4
                     )
                     .ToList()
                     .Single()
@@ -324,19 +313,17 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             double? param4h = -1.234567889;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (
+                set.Where(e =>
+                        e.Id == 11
+                        && (
+                            EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble)) == param4
+                            || (
                                 EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble))
-                                    == param4
-                                || (
-                                    EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble))
-                                        > param4l
-                                    && EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble))
-                                        < param4h
-                                )
+                                    > param4l
+                                && EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble))
+                                    < param4h
                             )
+                        )
                     )
                     .ToList()
                     .Single()
@@ -346,10 +333,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var param5 = -1234567890.01M;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<decimal>(e, nameof(BuiltInDataTypes.TestDecimal)) == param5
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<decimal>(e, nameof(BuiltInDataTypes.TestDecimal)) == param5
                 )
                 .ToList()
                 .Single()
@@ -358,10 +344,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var param6 = Fixture.DefaultDateTime;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<DateTime>(e, nameof(BuiltInDataTypes.TestDateTime)) == param6
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<DateTime>(e, nameof(BuiltInDataTypes.TestDateTime)) == param6
                 )
                 .ToList()
                 .Single()
@@ -372,13 +357,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param7 = new DateTimeOffset(new DateTime(), TimeSpan.FromHours(-8.0));
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<DateTimeOffset>(
-                                e,
-                                nameof(BuiltInDataTypes.TestDateTimeOffset)
-                            ) == param7
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<DateTimeOffset>(
+                            e,
+                            nameof(BuiltInDataTypes.TestDateTimeOffset)
+                        ) == param7
                     )
                     .ToList()
                     .Single()
@@ -390,11 +374,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param8 = new TimeSpan(0, 10, 9, 8, 7);
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<TimeSpan>(e, nameof(BuiltInDataTypes.TestTimeSpan))
-                                == param8
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<TimeSpan>(e, nameof(BuiltInDataTypes.TestTimeSpan)) == param8
                     )
                     .ToList()
                     .Single()
@@ -406,11 +388,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param9 = new DateOnly(2020, 3, 1);
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<DateOnly>(e, nameof(BuiltInDataTypes.TestDateOnly))
-                                == param9
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<DateOnly>(e, nameof(BuiltInDataTypes.TestDateOnly)) == param9
                     )
                     .ToList()
                     .Single()
@@ -422,11 +402,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param10 = new TimeOnly(12, 30, 45, 123);
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<TimeOnly>(e, nameof(BuiltInDataTypes.TestTimeOnly))
-                                == param10
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<TimeOnly>(e, nameof(BuiltInDataTypes.TestTimeOnly))
+                            == param10
                     )
                     .ToList()
                     .Single()
@@ -438,10 +417,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         {
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle)) == param11
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle)) == param11
                     )
                     .ToList()
                     .Single()
@@ -453,19 +431,17 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param11h = -1.2339F;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (
+                set.Where(e =>
+                        e.Id == 11
+                        && (
+                            EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle)) == param11
+                            || (
                                 EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle))
-                                    == param11
-                                || (
-                                    EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle))
-                                        > param11l
-                                    && EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle))
-                                        < param11h
-                                )
+                                    > param11l
+                                && EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle))
+                                    < param11h
                             )
+                        )
                     )
                     .ToList()
                     .Single()
@@ -475,10 +451,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var param12 = true;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<bool>(e, nameof(BuiltInDataTypes.TestBoolean)) == param12
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<bool>(e, nameof(BuiltInDataTypes.TestBoolean)) == param12
                 )
                 .ToList()
                 .Single()
@@ -489,10 +464,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param13 = (byte)255;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<byte>(e, nameof(BuiltInDataTypes.TestByte)) == param13
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<byte>(e, nameof(BuiltInDataTypes.TestByte)) == param13
                     )
                     .ToList()
                     .Single()
@@ -502,10 +476,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var param14 = Enum64.SomeValue;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64)) == param14
+            set.Where(e =>
+                    e.Id == 11 && EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64)) == param14
                 )
                 .ToList()
                 .Single()
@@ -514,10 +486,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var param15 = Enum32.SomeValue;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32)) == param15
+            set.Where(e =>
+                    e.Id == 11 && EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32)) == param15
                 )
                 .ToList()
                 .Single()
@@ -526,10 +496,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var param16 = Enum16.SomeValue;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16)) == param16
+            set.Where(e =>
+                    e.Id == 11 && EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16)) == param16
                 )
                 .ToList()
                 .Single()
@@ -540,10 +508,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param17 = Enum8.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8)) == param17
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8)) == param17
                     )
                     .ToList()
                     .Single()
@@ -555,11 +522,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param18 = (ushort)1234;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<ushort>(e, nameof(BuiltInDataTypes.TestUnsignedInt16))
-                                == param18
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<ushort>(e, nameof(BuiltInDataTypes.TestUnsignedInt16))
+                            == param18
                     )
                     .ToList()
                     .Single()
@@ -571,11 +537,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param19 = 1234565789U;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<uint>(e, nameof(BuiltInDataTypes.TestUnsignedInt32))
-                                == param19
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<uint>(e, nameof(BuiltInDataTypes.TestUnsignedInt32))
+                            == param19
                     )
                     .ToList()
                     .Single()
@@ -587,11 +552,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param20 = 1234567890123456789UL;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<ulong>(e, nameof(BuiltInDataTypes.TestUnsignedInt64))
-                                == param20
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<ulong>(e, nameof(BuiltInDataTypes.TestUnsignedInt64))
+                            == param20
                     )
                     .ToList()
                     .Single()
@@ -603,11 +567,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param21 = 'a';
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<char>(e, nameof(BuiltInDataTypes.TestCharacter))
-                                == param21
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<char>(e, nameof(BuiltInDataTypes.TestCharacter)) == param21
                     )
                     .ToList()
                     .Single()
@@ -619,11 +581,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param22 = (sbyte)-128;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<sbyte>(e, nameof(BuiltInDataTypes.TestSignedByte))
-                                == param22
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<sbyte>(e, nameof(BuiltInDataTypes.TestSignedByte)) == param22
                     )
                     .ToList()
                     .Single()
@@ -635,10 +595,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param23 = EnumU64.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<EnumU64>(e, nameof(BuiltInDataTypes.EnumU64)) == param23
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<EnumU64>(e, nameof(BuiltInDataTypes.EnumU64)) == param23
                     )
                     .ToList()
                     .Single()
@@ -650,10 +609,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param24 = EnumU32.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<EnumU32>(e, nameof(BuiltInDataTypes.EnumU32)) == param24
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<EnumU32>(e, nameof(BuiltInDataTypes.EnumU32)) == param24
                     )
                     .ToList()
                     .Single()
@@ -665,10 +623,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param25 = EnumU16.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<EnumU16>(e, nameof(BuiltInDataTypes.EnumU16)) == param25
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<EnumU16>(e, nameof(BuiltInDataTypes.EnumU16)) == param25
                     )
                     .ToList()
                     .Single()
@@ -680,10 +637,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param26 = EnumS8.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<EnumS8>(e, nameof(BuiltInDataTypes.EnumS8)) == param26
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<EnumS8>(e, nameof(BuiltInDataTypes.EnumS8)) == param26
                     )
                     .ToList()
                     .Single()
@@ -699,22 +655,19 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param27 = 1;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64))
-                                == (Enum64)param27
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64))
+                            == (Enum64)param27
                     )
                     .ToList()
                     .Single()
             );
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (int)EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64))
-                                == param27
+                set.Where(e =>
+                        e.Id == 11
+                        && (int)EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64)) == param27
                     )
                     .ToList()
                     .Single()
@@ -730,22 +683,19 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param28 = 1;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32))
-                                == (Enum32)param28
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32))
+                            == (Enum32)param28
                     )
                     .ToList()
                     .Single()
             );
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (int)EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32))
-                                == param28
+                set.Where(e =>
+                        e.Id == 11
+                        && (int)EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32)) == param28
                     )
                     .ToList()
                     .Single()
@@ -761,22 +711,19 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param29 = 1;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16))
-                                == (Enum16)param29
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16))
+                            == (Enum16)param29
                     )
                     .ToList()
                     .Single()
             );
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (int)EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16))
-                                == param29
+                set.Where(e =>
+                        e.Id == 11
+                        && (int)EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16)) == param29
                     )
                     .ToList()
                     .Single()
@@ -792,21 +739,18 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param30 = 1;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8))
-                                == (Enum8)param30
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8)) == (Enum8)param30
                     )
                     .ToList()
                     .Single()
             );
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (int)EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8)) == param30
+                set.Where(e =>
+                        e.Id == 11
+                        && (int)EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8)) == param30
                     )
                     .ToList()
                     .Single()
@@ -902,13 +846,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         short? param1 = -1234;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<short?>(
-                            e,
-                            nameof(BuiltInNullableDataTypes.TestNullableInt16)
-                        ) == param1
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<short?>(e, nameof(BuiltInNullableDataTypes.TestNullableInt16))
+                        == param1
                 )
                 .ToList()
                 .Single()
@@ -917,11 +858,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         int? param2 = -123456789;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<int?>(e, nameof(BuiltInNullableDataTypes.TestNullableInt32))
-                            == param2
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<int?>(e, nameof(BuiltInNullableDataTypes.TestNullableInt32))
+                        == param2
                 )
                 .ToList()
                 .Single()
@@ -930,11 +870,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         long? param3 = -1234567890123456789L;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<long?>(e, nameof(BuiltInNullableDataTypes.TestNullableInt64))
-                            == param3
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<long?>(e, nameof(BuiltInNullableDataTypes.TestNullableInt64))
+                        == param3
                 )
                 .ToList()
                 .Single()
@@ -945,13 +884,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         {
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<double?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableDouble)
-                            ) == param4
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<double?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableDouble)
+                        ) == param4
                     )
                     .ToList()
                     .Single()
@@ -963,25 +901,24 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             double? param4h = -1.234567889;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (
+                set.Where(e =>
+                        e.Id == 11
+                        && (
+                            EF.Property<double?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableDouble)
+                            ) == param4
+                            || (
                                 EF.Property<double?>(
                                     e,
                                     nameof(BuiltInNullableDataTypes.TestNullableDouble)
-                                ) == param4
-                                || (
-                                    EF.Property<double?>(
-                                        e,
-                                        nameof(BuiltInNullableDataTypes.TestNullableDouble)
-                                    ) > param4l
-                                    && EF.Property<double?>(
-                                        e,
-                                        nameof(BuiltInNullableDataTypes.TestNullableDouble)
-                                    ) < param4h
-                                )
+                                ) > param4l
+                                && EF.Property<double?>(
+                                    e,
+                                    nameof(BuiltInNullableDataTypes.TestNullableDouble)
+                                ) < param4h
                             )
+                        )
                     )
                     .ToList()
                     .Single()
@@ -991,13 +928,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         decimal? param5 = -1234567890.01M;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<decimal?>(
-                            e,
-                            nameof(BuiltInNullableDataTypes.TestNullableDecimal)
-                        ) == param5
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<decimal?>(
+                        e,
+                        nameof(BuiltInNullableDataTypes.TestNullableDecimal)
+                    ) == param5
                 )
                 .ToList()
                 .Single()
@@ -1006,13 +942,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         DateTime? param6 = Fixture.DefaultDateTime;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<DateTime?>(
-                            e,
-                            nameof(BuiltInNullableDataTypes.TestNullableDateTime)
-                        ) == param6
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<DateTime?>(
+                        e,
+                        nameof(BuiltInNullableDataTypes.TestNullableDateTime)
+                    ) == param6
                 )
                 .ToList()
                 .Single()
@@ -1026,13 +961,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             DateTimeOffset? param7 = new DateTimeOffset(new DateTime(), TimeSpan.FromHours(-8.0));
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<DateTimeOffset?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableDateTimeOffset)
-                            ) == param7
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<DateTimeOffset?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableDateTimeOffset)
+                        ) == param7
                     )
                     .ToList()
                     .Single()
@@ -1044,13 +978,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             TimeSpan? param8 = new TimeSpan(0, 10, 9, 8, 7);
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<TimeSpan?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableTimeSpan)
-                            ) == param8
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<TimeSpan?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableTimeSpan)
+                        ) == param8
                     )
                     .ToList()
                     .Single()
@@ -1062,13 +995,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             DateOnly? param9 = new DateOnly(2020, 3, 1);
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<DateOnly?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableDateOnly)
-                            ) == param9
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<DateOnly?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableDateOnly)
+                        ) == param9
                     )
                     .ToList()
                     .Single()
@@ -1080,13 +1012,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             TimeOnly? param10 = new TimeOnly(12, 30, 45, 123);
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<TimeOnly?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableTimeOnly)
-                            ) == param10
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<TimeOnly?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableTimeOnly)
+                        ) == param10
                     )
                     .ToList()
                     .Single()
@@ -1098,13 +1029,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         {
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<float?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableSingle)
-                            ) == param11
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<float?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableSingle)
+                        ) == param11
                     )
                     .ToList()
                     .Single()
@@ -1116,25 +1046,24 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             float? param11h = -1.2339F;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (
+                set.Where(e =>
+                        e.Id == 11
+                        && (
+                            EF.Property<float?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableSingle)
+                            ) == param11
+                            || (
                                 EF.Property<float?>(
                                     e,
                                     nameof(BuiltInNullableDataTypes.TestNullableSingle)
-                                ) == param11
-                                || (
-                                    EF.Property<float?>(
-                                        e,
-                                        nameof(BuiltInNullableDataTypes.TestNullableSingle)
-                                    ) > param11l
-                                    && EF.Property<float?>(
-                                        e,
-                                        nameof(BuiltInNullableDataTypes.TestNullableSingle)
-                                    ) < param11h
-                                )
+                                ) > param11l
+                                && EF.Property<float?>(
+                                    e,
+                                    nameof(BuiltInNullableDataTypes.TestNullableSingle)
+                                ) < param11h
                             )
+                        )
                     )
                     .ToList()
                     .Single()
@@ -1144,13 +1073,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         bool? param12 = true;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<bool?>(
-                            e,
-                            nameof(BuiltInNullableDataTypes.TestNullableBoolean)
-                        ) == param12
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<bool?>(e, nameof(BuiltInNullableDataTypes.TestNullableBoolean))
+                        == param12
                 )
                 .ToList()
                 .Single()
@@ -1161,13 +1087,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             byte? param13 = 255;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<byte?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableByte)
-                            ) == param13
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<byte?>(e, nameof(BuiltInNullableDataTypes.TestNullableByte))
+                            == param13
                     )
                     .ToList()
                     .Single()
@@ -1177,11 +1100,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         Enum64? param14 = Enum64.SomeValue;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
-                            == param14
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64)) == param14
                 )
                 .ToList()
                 .Single()
@@ -1190,11 +1111,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         Enum32? param15 = Enum32.SomeValue;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
-                            == param15
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32)) == param15
                 )
                 .ToList()
                 .Single()
@@ -1203,11 +1122,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         Enum16? param16 = Enum16.SomeValue;
         Assert.Same(
             entity,
-            set.Where(
-                    e =>
-                        e.Id == 11
-                        && EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
-                            == param16
+            set.Where(e =>
+                    e.Id == 11
+                    && EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16)) == param16
                 )
                 .ToList()
                 .Single()
@@ -1218,11 +1135,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             Enum8? param17 = Enum8.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
-                                == param17
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8)) == param17
                     )
                     .ToList()
                     .Single()
@@ -1237,13 +1152,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             ushort? param18 = 1234;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<ushort?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt16)
-                            ) == param18
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<ushort?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt16)
+                        ) == param18
                     )
                     .ToList()
                     .Single()
@@ -1258,13 +1172,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             uint? param19 = 1234565789U;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<uint?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt32)
-                            ) == param19
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<uint?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt32)
+                        ) == param19
                     )
                     .ToList()
                     .Single()
@@ -1279,13 +1192,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             ulong? param20 = 1234567890123456789UL;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<ulong?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt64)
-                            ) == param20
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<ulong?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt64)
+                        ) == param20
                     )
                     .ToList()
                     .Single()
@@ -1297,13 +1209,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             char? param21 = 'a';
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<char?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableCharacter)
-                            ) == param21
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<char?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableCharacter)
+                        ) == param21
                     )
                     .ToList()
                     .Single()
@@ -1317,13 +1228,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             sbyte? param22 = -128;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<sbyte?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableSignedByte)
-                            ) == param22
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<sbyte?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableSignedByte)
+                        ) == param22
                     )
                     .ToList()
                     .Single()
@@ -1335,11 +1245,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param23 = EnumU64.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<EnumU64?>(e, nameof(BuiltInNullableDataTypes.EnumU64))
-                                == param23
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<EnumU64?>(e, nameof(BuiltInNullableDataTypes.EnumU64))
+                            == param23
                     )
                     .ToList()
                     .Single()
@@ -1351,11 +1260,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param24 = EnumU32.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<EnumU32?>(e, nameof(BuiltInNullableDataTypes.EnumU32))
-                                == param24
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<EnumU32?>(e, nameof(BuiltInNullableDataTypes.EnumU32))
+                            == param24
                     )
                     .ToList()
                     .Single()
@@ -1367,11 +1275,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param25 = EnumU16.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<EnumU16?>(e, nameof(BuiltInNullableDataTypes.EnumU16))
-                                == param25
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<EnumU16?>(e, nameof(BuiltInNullableDataTypes.EnumU16))
+                            == param25
                     )
                     .ToList()
                     .Single()
@@ -1383,11 +1290,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             var param26 = EnumS8.SomeValue;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<EnumS8?>(e, nameof(BuiltInNullableDataTypes.EnumS8))
-                                == param26
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<EnumS8?>(e, nameof(BuiltInNullableDataTypes.EnumS8))
+                            == param26
                     )
                     .ToList()
                     .Single()
@@ -1405,22 +1311,20 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             int? param27 = 1;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
-                                == (Enum64)param27
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
+                            == (Enum64)param27
                     )
                     .ToList()
                     .Single()
             );
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (int)EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
-                                == param27
+                set.Where(e =>
+                        e.Id == 11
+                        && (int)EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
+                            == param27
                     )
                     .ToList()
                     .Single()
@@ -1438,22 +1342,20 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             int? param28 = 1;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
-                                == (Enum32)param28
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
+                            == (Enum32)param28
                     )
                     .ToList()
                     .Single()
             );
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (int)EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
-                                == param28
+                set.Where(e =>
+                        e.Id == 11
+                        && (int)EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
+                            == param28
                     )
                     .ToList()
                     .Single()
@@ -1471,22 +1373,20 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             int? param29 = 1;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
-                                == (Enum16)param29
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
+                            == (Enum16)param29
                     )
                     .ToList()
                     .Single()
             );
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (int)EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
-                                == param29
+                set.Where(e =>
+                        e.Id == 11
+                        && (int)EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
+                            == param29
                     )
                     .ToList()
                     .Single()
@@ -1504,22 +1404,20 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             int? param30 = 1;
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
-                                == (Enum8)param30
+                set.Where(e =>
+                        e.Id == 11
+                        && EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
+                            == (Enum8)param30
                     )
                     .ToList()
                     .Single()
             );
             Assert.Same(
                 entity,
-                set.Where(
-                        e =>
-                            e.Id == 11
-                            && (int)EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
-                                == param30
+                set.Where(e =>
+                        e.Id == 11
+                        && (int)EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
+                            == param30
                     )
                     .ToList()
                     .Single()
@@ -1687,11 +1585,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                     entity,
                     context
                         .Set<BuiltInNullableDataTypes>()
-                        .Where(
-                            e =>
-                                e.Id == 12
-                                && -e.TestNullableDouble + -1.23456789 < 1E-5
-                                && -e.TestNullableDouble + -1.23456789 > -1E-5
+                        .Where(e =>
+                            e.Id == 12
+                            && -e.TestNullableDouble + -1.23456789 < 1E-5
+                            && -e.TestNullableDouble + -1.23456789 > -1E-5
                         )
                         .ToList()
                         .Single()
@@ -1734,11 +1631,10 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                     entity,
                     context
                         .Set<BuiltInNullableDataTypes>()
-                        .Where(
-                            e =>
-                                e.Id == 12
-                                && e.TestNullableDateTimeOffset
-                                    == new DateTimeOffset(new DateTime(), TimeSpan.FromHours(-8.0))
+                        .Where(e =>
+                            e.Id == 12
+                            && e.TestNullableDateTimeOffset
+                                == new DateTimeOffset(new DateTime(), TimeSpan.FromHours(-8.0))
                         )
                         .ToList()
                         .Single()
@@ -1754,9 +1650,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                     entity,
                     context
                         .Set<BuiltInNullableDataTypes>()
-                        .Where(
-                            e =>
-                                e.Id == 12 && e.TestNullableTimeSpan == new TimeSpan(0, 10, 9, 8, 7)
+                        .Where(e =>
+                            e.Id == 12 && e.TestNullableTimeSpan == new TimeSpan(0, 10, 9, 8, 7)
                         )
                         .ToList()
                         .Single()
@@ -1772,8 +1667,7 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                     entity,
                     context
                         .Set<BuiltInNullableDataTypes>()
-                        .Where(
-                            e => e.Id == 12 && e.TestNullableDateOnly == new DateOnly(2020, 3, 1)
+                        .Where(e => e.Id == 12 && e.TestNullableDateOnly == new DateOnly(2020, 3, 1)
                         )
                         .ToList()
                         .Single()
@@ -1789,10 +1683,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                     entity,
                     context
                         .Set<BuiltInNullableDataTypes>()
-                        .Where(
-                            e =>
-                                e.Id == 12
-                                && e.TestNullableTimeOnly == new TimeOnly(12, 30, 45, 123)
+                        .Where(e =>
+                            e.Id == 12 && e.TestNullableTimeOnly == new TimeOnly(12, 30, 45, 123)
                         )
                         .ToList()
                         .Single()
@@ -1930,8 +1822,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                     entity,
                     context
                         .Set<BuiltInNullableDataTypes>()
-                        .Where(
-                            e => e.Id == 12 && e.TestNullableUnsignedInt64 == 1234567890123456789UL
+                        .Where(e =>
+                            e.Id == 12 && e.TestNullableUnsignedInt64 == 1234567890123456789UL
                         )
                         .ToList()
                         .Single()
@@ -3272,22 +3164,19 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             .Set<BuiltInDataTypes>()
             .Where(e => e.Id == 13)
             .AsEnumerable()
-            .Select(
-                b =>
-                    new
-                    {
-                        Sbyte = b.TestSignedByte.ToString(),
-                        Byte = b.TestByte.ToString(),
-                        Short = b.TestInt16.ToString(),
-                        Ushort = b.TestUnsignedInt16.ToString(),
-                        Int = b.TestInt32.ToString(),
-                        Uint = b.TestUnsignedInt32.ToString(),
-                        Long = b.TestInt64.ToString(),
-                        Ulong = b.TestUnsignedInt64.ToString(),
-                        Decimal = b.TestDecimal.ToString(),
-                        Char = b.TestCharacter.ToString()
-                    }
-            )
+            .Select(b => new
+            {
+                Sbyte = b.TestSignedByte.ToString(),
+                Byte = b.TestByte.ToString(),
+                Short = b.TestInt16.ToString(),
+                Ushort = b.TestUnsignedInt16.ToString(),
+                Int = b.TestInt32.ToString(),
+                Uint = b.TestUnsignedInt32.ToString(),
+                Long = b.TestInt64.ToString(),
+                Ulong = b.TestUnsignedInt64.ToString(),
+                Decimal = b.TestDecimal.ToString(),
+                Char = b.TestCharacter.ToString()
+            })
             .First();
 
         Fixture.ListLoggerFactory.Clear();
@@ -3295,29 +3184,26 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var query = context
             .Set<BuiltInDataTypes>()
             .Where(e => e.Id == 13)
-            .Select(
-                b =>
-                    new
-                    {
-                        Sbyte = b.TestSignedByte.ToString(),
-                        Byte = b.TestByte.ToString(),
-                        Short = b.TestInt16.ToString(),
-                        Ushort = b.TestUnsignedInt16.ToString(),
-                        Int = b.TestInt32.ToString(),
-                        Uint = b.TestUnsignedInt32.ToString(),
-                        Long = b.TestInt64.ToString(),
-                        Ulong = b.TestUnsignedInt64.ToString(),
-                        Float = b.TestSingle.ToString(),
-                        Double = b.TestDouble.ToString(),
-                        Decimal = b.TestDecimal.ToString(),
-                        Char = b.TestCharacter.ToString(),
-                        DateTime = b.TestDateTime.ToString(),
-                        DateTimeOffset = b.TestDateTimeOffset.ToString(),
-                        TimeSpan = b.TestTimeSpan.ToString(),
-                        DateOnly = b.TestDateOnly.ToString(),
-                        TimeOnly = b.TestTimeOnly.ToString(),
-                    }
-            )
+            .Select(b => new
+            {
+                Sbyte = b.TestSignedByte.ToString(),
+                Byte = b.TestByte.ToString(),
+                Short = b.TestInt16.ToString(),
+                Ushort = b.TestUnsignedInt16.ToString(),
+                Int = b.TestInt32.ToString(),
+                Uint = b.TestUnsignedInt32.ToString(),
+                Long = b.TestInt64.ToString(),
+                Ulong = b.TestUnsignedInt64.ToString(),
+                Float = b.TestSingle.ToString(),
+                Double = b.TestDouble.ToString(),
+                Decimal = b.TestDecimal.ToString(),
+                Char = b.TestCharacter.ToString(),
+                DateTime = b.TestDateTime.ToString(),
+                DateTimeOffset = b.TestDateTimeOffset.ToString(),
+                TimeSpan = b.TestTimeSpan.ToString(),
+                DateOnly = b.TestDateOnly.ToString(),
+                TimeOnly = b.TestTimeOnly.ToString(),
+            })
             .ToList();
 
         var actual = Assert.Single(query);
@@ -3340,28 +3226,22 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
         var expected = context
             .Set<DateTimeEnclosure>()
             .ToList()
-            .Select(
-                e =>
-                    new
-                    {
-                        DT = e.DateTimeOffset == null
-                            ? (DateTime?)null
-                            : e.DateTimeOffset.Value.DateTime.Date
-                    }
-            )
+            .Select(e => new
+            {
+                DT = e.DateTimeOffset == null
+                    ? (DateTime?)null
+                    : e.DateTimeOffset.Value.DateTime.Date
+            })
             .ToList();
 
         var actual = context
             .Set<DateTimeEnclosure>()
-            .Select(
-                e =>
-                    new
-                    {
-                        DT = e.DateTimeOffset == null
-                            ? (DateTime?)null
-                            : e.DateTimeOffset.Value.DateTime.Date
-                    }
-            )
+            .Select(e => new
+            {
+                DT = e.DateTimeOffset == null
+                    ? (DateTime?)null
+                    : e.DateTimeOffset.Value.DateTime.Date
+            })
             .ToList();
 
         for (var i = 0; i < expected.Count; i++)
@@ -3392,13 +3272,12 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
             base.AddOptions(builder)
-                .ConfigureWarnings(
-                    w =>
-                        w.Ignore(
-                            CoreEventId.MappedEntityTypeIgnoredWarning,
-                            CoreEventId.MappedPropertyIgnoredWarning,
-                            CoreEventId.MappedNavigationIgnoredWarning
-                        )
+                .ConfigureWarnings(w =>
+                    w.Ignore(
+                        CoreEventId.MappedEntityTypeIgnoredWarning,
+                        CoreEventId.MappedPropertyIgnoredWarning,
+                        CoreEventId.MappedNavigationIgnoredWarning
+                    )
                 );
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)

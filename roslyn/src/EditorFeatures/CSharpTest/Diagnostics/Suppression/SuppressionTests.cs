@@ -480,7 +480,9 @@ class Class
                     );
 
                     Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
-                        workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+                        workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>(
+
+                        )
                     );
                     var diagnosticService = Assert.IsType<DiagnosticAnalyzerService>(
                         workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
@@ -1327,11 +1329,10 @@ class Class
                                 foreach (
                                     var trivia in context
                                         .Node.DescendantTrivia()
-                                        .Where(
-                                            t =>
-                                                t.Kind()
-                                                    is SyntaxKind.SingleLineCommentTrivia
-                                                        or SyntaxKind.MultiLineCommentTrivia
+                                        .Where(t =>
+                                            t.Kind()
+                                                is SyntaxKind.SingleLineCommentTrivia
+                                                    or SyntaxKind.MultiLineCommentTrivia
                                         )
                                 )
                                 {

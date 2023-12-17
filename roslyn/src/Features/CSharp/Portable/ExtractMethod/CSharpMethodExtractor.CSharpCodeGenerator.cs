@@ -419,8 +419,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     cancellationToken
                 );
 
-                statements = statements.SelectAsArray(
-                    s => FixDeclarationExpressionsAndDeclarationPatterns(s, variableToRemoveMap)
+                statements = statements.SelectAsArray(s =>
+                    FixDeclarationExpressionsAndDeclarationPatterns(s, variableToRemoveMap)
                 );
 
                 foreach (var statement in statements)
@@ -551,11 +551,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 var declarations = statement
                     .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.Kind()
-                                is SyntaxKind.DeclarationExpression
-                                    or SyntaxKind.DeclarationPattern
+                    .Where(n =>
+                        n.Kind()
+                            is SyntaxKind.DeclarationExpression
+                                or SyntaxKind.DeclarationPattern
                     );
 
                 foreach (var node in declarations)
@@ -768,16 +767,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         if (
                             AnalyzerResult
                                 .ReturnType.GetMembers()
-                                .Any(
-                                    static x =>
-                                        x
-                                            is IMethodSymbol
-                                            {
-                                                Name: nameof(Task.ConfigureAwait),
-                                                Parameters: [
-                                                    { Type.SpecialType: SpecialType.System_Boolean }
-                                                ],
-                                            }
+                                .Any(static x =>
+                                    x
+                                        is IMethodSymbol
+                                        {
+                                            Name: nameof(Task.ConfigureAwait),
+                                            Parameters: [
+                                                { Type.SpecialType: SpecialType.System_Boolean }
+                                            ],
+                                        }
                                 )
                         )
                         {
@@ -989,15 +987,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     SyntaxNode methodSyntax
                 )
                 {
-                    var enclosingMethod = returnOperationSyntax.FirstAncestorOrSelf<SyntaxNode>(
-                        n =>
-                            n switch
-                            {
-                                BaseMethodDeclarationSyntax _ => true,
-                                AnonymousFunctionExpressionSyntax _ => true,
-                                LocalFunctionStatementSyntax _ => true,
-                                _ => false
-                            }
+                    var enclosingMethod = returnOperationSyntax.FirstAncestorOrSelf<SyntaxNode>(n =>
+                        n switch
+                        {
+                            BaseMethodDeclarationSyntax _ => true,
+                            AnonymousFunctionExpressionSyntax _ => true,
+                            LocalFunctionStatementSyntax _ => true,
+                            _ => false
+                        }
                     );
 
                     return enclosingMethod == methodSyntax;

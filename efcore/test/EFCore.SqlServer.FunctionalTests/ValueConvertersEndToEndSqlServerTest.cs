@@ -188,11 +188,9 @@ public class ValueConvertersEndToEndSqlServerTest
             Assert.Empty(
                 context
                     .Set<ConvertingEntity>()
-                    .Where(
-                        e =>
-                            EF.Functions.DataLength(
-                                (string)(object)new WrappedString { Value = "" }
-                            ) == 1
+                    .Where(e =>
+                        EF.Functions.DataLength((string)(object)new WrappedString { Value = "" })
+                        == 1
                     )
                     .ToList()
             );

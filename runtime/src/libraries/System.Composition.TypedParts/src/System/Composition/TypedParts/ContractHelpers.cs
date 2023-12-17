@@ -79,9 +79,8 @@ namespace System.Composition.TypedParts
                     foreach (
                         var prop in attrType
                             .GetRuntimeProperties()
-                            .Where(
-                                p =>
-                                    p.GetMethod.IsPublic && p.DeclaringType == attrType && p.CanRead
+                            .Where(p =>
+                                p.GetMethod.IsPublic && p.DeclaringType == attrType && p.CanRead
                             )
                     )
                     {

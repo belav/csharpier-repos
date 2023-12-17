@@ -435,7 +435,9 @@ namespace System.Security.Cryptography.Tests
                 Source = Rfc8439TestVectors,
                 CaseId = 1, // RFC 8439, Sec. 2.8.2
                 Key =
-                    "808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9f".HexToByteArray(),
+                    "808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9f".HexToByteArray(
+
+                    ),
                 Nonce = "070000004041424344454647".HexToByteArray(),
                 Plaintext = (
                     "4c616469657320616e642047656e746c"
@@ -465,7 +467,9 @@ namespace System.Security.Cryptography.Tests
                 Source = Rfc8439TestVectors,
                 CaseId = 2, // RFC 8439, Appendix A.5
                 Key =
-                    "1c9240a5eb55d38af333888604f6b5f0473917c1402b80099dca5cbc207075c0".HexToByteArray(),
+                    "1c9240a5eb55d38af333888604f6b5f0473917c1402b80099dca5cbc207075c0".HexToByteArray(
+
+                    ),
                 Nonce = "000000000102030405060708".HexToByteArray(),
                 Plaintext = (
                     "496e7465726e65742d44726166747320"

@@ -226,9 +226,8 @@ namespace AnalyzerRunner
             if (!string.IsNullOrWhiteSpace(_options.LogFileName))
             {
                 WriteDiagnosticResults(
-                    analysisResult.SelectManyAsArray(
-                        pair =>
-                            pair.Value.GetAllDiagnostics().Select(j => Tuple.Create(pair.Key, j))
+                    analysisResult.SelectManyAsArray(pair =>
+                        pair.Value.GetAllDiagnostics().Select(j => Tuple.Create(pair.Key, j))
                     ),
                     _options.LogFileName
                 );
@@ -386,8 +385,8 @@ namespace AnalyzerRunner
                 else if (options.AnalyzerNames.Count == 0)
                 {
                     if (
-                        analyzer.SupportedDiagnostics.Any(
-                            static diagnosticDescriptor => diagnosticDescriptor.IsEnabledByDefault
+                        analyzer.SupportedDiagnostics.Any(static diagnosticDescriptor =>
+                            diagnosticDescriptor.IsEnabledByDefault
                         )
                     )
                     {

@@ -718,7 +718,9 @@ namespace System.Workflow.Activities
                                                         ),
                                                         new BindValidationContext(
                                                             paramInfo.ParameterType.IsByRef
-                                                                ? paramInfo.ParameterType.GetElementType()
+                                                                ? paramInfo.ParameterType.GetElementType(
+
+                                                                )
                                                                 : paramInfo.ParameterType,
                                                             access
                                                         )

@@ -188,8 +188,8 @@ public class GenericModelBinderIntegrationTest
     {
         // Arrange
         // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request => request.QueryString = new QueryString("?parameter.index=0")
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            request.QueryString = new QueryString("?parameter.index=0")
         );
 
         var modelState = testContext.ModelState;
@@ -233,8 +233,8 @@ public class GenericModelBinderIntegrationTest
         };
 
         // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request => request.QueryString = new QueryString("?parameter.index=0")
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            request.QueryString = new QueryString("?parameter.index=0")
         );
 
         var modelState = testContext.ModelState;

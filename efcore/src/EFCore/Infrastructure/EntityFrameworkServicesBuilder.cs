@@ -370,19 +370,19 @@ public class EntityFrameworkServicesBuilder
         TryAdd<ILoggingOptions, LoggingOptions>();
         TryAdd<ICoreSingletonOptions, CoreSingletonOptions>();
         TryAdd<ISingletonOptions, ILoggingOptions>(p => p.GetRequiredService<ILoggingOptions>());
-        TryAdd<ISingletonOptions, ICoreSingletonOptions>(
-            p => p.GetRequiredService<ICoreSingletonOptions>()
+        TryAdd<ISingletonOptions, ICoreSingletonOptions>(p =>
+            p.GetRequiredService<ICoreSingletonOptions>()
         );
         TryAdd(p => GetContextServices(p).Model);
         TryAdd<IDesignTimeModel>(p => new DesignTimeModel(GetContextServices(p)));
         TryAdd(p => GetContextServices(p).CurrentContext);
         TryAdd<IDbContextOptions>(p => GetContextServices(p).ContextOptions);
-        TryAdd<IResettableService, ILazyLoaderFactory>(
-            p => p.GetRequiredService<ILazyLoaderFactory>()
+        TryAdd<IResettableService, ILazyLoaderFactory>(p =>
+            p.GetRequiredService<ILazyLoaderFactory>()
         );
         TryAdd<IResettableService, IStateManager>(p => p.GetRequiredService<IStateManager>());
-        TryAdd<IResettableService, IDbContextTransactionManager>(
-            p => p.GetRequiredService<IDbContextTransactionManager>()
+        TryAdd<IResettableService, IDbContextTransactionManager>(p =>
+            p.GetRequiredService<IDbContextTransactionManager>()
         );
         TryAdd<IEvaluatableExpressionFilter, EvaluatableExpressionFilter>();
         TryAdd<IValueConverterSelector, ValueConverterSelector>();
@@ -405,17 +405,16 @@ public class EntityFrameworkServicesBuilder
         TryAdd<IAdHocMapper, AdHocMapper>();
         TryAdd<IJsonValueReaderWriterSource, JsonValueReaderWriterSource>();
 
-        TryAdd(
-            p =>
-                p.GetService<IDbContextOptions>()
-                    ?.FindExtension<CoreOptionsExtension>()
-                    ?.DbContextLogger ?? new NullDbContextLogger()
+        TryAdd(p =>
+            p.GetService<IDbContextOptions>()
+                ?.FindExtension<CoreOptionsExtension>()
+                ?.DbContextLogger ?? new NullDbContextLogger()
         );
 
         // This has to be lazy to avoid creating instances that are not disposed
-        ServiceCollectionMap.TryAddSingleton<DiagnosticSource>(
-            _ => new DiagnosticListener(DbLoggerCategory.Name)
-        );
+        ServiceCollectionMap.TryAddSingleton<DiagnosticSource>(_ => new DiagnosticListener(
+            DbLoggerCategory.Name
+        ));
 
         ServiceCollectionMap
             .GetInfrastructure()

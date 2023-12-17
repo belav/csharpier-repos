@@ -842,10 +842,9 @@ namespace System.Data.Services.Client
                 ConstructorInfo constructorInfo = nex.Type.GetConstructors(
                     BindingFlags.NonPublic | BindingFlags.Instance
                 )
-                    .First(
-                        c =>
-                            c.GetParameters().Length == 7
-                            && c.GetParameters()[0].ParameterType == typeof(object)
+                    .First(c =>
+                        c.GetParameters().Length == 7
+                        && c.GetParameters()[0].ParameterType == typeof(object)
                     );
 
                 Type enumerable = typeof(IEnumerable<>).MakeGenericType(

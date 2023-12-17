@@ -108,8 +108,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // We can make changes to buffers. We would like to be sure nobody can change them at the same time.
             _threadingContext.ThrowIfNotOnUIThread();
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document == null)
             {
                 return CommitResultUnhandled;
@@ -194,7 +195,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
 
             var triggerDocument =
-                itemData.TriggerLocation.Value.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                itemData.TriggerLocation.Value.Snapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+                );
             if (triggerDocument == null)
             {
                 return CommitResultUnhandled;

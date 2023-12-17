@@ -333,7 +333,9 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             }
 
             var changeSignatureOptionsService =
-                succeededContext.Solution.Services.GetRequiredService<IChangeSignatureOptionsService>();
+                succeededContext.Solution.Services.GetRequiredService<IChangeSignatureOptionsService>(
+
+                );
 
             return changeSignatureOptionsService.GetChangeSignatureOptions(
                 succeededContext.Document,
@@ -1008,8 +1010,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 var newParam = reorderedParameters[index];
                 if (newParam is ExistingParameter existingParameter)
                 {
-                    var pos = originalParameters.IndexOf(
-                        p => p is ExistingParameter ep && ep.Symbol.Equals(existingParameter.Symbol)
+                    var pos = originalParameters.IndexOf(p =>
+                        p is ExistingParameter ep && ep.Symbol.Equals(existingParameter.Symbol)
                     );
                     var param = list[pos];
 
@@ -1325,8 +1327,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 .OrderByDescending(s => s.Locations.First().SourceSpan.Start);
 
             // No particular ordering preference for properties/fields.
-            var orderedPropertiesAndFields = sourceSymbols.Where(
-                s => s.IsKind(SymbolKind.Property) || s.IsKind(SymbolKind.Field)
+            var orderedPropertiesAndFields = sourceSymbols.Where(s =>
+                s.IsKind(SymbolKind.Property) || s.IsKind(SymbolKind.Field)
             );
 
             var fullyOrderedSymbols = orderedLocalAndParameterSymbols.Concat(

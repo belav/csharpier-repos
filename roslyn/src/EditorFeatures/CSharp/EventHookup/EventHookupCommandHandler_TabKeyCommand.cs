@@ -376,8 +376,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 return null;
             }
 
-            var typeInference =
-                semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
+            var typeInference = semanticDocument.Document.GetLanguageService<ITypeInferenceService>(
+
+            );
             var delegateType = typeInference.InferDelegateType(
                 semanticModel,
                 eventHookupExpression.Right,

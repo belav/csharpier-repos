@@ -151,12 +151,12 @@ public class ServiceCollectionMapTest
         ExistingServiceTest(m => m.TryAddTransient(typeof(IFakeService), typeof(FakeService)));
         ExistingServiceTest(m => m.TryAddScoped(typeof(IFakeService), typeof(FakeService)));
         ExistingServiceTest(m => m.TryAddSingleton(typeof(IFakeService), typeof(FakeService)));
-        ExistingServiceTest(
-            m => m.TryAddTransient<IFakeService, FakeService>(p => new FakeService())
+        ExistingServiceTest(m =>
+            m.TryAddTransient<IFakeService, FakeService>(p => new FakeService())
         );
         ExistingServiceTest(m => m.TryAddScoped<IFakeService, FakeService>(p => new FakeService()));
-        ExistingServiceTest(
-            m => m.TryAddSingleton<IFakeService, FakeService>(p => new FakeService())
+        ExistingServiceTest(m =>
+            m.TryAddSingleton<IFakeService, FakeService>(p => new FakeService())
         );
         ExistingServiceTest(m => m.TryAddTransient<IFakeService>(p => new FakeService()));
         ExistingServiceTest(m => m.TryAddScoped<IFakeService>(p => new FakeService()));

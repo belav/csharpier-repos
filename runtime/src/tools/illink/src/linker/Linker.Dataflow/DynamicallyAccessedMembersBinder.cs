@@ -61,8 +61,8 @@ namespace Mono.Linker
             if (memberTypes.HasFlag(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor))
             {
                 foreach (
-                    var c in typeDefinition.GetConstructorsOnType(
-                        filter: m => m.IsPublic && !m.HasMetadataParameters()
+                    var c in typeDefinition.GetConstructorsOnType(filter: m =>
+                        m.IsPublic && !m.HasMetadataParameters()
                     )
                 )
                     yield return c;

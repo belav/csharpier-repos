@@ -120,8 +120,8 @@ namespace System.ComponentModel.Composition.Hosting
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
-            var dependentsCatalog = filteredCatalog.IncludeDependents(
-                i => i.Cardinality == ImportCardinality.ZeroOrOne
+            var dependentsCatalog = filteredCatalog.IncludeDependents(i =>
+                i.Cardinality == ImportCardinality.ZeroOrOne
             );
             Assert.Equal(2, dependentsCatalog.Parts.Count());
         }
@@ -142,8 +142,8 @@ namespace System.ComponentModel.Composition.Hosting
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(2, filteredCatalog.Parts.Count());
 
-            var dependentsCatalog = filteredCatalog.IncludeDependents(
-                i => i.Cardinality == ImportCardinality.ZeroOrOne
+            var dependentsCatalog = filteredCatalog.IncludeDependents(i =>
+                i.Cardinality == ImportCardinality.ZeroOrOne
             );
             Assert.Equal(3, dependentsCatalog.Parts.Count());
         }
@@ -312,8 +312,8 @@ namespace System.ComponentModel.Composition.Hosting
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract2>());
             Assert.Equal(3, filteredCatalog.Parts.Count());
 
-            var dependentsCatalog = filteredCatalog.IncludeDependencies(
-                i => i.Cardinality == ImportCardinality.ZeroOrOne
+            var dependentsCatalog = filteredCatalog.IncludeDependencies(i =>
+                i.Cardinality == ImportCardinality.ZeroOrOne
             );
             Assert.Equal(4, dependentsCatalog.Parts.Count());
         }
@@ -333,8 +333,8 @@ namespace System.ComponentModel.Composition.Hosting
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract2>());
             Assert.Equal(2, filteredCatalog.Parts.Count());
 
-            var dependentsCatalog = filteredCatalog.IncludeDependencies(
-                i => i.Cardinality == ImportCardinality.ZeroOrOne
+            var dependentsCatalog = filteredCatalog.IncludeDependencies(i =>
+                i.Cardinality == ImportCardinality.ZeroOrOne
             );
             Assert.Equal(4, dependentsCatalog.Parts.Count());
         }

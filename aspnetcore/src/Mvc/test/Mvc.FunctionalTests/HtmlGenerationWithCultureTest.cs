@@ -27,8 +27,8 @@ public class HtmlGenerationWithCultureTest
     )
         : base(testOutputHelper)
     {
-        Factory = fixture.WithWebHostBuilder(
-            builder => builder.UseStartup<StartupWithCultureReplace>()
+        Factory = fixture.WithWebHostBuilder(builder =>
+            builder.UseStartup<StartupWithCultureReplace>()
         );
         Client = Factory.CreateDefaultClient();
     }
@@ -147,11 +147,10 @@ public class HtmlGenerationWithCultureTest
     {
         // Arrange
         var client = Factory
-            .WithWebHostBuilder(
-                builder =>
-                    builder
-                        .UseStartup<StartupWithCultureReplace>()
-                        .ConfigureTestServices(services => services.AddSingleton(LoggerFactory))
+            .WithWebHostBuilder(builder =>
+                builder
+                    .UseStartup<StartupWithCultureReplace>()
+                    .ConfigureTestServices(services => services.AddSingleton(LoggerFactory))
             )
             .CreateDefaultClient();
         string culture;

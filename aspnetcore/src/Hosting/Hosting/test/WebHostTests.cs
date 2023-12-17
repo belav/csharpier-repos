@@ -507,9 +507,11 @@ public partial class WebHostTests
                         disposingCalls++;
                     };
 
-                    services.AddSingleton<IHostedService>(
-                        _ => new DelegateHostedService(started, stopping, disposing)
-                    );
+                    services.AddSingleton<IHostedService>(_ => new DelegateHostedService(
+                        started,
+                        stopping,
+                        disposing
+                    ));
                 })
                 .Build()
         )
@@ -605,9 +607,11 @@ public partial class WebHostTests
                         disposingCalls++;
                     };
 
-                    services.AddSingleton<IHostedService>(
-                        _ => new DelegateHostedService(started, stopping, disposing)
-                    );
+                    services.AddSingleton<IHostedService>(_ => new DelegateHostedService(
+                        started,
+                        stopping,
+                        disposing
+                    ));
                 })
                 .Build()
         )
@@ -662,9 +666,11 @@ public partial class WebHostTests
                         disposingCalls++;
                     };
 
-                    services.AddSingleton<IHostedService>(
-                        _ => new DelegateHostedService(started, stopping, disposing)
-                    );
+                    services.AddSingleton<IHostedService>(_ => new DelegateHostedService(
+                        started,
+                        stopping,
+                        disposing
+                    ));
                 })
                 .Build()
         )
@@ -784,22 +790,16 @@ public partial class WebHostTests
                 .UseFakeServer()
                 .ConfigureServices(services =>
                 {
-                    services.AddTransient<IStartupFilter>(
-                        serviceProvider =>
-                            new TestFilter(
-                                () => Assert.Equal(1, configureOrder++),
-                                () => Assert.Equal(2, configureOrder++),
-                                () => Assert.Equal(5, configureOrder++)
-                            )
-                    );
-                    services.AddTransient<IStartupFilter>(
-                        serviceProvider =>
-                            new TestFilter(
-                                () => Assert.Equal(0, configureOrder++),
-                                () => Assert.Equal(3, configureOrder++),
-                                () => Assert.Equal(4, configureOrder++)
-                            )
-                    );
+                    services.AddTransient<IStartupFilter>(serviceProvider => new TestFilter(
+                        () => Assert.Equal(1, configureOrder++),
+                        () => Assert.Equal(2, configureOrder++),
+                        () => Assert.Equal(5, configureOrder++)
+                    ));
+                    services.AddTransient<IStartupFilter>(serviceProvider => new TestFilter(
+                        () => Assert.Equal(0, configureOrder++),
+                        () => Assert.Equal(3, configureOrder++),
+                        () => Assert.Equal(4, configureOrder++)
+                    ));
                 })
                 .Build()
         )
@@ -1517,8 +1517,8 @@ public static class TestServerWebHostExtensions
 {
     public static IWebHostBuilder UseFakeServer(this IWebHostBuilder builder)
     {
-        return builder.ConfigureServices(
-            services => services.AddSingleton<IServer, WebHostTests.FakeServer>()
+        return builder.ConfigureServices(services =>
+            services.AddSingleton<IServer, WebHostTests.FakeServer>()
         );
     }
 }

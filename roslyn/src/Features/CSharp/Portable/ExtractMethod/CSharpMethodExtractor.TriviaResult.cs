@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             )
             {
                 var preservationService =
-                    selectionResult.SemanticDocument.Document.Project.Services.GetService<ISyntaxTriviaService>();
+                    selectionResult.SemanticDocument.Document.Project.Services.GetService<ISyntaxTriviaService>(
+
+                    );
                 var root = selectionResult.SemanticDocument.Root;
                 var result = preservationService.SaveTriviaAroundSelection(
                     root,

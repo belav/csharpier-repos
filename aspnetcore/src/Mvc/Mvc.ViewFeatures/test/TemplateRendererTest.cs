@@ -75,8 +75,8 @@ public class TemplateRendererTest
         var typeNames = TemplateRenderer.GetTypeNames(metadata, fieldType);
 
         // Assert
-        var collectionAssertions = expectedResult.Select<string, Action<string>>(
-            expected => actual => Assert.Equal(expected, actual)
+        var collectionAssertions = expectedResult.Select<string, Action<string>>(expected =>
+            actual => Assert.Equal(expected, actual)
         );
         Assert.Collection(typeNames, collectionAssertions.ToArray());
     }

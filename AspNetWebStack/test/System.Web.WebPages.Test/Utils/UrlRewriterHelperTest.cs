@@ -160,8 +160,7 @@ namespace System.Web.WebPages.Test
             if (isUrlRewriteOnForServer)
             {
                 mockWorkerRequest
-                    .Setup(
-                        wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
+                    .Setup(wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
                     )
                     .Returns("On!")
                     .Verifiable();
@@ -169,8 +168,7 @@ namespace System.Web.WebPages.Test
             else
             {
                 mockWorkerRequest
-                    .Setup(
-                        wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
+                    .Setup(wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
                     )
                     .Returns((string)null)
                     .Verifiable();

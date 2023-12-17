@@ -14,11 +14,11 @@ public class RazorCompiledItemFeatureProviderTest
     public void PopulateFeature_AddsItemsFromProviderTypes()
     {
         // Arrange
-        var item1 = Mock.Of<RazorCompiledItem>(
-            i => i.Identifier == "Item1" && i.Type == typeof(TestView)
+        var item1 = Mock.Of<RazorCompiledItem>(i =>
+            i.Identifier == "Item1" && i.Type == typeof(TestView)
         );
-        var item2 = Mock.Of<RazorCompiledItem>(
-            i => i.Identifier == "Item2" && i.Type == typeof(TestPage)
+        var item2 = Mock.Of<RazorCompiledItem>(i =>
+            i.Identifier == "Item2" && i.Type == typeof(TestPage)
         );
         var part1 = new AssemblyPart(typeof(RazorCompiledItemFeatureProviderTest).Assembly);
         var part2 = new Mock<ApplicationPart>();
@@ -40,11 +40,11 @@ public class RazorCompiledItemFeatureProviderTest
     public void PopulateFeature_PopulatesRazorCompiledItemsFromTypeAssembly()
     {
         // Arrange
-        var item1 = Mock.Of<RazorCompiledItem>(
-            i => i.Identifier == "Item1" && i.Type == typeof(TestView)
+        var item1 = Mock.Of<RazorCompiledItem>(i =>
+            i.Identifier == "Item1" && i.Type == typeof(TestView)
         );
-        var item2 = Mock.Of<RazorCompiledItem>(
-            i => i.Identifier == "Item2" && i.Type == typeof(TestPage)
+        var item2 = Mock.Of<RazorCompiledItem>(i =>
+            i.Identifier == "Item2" && i.Type == typeof(TestPage)
         );
 
         var assembly = new TestAssembly(
@@ -75,11 +75,11 @@ public class RazorCompiledItemFeatureProviderTest
     public void PopulateFeature_AllowsDuplicateItemsFromMultipleParts()
     {
         // Arrange
-        var item1 = Mock.Of<RazorCompiledItem>(
-            i => i.Identifier == "Item" && i.Type == typeof(TestView)
+        var item1 = Mock.Of<RazorCompiledItem>(i =>
+            i.Identifier == "Item" && i.Type == typeof(TestView)
         );
-        var item2 = Mock.Of<RazorCompiledItem>(
-            i => i.Identifier == "Item" && i.Type == typeof(TestPage)
+        var item2 = Mock.Of<RazorCompiledItem>(i =>
+            i.Identifier == "Item" && i.Type == typeof(TestPage)
         );
         var part1 = new Mock<ApplicationPart>();
         part1
@@ -133,14 +133,11 @@ public class RazorCompiledItemFeatureProviderTest
     public void PopulateFeature_ReplacesWithHotRelaodedItems()
     {
         // Arrange
-        var item1 = Mock.Of<RazorCompiledItem>(
-            i => i.Identifier == "Item1" && i.Type == typeof(TestView)
+        var item1 = Mock.Of<RazorCompiledItem>(i =>
+            i.Identifier == "Item1" && i.Type == typeof(TestView)
         );
-        var item2 = Mock.Of<RazorCompiledItem>(
-            i =>
-                i.Identifier == "Item2"
-                && i.Type == typeof(TestPage)
-                && i.Kind == "mvc.1.0.razor-page"
+        var item2 = Mock.Of<RazorCompiledItem>(i =>
+            i.Identifier == "Item2" && i.Type == typeof(TestPage) && i.Kind == "mvc.1.0.razor-page"
         );
 
         var applicationPart = new TestRazorCompiledItemProvider

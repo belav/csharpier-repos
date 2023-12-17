@@ -1388,44 +1388,43 @@ public class OpenIdConnectEventTests_Handlers
     private TestServer CreateServer(OpenIdConnectEvents events, RequestDelegate appCode)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                builder =>
-                    builder
-                        .UseTestServer()
-                        .ConfigureServices(services =>
-                        {
-                            services
-                                .AddAuthentication(auth =>
+            .ConfigureWebHost(builder =>
+                builder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services
+                            .AddAuthentication(auth =>
+                            {
+                                auth.DefaultScheme =
+                                    CookieAuthenticationDefaults.AuthenticationScheme;
+                                auth.DefaultChallengeScheme =
+                                    OpenIdConnectDefaults.AuthenticationScheme;
+                            })
+                            .AddCookie()
+                            .AddOpenIdConnect(o =>
+                            {
+                                o.Events = events;
+                                o.ClientId = "ClientId";
+                                o.GetClaimsFromUserInfoEndpoint = true;
+                                o.Configuration = new OpenIdConnectConfiguration()
                                 {
-                                    auth.DefaultScheme =
-                                        CookieAuthenticationDefaults.AuthenticationScheme;
-                                    auth.DefaultChallengeScheme =
-                                        OpenIdConnectDefaults.AuthenticationScheme;
-                                })
-                                .AddCookie()
-                                .AddOpenIdConnect(o =>
-                                {
-                                    o.Events = events;
-                                    o.ClientId = "ClientId";
-                                    o.GetClaimsFromUserInfoEndpoint = true;
-                                    o.Configuration = new OpenIdConnectConfiguration()
-                                    {
-                                        TokenEndpoint = "http://testhost/tokens",
-                                        UserInfoEndpoint = "http://testhost/user",
-                                        EndSessionEndpoint = "http://testhost/end"
-                                    };
-                                    o.StateDataFormat = new TestStateDataFormat();
-                                    o.UseSecurityTokenValidator = false;
-                                    o.TokenHandler = new TestTokenHandler();
-                                    o.ProtocolValidator = new TestProtocolValidator();
-                                    o.BackchannelHttpHandler = new TestBackchannel();
-                                });
-                        })
-                        .Configure(app =>
-                        {
-                            app.UseAuthentication();
-                            app.Run(appCode);
-                        })
+                                    TokenEndpoint = "http://testhost/tokens",
+                                    UserInfoEndpoint = "http://testhost/user",
+                                    EndSessionEndpoint = "http://testhost/end"
+                                };
+                                o.StateDataFormat = new TestStateDataFormat();
+                                o.UseSecurityTokenValidator = false;
+                                o.TokenHandler = new TestTokenHandler();
+                                o.ProtocolValidator = new TestProtocolValidator();
+                                o.BackchannelHttpHandler = new TestBackchannel();
+                            });
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseAuthentication();
+                        app.Run(appCode);
+                    })
             )
             .Build();
 

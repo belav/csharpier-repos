@@ -31,13 +31,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
         )
         {
             var projects = workspace
-                .CurrentSolution.Projects.Where(
-                    p =>
-                        string.Equals(
-                            p.OutputFilePath,
-                            filePath,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                .CurrentSolution.Projects.Where(p =>
+                    string.Equals(p.OutputFilePath, filePath, StringComparison.OrdinalIgnoreCase)
                 )
                 .ToList();
 

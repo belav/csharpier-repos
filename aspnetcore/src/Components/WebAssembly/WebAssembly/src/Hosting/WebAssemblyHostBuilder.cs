@@ -197,8 +197,8 @@ public sealed class WebAssemblyHostBuilder
 
                 // Perf: Using this over AddJsonStream. This allows the linker to trim out the "File"-specific APIs and assemblies
                 // for Configuration, of where there are several.
-                Configuration.Add<JsonStreamConfigurationSource>(
-                    s => s.Stream = new MemoryStream(appSettingsJson)
+                Configuration.Add<JsonStreamConfigurationSource>(s =>
+                    s.Stream = new MemoryStream(appSettingsJson)
                 );
             }
         }
@@ -294,8 +294,8 @@ public sealed class WebAssemblyHostBuilder
         Services.AddSingleton(new LazyAssemblyLoader(DefaultWebAssemblyJSRuntime.Instance));
         Services.AddSingleton<RootComponentTypeCache>(_ => _rootComponentCache ?? new());
         Services.AddSingleton<ComponentStatePersistenceManager>();
-        Services.AddSingleton<PersistentComponentState>(
-            sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State
+        Services.AddSingleton<PersistentComponentState>(sp =>
+            sp.GetRequiredService<ComponentStatePersistenceManager>().State
         );
         Services.AddSingleton<AntiforgeryStateProvider, DefaultAntiforgeryStateProvider>();
         Services.AddSingleton<IErrorBoundaryLogger, WebAssemblyErrorBoundaryLogger>();

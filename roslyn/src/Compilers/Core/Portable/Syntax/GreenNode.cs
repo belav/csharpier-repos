@@ -41,8 +41,9 @@ namespace Microsoft.CodeAnalysis
         > s_annotationsTable = new ConditionalWeakTable<GreenNode, SyntaxAnnotation[]>();
 
         private static readonly DiagnosticInfo[] s_noDiagnostics = Array.Empty<DiagnosticInfo>();
-        private static readonly SyntaxAnnotation[] s_noAnnotations =
-            Array.Empty<SyntaxAnnotation>();
+        private static readonly SyntaxAnnotation[] s_noAnnotations = Array.Empty<SyntaxAnnotation>(
+
+        );
         private static readonly IEnumerable<SyntaxAnnotation> s_noAnnotationsEnumerable =
             SpecializedCollections.EmptyEnumerable<SyntaxAnnotation>();
 

@@ -66,8 +66,8 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        var matchedClaims = user.Claims.Where(
-            uc => uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type
+        var matchedClaims = user.Claims.Where(uc =>
+            uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type
         )
             .ToList();
         foreach (var matchedClaim in matchedClaims)
@@ -86,11 +86,8 @@ public class InMemoryUserStore<TUser>
     {
         foreach (var claim in claims)
         {
-            var entity = user.Claims.FirstOrDefault(
-                uc =>
-                    uc.UserId == user.Id
-                    && uc.ClaimType == claim.Type
-                    && uc.ClaimValue == claim.Value
+            var entity = user.Claims.FirstOrDefault(uc =>
+                uc.UserId == user.Id && uc.ClaimType == claim.Type && uc.ClaimValue == claim.Value
             );
             if (entity != null)
             {
@@ -255,11 +252,8 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        var loginEntity = user.Logins.SingleOrDefault(
-            l =>
-                l.ProviderKey == providerKey
-                && l.LoginProvider == loginProvider
-                && l.UserId == user.Id
+        var loginEntity = user.Logins.SingleOrDefault(l =>
+            l.ProviderKey == providerKey && l.LoginProvider == loginProvider && l.UserId == user.Id
         );
         if (loginEntity != null)
         {
@@ -274,9 +268,11 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        IList<UserLoginInfo> result = user.Logins.Select(
-            l => new UserLoginInfo(l.LoginProvider, l.ProviderKey, l.ProviderDisplayName)
-        )
+        IList<UserLoginInfo> result = user.Logins.Select(l => new UserLoginInfo(
+            l.LoginProvider,
+            l.ProviderKey,
+            l.ProviderDisplayName
+        ))
             .ToList();
         return Task.FromResult(result);
     }
@@ -515,8 +511,8 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken
     )
     {
-        var tokenEntity = user.Tokens.SingleOrDefault(
-            l => l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
+        var tokenEntity = user.Tokens.SingleOrDefault(l =>
+            l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
         );
         if (tokenEntity != null)
         {
@@ -544,8 +540,8 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken
     )
     {
-        var tokenEntity = user.Tokens.SingleOrDefault(
-            l => l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
+        var tokenEntity = user.Tokens.SingleOrDefault(l =>
+            l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
         );
         if (tokenEntity != null)
         {
@@ -561,8 +557,8 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken
     )
     {
-        var tokenEntity = user.Tokens.SingleOrDefault(
-            l => l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
+        var tokenEntity = user.Tokens.SingleOrDefault(l =>
+            l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
         );
         return Task.FromResult(tokenEntity?.TokenValue);
     }

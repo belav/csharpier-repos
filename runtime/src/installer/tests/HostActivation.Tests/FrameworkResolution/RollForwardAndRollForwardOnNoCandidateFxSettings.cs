@@ -113,8 +113,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             CommandResult result = RunTest(
                 new TestSettings()
-                    .WithRuntimeConfigCustomizer(
-                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
+                    .WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
                     )
                     .With(
                         RollForwardSetting(rollForwardLocation, Constants.RollForwardSetting.Minor)
@@ -146,9 +146,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             RunTest(
                     new TestSettings()
-                        .WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
                         )
                         .WithCommandLine(
                             Constants.RollForwardSetting.CommandLineArgument,
@@ -194,9 +193,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string requestedVersion = "5.0.0";
             CommandResult result = RunTest(
                 new TestSettings()
-                    .WithRuntimeConfigCustomizer(
-                        runtimeConfig =>
-                            runtimeConfig.WithFramework(MicrosoftNETCoreApp, requestedVersion)
+                    .WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, requestedVersion)
                     )
                     .With(
                         RollForwardSetting(rollForwardLocation, Constants.RollForwardSetting.Major)

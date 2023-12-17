@@ -207,8 +207,8 @@ namespace System.CommandLine
                 ? OptionsWithArgumentLimitReached(commandResult)
                 : Array.Empty<string>();
 
-            completions = completions.Where(
-                item => optionsWithArgumentLimitReached.All(s => s != item.Label)
+            completions = completions.Where(item =>
+                optionsWithArgumentLimitReached.All(s => s != item.Label)
             );
 
             return completions;
@@ -334,8 +334,8 @@ namespace System.CommandLine
 
                     if (textCompletionContext.WordToComplete.Length > 0)
                     {
-                        var tokenToComplete = parseResult.Tokens.Last(
-                            t => t.Value == textCompletionContext.WordToComplete
+                        var tokenToComplete = parseResult.Tokens.Last(t =>
+                            t.Value == textCompletionContext.WordToComplete
                         );
 
                         return optionResult.Tokens.Contains(tokenToComplete);

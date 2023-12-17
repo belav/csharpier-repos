@@ -120,12 +120,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpResponseMessage response = new HttpResponseMessage();
             Mock<ApiController> mockController = new Mock<ApiController>() { CallBase = true };
             mockController
-                .Setup(
-                    b =>
-                        b.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(b =>
+                    b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns(Task.FromResult<HttpResponseMessage>(response));
 
@@ -194,12 +190,8 @@ namespace System.Web.Http.Tracing.Tracers
             tcs.TrySetException(exception);
             Mock<ApiController> mockController = new Mock<ApiController>() { CallBase = true };
             mockController
-                .Setup(
-                    b =>
-                        b.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(b =>
+                    b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns(tcs.Task);
 
@@ -267,12 +259,8 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             Mock<ApiController> mockController = new Mock<ApiController>() { CallBase = true };
             mockController
-                .Setup(
-                    b =>
-                        b.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(b =>
+                    b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns(TaskHelpers.Canceled<HttpResponseMessage>());
 

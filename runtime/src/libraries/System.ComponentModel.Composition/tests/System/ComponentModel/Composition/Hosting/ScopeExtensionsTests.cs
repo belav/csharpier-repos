@@ -95,8 +95,9 @@ namespace System.ComponentModel.Composition.Hosting
         public void Imports_CardinalityIgnored_WhenNotSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple =
-                typeof(PartImportingContract1Multiple).AsPart();
+            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple).AsPart(
+
+            );
             ComposablePartDefinition part1Optional =
                 typeof(PartImportingContract1Optionally).AsPart();
 
@@ -109,8 +110,9 @@ namespace System.ComponentModel.Composition.Hosting
         public void Imports_CardinalityNotIgnored_WhenSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple =
-                typeof(PartImportingContract1Multiple).AsPart();
+            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple).AsPart(
+
+            );
             ComposablePartDefinition part1Optional =
                 typeof(PartImportingContract1Optionally).AsPart();
 

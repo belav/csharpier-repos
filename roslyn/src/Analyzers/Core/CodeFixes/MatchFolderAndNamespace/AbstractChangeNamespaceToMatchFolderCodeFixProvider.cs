@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var service =
-                context.Document.Project.Solution.Services.GetRequiredService<ISupportedChangesService>();
+                context.Document.Project.Solution.Services.GetRequiredService<ISupportedChangesService>(
+
+                );
             if (service.CanApplyChange(ApplyChangesKind.ChangeDocumentInfo))
             {
                 context.RegisterCodeFix(
@@ -59,9 +61,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
             // All the target namespaces should be the same for a given document
             Debug.Assert(
                 diagnostics
-                    .Select(
-                        diagnostic =>
-                            diagnostic.Properties[MatchFolderAndNamespaceConstants.TargetNamespace]
+                    .Select(diagnostic =>
+                        diagnostic.Properties[MatchFolderAndNamespaceConstants.TargetNamespace]
                     )
                     .Distinct()
                     .Count() == 1

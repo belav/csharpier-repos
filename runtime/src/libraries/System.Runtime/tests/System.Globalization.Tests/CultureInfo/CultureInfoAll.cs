@@ -2212,10 +2212,9 @@ namespace System.Globalization.Tests
             );
             found = CultureInfo
                 .GetCultures(CultureTypes.NeutralCultures)
-                .Any(
-                    c =>
-                        cultureNames.Contains(c.Name, StringComparer.OrdinalIgnoreCase)
-                        || c.Name.Equals(alternativeCultureName, StringComparison.OrdinalIgnoreCase)
+                .Any(c =>
+                    cultureNames.Contains(c.Name, StringComparer.OrdinalIgnoreCase)
+                    || c.Name.Equals(alternativeCultureName, StringComparison.OrdinalIgnoreCase)
                 );
             Assert.All(
                 CultureInfo.GetCultures(CultureTypes.SpecificCultures),
@@ -2229,13 +2228,9 @@ namespace System.Globalization.Tests
             {
                 found = CultureInfo
                     .GetCultures(CultureTypes.SpecificCultures)
-                    .Any(
-                        c =>
-                            cultureNames.Contains(c.Name, StringComparer.OrdinalIgnoreCase)
-                            || c.Name.Equals(
-                                alternativeCultureName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                    .Any(c =>
+                        cultureNames.Contains(c.Name, StringComparer.OrdinalIgnoreCase)
+                        || c.Name.Equals(alternativeCultureName, StringComparison.OrdinalIgnoreCase)
                     );
             }
 

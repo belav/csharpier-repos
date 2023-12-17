@@ -79,9 +79,7 @@ class TestClass
     public static int Main()
     {
         // Test that we encode (!v3) & ((!v1) & ((v1 | v2) & (v2 | v3)))
-        P(
-            v1 =>
-                P(v2 => P(v3 => StopTrue(And(Not(v3), And(Not(v1), And(Or(v1, v2), Or(v2, v3)))))))
+        P(v1 => P(v2 => P(v3 => StopTrue(And(Not(v3), And(Not(v1), And(Or(v1, v2), Or(v2, v3)))))))
         );
 
         return 0;

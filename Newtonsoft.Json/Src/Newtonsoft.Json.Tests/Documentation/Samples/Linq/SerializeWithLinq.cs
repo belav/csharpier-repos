@@ -77,23 +77,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             };
 
             JArray blogPostsArray = new JArray(
-                blogPosts.Select(
-                    p =>
-                        new JObject
-                        {
-                            { "Title", p.Title },
-                            {
-                                "Author",
-                                new JObject
-                                {
-                                    { "Name", p.AuthorName },
-                                    { "Twitter", p.AuthorTwitter }
-                                }
-                            },
-                            { "Date", p.PostedDate },
-                            { "BodyHtml", HttpUtility.HtmlEncode(p.Body) },
-                        }
-                )
+                blogPosts.Select(p => new JObject
+                {
+                    { "Title", p.Title },
+                    {
+                        "Author",
+                        new JObject { { "Name", p.AuthorName }, { "Twitter", p.AuthorTwitter } }
+                    },
+                    { "Date", p.PostedDate },
+                    { "BodyHtml", HttpUtility.HtmlEncode(p.Body) },
+                })
             );
 
             Console.WriteLine(blogPostsArray.ToString());

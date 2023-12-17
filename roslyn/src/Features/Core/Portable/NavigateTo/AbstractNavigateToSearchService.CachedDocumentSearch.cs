@@ -88,8 +88,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 cancellationToken
             );
 
-            var documentKeys = projects.SelectManyAsArray(
-                p => p.Documents.Select(DocumentKey.ToDocumentKey)
+            var documentKeys = projects.SelectManyAsArray(p =>
+                p.Documents.Select(DocumentKey.ToDocumentKey)
             );
             var priorityDocumentKeys = priorityDocuments.SelectAsArray(DocumentKey.ToDocumentKey);
 
@@ -292,15 +292,14 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             var asyncLazy = cachedIndexMap.GetOrAdd(
                 (storageService, documentKey, stringTable),
                 static t =>
-                    AsyncLazy.Create(
-                        c =>
-                            TopLevelSyntaxTreeIndex.LoadAsync(
-                                t.service,
-                                t.documentKey,
-                                checksum: null,
-                                t.stringTable,
-                                c
-                            )
+                    AsyncLazy.Create(c =>
+                        TopLevelSyntaxTreeIndex.LoadAsync(
+                            t.service,
+                            t.documentKey,
+                            checksum: null,
+                            t.stringTable,
+                            c
+                        )
                     )
             );
             return asyncLazy.GetValueAsync(cancellationToken);

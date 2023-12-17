@@ -1019,7 +1019,9 @@ namespace System.ServiceModel.Security
                 return;
             }
             ILogonTokenCacheManager logonManager =
-                OperationContext.Current.EndpointDispatcher.ChannelDispatcher.Listener.GetProperty<ILogonTokenCacheManager>();
+                OperationContext.Current.EndpointDispatcher.ChannelDispatcher.Listener.GetProperty<ILogonTokenCacheManager>(
+
+                );
             Collection<ISecurityContextSecurityTokenCache> sctCaches =
                 OperationContext.Current.EndpointDispatcher.ChannelDispatcher.Listener.GetProperty<
                     Collection<ISecurityContextSecurityTokenCache>
@@ -1625,7 +1627,9 @@ namespace System.ServiceModel.Security
                 )
                 {
                     ServiceAuthenticationManager serviceAuthenticationManager =
-                        this.authenticator.IssuerBindingContext.BindingParameters.Find<ServiceAuthenticationManager>();
+                        this.authenticator.IssuerBindingContext.BindingParameters.Find<ServiceAuthenticationManager>(
+
+                        );
                     if (serviceAuthenticationManager != null)
                     {
                         endpointDispatcher.DispatchRuntime.ServiceAuthenticationManager =

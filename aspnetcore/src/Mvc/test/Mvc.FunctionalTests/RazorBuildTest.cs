@@ -17,14 +17,12 @@ public class RazorBuildTest : IClassFixture<MvcTestFixture<RazorBuildWebSite.Sta
         var factory =
             fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(b => b.UseStartup<RazorBuildWebSite.Startup>());
-        factory = factory.WithWebHostBuilder(
-            b =>
-                b.ConfigureTestServices(
-                    serviceCollection =>
-                        serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(
-                            ConfigureRuntimeCompilationOptions
-                        )
+        factory = factory.WithWebHostBuilder(b =>
+            b.ConfigureTestServices(serviceCollection =>
+                serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(
+                    ConfigureRuntimeCompilationOptions
                 )
+            )
         );
 
         Client = factory.CreateDefaultClient();

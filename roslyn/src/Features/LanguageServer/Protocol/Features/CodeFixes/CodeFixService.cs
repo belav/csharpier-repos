@@ -180,7 +180,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
 
             var buildOnlyDiagnosticsService =
-                document.Project.Solution.Services.GetRequiredService<IBuildOnlyDiagnosticsService>();
+                document.Project.Solution.Services.GetRequiredService<IBuildOnlyDiagnosticsService>(
+
+                );
             allDiagnostics = allDiagnostics.AddRange(
                 buildOnlyDiagnosticsService.GetBuildOnlyDiagnostics(document.Id)
             );
@@ -308,7 +310,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
 
             var buildOnlyDiagnosticsService =
-                document.Project.Solution.Services.GetRequiredService<IBuildOnlyDiagnosticsService>();
+                document.Project.Solution.Services.GetRequiredService<IBuildOnlyDiagnosticsService>(
+
+                );
             var buildOnlyDiagnostics = buildOnlyDiagnosticsService.GetBuildOnlyDiagnostics(
                 document.Id
             );
@@ -465,8 +469,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     .ConfigureAwait(false);
             }
 
-            diagnostics = diagnostics.WhereAsArray(
-                d => d.Severity.IsMoreSevereThanOrEqualTo(minimumSeverity)
+            diagnostics = diagnostics.WhereAsArray(d =>
+                d.Severity.IsMoreSevereThanOrEqualTo(minimumSeverity)
             );
             if (!diagnostics.Any())
                 return null;
@@ -652,8 +656,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 // Log exception and show info bar, if needed.
                 if (logExceptionWithInfoBar)
                 {
-                    var errorReportingService =
-                        services.GetRequiredService<IErrorReportingService>();
+                    var errorReportingService = services.GetRequiredService<IErrorReportingService>(
+
+                    );
                     var message =
                         lazyFixer.Metadata.Name != null
                             ? string.Format(
@@ -760,8 +765,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             if (TryGetWorkspaceFixersPriorityMap(document, out var fixersForLanguage))
                 allFixers = allFixers.Sort(new FixerComparer(allFixers, fixersForLanguage.Value));
 
-            var extensionManager =
-                document.Project.Solution.Services.GetService<IExtensionManager>();
+            var extensionManager = document.Project.Solution.Services.GetService<IExtensionManager>(
+
+            );
 
             // Run each CodeFixProvider to gather individual CodeFixes for reported diagnostics.
             // Ensure that no diagnostic has registered code actions from different code fix providers with same equivalance key.
@@ -1090,8 +1096,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                                         cancellationToken
                                     )
                                     .ConfigureAwait(false);
-                                return fixes.WhereAsArray(
-                                    f => registeredConfigurationFixTitles.Add(f.Action.Title)
+                                return fixes.WhereAsArray(f =>
+                                    registeredConfigurationFixTitles.Add(f.Action.Title)
                                 );
                             },
                             fallbackOptions,
@@ -1467,8 +1473,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             ImmutableArray<CodeFixProvider>
         > ComputeProjectFixers(TextDocument document)
         {
-            var extensionManager =
-                document.Project.Solution.Services.GetService<IExtensionManager>();
+            var extensionManager = document.Project.Solution.Services.GetService<IExtensionManager>(
+
+            );
 
             using var _ = PooledDictionary<DiagnosticId, ArrayBuilder<CodeFixProvider>>.GetInstance(
                 out var builder

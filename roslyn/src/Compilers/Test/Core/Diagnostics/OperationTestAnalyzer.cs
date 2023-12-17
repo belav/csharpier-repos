@@ -1145,8 +1145,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     }
 
                     foreach (
-                        var decl in declarationStatement.Declarations.SelectMany(
-                            multiDecl => multiDecl.Declarators
+                        var decl in declarationStatement.Declarations.SelectMany(multiDecl =>
+                            multiDecl.Declarators
                         )
                     )
                     {

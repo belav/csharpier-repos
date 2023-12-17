@@ -43,8 +43,8 @@ namespace RenderingPlayground
 
             Add(tableView);
 
-            Formatter.AddFormatter<DateTime>(
-                d => $"{d:d} {ForegroundColorSpan.DarkGray()}{d:t}{ForegroundColorSpan.Reset()}"
+            Formatter.AddFormatter<DateTime>(d =>
+                $"{d:d} {ForegroundColorSpan.DarkGray()}{d:t}{ForegroundColorSpan.Reset()}"
             );
         }
 

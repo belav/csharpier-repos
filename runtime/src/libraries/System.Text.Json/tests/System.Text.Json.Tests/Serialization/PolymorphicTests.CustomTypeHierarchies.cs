@@ -3237,8 +3237,8 @@ namespace System.Text.Json.Serialization.Tests
                 PolymorphicClassWithCustomTypeDiscriminator Value,
                 Func<string, string> JsonTemplate
             )[] data = PolymorphicClassWithCustomTypeDiscriminator.GetTestData().ToArray();
-            PolymorphicClassWithCustomTypeDiscriminator[] expectedValues = data.Select(
-                    entry => entry.Value
+            PolymorphicClassWithCustomTypeDiscriminator[] expectedValues = data.Select(entry =>
+                    entry.Value
                 )
                 .Concat(data.Select(entry => entry.Value))
                 .ToArray();
@@ -3421,7 +3421,9 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicInterfaceWithInterfaceDerivedType_FallbackToNearestAncestor_Serialization()
         {
             PolymorphicInterfaceWithInterfaceDerivedType value =
-                new PolymorphicInterfaceWithInterfaceDerivedType.DerivedInterface.ImplementingClass();
+                new PolymorphicInterfaceWithInterfaceDerivedType.DerivedInterface.ImplementingClass(
+
+                );
             string expectedJson = @"{""$type"":""derivedInterface""}";
             string actualJson = await Serializer.SerializeWrapper(
                 value,

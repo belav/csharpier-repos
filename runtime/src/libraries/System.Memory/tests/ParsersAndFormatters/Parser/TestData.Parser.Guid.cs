@@ -13,7 +13,9 @@ namespace System.Buffers.Text.Tests
             get
             {
                 foreach (
-                    ParserTestData<Guid> testData in GuidFormatterTestData.ToParserTheoryDataCollection()
+                    ParserTestData<Guid> testData in GuidFormatterTestData.ToParserTheoryDataCollection(
+
+                    )
                 )
                 {
                     yield return testData;

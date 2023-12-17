@@ -342,9 +342,8 @@
                         return exception;
                     }
 
-                    foundCatchAllParameter = subsegments.Any<PathSubsegment>(
-                        seg =>
-                            (seg is ParameterSubsegment) && (((ParameterSubsegment)seg).IsCatchAll)
+                    foundCatchAllParameter = subsegments.Any<PathSubsegment>(seg =>
+                        (seg is ParameterSubsegment) && (((ParameterSubsegment)seg).IsCatchAll)
                     );
                 }
             }

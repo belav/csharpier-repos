@@ -221,11 +221,8 @@ namespace ILCompiler.DependencyAnalysis
                         _nodeFactory.Target,
                         _nodeFactory.ImageBase
                     );
-                    peIdProvider = new Func<IEnumerable<Blob>, BlobContentId>(
-                        content =>
-                            BlobContentId.FromHash(
-                                CryptographicHashProvider.ComputeSourceHash(content)
-                            )
+                    peIdProvider = new Func<IEnumerable<Blob>, BlobContentId>(content =>
+                        BlobContentId.FromHash(CryptographicHashProvider.ComputeSourceHash(content))
                     );
                     timeDateStamp = null;
                     r2rHeaderExportSymbol = _nodeFactory.Header;

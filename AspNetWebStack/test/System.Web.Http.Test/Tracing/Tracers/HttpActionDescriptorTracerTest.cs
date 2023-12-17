@@ -22,8 +22,9 @@ namespace System.Web.Http.Tracing.Tracers
         public void ActionName_Calls_Inner()
         {
             // Arrange
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -48,8 +49,9 @@ namespace System.Web.Http.Tracing.Tracers
         public void SupportedHttpMethods_Calls_Inner()
         {
             // Arrange
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Collection<HttpMethod> methods = new Collection<HttpMethod>() { HttpMethod.Delete };
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
@@ -76,8 +78,9 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             HttpActionBinding binding = new Mock<HttpActionBinding>().Object;
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -102,8 +105,9 @@ namespace System.Web.Http.Tracing.Tracers
         public void ReturnType_Calls_Inner()
         {
             // Arrange
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -129,8 +133,9 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             IActionResultConverter resultConverter = new Mock<IActionResultConverter>().Object;
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -157,8 +162,9 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             ConcurrentDictionary<object, object> properties =
                 new ConcurrentDictionary<object, object>();
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -184,8 +190,9 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             Collection<Attribute> customAttributes = new Collection<Attribute>();
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -215,8 +222,9 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             Collection<HttpParameterDescriptor> parameters =
                 new Collection<HttpParameterDescriptor>();
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -242,8 +250,9 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             Collection<IFilter> filters = new Collection<IFilter>();
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -271,8 +280,9 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             Collection<FilterInfo> filters = new Collection<FilterInfo>();
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -299,8 +309,9 @@ namespace System.Web.Http.Tracing.Tracers
         public void Configuration_Uses_Inners()
         {
             // Assert
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -323,8 +334,9 @@ namespace System.Web.Http.Tracing.Tracers
         public void ControllerDescriptor_Uses_Inners()
         {
             // Assert
-            HttpControllerDescriptor controllerDescriptor =
-                new Mock<HttpControllerDescriptor>().Object;
+            HttpControllerDescriptor controllerDescriptor = new Mock<HttpControllerDescriptor>(
+
+            ).Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
                 controllerDescriptor
@@ -456,13 +468,12 @@ namespace System.Web.Http.Tracing.Tracers
             };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             mockActionDescriptor
-                .Setup(
-                    a =>
-                        a.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            CancellationToken.None
-                        )
+                .Setup(a =>
+                    a.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        CancellationToken.None
+                    )
                 )
                 .Returns(Task.FromResult<object>(null));
             HttpControllerContext controllerContext = ContextUtil.CreateControllerContext();
@@ -520,13 +531,12 @@ namespace System.Web.Http.Tracing.Tracers
             };
             InvalidOperationException exception = new InvalidOperationException("test");
             mockActionDescriptor
-                .Setup(
-                    a =>
-                        a.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            CancellationToken.None
-                        )
+                .Setup(a =>
+                    a.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        CancellationToken.None
+                    )
                 )
                 .Throws(exception);
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");

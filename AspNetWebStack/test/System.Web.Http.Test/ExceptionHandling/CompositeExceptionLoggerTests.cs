@@ -89,21 +89,13 @@ namespace System.Web.Http.ExceptionHandling
                 MockBehavior.Strict
             );
             exceptionLogger1Mock
-                .Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(l =>
+                    l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns(Task.FromResult(0));
             exceptionLogger2Mock
-                .Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+                .Setup(l =>
+                    l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns(Task.FromResult(0));
             IEnumerable<IExceptionLogger> loggers = new IExceptionLogger[]

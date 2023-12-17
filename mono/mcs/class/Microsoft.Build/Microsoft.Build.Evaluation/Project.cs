@@ -290,13 +290,12 @@ namespace Microsoft.Build.Evaluation
                     foreach (var p in pge.Properties)
                         // do not allow overwriting reserved or well-known properties by user
                         if (
-                            !this.properties.Any(
-                                _ =>
-                                    (_.IsReservedProperty || _.IsWellKnownProperty)
-                                    && _.Name.Equals(
-                                        p.Name,
-                                        StringComparison.InvariantCultureIgnoreCase
-                                    )
+                            !this.properties.Any(_ =>
+                                (_.IsReservedProperty || _.IsWellKnownProperty)
+                                && _.Name.Equals(
+                                    p.Name,
+                                    StringComparison.InvariantCultureIgnoreCase
+                                )
                             )
                         )
                             if (Evaluate(p.Condition))
@@ -364,8 +363,8 @@ namespace Microsoft.Build.Evaluation
                 DirectoryPath,
                 assignRecurse,
                 t =>
-                    all_evaluated_items.Any(
-                        i => i.EvaluatedInclude == t.ItemSpec && itemTypeCheck(i.ItemType)
+                    all_evaluated_items.Any(i =>
+                        i.EvaluatedInclude == t.ItemSpec && itemTypeCheck(i.ItemType)
                     )
             );
         }
@@ -489,8 +488,7 @@ namespace Microsoft.Build.Evaluation
         public ICollection<ProjectItem> GetItemsIgnoringCondition(string itemType)
         {
             return new CollectionFromEnumerable<ProjectItem>(
-                raw_items.Where(
-                    p => p.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
+                raw_items.Where(p => p.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
                 )
             );
         }
@@ -697,12 +695,8 @@ namespace Microsoft.Build.Evaluation
         public ICollection<ProjectItem> GetItemsByEvaluatedInclude(string evaluatedInclude)
         {
             return new CollectionFromEnumerable<ProjectItem>(
-                Items.Where(
-                    p =>
-                        p.EvaluatedInclude.Equals(
-                            evaluatedInclude,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                Items.Where(p =>
+                    p.EvaluatedInclude.Equals(evaluatedInclude, StringComparison.OrdinalIgnoreCase)
                 )
             );
         }
@@ -719,16 +713,16 @@ namespace Microsoft.Build.Evaluation
 
         public static string GetMetadataValueEscaped(ProjectItem item, string name)
         {
-            var md = item.Metadata.FirstOrDefault(
-                m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+            var md = item.Metadata.FirstOrDefault(m =>
+                m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
             );
             return md != null ? ProjectCollection.Escape(md.EvaluatedValue) : null;
         }
 
         public static string GetMetadataValueEscaped(ProjectItemDefinition item, string name)
         {
-            var md = item.Metadata.FirstOrDefault(
-                m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+            var md = item.Metadata.FirstOrDefault(m =>
+                m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
             );
             return md != null ? ProjectCollection.Escape(md.EvaluatedValue) : null;
         }
@@ -759,8 +753,8 @@ namespace Microsoft.Build.Evaluation
                 )
             )
                 return new ReservedProjectProperty(this, name, () => extensions_path_override);
-            return properties.FirstOrDefault(
-                p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+            return properties.FirstOrDefault(p =>
+                p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
             );
         }
 
@@ -787,8 +781,8 @@ namespace Microsoft.Build.Evaluation
 
         public bool RemoveProperty(ProjectProperty property)
         {
-            var removed = properties.FirstOrDefault(
-                p => p.Name.Equals(property.Name, StringComparison.OrdinalIgnoreCase)
+            var removed = properties.FirstOrDefault(p =>
+                p.Name.Equals(property.Name, StringComparison.OrdinalIgnoreCase)
             );
             if (removed == null)
                 return false;

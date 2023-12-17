@@ -77,9 +77,8 @@ public class WebSocketsTransportTests : FunctionalTestBase
             .Setup(socket => socket.CloseStatus)
             .Returns(WebSocketCloseStatus.NormalClosure);
         webSocketMock
-            .Setup(
-                socket =>
-                    socket.ReceiveAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
+            .Setup(socket =>
+                socket.ReceiveAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
             )
             .ReturnsAsync(new ValueWebSocketReceiveResult(0, WebSocketMessageType.Close, true));
 
@@ -155,7 +154,9 @@ public class WebSocketsTransportTests : FunctionalTestBase
 
             // user agent version should come from version embedded in assembly metadata
             var assemblyVersion =
-                typeof(Constants).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                typeof(Constants).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>(
+
+                );
 
             var majorVersion = typeof(HttpConnection).Assembly.GetName().Version.Major;
             var minorVersion = typeof(HttpConnection).Assembly.GetName().Version.Minor;

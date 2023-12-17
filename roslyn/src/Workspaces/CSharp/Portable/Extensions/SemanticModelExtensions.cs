@@ -84,8 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             var parameterNames = reservedNames
                 .Concat(
-                    arguments.Select(
-                        a => semanticModel.GenerateNameForArgument(a, cancellationToken)
+                    arguments.Select(a =>
+                        semanticModel.GenerateNameForArgument(a, cancellationToken)
                     )
                 )
                 .ToImmutableArray();
@@ -121,8 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             var parameterNames = reservedNames
                 .Concat(
-                    arguments.Select(
-                        a => semanticModel.GenerateNameForArgument(a, cancellationToken)
+                    arguments.Select(a =>
+                        semanticModel.GenerateNameForArgument(a, cancellationToken)
                     )
                 )
                 .ToImmutableArray();

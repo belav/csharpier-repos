@@ -73,8 +73,7 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
                 listenOptions =>
                 {
                     listenOptions.UseConnectionLogging();
-                    listenOptions.Use(
-                        next => new AsyncConnectionMiddleware(next).OnConnectionAsync
+                    listenOptions.Use(next => new AsyncConnectionMiddleware(next).OnConnectionAsync
                     );
                     listenOptions.UseConnectionLogging();
                 }
@@ -244,13 +243,12 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     {
         var connectionId = "";
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
-        listenOptions.Use(
-            next =>
-                context =>
-                {
-                    connectionId = context.ConnectionId;
-                    throw new InvalidOperationException();
-                }
+        listenOptions.Use(next =>
+            context =>
+            {
+                connectionId = context.ConnectionId;
+                throw new InvalidOperationException();
+            }
         );
 
         var serviceContext = new TestServiceContext(LoggerFactory);
@@ -274,9 +272,9 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     [Fact]
     public async Task CanFlushAsyncWithConnectionMiddleware()
     {
-        var listenOptions = new ListenOptions(
-            new IPEndPoint(IPAddress.Loopback, 0)
-        ).UsePassThrough();
+        var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough(
+
+        );
 
         var serviceContext = new TestServiceContext(LoggerFactory);
 
@@ -310,9 +308,9 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     [Fact]
     public async Task CanFlushAsyncWithConnectionMiddlewarePipeWriter()
     {
-        var listenOptions = new ListenOptions(
-            new IPEndPoint(IPAddress.Loopback, 0)
-        ).UsePassThrough();
+        var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough(
+
+        );
 
         var serviceContext = new TestServiceContext(LoggerFactory);
 

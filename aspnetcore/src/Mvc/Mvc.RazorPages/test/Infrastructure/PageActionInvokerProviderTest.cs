@@ -427,12 +427,11 @@ public class PageInvokerProviderTest
 
         var loader = new Mock<PageLoader>();
         loader
-            .Setup(
-                l =>
-                    l.LoadAsync(
-                        It.IsAny<PageActionDescriptor>(),
-                        It.IsAny<EndpointMetadataCollection>()
-                    )
+            .Setup(l =>
+                l.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                )
             )
             .ReturnsAsync(compiledPageDescriptor);
 
@@ -479,12 +478,11 @@ public class PageInvokerProviderTest
 
         var loader = new Mock<PageLoader>();
         loader
-            .Setup(
-                l =>
-                    l.LoadAsync(
-                        It.IsAny<PageActionDescriptor>(),
-                        It.IsAny<EndpointMetadataCollection>()
-                    )
+            .Setup(l =>
+                l.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                )
             )
             .ReturnsAsync(CreateCompiledPageActionDescriptor(descriptor, typeof(TestPageModel)));
 

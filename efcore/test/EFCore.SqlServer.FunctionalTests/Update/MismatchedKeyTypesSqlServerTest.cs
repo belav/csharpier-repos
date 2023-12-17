@@ -488,27 +488,21 @@ public class MismatchedKeyTypesSqlServerTest
 
             modelBuilder
                 .Entity<PrincipalComposite>()
-                .HasKey(
-                    e =>
-                        new
-                        {
-                            e.Id1,
-                            e.Id2,
-                            e.Id3
-                        }
-                );
+                .HasKey(e => new
+                {
+                    e.Id1,
+                    e.Id2,
+                    e.Id3
+                });
 
             modelBuilder
                 .Entity<PrincipalBadComposite>()
-                .HasKey(
-                    e =>
-                        new
-                        {
-                            e.Id1,
-                            e.Id2,
-                            e.Id3
-                        }
-                );
+                .HasKey(e => new
+                {
+                    e.Id1,
+                    e.Id2,
+                    e.Id3
+                });
 
             modelBuilder.Entity<PrincipalBad>().Property(e => e.Id).ValueGeneratedNever();
 

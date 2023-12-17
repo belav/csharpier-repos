@@ -88,10 +88,9 @@ public class NullCheckDefault : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>()
-                    .ForMember(d => d.Length, o => o.MapFrom(s => s.Value.Length))
+        new(c =>
+            c.CreateMap<Source, Destination>()
+                .ForMember(d => d.Length, o => o.MapFrom(s => s.Value.Length))
         );
 
     [Fact]
@@ -340,10 +339,8 @@ public class When_mappping_null_array_to_IEnumerable_with_MapAtRuntime : AutoMap
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            cfg =>
-                cfg.CreateMap<Source, Destination>()
-                    .ForMember(d => d.Collection, o => o.MapAtRuntime())
+        new(cfg =>
+            cfg.CreateMap<Source, Destination>().ForMember(d => d.Collection, o => o.MapAtRuntime())
         );
 
     [Fact]
@@ -651,11 +648,8 @@ public class When_overriding_null_behavior_with_null_source_items : AutoMapperSp
                 .ForMember(
                     d => d.SubExpressionName,
                     opt =>
-                        opt.MapFrom(
-                            src =>
-                                src.Subs.FirstOrDefault(
-                                    spt => spt.Sub.Something == src.Id
-                                ).Something
+                        opt.MapFrom(src =>
+                            src.Subs.FirstOrDefault(spt => spt.Sub.Something == src.Id).Something
                         )
                 )
                 .ForMember(d => d.NullableMapFrom, opt => opt.MapFrom(s => s.Sub.Something));
@@ -757,11 +751,9 @@ public class When_overriding_null_behavior_in_sub_profile : AutoMapperSpecBase
                         .ForMember(
                             d => d.SubExpressionName,
                             opt =>
-                                opt.MapFrom(
-                                    src =>
-                                        src.Subs.FirstOrDefault(
-                                            spt => spt.Sub.Something == src.Id
-                                        ).Something
+                                opt.MapFrom(src =>
+                                    src.Subs.FirstOrDefault(spt => spt.Sub.Something == src.Id
+                                    ).Something
                                 )
                         )
                         .ForMember(

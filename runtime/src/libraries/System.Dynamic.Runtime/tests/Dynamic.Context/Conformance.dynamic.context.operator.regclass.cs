@@ -2014,10 +2014,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             dynamic dy = mc;
             char? c = 'a';
             double[] d = new double[0];
-            var result = list.Where(
-                    p =>
-                        p._field1 == ((decimal?)(mc != dy)).Value
-                        && p._field2 == ((int?)(c ^ dy)).Value
+            var result = list.Where(p =>
+                    p._field1 == ((decimal?)(mc != dy)).Value && p._field2 == ((int?)(c ^ dy)).Value
                 )
                 .Where(p => p._field3 == (d & dy))
                 .Select(p => p._field3)

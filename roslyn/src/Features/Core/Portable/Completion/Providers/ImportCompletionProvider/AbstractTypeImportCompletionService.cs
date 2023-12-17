@@ -155,7 +155,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     () => new EditorBrowsableInfo(originCompilation)
                 );
                 foreach (
-                    var peReference in currentProject.MetadataReferences.OfType<PortableExecutableReference>()
+                    var peReference in currentProject.MetadataReferences.OfType<PortableExecutableReference>(
+
+                    )
                 )
                 {
                     // Can't cache items for reference with null key. We don't want risk potential perf regression by

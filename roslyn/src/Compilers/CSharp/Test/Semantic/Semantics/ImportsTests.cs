@@ -183,9 +183,8 @@ using F = System.IO;
             comp.GetDiagnostics().Where(d => d.Severity == DiagnosticSeverity.Error).Verify();
 
             var factories = trees.Select(tree => comp.GetBinderFactory(tree));
-            var binders = factories.Select(
-                factory =>
-                    factory.GetInNamespaceBinder((CSharpSyntaxNode)factory.SyntaxTree.GetRoot())
+            var binders = factories.Select(factory =>
+                factory.GetInNamespaceBinder((CSharpSyntaxNode)factory.SyntaxTree.GetRoot())
             );
             var imports = binders.Select(binder => binder.ImportChain.Imports);
             Assert.DoesNotContain(Imports.Empty, imports);

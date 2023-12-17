@@ -65,10 +65,9 @@ public class DefaultViewComponentDescriptorProvider : IViewComponentDescriptorPr
         var componentName = componentType.FullName;
         var methods = componentType
             .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-            .Where(
-                method =>
-                    string.Equals(method.Name, AsyncMethodName, StringComparison.Ordinal)
-                    || string.Equals(method.Name, SyncMethodName, StringComparison.Ordinal)
+            .Where(method =>
+                string.Equals(method.Name, AsyncMethodName, StringComparison.Ordinal)
+                || string.Equals(method.Name, SyncMethodName, StringComparison.Ordinal)
             )
             .ToArray();
 

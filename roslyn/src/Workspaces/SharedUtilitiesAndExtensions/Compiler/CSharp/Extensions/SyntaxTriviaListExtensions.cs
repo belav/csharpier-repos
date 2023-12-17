@@ -31,15 +31,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return null;
 
             return triviaList
-                .Where(
-                    t =>
-                        t
-                            is
-                            (
-                                kind: SyntaxKind.SingleLineCommentTrivia
-                                    or SyntaxKind.MultiLineCommentTrivia
-                                    or SyntaxKind.WhitespaceTrivia
-                            )
+                .Where(t =>
+                    t
+                        is
+                        (
+                            kind: SyntaxKind.SingleLineCommentTrivia
+                                or SyntaxKind.MultiLineCommentTrivia
+                                or SyntaxKind.WhitespaceTrivia
+                        )
                 )
                 .LastOrNull();
         }
@@ -59,9 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 currentLine.Add(trivia);
                 if (trivia.Kind() == SyntaxKind.EndOfLineTrivia)
                 {
-                    var currentLineIsBlank = currentLine.All(
-                        static t =>
-                            t.Kind() is SyntaxKind.EndOfLineTrivia or SyntaxKind.WhitespaceTrivia
+                    var currentLineIsBlank = currentLine.All(static t =>
+                        t.Kind() is SyntaxKind.EndOfLineTrivia or SyntaxKind.WhitespaceTrivia
                     );
                     if (!currentLineIsBlank)
                     {

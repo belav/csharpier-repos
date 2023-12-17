@@ -209,8 +209,10 @@ class C
                 rebuildData: null,
                 testData: new CompilationTestData()
                 {
-                    SymWriterFactory = metadataProvider =>
-                        new SymUnmanagedWriterWithoutSourceLinkSupport(metadataProvider)
+                    SymWriterFactory =
+                        metadataProvider => new SymUnmanagedWriterWithoutSourceLinkSupport(
+                            metadataProvider
+                        )
                 }
             );
 

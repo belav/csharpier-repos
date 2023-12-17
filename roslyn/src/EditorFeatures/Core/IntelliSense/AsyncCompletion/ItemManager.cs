@@ -175,7 +175,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                             );
                         }
 
-                        AsyncCompletionLogger.LogSessionWithDelayedImportCompletionIncludedInUpdate();
+                        AsyncCompletionLogger.LogSessionWithDelayedImportCompletionIncludedInUpdate(
+
+                        );
                     }
                 }
 

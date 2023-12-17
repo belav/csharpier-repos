@@ -147,8 +147,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            var projectToLocations = memberReferenceLocations.ToLookup(
-                loc => loc.location.Document.Project.Id
+            var projectToLocations = memberReferenceLocations.ToLookup(loc =>
+                loc.location.Document.Project.Id
             );
             var solutionWithFixedReferences = await RefactorReferencesAsync(
                     projectToLocations,
@@ -171,8 +171,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             var members = memberNodes
                 .Select(node => root.GetCurrentNode(node))
                 .WhereNotNull()
-                .SelectAsArray(
-                    node => (semanticModel.GetDeclaredSymbol(node, cancellationToken), false)
+                .SelectAsArray(node =>
+                    (semanticModel.GetDeclaredSymbol(node, cancellationToken), false)
                 );
 
             var pullMembersUpOptions = PullMembersUpOptionsBuilder.BuildPullMembersUpOptions(
@@ -243,8 +243,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            var projectToLocations = memberReferenceLocations.ToLookup(
-                loc => loc.location.Document.Project.Id
+            var projectToLocations = memberReferenceLocations.ToLookup(loc =>
+                loc.location.Document.Project.Id
             );
             var solutionWithFixedReferences = await RefactorReferencesAsync(
                     projectToLocations,
@@ -267,8 +267,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             var members = oldMemberNodes
                 .Select(node => root.GetCurrentNode(node))
                 .WhereNotNull()
-                .SelectAsArray(
-                    node => (semanticModel.GetDeclaredSymbol(node, cancellationToken), false)
+                .SelectAsArray(node =>
+                    (semanticModel.GetDeclaredSymbol(node, cancellationToken), false)
                 );
 
             newTypeDoc = solutionWithFixedReferences.GetRequiredDocument(newTypeDoc.Id);
@@ -318,8 +318,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 var compilation = await project
                     .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var documentToLocations = referencesForProject.ToLookup(
-                    reference => reference.location.Document.Id
+                var documentToLocations = referencesForProject.ToLookup(reference =>
+                    reference.location.Document.Id
                 );
                 foreach (var (docId, referencesForDoc) in documentToLocations)
                 {
@@ -354,12 +354,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             var syntaxFacts = doc.GetRequiredLanguageService<ISyntaxFactsService>();
 
             // keep extension method flag attached to node through dict
-            var trackNodesDict = referenceLocations.ToImmutableDictionary(
-                refLoc =>
-                    refLoc.location.Location.FindNode(
-                        getInnermostNodeForTie: true,
-                        cancellationToken
-                    )
+            var trackNodesDict = referenceLocations.ToImmutableDictionary(refLoc =>
+                refLoc.location.Location.FindNode(getInnermostNodeForTie: true, cancellationToken)
             );
 
             var docEditor = await DocumentEditor
@@ -486,17 +482,16 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             CancellationToken cancellationToken
         )
         {
-            var tasks = members.Select(
-                symbol => SymbolFinder.FindReferencesAsync(symbol, solution, cancellationToken)
+            var tasks = members.Select(symbol =>
+                SymbolFinder.FindReferencesAsync(symbol, solution, cancellationToken)
             );
             var symbolRefs = await Task.WhenAll(tasks).ConfigureAwait(false);
             return symbolRefs
                 .Flatten()
-                .SelectMany(
-                    refSymbol =>
-                        refSymbol
-                            .Locations.Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
-                            .Select(loc => (loc, refSymbol.Definition.IsExtensionMethod()))
+                .SelectMany(refSymbol =>
+                    refSymbol
+                        .Locations.Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
+                        .Select(loc => (loc, refSymbol.Definition.IsExtensionMethod()))
                 )
                 .ToImmutableArrayOrEmpty();
         }

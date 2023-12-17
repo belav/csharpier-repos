@@ -104,18 +104,17 @@ public class AnchorTagHelperTest
 
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateRouteLink(
-                        It.IsAny<ViewContext>(),
-                        string.Empty,
-                        "Default",
-                        "http",
-                        "contoso.com",
-                        "hello=world",
-                        It.IsAny<IDictionary<string, object>>(),
-                        null
-                    )
+            .Setup(mock =>
+                mock.GenerateRouteLink(
+                    It.IsAny<ViewContext>(),
+                    string.Empty,
+                    "Default",
+                    "http",
+                    "contoso.com",
+                    "hello=world",
+                    It.IsAny<IDictionary<string, object>>(),
+                    null
+                )
             )
             .Returns(new TagBuilder("a"))
             .Verifiable();
@@ -159,19 +158,18 @@ public class AnchorTagHelperTest
 
         var generator = new Mock<IHtmlGenerator>();
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateActionLink(
-                        It.IsAny<ViewContext>(),
-                        string.Empty,
-                        "Index",
-                        "Home",
-                        "http",
-                        "contoso.com",
-                        "hello=world",
-                        It.IsAny<IDictionary<string, object>>(),
-                        null
-                    )
+            .Setup(mock =>
+                mock.GenerateActionLink(
+                    It.IsAny<ViewContext>(),
+                    string.Empty,
+                    "Index",
+                    "Home",
+                    "http",
+                    "contoso.com",
+                    "hello=world",
+                    It.IsAny<IDictionary<string, object>>(),
+                    null
+                )
             )
             .Returns(new TagBuilder("a"))
             .Verifiable();
@@ -218,19 +216,18 @@ public class AnchorTagHelperTest
         var expectedRouteValues = new Dictionary<string, object> { { "area", "Admin" } };
 
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateActionLink(
-                        It.IsAny<ViewContext>(),
-                        string.Empty,
-                        "Index",
-                        "Home",
-                        "http",
-                        "contoso.com",
-                        "hello=world",
-                        expectedRouteValues,
-                        null
-                    )
+            .Setup(mock =>
+                mock.GenerateActionLink(
+                    It.IsAny<ViewContext>(),
+                    string.Empty,
+                    "Index",
+                    "Home",
+                    "http",
+                    "contoso.com",
+                    "hello=world",
+                    expectedRouteValues,
+                    null
+                )
             )
             .Returns(new TagBuilder("a"))
             .Verifiable();
@@ -281,19 +278,18 @@ public class AnchorTagHelperTest
         var expectedRouteValues = new Dictionary<string, object> { { "area", "Admin" } };
 
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateActionLink(
-                        It.IsAny<ViewContext>(),
-                        string.Empty,
-                        "Index",
-                        "Home",
-                        "http",
-                        "contoso.com",
-                        "hello=world",
-                        expectedRouteValues,
-                        null
-                    )
+            .Setup(mock =>
+                mock.GenerateActionLink(
+                    It.IsAny<ViewContext>(),
+                    string.Empty,
+                    "Index",
+                    "Home",
+                    "http",
+                    "contoso.com",
+                    "hello=world",
+                    expectedRouteValues,
+                    null
+                )
             )
             .Returns(new TagBuilder("a"))
             .Verifiable();
@@ -345,19 +341,18 @@ public class AnchorTagHelperTest
         var expectedRouteValues = new Dictionary<string, object> { { "area", string.Empty } };
 
         generator
-            .Setup(
-                mock =>
-                    mock.GenerateActionLink(
-                        It.IsAny<ViewContext>(),
-                        string.Empty,
-                        "Index",
-                        "Home",
-                        "http",
-                        "contoso.com",
-                        "hello=world",
-                        expectedRouteValues,
-                        null
-                    )
+            .Setup(mock =>
+                mock.GenerateActionLink(
+                    It.IsAny<ViewContext>(),
+                    string.Empty,
+                    "Index",
+                    "Home",
+                    "http",
+                    "contoso.com",
+                    "hello=world",
+                    expectedRouteValues,
+                    null
+                )
             )
             .Returns(new TagBuilder("a"))
             .Verifiable();
@@ -406,19 +401,18 @@ public class AnchorTagHelperTest
 
         var generator = new Mock<IHtmlGenerator>();
         generator
-            .Setup(
-                mock =>
-                    mock.GeneratePageLink(
-                        It.IsAny<ViewContext>(),
-                        string.Empty,
-                        "/User/Home/Index",
-                        "page-handler",
-                        "http",
-                        "contoso.com",
-                        "hello=world",
-                        It.IsAny<object>(),
-                        null
-                    )
+            .Setup(mock =>
+                mock.GeneratePageLink(
+                    It.IsAny<ViewContext>(),
+                    string.Empty,
+                    "/User/Home/Index",
+                    "page-handler",
+                    "http",
+                    "contoso.com",
+                    "hello=world",
+                    It.IsAny<object>(),
+                    null
+                )
             )
             .Returns(new TagBuilder("a"))
             .Verifiable();
@@ -462,19 +456,18 @@ public class AnchorTagHelperTest
 
         var generator = new Mock<IHtmlGenerator>();
         generator
-            .Setup(
-                mock =>
-                    mock.GeneratePageLink(
-                        It.IsAny<ViewContext>(),
-                        string.Empty,
-                        "/User/Home/Index",
-                        "page-handler",
-                        "http",
-                        "contoso.com",
-                        "hello=world",
-                        It.IsAny<object>(),
-                        null
-                    )
+            .Setup(mock =>
+                mock.GeneratePageLink(
+                    It.IsAny<ViewContext>(),
+                    string.Empty,
+                    "/User/Home/Index",
+                    "page-handler",
+                    "http",
+                    "contoso.com",
+                    "hello=world",
+                    It.IsAny<object>(),
+                    null
+                )
             )
             .Callback(
                 (

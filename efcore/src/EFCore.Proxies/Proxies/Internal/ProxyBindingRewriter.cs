@@ -161,10 +161,9 @@ public class ProxyBindingRewriter : IModelFinalizingConvention
                     foreach (
                         var conflictingProperty in entityType
                             .GetDerivedTypes()
-                            .SelectMany(
-                                e =>
-                                    e.GetDeclaredServiceProperties()
-                                        .Where(p => p.ClrType == typeof(ILazyLoader))
+                            .SelectMany(e =>
+                                e.GetDeclaredServiceProperties()
+                                    .Where(p => p.ClrType == typeof(ILazyLoader))
                             )
                             .ToList()
                     )

@@ -2078,7 +2078,9 @@ class C
 
             // block solution cralwer from processing.
             var globalOperation =
-                workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOperationNotificationService>();
+                workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOperationNotificationService>(
+
+                );
             using (var operation = globalOperation.Start("Block SolutionCrawler"))
             {
                 // make sure global operaiton is actually started
@@ -2104,17 +2106,15 @@ class C
                 //
                 // since asyncToken doesn't distinguish whether (1) certain event is happened but all processed or (2) it never happened yet,
                 // to check (1), we must wait for first item, and then wait for all items to be processed.
-                await crawlerListener.WaitUntilConditionIsMetAsync(
-                    pendingTokens =>
-                        pendingTokens.Any(
-                            token =>
-                                token.Tag == (object)SolutionCrawlerRegistrationService.EnqueueItem
-                        )
+                await crawlerListener.WaitUntilConditionIsMetAsync(pendingTokens =>
+                    pendingTokens.Any(token =>
+                        token.Tag == (object)SolutionCrawlerRegistrationService.EnqueueItem
+                    )
                 );
 
                 // and then wait them to be processed
-                await crawlerListener.WaitUntilConditionIsMetAsync(
-                    pendingTokens => pendingTokens.Where(token => token.Tag == workspace).IsEmpty()
+                await crawlerListener.WaitUntilConditionIsMetAsync(pendingTokens =>
+                    pendingTokens.Where(token => token.Tag == workspace).IsEmpty()
                 );
             }
 
@@ -2456,7 +2456,9 @@ class C
                 );
 
                 var globalOptions =
-                    workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
+                    workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>(
+
+                    );
                 globalOptions.SetGlobalOption(
                     SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
                     LanguageNames.CSharp,

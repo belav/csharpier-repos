@@ -175,8 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 var snapshot = e.After;
 
-                var tagsToRemove = e.Changes.SelectMany(
-                    c => treeForBuffer.GetIntersectingSpans(new SnapshotSpan(snapshot, c.NewSpan))
+                var tagsToRemove = e.Changes.SelectMany(c =>
+                    treeForBuffer.GetIntersectingSpans(new SnapshotSpan(snapshot, c.NewSpan))
                 );
                 if (!tagsToRemove.Any())
                     return;
@@ -531,10 +531,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 var languageName = _subjectBuffer.GetLanguageName();
                 return _dataSource
                     .Options.OfType<PerLanguageOption2<bool>>()
-                    .Any(
-                        option =>
-                            languageName == null
-                            || !_dataSource.GlobalOptions.GetOption(option, languageName)
+                    .Any(option =>
+                        languageName == null
+                        || !_dataSource.GlobalOptions.GetOption(option, languageName)
                     );
             }
 

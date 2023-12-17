@@ -573,8 +573,9 @@ public class DbContextPoolingTest
 
         using var scope = serviceProvider.CreateScope();
 
-        var context =
-            scope.ServiceProvider.GetRequiredService<WithParameterlessConstructorContext>();
+        var context = scope.ServiceProvider.GetRequiredService<WithParameterlessConstructorContext>(
+
+        );
 
         Assert.Equal("Options", context.ConstructorUsed);
     }
@@ -703,10 +704,9 @@ public class DbContextPoolingTest
     public async Task ContextIds_make_sense_when_not_pooling(bool async)
     {
         var serviceProvider = new ServiceCollection()
-            .AddDbContext<DbContext>(
-                ob =>
-                    ob.UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString)
-                        .EnableServiceProviderCaching(false)
+            .AddDbContext<DbContext>(ob =>
+                ob.UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString)
+                    .EnableServiceProviderCaching(false)
             )
             .BuildServiceProvider(validateScopes: true);
 
@@ -908,11 +908,11 @@ public class DbContextPoolingTest
     )
     {
         var serviceProvider = useInterface
-            ? BuildServiceProvider<IPooledContext, PooledContext>(
-                b => UseQueryTrackingBehavior(b, queryTrackingBehavior)
+            ? BuildServiceProvider<IPooledContext, PooledContext>(b =>
+                UseQueryTrackingBehavior(b, queryTrackingBehavior)
             )
-            : BuildServiceProvider<PooledContext>(
-                b => UseQueryTrackingBehavior(b, queryTrackingBehavior)
+            : BuildServiceProvider<PooledContext>(b =>
+                UseQueryTrackingBehavior(b, queryTrackingBehavior)
             );
 
         var serviceScope = serviceProvider.CreateScope();
@@ -1032,8 +1032,8 @@ public class DbContextPoolingTest
         QueryTrackingBehavior? queryTrackingBehavior
     )
     {
-        var serviceProvider = BuildServiceProvider<SecondContext>(
-            b => UseQueryTrackingBehavior(b, queryTrackingBehavior)
+        var serviceProvider = BuildServiceProvider<SecondContext>(b =>
+            UseQueryTrackingBehavior(b, queryTrackingBehavior)
         );
 
         var serviceScope = serviceProvider.CreateScope();
@@ -1305,8 +1305,8 @@ public class DbContextPoolingTest
         QueryTrackingBehavior? queryTrackingBehavior
     )
     {
-        var serviceProvider = BuildServiceProvider<DefaultOptionsPooledContext>(
-            b => UseQueryTrackingBehavior(b, queryTrackingBehavior)
+        var serviceProvider = BuildServiceProvider<DefaultOptionsPooledContext>(b =>
+            UseQueryTrackingBehavior(b, queryTrackingBehavior)
         );
 
         var serviceScope = serviceProvider.CreateScope();
@@ -1663,9 +1663,9 @@ public class DbContextPoolingTest
             : BuildServiceProvider<PooledContext>();
 
         var scope = serviceProvider.CreateScope();
-        var lease = scope.ServiceProvider.GetRequiredService<
-            IScopedDbContextLease<PooledContext>
-        >();
+        var lease = scope.ServiceProvider.GetRequiredService<IScopedDbContextLease<PooledContext>>(
+
+        );
         var context = lease.Context;
 
         await Dispose(scope, async);
@@ -1747,8 +1747,8 @@ public class DbContextPoolingTest
     {
         var serviceProvider = useInterface
             ? BuildServiceProvider<IPooledContext, PooledContext>()
-            : BuildServiceProvider<PooledContext>(
-                o => o.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+            : BuildServiceProvider<PooledContext>(o =>
+                o.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
             );
 
         var serviceScope = serviceProvider.CreateScope();
@@ -1839,10 +1839,9 @@ public class DbContextPoolingTest
     )
     {
         var serviceProvider = new ServiceCollection()
-            .AddDbContextPool<PooledContext>(
-                ob =>
-                    ob.UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString)
-                        .EnableServiceProviderCaching(false)
+            .AddDbContextPool<PooledContext>(ob =>
+                ob.UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString)
+                    .EnableServiceProviderCaching(false)
             )
             .BuildServiceProvider(validateScopes: true);
 
@@ -1925,8 +1924,8 @@ public class DbContextPoolingTest
         }
 
         var serviceProvider = new ServiceCollection()
-            .AddDbContextPool<PooledContext>(
-                ob => ob.UseSqlServer(connection).EnableServiceProviderCaching(false)
+            .AddDbContextPool<PooledContext>(ob =>
+                ob.UseSqlServer(connection).EnableServiceProviderCaching(false)
             )
             .BuildServiceProvider(validateScopes: true);
 
@@ -2003,12 +2002,9 @@ public class DbContextPoolingTest
 
         var factory = withDependencyInjection
             ? new ServiceCollection()
-                .AddPooledDbContextFactory<PooledContext>(
-                    ob =>
-                        ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
-                            .EnableServiceProviderCaching(false)
+                .AddPooledDbContextFactory<PooledContext>(ob =>
+                    ob.UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString)
+                        .EnableServiceProviderCaching(false)
                 )
                 .BuildServiceProvider(validateScopes: true)
                 .GetRequiredService<IDbContextFactory<PooledContext>>()
@@ -2100,8 +2096,8 @@ public class DbContextPoolingTest
 
         var factory = withDependencyInjection
             ? new ServiceCollection()
-                .AddPooledDbContextFactory<PooledContext>(
-                    ob => ob.UseSqlServer(connection).EnableServiceProviderCaching(false)
+                .AddPooledDbContextFactory<PooledContext>(ob =>
+                    ob.UseSqlServer(connection).EnableServiceProviderCaching(false)
                 )
                 .BuildServiceProvider(validateScopes: true)
                 .GetRequiredService<IDbContextFactory<PooledContext>>()
@@ -2283,24 +2279,23 @@ public class DbContextPoolingTest
         await Task.WhenAll(
             Enumerable
                 .Range(0, 10)
-                .Select(
-                    _ =>
-                        Task.Run(async () =>
+                .Select(_ =>
+                    Task.Run(async () =>
+                    {
+                        for (var j = 0; j < 1_000_000; j++)
                         {
-                            for (var j = 0; j < 1_000_000; j++)
-                            {
-                                var ctx = factory.CreateDbContext();
+                            var ctx = factory.CreateDbContext();
 
-                                if (async)
-                                {
-                                    await ctx.DisposeAsync();
-                                }
-                                else
-                                {
-                                    ctx.Dispose();
-                                }
+                            if (async)
+                            {
+                                await ctx.DisposeAsync();
                             }
-                        })
+                            else
+                            {
+                                ctx.Dispose();
+                            }
+                        }
+                    })
                 )
         );
     }

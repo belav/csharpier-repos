@@ -1791,11 +1791,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (!thisPtr.isInstanceInitialized && thisPtr.canCreateInstance)
                     {
-                        thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowCreated();
+                        thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowCreated(
+
+                        );
                     }
                     else
                     {
-                        thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowLoaded();
+                        thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowLoaded(
+
+                        );
                     }
 
                     thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowLoadDuration(
@@ -1850,7 +1854,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 thisPtr.ownsThrottle = asyncException == null;
                 if (thisPtr.ownsThrottle)
                 {
-                    thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowInMemory();
+                    thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowInMemory(
+
+                    );
                 }
                 thisPtr.Complete(false, asyncException);
             }

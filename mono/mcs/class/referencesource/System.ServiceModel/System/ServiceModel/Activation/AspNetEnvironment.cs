@@ -360,8 +360,9 @@ namespace System.ServiceModel.Activation
                         bool isApplicationDomainHosted = false;
                         if (AspNetEnvironment.Enabled)
                         {
-                            isApplicationDomainHosted =
-                                AspNetEnvironment.IsSystemWebAssemblyLoaded();
+                            isApplicationDomainHosted = AspNetEnvironment.IsSystemWebAssemblyLoaded(
+
+                            );
                         }
                         AspNetEnvironment.isApplicationDomainHosted = isApplicationDomainHosted;
                     }

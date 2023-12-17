@@ -97,7 +97,9 @@ namespace System.ServiceModel.Dispatcher
                 if (this.workflowInstanceLifeTimeManager == null)
                 {
                     this.workflowInstanceLifeTimeManager =
-                        this.dispatchRuntime.ChannelDispatcher.Host.Extensions.Find<WorkflowInstanceLifetimeManagerExtension>();
+                        this.dispatchRuntime.ChannelDispatcher.Host.Extensions.Find<WorkflowInstanceLifetimeManagerExtension>(
+
+                        );
                 }
 
                 return this.workflowInstanceLifeTimeManager;

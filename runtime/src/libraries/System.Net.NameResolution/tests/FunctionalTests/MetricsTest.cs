@@ -91,11 +91,10 @@ namespace System.Net.NameResolution.Tests
                 {
                     KeyValuePair<string, object?>[] tags = m.Tags.ToArray();
                     if (
-                        !tags.Any(
-                            t =>
-                                t.Key == "dns.question.name"
-                                && t.Value is string hostnameTag
-                                && hostnameTag == hostname
+                        !tags.Any(t =>
+                            t.Key == "dns.question.name"
+                            && t.Value is string hostnameTag
+                            && hostnameTag == hostname
                         )
                     )
                     {

@@ -91,8 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 Assert.Equal(massaged, TextView.TextSnapshot.GetText());
                 Assert.Equal(caretPosition, TextView.Caret.Position.BufferPosition.Position);
 
-                var virtualSpaces = spans.SingleOrDefault(
-                    kvp => kvp.Key.StartsWith("VirtualSpaces#")
+                var virtualSpaces = spans.SingleOrDefault(kvp =>
+                    kvp.Key.StartsWith("VirtualSpaces#")
                 );
                 if (virtualSpaces.Key != null)
                 {
@@ -120,8 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                     as TestStringCopyPasteService;
                 service?.TrySetClipboardData(StringCopyPasteCommandHandler.KeyAndVersion, "");
 
-                var copyDocument = this.Workspace.Documents.FirstOrDefault(
-                    d => d.AnnotatedSpans.ContainsKey("Copy")
+                var copyDocument = this.Workspace.Documents.FirstOrDefault(d =>
+                    d.AnnotatedSpans.ContainsKey("Copy")
                 );
                 if (copyDocument != null)
                 {

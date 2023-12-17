@@ -1027,8 +1027,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // Fetch the compilation from the other project, it should have a compilation reference that
             // contains the generated tree
-            var projectWithReference = generatedDocument.Project.Solution.Projects.Single(
-                p => p.Id != projectIdWithGenerator
+            var projectWithReference = generatedDocument.Project.Solution.Projects.Single(p =>
+                p.Id != projectIdWithGenerator
             );
             var compilationWithReference = await projectWithReference.GetRequiredCompilationAsync(
                 CancellationToken.None

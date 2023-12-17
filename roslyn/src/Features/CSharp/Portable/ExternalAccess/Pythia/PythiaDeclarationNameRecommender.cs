@@ -46,15 +46,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExternalAccess.Pythia
                 .ConfigureAwait(false);
 
             // We just pick the first possible symbol kind for glyph.
-            return result.SelectAsArray(
-                name =>
-                    (
-                        name,
-                        NameDeclarationInfo.GetGlyph(
-                            NameDeclarationInfo.GetSymbolKind(nameInfo.PossibleSymbolKinds[0]),
-                            nameInfo.DeclaredAccessibility
-                        )
+            return result.SelectAsArray(name =>
+                (
+                    name,
+                    NameDeclarationInfo.GetGlyph(
+                        NameDeclarationInfo.GetSymbolKind(nameInfo.PossibleSymbolKinds[0]),
+                        nameInfo.DeclaredAccessibility
                     )
+                )
             );
         }
     }

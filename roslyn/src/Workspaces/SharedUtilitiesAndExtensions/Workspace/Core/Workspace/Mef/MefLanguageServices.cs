@@ -43,13 +43,10 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             var services = hostServices.GetExports<ILanguageService, LanguageServiceMetadata>();
             var factories = hostServices
                 .GetExports<ILanguageServiceFactory, LanguageServiceMetadata>()
-                .Select(
-                    lz =>
-                        new Lazy<ILanguageService, LanguageServiceMetadata>(
-                            () => lz.Value.CreateLanguageService(this),
-                            lz.Metadata
-                        )
-                );
+                .Select(lz => new Lazy<ILanguageService, LanguageServiceMetadata>(
+                    () => lz.Value.CreateLanguageService(this),
+                    lz.Metadata
+                ));
 
             _services = services
                 .Concat(factories)

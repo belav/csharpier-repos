@@ -78,8 +78,8 @@ namespace System.Web.Mvc.Html.Test
                 );
                 ViewContext callbackViewContext = null;
                 engine
-                    .Engine.Setup(
-                        e => e.FindPartialView(html.ViewContext, "DisplayTemplates/String", true)
+                    .Engine.Setup(e =>
+                        e.FindPartialView(html.ViewContext, "DisplayTemplates/String", true)
                     )
                     .Returns(new ViewEngineResult(engine.View.Object, engine.Engine.Object))
                     .Verifiable();
@@ -136,8 +136,8 @@ namespace System.Web.Mvc.Html.Test
                 );
                 ViewContext callbackViewContext = null;
                 engine
-                    .Engine.Setup(
-                        e => e.FindPartialView(html.ViewContext, "EditorTemplates/String", true)
+                    .Engine.Setup(e =>
+                        e.FindPartialView(html.ViewContext, "EditorTemplates/String", true)
                     )
                     .Returns(new ViewEngineResult(engine.View.Object, engine.Engine.Object))
                     .Verifiable();
@@ -193,13 +193,12 @@ namespace System.Web.Mvc.Html.Test
                     html.ViewData
                 );
                 engine
-                    .Engine.Setup(
-                        e =>
-                            e.FindPartialView(
-                                html.ViewContext,
-                                "DisplayTemplates/String",
-                                It.IsAny<bool>()
-                            )
+                    .Engine.Setup(e =>
+                        e.FindPartialView(
+                            html.ViewContext,
+                            "DisplayTemplates/String",
+                            It.IsAny<bool>()
+                        )
                     )
                     .Returns(new ViewEngineResult(new string[0]))
                     .Verifiable();
@@ -240,13 +239,12 @@ namespace System.Web.Mvc.Html.Test
                     html.ViewData
                 );
                 engine
-                    .Engine.Setup(
-                        e =>
-                            e.FindPartialView(
-                                html.ViewContext,
-                                "EditorTemplates/String",
-                                It.IsAny<bool>()
-                            )
+                    .Engine.Setup(e =>
+                        e.FindPartialView(
+                            html.ViewContext,
+                            "EditorTemplates/String",
+                            It.IsAny<bool>()
+                        )
                     )
                     .Returns(new ViewEngineResult(new string[0]))
                     .Verifiable();
@@ -1842,13 +1840,12 @@ namespace System.Web.Mvc.Html.Test
                 Engine = new Mock<IViewEngine>();
 
                 Engine
-                    .Setup(
-                        e =>
-                            e.FindPartialView(
-                                It.IsAny<ControllerContext>(),
-                                It.IsAny<string>(),
-                                It.IsAny<bool>()
-                            )
+                    .Setup(e =>
+                        e.FindPartialView(
+                            It.IsAny<ControllerContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<bool>()
+                        )
                     )
                     .Returns(
                         returnView

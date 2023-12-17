@@ -42,20 +42,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Semantics
             var initialNode = initialTree
                 .GetRoot()
                 .DescendantNodes()
-                .First(
-                    n =>
-                        IsExpressionNode(n)
-                        && n.ToString() == (expressionToAnalyze ?? initialExpression)
+                .First(n =>
+                    IsExpressionNode(n)
+                    && n.ToString() == (expressionToAnalyze ?? initialExpression)
                 );
 
             var replacementTree = Parse(UnderTestRegex.Replace(code, replacementExpression));
             var replacementNode = replacementTree
                 .GetRoot()
                 .DescendantNodes()
-                .First(
-                    n =>
-                        IsExpressionNode(n)
-                        && n.ToString() == (expressionToAnalyze ?? replacementExpression)
+                .First(n =>
+                    IsExpressionNode(n)
+                    && n.ToString() == (expressionToAnalyze ?? replacementExpression)
                 );
 
             var initialCompilation = CreateCompilation(initialTree);

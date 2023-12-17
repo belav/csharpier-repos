@@ -204,10 +204,8 @@ internal sealed class DataAnnotationsMetadataProvider
 
             var enumFields = Enum.GetNames(underlyingType)
                 .Select(name => underlyingType.GetField(name)!)
-                .OrderBy(
-                    field =>
-                        field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder()
-                        ?? 1000
+                .OrderBy(field =>
+                    field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder() ?? 1000
                 );
 
             foreach (var field in enumFields)

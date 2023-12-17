@@ -43,9 +43,8 @@ public static class OpenApiEndpointConventionBuilderExtensions
     )
         where TBuilder : IEndpointConventionBuilder
     {
-        builder.Finally(
-            endpointBuilder =>
-                AddAndConfigureOperationForEndpoint(endpointBuilder, configureOperation)
+        builder.Finally(endpointBuilder =>
+            AddAndConfigureOperationForEndpoint(endpointBuilder, configureOperation)
         );
         return builder;
     }

@@ -71,13 +71,12 @@ internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHigh
             // It's possible to match multiple parameters, either based on parameter name, or [FromRoute(Name = "XXX")] attribute.
             var parameterName = node.ParameterNameToken.Value!.ToString();
             foreach (
-                var matchingParameter in resolvedParameters.Where(
-                    s =>
-                        string.Equals(
-                            s.RouteParameterName,
-                            parameterName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                var matchingParameter in resolvedParameters.Where(s =>
+                    string.Equals(
+                        s.RouteParameterName,
+                        parameterName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 )
             )
             {
@@ -134,13 +133,12 @@ internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHigh
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(i => i.Identifier.Text == matchingParameter.Name)
-                .Where(
-                    i =>
-                        semanticModel.GetSymbolInfo(i) is var symbolInfo
-                        && SymbolEqualityComparer.Default.Equals(
-                            symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault(),
-                            matchingParameter
-                        )
+                .Where(i =>
+                    semanticModel.GetSymbolInfo(i) is var symbolInfo
+                    && SymbolEqualityComparer.Default.Equals(
+                        symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault(),
+                        matchingParameter
+                    )
                 );
 
             foreach (var reference in parameterReferences)

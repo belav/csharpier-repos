@@ -34,8 +34,8 @@ public class UniqueJsonKeyClaimAction : JsonKeyClaimAction
             return;
         }
 
-        var claim = identity.FindFirst(
-            c => string.Equals(c.Type, ClaimType, StringComparison.OrdinalIgnoreCase)
+        var claim = identity.FindFirst(c =>
+            string.Equals(c.Type, ClaimType, StringComparison.OrdinalIgnoreCase)
         );
         if (claim != null && string.Equals(claim.Value, value, StringComparison.Ordinal))
         {

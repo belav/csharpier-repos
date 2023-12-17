@@ -79,7 +79,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             SetErrorHandlers(typeof(IVsInteractiveWindow).Assembly, fatalHandler, nonFatalHandler);
 
             _interactiveWindowProvider =
-                _componentModel.DefaultExportProvider.GetExportedValue<TVsInteractiveWindowProvider>();
+                _componentModel.DefaultExportProvider.GetExportedValue<TVsInteractiveWindowProvider>(
+
+                );
 
             InitializeMenuCommands(menuCommandService);
         }

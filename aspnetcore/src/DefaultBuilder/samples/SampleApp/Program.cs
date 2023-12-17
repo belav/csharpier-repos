@@ -51,28 +51,27 @@ public class Program
     {
         // Using a router
         using (
-            WebHost.Start(
-                router =>
-                    router
-                        .MapGet(
-                            "hello/{name}",
-                            (req, res, data) => res.WriteAsync($"Hello, {data.Values["name"]}")
-                        )
-                        .MapGet(
-                            "goodbye/{name}",
-                            (req, res, data) => res.WriteAsync($"Goodbye, {data.Values["name"]}")
-                        )
-                        .MapGet(
-                            "throw/{message?}",
-                            (req, res, data) =>
-                                throw new Exception((string)data.Values["message"] ?? "Uh oh!")
-                        )
-                        .MapGet(
-                            "{greeting}/{name}",
-                            (req, res, data) =>
-                                res.WriteAsync($"{data.Values["greeting"]}, {data.Values["name"]}")
-                        )
-                        .MapGet("", (req, res, data) => res.WriteAsync($"Hello, World!"))
+            WebHost.Start(router =>
+                router
+                    .MapGet(
+                        "hello/{name}",
+                        (req, res, data) => res.WriteAsync($"Hello, {data.Values["name"]}")
+                    )
+                    .MapGet(
+                        "goodbye/{name}",
+                        (req, res, data) => res.WriteAsync($"Goodbye, {data.Values["name"]}")
+                    )
+                    .MapGet(
+                        "throw/{message?}",
+                        (req, res, data) =>
+                            throw new Exception((string)data.Values["message"] ?? "Uh oh!")
+                    )
+                    .MapGet(
+                        "{greeting}/{name}",
+                        (req, res, data) =>
+                            res.WriteAsync($"{data.Values["greeting"]}, {data.Values["name"]}")
+                    )
+                    .MapGet("", (req, res, data) => res.WriteAsync($"Hello, World!"))
             )
         )
         {

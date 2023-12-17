@@ -97,8 +97,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             CancellationToken cancellationToken
         )
         {
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document == null)
                 return default;
 

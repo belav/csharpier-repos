@@ -940,18 +940,14 @@ public class A
                     // Find the handle and row for A.
                     var pairA = peFileReader
                         .TypeDefinitions.AsEnumerable()
-                        .Select(
-                            handle =>
-                                new
-                                {
-                                    handle = handle,
-                                    row = peFileReader.GetTypeDefinition(handle)
-                                }
-                        )
-                        .Single(
-                            pair =>
-                                peFileReader.GetString(pair.row.Name) == "A"
-                                && string.IsNullOrEmpty(peFileReader.GetString(pair.row.Namespace))
+                        .Select(handle => new
+                        {
+                            handle = handle,
+                            row = peFileReader.GetTypeDefinition(handle)
+                        })
+                        .Single(pair =>
+                            peFileReader.GetString(pair.row.Name) == "A"
+                            && string.IsNullOrEmpty(peFileReader.GetString(pair.row.Namespace))
                         );
                     TypeDefinitionHandle handleA = pairA.handle;
                     TypeDefinition typeA = pairA.row;
@@ -960,43 +956,37 @@ public class A
                     MethodDefinitionHandle handleDestructorA = typeA
                         .GetMethods()
                         .AsEnumerable()
-                        .Single(
-                            handle =>
-                                peFileReader.GetString(
-                                    peFileReader.GetMethodDefinition(handle).Name
-                                ) == WellKnownMemberNames.DestructorName
+                        .Single(handle =>
+                            peFileReader.GetString(peFileReader.GetMethodDefinition(handle).Name)
+                            == WellKnownMemberNames.DestructorName
                         );
 
                     // Find the handle for System.Object.
                     TypeReferenceHandle handleObject = peFileReader
                         .TypeReferences.AsEnumerable()
-                        .Select(
-                            handle =>
-                                new { handle = handle, row = peFileReader.GetTypeReference(handle) }
-                        )
-                        .Single(
-                            pair =>
-                                peFileReader.GetString(pair.row.Name) == "Object"
-                                && peFileReader.GetString(pair.row.Namespace) == "System"
+                        .Select(handle => new
+                        {
+                            handle = handle,
+                            row = peFileReader.GetTypeReference(handle)
+                        })
+                        .Single(pair =>
+                            peFileReader.GetString(pair.row.Name) == "Object"
+                            && peFileReader.GetString(pair.row.Namespace) == "System"
                         )
                         .handle;
 
                     // Find the handle for System.Object's destructor.
                     MemberReferenceHandle handleDestructorObject = peFileReader
                         .MemberReferences.AsEnumerable()
-                        .Select(
-                            handle =>
-                                new
-                                {
-                                    handle = handle,
-                                    row = peFileReader.GetMemberReference(handle)
-                                }
-                        )
-                        .Single(
-                            pair =>
-                                pair.row.Parent == (EntityHandle)handleObject
-                                && peFileReader.GetString(pair.row.Name)
-                                    == WellKnownMemberNames.DestructorName
+                        .Select(handle => new
+                        {
+                            handle = handle,
+                            row = peFileReader.GetMemberReference(handle)
+                        })
+                        .Single(pair =>
+                            pair.row.Parent == (EntityHandle)handleObject
+                            && peFileReader.GetString(pair.row.Name)
+                                == WellKnownMemberNames.DestructorName
                         )
                         .handle;
 

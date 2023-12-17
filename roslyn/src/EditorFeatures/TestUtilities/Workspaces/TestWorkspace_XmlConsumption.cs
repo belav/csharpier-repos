@@ -581,12 +581,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 return new VisualBasicParseOptions(
                     preprocessorSymbols: preprocessorSymbolsAttribute
                         .Value.Split(',')
-                        .Select(
-                            v =>
-                                KeyValuePairUtil.Create(
-                                    v.Split('=').ElementAt(0),
-                                    (object)v.Split('=').ElementAt(1)
-                                )
+                        .Select(v =>
+                            KeyValuePairUtil.Create(
+                                v.Split('=').ElementAt(0),
+                                (object)v.Split('=').ElementAt(1)
+                            )
                         )
                         .ToImmutableArray()
                 );

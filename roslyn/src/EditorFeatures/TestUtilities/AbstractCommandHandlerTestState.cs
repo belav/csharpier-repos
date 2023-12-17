@@ -86,8 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             }
             else
             {
-                var cursorDocument = Workspace.Documents.First(
-                    d => d.CursorPosition.HasValue || d.SelectedSpans.Any(ss => ss.IsEmpty)
+                var cursorDocument = Workspace.Documents.First(d =>
+                    d.CursorPosition.HasValue || d.SelectedSpans.Any(ss => ss.IsEmpty)
                 );
                 _textView = cursorDocument.GetTextView();
                 _subjectBuffer = cursorDocument.GetTextBuffer();

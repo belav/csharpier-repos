@@ -69,8 +69,9 @@ namespace System.Web.Http.Controllers
         )
         {
             HttpConfiguration config = parameter.Configuration;
-            IEnumerable<ValueProviderFactory> valueProviderFactories =
-                new ModelBinderAttribute().GetValueProviderFactories(config);
+            IEnumerable<ValueProviderFactory> valueProviderFactories = new ModelBinderAttribute(
+
+            ).GetValueProviderFactories(config);
 
             return BindWithModelBinding(parameter, binder, valueProviderFactories);
         }

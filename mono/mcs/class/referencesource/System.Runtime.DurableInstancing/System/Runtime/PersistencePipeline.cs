@@ -154,9 +154,9 @@ namespace System.Runtime
                     if (pendingValues == null)
                     {
                         pendingValues =
-                            new List<
-                                Tuple<IPersistencePipelineModule, IDictionary<XName, object>>
-                            >();
+                            new List<Tuple<IPersistencePipelineModule, IDictionary<XName, object>>>(
+
+                            );
                     }
                     pendingValues.Add(
                         new Tuple<IPersistencePipelineModule, IDictionary<XName, object>>(

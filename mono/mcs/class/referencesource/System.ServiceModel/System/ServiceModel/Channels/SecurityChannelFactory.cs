@@ -562,8 +562,9 @@ namespace System.ServiceModel.Channels
 
                 if (InnerChannel != null)
                 {
-                    IChannelBindingProvider cbp =
-                        InnerChannel.GetProperty<IChannelBindingProvider>();
+                    IChannelBindingProvider cbp = InnerChannel.GetProperty<IChannelBindingProvider>(
+
+                    );
                     if (cbp != null)
                     {
                         cbp.EnableChannelBindingSupport();

@@ -124,7 +124,9 @@ namespace System.Text.Json.Serialization.Metadata
                     ) != 0
                 )
                 {
-                    ThrowHelper.ThrowInvalidOperationException_InvalidCustomTypeDiscriminatorPropertyName();
+                    ThrowHelper.ThrowInvalidOperationException_InvalidCustomTypeDiscriminatorPropertyName(
+
+                    );
                 }
 
                 TypeDiscriminatorPropertyName = propertyName;

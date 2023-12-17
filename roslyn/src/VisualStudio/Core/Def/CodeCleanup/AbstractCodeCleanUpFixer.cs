@@ -292,8 +292,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                 )
             )
             {
-                var workspaceStatusService =
-                    workspace.Services.GetService<IWorkspaceStatusService>();
+                var workspaceStatusService = workspace.Services.GetService<IWorkspaceStatusService>(
+
+                );
                 if (workspaceStatusService != null)
                 {
                     await workspaceStatusService

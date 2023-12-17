@@ -192,16 +192,15 @@ internal abstract partial class AbstractRecommendationService<
             if (!parameterTypeSymbols.Contains(parameter.Type, SymbolEqualityComparer.Default))
                 parameterTypeSymbols = parameterTypeSymbols.Concat(parameter.Type);
 
-            return parameterTypeSymbols.SelectManyAsArray(
-                parameterTypeSymbol =>
-                    GetMemberSymbols(
-                        parameterTypeSymbol,
-                        position,
-                        excludeInstance: false,
-                        useBaseReferenceAccessibility: false,
-                        unwrapNullable,
-                        isForDereference
-                    )
+            return parameterTypeSymbols.SelectManyAsArray(parameterTypeSymbol =>
+                GetMemberSymbols(
+                    parameterTypeSymbol,
+                    position,
+                    excludeInstance: false,
+                    useBaseReferenceAccessibility: false,
+                    unwrapNullable,
+                    isForDereference
+                )
             );
         }
 
@@ -343,8 +342,8 @@ internal abstract partial class AbstractRecommendationService<
             if (!string.IsNullOrEmpty(argumentName))
             {
                 parameterType = method
-                    .Parameters.FirstOrDefault(
-                        p => _stringComparerForLanguage.Equals(p.Name, argumentName)
+                    .Parameters.FirstOrDefault(p =>
+                        _stringComparerForLanguage.Equals(p.Name, argumentName)
                     )
                     ?.Type;
                 return parameterType != null;
@@ -389,9 +388,8 @@ internal abstract partial class AbstractRecommendationService<
 
             var symbols = semanticModel
                 .LookupNamespacesAndTypes(declarationSyntax.SpanStart, containingNamespaceSymbol)
-                .WhereAsArray(
-                    recommendationSymbol =>
-                        IsNonIntersectingNamespace(recommendationSymbol, declarationSyntax)
+                .WhereAsArray(recommendationSymbol =>
+                    IsNonIntersectingNamespace(recommendationSymbol, declarationSyntax)
                 );
 
             return symbols;
@@ -442,8 +440,8 @@ internal abstract partial class AbstractRecommendationService<
             {
                 var specialTypeSymbol = _context
                     .SemanticModel.LookupNamespacesAndTypes(_context.Position, container, name)
-                    .FirstOrDefault(
-                        s => s is INamedTypeSymbol namedType && namedType.SpecialType == specialType
+                    .FirstOrDefault(s =>
+                        s is INamedTypeSymbol namedType && namedType.SpecialType == specialType
                     );
 
                 builder.AddIfNotNull(specialTypeSymbol);

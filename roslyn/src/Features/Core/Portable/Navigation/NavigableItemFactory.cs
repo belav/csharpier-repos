@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.Navigation
         )
         {
             var locations = GetPreferredSourceLocations(solution, symbol, cancellationToken);
-            return locations.SelectAsArray(
-                loc => GetItemFromSymbolLocation(solution, symbol, loc, displayTaggedParts)
+            return locations.SelectAsArray(loc =>
+                GetItemFromSymbolLocation(solution, symbol, loc, displayTaggedParts)
             );
         }
 

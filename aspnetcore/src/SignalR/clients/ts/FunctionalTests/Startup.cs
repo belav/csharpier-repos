@@ -247,12 +247,11 @@ public class Startup
         app.UseCors(policy =>
         {
             policy
-                .SetIsOriginAllowed(
-                    host =>
-                        host.StartsWith("http://localhost:", StringComparison.Ordinal)
-                        || host.StartsWith("http://127.0.0.1:", StringComparison.Ordinal)
-                        || host.StartsWith("https://localhost:", StringComparison.Ordinal)
-                        || host.StartsWith("https://127.0.0.1:", StringComparison.Ordinal)
+                .SetIsOriginAllowed(host =>
+                    host.StartsWith("http://localhost:", StringComparison.Ordinal)
+                    || host.StartsWith("http://127.0.0.1:", StringComparison.Ordinal)
+                    || host.StartsWith("https://localhost:", StringComparison.Ordinal)
+                    || host.StartsWith("https://127.0.0.1:", StringComparison.Ordinal)
                 )
                 .AllowAnyHeader()
                 .AllowAnyMethod()

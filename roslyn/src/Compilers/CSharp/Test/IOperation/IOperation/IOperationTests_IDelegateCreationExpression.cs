@@ -2095,7 +2095,9 @@ IVariableDeclaratorOperation (Symbol: Program.DType d1) (OperationKind.VariableD
                 source,
                 expectedOperationTree,
                 expectedDiagnostics,
-                additionalOperationTreeVerifier: new IOperationTests_IConversionExpression.ExpectedSymbolVerifier().Verify
+                additionalOperationTreeVerifier: new IOperationTests_IConversionExpression.ExpectedSymbolVerifier(
+
+                ).Verify
             );
         }
 

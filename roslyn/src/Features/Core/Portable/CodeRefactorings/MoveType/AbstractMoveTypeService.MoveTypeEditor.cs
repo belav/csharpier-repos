@@ -105,7 +105,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 var syntaxFacts =
                     documentWithMovedType.GetRequiredLanguageService<ISyntaxFactsService>();
                 var removeUnnecessaryImports =
-                    documentWithMovedType.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>();
+                    documentWithMovedType.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>(
+
+                    );
 
                 // Remove all unnecessary imports from the new document we've created.
                 documentWithMovedType = await removeUnnecessaryImports
@@ -352,7 +354,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             )
             {
                 var semanticFacts =
-                    State.SemanticDocument.Document.GetRequiredLanguageService<ISemanticFactsService>();
+                    State.SemanticDocument.Document.GetRequiredLanguageService<ISemanticFactsService>(
+
+                    );
                 var typeChain = State.TypeNode.Ancestors().OfType<TTypeDeclarationSyntax>();
 
                 foreach (var node in typeChain)
@@ -402,9 +406,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             )
             {
                 var syntaxFacts =
-                    State.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                    State.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>(
+
+                    );
                 var bannerService =
-                    State.SemanticDocument.Document.GetRequiredLanguageService<IFileBannerFactsService>();
+                    State.SemanticDocument.Document.GetRequiredLanguageService<IFileBannerFactsService>(
+
+                    );
 
                 var withoutBlankLines = bannerService.GetNodeWithoutLeadingBlankLines(
                     currentTypeNode

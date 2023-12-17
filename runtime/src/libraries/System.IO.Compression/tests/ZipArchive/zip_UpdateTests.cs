@@ -189,8 +189,9 @@ namespace System.IO.Compression.Tests
                 {
                     s.Seek(0, SeekOrigin.End);
 
-                    byte[] data =
-                        "\r\n\r\nThe answer my friend, is blowin' in the wind."u8.ToArray();
+                    byte[] data = "\r\n\r\nThe answer my friend, is blowin' in the wind."u8.ToArray(
+
+                    );
                     if (writeWithSpans)
                     {
                         s.Write(new ReadOnlySpan<byte>(data));

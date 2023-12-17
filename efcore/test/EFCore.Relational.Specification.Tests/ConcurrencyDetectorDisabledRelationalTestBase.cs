@@ -18,16 +18,13 @@ public abstract class ConcurrencyDetectorDisabledRelationalTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task FromSql(bool async) =>
-        ConcurrencyDetectorTest(
-            async c =>
-                async
-                    ? await c.Products.FromSqlRaw(
-                        NormalizeDelimitersInRawString("select * from [Products]")
-                    )
-                        .ToListAsync()
-                    : c.Products.FromSqlRaw(
-                        NormalizeDelimitersInRawString("select * from [Products]")
-                    )
-                        .ToList()
+        ConcurrencyDetectorTest(async c =>
+            async
+                ? await c.Products.FromSqlRaw(
+                    NormalizeDelimitersInRawString("select * from [Products]")
+                )
+                    .ToListAsync()
+                : c.Products.FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]"))
+                    .ToList()
         );
 }

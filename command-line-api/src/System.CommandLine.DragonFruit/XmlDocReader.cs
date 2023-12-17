@@ -105,14 +105,13 @@ namespace System.CommandLine.DragonFruit
                                 string.Empty,
                                 element
                                     .Elements()
-                                    .Select(
-                                        e =>
-                                            e.Value
-                                            + (
-                                                e.Name.ToString().ToLower() == "para"
-                                                    ? Environment.NewLine
-                                                    : string.Empty
-                                            )
+                                    .Select(e =>
+                                        e.Value
+                                        + (
+                                            e.Name.ToString().ToLower() == "para"
+                                                ? Environment.NewLine
+                                                : string.Empty
+                                        )
                                     )
                             );
                             commandHelpMetadata.Description = val.TrimEnd(

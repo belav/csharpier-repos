@@ -132,23 +132,22 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public static bool AreCompatible(IReadOnlyList<Property> properties, EntityType entityType) =>
-        properties.All(
-            property =>
-                property.IsShadowProperty()
-                || (
-                    property.IsIndexerProperty()
-                        ? property.PropertyInfo == entityType.FindIndexerPropertyInfo()
-                        : (
-                            (
-                                property.PropertyInfo != null
-                                && entityType.GetRuntimeProperties().ContainsKey(property.Name)
-                            )
-                            || (
-                                property.FieldInfo != null
-                                && entityType.GetRuntimeFields().ContainsKey(property.Name)
-                            )
+        properties.All(property =>
+            property.IsShadowProperty()
+            || (
+                property.IsIndexerProperty()
+                    ? property.PropertyInfo == entityType.FindIndexerPropertyInfo()
+                    : (
+                        (
+                            property.PropertyInfo != null
+                            && entityType.GetRuntimeProperties().ContainsKey(property.Name)
                         )
-                )
+                        || (
+                            property.FieldInfo != null
+                            && entityType.GetRuntimeFields().ContainsKey(property.Name)
+                        )
+                    )
+            )
         );
 
     /// <summary>

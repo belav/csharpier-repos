@@ -266,7 +266,9 @@ namespace Microsoft.CodeAnalysis
                 metadataReferences,
                 analyzerReferences,
                 additionalDocuments,
-                analyzerConfigDocuments: SpecializedCollections.EmptyBoxedImmutableArray<DocumentInfo>(),
+                analyzerConfigDocuments: SpecializedCollections.EmptyBoxedImmutableArray<DocumentInfo>(
+
+                ),
                 hostObjectType
             );
         }

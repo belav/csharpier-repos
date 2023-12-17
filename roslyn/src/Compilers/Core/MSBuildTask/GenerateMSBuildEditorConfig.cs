@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             }
 
             // group the metadata items by their full path
-            var groupedItems = MetadataItems.GroupBy(
-                i => NormalizeWithForwardSlash(i.GetMetadata("FullPath"))
+            var groupedItems = MetadataItems.GroupBy(i =>
+                NormalizeWithForwardSlash(i.GetMetadata("FullPath"))
             );
 
             foreach (var group in groupedItems)

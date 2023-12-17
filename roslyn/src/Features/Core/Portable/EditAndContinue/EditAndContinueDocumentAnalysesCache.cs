@@ -55,20 +55,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<DocumentAnalysisResults>.Empty;
                 }
 
-                var tasks = documents.Select(
-                    document =>
-                        Task.Run(
-                            () =>
-                                GetDocumentAnalysisAsync(
-                                        oldSolution,
-                                        document.oldDocument,
-                                        document.newDocument,
-                                        activeStatementSpanProvider,
-                                        cancellationToken
-                                    )
-                                    .AsTask(),
-                            cancellationToken
-                        )
+                var tasks = documents.Select(document =>
+                    Task.Run(
+                        () =>
+                            GetDocumentAnalysisAsync(
+                                    oldSolution,
+                                    document.oldDocument,
+                                    document.newDocument,
+                                    activeStatementSpanProvider,
+                                    cancellationToken
+                                )
+                                .AsTask(),
+                        cancellationToken
+                    )
                 );
                 var allResults = await Task.WhenAll(tasks).ConfigureAwait(false);
 
@@ -232,9 +231,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 );
 
                 // TODO: optimize
-                var newLineMappingContainingActiveSpan = newLineMappings.FirstOrDefault(
-                    mapping =>
-                        mapping.MappedSpan.Span.Contains(newMappedDocumentActiveSpan.LineSpan)
+                var newLineMappingContainingActiveSpan = newLineMappings.FirstOrDefault(mapping =>
+                    mapping.MappedSpan.Span.Contains(newMappedDocumentActiveSpan.LineSpan)
                 );
 
                 var unmappedSpan = newLineMappingContainingActiveSpan.MappedSpan.IsValid
@@ -273,13 +271,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return analysis.results;
             }
 
-            var lazyResults =
-                AsyncLazy.Create(asynchronousComputeFunction: async cancellationToken =>
+            var lazyResults = AsyncLazy.Create(
+                asynchronousComputeFunction: async cancellationToken =>
                 {
                     try
                     {
                         var analyzer =
-                            document.Project.Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                            document.Project.Services.GetRequiredService<IEditAndContinueAnalyzer>(
+
+                            );
                         return await analyzer
                             .AnalyzeDocumentAsync(
                                 baseProject,
@@ -296,7 +296,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     {
                         throw ExceptionUtilities.Unreachable();
                     }
-                });
+                }
+            );
 
             // Previous results for this document id are discarded as they are no longer relevant.
             // The only relevant analysis is for the latest base and document snapshots.

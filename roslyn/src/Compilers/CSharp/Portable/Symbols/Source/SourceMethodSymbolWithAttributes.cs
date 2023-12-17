@@ -866,8 +866,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (this.IsAccessor())
             {
                 // CS1667: Attribute '{0}' is not valid on property or event accessors. It is only valid on '{1}' declarations.
-                AttributeUsageInfo attributeUsage =
-                    attribute.AttributeClass.GetAttributeUsageInfo();
+                AttributeUsageInfo attributeUsage = attribute.AttributeClass.GetAttributeUsageInfo(
+
+                );
                 diagnostics.Add(
                     ErrorCode.ERR_AttributeNotOnAccessor,
                     node.Name.Location,
@@ -1281,8 +1282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 (CSharpParseOptions)attributeSyntax.SyntaxTree.Options
             ).InterceptorsPreviewNamespaces;
             var thisNamespaceNames = getNamespaceNames();
-            var foundAnyMatch = interceptorsNamespaces.Any(
-                ns => isDeclaredInNamespace(thisNamespaceNames, ns)
+            var foundAnyMatch = interceptorsNamespaces.Any(ns =>
+                isDeclaredInNamespace(thisNamespaceNames, ns)
             );
             if (!foundAnyMatch)
             {
@@ -1926,8 +1927,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var cancellationTokenType = DeclaringCompilation.GetWellKnownType(
                         WellKnownType.System_Threading_CancellationToken
                     );
-                    var enumeratorCancellationCount = Parameters.Count(
-                        p => p.IsSourceParameterWithEnumeratorCancellationAttribute()
+                    var enumeratorCancellationCount = Parameters.Count(p =>
+                        p.IsSourceParameterWithEnumeratorCancellationAttribute()
                     );
                     if (
                         enumeratorCancellationCount == 0

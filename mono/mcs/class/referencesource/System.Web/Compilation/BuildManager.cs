@@ -1408,8 +1408,9 @@ namespace System.Web.Compilation
             _excludedCodeSubdirectories = new CaseInsensitiveStringSet();
 
             // Get the list of sub directories that will be compiled separately
-            CodeSubDirectoriesCollection codeSubDirectories =
-                CompilationUtil.GetCodeSubDirectories();
+            CodeSubDirectoriesCollection codeSubDirectories = CompilationUtil.GetCodeSubDirectories(
+
+            );
 
             // Add them to the exclusion list of the top level code directory
             if (codeSubDirectories != null)
@@ -1426,8 +1427,9 @@ namespace System.Web.Compilation
             VirtualPath virtualDir = HttpRuntime.CodeDirectoryVirtualPath;
 
             // Get the list of sub directories that will be compiled separately
-            CodeSubDirectoriesCollection codeSubDirectories =
-                CompilationUtil.GetCodeSubDirectories();
+            CodeSubDirectoriesCollection codeSubDirectories = CompilationUtil.GetCodeSubDirectories(
+
+            );
 
             if (codeSubDirectories != null)
             {
@@ -2634,8 +2636,9 @@ namespace System.Web.Compilation
                 return new string[0];
 
             // Get the list of code sub directories that will be compiled separately
-            CodeSubDirectoriesCollection codeSubDirectories =
-                CompilationUtil.GetCodeSubDirectories();
+            CodeSubDirectoriesCollection codeSubDirectories = CompilationUtil.GetCodeSubDirectories(
+
+            );
 
             // Compute the number of code dirs, including the root one
             int numOfCodeDirs = 1;
@@ -3690,8 +3693,8 @@ namespace System.Web.Compilation
         private bool IsExcludedFromPrecompilation(VirtualDirectory dir)
         {
             Debug.Assert(dir != null);
-            return _excludedCompilationPaths.Any(
-                path => UrlPath.IsEqualOrSubpath(path.VirtualPathString, dir.VirtualPath)
+            return _excludedCompilationPaths.Any(path =>
+                UrlPath.IsEqualOrSubpath(path.VirtualPathString, dir.VirtualPath)
             );
         }
 
@@ -4356,8 +4359,9 @@ namespace System.Web.Compilation
             }
 
             // Check the sub code directories.
-            CodeSubDirectoriesCollection codeSubDirectories =
-                CompilationUtil.GetCodeSubDirectories();
+            CodeSubDirectoriesCollection codeSubDirectories = CompilationUtil.GetCodeSubDirectories(
+
+            );
             foreach (CodeSubDirectory directory in codeSubDirectories)
             {
                 if (

@@ -143,10 +143,9 @@ public class When_source_struct_config_has_custom_mappings : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            cfg =>
-                cfg.CreateMap<matrixDigiInStruct1, DigiIn1>()
-                    .ForMember(d => d.CncInfo, x => x.MapFrom(s => s.CNCinfo))
+        new(cfg =>
+            cfg.CreateMap<matrixDigiInStruct1, DigiIn1>()
+                .ForMember(d => d.CncInfo, x => x.MapFrom(s => s.CNCinfo))
         );
 
     [Fact]

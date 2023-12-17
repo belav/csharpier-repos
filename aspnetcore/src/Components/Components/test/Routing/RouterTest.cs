@@ -310,8 +310,9 @@ public class RouterTest
 
     internal sealed class TestNavigationInterception : INavigationInterception
     {
-        public static readonly TestNavigationInterception Instance =
-            new TestNavigationInterception();
+        public static readonly TestNavigationInterception Instance = new TestNavigationInterception(
+
+        );
 
         public Task EnableNavigationInterceptionAsync()
         {

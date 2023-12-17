@@ -4298,8 +4298,9 @@ namespace System.ComponentModel
         /// </devdoc>
         private sealed class MemberDescriptorComparer : IComparer
         {
-            public static readonly MemberDescriptorComparer Instance =
-                new MemberDescriptorComparer();
+            public static readonly MemberDescriptorComparer Instance = new MemberDescriptorComparer(
+
+            );
 
             public int Compare(object left, object right)
             {

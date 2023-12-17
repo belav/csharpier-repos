@@ -62,8 +62,8 @@ class Goo
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -91,8 +91,8 @@ record Goo
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -120,8 +120,8 @@ record class Goo
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -158,8 +158,8 @@ record class Goo
                 content,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -195,8 +195,8 @@ record class Goo
                 content,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -224,8 +224,8 @@ class @static
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("static")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("static")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -237,8 +237,8 @@ class @static
                     );
 
                     // Check searching for @static too
-                    item = (await _aggregator.GetItemsAsync("@static")).Single(
-                        x => x.Kind != "Method"
+                    item = (await _aggregator.GetItemsAsync("@static")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -272,8 +272,8 @@ class Goo
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("DogBed")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("DogBed")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -343,8 +343,8 @@ class Goo<T> where T : IEnumerable
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -469,8 +469,8 @@ namespace Bar
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -498,8 +498,7 @@ struct Bar
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("B")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("B")).Single(x => x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -530,8 +529,8 @@ enum Colors
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Colors")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("Colors")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -996,8 +995,8 @@ class Goo
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        t => t.Kind == NavigateToItemKind.Method
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(t =>
+                        t.Kind == NavigateToItemKind.Method
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -1029,8 +1028,8 @@ class Goo
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        t => t.Kind == NavigateToItemKind.Method
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(t =>
+                        t.Kind == NavigateToItemKind.Method
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -1062,8 +1061,8 @@ class Goo
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        t => t.Kind == NavigateToItemKind.Method && t.Name != ".ctor"
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(t =>
+                        t.Kind == NavigateToItemKind.Method && t.Name != ".ctor"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -1459,8 +1458,8 @@ namespace Goo
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("DoStuff")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("DoStuff")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -1787,8 +1786,7 @@ public class Goo
                 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("G")).Single(
-                        x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("G")).Single(x => x.Kind != "Method"
                     );
                     var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
 
@@ -1796,8 +1794,8 @@ public class Goo
 
                     void assertDescription(string label, string value)
                     {
-                        var descriptionItem = descriptionItems.Single(
-                            i => i.Category.Single().Text == label
+                        var descriptionItem = descriptionItems.Single(i =>
+                            i.Category.Single().Text == label
                         );
                         Assert.Equal(value, descriptionItem.Details.Single().Text);
                     }
@@ -2911,8 +2909,8 @@ record Goo(int Member)
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Member")).Single(
-                        x => x.Kind == NavigateToItemKind.Property
+                    var item = (await _aggregator.GetItemsAsync("Member")).Single(x =>
+                        x.Kind == NavigateToItemKind.Property
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -2942,8 +2940,8 @@ record Goo(int Member)
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Member")).Single(
-                        x => x.Kind == NavigateToItemKind.Property
+                    var item = (await _aggregator.GetItemsAsync("Member")).Single(x =>
+                        x.Kind == NavigateToItemKind.Property
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -2973,8 +2971,8 @@ record Goo(int Member)
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Member")).Single(
-                        x => x.Kind == NavigateToItemKind.Field
+                    var item = (await _aggregator.GetItemsAsync("Member")).Single(x =>
+                        x.Kind == NavigateToItemKind.Field
                     );
                     VerifyNavigateToResultItem(
                         item,

@@ -1818,10 +1818,9 @@ namespace System.Reflection.Metadata.Tests
             else
             {
                 expChildren = allNamespaces
-                    .Where(
-                        ns =>
-                            ns.StartsWith(rootNamespaceName)
-                            && ns.LastIndexOf('.') == rootNamespaceName.Length
+                    .Where(ns =>
+                        ns.StartsWith(rootNamespaceName)
+                        && ns.LastIndexOf('.') == rootNamespaceName.Length
                     )
                     .ToList();
             }
@@ -4064,8 +4063,8 @@ namespace System.Reflection.Metadata.Tests
             var reader = GetMetadataReader(Misc.Members);
             var typeC = reader.GetTypeDefinition(
                 reader
-                    .TypeDefinitions.Where(
-                        t => reader.GetString(reader.GetTypeDefinition(t).Name) == "C"
+                    .TypeDefinitions.Where(t =>
+                        reader.GetString(reader.GetTypeDefinition(t).Name) == "C"
                     )
                     .Single()
             );

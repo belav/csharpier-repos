@@ -64,21 +64,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                 .GetMembers()
                 .WhereAsArray(MemberAndDestinationValidator.IsMemberValid);
 
-            var memberViewModels = membersInType.SelectAsArray(
-                member =>
-                    new MemberSymbolViewModel(member, _glyphService)
-                    {
-                        // The member(s) user selected will be checked at the beginning.
-                        IsChecked = selectedMembers.Any(
-                            SymbolEquivalenceComparer.Instance.Equals,
-                            member
-                        ),
-                        MakeAbstract = false,
-                        IsMakeAbstractCheckable =
-                            !member.IsKind(SymbolKind.Field) && !member.IsAbstract,
-                        IsCheckable = true
-                    }
-            );
+            var memberViewModels = membersInType.SelectAsArray(member => new MemberSymbolViewModel(
+                member,
+                _glyphService
+            )
+            {
+                // The member(s) user selected will be checked at the beginning.
+                IsChecked = selectedMembers.Any(SymbolEquivalenceComparer.Instance.Equals, member),
+                MakeAbstract = false,
+                IsMakeAbstractCheckable = !member.IsKind(SymbolKind.Field) && !member.IsAbstract,
+                IsCheckable = true
+            });
 
             var memberToDependentsMap = SymbolDependentsBuilder.FindMemberToDependentsMap(
                 membersInType,

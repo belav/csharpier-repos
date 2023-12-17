@@ -172,8 +172,8 @@ namespace System.Activities.Statements
                                                 Condition = new Equal<Type, Type, bool>
                                                 {
                                                     Left = new ObtainType { Input = parent, },
-                                                    Right = new InArgument<Type>(
-                                                        context => typeof(TransactionScope)
+                                                    Right = new InArgument<Type>(context =>
+                                                        typeof(TransactionScope)
                                                     )
                                                 },
                                                 Then = new Sequence
@@ -279,8 +279,8 @@ namespace System.Activities.Statements
                                                     {
                                                         Input = new InArgument<Activity>(child)
                                                     },
-                                                    Right = new InArgument<Type>(
-                                                        context => typeof(CompensableActivity)
+                                                    Right = new InArgument<Type>(context =>
+                                                        typeof(CompensableActivity)
                                                     )
                                                 },
                                                 Then = new Assign<bool>

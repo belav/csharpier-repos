@@ -17,10 +17,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 
 public class NewtonsoftJsonPatchInputFormatterTest
 {
-    private static readonly ObjectPoolProvider _objectPoolProvider =
-        new DefaultObjectPoolProvider();
-    private static readonly JsonSerializerSettings _serializerSettings =
-        new JsonSerializerSettings();
+    private static readonly ObjectPoolProvider _objectPoolProvider = new DefaultObjectPoolProvider(
+
+    );
+    private static readonly JsonSerializerSettings _serializerSettings = new JsonSerializerSettings(
+
+    );
 
     [Fact]
     public async Task Constructor_BuffersRequestBody_ByDefault()

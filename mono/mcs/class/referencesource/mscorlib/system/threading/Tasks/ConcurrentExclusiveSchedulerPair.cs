@@ -374,9 +374,9 @@ namespace System.Threading.Tasks
                     {
                         processingTask = new Task(
                             thisPair =>
-                                (
-                                    (ConcurrentExclusiveSchedulerPair)thisPair
-                                ).ProcessExclusiveTasks(),
+                                ((ConcurrentExclusiveSchedulerPair)thisPair).ProcessExclusiveTasks(
+
+                                ),
                             this,
                             default(CancellationToken),
                             GetCreationOptionsForTask(fairly)

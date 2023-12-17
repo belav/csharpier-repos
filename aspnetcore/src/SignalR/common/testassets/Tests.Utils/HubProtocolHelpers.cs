@@ -7,8 +7,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public static class HubProtocolHelpers
 {
-    private static readonly IHubProtocol NewtonsoftJsonHubProtocol =
-        new NewtonsoftJsonHubProtocol();
+    private static readonly IHubProtocol NewtonsoftJsonHubProtocol = new NewtonsoftJsonHubProtocol(
+
+    );
 
     private static readonly IHubProtocol MessagePackHubProtocol = new MessagePackHubProtocol();
 

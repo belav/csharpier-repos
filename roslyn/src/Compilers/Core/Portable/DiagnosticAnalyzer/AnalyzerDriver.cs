@@ -1483,12 +1483,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 //  1. Diagnostics which are already suppressed in source via pragma/suppress message attribute.
                 //  2. Diagnostics explicitly tagged as not configurable by analyzer authors - this includes compiler error diagnostics.
                 //  3. Diagnostics which are marked as error by default by diagnostic authors.
-                var suppressableDiagnostics = reportedDiagnostics.Where(
-                    d =>
-                        !d.IsSuppressed
-                        && !d.IsNotConfigurable()
-                        && d.DefaultSeverity != DiagnosticSeverity.Error
-                        && !_diagnosticsProcessedForProgrammaticSuppressions.Contains(d)
+                var suppressableDiagnostics = reportedDiagnostics.Where(d =>
+                    !d.IsSuppressed
+                    && !d.IsNotConfigurable()
+                    && d.DefaultSeverity != DiagnosticSeverity.Error
+                    && !_diagnosticsProcessedForProgrammaticSuppressions.Contains(d)
                 );
 
                 if (suppressableDiagnostics.IsEmpty())
@@ -1613,8 +1612,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     foreach (var diagnostic in reportedDiagnostics)
                     {
                         if (
-                            supportedSuppressions.Contains(
-                                s => s.SuppressedDiagnosticId == diagnostic.Id
+                            supportedSuppressions.Contains(s =>
+                                s.SuppressedDiagnosticId == diagnostic.Id
                             )
                         )
                         {
@@ -1943,18 +1942,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 static bool containsGeneratedCodeToken(SyntaxNode root)
                 {
                     return root.DescendantTokens()
-                        .Any(
-                            static token =>
-                                string.Equals(
-                                    token.ValueText,
-                                    "GeneratedCode",
-                                    StringComparison.Ordinal
-                                )
-                                || string.Equals(
-                                    token.ValueText,
-                                    nameof(GeneratedCodeAttribute),
-                                    StringComparison.Ordinal
-                                )
+                        .Any(static token =>
+                            string.Equals(
+                                token.ValueText,
+                                "GeneratedCode",
+                                StringComparison.Ordinal
+                            )
+                            || string.Equals(
+                                token.ValueText,
+                                nameof(GeneratedCodeAttribute),
+                                StringComparison.Ordinal
+                            )
                         );
                 }
             }
@@ -2109,12 +2107,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 DiagnosticAnalyzer,
                 ImmutableArray<ImmutableArray<SymbolAnalyzerAction>>
             )>.GetInstance();
-            var actionsByAnalyzers = analyzerActions.SymbolActions.GroupBy(
-                action => action.Analyzer
+            var actionsByAnalyzers = analyzerActions.SymbolActions.GroupBy(action => action.Analyzer
             );
-            var actionsByKindBuilder = ArrayBuilder<
-                ArrayBuilder<SymbolAnalyzerAction>
-            >.GetInstance();
+            var actionsByKindBuilder = ArrayBuilder<ArrayBuilder<SymbolAnalyzerAction>>.GetInstance(
+
+            );
             foreach (var analyzerAndActions in actionsByAnalyzers)
             {
                 actionsByKindBuilder.Clear();
@@ -4141,8 +4138,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     var filteredOperationsToAnalyze =
                         declarationAnalysisData.IsPartialAnalysis
                         && !groupedActionsForAnalyzer.HasOperationBlockStartActions
-                            ? operationsToAnalyze.WhereAsArray(
-                                operation => analysisScope.ShouldAnalyze(operation.Syntax)
+                            ? operationsToAnalyze.WhereAsArray(operation =>
+                                analysisScope.ShouldAnalyze(operation.Syntax)
                             )
                             : operationsToAnalyze;
 

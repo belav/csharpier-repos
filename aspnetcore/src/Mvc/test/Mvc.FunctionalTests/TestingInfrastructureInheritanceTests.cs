@@ -20,8 +20,8 @@ public class TestingInfrastructureInheritanceTests
         using var factory = new CustomizedFactory<BasicWebSite.StartupWithoutEndpointRouting>();
         using var customized = factory
             .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("Customization"))
-            .WithWebHostBuilder(
-                builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization")
+            .WithWebHostBuilder(builder =>
+                factory.ConfigureWebHostCalled.Add("FurtherCustomization")
             );
         var client = customized.CreateClient();
 
@@ -45,8 +45,8 @@ public class TestingInfrastructureInheritanceTests
         using var factory = new CustomizedFactory<GenericHostWebSite.Startup>();
         using var customized = factory
             .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("Customization"))
-            .WithWebHostBuilder(
-                builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization")
+            .WithWebHostBuilder(builder =>
+                factory.ConfigureWebHostCalled.Add("FurtherCustomization")
             );
         var client = customized.CreateClient();
 

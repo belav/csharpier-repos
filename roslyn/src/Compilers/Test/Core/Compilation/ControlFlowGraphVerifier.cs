@@ -429,12 +429,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 if (
                     model
                         .GetDiagnostics(graph.OriginalOperation.Syntax.Span)
-                        .Any(
-                            d =>
-                                d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoWith
-                                || d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoFor
-                                || d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoSyncLock
-                                || d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoUsing
+                        .Any(d =>
+                            d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoWith
+                            || d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoFor
+                            || d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoSyncLock
+                            || d.Code == (int)VisualBasic.ERRID.ERR_GotoIntoUsing
                         )
                 )
                 {
@@ -683,8 +682,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                             AssertTrueWithGraph(
                                 referencesAfter.Length > 0
-                                    && referencesAfter.All(
-                                        r => isLongLivedCaptureReferenceSyntax(r.Syntax)
+                                    && referencesAfter.All(r =>
+                                        isLongLivedCaptureReferenceSyntax(r.Syntax)
                                     ),
                                 $"Capture [{id.Value}] is not used in region [{getRegionId(region)}] before leaving it after block [{getBlockId(block)}]",
                                 finalGraph
@@ -817,15 +816,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             && conditional.Expression == syntax
                             && conditional
                                 .WhenNotNull.DescendantNodesAndSelf()
-                                .Any(
-                                    n =>
-                                        n.IsKind(VisualBasic.SyntaxKind.XmlElementAccessExpression)
-                                        || n.IsKind(
-                                            VisualBasic.SyntaxKind.XmlDescendantAccessExpression
-                                        )
-                                        || n.IsKind(
-                                            VisualBasic.SyntaxKind.XmlAttributeAccessExpression
-                                        )
+                                .Any(n =>
+                                    n.IsKind(VisualBasic.SyntaxKind.XmlElementAccessExpression)
+                                    || n.IsKind(
+                                        VisualBasic.SyntaxKind.XmlDescendantAccessExpression
+                                    )
+                                    || n.IsKind(VisualBasic.SyntaxKind.XmlAttributeAccessExpression)
                                 )
                         )
                         {

@@ -634,12 +634,11 @@ namespace System.Net.Sockets.Tests
         ) =>
             InvokeAsync(
                 s,
-                e =>
-                    new SocketReceiveFromResult
-                    {
-                        ReceivedBytes = e.BytesTransferred,
-                        RemoteEndPoint = e.RemoteEndPoint
-                    },
+                e => new SocketReceiveFromResult
+                {
+                    ReceivedBytes = e.BytesTransferred,
+                    RemoteEndPoint = e.RemoteEndPoint
+                },
                 e =>
                 {
                     e.SetBuffer(buffer.Array, buffer.Offset, buffer.Count);
@@ -655,14 +654,13 @@ namespace System.Net.Sockets.Tests
         ) =>
             InvokeAsync(
                 s,
-                e =>
-                    new SocketReceiveMessageFromResult
-                    {
-                        ReceivedBytes = e.BytesTransferred,
-                        RemoteEndPoint = e.RemoteEndPoint,
-                        SocketFlags = e.SocketFlags,
-                        PacketInformation = e.ReceiveMessageFromPacketInfo
-                    },
+                e => new SocketReceiveMessageFromResult
+                {
+                    ReceivedBytes = e.BytesTransferred,
+                    RemoteEndPoint = e.RemoteEndPoint,
+                    SocketFlags = e.SocketFlags,
+                    PacketInformation = e.ReceiveMessageFromPacketInfo
+                },
                 e =>
                 {
                     e.SetBuffer(buffer.Array, buffer.Offset, buffer.Count);

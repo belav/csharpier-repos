@@ -148,7 +148,9 @@ namespace System.ServiceModel.Channels
                     MessageLogger.LogMessage(ref message, MessageLoggingSource.TransportSend);
                 }
                 if (
-                    System.ServiceModel.Diagnostics.Application.TD.MessageWrittenByEncoderIsEnabled()
+                    System.ServiceModel.Diagnostics.Application.TD.MessageWrittenByEncoderIsEnabled(
+
+                    )
                     && messageData != null
                 )
                 {

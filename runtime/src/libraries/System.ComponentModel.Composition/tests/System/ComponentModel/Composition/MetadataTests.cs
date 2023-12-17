@@ -977,10 +977,9 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create();
             container.ComposeParts(new ItemWithTypeExports_WithAllNulls());
 
-            var export = container.GetExport<
-                ItemWithTypeExports_WithAllNulls,
-                ITypesMetadataView
-            >();
+            var export = container.GetExport<ItemWithTypeExports_WithAllNulls, ITypesMetadataView>(
+
+            );
 
             Assert.NotNull(export.Metadata);
             Assert.NotNull(export.Metadata.Type);

@@ -62,10 +62,9 @@ internal static class SharedTypeExtensions
         }
 
         var types = GetGenericTypeImplementations(type, typeof(IDictionary<,>));
-        return types.Any(
-            t =>
-                t.GetGenericArguments()[0] == typeof(string)
-                && t.GetGenericArguments()[1] == typeof(object)
+        return types.Any(t =>
+            t.GetGenericArguments()[0] == typeof(string)
+            && t.GetGenericArguments()[1] == typeof(object)
         );
     }
 
@@ -333,10 +332,8 @@ internal static class SharedTypeExtensions
         types ??= Array.Empty<Type>();
 
         return type.GetTypeInfo()
-            .DeclaredConstructors.SingleOrDefault(
-                c =>
-                    !c.IsStatic
-                    && c.GetParameters().Select(p => p.ParameterType).SequenceEqual(types)
+            .DeclaredConstructors.SingleOrDefault(c =>
+                !c.IsStatic && c.GetParameters().Select(p => p.ParameterType).SequenceEqual(types)
             )!;
     }
 

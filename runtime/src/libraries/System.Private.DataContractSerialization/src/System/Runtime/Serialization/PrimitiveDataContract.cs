@@ -16,8 +16,9 @@ namespace System.Runtime.Serialization.DataContracts
         internal const string ContractTypeString = nameof(PrimitiveDataContract);
         public override string? ContractType => ContractTypeString;
 
-        internal static readonly PrimitiveDataContract NullContract =
-            new NullPrimitiveDataContract();
+        internal static readonly PrimitiveDataContract NullContract = new NullPrimitiveDataContract(
+
+        );
 
         private readonly PrimitiveDataContractCriticalHelper _helper;
 

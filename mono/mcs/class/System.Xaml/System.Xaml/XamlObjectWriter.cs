@@ -400,10 +400,9 @@ namespace System.Xaml
                     var contents = (List<object>)state.Value;
                     var mi = state
                         .Type.UnderlyingType.GetMethods(static_flags)
-                        .FirstOrDefault(
-                            mii =>
-                                mii.Name == state.FactoryMethod
-                                && mii.GetParameters().Length == contents.Count
+                        .FirstOrDefault(mii =>
+                            mii.Name == state.FactoryMethod
+                            && mii.GetParameters().Length == contents.Count
                         );
                     if (mi == null)
                         throw new XamlObjectWriterException(

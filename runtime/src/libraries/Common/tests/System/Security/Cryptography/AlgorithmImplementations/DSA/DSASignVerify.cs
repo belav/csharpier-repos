@@ -150,11 +150,10 @@ namespace System.Security.Cryptography.Dsa.Tests
     public sealed class DSASignVerify_Span : DSASignVerify
     {
         public override byte[] SignData(DSA dsa, byte[] data, HashAlgorithmName hashAlgorithm) =>
-            TryWithOutputArray(
-                dest =>
-                    dsa.TrySignData(data, dest, hashAlgorithm, out int bytesWritten)
-                        ? (true, bytesWritten)
-                        : (false, 0)
+            TryWithOutputArray(dest =>
+                dsa.TrySignData(data, dest, hashAlgorithm, out int bytesWritten)
+                    ? (true, bytesWritten)
+                    : (false, 0)
             );
 
         public override bool VerifyData(

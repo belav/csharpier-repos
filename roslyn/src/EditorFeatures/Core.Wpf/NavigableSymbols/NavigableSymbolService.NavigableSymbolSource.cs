@@ -38,8 +38,9 @@ internal partial class NavigableSymbolService
             if (document == null)
                 return null;
 
-            var definitionLocationService =
-                document.GetLanguageService<IDefinitionLocationService>();
+            var definitionLocationService = document.GetLanguageService<IDefinitionLocationService>(
+
+            );
             if (definitionLocationService == null)
                 return null;
 
@@ -50,7 +51,9 @@ internal partial class NavigableSymbolService
                 return null;
 
             var indicatorFactory =
-                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>(
+
+                );
 
             return new NavigableSymbol(
                 service,

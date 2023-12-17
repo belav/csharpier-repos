@@ -549,13 +549,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             string code = "class Program { }"
         )
         {
-            var fixers = codefixers.Select(
-                codefix =>
-                    new Lazy<CodeFixProvider, CodeChangeProviderMetadata>(
-                        () => throwExceptionInFixerCreation ? throw new Exception() : codefix,
-                        new CodeChangeProviderMetadata("Test", languages: LanguageNames.CSharp)
-                    )
-            );
+            var fixers = codefixers.Select(codefix => new Lazy<
+                CodeFixProvider,
+                CodeChangeProviderMetadata
+            >(
+                () => throwExceptionInFixerCreation ? throw new Exception() : codefix,
+                new CodeChangeProviderMetadata("Test", languages: LanguageNames.CSharp)
+            ));
 
             var workspace = TestWorkspace.CreateCSharp(
                 code,
@@ -1060,8 +1060,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 await GetNuGetAndVsixCodeFixersCoreAsync(nugetFixer, vsixFixer, diagnosticAnalyzer)
             ).SelectMany(fixCollection => fixCollection.Fixes);
 
-            var nugetFixerRegisteredActions = fixes.Where(
-                f => f.Action.Title == nameof(NuGetCodeFixProvider)
+            var nugetFixerRegisteredActions = fixes.Where(f =>
+                f.Action.Title == nameof(NuGetCodeFixProvider)
             );
             var actualDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer =
                 nugetFixerRegisteredActions.SelectMany(a => a.Diagnostics).Select(d => d.Id);
@@ -1071,8 +1071,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 )
             );
 
-            var vsixFixerRegisteredActions = fixes.Where(
-                f => f.Action.Title == nameof(VsixCodeFixProvider)
+            var vsixFixerRegisteredActions = fixes.Where(f =>
+                f.Action.Title == nameof(VsixCodeFixProvider)
             );
             var actualDiagnosticIdsWithRegisteredCodeActionsByVsixFixer = vsixFixerRegisteredActions
                 .SelectMany(a => a.Diagnostics)
@@ -1187,8 +1187,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
 
             public override Task RegisterCodeFixesAsync(CodeFixContext context)
             {
-                var fixableDiagnostics = context.Diagnostics.WhereAsArray(
-                    d => FixableDiagnosticIds.Contains(d.Id)
+                var fixableDiagnostics = context.Diagnostics.WhereAsArray(d =>
+                    FixableDiagnosticIds.Contains(d.Id)
                 );
                 context.RegisterCodeFix(
                     CodeAction.Create(_name, ct => Task.FromResult(context.Document)),

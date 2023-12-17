@@ -689,8 +689,8 @@ public class RouteCollectionTest
         var target = new Mock<INamedRouter>(MockBehavior.Strict);
         target
             .Setup(e => e.GetVirtualPath(It.IsAny<VirtualPathContext>()))
-            .Returns<VirtualPathContext>(
-                c => c.RouteName == name ? new VirtualPathData(target.Object, matchValue) : null
+            .Returns<VirtualPathContext>(c =>
+                c.RouteName == name ? new VirtualPathData(target.Object, matchValue) : null
             )
             .Verifiable();
 

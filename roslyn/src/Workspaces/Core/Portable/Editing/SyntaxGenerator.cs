@@ -267,10 +267,9 @@ namespace Microsoft.CodeAnalysis.Editing
                 return method
                         .ReturnType.GetReferencedTypeParameters()
                         .Any(t => IsNullableAnnotatedTypeParameter(typeParameter, t))
-                    || method.Parameters.Any(
-                        p =>
-                            p.Type.GetReferencedTypeParameters()
-                                .Any(t => IsNullableAnnotatedTypeParameter(typeParameter, t))
+                    || method.Parameters.Any(p =>
+                        p.Type.GetReferencedTypeParameters()
+                            .Any(t => IsNullableAnnotatedTypeParameter(typeParameter, t))
                     );
             }
 
@@ -1004,8 +1003,8 @@ namespace Microsoft.CodeAnalysis.Editing
                                 ? DelegateDeclaration(
                                     type.Name,
                                     typeParameters: type.TypeParameters.Select(TypeParameter),
-                                    parameters: invoke.Parameters.Select(
-                                        p => ParameterDeclaration(p)
+                                    parameters: invoke.Parameters.Select(p =>
+                                        ParameterDeclaration(p)
                                     ),
                                     returnType: invoke.ReturnsVoid
                                         ? null
@@ -1325,12 +1324,12 @@ namespace Microsoft.CodeAnalysis.Editing
             Contract.ThrowIfNull(attribute.AttributeClass);
 
             var args = attribute
-                .ConstructorArguments.Select(
-                    a => this.AttributeArgument(this.TypedConstantExpression(a))
+                .ConstructorArguments.Select(a =>
+                    this.AttributeArgument(this.TypedConstantExpression(a))
                 )
                 .Concat(
-                    attribute.NamedArguments.Select(
-                        n => this.AttributeArgument(n.Key, this.TypedConstantExpression(n.Value))
+                    attribute.NamedArguments.Select(n =>
+                        this.AttributeArgument(n.Key, this.TypedConstantExpression(n.Value))
                     )
                 )
                 .ToBoxedImmutableArray();
@@ -1876,11 +1875,10 @@ namespace Microsoft.CodeAnalysis.Editing
         {
             // return tokens from newList, but use original tokens of kind matches
             return new SyntaxTokenList(
-                newList.Select(
-                    token =>
-                        Any(original, token.RawKind)
-                            ? original.First(tk => tk.RawKind == token.RawKind)
-                            : token
+                newList.Select(token =>
+                    Any(original, token.RawKind)
+                        ? original.First(tk => tk.RawKind == token.RawKind)
+                        : token
                 )
             );
         }

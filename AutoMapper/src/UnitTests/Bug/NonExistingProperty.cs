@@ -11,8 +11,8 @@ public class NonExistingProperty : NonValidatingSpecBase
     {
         new Action(
             () =>
-                new MapperConfiguration(
-                    cfg => cfg.CreateMap<Source, Destination>().ForMember("X", s => { })
+                new MapperConfiguration(cfg =>
+                    cfg.CreateMap<Source, Destination>().ForMember("X", s => { })
                 )
         ).ShouldThrow<ArgumentOutOfRangeException>();
     }

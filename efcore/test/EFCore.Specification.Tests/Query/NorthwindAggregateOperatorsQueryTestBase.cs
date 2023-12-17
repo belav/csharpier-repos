@@ -255,9 +255,11 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             ss =>
                 ss.Set<Order>()
                     .Where(o => o.OrderID < 10300)
-                    .Select(
-                        o => new { o.OrderID, Sum = o.OrderDetails.Average(od => od.Discount) }
-                    ),
+                    .Select(o => new
+                    {
+                        o.OrderID,
+                        Sum = o.OrderDetails.Average(od => od.Discount)
+                    }),
             e => e.OrderID
         );
 
@@ -269,14 +271,11 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             ss =>
                 ss.Set<Order>()
                     .Where(o => o.OrderID < 10300)
-                    .Select(
-                        o =>
-                            new
-                            {
-                                o.OrderID,
-                                Sum = o.OrderDetails.Average(od => (float?)od.Discount)
-                            }
-                    ),
+                    .Select(o => new
+                    {
+                        o.OrderID,
+                        Sum = o.OrderDetails.Average(od => (float?)od.Discount)
+                    }),
             e => e.OrderID
         );
 
@@ -787,12 +786,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.CustomerID == "ALFKI"
-                            && c.Orders.Where(o => o.CustomerID == "ALFKI")
-                                .FirstOrDefault()
-                                .CustomerID == "ALFKI"
+                    .Where(c =>
+                        c.CustomerID == "ALFKI"
+                        && c.Orders.Where(o => o.CustomerID == "ALFKI").FirstOrDefault().CustomerID
+                            == "ALFKI"
                     )
         );
 
@@ -805,23 +802,21 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .OrderBy(c => c.CustomerID)
-                    .Select(
-                        c =>
-                            c.Orders.OrderBy(o => o.OrderID)
-                                .FirstOrDefault()
-                                .OrderDetails.OrderBy(od => od.ProductID)
-                                .FirstOrDefault()
+                    .Select(c =>
+                        c.Orders.OrderBy(o => o.OrderID)
+                            .FirstOrDefault()
+                            .OrderDetails.OrderBy(od => od.ProductID)
+                            .FirstOrDefault()
                     ),
             ss =>
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .OrderBy(c => c.CustomerID)
-                    .Select(
-                        c =>
-                            c.Orders.OrderBy(o => o.OrderID)
-                                .FirstOrDefault()
-                                .Maybe(x => x.OrderDetails)
-                                .Maybe(xx => xx.OrderBy(od => od.ProductID).FirstOrDefault())
+                    .Select(c =>
+                        c.Orders.OrderBy(o => o.OrderID)
+                            .FirstOrDefault()
+                            .Maybe(x => x.OrderDetails)
+                            .Maybe(xx => xx.OrderBy(od => od.ProductID).FirstOrDefault())
                     )
         );
 
@@ -836,27 +831,25 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("A"))
                     .OrderBy(c => c.CustomerID)
-                    .Select(
-                        c =>
-                            (int?)
-                                c.Orders.OrderBy(o => o.OrderID)
-                                    .FirstOrDefault()
-                                    .OrderDetails.OrderBy(od => od.ProductID)
-                                    .FirstOrDefault()
-                                    .ProductID
+                    .Select(c =>
+                        (int?)
+                            c.Orders.OrderBy(o => o.OrderID)
+                                .FirstOrDefault()
+                                .OrderDetails.OrderBy(od => od.ProductID)
+                                .FirstOrDefault()
+                                .ProductID
                     ),
             ss =>
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("A"))
                     .OrderBy(c => c.CustomerID)
-                    .Select(
-                        c =>
-                            c.Orders.OrderBy(o => o.OrderID)
-                                .FirstOrDefault()
-                                .Maybe(x => x.OrderDetails)
-                                .MaybeScalar(
-                                    x => x.OrderBy(od => od.ProductID).FirstOrDefault().ProductID
-                                )
+                    .Select(c =>
+                        c.Orders.OrderBy(o => o.OrderID)
+                            .FirstOrDefault()
+                            .Maybe(x => x.OrderDetails)
+                            .MaybeScalar(x =>
+                                x.OrderBy(od => od.ProductID).FirstOrDefault().ProductID
+                            )
                     )
         );
 
@@ -867,11 +860,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            c.CustomerID == "ALFKI"
-                            && c.Orders.Where(o => o.CustomerID == "ALFKI").First().CustomerID
-                                == "ALFKI"
+                    .Where(c =>
+                        c.CustomerID == "ALFKI"
+                        && c.Orders.Where(o => o.CustomerID == "ALFKI").First().CustomerID
+                            == "ALFKI"
                     )
         );
 
@@ -966,11 +958,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            ss.Set<Customer>()
-                                .Where(c1 => ids.Contains(c1.City))
-                                .Any(e => e.CustomerID == c.CustomerID)
+                    .Where(c =>
+                        ss.Set<Customer>()
+                            .Where(c1 => ids.Contains(c1.City))
+                            .Any(e => e.CustomerID == c.CustomerID)
                     )
         );
 
@@ -980,11 +971,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            ss.Set<Customer>()
-                                .Where(c1 => ids.Contains(c1.City))
-                                .Any(e => e.CustomerID == c.CustomerID)
+                    .Where(c =>
+                        ss.Set<Customer>()
+                            .Where(c1 => ids.Contains(c1.City))
+                            .Any(e => e.CustomerID == c.CustomerID)
                     )
         );
     }
@@ -1146,11 +1136,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", "ALFKI" }
-                                .Where(e => e != null)
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<string> { "ABCDE", "ALFKI" }
+                            .Where(e => e != null)
+                            .Contains(c.CustomerID)
                     )
         );
 
@@ -1164,11 +1153,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", id }
-                                .Where(e => e != null)
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<string> { "ABCDE", id }
+                            .Where(e => e != null)
+                            .Contains(c.CustomerID)
                     )
         );
 
@@ -1178,11 +1166,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", id }
-                                .Where(e => e != null)
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<string> { "ABCDE", id }
+                            .Where(e => e != null)
+                            .Contains(c.CustomerID)
                     )
         );
     }
@@ -1236,11 +1223,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", "ALFKI" }
-                                .Order()
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<string> { "ABCDE", "ALFKI" }
+                            .Order()
+                            .Contains(c.CustomerID)
                     )
         );
 
@@ -1254,11 +1240,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", id }
-                                .Order()
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<string> { "ABCDE", id }
+                            .Order()
+                            .Contains(c.CustomerID)
                     )
         );
 
@@ -1268,11 +1253,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", id }
-                                .Order()
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<string> { "ABCDE", id }
+                            .Order()
+                            .Contains(c.CustomerID)
                     )
         );
     }
@@ -1326,11 +1310,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", "ALFKI" }
-                                .AsReadOnly()
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<string> { "ABCDE", "ALFKI" }
+                            .AsReadOnly()
+                            .Contains(c.CustomerID)
                     )
         );
 
@@ -1346,11 +1329,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", id }
-                                .AsReadOnly()
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<string> { "ABCDE", id }
+                            .AsReadOnly()
+                            .Contains(c.CustomerID)
                     )
         );
 
@@ -1360,11 +1342,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", id }
-                                .AsReadOnly()
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<string> { "ABCDE", id }
+                            .AsReadOnly()
+                            .Contains(c.CustomerID)
                     )
         );
     }
@@ -1379,15 +1360,14 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<Customer>
-                            {
-                                new() { CustomerID = "ABCDE" },
-                                new() { CustomerID = id }
-                            }
-                                .Select(i => i.CustomerID)
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<Customer>
+                        {
+                            new() { CustomerID = "ABCDE" },
+                            new() { CustomerID = id }
+                        }
+                            .Select(i => i.CustomerID)
+                            .Contains(c.CustomerID)
                     )
         );
 
@@ -1397,15 +1377,14 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<Customer>
-                            {
-                                new() { CustomerID = "ABCDE" },
-                                new() { CustomerID = id }
-                            }
-                                .Select(i => i.CustomerID)
-                                .Contains(c.CustomerID)
+                    .Where(c =>
+                        new List<Customer>
+                        {
+                            new() { CustomerID = "ABCDE" },
+                            new() { CustomerID = id }
+                        }
+                            .Select(i => i.CustomerID)
+                            .Contains(c.CustomerID)
                     )
         );
     }
@@ -1446,10 +1425,9 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            (c.CustomerID == "ALFKI" || c.CustomerID == "ABCDE")
-                            && ids.Contains(c.CustomerID)
+                    .Where(c =>
+                        (c.CustomerID == "ALFKI" || c.CustomerID == "ABCDE")
+                        && ids.Contains(c.CustomerID)
                     )
         );
     }
@@ -1464,10 +1442,9 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            ids.Contains(c.CustomerID)
-                            || (c.CustomerID == "ALFKI" || c.CustomerID == "ABCDE")
+                    .Where(c =>
+                        ids.Contains(c.CustomerID)
+                        || (c.CustomerID == "ALFKI" || c.CustomerID == "ABCDE")
                     )
         );
     }
@@ -1484,10 +1461,9 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            (c.CustomerID == "ALFKI" || c.CustomerID == "ABCDE")
-                            || !ids.Contains(c.CustomerID)
+                    .Where(c =>
+                        (c.CustomerID == "ALFKI" || c.CustomerID == "ABCDE")
+                        || !ids.Contains(c.CustomerID)
                     )
         );
     }
@@ -1504,10 +1480,9 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            ids.Contains(c.CustomerID)
-                            && (c.CustomerID != "ALFKI" && c.CustomerID != "ABCDE")
+                    .Where(c =>
+                        ids.Contains(c.CustomerID)
+                        && (c.CustomerID != "ALFKI" && c.CustomerID != "ABCDE")
                     ),
             assertEmpty: true
         );
@@ -1523,10 +1498,9 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            ids.Contains(c.CustomerID)
-                            || (c.CustomerID == "ALFKI" || c.CustomerID == "ABCDE")
+                    .Where(c =>
+                        ids.Contains(c.CustomerID)
+                        || (c.CustomerID == "ALFKI" || c.CustomerID == "ABCDE")
                     )
         );
     }
@@ -1700,13 +1674,12 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<Customer>
-                            {
-                                new() { CustomerID = "ALFKI" },
-                                new() { CustomerID = "ANATR" }
-                            }.Contains(c)
+                    .Where(c =>
+                        new List<Customer>
+                        {
+                            new() { CustomerID = "ALFKI" },
+                            new() { CustomerID = "ANATR" }
+                        }.Contains(c)
                     )
         );
 
@@ -1743,13 +1716,12 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Order>()
-                    .Where(
-                        o =>
-                            new List<Order>
-                            {
-                                new() { OrderID = 10248 },
-                                new() { OrderID = 10249 }
-                            }.Contains(o)
+                    .Where(o =>
+                        new List<Order>
+                        {
+                            new() { OrderID = 10248 },
+                            new() { OrderID = 10249 }
+                        }.Contains(o)
                     )
         );
 
@@ -1847,12 +1819,11 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Order>()
-                    .Where(
-                        o =>
-                            ss.Set<Order>()
-                                .Where(o => o.CustomerID == "VINET")
-                                .Select(o => o.EmployeeID)
-                                .Contains(null)
+                    .Where(o =>
+                        ss.Set<Order>()
+                            .Where(o => o.CustomerID == "VINET")
+                            .Select(o => o.EmployeeID)
+                            .Contains(null)
                     ),
             assertEmpty: true
         );
@@ -1866,12 +1837,11 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Order>()
-                    .Where(
-                        o =>
-                            !ss.Set<Order>()
-                                .Where(o => o.CustomerID == "VINET")
-                                .Select(o => o.EmployeeID)
-                                .Contains(null)
+                    .Where(o =>
+                        !ss.Set<Order>()
+                            .Where(o => o.CustomerID == "VINET")
+                            .Select(o => o.EmployeeID)
+                            .Contains(null)
                     )
         );
 
@@ -1884,16 +1854,15 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Order>()
-                    .Where(
-                        o =>
-                            ss.Set<Order>()
-                                .Where(o => o.CustomerID == "VINET")
-                                .Select(o => o.EmployeeID)
-                                .Contains(null)
-                            == ss.Set<Order>()
-                                .Where(o => o.CustomerID != "VINET")
-                                .Select(o => o.EmployeeID)
-                                .Contains(null)
+                    .Where(o =>
+                        ss.Set<Order>()
+                            .Where(o => o.CustomerID == "VINET")
+                            .Select(o => o.EmployeeID)
+                            .Contains(null)
+                        == ss.Set<Order>()
+                            .Where(o => o.CustomerID != "VINET")
+                            .Select(o => o.EmployeeID)
+                            .Contains(null)
                     )
         );
 
@@ -1906,12 +1875,11 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Order>()
-                    .Select(
-                        o =>
-                            ss.Set<Order>()
-                                .Where(o => o.CustomerID == "VINET")
-                                .Select(o => o.EmployeeID)
-                                .Contains(null)
+                    .Select(o =>
+                        ss.Set<Order>()
+                            .Where(o => o.CustomerID == "VINET")
+                            .Select(o => o.EmployeeID)
+                            .Contains(null)
                     )
         );
 
@@ -1924,12 +1892,11 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Order>()
-                    .Select(
-                        o =>
-                            ss.Set<Customer>()
-                                .Where(o => o.CustomerID != "VINET")
-                                .Select(o => o.CustomerID)
-                                .Contains(null)
+                    .Select(o =>
+                        ss.Set<Customer>()
+                            .Where(o => o.CustomerID != "VINET")
+                            .Select(o => o.CustomerID)
+                            .Contains(null)
                     )
         );
 
@@ -1950,10 +1917,9 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<OrderDetail>()
-                    .Where(
-                        o =>
-                            o.ProductID == 42
-                            && ss.Set<OrderDetail>().Where(x => x.OrderID > 42).Contains(o)
+                    .Where(o =>
+                        o.ProductID == 42
+                        && ss.Set<OrderDetail>().Where(x => x.OrderID > 42).Contains(o)
                     )
         );
 
@@ -1989,8 +1955,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c => new[] { "ABCDE", "ALFKI", "ANATR" }.Any(li => li.Equals(c.CustomerID))
+                    .Where(c =>
+                        new[] { "ABCDE", "ALFKI", "ANATR" }.Any(li => li.Equals(c.CustomerID))
                     )
         );
 
@@ -2048,11 +2014,10 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(
-                        c =>
-                            new List<string> { "ABCDE", "ALFKI", "ANATR" }.All(
-                                li => !li.Equals(c.CustomerID)
-                            )
+                    .Where(c =>
+                        new List<string> { "ABCDE", "ALFKI", "ANATR" }.All(li =>
+                            !li.Equals(c.CustomerID)
+                        )
                     )
         );
 
@@ -2140,19 +2105,16 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             ss =>
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
-                    .Where(
-                        c =>
-                            c.Orders.OrderByDescending(o => o.OrderID).Last().CustomerID
-                            == c.CustomerID
+                    .Where(c =>
+                        c.Orders.OrderByDescending(o => o.OrderID).Last().CustomerID == c.CustomerID
                     ),
             ss =>
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
-                    .Where(
-                        c =>
-                            c.Orders.OrderByDescending(o => o.OrderID)
-                                .LastOrDefault()
-                                .Maybe(x => x.CustomerID) == c.CustomerID
+                    .Where(c =>
+                        c.Orders.OrderByDescending(o => o.OrderID)
+                            .LastOrDefault()
+                            .Maybe(x => x.CustomerID) == c.CustomerID
                     )
         );
 
@@ -2166,19 +2128,17 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             ss =>
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
-                    .Where(
-                        c =>
-                            c.Orders.OrderByDescending(o => o.OrderID).LastOrDefault().CustomerID
-                            == c.CustomerID
+                    .Where(c =>
+                        c.Orders.OrderByDescending(o => o.OrderID).LastOrDefault().CustomerID
+                        == c.CustomerID
                     ),
             ss =>
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
-                    .Where(
-                        c =>
-                            c.Orders.OrderByDescending(o => o.OrderID)
-                                .LastOrDefault()
-                                .Maybe(x => x.CustomerID) == c.CustomerID
+                    .Where(c =>
+                        c.Orders.OrderByDescending(o => o.OrderID)
+                            .LastOrDefault()
+                            .Maybe(x => x.CustomerID) == c.CustomerID
                     )
         );
 
@@ -2296,15 +2256,12 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             ss =>
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
-                    .Select(
-                        c =>
-                            new
-                            {
-                                Ave = c.Orders != null && c.Orders.Count() > 0
-                                    ? (double?)c.Orders.Average(o => o.OrderID)
-                                    : null
-                            }
-                    ),
+                    .Select(c => new
+                    {
+                        Ave = c.Orders != null && c.Orders.Count() > 0
+                            ? (double?)c.Orders.Average(o => o.OrderID)
+                            : null
+                    }),
             assertOrder: true,
             elementAsserter: (e, a) =>
             {
@@ -2327,16 +2284,11 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             ss =>
                 ss.Set<Order>()
                     // ReSharper disable once ConvertTypeCheckToNullCheck
-                    .Select(
-                        o =>
-                            new
-                            {
-                                o.OrderID,
-                                Customer = o.Customer is Customer
-                                    ? new { o.Customer.ContactName }
-                                    : null
-                            }
-                    )
+                    .Select(o => new
+                    {
+                        o.OrderID,
+                        Customer = o.Customer is Customer ? new { o.Customer.ContactName } : null
+                    })
                     .Take(1)
         );
 

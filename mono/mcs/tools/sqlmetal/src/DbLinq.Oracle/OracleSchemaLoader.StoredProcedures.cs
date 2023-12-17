@@ -97,8 +97,8 @@ from all_arguments where lower(owner) = :db order by object_id, position";
                     nameFormat
                 );
 
-                Function function = schema.Functions.SingleOrDefault(
-                    f => f.Method == procedureName.MethodName
+                Function function = schema.Functions.SingleOrDefault(f =>
+                    f.Method == procedureName.MethodName
                 );
                 if (function == null)
                 {

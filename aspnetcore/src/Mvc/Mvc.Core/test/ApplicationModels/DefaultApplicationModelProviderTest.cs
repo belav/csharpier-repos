@@ -1407,7 +1407,9 @@ public class DefaultApplicationModelProviderTest
         // Arrange
         var builder = new TestApplicationModelProvider();
         var typeInfo =
-            typeof(DerivedFromControllerAndExplicitIDisposableImplementationController).GetTypeInfo();
+            typeof(DerivedFromControllerAndExplicitIDisposableImplementationController).GetTypeInfo(
+
+            );
         var context = new ApplicationModelProviderContext(new[] { typeInfo });
 
         // Act
@@ -1423,8 +1425,9 @@ public class DefaultApplicationModelProviderTest
     {
         // Arrange
         var builder = new TestApplicationModelProvider();
-        var typeInfo =
-            typeof(DerivedFromControllerAndHidesBaseDisposeMethodController).GetTypeInfo();
+        var typeInfo = typeof(DerivedFromControllerAndHidesBaseDisposeMethodController).GetTypeInfo(
+
+        );
         var context = new ApplicationModelProviderContext(new[] { typeInfo });
 
         // Act

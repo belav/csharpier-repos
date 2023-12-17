@@ -337,10 +337,9 @@ public class DefaultHttpContextTests
         var type = value.GetType();
 
         var field = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
-            .Single(
-                f =>
-                    f.FieldType.GetTypeInfo().IsGenericType
-                    && f.FieldType.GetGenericTypeDefinition() == typeof(FeatureReferences<>)
+            .Single(f =>
+                f.FieldType.GetTypeInfo().IsGenericType
+                && f.FieldType.GetGenericTypeDefinition() == typeof(FeatureReferences<>)
             );
 
         var boxedExpectedStruct =
@@ -374,10 +373,9 @@ public class DefaultHttpContextTests
         TestFeatureProperties(value, features, properties);
 
         var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
-            .Where(
-                f =>
-                    f.FieldType.GetTypeInfo().IsInterface
-                    && f.GetCustomAttribute<CompilerGeneratedAttribute>() == null
+            .Where(f =>
+                f.FieldType.GetTypeInfo().IsInterface
+                && f.GetCustomAttribute<CompilerGeneratedAttribute>() == null
             );
 
         foreach (var field in fields)

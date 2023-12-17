@@ -227,14 +227,11 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
             async,
             ss =>
                 ss.Set<Bird>()
-                    .Select(
-                        b =>
-                            new
-                            {
-                                b.IsFlightless,
-                                Discriminator = EF.Property<string>(b, "Discriminator")
-                            }
-                    ),
+                    .Select(b => new
+                    {
+                        b.IsFlightless,
+                        Discriminator = EF.Property<string>(b, "Discriminator")
+                    }),
             ss =>
                 ss.Set<Bird>()
                     .Select(b => new { b.IsFlightless, Discriminator = b.GetType().Name }),
@@ -430,10 +427,9 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
             async,
             ss =>
                 ss.Set<Animal>()
-                    .Where(
-                        a =>
-                            ss.Set<Animal>().FirstOrDefault(a1 => a1.Name == "Great spotted kiwi")
-                            is Kiwi
+                    .Where(a =>
+                        ss.Set<Animal>().FirstOrDefault(a1 => a1.Name == "Great spotted kiwi")
+                        is Kiwi
                     )
                     .OrderBy(a => a.Species),
             assertOrder: true

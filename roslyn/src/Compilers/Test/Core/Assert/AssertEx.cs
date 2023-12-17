@@ -346,8 +346,8 @@ namespace Roslyn.Test.Utilities
             );
 
             if (
-                !diff.Lines.Any(
-                    line => line.Type == ChangeType.Inserted || line.Type == ChangeType.Deleted
+                !diff.Lines.Any(line =>
+                    line.Type == ChangeType.Inserted || line.Type == ChangeType.Deleted
                 )
             )
             {
@@ -864,8 +864,8 @@ namespace Roslyn.Test.Utilities
                 }
                 else
                 {
-                    itemInspector = new Func<T, string>(
-                        obj => (obj != null) ? obj.ToString() : "<null>"
+                    itemInspector = new Func<T, string>(obj =>
+                        (obj != null) ? obj.ToString() : "<null>"
                     );
                 }
             }
@@ -945,8 +945,8 @@ namespace Roslyn.Test.Utilities
                 }
                 else
                 {
-                    itemInspector = new Func<T, string>(
-                        obj => (obj != null) ? obj.ToString() : "<null>"
+                    itemInspector = new Func<T, string>(obj =>
+                        (obj != null) ? obj.ToString() : "<null>"
                     );
                 }
             }

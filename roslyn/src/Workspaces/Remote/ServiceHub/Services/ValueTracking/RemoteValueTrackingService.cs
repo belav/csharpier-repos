@@ -50,13 +50,8 @@ namespace Microsoft.CodeAnalysis.Remote
                         .ConfigureAwait(false);
 
                     var items = progress.GetItems();
-                    return items.SelectAsArray(
-                        item =>
-                            SerializableValueTrackedItem.Dehydrate(
-                                solution,
-                                item,
-                                cancellationToken
-                            )
+                    return items.SelectAsArray(item =>
+                        SerializableValueTrackedItem.Dehydrate(solution, item, cancellationToken)
                     );
                 },
                 cancellationToken
@@ -92,13 +87,8 @@ namespace Microsoft.CodeAnalysis.Remote
                         .ConfigureAwait(false);
 
                     var items = progress.GetItems();
-                    return items.SelectAsArray(
-                        item =>
-                            SerializableValueTrackedItem.Dehydrate(
-                                solution,
-                                item,
-                                cancellationToken
-                            )
+                    return items.SelectAsArray(item =>
+                        SerializableValueTrackedItem.Dehydrate(solution, item, cancellationToken)
                     );
                 },
                 cancellationToken

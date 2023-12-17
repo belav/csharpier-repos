@@ -26,8 +26,7 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
                 .Throws<DbUpdateException>(() =>
                 {
                     var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                    modelBuilder.Entity<SomeEntity>(
-                        eb => eb.Property(p => p.Property).IsRequired()
+                    modelBuilder.Entity<SomeEntity>(eb => eb.Property(p => p.Property).IsRequired()
                     );
 
                     var optionsBuilder = new DbContextOptionsBuilder()
@@ -57,8 +56,7 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
                 .Throws<DbUpdateException>(() =>
                 {
                     var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                    modelBuilder.Entity<SomeEntity>(
-                        eb => eb.Property(p => p.Property).IsRequired()
+                    modelBuilder.Entity<SomeEntity>(eb => eb.Property(p => p.Property).IsRequired()
                     );
 
                     var optionsBuilder = new DbContextOptionsBuilder()
@@ -154,8 +152,8 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
                 .Throws<DbUpdateException>(() =>
                 {
                     var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                    modelBuilder.Entity<AnotherEntityWithRequiredAttribute>(
-                        eb => eb.Property(p => p.Property).IsRequired()
+                    modelBuilder.Entity<AnotherEntityWithRequiredAttribute>(eb =>
+                        eb.Property(p => p.Property).IsRequired()
                     );
 
                     var optionsBuilder = new DbContextOptionsBuilder()
@@ -216,8 +214,8 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
     public void Can_insert_null_values_with_RequiredAttribute_and_IsRequired_for_properties_if_nullability_check_is_disabled()
     {
         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-        modelBuilder.Entity<AnotherEntityWithRequiredAttribute>(
-            eb => eb.Property(p => p.Property).IsRequired()
+        modelBuilder.Entity<AnotherEntityWithRequiredAttribute>(eb =>
+            eb.Property(p => p.Property).IsRequired()
         );
 
         var optionsBuilder = new DbContextOptionsBuilder()

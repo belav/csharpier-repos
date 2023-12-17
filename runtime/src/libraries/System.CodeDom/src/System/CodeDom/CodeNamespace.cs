@@ -7,12 +7,14 @@ namespace System.CodeDom
     public class CodeNamespace : CodeObject
     {
         private string _name;
-        private readonly CodeNamespaceImportCollection _imports =
-            new CodeNamespaceImportCollection();
+        private readonly CodeNamespaceImportCollection _imports = new CodeNamespaceImportCollection(
+
+        );
         private readonly CodeCommentStatementCollection _comments =
             new CodeCommentStatementCollection();
-        private readonly CodeTypeDeclarationCollection _classes =
-            new CodeTypeDeclarationCollection();
+        private readonly CodeTypeDeclarationCollection _classes = new CodeTypeDeclarationCollection(
+
+        );
 
         private int _populated;
         private const int ImportsCollection = 0x1;

@@ -105,8 +105,8 @@ namespace System.Web.Cors
             if (AllowedMethods.Count > 0)
             {
                 // Filter out simple methods
-                IEnumerable<string> nonSimpleAllowMethods = AllowedMethods.Where(
-                    m => !CorsConstants.SimpleMethods.Contains(m, StringComparer.OrdinalIgnoreCase)
+                IEnumerable<string> nonSimpleAllowMethods = AllowedMethods.Where(m =>
+                    !CorsConstants.SimpleMethods.Contains(m, StringComparer.OrdinalIgnoreCase)
                 );
                 AddHeader(headers, CorsConstants.AccessControlAllowMethods, nonSimpleAllowMethods);
             }
@@ -114,12 +114,11 @@ namespace System.Web.Cors
             if (AllowedHeaders.Count > 0)
             {
                 // Filter out simple request headers
-                IEnumerable<string> nonSimpleAllowRequestHeaders = AllowedHeaders.Where(
-                    header =>
-                        !CorsConstants.SimpleRequestHeaders.Contains(
-                            header,
-                            StringComparer.OrdinalIgnoreCase
-                        )
+                IEnumerable<string> nonSimpleAllowRequestHeaders = AllowedHeaders.Where(header =>
+                    !CorsConstants.SimpleRequestHeaders.Contains(
+                        header,
+                        StringComparer.OrdinalIgnoreCase
+                    )
                 );
                 AddHeader(
                     headers,

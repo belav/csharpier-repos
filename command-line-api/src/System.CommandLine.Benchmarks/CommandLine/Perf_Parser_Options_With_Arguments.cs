@@ -21,14 +21,11 @@ namespace System.CommandLine.Benchmarks.CommandLine
         private IEnumerable<CliOption> GenerateTestOptions(int count, ArgumentArity arity) =>
             Enumerable
                 .Range(0, count)
-                .Select(
-                    i =>
-                        new CliOption<string>($"-option{i}")
-                        {
-                            Arity = arity,
-                            Description = $"Description for -option {i} ...."
-                        }
-                );
+                .Select(i => new CliOption<string>($"-option{i}")
+                {
+                    Arity = arity,
+                    Description = $"Description for -option {i} ...."
+                });
 
         /// <remarks>
         /// For optionsCount: 5, argumentsCount: 5 will return:

@@ -396,12 +396,9 @@ namespace Microsoft.Extensions.Logging
                 MaxMessageSize = maxMessageSize;
                 Messages = new List<string>();
                 Entries =
-                    new List<(
-                        string Message,
-                        EventLogEntryType Type,
-                        int EventId,
-                        short Category
-                    )>();
+                    new List<(string Message, EventLogEntryType Type, int EventId, short Category)>(
+
+                    );
             }
 
             public int MaxMessageSize { get; }

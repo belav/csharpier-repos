@@ -812,8 +812,9 @@ namespace System.Xml.Schema
         }
 
         // XSD types
-        static private readonly DatatypeImplementation c_anySimpleType =
-            new Datatype_anySimpleType();
+        static private readonly DatatypeImplementation c_anySimpleType = new Datatype_anySimpleType(
+
+        );
         private static readonly DatatypeImplementation c_anyURI = new Datatype_anyURI();
         private static readonly DatatypeImplementation c_base64Binary = new Datatype_base64Binary();
         private static readonly DatatypeImplementation c_boolean = new Datatype_boolean();
@@ -823,8 +824,9 @@ namespace System.Xml.Schema
         private static readonly DatatypeImplementation c_dateTime = new Datatype_dateTime();
         private static readonly DatatypeImplementation c_dateTimeNoTz =
             new Datatype_dateTimeNoTimeZone(); // XDR
-        private static readonly DatatypeImplementation c_dateTimeTz =
-            new Datatype_dateTimeTimeZone(); // XDR
+        private static readonly DatatypeImplementation c_dateTimeTz = new Datatype_dateTimeTimeZone(
+
+        ); // XDR
         private static readonly DatatypeImplementation c_day = new Datatype_day();
         private static readonly DatatypeImplementation c_decimal = new Datatype_decimal();
         private static readonly DatatypeImplementation c_double = new Datatype_double();
@@ -875,8 +877,9 @@ namespace System.Xml.Schema
         private static readonly DatatypeImplementation c_unsignedByte = new Datatype_unsignedByte();
         private static readonly DatatypeImplementation c_unsignedInt = new Datatype_unsignedInt();
         private static readonly DatatypeImplementation c_unsignedLong = new Datatype_unsignedLong();
-        private static readonly DatatypeImplementation c_unsignedShort =
-            new Datatype_unsignedShort();
+        private static readonly DatatypeImplementation c_unsignedShort = new Datatype_unsignedShort(
+
+        );
         private static readonly DatatypeImplementation c_uuid = new Datatype_uuid(); // XDR
         private static readonly DatatypeImplementation c_year = new Datatype_year();
         private static readonly DatatypeImplementation c_yearMonth = new Datatype_yearMonth();
@@ -888,8 +891,9 @@ namespace System.Xml.Schema
             new Datatype_tokenV1Compat();
 
         // XQuery types
-        static private readonly DatatypeImplementation c_anyAtomicType =
-            new Datatype_anyAtomicType();
+        static private readonly DatatypeImplementation c_anyAtomicType = new Datatype_anyAtomicType(
+
+        );
         private static readonly DatatypeImplementation c_dayTimeDuration =
             new Datatype_dayTimeDuration();
         private static readonly DatatypeImplementation c_untypedAtomicType =

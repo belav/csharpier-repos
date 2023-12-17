@@ -146,8 +146,8 @@ public static class ServiceCollectionExtensions
             assembliesToScan = new HashSet<Assembly>(
                 assembliesToScan.Where(a => !a.IsDynamic && a != typeof(Mapper).Assembly)
             );
-            services.Configure<MapperConfigurationExpression>(
-                options => options.AddMaps(assembliesToScan)
+            services.Configure<MapperConfigurationExpression>(options =>
+                options.AddMaps(assembliesToScan)
             );
             var openTypes = new[]
             {
@@ -158,18 +158,16 @@ public static class ServiceCollectionExtensions
                 typeof(IMappingAction<,>)
             };
             foreach (
-                var type in assembliesToScan.SelectMany(
-                    a =>
-                        a.GetTypes()
-                            .Where(
-                                type =>
-                                    type.IsClass
-                                    && !type.IsAbstract
-                                    && Array.Exists(
-                                        openTypes,
-                                        openType => type.GetGenericInterface(openType) != null
-                                    )
+                var type in assembliesToScan.SelectMany(a =>
+                    a.GetTypes()
+                        .Where(type =>
+                            type.IsClass
+                            && !type.IsAbstract
+                            && Array.Exists(
+                                openTypes,
+                                openType => type.GetGenericInterface(openType) != null
                             )
+                        )
                 )
             )
             {

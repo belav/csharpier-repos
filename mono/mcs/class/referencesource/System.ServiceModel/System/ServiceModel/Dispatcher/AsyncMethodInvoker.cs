@@ -462,11 +462,9 @@ namespace System.ServiceModel.Dispatcher
                 // Only pass locals byref because InvokerUtil may store temporary results in the byref.
                 // If two threads both reference this.count, temporary results may interact.
                 int inputParameterCount;
-                InvokeBeginDelegate invokeBeginDelegate =
-                    new InvokerUtil().GenerateInvokeBeginDelegate(
-                        this.beginMethod,
-                        out inputParameterCount
-                    );
+                InvokeBeginDelegate invokeBeginDelegate = new InvokerUtil(
+
+                ).GenerateInvokeBeginDelegate(this.beginMethod, out inputParameterCount);
                 this.inputParameterCount = inputParameterCount;
 
                 int outputParameterCount;

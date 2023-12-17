@@ -146,13 +146,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         ) =>
             type.GetMembers(WellKnownMemberNames.Indexer)
                 .OfType<IPropertySymbol>()
-                .Where(
-                    p =>
-                        p.IsIndexer
-                        && IsPublicInstance(p)
-                        && returnType.Equals(p.Type)
-                        && p.Parameters.Length == 1
-                        && p.Parameters[0].Type.Equals(parameterType)
+                .Where(p =>
+                    p.IsIndexer
+                    && IsPublicInstance(p)
+                    && returnType.Equals(p.Type)
+                    && p.Parameters.Length == 1
+                    && p.Parameters[0].Type.Equals(parameterType)
                 )
                 .FirstOrDefault();
 
@@ -167,12 +166,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 : method
                     .ContainingType.GetMembers(method.Name)
                     .OfType<IMethodSymbol>()
-                    .Where(
-                        m =>
-                            IsPublicInstance(m)
-                            && m.Parameters.Length == 1
-                            && m.Parameters[0].Type.Equals(parameterType)
-                            && m.ReturnType.Equals(method.ReturnType)
+                    .Where(m =>
+                        IsPublicInstance(m)
+                        && m.Parameters.Length == 1
+                        && m.Parameters[0].Type.Equals(parameterType)
+                        && m.ReturnType.Equals(method.ReturnType)
                     )
                     .FirstOrDefault();
     }

@@ -69,10 +69,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
             var originalRoot = editor.OriginalRoot;
             var parseOptions = (CSharpParseOptions)originalRoot.SyntaxTree.Options;
 
-            var originalNodes = diagnostics.SelectAsArray(
-                d =>
-                    (DefaultExpressionSyntax)
-                        originalRoot.FindNode(d.Location.SourceSpan, getInnermostNodeForTie: true)
+            var originalNodes = diagnostics.SelectAsArray(d =>
+                (DefaultExpressionSyntax)
+                    originalRoot.FindNode(d.Location.SourceSpan, getInnermostNodeForTie: true)
             );
 
             await editor

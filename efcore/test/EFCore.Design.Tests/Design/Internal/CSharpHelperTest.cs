@@ -615,8 +615,8 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_parameterless_constructor()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v => Expression.New(typeof(SimpleTestType))
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.New(typeof(SimpleTestType))
         );
 
         Assert.Equal(
@@ -628,12 +628,11 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_one_parameter_constructor()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.New(
-                    typeof(SimpleTestType).GetConstructor(new[] { typeof(string) })!,
-                    Expression.Constant(v.Arg1, typeof(string))
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.New(
+                typeof(SimpleTestType).GetConstructor(new[] { typeof(string) })!,
+                Expression.Constant(v.Arg1, typeof(string))
+            )
         );
 
         Assert.Equal(
@@ -645,13 +644,12 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_two_parameter_constructor()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.New(
-                    typeof(SimpleTestType).GetConstructor(new[] { typeof(string), typeof(int?) })!,
-                    Expression.Constant(v.Arg1, typeof(string)),
-                    Expression.Constant(v.Arg2, typeof(int?))
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.New(
+                typeof(SimpleTestType).GetConstructor(new[] { typeof(string), typeof(int?) })!,
+                Expression.Constant(v.Arg1, typeof(string)),
+                Expression.Constant(v.Arg2, typeof(int?))
+            )
         );
 
         Assert.Equal(
@@ -663,14 +661,13 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_parameterless_static_factory()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Call(
-                    typeof(SimpleTestTypeFactory).GetMethod(
-                        nameof(SimpleTestTypeFactory.StaticCreate),
-                        Type.EmptyTypes
-                    )!
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Call(
+                typeof(SimpleTestTypeFactory).GetMethod(
+                    nameof(SimpleTestTypeFactory.StaticCreate),
+                    Type.EmptyTypes
+                )!
+            )
         );
 
         Assert.Equal(
@@ -682,15 +679,14 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_one_parameter_static_factory()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Call(
-                    typeof(SimpleTestTypeFactory).GetMethod(
-                        nameof(SimpleTestTypeFactory.StaticCreate),
-                        new[] { typeof(string) }
-                    )!,
-                    Expression.Constant(v.Arg1, typeof(string))
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Call(
+                typeof(SimpleTestTypeFactory).GetMethod(
+                    nameof(SimpleTestTypeFactory.StaticCreate),
+                    new[] { typeof(string) }
+                )!,
+                Expression.Constant(v.Arg1, typeof(string))
+            )
         );
 
         Assert.Equal(
@@ -702,16 +698,15 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_two_parameter_static_factory()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Call(
-                    typeof(SimpleTestTypeFactory).GetMethod(
-                        nameof(SimpleTestTypeFactory.StaticCreate),
-                        new[] { typeof(string), typeof(int?) }
-                    )!,
-                    Expression.Constant(v.Arg1, typeof(string)),
-                    Expression.Constant(v.Arg2, typeof(int?))
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Call(
+                typeof(SimpleTestTypeFactory).GetMethod(
+                    nameof(SimpleTestTypeFactory.StaticCreate),
+                    new[] { typeof(string), typeof(int?) }
+                )!,
+                Expression.Constant(v.Arg1, typeof(string)),
+                Expression.Constant(v.Arg2, typeof(int?))
+            )
         );
 
         Assert.Equal(
@@ -723,15 +718,14 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_parameterless_instance_factory()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Call(
-                    Expression.New(typeof(SimpleTestTypeFactory)),
-                    typeof(SimpleTestTypeFactory).GetMethod(
-                        nameof(SimpleTestTypeFactory.Create),
-                        new Type[0]
-                    )!
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Call(
+                Expression.New(typeof(SimpleTestTypeFactory)),
+                typeof(SimpleTestTypeFactory).GetMethod(
+                    nameof(SimpleTestTypeFactory.Create),
+                    new Type[0]
+                )!
+            )
         );
 
         Assert.Equal(
@@ -743,19 +737,18 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_one_parameter_instance_factory()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Convert(
-                    Expression.Call(
-                        Expression.New(typeof(SimpleTestTypeFactory)),
-                        typeof(SimpleTestTypeFactory).GetMethod(
-                            nameof(SimpleTestTypeFactory.Create),
-                            new[] { typeof(string) }
-                        )!,
-                        Expression.Constant(v.Arg1, typeof(string))
-                    ),
-                    typeof(SimpleTestType)
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Convert(
+                Expression.Call(
+                    Expression.New(typeof(SimpleTestTypeFactory)),
+                    typeof(SimpleTestTypeFactory).GetMethod(
+                        nameof(SimpleTestTypeFactory.Create),
+                        new[] { typeof(string) }
+                    )!,
+                    Expression.Constant(v.Arg1, typeof(string))
+                ),
+                typeof(SimpleTestType)
+            )
         );
 
         Assert.Equal(
@@ -767,23 +760,22 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_two_parameter_instance_factory()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Convert(
-                    Expression.Call(
-                        Expression.New(
-                            typeof(SimpleTestTypeFactory).GetConstructor(new[] { typeof(string) })!,
-                            Expression.Constant("4096", typeof(string))
-                        ),
-                        typeof(SimpleTestTypeFactory).GetMethod(
-                            nameof(SimpleTestTypeFactory.Create),
-                            new[] { typeof(string), typeof(int?) }
-                        )!,
-                        Expression.Constant(v.Arg1, typeof(string)),
-                        Expression.Constant(v.Arg2, typeof(int?))
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Convert(
+                Expression.Call(
+                    Expression.New(
+                        typeof(SimpleTestTypeFactory).GetConstructor(new[] { typeof(string) })!,
+                        Expression.Constant("4096", typeof(string))
                     ),
-                    typeof(SimpleTestType)
-                )
+                    typeof(SimpleTestTypeFactory).GetMethod(
+                        nameof(SimpleTestTypeFactory.Create),
+                        new[] { typeof(string), typeof(int?) }
+                    )!,
+                    Expression.Constant(v.Arg1, typeof(string)),
+                    Expression.Constant(v.Arg2, typeof(int?))
+                ),
+                typeof(SimpleTestType)
+            )
         );
 
         Assert.Equal(
@@ -795,23 +787,22 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_two_parameter_instance_factory_and_internal_cast()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Convert(
-                    Expression.Call(
-                        Expression.New(
-                            typeof(SimpleTestTypeFactory).GetConstructor(new[] { typeof(string) })!,
-                            Expression.Constant("4096", typeof(string))
-                        ),
-                        typeof(SimpleTestTypeFactory).GetMethod(
-                            nameof(SimpleTestTypeFactory.Create),
-                            new[] { typeof(string), typeof(int?) }
-                        )!,
-                        Expression.Constant(v.Arg1, typeof(string)),
-                        Expression.Convert(Expression.Constant(v.Arg2, typeof(int)), typeof(int?))
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Convert(
+                Expression.Call(
+                    Expression.New(
+                        typeof(SimpleTestTypeFactory).GetConstructor(new[] { typeof(string) })!,
+                        Expression.Constant("4096", typeof(string))
                     ),
-                    typeof(SimpleTestType)
-                )
+                    typeof(SimpleTestTypeFactory).GetMethod(
+                        nameof(SimpleTestTypeFactory.Create),
+                        new[] { typeof(string), typeof(int?) }
+                    )!,
+                    Expression.Constant(v.Arg1, typeof(string)),
+                    Expression.Convert(Expression.Constant(v.Arg2, typeof(int)), typeof(int?))
+                ),
+                typeof(SimpleTestType)
+            )
         );
 
         Assert.Equal(
@@ -823,12 +814,11 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_static_field()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Field(
-                    null,
-                    typeof(SimpleTestType).GetField(nameof(SimpleTestType.SomeStaticField))!
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Field(
+                null,
+                typeof(SimpleTestType).GetField(nameof(SimpleTestType.SomeStaticField))!
+            )
         );
 
         Assert.Equal(
@@ -840,12 +830,11 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_static_property()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Property(
-                    null,
-                    typeof(SimpleTestType).GetProperty(nameof(SimpleTestType.SomeStaticProperty))!
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Property(
+                null,
+                typeof(SimpleTestType).GetProperty(nameof(SimpleTestType.SomeStaticProperty))!
+            )
         );
 
         Assert.Equal(
@@ -857,12 +846,11 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_instance_property()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v =>
-                Expression.Property(
-                    Expression.New(typeof(SimpleTestType)),
-                    typeof(SimpleTestType).GetProperty(nameof(SimpleTestType.SomeInstanceProperty))!
-                )
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Property(
+                Expression.New(typeof(SimpleTestType)),
+                typeof(SimpleTestType).GetProperty(nameof(SimpleTestType.SomeInstanceProperty))!
+            )
         );
 
         Assert.Equal(
@@ -874,8 +862,8 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_add()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v => Expression.Add(Expression.Constant(10), Expression.Constant(10))
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Add(Expression.Constant(10), Expression.Constant(10))
         );
 
         Assert.Equal("10 + 10", new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType()));
@@ -884,8 +872,8 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_with_unsupported_node_throws()
     {
-        var typeMapping = CreateTypeMappingSource<SimpleTestType>(
-            v => Expression.Multiply(Expression.Constant(10), Expression.Constant(10))
+        var typeMapping = CreateTypeMappingSource<SimpleTestType>(v =>
+            Expression.Multiply(Expression.Constant(10), Expression.Constant(10))
         );
 
         Assert.Equal(

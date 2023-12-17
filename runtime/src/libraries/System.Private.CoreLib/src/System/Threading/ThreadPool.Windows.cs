@@ -82,7 +82,9 @@ namespace System.Threading
         internal static object GetOrCreateThreadLocalCompletionCountObject() =>
             ThreadPool.UseWindowsThreadPool
                 ? WindowsThreadPool.GetOrCreateThreadLocalCompletionCountObject()
-                : PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject();
+                : PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject(
+
+                );
 
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads) =>
             ThreadPool.UseWindowsThreadPool

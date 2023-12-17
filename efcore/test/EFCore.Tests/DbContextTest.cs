@@ -354,11 +354,8 @@ public partial class DbContextTest
 
         protected internal override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Question>(
-                b =>
-                    b.HasOne(x => x.Author)
-                        .WithMany(x => x.Questions)
-                        .HasForeignKey(x => x.AuthorId)
+            modelBuilder.Entity<Question>(b =>
+                b.HasOne(x => x.Author).WithMany(x => x.Questions).HasForeignKey(x => x.AuthorId)
             );
 
             modelBuilder.Entity<Answer>(b =>

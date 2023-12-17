@@ -238,8 +238,8 @@ public class Model : ConventionAnnotatable, IMutableModel, IConventionModel, IRu
         if (entityType.HasSharedClrType)
         {
             if (
-                _entityTypes.Any(
-                    et => !et.Value.HasSharedClrType && et.Value.ClrType == entityType.ClrType
+                _entityTypes.Any(et =>
+                    !et.Value.HasSharedClrType && et.Value.ClrType == entityType.ClrType
                 )
             )
             {

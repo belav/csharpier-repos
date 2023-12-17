@@ -745,10 +745,9 @@ namespace System.Web.DynamicData
             // Group columns that have groups by group names. Then put them into a dictionary from group name ->
             // minimum column order so that groups are "stick" close together.
             return Columns
-                .Where(
-                    c =>
-                        c.Metadata.DisplayAttribute != null
-                        && !String.IsNullOrEmpty(c.Metadata.DisplayAttribute.GetGroupName())
+                .Where(c =>
+                    c.Metadata.DisplayAttribute != null
+                    && !String.IsNullOrEmpty(c.Metadata.DisplayAttribute.GetGroupName())
                 )
                 .GroupBy(c => c.Metadata.DisplayAttribute.GetGroupName())
                 .ToDictionary(cg => cg.Key, cg => cg.Min(c => GetColumnOrder(c)));

@@ -955,11 +955,10 @@ public abstract class StoreGeneratedSqlServerTestBase<TFixture> : StoreGenerated
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
             builder
                 .EnableSensitiveDataLogging()
-                .ConfigureWarnings(
-                    b =>
-                        b.Default(WarningBehavior.Throw)
-                            .Ignore(CoreEventId.SensitiveDataLoggingEnabledWarning)
-                            .Ignore(RelationalEventId.BoolWithDefaultWarning)
+                .ConfigureWarnings(b =>
+                    b.Default(WarningBehavior.Throw)
+                        .Ignore(CoreEventId.SensitiveDataLoggingEnabledWarning)
+                        .Ignore(RelationalEventId.BoolWithDefaultWarning)
                 );
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)

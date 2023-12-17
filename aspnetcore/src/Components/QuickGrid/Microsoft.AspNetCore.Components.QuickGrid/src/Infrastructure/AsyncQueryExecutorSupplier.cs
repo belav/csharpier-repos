@@ -74,12 +74,11 @@ internal static class AsyncQueryExecutorSupplier
     ) =>
         queryableProviderType
             .GetInterfaces()
-            .Any(
-                x =>
-                    string.Equals(
-                        x.FullName,
-                        "Microsoft.EntityFrameworkCore.Query.IAsyncQueryProvider",
-                        StringComparison.Ordinal
-                    )
+            .Any(x =>
+                string.Equals(
+                    x.FullName,
+                    "Microsoft.EntityFrameworkCore.Query.IAsyncQueryProvider",
+                    StringComparison.Ordinal
+                )
             ) == true;
 }

@@ -803,28 +803,26 @@ namespace System.Text.Tests
             if (suppressExpectedCancellationTokenAsserts)
             {
                 delegatingInnerStreamMock
-                    .Setup(
-                        o =>
-                            o.ReadAsync(
-                                It.IsAny<byte[]>(),
-                                It.IsAny<int>(),
-                                It.IsAny<int>(),
-                                It.IsAny<CancellationToken>()
-                            )
+                    .Setup(o =>
+                        o.ReadAsync(
+                            It.IsAny<byte[]>(),
+                            It.IsAny<int>(),
+                            It.IsAny<int>(),
+                            It.IsAny<CancellationToken>()
+                        )
                     )
                     .Returns<byte[], int, int, CancellationToken>(innerStream.ReadAsync);
             }
             else
             {
                 delegatingInnerStreamMock
-                    .Setup(
-                        o =>
-                            o.ReadAsync(
-                                It.IsAny<byte[]>(),
-                                It.IsAny<int>(),
-                                It.IsAny<int>(),
-                                expectedCancellationToken
-                            )
+                    .Setup(o =>
+                        o.ReadAsync(
+                            It.IsAny<byte[]>(),
+                            It.IsAny<int>(),
+                            It.IsAny<int>(),
+                            expectedCancellationToken
+                        )
                     )
                     .Returns<byte[], int, int, CancellationToken>(innerStream.ReadAsync);
             }
@@ -1105,23 +1103,24 @@ namespace System.Text.Tests
         public async Task WriteAsync_WithFullData()
         {
             MemoryStream sink = new();
-            CancellationToken expectedFlushAsyncCancellationToken =
-                new CancellationTokenSource().Token;
-            CancellationToken expectedWriteAsyncCancellationToken =
-                new CancellationTokenSource().Token;
+            CancellationToken expectedFlushAsyncCancellationToken = new CancellationTokenSource(
+
+            ).Token;
+            CancellationToken expectedWriteAsyncCancellationToken = new CancellationTokenSource(
+
+            ).Token;
 
             var innerStreamMock = new Mock<Stream>(MockBehavior.Strict);
             innerStreamMock.Setup(o => o.CanWrite).Returns(true);
 #if true // In current src/ projects, always pass byte array to inner Stream.
             innerStreamMock
-                .Setup(
-                    o =>
-                        o.WriteAsync(
-                            It.IsAny<byte[]>(),
-                            It.IsAny<int>(),
-                            It.IsAny<int>(),
-                            expectedWriteAsyncCancellationToken
-                        )
+                .Setup(o =>
+                    o.WriteAsync(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        expectedWriteAsyncCancellationToken
+                    )
                 )
                 .Returns<byte[], int, int, CancellationToken>(sink.WriteAsync);
 #else
@@ -1215,14 +1214,13 @@ namespace System.Text.Tests
             innerStreamMock.Setup(o => o.CanWrite).Returns(true);
 #if true // In current src/ projects, always pass byte array to inner Stream.
             innerStreamMock
-                .Setup(
-                    o =>
-                        o.WriteAsync(
-                            It.IsAny<byte[]>(),
-                            It.IsAny<int>(),
-                            It.IsAny<int>(),
-                            expectedCancellationToken
-                        )
+                .Setup(o =>
+                    o.WriteAsync(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        expectedCancellationToken
+                    )
                 )
                 .Returns<byte[], int, int, CancellationToken>(sink.WriteAsync);
 #else

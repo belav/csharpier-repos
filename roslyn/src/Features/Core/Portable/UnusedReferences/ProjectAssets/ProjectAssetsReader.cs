@@ -46,11 +46,10 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
                 .Project?.Frameworks
                 ?.Values
                 .Where(framework => framework.Dependencies != null)
-                .SelectMany(
-                    framework =>
-                        framework.Dependencies!.Keys.Where(
-                            key => framework.Dependencies[key].AutoReferenced
-                        )
+                .SelectMany(framework =>
+                    framework.Dependencies!.Keys.Where(key =>
+                        framework.Dependencies[key].AutoReferenced
+                    )
                 )
                 .Distinct()
                 .ToImmutableHashSet();
@@ -66,15 +65,14 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             var builtReferences = new Dictionary<string, ReferenceInfo?>();
 
             var references = projectReferences
-                .Select(
-                    projectReference =>
-                        EnhanceReference(
-                            projectAssets,
-                            projectReference,
-                            autoReferences,
-                            targetLibraryKeys,
-                            builtReferences
-                        )
+                .Select(projectReference =>
+                    EnhanceReference(
+                        projectAssets,
+                        projectReference,
+                        autoReferences,
+                        targetLibraryKeys,
+                        builtReferences
+                    )
                 )
                 .WhereNotNull()
                 .ToImmutableArray();
@@ -204,15 +202,14 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             }
 
             var dependencies = dependencyNames
-                .Select(
-                    dependency =>
-                        BuildReference(
-                            projectAssets,
-                            dependency,
-                            treatAsUsed: false,
-                            targetLibraryKeys,
-                            builtReferences
-                        )
+                .Select(dependency =>
+                    BuildReference(
+                        projectAssets,
+                        dependency,
+                        treatAsUsed: false,
+                        targetLibraryKeys,
+                        builtReferences
+                    )
                 )
                 .WhereNotNull()
                 .ToImmutableArray();

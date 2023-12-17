@@ -91,8 +91,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.context != null)
             {
-                IChannelFactory<TChannel> factory =
-                    this.context.BuildInnerChannelFactory<TChannel>();
+                IChannelFactory<TChannel> factory = this.context.BuildInnerChannelFactory<TChannel>(
+
+                );
                 this.context = null;
                 return factory;
             }

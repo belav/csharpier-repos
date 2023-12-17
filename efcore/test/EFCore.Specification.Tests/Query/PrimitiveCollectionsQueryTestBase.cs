@@ -458,16 +458,14 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
             async,
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
-                    .Where(
-                        c =>
-                            c.DateTimes[1] == new DateTime(2020, 1, 10, 12, 30, 0, DateTimeKind.Utc)
+                    .Where(c =>
+                        c.DateTimes[1] == new DateTime(2020, 1, 10, 12, 30, 0, DateTimeKind.Utc)
                     ),
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
-                    .Where(
-                        c =>
-                            (c.DateTimes.Length >= 2 ? c.DateTimes[1] : default)
-                            == new DateTime(2020, 1, 10, 12, 30, 0, DateTimeKind.Utc)
+                    .Where(c =>
+                        (c.DateTimes.Length >= 2 ? c.DateTimes[1] : default)
+                        == new DateTime(2020, 1, 10, 12, 30, 0, DateTimeKind.Utc)
                     )
         );
 
@@ -493,10 +491,9 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                     .Where(c => c.NullableStrings[2] == c.NullableString),
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
-                    .Where(
-                        c =>
-                            (c.NullableStrings.Length > 2 ? c.NullableStrings[2] : default)
-                            == c.NullableString
+                    .Where(c =>
+                        (c.NullableStrings.Length > 2 ? c.NullableStrings[2] : default)
+                        == c.NullableString
                     )
         );
 
@@ -512,10 +509,9 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                     .Where(c => c.Strings.Any() && c.Strings[1] == c.NullableString),
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
-                    .Where(
-                        c =>
-                            c.Strings.Any()
-                            && (c.Strings.Length > 1 ? c.Strings[1] : default) == c.NullableString
+                    .Where(c =>
+                        c.Strings.Any()
+                        && (c.Strings.Length > 1 ? c.Strings[1] : default) == c.NullableString
                     )
         );
 
@@ -610,10 +606,8 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                     .Where(c => c.Ints.OrderByDescending(i => i).ElementAt(0) == 111),
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
-                    .Where(
-                        c =>
-                            c.Ints.Length > 0
-                            && c.Ints.OrderByDescending(i => i).ElementAt(0) == 111
+                    .Where(c =>
+                        c.Ints.Length > 0 && c.Ints.OrderByDescending(i => i).ElementAt(0) == 111
                     )
         );
 
@@ -655,10 +649,9 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
             async,
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
-                    .Where(
-                        c =>
-                            c.Ints.Join(ints, i => i, j => j, (i, j) => new { I = i, J = j })
-                                .Count() == 2
+                    .Where(c =>
+                        c.Ints.Join(ints, i => i, j => j, (i, j) => new { I = i, J = j }).Count()
+                        == 2
                     )
         );
     }
@@ -670,11 +663,10 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
             async,
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
-                    .Where(
-                        c =>
-                            new[] { 11, 111 }
-                                .Join(c.Ints, i => i, j => j, (i, j) => new { I = i, J = j })
-                                .Count() == 2
+                    .Where(c =>
+                        new[] { 11, 111 }
+                            .Join(c.Ints, i => i, j => j, (i, j) => new { I = i, J = j })
+                            .Count() == 2
                     )
         );
 
@@ -856,17 +848,16 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
             async,
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
-                    .Where(
-                        p =>
-                            ints.Skip(1)
-                                .Union(
-                                    p.Ints.OrderBy(x => x)
-                                        .Skip(1)
-                                        .Distinct()
-                                        .OrderByDescending(x => x)
-                                        .Take(20)
-                                )
-                                .Count() == 3
+                    .Where(p =>
+                        ints.Skip(1)
+                            .Union(
+                                p.Ints.OrderBy(x => x)
+                                    .Skip(1)
+                                    .Distinct()
+                                    .OrderByDescending(x => x)
+                                    .Take(20)
+                            )
+                            .Count() == 3
                     )
         );
     }
@@ -1045,14 +1036,11 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Empty = x.NullableInts.Where(x => false).ToList(),
-                                OnlyNull = x.NullableInts.Where(x => x == null).ToList(),
-                            }
-                    ),
+                    .Select(x => new
+                    {
+                        Empty = x.NullableInts.Where(x => false).ToList(),
+                        OnlyNull = x.NullableInts.Where(x => x == null).ToList(),
+                    }),
             assertOrder: true,
             elementAsserter: (e, a) =>
             {
@@ -1069,19 +1057,14 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
             ss =>
                 ss.Set<PrimitiveCollectionsEntity>()
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Ints = x.Ints.ToList(),
-                                OrderedInts = x.Ints.OrderByDescending(xx => xx).ToList(),
-                                FilteredDateTimes = x.DateTimes.Where(xx => xx.Day != 1).ToList(),
-                                FilteredDateTimes2 = x.DateTimes.Where(
-                                    xx => xx > new DateTime(2000, 1, 1)
-                                )
-                                    .ToList()
-                            }
-                    ),
+                    .Select(x => new
+                    {
+                        Ints = x.Ints.ToList(),
+                        OrderedInts = x.Ints.OrderByDescending(xx => xx).ToList(),
+                        FilteredDateTimes = x.DateTimes.Where(xx => xx.Day != 1).ToList(),
+                        FilteredDateTimes2 = x.DateTimes.Where(xx => xx > new DateTime(2000, 1, 1))
+                            .ToList()
+                    }),
             elementAsserter: (e, a) =>
             {
                 AssertCollection(e.Ints, a.Ints, ordered: true);
@@ -1105,15 +1088,12 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                 ss.Set<PrimitiveCollectionsEntity>()
                     .Where(x => x.Id < 4)
                     .OrderBy(x => x.Id)
-                    .Select(
-                        x =>
-                            new
-                            {
-                                Indexer = x.Ints[0],
-                                EnumerableElementAt = x.DateTimes.ElementAt(0),
-                                QueryableElementAt = x.Strings.AsQueryable().ElementAt(1)
-                            }
-                    ),
+                    .Select(x => new
+                    {
+                        Indexer = x.Ints[0],
+                        EnumerableElementAt = x.DateTimes.ElementAt(0),
+                        QueryableElementAt = x.Strings.AsQueryable().ElementAt(1)
+                    }),
             elementAsserter: (e, a) =>
             {
                 AssertEqual(e.Indexer, a.Indexer);

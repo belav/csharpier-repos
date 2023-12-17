@@ -38,11 +38,11 @@ namespace Microsoft.Extensions.DependencyInjection
             //
             services.TryAddTransient<HttpMessageHandlerBuilder, DefaultHttpMessageHandlerBuilder>();
             services.TryAddSingleton<DefaultHttpClientFactory>();
-            services.TryAddSingleton<IHttpClientFactory>(
-                serviceProvider => serviceProvider.GetRequiredService<DefaultHttpClientFactory>()
+            services.TryAddSingleton<IHttpClientFactory>(serviceProvider =>
+                serviceProvider.GetRequiredService<DefaultHttpClientFactory>()
             );
-            services.TryAddSingleton<IHttpMessageHandlerFactory>(
-                serviceProvider => serviceProvider.GetRequiredService<DefaultHttpClientFactory>()
+            services.TryAddSingleton<IHttpMessageHandlerFactory>(serviceProvider =>
+                serviceProvider.GetRequiredService<DefaultHttpClientFactory>()
             );
 
             //

@@ -377,8 +377,8 @@ namespace System.Data.Common.Utils
         {
             Debug.Assert(null != end);
             // there must be exactly one ("Single") other end that isn't ("Filter") this end
-            AssociationSetEnd otherEnd = end.ParentAssociationSet.AssociationSetEnds.Where(
-                e => !e.EdmEquals(end)
+            AssociationSetEnd otherEnd = end.ParentAssociationSet.AssociationSetEnds.Where(e =>
+                !e.EdmEquals(end)
             )
                 .Single();
             return otherEnd;
@@ -439,14 +439,12 @@ namespace System.Data.Common.Utils
 
             //find EntitySetMappings where one of the mapping fragment maps some type to the given table
             return containerMapping
-                .EntitySetMaps.Where(
-                    map =>
-                        map.TypeMappings.Any(
-                            typeMap =>
-                                typeMap.MappingFragments.Any(
-                                    mappingFrag => mappingFrag.TableSet.EdmEquals(table)
-                                )
+                .EntitySetMaps.Where(map =>
+                    map.TypeMappings.Any(typeMap =>
+                        typeMap.MappingFragments.Any(mappingFrag =>
+                            mappingFrag.TableSet.EdmEquals(table)
                         )
+                    )
                 )
                 .Select(m => m.Set)
                 .Cast<EntitySet>()
@@ -664,9 +662,10 @@ namespace System.Data.Common.Utils
             HashSet<Pair<EdmMember, EntityType>> thisEndKeys = new HashSet<
                 Pair<EdmMember, EntityType>
             >(
-                thisEndsEntityType.KeyMembers.Select(
-                    edmMember => new Pair<EdmMember, EntityType>(edmMember, thisEndsEntityType)
-                )
+                thisEndsEntityType.KeyMembers.Select(edmMember => new Pair<EdmMember, EntityType>(
+                    edmMember,
+                    thisEndsEntityType
+                ))
             );
 
             foreach (ReferentialConstraint constraint in assocType.ReferentialConstraints)

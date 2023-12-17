@@ -23,10 +23,9 @@ public abstract class StoreValueGenerationSqlServerFixtureBase : StoreValueGener
         var helper = context.GetService<ISqlGenerationHelper>();
         var tables = context
             .Model.GetEntityTypes()
-            .SelectMany(
-                e =>
-                    e.GetTableMappings()
-                        .Select(m => helper.DelimitIdentifier(m.Table.Name, m.Table.Schema))
+            .SelectMany(e =>
+                e.GetTableMappings()
+                    .Select(m => helper.DelimitIdentifier(m.Table.Name, m.Table.Schema))
             );
 
         foreach (var table in tables)

@@ -159,7 +159,9 @@ namespace System.Net.Security.Tests
                         {
                             // Invoke tests that'll cause some events to be generated
                             var test = new SslStreamStreamToStreamTest_Async();
-                            await test.SslStream_ServerLocalCertificateSelectionCallbackReturnsNull_Throw();
+                            await test.SslStream_ServerLocalCertificateSelectionCallbackReturnsNull_Throw(
+
+                            );
                             await WaitForEventCountersAsync(events);
                         }
                     );
@@ -304,8 +306,8 @@ namespace System.Net.Security.Tests
 
             double[] allHandshakeDurations = eventCounters["all-tls-handshake-duration"];
             double[][] tlsHandshakeDurations = eventCounters
-                .Where(
-                    pair => pair.Key.StartsWith("tls") && pair.Key.EndsWith("-handshake-duration")
+                .Where(pair =>
+                    pair.Key.StartsWith("tls") && pair.Key.EndsWith("-handshake-duration")
                 )
                 .Select(pair => pair.Value)
                 .ToArray();

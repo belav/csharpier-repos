@@ -458,10 +458,9 @@ public class SkipCollectionEntryTest
 
         var joinEntity = context
             .ChangeTracker.Entries<Dictionary<string, object>>()
-            .Single(
-                e =>
-                    e.Property<int>("CherryId").CurrentValue == 1
-                    && e.Property<int>("ChunkyId").CurrentValue == 2
+            .Single(e =>
+                e.Property<int>("CherryId").CurrentValue == 1
+                && e.Property<int>("ChunkyId").CurrentValue == 2
             )
             .Entity;
 
@@ -541,10 +540,9 @@ public class SkipCollectionEntryTest
 
         var joinEntity = context
             .ChangeTracker.Entries<Dictionary<string, object>>()
-            .Single(
-                e =>
-                    e.Property<int>("CherryId").CurrentValue == 1
-                    && e.Property<int>("ChunkyId").CurrentValue == 2
+            .Single(e =>
+                e.Property<int>("CherryId").CurrentValue == 1
+                && e.Property<int>("ChunkyId").CurrentValue == 2
             )
             .Entity;
 

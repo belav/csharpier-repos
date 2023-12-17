@@ -22,7 +22,8 @@ namespace System.Reflection.Runtime.Dispensers
         //   The key cannot be a value type.
         //   Keys are compared using Object.ReferenceEquals.
         //
-        public static readonly DispenserAlgorithm ReuseAsLongAsKeyIsAlive =
-            new DispenserAlgorithm();
+        public static readonly DispenserAlgorithm ReuseAsLongAsKeyIsAlive = new DispenserAlgorithm(
+
+        );
     }
 }

@@ -365,9 +365,10 @@ namespace Microsoft.CodeAnalysis
                     // the generator is initialized, but we need to reparse the post-init trees as the parse options have changed
                     var reparsedInitSources = ParseAdditionalSources(
                         sourceGenerator,
-                        generatorState.PostInitTrees.SelectAsArray(
-                            t => new GeneratedSourceText(t.HintName, t.Text)
-                        ),
+                        generatorState.PostInitTrees.SelectAsArray(t => new GeneratedSourceText(
+                            t.HintName,
+                            t.Text
+                        )),
                         cancellationToken
                     );
                     generatorState = new GeneratorState(
@@ -677,14 +678,13 @@ namespace Microsoft.CodeAnalysis
             string sourceExtension
         )
         {
-            return generators.SelectAsArray(
-                g =>
-                    g switch
-                    {
-                        IncrementalGeneratorWrapper igw => igw.Generator,
-                        IIncrementalGenerator ig => ig,
-                        _ => new SourceGeneratorAdaptor(g, sourceExtension)
-                    }
+            return generators.SelectAsArray(g =>
+                g switch
+                {
+                    IncrementalGeneratorWrapper igw => igw.Generator,
+                    IIncrementalGenerator ig => ig,
+                    _ => new SourceGeneratorAdaptor(g, sourceExtension)
+                }
             );
         }
 

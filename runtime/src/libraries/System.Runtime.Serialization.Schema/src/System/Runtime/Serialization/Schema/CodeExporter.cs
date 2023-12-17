@@ -2660,8 +2660,9 @@ namespace System.Runtime.Serialization
                 );
 
                 //Generates: SerializationEntry entry = enumerator.Current;
-                CodeVariableDeclarationStatement getCurrent =
-                    new CodeVariableDeclarationStatement();
+                CodeVariableDeclarationStatement getCurrent = new CodeVariableDeclarationStatement(
+
+                );
                 getCurrent.Type = GetCodeTypeReference(typeof(SerializationEntry));
                 getCurrent.Name = ImportGlobals.SerializationEntryFieldName;
                 getCurrent.InitExpression = new CodePropertyReferenceExpression(

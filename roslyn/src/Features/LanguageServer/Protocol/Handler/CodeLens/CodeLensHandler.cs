@@ -162,8 +162,7 @@ internal sealed class CodeLensHandler
 
         // Find any test container members based on the test method members we found (e.g. find the class containing the test methods).
         var testContainerNodes = testMethodMembers.Select(member => member.Node.Parent);
-        var testContainerMembers = members.Where(
-            member => testContainerNodes.Contains(member.Node)
+        var testContainerMembers = members.Where(member => testContainerNodes.Contains(member.Node)
         );
 
         // Create code lenses for all test methods.

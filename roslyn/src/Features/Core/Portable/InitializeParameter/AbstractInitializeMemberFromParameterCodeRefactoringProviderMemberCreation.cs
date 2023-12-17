@@ -251,11 +251,11 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             if (parameters.Length < 2)
                 return default;
 
-            var fields = parameters.SelectAsArray(
-                p => (ISymbol)CreateField(p, accessibilityModifiersRequired, rules)
+            var fields = parameters.SelectAsArray(p =>
+                (ISymbol)CreateField(p, accessibilityModifiersRequired, rules)
             );
-            var properties = parameters.SelectAsArray(
-                p => (ISymbol)CreateProperty(p, accessibilityModifiersRequired, rules)
+            var properties = parameters.SelectAsArray(p =>
+                (ISymbol)CreateProperty(p, accessibilityModifiersRequired, rules)
             );
 
             var allFieldsAction = CodeAction.Create(

@@ -271,8 +271,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
 
         IModel? model = null;
         var migrations = Dependencies
-            .MigrationsAssembly.Migrations.Select(
-                m => Dependencies.MigrationsAssembly.CreateMigration(m.Value, _activeProvider)
+            .MigrationsAssembly.Migrations.Select(m =>
+                Dependencies.MigrationsAssembly.CreateMigration(m.Value, _activeProvider)
             )
             .ToList();
         if (migrations.Count != 0)
@@ -294,12 +294,11 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 {
                     applied = Dependencies
                         .HistoryRepository.GetAppliedMigrations()
-                        .Any(
-                            e =>
-                                e.MigrationId.Equals(
-                                    migration.GetId(),
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                        .Any(e =>
+                            e.MigrationId.Equals(
+                                migration.GetId(),
+                                StringComparison.OrdinalIgnoreCase
+                            )
                         );
                 }
                 catch (Exception ex) when (force)

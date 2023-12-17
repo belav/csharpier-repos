@@ -178,7 +178,9 @@ namespace System.Web.Http
                     .ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
                     .Any()
                 || actionContext
-                    .ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
+                    .ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>(
+
+                    )
                     .Any();
         }
 

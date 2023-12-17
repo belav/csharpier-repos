@@ -346,17 +346,15 @@ namespace System.CommandLine.Tests
 
             result
                 .CommandResult.Children.Should()
-                .ContainSingle(
-                    o =>
-                        ((OptionResult)o).Option.Name == "--inner1"
-                        && o.Tokens.Single().Value == "argument1"
+                .ContainSingle(o =>
+                    ((OptionResult)o).Option.Name == "--inner1"
+                    && o.Tokens.Single().Value == "argument1"
                 );
             result
                 .CommandResult.Children.Should()
-                .ContainSingle(
-                    o =>
-                        ((OptionResult)o).Option.Name == "--inner2"
-                        && o.Tokens.Single().Value == "argument2"
+                .ContainSingle(o =>
+                    ((OptionResult)o).Option.Name == "--inner2"
+                    && o.Tokens.Single().Value == "argument2"
                 );
         }
 

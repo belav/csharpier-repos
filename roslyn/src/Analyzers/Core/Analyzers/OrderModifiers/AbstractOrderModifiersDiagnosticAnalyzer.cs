@@ -46,11 +46,10 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context) =>
-            context.RegisterCompilationStartAction(
-                context =>
-                    context.RegisterSyntaxTreeAction(
-                        treeContext => AnalyzeSyntaxTree(treeContext, context.Compilation.Options)
-                    )
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeSyntaxTree(treeContext, context.Compilation.Options)
+                )
             );
 
         protected abstract CodeStyleOption2<string> GetPreferredOrderStyle(

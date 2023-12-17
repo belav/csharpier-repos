@@ -253,17 +253,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             var syntaxFacts = project.GetRequiredLanguageService<ISyntaxFactsService>();
             var comparer = syntaxFacts.StringComparer;
 
-            var streams = project.Documents.SelectAsArray(
-                d =>
-                    GetSourceLocationsInProcessAsync(
-                        d,
-                        comparer,
-                        container,
-                        symbolName,
-                        symbolArity,
-                        query,
-                        cancellationToken
-                    )
+            var streams = project.Documents.SelectAsArray(d =>
+                GetSourceLocationsInProcessAsync(
+                    d,
+                    comparer,
+                    container,
+                    symbolName,
+                    symbolArity,
+                    query,
+                    cancellationToken
+                )
             );
             return streams.MergeAsync(cancellationToken);
         }

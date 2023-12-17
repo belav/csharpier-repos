@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
         )
         {
             var service =
-                document.GetRequiredLanguageService<CodeAnalysis.NavigationBar.INavigationBarItemService>();
+                document.GetRequiredLanguageService<CodeAnalysis.NavigationBar.INavigationBarItemService>(
+
+                );
             var items = await service
                 .GetItemsAsync(
                     document,
@@ -51,8 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            return items.SelectAsArray(
-                v => (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v)
+            return items.SelectAsArray(v =>
+                (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v)
             );
         }
 

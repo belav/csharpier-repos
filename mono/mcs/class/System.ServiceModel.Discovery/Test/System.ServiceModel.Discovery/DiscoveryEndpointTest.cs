@@ -54,31 +54,25 @@ namespace MonoTests.System.ServiceModel.Discovery
             );
             Assert.AreEqual("DiscoveryProxy", cd.Name, "#11-3");
             Assert.AreEqual(2, cd.Operations.Count, "#11-4");
-            var oper = cd.Operations.FirstOrDefault(
-                od =>
-                    !od.IsOneWay
-                    && od.Messages.Any(
-                        md =>
-                            md.Action
-                            == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01/Probe"
-                    )
+            var oper = cd.Operations.FirstOrDefault(od =>
+                !od.IsOneWay
+                && od.Messages.Any(md =>
+                    md.Action == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01/Probe"
+                )
             );
             Assert.IsNotNull(oper, "#11-5");
             Assert.IsNotNull(
-                oper.Messages.Any(
-                    md => md.Body.ReturnValue != null && md.Body.ReturnValue.Type == typeof(void)
+                oper.Messages.Any(md =>
+                    md.Body.ReturnValue != null && md.Body.ReturnValue.Type == typeof(void)
                 ),
                 "#11-5-2"
             ); // return type is void
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od =>
-                        !od.IsOneWay
-                        && od.Messages.Any(
-                            md =>
-                                md.Action
-                                == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01/Resolve"
-                        )
+                cd.Operations.Any(od =>
+                    !od.IsOneWay
+                    && od.Messages.Any(md =>
+                        md.Action == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01/Resolve"
+                    )
                 ),
                 "#11-6"
             );
@@ -109,62 +103,49 @@ namespace MonoTests.System.ServiceModel.Discovery
             Assert.AreEqual("TargetService", cd.Name, "#11-3");
             Assert.AreEqual(5, cd.Operations.Count, "#11-4");
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od =>
-                        od.IsOneWay
-                        && od.Messages.Any(
-                            md =>
-                                md.Action
-                                == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/Probe"
-                        )
+                cd.Operations.Any(od =>
+                    od.IsOneWay
+                    && od.Messages.Any(md =>
+                        md.Action == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/Probe"
+                    )
                 ),
                 "#11-5"
             );
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od =>
-                        od.IsOneWay
-                        && od.Messages.Any(
-                            md =>
-                                md.Action
-                                == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/Resolve"
-                        )
+                cd.Operations.Any(od =>
+                    od.IsOneWay
+                    && od.Messages.Any(md =>
+                        md.Action == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/Resolve"
+                    )
                 ),
                 "#11-6"
             );
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od =>
-                        od.IsOneWay
-                        && od.Messages.Any(
-                            md =>
-                                md.Action
-                                == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/ProbeMatches"
-                        )
+                cd.Operations.Any(od =>
+                    od.IsOneWay
+                    && od.Messages.Any(md =>
+                        md.Action
+                        == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/ProbeMatches"
+                    )
                 ),
                 "#11-7"
             );
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od =>
-                        od.IsOneWay
-                        && od.Messages.Any(
-                            md =>
-                                md.Action
-                                == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/ResolveMatches"
-                        )
+                cd.Operations.Any(od =>
+                    od.IsOneWay
+                    && od.Messages.Any(md =>
+                        md.Action
+                        == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/ResolveMatches"
+                    )
                 ),
                 "#11-8"
             );
             Assert.IsTrue(
-                cd.Operations.Any(
-                    od =>
-                        od.IsOneWay
-                        && od.Messages.Any(
-                            md =>
-                                md.Action
-                                == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/Hello"
-                        )
+                cd.Operations.Any(od =>
+                    od.IsOneWay
+                    && od.Messages.Any(md =>
+                        md.Action == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09/Hello"
+                    )
                 ),
                 "#11-9"
             );

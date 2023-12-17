@@ -174,13 +174,8 @@ namespace Grpc.Testing
                 // Get grpc-encoding from HttpContext instead
                 var encoding = context
                     .GetHttpContext()
-                    .Request.Headers.SingleOrDefault(
-                        h =>
-                            string.Equals(
-                                h.Key,
-                                "grpc-encoding",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                    .Request.Headers.SingleOrDefault(h =>
+                        string.Equals(h.Key, "grpc-encoding", StringComparison.OrdinalIgnoreCase)
                     )
                     .Value.SingleOrDefault();
                 if (expectCompressed.Value)

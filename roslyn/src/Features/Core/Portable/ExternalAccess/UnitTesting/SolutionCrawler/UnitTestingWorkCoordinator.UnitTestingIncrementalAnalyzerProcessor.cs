@@ -106,7 +106,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                     // event and worker queues
                     _documentTracker =
-                        _registration.Services.GetRequiredService<IUnitTestingDocumentTrackingService>();
+                        _registration.Services.GetRequiredService<IUnitTestingDocumentTrackingService>(
+
+                        );
 
                     var globalNotificationService = _registration
                         .Services.ExportProvider.GetExports<IGlobalOperationNotificationService>()
@@ -565,8 +567,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             ._normalPriorityProcessor.GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
 
-                        var projectItems = items.Select(
-                            i => i.ToProjectWorkItem(EmptyAsyncToken.Instance)
+                        var projectItems = items.Select(i =>
+                            i.ToProjectWorkItem(EmptyAsyncToken.Instance)
                         );
                         _incrementalAnalyzerProcessor
                             ._lowPriorityProcessor.GetTestAccessor()

@@ -71,12 +71,11 @@ public abstract class SharedTypeQueryRelationalTestBase : SharedTypeQueryTestBas
             base.OnModelCreating(modelBuilder);
             modelBuilder
                 .Entity<ViewQuery24601>()
-                .HasQueryFilter(
-                    e =>
-                        Set<Dictionary<string, object>>("STET")
-                            .FromSqlRaw("Select * from STET")
-                            .Select(i => (string)i["Value"])
-                            .Contains(e.Value)
+                .HasQueryFilter(e =>
+                    Set<Dictionary<string, object>>("STET")
+                        .FromSqlRaw("Select * from STET")
+                        .Select(i => (string)i["Value"])
+                        .Contains(e.Value)
                 );
         }
     }

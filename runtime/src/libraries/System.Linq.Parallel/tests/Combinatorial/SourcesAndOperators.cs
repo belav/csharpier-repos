@@ -337,12 +337,11 @@ namespace System.Linq.Parallel.Tests
                     "SelectMany",
                     (start, count, source) =>
                         source(0, (count - 1) / CountFactor + 1)
-                            .SelectMany(
-                                x =>
-                                    Enumerable.Range(
-                                        start + x * CountFactor,
-                                        Math.Min(CountFactor, count - x * CountFactor)
-                                    )
+                            .SelectMany(x =>
+                                Enumerable.Range(
+                                    start + x * CountFactor,
+                                    Math.Min(CountFactor, count - x * CountFactor)
+                                )
                             )
                 )
             };
@@ -1063,13 +1062,12 @@ namespace System.Linq.Parallel.Tests
                 // For most, only the ordering of the first query is important
                 foreach (
                     Labeled<Operation> operation in BinaryOperatorSources(LabeledDefaultSource)
-                        .Where(
-                            op =>
-                                !(
-                                    op.ToString().StartsWith("Union")
-                                    || op.ToString().StartsWith("Zip")
-                                    || op.ToString().StartsWith("Concat")
-                                ) && op.ToString().Contains("Right")
+                        .Where(op =>
+                            !(
+                                op.ToString().StartsWith("Union")
+                                || op.ToString().StartsWith("Zip")
+                                || op.ToString().StartsWith("Concat")
+                            ) && op.ToString().Contains("Right")
                         )
                 )
                 {
@@ -1079,10 +1077,8 @@ namespace System.Linq.Parallel.Tests
                 // For Concat and Union, both sources must be ordered
                 foreach (
                     var operation in BinaryOperatorSources(RangeSources().First())
-                        .Where(
-                            op =>
-                                op.ToString().StartsWith("Concat")
-                                || op.ToString().StartsWith("Union")
+                        .Where(op =>
+                            op.ToString().StartsWith("Concat") || op.ToString().StartsWith("Union")
                         )
                 )
                 {

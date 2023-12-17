@@ -74,8 +74,8 @@ public class MvcLocalizationServicesTest
     )
     {
         var matches = services
-            .Where(
-                sd => sd.ServiceType == serviceType && sd.ImplementationType == implementationType
+            .Where(sd =>
+                sd.ServiceType == serviceType && sd.ImplementationType == implementationType
             )
             .ToArray();
 

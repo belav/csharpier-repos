@@ -711,8 +711,8 @@ namespace System.Text.RegularExpressions.Tests
             UnicodeCategory[] categories
         )
         {
-            HashSet<char> categoryInclusions = ComputeIncludedSet(
-                c => Array.IndexOf(categories, char.GetUnicodeCategory(c)) >= 0
+            HashSet<char> categoryInclusions = ComputeIncludedSet(c =>
+                Array.IndexOf(categories, char.GetUnicodeCategory(c)) >= 0
             );
             await ValidateSetAsync(engine, $"[{set}]", RegexOptions.None, categoryInclusions, null);
             await ValidateSetAsync(
@@ -1432,8 +1432,8 @@ namespace System.Text.RegularExpressions.Tests
             Regex r;
 
             char[] allChars = Enumerable.Range(0, char.MaxValue + 1).Select(i => (char)i).ToArray();
-            int expectedInCategory = allChars.Count(
-                c => Array.IndexOf(unicodeCategory, char.GetUnicodeCategory(c)) >= 0
+            int expectedInCategory = allChars.Count(c =>
+                Array.IndexOf(unicodeCategory, char.GetUnicodeCategory(c)) >= 0
             );
             int expectedNotInCategory = allChars.Length - expectedInCategory;
 

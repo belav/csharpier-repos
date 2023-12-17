@@ -37,7 +37,9 @@ public static class ListenOptionsConnectionLoggingExtensions
     )
     {
         var loggerFactory =
-            listenOptions.KestrelServerOptions.ApplicationServices.GetRequiredService<ILoggerFactory>();
+            listenOptions.KestrelServerOptions.ApplicationServices.GetRequiredService<ILoggerFactory>(
+
+            );
         var logger =
             loggerName == null
                 ? loggerFactory.CreateLogger<LoggingConnectionMiddleware>()
@@ -46,8 +48,8 @@ public static class ListenOptionsConnectionLoggingExtensions
         listenOptions.Use(next => new LoggingConnectionMiddleware(next, logger).OnConnectionAsync);
 
         IMultiplexedConnectionBuilder multiplexedConnectionBuilder = listenOptions;
-        multiplexedConnectionBuilder.Use(
-            next => new LoggingMultiplexedConnectionMiddleware(next, logger).OnConnectionAsync
+        multiplexedConnectionBuilder.Use(next =>
+            new LoggingMultiplexedConnectionMiddleware(next, logger).OnConnectionAsync
         );
 
         return listenOptions;

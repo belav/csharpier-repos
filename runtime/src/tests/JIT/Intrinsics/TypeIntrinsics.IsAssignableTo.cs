@@ -265,10 +265,9 @@ public partial class Program
             IsAssignableTo<KeyValuePair<IDisposable, object>, KeyValuePair<IDisposable, int>>()
         );
         IsFalse(
-            IsAssignableTo<
-                IDictionary<IDisposable, object>,
-                IDictionary<IDisposable, IDisposable>
-            >()
+            IsAssignableTo<IDictionary<IDisposable, object>, IDictionary<IDisposable, IDisposable>>(
+
+            )
         );
         IsFalse(IsAssignableTo<IDictionary<IDisposable, object>, IDictionary<IDisposable, int>>());
         IsFalse(

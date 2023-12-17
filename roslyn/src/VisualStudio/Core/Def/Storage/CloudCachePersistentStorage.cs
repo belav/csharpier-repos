@@ -61,11 +61,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
             : base(workingFolderPath, relativePathBase, databaseFilePath)
         {
             _cacheService = cacheService;
-            _projectToContainerKeyCacheCallback = ps =>
-                new ProjectContainerKeyCache(
-                    relativePathBase,
-                    ProjectKey.ToProjectKey(solutionKey, ps)
-                );
+            _projectToContainerKeyCacheCallback = ps => new ProjectContainerKeyCache(
+                relativePathBase,
+                ProjectKey.ToProjectKey(solutionKey, ps)
+            );
         }
 
         public sealed override void Dispose() => (_cacheService as IDisposable)?.Dispose();

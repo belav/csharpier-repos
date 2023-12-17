@@ -260,8 +260,8 @@ public class When_throwing_NRE_from_MapFrom_value_types : AutoMapperSpecBase
                 .ForMember(
                     x => x.SubModelId,
                     opts =>
-                        opts.MapFrom(
-                            src => src.SubModels.FirstOrDefault().SubSubModels.FirstOrDefault().Id
+                        opts.MapFrom(src =>
+                            src.SubModels.FirstOrDefault().SubSubModels.FirstOrDefault().Id
                         )
                 );
         });
@@ -319,10 +319,8 @@ public class When_using_value_with_mismatched_properties : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>()
-                    .ForMember(d => d.Value, o => o.MapFrom(src => _guid))
+        new(c =>
+            c.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(src => _guid))
         );
 
     protected override void Because_of()
@@ -353,10 +351,8 @@ public class When_custom_resolving_mismatched_properties : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>()
-                    .ForMember(d => d.Value, o => o.MapFrom<Resolver>())
+        new(c =>
+            c.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom<Resolver>())
         );
 
     class Resolver : IValueResolver<Source, Destination, Guid>
@@ -391,20 +387,19 @@ public class When_resolve_throws : NonValidatingSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>()
-                    .ForMember(
-                        d => d.Value,
-                        o =>
-                            o.MapFrom(
-                                (s, d) =>
-                                {
-                                    Throw();
-                                    return 0;
-                                }
-                            )
-                    )
+        new(c =>
+            c.CreateMap<Source, Destination>()
+                .ForMember(
+                    d => d.Value,
+                    o =>
+                        o.MapFrom(
+                            (s, d) =>
+                            {
+                                Throw();
+                                return 0;
+                            }
+                        )
+                )
         );
 
     private void Throw()
@@ -520,10 +515,9 @@ public class When_mapping_from_object_to_string_with_use_value : AutoMapperSpecB
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>()
-                    .ForMember(d => d.Value, o => o.MapFrom(src => new object()))
+        new(c =>
+            c.CreateMap<Source, Destination>()
+                .ForMember(d => d.Value, o => o.MapFrom(src => new object()))
         );
 
     protected override void Because_of()
@@ -553,10 +547,9 @@ public class When_mapping_from_object_to_string : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Source, Destination>()
-                    .ForMember(d => d.Value, o => o.MapFrom(s => s.ObjectValue))
+        new(c =>
+            c.CreateMap<Source, Destination>()
+                .ForMember(d => d.Value, o => o.MapFrom(s => s.ObjectValue))
         );
 
     protected override void Because_of()
@@ -929,10 +922,9 @@ public class When_specifying_a_custom_translator
     [Fact]
     public void Should_use_the_custom_translator()
     {
-        var config = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<Source, Destination>()
-                    .ConvertUsing(s => new Destination { Value = s.Value + 10 })
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>()
+                .ConvertUsing(s => new Destination { Value = s.Value + 10 })
         );
 
         _dest = config.CreateMapper().Map<Source, Destination>(_source);
@@ -942,11 +934,10 @@ public class When_specifying_a_custom_translator
     [Fact]
     public void Should_ignore_other_mapping_rules()
     {
-        var config = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<Source, Destination>()
-                    .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.AnotherValue))
-                    .ConvertUsing(s => new Destination { Value = s.Value + 10 })
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.AnotherValue))
+                .ConvertUsing(s => new Destination { Value = s.Value + 10 })
         );
 
         _dest = config.CreateMapper().Map<Source, Destination>(_source);
@@ -978,10 +969,9 @@ public class When_specifying_a_custom_translator_using_projection
     [Fact]
     public void Should_use_the_custom_translator()
     {
-        var config = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<Source, Destination>()
-                    .ConvertUsing(s => new Destination { Value = s.Value + 10 })
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>()
+                .ConvertUsing(s => new Destination { Value = s.Value + 10 })
         );
 
         _dest = config.CreateMapper().Map<Source, Destination>(_source);
@@ -991,11 +981,10 @@ public class When_specifying_a_custom_translator_using_projection
     [Fact]
     public void Should_ignore_other_mapping_rules()
     {
-        var config = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<Source, Destination>()
-                    .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.AnotherValue))
-                    .ConvertUsing(s => new Destination { Value = s.Value + 10 })
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.AnotherValue))
+                .ConvertUsing(s => new Destination { Value = s.Value + 10 })
         );
 
         _dest = config.CreateMapper().Map<Source, Destination>(_source);
@@ -1029,10 +1018,9 @@ public class When_specifying_a_custom_translator_and_passing_in_the_destination_
     [Fact]
     public void Should_resolve_to_the_destination_object_from_the_custom_translator()
     {
-        var config = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<Source, Destination>()
-                    .ConvertUsing(s => new Destination { Value = s.Value + 10 })
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>()
+                .ConvertUsing(s => new Destination { Value = s.Value + 10 })
         );
 
         _dest = config.CreateMapper().Map(_source, _dest);
@@ -1042,11 +1030,10 @@ public class When_specifying_a_custom_translator_and_passing_in_the_destination_
     [Fact]
     public void Should_ignore_other_mapping_rules()
     {
-        var config = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<Source, Destination>()
-                    .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.AnotherValue))
-                    .ConvertUsing(s => new Destination { Value = s.Value + 10 })
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.AnotherValue))
+                .ConvertUsing(s => new Destination { Value = s.Value + 10 })
         );
 
         _dest = config.CreateMapper().Map(_source, _dest);
@@ -1090,8 +1077,8 @@ public class When_specifying_a_custom_translator_using_generics
     [Fact]
     public void Should_use_the_custom_translator()
     {
-        var config = new MapperConfiguration(
-            cfg => cfg.CreateMap<Source, Destination>().ConvertUsing<Converter>()
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>().ConvertUsing<Converter>()
         );
 
         _dest = config.CreateMapper().Map<Source, Destination>(_source);
@@ -1101,11 +1088,10 @@ public class When_specifying_a_custom_translator_using_generics
     [Fact]
     public void Should_ignore_other_mapping_rules()
     {
-        var config = new MapperConfiguration(
-            cfg =>
-                cfg.CreateMap<Source, Destination>()
-                    .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.AnotherValue))
-                    .ConvertUsing(s => new Destination { Value = s.Value + 10 })
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.AnotherValue))
+                .ConvertUsing(s => new Destination { Value = s.Value + 10 })
         );
 
         _dest = config.CreateMapper().Map<Source, Destination>(_source);
@@ -1452,10 +1438,9 @@ public class When_specifying_a_custom_member_mapping_to_a_nested_object
     {
         typeof(ArgumentException).ShouldBeThrownBy(() =>
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(dest => dest.Dest.Value, opt => opt.MapFrom(src => src.Value))
+            var config = new MapperConfiguration(cfg =>
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(dest => dest.Dest.Value, opt => opt.MapFrom(src => src.Value))
             );
         });
     }
@@ -1748,10 +1733,8 @@ public class When_building_custom_configuration_mapping_to_itself
     {
         try
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                    cfg.CreateMap<Source, Dest>()
-                        .ForMember(dest => dest, opt => opt.MapFrom(src => 5))
+            var config = new MapperConfiguration(cfg =>
+                cfg.CreateMap<Source, Dest>().ForMember(dest => dest, opt => opt.MapFrom(src => 5))
             );
         }
         catch (Exception e)

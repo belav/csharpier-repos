@@ -493,8 +493,8 @@ namespace System.Data.Mapping.ViewGeneration
             if (!m_queryRewriterCache.TryGetValue(extent, out queryRewriter))
             {
                 // collect the cells that belong to this extent (just a few of them since we segment the mapping first)
-                var cellsForExtent = m_cellGroup.Where(
-                    c => c.GetLeftQuery(viewTarget).Extent == extent
+                var cellsForExtent = m_cellGroup.Where(c =>
+                    c.GetLeftQuery(viewTarget).Extent == extent
                 );
 
                 return new ViewgenContext(

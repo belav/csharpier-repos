@@ -96,8 +96,7 @@ namespace DebuggerTests.AsyncTests
                         });
                     Console.WriteLine("done with this continueWith");
                     await Task.Delay(300)
-                        .ContinueWith(
-                            t2 => Console.WriteLine($"t2: {t2.Status}, str: {str}, {dt0}")
+                        .ContinueWith(t2 => Console.WriteLine($"t2: {t2.Status}, str: {str}, {dt0}")
                         );
                 });
             Console.WriteLine($"done with this method");

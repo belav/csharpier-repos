@@ -204,8 +204,9 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class ValueTypeCopyInstruction : Instruction
     {
-        public static readonly ValueTypeCopyInstruction Instruction =
-            new ValueTypeCopyInstruction();
+        public static readonly ValueTypeCopyInstruction Instruction = new ValueTypeCopyInstruction(
+
+        );
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;

@@ -91,18 +91,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 method.ExplicitInterfaceImplementations,
                 method.Name,
                 updatedTypeParameters,
-                method.Parameters.SelectAsArray(
-                    p =>
-                        CodeGenerationSymbolFactory.CreateParameterSymbol(
-                            p.GetAttributes(),
-                            p.RefKind,
-                            p.IsParams,
-                            p.Type.SubstituteTypes(mapping, typeGenerator),
-                            p.Name,
-                            p.IsOptional,
-                            p.HasExplicitDefaultValue,
-                            p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
-                        )
+                method.Parameters.SelectAsArray(p =>
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        p.GetAttributes(),
+                        p.RefKind,
+                        p.IsParams,
+                        p.Type.SubstituteTypes(mapping, typeGenerator),
+                        p.Name,
+                        p.IsOptional,
+                        p.HasExplicitDefaultValue,
+                        p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
+                    )
                 )
             );
         }

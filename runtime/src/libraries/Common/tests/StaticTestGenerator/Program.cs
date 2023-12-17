@@ -185,11 +185,8 @@ namespace StaticTestGenerator
                     if (test.Values != null)
                     {
                         if (
-                            !test.Values.All(
-                                v =>
-                                    v == null
-                                    || (v is Type t && IsPublic(t))
-                                    || IsPublic(v.GetType())
+                            !test.Values.All(v =>
+                                v == null || (v is Type t && IsPublic(t)) || IsPublic(v.GetType())
                             )
                         )
                         {
@@ -549,8 +546,8 @@ namespace StaticTestGenerator
                                     if (
                                         !attrType.IsPublic
                                         || !cad.Constructor.IsPublic
-                                        || !cad.ConstructorArguments.All(
-                                            c => c.ArgumentType.IsPublic
+                                        || !cad.ConstructorArguments.All(c =>
+                                            c.ArgumentType.IsPublic
                                         )
                                     )
                                     {

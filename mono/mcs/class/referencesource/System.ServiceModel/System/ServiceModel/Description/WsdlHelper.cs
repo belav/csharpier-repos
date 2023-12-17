@@ -308,8 +308,8 @@ namespace System.ServiceModel.Description
 
         private static void VerifyContractNamespace(List<WsdlNS.ServiceDescription> wsdls)
         {
-            IEnumerable<WsdlNS.ServiceDescription> contractWsdls = wsdls.Where(
-                serviceDescription => serviceDescription.PortTypes.Count > 0
+            IEnumerable<WsdlNS.ServiceDescription> contractWsdls = wsdls.Where(serviceDescription =>
+                serviceDescription.PortTypes.Count > 0
             );
             if (contractWsdls.Count() > 1)
             {

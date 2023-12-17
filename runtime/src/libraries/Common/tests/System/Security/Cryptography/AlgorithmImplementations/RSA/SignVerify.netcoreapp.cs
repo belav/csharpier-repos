@@ -122,11 +122,10 @@ namespace System.Security.Cryptography.Rsa.Tests
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
         ) =>
-            TryWithOutputArray(
-                dest =>
-                    rsa.TrySignData(data, dest, hashAlgorithm, padding, out int bytesWritten)
-                        ? (true, bytesWritten)
-                        : (false, 0)
+            TryWithOutputArray(dest =>
+                rsa.TrySignData(data, dest, hashAlgorithm, padding, out int bytesWritten)
+                    ? (true, bytesWritten)
+                    : (false, 0)
             );
 
         protected override byte[] SignHash(
@@ -135,11 +134,10 @@ namespace System.Security.Cryptography.Rsa.Tests
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
         ) =>
-            TryWithOutputArray(
-                dest =>
-                    rsa.TrySignHash(hash, dest, hashAlgorithm, padding, out int bytesWritten)
-                        ? (true, bytesWritten)
-                        : (false, 0)
+            TryWithOutputArray(dest =>
+                rsa.TrySignHash(hash, dest, hashAlgorithm, padding, out int bytesWritten)
+                    ? (true, bytesWritten)
+                    : (false, 0)
             );
 
         protected override bool VerifyData(

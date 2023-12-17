@@ -145,8 +145,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = GetMetadataForType(typeof(Person))
             };
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             object retModel = testableBinder.CreateModelPublic(null, bindingContext);
@@ -222,8 +223,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = GetMetadataForType(typeof(PersonWithBindExclusion))
             };
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             IEnumerable<ModelMetadata> propertyMetadatas =
@@ -256,8 +258,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = GetMetadataForType(typeof(Person))
             };
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             IEnumerable<ModelMetadata> propertyMetadatas =
@@ -412,8 +415,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 new ModelValidationNode(nameProperty, "")
             );
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.ProcessDto(context, bindingContext, dto);
@@ -457,11 +461,12 @@ namespace System.Web.Http.ModelBinding.Binders
                 containerMetadata,
                 containerMetadata.Properties
             );
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
 
-            ModelMetadata propertyMetadata = dto.PropertyMetadata.Single(
-                o => o.PropertyName == "Name"
+            );
+
+            ModelMetadata propertyMetadata = dto.PropertyMetadata.Single(o =>
+                o.PropertyName == "Name"
             );
             dto.Results[propertyMetadata] = new ComplexModelDtoResult(
                 "John Doe",
@@ -515,8 +520,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 containerMetadata,
                 containerMetadata.Properties
             );
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.ProcessDto(context, bindingContext, dto);
@@ -563,12 +569,13 @@ namespace System.Web.Http.ModelBinding.Binders
                 containerMetadata,
                 containerMetadata.Properties
             );
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Make Age valid and City invalid.
-            ModelMetadata propertyMetadata = dto.PropertyMetadata.Single(
-                p => p.PropertyName == "Age"
+            ModelMetadata propertyMetadata = dto.PropertyMetadata.Single(p =>
+                p.PropertyName == "Age"
             );
             dto.Results[propertyMetadata] = new ComplexModelDtoResult(
                 23,
@@ -617,8 +624,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 containerMetadata,
                 containerMetadata.Properties
             );
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.ProcessDto(context, bindingContext, dto);
@@ -658,12 +666,13 @@ namespace System.Web.Http.ModelBinding.Binders
                 containerMetadata,
                 containerMetadata.Properties
             );
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Make ValueTypeRequired invalid.
-            ModelMetadata propertyMetadata = dto.PropertyMetadata.Single(
-                p => p.PropertyName == "ValueTypeRequired"
+            ModelMetadata propertyMetadata = dto.PropertyMetadata.Single(p =>
+                p.PropertyName == "ValueTypeRequired"
             );
             dto.Results[propertyMetadata] = new ComplexModelDtoResult(
                 null,
@@ -708,27 +717,28 @@ namespace System.Web.Http.ModelBinding.Binders
                 containerMetadata.Properties
             );
 
-            ModelMetadata firstNameProperty = dto.PropertyMetadata.Single(
-                o => o.PropertyName == "FirstName"
+            ModelMetadata firstNameProperty = dto.PropertyMetadata.Single(o =>
+                o.PropertyName == "FirstName"
             );
             dto.Results[firstNameProperty] = new ComplexModelDtoResult(
                 "John",
                 new ModelValidationNode(firstNameProperty, "")
             );
-            ModelMetadata lastNameProperty = dto.PropertyMetadata.Single(
-                o => o.PropertyName == "LastName"
+            ModelMetadata lastNameProperty = dto.PropertyMetadata.Single(o =>
+                o.PropertyName == "LastName"
             );
             dto.Results[lastNameProperty] = new ComplexModelDtoResult(
                 "Doe",
                 new ModelValidationNode(lastNameProperty, "")
             );
-            ModelMetadata dobProperty = dto.PropertyMetadata.Single(
-                o => o.PropertyName == "DateOfBirth"
+            ModelMetadata dobProperty = dto.PropertyMetadata.Single(o =>
+                o.PropertyName == "DateOfBirth"
             );
             dto.Results[dobProperty] = null;
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.ProcessDto(context, bindingContext, dto);
@@ -751,8 +761,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = GetMetadataForObject(new Person())
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
-                o => o.PropertyName == "PropertyWithDefaultValue"
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "PropertyWithDefaultValue"
             );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
@@ -765,8 +775,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 .Where(v => v.IsRequired)
                 .FirstOrDefault();
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.SetPropertyPublic(
@@ -792,8 +803,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = GetMetadataForType(typeof(Person))
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
-                o => o.PropertyName == "NonUpdateableProperty"
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "NonUpdateableProperty"
             );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
@@ -802,8 +813,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 validationNode
             );
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.SetPropertyPublic(
@@ -829,8 +841,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = GetMetadataForObject(model)
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
-                o => o.PropertyName == "DateOfBirth"
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "DateOfBirth"
             );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
@@ -842,8 +854,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 .Where(v => v.IsRequired)
                 .FirstOrDefault();
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.SetPropertyPublic(
@@ -871,8 +884,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = GetMetadataForObject(model)
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
-                o => o.PropertyName == "DateOfDeath"
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "DateOfDeath"
             );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
@@ -880,8 +893,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 validationNode
             );
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.SetPropertyPublic(
@@ -911,8 +925,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = GetMetadataForObject(new Person()),
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
-                o => o.PropertyName == "DateOfBirth"
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "DateOfBirth"
             );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
@@ -925,8 +939,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 .Where(v => v.IsRequired)
                 .FirstOrDefault();
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.SetPropertyPublic(
@@ -954,8 +969,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelName = "foo"
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
-                o => o.PropertyName == "ValueTypeRequired"
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "ValueTypeRequired"
             );
             ModelValidationNode validationNode = new ModelValidationNode(
                 propertyMetadata,
@@ -971,8 +986,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 .Where(v => v.IsRequired)
                 .FirstOrDefault();
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.SetPropertyPublic(
@@ -1003,8 +1019,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelName = "foo"
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
-                o => o.PropertyName == "NameNoAttribute"
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "NameNoAttribute"
             );
             ModelValidationNode validationNode = new ModelValidationNode(
                 propertyMetadata,
@@ -1020,8 +1036,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 .Where(v => v.IsRequired)
                 .FirstOrDefault();
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.SetPropertyPublic(
@@ -1054,8 +1071,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelName = "foo"
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
-                o => o.PropertyName == "Name"
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "Name"
             );
             ModelValidationNode validationNode = new ModelValidationNode(
                 propertyMetadata,
@@ -1071,8 +1088,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 .Where(v => v.IsRequired)
                 .FirstOrDefault();
 
-            TestableMutableObjectModelBinder testableBinder =
-                new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder(
+
+            );
 
             // Act
             testableBinder.SetPropertyPublic(

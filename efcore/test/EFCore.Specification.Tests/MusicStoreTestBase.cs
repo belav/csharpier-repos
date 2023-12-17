@@ -101,17 +101,14 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
         var genres = Enumerable
             .Range(1, numberOfGenres)
-            .Select(
-                g =>
-                    new Genre
-                    {
-                        Name = "Genre " + g,
-                        Albums = Enumerable
-                            .Range(1, numberOfAlbums)
-                            .Select(n => new Album { Artist = artist, Title = "Greatest Hits" })
-                            .ToList()
-                    }
-            )
+            .Select(g => new Genre
+            {
+                Name = "Genre " + g,
+                Albums = Enumerable
+                    .Range(1, numberOfAlbums)
+                    .Select(n => new Album { Artist = artist, Title = "Greatest Hits" })
+                    .ToList()
+            })
             .ToList();
 
         context.AddRange(genres);
@@ -164,15 +161,12 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
             var albums = Enumerable
                 .Range(1, 10)
-                .Select(
-                    n =>
-                        new Album
-                        {
-                            Artist = artists[n - 1],
-                            Genre = genres[n - 1],
-                            Title = "Greatest Hits"
-                        }
-                )
+                .Select(n => new Album
+                {
+                    Artist = artists[n - 1],
+                    Genre = genres[n - 1],
+                    Title = "Greatest Hits"
+                })
                 .ToArray();
 
             return albums;
@@ -337,15 +331,12 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
                     var cartItems = Enumerable
                         .Range(1, itemCount)
-                        .Select(
-                            n =>
-                                new CartItem
-                                {
-                                    Album = album,
-                                    Count = 1,
-                                    CartId = cartId
-                                }
-                        )
+                        .Select(n => new CartItem
+                        {
+                            Album = album,
+                            Count = 1,
+                            CartId = cartId
+                        })
                         .ToArray();
 
                     context.AddRange(cartItems);
@@ -529,20 +520,17 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
         var shoppingCartId = "CartId_A";
         var id = 1;
-        var query = context.CartItems.Select(
-            ci =>
-                new CartItem
-                {
-                    CartId = ci.CartId,
-                    CartItemId = ci.CartItemId,
-                    Count = ci.Count,
-                    Album = new Album { Title = ci.Album.Title }
-                }
-        );
+        var query = context.CartItems.Select(ci => new CartItem
+        {
+            CartId = ci.CartId,
+            CartItemId = ci.CartItemId,
+            Count = ci.Count,
+            Album = new Album { Title = ci.Album.Title }
+        });
 
         var cartItem = async
-            ? await query.FirstOrDefaultAsync(
-                ci => ci.CartId == shoppingCartId && ci.CartItemId == id
+            ? await query.FirstOrDefaultAsync(ci =>
+                ci.CartId == shoppingCartId && ci.CartItemId == id
             )
             : query.FirstOrDefault(ci => ci.CartId == shoppingCartId && ci.CartItemId == id);
 
@@ -563,15 +551,12 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
         var cartItems = Enumerable
             .Range(1, numberOfItems)
-            .Select(
-                n =>
-                    new CartItem
-                    {
-                        Count = 1,
-                        CartId = cartId,
-                        Album = albums[n % albums.Length]
-                    }
-            )
+            .Select(n => new CartItem
+            {
+                Count = 1,
+                CartId = cartId,
+                Album = albums[n % albums.Length]
+            })
             .ToArray();
 
         return cartItems;
@@ -580,16 +565,13 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     private static Album[] CreateTestAlbums(decimal itemPrice, Artist artist, Genre genre) =>
         Enumerable
             .Range(1, 10)
-            .Select(
-                n =>
-                    new Album
-                    {
-                        Title = "Greatest Hits",
-                        Price = itemPrice,
-                        Artist = artist,
-                        Genre = genre
-                    }
-            )
+            .Select(n => new Album
+            {
+                Title = "Greatest Hits",
+                Price = itemPrice,
+                Artist = artist,
+                Genre = genre
+            })
             .ToArray();
 
     protected class CartSummaryComponent
@@ -748,8 +730,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         {
             var userName = "RainbowDash";
 
-            var isValid = await context.Orders.AnyAsync(
-                o => o.OrderId == id && o.Username == userName
+            var isValid = await context.Orders.AnyAsync(o =>
+                o.OrderId == id && o.Username == userName
             );
 
             if (isValid)

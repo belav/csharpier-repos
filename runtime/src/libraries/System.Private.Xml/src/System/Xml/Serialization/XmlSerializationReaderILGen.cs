@@ -3058,11 +3058,15 @@ namespace System.Xml.Serialization
                             ilg.Call(XmlSerializationReader_ShrinkArray);
                             ilg.ConvertValue(
                                 XmlSerializationReader_ShrinkArray.ReturnType,
-                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!.MakeArrayType()
+                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!.MakeArrayType(
+
+                                )
                             );
                             WriteSourceEnd(
                                 member.ChoiceSource!,
-                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!.MakeArrayType()
+                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!.MakeArrayType(
+
+                                )
                             );
                         }
                     }

@@ -226,8 +226,8 @@ public class JSComponentInterop
     {
         var callback = jsObjectReference is null
             ? null
-            : new Func<object, Task>(
-                value => jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName, value).AsTask()
+            : new Func<object, Task>(value =>
+                jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName, value).AsTask()
             );
         return Activator.CreateInstance(eventCallbackType, null, callback)!;
     }

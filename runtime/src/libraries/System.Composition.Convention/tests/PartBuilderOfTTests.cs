@@ -428,9 +428,9 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder
                 .ForType<FooImplWithConstructors>()
-                .SelectConstructor(
-                    param => new FooImplWithConstructors(param.Import<IEnumerable<IFoo>>())
-                );
+                .SelectConstructor(param => new FooImplWithConstructors(
+                    param.Import<IEnumerable<IFoo>>()
+                ));
 
             ConstructorInfo selectedConstructor = GetSelectedConstructor(
                 builder,

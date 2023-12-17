@@ -81,8 +81,8 @@ public interface I0 : I1<string>
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                imc1.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
+                imc1.AllInterfacesNoUseSiteDiagnostics.Select(i =>
+                    i.ToTestDisplayString(includeNonNullable: true)
                 )
             );
 
@@ -113,8 +113,8 @@ public class C
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                imc2.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
+                imc2.AllInterfacesNoUseSiteDiagnostics.Select(i =>
+                    i.ToTestDisplayString(includeNonNullable: true)
                 )
             );
         }
@@ -168,8 +168,8 @@ public class C0 : I1<string>
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                lib2_c0.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
+                lib2_c0.AllInterfacesNoUseSiteDiagnostics.Select(i =>
+                    i.ToTestDisplayString(includeNonNullable: true)
                 )
             );
 
@@ -228,8 +228,8 @@ public class C1 : C0
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                lib3_c0.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
+                lib3_c0.AllInterfacesNoUseSiteDiagnostics.Select(i =>
+                    i.ToTestDisplayString(includeNonNullable: true)
                 )
             );
 
@@ -250,16 +250,15 @@ public class C1 : C0
             {
                 if (exists)
                 {
-                    _ = reader.TypeDefinitions.Single(
-                        h => reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                    _ = reader.TypeDefinitions.Single(h =>
+                        reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
                     );
                 }
                 else
                 {
                     Assert.False(
-                        reader.TypeDefinitions.Any(
-                            h =>
-                                reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                        reader.TypeDefinitions.Any(h =>
+                            reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
                         )
                     );
                 }
@@ -377,8 +376,8 @@ public interface I0 : I1<string>
                     "I1<System.String>",
                     "I2<System.String, (System.Object a, System.Object b)>"
                 },
-                imc1.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
+                imc1.AllInterfacesNoUseSiteDiagnostics.Select(i =>
+                    i.ToTestDisplayString(includeNonNullable: true)
                 )
             );
         }
@@ -6416,8 +6415,7 @@ class C
                         .ToArray();
 
                     // Nested tuple
-                    var field = fieldDefs.Single(
-                        f => reader.StringComparer.Equals(f.Name, "Nested")
+                    var field = fieldDefs.Single(f => reader.StringComparer.Equals(f.Name, "Nested")
                     );
                     var customAttributes = field.GetCustomAttributes();
                     AssertAttributes(
@@ -7240,18 +7238,17 @@ System.Object? Program.<Main>g__f|1_1(System.String! s)
             ImmutableArray<CSharpAttributeData> attributes
         )
         {
-            return attributes.Single(
-                a =>
-                    a.AttributeClass.ToTestDisplayString()
-                    == "System.Runtime.CompilerServices.NullableAttribute"
+            return attributes.Single(a =>
+                a.AttributeClass.ToTestDisplayString()
+                == "System.Runtime.CompilerServices.NullableAttribute"
             );
         }
 
         private static TypeDefinition GetTypeDefinitionByName(MetadataReader reader, string name)
         {
             return reader.GetTypeDefinition(
-                reader.TypeDefinitions.Single(
-                    h => reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                reader.TypeDefinitions.Single(h =>
+                    reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
                 )
             );
         }

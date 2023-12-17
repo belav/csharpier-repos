@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     .ConfigureAwait(false);
                 if (
                     unnecessaryImports == null
-                    || unnecessaryImports.Any(
-                        import => import.OverlapsHiddenPosition(cancellationToken)
+                    || unnecessaryImports.Any(import =>
+                        import.OverlapsHiddenPosition(cancellationToken)
                     )
                 )
                 {

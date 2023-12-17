@@ -208,8 +208,8 @@ file class C
                 var solution = workspace.CurrentSolution;
 
                 var bodyProject = solution.Projects.Single(p => p.AssemblyName == "BodyProject");
-                var referenceProject = solution.Projects.Single(
-                    p => p.AssemblyName == "ReferenceProject"
+                var referenceProject = solution.Projects.Single(p =>
+                    p.AssemblyName == "ReferenceProject"
                 );
 
                 var (bodyCompilation, referenceCompilation) = await GetCompilationsAsync(

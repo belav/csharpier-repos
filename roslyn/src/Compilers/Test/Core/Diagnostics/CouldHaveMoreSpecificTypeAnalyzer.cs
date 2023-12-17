@@ -177,7 +177,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         )
                                         {
                                             foreach (
-                                                ILocalSymbol local in multiVariableDeclaration.GetDeclaredVariables()
+                                                ILocalSymbol local in multiVariableDeclaration.GetDeclaredVariables(
+
+                                                )
                                             )
                                             {
                                                 AssignTo(

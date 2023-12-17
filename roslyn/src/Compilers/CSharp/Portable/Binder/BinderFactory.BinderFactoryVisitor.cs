@@ -664,7 +664,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 {
                     foreach (
-                        Symbol sym in sourceMemberContainerTypeSymbol.GetMembersToMatchAgainstDeclarationSpan()
+                        Symbol sym in sourceMemberContainerTypeSymbol.GetMembersToMatchAgainstDeclarationSpan(
+
+                        )
                     )
                     {
                         if (sym.IsAccessor())

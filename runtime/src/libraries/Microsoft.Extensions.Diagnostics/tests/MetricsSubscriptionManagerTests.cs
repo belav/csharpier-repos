@@ -58,8 +58,8 @@ namespace Microsoft.Extensions.Diagnostics.Tests
 
             hostBuilder.ConfigureServices(services =>
             {
-                services.AddMetrics(
-                    metrics => metrics.EnableMetrics("TestMeter").AddListener<TestMetricsListener>()
+                services.AddMetrics(metrics =>
+                    metrics.EnableMetrics("TestMeter").AddListener<TestMetricsListener>()
                 );
             });
 

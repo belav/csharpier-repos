@@ -262,8 +262,8 @@ internal static class SymbolExtensions
         if (parameterSymbol is { ContainingSymbol: IMethodSymbol constructor })
         {
             var constructedType = $"typeof({parameterSymbol.ContainingType.ToDisplayString()})";
-            var parameterTypes = constructor.Parameters.Select(
-                parameter => $"typeof({parameter.Type.ToDisplayString()})"
+            var parameterTypes = constructor.Parameters.Select(parameter =>
+                $"typeof({parameter.Type.ToDisplayString()})"
             );
             var parameterTypesString = string.Join(", ", parameterTypes);
             var getConstructorParameters = $$"""new[] { {{parameterTypesString}} }""";

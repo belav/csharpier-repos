@@ -68,11 +68,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         private static readonly SemanticTokensSchema s_vsTokenSchema =
             new(
                 ClassificationTypeNames
-                    .AllTypeNames.Where(
-                        classificationTypeName =>
-                            !ClassificationTypeNames.AdditiveTypeNames.Contains(
-                                classificationTypeName
-                            )
+                    .AllTypeNames.Where(classificationTypeName =>
+                        !ClassificationTypeNames.AdditiveTypeNames.Contains(classificationTypeName)
                     )
                     .ToImmutableDictionary(
                         classificationTypeName => classificationTypeName,
@@ -92,11 +89,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         private static readonly SemanticTokensSchema s_pureLspTokenSchema =
             new(
                 ClassificationTypeNames
-                    .AllTypeNames.Where(
-                        classificationTypeName =>
-                            !ClassificationTypeNames.AdditiveTypeNames.Contains(
-                                classificationTypeName
-                            )
+                    .AllTypeNames.Where(classificationTypeName =>
+                        !ClassificationTypeNames.AdditiveTypeNames.Contains(classificationTypeName)
                     )
                     .ToImmutableDictionary(
                         classificationTypeName => classificationTypeName,

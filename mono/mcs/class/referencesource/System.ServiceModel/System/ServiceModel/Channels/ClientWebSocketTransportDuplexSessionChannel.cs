@@ -384,8 +384,9 @@ namespace System.ServiceModel.Channels
         HttpWebRequest CreateHttpWebRequest(TimeSpan timeout)
         {
             TimeoutHelper helper = new TimeoutHelper(timeout);
-            ChannelParameterCollection channelParameterCollection =
-                new ChannelParameterCollection();
+            ChannelParameterCollection channelParameterCollection = new ChannelParameterCollection(
+
+            );
 
             HttpWebRequest request;
 

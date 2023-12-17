@@ -250,8 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         )
         {
             var diagnostics = DiagnosticBag.GetInstance();
-            var syntaxNodes = expressions.SelectAsArray(
-                expr => Parse(expr, treatAsExpression: true, diagnostics, out var formatSpecifiers)
+            var syntaxNodes = expressions.SelectAsArray(expr =>
+                Parse(expr, treatAsExpression: true, diagnostics, out var formatSpecifiers)
             );
             byte[]? assembly = null;
             if (!diagnostics.HasAnyErrors())
@@ -305,13 +305,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     diagnostics
                         .AsEnumerable()
                         .Where(d => d.Severity == DiagnosticSeverity.Error)
-                        .Select(
-                            d =>
-                                GetErrorMessage(
-                                    d,
-                                    CSharpDiagnosticFormatter.Instance,
-                                    preferredUICulture: null
-                                )
+                        .Select(d =>
+                            GetErrorMessage(
+                                d,
+                                CSharpDiagnosticFormatter.Instance,
+                                preferredUICulture: null
+                            )
                         )
                 );
             }
@@ -639,8 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         arguments.Count == 2
                         && arguments[0] is string namespaceName
                         && arguments[1] is NamespaceSymbol containingNamespace
-                        && containingNamespace.ConstituentNamespaces.Any(
-                            static n => n.ContainingAssembly.Identity.IsWindowsAssemblyIdentity()
+                        && containingNamespace.ConstituentNamespaces.Any(static n =>
+                            n.ContainingAssembly.Identity.IsWindowsAssemblyIdentity()
                         )
                     )
                     {

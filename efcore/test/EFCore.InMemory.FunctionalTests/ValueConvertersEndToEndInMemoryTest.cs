@@ -23,11 +23,11 @@ public class ValueConvertersEndToEndInMemoryTest
 
             if (async)
             {
-                await set.CountAsync(
-                    p => p.NullableListOfInt != nullList && p.NullableListOfInt!.Count > 0
+                await set.CountAsync(p =>
+                    p.NullableListOfInt != nullList && p.NullableListOfInt!.Count > 0
                 );
-                await set.CountAsync(
-                    p => p.NullableListOfInt != null && p.NullableListOfInt.Count > 0
+                await set.CountAsync(p =>
+                    p.NullableListOfInt != null && p.NullableListOfInt.Count > 0
                 );
             }
             else

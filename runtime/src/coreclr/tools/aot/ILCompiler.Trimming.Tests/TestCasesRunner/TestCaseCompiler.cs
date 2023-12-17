@@ -136,8 +136,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 .ToArray();
             var allReferences = references
                 .Concat(
-                    setupCompileInfo.References?.Select(
-                        p => MakeSupportingAssemblyReferencePathAbsolute(outputDirectory, p)
+                    setupCompileInfo.References?.Select(p =>
+                        MakeSupportingAssemblyReferencePathAbsolute(outputDirectory, p)
                     ) ?? Array.Empty<NPath>()
                 )
                 .ToArray();
@@ -383,8 +383,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     ? null
                     : options.OutputPath.ChangeExtension(".pdb").ToString();
 
-            var syntaxTrees = options.SourceFiles.Select(
-                p => CSharpSyntaxTree.ParseText(text: p.ReadAllText(), options: parseOptions)
+            var syntaxTrees = options.SourceFiles.Select(p =>
+                CSharpSyntaxTree.ParseText(text: p.ReadAllText(), options: parseOptions)
             );
 
             var compilation = CSharpCompilation.Create(

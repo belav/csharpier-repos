@@ -959,10 +959,9 @@ class C
                             var displayClassMethod in displayClassType
                                 .GetMembers()
                                 .OfType<MethodSymbol>()
-                                .Where(
-                                    m =>
-                                        GeneratedNameParser.GetKind(m.Name)
-                                        == GeneratedNameKind.LambdaMethod
+                                .Where(m =>
+                                    GeneratedNameParser.GetKind(m.Name)
+                                    == GeneratedNameKind.LambdaMethod
                                 )
                         )
                         {
@@ -1052,10 +1051,9 @@ class C
                             var displayClassMethod in displayClassType
                                 .GetMembers()
                                 .OfType<MethodSymbol>()
-                                .Where(
-                                    m =>
-                                        GeneratedNameParser.GetKind(m.Name)
-                                        == GeneratedNameKind.LambdaMethod
+                                .Where(m =>
+                                    GeneratedNameParser.GetKind(m.Name)
+                                    == GeneratedNameKind.LambdaMethod
                                 )
                         )
                         {
@@ -1704,8 +1702,8 @@ public class C
             var stateMachineType = originalType
                 .GetMembers()
                 .OfType<NamedTypeSymbol>()
-                .Single(
-                    t => GeneratedNameParser.GetKind(t.Name) == GeneratedNameKind.StateMachineType
+                .Single(t =>
+                    GeneratedNameParser.GetKind(t.Name) == GeneratedNameKind.StateMachineType
                 );
             var moveNextMethod = stateMachineType.GetMember<MethodSymbol>("MoveNext");
 

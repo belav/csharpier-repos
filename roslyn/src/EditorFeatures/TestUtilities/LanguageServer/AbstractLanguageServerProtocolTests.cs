@@ -105,14 +105,11 @@ namespace Roslyn.Test.Utilities
                 if (document.Name == GeneratedFileName)
                 {
                     mappedResult = spans
-                        .Select(
-                            span =>
-                                new MappedSpanResult(
-                                    s_mappedFilePath,
-                                    s_mappedLinePosition,
-                                    new TextSpan(0, 5)
-                                )
-                        )
+                        .Select(span => new MappedSpanResult(
+                            s_mappedFilePath,
+                            s_mappedLinePosition,
+                            new TextSpan(0, 5)
+                        ))
                         .ToImmutableArray();
                 }
 
@@ -657,13 +654,12 @@ namespace Roslyn.Test.Utilities
                         new List<LSP.Location>()
                     );
                     locationsForName.AddRange(
-                        spans.Select(
-                            span =>
-                                ConvertTextSpanWithTextToLocation(
-                                    span,
-                                    text,
-                                    ProtocolConversions.CreateAbsoluteUri(document.FilePath)
-                                )
+                        spans.Select(span =>
+                            ConvertTextSpanWithTextToLocation(
+                                span,
+                                text,
+                                ProtocolConversions.CreateAbsoluteUri(document.FilePath)
+                            )
                         )
                     );
 
@@ -714,14 +710,11 @@ namespace Roslyn.Test.Utilities
         )
         {
             var changeEvents = changes
-                .Select(
-                    change =>
-                        new LSP.TextDocumentContentChangeEvent
-                        {
-                            Text = change.Text,
-                            Range = change.Range,
-                        }
-                )
+                .Select(change => new LSP.TextDocumentContentChangeEvent
+                {
+                    Text = change.Text,
+                    Range = change.Range,
+                })
                 .ToArray();
 
             return new LSP.DidChangeTextDocumentParams()
@@ -776,7 +769,9 @@ namespace Roslyn.Test.Utilities
                 ClientCapabilities = clientCapabilities;
                 _locations = locations;
                 _codeAnalysisService =
-                    testWorkspace.Services.GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
+                    testWorkspace.Services.GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>(
+
+                    );
 
                 LanguageServer = target;
 
@@ -913,7 +908,9 @@ namespace Roslyn.Test.Utilities
                 var capabilitiesProvider =
                     workspace.ExportProvider.GetExportedValue<ExperimentalCapabilitiesProvider>();
                 var servicesProvider =
-                    workspace.ExportProvider.GetExportedValue<CSharpVisualBasicLspServiceProvider>();
+                    workspace.ExportProvider.GetExportedValue<CSharpVisualBasicLspServiceProvider>(
+
+                    );
 
                 var jsonRpc = new JsonRpc(
                     new HeaderDelimitedMessageHandler(
@@ -1027,24 +1024,23 @@ namespace Roslyn.Test.Utilities
                 return ReplaceTextAsync(
                     documentUri,
                     changes
-                        .Select(
-                            change =>
-                                (
-                                    new LSP.Range
+                        .Select(change =>
+                            (
+                                new LSP.Range
+                                {
+                                    Start = new LSP.Position
                                     {
-                                        Start = new LSP.Position
-                                        {
-                                            Line = change.Line,
-                                            Character = change.Column
-                                        },
-                                        End = new LSP.Position
-                                        {
-                                            Line = change.Line,
-                                            Character = change.Column
-                                        }
+                                        Line = change.Line,
+                                        Character = change.Column
                                     },
-                                    change.Text
-                                )
+                                    End = new LSP.Position
+                                    {
+                                        Line = change.Line,
+                                        Character = change.Column
+                                    }
+                                },
+                                change.Text
+                            )
                         )
                         .ToArray()
                 );
@@ -1058,24 +1054,23 @@ namespace Roslyn.Test.Utilities
                 return ReplaceTextAsync(
                     documentUri,
                     changes
-                        .Select(
-                            change =>
-                                (
-                                    new LSP.Range
+                        .Select(change =>
+                            (
+                                new LSP.Range
+                                {
+                                    Start = new LSP.Position
                                     {
-                                        Start = new LSP.Position
-                                        {
-                                            Line = change.StartLine,
-                                            Character = change.StartColumn
-                                        },
-                                        End = new LSP.Position
-                                        {
-                                            Line = change.EndLine,
-                                            Character = change.EndColumn
-                                        }
+                                        Line = change.StartLine,
+                                        Character = change.StartColumn
                                     },
-                                    string.Empty
-                                )
+                                    End = new LSP.Position
+                                    {
+                                        Line = change.EndLine,
+                                        Character = change.EndColumn
+                                    }
+                                },
+                                string.Empty
+                            )
                         )
                         .ToArray()
                 );
@@ -1161,7 +1156,9 @@ namespace Roslyn.Test.Utilities
                     .Deregister(GetManagerAccessor().GetLspMiscellaneousFilesWorkspace());
 
                 var solutionCrawlerRegistrationService = (SolutionCrawlerRegistrationService)
-                    TestWorkspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+                    TestWorkspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>(
+
+                    );
                 solutionCrawlerRegistrationService.Unregister(TestWorkspace);
 
                 // Some tests will manually call shutdown and exit, so attempting to call this during dispose

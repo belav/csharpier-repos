@@ -20,12 +20,11 @@ public class JsonResultWithNewtonsoftJsonTest
     {
         var factory =
             fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(
-                b => b.UseStartup<BasicWebSite.StartupWithNewtonsoftJson>()
+            ?? fixture.WithWebHostBuilder(b =>
+                b.UseStartup<BasicWebSite.StartupWithNewtonsoftJson>()
             );
-        factory = factory.WithWebHostBuilder(
-            b =>
-                b.ConfigureTestServices(serviceCollection => _serviceCollection = serviceCollection)
+        factory = factory.WithWebHostBuilder(b =>
+            b.ConfigureTestServices(serviceCollection => _serviceCollection = serviceCollection)
         );
 
         Client = factory.CreateDefaultClient();

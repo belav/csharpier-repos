@@ -124,8 +124,8 @@ namespace System.ServiceModel.Activities
         {
             if (this.InternalDeclaredMessageType == MessageDescription.TypeOfUntypedMessage)
             {
-                internalReceiveMessage.Message = new OutArgument<Message>(
-                    context => ((OutArgument<Message>)this.Message).Get(context)
+                internalReceiveMessage.Message = new OutArgument<Message>(context =>
+                    ((OutArgument<Message>)this.Message).Get(context)
                 );
                 requestFormatter = null;
             }
@@ -149,8 +149,8 @@ namespace System.ServiceModel.Activities
             if (this.InternalDeclaredMessageType == MessageDescription.TypeOfUntypedMessage)
             {
                 // do not use the formatter in this case
-                internalReceiveMessage.Message = new OutArgument<Message>(
-                    context => ((OutArgument<Message>)this.Message).Get(context)
+                internalReceiveMessage.Message = new OutArgument<Message>(context =>
+                    ((OutArgument<Message>)this.Message).Get(context)
                 );
                 responseFormatter = null;
             }

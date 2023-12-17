@@ -53,8 +53,9 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             if (document.Project.Solution.WorkspaceKind == WorkspaceKind.MiscellaneousFiles)
                 return;
 
-            var service =
-                document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>();
+            var service = document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>(
+
+            );
             var actions = await service
                 .GenerateDefaultConstructorsAsync(
                     document,

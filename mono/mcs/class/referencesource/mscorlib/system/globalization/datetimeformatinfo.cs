@@ -1828,9 +1828,9 @@ namespace System.Globalization
                     monthNamesArray = internalGetGenitiveMonthNames(abbreviated);
                     break;
                 case MonthNameStyles.LeapYear:
-                    monthNamesArray =
-                        internalGetLeapYearMonthNames( /*abbreviated*/
-                        );
+                    monthNamesArray = internalGetLeapYearMonthNames( /*abbreviated*/
+
+                    );
                     break;
                 default:
                     monthNamesArray = (

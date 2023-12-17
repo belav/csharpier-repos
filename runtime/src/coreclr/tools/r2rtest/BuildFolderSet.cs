@@ -1625,8 +1625,8 @@ namespace R2RTest
 
         private void WriteFoldersBlockedWithIssues(StreamWriter logWriter)
         {
-            IEnumerable<BuildFolder> blockedFolders = _buildFolders.Where(
-                folder => folder.IsBlockedWithIssue
+            IEnumerable<BuildFolder> blockedFolders = _buildFolders.Where(folder =>
+                folder.IsBlockedWithIssue
             );
 
             int blockedCount = blockedFolders.Count();
@@ -1799,8 +1799,8 @@ namespace R2RTest
                     "Crossgen conflicting results:    {0}",
                     crossgen.Count(kvp => kvp.Value == 2)
                 );
-                int matchCount = cpaot.Count(
-                    kvp => crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] == kvp.Value
+                int matchCount = cpaot.Count(kvp =>
+                    crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] == kvp.Value
                 );
                 int bothCount = cpaot.Count(kvp => crossgen.ContainsKey(kvp.Key));
                 logWriter.WriteLine("Objects queried by both:         {0}", bothCount);
@@ -1811,8 +1811,8 @@ namespace R2RTest
                 );
                 logWriter.WriteLine(
                     "Mismatched results:              {0}",
-                    cpaot.Count(
-                        kvp => crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] != kvp.Value
+                    cpaot.Count(kvp =>
+                        crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] != kvp.Value
                     )
                 );
                 logWriter.WriteLine(
@@ -1829,11 +1829,10 @@ namespace R2RTest
                     logWriter,
                     "CPAOT = TRUE / CROSSGEN = FALSE",
                     cpaot
-                        .Where(
-                            kvp =>
-                                kvp.Value == 1
-                                && crossgen.ContainsKey(kvp.Key)
-                                && crossgen[kvp.Key] == 0
+                        .Where(kvp =>
+                            kvp.Value == 1
+                            && crossgen.ContainsKey(kvp.Key)
+                            && crossgen[kvp.Key] == 0
                         )
                         .Select(kvp => kvp.Key)
                 );
@@ -1842,11 +1841,10 @@ namespace R2RTest
                     logWriter,
                     "CPAOT = FALSE / CROSSGEN = TRUE",
                     cpaot
-                        .Where(
-                            kvp =>
-                                kvp.Value == 0
-                                && crossgen.ContainsKey(kvp.Key)
-                                && crossgen[kvp.Key] == 1
+                        .Where(kvp =>
+                            kvp.Value == 0
+                            && crossgen.ContainsKey(kvp.Key)
+                            && crossgen[kvp.Key] == 1
                         )
                         .Select(kvp => kvp.Key)
                 );

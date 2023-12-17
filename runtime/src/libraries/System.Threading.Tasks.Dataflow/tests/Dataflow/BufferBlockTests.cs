@@ -40,13 +40,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestToString()
         {
-            DataflowTestHelpers.TestToString(
-                nameFormat =>
-                    nameFormat != null
-                        ? new BufferBlock<int>(
-                            new DataflowBlockOptions() { NameFormat = nameFormat }
-                        )
-                        : new BufferBlock<int>()
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new BufferBlock<int>(new DataflowBlockOptions() { NameFormat = nameFormat })
+                    : new BufferBlock<int>()
             );
         }
 

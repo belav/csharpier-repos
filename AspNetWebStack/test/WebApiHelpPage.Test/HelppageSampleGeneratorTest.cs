@@ -372,15 +372,14 @@ namespace WebApiHelpPageWebHost.UnitTest
             Mock<MediaTypeFormatter> bogusFormatter = new Mock<MediaTypeFormatter>();
             bogusFormatter.Setup(f => f.CanWriteType(It.IsAny<Type>())).Returns(true);
             bogusFormatter
-                .Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Returns(() =>
                 {
@@ -407,15 +406,14 @@ namespace WebApiHelpPageWebHost.UnitTest
             Mock<MediaTypeFormatter> customFormatter = new Mock<MediaTypeFormatter>();
             customFormatter.Setup(f => f.CanWriteType(It.IsAny<Type>())).Returns(true);
             customFormatter
-                .Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Returns(
                     (
@@ -452,15 +450,14 @@ namespace WebApiHelpPageWebHost.UnitTest
             Mock<MediaTypeFormatter> customFormatter = new Mock<MediaTypeFormatter>();
             customFormatter.Setup(f => f.CanWriteType(It.IsAny<Type>())).Returns(true);
             customFormatter
-                .Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Returns(
                     (
@@ -497,15 +494,14 @@ namespace WebApiHelpPageWebHost.UnitTest
             Mock<MediaTypeFormatter> bogusFormatter = new Mock<MediaTypeFormatter>();
             bogusFormatter.Setup(f => f.CanWriteType(It.IsAny<Type>())).Returns(true);
             bogusFormatter
-                .Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
+                .Setup(f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
                 )
                 .Returns(() =>
                 {

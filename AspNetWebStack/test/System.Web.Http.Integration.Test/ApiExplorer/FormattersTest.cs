@@ -32,12 +32,12 @@ namespace System.Web.Http.ApiExplorer
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(
-                desc => desc.ActionDescriptor.ActionName == "PostItem"
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
             );
             Assert.True(
-                description.SupportedRequestBodyFormatters.Any(
-                    formatter => formatter == customFormatter
+                description.SupportedRequestBodyFormatters.Any(formatter =>
+                    formatter == customFormatter
                 ),
                 "Did not find the custom formatter on the SupportedRequestBodyFormatters."
             );
@@ -60,12 +60,12 @@ namespace System.Web.Http.ApiExplorer
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(
-                desc => desc.ActionDescriptor.ActionName == "PostItem"
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
             );
             Assert.True(
-                description.SupportedResponseFormatters.Any(
-                    formatter => formatter == customFormatter
+                description.SupportedResponseFormatters.Any(formatter =>
+                    formatter == customFormatter
                 ),
                 "Did not find the custom formatter on the SupportedResponseFormatters."
             );
@@ -91,8 +91,8 @@ namespace System.Web.Http.ApiExplorer
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
             // Act
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(
-                desc => desc.ActionDescriptor.ActionName == "PostItem"
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
             );
             Collection<MediaTypeFormatter> formatters = description.SupportedRequestBodyFormatters;
 
@@ -121,8 +121,8 @@ namespace System.Web.Http.ApiExplorer
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
             // Act
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(
-                desc => desc.ActionDescriptor.ActionName == "PostItem"
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
             );
             Collection<MediaTypeFormatter> formatters = description.SupportedResponseFormatters;
 
@@ -153,8 +153,8 @@ namespace System.Web.Http.ApiExplorer
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
             // Act
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(
-                desc => desc.ActionDescriptor.ActionName == "PostItem"
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
             );
             Collection<MediaTypeFormatter> formatters = description.SupportedRequestBodyFormatters;
 
@@ -185,8 +185,8 @@ namespace System.Web.Http.ApiExplorer
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
             // Act
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(
-                desc => desc.ActionDescriptor.ActionName == "PostItem"
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
             );
             Collection<MediaTypeFormatter> formatters = description.SupportedResponseFormatters;
 

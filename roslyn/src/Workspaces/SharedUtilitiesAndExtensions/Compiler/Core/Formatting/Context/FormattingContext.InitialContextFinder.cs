@@ -68,10 +68,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                     {
                         Debug.Assert(
                             initialSuppressOperations.IsEmpty()
-                                || initialSuppressOperations.All(
-                                    o =>
-                                        o.TextSpan.Contains(startToken.SpanStart)
-                                        || o.TextSpan.Contains(endToken.SpanStart)
+                                || initialSuppressOperations.All(o =>
+                                    o.TextSpan.Contains(startToken.SpanStart)
+                                    || o.TextSpan.Contains(endToken.SpanStart)
                                 )
                         );
                     }
@@ -95,11 +94,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 while (node != null)
                 {
                     // get all operations for the nodes that contains the formatting span, but not ones contained by the span
-                    node.DescendantNodesAndSelf(
-                            n =>
-                                n != previous
-                                && n.Span.IntersectsWith(span)
-                                && !span.Contains(n.Span)
+                    node.DescendantNodesAndSelf(n =>
+                            n != previous && n.Span.IntersectsWith(span) && !span.Contains(n.Span)
                         )
                         .Do(n =>
                         {

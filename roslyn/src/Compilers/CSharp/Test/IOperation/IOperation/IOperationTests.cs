@@ -842,14 +842,13 @@ public class C
                 Enumerable
                     .Range(0, nTasks)
                     .AsParallel()
-                    .ForAll(
-                        _ =>
-                            Assert.Equal(
-                                "System.String System.String.op_Addition(System.String left, System.String right)",
-                                model
-                                    .GetSymbolInfo(fieldInitializer)
-                                    .Symbol.ToTestDisplayString(includeNonNullable: false)
-                            )
+                    .ForAll(_ =>
+                        Assert.Equal(
+                            "System.String System.String.op_Addition(System.String left, System.String right)",
+                            model
+                                .GetSymbolInfo(fieldInitializer)
+                                .Symbol.ToTestDisplayString(includeNonNullable: false)
+                        )
                     );
             }
         }

@@ -785,15 +785,14 @@ public class HealthCheckMiddlewareTests
                     .UseTestServer()
                     .Configure(app =>
                     {
-                        app.Use(
-                            next =>
-                                async (context) =>
-                                {
-                                    // Need to fake setting the connection info. TestServer doesn't
-                                    // do that, because it doesn't have a connection.
-                                    context.Connection.LocalPort = context.Request.Host.Port.Value;
-                                    await next(context);
-                                }
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
                         );
 
                         app.UseHealthChecks("/health", port: 5001);
@@ -827,15 +826,14 @@ public class HealthCheckMiddlewareTests
                     .UseTestServer()
                     .Configure(app =>
                     {
-                        app.Use(
-                            next =>
-                                async (context) =>
-                                {
-                                    // Need to fake setting the connection info. TestServer doesn't
-                                    // do that, because it doesn't have a connection.
-                                    context.Connection.LocalPort = context.Request.Host.Port.Value;
-                                    await next(context);
-                                }
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
                         );
 
                         app.UseHealthChecks(default, port: 5001);
@@ -869,15 +867,14 @@ public class HealthCheckMiddlewareTests
                     .UseTestServer()
                     .Configure(app =>
                     {
-                        app.Use(
-                            next =>
-                                async (context) =>
-                                {
-                                    // Need to fake setting the connection info. TestServer doesn't
-                                    // do that, because it doesn't have a connection.
-                                    context.Connection.LocalPort = context.Request.Host.Port.Value;
-                                    await next(context);
-                                }
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
                         );
 
                         app.UseHealthChecks("/health", port: 5001);
@@ -909,15 +906,14 @@ public class HealthCheckMiddlewareTests
                     .UseTestServer()
                     .Configure(app =>
                     {
-                        app.Use(
-                            next =>
-                                async (context) =>
-                                {
-                                    // Need to fake setting the connection info. TestServer doesn't
-                                    // do that, because it doesn't have a connection.
-                                    context.Connection.LocalPort = context.Request.Host.Port.Value;
-                                    await next(context);
-                                }
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
                         );
 
                         // Throws if used
@@ -958,15 +954,14 @@ public class HealthCheckMiddlewareTests
                     .UseTestServer()
                     .Configure(app =>
                     {
-                        app.Use(
-                            next =>
-                                async (context) =>
-                                {
-                                    // Need to fake setting the connection info. TestServer doesn't
-                                    // do that, because it doesn't have a connection.
-                                    context.Connection.LocalPort = context.Request.Host.Port.Value;
-                                    await next(context);
-                                }
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
                         );
 
                         // Throws if used

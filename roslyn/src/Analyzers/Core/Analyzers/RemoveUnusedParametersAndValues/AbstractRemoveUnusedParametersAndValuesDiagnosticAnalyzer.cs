@@ -264,9 +264,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
         protected sealed override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                compilationContext =>
-                    SymbolStartAnalyzer.CreateAndRegisterActions(compilationContext, this)
+            context.RegisterCompilationStartAction(compilationContext =>
+                SymbolStartAnalyzer.CreateAndRegisterActions(compilationContext, this)
             );
         }
 

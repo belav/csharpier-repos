@@ -1093,9 +1093,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             );
                             var builder = ArrayBuilder<BoundExpression>.GetInstance();
                             addElement(builder, rewrittenReceiver, rewrittenValue);
-                            var statements = builder.SelectAsArray(
-                                expr =>
-                                    (BoundStatement)new BoundExpressionStatement(expr.Syntax, expr)
+                            var statements = builder.SelectAsArray(expr =>
+                                (BoundStatement)new BoundExpressionStatement(expr.Syntax, expr)
                             );
                             builder.Free();
                             Debug.Assert(statements.Length > 0);

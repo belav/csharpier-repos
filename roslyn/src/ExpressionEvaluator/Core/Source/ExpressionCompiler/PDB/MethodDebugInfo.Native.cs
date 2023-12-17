@@ -176,9 +176,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         {
                             hoistedLocalScopeRecords = CustomDebugInfoReader
                                 .DecodeStateMachineHoistedLocalScopesRecord(customDebugInfoRecord)
-                                .SelectAsArray(
-                                    s => new HoistedLocalScopeRecord(s.StartOffset, s.Length)
-                                );
+                                .SelectAsArray(s => new HoistedLocalScopeRecord(
+                                    s.StartOffset,
+                                    s.Length
+                                ));
                         }
 
                         GetCSharpDynamicLocalInfo(
@@ -794,13 +795,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return MethodContextReuseConstraints.CalculateReuseSpan(
                 ilOffset,
                 ILSpan.MaxValue,
-                scopes.Select(
-                    scope =>
-                        new ILSpan(
-                            (uint)scope.GetStartOffset(),
-                            (uint)(scope.GetEndOffset() + (isEndInclusive ? 1 : 0))
-                        )
-                )
+                scopes.Select(scope => new ILSpan(
+                    (uint)scope.GetStartOffset(),
+                    (uint)(scope.GetEndOffset() + (isEndInclusive ? 1 : 0))
+                ))
             );
         }
 

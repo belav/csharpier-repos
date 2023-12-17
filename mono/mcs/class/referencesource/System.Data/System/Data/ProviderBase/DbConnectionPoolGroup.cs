@@ -158,7 +158,9 @@ namespace System.Data.ProviderBase
 
                         DbConnectionFactory connectionFactory = pool.ConnectionFactory;
 #if !MOBILE
-                        connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Decrement();
+                        connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Decrement(
+
+                        );
 #endif
                         connectionFactory.QueuePoolForRelease(pool, true);
                     }
@@ -236,7 +238,9 @@ namespace System.Data.ProviderBase
                                         "No other pool with current identity should exist at this point"
                                     );
 #if !MOBILE
-                                    connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Increment();
+                                    connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Increment(
+
+                                    );
 #endif
                                     pool = newPool;
                                     newPool = null;
@@ -337,7 +341,9 @@ namespace System.Data.ProviderBase
                                 DbConnectionFactory connectionFactory = pool.ConnectionFactory;
 
 #if !MOBILE
-                                connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Decrement();
+                                connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Decrement(
+
+                                );
 #endif
                                 connectionFactory.QueuePoolForRelease(pool, false);
                             }

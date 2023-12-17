@@ -141,9 +141,8 @@ public class IdentityUIScriptsTest : IDisposable
         var scriptTags = new List<ScriptTag>();
         foreach (var scriptElement in htmlDocument.Scripts)
         {
-            var fallbackSrcAttribute = scriptElement.Attributes.FirstOrDefault(
-                attr =>
-                    string.Equals("asp-fallback-src", attr.Name, StringComparison.OrdinalIgnoreCase)
+            var fallbackSrcAttribute = scriptElement.Attributes.FirstOrDefault(attr =>
+                string.Equals("asp-fallback-src", attr.Name, StringComparison.OrdinalIgnoreCase)
             );
 
             scriptTags.Add(

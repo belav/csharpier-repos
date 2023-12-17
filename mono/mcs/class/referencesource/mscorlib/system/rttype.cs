@@ -6751,9 +6751,9 @@ namespace System
                             try
                             {
 #pragma warning disable 618
-                                new SecurityPermission(
-                                    SecurityPermissionFlag.UnmanagedCode
-                                ).Demand();
+                                new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand(
+
+                                );
 #pragma warning restore 618
                             }
                             catch

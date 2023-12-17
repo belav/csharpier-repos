@@ -854,9 +854,9 @@ namespace System.Runtime.Remoting
             }
             if (uri.StartsWith(systemNSprefix, StringComparison.Ordinal))
             {
-                String assemName = (
-                    (RuntimeAssembly)typeof(String).Module.Assembly
-                ).GetSimpleName();
+                String assemName = ((RuntimeAssembly)typeof(String).Module.Assembly).GetSimpleName(
+
+                );
                 assemblyIncluded = true;
                 return uri.Substring(systemNSprefix.Length) + ", " + assemName; // now contains type
             }

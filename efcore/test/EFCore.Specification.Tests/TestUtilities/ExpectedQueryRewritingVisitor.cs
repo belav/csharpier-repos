@@ -28,14 +28,11 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
         var maybeScalarMethods = typeof(TestExtensions)
             .GetMethods()
             .Where(m => m.Name == nameof(TestExtensions.MaybeScalar))
-            .Select(
-                m =>
-                    new
-                    {
-                        method = m,
-                        argument = m.GetParameters()[1].ParameterType.GetGenericArguments()[1]
-                    }
-            );
+            .Select(m => new
+            {
+                method = m,
+                argument = m.GetParameters()[1].ParameterType.GetGenericArguments()[1]
+            });
 
         _maybeScalarNullableMethod = maybeScalarMethods
             .Single(x => x.argument.IsNullableValueType())
@@ -267,10 +264,9 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
             if (propertyName != null)
             {
                 var shadowPropertyMapping = _shadowPropertyMappings
-                    .Where(
-                        m =>
-                            caller.Type.GetTypesInHierarchy().Contains(m.Key.Item1)
-                            && m.Key.Item2 == propertyName
+                    .Where(m =>
+                        caller.Type.GetTypesInHierarchy().Contains(m.Key.Item1)
+                        && m.Key.Item2 == propertyName
                     )
                     .Select(m => m.Value)
                     .SingleOrDefault();

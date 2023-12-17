@@ -675,8 +675,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             )
             {
                 // Generate the declared type name without tuple element names.
-                var declaredTypeInfoNoTupleElementNames =
-                    declaredTypeInfo.WithNoTupleElementNames();
+                var declaredTypeInfoNoTupleElementNames = declaredTypeInfo.WithNoTupleElementNames(
+
+                );
                 var declaredTypeNameNoTupleElementNames =
                     (declaredTypeInfo == declaredTypeInfoNoTupleElementNames)
                         ? declaredTypeName

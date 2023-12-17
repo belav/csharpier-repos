@@ -529,10 +529,9 @@ namespace Microsoft.CodeAnalysis.Rename
                 var renameTextLength = renameText.Length;
 
                 var renameStringsAndPositions = root.DescendantTokens()
-                    .Where(
-                        t =>
-                            syntaxFactsService.IsStringLiteralOrInterpolatedStringLiteral(t)
-                            && t.Span.Length >= renameTextLength
+                    .Where(t =>
+                        syntaxFactsService.IsStringLiteralOrInterpolatedStringLiteral(t)
+                        && t.Span.Length >= renameTextLength
                     )
                     .Select(t => Tuple.Create(t.ToString(), t.Span.Start, t.Span));
 

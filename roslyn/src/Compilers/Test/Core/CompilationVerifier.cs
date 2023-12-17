@@ -519,11 +519,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 return string.Join(
                     Environment.NewLine,
-                    result.Select(
-                        r =>
-                            printMethod(r.Method, metadataReader)
-                            + r.Message
-                            + printErrorArguments(r.ErrorArguments)
+                    result.Select(r =>
+                        printMethod(r.Method, metadataReader)
+                        + r.Message
+                        + printErrorArguments(r.ErrorArguments)
                     )
                 );
             }

@@ -313,8 +313,9 @@ namespace System.ServiceModel.Security
                 out sourceToken,
                 out tokenParameters
             );
-            SecurityProtocolCorrelationState newCorrelationState =
-                CreateCorrelationStateIfRequired();
+            SecurityProtocolCorrelationState newCorrelationState = CreateCorrelationStateIfRequired(
+
+            );
             IList<SupportingTokenSpecification> supportingTokens;
             this.TryGetSupportingTokens(
                 this.SecurityProtocolFactory,

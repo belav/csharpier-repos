@@ -319,10 +319,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var analyzers =
                 documentAnalysisScope?.Analyzers
-                ?? compilationWithAnalyzers.Analyzers.Where(
-                    a =>
-                        forceExecuteAllAnalyzers
-                        || !a.IsOpenFileOnly(ideOptions.CleanupOptions?.SimplifierOptions)
+                ?? compilationWithAnalyzers.Analyzers.Where(a =>
+                    forceExecuteAllAnalyzers
+                    || !a.IsOpenFileOnly(ideOptions.CleanupOptions?.SimplifierOptions)
                 );
 
             analyzerMap.AppendAnalyzerMap(analyzers);

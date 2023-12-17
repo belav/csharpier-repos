@@ -27,12 +27,11 @@ public class Startup
             "zh",
             "zh-CN"
         };
-        app.UseRequestLocalization(
-            options =>
-                options
-                    .AddSupportedCultures(supportedCultures)
-                    .AddSupportedUICultures(supportedCultures)
-                    .SetDefaultCulture(supportedCultures[0])
+        app.UseRequestLocalization(options =>
+            options
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures)
+                .SetDefaultCulture(supportedCultures[0])
         // Optionally create an app-specific provider with just a delegate, e.g. look up user preference from DB.
         //.AddRequestCultureProvider(new CustomRequestCultureProvider(async context =>
         //{

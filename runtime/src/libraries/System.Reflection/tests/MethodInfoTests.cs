@@ -209,8 +209,9 @@ namespace System.Reflection.Tests
             );
             Assert.Equal(testClass.PublicStructMethod(new DateTime()), returnValue);
 
-            Delegate genMethodDelegate =
-                miPublicStructMethod.CreateDelegate<Delegate_DateTime_Str>();
+            Delegate genMethodDelegate = miPublicStructMethod.CreateDelegate<Delegate_DateTime_Str>(
+
+            );
             object genReturnValue = genMethodDelegate.DynamicInvoke(
                 new object[] { testClass, null }
             );
@@ -319,8 +320,8 @@ namespace System.Reflection.Tests
         public void CustomAttributes(Type type, string expectedToString)
         {
             MethodInfo methodInfo = GetMethod(typeof(MI_SubClass), "MethodWithAttributes");
-            CustomAttributeData attributeData = methodInfo.CustomAttributes.First(
-                attribute => attribute.AttributeType.Equals(type)
+            CustomAttributeData attributeData = methodInfo.CustomAttributes.First(attribute =>
+                attribute.AttributeType.Equals(type)
             );
             Assert.Equal(expectedToString, attributeData.ToString());
         }

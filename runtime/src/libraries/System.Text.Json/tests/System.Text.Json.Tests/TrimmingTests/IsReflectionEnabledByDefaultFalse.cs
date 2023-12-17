@@ -119,7 +119,9 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
         global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::MyPoco>? jsonTypeInfo =
             null;
         global::System.Text.Json.Serialization.Metadata.JsonObjectInfoValues<global::MyPoco> objectInfo =
-            new global::System.Text.Json.Serialization.Metadata.JsonObjectInfoValues<global::MyPoco>()
+            new global::System.Text.Json.Serialization.Metadata.JsonObjectInfoValues<global::MyPoco>(
+
+            )
             {
                 ObjectCreator = static () => new global::MyPoco(),
                 ObjectWithParameterizedConstructorCreator = null,
@@ -145,7 +147,9 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
             new global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo[1];
 
         global::System.Text.Json.Serialization.Metadata.JsonPropertyInfoValues<global::System.Int32> info0 =
-            new global::System.Text.Json.Serialization.Metadata.JsonPropertyInfoValues<global::System.Int32>()
+            new global::System.Text.Json.Serialization.Metadata.JsonPropertyInfoValues<global::System.Int32>(
+
+            )
             {
                 IsProperty = true,
                 IsPublic = true,

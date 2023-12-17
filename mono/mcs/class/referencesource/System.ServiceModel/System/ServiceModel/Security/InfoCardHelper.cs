@@ -598,8 +598,9 @@ namespace System.ServiceModel.Security
             }
 
             BindingElementCollection bindingElements = currentStsBinding.CreateBindingElements();
-            SecurityBindingElement secBindingElement =
-                bindingElements.Find<SecurityBindingElement>();
+            SecurityBindingElement secBindingElement = bindingElements.Find<SecurityBindingElement>(
+
+            );
 
             return TryGetNextStsIssuedTokenParameters(secBindingElement);
         }

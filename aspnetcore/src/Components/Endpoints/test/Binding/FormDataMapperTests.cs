@@ -501,13 +501,10 @@ public class FormDataMapperTests
         var data = new Dictionary<string, StringValues>(
             Enumerable
                 .Range(0, size)
-                .Select(
-                    i =>
-                        new KeyValuePair<string, StringValues>(
-                            $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                            (i + 10).ToString(CultureInfo.InvariantCulture)
-                        )
-                )
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
         );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
@@ -536,13 +533,10 @@ public class FormDataMapperTests
         var data = new Dictionary<string, StringValues>(
             Enumerable
                 .Range(0, size)
-                .Select(
-                    i =>
-                        new KeyValuePair<string, StringValues>(
-                            $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                            (i + 10).ToString(CultureInfo.InvariantCulture)
-                        )
-                )
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
         );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
@@ -587,13 +581,10 @@ public class FormDataMapperTests
         var data = new Dictionary<string, StringValues>(
             Enumerable
                 .Range(0, size)
-                .Select(
-                    i =>
-                        new KeyValuePair<string, StringValues>(
-                            $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                            (i + 10).ToString(CultureInfo.InvariantCulture)
-                        )
-                )
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
         );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
@@ -661,13 +652,10 @@ public class FormDataMapperTests
         var data = new Dictionary<string, StringValues>(
             Enumerable
                 .Range(0, size)
-                .Select(
-                    i =>
-                        new KeyValuePair<string, StringValues>(
-                            $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                            (i + 10).ToString(CultureInfo.InvariantCulture)
-                        )
-                )
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
         );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
@@ -1338,13 +1326,10 @@ public class FormDataMapperTests
         var data = new Dictionary<string, StringValues>(
             Enumerable
                 .Range(0, size)
-                .Select(
-                    i =>
-                        new KeyValuePair<string, StringValues>(
-                            $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                            (i + 10).ToString(CultureInfo.InvariantCulture)
-                        )
-                )
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
         );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);

@@ -111,13 +111,12 @@ public class RedirectToRouteResultTest
         await result.ExecuteResultAsync(actionContext);
 
         // Assert
-        urlHelper.Verify(
-            uh =>
-                uh.RouteUrl(
-                    It.Is<UrlRouteContext>(
-                        routeContext => string.Equals(routeName, routeContext.RouteName)
-                    )
+        urlHelper.Verify(uh =>
+            uh.RouteUrl(
+                It.Is<UrlRouteContext>(routeContext =>
+                    string.Equals(routeName, routeContext.RouteName)
                 )
+            )
         );
         Assert.True(
             httpContext.Response.Headers.ContainsKey("Location"),

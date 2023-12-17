@@ -498,12 +498,11 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             {
                 var identifierName = syntaxFactsService.GetIdentifierOfSimpleName(node).ValueText;
 
-                var variable = localVariables.FirstOrDefault(
-                    localVariable =>
-                        syntaxFactsService.StringComparer.Equals(localVariable.Name, identifierName)
-                        && localVariable.Equals(
-                            semanticModel.GetSymbolInfo(node, cancellationToken).Symbol
-                        )
+                var variable = localVariables.FirstOrDefault(localVariable =>
+                    syntaxFactsService.StringComparer.Equals(localVariable.Name, identifierName)
+                    && localVariable.Equals(
+                        semanticModel.GetSymbolInfo(node, cancellationToken).Symbol
+                    )
                 );
 
                 if (variable is object)

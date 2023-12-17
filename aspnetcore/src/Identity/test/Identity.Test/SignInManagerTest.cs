@@ -314,8 +314,8 @@ public class SignInManagerTest
         {
             var id = new ClaimsIdentity(IdentityConstants.TwoFactorRememberMeScheme);
             id.AddClaim(new Claim(ClaimTypes.Name, user.Id));
-            auth.Setup(
-                    a => a.AuthenticateAsync(context, IdentityConstants.TwoFactorRememberMeScheme)
+            auth.Setup(a =>
+                    a.AuthenticateAsync(context, IdentityConstants.TwoFactorRememberMeScheme)
                 )
                 .ReturnsAsync(
                     AuthenticateResult.Success(
@@ -416,14 +416,13 @@ public class SignInManagerTest
         var context = new DefaultHttpContext();
         var helper = SetupSignInManager(manager.Object, context);
         var auth = MockAuth(context);
-        auth.Setup(
-                a =>
-                    a.SignInAsync(
-                        context,
-                        IdentityConstants.TwoFactorUserIdScheme,
-                        It.Is<ClaimsPrincipal>(id => id.FindFirstValue(ClaimTypes.Name) == user.Id),
-                        It.IsAny<AuthenticationProperties>()
-                    )
+        auth.Setup(a =>
+                a.SignInAsync(
+                    context,
+                    IdentityConstants.TwoFactorUserIdScheme,
+                    It.Is<ClaimsPrincipal>(id => id.FindFirstValue(ClaimTypes.Name) == user.Id),
+                    It.IsAny<AuthenticationProperties>()
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -479,16 +478,13 @@ public class SignInManagerTest
         }
         else
         {
-            auth.Setup(
-                    a =>
-                        a.SignInAsync(
-                            context,
-                            IdentityConstants.TwoFactorUserIdScheme,
-                            It.Is<ClaimsPrincipal>(
-                                id => id.FindFirstValue(ClaimTypes.Name) == user.Id
-                            ),
-                            It.IsAny<AuthenticationProperties>()
-                        )
+            auth.Setup(a =>
+                    a.SignInAsync(
+                        context,
+                        IdentityConstants.TwoFactorUserIdScheme,
+                        It.Is<ClaimsPrincipal>(id => id.FindFirstValue(ClaimTypes.Name) == user.Id),
+                        It.IsAny<AuthenticationProperties>()
+                    )
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
@@ -539,13 +535,12 @@ public class SignInManagerTest
         var manager = SetupUserManager(user);
         manager.Setup(m => m.SupportsUserLockout).Returns(true).Verifiable();
         manager
-            .Setup(
-                m =>
-                    m.VerifyTwoFactorTokenAsync(
-                        user,
-                        providerName ?? TokenOptions.DefaultAuthenticatorProvider,
-                        code
-                    )
+            .Setup(m =>
+                m.VerifyTwoFactorTokenAsync(
+                    user,
+                    providerName ?? TokenOptions.DefaultAuthenticatorProvider,
+                    code
+                )
             )
             .ReturnsAsync(true)
             .Verifiable();
@@ -573,19 +568,17 @@ public class SignInManagerTest
             .Verifiable();
         if (rememberClient)
         {
-            auth.Setup(
-                    a =>
-                        a.SignInAsync(
-                            context,
-                            IdentityConstants.TwoFactorRememberMeScheme,
-                            It.Is<ClaimsPrincipal>(
-                                i =>
-                                    i.FindFirstValue(ClaimTypes.Name) == user.Id
-                                    && i.Identities.First().AuthenticationType
-                                        == IdentityConstants.TwoFactorRememberMeScheme
-                            ),
-                            It.IsAny<AuthenticationProperties>()
-                        )
+            auth.Setup(a =>
+                    a.SignInAsync(
+                        context,
+                        IdentityConstants.TwoFactorRememberMeScheme,
+                        It.Is<ClaimsPrincipal>(i =>
+                            i.FindFirstValue(ClaimTypes.Name) == user.Id
+                            && i.Identities.First().AuthenticationType
+                                == IdentityConstants.TwoFactorRememberMeScheme
+                        ),
+                        It.IsAny<AuthenticationProperties>()
+                    )
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
@@ -614,13 +607,12 @@ public class SignInManagerTest
         var manager = SetupUserManager(user);
         manager.Setup(m => m.SupportsUserLockout).Returns(false).Verifiable();
         manager
-            .Setup(
-                m =>
-                    m.VerifyTwoFactorTokenAsync(
-                        user,
-                        providerName ?? TokenOptions.DefaultAuthenticatorProvider,
-                        code
-                    )
+            .Setup(m =>
+                m.VerifyTwoFactorTokenAsync(
+                    user,
+                    providerName ?? TokenOptions.DefaultAuthenticatorProvider,
+                    code
+                )
             )
             .ReturnsAsync(false)
             .Verifiable();
@@ -677,13 +669,12 @@ public class SignInManagerTest
             .Verifiable();
         manager.Setup(m => m.SupportsUserLockout).Returns(true).Verifiable();
         manager
-            .Setup(
-                m =>
-                    m.VerifyTwoFactorTokenAsync(
-                        user,
-                        providerName ?? TokenOptions.DefaultAuthenticatorProvider,
-                        code
-                    )
+            .Setup(m =>
+                m.VerifyTwoFactorTokenAsync(
+                    user,
+                    providerName ?? TokenOptions.DefaultAuthenticatorProvider,
+                    code
+                )
             )
             .ReturnsAsync(false)
             .Verifiable();
@@ -806,39 +797,34 @@ public class SignInManagerTest
         );
         if (externalLogin)
         {
-            auth.Setup(
-                    a =>
-                        a.SignInAsync(
-                            context,
-                            IdentityConstants.ApplicationScheme,
-                            It.Is<ClaimsPrincipal>(
-                                i =>
-                                    i.FindFirstValue(ClaimTypes.AuthenticationMethod)
-                                        == loginProvider
-                                    && i.FindFirstValue(ClaimTypes.NameIdentifier) == user.Id
-                            ),
-                            It.IsAny<AuthenticationProperties>()
-                        )
+            auth.Setup(a =>
+                    a.SignInAsync(
+                        context,
+                        IdentityConstants.ApplicationScheme,
+                        It.Is<ClaimsPrincipal>(i =>
+                            i.FindFirstValue(ClaimTypes.AuthenticationMethod) == loginProvider
+                            && i.FindFirstValue(ClaimTypes.NameIdentifier) == user.Id
+                        ),
+                        It.IsAny<AuthenticationProperties>()
+                    )
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
-            auth.Setup(
-                    a =>
-                        a.SignOutAsync(
-                            context,
-                            IdentityConstants.ExternalScheme,
-                            It.IsAny<AuthenticationProperties>()
-                        )
+            auth.Setup(a =>
+                    a.SignOutAsync(
+                        context,
+                        IdentityConstants.ExternalScheme,
+                        It.IsAny<AuthenticationProperties>()
+                    )
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
-            auth.Setup(
-                    a =>
-                        a.SignOutAsync(
-                            context,
-                            IdentityConstants.TwoFactorUserIdScheme,
-                            It.IsAny<AuthenticationProperties>()
-                        )
+            auth.Setup(a =>
+                    a.SignOutAsync(
+                        context,
+                        IdentityConstants.TwoFactorUserIdScheme,
+                        It.IsAny<AuthenticationProperties>()
+                    )
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
@@ -949,13 +935,12 @@ public class SignInManagerTest
         //signInManager.Setup(s => s.SignInAsync(user, It.Is<AuthenticationProperties>(p => p.IsPersistent == isPersistent),
         //externalLogin? loginProvider : null)).Returns(Task.FromResult(0)).Verifiable();
         signInManager
-            .Setup(
-                s =>
-                    s.SignInWithClaimsAsync(
-                        user,
-                        It.IsAny<AuthenticationProperties>(),
-                        It.IsAny<IEnumerable<Claim>>()
-                    )
+            .Setup(s =>
+                s.SignInWithClaimsAsync(
+                    user,
+                    It.IsAny<AuthenticationProperties>(),
+                    It.IsAny<IEnumerable<Claim>>()
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -1022,42 +1007,37 @@ public class SignInManagerTest
         );
         if (externalLogin)
         {
-            auth.Setup(
-                    a =>
-                        a.SignInAsync(
-                            context,
-                            IdentityConstants.ApplicationScheme,
-                            It.Is<ClaimsPrincipal>(
-                                i =>
-                                    i.FindFirstValue(ClaimTypes.AuthenticationMethod)
-                                        == loginProvider
-                                    && i.FindFirstValue("amr") == "mfa"
-                                    && i.FindFirstValue(ClaimTypes.NameIdentifier) == user.Id
-                            ),
-                            It.IsAny<AuthenticationProperties>()
-                        )
+            auth.Setup(a =>
+                    a.SignInAsync(
+                        context,
+                        IdentityConstants.ApplicationScheme,
+                        It.Is<ClaimsPrincipal>(i =>
+                            i.FindFirstValue(ClaimTypes.AuthenticationMethod) == loginProvider
+                            && i.FindFirstValue("amr") == "mfa"
+                            && i.FindFirstValue(ClaimTypes.NameIdentifier) == user.Id
+                        ),
+                        It.IsAny<AuthenticationProperties>()
+                    )
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             // REVIEW: restore ability to test is persistent
             //It.Is<AuthenticationProperties>(v => v.IsPersistent == isPersistent))).Verifiable();
-            auth.Setup(
-                    a =>
-                        a.SignOutAsync(
-                            context,
-                            IdentityConstants.ExternalScheme,
-                            It.IsAny<AuthenticationProperties>()
-                        )
+            auth.Setup(a =>
+                    a.SignOutAsync(
+                        context,
+                        IdentityConstants.ExternalScheme,
+                        It.IsAny<AuthenticationProperties>()
+                    )
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
-            auth.Setup(
-                    a =>
-                        a.SignOutAsync(
-                            context,
-                            IdentityConstants.TwoFactorUserIdScheme,
-                            It.IsAny<AuthenticationProperties>()
-                        )
+            auth.Setup(a =>
+                    a.SignOutAsync(
+                        context,
+                        IdentityConstants.TwoFactorUserIdScheme,
+                        It.IsAny<AuthenticationProperties>()
+                    )
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
@@ -1068,19 +1048,17 @@ public class SignInManagerTest
         }
         if (rememberClient)
         {
-            auth.Setup(
-                    a =>
-                        a.SignInAsync(
-                            context,
-                            IdentityConstants.TwoFactorRememberMeScheme,
-                            It.Is<ClaimsPrincipal>(
-                                i =>
-                                    i.FindFirstValue(ClaimTypes.Name) == user.Id
-                                    && i.Identities.First().AuthenticationType
-                                        == IdentityConstants.TwoFactorRememberMeScheme
-                            ),
-                            It.IsAny<AuthenticationProperties>()
-                        )
+            auth.Setup(a =>
+                    a.SignInAsync(
+                        context,
+                        IdentityConstants.TwoFactorRememberMeScheme,
+                        It.Is<ClaimsPrincipal>(i =>
+                            i.FindFirstValue(ClaimTypes.Name) == user.Id
+                            && i.Identities.First().AuthenticationType
+                                == IdentityConstants.TwoFactorRememberMeScheme
+                        ),
+                        It.IsAny<AuthenticationProperties>()
+                    )
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
@@ -1168,19 +1146,17 @@ public class SignInManagerTest
         var context = new DefaultHttpContext();
         var auth = MockAuth(context);
         var helper = SetupSignInManager(manager.Object, context);
-        auth.Setup(
-                a =>
-                    a.SignInAsync(
-                        context,
-                        IdentityConstants.TwoFactorRememberMeScheme,
-                        It.Is<ClaimsPrincipal>(
-                            i =>
-                                i.FindFirstValue(ClaimTypes.Name) == user.Id
-                                && i.Identities.First().AuthenticationType
-                                    == IdentityConstants.TwoFactorRememberMeScheme
-                        ),
-                        It.Is<AuthenticationProperties>(v => v.IsPersistent == true)
-                    )
+        auth.Setup(a =>
+                a.SignInAsync(
+                    context,
+                    IdentityConstants.TwoFactorRememberMeScheme,
+                    It.Is<ClaimsPrincipal>(i =>
+                        i.FindFirstValue(ClaimTypes.Name) == user.Id
+                        && i.Identities.First().AuthenticationType
+                            == IdentityConstants.TwoFactorRememberMeScheme
+                    ),
+                    It.Is<AuthenticationProperties>(v => v.IsPersistent == true)
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -1263,33 +1239,30 @@ public class SignInManagerTest
         var manager = MockHelpers.TestUserManager<PocoUser>();
         var context = new DefaultHttpContext();
         var auth = MockAuth(context);
-        auth.Setup(
-                a =>
-                    a.SignOutAsync(
-                        context,
-                        IdentityConstants.ApplicationScheme,
-                        It.IsAny<AuthenticationProperties>()
-                    )
+        auth.Setup(a =>
+                a.SignOutAsync(
+                    context,
+                    IdentityConstants.ApplicationScheme,
+                    It.IsAny<AuthenticationProperties>()
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
-        auth.Setup(
-                a =>
-                    a.SignOutAsync(
-                        context,
-                        IdentityConstants.TwoFactorUserIdScheme,
-                        It.IsAny<AuthenticationProperties>()
-                    )
+        auth.Setup(a =>
+                a.SignOutAsync(
+                    context,
+                    IdentityConstants.TwoFactorUserIdScheme,
+                    It.IsAny<AuthenticationProperties>()
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
-        auth.Setup(
-                a =>
-                    a.SignOutAsync(
-                        context,
-                        IdentityConstants.ExternalScheme,
-                        It.IsAny<AuthenticationProperties>()
-                    )
+        auth.Setup(a =>
+                a.SignOutAsync(
+                    context,
+                    IdentityConstants.ExternalScheme,
+                    It.IsAny<AuthenticationProperties>()
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();
@@ -1505,28 +1478,22 @@ public class SignInManagerTest
         string amr = null
     )
     {
-        auth.Setup(
-                a =>
-                    a.SignInAsync(
-                        context,
-                        IdentityConstants.ApplicationScheme,
-                        It.Is<ClaimsPrincipal>(
-                            id =>
-                                (
-                                    userId == null
-                                    || id.FindFirstValue(ClaimTypes.NameIdentifier) == userId
-                                )
-                                && (
-                                    loginProvider == null
-                                    || id.FindFirstValue(ClaimTypes.AuthenticationMethod)
-                                        == loginProvider
-                                )
-                                && (amr == null || id.FindFirstValue("amr") == amr)
-                        ),
-                        It.Is<AuthenticationProperties>(
-                            v => isPersistent == null || v.IsPersistent == isPersistent
+        auth.Setup(a =>
+                a.SignInAsync(
+                    context,
+                    IdentityConstants.ApplicationScheme,
+                    It.Is<ClaimsPrincipal>(id =>
+                        (userId == null || id.FindFirstValue(ClaimTypes.NameIdentifier) == userId)
+                        && (
+                            loginProvider == null
+                            || id.FindFirstValue(ClaimTypes.AuthenticationMethod) == loginProvider
                         )
+                        && (amr == null || id.FindFirstValue("amr") == amr)
+                    ),
+                    It.Is<AuthenticationProperties>(v =>
+                        isPersistent == null || v.IsPersistent == isPersistent
                     )
+                )
             )
             .Returns(Task.FromResult(0))
             .Verifiable();

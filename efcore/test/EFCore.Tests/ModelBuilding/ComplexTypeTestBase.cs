@@ -105,8 +105,8 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Can_set_property_annotation_by_type()
         {
-            var modelBuilder = CreateModelBuilder(
-                c => c.Properties<string>().HaveAnnotation("foo", "bar")
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Properties<string>().HaveAnnotation("foo", "bar")
             );
 
             modelBuilder
@@ -743,8 +743,8 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Properties_can_have_provider_type_set_for_type()
         {
-            var modelBuilder = CreateModelBuilder(
-                c => c.Properties<string>().HaveConversion<byte[]>()
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Properties<string>().HaveConversion<byte[]>()
             );
 
             modelBuilder
@@ -845,10 +845,9 @@ public abstract partial class ModelBuilderTest
                         b.Property<int>("Charm")
                             .HasConversion<CastingConverter<int, long>, CustomValueComparer<int>>();
                         b.Property<string>("Strange")
-                            .HasConversion<
-                                UTF8StringToBytesConverter,
-                                CustomValueComparer<string>
-                            >();
+                            .HasConversion<UTF8StringToBytesConverter, CustomValueComparer<string>>(
+
+                            );
                         b.Property<string>("Strange").HasConversion(null, null);
                     }
                 );
@@ -2005,8 +2004,8 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Can_ignore_a_field()
         {
-            var modelBuilder = CreateModelBuilder(
-                c => c.ComplexProperties<KeylessEntityWithFields>()
+            var modelBuilder = CreateModelBuilder(c =>
+                c.ComplexProperties<KeylessEntityWithFields>()
             );
 
             modelBuilder

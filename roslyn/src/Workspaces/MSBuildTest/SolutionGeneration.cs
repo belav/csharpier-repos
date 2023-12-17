@@ -98,8 +98,8 @@ EndGlobal
                 {
                     if (projectReference.Guid == Guid.Empty)
                     {
-                        var referencedProject = projectBuilders.First(
-                            p => p.Name == projectReference.ProjectName
+                        var referencedProject = projectBuilders.First(p =>
+                            p.Name == projectReference.ProjectName
                         );
                         projectReference.Guid = referencedProject.Guid;
                         projectReference.ProjectFileName =

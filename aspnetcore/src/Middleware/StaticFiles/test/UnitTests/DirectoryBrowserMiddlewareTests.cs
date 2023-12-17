@@ -131,26 +131,24 @@ public class DirectoryBrowserMiddlewareTests
                 {
                     app.UseRouting();
 
-                    app.Use(
-                        next =>
-                            context =>
-                            {
-                                // Assign an endpoint, this will make the directory browser noop
-                                context.SetEndpoint(
-                                    new Endpoint(
-                                        (c) =>
-                                        {
-                                            c.Response.StatusCode = (int)
-                                                HttpStatusCode.NotAcceptable;
-                                            return c.Response.WriteAsync("Hi from endpoint.");
-                                        },
-                                        new EndpointMetadataCollection(),
-                                        "test"
-                                    )
-                                );
+                    app.Use(next =>
+                        context =>
+                        {
+                            // Assign an endpoint, this will make the directory browser noop
+                            context.SetEndpoint(
+                                new Endpoint(
+                                    (c) =>
+                                    {
+                                        c.Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+                                        return c.Response.WriteAsync("Hi from endpoint.");
+                                    },
+                                    new EndpointMetadataCollection(),
+                                    "test"
+                                )
+                            );
 
-                                return next(context);
-                            }
+                            return next(context);
+                        }
                     );
 
                     app.UseDirectoryBrowser(
@@ -189,21 +187,20 @@ public class DirectoryBrowserMiddlewareTests
                 {
                     app.UseRouting();
 
-                    app.Use(
-                        next =>
-                            context =>
-                            {
-                                // Assign an endpoint with a null RequestDelegate, the directory browser should still run
-                                context.SetEndpoint(
-                                    new Endpoint(
-                                        requestDelegate: null,
-                                        new EndpointMetadataCollection(),
-                                        "test"
-                                    )
-                                );
+                    app.Use(next =>
+                        context =>
+                        {
+                            // Assign an endpoint with a null RequestDelegate, the directory browser should still run
+                            context.SetEndpoint(
+                                new Endpoint(
+                                    requestDelegate: null,
+                                    new EndpointMetadataCollection(),
+                                    "test"
+                                )
+                            );
 
-                                return next(context);
-                            }
+                            return next(context);
+                        }
                     );
 
                     app.UseDirectoryBrowser(

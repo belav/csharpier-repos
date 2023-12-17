@@ -2372,10 +2372,9 @@ namespace TemplateDependencyFromGenArgs
                 case 10:
                     return TestClass<M3<M2<M1<X, Y>.Nested<X>>.Nested<Y>>.Nested<X>>.MyMethod();
                 case 11:
-                    return TestClass<N3<N2<N1<
-                        X,
-                        Y
-                    >.Nested<X>>.Nested<Y>>.Nested<X>>.MyGenMethod<X>();
+                    return TestClass<N3<N2<N1<X, Y>.Nested<X>>.Nested<Y>>.Nested<X>>.MyGenMethod<X>(
+
+                    );
 
                 case 12:
                     return TestClass.MyGenMethod<O3<O2<O1<X, Y>.Nested>.Nested>.Nested>();

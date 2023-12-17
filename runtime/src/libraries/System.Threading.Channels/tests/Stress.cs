@@ -298,8 +298,7 @@ namespace System.Threading.Channels.Tests
                 // Create a bunch of reads, half of which are cancelable
                 Task<int>[] reads = Enumerable
                     .Range(0, Writes)
-                    .Select(
-                        i => channel.Reader.ReadAsync(i % 2 == 0 ? cts.Token : default).AsTask()
+                    .Select(i => channel.Reader.ReadAsync(i % 2 == 0 ? cts.Token : default).AsTask()
                     )
                     .ToArray();
 

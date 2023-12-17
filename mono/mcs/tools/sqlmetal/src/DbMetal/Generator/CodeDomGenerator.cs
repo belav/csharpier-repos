@@ -670,8 +670,8 @@ namespace DbMetal.Generator
             };
             if (method.Parameters != null)
                 executeMethodCallArgs.AddRange(
-                    function.Parameters.Select(
-                        p => (CodeExpression)new CodeVariableReferenceExpression(p.Name)
+                    function.Parameters.Select(p =>
+                        (CodeExpression)new CodeVariableReferenceExpression(p.Name)
                     )
                 );
             method.Statements.Add(
@@ -1142,8 +1142,8 @@ namespace DbMetal.Generator
             var partialMethods = new[] { CreatePartialMethod("OnCreated") }
                 .Concat(
                     table
-                        .Type.Columns.Select(
-                            c => new[] { CreateChangedMethodDecl(c), CreateChangingMethodDecl(c) }
+                        .Type.Columns.Select(c =>
+                            new[] { CreateChangedMethodDecl(c), CreateChangingMethodDecl(c) }
                         )
                         .SelectMany(md => md)
                 )
@@ -1831,8 +1831,8 @@ namespace DbMetal.Generator
                     (from p in parents where p.Member == parent.Member select p).Count() > 1;
                 // WriteClassParent(writer, parent, hasDuplicates, schema, context);
                 // the following is apparently useless
-                DbLinq.Schema.Dbml.Table targetTable = schema.Tables.FirstOrDefault(
-                    t => t.Type.Name == parent.Type
+                DbLinq.Schema.Dbml.Table targetTable = schema.Tables.FirstOrDefault(t =>
+                    t.Type.Name == parent.Type
                 );
                 if (targetTable == null)
                 {
@@ -2001,18 +2001,19 @@ namespace DbMetal.Generator
                                 .Concat(
                                     Enumerable
                                         .Range(0, parentKeys.Length)
-                                        .Select(
-                                            i =>
-                                                (CodeStatement)
-                                                    new CodeAssignStatement(
-                                                        new CodeVariableReferenceExpression(
-                                                            GetStorageFieldName(childColumns[i])
+                                        .Select(i =>
+                                            (CodeStatement)
+                                                new CodeAssignStatement(
+                                                    new CodeVariableReferenceExpression(
+                                                        GetStorageFieldName(childColumns[i])
+                                                    ),
+                                                    new CodePropertyReferenceExpression(
+                                                        new CodePropertySetValueReferenceExpression(
+
                                                         ),
-                                                        new CodePropertyReferenceExpression(
-                                                            new CodePropertySetValueReferenceExpression(),
-                                                            parentKeys[i]
-                                                        )
+                                                        parentKeys[i]
                                                     )
+                                                )
                                         )
                                 )
                                 .ToArray(),
@@ -2021,8 +2022,8 @@ namespace DbMetal.Generator
                                 .Range(0, parentKeys.Length)
                                 .Select(i =>
                                 {
-                                    var column = parentTable.Type.Columns.Single(
-                                        c => c.Member == childKeys[i]
+                                    var column = parentTable.Type.Columns.Single(c =>
+                                        c.Member == childKeys[i]
                                     );
                                     return (CodeStatement)
                                         new CodeAssignStatement(

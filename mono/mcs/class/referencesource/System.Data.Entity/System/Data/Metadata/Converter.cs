@@ -1221,14 +1221,10 @@ namespace System.Data.Metadata.Edm
                     );
                     EntityContainer entityContainer = functionImportEntityContainer;
                     entitySets = somFunctionImport
-                        .ReturnTypeList.Select(
-                            returnType =>
-                                null != returnType.EntitySet
-                                    ? GetEntitySet(
-                                        returnType.EntitySet,
-                                        functionImportEntityContainer
-                                    )
-                                    : null
+                        .ReturnTypeList.Select(returnType =>
+                            null != returnType.EntitySet
+                                ? GetEntitySet(returnType.EntitySet, functionImportEntityContainer)
+                                : null
                         )
                         .ToArray();
                 }

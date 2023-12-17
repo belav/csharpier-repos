@@ -55,8 +55,8 @@ namespace System.Net.Http.Formatting
 
             foreach (MediaTypeHeaderValue mediaType1 in formatter1.SupportedMediaTypes)
             {
-                MediaTypeHeaderValue mediaType2 = formatter2.SupportedMediaTypes.Single(
-                    m => m.Equals(mediaType1)
+                MediaTypeHeaderValue mediaType2 = formatter2.SupportedMediaTypes.Single(m =>
+                    m.Equals(mediaType1)
                 );
                 Assert.NotSame(mediaType1, mediaType2);
             }
@@ -70,8 +70,7 @@ namespace System.Net.Http.Formatting
 
             foreach (Encoding mediaType1 in formatter1.SupportedEncodings)
             {
-                Encoding mediaType2 = formatter2.SupportedEncodings.Single(
-                    m => m.Equals(mediaType1)
+                Encoding mediaType2 = formatter2.SupportedEncodings.Single(m => m.Equals(mediaType1)
                 );
                 Assert.NotSame(mediaType1, mediaType2);
             }
@@ -338,15 +337,14 @@ namespace System.Net.Http.Formatting
             ObjectContent<int> content = new ObjectContent<int>(42, formatter.Object);
 
             formatter
-                .Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            typeof(int),
-                            42,
-                            stream,
-                            content,
-                            null /* transportContext */
-                        )
+                .Setup(f =>
+                    f.WriteToStreamAsync(
+                        typeof(int),
+                        42,
+                        stream,
+                        content,
+                        null /* transportContext */
+                    )
                 )
                 .Returns(TaskHelpers.Completed())
                 .Verifiable();
@@ -367,17 +365,16 @@ namespace System.Net.Http.Formatting
             ObjectContent<int> content = new ObjectContent<int>(42, formatter.Object);
 
             formatter
-                .Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            typeof(int),
-                            42,
-                            stream,
-                            content,
-                            null /* transportContext */
-                            ,
-                            CancellationToken.None
-                        )
+                .Setup(f =>
+                    f.WriteToStreamAsync(
+                        typeof(int),
+                        42,
+                        stream,
+                        content,
+                        null /* transportContext */
+                        ,
+                        CancellationToken.None
+                    )
                 )
                 .Returns(TaskHelpers.Completed())
                 .Verifiable();
@@ -402,14 +399,13 @@ namespace System.Net.Http.Formatting
             CancellationTokenSource cts = new CancellationTokenSource();
 
             formatter
-                .Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            typeof(string),
-                            It.IsAny<Stream>(),
-                            content,
-                            null /*formatterLogger */
-                        )
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        typeof(string),
+                        It.IsAny<Stream>(),
+                        content,
+                        null /*formatterLogger */
+                    )
                 )
                 .Returns(Task.FromResult<object>(null))
                 .Verifiable();
@@ -434,16 +430,15 @@ namespace System.Net.Http.Formatting
             CancellationTokenSource cts = new CancellationTokenSource();
 
             formatter
-                .Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            typeof(string),
-                            It.IsAny<Stream>(),
-                            content,
-                            null /*formatterLogger */
-                            ,
-                            cts.Token
-                        )
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        typeof(string),
+                        It.IsAny<Stream>(),
+                        content,
+                        null /*formatterLogger */
+                        ,
+                        cts.Token
+                    )
                 )
                 .Returns(Task.FromResult<object>(null))
                 .Verifiable();

@@ -85,8 +85,8 @@ namespace DbLinq.Vendor
                 var fromColumn = UnquoteSqlName(GetValue<string>(r, iFromColumn, null));
 
                 string fullFromTable = GetFullDbName(fromTable, fromSchema);
-                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(
-                    t => fullFromTable == t.Name
+                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t =>
+                    fullFromTable == t.Name
                 );
                 if (table == null)
                 {

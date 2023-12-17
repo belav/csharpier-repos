@@ -30,8 +30,9 @@ namespace System.Web.Services.Discovery
     {
         private DiscoveryClientReferenceCollection references =
             new DiscoveryClientReferenceCollection();
-        private DiscoveryClientDocumentCollection documents =
-            new DiscoveryClientDocumentCollection();
+        private DiscoveryClientDocumentCollection documents = new DiscoveryClientDocumentCollection(
+
+        );
         private Hashtable inlinedSchemas = new Hashtable();
         private ArrayList additionalInformation = new ArrayList();
         private DiscoveryExceptionDictionary errors = new DiscoveryExceptionDictionary();

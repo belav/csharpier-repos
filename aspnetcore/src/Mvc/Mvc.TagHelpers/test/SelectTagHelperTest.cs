@@ -657,30 +657,28 @@ public class SelectTagHelperTest
 
         var currentValues = new string[0];
         htmlGenerator
-            .Setup(
-                real =>
-                    real.GetCurrentValues(
-                        viewContext,
-                        modelExplorer,
-                        string.Empty, // expression
-                        false
-                    )
+            .Setup(real =>
+                real.GetCurrentValues(
+                    viewContext,
+                    modelExplorer,
+                    string.Empty, // expression
+                    false
+                )
             ) // allowMultiple
             .Returns(currentValues)
             .Verifiable();
         htmlGenerator
-            .Setup(
-                real =>
-                    real.GenerateSelect(
-                        viewContext,
-                        modelExplorer,
-                        null, // optionLabel
-                        string.Empty, // expression
-                        expectedItems,
-                        currentValues,
-                        false, // allowMultiple
-                        null
-                    )
+            .Setup(real =>
+                real.GenerateSelect(
+                    viewContext,
+                    modelExplorer,
+                    null, // optionLabel
+                    string.Empty, // expression
+                    expectedItems,
+                    currentValues,
+                    false, // allowMultiple
+                    null
+                )
             ) // htmlAttributes
             .Returns((TagBuilder)null)
             .Verifiable();
@@ -749,30 +747,28 @@ public class SelectTagHelperTest
         );
         var currentValues = new string[0];
         htmlGenerator
-            .Setup(
-                real =>
-                    real.GetCurrentValues(
-                        viewContext,
-                        modelExplorer,
-                        propertyName, // expression
-                        allowMultiple
-                    )
+            .Setup(real =>
+                real.GetCurrentValues(
+                    viewContext,
+                    modelExplorer,
+                    propertyName, // expression
+                    allowMultiple
+                )
             )
             .Returns(currentValues)
             .Verifiable();
         htmlGenerator
-            .Setup(
-                real =>
-                    real.GenerateSelect(
-                        viewContext,
-                        modelExplorer,
-                        null, // optionLabel
-                        propertyName, // expression
-                        It.IsAny<IEnumerable<SelectListItem>>(),
-                        currentValues,
-                        allowMultiple,
-                        null
-                    )
+            .Setup(real =>
+                real.GenerateSelect(
+                    viewContext,
+                    modelExplorer,
+                    null, // optionLabel
+                    propertyName, // expression
+                    It.IsAny<IEnumerable<SelectListItem>>(),
+                    currentValues,
+                    allowMultiple,
+                    null
+                )
             ) // htmlAttributes
             .Returns((TagBuilder)null)
             .Verifiable();
@@ -898,12 +894,11 @@ public class SelectTagHelperTest
         var selectList = Array.Empty<SelectListItem>();
         var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         generator
-            .Setup(
-                gen =>
-                    gen.GenerateGroupsAndOptions( /* optionLabel: */
-                        null,
-                        selectList
-                    )
+            .Setup(gen =>
+                gen.GenerateGroupsAndOptions( /* optionLabel: */
+                    null,
+                    selectList
+                )
             )
             .Returns(HtmlString.Empty)
             .Verifiable();

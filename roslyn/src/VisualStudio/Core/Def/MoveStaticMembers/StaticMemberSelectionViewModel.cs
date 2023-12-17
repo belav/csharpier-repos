@@ -33,8 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _members = members;
             _symbolToDependentsMap = dependentsMap;
-            _symbolToMemberViewMap = members.ToImmutableDictionary(
-                memberViewModel => memberViewModel.Symbol
+            _symbolToMemberViewMap = members.ToImmutableDictionary(memberViewModel =>
+                memberViewModel.Symbol
             );
         }
 

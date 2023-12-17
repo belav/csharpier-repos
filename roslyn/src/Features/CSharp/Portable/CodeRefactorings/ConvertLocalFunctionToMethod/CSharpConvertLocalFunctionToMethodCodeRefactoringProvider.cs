@@ -126,17 +126,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             // We also make a `ref` parameter here for each capture that is being written into inside the function
             var capturesAsParameters = captures
                 .Where(capture => !capture.IsThisParameter())
-                .Select(
-                    capture =>
-                        CodeGenerationSymbolFactory.CreateParameterSymbol(
-                            attributes: default,
-                            refKind: dataFlow.WrittenInside.Contains(capture)
-                                ? RefKind.Ref
-                                : RefKind.None,
-                            isParams: false,
-                            type: capture.GetSymbolType(),
-                            name: capture.Name
-                        )
+                .Select(capture =>
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        attributes: default,
+                        refKind: dataFlow.WrittenInside.Contains(capture)
+                            ? RefKind.Ref
+                            : RefKind.None,
+                        isParams: false,
+                        type: capture.GetSymbolType(),
+                        name: capture.Name
+                    )
                 )
                 .ToList();
 
@@ -147,8 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
 
             // We're going to remove unreferenced type parameters but we explicitly preserve
             // captures' types, just in case that they were not spelt out in the function body
-            var captureTypes = captures.SelectMany(
-                capture => capture.GetSymbolType().GetReferencedTypeParameters()
+            var captureTypes = captures.SelectMany(capture =>
+                capture.GetSymbolType().GetReferencedTypeParameters()
             );
             RemoveUnusedTypeParameters(
                 localFunction,
@@ -254,8 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
 
                 if (hasAdditionalTypeArguments)
                 {
-                    var existingTypeArguments = symbol.TypeArguments.Select(
-                        s => s.GenerateTypeSyntax()
+                    var existingTypeArguments = symbol.TypeArguments.Select(s =>
+                        s.GenerateTypeSyntax()
                     );
                     // Prepend additional type arguments to preserve lexical order in which they are defined
                     var typeArguments = additionalTypeArguments.Concat(existingTypeArguments);
@@ -272,13 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                             && invocation.ArgumentList.Arguments.Any(arg => arg.NameColon != null);
 
                         var additionalArguments = capturesAsParameters
-                            .Select(
-                                p =>
-                                    (ArgumentSyntax)GenerateArgument(
-                                        p,
-                                        p.Name,
-                                        shouldUseNamedArguments
-                                    )
+                            .Select(p =>
+                                (ArgumentSyntax)GenerateArgument(p, p.Name, shouldUseNamedArguments)
                             )
                             .ToArray();
 
@@ -335,8 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                         parameterNames,
                         (p, name) => GenerateArgument(p, name)
                     );
-                    var additionalArguments = capturesAsParameters.Select(
-                        p => GenerateArgument(p, p.Name)
+                    var additionalArguments = capturesAsParameters.Select(p =>
+                        GenerateArgument(p, p.Name)
                     );
                     var newNode = generator.ValueReturningLambdaExpression(
                         lambdaParameters,

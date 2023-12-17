@@ -459,7 +459,9 @@ public class OpenIdConnectConfigurationTests
                         app.Run(async context =>
                         {
                             var resolver =
-                                context.RequestServices.GetRequiredService<IAuthenticationHandlerProvider>();
+                                context.RequestServices.GetRequiredService<IAuthenticationHandlerProvider>(
+
+                                );
                             var handler =
                                 await resolver.GetHandlerAsync(
                                     context,
@@ -596,15 +598,14 @@ public class OpenIdConnectConfigurationTests
     private TestServer BuildTestServer(Action<OpenIdConnectOptions> options)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                builder =>
-                    builder
-                        .UseTestServer()
-                        .ConfigureServices(services =>
-                        {
-                            services.AddAuthentication().AddCookie().AddOpenIdConnect(options);
-                        })
-                        .Configure(app => app.UseAuthentication())
+            .ConfigureWebHost(builder =>
+                builder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddAuthentication().AddCookie().AddOpenIdConnect(options);
+                    })
+                    .Configure(app => app.UseAuthentication())
             )
             .Build();
         host.Start();

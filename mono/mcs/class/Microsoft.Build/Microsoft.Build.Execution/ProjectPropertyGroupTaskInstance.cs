@@ -41,9 +41,9 @@ namespace Microsoft.Build.Execution
             //this.FullPath = fullPath;
             location = xml.Location;
 
-            Properties = xml.Properties.Select(
-                prop => new ProjectPropertyGroupTaskPropertyInstance(prop)
-            )
+            Properties = xml.Properties.Select(prop => new ProjectPropertyGroupTaskPropertyInstance(
+                prop
+            ))
                 .ToArray();
         }
 

@@ -123,13 +123,12 @@ namespace Microsoft.DotNet.CoreSetup.Test
             var builder = NetCoreAppBuilder.ForNETCoreApp(Name, TestContext.TargetRID);
 
             // Update the .runtimeconfig.json - add included framework and remove any existing NETCoreApp framework
-            builder.WithRuntimeConfig(
-                c =>
-                    c.WithIncludedFramework(
-                            Constants.MicrosoftNETCoreApp,
-                            TestContext.MicrosoftNETCoreAppVersion
-                        )
-                        .RemoveFramework(Constants.MicrosoftNETCoreApp)
+            builder.WithRuntimeConfig(c =>
+                c.WithIncludedFramework(
+                        Constants.MicrosoftNETCoreApp,
+                        TestContext.MicrosoftNETCoreAppVersion
+                    )
+                    .RemoveFramework(Constants.MicrosoftNETCoreApp)
             );
 
             // Add main project assembly

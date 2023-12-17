@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 symbols,
                 localNameOpt
             );
-            statements = statements.SelectAsArray(
-                s => s.WithAdditionalAnnotations(statementAnnotation)
+            statements = statements.SelectAsArray(s =>
+                s.WithAdditionalAnnotations(statementAnnotation)
             );
 
             return CreateEqualsMethod(compilation, statements);
@@ -92,8 +92,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 containingType,
                 symbols
             );
-            statements = statements.SelectAsArray(
-                s => s.WithAdditionalAnnotations(statementAnnotation)
+            statements = statements.SelectAsArray(s =>
+                s.WithAdditionalAnnotations(statementAnnotation)
             );
 
             var methodSymbol = constructedEquatableType

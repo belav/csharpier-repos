@@ -191,8 +191,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 // as we only parse when we have a non-empty sequence of virtual chars to begin with.
                 if (
                     text.Length > 0
-                    && compilationUnit.EndOfFileToken.LeadingTrivia.All(
-                        t => t.Kind is JsonKind.WhitespaceTrivia or JsonKind.EndOfLineTrivia
+                    && compilationUnit.EndOfFileToken.LeadingTrivia.All(t =>
+                        t.Kind is JsonKind.WhitespaceTrivia or JsonKind.EndOfLineTrivia
                     )
                 )
                 {

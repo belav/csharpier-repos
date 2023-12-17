@@ -201,7 +201,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     buffer
                 );
                 var controllerFactoryService =
-                    _languageService.Package.ComponentModel.GetService<INavigationBarControllerFactoryService>();
+                    _languageService.Package.ComponentModel.GetService<INavigationBarControllerFactoryService>(
+
+                    );
                 var newController = controllerFactoryService.CreateController(
                     navigationBarClient,
                     textBuffer
@@ -315,12 +317,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 var languageServiceBroker =
                     _languageService.Package.ComponentModel.GetService<ILanguageServiceBroker2>();
                 var asyncListenerProvider =
-                    _languageService.Package.ComponentModel.GetService<IAsynchronousOperationListenerProvider>();
+                    _languageService.Package.ComponentModel.GetService<IAsynchronousOperationListenerProvider>(
+
+                    );
                 var asyncListener = asyncListenerProvider.GetListener(
                     FeatureAttribute.DocumentOutline
                 );
                 var editorAdaptersFactoryService =
-                    _languageService.Package.ComponentModel.GetService<IVsEditorAdaptersFactoryService>();
+                    _languageService.Package.ComponentModel.GetService<IVsEditorAdaptersFactoryService>(
+
+                    );
                 var outliningManagerService =
                     _languageService.Package.ComponentModel.GetService<IOutliningManagerService>();
 

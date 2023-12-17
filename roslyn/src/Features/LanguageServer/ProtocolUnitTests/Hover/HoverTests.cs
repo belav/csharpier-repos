@@ -568,8 +568,8 @@ class C
             );
             var content = string.Join(
                 "|",
-                classifiedTextElements.Select(
-                    cte => string.Join(string.Empty, cte.Runs.Select(ctr => ctr.Text))
+                classifiedTextElements.Select(cte =>
+                    string.Join(string.Empty, cte.Runs.Select(ctr => ctr.Text))
                 )
             );
             Assert.Equal(expectedContent, content);

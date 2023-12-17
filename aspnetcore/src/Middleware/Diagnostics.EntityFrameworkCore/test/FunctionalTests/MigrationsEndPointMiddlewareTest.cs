@@ -28,8 +28,7 @@ public class MigrationsEndPointMiddlewareTest
             {
                 webHostBuilder
                     .UseTestServer()
-                    .Configure(
-                        app => app.UseMigrationsEndPoint().UseMiddleware<SuccessMiddleware>()
+                    .Configure(app => app.UseMigrationsEndPoint().UseMiddleware<SuccessMiddleware>()
                     );
             })
             .Build();
@@ -291,12 +290,16 @@ public class MigrationsEndPointMiddlewareTest
                         .Configure(app => app.UseMigrationsEndPoint())
                         .ConfigureServices(services =>
                         {
-                            services.AddDbContext<BloggingContextWithSnapshotThatThrows>(optionsBuilder =>
-                            {
-                                optionsBuilder.UseSqlite(database.ConnectionString);
-                            });
-                        });
-                })
+                            services.AddDbContext<BloggingContextWithSnapshotThatThrows>(
+                                optionsBuilder =>
+                                {
+                                    optionsBuilder.UseSqlite(database.ConnectionString);
+                                }
+                            );
+                        }
+                        );
+                }
+                )
                 .Build();
 
             await host.StartAsync();

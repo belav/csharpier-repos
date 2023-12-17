@@ -519,7 +519,9 @@ public partial class TempConvertSoapClient
         get
         {
             System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
-                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>(
+
+                );
             if ((httpCookieContainerManager != null))
             {
                 return httpCookieContainerManager.CookieContainer;
@@ -532,7 +534,9 @@ public partial class TempConvertSoapClient
         set
         {
             System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
-                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>(
+
+                );
             if ((httpCookieContainerManager != null))
             {
                 httpCookieContainerManager.CookieContainer = value;

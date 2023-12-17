@@ -50,21 +50,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
             var membersInType = containingType
                 .GetMembers()
                 .WhereAsArray(MemberAndDestinationValidator.IsMemberValid);
-            var memberViewModels = membersInType.SelectAsArray(
-                member =>
-                    new MemberSymbolViewModel(member, _glyphService)
-                    {
-                        // The member user selected will be checked at the beginning.
-                        IsChecked = selectedMembers.Any(
-                            SymbolEquivalenceComparer.Instance.Equals,
-                            member
-                        ),
-                        MakeAbstract = false,
-                        IsMakeAbstractCheckable =
-                            !member.IsKind(SymbolKind.Field) && !member.IsAbstract,
-                        IsCheckable = true
-                    }
-            );
+            var memberViewModels = membersInType.SelectAsArray(member => new MemberSymbolViewModel(
+                member,
+                _glyphService
+            )
+            {
+                // The member user selected will be checked at the beginning.
+                IsChecked = selectedMembers.Any(SymbolEquivalenceComparer.Instance.Equals, member),
+                MakeAbstract = false,
+                IsMakeAbstractCheckable = !member.IsKind(SymbolKind.Field) && !member.IsAbstract,
+                IsCheckable = true
+            });
 
             using var cancellationTokenSource = new CancellationTokenSource();
             var baseTypeRootViewModel = BaseTypeTreeNodeViewModel.CreateBaseTypeTree(

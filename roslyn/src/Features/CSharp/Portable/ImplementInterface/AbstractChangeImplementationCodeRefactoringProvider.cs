@@ -144,8 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
 
             if (offerForSameInterface)
             {
-                var interfaceNames = interfaceTypes.Select(
-                    i => i.ToDisplayString(NameAndTypeParametersFormat)
+                var interfaceNames = interfaceTypes.Select(i =>
+                    i.ToDisplayString(NameAndTypeParametersFormat)
                 );
                 nestedActions.Add(
                     CodeAction.Create(
@@ -344,8 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                     editor.ReplaceNode(
                         decl,
                         (currentDecl, g) =>
-                            interfaceMembers.Select(
-                                s => ChangeImplementation(g, currentDecl, implMember, s)
+                            interfaceMembers.Select(s =>
+                                ChangeImplementation(g, currentDecl, implMember, s)
                             )
                     );
                 }

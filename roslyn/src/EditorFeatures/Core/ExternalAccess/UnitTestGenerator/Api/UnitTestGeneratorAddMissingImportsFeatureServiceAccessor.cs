@@ -34,8 +34,9 @@ internal class UnitTestGeneratorAddMissingImportsFeatureServiceAccessor(
     )
     {
         var options = await GetOptionsAsync(document, cancellationToken).ConfigureAwait(false);
-        var service =
-            document.Project.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
+        var service = document.Project.GetRequiredLanguageService<IAddMissingImportsFeatureService>(
+
+        );
 
         // Unfortunately, the unit testing system doesn't have a way to report progress.
         return await service
@@ -56,8 +57,9 @@ internal class UnitTestGeneratorAddMissingImportsFeatureServiceAccessor(
     )
     {
         var options = await GetOptionsAsync(document, cancellationToken).ConfigureAwait(false);
-        var service =
-            document.Project.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
+        var service = document.Project.GetRequiredLanguageService<IAddMissingImportsFeatureService>(
+
+        );
         var result = await service
             .AnalyzeAsync(document, textSpan, options, cancellationToken)
             .ConfigureAwait(false);
@@ -73,8 +75,9 @@ internal class UnitTestGeneratorAddMissingImportsFeatureServiceAccessor(
     )
     {
         var options = await GetOptionsAsync(document, cancellationToken).ConfigureAwait(false);
-        var service =
-            document.Project.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
+        var service = document.Project.GetRequiredLanguageService<IAddMissingImportsFeatureService>(
+
+        );
         var unwrappedResult = new AddMissingImportsAnalysisResult(
             analysisResult.AddImportFixDatas.SelectAsArray(result => result.Underlying)
         );

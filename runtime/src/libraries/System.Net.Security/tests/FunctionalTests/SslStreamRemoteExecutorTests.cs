@@ -39,8 +39,9 @@ namespace System.Net.Security.Tests
                 .Invoke(
                     async () =>
                     {
-                        (Stream clientStream, Stream serverStream) =
-                            TestHelper.GetConnectedStreams();
+                        (Stream clientStream, Stream serverStream) = TestHelper.GetConnectedStreams(
+
+                        );
                         using (clientStream)
                         using (serverStream)
                         using (var client = new SslStream(clientStream))

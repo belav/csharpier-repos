@@ -514,8 +514,8 @@ public class SimpleTypeModelBinderIntegrationTest
             .BindingDetails(binding =>
             {
                 // A real details provider could customize message based on BindingMetadataProviderContext.
-                binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
-                    value => $"Hurts when '{value}' is provided."
+                binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value =>
+                    $"Hurts when '{value}' is provided."
                 );
             });
 

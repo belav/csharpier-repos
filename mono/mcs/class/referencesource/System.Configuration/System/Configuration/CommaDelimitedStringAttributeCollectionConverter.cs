@@ -41,8 +41,9 @@ namespace System.Configuration
 
         public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
         {
-            CommaDelimitedStringCollection attributeCollection =
-                new CommaDelimitedStringCollection();
+            CommaDelimitedStringCollection attributeCollection = new CommaDelimitedStringCollection(
+
+            );
             attributeCollection.FromString((string)data);
             return attributeCollection;
         }

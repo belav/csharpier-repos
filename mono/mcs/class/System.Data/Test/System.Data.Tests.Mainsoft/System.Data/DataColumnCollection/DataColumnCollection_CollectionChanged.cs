@@ -42,8 +42,9 @@ namespace tests.system_data_dll.System_Data
         [Test]
         public void Main()
         {
-            DataColumnCollection_CollectionChanged tc =
-                new DataColumnCollection_CollectionChanged();
+            DataColumnCollection_CollectionChanged tc = new DataColumnCollection_CollectionChanged(
+
+            );
             Exception exp = null;
             try
             {

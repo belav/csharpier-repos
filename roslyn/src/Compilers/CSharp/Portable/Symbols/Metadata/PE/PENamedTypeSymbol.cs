@@ -95,8 +95,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         // a separate class with a noUncommonProperties singleton used for cases when type is "common".
         // this is done purely to save memory with expectation that "uncommon" cases are indeed uncommon.
         #region "Uncommon properties"
-        private static readonly UncommonProperties s_noUncommonProperties =
-            new UncommonProperties();
+        private static readonly UncommonProperties s_noUncommonProperties = new UncommonProperties(
+
+        );
         private UncommonProperties _lazyUncommonProperties;
 
         private UncommonProperties GetUncommonProperties()
@@ -2024,8 +2025,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 return declaredInterfaces;
             }
 
-            return declaredInterfaces.SelectAsArray(
-                t => BaseTypeAnalysis.TypeDependsOn(t, this) ? CyclicInheritanceError(t) : t
+            return declaredInterfaces.SelectAsArray(t =>
+                BaseTypeAnalysis.TypeDependsOn(t, this) ? CyclicInheritanceError(t) : t
             );
         }
 

@@ -175,8 +175,12 @@ namespace Roslyn.Test.Utilities
             var ilStream = builder.RealizedIL;
             if (mapLocal == null)
             {
-                mapLocal = local =>
-                    new LocalInfo(local.Name, local.Type, local.IsPinned, local.IsReference);
+                mapLocal = local => new LocalInfo(
+                    local.Name,
+                    local.Type,
+                    local.IsPinned,
+                    local.IsReference
+                );
             }
 
             var locals = builder.LocalSlotManager.LocalsInOrder().SelectAsArray(mapLocal);
@@ -222,8 +226,12 @@ namespace Roslyn.Test.Utilities
 
             if (mapLocal == null)
             {
-                mapLocal = local =>
-                    new LocalInfo(local.Name, local.Type, local.IsPinned, local.IsReference);
+                mapLocal = local => new LocalInfo(
+                    local.Name,
+                    local.Type,
+                    local.IsPinned,
+                    local.IsReference
+                );
             }
 
             var locals = builder.LocalSlotManager.LocalsInOrder().SelectAsArray(mapLocal);

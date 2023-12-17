@@ -1616,8 +1616,9 @@ namespace System.Data.OleDb
             {
                 if (null != propSet)
                 {
-                    UnsafeNativeMethods.ICommandProperties icommandProperties =
-                        ICommandProperties();
+                    UnsafeNativeMethods.ICommandProperties icommandProperties = ICommandProperties(
+
+                    );
 
                     Bid.Trace("<oledb.ICommandProperties.SetProperties|API|OLEDB> %d#\n", ObjectID);
                     OleDbHResult hr = icommandProperties.SetProperties(

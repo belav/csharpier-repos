@@ -467,8 +467,8 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
 
         if (
             size.HasValue
-            && NameBasesUsingPrecision.Any(
-                n => storeTypeName.StartsWith(n, StringComparison.OrdinalIgnoreCase)
+            && NameBasesUsingPrecision.Any(n =>
+                storeTypeName.StartsWith(n, StringComparison.OrdinalIgnoreCase)
             )
         )
         {

@@ -86,27 +86,20 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
         private static ImmutableArray<Argument> GetArguments(
             SeparatedSyntaxList<ArgumentSyntax> arguments
         ) =>
-            arguments.SelectAsArray(
-                a =>
-                    new Argument(
-                        a.GetRefKind(),
-                        a.NameColon?.Name.Identifier.ValueText,
-                        a.Expression
-                    )
-            );
+            arguments.SelectAsArray(a => new Argument(
+                a.GetRefKind(),
+                a.NameColon?.Name.Identifier.ValueText,
+                a.Expression
+            ));
 
         private static ImmutableArray<Argument> GetArguments(
             SeparatedSyntaxList<AttributeArgumentSyntax> arguments
         ) =>
-            arguments.SelectAsArray(
-                a =>
-                    new Argument(
-                        refKind: RefKind.None,
-                        a.NameEquals?.Name.Identifier.ValueText
-                            ?? a.NameColon?.Name.Identifier.ValueText,
-                        a.Expression
-                    )
-            );
+            arguments.SelectAsArray(a => new Argument(
+                refKind: RefKind.None,
+                a.NameEquals?.Name.Identifier.ValueText ?? a.NameColon?.Name.Identifier.ValueText,
+                a.Expression
+            ));
 
         protected override bool TryInitializeSimpleNameGenerationState(
             SemanticDocument document,

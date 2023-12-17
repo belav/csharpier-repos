@@ -44,32 +44,30 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             _globalOptions.GetOption(LineCommitOptionsStorage.PrettyListing, languageName);
 
         public void SetPrettyListing(string languageName, bool value) =>
-            InvokeOnUIThread(
-                _ =>
-                    _globalOptions.SetGlobalOption(
-                        LineCommitOptionsStorage.PrettyListing,
-                        languageName,
-                        value
-                    )
+            InvokeOnUIThread(_ =>
+                _globalOptions.SetGlobalOption(
+                    LineCommitOptionsStorage.PrettyListing,
+                    languageName,
+                    value
+                )
             );
 
         public void SetFileScopedNamespaces(bool value) =>
-            InvokeOnUIThread(
-                _ =>
-                    _globalOptions.SetGlobalOption(
-                        Microsoft
-                            .CodeAnalysis
-                            .CSharp
-                            .CodeStyle
-                            .CSharpCodeStyleOptions
-                            .NamespaceDeclarations,
-                        new CodeStyleOption2<NamespaceDeclarationPreference>(
-                            value
-                                ? NamespaceDeclarationPreference.FileScoped
-                                : NamespaceDeclarationPreference.BlockScoped,
-                            NotificationOption2.Suggestion
-                        )
+            InvokeOnUIThread(_ =>
+                _globalOptions.SetGlobalOption(
+                    Microsoft
+                        .CodeAnalysis
+                        .CSharp
+                        .CodeStyle
+                        .CSharpCodeStyleOptions
+                        .NamespaceDeclarations,
+                    new CodeStyleOption2<NamespaceDeclarationPreference>(
+                        value
+                            ? NamespaceDeclarationPreference.FileScoped
+                            : NamespaceDeclarationPreference.BlockScoped,
+                        NotificationOption2.Suggestion
                     )
+                )
             );
 
         public void SetGlobalOption(
@@ -113,7 +111,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             catch (Exception e)
             {
                 var listenerProvider = GetComponentModel()
-                    .DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+                    .DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>(
+
+                    );
                 var messageBuilder = new StringBuilder(
                     "Failed to clean up listeners in a timely manner."
                 );
@@ -135,8 +135,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         private static void WaitForProjectSystem(TimeSpan timeout)
         {
-            var operationProgressStatus = InvokeOnUIThread(
-                _ => GetGlobalService<SVsOperationProgress, IVsOperationProgressStatusService>()
+            var operationProgressStatus = InvokeOnUIThread(_ =>
+                GetGlobalService<SVsOperationProgress, IVsOperationProgressStatusService>()
             );
             var stageStatus = operationProgressStatus.GetStageStatus(
                 CommonOperationProgressStageIds.Intellisense
@@ -159,7 +159,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 LoadRoslynPackage();
 
                 var hook =
-                    _visualStudioWorkspace.Services.GetRequiredService<IWorkpacePartialSolutionsTestHook>();
+                    _visualStudioWorkspace.Services.GetRequiredService<IWorkpacePartialSolutionsTestHook>(
+
+                    );
                 hook.IsPartialSolutionDisabled = true;
             });
 
@@ -202,7 +204,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             InvokeOnUIThread(cancellationToken =>
             {
                 var provider = GetComponentModel()
-                    .DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+                    .DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>(
+
+                    );
 
                 if (provider == null)
                 {

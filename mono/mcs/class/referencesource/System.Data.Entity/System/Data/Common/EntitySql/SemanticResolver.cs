@@ -1085,8 +1085,8 @@ namespace System.Data.Common.EntitySql
                     //
                     // Reset aggregate info of AST nodes of aggregates resolved to the CurrentScopeRegion.
                     //
-                    this.CurrentScopeRegion.GroupAggregateInfos.ForEach(
-                        groupAggregateInfo => groupAggregateInfo.DetachFromAstNode()
+                    this.CurrentScopeRegion.GroupAggregateInfos.ForEach(groupAggregateInfo =>
+                        groupAggregateInfo.DetachFromAstNode()
                     );
 
                     //

@@ -17,30 +17,27 @@ public abstract class ExpressionMutator
     {
         IncludeMethodInfo = typeof(EntityFrameworkQueryableExtensions)
             .GetMethods()
-            .Where(
-                m =>
-                    m.Name == nameof(EntityFrameworkQueryableExtensions.Include)
-                    && m.GetParameters()[1].ParameterType != typeof(string)
+            .Where(m =>
+                m.Name == nameof(EntityFrameworkQueryableExtensions.Include)
+                && m.GetParameters()[1].ParameterType != typeof(string)
             )
             .Single();
         ThenIncludeCollectionMethodInfo = typeof(EntityFrameworkQueryableExtensions)
             .GetMethods()
-            .Where(
-                m =>
-                    m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
-                    && m.GetParameters()[0].ParameterType.GetGenericArguments()[1].IsGenericType
-                    && m.GetParameters()[0]
-                        .ParameterType.GetGenericArguments()[1]
-                        .GetGenericTypeDefinition() == typeof(IEnumerable<>)
+            .Where(m =>
+                m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
+                && m.GetParameters()[0].ParameterType.GetGenericArguments()[1].IsGenericType
+                && m.GetParameters()[0]
+                    .ParameterType.GetGenericArguments()[1]
+                    .GetGenericTypeDefinition() == typeof(IEnumerable<>)
             )
             .Single();
 
         ThenIncludeReferenceMethodInfo = typeof(EntityFrameworkQueryableExtensions)
             .GetMethods()
-            .Where(
-                m =>
-                    m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
-                    && m != ThenIncludeCollectionMethodInfo
+            .Where(m =>
+                m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
+                && m != ThenIncludeCollectionMethodInfo
             )
             .Single();
     }
@@ -95,8 +92,8 @@ public abstract class ExpressionMutator
         if (type.IsArray)
         {
             properties = properties
-                .Where(
-                    p => p.Name != "Rank" && p.Name != "IsFixedSize" && p.Name != "IsSynchronized"
+                .Where(p =>
+                    p.Name != "Rank" && p.Name != "IsFixedSize" && p.Name != "IsSynchronized"
                 )
                 .ToList();
         }
@@ -110,13 +107,12 @@ public abstract class ExpressionMutator
         if (entityType != null)
         {
             properties = properties
-                .Where(
-                    p =>
-                        entityType
-                            .GetProperties()
-                            .Where(pp => pp.PropertyInfo != null)
-                            .Select(pp => pp.Name)
-                            .Contains(p.Name)
+                .Where(p =>
+                    entityType
+                        .GetProperties()
+                        .Where(pp => pp.PropertyInfo != null)
+                        .Select(pp => pp.Name)
+                        .Contains(p.Name)
                 )
                 .ToList();
         }

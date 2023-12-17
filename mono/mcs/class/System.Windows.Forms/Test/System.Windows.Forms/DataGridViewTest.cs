@@ -288,8 +288,9 @@ namespace MonoTests.System.Windows.Forms
                                     continue;
 
                                 using (
-                                    DataGridView dgv =
-                                        DataGridViewCommon.CreateAndFillForClipboard()
+                                    DataGridView dgv = DataGridViewCommon.CreateAndFillForClipboard(
+
+                                    )
                                 )
                                 {
                                     dgv.SelectionMode = selectionmode;

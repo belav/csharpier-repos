@@ -625,8 +625,9 @@ namespace System.ServiceModel.Activities
 
         protected override void Cancel(NativeActivityContext context)
         {
-            SendReceiveExtension sendReceiveExtension =
-                context.GetExtension<SendReceiveExtension>();
+            SendReceiveExtension sendReceiveExtension = context.GetExtension<SendReceiveExtension>(
+
+            );
             if (sendReceiveExtension != null)
             {
                 Bookmark pendingBookmark = this.extensionSendCompleteBookmark.Get(context);
@@ -646,8 +647,9 @@ namespace System.ServiceModel.Activities
 
         protected override void Abort(NativeActivityAbortContext context)
         {
-            SendReceiveExtension sendReceiveExtension =
-                context.GetExtension<SendReceiveExtension>();
+            SendReceiveExtension sendReceiveExtension = context.GetExtension<SendReceiveExtension>(
+
+            );
             if (sendReceiveExtension != null)
             {
                 Bookmark pendingBookmark = this.extensionSendCompleteBookmark.Get(context);
@@ -683,8 +685,9 @@ namespace System.ServiceModel.Activities
         // workflowservicehost and always use the extension.
         protected override void Execute(NativeActivityContext context)
         {
-            SendReceiveExtension sendReceiveExtension =
-                context.GetExtension<SendReceiveExtension>();
+            SendReceiveExtension sendReceiveExtension = context.GetExtension<SendReceiveExtension>(
+
+            );
             if (sendReceiveExtension != null)
             {
                 this.ExecuteUsingExtension(sendReceiveExtension, context);
@@ -1541,7 +1544,9 @@ namespace System.ServiceModel.Activities
                 // Do it with or without correlation
                 if (
                     instance.CorrelationSynchronizer == null
-                    || instance.CorrelationSynchronizer.NotifyWorkflowCorrelationProcessingComplete()
+                    || instance.CorrelationSynchronizer.NotifyWorkflowCorrelationProcessingComplete(
+
+                    )
                 )
                 {
                     // The send complete notification has already occurred
@@ -2171,8 +2176,9 @@ namespace System.ServiceModel.Activities
                     if (this.channel.State == CommunicationState.Created)
                     {
                         // Disable ContextManager before channel is opened
-                        IContextManager contextManager =
-                            this.channel.GetProperty<IContextManager>();
+                        IContextManager contextManager = this.channel.GetProperty<IContextManager>(
+
+                        );
                         if (contextManager != null)
                         {
                             contextManager.Enabled = false;

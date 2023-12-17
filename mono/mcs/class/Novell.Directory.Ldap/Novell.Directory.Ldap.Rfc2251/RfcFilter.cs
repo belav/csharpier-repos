@@ -319,9 +319,9 @@ namespace Novell.Directory.Ldap.Rfc2251
                                 int tokCnt = sub.Count;
                                 int cnt = 0;
 
-                                System.String lastTok = new System.Text.StringBuilder(
-                                    ""
-                                ).ToString();
+                                System.String lastTok = new System.Text.StringBuilder("").ToString(
+
+                                );
 
                                 while (sub.HasMoreTokens())
                                 {

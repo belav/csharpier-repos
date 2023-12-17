@@ -1039,8 +1039,8 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(
-                options => options.ThrowOnBadRequest = throwOnBadRequests
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = throwOnBadRequests
             );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -1119,8 +1119,8 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(
-                options => options.ThrowOnBadRequest = true
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
             );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);

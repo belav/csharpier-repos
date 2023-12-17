@@ -21,12 +21,9 @@ public class MaxKeyLengthSchemaTest : IClassFixture<ScratchDatabaseFixture>
 
         services
             .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
-            .AddDbContext<VerstappenDbContext>(
-                o =>
-                    o.UseSqlite(fixture.Connection)
-                        .ConfigureWarnings(
-                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
-                        )
+            .AddDbContext<VerstappenDbContext>(o =>
+                o.UseSqlite(fixture.Connection)
+                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
             )
             .AddIdentity<IdentityUser, IdentityRole>(o => o.Stores.MaxLengthForKeys = 128)
             .AddEntityFrameworkStores<VerstappenDbContext>();

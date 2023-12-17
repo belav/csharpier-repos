@@ -102,7 +102,9 @@ namespace System.ServiceModel
             : MessageSecurityVersion
         {
             static MessageSecurityVersion instance =
-                new WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11MessageSecurityVersion();
+                new WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11MessageSecurityVersion(
+
+                );
 
             public static MessageSecurityVersion Instance
             {
@@ -137,7 +139,9 @@ namespace System.ServiceModel
             : MessageSecurityVersion
         {
             static MessageSecurityVersion instance =
-                new WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion();
+                new WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion(
+
+                );
 
             public static MessageSecurityVersion Instance
             {
@@ -172,7 +176,9 @@ namespace System.ServiceModel
             : MessageSecurityVersion
         {
             static MessageSecurityVersion instance =
-                new WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion();
+                new WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion(
+
+                );
 
             public static MessageSecurityVersion Instance
             {
@@ -207,7 +213,9 @@ namespace System.ServiceModel
             : MessageSecurityVersion
         {
             static MessageSecurityVersion instance =
-                new WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion();
+                new WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion(
+
+                );
 
             public static MessageSecurityVersion Instance
             {
@@ -242,7 +250,9 @@ namespace System.ServiceModel
             : MessageSecurityVersion
         {
             static MessageSecurityVersion instance =
-                new WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12MessageSecurityVersion();
+                new WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12MessageSecurityVersion(
+
+                );
 
             public static MessageSecurityVersion Instance
             {
@@ -277,7 +287,9 @@ namespace System.ServiceModel
             : MessageSecurityVersion
         {
             static MessageSecurityVersion instance =
-                new WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion();
+                new WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion(
+
+                );
 
             public static MessageSecurityVersion Instance
             {

@@ -10,8 +10,9 @@ namespace System.Net.Http
     internal static class CancellationHelper
     {
         /// <summary>The default message used by <see cref="OperationCanceledException"/>.</summary>
-        private static readonly string s_cancellationMessage =
-            new OperationCanceledException().Message; // use same message as the default ctor
+        private static readonly string s_cancellationMessage = new OperationCanceledException(
+
+        ).Message; // use same message as the default ctor
 
         /// <summary>Determines whether to wrap an <see cref="Exception"/> in a cancellation exception.</summary>
         /// <param name="exception">The exception.</param>

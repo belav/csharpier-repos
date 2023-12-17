@@ -22,7 +22,9 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public WSTrustSerializationContext()
             : this(
-                SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager()
+                SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager(
+
+                )
             ) { }
 
         /// <summary>

@@ -201,10 +201,9 @@ namespace System.Linq
                         .Select(i => new { Info = i, GenType = i.GetGenericTypeDefinition() })
                         .ToArray();
                     Type? typeArg = singleTypeGenInterfacesWithGetType
-                        .Where(
-                            i =>
-                                i.GenType == typeof(IOrderedQueryable<>)
-                                || i.GenType == typeof(IOrderedEnumerable<>)
+                        .Where(i =>
+                            i.GenType == typeof(IOrderedQueryable<>)
+                            || i.GenType == typeof(IOrderedEnumerable<>)
                         )
                         .Select(i => i.Info.GenericTypeArguments[0])
                         .Distinct()
@@ -214,10 +213,9 @@ namespace System.Linq
                     else
                     {
                         typeArg = singleTypeGenInterfacesWithGetType
-                            .Where(
-                                i =>
-                                    i.GenType == typeof(IQueryable<>)
-                                    || i.GenType == typeof(IEnumerable<>)
+                            .Where(i =>
+                                i.GenType == typeof(IQueryable<>)
+                                || i.GenType == typeof(IEnumerable<>)
                             )
                             .Select(i => i.Info.GenericTypeArguments[0])
                             .Distinct()

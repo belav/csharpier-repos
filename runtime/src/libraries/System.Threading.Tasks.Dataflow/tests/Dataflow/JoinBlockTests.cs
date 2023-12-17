@@ -68,21 +68,19 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestToString()
         {
-            DataflowTestHelpers.TestToString(
-                nameFormat =>
-                    nameFormat != null
-                        ? new JoinBlock<int, string>(
-                            new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
-                        )
-                        : new JoinBlock<int, string>()
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new JoinBlock<int, string>(
+                        new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new JoinBlock<int, string>()
             );
-            DataflowTestHelpers.TestToString(
-                nameFormat =>
-                    nameFormat != null
-                        ? new JoinBlock<int, string, double>(
-                            new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
-                        )
-                        : new JoinBlock<int, string, double>()
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new JoinBlock<int, string, double>(
+                        new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new JoinBlock<int, string, double>()
             );
         }
 
@@ -430,26 +428,23 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var sources = Enumerable
                 .Range(0, 2)
-                .Select(
-                    i =>
-                        new DelegatePropagator<int, int>
-                        {
-                            ReserveMessageDelegate = delegate
-                            {
-                                return true;
-                            },
-                            ConsumeMessageDelegate = delegate(
-                                DataflowMessageHeader messageHeader,
-                                ITargetBlock<int> target,
-                                out bool messageConsumed
-                            )
-                            {
-                                messageConsumed = false; // fail consumption of a message already reserved
-                                Assert.Equal(expected: 0, actual: i); // shouldn't get to second source
-                                return 0;
-                            }
-                        }
-                )
+                .Select(i => new DelegatePropagator<int, int>
+                {
+                    ReserveMessageDelegate = delegate
+                    {
+                        return true;
+                    },
+                    ConsumeMessageDelegate = delegate(
+                        DataflowMessageHeader messageHeader,
+                        ITargetBlock<int> target,
+                        out bool messageConsumed
+                    )
+                    {
+                        messageConsumed = false; // fail consumption of a message already reserved
+                        Assert.Equal(expected: 0, actual: i); // shouldn't get to second source
+                        return 0;
+                    }
+                })
                 .ToArray();
 
             var options = new GroupingDataflowBlockOptions { Greedy = false };

@@ -41,19 +41,18 @@ public class WebServer
                 {
                     if (options.WebServerUseCors)
                     {
-                        services.AddCors(
-                            o =>
-                                o.AddPolicy(
-                                    "AnyCors",
-                                    builder =>
-                                    {
-                                        builder
-                                            .AllowAnyOrigin()
-                                            .AllowAnyMethod()
-                                            .AllowAnyHeader()
-                                            .WithExposedHeaders("*");
-                                    }
-                                )
+                        services.AddCors(o =>
+                            o.AddPolicy(
+                                "AnyCors",
+                                builder =>
+                                {
+                                    builder
+                                        .AllowAnyOrigin()
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader()
+                                        .WithExposedHeaders("*");
+                                }
+                            )
                         );
                     }
                     services.AddSingleton(logger);
@@ -96,8 +95,9 @@ public static class ServerURLsProvider
             TaskCompletionSource<ServerURLs> tcs = realUrlsAvailableTcs;
             try
             {
-                ICollection<string>? addresses =
-                    app.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
+                ICollection<string>? addresses = app.ServerFeatures.Get<IServerAddressesFeature>(
+
+                )?.Addresses;
 
                 string? ipAddress = null;
                 string? ipAddressSecure = null;
@@ -125,12 +125,11 @@ public static class ServerURLsProvider
 
             static string? GetHttpServerAddress(ICollection<string> addresses, bool secure) =>
                 addresses
-                    ?.Where(
-                        a =>
-                            a.StartsWith(
-                                secure ? "https:" : "http:",
-                                StringComparison.InvariantCultureIgnoreCase
-                            )
+                    ?.Where(a =>
+                        a.StartsWith(
+                            secure ? "https:" : "http:",
+                            StringComparison.InvariantCultureIgnoreCase
+                        )
                     )
                     .Select(a => new Uri(a))
                     .Select(uri => uri.ToString())

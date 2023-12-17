@@ -625,10 +625,9 @@ public class IncludeMembersSelectFirstOrDefaultWithSubqueryMapFrom
                 .ForMember(
                     d => d.Details,
                     o =>
-                        o.MapFrom(
-                            s =>
-                                s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails)
-                                    .FirstOrDefault()
+                        o.MapFrom(s =>
+                            s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails)
+                                .FirstOrDefault()
                         )
                 );
             cfg.CreateProjection<OtherInnerSource, Destination>(MemberList.None)
@@ -1069,8 +1068,8 @@ public class SubqueryMapFromWithIncludeMembersSelectMemberFirstOrDefault
                 .ForMember(
                     d => d.Details,
                     o =>
-                        o.MapFrom(
-                            s => s.InnerSourceWrappers.Select(s => s.InnerSource).FirstOrDefault()
+                        o.MapFrom(s =>
+                            s.InnerSourceWrappers.Select(s => s.InnerSource).FirstOrDefault()
                         )
                 )
                 .ForMember(
@@ -1078,10 +1077,8 @@ public class SubqueryMapFromWithIncludeMembersSelectMemberFirstOrDefault
                     o => o.MapFrom(s => s.OtherInnerSources.Select(s => s).FirstOrDefault())
                 );
             cfg.CreateProjection<InnerSource, DestinationDetails>()
-                .IncludeMembers(
-                    s =>
-                        s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails)
-                            .FirstOrDefault()
+                .IncludeMembers(s =>
+                    s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails).FirstOrDefault()
                 );
             cfg.CreateProjection<OtherInnerSource, OtherDestinationDetails>()
                 .IncludeMembers(s => s.OtherInnerSourceDetails.Select(s => s).FirstOrDefault());

@@ -369,8 +369,8 @@ namespace System.Web.Razor.Parser
         {
             // http://dev.w3.org/html5/spec/tokenization.html#before-attribute-name-state
             // Capture whitespace
-            var whitespace = ReadWhile(
-                sym => sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine
+            var whitespace = ReadWhile(sym =>
+                sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine
             );
 
             if (At(HtmlSymbolType.Transition))
@@ -386,16 +386,13 @@ namespace System.Web.Razor.Parser
             var name = Enumerable.Empty<HtmlSymbol>();
             if (At(HtmlSymbolType.Text))
             {
-                name = ReadWhile(
-                    sym =>
-                        sym.Type != HtmlSymbolType.WhiteSpace
-                        && sym.Type != HtmlSymbolType.NewLine
-                        && sym.Type != HtmlSymbolType.Equals
-                        && sym.Type != HtmlSymbolType.CloseAngle
-                        && sym.Type != HtmlSymbolType.OpenAngle
-                        && (
-                            sym.Type != HtmlSymbolType.Solidus || !NextIs(HtmlSymbolType.CloseAngle)
-                        )
+                name = ReadWhile(sym =>
+                    sym.Type != HtmlSymbolType.WhiteSpace
+                    && sym.Type != HtmlSymbolType.NewLine
+                    && sym.Type != HtmlSymbolType.Equals
+                    && sym.Type != HtmlSymbolType.CloseAngle
+                    && sym.Type != HtmlSymbolType.OpenAngle
+                    && (sym.Type != HtmlSymbolType.Solidus || !NextIs(HtmlSymbolType.CloseAngle))
                 );
             }
             else
@@ -500,8 +497,8 @@ namespace System.Web.Razor.Parser
         private void AttributeValue(HtmlSymbolType quote)
         {
             SourceLocation prefixStart = CurrentLocation;
-            var prefix = ReadWhile(
-                sym => sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine
+            var prefix = ReadWhile(sym =>
+                sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine
             );
             Accept(prefix);
 
@@ -543,15 +540,14 @@ namespace System.Web.Razor.Parser
             {
                 // Literal value
                 // 'quote' should be "Unknown" if not quoted and symbols coming from the tokenizer should never have "Unknown" type.
-                var value = ReadWhile(
-                    sym =>
-                        // These three conditions find separators which break the attribute value into portions
-                        sym.Type != HtmlSymbolType.WhiteSpace
-                        && sym.Type != HtmlSymbolType.NewLine
-                        && sym.Type != HtmlSymbolType.Transition
-                        &&
-                        // This condition checks for the end of the attribute value (it repeats some of the checks above but for now that's ok)
-                        !IsEndOfAttributeValue(quote, sym)
+                var value = ReadWhile(sym =>
+                    // These three conditions find separators which break the attribute value into portions
+                    sym.Type != HtmlSymbolType.WhiteSpace
+                    && sym.Type != HtmlSymbolType.NewLine
+                    && sym.Type != HtmlSymbolType.Transition
+                    &&
+                    // This condition checks for the end of the attribute value (it repeats some of the checks above but for now that's ok)
+                    !IsEndOfAttributeValue(quote, sym)
                 );
                 Accept(value);
                 Span.CodeGenerator = new LiteralAttributeCodeGenerator(

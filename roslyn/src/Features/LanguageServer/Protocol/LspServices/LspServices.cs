@@ -46,21 +46,17 @@ internal sealed class LspServices : ILspServices
     )
     {
         // Convert MEF exported service factories to the lazy LSP services that they create.
-        var servicesFromFactories = mefLspServiceFactories.Select(
-            lz =>
-                new Lazy<ILspService, LspServiceMetadataView>(
-                    () => lz.Value.CreateILspService(this, serverKind),
-                    lz.Metadata
-                )
-        );
+        var servicesFromFactories = mefLspServiceFactories.Select(lz => new Lazy<
+            ILspService,
+            LspServiceMetadataView
+        >(() => lz.Value.CreateILspService(this, serverKind), lz.Metadata));
 
         var services = mefLspServices.Concat(servicesFromFactories);
 
         // Make sure that we only include services exported for the specified server kind (or NotSpecified).
-        services = services.Where(
-            lazyService =>
-                lazyService.Metadata.ServerKind == serverKind
-                || lazyService.Metadata.ServerKind == WellKnownLspServerKinds.Any
+        services = services.Where(lazyService =>
+            lazyService.Metadata.ServerKind == serverKind
+            || lazyService.Metadata.ServerKind == WellKnownLspServerKinds.Any
         );
 
         // This will throw if the same service is registered twice

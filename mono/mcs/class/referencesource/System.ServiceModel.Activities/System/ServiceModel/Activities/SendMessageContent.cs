@@ -142,8 +142,8 @@ namespace System.ServiceModel.Activities
             if (this.InternalDeclaredMessageType == MessageDescription.TypeOfUntypedMessage)
             {
                 // Value is a Message, do not use the formatter but directly pass it to InternalSendMessage
-                internalSendMessage.Message = new InArgument<Message>(
-                    context => ((InArgument<Message>)this.Message).Get(context)
+                internalSendMessage.Message = new InArgument<Message>(context =>
+                    ((InArgument<Message>)this.Message).Get(context)
                 );
                 requestFormatter = null;
             }
@@ -166,8 +166,8 @@ namespace System.ServiceModel.Activities
         {
             if (this.InternalDeclaredMessageType == MessageDescription.TypeOfUntypedMessage)
             {
-                internalSendMessage.Message = new InArgument<Message>(
-                    context => ((InArgument<Message>)this.Message).Get(context)
+                internalSendMessage.Message = new InArgument<Message>(context =>
+                    ((InArgument<Message>)this.Message).Get(context)
                 );
                 responseFormatter = null;
             }

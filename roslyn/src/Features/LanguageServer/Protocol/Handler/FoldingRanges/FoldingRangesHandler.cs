@@ -69,8 +69,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             CancellationToken cancellationToken
         )
         {
-            var blockStructureService =
-                document.GetRequiredLanguageService<BlockStructureService>();
+            var blockStructureService = document.GetRequiredLanguageService<BlockStructureService>(
+
+            );
             var blockStructure = await blockStructureService
                 .GetBlockStructureAsync(document, options, cancellationToken)
                 .ConfigureAwait(false);

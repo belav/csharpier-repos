@@ -87,16 +87,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 if (
                     _source
                         .DescendantTrivia()
-                        .Any(
-                            trivia =>
-                                trivia
-                                    is
-                                    (
-                                        kind: SyntaxKind.SingleLineCommentTrivia
-                                            or SyntaxKind.MultiLineCommentTrivia
-                                            or SyntaxKind.MultiLineDocumentationCommentTrivia
-                                    )
-                                || _source.ContainsDirectives
+                        .Any(trivia =>
+                            trivia
+                                is
+                                (
+                                    kind: SyntaxKind.SingleLineCommentTrivia
+                                        or SyntaxKind.MultiLineCommentTrivia
+                                        or SyntaxKind.MultiLineDocumentationCommentTrivia
+                                )
+                            || _source.ContainsDirectives
                         )
                 )
                 {
@@ -129,9 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     && // second attempt: at least to a local function
                     !_semanticModel
                         .GetDiagnostics(_source.Span, _cancellationToken)
-                        .Any(
-                            static diagnostic =>
-                                diagnostic.DefaultSeverity == DiagnosticSeverity.Error
+                        .Any(static diagnostic =>
+                            diagnostic.DefaultSeverity == DiagnosticSeverity.Error
                         )
                 )
                 {
@@ -295,7 +293,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                                                     joinClause.LeftExpression
                                                                 ),
                                                                 SyntaxFactory.Argument(
-                                                                    joinClause.RightExpression.WithoutTrailingTrivia()
+                                                                    joinClause.RightExpression.WithoutTrailingTrivia(
+
+                                                                    )
                                                                 )
                                                             }
                                                         )

@@ -615,8 +615,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         IXmlEncryptor? encryptor = null;
 
         // If we're running in Azure Web Sites, the key repository goes in the %HOME% directory.
-        var azureWebSitesKeysFolder =
-            _keyStorageDirectories.GetKeyStorageDirectoryForAzureWebSites();
+        var azureWebSitesKeysFolder = _keyStorageDirectories.GetKeyStorageDirectoryForAzureWebSites(
+
+        );
         if (azureWebSitesKeysFolder != null)
         {
             _logger.UsingAzureAsKeyRepository(azureWebSitesKeysFolder.FullName);
@@ -638,7 +639,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
                     // If the user profile is available, we can protect using DPAPI.
                     // Probe to see if protecting to local user is available, and use it as the default if so.
                     encryptor = new DpapiXmlEncryptor(
-                        protectToLocalMachine: !DpapiSecretSerializerHelper.CanProtectToCurrentUserAccount(),
+                        protectToLocalMachine: !DpapiSecretSerializerHelper.CanProtectToCurrentUserAccount(
+
+                        ),
                         loggerFactory: _loggerFactory
                     );
                 }

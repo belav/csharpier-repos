@@ -112,8 +112,9 @@ namespace System.Data.ProviderBase
     internal sealed class DbConnectionOpenBusy : DbConnectionBusy
     {
         // Open Connection, Currently Busy - closing connection
-        internal static readonly DbConnectionInternal SingletonInstance =
-            new DbConnectionOpenBusy(); // singleton object
+        internal static readonly DbConnectionInternal SingletonInstance = new DbConnectionOpenBusy(
+
+        ); // singleton object
 
         private DbConnectionOpenBusy()
             : base(ConnectionState.Open) { }

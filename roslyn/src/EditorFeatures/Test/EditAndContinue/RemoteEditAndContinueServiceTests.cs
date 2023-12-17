@@ -222,11 +222,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 localWorkspace.CurrentSolution,
                 debuggerService: new MockManagedEditAndContinueDebuggerService()
                 {
-                    IsEditAndContinueAvailable = _ =>
-                        new ManagedHotReloadAvailability(
-                            ManagedHotReloadAvailabilityStatus.NotAllowedForModule,
-                            "can't do enc"
-                        ),
+                    IsEditAndContinueAvailable = _ => new ManagedHotReloadAvailability(
+                        ManagedHotReloadAvailabilityStatus.NotAllowedForModule,
+                        "can't do enc"
+                    ),
                     GetActiveStatementsImpl = () => ImmutableArray.Create(as1)
                 },
                 sourceTextProvider: NullPdbMatchingSourceTextProvider.Instance,

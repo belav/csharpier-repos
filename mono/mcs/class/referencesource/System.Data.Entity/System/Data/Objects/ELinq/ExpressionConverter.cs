@@ -1661,14 +1661,13 @@ namespace System.Data.Objects.ELinq
             {
                 useLikeTranslation = true;
                 bool specifyEscapeDummy;
-                patternExpression = queryParameterExpression.EscapeParameterForLike(
-                    input =>
-                        PreparePattern(
-                            input,
-                            insertPercentAtStart,
-                            insertPercentAtEnd,
-                            out specifyEscapeDummy
-                        )
+                patternExpression = queryParameterExpression.EscapeParameterForLike(input =>
+                    PreparePattern(
+                        input,
+                        insertPercentAtStart,
+                        insertPercentAtEnd,
+                        out specifyEscapeDummy
+                    )
                 );
             }
 

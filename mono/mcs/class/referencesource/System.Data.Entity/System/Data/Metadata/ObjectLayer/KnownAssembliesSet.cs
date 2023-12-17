@@ -72,8 +72,8 @@ namespace System.Data.Metadata.Edm
             EdmItemCollection itemCollection
         )
         {
-            return _assemblies.Values.Where(
-                e => e.HaveSeenInCompatibleContext(loaderCookie, itemCollection)
+            return _assemblies.Values.Where(e =>
+                e.HaveSeenInCompatibleContext(loaderCookie, itemCollection)
             );
         }
 

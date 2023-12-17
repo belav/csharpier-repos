@@ -332,13 +332,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
 
             var parameterNames = reservedNames
                 .Concat(
-                    arguments.Select(
-                        a =>
-                            this.GenerateNameForArgument(
-                                document.SemanticModel,
-                                a,
-                                cancellationToken
-                            )
+                    arguments.Select(a =>
+                        this.GenerateNameForArgument(document.SemanticModel, a, cancellationToken)
                     )
                 )
                 .ToImmutableArray();

@@ -104,15 +104,11 @@ namespace Microsoft.Extensions.Http.Logging
         public async Task CustomLogger_LogsCorrectEvents(bool requestSuccessful, bool async)
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(
-                _ =>
-                    new TestMessageHandler(
-                        _ =>
-                            requestSuccessful
-                                ? new HttpResponseMessage()
-                                : throw new HttpRequestException("expected")
-                    )
-            );
+            serviceCollection.AddTransient(_ => new TestMessageHandler(_ =>
+                requestSuccessful
+                    ? new HttpResponseMessage()
+                    : throw new HttpRequestException("expected")
+            ));
 
             TestCountingLogger testLogger = async
                 ? new TestCountingAsyncLogger()
@@ -198,15 +194,11 @@ namespace Microsoft.Extensions.Http.Logging
         )
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(
-                _ =>
-                    new TestMessageHandler(
-                        _ =>
-                            requestSuccessful
-                                ? new HttpResponseMessage()
-                                : throw new HttpRequestException("expected")
-                    )
-            );
+            serviceCollection.AddTransient(_ => new TestMessageHandler(_ =>
+                requestSuccessful
+                    ? new HttpResponseMessage()
+                    : throw new HttpRequestException("expected")
+            ));
 
             var testLogger = new TestCountingAsyncLogger();
             serviceCollection
@@ -277,15 +269,11 @@ namespace Microsoft.Extensions.Http.Logging
         public async Task CustomLogger_WithContext_LogsCorrectEvents(bool requestSuccessful)
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(
-                _ =>
-                    new TestMessageHandler(
-                        _ =>
-                            requestSuccessful
-                                ? new HttpResponseMessage()
-                                : throw new HttpRequestException("expected")
-                    )
-            );
+            serviceCollection.AddTransient(_ => new TestMessageHandler(_ =>
+                requestSuccessful
+                    ? new HttpResponseMessage()
+                    : throw new HttpRequestException("expected")
+            ));
 
             var testLogger = new TestContextCountingLogger();
             serviceCollection
@@ -395,15 +383,11 @@ namespace Microsoft.Extensions.Http.Logging
             var serviceCollection = new ServiceCollection();
 
             int counter = 1;
-            serviceCollection.AddTransient(
-                _ =>
-                    new TestMessageHandler(
-                        _ =>
-                            ((counter++) % 3 == 0) // every 3rd request is successful
-                                ? new HttpResponseMessage()
-                                : throw new HttpRequestException("expected")
-                    )
-            );
+            serviceCollection.AddTransient(_ => new TestMessageHandler(_ =>
+                ((counter++) % 3 == 0) // every 3rd request is successful
+                    ? new HttpResponseMessage()
+                    : throw new HttpRequestException("expected")
+            ));
             serviceCollection.AddTransient<TestRetryingHandler>();
 
             var innerLogger = new TestCountingLogger();
@@ -451,8 +435,7 @@ namespace Microsoft.Extensions.Http.Logging
             services.AddSingleton<TestLoggerProvider>();
 
             services.AddLogging(b => b.SetMinimumLevel(LogLevel.Trace));
-            services.AddSingleton<ILoggerProvider>(
-                sp => sp.GetRequiredService<TestLoggerProvider>()
+            services.AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<TestLoggerProvider>()
             );
             services
                 .AddHttpClient("TestLoggerProvider")
@@ -476,14 +459,14 @@ namespace Microsoft.Extensions.Http.Logging
 
             Assert.Equal(
                 DefaultLoggerEventsPerRequest,
-                sink.Writes.Count(
-                    w => w.LoggerName.StartsWith("System.Net.Http.HttpClient.Production")
+                sink.Writes.Count(w =>
+                    w.LoggerName.StartsWith("System.Net.Http.HttpClient.Production")
                 )
             );
             Assert.Equal(
                 0,
-                sink.Writes.Count(
-                    w => w.LoggerName.StartsWith("System.Net.Http.HttpClient.TestLoggerProvider")
+                sink.Writes.Count(w =>
+                    w.LoggerName.StartsWith("System.Net.Http.HttpClient.TestLoggerProvider")
                 )
             );
         }
@@ -502,8 +485,7 @@ namespace Microsoft.Extensions.Http.Logging
             services.AddSingleton<TestLoggerProvider>();
 
             services.AddLogging(b => b.SetMinimumLevel(LogLevel.Trace));
-            services.AddSingleton<ILoggerProvider>(
-                sp => sp.GetRequiredService<TestLoggerProvider>()
+            services.AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<TestLoggerProvider>()
             );
             services
                 .AddHttpClient("TestLoggerProvider")

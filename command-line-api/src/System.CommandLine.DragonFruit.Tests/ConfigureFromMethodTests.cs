@@ -223,8 +223,8 @@ namespace System.CommandLine.DragonFruit.Tests
 
             options
                 .Should()
-                .NotContain(
-                    o => o.GetType().IsAssignableTo(typeof(CliOption<>).MakeGenericType(type))
+                .NotContain(o =>
+                    o.GetType().IsAssignableTo(typeof(CliOption<>).MakeGenericType(type))
                 );
         }
 

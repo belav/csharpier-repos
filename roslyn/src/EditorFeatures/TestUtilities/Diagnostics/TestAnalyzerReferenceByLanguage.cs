@@ -48,13 +48,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
         {
             var newAnalyzersMap = ImmutableDictionary.CreateRange(
-                _analyzersMap.Select(
-                    kvp =>
-                        new KeyValuePair<string, ImmutableArray<DiagnosticAnalyzer>>(
-                            kvp.Key,
-                            kvp.Key == language ? kvp.Value.AddRange(analyzers) : kvp.Value
-                        )
-                )
+                _analyzersMap.Select(kvp => new KeyValuePair<
+                    string,
+                    ImmutableArray<DiagnosticAnalyzer>
+                >(kvp.Key, kvp.Key == language ? kvp.Value.AddRange(analyzers) : kvp.Value))
             );
             return new(newAnalyzersMap);
         }

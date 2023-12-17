@@ -7543,12 +7543,11 @@ class Program
             var expectedOperator = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S1")
                 .GetMembers(WellKnownMemberNames.EqualityOperatorName)
                 .OfType<MethodSymbol>()
-                .Single(
-                    m =>
-                        m.ParameterTypesWithAnnotations[0].Equals(
-                            m.ParameterTypesWithAnnotations[1],
-                            TypeCompareKind.ConsiderEverything
-                        )
+                .Single(m =>
+                    m.ParameterTypesWithAnnotations[0].Equals(
+                        m.ParameterTypesWithAnnotations[1],
+                        TypeCompareKind.ConsiderEverything
+                    )
                 );
 
             var tree = comp.SyntaxTrees.Single();
@@ -7993,8 +7992,8 @@ public class RubyTime
             var diagnostics = DiagnosticBag.GetInstance();
             var block = binder.BindEmbeddedBlock(methodBody, diagnostics);
             diagnostics.Free();
-            var exprs = block.Statements.SelectAsArray(
-                stmt => ((BoundExpressionStatement)stmt).Expression
+            var exprs = block.Statements.SelectAsArray(stmt =>
+                ((BoundExpressionStatement)stmt).Expression
             );
             Assert.Equal(32, exprs.Length);
 

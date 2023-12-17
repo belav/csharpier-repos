@@ -94,16 +94,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             return new VSInternalCompletionList
             {
                 Items = completionResult
-                    .Completions.Select(
-                        c =>
-                            CreateCompletionItem(
-                                c,
-                                document.Id,
-                                text,
-                                request.Position,
-                                request.TextDocument,
-                                commitCharactersCache
-                            )
+                    .Completions.Select(c =>
+                        CreateCompletionItem(
+                            c,
+                            document.Id,
+                            text,
+                            request.Position,
+                            request.TextDocument,
+                            commitCharactersCache
+                        )
                     )
                     .ToArray(),
                 SuggestionMode = false,
@@ -197,14 +196,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             var xamlCommitCharacters = completionItem.XamlCommitCharacters.Value;
 
             var commitCharacters = xamlCommitCharacters
-                .Characters.Select(
-                    c =>
-                        new VSInternalCommitCharacter
-                        {
-                            Character = c.ToString(),
-                            Insert = !xamlCommitCharacters.NonInsertCharacters.Contains(c)
-                        }
-                )
+                .Characters.Select(c => new VSInternalCommitCharacter
+                {
+                    Character = c.ToString(),
+                    Insert = !xamlCommitCharacters.NonInsertCharacters.Contains(c)
+                })
                 .ToImmutableArray();
             commitCharactersCache.Add(completionItem.Kind, commitCharacters);
             return commitCharacters.ToArray();

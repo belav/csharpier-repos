@@ -659,11 +659,10 @@ public class RelationalModelValidator : ModelValidator
                     )
                     {
                         if (
-                            sproc.Parameters.Any(
-                                p =>
-                                    p.PropertyName == property.Name
-                                    && p.ForOriginalValue != parameter.ForOriginalValue
-                                    && p.Direction != ParameterDirection.Input
+                            sproc.Parameters.Any(p =>
+                                p.PropertyName == property.Name
+                                && p.ForOriginalValue != parameter.ForOriginalValue
+                                && p.Direction != ParameterDirection.Input
                             )
                         )
                         {
@@ -936,8 +935,8 @@ public class RelationalModelValidator : ModelValidator
         {
             foreach (var key in entityType.GetDeclaredKeys())
             {
-                var mutableProperty = key.Properties.FirstOrDefault(
-                    p => p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
+                var mutableProperty = key.Properties.FirstOrDefault(p =>
+                    p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
                 );
                 if (mutableProperty != null && !mutableProperty.IsOrdinalKeyProperty())
                 {
@@ -1137,11 +1136,10 @@ public class RelationalModelValidator : ModelValidator
                 && (
                     mappedType
                         .FindForeignKeys(primaryKey.Properties)
-                        .FirstOrDefault(
-                            fk =>
-                                fk.PrincipalKey.IsPrimaryKey()
-                                && !fk.PrincipalEntityType.IsAssignableFrom(fk.DeclaringEntityType)
-                                && unvalidatedTypes.Contains(fk.PrincipalEntityType)
+                        .FirstOrDefault(fk =>
+                            fk.PrincipalKey.IsPrimaryKey()
+                            && !fk.PrincipalEntityType.IsAssignableFrom(fk.DeclaringEntityType)
+                            && unvalidatedTypes.Contains(fk.PrincipalEntityType)
                         ) is
                     { } linkingFK
                 )
@@ -1187,10 +1185,9 @@ public class RelationalModelValidator : ModelValidator
             var comment = entityType.GetComment();
             var isExcluded = entityType.IsTableExcludedFromMigrations(storeObject);
             var typesToValidateLeft = typesToValidate.Count;
-            var directlyConnectedTypes = unvalidatedTypes.Where(
-                unvalidatedType =>
-                    entityType.IsAssignableFrom(unvalidatedType)
-                    || IsIdentifyingPrincipal(unvalidatedType, entityType)
+            var directlyConnectedTypes = unvalidatedTypes.Where(unvalidatedType =>
+                entityType.IsAssignableFrom(unvalidatedType)
+                || IsIdentifyingPrincipal(unvalidatedType, entityType)
             );
 
             foreach (var nextEntityType in directlyConnectedTypes)
@@ -1345,10 +1342,9 @@ public class RelationalModelValidator : ModelValidator
                 mappedType.FindPrimaryKey() != null
                 && mappedType
                     .FindForeignKeys(mappedType.FindPrimaryKey()!.Properties)
-                    .Any(
-                        fk =>
-                            fk.PrincipalKey.IsPrimaryKey()
-                            && unvalidatedTypes.Contains(fk.PrincipalEntityType)
+                    .Any(fk =>
+                        fk.PrincipalKey.IsPrimaryKey()
+                        && unvalidatedTypes.Contains(fk.PrincipalEntityType)
                     )
             )
             {
@@ -1356,10 +1352,9 @@ public class RelationalModelValidator : ModelValidator
                 {
                     var principalType = mappedType
                         .FindForeignKeys(mappedType.FindPrimaryKey()!.Properties)
-                        .First(
-                            fk =>
-                                fk.PrincipalKey.IsPrimaryKey()
-                                && unvalidatedTypes.Contains(fk.PrincipalEntityType)
+                        .First(fk =>
+                            fk.PrincipalKey.IsPrimaryKey()
+                            && unvalidatedTypes.Contains(fk.PrincipalEntityType)
                         )
                         .PrincipalEntityType;
                     throw new InvalidOperationException(
@@ -1397,10 +1392,9 @@ public class RelationalModelValidator : ModelValidator
         {
             var entityType = typesToValidate.Dequeue();
             var typesToValidateLeft = typesToValidate.Count;
-            var directlyConnectedTypes = unvalidatedTypes.Where(
-                unvalidatedType =>
-                    entityType.IsAssignableFrom(unvalidatedType)
-                    || IsIdentifyingPrincipal(unvalidatedType, entityType)
+            var directlyConnectedTypes = unvalidatedTypes.Where(unvalidatedType =>
+                entityType.IsAssignableFrom(unvalidatedType)
+                || IsIdentifyingPrincipal(unvalidatedType, entityType)
             );
 
             foreach (var nextEntityType in directlyConnectedTypes)
@@ -1438,9 +1432,8 @@ public class RelationalModelValidator : ModelValidator
     ) =>
         dependentEntityType
             .FindForeignKeys(dependentEntityType.FindPrimaryKey()!.Properties)
-            .Any(
-                fk =>
-                    fk.PrincipalKey.IsPrimaryKey() && fk.PrincipalEntityType == principalEntityType
+            .Any(fk =>
+                fk.PrincipalKey.IsPrimaryKey() && fk.PrincipalEntityType == principalEntityType
             );
 
     /// <summary>
@@ -2357,8 +2350,8 @@ public class RelationalModelValidator : ModelValidator
         )
         {
             foreach (
-                var storeGeneratedProperty in key.Properties.Where(
-                    p => (p.ValueGenerated & ValueGenerated.OnAdd) != 0
+                var storeGeneratedProperty in key.Properties.Where(p =>
+                    (p.ValueGenerated & ValueGenerated.OnAdd) != 0
                 )
             )
             {
@@ -2407,21 +2400,19 @@ public class RelationalModelValidator : ModelValidator
                     .GetReferencingForeignKeys()
                     .Where(fk => fk.IsOwnership)
                     .Select(fk => fk.DeclaringEntityType)
-                    .FirstOrDefault(
-                        owned =>
-                            StoreObjectIdentifier.Create(owned, storeObjectType) == null
-                            && ((IConventionEntityType)owned).GetStoreObjectConfigurationSource(
-                                storeObjectType
-                            ) == null
-                            && !owned.IsMappedToJson()
+                    .FirstOrDefault(owned =>
+                        StoreObjectIdentifier.Create(owned, storeObjectType) == null
+                        && ((IConventionEntityType)owned).GetStoreObjectConfigurationSource(
+                            storeObjectType
+                        ) == null
+                        && !owned.IsMappedToJson()
                     );
                 if (
                     unmappedOwnedType != null
                     && entityType
                         .GetDerivedTypes()
-                        .Any(
-                            derived =>
-                                StoreObjectIdentifier.Create(derived, storeObjectType) != null
+                        .Any(derived =>
+                            StoreObjectIdentifier.Create(derived, storeObjectType) != null
                         )
                 )
                 {
@@ -3122,10 +3113,9 @@ public class RelationalModelValidator : ModelValidator
                     (trigger.GetTableName() != tableName || trigger.GetTableSchema() != tableSchema)
                     && entityType
                         .GetMappingFragments(StoreObjectType.Table)
-                        .All(
-                            f =>
-                                trigger.GetTableName() != f.StoreObject.Name
-                                || trigger.GetTableSchema() != f.StoreObject.Schema
+                        .All(f =>
+                            trigger.GetTableName() != f.StoreObject.Name
+                            || trigger.GetTableSchema() != f.StoreObject.Schema
                         )
                 )
                 {
@@ -3206,10 +3196,9 @@ public class RelationalModelValidator : ModelValidator
 
             var rootType = distinctRootTypes[0];
             var jsonEntitiesMappedToSameJsonColumn = mappedTypes
-                .Where(
-                    x =>
-                        x.FindOwnership() is IForeignKey ownership
-                        && !ownership.PrincipalEntityType.IsOwned()
+                .Where(x =>
+                    x.FindOwnership() is IForeignKey ownership
+                    && !ownership.PrincipalEntityType.IsOwned()
                 )
                 .GroupBy(x => x.GetContainerColumnName())
                 .Where(x => x.Key is not null)
@@ -3248,11 +3237,10 @@ public class RelationalModelValidator : ModelValidator
 
     private void ValidateJsonEntitiesNotMappedToTableOrView(IEnumerable<IEntityType> entityTypes)
     {
-        var entitiesNotMappedToTableOrView = entityTypes.Where(
-            x =>
-                !x.IsMappedToJson()
-                && x.GetSchemaQualifiedTableName() == null
-                && x.GetSchemaQualifiedViewName() == null
+        var entitiesNotMappedToTableOrView = entityTypes.Where(x =>
+            !x.IsMappedToJson()
+            && x.GetSchemaQualifiedTableName() == null
+            && x.GetSchemaQualifiedViewName() == null
         );
 
         foreach (var entityNotMappedToTableOrView in entitiesNotMappedToTableOrView)

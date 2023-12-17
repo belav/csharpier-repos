@@ -217,10 +217,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(2, errors.Count);
             var failedTypes = errors
-                .Where(
-                    e =>
-                        e.ErrorCode
-                        == AnalyzerLoadFailureEventArgs.FailureErrorCode.UnableToCreateAnalyzer
+                .Where(e =>
+                    e.ErrorCode
+                    == AnalyzerLoadFailureEventArgs.FailureErrorCode.UnableToCreateAnalyzer
                 )
                 .Select(e => e.TypeName);
             Assert.Contains("Microsoft.CodeAnalysis.UnitTests.AbstractAnalyzer", failedTypes);

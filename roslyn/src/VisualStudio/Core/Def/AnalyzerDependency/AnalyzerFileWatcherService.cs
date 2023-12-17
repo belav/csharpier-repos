@@ -191,8 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     project.AnalyzerReferences.OfType<AnalyzerFileReference>();
 
                 if (
-                    analyzerFileReferences.Any(
-                        a => a.FullPath.Equals(filePath, StringComparison.OrdinalIgnoreCase)
+                    analyzerFileReferences.Any(a =>
+                        a.FullPath.Equals(filePath, StringComparison.OrdinalIgnoreCase)
                     )
                 )
                 {

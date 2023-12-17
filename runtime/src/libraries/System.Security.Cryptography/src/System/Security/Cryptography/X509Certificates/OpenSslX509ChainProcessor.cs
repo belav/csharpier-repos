@@ -44,8 +44,9 @@ namespace System.Security.Cryptography.X509Certificates
         private static readonly ConcurrentDictionary<int, string> s_errorStrings =
             new ConcurrentDictionary<int, string>();
 
-        private static readonly MapVersionSpecificCode s_mapVersionSpecificCode =
-            GetVersionLookup();
+        private static readonly MapVersionSpecificCode s_mapVersionSpecificCode = GetVersionLookup(
+
+        );
 
         private SafeX509Handle _leafHandle;
         private SafeX509StoreHandle _store;

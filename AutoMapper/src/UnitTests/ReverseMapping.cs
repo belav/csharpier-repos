@@ -15,11 +15,10 @@ public class ReverseMapWithStaticField : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(
-            c =>
-                c.CreateMap<Destination, Source>()
-                    .ForMember(src => src.Id, opt => opt.MapFrom(_ => Guid.Empty))
-                    .ReverseMap()
+        new(c =>
+            c.CreateMap<Destination, Source>()
+                .ForMember(src => src.Id, opt => opt.MapFrom(_ => Guid.Empty))
+                .ReverseMap()
         );
 
     [Fact]

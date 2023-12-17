@@ -62,11 +62,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     e => e.Value.OrderBy(ActiveStatementsMap.Comparer).ToImmutableArray()
                 ),
                 instructionMap: OldStatements.ToDictionary(
-                    s =>
-                        new ManagedInstructionId(
-                            new ManagedMethodId(Guid.NewGuid(), 0x060000001, version: 1),
-                            ilOffset: 0
-                        ),
+                    s => new ManagedInstructionId(
+                        new ManagedMethodId(Guid.NewGuid(), 0x060000001, version: 1),
+                        ilOffset: 0
+                    ),
                     s => s.Statement
                 )
             );
@@ -107,8 +106,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 newMappedSpans[ordinal] = newTree.GetMappedLineSpan(unmappedSpan);
                 newMappedRegions[ordinal] =
                     (ordinal < newExceptionRegionMarkers.Length)
-                        ? newExceptionRegionMarkers[ordinal].SelectAsArray(
-                            span => (SourceFileSpan)newTree.GetMappedLineSpan(span)
+                        ? newExceptionRegionMarkers[ordinal].SelectAsArray(span =>
+                            (SourceFileSpan)newTree.GetMappedLineSpan(span)
                         )
                         : ImmutableArray<SourceFileSpan>.Empty;
             }
@@ -234,31 +233,28 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             return activeStatements
                 .Select(s => s.Statement)
-                .SelectAsArray(
-                    statement =>
-                        new ManagedActiveStatementDebugInfo(
-                            new ManagedInstructionId(
-                                new ManagedMethodId(
-                                    (modules != null) ? modules[statement.Ordinal] : moduleId,
-                                    new ManagedModuleMethodId(
-                                        token: 0x06000000
-                                            | (
-                                                methodRowIds != null
-                                                    ? methodRowIds[statement.Ordinal]
-                                                    : statement.Ordinal + 1
-                                            ),
-                                        version: (methodVersions != null)
-                                            ? methodVersions[statement.Ordinal]
-                                            : 1
-                                    )
-                                ),
-                                ilOffset: (ilOffsets != null) ? ilOffsets[statement.Ordinal] : 0
-                            ),
-                            documentName: statement.FilePath,
-                            sourceSpan: statement.Span.ToSourceSpan(),
-                            flags: statement.Flags
-                        )
-                );
+                .SelectAsArray(statement => new ManagedActiveStatementDebugInfo(
+                    new ManagedInstructionId(
+                        new ManagedMethodId(
+                            (modules != null) ? modules[statement.Ordinal] : moduleId,
+                            new ManagedModuleMethodId(
+                                token: 0x06000000
+                                    | (
+                                        methodRowIds != null
+                                            ? methodRowIds[statement.Ordinal]
+                                            : statement.Ordinal + 1
+                                    ),
+                                version: (methodVersions != null)
+                                    ? methodVersions[statement.Ordinal]
+                                    : 1
+                            )
+                        ),
+                        ilOffset: (ilOffsets != null) ? ilOffsets[statement.Ordinal] : 0
+                    ),
+                    documentName: statement.FilePath,
+                    sourceSpan: statement.Span.ToSourceSpan(),
+                    flags: statement.Flags
+                ));
         }
     }
 }

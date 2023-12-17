@@ -359,14 +359,13 @@ namespace System.Data.Common.EntitySql
             // Check overload uniqueness.
             //
             if (
-                overloads.Exists(
-                    overload =>
-                        overload
-                            .Parameters.Select(p => p.ResultType)
-                            .SequenceEqual(
-                                functionInfo.Parameters.Select(p => p.ResultType),
-                                TypeUsageStructuralComparer.Instance
-                            )
+                overloads.Exists(overload =>
+                    overload
+                        .Parameters.Select(p => p.ResultType)
+                        .SequenceEqual(
+                            functionInfo.Parameters.Select(p => p.ResultType),
+                            TypeUsageStructuralComparer.Instance
+                        )
                 )
             )
             {

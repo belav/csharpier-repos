@@ -292,8 +292,9 @@ namespace System.ServiceModel.Channels
                 );
             }
 
-            IChannelListener<TChannel> innerListener =
-                context.BuildInnerChannelListener<TChannel>();
+            IChannelListener<TChannel> innerListener = context.BuildInnerChannelListener<TChannel>(
+
+            );
             TransactionChannelListener<TChannel> listener =
                 new TransactionChannelListener<TChannel>(
                     this.transactionProtocol,

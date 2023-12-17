@@ -280,11 +280,10 @@ namespace Microsoft.CodeAnalysis.AddImport
                         .ConfigureAwait(false);
 
                     symbols = symbols.AddRange(
-                        attributeSymbols.Select(
-                            r =>
-                                r.WithDesiredName(
-                                    r.DesiredName.GetWithoutAttributeSuffix(isCaseSensitive: false)
-                                )
+                        attributeSymbols.Select(r =>
+                            r.WithDesiredName(
+                                r.DesiredName.GetWithoutAttributeSuffix(isCaseSensitive: false)
+                            )
                         )
                     );
                 }
@@ -295,42 +294,41 @@ namespace Microsoft.CodeAnalysis.AddImport
 
                 // Only keep symbols which are accessible from the current location and that are allowed by the current
                 // editor browsable rules.
-                var accessibleTypeSymbols = typeSymbols.WhereAsArray(
-                    s =>
-                        ArityAccessibilityAndAttributeContextAreCorrect(
-                            s.Symbol,
-                            arity,
-                            inAttributeContext,
-                            hasIncompleteParentMember,
-                            looksGeneric
-                        )
-                        && s.Symbol.IsEditorBrowsable(
-                            _options.HideAdvancedMembers,
-                            _semanticModel.Compilation,
-                            editorBrowserInfo
-                        )
+                var accessibleTypeSymbols = typeSymbols.WhereAsArray(s =>
+                    ArityAccessibilityAndAttributeContextAreCorrect(
+                        s.Symbol,
+                        arity,
+                        inAttributeContext,
+                        hasIncompleteParentMember,
+                        looksGeneric
+                    )
+                    && s.Symbol.IsEditorBrowsable(
+                        _options.HideAdvancedMembers,
+                        _semanticModel.Compilation,
+                        editorBrowserInfo
+                    )
                 );
 
                 // These types may be contained within namespaces, or they may be nested
                 // inside generic types.  Record these namespaces/types if it would be
                 // legal to add imports for them.
 
-                var typesContainedDirectlyInNamespaces = accessibleTypeSymbols.WhereAsArray(
-                    s => s.Symbol.ContainingSymbol is INamespaceSymbol
+                var typesContainedDirectlyInNamespaces = accessibleTypeSymbols.WhereAsArray(s =>
+                    s.Symbol.ContainingSymbol is INamespaceSymbol
                 );
-                var typesContainedDirectlyInTypes = accessibleTypeSymbols.WhereAsArray(
-                    s => s.Symbol.ContainingType != null
+                var typesContainedDirectlyInTypes = accessibleTypeSymbols.WhereAsArray(s =>
+                    s.Symbol.ContainingType != null
                 );
 
                 var namespaceReferences = GetNamespaceSymbolReferences(
                     searchScope,
-                    typesContainedDirectlyInNamespaces.SelectAsArray(
-                        r => r.WithSymbol(r.Symbol.ContainingNamespace)
+                    typesContainedDirectlyInNamespaces.SelectAsArray(r =>
+                        r.WithSymbol(r.Symbol.ContainingNamespace)
                     )
                 );
 
-                var typeReferences = typesContainedDirectlyInTypes.SelectAsArray(
-                    r => searchScope.CreateReference(r.WithSymbol(r.Symbol.ContainingType))
+                var typeReferences = typesContainedDirectlyInTypes.SelectAsArray(r =>
+                    searchScope.CreateReference(r.WithSymbol(r.Symbol.ContainingType))
                 );
 
                 return namespaceReferences.Concat(typeReferences);
@@ -476,12 +474,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                                     var namedTypeSymbols = OfType<INamedTypeSymbol>(symbolResults);
                                     var name = nameNode.GetFirstToken().ValueText;
                                     var namespaceResults = namedTypeSymbols
-                                        .WhereAsArray(
-                                            sr =>
-                                                HasAccessibleStaticFieldOrProperty(sr.Symbol, name)
+                                        .WhereAsArray(sr =>
+                                            HasAccessibleStaticFieldOrProperty(sr.Symbol, name)
                                         )
-                                        .SelectAsArray(
-                                            sr => sr.WithSymbol(sr.Symbol.ContainingNamespace)
+                                        .SelectAsArray(sr =>
+                                            sr.WithSymbol(sr.Symbol.ContainingNamespace)
                                         );
 
                                     return GetNamespaceSymbolReferences(
@@ -571,8 +568,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                                 cancellationToken
                             );
 
-                            var namespaceSymbols = extensionMethodSymbols.SelectAsArray(
-                                s => s.WithSymbol(s.Symbol.ContainingNamespace)
+                            var namespaceSymbols = extensionMethodSymbols.SelectAsArray(s =>
+                                s.WithSymbol(s.Symbol.ContainingNamespace)
                             );
                             return GetNamespaceSymbolReferences(searchScope, namespaceSymbols);
                         }
@@ -589,15 +586,14 @@ namespace Microsoft.CodeAnalysis.AddImport
             )
             {
                 return GetViableExtensionMethodsWorker(methodSymbols)
-                    .WhereAsArray(
-                        s =>
-                            _owner.IsViableExtensionMethod(
-                                s.Symbol,
-                                expression,
-                                _semanticModel,
-                                _syntaxFacts,
-                                cancellationToken
-                            )
+                    .WhereAsArray(s =>
+                        _owner.IsViableExtensionMethod(
+                            s.Symbol,
+                            expression,
+                            _semanticModel,
+                            _syntaxFacts,
+                            cancellationToken
+                        )
                     );
             }
 
@@ -614,10 +610,9 @@ namespace Microsoft.CodeAnalysis.AddImport
                 ImmutableArray<SymbolResult<IMethodSymbol>> methodSymbols
             )
             {
-                return methodSymbols.WhereAsArray(
-                    s =>
-                        s.Symbol.IsExtensionMethod
-                        && s.Symbol.IsAccessibleWithin(_semanticModel.Compilation.Assembly)
+                return methodSymbols.WhereAsArray(s =>
+                    s.Symbol.IsExtensionMethod
+                    && s.Symbol.IsAccessibleWithin(_semanticModel.Compilation.Assembly)
                 );
             }
 
@@ -861,13 +856,13 @@ namespace Microsoft.CodeAnalysis.AddImport
 
                 if (predicate != null)
                 {
-                    viableExtensionMethods = viableExtensionMethods.WhereAsArray(
-                        s => predicate(s.Symbol)
+                    viableExtensionMethods = viableExtensionMethods.WhereAsArray(s =>
+                        predicate(s.Symbol)
                     );
                 }
 
-                var namespaceSymbols = viableExtensionMethods.SelectAsArray(
-                    s => s.WithSymbol(s.Symbol.ContainingNamespace)
+                var namespaceSymbols = viableExtensionMethods.SelectAsArray(s =>
+                    s.WithSymbol(s.Symbol.ContainingNamespace)
                 );
 
                 return GetNamespaceSymbolReferences(searchScope, namespaceSymbols);

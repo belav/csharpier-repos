@@ -240,8 +240,8 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e => e.Message == CoreStrings.BadRequest_RequestHeadersTimeout
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message == CoreStrings.BadRequest_RequestHeadersTimeout
                     )
                 ),
             Times.Once
@@ -282,10 +282,9 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e =>
-                            e.Message
-                            == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message
+                        == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
                     )
                 ),
             Times.Once
@@ -469,10 +468,9 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e =>
-                            e.Message
-                            == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message
+                        == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
                     )
                 ),
             Times.Once
@@ -543,10 +541,9 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e =>
-                            e.Message
-                            == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message
+                        == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
                     )
                 ),
             Times.Once
@@ -612,10 +609,9 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e =>
-                            e.Message
-                            == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message
+                        == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
                     )
                 ),
             Times.Once
@@ -682,10 +678,9 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e =>
-                            e.Message
-                            == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message
+                        == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
                     )
                 ),
             Times.Once
@@ -768,10 +763,9 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e =>
-                            e.Message
-                            == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message
+                        == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
                     )
                 ),
             Times.Once
@@ -832,8 +826,8 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e => e.Message == CoreStrings.BadRequest_RequestBodyTimeout
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message == CoreStrings.BadRequest_RequestBodyTimeout
                     )
                 ),
             Times.Once
@@ -896,8 +890,8 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e => e.Message == CoreStrings.BadRequest_RequestBodyTimeout
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message == CoreStrings.BadRequest_RequestBodyTimeout
                     )
                 ),
             Times.Once
@@ -980,8 +974,8 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e => e.Message == CoreStrings.BadRequest_RequestBodyTimeout
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message == CoreStrings.BadRequest_RequestBodyTimeout
                     )
                 ),
             Times.Once
@@ -1067,8 +1061,8 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e => e.Message == CoreStrings.BadRequest_RequestBodyTimeout
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message == CoreStrings.BadRequest_RequestBodyTimeout
                     )
                 ),
             Times.Once
@@ -1246,8 +1240,8 @@ public class Http2TimeoutTests : Http2TestBase
         _mockConnectionContext.Verify(
             c =>
                 c.Abort(
-                    It.Is<ConnectionAbortedException>(
-                        e => e.Message == CoreStrings.BadRequest_RequestBodyTimeout
+                    It.Is<ConnectionAbortedException>(e =>
+                        e.Message == CoreStrings.BadRequest_RequestBodyTimeout
                     )
                 ),
             Times.Once

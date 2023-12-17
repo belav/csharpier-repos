@@ -1075,16 +1075,13 @@ public abstract class NorthwindSetOperationsQueryTestBase<TFixture> : QueryTestB
                             .Select(c => new { c.Customer, c.OrderDate })
                     )
                     .OrderBy(c => c.Customer.CustomerID)
-                    .Select(
-                        c =>
-                            new
-                            {
-                                c.OrderDate,
-                                Orders = ss.Set<Order>()
-                                    .Where(o => o.CustomerID == c.Customer.CustomerID)
-                                    .ToList()
-                            }
-                    ),
+                    .Select(c => new
+                    {
+                        c.OrderDate,
+                        Orders = ss.Set<Order>()
+                            .Where(o => o.CustomerID == c.Customer.CustomerID)
+                            .ToList()
+                    }),
             assertOrder: true,
             elementAsserter: (e, a) =>
             {

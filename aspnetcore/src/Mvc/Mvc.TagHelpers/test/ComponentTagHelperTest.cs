@@ -92,11 +92,10 @@ public class ComponentTagHelperTest
             RequestServices = new ServiceCollection()
                 .AddScoped<IComponentPrerenderer, EndpointHtmlRenderer>()
                 .AddScoped<ServerComponentSerializer>()
-                .AddScoped(
-                    _ =>
-                        Mock.Of<IDataProtectionProvider>(
-                            x => x.CreateProtector(It.IsAny<string>()) == Mock.Of<IDataProtector>()
-                        )
+                .AddScoped(_ =>
+                    Mock.Of<IDataProtectionProvider>(x =>
+                        x.CreateProtector(It.IsAny<string>()) == Mock.Of<IDataProtector>()
+                    )
                 )
                 .AddLogging()
                 .AddScoped<ComponentStatePersistenceManager>()

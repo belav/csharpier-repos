@@ -212,12 +212,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 (baseType.TypeKind == TypeKind.Interface)
                     ? type.AllInterfaces
                     : type.GetBaseTypes();
-            return baseTypes.Contains(
-                t =>
-                    SymbolEquivalenceComparer.Instance.Equals(
-                        t.OriginalDefinition,
-                        originalBaseType
-                    )
+            return baseTypes.Contains(t =>
+                SymbolEquivalenceComparer.Instance.Equals(t.OriginalDefinition, originalBaseType)
             );
         }
 
@@ -270,8 +266,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static bool Implements(this ITypeSymbol type, ITypeSymbol interfaceType)
         {
-            return type.AllInterfaces.Contains(
-                t => SymbolEquivalenceComparer.Instance.Equals(t, interfaceType)
+            return type.AllInterfaces.Contains(t =>
+                SymbolEquivalenceComparer.Instance.Equals(t, interfaceType)
             );
         }
 
@@ -461,8 +457,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol within
         )
         {
-            return typeSymbol.AllInterfaces.Any(
-                    static i => i.SpecialType == SpecialType.System_Collections_IEnumerable
+            return typeSymbol.AllInterfaces.Any(static i =>
+                    i.SpecialType == SpecialType.System_Collections_IEnumerable
                 )
                 && typeSymbol
                     .GetBaseTypesAndThis()
@@ -510,8 +506,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             var types = containingType.GetBaseTypes();
-            return types.SelectMany(
-                x => x.GetMembers().OfType<T>().Where(m => m.IsAccessibleWithin(within))
+            return types.SelectMany(x =>
+                x.GetMembers().OfType<T>().Where(m => m.IsAccessibleWithin(within))
             );
         }
 
@@ -578,8 +574,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return ImmutableArray<T>.Empty;
             }
 
-            return types.SelectMany(
-                x => x.GetMembers().OfType<T>().Where(m => m.IsAccessibleWithin(within))
+            return types.SelectMany(x =>
+                x.GetMembers().OfType<T>().Where(m => m.IsAccessibleWithin(within))
             );
         }
 
@@ -595,8 +591,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return ImmutableArray<T>.Empty;
             }
 
-            return types.SelectMany(
-                x => x.GetMembers(memberName).OfType<T>().Where(m => m.IsAccessibleWithin(within))
+            return types.SelectMany(x =>
+                x.GetMembers(memberName).OfType<T>().Where(m => m.IsAccessibleWithin(within))
             );
         }
 
@@ -865,10 +861,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             type is INamedTypeSymbol namedType
             && namedType
                 .OriginalDefinition.GetAttributes()
-                .Any(
-                    static a =>
-                        a.AttributeClass?.SpecialType
-                        == SpecialType.System_Runtime_CompilerServices_InlineArrayAttribute
+                .Any(static a =>
+                    a.AttributeClass?.SpecialType
+                    == SpecialType.System_Runtime_CompilerServices_InlineArrayAttribute
                 );
     }
 }

@@ -111,8 +111,8 @@ namespace Microsoft.CodeAnalysis
             {
                 var assemblyToScope = model.Compilation.Assembly;
                 var assemblyScopedNamespaceSymbol =
-                    namespaceSymbol.ConstituentNamespaces.FirstOrDefault(
-                        ns => ns.ContainingAssembly == assemblyToScope
+                    namespaceSymbol.ConstituentNamespaces.FirstOrDefault(ns =>
+                        ns.ContainingAssembly == assemblyToScope
                     );
                 if (assemblyScopedNamespaceSymbol != null)
                 {

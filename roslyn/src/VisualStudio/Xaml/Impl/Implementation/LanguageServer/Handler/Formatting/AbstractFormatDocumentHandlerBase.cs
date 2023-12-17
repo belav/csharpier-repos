@@ -62,8 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                     .GetFormattingChangesAsync(document, options, textSpan, cancellationToken)
                     .ConfigureAwait(false);
                 edits.AddRange(
-                    textChanges.Select(
-                        change => ProtocolConversions.TextChangeToTextEdit(change, text)
+                    textChanges.Select(change =>
+                        ProtocolConversions.TextChangeToTextEdit(change, text)
                     )
                 );
             }

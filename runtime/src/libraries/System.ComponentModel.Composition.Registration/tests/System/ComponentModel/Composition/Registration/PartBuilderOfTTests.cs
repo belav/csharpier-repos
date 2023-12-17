@@ -284,9 +284,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var builder = InternalCalls.PartBuilder<FooImplWithConstructors>(t => true);
             builder
-                .SelectConstructor(
-                    param => new FooImplWithConstructors(param.Import<IEnumerable<IFoo>>())
-                )
+                .SelectConstructor(param => new FooImplWithConstructors(
+                    param.Import<IEnumerable<IFoo>>()
+                ))
                 .Export<IFoo>();
 
             IEnumerable<Attribute> typeAtts;
@@ -322,9 +322,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var builder = InternalCalls.PartBuilder<FooImplWithConstructors>(t => true);
             builder
-                .SelectConstructor(
-                    param => new FooImplWithConstructors(param.Import<IEnumerable<IFoo>>())
-                )
+                .SelectConstructor(param => new FooImplWithConstructors(
+                    param.Import<IEnumerable<IFoo>>()
+                ))
                 .Export<IFoo>();
 
             IEnumerable<Attribute> typeAtts;

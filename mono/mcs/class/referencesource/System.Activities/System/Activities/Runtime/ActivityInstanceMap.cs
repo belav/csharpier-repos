@@ -164,9 +164,9 @@ namespace System.Activities.Runtime
                 // we start from a secondary root instead of starting from the enviroment with the already completed owner that was added symbols.
                 // It is becuase for the case of adding symbols to noSymbols activities, the environment doesn't even exist from which we can start looking for referencing secondary root.
 
-                int[] secondaryRootOriginalQID = new QualifiedId(
-                    instanceList.ActivityId
-                ).AsIDArray();
+                int[] secondaryRootOriginalQID = new QualifiedId(instanceList.ActivityId).AsIDArray(
+
+                );
 
                 Fx.Assert(
                     secondaryRootOriginalQID != null && secondaryRootOriginalQID.Length > 1,

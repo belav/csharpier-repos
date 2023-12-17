@@ -88,8 +88,7 @@ public static class HubConnectionBuilderExtensions
         TimeSpan timeout
     )
     {
-        hubConnectionBuilder.Services.Configure<HubConnectionOptions>(
-            o => o.ServerTimeout = timeout
+        hubConnectionBuilder.Services.Configure<HubConnectionOptions>(o => o.ServerTimeout = timeout
         );
         return hubConnectionBuilder;
     }
@@ -105,8 +104,8 @@ public static class HubConnectionBuilderExtensions
         TimeSpan interval
     )
     {
-        hubConnectionBuilder.Services.Configure<HubConnectionOptions>(
-            o => o.KeepAliveInterval = interval
+        hubConnectionBuilder.Services.Configure<HubConnectionOptions>(o =>
+            o.KeepAliveInterval = interval
         );
         return hubConnectionBuilder;
     }

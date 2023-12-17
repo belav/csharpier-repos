@@ -890,8 +890,9 @@ namespace MS.Internal.Xml.XPath
             }
         } //ParamInfo
 
-        private static readonly Dictionary<string, ParamInfo> s_functionTable =
-            CreateFunctionTable();
+        private static readonly Dictionary<string, ParamInfo> s_functionTable = CreateFunctionTable(
+
+        );
 
         private static Dictionary<string, ParamInfo> CreateFunctionTable()
         {

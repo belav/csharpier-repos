@@ -59,8 +59,8 @@ public class AsShouldWorkOnlyWithDerivedTypes
     {
         new Action(
             () =>
-                new MapperConfiguration(
-                    c => c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source))
+                new MapperConfiguration(c =>
+                    c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source))
                 )
         ).ShouldThrowException<ArgumentOutOfRangeException>(ex =>
         {

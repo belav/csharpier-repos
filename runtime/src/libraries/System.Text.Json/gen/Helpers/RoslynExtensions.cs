@@ -121,10 +121,9 @@ namespace System.Text.Json.SourceGeneration
 
             constructorInfo = namedType
                 .GetExplicitlyDeclaredInstanceConstructors()
-                .FirstOrDefault(
-                    ctor =>
-                        ctor.DeclaredAccessibility is Accessibility.Public
-                        && ctor.Parameters.Length == 0
+                .FirstOrDefault(ctor =>
+                    ctor.DeclaredAccessibility is Accessibility.Public
+                    && ctor.Parameters.Length == 0
                 );
             return constructorInfo != null || type.IsValueType;
         }
@@ -132,12 +131,9 @@ namespace System.Text.Json.SourceGeneration
         public static IEnumerable<IMethodSymbol> GetExplicitlyDeclaredInstanceConstructors(
             this INamedTypeSymbol type
         ) =>
-            type.Constructors.Where(
-                ctor =>
-                    !ctor.IsStatic
-                    && !(
-                        ctor.IsImplicitlyDeclared && type.IsValueType && ctor.Parameters.Length == 0
-                    )
+            type.Constructors.Where(ctor =>
+                !ctor.IsStatic
+                && !(ctor.IsImplicitlyDeclared && type.IsValueType && ctor.Parameters.Length == 0)
             );
 
         public static bool ContainsAttribute(
@@ -147,9 +143,8 @@ namespace System.Text.Json.SourceGeneration
             attributeType != null
             && memberInfo
                 .GetAttributes()
-                .Any(
-                    attr =>
-                        SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
+                .Any(attr =>
+                    SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
                 );
 
         public static bool IsVirtual(this ISymbol symbol) =>

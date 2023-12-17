@@ -227,14 +227,13 @@ public class HtmlHelperLinkGenerationTest
         var dict = PropertyHelper.ObjectToDictionary(routeValues);
         return string.Join(
             string.Empty,
-            dict.Select(
-                kvp =>
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}={1}",
-                        kvp.Key,
-                        kvp.Value.ToString()
-                    )
+            dict.Select(kvp =>
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}={1}",
+                    kvp.Key,
+                    kvp.Value.ToString()
+                )
             )
         );
     }
@@ -244,14 +243,13 @@ public class HtmlHelperLinkGenerationTest
         var dict = PropertyHelper.ObjectToDictionary(routeValues);
         return string.Join(
             string.Empty,
-            dict.Select(
-                kvp =>
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        " {0}=\"HtmlEncode[[{1}]]\"",
-                        kvp.Key,
-                        kvp.Value.ToString()
-                    )
+            dict.Select(kvp =>
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    " {0}=\"HtmlEncode[[{1}]]\"",
+                    kvp.Key,
+                    kvp.Value.ToString()
+                )
             )
         );
     }

@@ -75,8 +75,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges(
+
+            );
             if (document == null)
                 return;
 

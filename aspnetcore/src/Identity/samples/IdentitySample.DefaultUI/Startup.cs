@@ -35,14 +35,13 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // Add framework services.
-        services.AddDbContext<ApplicationDbContext>(
-            options =>
-                options
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                    .UseSqlServer(
-                        Configuration.GetConnectionString("DefaultConnection"),
-                        x => x.MigrationsAssembly("IdentitySample.DefaultUI")
-                    )
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options
+                .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
+                .UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    x => x.MigrationsAssembly("IdentitySample.DefaultUI")
+                )
         );
 
         services.AddMvc().AddNewtonsoftJson();

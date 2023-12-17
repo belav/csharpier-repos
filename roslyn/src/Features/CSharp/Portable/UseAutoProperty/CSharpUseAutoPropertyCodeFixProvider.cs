@@ -91,8 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                 }
 
                 var modifiers = SyntaxFactory.TokenList(
-                    updatedProperty.Modifiers.Where(
-                        token => !token.IsKind(SyntaxKind.ReadOnlyKeyword)
+                    updatedProperty.Modifiers.Where(token =>
+                        !token.IsKind(SyntaxKind.ReadOnlyKeyword)
                     )
                 );
 

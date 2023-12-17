@@ -71,10 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // from CPS to see if this matches.
             if (targetFrameworkMoniker != null)
             {
-                var matchingProject = candidateProjects.FirstOrDefault(
-                    p =>
-                        _workspace.TryGetDependencyNodeTargetIdentifier(p.Id)
-                        == targetFrameworkMoniker
+                var matchingProject = candidateProjects.FirstOrDefault(p =>
+                    _workspace.TryGetDependencyNodeTargetIdentifier(p.Id) == targetFrameworkMoniker
                 );
 
                 if (matchingProject != null)
@@ -91,8 +89,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             foreach (var candidateProject in candidateProjects)
             {
                 if (
-                    !candidateProject.DocumentIds.Any(
-                        id => ContainedDocument.TryGetContainedDocument(id) != null
+                    !candidateProject.DocumentIds.Any(id =>
+                        ContainedDocument.TryGetContainedDocument(id) != null
                     )
                 )
                 {

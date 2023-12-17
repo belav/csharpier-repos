@@ -303,8 +303,9 @@ namespace System.Web
 
         internal IExecutionStep CreateImplicitAsyncPreloadExecutionStep()
         {
-            ImplicitAsyncPreloadModule implicitAsyncPreloadModule =
-                new ImplicitAsyncPreloadModule();
+            ImplicitAsyncPreloadModule implicitAsyncPreloadModule = new ImplicitAsyncPreloadModule(
+
+            );
             BeginEventHandler beginHandler = null;
             EndEventHandler endHandler = null;
             implicitAsyncPreloadModule.GetEventHandlers(out beginHandler, out endHandler);

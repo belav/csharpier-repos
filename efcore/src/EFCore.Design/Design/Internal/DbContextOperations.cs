@@ -532,11 +532,10 @@ public class DbContextOperations
             : StringComparison.Ordinal;
 
         return types
-            .Where(
-                t =>
-                    string.Equals(t.Key.Name, name, comparisonType)
-                    || string.Equals(t.Key.FullName, name, comparisonType)
-                    || string.Equals(t.Key.AssemblyQualifiedName, name, comparisonType)
+            .Where(t =>
+                string.Equals(t.Key.Name, name, comparisonType)
+                || string.Equals(t.Key.FullName, name, comparisonType)
+                || string.Equals(t.Key.AssemblyQualifiedName, name, comparisonType)
             )
             .ToDictionary();
     }

@@ -32,8 +32,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         protected T? GetOptionAttributeValue<T>(string attributeName, T? defaultValue)
         {
-            var attribute = _testCaseTypeDefinition.CustomAttributes.FirstOrDefault(
-                attr => attr.AttributeType.Name == attributeName
+            var attribute = _testCaseTypeDefinition.CustomAttributes.FirstOrDefault(attr =>
+                attr.AttributeType.Name == attributeName
             );
             if (attribute != null)
                 return (T?)attribute.ConstructorArguments.First().Value;
@@ -70,7 +70,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 // Use the parent type for locating the source file
                 var parentType = ParentMostType(valueAsTypeRef);
                 var pathRelativeToAssembly =
-                    $"{parentType.FullName.Substring(parentType.Module.Name.Length - 3).Replace('.', '/')}.cs".ToNPath();
+                    $"{parentType.FullName.Substring(parentType.Module.Name.Length - 3).Replace('.', '/')}.cs".ToNPath(
+
+                    );
                 var pathElements = pathRelativeToAssembly.Elements.ToArray();
                 var topMostDirectoryName = pathElements[0];
                 var topMostDirectory = _testCase

@@ -1070,9 +1070,8 @@ namespace MonoTests.System.Reflection
         {
             var method = type.GetTypeInfo()
                 .GetDeclaredMethods(name)
-                .SingleOrDefault(
-                    m =>
-                        m.GetParameters().Select(p => p.ParameterType).SequenceEqual(parameterTypes)
+                .SingleOrDefault(m =>
+                    m.GetParameters().Select(p => p.ParameterType).SequenceEqual(parameterTypes)
                 );
             Assert.IsNotNull(method, $"{type}.{name}");
         }

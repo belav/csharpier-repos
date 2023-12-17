@@ -51,8 +51,8 @@ public class ProblemResultTests
         var result = new ProblemHttpResult(details);
         var stream = new MemoryStream();
         var services = CreateServiceCollection()
-            .AddProblemDetails(
-                options => options.CustomizeProblemDetails = x => x.ProblemDetails.Type = null
+            .AddProblemDetails(options =>
+                options.CustomizeProblemDetails = x => x.ProblemDetails.Type = null
             )
             .BuildServiceProvider();
         var httpContext = new DefaultHttpContext()

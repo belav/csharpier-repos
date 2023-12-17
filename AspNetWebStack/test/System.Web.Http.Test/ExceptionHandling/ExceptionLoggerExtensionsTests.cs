@@ -16,12 +16,8 @@ namespace System.Web.Http.ExceptionHandling
             // Arrange
             Task expectedTask = CreateCompletedTask();
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            mock.Setup(
-                    h =>
-                        h.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
+            mock.Setup(h =>
+                    h.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
                 )
                 .Returns(expectedTask);
 
@@ -46,8 +42,7 @@ namespace System.Web.Http.ExceptionHandling
                 mock.Verify(
                     h =>
                         h.LogAsync(
-                            It.Is<ExceptionLoggerContext>(
-                                c => c.ExceptionContext == expectedContext
+                            It.Is<ExceptionLoggerContext>(c => c.ExceptionContext == expectedContext
                             ),
                             expectedCancellationToken
                         ),

@@ -249,10 +249,8 @@ public class ComputeWasmPublishAssets : Task
                 else if (baseName.StartsWith("dotnet"))
                     baseName = "dotnet";
 
-                var aotDotNetJs = WasmAotAssets.SingleOrDefault(
-                    a =>
-                        $"{a.GetMetadata("FileName")}{a.GetMetadata("Extension")}"
-                        == $"{baseName}.js"
+                var aotDotNetJs = WasmAotAssets.SingleOrDefault(a =>
+                    $"{a.GetMetadata("FileName")}{a.GetMetadata("Extension")}" == $"{baseName}.js"
                 );
                 ITaskItem newDotNetJs = null;
                 if (aotDotNetJs != null)

@@ -5616,16 +5616,15 @@ public class Program738490379
             int dt = (int)Math.Abs(DateTime.Now.Ticks % 1000000000);
             var tasks = Enumerable
                 .Range(0, numTasks)
-                .Select(
-                    t =>
-                        Task.Run(() =>
+                .Select(t =>
+                    Task.Run(() =>
+                    {
+                        int k = dt + t * numTestsPerTask;
+                        for (int i = 1; i < numTestsPerTask; i++)
                         {
-                            int k = dt + t * numTestsPerTask;
-                            for (int i = 1; i < numTestsPerTask; i++)
-                            {
-                                PatternMatchingFuzz(i + k);
-                            }
-                        })
+                            PatternMatchingFuzz(i + k);
+                        }
+                    })
                 );
             Task.WaitAll(tasks.ToArray());
         }
@@ -13123,9 +13122,8 @@ class Program
                 .OfType<SingleVariableDesignationSyntax>()
                 .ToArray();
             var types = locals
-                .Select(
-                    local =>
-                        ((ILocalSymbol)model.GetDeclaredSymbol(local)).Type.ToTestDisplayString()
+                .Select(local =>
+                    ((ILocalSymbol)model.GetDeclaredSymbol(local)).Type.ToTestDisplayString()
                 )
                 .ToArray();
             AssertEx.Equal(

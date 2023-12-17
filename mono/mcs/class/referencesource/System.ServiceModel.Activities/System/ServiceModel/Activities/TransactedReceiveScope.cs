@@ -130,8 +130,8 @@ namespace System.ServiceModel.Activities
                                                     {
                                                         Input = new InArgument<Activity>(child)
                                                     },
-                                                    Right = new InArgument<Type>(
-                                                        context => typeof(TransactionScope)
+                                                    Right = new InArgument<Type>(context =>
+                                                        typeof(TransactionScope)
                                                     )
                                                 },
                                                 Then = new AssertValidation
@@ -164,8 +164,8 @@ namespace System.ServiceModel.Activities
                                                     {
                                                         Input = new InArgument<Activity>(child)
                                                     },
-                                                    Right = new InArgument<Type>(
-                                                        context => typeof(CompensableActivity)
+                                                    Right = new InArgument<Type>(context =>
+                                                        typeof(CompensableActivity)
                                                     )
                                                 },
                                                 Then = new Assign<bool>

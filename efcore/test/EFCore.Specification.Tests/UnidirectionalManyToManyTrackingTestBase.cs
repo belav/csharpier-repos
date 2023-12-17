@@ -373,8 +373,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 // Make sure other related entities are loaded for delete fixup
                 context.Set<UnidirectionalJoinThreeToCompositeKeyFull>().Load();
 
-                var toRemoveOne = context.UnidirectionalEntityCompositeKeys.Single(
-                    e => e.Name == "Composite 6"
+                var toRemoveOne = context.UnidirectionalEntityCompositeKeys.Single(e =>
+                    e.Name == "Composite 6"
                 );
                 key1 = toRemoveOne.Key1;
                 key2 = toRemoveOne.Key2;
@@ -1115,12 +1115,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 // Make sure other related entities are loaded for delete fixup
                 context.Set<UnidirectionalJoinThreeToCompositeKeyFull>().Load();
 
-                var toRemoveOne = context.UnidirectionalEntityCompositeKeys.Single(
-                    e => e.Name == "Composite 6"
+                var toRemoveOne = context.UnidirectionalEntityCompositeKeys.Single(e =>
+                    e.Name == "Composite 6"
                 );
 
-                var toRemoveThree = context.UnidirectionalEntityThrees.Single(
-                    e => e.Name == "EntityThree 17"
+                var toRemoveThree = context.UnidirectionalEntityThrees.Single(e =>
+                    e.Name == "EntityThree 17"
                 );
                 threeId = toRemoveThree.Id;
                 var refCountThrees = ones.SelectMany(e => e.ThreeSkipFull)
@@ -2407,8 +2407,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                         keys[5],
                         context
                             .Entry(
-                                context.UnidirectionalEntityOnes.Local.Single(
-                                    e => e.Name == "EntityOne 1"
+                                context.UnidirectionalEntityOnes.Local.Single(e =>
+                                    e.Name == "EntityOne 1"
                                 )
                             )
                             .Property(e => e.Id)
@@ -2420,16 +2420,16 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     .Find<UnidirectionalJoinOneSelfPayload>(
                         context
                             .Entry(
-                                context.UnidirectionalEntityOnes.Local.Single(
-                                    e => e.Name == "EntityOne 20"
+                                context.UnidirectionalEntityOnes.Local.Single(e =>
+                                    e.Name == "EntityOne 20"
                                 )
                             )
                             .Property(e => e.Id)
                             .CurrentValue,
                         context
                             .Entry(
-                                context.UnidirectionalEntityOnes.Local.Single(
-                                    e => e.Name == "EntityOne 16"
+                                context.UnidirectionalEntityOnes.Local.Single(e =>
+                                    e.Name == "EntityOne 16"
                                 )
                             )
                             .Property(e => e.Id)
@@ -2854,8 +2854,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 );
 
                 leftEntities[2].ThreeSkipPayloadFullShared.Remove(
-                    leftEntities[2].ThreeSkipPayloadFullShared.Single(
-                        e => e.Name == "EntityThree 10"
+                    leftEntities[2].ThreeSkipPayloadFullShared.Single(e =>
+                        e.Name == "EntityThree 10"
                     )
                 );
                 var rightNav4 =
@@ -2867,8 +2867,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 rightNav4.Remove(rightNav4.Single(e => e.Name == "EntityOne 6"));
 
                 leftEntities[3].ThreeSkipPayloadFullShared.Remove(
-                    leftEntities[3].ThreeSkipPayloadFullShared.Single(
-                        e => e.Name == "EntityThree 17"
+                    leftEntities[3].ThreeSkipPayloadFullShared.Single(e =>
+                        e.Name == "EntityThree 17"
                     )
                 );
                 leftEntities[3].ThreeSkipPayloadFullShared.Add(

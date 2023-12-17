@@ -209,20 +209,18 @@ namespace System.ServiceModel.Dispatcher
             StreamBodyWriter bodyWriter;
             if (this.includeExceptionDetailInFaults)
             {
-                bodyWriter = StreamBodyWriter.CreateStreamBodyWriter(
-                    s =>
-                        HelpHtmlBuilder
-                            .CreateServerErrorPage(helpUri, error)
-                            .Save(s, SaveOptions.OmitDuplicateNamespaces)
+                bodyWriter = StreamBodyWriter.CreateStreamBodyWriter(s =>
+                    HelpHtmlBuilder
+                        .CreateServerErrorPage(helpUri, error)
+                        .Save(s, SaveOptions.OmitDuplicateNamespaces)
                 );
             }
             else
             {
-                bodyWriter = StreamBodyWriter.CreateStreamBodyWriter(
-                    s =>
-                        HelpHtmlBuilder
-                            .CreateServerErrorPage(helpUri, null)
-                            .Save(s, SaveOptions.OmitDuplicateNamespaces)
+                bodyWriter = StreamBodyWriter.CreateStreamBodyWriter(s =>
+                    HelpHtmlBuilder
+                        .CreateServerErrorPage(helpUri, null)
+                        .Save(s, SaveOptions.OmitDuplicateNamespaces)
                 );
             }
             Message response = new HttpStreamMessage(bodyWriter);

@@ -33,11 +33,10 @@ public class CacheTagHelperTest
         var value = new Mock<ICacheEntry>();
         value.Setup(c => c.Value).Returns(new DefaultTagHelperContent().SetContent("ok"));
         cache
-            .Setup(
-                c =>
-                    c.CreateEntry(
-                        /*key*/It.IsAny<string>()
-                    )
+            .Setup(c =>
+                c.CreateEntry(
+                    /*key*/It.IsAny<string>()
+                )
             )
             .Returns((object key) => value.Object)
             .Verifiable();

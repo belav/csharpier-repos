@@ -696,11 +696,10 @@ public abstract class AspNetIdentityTestBase<
             base.AddOptions(builder)
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging()
-                .ConfigureWarnings(
-                    b =>
-                        b.Default(WarningBehavior.Throw)
-                            .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
-                            .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
+                .ConfigureWarnings(b =>
+                    b.Default(WarningBehavior.Throw)
+                        .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
+                        .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
                 );
     }
 

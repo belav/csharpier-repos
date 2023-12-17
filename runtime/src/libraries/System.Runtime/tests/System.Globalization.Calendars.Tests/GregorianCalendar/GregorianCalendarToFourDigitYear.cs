@@ -11,8 +11,9 @@ namespace System.Globalization.Tests
         private const int MaxTwoDigitYear = 99;
         private const int MinTwoDigitYear = 0;
 
-        private static readonly RandomDataGenerator s_randomDataGenerator =
-            new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator(
+
+        );
 
         public static IEnumerable<object[]> ToFourDigitYear_TestData()
         {

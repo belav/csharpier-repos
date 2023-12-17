@@ -63,43 +63,37 @@ namespace System.Composition.Hosting.Providers.ExportFactory
 
             return definitionAccessor
                 .ResolveDependencies("product", productContract, false)
-                .Select(
-                    d =>
-                        new ExportDescriptorPromise(
-                            exportFactoryContract,
-                            typeof(ExportFactory<TProduct, TMetadata>).Name,
-                            false,
-                            () => new[] { d },
-                            _ =>
+                .Select(d => new ExportDescriptorPromise(
+                    exportFactoryContract,
+                    typeof(ExportFactory<TProduct, TMetadata>).Name,
+                    false,
+                    () => new[] { d },
+                    _ =>
+                    {
+                        var dsc = d.Target.GetDescriptor();
+                        return ExportDescriptor.Create(
+                            (c, o) =>
                             {
-                                var dsc = d.Target.GetDescriptor();
-                                return ExportDescriptor.Create(
-                                    (c, o) =>
+                                return new ExportFactory<TProduct, TMetadata>(
+                                    () =>
                                     {
-                                        return new ExportFactory<TProduct, TMetadata>(
-                                            () =>
-                                            {
-                                                var lifetimeContext = new LifetimeContext(
-                                                    c,
-                                                    boundaries
-                                                );
-                                                return Tuple.Create<TProduct, Action>(
-                                                    (TProduct)
-                                                        CompositionOperation.Run(
-                                                            lifetimeContext,
-                                                            dsc.Activator
-                                                        ),
-                                                    lifetimeContext.Dispose
-                                                );
-                                            },
-                                            metadataProvider(dsc.Metadata)
+                                        var lifetimeContext = new LifetimeContext(c, boundaries);
+                                        return Tuple.Create<TProduct, Action>(
+                                            (TProduct)
+                                                CompositionOperation.Run(
+                                                    lifetimeContext,
+                                                    dsc.Activator
+                                                ),
+                                            lifetimeContext.Dispose
                                         );
                                     },
-                                    dsc.Metadata
+                                    metadataProvider(dsc.Metadata)
                                 );
-                            }
-                        )
-                )
+                            },
+                            dsc.Metadata
+                        );
+                    }
+                ))
                 .ToArray();
         }
     }

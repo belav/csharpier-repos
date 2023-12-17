@@ -9,8 +9,9 @@ namespace System.Globalization.Tests
 {
     public class GregorianCalendarToDateTime
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator =
-            new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator(
+
+        );
 
         public static IEnumerable<object[]> ToDateTime_TestData()
         {

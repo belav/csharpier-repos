@@ -53,8 +53,8 @@ internal sealed class CSharpMakeStructMemberReadOnlyCodeFixProvider()
     )
     {
         var generator = editor.Generator;
-        var declarations = diagnostics.Select(
-            d => d.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken)
+        var declarations = diagnostics.Select(d =>
+            d.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken)
         );
 
         foreach (var declaration in declarations.OrderByDescending(t => t.SpanStart))
@@ -92,11 +92,11 @@ internal sealed class CSharpMakeStructMemberReadOnlyCodeFixProvider()
                             var currentAccessorList = currentProperty.AccessorList;
                             Contract.ThrowIfNull(currentAccessorList);
 
-                            var currentAccessor = currentAccessorList.Accessors.First(
-                                a => a.Kind() == accessor.Kind()
+                            var currentAccessor = currentAccessorList.Accessors.First(a =>
+                                a.Kind() == accessor.Kind()
                             );
-                            var otherAccessor = currentAccessorList.Accessors.Single(
-                                a => a != currentAccessor
+                            var otherAccessor = currentAccessorList.Accessors.Single(a =>
+                                a != currentAccessor
                             );
 
                             if (otherAccessor.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))

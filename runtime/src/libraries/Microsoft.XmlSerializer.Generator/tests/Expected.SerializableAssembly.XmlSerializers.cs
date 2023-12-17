@@ -10286,7 +10286,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         o =
                             (global::SerializationTypes.ClassImplementingIXmlSerialiable)ReadSerializable(
                                 (System.Xml.Serialization.IXmlSerializable)
-                                    new global::SerializationTypes.ClassImplementingIXmlSerialiable()
+                                    new global::SerializationTypes.ClassImplementingIXmlSerialiable(
+
+                                    )
                             );
                         break;
                     }
@@ -11368,7 +11370,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 return null;
             global::SerializationTypes.TypeWithKnownTypesOfCollectionsWithConflictingXmlName o;
             o =
-                new global::SerializationTypes.TypeWithKnownTypesOfCollectionsWithConflictingXmlName();
+                new global::SerializationTypes.TypeWithKnownTypesOfCollectionsWithConflictingXmlName(
+
+                );
             System.Span<bool> paramsRead = stackalloc bool[2];
             while (Reader.MoveToNextAttribute())
             {
@@ -12370,7 +12374,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         {
                             if ((object)(a) == null)
                                 a =
-                                    new global::System.Collections.Generic.List<global::System.Int32>();
+                                    new global::System.Collections.Generic.List<global::System.Int32>(
+
+                                    );
                             global::System.Collections.Generic.List<global::System.Int32> z_0_0 =
                                 (global::System.Collections.Generic.List<global::System.Int32>)a;
                             if ((Reader.IsEmptyElement))
@@ -12435,7 +12441,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         {
                             if ((object)(a) == null)
                                 a =
-                                    new global::System.Collections.Generic.List<global::System.String>();
+                                    new global::System.Collections.Generic.List<global::System.String>(
+
+                                    );
                             global::System.Collections.Generic.List<global::System.String> z_0_0 =
                                 (global::System.Collections.Generic.List<global::System.String>)a;
                             if ((Reader.IsEmptyElement))
@@ -12501,7 +12509,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         {
                             if ((object)(a) == null)
                                 a =
-                                    new global::System.Collections.Generic.List<global::System.Double>();
+                                    new global::System.Collections.Generic.List<global::System.Double>(
+
+                                    );
                             global::System.Collections.Generic.List<global::System.Double> z_0_0 =
                                 (global::System.Collections.Generic.List<global::System.Double>)a;
                             if ((Reader.IsEmptyElement))
@@ -12697,7 +12707,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         {
                             if ((object)(a) == null)
                                 a =
-                                    new global::System.Collections.Generic.List<global::TypeWithLinkedProperty>();
+                                    new global::System.Collections.Generic.List<global::TypeWithLinkedProperty>(
+
+                                    );
                             global::System.Collections.Generic.List<global::TypeWithLinkedProperty> z_0_0 =
                                 (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)a;
                             if ((Reader.IsEmptyElement))
@@ -12761,8 +12773,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         if (!ReadNull())
                         {
                             if ((object)(a) == null)
-                                a =
-                                    new global::System.Collections.Generic.List<global::Parameter>();
+                                a = new global::System.Collections.Generic.List<global::Parameter>(
+
+                                );
                             global::System.Collections.Generic.List<global::Parameter> z_0_0 =
                                 (global::System.Collections.Generic.List<global::Parameter>)a;
                             if ((Reader.IsEmptyElement))
@@ -13393,7 +13406,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         {
                             if ((object)(a) == null)
                                 a =
-                                    new global::System.Collections.Generic.List<global::System.String>();
+                                    new global::System.Collections.Generic.List<global::System.String>(
+
+                                    );
                             global::System.Collections.Generic.List<global::System.String> z_0_0 =
                                 (global::System.Collections.Generic.List<global::System.String>)a;
                             if ((Reader.IsEmptyElement))
@@ -13455,7 +13470,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         {
                             if ((object)(a) == null)
                                 a =
-                                    new global::System.Collections.Generic.List<global::System.Boolean>();
+                                    new global::System.Collections.Generic.List<global::System.Boolean>(
+
+                                    );
                             global::System.Collections.Generic.List<global::System.Boolean> z_0_0 =
                                 (global::System.Collections.Generic.List<global::System.Boolean>)a;
                             if ((Reader.IsEmptyElement))
@@ -14338,7 +14355,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@Children) == null)
                                     o.@Children =
-                                        new global::System.Collections.Generic.List<global::TypeWithLinkedProperty>();
+                                        new global::System.Collections.Generic.List<global::TypeWithLinkedProperty>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::TypeWithLinkedProperty> a_1_0 =
                                     (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)
                                         o.@Children;
@@ -17037,7 +17056,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@Aliased) == null)
                                     o.@Aliased =
-                                        new global::System.Collections.Generic.List<global::System.Int32>();
+                                        new global::System.Collections.Generic.List<global::System.Int32>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::System.Int32> a_0_0 =
                                     (global::System.Collections.Generic.List<global::System.Int32>)
                                         o.@Aliased;
@@ -17103,7 +17124,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@Aliased) == null)
                                     o.@Aliased =
-                                        new global::System.Collections.Generic.List<global::System.String>();
+                                        new global::System.Collections.Generic.List<global::System.String>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::System.String> a_0_0 =
                                     (global::System.Collections.Generic.List<global::System.String>)
                                         o.@Aliased;
@@ -17170,7 +17193,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@Aliased) == null)
                                     o.@Aliased =
-                                        new global::System.Collections.Generic.List<global::System.Double>();
+                                        new global::System.Collections.Generic.List<global::System.Double>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::System.Double> a_0_0 =
                                     (global::System.Collections.Generic.List<global::System.Double>)
                                         o.@Aliased;
@@ -18322,7 +18347,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@Parameters) == null)
                                     o.@Parameters =
-                                        new global::System.Collections.Generic.List<global::Parameter>();
+                                        new global::System.Collections.Generic.List<global::Parameter>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::Parameter> a_0_0 =
                                     (global::System.Collections.Generic.List<global::Parameter>)
                                         o.@Parameters;
@@ -19342,8 +19369,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             global::SerializationTypes.TypeWithMyCollectionField o;
             o = new global::SerializationTypes.TypeWithMyCollectionField();
             if ((object)(o.@Collection) == null)
-                o.@Collection =
-                    new global::SerializationTypes.MyCollection<global::System.String>();
+                o.@Collection = new global::SerializationTypes.MyCollection<global::System.String>(
+
+                );
             global::SerializationTypes.MyCollection<global::System.String> a_0 =
                 (global::SerializationTypes.MyCollection<global::System.String>)o.@Collection;
             System.Span<bool> paramsRead = stackalloc bool[1];
@@ -19382,7 +19410,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@Collection) == null)
                                     o.@Collection =
-                                        new global::SerializationTypes.MyCollection<global::System.String>();
+                                        new global::SerializationTypes.MyCollection<global::System.String>(
+
+                                        );
                                 global::SerializationTypes.MyCollection<global::System.String> a_0_0 =
                                     (global::SerializationTypes.MyCollection<global::System.String>)
                                         o.@Collection;
@@ -20347,7 +20377,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@ListProperty) == null)
                                     o.@ListProperty =
-                                        new global::System.Collections.Generic.List<global::System.String>();
+                                        new global::System.Collections.Generic.List<global::System.String>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::System.String> a_3_0 =
                                     (global::System.Collections.Generic.List<global::System.String>)
                                         o.@ListProperty;
@@ -20543,7 +20575,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@ListProperty) == null)
                                     o.@ListProperty =
-                                        new global::System.Collections.Generic.List<global::System.String>();
+                                        new global::System.Collections.Generic.List<global::System.String>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::System.String> a_3_0 =
                                     (global::System.Collections.Generic.List<global::System.String>)
                                         o.@ListProperty;
@@ -20748,7 +20782,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@ListProperty) == null)
                                     o.@ListProperty =
-                                        new global::System.Collections.Generic.List<global::System.String>();
+                                        new global::System.Collections.Generic.List<global::System.String>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::System.String> a_3_0 =
                                     (global::System.Collections.Generic.List<global::System.String>)
                                         o.@ListProperty;
@@ -22011,8 +22047,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                                 ca_7_0,
                                                                 typeof(global::System.Object)
                                                             );
-                                                        a_7_0[ca_7_0++] =
-                                                            Reader.ReadElementString();
+                                                        a_7_0[ca_7_0++] = Reader.ReadElementString(
+
+                                                        );
                                                     }
                                                     break;
                                                 }
@@ -22539,7 +22576,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@UnqualifiedSchemaFormListProperty) == null)
                                     o.@UnqualifiedSchemaFormListProperty =
-                                        new global::System.Collections.Generic.List<global::System.Int32>();
+                                        new global::System.Collections.Generic.List<global::System.Int32>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::System.Int32> a_0_0 =
                                     (global::System.Collections.Generic.List<global::System.Int32>)
                                         o.@UnqualifiedSchemaFormListProperty;
@@ -22603,7 +22642,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@NoneSchemaFormListProperty) == null)
                                     o.@NoneSchemaFormListProperty =
-                                        new global::System.Collections.Generic.List<global::System.String>();
+                                        new global::System.Collections.Generic.List<global::System.String>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::System.String> a_1_0 =
                                     (global::System.Collections.Generic.List<global::System.String>)
                                         o.@NoneSchemaFormListProperty;
@@ -22663,7 +22704,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 if ((object)(o.@QualifiedSchemaFormListProperty) == null)
                                     o.@QualifiedSchemaFormListProperty =
-                                        new global::System.Collections.Generic.List<global::System.Boolean>();
+                                        new global::System.Collections.Generic.List<global::System.Boolean>(
+
+                                        );
                                 global::System.Collections.Generic.List<global::System.Boolean> a_2_0 =
                                     (global::System.Collections.Generic.List<global::System.Boolean>)
                                         o.@QualifiedSchemaFormListProperty;

@@ -26,14 +26,8 @@ namespace System.Text.RegularExpressions.Tests
                     .GetRegexesAsync(
                         engine,
                         cases
-                            .Select(
-                                c =>
-                                    (
-                                        c.Pattern,
-                                        c.Culture,
-                                        (RegexOptions?)c.Options,
-                                        (TimeSpan?)null
-                                    )
+                            .Select(c =>
+                                (c.Pattern, c.Culture, (RegexOptions?)c.Options, (TimeSpan?)null)
                             )
                             .ToArray()
                     )

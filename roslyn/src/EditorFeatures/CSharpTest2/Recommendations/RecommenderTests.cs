@@ -161,9 +161,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 }
                 else
                 {
-                    var result = (
-                        await RecommendKeywordsAsync(position, context)
-                    ).SingleOrDefault();
+                    var result = (await RecommendKeywordsAsync(position, context)).SingleOrDefault(
+
+                    );
                     AssertEx.NotNull(result);
                     Assert.Equal(KeywordText, result!.Keyword);
                     if (matchPriority != null)

@@ -98,9 +98,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     $"<unknown>: class Implementation : IGoo",
                     string.Join(
                         Environment.NewLine,
-                        results.Select(
-                            result =>
-                                $"{result.GetItemOrigin()?.ToString() ?? "<unknown>"}: {result.GetText()}"
+                        results.Select(result =>
+                            $"{result.GetItemOrigin()?.ToString() ?? "<unknown>"}: {result.GetText()}"
                         )
                     )
                 );
@@ -213,9 +212,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     $"<unknown>: class Implementation : IBar",
                     string.Join(
                         Environment.NewLine,
-                        results.Select(
-                            result =>
-                                $"{result.GetItemOrigin()?.ToString() ?? "<unknown>"}: {result.GetText()}"
+                        results.Select(result =>
+                            $"{result.GetItemOrigin()?.ToString() ?? "<unknown>"}: {result.GetText()}"
                         )
                     )
                 );
@@ -314,17 +312,16 @@ class Implementation : IDisposable
                 );
 
                 // This test includes results from metadata on this path, so filter those out
-                results = results.WhereAsArray(
-                    result => result.GetItemOrigin() != ItemOrigin.ExactMetadata
+                results = results.WhereAsArray(result =>
+                    result.GetItemOrigin() != ItemOrigin.ExactMetadata
                 );
 
                 AssertEx.EqualOrDiff(
                     $"<unknown>: class Implementation : IDisposable",
                     string.Join(
                         Environment.NewLine,
-                        results.Select(
-                            result =>
-                                $"{result.GetItemOrigin()?.ToString() ?? "<unknown>"}: {result.GetText()}"
+                        results.Select(result =>
+                            $"{result.GetItemOrigin()?.ToString() ?? "<unknown>"}: {result.GetText()}"
                         )
                     )
                 );

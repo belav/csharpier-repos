@@ -268,8 +268,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         () =>
                             modelBuilder
                                 .Entity<BookLabel>()
-                                .UpdateUsingStoredProcedure(
-                                    s => s.HasRowsAffectedParameter().HasRowsAffectedReturnValue()
+                                .UpdateUsingStoredProcedure(s =>
+                                    s.HasRowsAffectedParameter().HasRowsAffectedReturnValue()
                                 )
                     )
                     .Message
@@ -290,9 +290,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         () =>
                             modelBuilder
                                 .Entity<BookLabel>()
-                                .UpdateUsingStoredProcedure(
-                                    s =>
-                                        s.HasRowsAffectedResultColumn().HasRowsAffectedReturnValue()
+                                .UpdateUsingStoredProcedure(s =>
+                                    s.HasRowsAffectedResultColumn().HasRowsAffectedReturnValue()
                                 )
                     )
                     .Message
@@ -311,8 +310,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         () =>
                             modelBuilder
                                 .Entity<BookLabel>()
-                                .UpdateUsingStoredProcedure(
-                                    s => s.HasRowsAffectedReturnValue().HasRowsAffectedParameter()
+                                .UpdateUsingStoredProcedure(s =>
+                                    s.HasRowsAffectedReturnValue().HasRowsAffectedParameter()
                                 )
                     )
                     .Message
@@ -333,9 +332,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         () =>
                             modelBuilder
                                 .Entity<BookLabel>()
-                                .UpdateUsingStoredProcedure(
-                                    s =>
-                                        s.HasRowsAffectedReturnValue().HasRowsAffectedResultColumn()
+                                .UpdateUsingStoredProcedure(s =>
+                                    s.HasRowsAffectedReturnValue().HasRowsAffectedResultColumn()
                                 )
                     )
                     .Message
@@ -356,8 +354,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         () =>
                             modelBuilder
                                 .Entity<BookLabel>()
-                                .UpdateUsingStoredProcedure(
-                                    s => s.HasRowsAffectedParameter().HasRowsAffectedResultColumn()
+                                .UpdateUsingStoredProcedure(s =>
+                                    s.HasRowsAffectedParameter().HasRowsAffectedResultColumn()
                                 )
                     )
                     .Message
@@ -396,8 +394,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         () =>
                             modelBuilder
                                 .Entity<BookLabel>()
-                                .UpdateUsingStoredProcedure(
-                                    s => s.HasRowsAffectedResultColumn().HasRowsAffectedParameter()
+                                .UpdateUsingStoredProcedure(s =>
+                                    s.HasRowsAffectedResultColumn().HasRowsAffectedParameter()
                                 )
                     )
                     .Message
@@ -784,8 +782,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         () =>
                             modelBuilder
                                 .Entity<BookLabel>()
-                                .UpdateUsingStoredProcedure(
-                                    s => s.HasRowsAffectedParameter().HasRowsAffectedReturnValue()
+                                .UpdateUsingStoredProcedure(s =>
+                                    s.HasRowsAffectedParameter().HasRowsAffectedReturnValue()
                                 )
                     )
                     .Message
@@ -806,9 +804,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         () =>
                             modelBuilder
                                 .Entity<BookLabel>()
-                                .UpdateUsingStoredProcedure(
-                                    s =>
-                                        s.HasRowsAffectedResultColumn().HasRowsAffectedReturnValue()
+                                .UpdateUsingStoredProcedure(s =>
+                                    s.HasRowsAffectedResultColumn().HasRowsAffectedReturnValue()
                                 )
                     )
                     .Message
@@ -847,8 +844,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         () =>
                             modelBuilder
                                 .Entity<BookLabel>()
-                                .UpdateUsingStoredProcedure(
-                                    s => s.HasRowsAffectedResultColumn().HasRowsAffectedParameter()
+                                .UpdateUsingStoredProcedure(s =>
+                                    s.HasRowsAffectedResultColumn().HasRowsAffectedParameter()
                                 )
                     )
                     .Message
@@ -1254,49 +1251,46 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
                         lb.Property(l => l.Id).ValueGeneratedOnUpdate();
 
-                        lb.InsertUsingStoredProcedure(
-                                s =>
-                                    s.HasAnnotation("foo", "bar1")
-                                        .HasParameter(b => b.Id)
-                                        .HasParameter(b => b.BookId, p => p.HasName("InsertId"))
+                        lb.InsertUsingStoredProcedure(s =>
+                                s.HasAnnotation("foo", "bar1")
+                                    .HasParameter(b => b.Id)
+                                    .HasParameter(b => b.BookId, p => p.HasName("InsertId"))
                             )
-                            .UpdateUsingStoredProcedure(
-                                s =>
-                                    s.HasAnnotation("foo", "bar2")
-                                        .HasOriginalValueParameter(b => b.Id)
-                                        .HasOriginalValueParameter(
-                                            b => b.BookId,
-                                            p =>
-                                            {
-                                                var parameterBuilder = p.HasName("UpdateId");
-                                                var nonGenericBuilder =
-                                                    (IInfrastructure<StoredProcedureParameterBuilder>)
-                                                        parameterBuilder;
-                                                Assert.IsAssignableFrom<PropertyBuilder>(
-                                                    nonGenericBuilder.Instance.GetInfrastructure()
-                                                );
-                                            }
-                                        )
-                                        .HasResultColumn(
-                                            b => b.Id,
-                                            p =>
-                                            {
-                                                var nonGenericBuilder =
-                                                    (IInfrastructure<StoredProcedureResultColumnBuilder>)
-                                                        p;
-                                                Assert.IsAssignableFrom<PropertyBuilder>(
-                                                    nonGenericBuilder.Instance.GetInfrastructure()
-                                                );
-                                            }
-                                        )
+                            .UpdateUsingStoredProcedure(s =>
+                                s.HasAnnotation("foo", "bar2")
+                                    .HasOriginalValueParameter(b => b.Id)
+                                    .HasOriginalValueParameter(
+                                        b => b.BookId,
+                                        p =>
+                                        {
+                                            var parameterBuilder = p.HasName("UpdateId");
+                                            var nonGenericBuilder =
+                                                (IInfrastructure<StoredProcedureParameterBuilder>)
+                                                    parameterBuilder;
+                                            Assert.IsAssignableFrom<PropertyBuilder>(
+                                                nonGenericBuilder.Instance.GetInfrastructure()
+                                            );
+                                        }
+                                    )
+                                    .HasResultColumn(
+                                        b => b.Id,
+                                        p =>
+                                        {
+                                            var nonGenericBuilder =
+                                                (IInfrastructure<StoredProcedureResultColumnBuilder>)
+                                                    p;
+                                            Assert.IsAssignableFrom<PropertyBuilder>(
+                                                nonGenericBuilder.Instance.GetInfrastructure()
+                                            );
+                                        }
+                                    )
                             )
-                            .DeleteUsingStoredProcedure(
-                                s =>
-                                    s.HasAnnotation("foo", "bar3")
-                                        .HasOriginalValueParameter(
-                                            b => b.BookId,
-                                            p => p.HasName("DeleteId")
-                                        )
+                            .DeleteUsingStoredProcedure(s =>
+                                s.HasAnnotation("foo", "bar3")
+                                    .HasOriginalValueParameter(
+                                        b => b.BookId,
+                                        p => p.HasName("DeleteId")
+                                    )
                             );
                     }
                 );
@@ -2654,8 +2648,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasRowsAffectedParameter(
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasRowsAffectedParameter(s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2715,8 +2709,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureResultColumnBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasRowsAffectedResultColumn(
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasRowsAffectedResultColumn(s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 
@@ -2859,8 +2853,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasRowsAffectedParameter(
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasRowsAffectedParameter(s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2921,8 +2915,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureResultColumnBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasRowsAffectedResultColumn(
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasRowsAffectedResultColumn(s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 
@@ -3183,8 +3177,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             TDependentEntity
         > HasRowsAffectedParameter(Action<TestStoredProcedureParameterBuilder> buildAction) =>
             Wrap(
-                StoredProcedureBuilder.HasRowsAffectedParameter(
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasRowsAffectedParameter(s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -3240,8 +3234,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             TDependentEntity
         > HasRowsAffectedResultColumn(Action<TestStoredProcedureResultColumnBuilder> buildAction) =>
             Wrap(
-                StoredProcedureBuilder.HasRowsAffectedResultColumn(
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasRowsAffectedResultColumn(s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 
@@ -3381,8 +3375,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             TDependentEntity
         > HasRowsAffectedParameter(Action<TestStoredProcedureParameterBuilder> buildAction) =>
             Wrap(
-                StoredProcedureBuilder.HasRowsAffectedParameter(
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasRowsAffectedParameter(s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -3439,8 +3433,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             TDependentEntity
         > HasRowsAffectedResultColumn(Action<TestStoredProcedureResultColumnBuilder> buildAction) =>
             Wrap(
-                StoredProcedureBuilder.HasRowsAffectedResultColumn(
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasRowsAffectedResultColumn(s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 

@@ -589,9 +589,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(
                 hasErrors
                     || _syntax.HasErrors
-                    || iterationVariables.All(
-                        local =>
-                            local.DeclarationKind == LocalDeclarationKind.ForEachIterationVariable
+                    || iterationVariables.All(local =>
+                        local.DeclarationKind == LocalDeclarationKind.ForEachIterationVariable
                     ),
                 "Should not have iteration variables that are not ForEachIterationVariable in valid code"
             );
@@ -754,7 +753,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var location = _syntax.ForEachKeyword.GetLocation();
                 foreach (
-                    var d in createConversionDiagnostics.DiagnosticBag.AsEnumerableWithoutResolution()
+                    var d in createConversionDiagnostics.DiagnosticBag.AsEnumerableWithoutResolution(
+
+                    )
                 )
                 {
                     diagnostics.Add(d.WithLocation(location));

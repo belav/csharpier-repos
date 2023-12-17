@@ -95,8 +95,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.AdditionalHandlers.Add(configureHandler())
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.AdditionalHandlers.Add(configureHandler())
                     );
                 }
             );
@@ -131,8 +131,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.AdditionalHandlers.Add(configureHandler(b.Services))
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.AdditionalHandlers.Add(configureHandler(b.Services))
                     );
                 }
             );
@@ -165,8 +165,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.AdditionalHandlers.Add(b.Services.GetRequiredService<THandler>())
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.AdditionalHandlers.Add(b.Services.GetRequiredService<THandler>())
                     );
                 }
             );
@@ -197,8 +197,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.PrimaryHandler = configureHandler()
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.PrimaryHandler = configureHandler()
                     );
                 }
             );
@@ -235,8 +235,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.PrimaryHandler = configureHandler(b.Services)
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.PrimaryHandler = configureHandler(b.Services)
                     );
                 }
             );
@@ -270,8 +270,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.PrimaryHandler = b.Services.GetRequiredService<THandler>()
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.PrimaryHandler = b.Services.GetRequiredService<THandler>()
                     );
                 }
             );
@@ -304,8 +304,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => configureHandler(b.PrimaryHandler, b.Services)
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        configureHandler(b.PrimaryHandler, b.Services)
                     );
                 }
             );
@@ -542,8 +542,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
 
-            builder.Services.AddTransient(
-                s => AddTransientHelper<TClient, TImplementation>(s, builder)
+            builder.Services.AddTransient(s =>
+                AddTransientHelper<TClient, TImplementation>(s, builder)
             );
 
             return builder;
@@ -804,8 +804,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => configureAdditionalHandlers(b.AdditionalHandlers, b.Services)
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        configureAdditionalHandlers(b.AdditionalHandlers, b.Services)
                     );
                 }
             );

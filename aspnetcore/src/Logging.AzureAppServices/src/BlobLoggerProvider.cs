@@ -35,8 +35,11 @@ public class BlobLoggerProvider : BatchingLoggerProvider
     public BlobLoggerProvider(IOptionsMonitor<AzureBlobLoggerOptions> options)
         : this(options, null)
     {
-        _blobReferenceFactory = name =>
-            new BlobAppendReferenceWrapper(options.CurrentValue.ContainerUrl, name, _httpClient);
+        _blobReferenceFactory = name => new BlobAppendReferenceWrapper(
+            options.CurrentValue.ContainerUrl,
+            name,
+            _httpClient
+        );
     }
 
     /// <summary>

@@ -60,14 +60,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestToStringAsyncEnumerable()
         {
-            DataflowTestHelpers.TestToString(
-                nameFormat =>
-                    nameFormat != null
-                        ? new TransformManyBlock<int, int>(
-                            DataflowTestHelpers.ToAsyncEnumerable,
-                            new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
-                        )
-                        : new TransformManyBlock<int, int>(DataflowTestHelpers.ToAsyncEnumerable)
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new TransformManyBlock<int, int>(
+                        DataflowTestHelpers.ToAsyncEnumerable,
+                        new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new TransformManyBlock<int, int>(DataflowTestHelpers.ToAsyncEnumerable)
             );
         }
 

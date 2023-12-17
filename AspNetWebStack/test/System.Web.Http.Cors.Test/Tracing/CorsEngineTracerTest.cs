@@ -18,12 +18,8 @@ namespace System.Web.Http.Cors.Tracing
             Mock<ICorsEngine> corsEngineMock = new Mock<ICorsEngine>();
             bool innerIsCalled = false;
             corsEngineMock
-                .Setup(
-                    engine =>
-                        engine.EvaluatePolicy(
-                            It.IsAny<CorsRequestContext>(),
-                            It.IsAny<CorsPolicy>()
-                        )
+                .Setup(engine =>
+                    engine.EvaluatePolicy(It.IsAny<CorsRequestContext>(), It.IsAny<CorsPolicy>())
                 )
                 .Returns(() =>
                 {
@@ -47,14 +43,13 @@ namespace System.Web.Http.Cors.Tracing
             TraceRecord endTrace = null;
             Mock<ITraceWriter> traceWriterMock = new Mock<ITraceWriter>();
             traceWriterMock
-                .Setup(
-                    t =>
-                        t.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
+                .Setup(t =>
+                    t.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
                 )
                 .Callback<HttpRequestMessage, string, TraceLevel, Action<TraceRecord>>(
                     (request, category, level, traceAction) =>
@@ -73,12 +68,8 @@ namespace System.Web.Http.Cors.Tracing
                 );
             Mock<ICorsEngine> corsEngineMock = new Mock<ICorsEngine>();
             corsEngineMock
-                .Setup(
-                    engine =>
-                        engine.EvaluatePolicy(
-                            It.IsAny<CorsRequestContext>(),
-                            It.IsAny<CorsPolicy>()
-                        )
+                .Setup(engine =>
+                    engine.EvaluatePolicy(It.IsAny<CorsRequestContext>(), It.IsAny<CorsPolicy>())
                 )
                 .Returns(new CorsResult());
             CorsEngineTracer tracer = new CorsEngineTracer(
@@ -116,14 +107,13 @@ namespace System.Web.Http.Cors.Tracing
 
             Mock<ITraceWriter> traceWriterMock = new Mock<ITraceWriter>();
             traceWriterMock
-                .Setup(
-                    t =>
-                        t.Trace(
-                            httpRequest,
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
+                .Setup(t =>
+                    t.Trace(
+                        httpRequest,
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
                 )
                 .Verifiable();
 

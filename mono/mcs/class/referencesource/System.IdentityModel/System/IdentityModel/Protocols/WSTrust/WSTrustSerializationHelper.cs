@@ -569,11 +569,15 @@ namespace System.IdentityModel.Protocols.WSTrust
                         );
                     }
                     else if (
-                        originalUseKeyToken.CanCreateKeyIdentifierClause<X509RawDataKeyIdentifierClause>()
+                        originalUseKeyToken.CanCreateKeyIdentifierClause<X509RawDataKeyIdentifierClause>(
+
+                        )
                     )
                     {
                         useKeySki.Add(
-                            originalUseKeyToken.CreateKeyIdentifierClause<X509RawDataKeyIdentifierClause>()
+                            originalUseKeyToken.CreateKeyIdentifierClause<X509RawDataKeyIdentifierClause>(
+
+                            )
                         );
                     }
                     else

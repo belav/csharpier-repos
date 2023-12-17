@@ -104,10 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // If one of the trees wasn't diagnosing doc comments, then an error might have slipped through.
                     // Otherwise, we shouldn't see exceptions from XDocument.Parse.
                     Debug.Assert(
-                        sourceIncludeElementNodes.All(
-                            syntax =>
-                                syntax.SyntaxTree.Options.DocumentationMode
-                                < DocumentationMode.Diagnose
+                        sourceIncludeElementNodes.All(syntax =>
+                            syntax.SyntaxTree.Options.DocumentationMode < DocumentationMode.Diagnose
                         ),
                         "Why didn't our parser catch this exception? " + e
                     );
@@ -360,8 +358,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 Debug.Assert(originatingSyntax != null);
 
-                bool diagnose =
-                    originatingSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics();
+                bool diagnose = originatingSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics(
+
+                );
 
                 if (!EnterIncludeElement(location))
                 {

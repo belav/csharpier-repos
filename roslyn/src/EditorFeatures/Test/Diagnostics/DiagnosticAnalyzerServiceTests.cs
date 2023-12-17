@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             );
 
         private static IGlobalOptionService GetGlobalOptions(Workspace workspace) =>
-            workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
+            workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>(
+
+            );
 
         private static void OpenDocumentAndMakeActive(Document document, Workspace workspace)
         {
@@ -1021,10 +1023,9 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 analyzer = (AdditionalFileAnalyzer)analyzers[i];
                 foreach (var additionalDoc in project.AdditionalDocuments)
                 {
-                    var applicableDiagnostics = diagnostics.Where(
-                        d =>
-                            d.Id == analyzer.Descriptor.Id
-                            && d.DataLocation.UnmappedFileSpan.Path == additionalDoc.FilePath
+                    var applicableDiagnostics = diagnostics.Where(d =>
+                        d.Id == analyzer.Descriptor.Id
+                        && d.DataLocation.UnmappedFileSpan.Path == additionalDoc.FilePath
                     );
 
                     var text = await additionalDoc.GetTextAsync();
@@ -1311,8 +1312,8 @@ class A
                 foreach (var e in eCollection)
                 {
                     diagnostics.AddRange(
-                        e.Diagnostics.Where(
-                            d => d.Id == IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId
+                        e.Diagnostics.Where(d =>
+                            d.Id == IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId
                         )
                             .OrderBy(d => d.DataLocation.UnmappedFileSpan.GetClampedTextSpan(text))
                     );
@@ -1805,8 +1806,8 @@ class A
             );
             var globalOptions = workspace.GetService<IGlobalOptionService>();
 
-            var generator = new DiagnosticProducingGenerator(
-                c => Location.Create(c.Compilation.SyntaxTrees.Single(), new TextSpan(0, 10))
+            var generator = new DiagnosticProducingGenerator(c =>
+                Location.Create(c.Compilation.SyntaxTrees.Single(), new TextSpan(0, 10))
             );
             Assert.True(
                 workspace.TryApplyChanges(
@@ -2003,29 +2004,26 @@ class A
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(
-                    c =>
-                        c.ReportDiagnostic(
-                            Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())
-                        )
+                context.RegisterSyntaxTreeAction(c =>
+                    c.ReportDiagnostic(
+                        Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())
+                    )
                 );
-                context.RegisterSemanticModelAction(
-                    c =>
-                        c.ReportDiagnostic(
-                            Diagnostic.Create(
-                                s_semanticRule,
-                                c.SemanticModel.SyntaxTree.GetRoot().GetLocation()
-                            )
+                context.RegisterSemanticModelAction(c =>
+                    c.ReportDiagnostic(
+                        Diagnostic.Create(
+                            s_semanticRule,
+                            c.SemanticModel.SyntaxTree.GetRoot().GetLocation()
                         )
+                    )
                 );
-                context.RegisterCompilationAction(
-                    c =>
-                        c.ReportDiagnostic(
-                            Diagnostic.Create(
-                                s_compilationRule,
-                                c.Compilation.SyntaxTrees.First().GetRoot().GetLocation()
-                            )
+                context.RegisterCompilationAction(c =>
+                    c.ReportDiagnostic(
+                        Diagnostic.Create(
+                            s_compilationRule,
+                            c.Compilation.SyntaxTrees.First().GetRoot().GetLocation()
                         )
+                    )
                 );
             }
         }
@@ -2063,29 +2061,26 @@ class A
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(
-                    c =>
-                        c.ReportDiagnostic(
-                            Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())
-                        )
+                context.RegisterSyntaxTreeAction(c =>
+                    c.ReportDiagnostic(
+                        Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())
+                    )
                 );
-                context.RegisterSemanticModelAction(
-                    c =>
-                        c.ReportDiagnostic(
-                            Diagnostic.Create(
-                                s_semanticRule,
-                                c.SemanticModel.SyntaxTree.GetRoot().GetLocation()
-                            )
+                context.RegisterSemanticModelAction(c =>
+                    c.ReportDiagnostic(
+                        Diagnostic.Create(
+                            s_semanticRule,
+                            c.SemanticModel.SyntaxTree.GetRoot().GetLocation()
                         )
+                    )
                 );
-                context.RegisterCompilationAction(
-                    c =>
-                        c.ReportDiagnostic(
-                            Diagnostic.Create(
-                                s_compilationRule,
-                                c.Compilation.SyntaxTrees.First().GetRoot().GetLocation()
-                            )
+                context.RegisterCompilationAction(c =>
+                    c.ReportDiagnostic(
+                        Diagnostic.Create(
+                            s_compilationRule,
+                            c.Compilation.SyntaxTrees.First().GetRoot().GetLocation()
                         )
+                    )
                 );
             }
         }
@@ -2105,11 +2100,10 @@ class A
                 ImmutableArray.Create(s_syntaxRule);
 
             public override void Initialize(AnalysisContext context) =>
-                context.RegisterSyntaxTreeAction(
-                    c =>
-                        c.ReportDiagnostic(
-                            Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())
-                        )
+                context.RegisterSyntaxTreeAction(c =>
+                    c.ReportDiagnostic(
+                        Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())
+                    )
                 );
 
             public DiagnosticAnalyzerCategory GetAnalyzerCategory() =>

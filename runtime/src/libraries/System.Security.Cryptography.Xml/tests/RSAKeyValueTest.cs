@@ -65,15 +65,14 @@ namespace System.Security.Cryptography.Xml.Tests
             // Schema check. Should not throw.
             const string schema = "http://www.w3.org/2000/09/xmldsig#";
             new[] { "Exponent", "Modulus" }
-                .Select(
-                    elementName =>
-                        Convert.FromBase64String(
-                            xmlkey
-                                .SelectSingleNode(
-                                    $"*[local-name()='RSAKeyValue' and namespace-uri()='{schema}']/*[local-name()='{elementName}' and namespace-uri()='{schema}']"
-                                )
-                                .InnerText
-                        )
+                .Select(elementName =>
+                    Convert.FromBase64String(
+                        xmlkey
+                            .SelectSingleNode(
+                                $"*[local-name()='RSAKeyValue' and namespace-uri()='{schema}']/*[local-name()='{elementName}' and namespace-uri()='{schema}']"
+                            )
+                            .InnerText
+                    )
                 )
                 .ToArray();
         }

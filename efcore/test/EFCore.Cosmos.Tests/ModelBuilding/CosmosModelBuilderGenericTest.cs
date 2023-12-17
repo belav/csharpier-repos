@@ -25,7 +25,9 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 Assert
                     .Throws<InvalidOperationException>(
                         () =>
-                            base.Can_set_composite_key_for_primitive_collection_on_an_entity_with_fields()
+                            base.Can_set_composite_key_for_primitive_collection_on_an_entity_with_fields(
+
+                            )
                     )
                     .Message
             );
@@ -36,7 +38,9 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 Assert
                     .Throws<InvalidOperationException>(
                         () =>
-                            base.Access_mode_can_be_overridden_at_entity_and_primitive_collection_levels()
+                            base.Access_mode_can_be_overridden_at_entity_and_primitive_collection_levels(
+
+                            )
                     )
                     .Message
             );
@@ -235,7 +239,9 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 Assert
                     .Throws<InvalidOperationException>(
                         () =>
-                            base.Primitive_collections_are_required_by_default_only_if_CLR_type_is_nullable()
+                            base.Primitive_collections_are_required_by_default_only_if_CLR_type_is_nullable(
+
+                            )
                     )
                     .Message
             );
@@ -306,7 +312,9 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 Assert
                     .Throws<InvalidOperationException>(
                         () =>
-                            base.Primitive_collections_specified_by_string_are_shadow_properties_unless_already_known_to_be_CLR_properties()
+                            base.Primitive_collections_specified_by_string_are_shadow_properties_unless_already_known_to_be_CLR_properties(
+
+                            )
                     )
                     .Message
             );
@@ -341,8 +349,8 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
 
         public override void Properties_can_have_provider_type_set_for_type()
         {
-            var modelBuilder = CreateModelBuilder(
-                c => c.Properties<string>().HaveConversion<byte[]>()
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Properties<string>().HaveConversion<byte[]>()
             );
 
             modelBuilder.Entity<Quarks>(b =>
@@ -708,7 +716,9 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 Assert
                     .Throws<InvalidOperationException>(
                         () =>
-                            base.Primitive_collections_are_required_by_default_only_if_CLR_type_is_nullable()
+                            base.Primitive_collections_are_required_by_default_only_if_CLR_type_is_nullable(
+
+                            )
                     )
                     .Message
             );
@@ -769,7 +779,9 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 Assert
                     .Throws<InvalidOperationException>(
                         () =>
-                            base.Primitive_collections_specified_by_string_are_shadow_properties_unless_already_known_to_be_CLR_properties()
+                            base.Primitive_collections_specified_by_string_are_shadow_properties_unless_already_known_to_be_CLR_properties(
+
+                            )
                     )
                     .Message
             );
@@ -822,8 +834,8 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
 
         public override void Properties_can_have_provider_type_set_for_type()
         {
-            var modelBuilder = CreateModelBuilder(
-                c => c.Properties<string>().HaveConversion<byte[]>()
+            var modelBuilder = CreateModelBuilder(c =>
+                c.Properties<string>().HaveConversion<byte[]>()
             );
 
             modelBuilder
@@ -1424,11 +1436,10 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
             bool compareAnnotations = false
         )
         {
-            expectedProperties = expectedProperties.Where(
-                p => p.Name != "__jObject" && p.Name != "__id"
+            expectedProperties = expectedProperties.Where(p =>
+                p.Name != "__jObject" && p.Name != "__id"
             );
-            actualProperties = actualProperties.Where(
-                p => p.Name != "__jObject" && p.Name != "__id"
+            actualProperties = actualProperties.Where(p => p.Name != "__jObject" && p.Name != "__id"
             );
 
             base.AssertEqual(expectedProperties, actualProperties, assertOrder, compareAnnotations);

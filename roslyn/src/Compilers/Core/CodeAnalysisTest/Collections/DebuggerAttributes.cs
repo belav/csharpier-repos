@@ -91,9 +91,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             // The debugger doesn't evaluate non-public members of type proxies.
             IEnumerable<FieldInfo> visibleFields = debuggerAttributeType
                 .GetFields()
-                .Where(
-                    fi =>
-                        fi.IsPublic && GetDebuggerBrowsableState(fi) != DebuggerBrowsableState.Never
+                .Where(fi =>
+                    fi.IsPublic && GetDebuggerBrowsableState(fi) != DebuggerBrowsableState.Never
                 );
             return visibleFields;
         }
@@ -105,10 +104,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             // The debugger doesn't evaluate non-public members of type proxies. GetGetMethod returns null if the getter is non-public.
             IEnumerable<PropertyInfo> visibleProperties = debuggerAttributeType
                 .GetProperties()
-                .Where(
-                    pi =>
-                        pi.GetGetMethod() != null
-                        && GetDebuggerBrowsableState(pi) != DebuggerBrowsableState.Never
+                .Where(pi =>
+                    pi.GetGetMethod() != null
+                    && GetDebuggerBrowsableState(pi) != DebuggerBrowsableState.Never
                 );
             return visibleProperties;
         }

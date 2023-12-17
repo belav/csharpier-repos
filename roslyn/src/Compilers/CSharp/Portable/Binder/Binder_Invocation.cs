@@ -174,11 +174,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var analyzedArguments = AnalyzedArguments.GetInstance();
             Debug.Assert(
-                !args.Any(
-                    static e =>
-                        e.Kind == BoundKind.OutVariablePendingInference
-                        || e.Kind == BoundKind.OutDeconstructVarPendingInference
-                        || e.Kind == BoundKind.DiscardExpression && !e.HasExpressionType()
+                !args.Any(static e =>
+                    e.Kind == BoundKind.OutVariablePendingInference
+                    || e.Kind == BoundKind.OutDeconstructVarPendingInference
+                    || e.Kind == BoundKind.DiscardExpression && !e.HasExpressionType()
                 )
             );
             analyzedArguments.Arguments.AddRange(args);

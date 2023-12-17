@@ -106,11 +106,11 @@ namespace ILCompiler.PEWriter
                     callCount,
                     callCount * percentFactor
                 );
-                int resolvedPairCount = _callInfo.Sum(
-                    info => info.CallType == CrossPageCall.Unresolved ? 0 : 1
+                int resolvedPairCount = _callInfo.Sum(info =>
+                    info.CallType == CrossPageCall.Unresolved ? 0 : 1
                 );
-                int resolvedCallCount = _callInfo.Sum(
-                    info => info.CallType == CrossPageCall.Unresolved ? 0 : info.CallCount
+                int resolvedCallCount = _callInfo.Sum(info =>
+                    info.CallType == CrossPageCall.Unresolved ? 0 : info.CallCount
                 );
                 writer.WriteLine(
                     "RESOLVED ENTRIES          | {0,10} | {1,10} | {2,10:F2}",
@@ -126,11 +126,10 @@ namespace ILCompiler.PEWriter
                     unresolvedCallCount,
                     unresolvedCallCount * percentFactor
                 );
-                int nearPairCount = _callInfo.Sum(
-                    info => info.CallType == CrossPageCall.No ? 1 : 0
+                int nearPairCount = _callInfo.Sum(info => info.CallType == CrossPageCall.No ? 1 : 0
                 );
-                int nearCallCount = _callInfo.Sum(
-                    info => info.CallType == CrossPageCall.No ? info.CallCount : 0
+                int nearCallCount = _callInfo.Sum(info =>
+                    info.CallType == CrossPageCall.No ? info.CallCount : 0
                 );
                 writer.WriteLine(
                     "NEAR (INTRA-PAGE) CALLS   | {0,10} | {1,10} | {2,10:F2}",
@@ -138,11 +137,10 @@ namespace ILCompiler.PEWriter
                     nearCallCount,
                     nearCallCount * percentFactor
                 );
-                int farPairCount = _callInfo.Sum(
-                    info => info.CallType == CrossPageCall.Yes ? 1 : 0
+                int farPairCount = _callInfo.Sum(info => info.CallType == CrossPageCall.Yes ? 1 : 0
                 );
-                int farCallCount = _callInfo.Sum(
-                    info => info.CallType == CrossPageCall.Yes ? info.CallCount : 0
+                int farCallCount = _callInfo.Sum(info =>
+                    info.CallType == CrossPageCall.Yes ? info.CallCount : 0
                 );
                 writer.WriteLine(
                     "FAR (CROSS-PAGE) CALLS    | {0,10} | {1,10} | {2,10:F2}",

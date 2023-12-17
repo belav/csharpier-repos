@@ -50,21 +50,19 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
             context =>
             {
                 new1 = context.CreateProxy<OptionalAk1>(e => e.AlternateId = Guid.NewGuid());
-                new1d = context.CreateProxy<OptionalAk1Derived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new1d = context.CreateProxy<OptionalAk1Derived>(e => e.AlternateId = Guid.NewGuid()
                 );
-                new1dd = context.CreateProxy<OptionalAk1MoreDerived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new1dd = context.CreateProxy<OptionalAk1MoreDerived>(e =>
+                    e.AlternateId = Guid.NewGuid()
                 );
                 new2a = context.CreateProxy<OptionalAk2>(e => e.AlternateId = Guid.NewGuid());
                 new2b = context.CreateProxy<OptionalAk2>(e => e.AlternateId = Guid.NewGuid());
                 new2ca = context.CreateProxy<OptionalComposite2>();
                 new2cb = context.CreateProxy<OptionalComposite2>();
-                new2d = context.CreateProxy<OptionalAk2Derived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new2d = context.CreateProxy<OptionalAk2Derived>(e => e.AlternateId = Guid.NewGuid()
                 );
-                new2dd = context.CreateProxy<OptionalAk2MoreDerived>(
-                    e => e.AlternateId = Guid.NewGuid()
+                new2dd = context.CreateProxy<OptionalAk2MoreDerived>(e =>
+                    e.AlternateId = Guid.NewGuid()
                 );
 
                 if (useExistingEntities)

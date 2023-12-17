@@ -231,7 +231,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             // TODO: fallback options https://github.com/dotnet/roslyn/issues/60786
             var globalOptions =
-                document.Project.Solution.Services.GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>();
+                document.Project.Solution.Services.GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>(
+
+                );
             var fallbackOptions = globalOptions?.Provider ?? CodeActionOptions.DefaultProvider;
 
             var addImportsOptions = await document

@@ -30,9 +30,8 @@ public class SkipOnAlpineAttribute : Attribute, ITestCondition
         RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
         && File.Exists("/etc/os-release")
         && File.ReadAllLines("/etc/os-release")
-            .Any(
-                line =>
-                    line.StartsWith("ID=", StringComparison.Ordinal)
-                    && line.Substring(3).Trim('"', '\'') == "alpine"
+            .Any(line =>
+                line.StartsWith("ID=", StringComparison.Ordinal)
+                && line.Substring(3).Trim('"', '\'') == "alpine"
             );
 }

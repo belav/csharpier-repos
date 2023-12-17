@@ -51,10 +51,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
                     workspace.ExportProvider.GetExportedValue<MockVisualStudioWorkspace>();
                 visualStudioWorkspaceMock.SetWorkspace(workspace);
 
-                var threadingContext =
-                    workspace.ExportProvider.GetExportedValue<IThreadingContext>();
+                var threadingContext = workspace.ExportProvider.GetExportedValue<IThreadingContext>(
+
+                );
                 var listenerProvider =
-                    workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+                    workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>(
+
+                    );
 
                 var state = new CodeModelState(
                     threadingContext,

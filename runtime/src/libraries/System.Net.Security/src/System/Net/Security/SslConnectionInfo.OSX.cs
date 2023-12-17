@@ -57,8 +57,9 @@ namespace System.Net.Security
                     }
                     else
                     {
-                        ApplicationProtocol =
-                            context.SelectedApplicationProtocol.Protocol.ToArray();
+                        ApplicationProtocol = context.SelectedApplicationProtocol.Protocol.ToArray(
+
+                        );
                     }
                 }
             }

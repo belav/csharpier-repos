@@ -257,7 +257,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                         // Now any visible documents
                         foreach (
-                            var visibleDocumentId in Processor._documentTracker.GetVisibleDocuments()
+                            var visibleDocumentId in Processor._documentTracker.GetVisibleDocuments(
+
+                            )
                         )
                         {
                             yield return visibleDocumentId;

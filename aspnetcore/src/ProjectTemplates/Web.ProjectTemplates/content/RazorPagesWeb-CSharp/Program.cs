@@ -38,19 +38,18 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 #if (UseLocalDB)
-        options.UseSqlServer(connectionString)
+    options.UseSqlServer(connectionString)
 );
 #else
-        options.UseSqlite(connectionString));
+    options.UseSqlite(connectionString));
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder
-    .Services.AddDefaultIdentity<IdentityUser>(
-        options => options.SignIn.RequireConfirmedAccount = true
+    .Services.AddDefaultIdentity<IdentityUser>(options =>
+        options.SignIn.RequireConfirmedAccount = true
     )
     .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)

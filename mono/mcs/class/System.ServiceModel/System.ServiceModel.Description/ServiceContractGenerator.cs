@@ -980,9 +980,9 @@ namespace System.ServiceModel.Description
                         thisExpr,
                         cm.Name,
                         inArgs
-                            .ConvertAll<CodeExpression>(
-                                decl => new CodeArgumentReferenceExpression(decl.Name)
-                            )
+                            .ConvertAll<CodeExpression>(decl => new CodeArgumentReferenceExpression(
+                                decl.Name
+                            ))
                             .ToArray()
                     );
                     call.Parameters.Add(nullExpr);
@@ -1072,9 +1072,9 @@ namespace System.ServiceModel.Description
                     new CodeArrayCreateExpression(
                         typeof(object),
                         inArgs
-                            .ConvertAll<CodeExpression>(
-                                decl => new CodeArgumentReferenceExpression(decl.Name)
-                            )
+                            .ConvertAll<CodeExpression>(decl => new CodeArgumentReferenceExpression(
+                                decl.Name
+                            ))
                             .ToArray()
                     )
                 );
