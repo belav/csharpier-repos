@@ -10,16 +10,16 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Metadata.Edm;
+using System.Data.Query.PlanCompiler;
 using System.Diagnostics;
 using System.Globalization;
-using System.Data.Query.PlanCompiler;
 using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.InternalTrees
 {
     /// <summary>
-    /// A PhysicalProjectOp is a physical Op capping the entire command tree (and the 
-    /// subtrees of CollectOps). 
+    /// A PhysicalProjectOp is a physical Op capping the entire command tree (and the
+    /// subtrees of CollectOps).
     /// </summary>
     internal class PhysicalProjectOp : PhysicalOp
     {
@@ -28,21 +28,21 @@ namespace System.Data.Query.InternalTrees
         /// Instance for pattern matching in rules
         /// </summary>
         internal static readonly PhysicalProjectOp Pattern = new PhysicalProjectOp();
- 
+
         /// <summary>
         /// Get the column map that describes how the result should be reshaped
         /// </summary>
-        internal SimpleCollectionColumnMap ColumnMap 
-        { 
-            get { return m_columnMap; } 
+        internal SimpleCollectionColumnMap ColumnMap
+        {
+            get { return m_columnMap; }
         }
 
         /// <summary>
         /// Get the (ordered) list of output vars that this node produces
         /// </summary>
-        internal VarList Outputs 
-        { 
-            get { return m_outputVars; } 
+        internal VarList Outputs
+        {
+            get { return m_outputVars; }
         }
 
         /// <summary>
@@ -51,7 +51,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -60,7 +63,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
 
         #endregion
 
@@ -79,9 +85,7 @@ namespace System.Data.Query.InternalTrees
         }
 
         private PhysicalProjectOp()
-            : base(OpType.PhysicalProject)
-        {
-        }
+            : base(OpType.PhysicalProject) { }
         #endregion
 
         #region private state
@@ -91,8 +95,8 @@ namespace System.Data.Query.InternalTrees
     }
 
     /// <summary>
-    /// Represents information about one collection being managed by the NestOps. 
-    /// The CollectionVar is a Var that represents the entire collection. 
+    /// Represents information about one collection being managed by the NestOps.
+    /// The CollectionVar is a Var that represents the entire collection.
     /// </summary>
     internal class CollectionInfo
     {
@@ -104,6 +108,7 @@ namespace System.Data.Query.InternalTrees
         {
             get { return m_collectionVar; }
         }
+
         /// <summary>
         /// the column map for the collection element
         /// </summary>
@@ -113,7 +118,7 @@ namespace System.Data.Query.InternalTrees
         }
 
         /// <summary>
-        /// list of vars describing the collection element; flattened to remove 
+        /// list of vars describing the collection element; flattened to remove
         /// nested collections
         /// </summary>
         internal VarList FlattenedElementVars
@@ -149,7 +154,14 @@ namespace System.Data.Query.InternalTrees
         #endregion
 
         #region constructors
-        internal CollectionInfo(Var collectionVar, ColumnMap columnMap, VarList flattenedElementVars, VarVec keys, List<InternalTrees.SortKey> sortKeys, object discriminatorValue)
+        internal CollectionInfo(
+            Var collectionVar,
+            ColumnMap columnMap,
+            VarList flattenedElementVars,
+            VarVec keys,
+            List<InternalTrees.SortKey> sortKeys,
+            object discriminatorValue
+        )
         {
             m_collectionVar = collectionVar;
             m_columnMap = columnMap;
@@ -161,11 +173,11 @@ namespace System.Data.Query.InternalTrees
         #endregion
 
         #region private state
-        private Var m_collectionVar;    // the collection Var
-        private ColumnMap m_columnMap;  // column map for the collection element
+        private Var m_collectionVar; // the collection Var
+        private ColumnMap m_columnMap; // column map for the collection element
         private VarList m_flattenedElementVars; // elementVars, removing collections;
-        private VarVec m_keys;              //list of keys specific to this collection
-        private List<InternalTrees.SortKey> m_sortKeys;          //list of sort keys specific to this collection
+        private VarVec m_keys; //list of keys specific to this collection
+        private List<InternalTrees.SortKey> m_sortKeys; //list of sort keys specific to this collection
         private object m_discriminatorValue;
         #endregion
     }
@@ -190,11 +202,11 @@ namespace System.Data.Query.InternalTrees
         /// the collections produced. In addition, this may also include non-key vars
         /// from the outer row
         /// </summary>
-        internal VarVec Outputs 
-        { 
-            get { return m_outputs; } 
+        internal VarVec Outputs
+        {
+            get { return m_outputs; }
         }
-        
+
         /// <summary>
         /// Information about each collection managed by the NestOp
         /// </summary>
@@ -205,9 +217,12 @@ namespace System.Data.Query.InternalTrees
         #endregion
 
         #region constructors
-        internal NestBaseOp(OpType opType, List<SortKey> prefixSortKeys, 
-            VarVec outputVars, 
-            List<CollectionInfo> collectionInfoList)
+        internal NestBaseOp(
+            OpType opType,
+            List<SortKey> prefixSortKeys,
+            VarVec outputVars,
+            List<CollectionInfo> collectionInfoList
+        )
             : base(opType)
         {
             m_outputs = outputVars;
@@ -224,7 +239,7 @@ namespace System.Data.Query.InternalTrees
     }
 
     /// <summary>
-    /// Single-stream nest aggregation Op. 
+    /// Single-stream nest aggregation Op.
     /// (Somewhat similar to a group-by op - should we merge these?)
     /// </summary>
     internal class SingleStreamNestOp : NestBaseOp
@@ -233,15 +248,19 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - the input
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// The discriminator Var (when there are multiple collections)
         /// </summary>
-        internal Var Discriminator 
-        { 
-            get { return m_discriminator; } 
+        internal Var Discriminator
+        {
+            get { return m_discriminator; }
         }
+
         /// <summary>
         /// List of postfix sort keys (mostly to deal with multi-level nested collections)
         /// </summary>
@@ -249,6 +268,7 @@ namespace System.Data.Query.InternalTrees
         {
             get { return m_postfixSortKeys; }
         }
+
         /// <summary>
         /// Set of keys for this nest operation
         /// </summary>
@@ -263,9 +283,9 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) 
-        { 
-            v.Visit(this, n); 
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
         }
 
         /// <summary>
@@ -275,18 +295,22 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) 
-        { 
-            return v.Visit(this, n); 
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
         }
 
         #endregion
 
         #region constructors
-        internal SingleStreamNestOp(VarVec keys,
-            List<SortKey> prefixSortKeys, List<SortKey> postfixSortKeys, 
-            VarVec outputVars, List<CollectionInfo> collectionInfoList, 
-            Var discriminatorVar)
+        internal SingleStreamNestOp(
+            VarVec keys,
+            List<SortKey> prefixSortKeys,
+            List<SortKey> postfixSortKeys,
+            VarVec outputVars,
+            List<CollectionInfo> collectionInfoList,
+            Var discriminatorVar
+        )
             : base(OpType.SingleStreamNest, prefixSortKeys, outputVars, collectionInfoList)
         {
             m_keys = keys;
@@ -298,12 +322,12 @@ namespace System.Data.Query.InternalTrees
         #region private state
         private VarVec m_keys; // keys for this operation
         private Var m_discriminator; // Var describing the discriminator
-        List<SortKey> m_postfixSortKeys; // list of postfix sort keys 
+        List<SortKey> m_postfixSortKeys; // list of postfix sort keys
         #endregion
     }
 
     /// <summary>
-    /// Represents a multi-stream nest operation. The first input represents the 
+    /// Represents a multi-stream nest operation. The first input represents the
     /// container row, while all the other inputs represent collections
     /// </summary>
     internal class MultiStreamNestOp : NestBaseOp
@@ -315,7 +339,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -324,15 +351,19 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
 
         #region constructors
-        internal MultiStreamNestOp(List<SortKey> prefixSortKeys, VarVec outputVars, 
-            List<CollectionInfo> collectionInfoList)
-            : base(OpType.MultiStreamNest, prefixSortKeys, outputVars, collectionInfoList)
-        {
-        }
+        internal MultiStreamNestOp(
+            List<SortKey> prefixSortKeys,
+            VarVec outputVars,
+            List<CollectionInfo> collectionInfoList
+        )
+            : base(OpType.MultiStreamNest, prefixSortKeys, outputVars, collectionInfoList) { }
         #endregion
 
         #region private state

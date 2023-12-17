@@ -18,5 +18,6 @@ public interface IElementTypeNullabilityChangedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessElementTypeNullabilityChanged(
         IConventionElementTypeBuilder builder,
-        IConventionContext<bool?> context);
+        IConventionContext<bool?> context
+    );
 }

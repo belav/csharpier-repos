@@ -14,9 +14,7 @@ namespace System.Speech.Internal.ObjectTokens
         #region Constructors
 
         protected ObjectTokenCategory(string keyId, RegistryDataKey key)
-            : base(keyId, key)
-        {
-        }
+            : base(keyId, key) { }
 
         internal static ObjectTokenCategory Create(string sCategoryId)
         {
@@ -32,15 +30,26 @@ namespace System.Speech.Internal.ObjectTokens
         {
             // Check if the token is for a voice
             string tokenName = keyName;
-            if (!string.IsNullOrEmpty(tokenName) && !tokenName.StartsWith("HKEY_", StringComparison.Ordinal))
+            if (
+                !string.IsNullOrEmpty(tokenName)
+                && !tokenName.StartsWith("HKEY_", StringComparison.Ordinal)
+            )
             {
-                tokenName = string.Format(CultureInfo.InvariantCulture, @"{0}\Tokens\{1}", Id, tokenName);
+                tokenName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    @"{0}\Tokens\{1}",
+                    Id,
+                    tokenName
+                );
             }
 
             return ObjectToken.Open(null, tokenName, false);
         }
 
-        internal List<ObjectToken> FindMatchingTokens(string requiredAttributes, string optionalAttributes)
+        internal List<ObjectToken> FindMatchingTokens(
+            string requiredAttributes,
+            string optionalAttributes
+        )
         {
             var objectTokenList = new List<ObjectToken>();
             ISpObjectTokenCategory category = null;

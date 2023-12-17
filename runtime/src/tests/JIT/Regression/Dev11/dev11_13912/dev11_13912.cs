@@ -20,9 +20,7 @@ public class P
 
     internal static void TestCatchReturn()
     {
-        try
-        {
-        }
+        try { }
         catch (Exception)
         {
             try
@@ -35,13 +33,9 @@ public class P
                 {
                     return;
                 }
-                finally
-                {
-                }
+                finally { }
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
     }
 }

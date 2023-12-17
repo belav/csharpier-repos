@@ -17,7 +17,8 @@ public sealed class ComponentEndpointConventionBuilder : IHubEndpointConventionB
         IEndpointConventionBuilder hubEndpoint,
         IEndpointConventionBuilder disconnectEndpoint,
         IEndpointConventionBuilder jsInitializersEndpoint,
-        IEndpointConventionBuilder blazorEndpoint)
+        IEndpointConventionBuilder blazorEndpoint
+    )
     {
         _hubEndpoint = hubEndpoint;
         _disconnectEndpoint = disconnectEndpoint;

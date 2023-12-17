@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,50 +30,57 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable]
+    public sealed class PrincipalPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        // Fields
+        private bool authenticated;
+        private string name;
+        private string role;
 
-	[ComVisible (true)]
-	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-	[Serializable]
-	public sealed class PrincipalPermissionAttribute : CodeAccessSecurityAttribute {
+        // Constructor
+        public PrincipalPermissionAttribute(SecurityAction action)
+            : base(action)
+        {
+            authenticated = true; // strange but true ;)
+        }
 
-		// Fields
-		private bool authenticated;
-		private string name;
-		private string role;
-		
-		// Constructor
-		public PrincipalPermissionAttribute (SecurityAction action)
-			: base (action)
-		{
-			authenticated = true; // strange but true ;)
-		}
+        // Properties
+        public bool Authenticated
+        {
+            get { return authenticated; }
+            set { authenticated = value; }
+        }
 
-		// Properties
-		public bool Authenticated {
-			get { return authenticated; }
-			set { authenticated = value; }
-		}
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
+        public string Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
 
-		public string Role {
-			get { return role; }
-			set { role = value; }
-		}
-
-		// Method
-		public override IPermission CreatePermission ()
-		{
-			PrincipalPermission perm = null;
-			if (this.Unrestricted)
-				perm = new PrincipalPermission (PermissionState.Unrestricted);
-			else
-				perm = new PrincipalPermission (name, role, authenticated);
-			return perm;
-		}
-	}
+        // Method
+        public override IPermission CreatePermission()
+        {
+            PrincipalPermission perm = null;
+            if (this.Unrestricted)
+                perm = new PrincipalPermission(PermissionState.Unrestricted);
+            else
+                perm = new PrincipalPermission(name, role, authenticated);
+            return perm;
+        }
+    }
 }

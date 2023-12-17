@@ -77,12 +77,30 @@ namespace System.Security.AccessControl.Tests
             string groupStr = "BG";
 
             CommonSecurityDescriptor commonSecurityDescriptor = null;
-            SecurityIdentifier owner = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(ownerStr));
-            SecurityIdentifier newOwner = (newOwnerStr != null ? new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(newOwnerStr)) : null);
-            SecurityIdentifier group = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(groupStr));
+            SecurityIdentifier owner = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(ownerStr)
+            );
+            SecurityIdentifier newOwner = (
+                newOwnerStr != null
+                    ? new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(newOwnerStr)
+                    )
+                    : null
+            );
+            SecurityIdentifier group = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(groupStr)
+            );
             SystemAcl sacl = null;
             DiscretionaryAcl dacl = null;
-            commonSecurityDescriptor = new CommonSecurityDescriptor(isContainer, isDS, (ControlFlags)controlFlags, owner, group, sacl, dacl);
+            commonSecurityDescriptor = new CommonSecurityDescriptor(
+                isContainer,
+                isDS,
+                (ControlFlags)controlFlags,
+                owner,
+                group,
+                sacl,
+                dacl
+            );
             commonSecurityDescriptor.Owner = newOwner;
             // verify the result, we can use == here as SecurityIdentifier overrides the comparsison
             Assert.True(newOwner == commonSecurityDescriptor.Owner);

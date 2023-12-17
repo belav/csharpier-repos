@@ -18,7 +18,8 @@ public class PasswordHasherOptions
     /// <value>
     /// The compatibility mode used when hashing passwords.
     /// </value>
-    public PasswordHasherCompatibilityMode CompatibilityMode { get; set; } = PasswordHasherCompatibilityMode.IdentityV3;
+    public PasswordHasherCompatibilityMode CompatibilityMode { get; set; } =
+        PasswordHasherCompatibilityMode.IdentityV3;
 
     /// <summary>
     /// Gets or sets the number of iterations used when hashing passwords using PBKDF2. Default is 100,000.

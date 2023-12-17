@@ -23,18 +23,12 @@ namespace System.ServiceModel.Dispatcher
 
         public MessageFilter Filter1
         {
-            get
-            {
-                return this.filter1;
-            }
+            get { return this.filter1; }
         }
 
         public MessageFilter Filter2
         {
-            get
-            {
-                return this.filter2;
-            }
+            get { return this.filter2; }
         }
 
         protected internal override IMessageFilterTable<FilterData> CreateFilterTable<FilterData>()

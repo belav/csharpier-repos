@@ -10,8 +10,12 @@ namespace System.Drawing
     /// Stores the location and size of a rectangular region.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [TypeConverter("System.Drawing.RectangleConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
+    [TypeConverter(
+        "System.Drawing.RectangleConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public struct Rectangle : IEquatable<Rectangle>
     {
         public static readonly Rectangle Empty;
@@ -156,7 +160,8 @@ namespace System.Drawing
         /// Tests whether <paramref name="obj"/> is a <see cref='System.Drawing.Rectangle'/> with the same location
         /// and size of this Rectangle.
         /// </summary>
-        public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is Rectangle && Equals((Rectangle)obj);
+        public override readonly bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is Rectangle && Equals((Rectangle)obj);
 
         public readonly bool Equals(Rectangle other) => this == other;
 
@@ -164,7 +169,10 @@ namespace System.Drawing
         /// Tests whether two <see cref='System.Drawing.Rectangle'/> objects have equal location and size.
         /// </summary>
         public static bool operator ==(Rectangle left, Rectangle right) =>
-            left.X == right.X && left.Y == right.Y && left.Width == right.Width && left.Height == right.Height;
+            left.X == right.X
+            && left.Y == right.Y
+            && left.Width == right.Width
+            && left.Height == right.Height;
 
         /// <summary>
         /// Tests whether two <see cref='System.Drawing.Rectangle'/> objects differ in location or size.
@@ -182,7 +190,8 @@ namespace System.Drawing
                     (int)Math.Ceiling(value.X),
                     (int)Math.Ceiling(value.Y),
                     (int)Math.Ceiling(value.Width),
-                    (int)Math.Ceiling(value.Height));
+                    (int)Math.Ceiling(value.Height)
+                );
             }
         }
 
@@ -197,7 +206,8 @@ namespace System.Drawing
                     (int)value.X,
                     (int)value.Y,
                     (int)value.Width,
-                    (int)value.Height);
+                    (int)value.Height
+                );
             }
         }
 
@@ -212,7 +222,8 @@ namespace System.Drawing
                     (int)Math.Round(value.X),
                     (int)Math.Round(value.Y),
                     (int)Math.Round(value.Width),
-                    (int)Math.Round(value.Height));
+                    (int)Math.Round(value.Height)
+                );
             }
         }
 
@@ -220,7 +231,8 @@ namespace System.Drawing
         /// Determines if the specified point is contained within the rectangular region defined by this
         /// <see cref='System.Drawing.Rectangle'/> .
         /// </summary>
-        public readonly bool Contains(int x, int y) => X <= x && x < X + Width && Y <= y && y < Y + Height;
+        public readonly bool Contains(int x, int y) =>
+            X <= x && x < X + Width && Y <= y && y < Y + Height;
 
         /// <summary>
         /// Determines if the specified point is contained within the rectangular region defined by this
@@ -233,8 +245,10 @@ namespace System.Drawing
         /// rectangular region represented by this <see cref='System.Drawing.Rectangle'/> .
         /// </summary>
         public readonly bool Contains(Rectangle rect) =>
-            (X <= rect.X) && (rect.X + rect.Width <= X + Width) &&
-            (Y <= rect.Y) && (rect.Y + rect.Height <= Y + Height);
+            (X <= rect.X)
+            && (rect.X + rect.Width <= X + Width)
+            && (Y <= rect.Y)
+            && (rect.Y + rect.Height <= Y + Height);
 
         public override readonly int GetHashCode() => HashCode.Combine(X, Y, Width, Height);
 
@@ -304,8 +318,10 @@ namespace System.Drawing
         /// Determines if this rectangle intersects with rect.
         /// </summary>
         public readonly bool IntersectsWith(Rectangle rect) =>
-            (rect.X < X + Width) && (X < rect.X + rect.Width) &&
-            (rect.Y < Y + Height) && (Y < rect.Y + rect.Height);
+            (rect.X < X + Width)
+            && (X < rect.X + rect.Width)
+            && (rect.Y < Y + Height)
+            && (Y < rect.Y + rect.Height);
 
         /// <summary>
         /// Creates a rectangle that represents the union between a and b.
@@ -340,6 +356,7 @@ namespace System.Drawing
         /// <summary>
         /// Converts the attributes of this <see cref='System.Drawing.Rectangle'/> to a human readable string.
         /// </summary>
-        public override readonly string ToString() => $"{{X={X},Y={Y},Width={Width},Height={Height}}}";
+        public override readonly string ToString() =>
+            $"{{X={X},Y={Y},Width={Width},Height={Height}}}";
     }
 }

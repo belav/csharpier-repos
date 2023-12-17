@@ -16,14 +16,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpAddAccessibilityModifiersDiagnosticAnalyzer,
-        CSharpAddAccessibilityModifiersCodeFixProvider>;
+        CSharpAddAccessibilityModifiersCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddAccessibilityModifiers)]
     public class AddAccessibilityModifiersTests
     {
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact]
         public async Task TestAllConstructs()
@@ -151,23 +152,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestRefStructs()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 namespace Test
                 {
                     ref struct [|S1|] { }
                 }
-                """, """
+                """,
+                """
                 namespace Test
                 {
                     internal ref struct S1 { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -237,17 +242,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
         [Fact]
         public async Task TestReadOnlyStructs()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 namespace Test
                 {
                     readonly struct [|S1|] { }
                 }
-                """, """
+                """,
+                """
                 namespace Test
                 {
                     internal readonly struct S1 { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -393,7 +401,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 },
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -417,7 +428,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 """,
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -441,7 +455,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 """,
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -459,7 +476,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 """,
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -467,7 +487,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
         [Fact]
         public async Task TestExternMethod()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
                 using System.Runtime.InteropServices;
 
@@ -486,13 +507,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                     [DllImport("User32.dll", CharSet = CharSet.Unicode)]
                     private static extern int [|MessageBox|](IntPtr h, string m, string c, int type);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestVolatile()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 internal class Program
                 {
                     volatile int [|x|];
@@ -503,13 +526,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 {
                     private volatile int x;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48899")]
         public async Task TestAbstractMethod()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public abstract class TestClass
                 {
                     abstract string {|CS0621:[|Test|]|} { get; }
@@ -520,13 +545,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 {
                     protected abstract string Test { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48899")]
         public async Task TestOverriddenMethod()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public abstract class TestClass
                 {
                     public abstract string Test { get; }
@@ -547,7 +574,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 {
                     public override string Test { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -743,10 +771,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp12,
-                CodeActionEquivalenceKey = nameof(AnalyzersResources.Remove_accessibility_modifiers),
+                CodeActionEquivalenceKey = nameof(
+                    AnalyzersResources.Remove_accessibility_modifiers
+                ),
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired,AccessibilityModifiersRequired.OmitIfDefault }
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    }
                 }
             };
 

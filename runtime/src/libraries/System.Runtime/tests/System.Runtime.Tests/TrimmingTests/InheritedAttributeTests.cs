@@ -4,9 +4,11 @@
 using System;
 
 [AttributeUsage(AttributeTargets.Property, Inherited = true)]
-class FooAttribute : Attribute{ }
+class FooAttribute : Attribute { }
+
 [AttributeUsage(AttributeTargets.Property, Inherited = true)]
 class BarAttribute : Attribute { }
+
 [AttributeUsage(AttributeTargets.Property, Inherited = true)]
 class BazAttribute : Attribute { }
 
@@ -32,7 +34,9 @@ class Program
 {
     static int Main(string[] args)
     {
-        int numAttributes = Attribute.GetCustomAttributes(typeof(Derived).GetProperty("X"), inherit: true).Length;
+        int numAttributes = Attribute
+            .GetCustomAttributes(typeof(Derived).GetProperty("X"), inherit: true)
+            .Length;
         if (numAttributes == 3)
         {
             return 100;

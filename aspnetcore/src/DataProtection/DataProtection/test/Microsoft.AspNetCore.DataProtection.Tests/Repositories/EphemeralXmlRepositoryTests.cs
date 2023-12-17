@@ -30,8 +30,16 @@ public class EphemeralXmlRepositoryTests
         // Act & assert
         repository.StoreElement(element1, "Invalid friendly name."); // nobody should care about the friendly name
         repository.StoreElement(element2, "abcdefg");
-        Assert.Equal(new[] { element1, element2 }, repository.GetAllElements(), XmlAssert.EqualityComparer);
+        Assert.Equal(
+            new[] { element1, element2 },
+            repository.GetAllElements(),
+            XmlAssert.EqualityComparer
+        );
         repository.StoreElement(element3, null);
-        Assert.Equal(new[] { element1, element2, element3 }, repository.GetAllElements(), XmlAssert.EqualityComparer);
+        Assert.Equal(
+            new[] { element1, element2, element3 },
+            repository.GetAllElements(),
+            XmlAssert.EqualityComparer
+        );
     }
 }

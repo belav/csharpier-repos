@@ -4,25 +4,25 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Configuration;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
-    using System.Globalization;
-    using System.ServiceModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Configuration;
+    using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
 
     public sealed partial class MetadataElement : ConfigurationElement
     {
-        public MetadataElement()
-        {
-        }
-
+        public MetadataElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.PolicyImporters)]
         public PolicyImporterElementCollection PolicyImporters
         {
-            get { return (PolicyImporterElementCollection)base[ConfigurationStrings.PolicyImporters]; }
+            get
+            {
+                return (PolicyImporterElementCollection)base[ConfigurationStrings.PolicyImporters];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.WsdlImporters)]
@@ -48,6 +48,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

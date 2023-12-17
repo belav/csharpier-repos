@@ -5,7 +5,6 @@
 using System;
 using Xunit;
 
-
 namespace Test
 {
     public class AA
@@ -26,6 +25,7 @@ namespace Test
             }
             catch (NullReferenceException) { }
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

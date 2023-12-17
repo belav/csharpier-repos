@@ -10,8 +10,6 @@ namespace System.Reflection.TypeLoading
     internal sealed class RoPinnedType : RoWrappedType
     {
         internal RoPinnedType(RoType unmodifiedType)
-            : base(unmodifiedType)
-        {
-        }
+            : base(unmodifiedType) { }
     }
 }

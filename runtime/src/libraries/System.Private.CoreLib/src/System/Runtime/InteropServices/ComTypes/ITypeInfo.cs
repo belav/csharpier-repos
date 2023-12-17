@@ -82,18 +82,18 @@ namespace System.Runtime.InteropServices.ComTypes
     [StructLayout(LayoutKind.Sequential)]
     public struct FUNCDESC
     {
-        public int memid;                   // MEMBERID memid;
-        public IntPtr lprgscode;            // /* [size_is(cScodes)] */ SCODE RPC_FAR *lprgscode;
-        public IntPtr lprgelemdescParam;    // /* [size_is(cParams)] */ ELEMDESC __RPC_FAR *lprgelemdescParam;
-        public FUNCKIND funckind;           // FUNCKIND funckind;
-        public INVOKEKIND invkind;          // INVOKEKIND invkind;
-        public CALLCONV callconv;           // CALLCONV callconv;
-        public short cParams;               // short cParams;
-        public short cParamsOpt;            // short cParamsOpt;
-        public short oVft;                  // short oVft;
-        public short cScodes;               // short cScodes;
-        public ELEMDESC elemdescFunc;       // ELEMDESC elemdescFunc;
-        public short wFuncFlags;            // WORD wFuncFlags;
+        public int memid; // MEMBERID memid;
+        public IntPtr lprgscode; // /* [size_is(cScodes)] */ SCODE RPC_FAR *lprgscode;
+        public IntPtr lprgelemdescParam; // /* [size_is(cParams)] */ ELEMDESC __RPC_FAR *lprgelemdescParam;
+        public FUNCKIND funckind; // FUNCKIND funckind;
+        public INVOKEKIND invkind; // INVOKEKIND invkind;
+        public CALLCONV callconv; // CALLCONV callconv;
+        public short cParams; // short cParams;
+        public short cParamsOpt; // short cParamsOpt;
+        public short oVft; // short oVft;
+        public short cScodes; // short cScodes;
+        public ELEMDESC elemdescFunc; // ELEMDESC elemdescFunc;
+        public short wFuncFlags; // WORD wFuncFlags;
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -156,9 +156,11 @@ namespace System.Runtime.InteropServices.ComTypes
         {
             [FieldOffset(0)]
             public IDLDESC idldesc;
+
             [FieldOffset(0)]
             public PARAMDESC paramdesc;
         }
+
         public DESCUNION desc;
     }
 
@@ -183,6 +185,7 @@ namespace System.Runtime.InteropServices.ComTypes
         {
             [FieldOffset(0)]
             public int oInst;
+
             [FieldOffset(0)]
             public IntPtr lpvarValue;
         }
@@ -210,9 +213,15 @@ namespace System.Runtime.InteropServices.ComTypes
     {
         public short wCode;
         public short wReserved;
-        [MarshalAs(UnmanagedType.BStr)] public string bstrSource;
-        [MarshalAs(UnmanagedType.BStr)] public string bstrDescription;
-        [MarshalAs(UnmanagedType.BStr)] public string bstrHelpFile;
+
+        [MarshalAs(UnmanagedType.BStr)]
+        public string bstrSource;
+
+        [MarshalAs(UnmanagedType.BStr)]
+        public string bstrDescription;
+
+        [MarshalAs(UnmanagedType.BStr)]
+        public string bstrHelpFile;
         public int dwHelpContext;
         public IntPtr pvReserved;
         public IntPtr pfnDeferredFillIn;
@@ -302,22 +311,66 @@ namespace System.Runtime.InteropServices.ComTypes
         void GetTypeComp(out ITypeComp ppTComp);
         void GetFuncDesc(int index, out IntPtr ppFuncDesc);
         void GetVarDesc(int index, out IntPtr ppVarDesc);
-        void GetNames(int memid, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2), Out] string[] rgBstrNames, int cMaxNames, out int pcNames);
+        void GetNames(
+            int memid,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2), Out] string[] rgBstrNames,
+            int cMaxNames,
+            out int pcNames
+        );
         void GetRefTypeOfImplType(int index, out int href);
         void GetImplTypeFlags(int index, out IMPLTYPEFLAGS pImplTypeFlags);
-        void GetIDsOfNames([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 1), In] string[] rgszNames, int cNames, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] int[] pMemId);
-        void Invoke([MarshalAs(UnmanagedType.IUnknown)] object pvInstance, int memid, short wFlags, ref DISPPARAMS pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, out int puArgErr);
-        void GetDocumentation(int index, out string strName, out string strDocString, out int dwHelpContext, out string strHelpFile);
-        void GetDllEntry(int memid, INVOKEKIND invKind, IntPtr pBstrDllName, IntPtr pBstrName, IntPtr pwOrdinal);
+        void GetIDsOfNames(
+            [
+                MarshalAs(
+                    UnmanagedType.LPArray,
+                    ArraySubType = UnmanagedType.LPWStr,
+                    SizeParamIndex = 1
+                ),
+                In
+            ]
+                string[] rgszNames,
+            int cNames,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] int[] pMemId
+        );
+        void Invoke(
+            [MarshalAs(UnmanagedType.IUnknown)] object pvInstance,
+            int memid,
+            short wFlags,
+            ref DISPPARAMS pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            out int puArgErr
+        );
+        void GetDocumentation(
+            int index,
+            out string strName,
+            out string strDocString,
+            out int dwHelpContext,
+            out string strHelpFile
+        );
+        void GetDllEntry(
+            int memid,
+            INVOKEKIND invKind,
+            IntPtr pBstrDllName,
+            IntPtr pBstrName,
+            IntPtr pwOrdinal
+        );
         void GetRefTypeInfo(int hRef, out ITypeInfo ppTI);
         void AddressOfMember(int memid, INVOKEKIND invKind, out IntPtr ppv);
-        void CreateInstance([MarshalAs(UnmanagedType.IUnknown)] object? pUnkOuter, [In] ref Guid riid, [MarshalAs(UnmanagedType.IUnknown), Out] out object ppvObj);
+        void CreateInstance(
+            [MarshalAs(UnmanagedType.IUnknown)] object? pUnkOuter,
+            [In] ref Guid riid,
+            [MarshalAs(UnmanagedType.IUnknown), Out] out object ppvObj
+        );
         void GetMops(int memid, out string? pBstrMops);
         void GetContainingTypeLib(out ITypeLib ppTLB, out int pIndex);
+
         [PreserveSig]
         void ReleaseTypeAttr(IntPtr pTypeAttr);
+
         [PreserveSig]
         void ReleaseFuncDesc(IntPtr pFuncDesc);
+
         [PreserveSig]
         void ReleaseVarDesc(IntPtr pVarDesc);
     }

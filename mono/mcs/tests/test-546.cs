@@ -8,8 +8,8 @@ Invisible code;
 
 namespace NameSpace
 {
-	class C
-	{
-		public static void Main () {}
-	}
+    class C
+    {
+        public static void Main() { }
+    }
 }

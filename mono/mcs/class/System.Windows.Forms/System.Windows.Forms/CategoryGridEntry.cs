@@ -28,40 +28,47 @@ using System.Drawing;
 
 namespace System.Windows.Forms.PropertyGridInternal
 {
-	/// <summary>
-	/// Summary description for CategoryGridEntry
-	/// </summary>
-	internal class CategoryGridEntry : GridEntry
-	{
-		private string label;
-		public CategoryGridEntry (PropertyGrid owner, string category, GridEntry parent)
-			: base (owner, parent)
-		{
-			label = category;
-		}
+    /// <summary>
+    /// Summary description for CategoryGridEntry
+    /// </summary>
+    internal class CategoryGridEntry : GridEntry
+    {
+        private string label;
 
-		public override GridItemType GridItemType {
-			get { return GridItemType.Category; }
-		}
+        public CategoryGridEntry(PropertyGrid owner, string category, GridEntry parent)
+            : base(owner, parent)
+        {
+            label = category;
+        }
 
-		public override bool Expandable {
-			get { return GridItems.Count > 0; }
-		}
+        public override GridItemType GridItemType
+        {
+            get { return GridItemType.Category; }
+        }
 
-		public override string Label {
-			get { return label; }
-		}
+        public override bool Expandable
+        {
+            get { return GridItems.Count > 0; }
+        }
 
-		public override bool IsReadOnly {
-			get { return true; }
-		}
+        public override string Label
+        {
+            get { return label; }
+        }
 
-		public override bool IsEditable {
-			get { return false; }
-		}
+        public override bool IsReadOnly
+        {
+            get { return true; }
+        }
 
-		public override bool IsResetable {
-			get { return false; }
-		}
-	}
+        public override bool IsEditable
+        {
+            get { return false; }
+        }
+
+        public override bool IsResetable
+        {
+            get { return false; }
+        }
+    }
 }

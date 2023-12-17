@@ -17,7 +17,6 @@ using Microsoft.Interop;
 using Microsoft.Interop.UnitTests;
 using SourceGenerators.Tests;
 using Xunit;
-
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpSourceGeneratorVerifier<Microsoft.Interop.ComInterfaceGenerator>;
 
 namespace ComInterfaceGenerator.Unit.Tests
@@ -152,7 +151,8 @@ namespace ComInterfaceGenerator.Unit.Tests
             var test = new VerifyCompilationTest<Microsoft.Interop.ComInterfaceGenerator>(false)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
+                TestBehaviors =
+                    TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
                 CompilationVerifier = VerifyCompilation
             };
             await test.RunAsync();
@@ -201,7 +201,8 @@ namespace ComInterfaceGenerator.Unit.Tests
             var test = new VerifyCompilationTest<Microsoft.Interop.ComInterfaceGenerator>(false)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
+                TestBehaviors =
+                    TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
                 CompilationVerifier = VerifyCompilation
             };
             await test.RunAsync();
@@ -226,7 +227,9 @@ namespace ComInterfaceGenerator.Unit.Tests
             Assert.False(method.IsAbstract);
             Assert.True(method.IsVirtual);
 
-            var syntax = Assert.IsType<MethodDeclarationSyntax>(Assert.Single(method.DeclaringSyntaxReferences).GetSyntax());
+            var syntax = Assert.IsType<MethodDeclarationSyntax>(
+                Assert.Single(method.DeclaringSyntaxReferences).GetSyntax()
+            );
             Assert.Contains(syntax.Modifiers, token => token.IsKind(SyntaxKind.NewKeyword));
         }
 
@@ -259,29 +262,40 @@ namespace ComInterfaceGenerator.Unit.Tests
             var test = new VerifyCompilationTest<Microsoft.Interop.ComInterfaceGenerator>(false)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
+                TestBehaviors =
+                    TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
                 CompilationVerifier = VerifyCompilation
             };
             await test.RunAsync();
 
             static void VerifyCompilation(Compilation comp)
             {
-                Assert.True(comp.GetTypeByMetadataName("Test.IDerivedIface")
-                    ?.GetMembers()
-                    .Where(m => m.Kind == SymbolKind.Method && m.Name == "Bar")
-                    .SingleOrDefault()
-                    ?.GetAttributes()
-                    .Any(att => att.AttributeClass?.Name == nameof(RequiresUnreferencedCodeAttribute)));
+                Assert.True(
+                    comp.GetTypeByMetadataName("Test.IDerivedIface")
+                        ?.GetMembers()
+                        .Where(m => m.Kind == SymbolKind.Method && m.Name == "Bar")
+                        .SingleOrDefault()
+                        ?.GetAttributes()
+                        .Any(
+                            att =>
+                                att.AttributeClass?.Name
+                                == nameof(RequiresUnreferencedCodeAttribute)
+                        )
+                );
             }
         }
 
-        private static async Task VerifyGeneratedTypeShapes(string source, params string[] typeNames)
+        private static async Task VerifyGeneratedTypeShapes(
+            string source,
+            params string[] typeNames
+        )
         {
-            GeneratedShapeTest test = new(typeNames)
-            {
-                TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
-            };
+            GeneratedShapeTest test =
+                new(typeNames)
+                {
+                    TestCode = source,
+                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
+                };
 
             await test.RunAsync();
         }
@@ -299,39 +313,80 @@ namespace ComInterfaceGenerator.Unit.Tests
             protected override void VerifyFinalCompilation(Compilation compilation)
             {
                 // Generate one source file per attributed interface.
-                Assert.Equal(TestState.Sources.Count + _typeNames.Length, compilation.SyntaxTrees.Count());
+                Assert.Equal(
+                    TestState.Sources.Count + _typeNames.Length,
+                    compilation.SyntaxTrees.Count()
+                );
                 Assert.All(_typeNames, name => VerifyShape(compilation, name));
             }
 
-            private static void VerifyShape(Compilation comp, string userDefinedInterfaceMetadataName)
+            private static void VerifyShape(
+                Compilation comp,
+                string userDefinedInterfaceMetadataName
+            )
             {
-                INamedTypeSymbol? userDefinedInterface = comp.Assembly.GetTypeByMetadataName(userDefinedInterfaceMetadataName);
+                INamedTypeSymbol? userDefinedInterface = comp.Assembly.GetTypeByMetadataName(
+                    userDefinedInterfaceMetadataName
+                );
                 Assert.NotNull(userDefinedInterface);
 
-                INamedTypeSymbol? iUnknownDerivedAttributeType = comp.GetTypeByMetadataName("System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2");
+                INamedTypeSymbol? iUnknownDerivedAttributeType = comp.GetTypeByMetadataName(
+                    "System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2"
+                );
 
                 Assert.NotNull(iUnknownDerivedAttributeType);
 
                 AttributeData iUnknownDerivedAttribute = Assert.Single(
                     userDefinedInterface.GetAttributes(),
-                    attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass?.OriginalDefinition, iUnknownDerivedAttributeType));
+                    attr =>
+                        SymbolEqualityComparer.Default.Equals(
+                            attr.AttributeClass?.OriginalDefinition,
+                            iUnknownDerivedAttributeType
+                        )
+                );
 
-                Assert.Collection(Assert.IsAssignableFrom<INamedTypeSymbol>(iUnknownDerivedAttribute.AttributeClass).TypeArguments,
+                Assert.Collection(
+                    Assert
+                        .IsAssignableFrom<INamedTypeSymbol>(iUnknownDerivedAttribute.AttributeClass)
+                        .TypeArguments,
                     infoType =>
                     {
-                        Assert.True(Assert.IsAssignableFrom<INamedTypeSymbol>(infoType).IsFileLocal);
+                        Assert.True(
+                            Assert.IsAssignableFrom<INamedTypeSymbol>(infoType).IsFileLocal
+                        );
                     },
                     implementationType =>
                     {
-                        Assert.True(Assert.IsAssignableFrom<INamedTypeSymbol>(implementationType).IsFileLocal);
-                        Assert.Contains(userDefinedInterface, implementationType.Interfaces, SymbolEqualityComparer.Default);
-                        Assert.Contains(implementationType.GetAttributes(), attr => attr.AttributeClass?.ToDisplayString() == typeof(DynamicInterfaceCastableImplementationAttribute).FullName);
-                        Assert.All(userDefinedInterface.GetMembers().OfType<IMethodSymbol>().Where(method => method.IsAbstract && !method.IsStatic),
+                        Assert.True(
+                            Assert
+                                .IsAssignableFrom<INamedTypeSymbol>(implementationType)
+                                .IsFileLocal
+                        );
+                        Assert.Contains(
+                            userDefinedInterface,
+                            implementationType.Interfaces,
+                            SymbolEqualityComparer.Default
+                        );
+                        Assert.Contains(
+                            implementationType.GetAttributes(),
+                            attr =>
+                                attr.AttributeClass?.ToDisplayString()
+                                == typeof(DynamicInterfaceCastableImplementationAttribute).FullName
+                        );
+                        Assert.All(
+                            userDefinedInterface
+                                .GetMembers()
+                                .OfType<IMethodSymbol>()
+                                .Where(method => method.IsAbstract && !method.IsStatic),
                             method =>
                             {
-                                Assert.NotNull(implementationType.FindImplementationForInterfaceMember(method));
-                            });
-                    });
+                                Assert.NotNull(
+                                    implementationType.FindImplementationForInterfaceMember(method)
+                                );
+                            }
+                        );
+                    }
+                );
             }
         }
     }

@@ -5,7 +5,6 @@
 using System;
 using System.Diagnostics;
 using System.Reflection.Runtime.General;
-
 using Internal.Metadata.NativeFormat;
 using Internal.NativeFormat;
 using Internal.Runtime.Augments;
@@ -53,24 +52,31 @@ namespace Internal.Runtime.TypeLoader
             MetadataReader metadataReader,
             RuntimeTypeHandle runtimeTypeHandle,
             FieldHandle fieldHandle,
-            out FieldAccessMetadata fieldAccessMetadata)
+            out FieldAccessMetadata fieldAccessMetadata
+        )
         {
             fieldAccessMetadata = default(FieldAccessMetadata);
 
-            if (TryGetFieldAccessMetadataFromFieldAccessMap(
-                runtimeTypeHandle,
-                fieldHandle,
-                CanonicalFormKind.Specific,
-                ref fieldAccessMetadata))
+            if (
+                TryGetFieldAccessMetadataFromFieldAccessMap(
+                    runtimeTypeHandle,
+                    fieldHandle,
+                    CanonicalFormKind.Specific,
+                    ref fieldAccessMetadata
+                )
+            )
             {
                 return true;
             }
 
-            if (TryGetFieldAccessMetadataFromFieldAccessMap(
-                runtimeTypeHandle,
-                fieldHandle,
-                CanonicalFormKind.Universal,
-                ref fieldAccessMetadata))
+            if (
+                TryGetFieldAccessMetadataFromFieldAccessMap(
+                    runtimeTypeHandle,
+                    fieldHandle,
+                    CanonicalFormKind.Universal,
+                    ref fieldAccessMetadata
+                )
+            )
             {
                 return true;
             }
@@ -90,14 +96,28 @@ namespace Internal.Runtime.TypeLoader
             RuntimeTypeHandle declaringTypeHandle,
             FieldHandle fieldHandle,
             CanonicalFormKind canonFormKind,
-            ref FieldAccessMetadata fieldAccessMetadata)
+            ref FieldAccessMetadata fieldAccessMetadata
+        )
         {
-            CanonicallyEquivalentEntryLocator canonWrapper = new CanonicallyEquivalentEntryLocator(declaringTypeHandle, canonFormKind);
+            CanonicallyEquivalentEntryLocator canonWrapper = new CanonicallyEquivalentEntryLocator(
+                declaringTypeHandle,
+                canonFormKind
+            );
 
-            foreach (NativeFormatModuleInfo mappingTableModule in ModuleList.EnumerateModules(RuntimeAugments.GetModuleFromTypeHandle(declaringTypeHandle)))
+            foreach (
+                NativeFormatModuleInfo mappingTableModule in ModuleList.EnumerateModules(
+                    RuntimeAugments.GetModuleFromTypeHandle(declaringTypeHandle)
+                )
+            )
             {
                 NativeReader fieldMapReader;
-                if (!TryGetNativeReaderForBlob(mappingTableModule, ReflectionMapBlob.FieldAccessMap, out fieldMapReader))
+                if (
+                    !TryGetNativeReaderForBlob(
+                        mappingTableModule,
+                        ReflectionMapBlob.FieldAccessMap,
+                        out fieldMapReader
+                    )
+                )
                     continue;
 
                 NativeParser fieldMapParser = new NativeParser(fieldMapReader, 0);
@@ -119,17 +139,25 @@ namespace Internal.Runtime.TypeLoader
 
                     FieldTableFlags entryFlags = (FieldTableFlags)entryParser.GetUnsigned();
 
-                    if ((canonFormKind == CanonicalFormKind.Universal) != ((entryFlags & FieldTableFlags.IsUniversalCanonicalEntry) != 0))
+                    if (
+                        (canonFormKind == CanonicalFormKind.Universal)
+                        != ((entryFlags & FieldTableFlags.IsUniversalCanonicalEntry) != 0)
+                    )
                         continue;
 
-                    RuntimeTypeHandle entryDeclaringTypeHandle = externalReferences.GetRuntimeTypeHandleFromIndex(entryParser.GetUnsigned());
-                    if (!entryDeclaringTypeHandle.Equals(declaringTypeHandle)
-                        && !canonWrapper.IsCanonicallyEquivalent(entryDeclaringTypeHandle))
+                    RuntimeTypeHandle entryDeclaringTypeHandle =
+                        externalReferences.GetRuntimeTypeHandleFromIndex(entryParser.GetUnsigned());
+                    if (
+                        !entryDeclaringTypeHandle.Equals(declaringTypeHandle)
+                        && !canonWrapper.IsCanonicallyEquivalent(entryDeclaringTypeHandle)
+                    )
                         continue;
 
                     if ((entryFlags & FieldTableFlags.HasMetadataHandle) != 0)
                     {
-                        Handle entryFieldHandle = (((int)HandleType.Field << 24) | (int)entryParser.GetUnsigned()).AsHandle();
+                        Handle entryFieldHandle = (
+                            ((int)HandleType.Field << 24) | (int)entryParser.GetUnsigned()
+                        ).AsHandle();
                         if (!fieldHandle.Equals(entryFieldHandle))
                             continue;
                     }
@@ -149,10 +177,15 @@ namespace Internal.Runtime.TypeLoader
                     else
                     {
                         fieldOffset = 0;
-                        fieldAddressCookie = externalReferences.GetAddressFromIndex(entryParser.GetUnsigned());
+                        fieldAddressCookie = externalReferences.GetAddressFromIndex(
+                            entryParser.GetUnsigned()
+                        );
 
                         FieldTableFlags storageClass = entryFlags & FieldTableFlags.StorageClass;
-                        if (storageClass == FieldTableFlags.GCStatic || storageClass == FieldTableFlags.ThreadStatic)
+                        if (
+                            storageClass == FieldTableFlags.GCStatic
+                            || storageClass == FieldTableFlags.ThreadStatic
+                        )
                             fieldOffset = (int)entryParser.GetUnsigned();
                     }
 

@@ -33,13 +33,15 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
     IStreamingFindUsagesPresenter streamingPresenter,
     IUIThreadOperationExecutor uiThreadOperationExecutor,
     IAsynchronousOperationListener listener,
-    IGlobalOptionService globalOptions) : ICommandHandler<TCommandArgs>
+    IGlobalOptionService globalOptions
+) : ICommandHandler<TCommandArgs>
     where TLanguageService : class, ILanguageService
     where TCommandArgs : EditorCommandArgs
 {
     private readonly IThreadingContext _threadingContext = threadingContext;
     private readonly IStreamingFindUsagesPresenter _streamingPresenter = streamingPresenter;
-    private readonly IUIThreadOperationExecutor _uiThreadOperationExecutor = uiThreadOperationExecutor;
+    private readonly IUIThreadOperationExecutor _uiThreadOperationExecutor =
+        uiThreadOperationExecutor;
     private readonly IAsynchronousOperationListener _listener = listener;
     private readonly IGlobalOptionService _globalOptions = globalOptions;
 
@@ -73,7 +75,12 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
     protected abstract string ScopeDescription { get; }
     protected abstract FunctionId FunctionId { get; }
 
-    protected abstract Task FindActionAsync(IFindUsagesContext context, Document document, int caretPosition, CancellationToken cancellationToken);
+    protected abstract Task FindActionAsync(
+        IFindUsagesContext context,
+        Document document,
+        int caretPosition,
+        CancellationToken cancellationToken
+    );
 
     private static (Document?, TLanguageService?) GetDocumentAndService(ITextSnapshot snapshot)
     {
@@ -84,9 +91,7 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
     public CommandState GetCommandState(TCommandArgs args)
     {
         var (_, service) = GetDocumentAndService(args.SubjectBuffer.CurrentSnapshot);
-        return service != null
-            ? CommandState.Available
-            : CommandState.Unspecified;
+        return service != null ? CommandState.Available : CommandState.Unspecified;
     }
 
     public bool ExecuteCommand(TCommandArgs args, CommandExecutionContext context)
@@ -110,14 +115,19 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
 
         // we're going to return immediately from ExecuteCommand and kick off our own async work to invoke the
         // operation. Once this returns, the editor will close the threaded wait dialog it created.
-        _inProgressCommand = ExecuteCommandAsync(document, caret.Value.Position, _cancellationTokenSource);
+        _inProgressCommand = ExecuteCommandAsync(
+            document,
+            caret.Value.Position,
+            _cancellationTokenSource
+        );
         return true;
     }
 
     private async Task ExecuteCommandAsync(
         Document document,
         int position,
-        CancellationTokenSource cancellationTokenSource)
+        CancellationTokenSource cancellationTokenSource
+    )
     {
         // This is a fire-and-forget method (nothing guarantees observing it).  As such, we have to handle cancellation
         // and failure ourselves.
@@ -126,7 +136,9 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
             _threadingContext.ThrowIfNotOnUIThread();
 
             // Make an tracking token so that integration tests can wait until we're complete.
-            using var token = _listener.BeginAsyncOperation($"{GetType().Name}.{nameof(ExecuteCommandAsync)}");
+            using var token = _listener.BeginAsyncOperation(
+                $"{GetType().Name}.{nameof(ExecuteCommandAsync)}"
+            );
 
             // Only start running once the previous command has finished.  That way we don't have results from both
             // potentially interleaving with each other.  Note: this should ideally always be fast as long as the prior
@@ -136,20 +148,18 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
             // any failures from it.  Technically this should not be possible as it should be inside this same
             // try/catch. however this code wants to be very resilient to any prior mistakes infecting later operations.
             await _inProgressCommand.NoThrowAwaitable(captureContext: false);
-            await ExecuteCommandWorkerAsync(document, position, cancellationTokenSource).ConfigureAwait(false);
+            await ExecuteCommandWorkerAsync(document, position, cancellationTokenSource)
+                .ConfigureAwait(false);
         }
-        catch (OperationCanceledException)
-        {
-        }
-        catch (Exception ex) when (FatalError.ReportAndCatch(ex))
-        {
-        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
     }
 
     private async Task ExecuteCommandWorkerAsync(
         Document document,
         int position,
-        CancellationTokenSource cancellationTokenSource)
+        CancellationTokenSource cancellationTokenSource
+    )
     {
         // Switch to the BG immediately so we can keep as much work off the UI thread.
         await TaskScheduler.Default;
@@ -169,7 +179,10 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
 
         var cancellationToken = cancellationTokenSource.Token;
         var delayTask = DelayAsync(cancellationToken);
-        var findTask = Task.Run(() => FindResultsAsync(findContext, document, position, cancellationToken), cancellationToken);
+        var findTask = Task.Run(
+            () => FindResultsAsync(findContext, document, position, cancellationToken),
+            cancellationToken
+        );
 
         var firstFinishedTask = await Task.WhenAny(delayTask, findTask).ConfigureAwait(false);
         if (cancellationToken.IsCancellationRequested)
@@ -181,16 +194,23 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
         {
             // We completed the search within 1.5 seconds.  If we had at least one result then Navigate to it directly
             // (if there is just one) or present them all if there are many.
-            var definitions = await findContext.GetDefinitionsAsync(cancellationToken).ConfigureAwait(false);
+            var definitions = await findContext
+                .GetDefinitionsAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (definitions.Length > 0)
             {
-                var title = await findContext.GetSearchTitleAsync(cancellationToken).ConfigureAwait(false);
-                var location = await _streamingPresenter.TryPresentLocationOrNavigateIfOneAsync(
-                    _threadingContext,
-                    document.Project.Solution.Workspace,
-                    title ?? DisplayName,
-                    definitions,
-                    cancellationToken).ConfigureAwait(false);
+                var title = await findContext
+                    .GetSearchTitleAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var location = await _streamingPresenter
+                    .TryPresentLocationOrNavigateIfOneAsync(
+                        _threadingContext,
+                        document.Project.Solution.Workspace,
+                        title ?? DisplayName,
+                        definitions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return;
             }
         }
@@ -198,7 +218,12 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
         // We either got no results, or 1.5 has passed and we didn't figure out the symbols to navigate to or
         // present.  So pop up the presenter to show the user that we're involved in a longer search, without
         // blocking them.
-        await PresentResultsInStreamingPresenterAsync(findContext, findTask, cancellationTokenSource).ConfigureAwait(false);
+        await PresentResultsInStreamingPresenterAsync(
+                findContext,
+                findTask,
+                cancellationTokenSource
+            )
+            .ConfigureAwait(false);
     }
 
     private Task DelayAsync(CancellationToken cancellationToken)
@@ -214,11 +239,15 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
     private async Task PresentResultsInStreamingPresenterAsync(
         BufferedFindUsagesContext findContext,
         Task findTask,
-        CancellationTokenSource cancellationTokenSource)
+        CancellationTokenSource cancellationTokenSource
+    )
     {
         var cancellationToken = cancellationTokenSource.Token;
         await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-        var (presenterContext, presenterCancellationToken) = _streamingPresenter.StartSearch(DisplayName, supportsReferences: false);
+        var (presenterContext, presenterCancellationToken) = _streamingPresenter.StartSearch(
+            DisplayName,
+            supportsReferences: false
+        );
 
         try
         {
@@ -227,7 +256,9 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
             // Now, tell our find-context (which has been collecting intermediary results) to swap over to using the
             // actual presenter context.  It will push all results it's been collecting into that, and from that
             // point onwards will just forward any new results directly to the presenter.
-            await findContext.AttachToStreamingPresenterAsync(presenterContext, cancellationToken).ConfigureAwait(false);
+            await findContext
+                .AttachToStreamingPresenterAsync(presenterContext, cancellationToken)
+                .ConfigureAwait(false);
 
             // Hook up the presenter's cancellation token to our overall governing cancellation token.  In other
             // words, if something else decides to present in the presenter (like a find-refs call) we'll hear about
@@ -247,25 +278,45 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
     }
 
     private async Task FindResultsAsync(
-        IFindUsagesContext findContext, Document document, int position, CancellationToken cancellationToken)
+        IFindUsagesContext findContext,
+        Document document,
+        int position,
+        CancellationToken cancellationToken
+    )
     {
-        using (Logger.LogBlock(FunctionId, KeyValueLogMessage.Create(LogType.UserAction), cancellationToken))
+        using (
+            Logger.LogBlock(
+                FunctionId,
+                KeyValueLogMessage.Create(LogType.UserAction),
+                cancellationToken
+            )
+        )
         {
-            await findContext.SetSearchTitleAsync(DisplayName, cancellationToken).ConfigureAwait(false);
+            await findContext
+                .SetSearchTitleAsync(DisplayName, cancellationToken)
+                .ConfigureAwait(false);
 
-            // Let the user know in the FAR window if results may be inaccurate because this is running prior to the 
+            // Let the user know in the FAR window if results may be inaccurate because this is running prior to the
             // solution being fully loaded.
-            var service = document.Project.Solution.Services.GetRequiredService<IWorkspaceStatusService>();
-            var isFullyLoaded = await service.IsFullyLoadedAsync(cancellationToken).ConfigureAwait(false);
+            var service =
+                document.Project.Solution.Services.GetRequiredService<IWorkspaceStatusService>();
+            var isFullyLoaded = await service
+                .IsFullyLoadedAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!isFullyLoaded)
             {
-                await findContext.ReportInformationalMessageAsync(
-                    EditorFeaturesResources.The_results_may_be_incomplete_due_to_the_solution_still_loading_projects, cancellationToken).ConfigureAwait(false);
+                await findContext
+                    .ReportInformationalMessageAsync(
+                        EditorFeaturesResources.The_results_may_be_incomplete_due_to_the_solution_still_loading_projects,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             // We were able to find the doc prior to loading the workspace (or else we would not have the service).
             // So we better be able to find it afterwards.
-            await FindActionAsync(findContext, document, position, cancellationToken).ConfigureAwait(false);
+            await FindActionAsync(findContext, document, position, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 
@@ -278,10 +329,10 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
     {
         private readonly AbstractGoToCommandHandler<TLanguageService, TCommandArgs> _instance;
 
-        internal TestAccessor(AbstractGoToCommandHandler<TLanguageService, TCommandArgs> instance)
-            => _instance = instance;
+        internal TestAccessor(
+            AbstractGoToCommandHandler<TLanguageService, TCommandArgs> instance
+        ) => _instance = instance;
 
-        internal ref Func<CancellationToken, Task>? DelayHook
-            => ref _instance._delayHook;
+        internal ref Func<CancellationToken, Task>? DelayHook => ref _instance._delayHook;
     }
 }

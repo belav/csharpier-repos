@@ -9,9 +9,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
     public class PatternContextRaggedExclude : PatternContextRagged
     {
         public PatternContextRaggedExclude(IRaggedPattern pattern)
-            : base(pattern)
-        {
-        }
+            : base(pattern) { }
 
         public override bool Test(DirectoryInfoBase directory)
         {
@@ -31,9 +29,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
                 return true;
             }
 
-            if (Pattern.EndsWith.Count == 0 &&
-                Frame.SegmentGroupIndex == Pattern.Contains.Count - 1 &&
-                TestMatchingGroup(directory))
+            if (
+                Pattern.EndsWith.Count == 0
+                && Frame.SegmentGroupIndex == Pattern.Contains.Count - 1
+                && TestMatchingGroup(directory)
+            )
             {
                 // directory excluded by matching up to final '/**'
                 return true;

@@ -9,6 +9,11 @@ namespace Microsoft.CodeAnalysis.CodeStyle;
 
 internal static class CodeStyleOptionsStorage
 {
-    public static IdeCodeStyleOptions GetCodeStyleOptions(this IGlobalOptionService globalOptions, LanguageServices languageServices)
-        => languageServices.GetRequiredService<ICodeStyleService>().GetIdeCodeStyleOptions(globalOptions, fallbackOptions: null);
+    public static IdeCodeStyleOptions GetCodeStyleOptions(
+        this IGlobalOptionService globalOptions,
+        LanguageServices languageServices
+    ) =>
+        languageServices
+            .GetRequiredService<ICodeStyleService>()
+            .GetIdeCodeStyleOptions(globalOptions, fallbackOptions: null);
 }

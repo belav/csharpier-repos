@@ -5,7 +5,6 @@
 using System;
 using Xunit;
 
-
 namespace Test
 {
     public class AA
@@ -27,6 +26,7 @@ namespace Test
             }
             finally { }
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

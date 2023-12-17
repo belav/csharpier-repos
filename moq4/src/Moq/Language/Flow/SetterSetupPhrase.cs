@@ -5,7 +5,6 @@ using System;
 
 namespace Moq.Language.Flow
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal class SetterSetupPhrase<T, TProperty> : VoidSetupPhrase<T>, ISetupSetter<T, TProperty> where T : class
@@ -26,11 +25,11 @@ namespace Moq.Language.Flow
     After:
         class SetterSetupPhrase<T, TProperty> : VoidSetupPhrase<T>, ISetupSetter<T, TProperty> where T : class
     */
-    class SetterSetupPhrase<T, TProperty> : VoidSetupPhrase<T>, ISetupSetter<T, TProperty> where T : class
+    class SetterSetupPhrase<T, TProperty> : VoidSetupPhrase<T>, ISetupSetter<T, TProperty>
+        where T : class
     {
-        public SetterSetupPhrase(MethodCall setup) : base(setup)
-        {
-        }
+        public SetterSetupPhrase(MethodCall setup)
+            : base(setup) { }
 
         public ICallbackResult Callback(Action<TProperty> callback)
         {

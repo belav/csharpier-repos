@@ -31,16 +31,30 @@ public class ComponentState : IAsyncDisposable
     /// <param name="componentId">The externally visible identifier for the <see cref="IComponent"/>. The identifier must be unique in the context of the <see cref="Renderer"/>.</param>
     /// <param name="component">The <see cref="IComponent"/> whose state is being tracked.</param>
     /// <param name="parentComponentState">The <see cref="ComponentState"/> for the parent component, or null if this is a root component.</param>
-    public ComponentState(Renderer renderer, int componentId, IComponent component, ComponentState? parentComponentState)
+    public ComponentState(
+        Renderer renderer,
+        int componentId,
+        IComponent component,
+        ComponentState? parentComponentState
+    )
     {
         ComponentId = componentId;
         ParentComponentState = parentComponentState;
         Component = component ?? throw new ArgumentNullException(nameof(component));
-        LogicalParentComponentState = component is SectionOutlet.SectionOutletContentRenderer
-            ? (GetSectionOutletLogicalParent(renderer, (SectionOutlet)parentComponentState!.Component) ?? parentComponentState)
-            : parentComponentState;
+        LogicalParentComponentState =
+            component is SectionOutlet.SectionOutletContentRenderer
+                ? (
+                    GetSectionOutletLogicalParent(
+                        renderer,
+                        (SectionOutlet)parentComponentState!.Component
+                    ) ?? parentComponentState
+                )
+                : parentComponentState;
         _renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
-        _cascadingParameters = CascadingParameterState.FindCascadingParameters(this, out _hasSingleDeliveryCascadingParameters);
+        _cascadingParameters = CascadingParameterState.FindCascadingParameters(
+            this,
+            out _hasSingleDeliveryCascadingParameters
+        );
         CurrentRenderTree = new RenderTreeBuilder();
         _nextRenderTree = new RenderTreeBuilder();
 
@@ -51,11 +65,16 @@ public class ComponentState : IAsyncDisposable
         }
     }
 
-    private static ComponentState? GetSectionOutletLogicalParent(Renderer renderer, SectionOutlet sectionOutlet)
+    private static ComponentState? GetSectionOutletLogicalParent(
+        Renderer renderer,
+        SectionOutlet sectionOutlet
+    )
     {
         // This will return null if the SectionOutlet is not currently rendering any content
-        if (sectionOutlet.CurrentLogicalParent is { } logicalParent
-            && renderer.GetComponentState(logicalParent) is { } logicalParentComponentState)
+        if (
+            sectionOutlet.CurrentLogicalParent is { } logicalParent
+            && renderer.GetComponentState(logicalParent) is { } logicalParentComponentState
+        )
         {
             return logicalParentComponentState;
         }
@@ -87,7 +106,11 @@ public class ComponentState : IAsyncDisposable
 
     internal Renderer Renderer => _renderer;
 
-    internal void RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, out Exception? renderFragmentException)
+    internal void RenderIntoBatch(
+        RenderBatchBuilder batchBuilder,
+        RenderFragment renderFragment,
+        out Exception? renderFragmentException
+    )
     {
         renderFragmentException = null;
 
@@ -124,7 +147,8 @@ public class ComponentState : IAsyncDisposable
             batchBuilder,
             ComponentId,
             _nextRenderTree.GetFrames(),
-            CurrentRenderTree.GetFrames());
+            CurrentRenderTree.GetFrames()
+        );
         batchBuilder.UpdatedComponentDiffs.Append(diff);
         batchBuilder.InvalidateParameterViews();
     }
@@ -195,14 +219,18 @@ public class ComponentState : IAsyncDisposable
         {
             if (!param.ParameterInfo.Attribute.SingleDelivery)
             {
-                remainingCascadingParameters ??= new(_cascadingParameters.Count /* upper bound on capacity needed */);
+                remainingCascadingParameters ??= new(
+                    _cascadingParameters.Count /* upper bound on capacity needed */
+                );
                 remainingCascadingParameters.Add(param);
             }
         }
 
         // Now update all the tracking state to match the filtered set
         _hasCascadingParameters = remainingCascadingParameters is not null;
-        _cascadingParameters = (IReadOnlyList<CascadingParameterState>?)remainingCascadingParameters ?? Array.Empty<CascadingParameterState>();
+        _cascadingParameters =
+            (IReadOnlyList<CascadingParameterState>?)remainingCascadingParameters
+            ?? Array.Empty<CascadingParameterState>();
         _hasSingleDeliveryCascadingParameters = false;
     }
 
@@ -217,9 +245,10 @@ public class ComponentState : IAsyncDisposable
             return;
         }
 
-        var directParams = _latestDirectParametersSnapshot != null
-            ? new ParameterView(lifetime, _latestDirectParametersSnapshot.Buffer, 0)
-            : ParameterView.Empty;
+        var directParams =
+            _latestDirectParametersSnapshot != null
+                ? new ParameterView(lifetime, _latestDirectParametersSnapshot.Buffer, 0)
+                : ParameterView.Empty;
         var allParams = directParams.WithCascadingParameters(_cascadingParameters!);
         SupplyCombinedParameters(allParams);
     }
@@ -240,7 +269,10 @@ public class ComponentState : IAsyncDisposable
             setParametersAsyncTask = Task.FromException(ex);
         }
 
-        _renderer.AddToPendingTasksWithErrorHandling(setParametersAsyncTask, owningComponentState: this);
+        _renderer.AddToPendingTasksWithErrorHandling(
+            setParametersAsyncTask,
+            owningComponentState: this
+        );
     }
 
     private bool AddCascadingParameterSubscriptions()
@@ -308,7 +340,11 @@ public class ComponentState : IAsyncDisposable
     internal ValueTask DisposeInBatchAsync(RenderBatchBuilder batchBuilder)
     {
         // We don't expect these things to throw.
-        RenderTreeDiffBuilder.DisposeFrames(batchBuilder, ComponentId, CurrentRenderTree.GetFrames());
+        RenderTreeDiffBuilder.DisposeFrames(
+            batchBuilder,
+            ComponentId,
+            CurrentRenderTree.GetFrames()
+        );
 
         if (_hasAnyCascadingParameterSubscriptions)
         {

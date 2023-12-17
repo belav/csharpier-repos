@@ -4,8 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-    public enum TicketCompatibilityMode {
+namespace System.Web.Configuration
+{
+    public enum TicketCompatibilityMode
+    {
         Framework20 = 0,
         Framework40 = 1,
     }

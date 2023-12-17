@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using System.Threading;
 
 public class Program
@@ -12,18 +11,17 @@ public class Program
 
     public void Test()
     {
-
         int?[] values = new int?[128 * 1024];
 
-        for (int i = 0; i < values.Length; i++) values[i] = 5;
+        for (int i = 0; i < values.Length; i++)
+            values[i] = 5;
 
         for (int i = 0; i < values.Length; i++)
         {
-
             values[i] = (int)0x42424242;
 
-            if (IsNull(values[i])) Console.WriteLine("Null found.");
-
+            if (IsNull(values[i]))
+                Console.WriteLine("Null found.");
         }
 
         System.Threading.Interlocked.Increment(ref g_completed);
@@ -31,21 +29,16 @@ public class Program
 
     public virtual bool IsNull(int? x)
     {
-
         return x == null;
-
     }
 
     public static int Main()
     {
-
         Program p = new Program();
 
         for (int i = 0; i < g_interations; i++)
         {
-
             ThreadPool.QueueUserWorkItem(o => p.Test());
-
         }
 
         while (true)
@@ -54,11 +47,10 @@ public class Program
 
             Thread.Sleep(1);
 
-            if (g_completed >= g_interations) break; 
+            if (g_completed >= g_interations)
+                break;
         }
 
         return 100;
-
     }
-
 }

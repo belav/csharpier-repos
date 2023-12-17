@@ -42,9 +42,7 @@ namespace System.Security.Cryptography
         /// </para>
         /// </remarks>
         public HMACSHA3_384()
-            : this(RandomNumberGenerator.GetBytes(BlockSize))
-        {
-        }
+            : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HMACSHA3_384" /> class with the specified key data.
@@ -74,15 +72,13 @@ namespace System.Security.Cryptography
         /// <value>
         /// <see langword="true" /> if the algorithm is supported; otherwise, <see langword="false" />.
         /// </value>
-        public static bool IsSupported { get; } = HashProviderDispenser.MacSupported(HashAlgorithmNames.SHA3_384);
+        public static bool IsSupported { get; } =
+            HashProviderDispenser.MacSupported(HashAlgorithmNames.SHA3_384);
 
         /// <inheritdoc />
         public override byte[] Key
         {
-            get
-            {
-                return base.Key;
-            }
+            get { return base.Key; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
@@ -100,8 +96,7 @@ namespace System.Security.Cryptography
             _hMacCommon.AppendHashData(source);
 
         /// <inheritdoc />
-        protected override byte[] HashFinal() =>
-            _hMacCommon.FinalizeHashAndReset();
+        protected override byte[] HashFinal() => _hMacCommon.FinalizeHashAndReset();
 
         /// <inheritdoc />
         protected override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
@@ -154,7 +149,11 @@ namespace System.Security.Cryptography
         /// The buffer in <paramref name="destination"/> is too small to hold the calculated hash
         /// size. The SHA3-384 algorithm always produces a 384-bit HMAC, or 48 bytes.
         /// </exception>
-        public static int HashData(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination)
+        public static int HashData(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        )
         {
             if (!TryHashData(key, source, destination, out int bytesWritten))
             {
@@ -177,7 +176,12 @@ namespace System.Security.Cryptography
         /// <see langword="false"/> if <paramref name="destination"/> is too small to hold the
         /// calculated hash, <see langword="true"/> otherwise.
         /// </returns>
-        public static bool TryHashData(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public static bool TryHashData(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             CheckSha3Support();
 
@@ -187,7 +191,12 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(HashAlgorithmNames.SHA3_384, key, source, destination);
+            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(
+                HashAlgorithmNames.SHA3_384,
+                key,
+                source,
+                destination
+            );
             Debug.Assert(bytesWritten == HashSizeInBytes);
 
             return true;
@@ -224,7 +233,12 @@ namespace System.Security.Cryptography
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
             CheckSha3Support();
-            return LiteHashProvider.HmacStream(HashAlgorithmNames.SHA3_384, key, source, destination);
+            return LiteHashProvider.HmacStream(
+                HashAlgorithmNames.SHA3_384,
+                key,
+                source,
+                destination
+            );
         }
 
         /// <summary>
@@ -247,7 +261,12 @@ namespace System.Security.Cryptography
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
             CheckSha3Support();
-            return LiteHashProvider.HmacStream(HashAlgorithmNames.SHA3_384, HashSizeInBytes, key, source);
+            return LiteHashProvider.HmacStream(
+                HashAlgorithmNames.SHA3_384,
+                HashSizeInBytes,
+                key,
+                source
+            );
         }
 
         /// <summary>
@@ -285,7 +304,11 @@ namespace System.Security.Cryptography
         /// <exception cref="ArgumentException">
         ///   <paramref name="source" /> does not support reading.
         /// </exception>
-        public static ValueTask<byte[]> HashDataAsync(ReadOnlyMemory<byte> key, Stream source, CancellationToken cancellationToken = default)
+        public static ValueTask<byte[]> HashDataAsync(
+            ReadOnlyMemory<byte> key,
+            Stream source,
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -293,7 +316,12 @@ namespace System.Security.Cryptography
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
             CheckSha3Support();
-            return LiteHashProvider.HmacStreamAsync(HashAlgorithmNames.SHA3_384, key.Span, source, cancellationToken);
+            return LiteHashProvider.HmacStreamAsync(
+                HashAlgorithmNames.SHA3_384,
+                key.Span,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -312,7 +340,11 @@ namespace System.Security.Cryptography
         /// <exception cref="ArgumentException">
         ///   <paramref name="source" /> does not support reading.
         /// </exception>
-        public static ValueTask<byte[]> HashDataAsync(byte[] key, Stream source, CancellationToken cancellationToken = default)
+        public static ValueTask<byte[]> HashDataAsync(
+            byte[] key,
+            Stream source,
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(key);
 
@@ -347,7 +379,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> key,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -363,7 +396,8 @@ namespace System.Security.Cryptography
                 key.Span,
                 source,
                 destination,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         /// <inheritdoc />

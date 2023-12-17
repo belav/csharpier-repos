@@ -6,31 +6,21 @@ namespace System.ComponentModel.Tests
     internal class MockEventDescriptor : EventDescriptor
     {
         public MockEventDescriptor(string name = null, Attribute[] attributes = null)
-            : base(name ?? nameof(MockEventDescriptor), attributes ?? new Attribute[0])
-        { }
+            : base(name ?? nameof(MockEventDescriptor), attributes ?? new Attribute[0]) { }
 
         public override Type ComponentType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override Type EventType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool IsMulticast
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override void AddEventHandler(object component, Delegate value)

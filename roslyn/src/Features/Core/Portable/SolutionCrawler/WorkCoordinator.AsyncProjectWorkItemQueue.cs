@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         internal partial class WorkCoordinator
         {
-            private sealed class AsyncProjectWorkItemQueue(SolutionCrawlerProgressReporter progressReporter, Workspace workspace) : AsyncWorkItemQueue<ProjectId>(progressReporter, workspace)
+            private sealed class AsyncProjectWorkItemQueue(
+                SolutionCrawlerProgressReporter progressReporter,
+                Workspace workspace
+            ) : AsyncWorkItemQueue<ProjectId>(progressReporter, workspace)
             {
                 private readonly Dictionary<ProjectId, WorkItem> _projectWorkQueue = new();
 
@@ -43,8 +46,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 }
 
                 protected override bool TryTakeAnyWork_NoLock(
-                    ProjectId? preferableProjectId, ProjectDependencyGraph dependencyGraph,
-                    out WorkItem workItem)
+                    ProjectId? preferableProjectId,
+                    ProjectDependencyGraph dependencyGraph,
+                    out WorkItem workItem
+                )
                 {
                     // there must be at least one item in the map when this is called unless host is shutting down.
                     if (_projectWorkQueue.Count == 0)
@@ -53,7 +58,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         return false;
                     }
 
-                    var projectId = GetBestProjectId_NoLock(_projectWorkQueue, preferableProjectId, dependencyGraph);
+                    var projectId = GetBestProjectId_NoLock(
+                        _projectWorkQueue,
+                        preferableProjectId,
+                        dependencyGraph
+                    );
                     if (TryTake_NoLock(projectId, out workItem))
                     {
                         return true;
@@ -72,7 +81,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     if (_projectWorkQueue.TryGetValue(key, out var existingWorkItem))
                     {
                         // replace it.
-                        _projectWorkQueue[key] = existingWorkItem.With(item.InvocationReasons, item.ActiveMember, item.SpecificAnalyzers, item.AsyncToken);
+                        _projectWorkQueue[key] = existingWorkItem.With(
+                            item.InvocationReasons,
+                            item.ActiveMember,
+                            item.SpecificAnalyzers,
+                            item.AsyncToken
+                        );
                         return false;
                     }
 

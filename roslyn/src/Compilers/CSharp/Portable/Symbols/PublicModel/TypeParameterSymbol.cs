@@ -13,14 +13,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
     {
         private readonly Symbols.TypeParameterSymbol _underlying;
 
-        public TypeParameterSymbol(Symbols.TypeParameterSymbol underlying, CodeAnalysis.NullableAnnotation nullableAnnotation)
+        public TypeParameterSymbol(
+            Symbols.TypeParameterSymbol underlying,
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
             : base(nullableAnnotation)
         {
             Debug.Assert(underlying is object);
             _underlying = underlying;
         }
 
-        protected override ITypeSymbol WithNullableAnnotation(CodeAnalysis.NullableAnnotation nullableAnnotation)
+        protected override ITypeSymbol WithNullableAnnotation(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
         {
             Debug.Assert(nullableAnnotation != _underlying.DefaultNullableAnnotation);
             Debug.Assert(nullableAnnotation != this.NullableAnnotation);
@@ -29,13 +34,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         internal override Symbols.TypeSymbol UnderlyingTypeSymbol => _underlying;
         internal override CSharp.Symbol UnderlyingSymbol => _underlying;
-        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol => _underlying;
+        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol =>
+            _underlying;
         internal Symbols.TypeParameterSymbol UnderlyingTypeParameterSymbol => _underlying;
 
         CodeAnalysis.NullableAnnotation ITypeParameterSymbol.ReferenceTypeConstraintNullableAnnotation =>
             _underlying.ReferenceTypeConstraintIsNullable switch
             {
-                false when !_underlying.HasReferenceTypeConstraint => CodeAnalysis.NullableAnnotation.None,
+                false when !_underlying.HasReferenceTypeConstraint
+                    => CodeAnalysis.NullableAnnotation.None,
                 false => CodeAnalysis.NullableAnnotation.NotAnnotated,
                 true => CodeAnalysis.NullableAnnotation.Annotated,
                 null => CodeAnalysis.NullableAnnotation.None,
@@ -43,10 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         TypeParameterKind ITypeParameterSymbol.TypeParameterKind
         {
-            get
-            {
-                return _underlying.TypeParameterKind;
-            }
+            get { return _underlying.TypeParameterKind; }
         }
 
         IMethodSymbol ITypeParameterSymbol.DeclaringMethod
@@ -61,10 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ImmutableArray<ITypeSymbol> ITypeParameterSymbol.ConstraintTypes
         {
-            get
-            {
-                return _underlying.ConstraintTypesNoUseSiteDiagnostics.GetPublicSymbols();
-            }
+            get { return _underlying.ConstraintTypesNoUseSiteDiagnostics.GetPublicSymbols(); }
         }
 
         ImmutableArray<CodeAnalysis.NullableAnnotation> ITypeParameterSymbol.ConstraintNullableAnnotations =>
@@ -84,11 +85,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         VarianceKind ITypeParameterSymbol.Variance => _underlying.Variance;
 
-        bool ITypeParameterSymbol.HasReferenceTypeConstraint => _underlying.HasReferenceTypeConstraint;
+        bool ITypeParameterSymbol.HasReferenceTypeConstraint =>
+            _underlying.HasReferenceTypeConstraint;
 
         bool ITypeParameterSymbol.HasValueTypeConstraint => _underlying.HasValueTypeConstraint;
 
-        bool ITypeParameterSymbol.HasUnmanagedTypeConstraint => _underlying.HasUnmanagedTypeConstraint;
+        bool ITypeParameterSymbol.HasUnmanagedTypeConstraint =>
+            _underlying.HasUnmanagedTypeConstraint;
 
         bool ITypeParameterSymbol.HasNotNullConstraint => _underlying.HasNotNullConstraint;
 
@@ -106,7 +109,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitTypeParameter(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitTypeParameter(this, argument);
         }

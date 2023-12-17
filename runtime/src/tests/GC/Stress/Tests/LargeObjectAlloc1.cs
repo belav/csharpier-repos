@@ -7,6 +7,7 @@
 
 
 using System;
+
 public class Test
 {
     public static int Main()
@@ -28,7 +29,9 @@ public class Test
                 }
                 catch (Exception e)
                 {
-                    TestLibrary.Logging.WriteLine("Failure to allocate " + size + " at loop " + loop);
+                    TestLibrary.Logging.WriteLine(
+                        "Failure to allocate " + size + " at loop " + loop
+                    );
                     TestLibrary.Logging.WriteLine("Caught Exception: {0}", e);
                     return 1;
                 }

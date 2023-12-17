@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="CustomValidator.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Web.UI.WebControls;
 using WebCntrls = System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
@@ -23,12 +23,22 @@ namespace System.Web.UI.MobileControls
     /// <include file='doc\CustomValidator.uex' path='docs/doc[@for="CustomValidator"]/*' />
     [
         DefaultEvent("ServerValidate"),
-        ToolboxData("<{0}:CustomValidator runat=\"server\" ErrorMessage=\"CustomValidator\"></{0}:CustomValidator>"),
+        ToolboxData(
+            "<{0}:CustomValidator runat=\"server\" ErrorMessage=\"CustomValidator\"></{0}:CustomValidator>"
+        ),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class CustomValidator : BaseValidator
     {
         private WebCntrls.CustomValidator _webCustomValidator;
@@ -46,8 +56,9 @@ namespace System.Web.UI.MobileControls
             // the aggregated control.  For more details about the mechanism,
             // please see the comment in the constructor of
             // Mobile.UI.AdRotator.
-            ServerValidateEventHandler eventHandler =
-                new ServerValidateEventHandler(WebServerValidate);
+            ServerValidateEventHandler eventHandler = new ServerValidateEventHandler(
+                WebServerValidate
+            );
 
             _webCustomValidator.ServerValidate += eventHandler;
 
@@ -66,14 +77,8 @@ namespace System.Web.UI.MobileControls
         ]
         public event ServerValidateEventHandler ServerValidate
         {
-            add
-            {
-                Events.AddHandler(EventServerValidate, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(EventServerValidate, value);
-            }
+            add { Events.AddHandler(EventServerValidate, value); }
+            remove { Events.RemoveHandler(EventServerValidate, value); }
         }
 
         // protected method (which can be overridden by subclasses) for
@@ -81,14 +86,15 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\CustomValidator.uex' path='docs/doc[@for="CustomValidator.OnServerValidate"]/*' />
         protected virtual bool OnServerValidate(String value)
         {
-            ServerValidateEventHandler handler = (ServerValidateEventHandler)Events[EventServerValidate];
-            if (handler != null) 
+            ServerValidateEventHandler handler = (ServerValidateEventHandler)
+                Events[EventServerValidate];
+            if (handler != null)
             {
                 ServerValidateEventArgs args = new ServerValidateEventArgs(value, true);
                 handler(this, args);
                 return args.IsValid;
             }
-            else 
+            else
             {
                 return true;
             }

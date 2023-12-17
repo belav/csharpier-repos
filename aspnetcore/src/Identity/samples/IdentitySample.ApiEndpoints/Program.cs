@@ -14,15 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseSqlite(connection));
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
+builder
+    .Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello, World!");
-app.MapGet("/requires-auth", (ClaimsPrincipal user) => $"Hello, {user.Identity?.Name}!").RequireAuthorization();
+app.MapGet("/requires-auth", (ClaimsPrincipal user) => $"Hello, {user.Identity?.Name}!")
+    .RequireAuthorization();
 
 app.MapGroup("/identity").MapIdentityApi<IdentityUser>();
 
@@ -31,7 +32,8 @@ connection.Close();
 
 public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
         Database.EnsureCreated();
     }

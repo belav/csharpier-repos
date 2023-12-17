@@ -19,8 +19,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Browse_ReturnsViewWithGenre()
     {
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -42,8 +43,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Index_CreatesViewWithGenres()
     {
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -62,12 +64,17 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Details_ReturnsAlbumDetail()
     {
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
-                    var genres = CreateTestGenres(numberOfGenres: 3, numberOfAlbums: 3, context: context);
+                    var genres = CreateTestGenres(
+                        numberOfGenres: 3,
+                        numberOfAlbums: 3,
+                        context: context
+                    );
                     var albumId = genres.First().Albums[2].AlbumId;
 
                     var controller = new StoreController(context);
@@ -84,19 +91,28 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
             });
     }
 
-    private static Genre[] CreateTestGenres(int numberOfGenres, int numberOfAlbums, DbContext context)
+    private static Genre[] CreateTestGenres(
+        int numberOfGenres,
+        int numberOfAlbums,
+        DbContext context
+    )
     {
         var artist = new Artist { Name = "Artist1" };
 
-        var genres = Enumerable.Range(1, numberOfGenres).Select(
-            g =>
-                new Genre
-                {
-                    Name = "Genre " + g,
-                    Albums = Enumerable.Range(1, numberOfAlbums).Select(
-                        n =>
-                            new Album { Artist = artist, Title = "Greatest Hits" }).ToList()
-                }).ToList();
+        var genres = Enumerable
+            .Range(1, numberOfGenres)
+            .Select(
+                g =>
+                    new Genre
+                    {
+                        Name = "Genre " + g,
+                        Albums = Enumerable
+                            .Range(1, numberOfAlbums)
+                            .Select(n => new Album { Artist = artist, Title = "Greatest Hits" })
+                            .ToList()
+                    }
+            )
+            .ToList();
 
         context.AddRange(genres);
         context.SaveChanges();
@@ -108,8 +124,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Index_GetsSixTopAlbums()
     {
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -135,22 +152,28 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     {
         public static Album[] GetAlbums()
         {
-            var genres = Enumerable.Range(1, 10).Select(
-                n =>
-                    new Genre { Name = "Genre Name " + n }).ToArray();
+            var genres = Enumerable
+                .Range(1, 10)
+                .Select(n => new Genre { Name = "Genre Name " + n })
+                .ToArray();
 
-            var artists = Enumerable.Range(1, 10).Select(
-                n =>
-                    new Artist { Name = "Artist Name " + n }).ToArray();
+            var artists = Enumerable
+                .Range(1, 10)
+                .Select(n => new Artist { Name = "Artist Name " + n })
+                .ToArray();
 
-            var albums = Enumerable.Range(1, 10).Select(
-                n =>
-                    new Album
-                    {
-                        Artist = artists[n - 1],
-                        Genre = genres[n - 1],
-                        Title = "Greatest Hits"
-                    }).ToArray();
+            var albums = Enumerable
+                .Range(1, 10)
+                .Select(
+                    n =>
+                        new Album
+                        {
+                            Artist = artists[n - 1],
+                            Genre = genres[n - 1],
+                            Title = "Greatest Hits"
+                        }
+                )
+                .ToArray();
 
             return albums;
         }
@@ -160,15 +183,15 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task GenreMenuComponent_Returns_NineGenres()
     {
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
                     var genreMenuComponent = new GenreMenuComponent(context);
 
-                    var genres = Enumerable.Range(1, 10).Select(
-                        n => new Genre { Name = $"G{n}" });
+                    var genres = Enumerable.Range(1, 10).Select(n => new Genre { Name = $"G{n}" });
 
                     context.AddRange(genres);
                     context.SaveChanges();
@@ -187,11 +210,15 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
         var order = CreateOrder();
 
-        var formCollection = new Dictionary<string, StringValues> { { "PromoCode", new[] { "FREE" } } };
+        var formCollection = new Dictionary<string, StringValues>
+        {
+            { "PromoCode", new[] { "FREE" } }
+        };
 
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -215,8 +242,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const string cartId = "CartId_A";
 
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -230,8 +258,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
             });
     }
 
-    protected Order CreateOrder(string userName = "RainbowDash")
-        => new()
+    protected Order CreateOrder(string userName = "RainbowDash") =>
+        new()
         {
             Username = userName,
             FirstName = "Macavity",
@@ -249,8 +277,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Complete_ReturnsOrderIdIfValid()
     {
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -270,8 +299,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Complete_ReturnsErrorIfInvalidOrder()
     {
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -292,8 +322,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const int itemCount = 10;
 
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -304,14 +335,18 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
                         Genre = new Genre { Name = "Rap" }
                     };
 
-                    var cartItems = Enumerable.Range(1, itemCount).Select(
-                        n =>
-                            new CartItem
-                            {
-                                Album = album,
-                                Count = 1,
-                                CartId = cartId
-                            }).ToArray();
+                    var cartItems = Enumerable
+                        .Range(1, itemCount)
+                        .Select(
+                            n =>
+                                new CartItem
+                                {
+                                    Album = album,
+                                    Count = 1,
+                                    CartId = cartId
+                                }
+                        )
+                        .ToArray();
 
                     context.AddRange(cartItems);
                     context.SaveChanges();
@@ -328,32 +363,36 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async void Music_store_project_to_mapped_entity()
     {
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
                     var albums = CreateTestAlbums(
                         10,
-                        new Artist { Name = "Kung Fu Kenny" }, new Genre { Name = "Rap" });
+                        new Artist { Name = "Kung Fu Kenny" },
+                        new Genre { Name = "Rap" }
+                    );
 
                     context.Albums.AddRange(albums);
                     await context.SaveChangesAsync();
 
-                    var q = from album in context.Albums
-                            join genre in context.Genres on album.GenreId equals genre.GenreId
-                            join artist in context.Artists on album.ArtistId equals artist.ArtistId
-                            select new Album
-                            {
-                                ArtistId = album.ArtistId,
-                                AlbumArtUrl = album.AlbumArtUrl,
-                                AlbumId = album.AlbumId,
-                                GenreId = album.GenreId,
-                                Price = album.Price,
-                                Title = album.Title,
-                                Artist = new Artist { ArtistId = album.ArtistId, Name = artist.Name },
-                                Genre = new Genre { GenreId = album.GenreId, Name = genre.Name }
-                            };
+                    var q =
+                        from album in context.Albums
+                        join genre in context.Genres on album.GenreId equals genre.GenreId
+                        join artist in context.Artists on album.ArtistId equals artist.ArtistId
+                        select new Album
+                        {
+                            ArtistId = album.ArtistId,
+                            AlbumArtUrl = album.AlbumArtUrl,
+                            AlbumId = album.AlbumId,
+                            GenreId = album.GenreId,
+                            Price = album.Price,
+                            Title = album.Title,
+                            Artist = new Artist { ArtistId = album.ArtistId, Name = artist.Name },
+                            Genre = new Genre { GenreId = album.GenreId, Name = genre.Name }
+                        };
 
                     var foundAlbums = q.ToList();
 
@@ -370,8 +409,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const int unitPrice = 10;
 
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -387,10 +427,16 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
                     Assert.Equal(numberOfItems - 1, viewModel.CartCount);
                     Assert.Equal((numberOfItems - 1) * 10, viewModel.CartTotal);
-                    Assert.Equal("Greatest Hits has been removed from your shopping cart.", viewModel.Message);
+                    Assert.Equal(
+                        "Greatest Hits has been removed from your shopping cart.",
+                        viewModel.Message
+                    );
 
                     var cart = ShoppingCart.GetCart(context, cartId);
-                    Assert.DoesNotContain((await cart.GetCartItems()), c => c.CartItemId == cartItemId);
+                    Assert.DoesNotContain(
+                        (await cart.GetCartItems()),
+                        c => c.CartItemId == cartItemId
+                    );
                 }
             });
     }
@@ -401,8 +447,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Cart_is_empty_when_no_items_have_been_added(string cartId)
     {
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
@@ -421,15 +468,13 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const string cartId = "CartId_A";
 
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
-                    var cartItems = CreateTestCartItems(
-                        cartId,
-                        itemPrice: 10,
-                        numberOfItems: 5);
+                    var cartItems = CreateTestCartItems(cartId, itemPrice: 10, numberOfItems: 5);
 
                     context.AddRange(cartItems.Select(n => n.Album).Distinct());
                     context.AddRange(cartItems);
@@ -450,14 +495,17 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const string cartId = "CartId_A";
 
         using var context = CreateContext();
-        await context.Database.CreateExecutionStrategy().ExecuteAsync(
-            async () =>
+        await context
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(async () =>
             {
                 using (Fixture.BeginTransaction(context))
                 {
                     var albums = CreateTestAlbums(
                         10,
-                        new Artist { Name = "Kung Fu Kenny" }, new Genre { Name = "Rap" });
+                        new Artist { Name = "Kung Fu Kenny" },
+                        new Genre { Name = "Rap" }
+                    );
 
                     context.AddRange(albums);
                     context.SaveChanges();
@@ -481,50 +529,68 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
         var shoppingCartId = "CartId_A";
         var id = 1;
-        var query = context.CartItems
-            .Select(
-                ci => new CartItem
+        var query = context.CartItems.Select(
+            ci =>
+                new CartItem
                 {
                     CartId = ci.CartId,
                     CartItemId = ci.CartItemId,
                     Count = ci.Count,
                     Album = new Album { Title = ci.Album.Title }
-                });
+                }
+        );
 
         var cartItem = async
-            ? await query.FirstOrDefaultAsync(ci => ci.CartId == shoppingCartId && ci.CartItemId == id)
+            ? await query.FirstOrDefaultAsync(
+                ci => ci.CartId == shoppingCartId && ci.CartItemId == id
+            )
             : query.FirstOrDefault(ci => ci.CartId == shoppingCartId && ci.CartItemId == id);
 
         Assert.Null(cartItem);
     }
 
-    private static CartItem[] CreateTestCartItems(string cartId, decimal itemPrice, int numberOfItems)
+    private static CartItem[] CreateTestCartItems(
+        string cartId,
+        decimal itemPrice,
+        int numberOfItems
+    )
     {
         var albums = CreateTestAlbums(
             itemPrice,
-            new Artist { Name = "Kung Fu Kenny" }, new Genre { Name = "Rap" });
+            new Artist { Name = "Kung Fu Kenny" },
+            new Genre { Name = "Rap" }
+        );
 
-        var cartItems = Enumerable.Range(1, numberOfItems).Select(
-            n => new CartItem
-            {
-                Count = 1,
-                CartId = cartId,
-                Album = albums[n % albums.Length]
-            }).ToArray();
+        var cartItems = Enumerable
+            .Range(1, numberOfItems)
+            .Select(
+                n =>
+                    new CartItem
+                    {
+                        Count = 1,
+                        CartId = cartId,
+                        Album = albums[n % albums.Length]
+                    }
+            )
+            .ToArray();
 
         return cartItems;
     }
 
-    private static Album[] CreateTestAlbums(decimal itemPrice, Artist artist, Genre genre)
-        => Enumerable.Range(1, 10).Select(
-            n =>
-                new Album
-                {
-                    Title = "Greatest Hits",
-                    Price = itemPrice,
-                    Artist = artist,
-                    Genre = genre
-                }).ToArray();
+    private static Album[] CreateTestAlbums(decimal itemPrice, Artist artist, Genre genre) =>
+        Enumerable
+            .Range(1, 10)
+            .Select(
+                n =>
+                    new Album
+                    {
+                        Title = "Greatest Hits",
+                        Price = itemPrice,
+                        Artist = artist,
+                        Genre = genre
+                    }
+            )
+            .ToArray();
 
     protected class CartSummaryComponent
     {
@@ -572,8 +638,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         {
             var cart = ShoppingCart.GetCart(_context, _cartId);
 
-            var cartItem = await _context.CartItems
-                .Where(item => item.CartItemId == cartItemId)
+            var cartItem = await _context
+                .CartItems.Where(item => item.CartItemId == cartItemId)
                 .Include(c => c.Album)
                 .SingleOrDefaultAsync();
 
@@ -586,12 +652,14 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
                 await _context.SaveChangesAsync();
 
                 var removed = (itemCount > 0) ? " 1 copy of " : string.Empty;
-                message = removed + cartItem.Album.Title + " has been removed from your shopping cart.";
+                message =
+                    removed + cartItem.Album.Title + " has been removed from your shopping cart.";
             }
             else
             {
                 itemCount = 0;
-                message = "Could not find this item, nothing has been removed from your shopping cart.";
+                message =
+                    "Could not find this item, nothing has been removed from your shopping cart.";
             }
 
             var viewModel = new ShoppingCartRemoveViewModel
@@ -610,7 +678,11 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         {
             var cart = ShoppingCart.GetCart(_context, _cartId);
 
-            var viewModel = new ShoppingCartViewModel { CartItems = await cart.GetCartItems(), CartTotal = await cart.GetTotal() };
+            var viewModel = new ShoppingCartViewModel
+            {
+                CartItems = await cart.GetCartItems(),
+                CartTotal = await cart.GetTotal()
+            };
 
             return viewModel;
         }
@@ -637,14 +709,21 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
             _formCollection = formCollection ?? new Dictionary<string, StringValues>();
         }
 
-        public async Task<object> AddressAndPayment(MusicStoreContext context, string cartId, Order order)
+        public async Task<object> AddressAndPayment(
+            MusicStoreContext context,
+            string cartId,
+            Order order
+        )
         {
             try
             {
-                if (!string.Equals(
+                if (
+                    !string.Equals(
                         _formCollection["PromoCode"].FirstOrDefault(),
                         PromoCode,
-                        StringComparison.OrdinalIgnoreCase))
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return null;
                 }
@@ -670,7 +749,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
             var userName = "RainbowDash";
 
             var isValid = await context.Orders.AnyAsync(
-                o => o.OrderId == id && o.Username == userName);
+                o => o.OrderId == id && o.Username == userName
+            );
 
             if (isValid)
             {
@@ -692,7 +772,11 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
         public async Task<List<string>> InvokeAsync()
         {
-            var genres = await _context.Genres.OrderBy(e => e.GenreId).Select(g => g.Name).Take(9).ToListAsync();
+            var genres = await _context
+                .Genres.OrderBy(e => e.GenreId)
+                .Select(g => g.Name)
+                .Take(9)
+                .ToListAsync();
 
             return genres;
         }
@@ -707,11 +791,11 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
             return albums;
         }
 
-        private Task<List<Album>> GetTopSellingAlbumsAsync(MusicStoreContext dbContext, int count)
-            => dbContext.Albums
-                .OrderByDescending(a => a.OrderDetails.Count)
-                .Take(count)
-                .ToListAsync();
+        private Task<List<Album>> GetTopSellingAlbumsAsync(
+            MusicStoreContext dbContext,
+            int count
+        ) =>
+            dbContext.Albums.OrderByDescending(a => a.OrderDetails.Count).Take(count).ToListAsync();
     }
 
     public class StoreController
@@ -732,8 +816,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
         public async Task<Genre> Browse(string genre)
         {
-            var genreModel = await _context.Genres
-                .Include(g => g.Albums)
+            var genreModel = await _context
+                .Genres.Include(g => g.Albums)
                 .Where(g => g.Name == genre)
                 .FirstOrDefaultAsync();
 
@@ -742,8 +826,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
         public async Task<Album> Details(int id)
         {
-            var album = await _context.Albums
-                .Where(a => a.AlbumId == id)
+            var album = await _context
+                .Albums.Where(a => a.AlbumId == id)
                 .Include(a => a.Artist)
                 .Include(a => a.Genre)
                 .FirstOrDefaultAsync();
@@ -754,18 +838,15 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
     protected TFixture Fixture { get; }
 
-    protected MusicStoreContext CreateContext()
-        => Fixture.CreateContext();
+    protected MusicStoreContext CreateContext() => Fixture.CreateContext();
 
     public abstract class MusicStoreFixtureBase : SharedStoreFixtureBase<MusicStoreContext>
     {
-        public virtual IDisposable BeginTransaction(DbContext context)
-            => context.Database.BeginTransaction();
+        public virtual IDisposable BeginTransaction(DbContext context) =>
+            context.Database.BeginTransaction();
 
-        protected override string StoreName
-            => "MusicStore";
+        protected override string StoreName => "MusicStore";
 
-        protected override bool UsePooling
-            => false;
+        protected override bool UsePooling => false;
     }
 }

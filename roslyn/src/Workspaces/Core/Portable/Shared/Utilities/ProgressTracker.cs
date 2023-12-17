@@ -19,9 +19,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private int _totalItems;
 
         public ProgressTracker()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public string Description
         {
@@ -57,7 +55,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             Update();
         }
 
-        private void Update()
-            => updateActionOpt?.Invoke(_description, _completedItems, _totalItems);
+        private void Update() =>
+            updateActionOpt?.Invoke(_description, _completedItems, _totalItems);
     }
 }

@@ -83,7 +83,13 @@ public class SizeLimitedStreamTests
         // Act
         var exception = Record.Exception(() =>
         {
-            var asyncResult = sizeLimitedStream.BeginRead(buffer, 0, buffer.Length, (o) => { }, null);
+            var asyncResult = sizeLimitedStream.BeginRead(
+                buffer,
+                0,
+                buffer.Length,
+                (o) => { },
+                null
+            );
             sizeLimitedStream.EndRead(asyncResult);
         });
 

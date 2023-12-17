@@ -12,10 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class AnonymousObjectCreationExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<AnonymousObjectCreationExpressionSyntax>
+public class AnonymousObjectCreationExpressionStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<AnonymousObjectCreationExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider()
-        => new AnonymousObjectCreationExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new AnonymousObjectCreationExpressionStructureProvider();
 
     [Fact]
     public async Task TestAnonymousObjectCreation()
@@ -33,6 +34,7 @@ public class AnonymousObjectCreationExpressionStructureTests : AbstractCSharpSyn
                     }
                 }
                 """,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

@@ -16,13 +16,13 @@ namespace System.Xml.Xsl.XsltOld
         private readonly Hashtable _templateNameTable = new Hashtable();
         private Hashtable? _attributeSetTable;
         private int _templateCount;
+
         //private ArrayList     preserveSpace;
         private Hashtable? _queryKeyTable;
         private ArrayList? _whitespaceList;
         private bool _whitespace;
         private readonly Hashtable _scriptObjectTypes = new Hashtable();
         private TemplateManager? _templates;
-
 
         private sealed class WhitespaceElement
         {
@@ -58,9 +58,18 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-        internal bool Whitespace { get { return _whitespace; } }
-        internal ArrayList Imports { get { return _imports; } }
-        internal Hashtable? AttributeSetTable { get { return _attributeSetTable; } }
+        internal bool Whitespace
+        {
+            get { return _whitespace; }
+        }
+        internal ArrayList Imports
+        {
+            get { return _imports; }
+        }
+        internal Hashtable? AttributeSetTable
+        {
+            get { return _attributeSetTable; }
+        }
 
         internal void AddSpace(Compiler compiler, string query, double Priority, bool PreserveSpace)
         {
@@ -93,7 +102,8 @@ namespace System.Xml.Xsl.XsltOld
                 {
                     for (int j = _whitespaceList.Count - 1; j > i; j--)
                     {
-                        WhitespaceElement elem1, elem2;
+                        WhitespaceElement elem1,
+                            elem2;
                         elem1 = (WhitespaceElement)_whitespaceList[j - 1]!;
                         elem2 = (WhitespaceElement)_whitespaceList[j]!;
                         if (elem2.Priority < elem1.Priority)
@@ -183,7 +193,6 @@ namespace System.Xml.Xsl.XsltOld
                 }
             }
 
-
             if (template.MatchKey != Compiler.InvalidQueryKey)
             {
                 _modeManagers ??= new Hashtable();
@@ -240,7 +249,6 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-
         internal void ReplaceNamespaceAlias(Compiler compiler)
         {
             if (_modeManagers != null)
@@ -278,7 +286,11 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-        internal TemplateAction? FindTemplate(Processor processor, XPathNavigator navigator, XmlQualifiedName mode)
+        internal TemplateAction? FindTemplate(
+            Processor processor,
+            XPathNavigator navigator,
+            XmlQualifiedName mode
+        )
         {
             Debug.Assert(processor != null && navigator != null);
             Debug.Assert(mode != null);
@@ -305,7 +317,11 @@ namespace System.Xml.Xsl.XsltOld
             return action ?? FindTemplateImports(processor, navigator, mode);
         }
 
-        internal TemplateAction? FindTemplateImports(Processor processor, XPathNavigator navigator, XmlQualifiedName mode)
+        internal TemplateAction? FindTemplateImports(
+            Processor processor,
+            XPathNavigator navigator,
+            XmlQualifiedName mode
+        )
         {
             TemplateAction? action = null;
 
@@ -340,7 +356,10 @@ namespace System.Xml.Xsl.XsltOld
         internal TemplateAction? FindTemplate(Processor processor, XPathNavigator navigator)
         {
             Debug.Assert(processor != null && navigator != null);
-            Debug.Assert(_templates == null && _modeManagers == null || _templates == _modeManagers![XmlQualifiedName.Empty]);
+            Debug.Assert(
+                _templates == null && _modeManagers == null
+                    || _templates == _modeManagers![XmlQualifiedName.Empty]
+            );
 
             TemplateAction? action = null;
 

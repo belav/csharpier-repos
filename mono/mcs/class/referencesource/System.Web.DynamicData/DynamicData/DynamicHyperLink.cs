@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Globalization;
 using System.Security.Permissions;
 using System.Web.Compilation;
+using System.Web.DynamicData.Util;
 using System.Web.Resources;
 using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.DynamicData.Util;
 
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     /// <summary>
     /// <para>A control that displays links to table actions based on routing rules. It will not generate links for actions that are not
     /// allowed by the routing rules. It can work in 3 modes: explicit, databinding to MetaTable, or databinding to a data row.</para>
@@ -25,10 +26,16 @@ namespace System.Web.DynamicData {
     /// been set explicitly or did not get set in one of the databinding scenarios.)</para>
     /// <para>Extra route parameters can be provided by declaring expando attributes on the controls markup.</para>
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "HyperLink", Justification="It's an extension of the HyperLink class")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1702:CompoundWordsShouldBeCasedCorrectly",
+        MessageId = "HyperLink",
+        Justification = "It's an extension of the HyperLink class"
+    )]
     [DefaultProperty("Action")]
     [ToolboxBitmap(typeof(DynamicHyperLink), "DynamicHyperLink.bmp")]
-    public class DynamicHyperLink : HyperLink, IAttributeAccessor {
+    public class DynamicHyperLink : HyperLink, IAttributeAccessor
+    {
         private HttpContextBase _context;
         private bool _dataBound;
         private object _dataItem;
@@ -41,23 +48,20 @@ namespace System.Web.DynamicData {
         [DefaultValue("")]
         [Category("Navigation")]
         [ResourceDescription("DynamicHyperLink_Action")]
-        public string Action {
-            get {
+        public string Action
+        {
+            get
+            {
                 object o = ViewState["Action"];
-                return (o == null ? String.Empty: (string)o);
+                return (o == null ? String.Empty : (string)o);
             }
-            set {
-                ViewState["Action"] = value;
-            }
+            set { ViewState["Action"] = value; }
         }
 
-        internal new HttpContextBase Context {
-            get {
-                return _context ?? new HttpContextWrapper(base.Context);
-            }
-            set {
-                _context = value;
-            }
+        internal new HttpContextBase Context
+        {
+            get { return _context ?? new HttpContextWrapper(base.Context); }
+            set { _context = value; }
         }
 
         /// <summary>
@@ -66,14 +70,14 @@ namespace System.Web.DynamicData {
         [DefaultValue("")]
         [Category("Navigation")]
         [ResourceDescription("DynamicHyperLink_ContextTypeName")]
-        public string ContextTypeName {
-            get {
+        public string ContextTypeName
+        {
+            get
+            {
                 object o = ViewState["ContextTypeName"];
                 return ((o == null) ? String.Empty : (string)o);
             }
-            set {
-                ViewState["ContextTypeName"] = value;
-            }
+            set { ViewState["ContextTypeName"] = value; }
         }
 
         /// <summary>
@@ -83,24 +87,21 @@ namespace System.Web.DynamicData {
         [DefaultValue("")]
         [Category("Navigation")]
         [ResourceDescription("DynamicHyperLink_DataField")]
-        public string DataField {
-            get {
+        public string DataField
+        {
+            get
+            {
                 object o = ViewState["DataField"];
                 return ((o == null) ? String.Empty : (string)o);
             }
-            set {
-                ViewState["DataField"] = value;
-            }
+            set { ViewState["DataField"] = value; }
         }
 
         // for unit testing purposes
-        internal object Page_DataItem {
-            get {
-                return _dataItem ?? Page.GetDataItem();
-            }
-            set {
-                _dataItem = value;
-            }
+        internal object Page_DataItem
+        {
+            get { return _dataItem ?? Page.GetDataItem(); }
+            set { _dataItem = value; }
         }
 
         /// <summary>
@@ -109,88 +110,128 @@ namespace System.Web.DynamicData {
         [DefaultValue("")]
         [Category("Navigation")]
         [ResourceDescription("DynamicHyperLink_TableName")]
-        public string TableName {
-            get {
+        public string TableName
+        {
+            get
+            {
                 object o = ViewState["TableName"];
                 return ((o == null) ? String.Empty : (string)o);
             }
-            set {
-                ViewState["TableName"] = value;
-            }
+            set { ViewState["TableName"] = value; }
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
-        protected override void OnDataBinding(EventArgs e) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            MessageId = "0#"
+        )]
+        protected override void OnDataBinding(EventArgs e)
+        {
             base.OnDataBinding(e);
 
-            if (DesignMode) {
+            if (DesignMode)
+            {
                 return;
             }
 
-            if (!String.IsNullOrEmpty(NavigateUrl)) {
+            if (!String.IsNullOrEmpty(NavigateUrl))
+            {
                 // stop processing if there already is a URL
                 return;
             }
 
-            if (!String.IsNullOrEmpty(TableName) || !String.IsNullOrEmpty(ContextTypeName)) {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                    DynamicDataResources.DynamicHyperLink_CannotSetTableAndContextWhenDatabinding, this.ID));
+            if (!String.IsNullOrEmpty(TableName) || !String.IsNullOrEmpty(ContextTypeName))
+            {
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        DynamicDataResources.DynamicHyperLink_CannotSetTableAndContextWhenDatabinding,
+                        this.ID
+                    )
+                );
             }
 
             object dataItem = Page_DataItem;
-            if (dataItem == null) {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                    DynamicDataResources.DynamicHyperLink_CannotBindToNull, this.ID));
+            if (dataItem == null)
+            {
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        DynamicDataResources.DynamicHyperLink_CannotBindToNull,
+                        this.ID
+                    )
+                );
             }
 
             MetaTable table = dataItem as MetaTable;
-            if (table != null) {
+            if (table != null)
+            {
                 BindToMetaTable(table);
-            } else {
+            }
+            else
+            {
                 BindToDataItem(dataItem);
             }
 
             _dataBound = true;
         }
 
-        private void BindToMetaTable(MetaTable table) {
+        private void BindToMetaTable(MetaTable table)
+        {
             string action = GetActionOrDefaultTo(PageAction.List);
             NavigateUrl = table.GetActionPath(action, GetRouteValues());
-            if (String.IsNullOrEmpty(Text)) {
+            if (String.IsNullOrEmpty(Text))
+            {
                 Text = table.DisplayName;
             }
         }
 
-        private void BindToDataItem(object dataItem) {
+        private void BindToDataItem(object dataItem)
+        {
             dataItem = Misc.GetRealDataItem(dataItem);
             Debug.Assert(dataItem != null, "DataItem is null");
             // Try to get the MetaTable from the type and if we can't find it then ---- up.
             MetaTable table = Misc.GetTableFromTypeHierarchy(dataItem.GetType());
-            if (table == null) {
-                throw new InvalidOperationException(String.Format(
-                    CultureInfo.CurrentCulture,
-                    DynamicDataResources.MetaModel_EntityTypeDoesNotBelongToModel,
-                    dataItem.GetType().FullName));
+            if (table == null)
+            {
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        DynamicDataResources.MetaModel_EntityTypeDoesNotBelongToModel,
+                        dataItem.GetType().FullName
+                    )
+                );
             }
 
             string action = GetActionOrDefaultTo(PageAction.Details);
             NavigateUrl = table.GetActionPath(action, GetRouteValues(table, dataItem));
 
-            if (String.IsNullOrEmpty(Text)) {
-                if (!String.IsNullOrEmpty(DataField)) {
+            if (String.IsNullOrEmpty(Text))
+            {
+                if (!String.IsNullOrEmpty(DataField))
+                {
                     Text = DataBinder.GetPropertyValue(dataItem, DataField).ToString();
-                } else {
+                }
+                else
+                {
                     Text = table.GetDisplayString(dataItem);
                 }
             }
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
-        protected override void OnPreRender(EventArgs e) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            MessageId = "0#"
+        )]
+        protected override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
-            if (DesignMode) {
-                if (!String.IsNullOrEmpty(NavigateUrl)) {
+            if (DesignMode)
+            {
+                if (!String.IsNullOrEmpty(NavigateUrl))
+                {
                     NavigateUrl = "DesignTimeUrl";
                 }
                 return;
@@ -198,16 +239,34 @@ namespace System.Web.DynamicData {
 
             // check both _dataBound and NavigateUrl cause NavigateUrl might be empty if routing/scaffolding
             // does not allow a particular action
-            if (!_dataBound && String.IsNullOrEmpty(NavigateUrl)) {
+            if (!_dataBound && String.IsNullOrEmpty(NavigateUrl))
+            {
                 MetaTable table;
-                try {
+                try
+                {
                     table = GetTable();
-                } catch (Exception exception) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, DynamicDataResources.DynamicHyperLink_CannotDetermineTable, this.ID), exception);
+                }
+                catch (Exception exception)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DynamicDataResources.DynamicHyperLink_CannotDetermineTable,
+                            this.ID
+                        ),
+                        exception
+                    );
                 }
 
-                if (table == null) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, DynamicDataResources.DynamicHyperLink_CannotDetermineTable, this.ID));
+                if (table == null)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DynamicDataResources.DynamicHyperLink_CannotDetermineTable,
+                            this.ID
+                        )
+                    );
                 }
 
                 var action = GetActionOrDefaultTo(PageAction.List);
@@ -215,52 +274,70 @@ namespace System.Web.DynamicData {
             }
         }
 
-        private RouteValueDictionary GetRouteValues() {
+        private RouteValueDictionary GetRouteValues()
+        {
             var routeValues = new RouteValueDictionary();
-            foreach (var entry in _extraRouteParams) {
+            foreach (var entry in _extraRouteParams)
+            {
                 string key = entry.Key;
                 routeValues[key] = entry.Value;
             }
             return routeValues;
         }
 
-        private RouteValueDictionary GetRouteValues(MetaTable table, object row) {
+        private RouteValueDictionary GetRouteValues(MetaTable table, object row)
+        {
             RouteValueDictionary routeValues = GetRouteValues();
-            foreach (var pk in table.GetPrimaryKeyDictionary(row)) {
+            foreach (var pk in table.GetPrimaryKeyDictionary(row))
+            {
                 routeValues[pk.Key] = pk.Value;
             }
             return routeValues;
         }
 
-        private string GetActionOrDefaultTo(string defaultAction) {
+        private string GetActionOrDefaultTo(string defaultAction)
+        {
             return String.IsNullOrEmpty(Action) ? defaultAction : Action;
         }
 
         // internal for unit testing
-        internal virtual MetaTable GetTable() {
+        internal virtual MetaTable GetTable()
+        {
             MetaTable table;
-            if (!String.IsNullOrEmpty(TableName)) {
+            if (!String.IsNullOrEmpty(TableName))
+            {
                 table = GetTableFromTableName();
-            } else {
+            }
+            else
+            {
                 table = DynamicDataRouteHandler.GetRequestMetaTable(Context);
             }
             return table;
         }
 
-        private MetaTable GetTableFromTableName() {
+        private MetaTable GetTableFromTableName()
+        {
             var tableName = TableName;
             var contextTypeName = ContextTypeName;
             Debug.Assert(!String.IsNullOrEmpty(tableName));
 
-            if (!String.IsNullOrEmpty(contextTypeName)) {
+            if (!String.IsNullOrEmpty(contextTypeName))
+            {
                 // context type allows to disambiguate table names
-                Type contextType = BuildManager.GetType(contextTypeName, /* throwOnError */ true, /* ignoreCase */ true);
+                Type contextType = BuildManager.GetType(
+                    contextTypeName, /* throwOnError */
+                    true, /* ignoreCase */
+                    true
+                );
                 MetaModel model = MetaModel.GetModel(contextType);
                 MetaTable table = model.GetTable(tableName, contextType);
                 return table;
-            } else {
+            }
+            else
+            {
                 var table = DynamicDataRouteHandler.GetRequestMetaTable(Context);
-                if (table == null) {
+                if (table == null)
+                {
                     return null;
                 }
                 return table.Model.GetTable(tableName);
@@ -269,11 +346,13 @@ namespace System.Web.DynamicData {
 
         #region IAttributeAccessor Members
 
-        string IAttributeAccessor.GetAttribute(string key) {
+        string IAttributeAccessor.GetAttribute(string key)
+        {
             return (string)_extraRouteParams[key];
         }
 
-        void IAttributeAccessor.SetAttribute(string key, string value) {
+        void IAttributeAccessor.SetAttribute(string key, string value)
+        {
             _extraRouteParams[key] = value;
         }
 

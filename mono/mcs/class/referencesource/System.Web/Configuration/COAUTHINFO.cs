@@ -4,27 +4,36 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Internal;
-    using System.Web;
-    using System.Web.Util;
-    using System.Security;
+    using System.Globalization;
     using System.IO;
-    using System.Web.Hosting;
-    using System.Runtime.InteropServices;
     using System.Reflection;
-    using System.Collections.Specialized;
-    using System.Xml;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Principal;
     using System.Threading;
-    using System.Globalization;
+    using System.Web;
+    using System.Web.Hosting;
+    using System.Web.Util;
+    using System.Xml;
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
     internal class COAUTHINFO : IDisposable
     {
-        internal COAUTHINFO(RpcAuthent authent, RpcAuthor author, string serverprinc, RpcLevel level, RpcImpers impers, IntPtr ciptr) {
+        internal COAUTHINFO(
+            RpcAuthent authent,
+            RpcAuthor author,
+            string serverprinc,
+            RpcLevel level,
+            RpcImpers impers,
+            IntPtr ciptr
+        )
+        {
             authnsvc = authent;
             authzsvc = author;
             serverprincname = serverprinc;
@@ -35,27 +44,34 @@ namespace System.Web.Configuration {
 
         internal RpcAuthent authnsvc;
         internal RpcAuthor authzsvc;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string serverprincname;
         internal RpcLevel authnlevel;
         internal RpcImpers impersonationlevel;
-        internal IntPtr authidentitydata;        // COAUTHIDENTITY*
-        internal int capabilities = 0;        // EOAC_NONE
+        internal IntPtr authidentitydata; // COAUTHIDENTITY*
+        internal int capabilities = 0; // EOAC_NONE
 
         void IDisposable.Dispose()
         {
             authidentitydata = IntPtr.Zero;
             GC.SuppressFinalize(this);
         }
-        ~COAUTHINFO()
-        {
-        }
+
+        ~COAUTHINFO() { }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
     internal class COAUTHINFO_X64 : IDisposable
     {
-        internal COAUTHINFO_X64(RpcAuthent authent, RpcAuthor author, string serverprinc, RpcLevel level, RpcImpers impers, IntPtr ciptr)
+        internal COAUTHINFO_X64(
+            RpcAuthent authent,
+            RpcAuthor author,
+            string serverprinc,
+            RpcLevel level,
+            RpcImpers impers,
+            IntPtr ciptr
+        )
         {
             authnsvc = authent;
             authzsvc = author;
@@ -67,12 +83,13 @@ namespace System.Web.Configuration {
 
         internal RpcAuthent authnsvc;
         internal RpcAuthor authzsvc;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string serverprincname;
         internal RpcLevel authnlevel;
         internal RpcImpers impersonationlevel;
-        internal IntPtr authidentitydata;        // COAUTHIDENTITY*
-        internal int capabilities = 0;        // EOAC_NONE
+        internal IntPtr authidentitydata; // COAUTHIDENTITY*
+        internal int capabilities = 0; // EOAC_NONE
 #pragma warning disable 0649
         internal int padding;
 #pragma warning restore 0649
@@ -82,8 +99,7 @@ namespace System.Web.Configuration {
             authidentitydata = IntPtr.Zero;
             GC.SuppressFinalize(this);
         }
-        ~COAUTHINFO_X64()
-        {
-        }
+
+        ~COAUTHINFO_X64() { }
     }
 }

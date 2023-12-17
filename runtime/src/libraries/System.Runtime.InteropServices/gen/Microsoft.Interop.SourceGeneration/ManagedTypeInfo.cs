@@ -47,17 +47,32 @@ namespace Microsoft.Interop
             }
             if (type.TypeKind == TypeKind.Enum)
             {
-                return new EnumTypeInfo(typeName, diagnosticFormattedName, ((INamedTypeSymbol)type).EnumUnderlyingType!.SpecialType);
+                return new EnumTypeInfo(
+                    typeName,
+                    diagnosticFormattedName,
+                    ((INamedTypeSymbol)type).EnumUnderlyingType!.SpecialType
+                );
             }
             if (type.TypeKind == TypeKind.Pointer)
             {
-                return new PointerTypeInfo(typeName, diagnosticFormattedName, IsFunctionPointer: false);
+                return new PointerTypeInfo(
+                    typeName,
+                    diagnosticFormattedName,
+                    IsFunctionPointer: false
+                );
             }
             if (type.TypeKind == TypeKind.FunctionPointer)
             {
-                return new PointerTypeInfo(typeName, diagnosticFormattedName, IsFunctionPointer: true);
+                return new PointerTypeInfo(
+                    typeName,
+                    diagnosticFormattedName,
+                    IsFunctionPointer: true
+                );
             }
-            if (type.TypeKind == TypeKind.Array && type is IArrayTypeSymbol { IsSZArray: true } arraySymbol)
+            if (
+                type.TypeKind == TypeKind.Array
+                && type is IArrayTypeSymbol { IsSZArray: true } arraySymbol
+            )
             {
                 return new SzArrayType(CreateTypeInfoForTypeSymbol(arraySymbol.ElementType));
             }
@@ -77,14 +92,21 @@ namespace Microsoft.Interop
         }
     }
 
-    public sealed record SpecialTypeInfo(string FullTypeName, string DiagnosticFormattedName, SpecialType SpecialType) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName)
+    public sealed record SpecialTypeInfo(
+        string FullTypeName,
+        string DiagnosticFormattedName,
+        SpecialType SpecialType
+    ) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName)
     {
         public static readonly SpecialTypeInfo Byte = new("byte", "byte", SpecialType.System_Byte);
         public static readonly SpecialTypeInfo Int32 = new("int", "int", SpecialType.System_Int32);
         public static readonly SpecialTypeInfo Void = new("void", "void", SpecialType.System_Void);
-        public static readonly SpecialTypeInfo String = new("string", "string", SpecialType.System_String);
-        public static readonly SpecialTypeInfo Boolean = new("bool", "bool", SpecialType.System_Boolean);
-        public static readonly SpecialTypeInfo IntPtr = new("System.IntPtr", "System.IntPtr", SpecialType.System_IntPtr);
+        public static readonly SpecialTypeInfo String =
+            new("string", "string", SpecialType.System_String);
+        public static readonly SpecialTypeInfo Boolean =
+            new("bool", "bool", SpecialType.System_Boolean);
+        public static readonly SpecialTypeInfo IntPtr =
+            new("System.IntPtr", "System.IntPtr", SpecialType.System_IntPtr);
 
         public bool Equals(SpecialTypeInfo? other)
         {
@@ -97,17 +119,36 @@ namespace Microsoft.Interop
         }
     }
 
-    public sealed record EnumTypeInfo(string FullTypeName, string DiagnosticFormattedName, SpecialType UnderlyingType) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record EnumTypeInfo(
+        string FullTypeName,
+        string DiagnosticFormattedName,
+        SpecialType UnderlyingType
+    ) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 
-    public sealed record PointerTypeInfo(string FullTypeName, string DiagnosticFormattedName, bool IsFunctionPointer) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record PointerTypeInfo(
+        string FullTypeName,
+        string DiagnosticFormattedName,
+        bool IsFunctionPointer
+    ) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 
-    public sealed record SzArrayType(ManagedTypeInfo ElementTypeInfo) : ManagedTypeInfo($"{ElementTypeInfo.FullTypeName}[]", $"{ElementTypeInfo.DiagnosticFormattedName}[]");
+    public sealed record SzArrayType(ManagedTypeInfo ElementTypeInfo)
+        : ManagedTypeInfo(
+            $"{ElementTypeInfo.FullTypeName}[]",
+            $"{ElementTypeInfo.DiagnosticFormattedName}[]"
+        );
 
-    public sealed record DelegateTypeInfo(string FullTypeName, string DiagnosticFormattedName) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record DelegateTypeInfo(string FullTypeName, string DiagnosticFormattedName)
+        : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 
-    public sealed record TypeParameterTypeInfo(string FullTypeName, string DiagnosticFormattedName) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record TypeParameterTypeInfo(string FullTypeName, string DiagnosticFormattedName)
+        : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 
-    public sealed record ValueTypeInfo(string FullTypeName, string DiagnosticFormattedName, bool IsByRefLike) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record ValueTypeInfo(
+        string FullTypeName,
+        string DiagnosticFormattedName,
+        bool IsByRefLike
+    ) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 
-    public sealed record ReferenceTypeInfo(string FullTypeName, string DiagnosticFormattedName) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record ReferenceTypeInfo(string FullTypeName, string DiagnosticFormattedName)
+        : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 }

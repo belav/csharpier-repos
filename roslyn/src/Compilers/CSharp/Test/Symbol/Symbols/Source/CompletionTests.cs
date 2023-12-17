@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void FieldSymbolsAreLazy()
         {
             var text =
-@"
+                @"
 class A {
     int x;
     NotFound y;
@@ -64,7 +64,7 @@ class A {
         public void PropertySymbolsAreLazy()
         {
             var text =
-@"class A
+                @"class A
 {
     object P { get; set; }
     object this[object o] { get { return null; } set { } }
@@ -105,7 +105,11 @@ class A {
         /// failed before the fix was applied.  Now it documents the former problem
         /// and gives us some level of confidence in the fix.
         /// </summary>
-        [Fact, WorkItem(546196, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546196"), WorkItem(546604, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546604")]
+        [
+            Fact,
+            WorkItem(546196, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546196"),
+            WorkItem(546604, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546604")
+        ]
         public void TestNextCompletionPart()
         {
             SymbolCompletionState state = new SymbolCompletionState();
@@ -114,21 +118,29 @@ class A {
             {
                 while (state.IncompleteParts != 0)
                 {
-                    Assert.True(SymbolCompletionState.HasAtMostOneBitSet((int)state.NextIncompletePart));
+                    Assert.True(
+                        SymbolCompletionState.HasAtMostOneBitSet((int)state.NextIncompletePart)
+                    );
                 }
             };
 
             Action writers = () =>
             {
-                Parallel.For(0, Math.Max(1, Environment.ProcessorCount - 1), t =>
-                {
-                    Random r = new Random(t);
-                    while (state.IncompleteParts != 0)
+                Parallel.For(
+                    0,
+                    Math.Max(1, Environment.ProcessorCount - 1),
+                    t =>
                     {
-                        CompletionPart part = (CompletionPart)(1 << r.Next(8 * sizeof(CompletionPart)));
-                        state.NotePartComplete(part);
+                        Random r = new Random(t);
+                        while (state.IncompleteParts != 0)
+                        {
+                            CompletionPart part = (CompletionPart)(
+                                1 << r.Next(8 * sizeof(CompletionPart))
+                            );
+                            state.NotePartComplete(part);
+                        }
                     }
-                });
+                );
             };
 
             for (int i = 0; i < 1000; i++)

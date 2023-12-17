@@ -43,7 +43,8 @@ namespace System.Runtime
         public static readonly int ThunkDataSize = 2 * IntPtr.Size;
         public static readonly int ThunkCodeSize = RuntimeImports.RhpGetThunkSize();
         public static readonly int NumThunksPerBlock = RuntimeImports.RhpGetNumThunksPerBlock();
-        public static readonly int NumThunkBlocksPerMapping = RuntimeImports.RhpGetNumThunkBlocksPerMapping();
+        public static readonly int NumThunkBlocksPerMapping =
+            RuntimeImports.RhpGetNumThunkBlocksPerMapping();
         public static readonly uint ThunkBlockSize = (uint)RuntimeImports.RhpGetThunkBlockSize();
         public static readonly nuint ThunkBlockSizeMask = ThunkBlockSize - 1;
     }
@@ -71,6 +72,7 @@ namespace System.Runtime
 #endif
             return value;
         }
+
         private static IntPtr SetThumbBit(IntPtr value)
         {
 #if TARGET_ARM
@@ -100,12 +102,18 @@ namespace System.Runtime
                 Debug.Assert(((nuint)(nint)thunkDataBlock % Constants.ThunkBlockSize) == 0);
 
                 // Update the last pointer value in the thunks data section with the value of the common stub address
-                *(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size)) = commonStubAddress;
-                Debug.Assert(*(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size)) == commonStubAddress);
+                *(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size)) =
+                    commonStubAddress;
+                Debug.Assert(
+                    *(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size))
+                        == commonStubAddress
+                );
 
                 // Set the head and end of the linked list
                 _nextAvailableThunkPtr = thunkDataBlock;
-                _lastThunkPtr = _nextAvailableThunkPtr + Constants.ThunkDataSize * (Constants.NumThunksPerBlock - 1);
+                _lastThunkPtr =
+                    _nextAvailableThunkPtr
+                    + Constants.ThunkDataSize * (Constants.NumThunksPerBlock - 1);
 
                 _allocatedBlocks._blockBaseAddress = thunkStubsBlock;
             }
@@ -156,14 +164,20 @@ namespace System.Runtime
                 Debug.Assert(((nuint)(nint)thunkDataBlock % Constants.ThunkBlockSize) == 0);
 
                 // Update the last pointer value in the thunks data section with the value of the common stub address
-                *(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size)) = _commonStubAddress;
-                Debug.Assert(*(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size)) == _commonStubAddress);
+                *(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size)) =
+                    _commonStubAddress;
+                Debug.Assert(
+                    *(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size))
+                        == _commonStubAddress
+                );
 
                 // Link the last entry in the old list to the first entry in the new list
                 *((IntPtr*)_lastThunkPtr) = thunkDataBlock;
 
                 // Update the pointer to the last entry in the list
-                _lastThunkPtr = *((IntPtr*)_lastThunkPtr) + Constants.ThunkDataSize * (Constants.NumThunksPerBlock - 1);
+                _lastThunkPtr =
+                    *((IntPtr*)_lastThunkPtr)
+                    + Constants.ThunkDataSize * (Constants.NumThunksPerBlock - 1);
 
                 newBlockInfo._blockBaseAddress = thunkStubsBlock;
                 newBlockInfo._nextBlock = _allocatedBlocks;
@@ -210,11 +224,16 @@ namespace System.Runtime
             *((IntPtr*)(nextAvailableThunkPtr + IntPtr.Size)) = IntPtr.Zero;
 #endif
 
-            int thunkIndex = (int)(((nuint)(nint)nextAvailableThunkPtr) - ((nuint)(nint)nextAvailableThunkPtr & ~Constants.ThunkBlockSizeMask));
+            int thunkIndex = (int)(
+                ((nuint)(nint)nextAvailableThunkPtr)
+                - ((nuint)(nint)nextAvailableThunkPtr & ~Constants.ThunkBlockSizeMask)
+            );
             Debug.Assert((thunkIndex % Constants.ThunkDataSize) == 0);
             thunkIndex /= Constants.ThunkDataSize;
 
-            IntPtr thunkAddress = RuntimeImports.RhpGetThunkStubsBlockAddress(nextAvailableThunkPtr) + thunkIndex * Constants.ThunkCodeSize;
+            IntPtr thunkAddress =
+                RuntimeImports.RhpGetThunkStubsBlockAddress(nextAvailableThunkPtr)
+                + thunkIndex * Constants.ThunkCodeSize;
 
             return SetThumbBit(thunkAddress);
         }
@@ -249,8 +268,12 @@ namespace System.Runtime
 
             while (currentBlock != null)
             {
-                if (thunkAddressValue >= (nuint)(nint)currentBlock._blockBaseAddress &&
-                    thunkAddressValue < (nuint)(nint)currentBlock._blockBaseAddress + (nuint)(Constants.NumThunksPerBlock * Constants.ThunkCodeSize))
+                if (
+                    thunkAddressValue >= (nuint)(nint)currentBlock._blockBaseAddress
+                    && thunkAddressValue
+                        < (nuint)(nint)currentBlock._blockBaseAddress
+                            + (nuint)(Constants.NumThunksPerBlock * Constants.ThunkCodeSize)
+                )
                 {
                     return true;
                 }
@@ -269,14 +292,21 @@ namespace System.Runtime
             nuint currentThunksBlockAddress = thunkAddressValue & ~Constants.ThunkBlockSizeMask;
 
             // Make sure the thunk address is valid by checking alignment
-            if ((thunkAddressValue - currentThunksBlockAddress) % (nuint)Constants.ThunkCodeSize != 0)
+            if (
+                (thunkAddressValue - currentThunksBlockAddress) % (nuint)Constants.ThunkCodeSize
+                != 0
+            )
                 return IntPtr.Zero;
 
             // Compute the thunk's index
-            int thunkIndex = (int)((thunkAddressValue - currentThunksBlockAddress) / (nuint)Constants.ThunkCodeSize);
+            int thunkIndex = (int)(
+                (thunkAddressValue - currentThunksBlockAddress) / (nuint)Constants.ThunkCodeSize
+            );
 
             // Compute the address of the data block that corresponds to the current thunk
-            IntPtr thunkDataBlockAddress = RuntimeImports.RhpGetThunkDataBlockAddress((IntPtr)((nint)thunkAddressValue));
+            IntPtr thunkDataBlockAddress = RuntimeImports.RhpGetThunkDataBlockAddress(
+                (IntPtr)((nint)thunkAddressValue)
+            );
 
             return thunkDataBlockAddress + thunkIndex * Constants.ThunkDataSize;
         }
@@ -288,7 +318,11 @@ namespace System.Runtime
         /// address of a thunk that was not previously freed.
         /// </summary>
         /// <returns>True if the thunk's data was successfully retrieved.</returns>
-        public unsafe bool TryGetThunkData(IntPtr thunkAddress, out IntPtr context, out IntPtr target)
+        public unsafe bool TryGetThunkData(
+            IntPtr thunkAddress,
+            out IntPtr context,
+            out IntPtr target
+        )
         {
             context = IntPtr.Zero;
             target = IntPtr.Zero;
@@ -327,7 +361,9 @@ namespace System.Runtime
 
     internal static class ThunkBlocks
     {
-        private static IntPtr[] s_currentlyMappedThunkBlocks = new IntPtr[Constants.NumThunkBlocksPerMapping];
+        private static IntPtr[] s_currentlyMappedThunkBlocks = new IntPtr[
+            Constants.NumThunkBlocksPerMapping
+        ];
         private static int s_currentlyMappedThunkBlocksIndex = Constants.NumThunkBlocksPerMapping;
 
         public static unsafe IntPtr GetNewThunksBlock()

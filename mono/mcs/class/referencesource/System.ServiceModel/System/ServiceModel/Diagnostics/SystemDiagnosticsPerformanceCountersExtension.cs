@@ -9,7 +9,11 @@ namespace System.ServiceModel.Diagnostics
 
     static class SystemDiagnosticsPerformanceCountersExtension
     {
-        static internal void Increment(this PerformanceCountersBase thisPtr, PerformanceCounter[] counters, int counterIndex)
+        internal static void Increment(
+            this PerformanceCountersBase thisPtr,
+            PerformanceCounter[] counters,
+            int counterIndex
+        )
         {
             PerformanceCounter counter = null;
             try
@@ -26,8 +30,12 @@ namespace System.ServiceModel.Diagnostics
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
-                PerformanceCounters.TracePerformanceCounterUpdateFailure(thisPtr.InstanceName, thisPtr.CounterNames[counterIndex]);
+                if (Fx.IsFatal(e))
+                    throw;
+                PerformanceCounters.TracePerformanceCounterUpdateFailure(
+                    thisPtr.InstanceName,
+                    thisPtr.CounterNames[counterIndex]
+                );
                 if (counters != null)
                 {
                     counters[counterIndex] = null;
@@ -36,7 +44,12 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void IncrementBy(this PerformanceCountersBase thisPtr, PerformanceCounter[] counters, int counterIndex, long time)
+        internal static void IncrementBy(
+            this PerformanceCountersBase thisPtr,
+            PerformanceCounter[] counters,
+            int counterIndex,
+            long time
+        )
         {
             PerformanceCounter counter = null;
             try
@@ -53,8 +66,12 @@ namespace System.ServiceModel.Diagnostics
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
-                PerformanceCounters.TracePerformanceCounterUpdateFailure(thisPtr.InstanceName, thisPtr.CounterNames[counterIndex]);
+                if (Fx.IsFatal(e))
+                    throw;
+                PerformanceCounters.TracePerformanceCounterUpdateFailure(
+                    thisPtr.InstanceName,
+                    thisPtr.CounterNames[counterIndex]
+                );
                 if (counters != null)
                 {
                     counters[counterIndex] = null;
@@ -63,7 +80,12 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void Set(this PerformanceCountersBase thisPtr, PerformanceCounter[] counters, int counterIndex, long value)
+        internal static void Set(
+            this PerformanceCountersBase thisPtr,
+            PerformanceCounter[] counters,
+            int counterIndex,
+            long value
+        )
         {
             PerformanceCounter counter = null;
             try
@@ -80,14 +102,22 @@ namespace System.ServiceModel.Diagnostics
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
-                PerformanceCounters.TracePerformanceCounterUpdateFailure(thisPtr.InstanceName, thisPtr.CounterNames[counterIndex]);
+                if (Fx.IsFatal(e))
+                    throw;
+                PerformanceCounters.TracePerformanceCounterUpdateFailure(
+                    thisPtr.InstanceName,
+                    thisPtr.CounterNames[counterIndex]
+                );
                 counters[counterIndex] = null;
                 PerformanceCounters.ReleasePerformanceCounter(ref counter);
             }
         }
 
-        static internal void Decrement(this PerformanceCountersBase thisPtr, PerformanceCounter[] counters, int counterIndex)
+        internal static void Decrement(
+            this PerformanceCountersBase thisPtr,
+            PerformanceCounter[] counters,
+            int counterIndex
+        )
         {
             PerformanceCounter counter = null;
             try
@@ -104,8 +134,12 @@ namespace System.ServiceModel.Diagnostics
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
-                PerformanceCounters.TracePerformanceCounterUpdateFailure(thisPtr.InstanceName, thisPtr.CounterNames[counterIndex]);
+                if (Fx.IsFatal(e))
+                    throw;
+                PerformanceCounters.TracePerformanceCounterUpdateFailure(
+                    thisPtr.InstanceName,
+                    thisPtr.CounterNames[counterIndex]
+                );
                 if (counters != null)
                 {
                     counters[counterIndex] = null;

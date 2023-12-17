@@ -16,24 +16,25 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicitCast
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
-    public partial class AddExplicitCastTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class AddExplicitCastTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddExplicitCastTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddExplicitCastCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddExplicitCastCodeFixProvider());
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact]
         public async Task SimpleVariableDeclaration()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -45,7 +46,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -56,14 +57,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived d = (Derived)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task SimpleVariableDeclarationWithFunctionInnvocation()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -80,7 +82,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -96,14 +98,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived d = (Derived)returnBase();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ReturnStatementWithObject()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -115,7 +118,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -126,14 +129,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return (Derived)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ReturnStatementWithIEnumerable()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System.Collections.Generic;
             class Program
             {
@@ -146,7 +150,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System.Collections.Generic;
             class Program
             {
@@ -158,14 +162,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return (IEnumerable<Derived>)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ReturnStatementWithIEnumerator()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System.Collections.Generic;
             class Program
             {
@@ -178,7 +183,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System.Collections.Generic;
             class Program
             {
@@ -190,14 +195,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return (IEnumerator<Derived>)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ReturnStatementWithFunctionInnvocation()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -213,7 +219,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -228,14 +234,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return (Derived)returnBase();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task SimpleFunctionArgumentsWithObject1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -254,7 +261,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -272,14 +279,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     passDerived((Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task SimpleFunctionArgumentsWithObject2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -298,7 +306,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -316,14 +324,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     passDerived(1, (Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task SimpleFunctionArgumentsWithFunctionInvocation()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -341,7 +350,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -358,14 +367,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     passDerived((Derived)returnBase());
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task YieldReturnStatementWithObject()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System.Collections.Generic;
             class Program
             {
@@ -378,7 +388,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System.Collections.Generic;
             class Program
             {
@@ -390,14 +400,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     yield return (Derived)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task SimpleConstructorArgumentsWithObject()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -412,7 +423,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -426,14 +437,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Test t = new Test((Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ReturnTypeWithTask()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System.Threading.Tasks;
 
             class Program
@@ -447,7 +459,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System.Threading.Tasks;
 
             class Program
@@ -460,14 +472,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return (Derived)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task VariableDeclarationWithPublicFieldMember()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -484,7 +497,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -500,14 +513,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived d = (Derived)t.b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task VariableDeclarationWithPrivateFieldMember()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -523,14 +537,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived d = [||]t.b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task PublicMemberFunctionArgument1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -545,7 +560,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -559,14 +574,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     list.Add((Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task PublicMemberFunctionArgument2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -582,7 +598,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -597,14 +613,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     t.testing((Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task PrivateMemberFunctionArgument()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -619,14 +636,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     t.testing(b[||]);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MemberFunctions()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -643,7 +661,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -659,14 +677,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     t.testing((Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task BaseConstructorArgument()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -679,7 +698,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -691,14 +710,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     public Derived_Test (Base b) : base((Derived)b) {}
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ThisConstructorArgument()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -709,7 +729,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -719,14 +739,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     public Test(Base b, int i) : this((Derived)b) {}
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task LambdaFunction1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -738,7 +759,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System;
 
             class Program
@@ -749,14 +770,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Func<Base, Derived> foo = d => (Derived)d;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task LambdaFunction2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -771,7 +793,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System;
 
             class Program
@@ -785,14 +807,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Base b2 = func((Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task LambdaFunction3()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -807,7 +830,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System;
 
             class Program
@@ -821,14 +844,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived b2 = (Derived)func(b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task LambdaFunction4()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -843,7 +867,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System;
 
             class Program
@@ -857,14 +881,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return (Derived)func(b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task LambdaFunction5_ReturnStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -876,14 +901,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return [||](Base b) => { };
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task LambdaFunction6_Arguments()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -898,7 +924,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System;
 
             class Program
@@ -912,14 +938,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     M((Derived)b, (Derived d) => { });
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task LambdaFunction7_Arguments()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -933,14 +960,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     M([||]b, (Base base) => { });
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task LambdaFunction8_Arguments()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -955,7 +983,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System;
 
             class Program
@@ -969,14 +997,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     M((Derived)b1, (Derived d) => { }, (Derived d) => { });
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task LambdaFunction9_Arguments()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -990,14 +1019,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     M([||]b1, action: new Action<Derived>[0], (Derived d) => { }, (Derived d) => { });
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task InheritInterfaces1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1009,7 +1039,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1020,14 +1050,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived d = (Derived)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task InheritInterfaces2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1040,7 +1071,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1052,14 +1083,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived2 d = (Derived2)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task InheritInterfaces3()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1070,7 +1102,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1080,14 +1112,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return (Base2)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task InheritInterfaces4()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1098,7 +1131,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1108,14 +1141,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Base2 b2 = (Base2)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task InheritInterfaces5()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1130,7 +1164,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 interface Base1 {}
@@ -1144,14 +1178,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo((Derived2)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task GenericType()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -1165,7 +1200,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System;
             class Program
             {
@@ -1178,14 +1213,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Func<Derived, Derived> func2 = (Func<Derived, Derived>)func1;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task GenericType2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -1200,7 +1236,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System;
             class Program
             {
@@ -1214,14 +1250,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo((Func<Derived, Derived>)func1);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task GenericType3()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -1234,7 +1271,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             using System;
             class Program
             {
@@ -1246,14 +1283,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return (Func<Derived, Derived>)func1;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task GenericType4()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 void Goo()
@@ -1269,7 +1307,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 public class B<T> : A<T> where T : CB { }
             }
             """,
-            """
+                """
             class Program
             {
                 void Goo()
@@ -1284,14 +1322,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
 
                 public class B<T> : A<T> where T : CB { }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task GenericType5()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 void Goo()
@@ -1306,14 +1345,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
 
                 public class B<T> : A<T> where T : IB { }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task GenericType6()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 void Goo()
@@ -1329,7 +1369,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 public class B<T, U> : A<T, U> where T : IB { }
             }
             """,
-            """
+                """
             class Program
             {
                 void Goo()
@@ -1344,14 +1384,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
 
                 public class B<T, U> : A<T, U> where T : IB { }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ObjectInitializer()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1365,14 +1406,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived d2 = new Test();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ObjectInitializer2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1387,7 +1429,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1401,14 +1443,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived d2 = (Derived)new Test();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ObjectInitializer3()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1421,14 +1464,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return [||]new Base();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ObjectInitializer4()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1442,7 +1486,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1455,14 +1499,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     return (Derived)new Test();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ObjectInitializer5()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1476,14 +1521,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     M([||]new Base());
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ObjectInitializer6()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1498,7 +1544,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1512,14 +1558,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     M((Derived)new Test());
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ObjectInitializer7()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1533,14 +1580,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     M([||]new Base());
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task RedundantCast1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1551,7 +1599,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1561,14 +1609,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived d = (Derived)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task RedundantCast2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1580,7 +1629,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1591,14 +1640,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Derived2 d = (Derived2)b;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task RedundantCast3()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1610,7 +1660,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1621,14 +1671,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     M((Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task RedundantCast4()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1641,7 +1692,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1653,14 +1704,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     M((Derived2)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ExactMethodCandidate()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base
@@ -1679,14 +1731,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     d.Testing([||]b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates1_ArgumentsInOrder_NoLabels()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -1702,7 +1755,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -1717,14 +1770,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", (Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates2_ArgumentsInOrder_NoLabels()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -1742,7 +1796,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base {}
@@ -1759,14 +1813,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", (Derived)b, out var i);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates3_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1784,7 +1839,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1801,14 +1856,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", (Derived)b, out var i);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates4_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1826,7 +1882,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1843,14 +1899,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", (Derived)b, out var i, 1);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates5_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1868,7 +1925,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1885,14 +1942,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", (Derived)b, out var i, 1, 2, 3);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates6_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1909,7 +1967,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1925,14 +1983,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", (Derived)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates7_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1949,7 +2008,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -1965,14 +2024,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", b, (Derived2)b);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates8_ArgumentsInOrder_NoLabels()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             namespace ExtensionMethods
             {
                 public class Base { }
@@ -1994,7 +2054,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             namespace ExtensionMethods
             {
                 public class Base { }
@@ -2015,14 +2075,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     public static void Goo(this string str, Derived d, Derived d2) { }
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates9_ArgumentsOutOfOrder_NoLabels()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -2038,14 +2099,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo(b[||], "");
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates10_ArgumentsInOrder_SomeLabels()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2062,7 +2124,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2078,14 +2140,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", d: (Derived)b, 1);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates11_ArgumentsInOrder_SomeLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2103,7 +2166,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2120,14 +2183,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", d: (Derived)b, 1, list: strlist);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates12_ArgumentsInOrder_SomeLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2145,7 +2209,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2162,14 +2226,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", d: (Derived)b, list: strlist, i: 1);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates13_ArgumentsOutOfOrder_SomeLabels()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2186,14 +2251,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo(d: [||]b, "", 1, list: strlist);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates14_ArgumentsOutOfOrder_AllLabels()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2211,7 +2277,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2228,14 +2294,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo(d: (Derived)b, s: "", list: strlist, i: 1);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates15_ArgumentsOutOfOrder_AllLabels()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2252,14 +2319,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo(d: "", s: [||]b, list: strlist, i: 1);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates17_ArgumentsInOrder_SomeLabels()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2276,7 +2344,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2292,14 +2360,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", d: (Derived)b, 1);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates18_ArgumentsInOrder_SomeLabels()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2317,7 +2386,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2334,14 +2403,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", d: b, (Derived2[])dlist);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates19_ArgumentsInOrder_NoLabels_Params()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2358,14 +2428,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo([||]dlist, new Derived2());
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates20_ArgumentsInOrder_NoLabels_Params()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2382,14 +2453,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo([||]dlist, dlist);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates21_ArgumentsInOrder_Labels()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2403,14 +2475,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo([||]b, i:1, i:1);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MethodCandidates22_ArgumentsInOrder()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base {}
@@ -2427,14 +2500,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Goo("", [||]b, out Base i);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ConstructorCandidates1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2455,7 +2529,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2475,14 +2549,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Test t = new Test(d: (Derived)b, s:"", i:1, list : strlist);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ConstructorCandidates2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2505,7 +2580,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2527,14 +2602,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Test t = new Test("", d: (Derived)b, i:1, "1", "2", "3");
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task ConstructorCandidates3()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2549,7 +2625,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """,
-            """
+                """
             class Program
             {
                 class Base { }
@@ -2563,14 +2639,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     Test(string s, Derived d, int i) { }
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task MultipleOptions1()
         {
-            var initialMarkup =
-                """
+            var initialMarkup = """
                 class Program
                 {
                     class Base { }
@@ -2588,12 +2664,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 """;
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, new TestParameters()))
             {
-                var (actions, actionToInvoke) = await GetCodeActionsAsync(workspace, new TestParameters());
+                var (actions, actionToInvoke) = await GetCodeActionsAsync(
+                    workspace,
+                    new TestParameters()
+                );
                 Assert.Equal(2, actions.Length);
             }
 
-            var expect_0 =
-                """
+            var expect_0 = """
                 class Program
                 {
                     class Base { }
@@ -2609,11 +2687,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(initialMarkup, expect_0, index: 0,
-                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_0,
+                index: 0,
+                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived")
+            );
 
-            var expect_1 =
-                """
+            var expect_1 = """
                 class Program
                 {
                     class Base { }
@@ -2629,15 +2710,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(initialMarkup, expect_1, index: 1,
-                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived2"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_1,
+                index: 1,
+                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived2")
+            );
         }
 
         [Fact]
         public async Task MultipleOptions2()
         {
-            var initialMarkup =
-                """
+            var initialMarkup = """
                 class Program
                 {
                     class Base { }
@@ -2656,12 +2740,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
 
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, new TestParameters()))
             {
-                var (actions, actionToInvoke) = await GetCodeActionsAsync(workspace, new TestParameters());
+                var (actions, actionToInvoke) = await GetCodeActionsAsync(
+                    workspace,
+                    new TestParameters()
+                );
                 Assert.Equal(2, actions.Length);
             }
 
-            var expect_0 =
-                """
+            var expect_0 = """
                 class Program
                 {
                     class Base { }
@@ -2677,11 +2763,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(initialMarkup, expect_0, index: 0,
-                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_0,
+                index: 0,
+                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived")
+            );
 
-            var expect_1 =
-                """
+            var expect_1 = """
                 class Program
                 {
                     class Base { }
@@ -2697,16 +2786,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(initialMarkup, expect_1, index: 1,
-                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived2"));
-
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_1,
+                index: 1,
+                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived2")
+            );
         }
 
         [Fact]
         public async Task MultipleOptions3()
         {
-            var initialMarkup =
-                """
+            var initialMarkup = """
                 class Program
                 {
                     class Base { }
@@ -2722,8 +2813,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     class Base { }
@@ -2745,8 +2835,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         [Fact]
         public async Task MultipleOptions4()
         {
-            var initialMarkup =
-                """
+            var initialMarkup = """
                 class Program
                 {
                     class Base { }
@@ -2765,8 +2854,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     class Base { }
@@ -2791,8 +2879,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         [Fact]
         public async Task MultipleOptions5()
         {
-            var initialMarkup =
-            """
+            var initialMarkup = """
             class Program
             {
                 class Base { }
@@ -2813,12 +2900,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
             """;
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, new TestParameters()))
             {
-                var (actions, actionToInvoke) = await GetCodeActionsAsync(workspace, new TestParameters());
+                var (actions, actionToInvoke) = await GetCodeActionsAsync(
+                    workspace,
+                    new TestParameters()
+                );
                 Assert.Equal(2, actions.Length);
             }
 
-            var expect_0 =
-                """
+            var expect_0 = """
                 class Program
                 {
                     class Base { }
@@ -2837,11 +2926,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(initialMarkup, expect_0, index: 0,
-                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_0,
+                index: 0,
+                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived")
+            );
 
-            var expect_1 =
-                """
+            var expect_1 = """
                 class Program
                 {
                     class Base { }
@@ -2860,15 +2952,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(initialMarkup, expect_1, index: 1,
-                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived2"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_1,
+                index: 1,
+                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived2")
+            );
         }
 
         [Fact]
         public async Task MultipleOptions6()
         {
-            var initialMarkup =
-            """
+            var initialMarkup = """
             class Program
             {
                 class Base { 
@@ -2892,12 +2987,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
             """;
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, new TestParameters()))
             {
-                var (actions, actionToInvoke) = await GetCodeActionsAsync(workspace, new TestParameters());
+                var (actions, actionToInvoke) = await GetCodeActionsAsync(
+                    workspace,
+                    new TestParameters()
+                );
                 Assert.Equal(3, actions.Length);
             }
 
-            var expect_0 =
-                """
+            var expect_0 = """
                 class Program
                 {
                     class Base { 
@@ -2919,11 +3016,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(initialMarkup, expect_0, index: 0,
-                title: string.Format(CodeFixesResources.Convert_type_to_0, "string"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_0,
+                index: 0,
+                title: string.Format(CodeFixesResources.Convert_type_to_0, "string")
+            );
 
-            var expect_1 =
-                """
+            var expect_1 = """
                 class Program
                 {
                     class Base { 
@@ -2945,11 +3045,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(initialMarkup, expect_1, index: 1,
-                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_1,
+                index: 1,
+                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived")
+            );
 
-            var expect_2 =
-                """
+            var expect_2 = """
                 class Program
                 {
                     class Base { 
@@ -2971,15 +3074,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(initialMarkup, expect_2, index: 2,
-                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived2"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_2,
+                index: 2,
+                title: string.Format(CodeFixesResources.Convert_type_to_0, "Derived2")
+            );
         }
 
         [Fact]
         public async Task MultipleOptions7()
         {
-            var initialMarkup =
-            """
+            var initialMarkup = """
             class Program
             {
                 class Base { }
@@ -2999,8 +3105,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """;
-            var expected =
-            """
+            var expected = """
             class Program
             {
                 class Base { }
@@ -3026,8 +3131,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         [Fact]
         public async Task MultipleOptions8()
         {
-            var initialMarkup =
-            """
+            var initialMarkup = """
             class Program
             {
                 class Base { }
@@ -3046,8 +3150,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                 }
             }
             """;
-            var expected =
-            """
+            var expected = """
             class Program
             {
                 class Base { }
@@ -3072,8 +3175,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         [Fact]
         public async Task MultipleOptions9()
         {
-            var initialMarkup =
-                """
+            var initialMarkup = """
                 class Program
                 {
                     class Base { }
@@ -3127,7 +3229,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                         M(d = (Derived)b);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3165,7 +3268,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                         M((Derived2)(d = b));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3181,7 +3285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                         M([||]t);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3211,7 +3316,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/50493")]
@@ -3239,7 +3345,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                         if (array[(int)o] > 0) {}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3269,7 +3376,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
                         Derived2 d = (Derived2)b;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

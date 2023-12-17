@@ -28,99 +28,104 @@
 //
 
 using System;
-using System.Reflection;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using NUnit.Framework;
 
 namespace MonoTests.System.Linq.Expressions
 {
-	[TestFixture]
-	[Category("SRE")]
-	public class ExpressionTest_TypeAs
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Arg1Null ()
-		{
-			Expression.TypeAs (null, typeof (int));
-		}
+    [TestFixture]
+    [Category("SRE")]
+    public class ExpressionTest_TypeAs
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg1Null()
+        {
+            Expression.TypeAs(null, typeof(int));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Arg2Null ()
-		{
-			Expression.TypeAs (Expression.Constant (1), null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg2Null()
+        {
+            Expression.TypeAs(Expression.Constant(1), null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Arg2NotReferenceNorNullable ()
-		{
-			Expression.TypeAs (Expression.Constant (1), typeof (int));
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Arg2NotReferenceNorNullable()
+        {
+            Expression.TypeAs(Expression.Constant(1), typeof(int));
+        }
 
-		[Test]
-		public void NullableNumeric ()
-		{
-			UnaryExpression expr = Expression.TypeAs (Expression.Constant (1), typeof (int?));
-			Assert.AreEqual (ExpressionType.TypeAs, expr.NodeType, "TypeAs#01");
-			Assert.AreEqual (typeof (int?), expr.Type, "TypeAs#02");
-			Assert.AreEqual ("(1 As Nullable`1)", expr.ToString(), "TypeAs#03");
-		}
+        [Test]
+        public void NullableNumeric()
+        {
+            UnaryExpression expr = Expression.TypeAs(Expression.Constant(1), typeof(int?));
+            Assert.AreEqual(ExpressionType.TypeAs, expr.NodeType, "TypeAs#01");
+            Assert.AreEqual(typeof(int?), expr.Type, "TypeAs#02");
+            Assert.AreEqual("(1 As Nullable`1)", expr.ToString(), "TypeAs#03");
+        }
 
-		[Test]
-		public void String ()
-		{
-			UnaryExpression expr = Expression.TypeAs (Expression.Constant (1), typeof (string));
-			Assert.AreEqual (ExpressionType.TypeAs, expr.NodeType, "TypeAs#04");
-			Assert.AreEqual (typeof (string), expr.Type, "TypeAs#05");
-			Assert.AreEqual ("(1 As String)", expr.ToString(), "TypeAs#06");
-		}
+        [Test]
+        public void String()
+        {
+            UnaryExpression expr = Expression.TypeAs(Expression.Constant(1), typeof(string));
+            Assert.AreEqual(ExpressionType.TypeAs, expr.NodeType, "TypeAs#04");
+            Assert.AreEqual(typeof(string), expr.Type, "TypeAs#05");
+            Assert.AreEqual("(1 As String)", expr.ToString(), "TypeAs#06");
+        }
 
-		[Test]
-		public void UserDefinedClass ()
-		{
-			UnaryExpression expr = Expression.TypeAs (Expression.Constant (new OpClass()), typeof (OpClass));
-			Assert.AreEqual (ExpressionType.TypeAs, expr.NodeType, "TypeAs#07");
-			Assert.AreEqual (typeof (OpClass), expr.Type, "TypeAs#08");
-			Assert.AreEqual ("(value(MonoTests.System.Linq.Expressions.OpClass) As OpClass)", expr.ToString(), "TypeAs#09");
-		}
+        [Test]
+        public void UserDefinedClass()
+        {
+            UnaryExpression expr = Expression.TypeAs(
+                Expression.Constant(new OpClass()),
+                typeof(OpClass)
+            );
+            Assert.AreEqual(ExpressionType.TypeAs, expr.NodeType, "TypeAs#07");
+            Assert.AreEqual(typeof(OpClass), expr.Type, "TypeAs#08");
+            Assert.AreEqual(
+                "(value(MonoTests.System.Linq.Expressions.OpClass) As OpClass)",
+                expr.ToString(),
+                "TypeAs#09"
+            );
+        }
 
-		static Func<object, TType> CreateTypeAs<TType> ()
-		{
-			var obj = Expression.Parameter (typeof (object), "obj");
+        static Func<object, TType> CreateTypeAs<TType>()
+        {
+            var obj = Expression.Parameter(typeof(object), "obj");
 
-			return Expression.Lambda<Func<object, TType>> (
-				Expression.TypeAs (obj, typeof (TType)), obj).Compile ();
-		}
+            return Expression
+                .Lambda<Func<object, TType>>(Expression.TypeAs(obj, typeof(TType)), obj)
+                .Compile();
+        }
 
-		struct Foo {
-		}
+        struct Foo { }
 
-		class Bar {
-		}
+        class Bar { }
 
-		class Baz : Bar {
-		}
+        class Baz : Bar { }
 
-		[Test]
-		public void CompiledTypeAs ()
-		{
-			var asbar = CreateTypeAs<Bar> ();
-			var asbaz = CreateTypeAs<Baz> ();
+        [Test]
+        public void CompiledTypeAs()
+        {
+            var asbar = CreateTypeAs<Bar>();
+            var asbaz = CreateTypeAs<Baz>();
 
-			Assert.IsNotNull (asbar (new Bar ()));
-			Assert.IsNull (asbar (new Foo ()));
-			Assert.IsNotNull (asbar (new Baz ()));
-			Assert.IsNull (asbaz (new Bar ()));
-		}
+            Assert.IsNotNull(asbar(new Bar()));
+            Assert.IsNull(asbar(new Foo()));
+            Assert.IsNotNull(asbar(new Baz()));
+            Assert.IsNull(asbaz(new Bar()));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void TypeAsVoid ()
-		{
-			Expression.TypeAs ("yoyo".ToConstant (), typeof (void));
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TypeAsVoid()
+        {
+            Expression.TypeAs("yoyo".ToConstant(), typeof(void));
+        }
+    }
 }

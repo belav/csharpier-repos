@@ -15,7 +15,11 @@ public class WebTransportStreamTests : Http3TestBase
     [InlineData(WebTransportStreamType.Bidirectional, true, true)]
     [InlineData(WebTransportStreamType.Input, true, false)]
     [InlineData(WebTransportStreamType.Output, false, true)]
-    internal async Task WebTransportStream_StreamTypesAreDefinedCorrectly(WebTransportStreamType type, bool canRead, bool canWrite)
+    internal async Task WebTransportStream_StreamTypesAreDefinedCorrectly(
+        WebTransportStreamType type,
+        bool canRead,
+        bool canWrite
+    )
     {
         var memory = new Memory<byte>(new byte[5]);
         var stream = WebTransportTestUtilities.CreateStream(type, memory);
@@ -36,7 +40,10 @@ public class WebTransportStreamTests : Http3TestBase
     {
         var memory = new Memory<byte>(new byte[5]);
 
-        var stream = WebTransportTestUtilities.CreateStream(WebTransportStreamType.Bidirectional, memory);
+        var stream = WebTransportTestUtilities.CreateStream(
+            WebTransportStreamType.Bidirectional,
+            memory
+        );
 
         var input = new ReadOnlyMemory<byte>(RandomBytes);
         await stream.Transport.Output.WriteAsync(input, CancellationToken.None);
@@ -44,7 +51,9 @@ public class WebTransportStreamTests : Http3TestBase
         await stream.Transport.Output.FlushAsync();
 
         var memoryOut = new Memory<byte>(new byte[5]);
-        var length = await stream.Transport.Input.AsStream().ReadAsync(memoryOut, CancellationToken.None);
+        var length = await stream
+            .Transport.Input.AsStream()
+            .ReadAsync(memoryOut, CancellationToken.None);
 
         Assert.Equal(5, length);
         Assert.Equal(input.ToArray(), memoryOut.ToArray());

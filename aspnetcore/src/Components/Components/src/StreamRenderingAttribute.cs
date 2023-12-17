@@ -5,7 +5,7 @@ namespace Microsoft.AspNetCore.Components;
 
 /// <summary>
 /// An attribute to indicate whether to stream the rendering of a component and its descendants.
-/// 
+///
 /// This attribute only takes effect within renderers that support streaming rendering (for example,
 /// server-side HTML rendering from a Razor Component endpoint). In other hosting models it has no effect.
 ///

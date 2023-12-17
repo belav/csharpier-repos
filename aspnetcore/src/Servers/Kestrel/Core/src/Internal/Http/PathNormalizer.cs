@@ -13,7 +13,12 @@ internal static class PathNormalizer
     private const byte ByteSlash = (byte)'/';
     private const byte ByteDot = (byte)'.';
 
-    public static string DecodePath(Span<byte> path, bool pathEncoded, string rawTarget, int queryLength)
+    public static string DecodePath(
+        Span<byte> path,
+        bool pathEncoded,
+        string rawTarget,
+        int queryLength
+    )
     {
         int pathLength;
         if (pathEncoded)
@@ -74,7 +79,9 @@ internal static class PathNormalizer
             var ch1 = *src;
             Debug.Assert(ch1 == '/', "Path segment must always start with a '/'");
 
-            byte ch2, ch3, ch4;
+            byte ch2,
+                ch3,
+                ch4;
 
             switch (end - src)
             {
@@ -191,7 +198,9 @@ internal static class PathNormalizer
             var ch1 = *src;
             Debug.Assert(ch1 == '/', "Path segment must always start with a '/'");
 
-            byte ch2, ch3, ch4;
+            byte ch2,
+                ch3,
+                ch4;
 
             switch (end - src)
             {
@@ -210,8 +219,7 @@ internal static class PathNormalizer
                     ch2 = *(src + 1);
                     ch3 = *(src + 2);
 
-                    if ((ch2 == ByteDot && ch3 == ByteDot) ||
-                        (ch2 == ByteDot && ch3 == ByteSlash))
+                    if ((ch2 == ByteDot && ch3 == ByteDot) || (ch2 == ByteDot && ch3 == ByteSlash))
                     {
                         return true;
                     }
@@ -222,8 +230,10 @@ internal static class PathNormalizer
                     ch3 = *(src + 2);
                     ch4 = *(src + 3);
 
-                    if ((ch2 == ByteDot && ch3 == ByteDot && ch4 == ByteSlash) ||
-                        (ch2 == ByteDot && ch3 == ByteSlash))
+                    if (
+                        (ch2 == ByteDot && ch3 == ByteDot && ch4 == ByteSlash)
+                        || (ch2 == ByteDot && ch3 == ByteSlash)
+                    )
                     {
                         return true;
                     }

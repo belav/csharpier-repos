@@ -11,7 +11,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpRemoveConfusingSuppressionDiagnosticAnalyzer, CSharpRemoveConfusingSuppressionCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpRemoveConfusingSuppressionDiagnosticAnalyzer,
+        CSharpRemoveConfusingSuppressionCodeFixProvider
+    >;
 
     public class RemoveConfusingSuppressionTests
     {
@@ -40,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44872")]
@@ -68,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44872")]
@@ -76,8 +81,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     void M(object o)
@@ -88,8 +92,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class C
                 {
                     void M(object o)
@@ -110,8 +113,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     void M(object o)
@@ -122,8 +124,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class C
                 {
                     void M(object o)
@@ -144,8 +145,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     void M(object o)
@@ -156,8 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class C
                 {
                     void M(object o)
@@ -178,8 +177,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     void M(object o)
@@ -217,8 +215,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     void M(object o)
@@ -232,8 +229,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class C
                 {
                     void M(object o)
@@ -248,7 +244,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                 }
                 """,
                 NumberOfFixAllIterations = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
             }.RunAsync();
         }
 
@@ -257,8 +254,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     void M(object o)
@@ -272,8 +268,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class C
                 {
                     void M(object o)
@@ -288,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                 }
                 """,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
                 NumberOfFixAllIterations = 1,
             }.RunAsync();
         }
@@ -298,8 +294,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     void M(object o)
@@ -313,8 +308,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class C
                 {
                     void M(object o)
@@ -329,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                 }
                 """,
                 NumberOfFixAllIterations = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
             }.RunAsync();
         }
 
@@ -338,8 +333,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     void M(object o)
@@ -353,8 +347,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class C
                 {
                     void M(object o)
@@ -370,7 +363,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                 """,
                 NumberOfFixAllIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
             }.RunAsync();
         }
     }

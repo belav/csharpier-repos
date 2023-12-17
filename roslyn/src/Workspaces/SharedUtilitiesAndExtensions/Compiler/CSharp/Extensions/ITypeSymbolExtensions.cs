@@ -37,11 +37,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
         }
 
-        public static bool TryGetPrimaryConstructor(this INamedTypeSymbol typeSymbol, [NotNullWhen(true)] out IMethodSymbol? primaryConstructor)
+        public static bool TryGetPrimaryConstructor(
+            this INamedTypeSymbol typeSymbol,
+            [NotNullWhen(true)] out IMethodSymbol? primaryConstructor
+        )
         {
             if (typeSymbol.TypeKind is TypeKind.Class or TypeKind.Struct)
             {
-                Debug.Assert(typeSymbol.GetParameters().IsDefaultOrEmpty, "If GetParameters extension handles record, we can remove the handling here.");
+                Debug.Assert(
+                    typeSymbol.GetParameters().IsDefaultOrEmpty,
+                    "If GetParameters extension handles record, we can remove the handling here."
+                );
 
                 // A bit hacky to determine the parameters of primary constructor associated with a given record.
                 // Simplifying is tracked by: https://github.com/dotnet/roslyn/issues/53092.
@@ -50,7 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 // of the extension method and make sure the change is applicable to all these usages.
 
                 primaryConstructor = typeSymbol.InstanceConstructors.FirstOrDefault(
-                    c => c.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is RecordDeclarationSyntax or ClassDeclarationSyntax or StructDeclarationSyntax);
+                    c =>
+                        c.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
+                            is RecordDeclarationSyntax
+                                or ClassDeclarationSyntax
+                                or StructDeclarationSyntax
+                );
                 return primaryConstructor is not null;
             }
 

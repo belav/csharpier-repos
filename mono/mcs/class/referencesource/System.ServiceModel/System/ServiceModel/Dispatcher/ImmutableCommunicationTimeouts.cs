@@ -14,9 +14,7 @@ namespace System.ServiceModel.Dispatcher
         TimeSpan send;
 
         internal ImmutableCommunicationTimeouts()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         internal ImmutableCommunicationTimeouts(IDefaultCommunicationTimeouts timeouts)
         {

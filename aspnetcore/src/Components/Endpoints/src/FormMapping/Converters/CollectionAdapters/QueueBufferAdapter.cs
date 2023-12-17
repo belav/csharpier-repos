@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
-internal sealed class QueueBufferAdapter<TElement> : ICollectionBufferAdapter<Queue<TElement>, Queue<TElement>, TElement>
+internal sealed class QueueBufferAdapter<TElement>
+    : ICollectionBufferAdapter<Queue<TElement>, Queue<TElement>, TElement>
 {
     public static Queue<TElement> CreateBuffer() => new();
 

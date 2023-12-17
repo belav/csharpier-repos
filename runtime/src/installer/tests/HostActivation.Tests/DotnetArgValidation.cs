@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.Cli.Build;
 using System;
 using System.IO;
+using Microsoft.DotNet.Cli.Build;
 using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
@@ -21,24 +21,32 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void MuxerExec_MissingAppAssembly_Fails()
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.dll");
-            TestContext.BuiltDotNet.Exec("exec", assemblyName)
+            TestContext
+                .BuiltDotNet.Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining($"The application to execute does not exist: '{assemblyName}'");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    $"The application to execute does not exist: '{assemblyName}'"
+                );
         }
 
         [Fact]
         public void MuxerExec_MissingAppAssembly_BadExtension_Fails()
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.xzy");
-            TestContext.BuiltDotNet.Exec("exec", assemblyName)
+            TestContext
+                .BuiltDotNet.Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining($"The application to execute does not exist: '{assemblyName}'");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    $"The application to execute does not exist: '{assemblyName}'"
+                );
         }
 
         [Fact]
@@ -48,22 +56,28 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string fxDir = TestContext.BuiltDotNet.GreatestVersionSharedFxPath;
             string assemblyName = Path.Combine(fxDir, "Microsoft.NETCore.App.deps.json");
 
-            TestContext.BuiltDotNet.Exec("exec", assemblyName)
+            TestContext
+                .BuiltDotNet.Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining($"dotnet exec needs a managed .dll or .exe extension. The application specified was '{assemblyName}'");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    $"dotnet exec needs a managed .dll or .exe extension. The application specified was '{assemblyName}'"
+                );
         }
 
         [Fact]
         public void MissingArgumentValue_Fails()
         {
-            TestContext.BuiltDotNet.Exec("--fx-version")
+            TestContext
+                .BuiltDotNet.Exec("--fx-version")
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining($"Failed to parse supported options or their values:");
         }
 
@@ -71,12 +85,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void InvalidFileOrCommand_NoSDK_ListsPossibleIssues()
         {
             string fileName = "NonExistent";
-            TestContext.BuiltDotNet.Exec(fileName)
+            TestContext
+                .BuiltDotNet.Exec(fileName)
                 .WorkingDirectory(sharedTestState.BaseDirectory.Location)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining($"The application '{fileName}' does not exist")
                 .And.FindAnySdk(false);
         }
@@ -84,11 +100,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void DotNetInfo_NoSDK()
         {
-            TestContext.BuiltDotNet.Exec("--info")
+            TestContext
+                .BuiltDotNet.Exec("--info")
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutMatching($@"Architecture:\s*{TestContext.BuildArchitecture}")
                 .And.HaveStdOutMatching($@"RID:\s*{TestContext.BuildRID}");
         }
@@ -96,17 +114,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void DotNetInfo_WithSDK()
         {
-            DotNetCli dotnet = new DotNetBuilder(sharedTestState.BaseDirectory.Location, TestContext.BuiltDotNet.BinPath, "withSdk")
+            DotNetCli dotnet = new DotNetBuilder(
+                sharedTestState.BaseDirectory.Location,
+                TestContext.BuiltDotNet.BinPath,
+                "withSdk"
+            )
                 .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("1.0.0")
                 .AddMockSDK("1.0.0", "1.0.0")
                 .Build();
 
-            dotnet.Exec("--info")
+            dotnet
+                .Exec("--info")
                 .WorkingDirectory(sharedTestState.BaseDirectory.Location)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.NotHaveStdOutMatching($@"RID:\s*{TestContext.BuildRID}");
         }
 
@@ -124,7 +148,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             public SharedTestState()
             {
-                BaseDirectory = new TestArtifact(SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "argValidation")));
+                BaseDirectory = new TestArtifact(
+                    SharedFramework.CalculateUniqueTestDirectory(
+                        Path.Combine(TestArtifact.TestArtifactsPath, "argValidation")
+                    )
+                );
 
                 // Create an empty global.json file
                 Directory.CreateDirectory(BaseDirectory.Location);

@@ -9,8 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Xunit;
-using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<
-    Microsoft.CodeAnalysis.GenerateComparisonOperators.GenerateComparisonOperatorsCodeRefactoringProvider>;
+using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<Microsoft.CodeAnalysis.GenerateComparisonOperators.GenerateComparisonOperatorsCodeRefactoringProvider>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOperators
 {
@@ -57,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
                         return left.CompareTo(right) >= 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System;
 
                 [||]class C : IComparable<C>
@@ -74,8 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
                     public int CompareTo(C c) => 0;
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System;
 
                 class C : IComparable<C>
@@ -91,8 +89,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
                 EditorConfig = CodeFixVerifierHelper.GetEditorConfigText(
                     new OptionsCollection(LanguageNames.CSharp)
                     {
-                        { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement },
-                    }),
+                        {
+                            CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                            CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                        },
+                    }
+                ),
             }.RunAsync();
         }
 
@@ -135,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
                         return ((IComparable<C>)left).CompareTo(right) >= 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -177,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
                         return left.CompareTo(right) >= 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -219,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
                         return left.CompareTo(right) >= 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -263,7 +268,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
                         return left.CompareTo(right) >= 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -301,8 +307,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
         [Fact]
         public async Task TestMissingWithAllExistingOperators()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 class C : IComparable<C>
@@ -382,14 +387,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
                         return left.CompareTo(right) >= 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestMultipleInterfaces()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 class C : IComparable<C>, IComparable<int>
@@ -400,8 +405,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
                 [||]
                 }
                 """;
-            string GetFixedCode(string type)
-=> $@"using System;
+            string GetFixedCode(string type) =>
+                $@"using System;
 
 class C : IComparable<C>, IComparable<int>
 {{
@@ -487,7 +492,8 @@ class C : IComparable<C>, IComparable<int>
                         return left.CompareTo(right) >= 0;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }
