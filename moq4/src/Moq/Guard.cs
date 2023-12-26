@@ -6,9 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Properties;
-
 using TypeNameFormatter;
 
 namespace Moq
@@ -24,11 +22,17 @@ namespace Moq
                     string.Format(
                         CultureInfo.CurrentCulture,
                         Resources.TypeHasNoDefaultConstructor,
-                        type.GetFormattedName()));
+                        type.GetFormattedName()
+                    )
+                );
             }
         }
 
-        public static void ImplementsInterface(Type interfaceType, Type type, string paramName = null)
+        public static void ImplementsInterface(
+            Type interfaceType,
+            Type type,
+            string paramName = null
+        )
         {
             Debug.Assert(interfaceType != null);
             Debug.Assert(interfaceType.IsInterface);
@@ -42,8 +46,10 @@ namespace Moq
                         CultureInfo.CurrentCulture,
                         Resources.TypeNotImplementInterface,
                         type.GetFormattedName(),
-                        interfaceType.GetFormattedName()),
-                    paramName);
+                        interfaceType.GetFormattedName()
+                    ),
+                    paramName
+                );
             }
         }
 
@@ -55,7 +61,10 @@ namespace Moq
             Guard.CanCreateInstance(type);
         }
 
-        public static void IsAssignmentToPropertyOrIndexer(LambdaExpression expression, string paramName)
+        public static void IsAssignmentToPropertyOrIndexer(
+            LambdaExpression expression,
+            string paramName
+        )
         {
             Debug.Assert(expression != null);
 
@@ -63,12 +72,14 @@ namespace Moq
             {
                 case ExpressionType.Assign:
                     var assignment = (BinaryExpression)expression.Body;
-                    if (assignment.Left is MemberExpression || assignment.Left is IndexExpression) return;
+                    if (assignment.Left is MemberExpression || assignment.Left is IndexExpression)
+                        return;
                     break;
 
                 case ExpressionType.Call:
                     var call = (MethodCallExpression)expression.Body;
-                    if (call.Method.IsSetAccessor()) return;
+                    if (call.Method.IsSetAccessor())
+                        return;
                     break;
             }
 
@@ -76,8 +87,10 @@ namespace Moq
                 string.Format(
                     CultureInfo.CurrentCulture,
                     Resources.SetupNotSetter,
-                    expression.ToStringFixed()),
-                paramName);
+                    expression.ToStringFixed()
+                ),
+                paramName
+            );
         }
 
         public static void IsOverridable(MethodInfo method, Expression expression)
@@ -91,8 +104,13 @@ namespace Moq
                         expression.ToStringFixed(),
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            method.IsExtensionMethod() ? Resources.UnsupportedExtensionMethod : Resources.UnsupportedStaticMember,
-                            $"{method.DeclaringType.GetFormattedName()}.{method.Name}")));
+                            method.IsExtensionMethod()
+                                ? Resources.UnsupportedExtensionMethod
+                                : Resources.UnsupportedStaticMember,
+                            $"{method.DeclaringType.GetFormattedName()}.{method.Name}"
+                        )
+                    )
+                );
             }
             else if (!method.CanOverride())
             {
@@ -104,20 +122,29 @@ namespace Moq
                         string.Format(
                             CultureInfo.CurrentCulture,
                             Resources.UnsupportedNonOverridableMember,
-                            $"{method.DeclaringType.GetFormattedName()}.{method.Name}")));
+                            $"{method.DeclaringType.GetFormattedName()}.{method.Name}"
+                        )
+                    )
+                );
             }
         }
 
         public static void IsVisibleToProxyFactory(MethodInfo method)
         {
-            if (ProxyFactory.Instance.IsMethodVisible(method, out string messageIfNotVisible) == false)
+            if (
+                ProxyFactory.Instance.IsMethodVisible(method, out string messageIfNotVisible)
+                == false
+            )
             {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.MethodNotVisibleToProxyFactory,
-                    method.DeclaringType.Name,
-                    method.Name,
-                    messageIfNotVisible));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.MethodNotVisibleToProxyFactory,
+                        method.DeclaringType.Name,
+                        method.Name,
+                        messageIfNotVisible
+                    )
+                );
             }
         }
 
@@ -129,7 +156,8 @@ namespace Moq
             {
                 case ExpressionType.Call:
                     var call = (MethodCallExpression)expression.Body;
-                    if (call.Method.IsEventAddAccessor()) return;
+                    if (call.Method.IsEventAddAccessor())
+                        return;
                     break;
             }
 
@@ -137,8 +165,10 @@ namespace Moq
                 string.Format(
                     CultureInfo.CurrentCulture,
                     Resources.SetupNotEventAdd,
-                    expression.ToStringFixed()),
-                paramName);
+                    expression.ToStringFixed()
+                ),
+                paramName
+            );
         }
 
         public static void IsEventRemove(LambdaExpression expression, string paramName)
@@ -149,7 +179,8 @@ namespace Moq
             {
                 case ExpressionType.Call:
                     var call = (MethodCallExpression)expression.Body;
-                    if (call.Method.IsEventRemoveAccessor()) return;
+                    if (call.Method.IsEventRemoveAccessor())
+                        return;
                     break;
             }
 
@@ -157,8 +188,10 @@ namespace Moq
                 string.Format(
                     CultureInfo.CurrentCulture,
                     Resources.SetupNotEventRemove,
-                    expression.ToStringFixed()),
-                paramName);
+                    expression.ToStringFixed()
+                ),
+                paramName
+            );
         }
 
         /// <summary>
@@ -175,7 +208,7 @@ namespace Moq
 
         /// <summary>
         /// Ensures the given string <paramref name="value"/> is not null or empty.
-        /// Throws <see cref="ArgumentNullException"/> in the first case, or 
+        /// Throws <see cref="ArgumentNullException"/> in the first case, or
         /// <see cref="ArgumentException"/> in the latter.
         /// </summary>
         public static void NotNullOrEmpty(string value, string paramName)
@@ -195,9 +228,8 @@ namespace Moq
         {
             if (memberAccess.Member is FieldInfo)
                 throw new NotSupportedException(
-                    string.Format(
-                        Resources.FieldsNotSupported,
-                        memberAccess.ToStringFixed()));
+                    string.Format(Resources.FieldsNotSupported, memberAccess.ToStringFixed())
+                );
         }
 
         public static void IsMockable(Type type)
@@ -205,9 +237,8 @@ namespace Moq
             if (!type.IsMockable())
             {
                 throw new NotSupportedException(
-                    string.Format(
-                        Resources.TypeNotMockable,
-                        type.GetFormattedName()));
+                    string.Format(Resources.TypeNotMockable, type.GetFormattedName())
+                );
             }
         }
 
@@ -223,10 +254,14 @@ namespace Moq
         {
             if (!property.CanRead(out _))
             {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.PropertyGetNotFound,
-                    property.DeclaringType.Name, property.Name));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.PropertyGetNotFound,
+                        property.DeclaringType.Name,
+                        property.Name
+                    )
+                );
             }
         }
 
@@ -234,10 +269,14 @@ namespace Moq
         {
             if (!property.CanWrite(out _))
             {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.PropertySetNotFound,
-                    property.DeclaringType.Name, property.Name));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.PropertySetNotFound,
+                        property.DeclaringType.Name,
+                        property.Name
+                    )
+                );
             }
         }
     }

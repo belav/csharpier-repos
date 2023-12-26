@@ -13,25 +13,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
     [UseExportProvider]
     public class SpellCheckFixerProviderTests : AbstractSpellCheckFixerProviderTests
     {
-        protected override TestWorkspace CreateWorkspace(string content)
-            => TestWorkspace.CreateCSharp(content);
+        protected override TestWorkspace CreateWorkspace(string content) =>
+            TestWorkspace.CreateCSharp(content);
 
         [WpfFact]
         public async Task TestRenameClassName()
         {
             await TestSuccessAsync(
                 """
-                class {|CorrectlySpelled:CrrectlySpelled|}
-                {
-                    public CrrectlySpelled() { }
-                }
-                """,
+                    class {|CorrectlySpelled:CrrectlySpelled|}
+                    {
+                        public CrrectlySpelled() { }
+                    }
+                    """,
                 """
-                class CorrectlySpelled
-                {
-                    public CorrectlySpelled() { }
-                }
-                """);
+                    class CorrectlySpelled
+                    {
+                        public CorrectlySpelled() { }
+                    }
+                    """
+            );
         }
 
         [WpfFact]
@@ -40,25 +41,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             // Should not be called inside a string.  But we should still apply the change.
             await TestFailureAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v1 = "{|word:wrd|}";
-                        var v2 = "wrd";
+                        void M()
+                        {
+                            var v1 = "{|word:wrd|}";
+                            var v2 = "wrd";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v1 = "word";
-                        var v2 = "wrd";
+                        void M()
+                        {
+                            var v1 = "word";
+                            var v2 = "wrd";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [WpfFact]
@@ -67,17 +69,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             // Should not be called inside a string.  But we should still apply the change.
             await TestFailureAsync(
                 """
-                class {|Bo()gus:Orginal|}
-                {
-                    public Orginal() { }
-                }
-                """,
+                    class {|Bo()gus:Orginal|}
+                    {
+                        public Orginal() { }
+                    }
+                    """,
                 """
-                class Bo()gus
-                {
-                    public Orginal() { }
-                }
-                """);
+                    class Bo()gus
+                    {
+                        public Orginal() { }
+                    }
+                    """
+            );
         }
 
         [WpfFact]
@@ -86,17 +89,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             // Replacement span is larger than the lang token to rename.
             await TestFailureAsync(
                 """
-                class {|Replacement:Class |}
-                {
-                    public Class() { }
-                }
-                """,
+                    class {|Replacement:Class |}
+                    {
+                        public Class() { }
+                    }
+                    """,
                 """
-                class Replacement
-                {
-                    public Class() { }
-                }
-                """);
+                    class Replacement
+                    {
+                        public Class() { }
+                    }
+                    """
+            );
         }
     }
 }

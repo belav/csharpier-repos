@@ -21,7 +21,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
             Diagnostics = ImmutableList<WorkspaceDiagnostic>.Empty;
         }
 
-        public void Report(DiagnosticReportingMode mode, string message, Func<string, Exception>? createException = null)
+        public void Report(
+            DiagnosticReportingMode mode,
+            string message,
+            Func<string, Exception>? createException = null
+        )
         {
             switch (mode)
             {
@@ -41,7 +45,14 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     break;
 
                 default:
-                    throw new ArgumentException(string.Format(WorkspaceMSBuildResources.Invalid_0_specified_1, nameof(DiagnosticReportingMode), nameof(mode)), nameof(mode));
+                    throw new ArgumentException(
+                        string.Format(
+                            WorkspaceMSBuildResources.Invalid_0_specified_1,
+                            nameof(DiagnosticReportingMode),
+                            nameof(mode)
+                        ),
+                        nameof(mode)
+                    );
             }
         }
 
@@ -59,13 +70,23 @@ namespace Microsoft.CodeAnalysis.MSBuild
         {
             foreach (var logItem in log)
             {
-                Report(DiagnosticReportingMode.Log, GetMSBuildFailedMessage(logItem.ProjectFilePath, logItem.ToString()));
+                Report(
+                    DiagnosticReportingMode.Log,
+                    GetMSBuildFailedMessage(logItem.ProjectFilePath, logItem.ToString())
+                );
             }
         }
 
-        private static string GetMSBuildFailedMessage(string projectFilePath, string message)
-            => RoslynString.IsNullOrWhiteSpace(message)
-                ? string.Format(WorkspaceMSBuildResources.Msbuild_failed_when_processing_the_file_0, projectFilePath)
-                : string.Format(WorkspaceMSBuildResources.Msbuild_failed_when_processing_the_file_0_with_message_1, projectFilePath, message);
+        private static string GetMSBuildFailedMessage(string projectFilePath, string message) =>
+            RoslynString.IsNullOrWhiteSpace(message)
+                ? string.Format(
+                    WorkspaceMSBuildResources.Msbuild_failed_when_processing_the_file_0,
+                    projectFilePath
+                )
+                : string.Format(
+                    WorkspaceMSBuildResources.Msbuild_failed_when_processing_the_file_0_with_message_1,
+                    projectFilePath,
+                    message
+                );
     }
 }

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,37 +25,39 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using System.Collections.Generic;
 
 namespace System.ServiceModel.Dispatcher
 {
-	public class FaultContractInfo
-	{
-		public FaultContractInfo (string action, Type detail)
-		{
-			if (action == null)
-				throw new ArgumentNullException ("action");
-			if (detail == null)
-				throw new ArgumentNullException ("detail");
-			Action = action;
-			Detail = detail;
-		}
+    public class FaultContractInfo
+    {
+        public FaultContractInfo(string action, Type detail)
+        {
+            if (action == null)
+                throw new ArgumentNullException("action");
+            if (detail == null)
+                throw new ArgumentNullException("detail");
+            Action = action;
+            Detail = detail;
+        }
 
-		DataContractSerializer serializer;
+        DataContractSerializer serializer;
 
-		public string Action { get; private set; }
+        public string Action { get; private set; }
 
-		public Type Detail { get; private set; }
+        public Type Detail { get; private set; }
 
-		internal DataContractSerializer Serializer {
-			get {
-				if (serializer == null)
-					serializer = new DataContractSerializer (Detail);
-				return serializer;
-			}
-		}
-	}
+        internal DataContractSerializer Serializer
+        {
+            get
+            {
+                if (serializer == null)
+                    serializer = new DataContractSerializer(Detail);
+                return serializer;
+            }
+        }
+    }
 }

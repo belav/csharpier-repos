@@ -60,5 +60,6 @@ public sealed class NamedPipeTransportOptions
     /// </summary>
     public PipeSecurity? PipeSecurity { get; set; }
 
-    internal Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } = PinnedBlockMemoryPoolFactory.Create;
+    internal Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } =
+        PinnedBlockMemoryPoolFactory.Create;
 }

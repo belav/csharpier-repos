@@ -41,15 +41,25 @@ namespace System.Linq.Parallel.Tests
         [InlineData((object)null, 1)]
         public static void SingleOrDefault<T>(T element, int count)
         {
-            Assert.Equal(count >= 1 ? element : default(T), ParallelEnumerable.Repeat(element, count).SingleOrDefault());
-            Assert.Equal(count >= 1 ? element : default(T), ParallelEnumerable.Repeat(element, count).SingleOrDefault(x => true));
+            Assert.Equal(
+                count >= 1 ? element : default(T),
+                ParallelEnumerable.Repeat(element, count).SingleOrDefault()
+            );
+            Assert.Equal(
+                count >= 1 ? element : default(T),
+                ParallelEnumerable.Repeat(element, count).SingleOrDefault(x => true)
+            );
         }
 
         [Fact]
         public static void Single_Empty()
         {
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Single());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Single(x => true));
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Single()
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Single(x => true)
+            );
         }
 
         [Theory]
@@ -59,7 +69,9 @@ namespace System.Linq.Parallel.Tests
         public static void Single_NoMatch(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, count).Single(x => !seen.Add(x)));
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Range(0, count).Single(x => !seen.Add(x))
+            );
             seen.AssertComplete();
         }
 
@@ -78,7 +90,10 @@ namespace System.Linq.Parallel.Tests
         public static void SingleOrDefault_NoMatch(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
-            Assert.Equal(default(int), ParallelEnumerable.Range(0, count).SingleOrDefault(x => !seen.Add(x)));
+            Assert.Equal(
+                default(int),
+                ParallelEnumerable.Range(0, count).SingleOrDefault(x => !seen.Add(x))
+            );
             seen.AssertComplete();
         }
 
@@ -94,7 +109,9 @@ namespace System.Linq.Parallel.Tests
         [InlineData(16)]
         public static void Single_AllMatch(int count)
         {
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, count).Single(x => true));
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Range(0, count).Single(x => true)
+            );
         }
 
         [Fact]
@@ -109,7 +126,9 @@ namespace System.Linq.Parallel.Tests
         [InlineData(16)]
         public static void SingleOrDefault_AllMatch(int count)
         {
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, count).SingleOrDefault(x => true));
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Range(0, count).SingleOrDefault(x => true)
+            );
         }
 
         [Fact]
@@ -124,13 +143,21 @@ namespace System.Linq.Parallel.Tests
         public static void Single_OneMatch(int count, int element)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
-            Assert.Equal(element, ParallelEnumerable.Range(0, count).Single(x => seen.Add(x) && x == element));
+            Assert.Equal(
+                element,
+                ParallelEnumerable.Range(0, count).Single(x => seen.Add(x) && x == element)
+            );
             seen.AssertComplete();
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(SingleSpecificData), new int[] { /* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(SingleSpecificData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void Single_OneMatch_Longrunning(int count, int element)
         {
             Single_OneMatch(count, element);
@@ -141,13 +168,21 @@ namespace System.Linq.Parallel.Tests
         public static void SingleOrDefault_OneMatch(int count, int element)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
-            Assert.Equal(element, ParallelEnumerable.Range(0, count).SingleOrDefault(x => seen.Add(x) && x == element));
+            Assert.Equal(
+                element,
+                ParallelEnumerable.Range(0, count).SingleOrDefault(x => seen.Add(x) && x == element)
+            );
             seen.AssertComplete();
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(SingleSpecificData), new int[] { /* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(SingleSpecificData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void SingleOrDefault_OneMatch_Longrunning(int count, int element)
         {
             SingleOrDefault_OneMatch(count, element);
@@ -156,27 +191,69 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Single_OperationCanceledException()
         {
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Single(x => { canceler(); return false; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Single(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
         }
 
         [Fact]
         public static void SingleOrDefault_OperationCanceledException()
         {
-            AssertThrows.EventuallyCanceled((source, canceler) => source.SingleOrDefault(x => { canceler(); return false; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.SingleOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
         }
 
         [Fact]
         public static void Single_AggregateException_Wraps_OperationCanceledException()
         {
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Single(x => { canceler(); return false; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Single(x => { canceler(); return false; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Single(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Single(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
         }
 
         [Fact]
         public static void SingleOrDefault_AggregateException_Wraps_OperationCanceledException()
         {
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.SingleOrDefault(x => { canceler(); return false; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.SingleOrDefault(x => { canceler(); return false; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.SingleOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.SingleOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
         }
 
         [Fact]
@@ -196,18 +273,46 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Single_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Single(x => { throw new DeliberateTestException(); }));
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).SingleOrDefault(x => { throw new DeliberateTestException(); }));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Single(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .SingleOrDefault(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
+            );
         }
 
         [Fact]
         public static void Single_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).Single());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).SingleOrDefault());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).Single()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).SingleOrDefault()
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<int>().Single(null));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<int>().SingleOrDefault(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<int>().Single(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<int>().SingleOrDefault(null)
+            );
         }
     }
 }

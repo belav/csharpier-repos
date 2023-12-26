@@ -18,44 +18,54 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddRequiredParentheses)]
-    public partial class AddRequiredPatternParenthesesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class AddRequiredPatternParenthesesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddRequiredPatternParenthesesTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer(), new AddRequiredParenthesesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer(),
+                new AddRequiredParenthesesCodeFixProvider()
+            );
 
-        private Task TestMissingAsync(string initialMarkup, OptionsCollection options)
-            => TestMissingInRegularAndScriptAsync(initialMarkup, new TestParameters(options: options));
+        private Task TestMissingAsync(string initialMarkup, OptionsCollection options) =>
+            TestMissingInRegularAndScriptAsync(initialMarkup, new TestParameters(options: options));
 
-        private Task TestAsync(string initialMarkup, string expected, OptionsCollection options)
-            => TestInRegularAndScript1Async(initialMarkup, expected, parameters: new TestParameters(options: options));
+        private Task TestAsync(string initialMarkup, string expected, OptionsCollection options) =>
+            TestInRegularAndScript1Async(
+                initialMarkup,
+                expected,
+                parameters: new TestParameters(options: options)
+            );
 
         [Fact]
         public async Task TestLogicalPrecedence()
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        object x = o is a or b $$and c;
+                        void M(object o)
+                        {
+                            object x = o is a or b $$and c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        object x = o is a or (b and c);
+                        void M(object o)
+                        {
+                            object x = o is a or (b and c);
+                        }
                     }
-                }
-                """, RequireAllParenthesesForClarity);
+                    """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -63,14 +73,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        object x = o is a $$or b and c;
+                        void M(object o)
+                        {
+                            object x = o is a $$or b and c;
+                        }
                     }
-                }
-                """, RequireAllParenthesesForClarity);
+                    """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -78,14 +90,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        object x = o is a or b $$or c;
+                        void M(object o)
+                        {
+                            object x = o is a or b $$or c;
+                        }
                     }
-                }
-                """, RequireAllParenthesesForClarity);
+                    """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -93,14 +107,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        object x = o is a or b $$or c;
+                        void M(object o)
+                        {
+                            object x = o is a or b $$or c;
+                        }
                     }
-                }
-                """, RequireArithmeticBinaryParenthesesForClarity);
+                    """,
+                RequireArithmeticBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -108,23 +124,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        object x = o is a or b $$and c and d;
+                        void M(object o)
+                        {
+                            object x = o is a or b $$and c and d;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        object x = o is a or (b and c and d);
+                        void M(object o)
+                        {
+                            object x = o is a or (b and c and d);
+                        }
                     }
-                }
-                """, RequireAllParenthesesForClarity);
+                    """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -132,23 +150,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        object x = o is a or b and c $$and d;
+                        void M(object o)
+                        {
+                            object x = o is a or b and c $$and d;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        object x = o is a or (b and c and d);
+                        void M(object o)
+                        {
+                            object x = o is a or (b and c and d);
+                        }
                     }
-                }
-                """, RequireAllParenthesesForClarity);
+                    """,
+                RequireAllParenthesesForClarity
+            );
         }
     }
 }

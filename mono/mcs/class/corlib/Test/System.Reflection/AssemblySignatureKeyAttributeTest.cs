@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,90 +27,87 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 using NUnit.Framework;
 
-namespace MonoTests.System.Reflection {
-
-	/// <summary>
-	/// Summary description for AssemblySignatureKeyAttributeTest.
-	/// </summary>
-	[TestFixture]
-	public class AssemblySignatureKeyAttributeTest
-	{
+namespace MonoTests.System.Reflection
+{
+    /// <summary>
+    /// Summary description for AssemblySignatureKeyAttributeTest.
+    /// </summary>
+    [TestFixture]
+    public class AssemblySignatureKeyAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		AssemblySignatureKeyAttribute attr;
-		
-		public AssemblySignatureKeyAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName();
+        AssemblySignatureKeyAttribute attr;
 
-			dynAsmName.Name = "TestAssembly";
+        public AssemblySignatureKeyAttributeTest()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAsmName.Name = "TestAssembly";
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (AssemblySignatureKeyAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string), typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [2] { "PublicKey", "CounterSignature" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as AssemblySignatureKeyAttribute;
-		}
+            dynAssembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.Run);
 
-		[Test]
-		public void SignatureKeyTest ()
-		{
-			Assert.AreEqual (
-				attr.PublicKey,
-				"PublicKey", "#1");
-			Assert.AreEqual (
-				attr.Countersignature,
-				"CounterSignature", "#2");
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof(AssemblySignatureKeyAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor(
+                new Type[] { typeof(string), typeof(string) }
+            );
+            CustomAttributeBuilder attrBuilder = new CustomAttributeBuilder(
+                ctrInfo,
+                new object[2] { "PublicKey", "CounterSignature" }
+            );
+            dynAssembly.SetCustomAttribute(attrBuilder);
+            object[] attributes = dynAssembly.GetCustomAttributes(true);
+            attr = attributes[0] as AssemblySignatureKeyAttribute;
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (AssemblySignatureKeyAttribute), "#1"
-				);
-		}
+        [Test]
+        public void SignatureKeyTest()
+        {
+            Assert.AreEqual(attr.PublicKey, "PublicKey", "#1");
+            Assert.AreEqual(attr.Countersignature, "CounterSignature", "#2");
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
+        [Test]
+        public void TypeIdTest()
+        {
+            Assert.AreEqual(attr.TypeId, typeof(AssemblySignatureKeyAttribute), "#1");
+        }
 
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			Assert.AreEqual (
-				attr.Match (new AssemblySignatureKeyAttribute ("OtherPublicKey", "OtherCounterSignature")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue()
+        {
+            Assert.AreEqual(attr.Match(attr), true, "#1");
+        }
+
+        [Test]
+        public void MatchTestForFalse()
+        {
+            Assert.AreEqual(
+                attr.Match(
+                    new AssemblySignatureKeyAttribute("OtherPublicKey", "OtherCounterSignature")
+                ),
+                false,
+                "#1"
+            );
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new AssemblySignatureKeyAttribute ("some text", "some other text");
-			Assert.AreEqual ("some text", a.PublicKey);
-			Assert.AreEqual ("some other text", a.Countersignature);
-		}
-	}
-}
 
+        [Test]
+        public void CtorTest()
+        {
+            var a = new AssemblySignatureKeyAttribute("some text", "some other text");
+            Assert.AreEqual("some text", a.PublicKey);
+            Assert.AreEqual("some other text", a.Countersignature);
+        }
+    }
+}

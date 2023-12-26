@@ -4,8 +4,8 @@
 // Test register struct returns and local vars retyping cases.
 
 using System;
-using System.Numerics;
 using System.Diagnostics;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
@@ -55,7 +55,6 @@ class TestStructReturns
         a.b = true;
         return a;
     }
-
 
     static NativeIntOneField TestNativeIntOneFieldReturnBlockInit()
     {
@@ -290,7 +289,6 @@ class TestStructReturns
 #region Test struct unsafe casts
 class TestUnsafeCasts
 {
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void PrimFromLPrim1()
     {
@@ -712,7 +710,6 @@ class TestUnsafeCasts
         return Unsafe.As<eightByteStruct, long>(ref a);
     }
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     static eightByteStruct ReturnAsEightByteStructFromLong(long a)
     {
@@ -799,7 +796,6 @@ class TestUnsafeCasts
         structWithVectorField.b = new Vector<float>();
     }
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void TestWhatShouldBeOptimized()
     {
@@ -866,12 +862,12 @@ class TestMergeReturnBlocks
         TestConstPropagation(5);
     }
 
-
     [StructLayout(LayoutKind.Explicit, Pack = 1)]
     struct StructWithOverlaps
     {
         [FieldOffset(0)]
         public int val;
+
         [FieldOffset(0)]
         public ReturnStruct s;
 
@@ -910,7 +906,6 @@ class TestMergeReturnBlocks
             StructWithOverlaps s4 = new StructWithOverlaps(4);
             return s4.s;
         }
-
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -918,7 +913,6 @@ class TestMergeReturnBlocks
     {
         TestNoFieldSeqPropagation(5);
     }
-
 
     public static void Test()
     {
@@ -1022,6 +1016,7 @@ class TestHFAandHVA
     {
         return new Doubles2Wrapper();
     }
+
     struct Floats3Wrapper
     {
         public float f1;
@@ -1090,10 +1085,7 @@ class TestHFAandHVA
     [MethodImpl(MethodImplOptions.NoInlining)]
     static Vector2Wrapper ReturnVector2WrapperPromoted()
     {
-        var a = new Vector2Wrapper
-        {
-            f1 = Vector2.Zero
-        };
+        var a = new Vector2Wrapper { f1 = Vector2.Zero };
 
         return a;
     }
@@ -1112,10 +1104,7 @@ class TestHFAandHVA
     [MethodImpl(MethodImplOptions.NoInlining)]
     static Vector3Wrapper ReturnVector3WrapperPromoted()
     {
-        var a = new Vector3Wrapper
-        {
-            f1 = Vector3.Zero
-        };
+        var a = new Vector3Wrapper { f1 = Vector3.Zero };
 
         return a;
     }
@@ -1134,10 +1123,7 @@ class TestHFAandHVA
     [MethodImpl(MethodImplOptions.NoInlining)]
     static Vector4Wrapper ReturnVector4WrapperPromoted()
     {
-        var a = new Vector4Wrapper
-        {
-            f1 = Vector4.Zero
-        };
+        var a = new Vector4Wrapper { f1 = Vector4.Zero };
 
         return a;
     }
@@ -1211,13 +1197,15 @@ class TestHFAandHVA
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector<T> ReturnVectorT<T>() where T : struct
+    static Vector<T> ReturnVectorT<T>()
+        where T : struct
     {
         return new Vector<T>();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector<T> ReturnVectorTWithMerge<T>(int v, T init1, T init2, T init3, T init4) where T : struct
+    static Vector<T> ReturnVectorTWithMerge<T>(int v, T init1, T init2, T init3, T init4)
+        where T : struct
     {
         if (v == 0)
         {
@@ -1243,7 +1231,8 @@ class TestHFAandHVA
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector<T> ReturnVectorT2<T>(T init) where T : struct
+    static Vector<T> ReturnVectorT2<T>(T init)
+        where T : struct
     {
         var a = new Vector<T>();
         var b = new Vector<T>(init);
@@ -1253,7 +1242,8 @@ class TestHFAandHVA
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector<int> ReturnVectorInt2<T>(Vector<T> left, Vector<T> right) where T : struct
+    static Vector<int> ReturnVectorInt2<T>(Vector<T> left, Vector<T> right)
+        where T : struct
     {
         Vector<int> cond = (Vector<int>)Vector.LessThan(left, right);
         return cond;
@@ -1273,10 +1263,7 @@ class TestHFAandHVA
     [MethodImpl(MethodImplOptions.NoInlining)]
     static VectorShortWrapper ReturnVectorShortWrapperPromoted()
     {
-        var a = new VectorShortWrapper()
-        {
-            f = Vector<short>.Zero
-        };
+        var a = new VectorShortWrapper() { f = Vector<short>.Zero };
         return a;
     }
 
@@ -1302,30 +1289,35 @@ class TestHFAandHVA
         return new VectorDoubleWrapper();
     }
 
-    struct VectorTWrapper<T> where T : struct
+    struct VectorTWrapper<T>
+        where T : struct
     {
         Vector<T> f;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static VectorTWrapper<T> ReturnVectorTWrapper<T>() where T : struct
+    static VectorTWrapper<T> ReturnVectorTWrapper<T>()
+        where T : struct
     {
         return new VectorTWrapper<T>();
     }
 
-    struct VectorTWrapperWrapper<T> where T : struct
+    struct VectorTWrapperWrapper<T>
+        where T : struct
     {
         VectorTWrapper<T> f;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static VectorTWrapperWrapper<T> ReturnVectorTWrapperWrapper<T>() where T : struct
+    static VectorTWrapperWrapper<T> ReturnVectorTWrapperWrapper<T>()
+        where T : struct
     {
         return new VectorTWrapperWrapper<T>();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void TestReturnViaThrowing<T>() where T : struct
+    private static void TestReturnViaThrowing<T>()
+        where T : struct
     {
         Vector<T> vector = Vector<T>.One;
         try
@@ -1375,17 +1367,13 @@ class TestHFAandHVA
             var a = ReturnVectorT2<Vector4>(new Vector4(1));
             Debug.Assert(false, "unreachable");
         }
-        catch (System.NotSupportedException)
-        {
-        }
+        catch (System.NotSupportedException) { }
         try
         {
             var a = ReturnVectorT2<VectorTWrapperWrapper<int>>(new VectorTWrapperWrapper<int>());
             Debug.Assert(false, "unreachable");
         }
-        catch (System.NotSupportedException)
-        {
-        }
+        catch (System.NotSupportedException) { }
         ReturnVectorInt2<float>(new Vector<float>(1), new Vector<float>(2));
         ReturnVectorInt2<int>(new Vector<int>(1), new Vector<int>(2));
 
@@ -1557,10 +1545,7 @@ class TestHFAandHVA
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static Vector64Wrapped TestReturnVector64WrappedPromoted()
     {
-        var a = new Vector64Wrapped
-        {
-            f = Vector64<float>.Zero
-        };
+        var a = new Vector64Wrapped { f = Vector64<float>.Zero };
         return a;
     }
 
@@ -1572,10 +1557,7 @@ class TestHFAandHVA
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static Vector128Wrapped TestReturnVector128WrappedPromoted()
     {
-        var a = new Vector128Wrapped
-        {
-            f = Vector128<short>.Zero
-        };
+        var a = new Vector128Wrapped { f = Vector128<short>.Zero };
         return a;
     }
 
@@ -1587,13 +1569,9 @@ class TestHFAandHVA
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static Vector256Wrapped TestReturnVector256WrappedPromoted()
     {
-        var a = new Vector256Wrapped
-        {
-            f = Vector256<byte>.Zero
-        };
+        var a = new Vector256Wrapped { f = Vector256<byte>.Zero };
         return a;
     }
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void TestReturnVectorNWrappedPromoted()

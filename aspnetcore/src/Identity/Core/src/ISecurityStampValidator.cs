@@ -21,4 +21,3 @@ public interface ISecurityStampValidator
     /// <returns>The <see cref="Task"/> that represents the asynchronous validation operation.</returns>
     Task ValidateAsync(CookieValidatePrincipalContext context);
 }
-

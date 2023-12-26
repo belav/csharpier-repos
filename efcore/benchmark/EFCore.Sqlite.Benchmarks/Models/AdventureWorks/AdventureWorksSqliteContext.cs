@@ -12,6 +12,6 @@ public class AdventureWorksSqliteContext : AdventureWorksContextBase
         _connectionString = connectionString;
     }
 
-    protected override void ConfigureProvider(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite(_connectionString);
+    protected override void ConfigureProvider(DbContextOptionsBuilder optionsBuilder) =>
+        optionsBuilder.UseSqlite(_connectionString);
 }

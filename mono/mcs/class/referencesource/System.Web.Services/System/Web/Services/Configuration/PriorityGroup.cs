@@ -10,6 +10,3 @@ namespace System.Web.Services.Configuration
         Low = 1
     }
 }
-
-
-

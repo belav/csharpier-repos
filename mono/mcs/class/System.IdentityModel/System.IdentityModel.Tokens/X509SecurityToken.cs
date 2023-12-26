@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,121 +27,131 @@
 //
 using System;
 using System.Collections.ObjectModel;
-using System.Xml;
 using System.IdentityModel.Policy;
 using System.Security.Cryptography.X509Certificates;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	public class X509SecurityToken : SecurityToken, IDisposable
-	{
-		public X509SecurityToken (X509Certificate2 certificate)
-			: this (certificate, "uuid:" + Guid.NewGuid ().ToString ())
-		{
-		}
+    public class X509SecurityToken : SecurityToken, IDisposable
+    {
+        public X509SecurityToken(X509Certificate2 certificate)
+            : this(certificate, "uuid:" + Guid.NewGuid().ToString()) { }
 
-		public X509SecurityToken (X509Certificate2 certificate, string id)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException ("certificate");
-			if (id == null)
-				throw new ArgumentNullException ("id");
-			this.cert = certificate;
-			this.id = id;
-		}
+        public X509SecurityToken(X509Certificate2 certificate, string id)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException("certificate");
+            if (id == null)
+                throw new ArgumentNullException("id");
+            this.cert = certificate;
+            this.id = id;
+        }
 
-		X509Certificate2 cert;
-		string id;
-		ReadOnlyCollection<SecurityKey> keys;
+        X509Certificate2 cert;
+        string id;
+        ReadOnlyCollection<SecurityKey> keys;
 
-		public X509Certificate2 Certificate {
-			get { return cert; }
-		}
+        public X509Certificate2 Certificate
+        {
+            get { return cert; }
+        }
 
-		public override DateTime ValidFrom {
-			get { return cert.NotBefore.ToUniversalTime (); }
-		}
+        public override DateTime ValidFrom
+        {
+            get { return cert.NotBefore.ToUniversalTime(); }
+        }
 
-		public override DateTime ValidTo {
-			get { return cert.NotAfter.ToUniversalTime (); }
-		}
+        public override DateTime ValidTo
+        {
+            get { return cert.NotAfter.ToUniversalTime(); }
+        }
 
-		public override string Id {
-			get { return id; }
-		}
+        public override string Id
+        {
+            get { return id; }
+        }
 
-		public virtual void Dispose ()
-		{
-			cert.Reset ();
-			cert = null;
-		}
+        public virtual void Dispose()
+        {
+            cert.Reset();
+            cert = null;
+        }
 
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get {
-				if (keys == null)
-					keys = new ReadOnlyCollection<SecurityKey> (new SecurityKey [] {new X509AsymmetricSecurityKey (cert)});
-				return keys;
-			}
-		}
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys
+        {
+            get
+            {
+                if (keys == null)
+                    keys = new ReadOnlyCollection<SecurityKey>(
+                        new SecurityKey[] { new X509AsymmetricSecurityKey(cert) }
+                    );
+                return keys;
+            }
+        }
 
-		public override bool CanCreateKeyIdentifierClause<T> ()
-		{
-			Type t = typeof (T);
-			return
-//				t == typeof (X509SubjectKeyIdentifierClause) ||
-				t == typeof (X509ThumbprintKeyIdentifierClause) ||
-				t == typeof (X509IssuerSerialKeyIdentifierClause) ||
-				t == typeof (X509RawDataKeyIdentifierClause);
-		}
+        public override bool CanCreateKeyIdentifierClause<T>()
+        {
+            Type t = typeof(T);
+            return
+                //				t == typeof (X509SubjectKeyIdentifierClause) ||
+                t == typeof(X509ThumbprintKeyIdentifierClause)
+                || t == typeof(X509IssuerSerialKeyIdentifierClause)
+                || t == typeof(X509RawDataKeyIdentifierClause);
+        }
 
-		public override T CreateKeyIdentifierClause<T> ()
-		{
-			Type t = typeof (T);
-//			if (t == typeof (X509SubjectKeyIdentifierClause))
-//				return (T) (object) new X509SubjectKeyIdentifierClause (cert.SubjectName.RawData);
-			if (t == typeof (X509ThumbprintKeyIdentifierClause))
-				return (T) (object) new X509ThumbprintKeyIdentifierClause (cert);
-			if (t == typeof (X509IssuerSerialKeyIdentifierClause))
-				return (T) (object) new X509IssuerSerialKeyIdentifierClause (cert);
-			if (t == typeof (X509RawDataKeyIdentifierClause))
-				return (T) (object) new X509RawDataKeyIdentifierClause (cert);
+        public override T CreateKeyIdentifierClause<T>()
+        {
+            Type t = typeof(T);
+            //			if (t == typeof (X509SubjectKeyIdentifierClause))
+            //				return (T) (object) new X509SubjectKeyIdentifierClause (cert.SubjectName.RawData);
+            if (t == typeof(X509ThumbprintKeyIdentifierClause))
+                return (T)(object)new X509ThumbprintKeyIdentifierClause(cert);
+            if (t == typeof(X509IssuerSerialKeyIdentifierClause))
+                return (T)(object)new X509IssuerSerialKeyIdentifierClause(cert);
+            if (t == typeof(X509RawDataKeyIdentifierClause))
+                return (T)(object)new X509RawDataKeyIdentifierClause(cert);
 
-			throw new NotSupportedException (String.Format ("X509SecurityToken does not support creation of {0}.", t));
-		}
+            throw new NotSupportedException(
+                String.Format("X509SecurityToken does not support creation of {0}.", t)
+            );
+        }
 
-		[MonoTODO]
-		public override bool MatchesKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			LocalIdKeyIdentifierClause l =
-				keyIdentifierClause as LocalIdKeyIdentifierClause;
-			if (l != null)
-				return l.LocalId == Id;
+        [MonoTODO]
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
+        {
+            LocalIdKeyIdentifierClause l = keyIdentifierClause as LocalIdKeyIdentifierClause;
+            if (l != null)
+                return l.LocalId == Id;
 
-			X509ThumbprintKeyIdentifierClause t =
-				keyIdentifierClause as X509ThumbprintKeyIdentifierClause;
-			if (t != null)
-				return t.Matches (cert);
-			X509IssuerSerialKeyIdentifierClause i =
-				keyIdentifierClause as X509IssuerSerialKeyIdentifierClause;
-			if (i != null)
-				return i.Matches (cert);
-			X509SubjectKeyIdentifierClause s =
-				keyIdentifierClause as X509SubjectKeyIdentifierClause;
-			if (s != null)
-				return s.Matches (cert);
-			X509RawDataKeyIdentifierClause r =
-				keyIdentifierClause as X509RawDataKeyIdentifierClause;
-			if (r != null)
-				return r.Matches (cert);
+            X509ThumbprintKeyIdentifierClause t =
+                keyIdentifierClause as X509ThumbprintKeyIdentifierClause;
+            if (t != null)
+                return t.Matches(cert);
+            X509IssuerSerialKeyIdentifierClause i =
+                keyIdentifierClause as X509IssuerSerialKeyIdentifierClause;
+            if (i != null)
+                return i.Matches(cert);
+            X509SubjectKeyIdentifierClause s =
+                keyIdentifierClause as X509SubjectKeyIdentifierClause;
+            if (s != null)
+                return s.Matches(cert);
+            X509RawDataKeyIdentifierClause r =
+                keyIdentifierClause as X509RawDataKeyIdentifierClause;
+            if (r != null)
+                return r.Matches(cert);
 
-			return false;
-		}
+            return false;
+        }
 
-		protected void ThrowIfDisposed ()
-		{
-			if (cert == null)
-				throw new ObjectDisposedException ("This X509SecurityToken has already been disposed.");
-		}
-	}
+        protected void ThrowIfDisposed()
+        {
+            if (cert == null)
+                throw new ObjectDisposedException(
+                    "This X509SecurityToken has already been disposed."
+                );
+        }
+    }
 }

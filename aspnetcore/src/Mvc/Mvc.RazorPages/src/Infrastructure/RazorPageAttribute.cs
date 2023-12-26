@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 /// <summary>
 /// Obsolete: This attribute has been superseded by RazorCompiledItem and will not be used by the runtime.
 /// </summary>
-[Obsolete("This attribute has been superseded by RazorCompiledItem and will not be used by the runtime.")]
+[Obsolete(
+    "This attribute has been superseded by RazorCompiledItem and will not be used by the runtime."
+)]
 public class RazorPageAttribute : RazorViewAttribute
 {
     /// <summary>

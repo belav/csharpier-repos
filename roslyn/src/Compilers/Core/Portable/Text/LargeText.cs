@@ -4,12 +4,12 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Text
 {
@@ -29,7 +29,13 @@ namespace Microsoft.CodeAnalysis.Text
         private readonly int _length;
         private readonly Encoding? _encodingOpt;
 
-        internal LargeText(ImmutableArray<char[]> chunks, Encoding? encodingOpt, ImmutableArray<byte> checksum, SourceHashAlgorithm checksumAlgorithm, ImmutableArray<byte> embeddedTextBlob)
+        internal LargeText(
+            ImmutableArray<char[]> chunks,
+            Encoding? encodingOpt,
+            ImmutableArray<byte> checksum,
+            SourceHashAlgorithm checksumAlgorithm,
+            ImmutableArray<byte> embeddedTextBlob
+        )
             : base(checksum, checksumAlgorithm, embeddedTextBlob)
         {
             _chunks = chunks;
@@ -46,12 +52,26 @@ namespace Microsoft.CodeAnalysis.Text
             _length = offset;
         }
 
-        internal LargeText(ImmutableArray<char[]> chunks, Encoding? encodingOpt, SourceHashAlgorithm checksumAlgorithm)
-            : this(chunks, encodingOpt, default(ImmutableArray<byte>), checksumAlgorithm, default(ImmutableArray<byte>))
-        {
-        }
+        internal LargeText(
+            ImmutableArray<char[]> chunks,
+            Encoding? encodingOpt,
+            SourceHashAlgorithm checksumAlgorithm
+        )
+            : this(
+                chunks,
+                encodingOpt,
+                default(ImmutableArray<byte>),
+                checksumAlgorithm,
+                default(ImmutableArray<byte>)
+            ) { }
 
-        internal static SourceText Decode(Stream stream, Encoding encoding, SourceHashAlgorithm checksumAlgorithm, bool throwIfBinaryDetected, bool canBeEmbedded)
+        internal static SourceText Decode(
+            Stream stream,
+            Encoding encoding,
+            SourceHashAlgorithm checksumAlgorithm,
+            bool throwIfBinaryDetected,
+            bool canBeEmbedded
+        )
         {
             stream.Seek(0, SeekOrigin.Begin);
 
@@ -65,19 +85,44 @@ namespace Microsoft.CodeAnalysis.Text
             Debug.Assert(longLength > 0 && longLength <= int.MaxValue); // GetMaxCharCountOrThrowIfHuge should have thrown.
             int length = (int)longLength;
 
-            using (var reader = new StreamReader(stream, encoding, detectEncodingFromByteOrderMarks: true, bufferSize: Math.Min(length, 4096), leaveOpen: true))
+            using (
+                var reader = new StreamReader(
+                    stream,
+                    encoding,
+                    detectEncodingFromByteOrderMarks: true,
+                    bufferSize: Math.Min(length, 4096),
+                    leaveOpen: true
+                )
+            )
             {
-                var chunks = ReadChunksFromTextReader(reader, maxCharRemainingGuess, throwIfBinaryDetected);
+                var chunks = ReadChunksFromTextReader(
+                    reader,
+                    maxCharRemainingGuess,
+                    throwIfBinaryDetected
+                );
 
                 // We must compute the checksum and embedded text blob now while we still have the original bytes in hand.
                 // We cannot re-encode to obtain checksum and blob as the encoding is not guaranteed to round-trip.
                 var checksum = CalculateChecksum(stream, checksumAlgorithm);
-                var embeddedTextBlob = canBeEmbedded ? EmbeddedText.CreateBlob(stream) : default(ImmutableArray<byte>);
-                return new LargeText(chunks, reader.CurrentEncoding, checksum, checksumAlgorithm, embeddedTextBlob);
+                var embeddedTextBlob = canBeEmbedded
+                    ? EmbeddedText.CreateBlob(stream)
+                    : default(ImmutableArray<byte>);
+                return new LargeText(
+                    chunks,
+                    reader.CurrentEncoding,
+                    checksum,
+                    checksumAlgorithm,
+                    embeddedTextBlob
+                );
             }
         }
 
-        internal static SourceText Decode(TextReader reader, int length, Encoding? encodingOpt, SourceHashAlgorithm checksumAlgorithm)
+        internal static SourceText Decode(
+            TextReader reader,
+            int length,
+            Encoding? encodingOpt,
+            SourceHashAlgorithm checksumAlgorithm
+        )
         {
             if (length == 0)
             {
@@ -90,7 +135,11 @@ namespace Microsoft.CodeAnalysis.Text
             return new LargeText(chunks, encodingOpt, checksumAlgorithm);
         }
 
-        private static ImmutableArray<char[]> ReadChunksFromTextReader(TextReader reader, int maxCharRemainingGuess, bool throwIfBinaryDetected)
+        private static ImmutableArray<char[]> ReadChunksFromTextReader(
+            TextReader reader,
+            int maxCharRemainingGuess,
+            bool throwIfBinaryDetected
+        )
         {
             var chunks = ArrayBuilder<char[]>.GetInstance(1 + maxCharRemainingGuess / ChunkSize);
 
@@ -152,7 +201,12 @@ namespace Microsoft.CodeAnalysis.Text
 
         public override int Length => _length;
 
-        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        public override void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             if (count == 0)
             {
@@ -178,7 +232,11 @@ namespace Microsoft.CodeAnalysis.Text
             }
         }
 
-        public override void Write(TextWriter writer, TextSpan span, CancellationToken cancellationToken = default(CancellationToken))
+        public override void Write(
+            TextWriter writer,
+            TextSpan span,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (span.Start < 0 || span.Start > _length || span.End > _length)
             {
@@ -274,7 +332,7 @@ namespace Microsoft.CodeAnalysis.Text
                         case '\u0085':
                         case '\u2028':
                         case '\u2029':
-line_break:
+                            line_break:
                             arrayBuilder.Add(position);
                             position = index;
                             break;
@@ -282,7 +340,7 @@ line_break:
                 }
             }
 
-            // Create a start for the final line.  
+            // Create a start for the final line.
             arrayBuilder.Add(position);
             return arrayBuilder.ToArrayAndFree();
         }

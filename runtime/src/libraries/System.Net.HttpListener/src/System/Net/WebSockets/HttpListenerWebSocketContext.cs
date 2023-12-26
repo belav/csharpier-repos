@@ -37,7 +37,8 @@ namespace System.Net.WebSockets
             IEnumerable<string> secWebSocketProtocols,
             string secWebSocketVersion,
             string secWebSocketKey,
-            WebSocket webSocket)
+            WebSocket webSocket
+        )
         {
             Debug.Assert(requestUri != null, "requestUri shouldn't be null");
             Debug.Assert(headers != null, "headers shouldn't be null");
@@ -96,7 +97,13 @@ namespace System.Net.WebSockets
                     // AuthenticationSchemes.Basic.
                     if (user.Identity is HttpListenerBasicIdentity basicIdentity)
                     {
-                        return new GenericPrincipal(new HttpListenerBasicIdentity(basicIdentity.Name, basicIdentity.Password), null);
+                        return new GenericPrincipal(
+                            new HttpListenerBasicIdentity(
+                                basicIdentity.Name,
+                                basicIdentity.Password
+                            ),
+                            null
+                        );
                     }
                 }
                 else
@@ -104,11 +111,17 @@ namespace System.Net.WebSockets
                     // AuthenticationSchemes.Digest, AuthenticationSchemes.Negotiate, AuthenticationSchemes.NTLM.
 #if TARGET_WINDOWS
                     WindowsIdentity windowsIdentity = (WindowsIdentity)user.Identity!;
-                    return new WindowsPrincipal(new WindowsIdentity(windowsIdentity.Token, windowsIdentity.AuthenticationType!, WindowsAccountType.Normal, true));
+                    return new WindowsPrincipal(
+                        new WindowsIdentity(
+                            windowsIdentity.Token,
+                            windowsIdentity.AuthenticationType!,
+                            WindowsAccountType.Normal,
+                            true
+                        )
+                    );
 #else
                     throw new PlatformNotSupportedException();
 #endif
-
                 }
             }
 

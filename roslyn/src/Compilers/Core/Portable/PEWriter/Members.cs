@@ -24,7 +24,7 @@ namespace Microsoft.Cci
     internal enum CallingConvention
     {
         /// <summary>
-        /// C/C++ style calling convention for unmanaged methods. The call stack is cleaned up by the caller, 
+        /// C/C++ style calling convention for unmanaged methods. The call stack is cleaned up by the caller,
         /// which makes this convention suitable for calling methods that accept extra arguments.
         /// </summary>
         CDecl = SignatureCallingConvention.CDecl,
@@ -92,7 +92,9 @@ namespace Microsoft.Cci
             | SignatureAttributes.Instance
             | SignatureAttributes.ExplicitThis;
 
-        internal static CallingConvention FromSignatureConvention(this SignatureCallingConvention convention)
+        internal static CallingConvention FromSignatureConvention(
+            this SignatureCallingConvention convention
+        )
         {
             if (!convention.IsValid())
             {
@@ -102,25 +104,36 @@ namespace Microsoft.Cci
             return (CallingConvention)(convention & SignatureCallingConventionMask);
         }
 
-        internal static bool IsValid(this SignatureCallingConvention convention)
-            => convention <= SignatureCallingConvention.VarArgs || convention == SignatureCallingConvention.Unmanaged;
+        internal static bool IsValid(this SignatureCallingConvention convention) =>
+            convention <= SignatureCallingConvention.VarArgs
+            || convention == SignatureCallingConvention.Unmanaged;
 
-        internal static SignatureCallingConvention ToSignatureConvention(this CallingConvention convention)
-            => (SignatureCallingConvention)convention & SignatureCallingConventionMask;
+        internal static SignatureCallingConvention ToSignatureConvention(
+            this CallingConvention convention
+        ) => (SignatureCallingConvention)convention & SignatureCallingConventionMask;
 
         /// <summary>
         /// Compares calling conventions, ignoring calling convention attributes.
         /// </summary>
-        internal static bool IsCallingConvention(this CallingConvention original, CallingConvention compare)
+        internal static bool IsCallingConvention(
+            this CallingConvention original,
+            CallingConvention compare
+        )
         {
             Debug.Assert((compare & ~(CallingConvention)SignatureCallingConventionMask) == 0);
             return ((original & (CallingConvention)SignatureCallingConventionMask)) == compare;
         }
 
-        internal static bool HasUnknownCallingConventionAttributeBits(this CallingConvention convention)
-            => (convention & ~((CallingConvention)SignatureCallingConventionMask
-                               | (CallingConvention)SignatureAttributesMask))
-               != 0;
+        internal static bool HasUnknownCallingConventionAttributeBits(
+            this CallingConvention convention
+        ) =>
+            (
+                convention
+                & ~(
+                    (CallingConvention)SignatureCallingConventionMask
+                    | (CallingConvention)SignatureAttributesMask
+                )
+            ) != 0;
     }
 
     /// <summary>
@@ -180,10 +193,7 @@ namespace Microsoft.Cci
         /// <summary>
         /// Mapped field data, or null if the field is not mapped.
         /// </summary>
-        ImmutableArray<byte> MappedData
-        {
-            get;
-        }
+        ImmutableArray<byte> MappedData { get; }
 
         /// <summary>
         /// This field is a compile-time constant. The field has no runtime location and cannot be directly addressed from IL.
@@ -223,27 +233,21 @@ namespace Microsoft.Cci
         /// <summary>
         /// Specifies how this field is marshalled when it is accessed from unmanaged code.
         /// </summary>
-        IMarshallingInformation? MarshallingInformation
-        {
-            get;
+        IMarshallingInformation? MarshallingInformation { get;
             // ^ requires this.IsMarshalledExplicitly;
         }
 
         /// <summary>
         /// Checked if IsMarshalledExplicitly == true and MarshallingInformation is null
         /// </summary>
-        ImmutableArray<byte> MarshallingDescriptor
-        {
-            get;
+        ImmutableArray<byte> MarshallingDescriptor { get;
             // ^ requires this.IsMarshalledExplicitly;
         }
 
         /// <summary>
         /// Offset of the field.
         /// </summary>
-        int Offset
-        {
-            get;
+        int Offset { get;
             // ^ requires this.ContainingTypeDefinition.Layout == LayoutKind.Explicit;
         }
     }
@@ -259,12 +263,9 @@ namespace Microsoft.Cci
         ITypeReference GetType(EmitContext context);
 
         /// <summary>
-        /// The list of custom modifiers, if any, associated with the ref modifier. 
+        /// The list of custom modifiers, if any, associated with the ref modifier.
         /// </summary>
-        ImmutableArray<ICustomModifier> RefCustomModifiers
-        {
-            get;
-        }
+        ImmutableArray<ICustomModifier> RefCustomModifiers { get; }
 
         /// <summary>
         /// True if the field contains a managed pointer.
@@ -282,10 +283,7 @@ namespace Microsoft.Cci
         /// True, if field is an IContextualNamedEntity, even if field reference implements the interface,
         /// doesn't mean it is contextual.
         /// </summary>
-        bool IsContextualNamedEntity
-        {
-            get;
-        }
+        bool IsContextualNamedEntity { get; }
     }
 
     /// <summary>
@@ -296,18 +294,12 @@ namespace Microsoft.Cci
         /// <summary>
         /// The compile time value of the definition, if it is a local constant.
         /// </summary>
-        MetadataConstant CompileTimeValue
-        {
-            get;
-        }
+        MetadataConstant CompileTimeValue { get; }
 
         /// <summary>
         /// Custom modifiers associated with local variable definition.
         /// </summary>
-        ImmutableArray<ICustomModifier> CustomModifiers
-        {
-            get;
-        }
+        ImmutableArray<ICustomModifier> CustomModifiers { get; }
 
         /// <summary>
         /// TODO: use <see cref="Constraints"/> instead.
@@ -325,14 +317,14 @@ namespace Microsoft.Cci
 
         /// <summary>
         /// Each local has an attributes field in the PDB.  To match the native compiler,
-        /// we emit <see cref="LocalVariableAttributes.DebuggerHidden"/> for locals that should 
+        /// we emit <see cref="LocalVariableAttributes.DebuggerHidden"/> for locals that should
         /// definitely not bind in the debugger and <see cref="LocalVariableAttributes.None"/>
         /// for all other locals.
         /// </summary>
         /// <remarks>
         /// A value of <see cref="LocalVariableAttributes.DebuggerHidden"/> is a sufficient, but not a necessary, condition for hiding the
         /// local in the debugger.  Locals with value <see cref="LocalVariableAttributes.None"/> may also be hidden.
-        /// 
+        ///
         /// Hidden locals must still be emitted because they participate in evaluation.
         /// </remarks>
         LocalVariableAttributes PdbAttributes { get; }
@@ -371,7 +363,7 @@ namespace Microsoft.Cci
         byte[]? Signature { get; }
 
         /// <summary>
-        /// Local id, or <see cref="LocalDebugId.None"/> if this is a local constant, short-lived temp variable, 
+        /// Local id, or <see cref="LocalDebugId.None"/> if this is a local constant, short-lived temp variable,
         /// or we are not emitting local variable ids (release builds).
         /// </summary>
         LocalSlotDebugInfo SlotInfo { get; }
@@ -385,9 +377,7 @@ namespace Microsoft.Cci
         /// <summary>
         /// A list exception data within the method body IL.
         /// </summary>
-        ImmutableArray<ExceptionHandlerRegion> ExceptionRegions
-        {
-            get;
+        ImmutableArray<ExceptionHandlerRegion> ExceptionRegions { get;
             // ^ requires !this.MethodDefinition.IsAbstract && !this.MethodDefinition.IsExternal && this.MethodDefinition.IsCil;
         }
 
@@ -436,13 +426,13 @@ namespace Microsoft.Cci
         ImmutableArray<LocalScope> LocalScopes { get; }
 
         /// <summary>
-        /// Returns an import scope the method is declared within, or null if there is none 
+        /// Returns an import scope the method is declared within, or null if there is none
         /// (e.g. the method doesn't contain user code).
         /// </summary>
         /// <remarks>
         /// The chain is a spine of a tree in a forest of import scopes. A tree of import scopes is created by the language for each source file
         /// based on namespace declarations. In VB each tree is trivial single-node tree that declares the imports of a file.
-        /// In C# the tree copies the nesting of namespace declarations in the file. There is a separate scope for each dotted component in 
+        /// In C# the tree copies the nesting of namespace declarations in the file. There is a separate scope for each dotted component in
         /// the namespace type name. For instance namespace type x.y.z will have two namespace scopes, the first is for the x and the second
         /// is for the y.
         /// </remarks>
@@ -451,7 +441,7 @@ namespace Microsoft.Cci
         DebugId MethodId { get; }
 
         /// <summary>
-        /// Returns debug information for local variables hoisted to state machine fields, 
+        /// Returns debug information for local variables hoisted to state machine fields,
         /// or null if this method isn't MoveNext method of a state machine.
         /// </summary>
         /// <remarks>
@@ -467,13 +457,13 @@ namespace Microsoft.Cci
         ImmutableArray<StateMachineHoistedLocalScope> StateMachineHoistedLocalScopes { get; }
 
         /// <summary>
-        /// The name of the state machine generated for the method, 
+        /// The name of the state machine generated for the method,
         /// or null if the method isn't the kickoff method of a state machine.
         /// </summary>
         string StateMachineTypeName { get; }
 
         /// <summary>
-        /// Returns information relevant to EnC on slots of local variables hoisted to state machine fields, 
+        /// Returns information relevant to EnC on slots of local variables hoisted to state machine fields,
         /// or null if the method isn't the kickoff method of a state machine.
         /// </summary>
         ImmutableArray<EncHoistedLocalInfo> StateMachineHoistedLocalSlots { get; }
@@ -537,7 +527,7 @@ namespace Microsoft.Cci
         bool IsAbstract { get; }
 
         /// <summary>
-        /// True if the method can only be overridden when it is also accessible. 
+        /// True if the method can only be overridden when it is also accessible.
         /// </summary>
         bool IsAccessCheckedOnOverride { get; }
 
@@ -555,13 +545,13 @@ namespace Microsoft.Cci
         bool IsExternal { get; }
 
         /// <summary>
-        /// True if this method is hidden if a derived type declares a method with the same name and signature. 
+        /// True if this method is hidden if a derived type declares a method with the same name and signature.
         /// If false, any method with the same name hides this method. This flag is ignored by the runtime and is only used by compilers.
         /// </summary>
         bool IsHiddenBySignature { get; }
 
         /// <summary>
-        /// The method always gets a new slot in the virtual method table. 
+        /// The method always gets a new slot in the virtual method table.
         /// This means the method will hide (not override) a base type method with the same name and signature.
         /// </summary>
         bool IsNewSlot { get; }
@@ -594,9 +584,7 @@ namespace Microsoft.Cci
         /// <summary>
         /// True if the method may be overridden (or if it is an override).
         /// </summary>
-        bool IsVirtual
-        {
-            get;
+        bool IsVirtual { get;
             // ^ ensures result ==> !this.IsStatic;
         }
 
@@ -613,9 +601,7 @@ namespace Microsoft.Cci
         /// <summary>
         /// Detailed information about the PInvoke stub. Identifies which method to call, which module has the method and the calling convention among other things.
         /// </summary>
-        IPlatformInvokeInformation PlatformInvokeData
-        {
-            get;
+        IPlatformInvokeInformation PlatformInvokeData { get;
             // ^ requires this.IsPlatformInvoke;
         }
 
@@ -638,18 +624,14 @@ namespace Microsoft.Cci
         /// <summary>
         /// Specifies how the return value is marshalled when the method is called from unmanaged code.
         /// </summary>
-        IMarshallingInformation ReturnValueMarshallingInformation
-        {
-            get;
+        IMarshallingInformation ReturnValueMarshallingInformation { get;
             // ^ requires this.ReturnValueIsMarshalledExplicitly;
         }
 
         /// <summary>
         /// Checked if ReturnValueIsMarshalledExplicitly == true and ReturnValueMarshallingInformation is null
         /// </summary>
-        ImmutableArray<byte> ReturnValueMarshallingDescriptor
-        {
-            get;
+        ImmutableArray<byte> ReturnValueMarshallingDescriptor { get;
             // ^ requires this.ReturnValueIsMarshalledExplicitly;
         }
 
@@ -694,9 +676,7 @@ namespace Microsoft.Cci
         /// <summary>
         /// True if the argument value must be included in the marshalled arguments passed to a remote callee only if it is different from the default value (if there is one).
         /// </summary>
-        bool IsOptional
-        {
-            get;
+        bool IsOptional { get;
             // ^ result ==> this.HasDefaultValue;
         }
 
@@ -708,18 +688,14 @@ namespace Microsoft.Cci
         /// <summary>
         /// Specifies how this parameter is marshalled when it is accessed from unmanaged code.
         /// </summary>
-        IMarshallingInformation? MarshallingInformation
-        {
-            get;
+        IMarshallingInformation? MarshallingInformation { get;
             // ^ requires this.IsMarshalledExplicitly;
         }
 
         /// <summary>
         /// Checked if IsMarshalledExplicitly == true and MarshallingInformation is null
         /// </summary>
-        ImmutableArray<byte> MarshallingDescriptor
-        {
-            get;
+        ImmutableArray<byte> MarshallingDescriptor { get;
             // ^ requires this.IsMarshalledExplicitly;
         }
     }
@@ -738,9 +714,7 @@ namespace Microsoft.Cci
         /// <summary>
         /// A compile time constant value that provides the default value for the property. (Who uses this and why?)
         /// </summary>
-        MetadataConstant? DefaultValue
-        {
-            get;
+        MetadataConstant? DefaultValue { get;
             // ^ requires this.HasDefaultValue;
         }
 
@@ -797,20 +771,14 @@ namespace Microsoft.Cci
         ImmutableArray<IParameterTypeInformation> GetParameters(EmitContext context);
 
         /// <summary>
-        /// Returns the list of custom modifiers, if any, associated with the return type. 
+        /// Returns the list of custom modifiers, if any, associated with the return type.
         /// </summary>
-        ImmutableArray<ICustomModifier> ReturnValueCustomModifiers
-        {
-            get;
-        }
+        ImmutableArray<ICustomModifier> ReturnValueCustomModifiers { get; }
 
         /// <summary>
-        /// Returns the list of custom modifiers, if any, associated with the ref modifier. 
+        /// Returns the list of custom modifiers, if any, associated with the ref modifier.
         /// </summary>
-        ImmutableArray<ICustomModifier> RefCustomModifiers
-        {
-            get;
-        }
+        ImmutableArray<ICustomModifier> RefCustomModifiers { get; }
 
         /// <summary>
         /// True if the return value is passed by reference (using a managed pointer).
@@ -863,10 +831,7 @@ namespace Microsoft.Cci
         /// corresponds to a definition that is not obtained via specialization.)
         /// </summary>
         [NotNull]
-        IEventDefinition UnspecializedVersion
-        {
-            get;
-        }
+        IEventDefinition UnspecializedVersion { get; }
     }
 
     /// <summary>
@@ -875,8 +840,8 @@ namespace Microsoft.Cci
     internal interface ISpecializedFieldReference : IFieldReference
     {
         /// <summary>
-        /// A reference to the field definition that has been specialized to obtain the field definition referred to by this field reference. 
-        /// When the containing type of the referenced specialized field definition is itself a specialized nested type of a generic type instance, 
+        /// A reference to the field definition that has been specialized to obtain the field definition referred to by this field reference.
+        /// When the containing type of the referenced specialized field definition is itself a specialized nested type of a generic type instance,
         /// then the unspecialized field reference refers to the corresponding field definition from the unspecialized containing type definition.
         /// (I.e. the unspecialized field reference always refers to a field definition that is not obtained via specialization.)
         /// </summary>
@@ -889,8 +854,8 @@ namespace Microsoft.Cci
     internal interface ISpecializedMethodReference : IMethodReference
     {
         /// <summary>
-        /// A reference to the method definition that has been specialized to obtain the method definition referred to by this method reference. 
-        /// When the containing type of the referenced specialized method definition is itself a specialized nested type of a generic type instance, 
+        /// A reference to the method definition that has been specialized to obtain the method definition referred to by this method reference.
+        /// When the containing type of the referenced specialized method definition is itself a specialized nested type of a generic type instance,
         /// then the unspecialized method reference refers to the corresponding method definition from the unspecialized containing type definition.
         /// (I.e. the unspecialized method reference always refers to a method definition that is not obtained via specialization.)
         /// </summary>
@@ -908,10 +873,7 @@ namespace Microsoft.Cci
         /// corresponds to a definition that is not obtained via specialization.)
         /// </summary>
         [NotNull]
-        IPropertyDefinition UnspecializedVersion
-        {
-            get;
-        }
+        IPropertyDefinition UnspecializedVersion { get; }
     }
 
     /// <summary>
@@ -933,6 +895,7 @@ namespace Microsoft.Cci
         /// The method being referred to.
         /// </summary>
         IMethodDefinition? GetResolvedMethod(EmitContext context);
+
         // ^ ensures this is IMethodDefinition ==> result == this;
 
         /// <summary>
@@ -953,6 +916,7 @@ namespace Microsoft.Cci
         /// The type arguments that were used to instantiate this.GenericMethod in order to create this method.
         /// </summary>
         IEnumerable<ITypeReference> GetGenericArguments(EmitContext context);
+
         // ^ ensures result.GetEnumerator().MoveNext(); // The collection is always non empty.
 
         /// <summary>
@@ -965,9 +929,7 @@ namespace Microsoft.Cci
     /// <summary>
     /// Represents a global field in symbol table.
     /// </summary>
-    internal interface IGlobalFieldDefinition : IFieldDefinition
-    {
-    }
+    internal interface IGlobalFieldDefinition : IFieldDefinition { }
 
     /// <summary>
     /// Represents a global method in symbol table.
@@ -990,7 +952,9 @@ namespace Microsoft.Cci
             // Method definition has body if it is a non-abstract, non-extern method.
             // Additionally, methods within COM types have no body.
 
-            return !methodDef.IsAbstract && !methodDef.IsExternal && !methodDef.ContainingTypeDefinition.IsComObject;
+            return !methodDef.IsAbstract
+                && !methodDef.IsExternal
+                && !methodDef.ContainingTypeDefinition.IsComObject;
         }
     }
 
@@ -1021,7 +985,9 @@ namespace Microsoft.Cci
                     break;
                 case TypeMemberVisibility.Assembly:
                 case TypeMemberVisibility.FamilyAndAssembly:
-                    acceptBasedOnVisibility = context.IncludePrivateMembers || context.Module.SourceAssemblyOpt?.InternalsAreVisible == true;
+                    acceptBasedOnVisibility =
+                        context.IncludePrivateMembers
+                        || context.Module.SourceAssemblyOpt?.InternalsAreVisible == true;
                     break;
             }
 
@@ -1032,7 +998,11 @@ namespace Microsoft.Cci
 
             if (method?.IsStatic == true)
             {
-                foreach (var methodImplementation in method.ContainingTypeDefinition.GetExplicitImplementationOverrides(context))
+                foreach (
+                    var methodImplementation in method.ContainingTypeDefinition.GetExplicitImplementationOverrides(
+                        context
+                    )
+                )
                 {
                     if (methodImplementation.ImplementingMethod == method)
                     {

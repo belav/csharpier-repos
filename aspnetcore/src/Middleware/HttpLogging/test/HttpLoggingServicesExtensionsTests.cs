@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 public class HttpLoggingServicesExtensionsTests
@@ -11,15 +12,13 @@ public class HttpLoggingServicesExtensionsTests
     [Fact]
     public void AddHttpLogging_NullOptions_Throws()
     {
-        Assert.Throws<ArgumentNullException>(() =>
-            new ServiceCollection().AddHttpLogging(null));
+        Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddHttpLogging(null));
     }
 
     [Fact]
     public void AddW3CLogging_NullOptions_Throws()
     {
-        Assert.Throws<ArgumentNullException>(() =>
-            new ServiceCollection().AddW3CLogging(null));
+        Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddW3CLogging(null));
     }
 
     [Fact]
@@ -31,7 +30,10 @@ public class HttpLoggingServicesExtensionsTests
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => appBuilder.UseHttpLogging());
-        Assert.Equal("Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddHttpLogging' in the application startup code.", ex.Message);
+        Assert.Equal(
+            "Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddHttpLogging' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -43,7 +45,10 @@ public class HttpLoggingServicesExtensionsTests
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => appBuilder.UseW3CLogging());
-        Assert.Equal("Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddW3CLogging' in the application startup code.", ex.Message);
+        Assert.Equal(
+            "Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddW3CLogging' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]

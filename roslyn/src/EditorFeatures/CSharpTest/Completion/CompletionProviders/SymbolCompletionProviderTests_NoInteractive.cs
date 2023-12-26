@@ -25,154 +25,240 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class SymbolCompletionProviderTests_NoInteractive : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(SymbolCompletionProvider);
+        internal override Type GetCompletionProviderType() => typeof(SymbolCompletionProvider);
 
         private protected override Task VerifyWorkerAsync(
-            string code, int position, string expectedItemOrNull, string expectedDescriptionOrNull,
-            SourceCodeKind sourceCodeKind, bool usePreviousCharAsTrigger, bool checkForAbsence,
-            int? glyph, int? matchPriority, bool? hasSuggestionItem, string displayTextSuffix,
-            string displayTextPrefix, string inlineDescription, bool? isComplexTextEdit,
-            List<CompletionFilter> matchingFilters, CompletionItemFlags? flags = null, CompletionOptions options = null, bool skipSpeculation = false)
+            string code,
+            int position,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool usePreviousCharAsTrigger,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string inlineDescription,
+            bool? isComplexTextEdit,
+            List<CompletionFilter> matchingFilters,
+            CompletionItemFlags? flags = null,
+            CompletionOptions options = null,
+            bool skipSpeculation = false
+        )
         {
-            return base.VerifyWorkerAsync(code, position,
-                expectedItemOrNull, expectedDescriptionOrNull,
-                SourceCodeKind.Regular, usePreviousCharAsTrigger, checkForAbsence,
-                glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters, flags, options);
+            return base.VerifyWorkerAsync(
+                code,
+                position,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                SourceCodeKind.Regular,
+                usePreviousCharAsTrigger,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters,
+                flags,
+                options
+            );
         }
 
         [Fact]
-        public async Task IsCommitCharacterTest()
-            => await VerifyCommonCommitCharactersAsync("class C { void M() { System.Console.$$", textTypedSoFar: "");
+        public async Task IsCommitCharacterTest() =>
+            await VerifyCommonCommitCharactersAsync(
+                "class C { void M() { System.Console.$$",
+                textTypedSoFar: ""
+            );
 
         [Fact]
         public void IsTextualTriggerCharacterTest()
         {
             TestCommonIsTextualTriggerCharacter();
 
-            VerifyTextualTriggerCharacter("Abc $$X", shouldTriggerWithTriggerOnLettersEnabled: true, shouldTriggerWithTriggerOnLettersDisabled: false);
+            VerifyTextualTriggerCharacter(
+                "Abc $$X",
+                shouldTriggerWithTriggerOnLettersEnabled: true,
+                shouldTriggerWithTriggerOnLettersDisabled: false
+            );
 
-            VerifyTextualTriggerCharacter("Abc$$ ", shouldTriggerWithTriggerOnLettersEnabled: true, shouldTriggerWithTriggerOnLettersDisabled: false, showCompletionInArgumentLists: true);
+            VerifyTextualTriggerCharacter(
+                "Abc$$ ",
+                shouldTriggerWithTriggerOnLettersEnabled: true,
+                shouldTriggerWithTriggerOnLettersDisabled: false,
+                showCompletionInArgumentLists: true
+            );
 
-            VerifyTextualTriggerCharacter("Abc$$ ", shouldTriggerWithTriggerOnLettersEnabled: false, shouldTriggerWithTriggerOnLettersDisabled: false, showCompletionInArgumentLists: false);
+            VerifyTextualTriggerCharacter(
+                "Abc$$ ",
+                shouldTriggerWithTriggerOnLettersEnabled: false,
+                shouldTriggerWithTriggerOnLettersDisabled: false,
+                showCompletionInArgumentLists: false
+            );
         }
 
         [Fact]
         public async Task SendEnterThroughToEditorTest()
         {
-            await VerifySendEnterThroughToEnterAsync("class C { void M() { System.Console.$$", "Beep", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync("class C { void M() { System.Console.$$", "Beep", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync("class C { void M() { System.Console.$$", "Beep", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                "class C { void M() { System.Console.$$",
+                "Beep",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                "class C { void M() { System.Console.$$",
+                "Beep",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                "class C { void M() { System.Console.$$",
+                "Beep",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44423")]
-        public async Task GlobalStatement1()
-            => await VerifyItemExistsAsync(@"System.Console.$$", @"Beep");
+        public async Task GlobalStatement1() =>
+            await VerifyItemExistsAsync(@"System.Console.$$", @"Beep");
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44423")]
         public async Task GlobalStatement2()
         {
-            await VerifyItemExistsAsync("""
-                using System;
-                Console.$$
-                """, @"Beep");
+            await VerifyItemExistsAsync(
+                """
+                    using System;
+                    Console.$$
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
-        public async Task InvalidLocation3()
-            => await VerifyItemIsAbsentAsync(@"using System.Console.$$", @"Beep");
+        public async Task InvalidLocation3() =>
+            await VerifyItemIsAbsentAsync(@"using System.Console.$$", @"Beep");
 
         [Fact]
         public async Task InvalidLocation4()
         {
-            await VerifyItemIsAbsentAsync("""
-                class C {
-                #if false 
-                System.Console.$$
-                #endif
-                """, @"Beep");
+            await VerifyItemIsAbsentAsync(
+                """
+                    class C {
+                    #if false
+                    System.Console.$$
+                    #endif
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
         public async Task InvalidLocation5()
         {
-            await VerifyItemIsAbsentAsync("""
-                class C {
-                #if true 
-                System.Console.$$
-                #endif
-                """, @"Beep");
+            await VerifyItemIsAbsentAsync(
+                """
+                    class C {
+                    #if true
+                    System.Console.$$
+                    #endif
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
         public async Task InvalidLocation6()
         {
-            await VerifyItemIsAbsentAsync("""
-                using System;
+            await VerifyItemIsAbsentAsync(
+                """
+                    using System;
 
-                class C {
-                // Console.$$
-                """, @"Beep");
+                    class C {
+                    // Console.$$
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
         public async Task InvalidLocation7()
         {
-            await VerifyItemIsAbsentAsync("""
-                using System;
+            await VerifyItemIsAbsentAsync(
+                """
+                    using System;
 
-                class C {
-                /*  Console.$$   */
-                """, @"Beep");
+                    class C {
+                    /*  Console.$$   */
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
         public async Task InvalidLocation8()
         {
-            await VerifyItemIsAbsentAsync("""
-                using System;
+            await VerifyItemIsAbsentAsync(
+                """
+                    using System;
 
-                class C {
-                /// Console.$$
-                """, @"Beep");
+                    class C {
+                    /// Console.$$
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
         public async Task InvalidLocation9()
         {
-            await VerifyItemIsAbsentAsync("""
-                using System;
+            await VerifyItemIsAbsentAsync(
+                """
+                    using System;
 
-                class C {
-                    void Method()
-                    {
-                        /// Console.$$
+                    class C {
+                        void Method()
+                        {
+                            /// Console.$$
+                        }
                     }
-                }
-                """, @"Beep");
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
         public async Task InvalidLocation10()
         {
-            await VerifyItemIsAbsentAsync("""
-                using System;
+            await VerifyItemIsAbsentAsync(
+                """
+                    using System;
 
-                class C {
-                    void Method()
-                    {
-                        /**  Console.$$   */
-                """, @"Beep");
+                    class C {
+                        void Method()
+                        {
+                            /**  Console.$$   */
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
-        public async Task InvalidLocation11()
-            => await VerifyItemIsAbsentAsync(AddUsingDirectives("using System;", AddInsideMethod("string s = \"Console.$$")), @"Beep");
+        public async Task InvalidLocation11() =>
+            await VerifyItemIsAbsentAsync(
+                AddUsingDirectives("using System;", AddInsideMethod("string s = \"Console.$$")),
+                @"Beep"
+            );
 
         [Fact]
-        public async Task InvalidLocation12()
-            => await VerifyItemIsAbsentAsync(@"[assembly: System.Console.$$]", @"Beep");
+        public async Task InvalidLocation12() =>
+            await VerifyItemIsAbsentAsync(@"[assembly: System.Console.$$]", @"Beep");
 
         [Fact]
         public async Task InvalidLocation13()
@@ -186,8 +272,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         }
 
         [Fact]
-        public async Task InvalidLocation14()
-            => await VerifyItemIsAbsentAsync(AddUsingDirectives("using System;", @"class CL<[Console.$$]T> {}"), @"Beep");
+        public async Task InvalidLocation14() =>
+            await VerifyItemIsAbsentAsync(
+                AddUsingDirectives("using System;", @"class CL<[Console.$$]T> {}"),
+                @"Beep"
+            );
 
         [Fact]
         public async Task InvalidLocation15()
@@ -202,146 +291,182 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         }
 
         [Fact]
-        public async Task InvalidLocation16()
-            => await VerifyItemIsAbsentAsync(AddUsingDirectives("using System;", @"class CL<Console.$$"), @"Beep");
+        public async Task InvalidLocation16() =>
+            await VerifyItemIsAbsentAsync(
+                AddUsingDirectives("using System;", @"class CL<Console.$$"),
+                @"Beep"
+            );
 
         [Fact]
         public async Task InvalidLocation17()
         {
-            await VerifyItemIsAbsentAsync("""
-                using System;
+            await VerifyItemIsAbsentAsync(
+                """
+                    using System;
 
-                class Program {
-                    static void Main(string[] args)
-                    {
-                        string a = "a$$
+                    class Program {
+                        static void Main(string[] args)
+                        {
+                            string a = "a$$
+                        }
                     }
-                }
-                """, @"Main");
+                    """,
+                @"Main"
+            );
         }
 
         [Fact]
         public async Task InvalidLocation18()
         {
-            await VerifyItemIsAbsentAsync("""
-                using System;
+            await VerifyItemIsAbsentAsync(
+                """
+                    using System;
 
-                class Program {
-                    static void Main(string[] args)
-                    {
-                        #region
-                        #endregion // a$$
+                    class Program {
+                        static void Main(string[] args)
+                        {
+                            #region
+                            #endregion // a$$
+                        }
                     }
-                }
-                """, @"Main");
+                    """,
+                @"Main"
+            );
         }
 
         [Fact]
         public async Task InvalidLocation19()
         {
-            await VerifyItemIsAbsentAsync("""
-                using System;
+            await VerifyItemIsAbsentAsync(
+                """
+                    using System;
 
-                class Program {
-                    static void Main(string[] args)
-                    {
-                        //s$$
+                    class Program {
+                        static void Main(string[] args)
+                        {
+                            //s$$
+                        }
                     }
-                }
-                """, @"SByte");
+                    """,
+                @"SByte"
+            );
         }
 
         [Fact]
         public async Task InsideMethodBody()
         {
-            await VerifyItemExistsAsync("""
-                using System;
+            await VerifyItemExistsAsync(
+                """
+                    using System;
 
-                class C {
-                    void Method()
-                    {
-                        Console.$$
-                """, @"Beep");
+                    class C {
+                        void Method()
+                        {
+                            Console.$$
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
-        public async Task UsingDirectiveGlobal()
-            => await VerifyItemExistsAsync(@"using global::$$;", @"System");
+        public async Task UsingDirectiveGlobal() =>
+            await VerifyItemExistsAsync(@"using global::$$;", @"System");
 
         [Fact]
         public async Task InsideAccessor()
         {
-            await VerifyItemExistsAsync("""
-                using System;
+            await VerifyItemExistsAsync(
+                """
+                    using System;
 
-                class C {
-                    string Property
-                    {
-                        get 
+                    class C {
+                        string Property
                         {
-                            Console.$$
-                """, @"Beep");
+                            get 
+                            {
+                                Console.$$
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
         public async Task FieldInitializer()
         {
-            await VerifyItemExistsAsync("""
-                using System;
+            await VerifyItemExistsAsync(
+                """
+                    using System;
 
-                class C {
-                    int i = Console.$$
-                """, @"Beep");
+                    class C {
+                        int i = Console.$$
+                    """,
+                @"Beep"
+            );
         }
 
         [Fact]
         public async Task FieldInitializer2()
         {
-            await VerifyItemExistsAsync("""
-                class C {
-                    object i = $$
-                """, @"System");
+            await VerifyItemExistsAsync(
+                """
+                    class C {
+                        object i = $$
+                    """,
+                @"System"
+            );
         }
 
         [Fact]
         public async Task ImportedProperty()
         {
-            await VerifyItemExistsAsync("""
-                using System.Collections.Generic;
+            await VerifyItemExistsAsync(
+                """
+                    using System.Collections.Generic;
 
-                class C {
-                    void Method()
-                    {
-                       new List<string>().$$
-                """, @"Capacity");
+                    class C {
+                        void Method()
+                        {
+                           new List<string>().$$
+                    """,
+                @"Capacity"
+            );
         }
 
         [Fact]
         public async Task FieldInitializerWithProperty()
         {
-            await VerifyItemExistsAsync("""
-                using System.Collections.Generic;
-                class C {
-                    int i =  new List<string>().$$
-                """, @"Count");
+            await VerifyItemExistsAsync(
+                """
+                    using System.Collections.Generic;
+                    class C {
+                        int i =  new List<string>().$$
+                    """,
+                @"Count"
+            );
         }
 
         [Fact]
         public async Task StaticMethods()
         {
-            await VerifyItemExistsAsync("""
-                using System;
+            await VerifyItemExistsAsync(
+                """
+                    using System;
 
-                class C {
-                    private static int Method() {}
+                    class C {
+                        private static int Method() {}
 
-                    int i = $$
-                """, @"Method");
+                        int i = $$
+                    """,
+                @"Method"
+            );
         }
 
         [Fact]
-        public async Task EndOfFile()
-            => await VerifyItemExistsAsync(@"static class E { public static void Method() { E.$$", @"Method");
+        public async Task EndOfFile() =>
+            await VerifyItemExistsAsync(
+                @"static class E { public static void Method() { E.$$",
+                @"Method"
+            );
 
         [Fact]
         public async Task InheritedStaticFields()
@@ -361,14 +486,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
             var code = """
                 using System;
 
-                class C 
+                class C
                 {
                     string Property
                     {
                         get 
                         {
                             Console.$$
-                """;//, @"Beep"
+                """; //, @"Beep"
 
             using var workspace = TestWorkspace.CreateCSharp(code);
             var testDocument = workspace.Documents.Single();
@@ -378,7 +503,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
             var service = CompletionService.GetService(document);
             var options = CompletionOptions.Default;
             var displayOptions = SymbolDescriptionOptions.Default;
-            var completions = await service.GetCompletionsAsync(document, position, options, OptionSet.Empty);
+            var completions = await service.GetCompletionsAsync(
+                document,
+                position,
+                options,
+                OptionSet.Empty
+            );
 
             var item = completions.ItemsList.First(i => i.DisplayText == "Beep");
             var edit = testDocument.GetTextBuffer().CreateEdit();

@@ -14,15 +14,32 @@ namespace System.Activities.Core.Presentation
 
     internal partial class ReorderableListEditor : UserControl
     {
-        public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(ReorderableListEditor), new PropertyMetadata(null));
-        public static readonly DependencyProperty ListProperty = DependencyProperty.Register("List", typeof(ObservableCollection<ExpandableItemWrapper>), typeof(ReorderableListEditor), new PropertyMetadata(null));
-        public static readonly DependencyProperty SelectedListItemProperty = DependencyProperty.Register("SelectedListItem", typeof(ExpandableItemWrapper), typeof(ReorderableListEditor), new PropertyMetadata(null));
+        public static readonly DependencyProperty ItemTemplateProperty =
+            DependencyProperty.Register(
+                "ItemTemplate",
+                typeof(DataTemplate),
+                typeof(ReorderableListEditor),
+                new PropertyMetadata(null)
+            );
+        public static readonly DependencyProperty ListProperty = DependencyProperty.Register(
+            "List",
+            typeof(ObservableCollection<ExpandableItemWrapper>),
+            typeof(ReorderableListEditor),
+            new PropertyMetadata(null)
+        );
+        public static readonly DependencyProperty SelectedListItemProperty =
+            DependencyProperty.Register(
+                "SelectedListItem",
+                typeof(ExpandableItemWrapper),
+                typeof(ReorderableListEditor),
+                new PropertyMetadata(null)
+            );
 
         public ReorderableListEditor()
         {
             this.InitializeComponent();
         }
-        
+
         public DataTemplate ItemTemplate
         {
             get { return (DataTemplate)this.GetValue(ItemTemplateProperty); }
@@ -51,9 +68,14 @@ namespace System.Activities.Core.Presentation
             base.OnIsKeyboardFocusWithinChanged(e);
         }
 
-        private void OnListBoxPreviewGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void OnListBoxPreviewGotKeyboardFocus(
+            object sender,
+            KeyboardFocusChangedEventArgs e
+        )
         {
-            ListBoxItem item = VisualTreeUtils.FindVisualAncestor<ListBoxItem>(e.OriginalSource as DependencyObject);
+            ListBoxItem item = VisualTreeUtils.FindVisualAncestor<ListBoxItem>(
+                e.OriginalSource as DependencyObject
+            );
 
             if (item != null)
             {

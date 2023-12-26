@@ -10,7 +10,8 @@ namespace System.Text
 {
     public sealed class DecoderExceptionFallback : DecoderFallback
     {
-        internal static readonly DecoderExceptionFallback s_default = new DecoderExceptionFallback();
+        internal static readonly DecoderExceptionFallback s_default =
+            new DecoderExceptionFallback();
 
         public override DecoderFallbackBuffer CreateFallbackBuffer() =>
             new DecoderExceptionFallbackBuffer();
@@ -23,7 +24,6 @@ namespace System.Text
 
         public override int GetHashCode() => 879;
     }
-
 
     public sealed class DecoderExceptionFallbackBuffer : DecoderFallbackBuffer
     {
@@ -63,14 +63,18 @@ namespace System.Text
 
             // Known index
             throw new DecoderFallbackException(
-                SR.Format(SR.Argument_InvalidCodePageBytesIndex,
-                   strBytes, index), bytesUnknown, index);
+                SR.Format(SR.Argument_InvalidCodePageBytesIndex, strBytes, index),
+                bytesUnknown,
+                index
+            );
         }
     }
 
     // Exception for decoding unknown byte sequences.
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class DecoderFallbackException : ArgumentException
     {
         private readonly byte[]? _bytesUnknown;
@@ -101,11 +105,16 @@ namespace System.Text
             _index = index;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private DecoderFallbackException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext)
-        {
-        }
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private DecoderFallbackException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext) { }
 
         public byte[]? BytesUnknown => _bytesUnknown;
 

@@ -32,51 +32,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         private const int ParameterAndOverrides = 5;
 
         public GenerateVariableTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpGenerateVariableCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpGenerateVariableCodeFixProvider());
 
-        private readonly CodeStyleOption2<bool> onWithInfo = new(true, NotificationOption2.Suggestion);
+        private readonly CodeStyleOption2<bool> onWithInfo =
+            new(true, NotificationOption2.Suggestion);
 
         // specify all options explicitly to override defaults.
-        private OptionsCollection ImplicitTypingEverywhere()
-            => new(GetLanguage())
+        private OptionsCollection ImplicitTypingEverywhere() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, onWithInfo },
             };
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact]
         public async Task TestSimpleLowercaseIdentifier1()
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|goo|];
+                        void Method()
+                        {
+                            [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private object goo;
-
-                    void Method()
+                    class Class
                     {
-                        goo;
+                        private object goo;
+
+                        void Method()
+                        {
+                            goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -84,22 +86,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestExactActionSetOfferedAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|goo|];
+                        void Method()
+                        {
+                            [|goo|];
+                        }
                     }
+                    """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_read_only_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_property_0, "goo"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo"),
                 }
-                """,
-new[]
-{
-    string.Format(FeaturesResources.Generate_field_0, "goo"),
-    string.Format(FeaturesResources.Generate_read_only_field_0, "goo"),
-    string.Format(FeaturesResources.Generate_property_0, "goo"),
-    string.Format(FeaturesResources.Generate_local_0, "goo"),
-    string.Format(FeaturesResources.Generate_parameter_0, "goo"),
-});
+            );
         }
 
         [Fact]
@@ -107,19 +110,20 @@ new[]
         {
             await TestExactActionSetOfferedAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|_goo|];
+                        void Method()
+                        {
+                            [|_goo|];
+                        }
                     }
+                    """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "_goo"),
+                    string.Format(FeaturesResources.Generate_read_only_field_0, "_goo"),
                 }
-                """,
-new[]
-{
-    string.Format(FeaturesResources.Generate_field_0, "_goo"),
-    string.Format(FeaturesResources.Generate_read_only_field_0, "_goo"),
-});
+            );
         }
 
         [Fact]
@@ -127,26 +131,27 @@ new[]
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|goo|];
+                        void Method()
+                        {
+                            [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private readonly object goo;
-
-                    void Method()
+                    class Class
                     {
-                        goo;
+                        private readonly object goo;
+
+                        void Method()
+                        {
+                            goo;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -154,26 +159,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|goo|];
+                        void Method()
+                        {
+                            [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public object goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        goo;
+                        public object goo { get; private set; }
+
+                        void Method()
+                        {
+                            goo;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -181,25 +187,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|Goo|];
+                        void Method()
+                        {
+                            [|Goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public object Goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        Goo;
+                        public object Goo { get; private set; }
+
+                        void Method()
+                        {
+                            Goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -207,26 +214,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|Goo|];
+                        void Method()
+                        {
+                            [|Goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private object Goo;
-
-                    void Method()
+                    class Class
                     {
-                        Goo;
+                        private object Goo;
+
+                        void Method()
+                        {
+                            Goo;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -234,26 +242,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|Goo|];
+                        void Method()
+                        {
+                            [|Goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private readonly object Goo;
-
-                    void Method()
+                    class Class
                     {
-                        Goo;
+                        private readonly object Goo;
+
+                        void Method()
+                        {
+                            Goo;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -261,25 +270,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(int i)
+                    class Class
                     {
-                        Method([|goo|]);
+                        void Method(int i)
+                        {
+                            Method([|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private int goo;
-
-                    void Method(int i)
+                    class Class
                     {
-                        Method(goo);
+                        private int goo;
+
+                        void Method(int i)
+                        {
+                            Method(goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -287,29 +297,30 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                class Class
-                {
-                    void Method(string? s)
+                    class Class
                     {
-                        Method([|goo|]);
+                        void Method(string? s)
+                        {
+                            Method([|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                class Class
-                {
-                    private string? goo;
-
-                    void Method(string? s)
+                    class Class
                     {
-                        Method(goo);
+                        private string? goo;
+
+                        void Method(string? s)
+                        {
+                            Method(goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -317,33 +328,34 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Class
-                {
-                    void Method(IEnumerable<string?> s)
+                    class Class
                     {
-                        Method([|goo|]);
+                        void Method(IEnumerable<string?> s)
+                        {
+                            Method([|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Class
-                {
-                    private IEnumerable<string?> goo;
-
-                    void Method(IEnumerable<string?> s)
+                    class Class
                     {
-                        Method(goo);
+                        private IEnumerable<string?> goo;
+
+                        void Method(IEnumerable<string?> s)
+                        {
+                            Method(goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -351,15 +363,22 @@ index: PropertyIndex);
         {
             await TestExactActionSetOfferedAsync(
                 """
-                class Class
-                {
-                    void Method(int i)
+                    class Class
                     {
-                        [|goo|] = 1;
+                        void Method(int i)
+                        {
+                            [|goo|] = 1;
+                        }
                     }
+                    """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_property_0, "goo"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo")
                 }
-                """,
-new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(FeaturesResources.Generate_property_0, "goo"), string.Format(FeaturesResources.Generate_local_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0, "goo") });
+            );
         }
 
         [Fact]
@@ -367,20 +386,31 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
         {
             await TestExactActionSetOfferedAsync(
                 """
-                abstract class Base
-                {
-                    public abstract void Method(int i);
-                }
-
-                class Class : Base
-                {
-                    public override void Method(int i)
+                    abstract class Base
                     {
-                        [|goo|] = 1;
+                        public abstract void Method(int i);
                     }
+
+                    class Class : Base
+                    {
+                        public override void Method(int i)
+                        {
+                            [|goo|] = 1;
+                        }
+                    }
+                    """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_property_0, "goo"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo"),
+                    string.Format(
+                        FeaturesResources.Generate_parameter_0_and_overrides_implementations,
+                        "goo"
+                    )
                 }
-                """,
-new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(FeaturesResources.Generate_property_0, "goo"), string.Format(FeaturesResources.Generate_local_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0_and_overrides_implementations, "goo") });
+            );
         }
 
         [Fact]
@@ -388,25 +418,26 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(int i)
+                    class Class
                     {
-                        [|goo|] = 1;
+                        void Method(int i)
+                        {
+                            [|goo|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private int goo;
-
-                    void Method(int i)
+                    class Class
                     {
-                        goo = 1;
+                        private int goo;
+
+                        void Method(int i)
+                        {
+                            goo = 1;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -414,26 +445,27 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(int i)
+                    class Class
                     {
-                        [|goo|] = 1;
+                        void Method(int i)
+                        {
+                            [|goo|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public int goo { get; private set; }
-
-                    void Method(int i)
+                    class Class
                     {
-                        goo = 1;
+                        public int goo { get; private set; }
+
+                        void Method(int i)
+                        {
+                            goo = 1;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -441,25 +473,26 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(ref int i)
+                    class Class
                     {
-                        Method(ref this.[|goo|]);
+                        void Method(ref int i)
+                        {
+                            Method(ref this.[|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private int goo;
-
-                    void Method(ref int i)
+                    class Class
                     {
-                        Method(ref this.[|goo|]);
+                        private int goo;
+
+                        void Method(ref int i)
+                        {
+                            Method(ref this.[|goo|]);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -467,27 +500,29 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class Class
-                {
-                    void Method(ref int i)
+                    using System;
+                    class Class
                     {
-                        Method(ref this.[|goo|]);
+                        void Method(ref int i)
+                        {
+                            Method(ref this.[|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class Class
-                {
-                    public ref int goo => throw new NotImplementedException();
-
-                    void Method(ref int i)
+                    using System;
+                    class Class
                     {
-                        Method(ref this.goo);
+                        public ref int goo => throw new NotImplementedException();
+
+                        void Method(ref int i)
+                        {
+                            Method(ref this.goo);
+                        }
                     }
-                }
-                """, index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -495,27 +530,29 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class Class
-                {
-                    void Method(in int i)
+                    using System;
+                    class Class
                     {
-                        Method(in this.[|goo|]);
+                        void Method(in int i)
+                        {
+                            Method(in this.[|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class Class
-                {
-                    public ref readonly int goo => throw new NotImplementedException();
-
-                    void Method(in int i)
+                    using System;
+                    class Class
                     {
-                        Method(in this.goo);
+                        public ref readonly int goo => throw new NotImplementedException();
+
+                        void Method(in int i)
+                        {
+                            Method(in this.goo);
+                        }
                     }
-                }
-                """, index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -523,25 +560,26 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(ref int i)
+                    class Class
                     {
-                        Method(ref [|goo|]);
+                        void Method(ref int i)
+                        {
+                            Method(ref [|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private int goo;
-
-                    void Method(ref int i)
+                    class Class
                     {
-                        Method(ref goo);
+                        private int goo;
+
+                        void Method(ref int i)
+                        {
+                            Method(ref goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -549,15 +587,21 @@ index: ReadonlyFieldIndex);
         {
             await TestExactActionSetOfferedAsync(
                 """
-                class Class
-                {
-                    void Method(out int i)
+                    class Class
                     {
-                        Method(out [|goo|]);
+                        void Method(out int i)
+                        {
+                            Method(out [|goo|]);
+                        }
                     }
+                    """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "goo"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo")
                 }
-                """,
-new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(FeaturesResources.Generate_local_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0, "goo") });
+            );
         }
 
         [Fact]
@@ -565,25 +609,26 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(out int i)
+                    class Class
                     {
-                        Method(out [|goo|]);
+                        void Method(out int i)
+                        {
+                            Method(out [|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private int goo;
-
-                    void Method(out int i)
+                    class Class
                     {
-                        Method(out goo);
+                        private int goo;
+
+                        void Method(out int i)
+                        {
+                            Method(out goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -591,25 +636,26 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    static void Method()
+                    class Class
                     {
-                        [|goo|];
+                        static void Method()
+                        {
+                            [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private static object goo;
-
-                    static void Method()
+                    class Class
                     {
-                        goo;
+                        private static object goo;
+
+                        static void Method()
+                        {
+                            goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -617,26 +663,27 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "goo"), string.Format(
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    static void Method()
+                    class Class
                     {
-                        [|goo|];
+                        static void Method()
+                        {
+                            [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private static readonly object goo;
-
-                    static void Method()
+                    class Class
                     {
-                        goo;
+                        private static readonly object goo;
+
+                        static void Method()
+                        {
+                            goo;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -644,26 +691,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    static void Method()
+                    class Class
                     {
-                        [|goo|];
+                        static void Method()
+                        {
+                            [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public static object goo { get; private set; }
-
-                    static void Method()
+                    class Class
                     {
-                        goo;
+                        public static object goo { get; private set; }
+
+                        static void Method()
+                        {
+                            goo;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -671,25 +719,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        this.[|goo|];
+                        void Method()
+                        {
+                            this.[|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private object goo;
-
-                    void Method()
+                    class Class
                     {
-                        this.goo;
+                        private object goo;
+
+                        void Method()
+                        {
+                            this.goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -697,26 +746,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        this.[|goo|];
+                        void Method()
+                        {
+                            this.[|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private readonly object goo;
-
-                    void Method()
+                    class Class
                     {
-                        this.goo;
+                        private readonly object goo;
+
+                        void Method()
+                        {
+                            this.goo;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -724,26 +774,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        this.[|goo|];
+                        void Method()
+                        {
+                            this.[|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public object goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        this.goo;
+                        public object goo { get; private set; }
+
+                        void Method()
+                        {
+                            this.goo;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -751,25 +802,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        this.[|goo|] = 1;
+                        void Method()
+                        {
+                            this.[|goo|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private int goo;
-
-                    void Method()
+                    class Class
                     {
-                        this.goo = 1;
+                        private int goo;
+
+                        void Method()
+                        {
+                            this.goo = 1;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -777,26 +829,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        this.[|goo|] = 1;
+                        void Method()
+                        {
+                            this.[|goo|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public int goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        this.goo = 1;
+                        public int goo { get; private set; }
+
+                        void Method()
+                        {
+                            this.goo = 1;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -804,25 +857,26 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Class.[|goo|];
+                        void Method()
+                        {
+                            Class.[|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private static object goo;
-
-                    void Method()
+                    class Class
                     {
-                        Class.goo;
+                        private static object goo;
+
+                        void Method()
+                        {
+                            Class.goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -830,26 +884,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Class.[|goo|];
+                        void Method()
+                        {
+                            Class.[|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private static readonly object goo;
-
-                    void Method()
+                    class Class
                     {
-                        Class.goo;
+                        private static readonly object goo;
+
+                        void Method()
+                        {
+                            Class.goo;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -857,26 +912,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Class.[|goo|];
+                        void Method()
+                        {
+                            Class.[|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public static object goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        Class.goo;
+                        public static object goo { get; private set; }
+
+                        void Method()
+                        {
+                            Class.goo;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -884,25 +940,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Class.[|goo|] = 1;
+                        void Method()
+                        {
+                            Class.[|goo|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private static int goo;
-
-                    void Method()
+                    class Class
                     {
-                        Class.goo = 1;
+                        private static int goo;
+
+                        void Method()
+                        {
+                            Class.goo = 1;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -910,26 +967,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Class.[|goo|] = 1;
+                        void Method()
+                        {
+                            Class.[|goo|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public static int goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        Class.goo = 1;
+                        public static int goo { get; private set; }
+
+                        void Method()
+                        {
+                            Class.goo = 1;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -937,32 +995,33 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        new D().[|goo|];
+                        void Method()
+                        {
+                            new D().[|goo|];
+                        }
                     }
-                }
 
-                class D
-                {
-                }
-                """,
+                    class D
+                    {
+                    }
+                    """,
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        new D().goo;
+                        void Method()
+                        {
+                            new D().goo;
+                        }
                     }
-                }
 
-                class D
-                {
-                    internal object goo;
-                }
-                """);
+                    class D
+                    {
+                        internal object goo;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -970,31 +1029,32 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Outer
-                {
-                    class Class
+                    class Outer
                     {
-                        void Method()
+                        class Class
                         {
-                            new Outer().[|goo|];
+                            void Method()
+                            {
+                                new Outer().[|goo|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Outer
-                {
-                    private object goo;
-
-                    class Class
+                    class Outer
                     {
-                        void Method()
+                        private object goo;
+
+                        class Class
                         {
-                            new Outer().goo;
+                            void Method()
+                            {
+                                new Outer().goo;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1002,32 +1062,33 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class : Base
-                {
-                    void Method(Base b)
+                    class Class : Base
                     {
-                        b.[|goo|];
+                        void Method(Base b)
+                        {
+                            b.[|goo|];
+                        }
                     }
-                }
 
-                class Base
-                {
-                }
-                """,
+                    class Base
+                    {
+                    }
+                    """,
                 """
-                class Class : Base
-                {
-                    void Method(Base b)
+                    class Class : Base
                     {
-                        b.goo;
+                        void Method(Base b)
+                        {
+                            b.goo;
+                        }
                     }
-                }
 
-                class Base
-                {
-                    internal object goo;
-                }
-                """);
+                    class Base
+                    {
+                        internal object goo;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1035,32 +1096,33 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class : Base
-                {
-                    void Method(Base b)
+                    class Class : Base
                     {
-                        Base.[|goo|];
+                        void Method(Base b)
+                        {
+                            Base.[|goo|];
+                        }
                     }
-                }
 
-                class Base
-                {
-                }
-                """,
+                    class Base
+                    {
+                    }
+                    """,
                 """
-                class Class : Base
-                {
-                    void Method(Base b)
+                    class Class : Base
                     {
-                        Base.goo;
+                        void Method(Base b)
+                        {
+                            Base.goo;
+                        }
                     }
-                }
 
-                class Base
-                {
-                    protected static object goo;
-                }
-                """);
+                    class Base
+                    {
+                        protected static object goo;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1068,19 +1130,20 @@ index: ReadonlyFieldIndex);
         {
             await TestActionCountAsync(
                 """
-                class Class
-                {
-                    void Method(I i)
+                    class Class
                     {
-                        i.[|goo|];
+                        void Method(I i)
+                        {
+                            i.[|goo|];
+                        }
                     }
-                }
 
-                interface I
-                {
-                }
-                """,
-count: 2);
+                    interface I
+                    {
+                    }
+                    """,
+                count: 2
+            );
         }
 
         [Fact]
@@ -1088,32 +1151,34 @@ count: 2);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(I i)
+                    class Class
                     {
-                        i.[|Goo|];
+                        void Method(I i)
+                        {
+                            i.[|Goo|];
+                        }
                     }
-                }
 
-                interface I
-                {
-                }
-                """,
+                    interface I
+                    {
+                    }
+                    """,
                 """
-                class Class
-                {
-                    void Method(I i)
+                    class Class
                     {
-                        i.Goo;
+                        void Method(I i)
+                        {
+                            i.Goo;
+                        }
                     }
-                }
 
-                interface I
-                {
-                    object Goo { get; set; }
-                }
-                """, index: ReadonlyFieldIndex);
+                    interface I
+                    {
+                        object Goo { get; set; }
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -1121,32 +1186,33 @@ count: 2);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(I i)
+                    class Class
                     {
-                        i.[|Goo|];
+                        void Method(I i)
+                        {
+                            i.[|Goo|];
+                        }
                     }
-                }
 
-                interface I
-                {
-                }
-                """,
+                    interface I
+                    {
+                    }
+                    """,
                 """
-                class Class
-                {
-                    void Method(I i)
+                    class Class
                     {
-                        i.Goo;
+                        void Method(I i)
+                        {
+                            i.Goo;
+                        }
                     }
-                }
 
-                interface I
-                {
-                    object Goo { get; }
-                }
-                """);
+                    interface I
+                    {
+                        object Goo { get; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1154,18 +1220,19 @@ count: 2);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(I i)
+                    class Class
                     {
-                        I.[|Goo|];
+                        void Method(I i)
+                        {
+                            I.[|Goo|];
+                        }
                     }
-                }
 
-                interface I
-                {
-                }
-                """);
+                    interface I
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1173,19 +1240,20 @@ count: 2);
         {
             await TestActionCountAsync(
                 """
-                class Class
-                {
-                    void Method(I i)
+                    class Class
                     {
-                        i.[|Goo|] = 1;
+                        void Method(I i)
+                        {
+                            i.[|Goo|] = 1;
+                        }
                     }
-                }
 
-                interface I
-                {
-                }
-                """,
-count: 1);
+                    interface I
+                    {
+                    }
+                    """,
+                count: 1
+            );
         }
 
         [Fact]
@@ -1193,32 +1261,33 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(I i)
+                    class Class
                     {
-                        i.[|Goo|] = 1;
+                        void Method(I i)
+                        {
+                            i.[|Goo|] = 1;
+                        }
                     }
-                }
 
-                interface I
-                {
-                }
-                """,
+                    interface I
+                    {
+                    }
+                    """,
                 """
-                class Class
-                {
-                    void Method(I i)
+                    class Class
                     {
-                        i.Goo = 1;
+                        void Method(I i)
+                        {
+                            i.Goo = 1;
+                        }
                     }
-                }
 
-                interface I
-                {
-                    int Goo { get; set; }
-                }
-                """);
+                    interface I
+                    {
+                        int Goo { get; set; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1226,25 +1295,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class<T>
-                {
-                    void Method(T t)
+                    class Class<T>
                     {
-                        [|goo|] = t;
+                        void Method(T t)
+                        {
+                            [|goo|] = t;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class<T>
-                {
-                    private T goo;
-
-                    void Method(T t)
+                    class Class<T>
                     {
-                        goo = t;
+                        private T goo;
+
+                        void Method(T t)
+                        {
+                            goo = t;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1252,25 +1322,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method<T>(T t)
+                    class Class
                     {
-                        [|goo|] = t;
+                        void Method<T>(T t)
+                        {
+                            [|goo|] = t;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private object goo;
-
-                    void Method<T>(T t)
+                    class Class
                     {
-                        goo = t;
+                        private object goo;
+
+                        void Method<T>(T t)
+                        {
+                            goo = t;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1278,25 +1349,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method<T>(IList<T> t)
+                    class Class
                     {
-                        [|goo|] = t;
+                        void Method<T>(IList<T> t)
+                        {
+                            [|goo|] = t;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private IList<object> goo;
-
-                    void Method<T>(IList<T> t)
+                    class Class
                     {
-                        goo = t;
+                        private IList<object> goo;
+
+                        void Method<T>(IList<T> t)
+                        {
+                            goo = t;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1304,28 +1376,29 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    int i;
-
-                    void Method()
+                    class Class
                     {
-                        [|goo|];
+                        int i;
+
+                        void Method()
+                        {
+                            [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    int i;
-                    private object goo;
-
-                    void Method()
+                    class Class
                     {
-                        goo;
+                        int i;
+                        private object goo;
+
+                        void Method()
+                        {
+                            goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1333,28 +1406,29 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|goo|];
-                    }
+                        void Method()
+                        {
+                            [|goo|];
+                        }
 
-                    int i;
-                }
-                """,
+                        int i;
+                    }
+                    """,
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        goo;
-                    }
+                        void Method()
+                        {
+                            goo;
+                        }
 
-                    int i;
-                    private object goo;
-                }
-                """);
+                        int i;
+                        private object goo;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1362,29 +1436,30 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    int Bar;
-
-                    void Method()
+                    class Class
                     {
-                        [|Goo|];
+                        int Bar;
+
+                        void Method()
+                        {
+                            [|Goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    int Bar;
-
-                    public object Goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        Goo;
+                        int Bar;
+
+                        public object Goo { get; private set; }
+
+                        void Method()
+                        {
+                            Goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1392,29 +1467,30 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|Goo|];
-                    }
+                        void Method()
+                        {
+                            [|Goo|];
+                        }
 
-                    int Bar;
-                }
-                """,
+                        int Bar;
+                    }
+                    """,
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Goo;
+                        void Method()
+                        {
+                            Goo;
+                        }
+
+                        int Bar;
+
+                        public object Goo { get; private set; }
                     }
-
-                    int Bar;
-
-                    public object Goo { get; private set; }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1422,28 +1498,29 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    int Quux { get; }
-
-                    void Method()
+                    class Class
                     {
-                        [|Goo|];
+                        int Quux { get; }
+
+                        void Method()
+                        {
+                            [|Goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public object Goo { get; private set; }
-                    int Quux { get; }
-
-                    void Method()
+                    class Class
                     {
-                        Goo;
+                        public object Goo { get; private set; }
+                        int Quux { get; }
+
+                        void Method()
+                        {
+                            Goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1451,32 +1528,33 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    int Bar;
-
-                    int Quux { get; }
-
-                    void Method()
+                    class Class
                     {
-                        [|Goo|];
+                        int Bar;
+
+                        int Quux { get; }
+
+                        void Method()
+                        {
+                            [|Goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    int Bar;
-
-                    public object Goo { get; private set; }
-                    int Quux { get; }
-
-                    void Method()
+                    class Class
                     {
-                        Goo;
+                        int Bar;
+
+                        public object Goo { get; private set; }
+                        int Quux { get; }
+
+                        void Method()
+                        {
+                            Goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1484,32 +1562,33 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    int Quux { get; }
-
-                    int Bar;
-
-                    void Method()
+                    class Class
                     {
-                        [|Goo|];
+                        int Quux { get; }
+
+                        int Bar;
+
+                        void Method()
+                        {
+                            [|Goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    int Quux { get; }
-                    public object Goo { get; private set; }
-
-                    int Bar;
-
-                    void Method()
+                    class Class
                     {
-                        Goo;
+                        int Quux { get; }
+                        public object Goo { get; private set; }
+
+                        int Bar;
+
+                        void Method()
+                        {
+                            Goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1517,14 +1596,15 @@ count: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|Goo|]();
+                        void Method()
+                        {
+                            [|Goo|]();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1532,14 +1612,15 @@ count: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        new [|Goo|]();
+                        void Method()
+                        {
+                            new [|Goo|]();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1547,102 +1628,111 @@ count: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|A|] a;
+                        void Method()
+                        {
+                            [|A|] a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|A.B|] a;
+                        void Method()
+                        {
+                            [|A.B|] a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|A|].B a;
+                        void Method()
+                        {
+                            [|A|].B a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        A.[|B|] a;
+                        void Method()
+                        {
+                            A.[|B|] a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|A.B.C|] a;
+                        void Method()
+                        {
+                            [|A.B.C|] a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|A.B|].C a;
+                        void Method()
+                        {
+                            [|A.B|].C a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        A.B.[|C|] a;
+                        void Method()
+                        {
+                            A.B.[|C|] a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|A|].B.C a;
+                        void Method()
+                        {
+                            [|A|].B.C a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        A.[|B|].C a;
+                        void Method()
+                        {
+                            A.[|B|].C a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539336")]
@@ -1650,75 +1740,84 @@ count: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                [[|A|]]
-                class Class
-                {
-                }
-                """);
+                    [[|A|]]
+                    class Class
+                    {
+                    }
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                [[|A.B|]]
-                class Class
-                {
-                }
-                """);
+                    [[|A.B|]]
+                    class Class
+                    {
+                    }
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                [[|A|].B]
-                class Class
-                {
-                }
-                """);
+                    [[|A|].B]
+                    class Class
+                    {
+                    }
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                [A.[|B|]]
-                class Class
-                {
-                }
-                """);
+                    [A.[|B|]]
+                    class Class
+                    {
+                    }
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                [[|A.B.C|]]
-                class Class
-                {
-                }
-                """);
+                    [[|A.B.C|]]
+                    class Class
+                    {
+                    }
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                [[|A.B|].C]
-                class Class
-                {
-                }
-                """);
+                    [[|A.B|].C]
+                    class Class
+                    {
+                    }
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                [A.B.[|C|]]
-                class Class
-                {
-                }
-                """);
+                    [A.B.[|C|]]
+                    class Class
+                    {
+                    }
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                [[|A|].B.C]
-                class Class
-                {
-                }
-                """);
+                    [[|A|].B.C]
+                    class Class
+                    {
+                    }
+                    """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                [A.B.[|C|]]
-                class Class
-                {
-                }
-                """);
+                    [A.B.[|C|]]
+                    class Class
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539340")]
@@ -1726,69 +1825,76 @@ count: 1);
         {
             await TestSpansAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        this.[|Goo|] }
-                """);
+                        void M()
+                        {
+                            this.[|Goo|] }
+                    """
+            );
 
             await TestSpansAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        this.[|Goo|];
-                    }
-                """);
+                        void M()
+                        {
+                            this.[|Goo|];
+                        }
+                    """
+            );
 
             await TestSpansAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        this.[|Goo|] = 1 }
-                """);
+                        void M()
+                        {
+                            this.[|Goo|] = 1 }
+                    """
+            );
 
             await TestSpansAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        this.[|Goo|] = 1 + 2 }
-                """);
+                        void M()
+                        {
+                            this.[|Goo|] = 1 + 2 }
+                    """
+            );
 
             await TestSpansAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        this.[|Goo|] = 1 + 2;
-                    }
-                """);
+                        void M()
+                        {
+                            this.[|Goo|] = 1 + 2;
+                        }
+                    """
+            );
 
             await TestSpansAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        this.[|Goo|] += Bar() }
-                """);
+                        void M()
+                        {
+                            this.[|Goo|] += Bar() }
+                    """
+            );
 
             await TestSpansAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        this.[|Goo|] += Bar();
-                    }
-                """);
+                        void M()
+                        {
+                            this.[|Goo|] += Bar();
+                        }
+                    """
+            );
         }
 
         [Fact]
@@ -1796,29 +1902,31 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<string, int> f = x => [|goo|];
+                        static void Main(string[] args)
+                        {
+                            Func<string, int> f = x => [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    private static int goo;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<string, int> f = x => goo;
+                        private static int goo;
+
+                        static void Main(string[] args)
+                        {
+                            Func<string, int> f = x => goo;
+                        }
                     }
-                }
-                """, FieldIndex);
+                    """,
+                FieldIndex
+            );
         }
 
         [Fact]
@@ -1826,29 +1934,31 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<int> f = () => [|goo|];
+                        static void Main(string[] args)
+                        {
+                            Func<int> f = () => [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    private static int goo;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<int> f = () => goo;
+                        private static int goo;
+
+                        static void Main(string[] args)
+                        {
+                            Func<int> f = () => goo;
+                        }
                     }
-                }
-                """, FieldIndex);
+                    """,
+                FieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30232")]
@@ -1856,31 +1966,33 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<string, Task<int>> f = async x => [|goo|];
+                        static void Main(string[] args)
+                        {
+                            Func<string, Task<int>> f = async x => [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private static int goo;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<string, Task<int>> f = async x => goo;
+                        private static int goo;
+
+                        static void Main(string[] args)
+                        {
+                            Func<string, Task<int>> f = async x => goo;
+                        }
                     }
-                }
-                """, FieldIndex);
+                    """,
+                FieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30232")]
@@ -1888,31 +2000,33 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<Task<int>> f = async () => [|goo|];
+                        static void Main(string[] args)
+                        {
+                            Func<Task<int>> f = async () => [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private static int goo;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<Task<int>> f = async () => goo;
+                        private static int goo;
+
+                        static void Main(string[] args)
+                        {
+                            Func<Task<int>> f = async () => goo;
+                        }
                     }
-                }
-                """, FieldIndex);
+                    """,
+                FieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539427")]
@@ -1920,29 +2034,30 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(int i)
+                    class Class
                     {
-                        [|goo|] = () => {
-                            return 2 };
+                        void Method(int i)
+                        {
+                            [|goo|] = () => {
+                                return 2 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Class
-                {
-                    private Func<int> goo;
-
-                    void Method(int i)
+                    class Class
                     {
-                        goo = () => {
-                            return 2 };
+                        private Func<int> goo;
+
+                        void Method(int i)
+                        {
+                            goo = () => {
+                                return 2 };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         // TODO: Move to TypeInferrer.InferTypes, or something
@@ -1951,25 +2066,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(int i)
+                    class Class
                     {
-                        System.Console.WriteLine([|goo|]);
+                        void Method(int i)
+                        {
+                            System.Console.WriteLine([|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private bool goo;
-
-                    void Method(int i)
+                    class Class
                     {
-                        System.Console.WriteLine(goo);
+                        private bool goo;
+
+                        void Method(int i)
+                        {
+                            System.Console.WriteLine(goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         // TODO: Move to TypeInferrer.InferTypes, or something
@@ -1978,25 +2094,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method(int i)
+                    class Class
                     {
-                        System.Console.WriteLine(this.[|goo|]);
+                        void Method(int i)
+                        {
+                            System.Console.WriteLine(this.[|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private bool goo;
-
-                    void Method(int i)
+                    class Class
                     {
-                        System.Console.WriteLine(this.goo);
+                        private bool goo;
+
+                        void Method(int i)
+                        {
+                            System.Console.WriteLine(this.goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2004,26 +2121,27 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class : ITest
-                {
-                    bool ITest.[|SomeProp|] { get; set; }
-                }
+                    class Class : ITest
+                    {
+                        bool ITest.[|SomeProp|] { get; set; }
+                    }
 
-                interface ITest
-                {
-                }
-                """,
+                    interface ITest
+                    {
+                    }
+                    """,
                 """
-                class Class : ITest
-                {
-                    bool ITest.SomeProp { get; set; }
-                }
+                    class Class : ITest
+                    {
+                        bool ITest.SomeProp { get; set; }
+                    }
 
-                interface ITest
-                {
-                    bool SomeProp { get; set; }
-                }
-                """);
+                    interface ITest
+                    {
+                        bool SomeProp { get; set; }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2031,26 +2149,28 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class : ITest
-                {
-                    bool ITest.[|SomeProp|] { }
-                }
+                    class Class : ITest
+                    {
+                        bool ITest.[|SomeProp|] { }
+                    }
 
-                interface ITest
-                {
-                }
-                """,
+                    interface ITest
+                    {
+                    }
+                    """,
                 """
-                class Class : ITest
-                {
-                    bool ITest.SomeProp { }
-                }
+                    class Class : ITest
+                    {
+                        bool ITest.SomeProp { }
+                    }
 
-                interface ITest
-                {
-                    bool SomeProp { get; set; }
-                }
-                """, index: ReadonlyFieldIndex);
+                    interface ITest
+                    {
+                        bool SomeProp { get; set; }
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2058,26 +2178,27 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class : ITest
-                {
-                    bool ITest.[|SomeProp|] { }
-                }
+                    class Class : ITest
+                    {
+                        bool ITest.[|SomeProp|] { }
+                    }
 
-                interface ITest
-                {
-                }
-                """,
+                    interface ITest
+                    {
+                    }
+                    """,
                 """
-                class Class : ITest
-                {
-                    bool ITest.SomeProp { }
-                }
+                    class Class : ITest
+                    {
+                        bool ITest.SomeProp { }
+                    }
 
-                interface ITest
-                {
-                    bool SomeProp { get; }
-                }
-                """);
+                    interface ITest
+                    {
+                        bool SomeProp { get; }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2085,15 +2206,16 @@ count: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    bool ITest.[|SomeProp|] { }
-                }
+                    class Class
+                    {
+                        bool ITest.[|SomeProp|] { }
+                    }
 
-                interface ITest
-                {
-                }
-                """);
+                    interface ITest
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -2101,16 +2223,17 @@ count: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class : ITest
-                {
-                    bool ITest.[|SomeProp|] { }
-                }
+                    class Class : ITest
+                    {
+                        bool ITest.[|SomeProp|] { }
+                    }
 
-                interface ITest
-                {
-                    bool SomeProp { get; }
-                }
-                """);
+                    interface ITest
+                    {
+                        bool SomeProp { get; }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -2118,25 +2241,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|@goo|];
+                        void Method()
+                        {
+                            [|@goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private object goo;
-
-                    void Method()
+                    class Class
                     {
-                        @goo;
+                        private object goo;
+
+                        void Method()
+                        {
+                            @goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -2144,25 +2268,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|@int|];
+                        void Method()
+                        {
+                            [|@int|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private object @int;
-
-                    void Method()
+                    class Class
                     {
-                        @int;
+                        private object @int;
+
+                        void Method()
+                        {
+                            @int;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539529")]
@@ -2170,25 +2295,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|test|] = (ref int x) => x = 10;
+                        void Method()
+                        {
+                            [|test|] = (ref int x) => x = 10;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private object test;
-
-                    void Method()
+                    class Class
                     {
-                        test = (ref int x) => x = 10;
+                        private object test;
+
+                        void Method()
+                        {
+                            test = (ref int x) => x = 10;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539595")]
@@ -2196,14 +2322,15 @@ count: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void F<U, V>(U u1, V v1)
+                    class Class
                     {
-                        Goo<string, int>([|u1|], u2);
+                        void F<U, V>(U u1, V v1)
+                        {
+                            Goo<string, int>([|u1|], u2);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539571")]
@@ -2211,37 +2338,38 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace TestNs
-                {
-                    class Program
+                    namespace TestNs
                     {
-                        class Test
+                        class Program
                         {
-                            void Meth()
+                            class Test
                             {
-                                Program.[|blah|] = new Test();
+                                void Meth()
+                                {
+                                    Program.[|blah|] = new Test();
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace TestNs
-                {
-                    class Program
+                    namespace TestNs
                     {
-                        private static Test blah;
-
-                        class Test
+                        class Program
                         {
-                            void Meth()
+                            private static Test blah;
+
+                            class Test
                             {
-                                Program.blah = new Test();
+                                void Meth()
+                                {
+                                    Program.blah = new Test();
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539717")]
@@ -2249,25 +2377,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|i|]++;
+                        static void Main(string[] args)
+                        {
+                            [|i|]++;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int i;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        i++;
+                        private static int i;
+
+                        static void Main(string[] args)
+                        {
+                            i++;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539717")]
@@ -2275,25 +2404,26 @@ count: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        --[|i|];
+                        static void Main(string[] args)
+                        {
+                            --[|i|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int i;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        --i;
+                        private static int i;
+
+                        static void Main(string[] args)
+                        {
+                            --i;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539738")]
@@ -2301,25 +2431,26 @@ count: 1);
         {
             await TestAsync(
                 """
-                using C;
+                    using C;
 
-                static class C
-                {
-                }
+                    static class C
+                    {
+                    }
 
-                C.[|i|] ++ ;
-                """,
+                    C.[|i|] ++ ;
+                    """,
                 """
-                using C;
+                    using C;
 
-                static class C
-                {
-                    internal static int i;
-                }
+                    static class C
+                    {
+                        internal static int i;
+                    }
 
-                C.i ++ ;
-                """,
-parseOptions: Options.Script);
+                    C.i ++ ;
+                    """,
+                parseOptions: Options.Script
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539558")]
@@ -2327,33 +2458,34 @@ parseOptions: Options.Script);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|Goo|]#();
+                        static void Main(string[] args)
+                        {
+                            [|Goo|]#();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class Program
-                {
-                    public static object Goo { get; private set; }
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Goo#();
+                        public static object Goo { get; private set; }
+
+                        static void Main(string[] args)
+                        {
+                            Goo#();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact(Skip = "Tuples")]
@@ -2362,34 +2494,35 @@ parseOptions: Options.Script);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        new([|goo|])();
+                        static void Main(string[] args)
+                        {
+                            new([|goo|])();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class Program
-                {
-                    public static object goo { get; private set; }
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        new(goo)();
+                        public static object goo { get; private set; }
+
+                        static void Main(string[] args)
+                        {
+                            new(goo)();
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539665")]
@@ -2397,28 +2530,29 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C { }
-                class D
-                {
-                    void M()
+                    class C { }
+                    class D
                     {
-                        C.[|P|] = 10;
+                        void M()
+                        {
+                            C.[|P|] = 10;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public static int P { get; internal set; }
-                }
-                class D
-                {
-                    void M()
+                    class C
                     {
-                        C.P = 10;
+                        public static int P { get; internal set; }
                     }
-                }
-                """);
+                    class D
+                    {
+                        void M()
+                        {
+                            C.P = 10;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539793")]
@@ -2426,37 +2560,45 @@ index: PropertyIndex);
         {
             await TestExactActionSetOfferedAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|p|]++;
+                        static void Main()
+                        {
+                            [|p|]++;
+                        }
                     }
+                    """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_0, "p"),
+                    string.Format(FeaturesResources.Generate_property_0, "p"),
+                    string.Format(FeaturesResources.Generate_local_0, "p"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "p")
                 }
-                """,
-new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(FeaturesResources.Generate_property_0, "p"), string.Format(FeaturesResources.Generate_local_0, "p"), string.Format(FeaturesResources.Generate_parameter_0, "p") });
+            );
 
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|p|]++;
+                        static void Main()
+                        {
+                            [|p|]++;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int p;
-
-                    static void Main()
+                    class Program
                     {
-                        p++;
+                        private static int p;
+
+                        static void Main()
+                        {
+                            p++;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
@@ -2465,14 +2607,15 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        goto [|goo|];
+                        static void Main()
+                        {
+                            goto [|goo|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539826")]
@@ -2480,25 +2623,26 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|goo|].ToString();
+                        static void Main()
+                        {
+                            [|goo|].ToString();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static object goo;
-
-                    static void Main()
+                    class Program
                     {
-                        goo.ToString();
+                        private static object goo;
+
+                        static void Main()
+                        {
+                            goo.ToString();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539840")]
@@ -2506,18 +2650,19 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|global|]::System.String s;
+                        static void Main(string[] args)
+                        {
+                            [|global|]::System.String s;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539871")]
@@ -2525,16 +2670,17 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C<T>
-                {
-                    public delegate void Goo<R>(R r);
-
-                    static void M()
+                    class C<T>
                     {
-                        Goo<T> r = [|Goo<T>|];
+                        public delegate void Goo<R>(R r);
+
+                        static void M()
+                        {
+                            Goo<T> r = [|Goo<T>|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539934")]
@@ -2542,30 +2688,31 @@ new[] { string.Format(FeaturesResources.Generate_field_0, "p"), string.Format(Fe
         {
             await TestAsync(
                 """
-                class C
-                {
-                    delegate void D();
-
-                    void M()
+                    class C
                     {
-                        D d = [|M1|] + M2;
+                        delegate void D();
+
+                        void M()
+                        {
+                            D d = [|M1|] + M2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private D M1 { get; set; }
-
-                    delegate void D();
-
-                    void M()
+                    class C
                     {
-                        D d = M1 + M2;
+                        private D M1 { get; set; }
+
+                        delegate void D();
+
+                        void M()
+                        {
+                            D d = M1 + M2;
+                        }
                     }
-                }
-                """,
-parseOptions: null);
+                    """,
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539986")]
@@ -2573,32 +2720,33 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C<T>
-                {
-                    public void Test()
+                    class C<T>
                     {
-                        C<T> c = A.[|M|];
+                        public void Test()
+                        {
+                            C<T> c = A.[|M|];
+                        }
                     }
-                }
 
-                class A
-                {
-                }
-                """,
+                    class A
+                    {
+                    }
+                    """,
                 """
-                class C<T>
-                {
-                    public void Test()
+                    class C<T>
                     {
-                        C<T> c = A.M;
+                        public void Test()
+                        {
+                            C<T> c = A.M;
+                        }
                     }
-                }
 
-                class A
-                {
-                    public static C<object> M { get; internal set; }
-                }
-                """);
+                    class A
+                    {
+                        public static C<object> M { get; internal set; }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539986")]
@@ -2606,32 +2754,33 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C<T>
-                {
-                    public void Test()
+                    class C<T>
                     {
-                        C<T> c = A.[|M|];
-                    }
+                        public void Test()
+                        {
+                            C<T> c = A.[|M|];
+                        }
 
-                    class A
-                    {
+                        class A
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C<T>
-                {
-                    public void Test()
+                    class C<T>
                     {
-                        C<T> c = A.M;
-                    }
+                        public void Test()
+                        {
+                            C<T> c = A.M;
+                        }
 
-                    class A
-                    {
-                        public static C<T> M { get; internal set; }
+                        class A
+                        {
+                            public static C<T> M { get; internal set; }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540159")]
@@ -2639,22 +2788,24 @@ parseOptions: null);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        int i = [|@|] }
-                }
-                """);
+                        static void M()
+                        {
+                            int i = [|@|] }
+                    }
+                    """
+            );
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        int i = [|@|]}
-                }
-                """);
+                        static void M()
+                        {
+                            int i = [|@|]}
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541194")]
@@ -2662,31 +2813,32 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        foreach (var v in [|list|])
+                        void M()
                         {
+                            foreach (var v in [|list|])
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    private IEnumerable<object> list;
-
-                    void M()
+                    class C
                     {
-                        foreach (var v in list)
+                        private IEnumerable<object> list;
+
+                        void M()
                         {
+                            foreach (var v in list)
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541265")]
@@ -2694,48 +2846,49 @@ parseOptions: null);
         {
             await TestAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static void Main()
+                    class C
                     {
-                        string s = "Hello";
-                        [|f|] = s.ExtensionMethod;
+                        public static void Main()
+                        {
+                            string s = "Hello";
+                            [|f|] = s.ExtensionMethod;
+                        }
                     }
-                }
 
-                public static class MyExtension
-                {
-                    public static int ExtensionMethod(this String s)
+                    public static class MyExtension
                     {
-                        return s.Length;
+                        public static int ExtensionMethod(this String s)
+                        {
+                            return s.Length;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private static Func<int> f;
-
-                    public static void Main()
+                    class C
                     {
-                        string s = "Hello";
-                        f = s.ExtensionMethod;
-                    }
-                }
+                        private static Func<int> f;
 
-                public static class MyExtension
-                {
-                    public static int ExtensionMethod(this String s)
-                    {
-                        return s.Length;
+                        public static void Main()
+                        {
+                            string s = "Hello";
+                            f = s.ExtensionMethod;
+                        }
                     }
-                }
-                """,
-parseOptions: null);
+
+                    public static class MyExtension
+                    {
+                        public static int ExtensionMethod(this String s)
+                        {
+                            return s.Length;
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541549")]
@@ -2743,31 +2896,32 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<int, int> f = x => x + 1;
-                        f([|x|]);
+                        static void Main(string[] args)
+                        {
+                            Func<int, int> f = x => x + 1;
+                            f([|x|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    private static int x;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<int, int> f = x => x + 1;
-                        f(x);
+                        private static int x;
+
+                        static void Main(string[] args)
+                        {
+                            Func<int, int> f = x => x + 1;
+                            f(x);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541597")]
@@ -2775,25 +2929,26 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|a|] = a + 10;
+                        static void Main(string[] args)
+                        {
+                            [|a|] = a + 10;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int a;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        a = a + 10;
+                        private static int a;
+
+                        static void Main(string[] args)
+                        {
+                            a = a + 10;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541597")]
@@ -2801,25 +2956,26 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        a = [|a|] + 10;
+                        static void Main(string[] args)
+                        {
+                            a = [|a|] + 10;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int a;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        a = a + 10;
+                        private static int a;
+
+                        static void Main(string[] args)
+                        {
+                            a = a + 10;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541659")]
@@ -2827,37 +2983,38 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    public static void Main()
+                    class Program
                     {
-                        var v = [|p|];
+                        public static void Main()
+                        {
+                            var v = [|p|];
+                        }
                     }
-                }
 
-                class var
-                {
-                }
-                """,
+                    class var
+                    {
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    private static var p;
-
-                    public static void Main()
+                    class Program
                     {
-                        var v = p;
-                    }
-                }
+                        private static var p;
 
-                class var
-                {
-                }
-                """);
+                        public static void Main()
+                        {
+                            var v = p;
+                        }
+                    }
+
+                    class var
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541675")]
@@ -2865,57 +3022,60 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        MyExtension.ExMethod([|ss|]);
+                        static void Main(string[] args)
+                        {
+                            MyExtension.ExMethod([|ss|]);
+                        }
                     }
-                }
 
-                static class MyExtension
-                {
-                    public static int ExMethod(this string s)
+                    static class MyExtension
                     {
-                        return s.Length;
+                        public static int ExMethod(this string s)
+                        {
+                            return s.Length;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    private static string ss;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        MyExtension.ExMethod(ss);
-                    }
-                }
+                        private static string ss;
 
-                static class MyExtension
-                {
-                    public static int ExMethod(this string s)
-                    {
-                        return s.Length;
+                        static void Main(string[] args)
+                        {
+                            MyExtension.ExMethod(ss);
+                        }
                     }
-                }
-                """);
+
+                    static class MyExtension
+                    {
+                        public static int ExMethod(this string s)
+                        {
+                            return s.Length;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task SpeakableTopLevelStatementType()
         {
-            await TestMissingAsync("""
-                [|P|] = 10;
+            await TestMissingAsync(
+                """
+                    [|P|] = 10;
 
-                partial class Program
-                {
-                }
-                """);
+                    partial class Program
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539675")]
@@ -2923,27 +3083,28 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    //method
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|P|] = 10;
+                        //method
+                        static void Main(string[] args)
+                        {
+                            [|P|] = 10;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public static int P { get; private set; }
-
-                    //method
-                    static void Main(string[] args)
+                    class Program
                     {
-                        P = 10;
+                        public static int P { get; private set; }
+
+                        //method
+                        static void Main(string[] args)
+                        {
+                            P = 10;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539675")]
@@ -2951,28 +3112,29 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    //method
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|P|] = 10;
+                        //method
+                        static void Main(string[] args)
+                        {
+                            [|P|] = 10;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int P;
-
-                    //method
-                    static void Main(string[] args)
+                    class Program
                     {
-                        P = 10;
+                        private static int P;
+
+                        //method
+                        static void Main(string[] args)
+                        {
+                            P = 10;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -2980,26 +3142,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|P|] = 10;
+                        static void Main(string[] args)
+                        {
+                            [|P|] = 10;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int P;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        P = 10;
+                        private static int P;
+
+                        static void Main(string[] args)
+                        {
+                            P = 10;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -3007,26 +3170,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|P|] = 10;
+                        static void Main(string[] args)
+                        {
+                            [|P|] = 10;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public static int P { get; private set; }
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        P = 10;
+                        public static int P { get; private set; }
+
+                        static void Main(string[] args)
+                        {
+                            P = 10;
+                        }
                     }
-                }
-                """,
-index: 0);
+                    """,
+                index: 0
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -3034,31 +3198,32 @@ index: 0);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    private static int P;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        P = 10;
-                        [|A|] = 9;
+                        private static int P;
+
+                        static void Main(string[] args)
+                        {
+                            P = 10;
+                            [|A|] = 9;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int P;
-                    private static int A;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        P = 10;
-                        A = 9;
+                        private static int P;
+                        private static int A;
+
+                        static void Main(string[] args)
+                        {
+                            P = 10;
+                            A = 9;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -3066,31 +3231,32 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public static int P { get; private set; }
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        P = 10;
-                        [|A|] = 9;
+                        public static int P { get; private set; }
+
+                        static void Main(string[] args)
+                        {
+                            P = 10;
+                            [|A|] = 9;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public static int P { get; private set; }
-                    public static int A { get; private set; }
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        P = 10;
-                        A = 9;
+                        public static int P { get; private set; }
+                        public static int A { get; private set; }
+
+                        static void Main(string[] args)
+                        {
+                            P = 10;
+                            A = 9;
+                        }
                     }
-                }
-                """,
-index: 0);
+                    """,
+                index: 0
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539665")]
@@ -3098,62 +3264,61 @@ index: 0);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C { }
-                class D
-                {
-                    void M()
+                    class C { }
+                    class D
                     {
-                        C.[|P|] = 10;
+                        void M()
+                        {
+                            C.[|P|] = 10;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public static int P { get; internal set; }
-                }
-                class D
-                {
-                    void M()
+                    class C
                     {
-                        C.P = 10;
+                        public static int P { get; internal set; }
                     }
-                }
-                """);
+                    class D
+                    {
+                        void M()
+                        {
+                            C.P = 10;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540595")]
         public async Task TestGeneratePropertyInScript()
         {
             await TestAsync(
-@"[|Goo|]",
-"""
+                @"[|Goo|]",
+                """
 object Goo { get; private set; }
 
 Goo
 """,
-parseOptions: Options.Script);
+                parseOptions: Options.Script
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542535")]
         public async Task TestConstantInParameterValue()
         {
-            const string Initial =
-                """
+            const string Initial = """
                 class C
-                {   
+                {
                     const int y = 1 ; 
                     public void Goo ( bool x = [|undeclared|] ) { }
                 }
                 """;
 
-            await TestActionCountAsync(
-Initial,
-count: 1);
+            await TestActionCountAsync(Initial, count: 1);
 
             await TestInRegularAndScriptAsync(
-Initial,
-"""
+                Initial,
+                """
 class C
 {   
     const int y = 1 ;
@@ -3161,7 +3326,8 @@ class C
 
     public void Goo ( bool x = undeclared ) { }
 }
-""");
+"""
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542900")]
@@ -3169,29 +3335,30 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class ProgramAttribute : Attribute
-                {
-                    [Program([|Name|] = 0)]
-                    static void Main(string[] args)
+                    class ProgramAttribute : Attribute
                     {
+                        [Program([|Name|] = 0)]
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class ProgramAttribute : Attribute
-                {
-                    public int Name { get; set; }
-
-                    [Program(Name = 0)]
-                    static void Main(string[] args)
+                    class ProgramAttribute : Attribute
                     {
+                        public int Name { get; set; }
+
+                        [Program(Name = 0)]
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542900")]
@@ -3199,30 +3366,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class ProgramAttribute : Attribute
-                {
-                    [Program([|Name|] = 0)]
-                    static void Main(string[] args)
+                    class ProgramAttribute : Attribute
                     {
+                        [Program([|Name|] = 0)]
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class ProgramAttribute : Attribute
-                {
-                    public int Name;
-
-                    [Program(Name = 0)]
-                    static void Main(string[] args)
+                    class ProgramAttribute : Attribute
                     {
+                        public int Name;
+
+                        [Program(Name = 0)]
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3230,324 +3398,7 @@ index: ReadonlyFieldIndex);
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    public static void Main()
-                    {
-                        C c = [|P|];
-                    }
-
-                    private class C
-                    {
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    private static C P { get; set; }
-
-                    public static void Main()
-                    {
-                        C c = P;
-                    }
-
-                    private class C
-                    {
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility2_InternalProtected()
-        {
-            await TestAsync(
-                """
-                class Program
-                {
-                    public static void Main()
-                    {
-                        C c = [|P|];
-                    }
-
-                    protected class C
-                    {
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    protected static C P { get; private set; }
-
-                    public static void Main()
-                    {
-                        C c = P;
-                    }
-
-                    protected class C
-                    {
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility3_InternalInternal()
-        {
-            await TestAsync(
-                """
-                class Program
-                {
-                    public static void Main()
-                    {
-                        C c = [|P|];
-                    }
-
-                    internal class C
-                    {
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    public static C P { get; private set; }
-
-                    public static void Main()
-                    {
-                        C c = P;
-                    }
-
-                    internal class C
-                    {
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility4_InternalProtectedInternal()
-        {
-            await TestAsync(
-                """
-                class Program
-                {
-                    public static void Main()
-                    {
-                        C c = [|P|];
-                    }
-
-                    protected internal class C
-                    {
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    public static C P { get; private set; }
-
-                    public static void Main()
-                    {
-                        C c = P;
-                    }
-
-                    protected internal class C
-                    {
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility5_InternalPublic()
-        {
-            await TestAsync(
-                """
-                class Program
-                {
-                    public static void Main()
-                    {
-                        C c = [|P|];
-                    }
-
-                    public class C
-                    {
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    public static C P { get; private set; }
-
-                    public static void Main()
-                    {
-                        C c = P;
-                    }
-
-                    public class C
-                    {
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility6_PublicInternal()
-        {
-            await TestAsync(
-                """
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        C c = [|P|];
-                    }
-
-                    internal class C
-                    {
-                    }
-                }
-                """,
-                """
-                public class Program
-                {
-                    internal static C P { get; private set; }
-
-                    public static void Main()
-                    {
-                        C c = P;
-                    }
-
-                    internal class C
-                    {
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility7_PublicProtectedInternal()
-        {
-            await TestAsync(
-                """
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        C c = [|P|];
-                    }
-
-                    protected internal class C
-                    {
-                    }
-                }
-                """,
-                """
-                public class Program
-                {
-                    protected internal static C P { get; private set; }
-
-                    public static void Main()
-                    {
-                        C c = P;
-                    }
-
-                    protected internal class C
-                    {
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility8_PublicProtected()
-        {
-            await TestAsync(
-                """
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        C c = [|P|];
-                    }
-
-                    protected class C
-                    {
-                    }
-                }
-                """,
-                """
-                public class Program
-                {
-                    protected static C P { get; private set; }
-
-                    public static void Main()
-                    {
-                        C c = P;
-                    }
-
-                    protected class C
-                    {
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility9_PublicPrivate()
-        {
-            await TestAsync(
-                """
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        C c = [|P|];
-                    }
-
-                    private class C
-                    {
-                    }
-                }
-                """,
-                """
-                public class Program
-                {
-                    private static C P { get; set; }
-
-                    public static void Main()
-                    {
-                        C c = P;
-                    }
-
-                    private class C
-                    {
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility10_PrivatePrivate()
-        {
-            await TestAsync(
-                """
-                class outer
-                {
-                    private class Program
+                    class Program
                     {
                         public static void Main()
                         {
@@ -3558,176 +3409,9 @@ parseOptions: null);
                         {
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class outer
-                {
-                    private class Program
-                    {
-                        public static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        private class C
-                        {
-                        }
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility11_PrivateProtected()
-        {
-            await TestAsync(
-                """
-                class outer
-                {
-                    private class Program
-                    {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        protected class C
-                        {
-                        }
-                    }
-                }
-                """,
-                """
-                class outer
-                {
-                    private class Program
-                    {
-                        public static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        protected class C
-                        {
-                        }
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility12_PrivateProtectedInternal()
-        {
-            await TestAsync(
-                """
-                class outer
-                {
-                    private class Program
-                    {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        protected internal class C
-                        {
-                        }
-                    }
-                }
-                """,
-                """
-                class outer
-                {
-                    private class Program
-                    {
-                        public static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        protected internal class C
-                        {
-                        }
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility13_PrivateInternal()
-        {
-            await TestAsync(
-                """
-                class outer
-                {
-                    private class Program
-                    {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        internal class C
-                        {
-                        }
-                    }
-                }
-                """,
-                """
-                class outer
-                {
-                    private class Program
-                    {
-                        public static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        internal class C
-                        {
-                        }
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility14_ProtectedPrivate()
-        {
-            await TestAsync(
-                """
-                class outer
-                {
-                    protected class Program
-                    {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        private class C
-                        {
-                        }
-                    }
-                }
-                """,
-                """
-                class outer
-                {
-                    protected class Program
+                    class Program
                     {
                         private static C P { get; set; }
 
@@ -3740,60 +3424,17 @@ parseOptions: null);
                         {
                         }
                     }
-                }
-                """,
-parseOptions: null);
+                    """,
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility15_ProtectedInternal()
+        public async Task TestMinimalAccessibility2_InternalProtected()
         {
             await TestAsync(
                 """
-                class outer
-                {
-                    protected class Program
-                    {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        internal class C
-                        {
-                        }
-                    }
-                }
-                """,
-                """
-                class outer
-                {
-                    protected class Program
-                    {
-                        public static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        internal class C
-                        {
-                        }
-                    }
-                }
-                """,
-parseOptions: null);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility16_ProtectedInternalProtected()
-        {
-            await TestAsync(
-                """
-                class outer
-                {
-                    protected internal class Program
+                    class Program
                     {
                         public static void Main()
                         {
@@ -3804,12 +3445,9 @@ parseOptions: null);
                         {
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class outer
-                {
-                    protected internal class Program
+                    class Program
                     {
                         protected static C P { get; private set; }
 
@@ -3822,19 +3460,17 @@ parseOptions: null);
                         {
                         }
                     }
-                }
-                """,
-parseOptions: null);
+                    """,
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility17_ProtectedInternalInternal()
+        public async Task TestMinimalAccessibility3_InternalInternal()
         {
             await TestAsync(
                 """
-                class outer
-                {
-                    protected internal class Program
+                    class Program
                     {
                         public static void Main()
                         {
@@ -3845,12 +3481,9 @@ parseOptions: null);
                         {
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class outer
-                {
-                    protected internal class Program
+                    class Program
                     {
                         public static C P { get; private set; }
 
@@ -3863,9 +3496,561 @@ parseOptions: null);
                         {
                         }
                     }
-                }
-                """,
-parseOptions: null);
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility4_InternalProtectedInternal()
+        {
+            await TestAsync(
+                """
+                    class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        protected internal class C
+                        {
+                        }
+                    }
+                    """,
+                """
+                    class Program
+                    {
+                        public static C P { get; private set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        protected internal class C
+                        {
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility5_InternalPublic()
+        {
+            await TestAsync(
+                """
+                    class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        public class C
+                        {
+                        }
+                    }
+                    """,
+                """
+                    class Program
+                    {
+                        public static C P { get; private set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        public class C
+                        {
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility6_PublicInternal()
+        {
+            await TestAsync(
+                """
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        internal class C
+                        {
+                        }
+                    }
+                    """,
+                """
+                    public class Program
+                    {
+                        internal static C P { get; private set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        internal class C
+                        {
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility7_PublicProtectedInternal()
+        {
+            await TestAsync(
+                """
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        protected internal class C
+                        {
+                        }
+                    }
+                    """,
+                """
+                    public class Program
+                    {
+                        protected internal static C P { get; private set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        protected internal class C
+                        {
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility8_PublicProtected()
+        {
+            await TestAsync(
+                """
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        protected class C
+                        {
+                        }
+                    }
+                    """,
+                """
+                    public class Program
+                    {
+                        protected static C P { get; private set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        protected class C
+                        {
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility9_PublicPrivate()
+        {
+            await TestAsync(
+                """
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        private class C
+                        {
+                        }
+                    }
+                    """,
+                """
+                    public class Program
+                    {
+                        private static C P { get; set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        private class C
+                        {
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility10_PrivatePrivate()
+        {
+            await TestAsync(
+                """
+                    class outer
+                    {
+                        private class Program
+                        {
+                            public static void Main()
+                            {
+                                C c = [|P|];
+                            }
+
+                            private class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class outer
+                    {
+                        private class Program
+                        {
+                            public static C P { get; private set; }
+
+                            public static void Main()
+                            {
+                                C c = P;
+                            }
+
+                            private class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility11_PrivateProtected()
+        {
+            await TestAsync(
+                """
+                    class outer
+                    {
+                        private class Program
+                        {
+                            public static void Main()
+                            {
+                                C c = [|P|];
+                            }
+
+                            protected class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class outer
+                    {
+                        private class Program
+                        {
+                            public static C P { get; private set; }
+
+                            public static void Main()
+                            {
+                                C c = P;
+                            }
+
+                            protected class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility12_PrivateProtectedInternal()
+        {
+            await TestAsync(
+                """
+                    class outer
+                    {
+                        private class Program
+                        {
+                            public static void Main()
+                            {
+                                C c = [|P|];
+                            }
+
+                            protected internal class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class outer
+                    {
+                        private class Program
+                        {
+                            public static C P { get; private set; }
+
+                            public static void Main()
+                            {
+                                C c = P;
+                            }
+
+                            protected internal class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility13_PrivateInternal()
+        {
+            await TestAsync(
+                """
+                    class outer
+                    {
+                        private class Program
+                        {
+                            public static void Main()
+                            {
+                                C c = [|P|];
+                            }
+
+                            internal class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class outer
+                    {
+                        private class Program
+                        {
+                            public static C P { get; private set; }
+
+                            public static void Main()
+                            {
+                                C c = P;
+                            }
+
+                            internal class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility14_ProtectedPrivate()
+        {
+            await TestAsync(
+                """
+                    class outer
+                    {
+                        protected class Program
+                        {
+                            public static void Main()
+                            {
+                                C c = [|P|];
+                            }
+
+                            private class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class outer
+                    {
+                        protected class Program
+                        {
+                            private static C P { get; set; }
+
+                            public static void Main()
+                            {
+                                C c = P;
+                            }
+
+                            private class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility15_ProtectedInternal()
+        {
+            await TestAsync(
+                """
+                    class outer
+                    {
+                        protected class Program
+                        {
+                            public static void Main()
+                            {
+                                C c = [|P|];
+                            }
+
+                            internal class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class outer
+                    {
+                        protected class Program
+                        {
+                            public static C P { get; private set; }
+
+                            public static void Main()
+                            {
+                                C c = P;
+                            }
+
+                            internal class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility16_ProtectedInternalProtected()
+        {
+            await TestAsync(
+                """
+                    class outer
+                    {
+                        protected internal class Program
+                        {
+                            public static void Main()
+                            {
+                                C c = [|P|];
+                            }
+
+                            protected class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class outer
+                    {
+                        protected internal class Program
+                        {
+                            protected static C P { get; private set; }
+
+                            public static void Main()
+                            {
+                                C c = P;
+                            }
+
+                            protected class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility17_ProtectedInternalInternal()
+        {
+            await TestAsync(
+                """
+                    class outer
+                    {
+                        protected internal class Program
+                        {
+                            public static void Main()
+                            {
+                                C c = [|P|];
+                            }
+
+                            internal class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class outer
+                    {
+                        protected internal class Program
+                        {
+                            public static C P { get; private set; }
+
+                            public static void Main()
+                            {
+                                C c = P;
+                            }
+
+                            internal class C
+                            {
+                            }
+                        }
+                    }
+                    """,
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543153")]
@@ -3873,28 +4058,29 @@ parseOptions: null);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var a = new { x = 5 };
-                        a = new { x = [|HERE|] };
+                        void M()
+                        {
+                            var a = new { x = 5 };
+                            a = new { x = [|HERE|] };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private int HERE;
-
-                    void M()
+                    class C
                     {
-                        var a = new { x = 5 };
-                        a = new { x = HERE };
+                        private int HERE;
+
+                        void M()
+                        {
+                            var a = new { x = 5 };
+                            a = new { x = HERE };
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543124")]
@@ -3902,15 +4088,16 @@ index: ReadonlyFieldIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var v = new { };
-                        bool b = v.[|Bar|];
+                        static void Main(string[] args)
+                        {
+                            var v = new { };
+                            bool b = v.[|Bar|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543543")]
@@ -3918,23 +4105,24 @@ index: ReadonlyFieldIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public Program(string s)
+                    class Program
                     {
-                    }
+                        public Program(string s)
+                        {
+                        }
 
-                    static void Main(string[] args)
-                    {
-                        Program p = "";
-                    }
+                        static void Main(string[] args)
+                        {
+                            Program p = "";
+                        }
 
-                    public static implicit operator Program(string str)
-                    {
-                        return new Program([|str|]);
+                        public static implicit operator Program(string str)
+                        {
+                            return new Program([|str|]);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544175")]
@@ -3942,20 +4130,21 @@ index: ReadonlyFieldIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class class1
-                {
-                    public void Test()
+                    class class1
                     {
-                        Goo([|x|]: x);
-                    }
+                        public void Test()
+                        {
+                            Goo([|x|]: x);
+                        }
 
-                    public string Goo(int x)
-                    {
+                        public string Goo(int x)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544271")]
@@ -3963,20 +4152,21 @@ index: ReadonlyFieldIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Goo
-                {
-                    public Goo(int a = 42)
+                    class Goo
                     {
+                        public Goo(int a = 42)
+                        {
+                        }
                     }
-                }
 
-                class DogBed : Goo
-                {
-                    public DogBed(int b) : base([|a|]: b)
+                    class DogBed : Goo
                     {
+                        public DogBed(int b) : base([|a|]: b)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544164")]
@@ -3984,32 +4174,33 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { [|Gibberish|] = 24 };
                     }
-                }
-                """,
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { [|Gibberish|] = 24 };
+                        }
+                    }
+                    """,
                 """
-                class Goo
-                {
-                    public int Gibberish { get; internal set; }
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { Gibberish = 24 };
+                        public int Gibberish { get; internal set; }
                     }
-                }
-                """);
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { Gibberish = 24 };
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49294")]
@@ -4017,32 +4208,33 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                record Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo(Goo g)
+                    record Goo
                     {
-                        var c = g with { [|Gibberish|] = 24 };
                     }
-                }
-                """,
+
+                    class Bar
+                    {
+                        void goo(Goo g)
+                        {
+                            var c = g with { [|Gibberish|] = 24 };
+                        }
+                    }
+                    """,
                 """
-                record Goo
-                {
-                    public int Gibberish { get; internal set; }
-                }
-
-                class Bar
-                {
-                    void goo(Goo g)
+                    record Goo
                     {
-                        var c = g with { Gibberish = 24 };
+                        public int Gibberish { get; internal set; }
                     }
-                }
-                """);
+
+                    class Bar
+                    {
+                        void goo(Goo g)
+                        {
+                            var c = g with { Gibberish = 24 };
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13166")]
@@ -4050,30 +4242,31 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                public class Inner
-                {
-                }
+                    public class Inner
+                    {
+                    }
 
-                public class Outer
-                {
-                    public Inner Inner { get; set; } = new Inner();
+                    public class Outer
+                    {
+                        public Inner Inner { get; set; } = new Inner();
 
-                    public static Outer X() => new Outer { Inner = { [|InnerValue|] = 5 } };
-                }
-                """,
+                        public static Outer X() => new Outer { Inner = { [|InnerValue|] = 5 } };
+                    }
+                    """,
                 """
-                public class Inner
-                {
-                    public int InnerValue { get; internal set; }
-                }
+                    public class Inner
+                    {
+                        public int InnerValue { get; internal set; }
+                    }
 
-                public class Outer
-                {
-                    public Inner Inner { get; set; } = new Inner();
+                    public class Outer
+                    {
+                        public Inner Inner { get; set; } = new Inner();
 
-                    public static Outer X() => new Outer { Inner = { InnerValue = 5 } };
-                }
-                """);
+                        public static Outer X() => new Outer { Inner = { InnerValue = 5 } };
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -4081,32 +4274,33 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { [|Gibberish|] = Gibberish };
                     }
-                }
-                """,
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { [|Gibberish|] = Gibberish };
+                        }
+                    }
+                    """,
                 """
-                class Goo
-                {
-                    public object Gibberish { get; internal set; }
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { Gibberish = Gibberish };
+                        public object Gibberish { get; internal set; }
                     }
-                }
-                """);
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { Gibberish = Gibberish };
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -4114,33 +4308,34 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { Gibberish = [|Gibberish|] };
                     }
-                }
-                """,
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { Gibberish = [|Gibberish|] };
+                        }
+                    }
+                    """,
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    public object Gibberish { get; private set; }
-
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { Gibberish = Gibberish };
                     }
-                }
-                """);
+
+                    class Bar
+                    {
+                        public object Gibberish { get; private set; }
+
+                        void goo()
+                        {
+                            var c = new Goo { Gibberish = Gibberish };
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -4148,33 +4343,34 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { [|Gibberish|] = 24 };
                     }
-                }
-                """,
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { [|Gibberish|] = 24 };
+                        }
+                    }
+                    """,
                 """
-                class Goo
-                {
-                    internal int Gibberish;
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { Gibberish = 24 };
+                        internal int Gibberish;
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { Gibberish = 24 };
+                        }
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -4182,33 +4378,34 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { [|Gibberish|] = Gibberish };
                     }
-                }
-                """,
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { [|Gibberish|] = Gibberish };
+                        }
+                    }
+                    """,
                 """
-                class Goo
-                {
-                    internal object Gibberish;
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { Gibberish = Gibberish };
+                        internal object Gibberish;
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { Gibberish = Gibberish };
+                        }
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -4216,34 +4413,35 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { Gibberish = [|Gibberish|] };
                     }
-                }
-                """,
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { Gibberish = [|Gibberish|] };
+                        }
+                    }
+                    """,
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    private object Gibberish;
-
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { Gibberish = Gibberish };
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+
+                    class Bar
+                    {
+                        private object Gibberish;
+
+                        void goo()
+                        {
+                            var c = new Goo { Gibberish = Gibberish };
+                        }
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -4251,19 +4449,20 @@ index: ReadonlyFieldIndex);
         {
             await TestActionCountAsync(
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { . [|Gibberish|] = 24 };
                     }
-                }
-                """,
-2);
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { . [|Gibberish|] = 24 };
+                        }
+                    }
+                    """,
+                2
+            );
         }
 
         [Fact]
@@ -4271,33 +4470,34 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        var c = new Goo { Gibberish = [|blah|] };
                     }
-                }
-                """,
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            var c = new Goo { Gibberish = [|blah|] };
+                        }
+                    }
+                    """,
                 """
-                class Goo
-                {
-                }
-
-                class Bar
-                {
-                    void goo()
+                    class Goo
                     {
-                        object blah = null;
-                        var c = new Goo { Gibberish = blah };
                     }
-                }
-                """,
-index: LocalIndex);
+
+                    class Bar
+                    {
+                        void goo()
+                        {
+                            object blah = null;
+                            var c = new Goo { Gibberish = blah };
+                        }
+                    }
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544319")]
@@ -4305,12 +4505,13 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Class1
-                {
-                    Console.[|WriteLine|](); }
-                """);
+                    class Class1
+                    {
+                        Console.[|WriteLine|](); }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544319")]
@@ -4318,12 +4519,13 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Class1
-                { [|WriteLine|]();
-                }
-                """);
+                    class Class1
+                    { [|WriteLine|]();
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544319")]
@@ -4331,13 +4533,14 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Class1
-                {
-                    [|WriteLine|]
-                }
-                """);
+                    class Class1
+                    {
+                        [|WriteLine|]
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544384")]
@@ -4345,57 +4548,59 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static int x;
-
-                    unsafe static void F(int* p)
+                    class Program
                     {
-                        *p = 1;
-                    }
+                        static int x;
 
-                    static unsafe void Main(string[] args)
-                    {
-                        int[] a = new int[10];
-                        fixed (int* p2 = &x, int* p3 = ) F(GetP2([|p2|]));
-                    }
+                        unsafe static void F(int* p)
+                        {
+                            *p = 1;
+                        }
 
-                    unsafe private static int* GetP2(int* p2)
-                    {
-                        return p2;
+                        static unsafe void Main(string[] args)
+                        {
+                            int[] a = new int[10];
+                            fixed (int* p2 = &x, int* p3 = ) F(GetP2([|p2|]));
+                        }
+
+                        unsafe private static int* GetP2(int* p2)
+                        {
+                            return p2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static int x;
-                    private static unsafe int* p2;
-
-                    unsafe static void F(int* p)
+                    class Program
                     {
-                        *p = 1;
-                    }
+                        static int x;
+                        private static unsafe int* p2;
 
-                    static unsafe void Main(string[] args)
-                    {
-                        int[] a = new int[10];
-                        fixed (int* p2 = &x, int* p3 = ) F(GetP2(p2));
-                    }
+                        unsafe static void F(int* p)
+                        {
+                            *p = 1;
+                        }
 
-                    unsafe private static int* GetP2(int* p2)
-                    {
-                        return p2;
+                        static unsafe void Main(string[] args)
+                        {
+                            int[] a = new int[10];
+                            fixed (int* p2 = &x, int* p3 = ) F(GetP2(p2));
+                        }
+
+                        unsafe private static int* GetP2(int* p2)
+                        {
+                            return p2;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544510")]
         public async Task TestNotOnUsingAlias()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using [|S|] = System ; S . Console . WriteLine ( ""hello world"" ) ; ");
+                @"using [|S|] = System ; S . Console . WriteLine ( ""hello world"" ) ; "
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544907")]
@@ -4403,31 +4608,32 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Linq.Expressions;
+                    using System;
+                    using System.Linq.Expressions;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        Expression<Func<int, int>> e = x => [|Goo|];
+                        static void Main()
+                        {
+                            Expression<Func<int, int>> e = x => [|Goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Linq.Expressions;
+                    using System;
+                    using System.Linq.Expressions;
 
-                class C
-                {
-                    public static int Goo { get; private set; }
-
-                    static void Main()
+                    class C
                     {
-                        Expression<Func<int, int>> e = x => Goo;
+                        public static int Goo { get; private set; }
+
+                        static void Main()
+                        {
+                            Expression<Func<int, int>> e = x => Goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -4435,20 +4641,21 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        int i = D.[|Bar|];
+                        void Goo()
+                        {
+                            int i = D.[|Bar|];
+                        }
                     }
-                }
 
-                #line hidden
-                class D
-                {
-                }
-                #line default
-                """);
+                    #line hidden
+                    class D
+                    {
+                    }
+                    #line default
+                    """
+            );
         }
 
         [Fact]
@@ -4456,25 +4663,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        return [|goo|];
+                        void Main()
+                        {
+                            return [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private object goo;
-
-                    void Main()
+                    class Program
                     {
-                        return goo;
+                        private object goo;
+
+                        void Main()
+                        {
+                            return goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -4482,33 +4690,34 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        Goo([|bar|]);
-                    }
+                        void Main()
+                        {
+                            Goo([|bar|]);
+                        }
 
-                    static void Goo(int i)
-                    {
+                        static void Goo(int i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        int bar = 0;
-                        Goo(bar);
-                    }
+                        void Main()
+                        {
+                            int bar = 0;
+                            Goo(bar);
+                        }
 
-                    static void Goo(int i)
-                    {
+                        static void Goo(int i)
+                        {
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -4516,37 +4725,38 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        Goo([|bar|]);
-                    }
+                        void Main()
+                        {
+                            Goo([|bar|]);
+                        }
 
-                    static void Goo(string? s)
-                    {
+                        static void Goo(string? s)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        string? bar = null;
-                        Goo(bar);
-                    }
+                        void Main()
+                        {
+                            string? bar = null;
+                            Goo(bar);
+                        }
 
-                    static void Goo(string? s)
-                    {
+                        static void Goo(string? s)
+                        {
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -4554,37 +4764,38 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        Goo([|bar|]);
-                    }
+                        void Main()
+                        {
+                            Goo([|bar|]);
+                        }
 
-                    static void Goo(IEnumerable<string?> s)
-                    {
+                        static void Goo(IEnumerable<string?> s)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        IEnumerable<string?> bar = null;
-                        Goo(bar);
-                    }
+                        void Main()
+                        {
+                            IEnumerable<string?> bar = null;
+                            Goo(bar);
+                        }
 
-                    static void Goo(IEnumerable<string?> s)
-                    {
+                        static void Goo(IEnumerable<string?> s)
+                        {
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -4592,33 +4803,34 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        Goo(out [|bar|]);
-                    }
+                        void Main()
+                        {
+                            Goo(out [|bar|]);
+                        }
 
-                    static void Goo(out int i)
-                    {
+                        static void Goo(out int i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        int bar;
-                        Goo(out bar);
-                    }
+                        void Main()
+                        {
+                            int bar;
+                            Goo(out bar);
+                        }
 
-                    static void Goo(out int i)
-                    {
+                        static void Goo(out int i)
+                        {
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/809542")]
@@ -4626,33 +4838,34 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                #if true
-                        // Banner Line 1
-                        // Banner Line 2
-                        int.TryParse("123", out [|local|]);
-                #endif
+                        void Main()
+                        {
+                    #if true
+                            // Banner Line 1
+                            // Banner Line 2
+                            int.TryParse("123", out [|local|]);
+                    #endif
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                #if true
-                        int local;
-                        // Banner Line 1
-                        // Banner Line 2
-                        int.TryParse("123", out [|local|]);
-                #endif
+                        void Main()
+                        {
+                    #if true
+                            int local;
+                            // Banner Line 1
+                            // Banner Line 2
+                            int.TryParse("123", out [|local|]);
+                    #endif
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/809542")]
@@ -4660,35 +4873,36 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                #if true
-                        // Banner Line 1
-                        // Banner Line 2
+                        void Main()
+                        {
+                    #if true
+                            // Banner Line 1
+                            // Banner Line 2
 
-                        int.TryParse("123", out [|local|]);
-                #endif
+                            int.TryParse("123", out [|local|]);
+                    #endif
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                #if true
-                        // Banner Line 1
-                        // Banner Line 2
+                        void Main()
+                        {
+                    #if true
+                            // Banner Line 1
+                            // Banner Line 2
 
-                        int local;
-                        int.TryParse("123", out [|local|]);
-                #endif
+                            int local;
+                            int.TryParse("123", out [|local|]);
+                    #endif
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -4696,33 +4910,34 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                #line hidden
-                class Program
-                {
-                    void Main()
+                    #line hidden
+                    class Program
                     {
-                #line default
-                        Goo(Program.[|X|])
+                        void Main()
+                        {
+                    #line default
+                            Goo(Program.[|X|])
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                #line hidden
-                class Program
-                {
-                    void Main()
+                    #line hidden
+                    class Program
                     {
-                #line default
-                        Goo(Program.X)
-                    }
+                        void Main()
+                        {
+                    #line default
+                            Goo(Program.X)
+                        }
 
-                    public static object X { get; private set; }
-                }
-                """);
+                        public static object X { get; private set; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -4730,22 +4945,23 @@ index: ReadonlyFieldIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                #line hidden
-                class Program
-                {
-                    void Main()
+                    #line hidden
+                    class Program
                     {
-                #line default
-                        Goo(Program.[|X|])
+                        void Main()
+                        {
+                    #line default
+                            Goo(Program.[|X|])
 
 
-                #line hidden
+                    #line hidden
+                        }
                     }
-                }
-                #line default
-                """);
+                    #line default
+                    """
+            );
         }
 
         [Fact]
@@ -4753,36 +4969,37 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                #line hidden
-                class Program
-                {
-                #line default
-                    void Main()
+                    #line hidden
+                    class Program
                     {
-                        Goo([|x|]);
+                    #line default
+                        void Main()
+                        {
+                            Goo([|x|]);
+                        }
+                    #line hidden
                     }
-                #line hidden
-                }
-                #line default
-                """,
+                    #line default
+                    """,
                 """
-                using System;
+                    using System;
 
-                #line hidden
-                class Program
-                {
-                #line default
-                    void Main()
+                    #line hidden
+                    class Program
                     {
-                        object x = null;
-                        Goo(x);
+                    #line default
+                        void Main()
+                        {
+                            object x = null;
+                            Goo(x);
+                        }
+                    #line hidden
                     }
-                #line hidden
-                }
-                #line default
-                """);
+                    #line default
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545217")]
@@ -4790,41 +5007,43 @@ index: ReadonlyFieldIndex);
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    void goo()
+                    class Program
                     {
-                        bar([|xyz|]);
-                    }
+                        void goo()
+                        {
+                            bar([|xyz|]);
+                        }
 
-                    struct sfoo
-                    {
-                    }
+                        struct sfoo
+                        {
+                        }
 
-                    void bar(sfoo x)
-                    {
+                        void bar(sfoo x)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void goo()
+                    class Program
                     {
-                        sfoo xyz = default(sfoo);
-                        bar(xyz);
-                    }
+                        void goo()
+                        {
+                            sfoo xyz = default(sfoo);
+                            bar(xyz);
+                        }
 
-                    struct sfoo
-                    {
-                    }
+                        struct sfoo
+                        {
+                        }
 
-                    void bar(sfoo x)
-                    {
+                        void bar(sfoo x)
+                        {
+                        }
                     }
-                }
-                """,
-index: 3, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
+                    """,
+                index: 3,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545217")]
@@ -4832,41 +5051,42 @@ index: 3, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void goo()
+                    class Program
                     {
-                        bar([|xyz|]);
-                    }
+                        void goo()
+                        {
+                            bar([|xyz|]);
+                        }
 
-                    struct sfoo
-                    {
-                    }
+                        struct sfoo
+                        {
+                        }
 
-                    void bar(sfoo x)
-                    {
+                        void bar(sfoo x)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void goo()
+                    class Program
                     {
-                        sfoo xyz = default;
-                        bar(xyz);
-                    }
+                        void goo()
+                        {
+                            sfoo xyz = default;
+                            bar(xyz);
+                        }
 
-                    struct sfoo
-                    {
-                    }
+                        struct sfoo
+                        {
+                        }
 
-                    void bar(sfoo x)
-                    {
+                        void bar(sfoo x)
+                        {
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -4874,25 +5094,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        int v = 1 + ([|k|]);
+                        void Main()
+                        {
+                            int v = 1 + ([|k|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int k;
-
-                    void Main()
+                    class Program
                     {
-                        int v = 1 + (k);
+                        private int k;
+
+                        void Main()
+                        {
+                            int v = 1 + (k);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -4900,31 +5121,32 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Linq;
+                    using System.Linq;
 
-                class Program
-                {
-                    void Main(string[] args)
+                    class Program
                     {
-                        var q = from a in args
-                                select [|v|];
+                        void Main(string[] args)
+                        {
+                            var q = from a in args
+                                    select [|v|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Linq;
+                    using System.Linq;
 
-                class Program
-                {
-                    private object v;
-
-                    void Main(string[] args)
+                    class Program
                     {
-                        var q = from a in args
-                                select v;
+                        private object v;
+
+                        void Main(string[] args)
+                        {
+                            var q = from a in args
+                                    select v;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -4932,27 +5154,28 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        int[] a = null;
-                        int[] temp = checked([|goo|]);
+                        void Main()
+                        {
+                            int[] a = null;
+                            int[] temp = checked([|goo|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int[] goo;
-
-                    void Main()
+                    class Program
                     {
-                        int[] a = null;
-                        int[] temp = checked(goo);
+                        private int[] goo;
+
+                        void Main()
+                        {
+                            int[] a = null;
+                            int[] temp = checked(goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -4960,25 +5183,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var v = new int[[|k|]];
+                        void Main()
+                        {
+                            var v = new int[[|k|]];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int k;
-
-                    void Main()
+                    class Program
                     {
-                        var v = new int[k];
+                        private int k;
+
+                        void Main()
+                        {
+                            var v = new int[k];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -4986,25 +5210,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int i = [|goo|] ? bar : baz;
+                        static void Main()
+                        {
+                            int i = [|goo|] ? bar : baz;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static bool goo;
-
-                    static void Main()
+                    class Program
                     {
-                        int i = goo ? bar : baz;
+                        private static bool goo;
+
+                        static void Main()
+                        {
+                            int i = goo ? bar : baz;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5012,25 +5237,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int i = goo ? [|bar|] : baz;
+                        static void Main()
+                        {
+                            int i = goo ? [|bar|] : baz;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int bar;
-
-                    static void Main()
+                    class Program
                     {
-                        int i = goo ? bar : baz;
+                        private static int bar;
+
+                        static void Main()
+                        {
+                            int i = goo ? bar : baz;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5038,25 +5264,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int i = goo ? bar : [|baz|];
+                        static void Main()
+                        {
+                            int i = goo ? bar : [|baz|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private static int baz;
-
-                    static void Main()
+                    class Program
                     {
-                        int i = goo ? bar : baz;
+                        private static int baz;
+
+                        static void Main()
+                        {
+                            int i = goo ? bar : baz;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5064,25 +5291,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var x = (int)[|y|];
+                        void Main()
+                        {
+                            var x = (int)[|y|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int y;
-
-                    void Main()
+                    class Program
                     {
-                        var x = (int)y;
+                        private int y;
+
+                        void Main()
+                        {
+                            var x = (int)y;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5090,29 +5318,30 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        if ([|goo|])
+                        void Main()
                         {
+                            if ([|goo|])
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private bool goo;
-
-                    void Main()
+                    class Program
                     {
-                        if (goo)
+                        private bool goo;
+
+                        void Main()
                         {
+                            if (goo)
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5120,29 +5349,30 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        switch ([|goo|])
+                        void Main()
                         {
+                            switch ([|goo|])
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int goo;
-
-                    void Main()
+                    class Program
                     {
-                        switch (goo)
+                        private int goo;
+
+                        void Main()
                         {
+                            switch (goo)
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5150,14 +5380,15 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        [|System|].Console.WriteLine(4);
+                        void Main()
+                        {
+                            [|System|].Console.WriteLine(4);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5165,14 +5396,15 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        [|System.Console|].WriteLine(4);
+                        void Main()
+                        {
+                            [|System.Console|].WriteLine(4);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5180,14 +5412,15 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        [|base|].ToString();
+                        void Main()
+                        {
+                            [|base|].ToString();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545273")]
@@ -5195,24 +5428,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        [|undefined|] = 1;
+                        void Main()
+                        {
+                            [|undefined|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var undefined = 1;
+                        void Main()
+                        {
+                            var undefined = 1;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex, options: ImplicitTypingEverywhere());
+                    """,
+                index: PropertyIndex,
+                options: ImplicitTypingEverywhere()
+            );
         }
 
         [Fact]
@@ -5220,24 +5455,25 @@ index: PropertyIndex, options: ImplicitTypingEverywhere());
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        [|undefined|] = (x) => 2;
+                        void Main()
+                        {
+                            [|undefined|] = (x) => 2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        System.Func<object, int> undefined = (x) => 2;
+                        void Main()
+                        {
+                            System.Func<object, int> undefined = (x) => 2;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545273")]
@@ -5245,24 +5481,25 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        [|undefined|] = 1;
+                        void Main()
+                        {
+                            [|undefined|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        int undefined = 1;
+                        void Main()
+                        {
+                            int undefined = 1;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545273")]
@@ -5270,24 +5507,25 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        [|undefined|] = new { P = "1" };
+                        void Main()
+                        {
+                            [|undefined|] = new { P = "1" };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var undefined = new { P = "1" };
+                        void Main()
+                        {
+                            var undefined = new { P = "1" };
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545269")]
@@ -5295,17 +5533,18 @@ index: PropertyIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                #line 1 "goo"
-                    void Goo()
+                    class C
                     {
-                        this.[|Bar|] = 1;
+                    #line 1 "goo"
+                        void Goo()
+                        {
+                            this.[|Bar|] = 1;
+                        }
+                    #line default
+                    #line hidden
                     }
-                #line default
-                #line hidden
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545269")]
@@ -5323,21 +5562,31 @@ index: PropertyIndex);
                 #line hidden
                 }
                 """;
-            await TestExactActionSetOfferedAsync(code, new[] { string.Format(FeaturesResources.Generate_local_0, "Bar"), string.Format(FeaturesResources.Generate_parameter_0, "Bar") });
-
-            await TestInRegularAndScriptAsync(code,
-                """
-                class C
+            await TestExactActionSetOfferedAsync(
+                code,
+                new[]
                 {
-                #line 1 "goo"
-                    void Goo()
-                    {
-                        var [|Bar|] = 1;
-                    }
-                #line default
-                #line hidden
+                    string.Format(FeaturesResources.Generate_local_0, "Bar"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "Bar")
                 }
-                """, options: ImplicitTypingEverywhere());
+            );
+
+            await TestInRegularAndScriptAsync(
+                code,
+                """
+                    class C
+                    {
+                    #line 1 "goo"
+                        void Goo()
+                        {
+                            var [|Bar|] = 1;
+                        }
+                    #line default
+                    #line hidden
+                    }
+                    """,
+                options: ImplicitTypingEverywhere()
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546027")]
@@ -5345,32 +5594,33 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                [AttributeUsage(AttributeTargets.Class)]
-                class MyAttrAttribute : Attribute
-                {
-                }
+                    [AttributeUsage(AttributeTargets.Class)]
+                    class MyAttrAttribute : Attribute
+                    {
+                    }
 
-                [MyAttr(123, [|Value|] = 1)]
-                class D
-                {
-                }
-                """,
+                    [MyAttr(123, [|Value|] = 1)]
+                    class D
+                    {
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                [AttributeUsage(AttributeTargets.Class)]
-                class MyAttrAttribute : Attribute
-                {
-                    public int Value { get; set; }
-                }
+                    [AttributeUsage(AttributeTargets.Class)]
+                    class MyAttrAttribute : Attribute
+                    {
+                        public int Value { get; set; }
+                    }
 
-                [MyAttr(123, Value = 1)]
-                class D
-                {
-                }
-                """);
+                    [MyAttr(123, Value = 1)]
+                    class D
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545232")]
@@ -5378,45 +5628,46 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                namespace CSharpDemoApp
-                {
-                    class Program
+                    using System;
+                    namespace CSharpDemoApp
                     {
-                        static void Main(string[] args)
+                        class Program
                         {
-                            const int MEGABYTE = 1024 * 1024;
-                            Console.WriteLine(MEGABYTE);
+                            static void Main(string[] args)
+                            {
+                                const int MEGABYTE = 1024 * 1024;
+                                Console.WriteLine(MEGABYTE);
 
-                            Calculate([|multiplier|]);
-                        }
-                        static void Calculate(double multiplier = Math.PI)
-                        {
+                                Calculate([|multiplier|]);
+                            }
+                            static void Calculate(double multiplier = Math.PI)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                namespace CSharpDemoApp
-                {
-                    class Program
+                    using System;
+                    namespace CSharpDemoApp
                     {
-                        static void Main(string[] args)
+                        class Program
                         {
-                            const int MEGABYTE = 1024 * 1024;
-                            Console.WriteLine(MEGABYTE);
+                            static void Main(string[] args)
+                            {
+                                const int MEGABYTE = 1024 * 1024;
+                                Console.WriteLine(MEGABYTE);
 
-                            double multiplier = 0;
-                            Calculate(multiplier);
-                        }
-                        static void Calculate(double multiplier = Math.PI)
-                        {
+                                double multiplier = 0;
+                                Calculate(multiplier);
+                            }
+                            static void Calculate(double multiplier = Math.PI)
+                            {
+                            }
                         }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/863346")]
@@ -5424,41 +5675,42 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class TestClass<T1>
-                {
-                    static T TestMethod<T>(T item)
+                    using System;
+                    class TestClass<T1>
                     {
-                        T t = WrapFunc<T>([|NewLocal|]);
-                        return t;
-                    }
+                        static T TestMethod<T>(T item)
+                        {
+                            T t = WrapFunc<T>([|NewLocal|]);
+                            return t;
+                        }
 
-                    private static T WrapFunc<T>(Func<T1, T> function)
-                    {
-                        T1 zoo = default(T1);
-                        return function(zoo);
+                        private static T WrapFunc<T>(Func<T1, T> function)
+                        {
+                            T1 zoo = default(T1);
+                            return function(zoo);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class TestClass<T1>
-                {
-                    static T TestMethod<T>(T item)
+                    using System;
+                    class TestClass<T1>
                     {
-                        Func<T1, T> NewLocal = null;
-                        T t = WrapFunc<T>(NewLocal);
-                        return t;
-                    }
+                        static T TestMethod<T>(T item)
+                        {
+                            Func<T1, T> NewLocal = null;
+                            T t = WrapFunc<T>(NewLocal);
+                            return t;
+                        }
 
-                    private static T WrapFunc<T>(Func<T1, T> function)
-                    {
-                        T1 zoo = default(T1);
-                        return function(zoo);
+                        private static T WrapFunc<T>(Func<T1, T> function)
+                        {
+                            T1 zoo = default(T1);
+                            return function(zoo);
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/863346")]
@@ -5466,41 +5718,42 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class TestClass<T1>
-                {
-                    static T TestMethod<T>(T item)
+                    using System;
+                    class TestClass<T1>
                     {
-                        T t = WrapFunc<T>([|NewLocal|]);
-                        return t;
-                    }
+                        static T TestMethod<T>(T item)
+                        {
+                            T t = WrapFunc<T>([|NewLocal|]);
+                            return t;
+                        }
 
-                    private static T WrapFunc<T>(Func<T1, T> function)
-                    {
-                        T1 zoo = default(T1);
-                        return function(zoo);
+                        private static T WrapFunc<T>(Func<T1, T> function)
+                        {
+                            T1 zoo = default(T1);
+                            return function(zoo);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class TestClass<T1>
-                {
-                    public static Func<T1, object> NewLocal { get; private set; }
-
-                    static T TestMethod<T>(T item)
+                    using System;
+                    class TestClass<T1>
                     {
-                        T t = WrapFunc<T>(NewLocal);
-                        return t;
-                    }
+                        public static Func<T1, object> NewLocal { get; private set; }
 
-                    private static T WrapFunc<T>(Func<T1, T> function)
-                    {
-                        T1 zoo = default(T1);
-                        return function(zoo);
+                        static T TestMethod<T>(T item)
+                        {
+                            T t = WrapFunc<T>(NewLocal);
+                            return t;
+                        }
+
+                        private static T WrapFunc<T>(Func<T1, T> function)
+                        {
+                            T1 zoo = default(T1);
+                            return function(zoo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/865067")]
@@ -5508,31 +5761,32 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    IEnumerable<DayOfWeek> Goo()
+                    class Program
                     {
-                        yield return [|abc|];
+                        IEnumerable<DayOfWeek> Goo()
+                        {
+                            yield return [|abc|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    private DayOfWeek abc;
-
-                    IEnumerable<DayOfWeek> Goo()
+                    class Program
                     {
-                        yield return abc;
+                        private DayOfWeek abc;
+
+                        IEnumerable<DayOfWeek> Goo()
+                        {
+                            yield return abc;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5540,31 +5794,32 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    async IAsyncEnumerable<DayOfWeek> Goo()
+                    class Program
                     {
-                        yield return [|abc|];
+                        async IAsyncEnumerable<DayOfWeek> Goo()
+                        {
+                            yield return [|abc|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    private DayOfWeek abc;
-
-                    async IAsyncEnumerable<DayOfWeek> Goo()
+                    class Program
                     {
-                        yield return abc;
+                        private DayOfWeek abc;
+
+                        async IAsyncEnumerable<DayOfWeek> Goo()
+                        {
+                            yield return abc;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30235")]
@@ -5572,37 +5827,38 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    void M()
+                    class Program
                     {
-                        IEnumerable<DayOfWeek> F()
+                        void M()
                         {
-                            yield return [|abc|];
+                            IEnumerable<DayOfWeek> F()
+                            {
+                                yield return [|abc|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    private DayOfWeek abc;
-
-                    void M()
+                    class Program
                     {
-                        IEnumerable<DayOfWeek> F()
+                        private DayOfWeek abc;
+
+                        void M()
                         {
-                            yield return abc;
+                            IEnumerable<DayOfWeek> F()
+                            {
+                                yield return abc;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/877580")]
@@ -5610,29 +5866,31 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        throw [|MyExp|];
+                        void Goo()
+                        {
+                            throw [|MyExp|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    private Exception MyExp;
-
-                    void Goo()
+                    class Program
                     {
-                        throw MyExp;
+                        private Exception MyExp;
+
+                        void Goo()
+                        {
+                            throw MyExp;
+                        }
                     }
-                }
-                """, index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5640,25 +5898,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|int* a = goo|];
+                        void Method()
+                        {
+                            [|int* a = goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private unsafe int* goo;
-
-                    void Method()
+                    class Class
                     {
-                        int* a = goo;
+                        private unsafe int* goo;
+
+                        void Method()
+                        {
+                            int* a = goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5666,25 +5925,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|int*[] a = goo|];
+                        void Method()
+                        {
+                            [|int*[] a = goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private unsafe int*[] goo;
-
-                    void Method()
+                    class Class
                     {
-                        int*[] a = goo;
+                        private unsafe int*[] goo;
+
+                        void Method()
+                        {
+                            int*[] a = goo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5692,47 +5952,16 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                unsafe class Class
-                {
-                    void Method()
-                    {
-                        [|int* a = goo|];
-                    }
-                }
-                """,
-                """
-                unsafe class Class
-                {
-                    private int* goo;
-
-                    void Method()
-                    {
-                        int* a = goo;
-                    }
-                }
-                """);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
-        public async Task TestUnsafeFieldInNestedClass()
-        {
-            await TestInRegularAndScriptAsync(
-                """
-                unsafe class Class
-                {
-                    class MyClass
+                    unsafe class Class
                     {
                         void Method()
                         {
                             [|int* a = goo|];
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                unsafe class Class
-                {
-                    class MyClass
+                    unsafe class Class
                     {
                         private int* goo;
 
@@ -5741,8 +5970,41 @@ index: LocalIndex);
                             int* a = goo;
                         }
                     }
-                }
-                """);
+                    """
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
+        public async Task TestUnsafeFieldInNestedClass()
+        {
+            await TestInRegularAndScriptAsync(
+                """
+                    unsafe class Class
+                    {
+                        class MyClass
+                        {
+                            void Method()
+                            {
+                                [|int* a = goo|];
+                            }
+                        }
+                    }
+                    """,
+                """
+                    unsafe class Class
+                    {
+                        class MyClass
+                        {
+                            private int* goo;
+
+                            void Method()
+                            {
+                                int* a = goo;
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5750,31 +6012,32 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    unsafe class MyClass
+                    class Class
                     {
-                        void Method()
+                        unsafe class MyClass
                         {
-                            [|int* a = Class.goo|];
+                            void Method()
+                            {
+                                [|int* a = Class.goo|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private static unsafe int* goo;
-
-                    unsafe class MyClass
+                    class Class
                     {
-                        void Method()
+                        private static unsafe int* goo;
+
+                        unsafe class MyClass
                         {
-                            int* a = Class.goo;
+                            void Method()
+                            {
+                                int* a = Class.goo;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5782,26 +6045,27 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|int* a = goo|];
+                        void Method()
+                        {
+                            [|int* a = goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private readonly unsafe int* goo;
-
-                    void Method()
+                    class Class
                     {
-                        int* a = goo;
+                        private readonly unsafe int* goo;
+
+                        void Method()
+                        {
+                            int* a = goo;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5809,26 +6073,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|int*[] a = goo|];
+                        void Method()
+                        {
+                            [|int*[] a = goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private readonly unsafe int*[] goo;
-
-                    void Method()
+                    class Class
                     {
-                        int*[] a = goo;
+                        private readonly unsafe int*[] goo;
+
+                        void Method()
+                        {
+                            int*[] a = goo;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5836,48 +6101,16 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                unsafe class Class
-                {
-                    void Method()
-                    {
-                        [|int* a = goo|];
-                    }
-                }
-                """,
-                """
-                unsafe class Class
-                {
-                    private readonly int* goo;
-
-                    void Method()
-                    {
-                        int* a = goo;
-                    }
-                }
-                """,
-index: ReadonlyFieldIndex);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
-        public async Task TestUnsafeReadOnlyFieldInNestedClass()
-        {
-            await TestInRegularAndScriptAsync(
-                """
-                unsafe class Class
-                {
-                    class MyClass
+                    unsafe class Class
                     {
                         void Method()
                         {
                             [|int* a = goo|];
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                unsafe class Class
-                {
-                    class MyClass
+                    unsafe class Class
                     {
                         private readonly int* goo;
 
@@ -5886,9 +6119,43 @@ index: ReadonlyFieldIndex);
                             int* a = goo;
                         }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
+        public async Task TestUnsafeReadOnlyFieldInNestedClass()
+        {
+            await TestInRegularAndScriptAsync(
+                """
+                    unsafe class Class
+                    {
+                        class MyClass
+                        {
+                            void Method()
+                            {
+                                [|int* a = goo|];
+                            }
+                        }
+                    }
+                    """,
+                """
+                    unsafe class Class
+                    {
+                        class MyClass
+                        {
+                            private readonly int* goo;
+
+                            void Method()
+                            {
+                                int* a = goo;
+                            }
+                        }
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5896,32 +6163,33 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    unsafe class MyClass
+                    class Class
                     {
-                        void Method()
+                        unsafe class MyClass
                         {
-                            [|int* a = Class.goo|];
+                            void Method()
+                            {
+                                [|int* a = Class.goo|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private static readonly unsafe int* goo;
-
-                    unsafe class MyClass
+                    class Class
                     {
-                        void Method()
+                        private static readonly unsafe int* goo;
+
+                        unsafe class MyClass
                         {
-                            int* a = Class.goo;
+                            void Method()
+                            {
+                                int* a = Class.goo;
+                            }
                         }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5929,26 +6197,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|int* a = goo|];
+                        void Method()
+                        {
+                            [|int* a = goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public unsafe int* goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        int* a = goo;
+                        public unsafe int* goo { get; private set; }
+
+                        void Method()
+                        {
+                            int* a = goo;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5956,26 +6225,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|int*[] a = goo|];
+                        void Method()
+                        {
+                            [|int*[] a = goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public unsafe int*[] goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        int*[] a = goo;
+                        public unsafe int*[] goo { get; private set; }
+
+                        void Method()
+                        {
+                            int*[] a = goo;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5983,48 +6253,16 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                unsafe class Class
-                {
-                    void Method()
-                    {
-                        [|int* a = goo|];
-                    }
-                }
-                """,
-                """
-                unsafe class Class
-                {
-                    public int* goo { get; private set; }
-
-                    void Method()
-                    {
-                        int* a = goo;
-                    }
-                }
-                """,
-index: PropertyIndex);
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
-        public async Task TestUnsafePropertyInNestedClass()
-        {
-            await TestInRegularAndScriptAsync(
-                """
-                unsafe class Class
-                {
-                    class MyClass
+                    unsafe class Class
                     {
                         void Method()
                         {
                             [|int* a = goo|];
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                unsafe class Class
-                {
-                    class MyClass
+                    unsafe class Class
                     {
                         public int* goo { get; private set; }
 
@@ -6033,9 +6271,43 @@ index: PropertyIndex);
                             int* a = goo;
                         }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
+        public async Task TestUnsafePropertyInNestedClass()
+        {
+            await TestInRegularAndScriptAsync(
+                """
+                    unsafe class Class
+                    {
+                        class MyClass
+                        {
+                            void Method()
+                            {
+                                [|int* a = goo|];
+                            }
+                        }
+                    }
+                    """,
+                """
+                    unsafe class Class
+                    {
+                        class MyClass
+                        {
+                            public int* goo { get; private set; }
+
+                            void Method()
+                            {
+                                int* a = goo;
+                            }
+                        }
+                    }
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -6043,32 +6315,33 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    unsafe class MyClass
+                    class Class
                     {
-                        void Method()
+                        unsafe class MyClass
                         {
-                            [|int* a = Class.goo|];
+                            void Method()
+                            {
+                                [|int* a = Class.goo|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public static unsafe int* goo { get; private set; }
-
-                    unsafe class MyClass
+                    class Class
                     {
-                        void Method()
+                        public static unsafe int* goo { get; private set; }
+
+                        unsafe class MyClass
                         {
-                            int* a = Class.goo;
+                            void Method()
+                            {
+                                int* a = Class.goo;
+                            }
                         }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6076,25 +6349,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z|]);
+                        void M()
+                        {
+                            var x = nameof([|Z|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public object Z { get; private set; }
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(Z);
+                        public object Z { get; private set; }
+
+                        void M()
+                        {
+                            var x = nameof(Z);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6102,26 +6376,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z|]);
+                        void M()
+                        {
+                            var x = nameof([|Z|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private object Z;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(Z);
+                        private object Z;
+
+                        void M()
+                        {
+                            var x = nameof(Z);
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6129,26 +6404,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z|]);
+                        void M()
+                        {
+                            var x = nameof([|Z|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private readonly object Z;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(Z);
+                        private readonly object Z;
+
+                        void M()
+                        {
+                            var x = nameof(Z);
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6156,25 +6432,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z|]);
+                        void M()
+                        {
+                            var x = nameof([|Z|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        object Z = null;
-                        var x = nameof(Z);
+                        void M()
+                        {
+                            object Z = null;
+                            var x = nameof(Z);
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6182,25 +6459,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z.X|]);
+                        void M()
+                        {
+                            var x = nameof([|Z.X|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public object Z { get; private set; }
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(Z.X);
+                        public object Z { get; private set; }
+
+                        void M()
+                        {
+                            var x = nameof(Z.X);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6208,26 +6486,27 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z.X|]);
+                        void M()
+                        {
+                            var x = nameof([|Z.X|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private object Z;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(Z.X);
+                        private object Z;
+
+                        void M()
+                        {
+                            var x = nameof(Z.X);
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6235,26 +6514,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z.X|]);
+                        void M()
+                        {
+                            var x = nameof([|Z.X|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private readonly object Z;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(Z.X);
+                        private readonly object Z;
+
+                        void M()
+                        {
+                            var x = nameof(Z.X);
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6262,25 +6542,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z.X|]);
+                        void M()
+                        {
+                            var x = nameof([|Z.X|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        object Z = null;
-                        var x = nameof(Z.X);
+                        void M()
+                        {
+                            object Z = null;
+                            var x = nameof(Z.X);
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6288,25 +6569,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z.X.Y|]);
+                        void M()
+                        {
+                            var x = nameof([|Z.X.Y|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public object Z { get; private set; }
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(Z.X.Y);
+                        public object Z { get; private set; }
+
+                        void M()
+                        {
+                            var x = nameof(Z.X.Y);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6314,26 +6596,27 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z.X.Y|]);
+                        void M()
+                        {
+                            var x = nameof([|Z.X.Y|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private object Z;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(Z.X.Y);
+                        private object Z;
+
+                        void M()
+                        {
+                            var x = nameof(Z.X.Y);
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6341,26 +6624,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z.X.Y|]);
+                        void M()
+                        {
+                            var x = nameof([|Z.X.Y|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private readonly object Z;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(Z.X.Y);
+                        private readonly object Z;
+
+                        void M()
+                        {
+                            var x = nameof(Z.X.Y);
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6368,25 +6652,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|Z.X.Y|]);
+                        void M()
+                        {
+                            var x = nameof([|Z.X.Y|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        object Z = null;
-                        var x = nameof(Z.X.Y);
+                        void M()
+                        {
+                            object Z = null;
+                            var x = nameof(Z.X.Y);
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6394,14 +6679,15 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = [|nameof(1 + 2)|];
+                        void M()
+                        {
+                            var x = [|nameof(1 + 2)|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6409,15 +6695,16 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var y = 1 + 2;
-                        var x = [|nameof(y)|];
+                        void M()
+                        {
+                            var y = 1 + 2;
+                            var x = [|nameof(y)|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6425,16 +6712,17 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var y = 1 + 2;
-                        var z = "";
-                        var x = [|nameof(y, z)|];
+                        void M()
+                        {
+                            var y = 1 + 2;
+                            var z = "";
+                            var x = [|nameof(y, z)|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6442,26 +6730,27 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|y|], z);
+                        void M()
+                        {
+                            var x = nameof([|y|], z);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public object y { get; private set; }
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(y, z);
+                        public object y { get; private set; }
+
+                        void M()
+                        {
+                            var x = nameof(y, z);
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6469,25 +6758,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|y|], z);
+                        void M()
+                        {
+                            var x = nameof([|y|], z);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private object y;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(y, z);
+                        private object y;
+
+                        void M()
+                        {
+                            var x = nameof(y, z);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6495,26 +6785,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|y|], z);
+                        void M()
+                        {
+                            var x = nameof([|y|], z);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private readonly object y;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(y, z);
+                        private readonly object y;
+
+                        void M()
+                        {
+                            var x = nameof(y, z);
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6522,25 +6813,26 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|y|], z);
+                        void M()
+                        {
+                            var x = nameof([|y|], z);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        object y = null;
-                        var x = nameof(y, z);
+                        void M()
+                        {
+                            object y = null;
+                            var x = nameof(y, z);
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6548,36 +6840,37 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|y|]);
-                    }
+                        void M()
+                        {
+                            var x = nameof([|y|]);
+                        }
 
-                    private object nameof(object y)
-                    {
-                        return null;
+                        private object nameof(object y)
+                        {
+                            return null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public object y { get; private set; }
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(y);
-                    }
+                        public object y { get; private set; }
 
-                    private object nameof(object y)
-                    {
-                        return null;
+                        void M()
+                        {
+                            var x = nameof(y);
+                        }
+
+                        private object nameof(object y)
+                        {
+                            return null;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6585,35 +6878,36 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|y|]);
-                    }
+                        void M()
+                        {
+                            var x = nameof([|y|]);
+                        }
 
-                    private object nameof(object y)
-                    {
-                        return null;
+                        private object nameof(object y)
+                        {
+                            return null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private object y;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(y);
-                    }
+                        private object y;
 
-                    private object nameof(object y)
-                    {
-                        return null;
+                        void M()
+                        {
+                            var x = nameof(y);
+                        }
+
+                        private object nameof(object y)
+                        {
+                            return null;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6621,36 +6915,37 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|y|]);
-                    }
+                        void M()
+                        {
+                            var x = nameof([|y|]);
+                        }
 
-                    private object nameof(object y)
-                    {
-                        return null;
+                        private object nameof(object y)
+                        {
+                            return null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private readonly object y;
-
-                    void M()
+                    class C
                     {
-                        var x = nameof(y);
-                    }
+                        private readonly object y;
 
-                    private object nameof(object y)
-                    {
-                        return null;
+                        void M()
+                        {
+                            var x = nameof(y);
+                        }
+
+                        private object nameof(object y)
+                        {
+                            return null;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -6658,35 +6953,36 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = nameof([|y|]);
-                    }
+                        void M()
+                        {
+                            var x = nameof([|y|]);
+                        }
 
-                    private object nameof(object y)
-                    {
-                        return null;
+                        private object nameof(object y)
+                        {
+                            return null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        object y = null;
-                        var x = nameof(y);
-                    }
+                        void M()
+                        {
+                            object y = null;
+                            var x = nameof(y);
+                        }
 
-                    private object nameof(object y)
-                    {
-                        return null;
+                        private object nameof(object y)
+                        {
+                            return null;
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6694,25 +6990,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?[|.Instance|];
+                        void Main(C a)
+                        {
+                            C x = a?[|.Instance|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public C Instance { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?.Instance;
+                        public C Instance { get; private set; }
+
+                        void Main(C a)
+                        {
+                            C x = a?.Instance;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6720,26 +7017,27 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?[|.Instance|];
+                        void Main(C a)
+                        {
+                            C x = a?[|.Instance|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private C Instance;
-
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?.Instance;
+                        private C Instance;
+
+                        void Main(C a)
+                        {
+                            C x = a?.Instance;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6747,26 +7045,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?[|.Instance|];
+                        void Main(C a)
+                        {
+                            C x = a?[|.Instance|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private readonly C Instance;
-
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?.Instance;
+                        private readonly C Instance;
+
+                        void Main(C a)
+                        {
+                            C x = a?.Instance;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6774,25 +7073,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?[|.Instance|];
+                        void Main(C a)
+                        {
+                            var x = a?[|.Instance|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public object Instance { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?.Instance;
+                        public object Instance { get; private set; }
+
+                        void Main(C a)
+                        {
+                            var x = a?.Instance;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6800,26 +7100,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?[|.Instance|];
+                        void Main(C a)
+                        {
+                            var x = a?[|.Instance|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private object Instance;
-
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?.Instance;
+                        private object Instance;
+
+                        void Main(C a)
+                        {
+                            var x = a?.Instance;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6827,26 +7128,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?[|.Instance|];
+                        void Main(C a)
+                        {
+                            var x = a?[|.Instance|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private readonly object Instance;
-
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?.Instance;
+                        private readonly object Instance;
+
+                        void Main(C a)
+                        {
+                            var x = a?.Instance;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6854,25 +7156,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?[|.B|];
+                        void Main(C a)
+                        {
+                            int? x = a?[|.B|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public int B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?.B;
+                        public int B { get; private set; }
+
+                        void Main(C a)
+                        {
+                            int? x = a?.B;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6880,26 +7183,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?[|.B|];
+                        void Main(C a)
+                        {
+                            int? x = a?[|.B|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private int B;
-
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?.B;
+                        private int B;
+
+                        void Main(C a)
+                        {
+                            int? x = a?.B;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6907,26 +7211,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?[|.B|];
+                        void Main(C a)
+                        {
+                            int? x = a?[|.B|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private readonly int B;
-
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?.B;
+                        private readonly int B;
+
+                        void Main(C a)
+                        {
+                            int? x = a?.B;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6934,36 +7239,37 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            C x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        public C C { get; internal set; }
+                        void Main(C a)
+                        {
+                            C x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            public C C { get; internal set; }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6971,36 +7277,37 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            int x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        public int C { get; internal set; }
+                        void Main(C a)
+                        {
+                            int x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            public int C { get; internal set; }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7008,36 +7315,37 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            int? x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        public int C { get; internal set; }
+                        void Main(C a)
+                        {
+                            int? x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            public int C { get; internal set; }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7045,36 +7353,37 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            var x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        public object C { get; internal set; }
+                        void Main(C a)
+                        {
+                            var x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            public object C { get; internal set; }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7082,37 +7391,38 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            C x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        internal C C;
+                        void Main(C a)
+                        {
+                            C x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            internal C C;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7120,37 +7430,38 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            int x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        internal int C;
+                        void Main(C a)
+                        {
+                            int x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            internal int C;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7158,37 +7469,38 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            int? x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        internal int C;
+                        void Main(C a)
+                        {
+                            int? x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            internal int C;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7196,37 +7508,38 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            var x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        internal object C;
+                        void Main(C a)
+                        {
+                            var x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            internal object C;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7234,37 +7547,38 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            C x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        C x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        internal readonly C C;
+                        void Main(C a)
+                        {
+                            C x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            internal readonly C C;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7272,37 +7586,38 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            int x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        internal readonly int C;
+                        void Main(C a)
+                        {
+                            int x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            internal readonly int C;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7310,37 +7625,38 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            int? x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        int? x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        internal readonly int C;
+                        void Main(C a)
+                        {
+                            int? x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            internal readonly int C;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -7348,37 +7664,38 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?.B.[|C|];
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
+                        void Main(C a)
+                        {
+                            var x = a?.B.[|C|];
+                        }
+
+                        public class E
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public E B { get; private set; }
-
-                    void Main(C a)
+                    class C
                     {
-                        var x = a?.B.C;
-                    }
+                        public E B { get; private set; }
 
-                    public class E
-                    {
-                        internal readonly object C;
+                        void Main(C a)
+                        {
+                            var x = a?.B.C;
+                        }
+
+                        public class E
+                        {
+                            internal readonly object C;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7386,29 +7703,30 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    public int MyProperty { get; } = [|y|];
-                }
-                """,
+                    class Program
+                    {
+                        public int MyProperty { get; } = [|y|];
+                    }
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private static int y;
+                    class Program
+                    {
+                        private static int y;
 
-                    public int MyProperty { get; } = y;
-                }
-                """);
+                        public int MyProperty { get; } = y;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -7416,30 +7734,31 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    public int MyProperty { get; } = [|y|];
-                }
-                """,
+                    class Program
+                    {
+                        public int MyProperty { get; } = [|y|];
+                    }
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private static readonly int y;
+                    class Program
+                    {
+                        private static readonly int y;
 
-                    public int MyProperty { get; } = y;
-                }
-                """,
-index: ReadonlyFieldIndex);
+                        public int MyProperty { get; } = y;
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7447,29 +7766,30 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    public int MyProperty { get; } = [|y|];
-                }
-                """,
+                    class Program
+                    {
+                        public int MyProperty { get; } = [|y|];
+                    }
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    public static int y { get; private set; }
-                    public int MyProperty { get; } = y;
-                }
-                """,
-index: PropertyIndex);
+                    class Program
+                    {
+                        public static int y { get; private set; }
+                        public int MyProperty { get; } = y;
+                    }
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7477,19 +7797,20 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public int Y => [|y|];
-                }
-                """,
+                    class Program
+                    {
+                        public int Y => [|y|];
+                    }
+                    """,
                 """
-                class Program
-                {
-                    private int y;
+                    class Program
+                    {
+                        private int y;
 
-                    public int Y => y;
-                }
-                """);
+                        public int Y => y;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -7497,20 +7818,21 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public int Y => [|y|];
-                }
-                """,
+                    class Program
+                    {
+                        public int Y => [|y|];
+                    }
+                    """,
                 """
-                class Program
-                {
-                    private readonly int y;
+                    class Program
+                    {
+                        private readonly int y;
 
-                    public int Y => y;
-                }
-                """,
-index: ReadonlyFieldIndex);
+                        public int Y => y;
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7518,20 +7840,21 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public int Y => [|y|];
-                }
-                """,
+                    class Program
+                    {
+                        public int Y => [|y|];
+                    }
+                    """,
                 """
-                class Program
-                {
-                    public int Y => y;
+                    class Program
+                    {
+                        public int Y => y;
 
-                    public int y { get; private set; }
-                }
-                """,
-index: PropertyIndex);
+                        public int y { get; private set; }
+                    }
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7539,19 +7862,20 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public static C operator --(C p) => [|x|];
-                }
-                """,
+                    class C
+                    {
+                        public static C operator --(C p) => [|x|];
+                    }
+                    """,
                 """
-                class C
-                {
-                    private static C x;
+                    class C
+                    {
+                        private static C x;
 
-                    public static C operator --(C p) => x;
-                }
-                """);
+                        public static C operator --(C p) => x;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -7559,20 +7883,21 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public static C operator --(C p) => [|x|];
-                }
-                """,
+                    class C
+                    {
+                        public static C operator --(C p) => [|x|];
+                    }
+                    """,
                 """
-                class C
-                {
-                    private static readonly C x;
+                    class C
+                    {
+                        private static readonly C x;
 
-                    public static C operator --(C p) => x;
-                }
-                """,
-index: ReadonlyFieldIndex);
+                        public static C operator --(C p) => x;
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7580,20 +7905,21 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public static C operator --(C p) => [|x|];
-                }
-                """,
+                    class C
+                    {
+                        public static C operator --(C p) => [|x|];
+                    }
+                    """,
                 """
-                class C
-                {
-                    public static C x { get; private set; }
+                    class C
+                    {
+                        public static C x { get; private set; }
 
-                    public static C operator --(C p) => x;
-                }
-                """,
-index: PropertyIndex);
+                        public static C operator --(C p) => x;
+                    }
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7601,19 +7927,20 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public static C GetValue(C p) => [|x|];
-                }
-                """,
+                    class C
+                    {
+                        public static C GetValue(C p) => [|x|];
+                    }
+                    """,
                 """
-                class C
-                {
-                    private static C x;
+                    class C
+                    {
+                        private static C x;
 
-                    public static C GetValue(C p) => x;
-                }
-                """);
+                        public static C GetValue(C p) => x;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -7621,20 +7948,21 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public static C GetValue(C p) => [|x|];
-                }
-                """,
+                    class C
+                    {
+                        public static C GetValue(C p) => [|x|];
+                    }
+                    """,
                 """
-                class C
-                {
-                    private static readonly C x;
+                    class C
+                    {
+                        private static readonly C x;
 
-                    public static C GetValue(C p) => x;
-                }
-                """,
-index: ReadonlyFieldIndex);
+                        public static C GetValue(C p) => x;
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7642,20 +7970,21 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public static C GetValue(C p) => [|x|];
-                }
-                """,
+                    class C
+                    {
+                        public static C GetValue(C p) => [|x|];
+                    }
+                    """,
                 """
-                class C
-                {
-                    public static C x { get; private set; }
+                    class C
+                    {
+                        public static C x { get; private set; }
 
-                    public static C GetValue(C p) => x;
-                }
-                """,
-index: PropertyIndex);
+                        public static C GetValue(C p) => x;
+                    }
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27647")]
@@ -7663,20 +7992,21 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public static async System.Threading.Tasks.Task<C> GetValue(C p) => [|x|];
-                }
-                """,
+                    class C
+                    {
+                        public static async System.Threading.Tasks.Task<C> GetValue(C p) => [|x|];
+                    }
+                    """,
                 """
-                class C
-                {
-                    public static C x { get; private set; }
+                    class C
+                    {
+                        public static C x { get; private set; }
 
-                    public static async System.Threading.Tasks.Task<C> GetValue(C p) => x;
-                }
-                """,
-index: PropertyIndex);
+                        public static async System.Threading.Tasks.Task<C> GetValue(C p) => x;
+                    }
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7684,29 +8014,30 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { [[|key|]] = 0 };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { [[|key|]] = 0 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    private static string key;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { [key] = 0 };
+                        private static string key;
+
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { [key] = 0 };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -7714,29 +8045,30 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    public static string One { get; private set; }
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
+                        public static string One { get; private set; }
+
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -7744,29 +8076,30 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    private static int i;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = i };
+                        private static int i;
+
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = i };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -7774,30 +8107,31 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { [[|key|]] = 0 };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { [[|key|]] = 0 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    private static readonly string key;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { [key] = 0 };
+                        private static readonly string key;
+
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { [key] = 0 };
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7805,30 +8139,31 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    private static string One;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
+                        private static string One;
+
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7836,30 +8171,31 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    private static readonly int i;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = i };
+                        private static readonly int i;
+
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = i };
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -7867,30 +8203,31 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { [[|key|]] = 0 };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { [[|key|]] = 0 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    public static string key { get; private set; }
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { [key] = 0 };
+                        public static string key { get; private set; }
+
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { [key] = 0 };
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7898,30 +8235,31 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    private static readonly string One;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
+                        private static readonly string One;
+
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7929,30 +8267,31 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    public static int i { get; private set; }
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = i };
+                        public static int i { get; private set; }
+
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = i };
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -7960,29 +8299,30 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { [[|key|]] = 0 };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { [[|key|]] = 0 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string key = null;
-                        var x = new Dictionary<string, int> { [key] = 0 };
+                        static void Main(string[] args)
+                        {
+                            string key = null;
+                            var x = new Dictionary<string, int> { [key] = 0 };
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -7990,29 +8330,30 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string One = null;
-                        var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
+                        static void Main(string[] args)
+                        {
+                            string One = null;
+                            var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -8020,29 +8361,30 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
+                        static void Main(string[] args)
+                        {
+                            var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int i = 0;
-                        var x = new Dictionary<string, int> { ["Zero"] = i };
+                        static void Main(string[] args)
+                        {
+                            int i = 0;
+                            var x = new Dictionary<string, int> { ["Zero"] = i };
+                        }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact]
@@ -8050,33 +8392,34 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|goo|] = () => {
-                            return 0;
-                        };
+                        static void Main(string[] args)
+                        {
+                            [|goo|] = () => {
+                                return 0;
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    private static Func<int> goo;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        goo = () => {
-                            return 0;
-                        };
+                        private static Func<int> goo;
+
+                        static void Main(string[] args)
+                        {
+                            goo = () => {
+                                return 0;
+                            };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8084,34 +8427,35 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|goo|] = () => {
-                            return 0;
-                        };
+                        static void Main(string[] args)
+                        {
+                            [|goo|] = () => {
+                                return 0;
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    public static Func<int> goo { get; private set; }
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        goo = () => {
-                            return 0;
-                        };
+                        public static Func<int> goo { get; private set; }
+
+                        static void Main(string[] args)
+                        {
+                            goo = () => {
+                                return 0;
+                            };
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact]
@@ -8119,33 +8463,34 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|goo|] = () => {
-                            return 0;
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        Func<int> goo = () =>
+                        static void Main(string[] args)
                         {
-                            return 0;
-                        };
+                            [|goo|] = () => {
+                                return 0;
+                            };
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                """
+                    using System;
+
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            Func<int> goo = () =>
+                            {
+                                return 0;
+                            };
+                        }
+                    }
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8010")]
@@ -8153,35 +8498,36 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                public class Test
-                {
-                    public static int Property1
+                    public class Test
                     {
-                        get
+                        public static int Property1
                         {
-                            return [|_field|];
+                            get
+                            {
+                                return [|_field|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class Test
-                {
-                    private static int _field;
-
-                    public static int Property1
+                    public class Test
                     {
-                        get
+                        private static int _field;
+
+                        public static int Property1
                         {
-                            return _field;
+                            get
+                            {
+                                return _field;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8010")]
@@ -8189,36 +8535,37 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                public class Test
-                {
-                    public static int Property1
+                    public class Test
                     {
-                        get
+                        public static int Property1
                         {
-                            return [|_field|];
+                            get
+                            {
+                                return [|_field|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class Test
-                {
-                    private static readonly int _field;
-
-                    public static int Property1
+                    public class Test
                     {
-                        get
+                        private static readonly int _field;
+
+                        public static int Property1
                         {
-                            return _field;
+                            get
+                            {
+                                return _field;
+                            }
                         }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8010")]
@@ -8226,36 +8573,37 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                public class Test
-                {
-                    public static int Property1
+                    public class Test
                     {
-                        get
+                        public static int Property1
                         {
-                            return [|goo|];
+                            get
+                            {
+                                return [|goo|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class Test
-                {
-                    public static int Property1
+                    public class Test
                     {
-                        get
+                        public static int Property1
                         {
-                            return goo;
+                            get
+                            {
+                                return goo;
+                            }
                         }
-                    }
 
-                    public static int goo { get; private set; }
-                }
-                """,
-index: PropertyIndex);
+                        public static int goo { get; private set; }
+                    }
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8010")]
@@ -8263,35 +8611,36 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                public class Test
-                {
-                    public static int Property1
+                    public class Test
                     {
-                        get
+                        public static int Property1
                         {
-                            return [|goo|];
+                            get
+                            {
+                                return [|goo|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class Test
-                {
-                    public static int Property1
+                    public class Test
                     {
-                        get
+                        public static int Property1
                         {
-                            int goo = 0;
-                            return goo;
+                            get
+                            {
+                                int goo = 0;
+                                return goo;
+                            }
                         }
                     }
-                }
-                """,
-index: LocalIndex);
+                    """,
+                index: LocalIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8358")]
@@ -8299,35 +8648,36 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Outer
-                {
-                    int _field;
-
-                    class Inner
+                    class Outer
                     {
-                        public Inner(int field)
+                        int _field;
+
+                        class Inner
                         {
-                            [|_field|] = field;
+                            public Inner(int field)
+                            {
+                                [|_field|] = field;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Outer
-                {
-                    int _field;
-
-                    class Inner
+                    class Outer
                     {
-                        private int _field;
+                        int _field;
 
-                        public Inner(int field)
+                        class Inner
                         {
-                            _field = field;
+                            private int _field;
+
+                            public Inner(int field)
+                            {
+                                _field = field;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8358")]
@@ -8335,16 +8685,17 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int _field;
-
-                    void M()
+                    class C
                     {
-                        C.[|_field|] = 42;
+                        int _field;
+
+                        void M()
+                        {
+                            C.[|_field|] = 42;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8358")]
@@ -8352,16 +8703,17 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int _field;
-
-                    static C()
+                    class C
                     {
-                        [|_field|] = 42;
+                        int _field;
+
+                        static C()
+                        {
+                            [|_field|] = 42;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8369,25 +8721,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method((int, string) i)
+                    class Class
                     {
-                        Method([|tuple|]);
+                        void Method((int, string) i)
+                        {
+                            Method([|tuple|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private (int, string) tuple;
-
-                    void Method((int, string) i)
+                    class Class
                     {
-                        Method(tuple);
+                        private (int, string) tuple;
+
+                        void Method((int, string) i)
+                        {
+                            Method(tuple);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8395,25 +8748,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method((int a, string) i)
+                    class Class
                     {
-                        Method([|tuple|]);
+                        void Method((int a, string) i)
+                        {
+                            Method([|tuple|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private (int a, string) tuple;
-
-                    void Method((int a, string) i)
+                    class Class
                     {
-                        Method(tuple);
+                        private (int a, string) tuple;
+
+                        void Method((int a, string) i)
+                        {
+                            Method(tuple);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8421,25 +8775,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|tuple|] = (1, "hello");
+                        void Method()
+                        {
+                            [|tuple|] = (1, "hello");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private (int, string) tuple;
-
-                    void Method()
+                    class Class
                     {
-                        tuple = (1, "hello");
+                        private (int, string) tuple;
+
+                        void Method()
+                        {
+                            tuple = (1, "hello");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8447,25 +8802,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|tuple|] = (a: 1, "hello");
+                        void Method()
+                        {
+                            [|tuple|] = (a: 1, "hello");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private (int a, string) tuple;
-
-                    void Method()
+                    class Class
                     {
-                        tuple = (a: 1, "hello");
+                        private (int a, string) tuple;
+
+                        void Method()
+                        {
+                            tuple = (a: 1, "hello");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8473,27 +8829,28 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    public void Goo()
+                    using System;
+                    class C
                     {
-                        ref int i = ref this.[|Bar|];
+                        public void Goo()
+                        {
+                            ref int i = ref this.[|Bar|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    public ref int Bar => throw new NotImplementedException();
-
-                    public void Goo()
+                    using System;
+                    class C
                     {
-                        ref int i = ref this.Bar;
+                        public ref int Bar => throw new NotImplementedException();
+
+                        public void Goo()
+                        {
+                            ref int i = ref this.Bar;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8501,27 +8858,28 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    public void Goo()
+                    using System;
+                    class C
                     {
-                        ref int i = ref this.[|bar|];
+                        public void Goo()
+                        {
+                            ref int i = ref this.[|bar|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    private int bar;
-
-                    public void Goo()
+                    using System;
+                    class C
                     {
-                        ref int i = ref this.bar;
+                        private int bar;
+
+                        public void Goo()
+                        {
+                            ref int i = ref this.bar;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17621")]
@@ -8529,29 +8887,30 @@ index: LocalIndex);
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                public class Goo
-                {
-                    public Goo(String goo)
+                    public class Goo
                     {
-                        [|String|] = goo;
+                        public Goo(String goo)
+                        {
+                            [|String|] = goo;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class Goo
-                {
-                    public Goo(String goo)
+                    public class Goo
                     {
-                        String = goo;
-                    }
+                        public Goo(String goo)
+                        {
+                            String = goo;
+                        }
 
-                    public string String { get; }
-                }
-                """);
+                        public string String { get; }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17621")]
@@ -8559,29 +8918,31 @@ index: LocalIndex);
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                public class Goo
-                {
-                    public Goo(String goo)
+                    public class Goo
                     {
-                        [|String|] = goo;
+                        public Goo(String goo)
+                        {
+                            [|String|] = goo;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class Goo
-                {
-                    public Goo(String goo)
+                    public class Goo
                     {
-                        String = goo;
-                    }
+                        public Goo(String goo)
+                        {
+                            String = goo;
+                        }
 
-                    public string String { get; private set; }
-                }
-                """, index: ReadonlyFieldIndex);
+                        public string String { get; private set; }
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18275")]
@@ -8589,21 +8950,22 @@ index: LocalIndex);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                namespace N
-                {
-                    class nameof
+                    namespace N
                     {
+                        class nameof
+                        {
+                        }
                     }
-                }
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|nameof|]
+                        void M()
+                        {
+                            [|nameof|]
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8611,30 +8973,31 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    private readonly int _goo;
-
-                    public Class()
+                    class Class
                     {
-                        _goo = 0;
-                        [|_bar|] = 1;
+                        private readonly int _goo;
+
+                        public Class()
+                        {
+                            _goo = 0;
+                            [|_bar|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private readonly int _goo;
-                    private readonly int _bar;
-
-                    public Class()
+                    class Class
                     {
-                        _goo = 0;
-                        _bar = 1;
+                        private readonly int _goo;
+                        private readonly int _bar;
+
+                        public Class()
+                        {
+                            _goo = 0;
+                            _bar = 1;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8642,30 +9005,31 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    private readonly int _goo;
-
-                    public Class()
+                    class Class
                     {
-                        [|_bar|] = 1;
-                        _goo = 0;
+                        private readonly int _goo;
+
+                        public Class()
+                        {
+                            [|_bar|] = 1;
+                            _goo = 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private readonly int _bar;
-                    private readonly int _goo;
-
-                    public Class()
+                    class Class
                     {
-                        _bar = 1;
-                        _goo = 0;
+                        private readonly int _bar;
+                        private readonly int _goo;
+
+                        public Class()
+                        {
+                            _bar = 1;
+                            _goo = 0;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19239")]
@@ -8673,25 +9037,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    public Class()
+                    class Class
                     {
-                        [|Bar|] = 1;
+                        public Class()
+                        {
+                            [|Bar|] = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public Class()
+                    class Class
                     {
-                        Bar = 1;
-                    }
+                        public Class()
+                        {
+                            Bar = 1;
+                        }
 
-                    public int Bar { get; }
-                }
-                """);
+                        public int Bar { get; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -8699,34 +9064,35 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    private int _goo;
-                    private int _quux;
-
-                    public Class()
+                    class Class
                     {
-                        _goo = 0;
-                        [|_bar|] = 1;
-                        _quux = 2;
+                        private int _goo;
+                        private int _quux;
+
+                        public Class()
+                        {
+                            _goo = 0;
+                            [|_bar|] = 1;
+                            _quux = 2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private int _goo;
-                    private int _bar;
-                    private int _quux;
-
-                    public Class()
+                    class Class
                     {
-                        _goo = 0;
-                        _bar = 1;
-                        _quux = 2;
+                        private int _goo;
+                        private int _bar;
+                        private int _quux;
+
+                        public Class()
+                        {
+                            _goo = 0;
+                            _bar = 1;
+                            _quux = 2;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8734,34 +9100,35 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    private int goo;
-                    private int quux;
-
-                    public Class()
+                    class Class
                     {
-                        this.goo = 0;
-                        this.[|bar|] = 1;
-                        this.quux = 2;
+                        private int goo;
+                        private int quux;
+
+                        public Class()
+                        {
+                            this.goo = 0;
+                            this.[|bar|] = 1;
+                            this.quux = 2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private int goo;
-                    private int bar;
-                    private int quux;
-
-                    public Class()
+                    class Class
                     {
-                        this.goo = 0;
-                        this.bar = 1;
-                        this.quux = 2;
+                        private int goo;
+                        private int bar;
+                        private int quux;
+
+                        public Class()
+                        {
+                            this.goo = 0;
+                            this.bar = 1;
+                            this.quux = 2;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -8769,142 +9136,152 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    public int Goo { get; }
-                    public int Quuz { get; }
-
-                    public Class()
+                    class Class
                     {
-                        Goo = 0;
-                        [|Bar|] = 1;
-                        Quux = 2;
+                        public int Goo { get; }
+                        public int Quuz { get; }
+
+                        public Class()
+                        {
+                            Goo = 0;
+                            [|Bar|] = 1;
+                            Quux = 2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public int Goo { get; }
-                    public int Bar { get; }
-                    public int Quuz { get; }
-
-                    public Class()
+                    class Class
                     {
-                        Goo = 0;
-                        Bar = 1;
-                        Quux = 2;
+                        public int Goo { get; }
+                        public int Bar { get; }
+                        public int Quuz { get; }
+
+                        public Class()
+                        {
+                            Goo = 0;
+                            Bar = 1;
+                            Quux = 2;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19575")]
         public async Task TestNotOnGenericCodeParsedAsExpression()
         {
-            await TestMissingAsync("""
-                class C
-                {
-                    private void GetEvaluationRuleNames()
+            await TestMissingAsync(
+                """
+                    class C
                     {
-                        [|IEnumerable|] < Int32 >
-                        return ImmutableArray.CreateRange();
+                        private void GetEvaluationRuleNames()
+                        {
+                            [|IEnumerable|] < Int32 >
+                            return ImmutableArray.CreateRange();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19575")]
         public async Task TestOnNonGenericExpressionWithLessThan()
         {
-            await TestInRegularAndScriptAsync("""
-                class C
-                {
-                    private void GetEvaluationRuleNames()
-                    {
-                        [|IEnumerable|] < Int32
-                        return ImmutableArray.CreateRange();
-                    }
-                }
-                """,
+            await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public int IEnumerable { get; private set; }
-
-                    private void GetEvaluationRuleNames()
+                    class C
                     {
-                        IEnumerable < Int32
-                        return ImmutableArray.CreateRange();
+                        private void GetEvaluationRuleNames()
+                        {
+                            [|IEnumerable|] < Int32
+                            return ImmutableArray.CreateRange();
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    class C
+                    {
+                        public int IEnumerable { get; private set; }
+
+                        private void GetEvaluationRuleNames()
+                        {
+                            IEnumerable < Int32
+                            return ImmutableArray.CreateRange();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18988")]
         public async Task GroupNonReadonlyFieldsTogether()
         {
-            await TestInRegularAndScriptAsync("""
-                class C
-                {
-                    public bool isDisposed;
-
-                    public readonly int x;
-                    public readonly int m;
-
-                    public C()
-                    {
-                        this.[|y|] = 0;
-                    }
-                }
-                """,
+            await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public bool isDisposed;
-                    private int y;
-                    public readonly int x;
-                    public readonly int m;
-
-                    public C()
+                    class C
                     {
-                        this.y = 0;
+                        public bool isDisposed;
+
+                        public readonly int x;
+                        public readonly int m;
+
+                        public C()
+                        {
+                            this.[|y|] = 0;
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    class C
+                    {
+                        public bool isDisposed;
+                        private int y;
+                        public readonly int x;
+                        public readonly int m;
+
+                        public C()
+                        {
+                            this.y = 0;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18988")]
         public async Task GroupReadonlyFieldsTogether()
         {
-            await TestInRegularAndScriptAsync("""
-                class C
-                {
-                    public readonly int x;
-                    public readonly int m;
-
-                    public bool isDisposed;
-
-                    public C()
-                    {
-                        this.[|y|] = 0;
-                    }
-                }
-                """,
+            await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public readonly int x;
-                    public readonly int m;
-                    private readonly int y;
-                    public bool isDisposed;
-
-                    public C()
+                    class C
                     {
-                        this.y = 0;
+                        public readonly int x;
+                        public readonly int m;
+
+                        public bool isDisposed;
+
+                        public C()
+                        {
+                            this.[|y|] = 0;
+                        }
                     }
-                }
-                """, index: ReadonlyFieldIndex);
+                    """,
+                """
+                    class C
+                    {
+                        public readonly int x;
+                        public readonly int m;
+                        private readonly int y;
+                        public bool isDisposed;
+
+                        public C()
+                        {
+                            this.y = 0;
+                        }
+                    }
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20791")]
@@ -8912,31 +9289,32 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Goo(out [|goo|]);
-                    }
+                        void Method()
+                        {
+                            Goo(out [|goo|]);
+                        }
 
-                    void Goo(int i) { }
-                    void Goo(out bool b) { }
-                }
-                """,
+                        void Goo(int i) { }
+                        void Goo(out bool b) { }
+                    }
+                    """,
                 """
-                class Class
-                {
-                    private bool goo;
-
-                    void Method()
+                    class Class
                     {
-                        Goo(out goo);
-                    }
+                        private bool goo;
 
-                    void Goo(int i) { }
-                    void Goo(out bool b) { }
-                }
-                """);
+                        void Method()
+                        {
+                            Goo(out goo);
+                        }
+
+                        void Goo(int i) { }
+                        void Goo(out bool b) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20791")]
@@ -8944,31 +9322,32 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Goo([|goo|]);
-                    }
+                        void Method()
+                        {
+                            Goo([|goo|]);
+                        }
 
-                    void Goo(out bool b) { }
-                    void Goo(int i) { }
-                }
-                """,
+                        void Goo(out bool b) { }
+                        void Goo(int i) { }
+                    }
+                    """,
                 """
-                class Class
-                {
-                    private int goo;
-
-                    void Method()
+                    class Class
                     {
-                        Goo(goo);
-                    }
+                        private int goo;
 
-                    void Goo(out bool b) { }
-                    void Goo(int i) { }
-                }
-                """);
+                        void Method()
+                        {
+                            Goo(goo);
+                        }
+
+                        void Goo(out bool b) { }
+                        void Goo(int i) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20791")]
@@ -8976,31 +9355,32 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Goo(ref [|goo|]);
-                    }
+                        void Method()
+                        {
+                            Goo(ref [|goo|]);
+                        }
 
-                    void Goo(int i) { }
-                    void Goo(ref bool b) { }
-                }
-                """,
+                        void Goo(int i) { }
+                        void Goo(ref bool b) { }
+                    }
+                    """,
                 """
-                class Class
-                {
-                    private bool goo;
-
-                    void Method()
+                    class Class
                     {
-                        Goo(ref goo);
-                    }
+                        private bool goo;
 
-                    void Goo(int i) { }
-                    void Goo(ref bool b) { }
-                }
-                """);
+                        void Method()
+                        {
+                            Goo(ref goo);
+                        }
+
+                        void Goo(int i) { }
+                        void Goo(ref bool b) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20791")]
@@ -9008,31 +9388,32 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        Goo([|goo|]);
-                    }
+                        void Method()
+                        {
+                            Goo([|goo|]);
+                        }
 
-                    void Goo(ref bool b) { }
-                    void Goo(int i) { }
-                }
-                """,
+                        void Goo(ref bool b) { }
+                        void Goo(int i) { }
+                    }
+                    """,
                 """
-                class Class
-                {
-                    private int goo;
-
-                    void Method()
+                    class Class
                     {
-                        Goo(goo);
-                    }
+                        private int goo;
 
-                    void Goo(ref bool b) { }
-                    void Goo(int i) { }
-                }
-                """);
+                        void Method()
+                        {
+                            Goo(goo);
+                        }
+
+                        void Goo(ref bool b) { }
+                        void Goo(int i) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9040,25 +9421,26 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public int Property
+                    class Program
                     {
-                        get => [|_field|];
+                        public int Property
+                        {
+                            get => [|_field|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int _field;
-
-                    public int Property
+                    class Program
                     {
-                        get => _field;
+                        private int _field;
+
+                        public int Property
+                        {
+                            get => _field;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9066,27 +9448,28 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public int Property
+                    class Program
                     {
-                        protected get => [|_field|];
-                        set => throw new System.NotImplementedException();
+                        public int Property
+                        {
+                            protected get => [|_field|];
+                            set => throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int _field;
-
-                    public int Property
+                    class Program
                     {
-                        protected get => _field;
-                        set => throw new System.NotImplementedException();
+                        private int _field;
+
+                        public int Property
+                        {
+                            protected get => _field;
+                            set => throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9094,26 +9477,27 @@ index: LocalIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public int Property
+                    class Program
                     {
-                        get => [|_readonlyField|];
+                        public int Property
+                        {
+                            get => [|_readonlyField|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private readonly int _readonlyField;
-
-                    public int Property
+                    class Program
                     {
-                        get => _readonlyField;
+                        private readonly int _readonlyField;
+
+                        public int Property
+                        {
+                            get => _readonlyField;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9121,25 +9505,26 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public int Property
+                    class Program
                     {
-                        get => [|prop|];
+                        public int Property
+                        {
+                            get => [|prop|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public int Property
+                    class Program
                     {
-                        get => prop;
+                        public int Property
+                        {
+                            get => prop;
+                        }
+                        public int prop { get; private set; }
                     }
-                    public int prop { get; private set; }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9147,25 +9532,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public int Property
+                    class Program
                     {
-                        set => [|_field|] = value;
+                        public int Property
+                        {
+                            set => [|_field|] = value;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int _field;
-
-                    public int Property
+                    class Program
                     {
-                        set => _field = value;
+                        private int _field;
+
+                        public int Property
+                        {
+                            set => _field = value;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9173,25 +9559,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int Local() => [|_field|];
+                        public void Method()
+                        {
+                            int Local() => [|_field|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int _field;
-
-                    public void Method()
+                    class Program
                     {
-                        int Local() => _field;
+                        private int _field;
+
+                        public void Method()
+                        {
+                            int Local() => _field;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9199,26 +9586,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int Local() => [|_readonlyField|];
+                        public void Method()
+                        {
+                            int Local() => [|_readonlyField|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private readonly int _readonlyField;
-
-                    public void Method()
+                    class Program
                     {
-                        int Local() => _readonlyField;
+                        private readonly int _readonlyField;
+
+                        public void Method()
+                        {
+                            int Local() => _readonlyField;
+                        }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9226,26 +9614,27 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int Local() => [|prop|];
+                        public void Method()
+                        {
+                            int Local() => [|prop|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public int prop { get; private set; }
-
-                    public void Method()
+                    class Program
                     {
-                        int Local() => prop;
+                        public int prop { get; private set; }
+
+                        public void Method()
+                        {
+                            int Local() => prop;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27647")]
@@ -9253,26 +9642,27 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        async System.Threading.Tasks.Task<int> Local() => [|prop|];
+                        public void Method()
+                        {
+                            async System.Threading.Tasks.Task<int> Local() => [|prop|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public int prop { get; private set; }
-
-                    public void Method()
+                    class Program
                     {
-                        async System.Threading.Tasks.Task<int> Local() => prop;
+                        public int prop { get; private set; }
+
+                        public void Method()
+                        {
+                            async System.Threading.Tasks.Task<int> Local() => prop;
+                        }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9280,25 +9670,26 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int Local() => [|_field|] = 12;
+                        public void Method()
+                        {
+                            int Local() => [|_field|] = 12;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int _field;
-
-                    public void Method()
+                    class Program
                     {
-                        int Local() => _field = 12;
+                        private int _field;
+
+                        public void Method()
+                        {
+                            int Local() => _field = 12;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9306,31 +9697,32 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int Local()
+                        public void Method()
                         {
-                            return [|_field|];
+                            int Local()
+                            {
+                                return [|_field|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int _field;
-
-                    public void Method()
+                    class Program
                     {
-                        int Local()
+                        private int _field;
+
+                        public void Method()
                         {
-                            return _field;
+                            int Local()
+                            {
+                                return _field;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9338,32 +9730,33 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int Local()
+                        public void Method()
                         {
-                            return [|_readonlyField|];
+                            int Local()
+                            {
+                                return [|_readonlyField|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private readonly int _readonlyField;
-
-                    public void Method()
+                    class Program
                     {
-                        int Local()
+                        private readonly int _readonlyField;
+
+                        public void Method()
                         {
-                            return _readonlyField;
+                            int Local()
+                            {
+                                return _readonlyField;
+                            }
                         }
                     }
-                }
-                """,
-index: ReadonlyFieldIndex);
+                    """,
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9371,32 +9764,33 @@ index: ReadonlyFieldIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int Local()
+                        public void Method()
                         {
-                            return [|prop|];
+                            int Local()
+                            {
+                                return [|prop|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public int prop { get; private set; }
-
-                    public void Method()
+                    class Program
                     {
-                        int Local()
+                        public int prop { get; private set; }
+
+                        public void Method()
                         {
-                            return prop;
+                            int Local()
+                            {
+                                return prop;
+                            }
                         }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact]
@@ -9404,32 +9798,33 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        async System.Threading.Tasks.Task<int> Local()
+                        public void Method()
                         {
-                            return [|prop|];
+                            async System.Threading.Tasks.Task<int> Local()
+                            {
+                                return [|prop|];
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public int prop { get; private set; }
-
-                    public void Method()
+                    class Program
                     {
-                        async System.Threading.Tasks.Task<int> Local()
+                        public int prop { get; private set; }
+
+                        public void Method()
                         {
-                            return prop;
+                            async System.Threading.Tasks.Task<int> Local()
+                            {
+                                return prop;
+                            }
                         }
                     }
-                }
-                """,
-index: PropertyIndex);
+                    """,
+                index: PropertyIndex
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9437,31 +9832,32 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int Local() 
+                        public void Method()
                         {
-                            return [|_field|] = 12;
+                            int Local() 
+                            {
+                                return [|_field|] = 12;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    private int _field;
-
-                    public void Method()
+                    class Program
                     {
-                        int Local() 
+                        private int _field;
+
+                        public void Method()
                         {
-                            return _field = 12;
+                            int Local() 
+                            {
+                                return _field = 12;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9469,41 +9865,42 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        Action action = () => 
+                        public void Method()
                         {
-                            int Local()
+                            Action action = () => 
                             {
-                                return [|_field|];
-                            }
-                        };
+                                int Local()
+                                {
+                                    return [|_field|];
+                                }
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    private int _field;
-
-                    public void Method()
+                    class Program
                     {
-                        Action action = () => 
+                        private int _field;
+
+                        public void Method()
                         {
-                            int Local()
+                            Action action = () => 
                             {
-                                return _field;
-                            }
-                        };
+                                int Local()
+                                {
+                                    return _field;
+                                }
+                            };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26993")]
@@ -9511,35 +9908,36 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        Action action = () => 
+                        public void Method()
                         {
-                            int Local() => [|_field|];
-                        };
+                            Action action = () => 
+                            {
+                                int Local() => [|_field|];
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    private int _field;
-
-                    public void Method()
+                    class Program
                     {
-                        Action action = () => 
+                        private int _field;
+
+                        public void Method()
                         {
-                            int Local() => _field;
-                        };
+                            Action action = () => 
+                            {
+                                int Local() => _field;
+                            };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26406")]
@@ -9547,29 +9945,30 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        lock ([|goo|])
+                        void Method()
                         {
+                            lock ([|goo|])
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private object goo;
-
-                    void Method()
+                    class Class
                     {
-                        lock (goo)
+                        private object goo;
+
+                        void Method()
                         {
+                            lock (goo)
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26406")]
@@ -9577,29 +9976,31 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        lock ([|goo|])
+                        void Method()
                         {
+                            lock ([|goo|])
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    private readonly object goo;
-
-                    void Method()
+                    class Class
                     {
-                        lock (goo)
+                        private readonly object goo;
+
+                        void Method()
                         {
+                            lock (goo)
+                            {
+                            }
                         }
                     }
-                }
-                """, index: 1);
+                    """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26406")]
@@ -9607,29 +10008,31 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        lock ([|goo|])
+                        void Method()
                         {
+                            lock ([|goo|])
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    public object goo { get; private set; }
-
-                    void Method()
+                    class Class
                     {
-                        lock (goo)
+                        public object goo { get; private set; }
+
+                        void Method()
                         {
+                            lock (goo)
+                            {
+                            }
                         }
                     }
-                }
-                """, index: 2);
+                    """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9637,38 +10040,39 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { [|X|]: int i })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { [|X|]: int i })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: int i })
+                        void M2()
                         {
+                            object o = null;
+                            if (o is Blah { X: int i })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public int X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public int X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9676,38 +10080,39 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        Blah o = null;
-                        if (o is { [|X|]: int i })
+                        void M2()
+                        {
+                            Blah o = null;
+                            if (o is { [|X|]: int i })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        Blah o = null;
-                        if (o is { X: int i })
+                        void M2()
                         {
+                            Blah o = null;
+                            if (o is { X: int i })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public int X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public int X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9715,48 +10120,49 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: { [|Y|]: int i } })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { X: { [|Y|]: int i } })
+                            {
+                            }
+                        }
+
+                        class Frob
                         {
                         }
-                    }
 
-                    class Frob
-                    {
+                        class Blah
+                        {
+                            public Frob X;
+                        }
                     }
-
-                    class Blah
-                    {
-                        public Frob X;
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: { Y: int i } })
+                        void M2()
                         {
+                            object o = null;
+                            if (o is Blah { X: { Y: int i } })
+                            {
+                            }
+                        }
+
+                        class Frob
+                        {
+                            public int Y { get; internal set; }
+                        }
+
+                        class Blah
+                        {
+                            public Frob X;
                         }
                     }
-
-                    class Frob
-                    {
-                        public int Y { get; internal set; }
-                    }
-
-                    class Blah
-                    {
-                        public Frob X;
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9764,38 +10170,39 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { [|X|]: })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { [|X|]: })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: })
+                        void M2()
                         {
+                            object o = null;
+                            if (o is Blah { X: })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public object X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public object X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9803,46 +10210,47 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { [|X|]: Frob { } })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { [|X|]: Frob { } })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                        }
+
+                        class Frob
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-
-                    class Frob
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: Frob { } })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { X: Frob { } })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public Frob X { get; internal set; }
+                        }
+
+                        class Frob
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                        public Frob X { get; internal set; }
-                    }
-
-                    class Frob
-                    {
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9850,38 +10258,39 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { [|X|]: (1, 2) })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { [|X|]: (1, 2) })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: (1, 2) })
+                        void M2()
                         {
+                            object o = null;
+                            if (o is Blah { X: (1, 2) })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public (int, int) X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public (int, int) X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9889,38 +10298,39 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { [|X|]: (y: 1, z: 2) })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { [|X|]: (y: 1, z: 2) })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: (y: 1, z: 2) })
+                        void M2()
                         {
+                            object o = null;
+                            if (o is Blah { X: (y: 1, z: 2) })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public (int y, int z) X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public (int y, int z) X { get; internal set; }
-                    }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs);
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -9928,38 +10338,39 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { [|X|]: () })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { [|X|]: () })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: () })
+                        void M2()
                         {
+                            object o = null;
+                            if (o is Blah { X: () })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public object X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public object X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -9967,42 +10378,46 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    Blah SomeBlah { get; set; }
-
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is C { SomeBlah.[|X|]: (y: 1, z: 2) })
+                        Blah SomeBlah { get; set; }
+
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is C { SomeBlah.[|X|]: (y: 1, z: 2) })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                class C
-                {
-                    Blah SomeBlah { get; set; }
-
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is C { SomeBlah.X: (y: 1, z: 2) })
+                        Blah SomeBlah { get; set; }
+
+                        void M2()
                         {
+                            object o = null;
+                            if (o is C { SomeBlah.X: (y: 1, z: 2) })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public (int y, int z) X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public (int y, int z) X { get; internal set; }
-                    }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp12
+                )
+            );
         }
 
         [Fact]
@@ -10010,43 +10425,47 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    Blah SomeBlah { get; set; }
-
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is C { SomeBlah: [|MissingConstant|] })
+                        Blah SomeBlah { get; set; }
+
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is C { SomeBlah: [|MissingConstant|] })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private const Blah MissingConstant;
-
-                    Blah SomeBlah { get; set; }
-
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is C { SomeBlah: MissingConstant })
+                        private const Blah MissingConstant;
+
+                        Blah SomeBlah { get; set; }
+
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is C { SomeBlah: MissingConstant })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp12
+                )
+            );
         }
 
         [Fact]
@@ -10054,45 +10473,49 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    C SomeC { get; set; }
-                    Blah SomeBlah { get; set; }
-
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is C { SomeC.SomeBlah: [|MissingConstant|] })
+                        C SomeC { get; set; }
+                        Blah SomeBlah { get; set; }
+
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is C { SomeC.SomeBlah: [|MissingConstant|] })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private const Blah MissingConstant;
-
-                    C SomeC { get; set; }
-                    Blah SomeBlah { get; set; }
-
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is C { SomeC.SomeBlah: MissingConstant })
+                        private const Blah MissingConstant;
+
+                        C SomeC { get; set; }
+                        Blah SomeBlah { get; set; }
+
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is C { SomeC.SomeBlah: MissingConstant })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp12
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10100,38 +10523,39 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { [|X|]: (1) })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { [|X|]: (1) })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: (1) })
+                        void M2()
                         {
+                            object o = null;
+                            if (o is Blah { X: (1) })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public int X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public int X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10139,38 +10563,39 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { [|X|]: (y: 1) })
+                        void M2()
+                        {
+                            object o = null;
+                            if (o is Blah { [|X|]: (y: 1) })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        if (o is Blah { X: (y: 1) })
+                        void M2()
                         {
+                            object o = null;
+                            if (o is Blah { X: (y: 1) })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public object X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public object X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10178,44 +10603,45 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object? o = null;
-                        object? zToMatch = null;
-                        if (o is Blah { [|X|]: (y: 1, z: zToMatch) })
+                        void M2()
+                        {
+                            object? o = null;
+                            object? zToMatch = null;
+                            if (o is Blah { [|X|]: (y: 1, z: zToMatch) })
+                            {
+                            }
+                        }
+
+                        class Blah
                         {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object? o = null;
-                        object? zToMatch = null;
-                        if (o is Blah { X: (y: 1, z: zToMatch) })
+                        void M2()
                         {
+                            object? o = null;
+                            object? zToMatch = null;
+                            if (o is Blah { X: (y: 1, z: zToMatch) })
+                            {
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public (int y, object? z) X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public (int y, object? z) X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10223,42 +10649,43 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        switch (o)
+                        void M2()
                         {
-                            case Blah { [|X|]: int i }:
-                                break;
+                            object o = null;
+                            switch (o)
+                            {
+                                case Blah { [|X|]: int i }:
+                                    break;
+                            }
+                        }
+
+                        class Blah
+                        {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        switch (o)
+                        void M2()
                         {
-                            case Blah { X: int i }:
-                                break;
+                            object o = null;
+                            switch (o)
+                            {
+                                case Blah { X: int i }:
+                                    break;
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public int X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public int X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10266,42 +10693,43 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        Blah o = null;
-                        switch (o)
+                        void M2()
                         {
-                            case { [|X|]: int i }:
-                                break;
+                            Blah o = null;
+                            switch (o)
+                            {
+                                case { [|X|]: int i }:
+                                    break;
+                            }
+                        }
+
+                        class Blah
+                        {
                         }
                     }
-
-                    class Blah
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        Blah o = null;
-                        switch (o)
+                        void M2()
                         {
-                            case { X: int i }:
-                                break;
+                            Blah o = null;
+                            switch (o)
+                            {
+                                case { X: int i }:
+                                    break;
+                            }
+                        }
+
+                        class Blah
+                        {
+                            public int X { get; internal set; }
                         }
                     }
-
-                    class Blah
-                    {
-                        public int X { get; internal set; }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9090")]
@@ -10309,34 +10737,35 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        _ = o switch { Blah { [|X|]: int i } => 0, _ => 0 };
-                    }
+                        void M2()
+                        {
+                            object o = null;
+                            _ = o switch { Blah { [|X|]: int i } => 0, _ => 0 };
+                        }
 
-                    class Blah
-                    {
+                        class Blah
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        _ = o switch { Blah { X: int i } => 0, _ => 0 };
-                    }
+                        void M2()
+                        {
+                            object o = null;
+                            _ = o switch { Blah { X: int i } => 0, _ => 0 };
+                        }
 
-                    class Blah
-                    {
-                        public int X { get; internal set; }
+                        class Blah
+                        {
+                            public int X { get; internal set; }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10344,37 +10773,38 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        _ = o switch { Blah { X: [|Y|] } => 0, _ => 0 };
-                    }
+                        void M2()
+                        {
+                            object o = null;
+                            _ = o switch { Blah { X: [|Y|] } => 0, _ => 0 };
+                        }
 
-                    class Blah
-                    {
-                        public int X;
+                        class Blah
+                        {
+                            public int X;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    private const int Y;
-
-                    void M2()
+                    class C
                     {
-                        object o = null;
-                        _ = o switch { Blah { X: Y } => 0, _ => 0 };
-                    }
+                        private const int Y;
 
-                    class Blah
-                    {
-                        public int X;
+                        void M2()
+                        {
+                            object o = null;
+                            _ = o switch { Blah { X: Y } => 0, _ => 0 };
+                        }
+
+                        class Blah
+                        {
+                            public int X;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10382,23 +10812,25 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        [|goo|];
+                        void Method()
+                        {
+                            [|goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void Method(object goo)
+                    class Class
                     {
-                        goo;
+                        void Method(object goo)
+                        {
+                            goo;
+                        }
                     }
-                }
-                """, index: Parameter);
+                    """,
+                index: Parameter
+            );
         }
 
         [Fact]
@@ -10406,33 +10838,35 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface Interface
-                {
-                    void Method();
-                }
-
-                class Class
-                {
-                    public void Method()
+                    interface Interface
                     {
-                        [|goo|];
+                        void Method();
                     }
-                }
-                """,
+
+                    class Class
+                    {
+                        public void Method()
+                        {
+                            [|goo|];
+                        }
+                    }
+                    """,
                 """
-                interface Interface
-                {
-                    void Method();
-                }
-
-                class Class
-                {
-                    public void Method(object goo)
+                    interface Interface
                     {
-                        [|goo|];
+                        void Method();
                     }
-                }
-                """, index: Parameter);
+
+                    class Class
+                    {
+                        public void Method(object goo)
+                        {
+                            [|goo|];
+                        }
+                    }
+                    """,
+                index: Parameter
+            );
         }
 
         [Fact]
@@ -10440,61 +10874,65 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface Interface
-                {
-                    void Method();
-                }
-
-                class Class : Interface
-                {
-                    public void Method()
+                    interface Interface
                     {
-                        [|goo|];
+                        void Method();
                     }
-                }
-                """,
+
+                    class Class : Interface
+                    {
+                        public void Method()
+                        {
+                            [|goo|];
+                        }
+                    }
+                    """,
                 """
-                interface Interface
-                {
-                    void Method(object goo);
-                }
-
-                class Class : Interface
-                {
-                    public void Method(object goo)
+                    interface Interface
                     {
-                        [|goo|];
+                        void Method(object goo);
                     }
-                }
-                """, index: ParameterAndOverrides);
+
+                    class Class : Interface
+                    {
+                        public void Method(object goo)
+                        {
+                            [|goo|];
+                        }
+                    }
+                    """,
+                index: ParameterAndOverrides
+            );
         }
 
         [Fact]
         public async Task TestAddParameterIsOfCorrectType()
         {
             await TestInRegularAndScriptAsync(
-    """
-    class Class
-    {
-        void Method()
-        {
-            M1([|goo|]);
-        }
+                """
+                    class Class
+                    {
+                        void Method()
+                        {
+                            M1([|goo|]);
+                        }
 
-        void M1(int a);
-    }
-    """,
-    """
-    class Class
-    {
-        void Method(int goo)
-        {
-            M1(goo);
-        }
+                        void M1(int a);
+                    }
+                    """,
+                """
+                    class Class
+                    {
+                        void Method(int goo)
+                        {
+                            M1(goo);
+                        }
 
-        void M1(int a);
-    }
-    """, index: Parameter);
+                        void M1(int a);
+                    }
+                    """,
+                index: Parameter
+            );
         }
 
         [Fact]
@@ -10502,37 +10940,39 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface Interface
-                {
-                    void Method();
-                }
-
-                class Class : Interface
-                {
-                    public void Method()
+                    interface Interface
                     {
-                        M1([|goo|]);
+                        void Method();
                     }
 
-                    void M1(int a);
-                }
-                """,
+                    class Class : Interface
+                    {
+                        public void Method()
+                        {
+                            M1([|goo|]);
+                        }
+
+                        void M1(int a);
+                    }
+                    """,
                 """
-                interface Interface
-                {
-                    void Method(int goo);
-                }
-
-                class Class : Interface
-                {
-                    public void Method(int goo)
+                    interface Interface
                     {
-                        M1(goo);
+                        void Method(int goo);
                     }
 
-                    void M1(int a);
-                }
-                """, index: ParameterAndOverrides);
+                    class Class : Interface
+                    {
+                        public void Method(int goo)
+                        {
+                            M1(goo);
+                        }
+
+                        void M1(int a);
+                    }
+                    """,
+                index: ParameterAndOverrides
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26502")]
@@ -10540,23 +10980,25 @@ index: PropertyIndex);
         {
             await TestExactActionSetOfferedAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C()
+                    class C
                     {
-                        Action a = () =>
+                        public C()
                         {
-                            this.[|Field|] = 1;
-                        };
+                            Action a = () =>
+                            {
+                                this.[|Field|] = 1;
+                            };
+                        }
                     }
+                    """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_property_0, "Field"),
+                    string.Format(FeaturesResources.Generate_field_0, "Field"),
                 }
-                """, new[]
-{
-    string.Format(FeaturesResources.Generate_property_0, "Field"),
-    string.Format(FeaturesResources.Generate_field_0, "Field"),
-});
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26502")]
@@ -10564,23 +11006,25 @@ index: PropertyIndex);
         {
             await TestExactActionSetOfferedAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C()
+                    class C
                     {
-                        void Goo()
+                        public C()
                         {
-                            this.[|Field|] = 1;
-                        };
+                            void Goo()
+                            {
+                                this.[|Field|] = 1;
+                            };
+                        }
                     }
+                    """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_property_0, "Field"),
+                    string.Format(FeaturesResources.Generate_field_0, "Field"),
                 }
-                """, new[]
-{
-    string.Format(FeaturesResources.Generate_property_0, "Field"),
-    string.Format(FeaturesResources.Generate_field_0, "Field"),
-});
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45367")]
@@ -10588,22 +11032,24 @@ index: PropertyIndex);
         {
             await TestExactActionSetOfferedAsync(
                 """
-                using System;
+                    using System;
 
-                namespace ConsoleApp5
-                {
-                    class MyException: Exception
-
-                    internal MyException(int error, int offset, string message) : base(message)
+                    namespace ConsoleApp5
                     {
-                        [|Error|] = error;
-                        Offset = offset;
-                    }
-                """, new[]
-{
-    string.Format(FeaturesResources.Generate_local_0, "Error", "MyException"),
-    string.Format(FeaturesResources.Generate_parameter_0, "Error", "MyException"),
-});
+                        class MyException: Exception
+
+                        internal MyException(int error, int offset, string message) : base(message)
+                        {
+                            [|Error|] = error;
+                            Offset = offset;
+                        }
+                    """,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_local_0, "Error", "MyException"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "Error", "MyException"),
+                }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48172")]
@@ -10617,29 +11063,31 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Diagnostics;
+                    using System;
+                    using System.Diagnostics;
 
-                class Class
-                {
-                    private static void AssertSomething()
+                    class Class
                     {
-                        Action<int> call = _ => Debug.Assert([|expected|]);
+                        private static void AssertSomething()
+                        {
+                            Action<int> call = _ => Debug.Assert([|expected|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Diagnostics;
+                    using System;
+                    using System.Diagnostics;
 
-                class Class
-                {
-                    private static void AssertSomething(bool expected)
+                    class Class
                     {
-                        Action<int> call = _ => Debug.Assert(expected);
+                        private static void AssertSomething(bool expected)
+                        {
+                            Action<int> call = _ => Debug.Assert(expected);
+                        }
                     }
-                }
-                """, index: Parameter);
+                    """,
+                index: Parameter
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47586")]
@@ -10647,35 +11095,37 @@ index: PropertyIndex);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Diagnostics;
+                    using System;
+                    using System.Diagnostics;
 
-                class Class
-                {
-                    private static void AssertSomething()
+                    class Class
                     {
-                        void M()
+                        private static void AssertSomething()
                         {
-                            Action<int> call = _ => Debug.Assert([|expected|]);
+                            void M()
+                            {
+                                Action<int> call = _ => Debug.Assert([|expected|]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Diagnostics;
+                    using System;
+                    using System.Diagnostics;
 
-                class Class
-                {
-                    private static void AssertSomething()
+                    class Class
                     {
-                        void M(bool expected)
+                        private static void AssertSomething()
                         {
-                            Action<int> call = _ => Debug.Assert(expected);
+                            void M(bool expected)
+                            {
+                                Action<int> call = _ => Debug.Assert(expected);
+                            }
                         }
                     }
-                }
-                """, index: Parameter);
+                    """,
+                index: Parameter
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/27646")]
@@ -10718,17 +11168,19 @@ index: PropertyIndex);
         [InlineData("managed")]
         [InlineData("unmanaged")]
         [InlineData("dynamic")]
-        public async Task TestContextualKeywordsThatDoNotProbablyStartSyntacticConstructs_ReturnStatement(string keyword)
+        public async Task TestContextualKeywordsThatDoNotProbablyStartSyntacticConstructs_ReturnStatement(
+            string keyword
+        )
         {
             await TestInRegularAndScriptAsync(
-$@"class C
+                $@"class C
 {{
     int M()
     {{
         [|return {keyword}|];
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     private int {keyword};
 
@@ -10736,7 +11188,8 @@ $@"class C
     {{
         return {keyword};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/27646")]
@@ -10745,16 +11198,19 @@ $@"class C
         [InlineData("async")]
         [InlineData("await")]
         [InlineData("var")]
-        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_ReturnStatement(string keyword)
+        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_ReturnStatement(
+            string keyword
+        )
         {
             await TestMissingInRegularAndScriptAsync(
-$@"class C
+                $@"class C
 {{
     int M()
     {{
         [|return {keyword}|];
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/27646")]
@@ -10763,16 +11219,19 @@ $@"class C
         [InlineData("async")]
         [InlineData("await")]
         [InlineData("var")]
-        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_OnTheirOwn(string keyword)
+        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_OnTheirOwn(
+            string keyword
+        )
         {
             await TestMissingInRegularAndScriptAsync(
-$@"class C
+                $@"class C
 {{
     int M()
     {{
         [|{keyword}|]
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/27646")]
@@ -10781,15 +11240,18 @@ $@"class C
         [InlineData("async")]
         [InlineData("await")]
         [InlineData("var")]
-        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_Local(string keyword)
+        public async Task TestContextualKeywordsThatCanProbablyStartSyntacticConstructs_Local(
+            string keyword
+        )
         {
             await TestMissingInRegularAndScriptAsync(
-$@"class Program
+                $@"class Program
 {{
     void Main()
     {{
         var x = [|{keyword}|];
-    }}");
+    }}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/60842")]
@@ -10797,29 +11259,31 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(CancellationToken cancellationToken)
+                    class C
                     {
-                        await Task.Delay([|time|]);
+                        public async Task M(CancellationToken cancellationToken)
+                        {
+                            await Task.Delay([|time|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(System.TimeSpan time, CancellationToken cancellationToken)
+                    class C
                     {
-                        await Task.Delay(time);
+                        public async Task M(System.TimeSpan time, CancellationToken cancellationToken)
+                        {
+                            await Task.Delay(time);
+                        }
                     }
-                }
-                """, index: 4);
+                    """,
+                index: 4
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/60842")]
@@ -10827,29 +11291,31 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(string someParameter, CancellationToken cancellationToken)
+                    class C
                     {
-                        await Task.Delay([|time|]);
+                        public async Task M(string someParameter, CancellationToken cancellationToken)
+                        {
+                            await Task.Delay([|time|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(string someParameter, System.TimeSpan time, CancellationToken cancellationToken)
+                    class C
                     {
-                        await Task.Delay(time);
+                        public async Task M(string someParameter, System.TimeSpan time, CancellationToken cancellationToken)
+                        {
+                            await Task.Delay(time);
+                        }
                     }
-                }
-                """, index: 4);
+                    """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10857,29 +11323,31 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(bool someParameter = true, CancellationToken cancellationToken)
+                    class C
                     {
-                        await Task.Delay([|time|]);
+                        public async Task M(bool someParameter = true, CancellationToken cancellationToken)
+                        {
+                            await Task.Delay([|time|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(System.TimeSpan time, bool someParameter = true, CancellationToken cancellationToken)
+                    class C
                     {
-                        await Task.Delay(time);
+                        public async Task M(System.TimeSpan time, bool someParameter = true, CancellationToken cancellationToken)
+                        {
+                            await Task.Delay(time);
+                        }
                     }
-                }
-                """, index: 4);
+                    """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10887,29 +11355,31 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(int value, bool someParameter = true, CancellationToken cancellationToken)
+                    class C
                     {
-                        await Task.Delay([|time|]);
+                        public async Task M(int value, bool someParameter = true, CancellationToken cancellationToken)
+                        {
+                            await Task.Delay([|time|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(int value, System.TimeSpan time, bool someParameter = true, CancellationToken cancellationToken)
+                    class C
                     {
-                        await Task.Delay(time);
+                        public async Task M(int value, System.TimeSpan time, bool someParameter = true, CancellationToken cancellationToken)
+                        {
+                            await Task.Delay(time);
+                        }
                     }
-                }
-                """, index: 4);
+                    """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10917,29 +11387,31 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(bool someParameter = true)
+                    class C
                     {
-                        await Task.Delay([|time|]);
+                        public async Task M(bool someParameter = true)
+                        {
+                            await Task.Delay([|time|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(System.TimeSpan time, bool someParameter = true)
+                    class C
                     {
-                        await Task.Delay(time);
+                        public async Task M(System.TimeSpan time, bool someParameter = true)
+                        {
+                            await Task.Delay(time);
+                        }
                     }
-                }
-                """, index: 4);
+                    """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10947,29 +11419,31 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(params double[] x)
+                    class C
                     {
-                        await Task.Delay([|time|]);
+                        public async Task M(params double[] x)
+                        {
+                            await Task.Delay([|time|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(System.TimeSpan time, params double[] x)
+                    class C
                     {
-                        await Task.Delay(time);
+                        public async Task M(System.TimeSpan time, params double[] x)
+                        {
+                            await Task.Delay(time);
+                        }
                     }
-                }
-                """, index: 4);
+                    """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -10977,29 +11451,31 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                public static class TestClass
-                {
-                    public static int Method(this CancellationToken cancellationToken)
+                    public static class TestClass
                     {
-                        return [|test|];
+                        public static int Method(this CancellationToken cancellationToken)
+                        {
+                            return [|test|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                public static class TestClass
-                {
-                    public static int Method(this CancellationToken cancellationToken, int test)
+                    public static class TestClass
                     {
-                        return test;
+                        public static int Method(this CancellationToken cancellationToken, int test)
+                        {
+                            return test;
+                        }
                     }
-                }
-                """, index: 4);
+                    """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -11007,29 +11483,31 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                public static class TestClass
-                {
-                    public static int Method(this CancellationToken cancellationToken, out int x, params bool[] z)
+                    public static class TestClass
                     {
-                        return [|test|];
+                        public static int Method(this CancellationToken cancellationToken, out int x, params bool[] z)
+                        {
+                            return [|test|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                public static class TestClass
-                {
-                    public static int Method(this CancellationToken cancellationToken, int test, out int x, params bool[] z)
+                    public static class TestClass
                     {
-                        return test;
+                        public static int Method(this CancellationToken cancellationToken, int test, out int x, params bool[] z)
+                        {
+                            return test;
+                        }
                     }
-                }
-                """, index: 4);
+                    """,
+                index: 4
+            );
         }
 
         [Fact]
@@ -11037,29 +11515,31 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(out int x, int y, out int z, params double[] x)
+                    class C
                     {
-                        await Task.Delay([|time|]);
+                        public async Task M(out int x, int y, out int z, params double[] x)
+                        {
+                            await Task.Delay([|time|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
-                using System.Threading.Tasks;
+                    using System.Threading;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public async Task M(out int x, int y, System.TimeSpan time, out int z, params double[] x)
+                    class C
                     {
-                        await Task.Delay(time);
+                        public async Task M(out int x, int y, System.TimeSpan time, out int z, params double[] x)
+                        {
+                            await Task.Delay(time);
+                        }
                     }
-                }
-                """, index: 4);
+                    """,
+                index: 4
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/50764")]
@@ -11067,16 +11547,17 @@ $@"class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                public unsafe class Bar
-                {
-                    public static ZZZ()
+                    public unsafe class Bar
                     {
-                         delegate*<void> i = &[|Goo|];
+                        public static ZZZ()
+                        {
+                             delegate*<void> i = &[|Goo|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68322")]
@@ -11084,29 +11565,30 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Example
-                {
-                    public Example(int argument) { }
-
-                    void M()
+                    class Example
                     {
-                        Example e = new([|_field|]);
+                        public Example(int argument) { }
+
+                        void M()
+                        {
+                            Example e = new([|_field|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Example
-                {
-                    private int _field;
-
-                    public Example(int argument) { }
-
-                    void M()
+                    class Example
                     {
-                        Example e = new(_field);
+                        private int _field;
+
+                        public Example(int argument) { }
+
+                        void M()
+                        {
+                            Example e = new(_field);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68322")]
@@ -11114,29 +11596,30 @@ $@"class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Example
-                {
-                    void M()
+                    class Example
                     {
-                        List<int> list = new() { [|_field|] };
+                        void M()
+                        {
+                            List<int> list = new() { [|_field|] };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Example
-                {
-                    private int _field;
-
-                    void M()
+                    class Example
                     {
-                        List<int> list = new() { [|_field|] };
+                        private int _field;
+
+                        void M()
+                        {
+                            List<int> list = new() { [|_field|] };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

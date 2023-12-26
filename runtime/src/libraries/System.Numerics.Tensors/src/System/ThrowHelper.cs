@@ -21,6 +21,9 @@ namespace System
 
         [DoesNotReturn]
         public static void ThrowArgument_InputAndDestinationSpanMustNotOverlap() =>
-            throw new ArgumentException(SR.Argument_InputAndDestinationSpanMustNotOverlap, "destination");
+            throw new ArgumentException(
+                SR.Argument_InputAndDestinationSpanMustNotOverlap,
+                "destination"
+            );
     }
 }

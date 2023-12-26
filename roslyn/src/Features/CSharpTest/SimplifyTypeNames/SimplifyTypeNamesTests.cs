@@ -22,52 +22,57 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyTypeNames)]
-    public partial class SimplifyTypeNamesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class SimplifyTypeNamesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyTypeNamesTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpSimplifyTypeNamesDiagnosticAnalyzer(), new SimplifyTypeNamesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpSimplifyTypeNamesDiagnosticAnalyzer(),
+                new SimplifyTypeNamesCodeFixProvider()
+            );
 
         [Fact]
         public async Task SimplifyGenericName()
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static T Goo<T>(T x, T y)
+                    class C
                     {
-                        return default(T);
-                    }
+                        static T Goo<T>(T x, T y)
+                        {
+                            return default(T);
+                        }
 
-                    static void M()
-                    {
-                        var c = [|Goo<int>|](1, 1);
+                        static void M()
+                        {
+                            var c = [|Goo<int>|](1, 1);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static T Goo<T>(T x, T y)
+                    class C
                     {
-                        return default(T);
-                    }
+                        static T Goo<T>(T x, T y)
+                        {
+                            return default(T);
+                        }
 
-                    static void M()
-                    {
-                        var c = Goo(1, 1);
+                        static void M()
+                        {
+                            var c = Goo(1, 1);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -75,35 +80,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                using Goo = System;
+                    using Goo = System;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                    }
+                        class A
+                        {
+                        }
 
-                    class B
-                    {
-                        public [|Goo::Int32|] a;
+                        class B
+                        {
+                            public [|Goo::Int32|] a;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using Goo = System;
+                    using Goo = System;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                    }
+                        class A
+                        {
+                        }
 
-                    class B
-                    {
-                        public int a;
+                        class B
+                        {
+                            public int a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -111,27 +117,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace Root
-                {
-                    using MyType = System.IO.File;
-
-                    class A
+                    namespace Root
                     {
-                        [|System.IO.File|] c;
+                        using MyType = System.IO.File;
+
+                        class A
+                        {
+                            [|System.IO.File|] c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace Root
-                {
-                    using MyType = System.IO.File;
-
-                    class A
+                    namespace Root
                     {
-                        MyType c;
+                        using MyType = System.IO.File;
+
+                        class A
+                        {
+                            MyType c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -139,27 +146,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                global using MyType = System.IO.File;
+                    global using MyType = System.IO.File;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        [|System.IO.File|] c;
+                        class A
+                        {
+                            [|System.IO.File|] c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                global using MyType = System.IO.File;
+                    global using MyType = System.IO.File;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        MyType c;
+                        class A
+                        {
+                            MyType c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -167,32 +175,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" CommonReferences="true">
-                        <Document>
-                global using MyType = System.IO.File;
-                        </Document>
-                        <Document>
-                namespace Root
-                {
-                    class A
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true">
+                            <Document>
+                    global using MyType = System.IO.File;
+                            </Document>
+                            <Document>
+                    namespace Root
                     {
-                        [|System.IO.File|] c;
-                    }
-                }</Document>
-                    </Project>
-                </Workspace>
-                """,
+                        class A
+                        {
+                            [|System.IO.File|] c;
+                        }
+                    }</Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        MyType c;
+                        class A
+                        {
+                            MyType c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -200,32 +209,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace Root;
+                    namespace Root;
 
-                using MyType = System.IO.File;
+                    using MyType = System.IO.File;
 
-                class A
-                {
-                    [|System.IO.File|] c;
-                }
-                """,
+                    class A
+                    {
+                        [|System.IO.File|] c;
+                    }
+                    """,
                 """
-                namespace Root;
+                    namespace Root;
 
-                using MyType = System.IO.File;
+                    using MyType = System.IO.File;
 
-                class A
-                {
-                    MyType c;
-                }
-                """);
+                    class A
+                    {
+                        MyType c;
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task UseAlias()
         {
-            var source =
-                """
+            var source = """
                 using MyType = System.Exception;
 
                 class A
@@ -234,26 +243,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                class A
-                {
-                    MyType c;
-                }
-                """);
+                    class A
+                    {
+                        MyType c;
+                    }
+                    """
+            );
 
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                class A
-                {
-                    [|System.Exception|] c;
-                }
-                """);
+                    class A
+                    {
+                        [|System.Exception|] c;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -261,27 +273,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace Root
-                {
-                    using MyType = System.Exception;
-
-                    class A
+                    namespace Root
                     {
-                        [|System.Exception|] c;
+                        using MyType = System.Exception;
+
+                        class A
+                        {
+                            [|System.Exception|] c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace Root
-                {
-                    using MyType = System.Exception;
-
-                    class A
+                    namespace Root
                     {
-                        MyType c;
+                        using MyType = System.Exception;
+
+                        class A
+                        {
+                            MyType c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -289,27 +302,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        [|System.Exception|] c;
+                        class A
+                        {
+                            [|System.Exception|] c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        MyType c;
+                        class A
+                        {
+                            MyType c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -317,33 +331,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    namespace Nested
+                    namespace Root
                     {
-                        class A
+                        namespace Nested
                         {
-                            [|System.Exception|] c;
+                            class A
+                            {
+                                [|System.Exception|] c;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    namespace Nested
+                    namespace Root
                     {
-                        class A
+                        namespace Nested
                         {
-                            MyType c;
+                            class A
+                            {
+                                MyType c;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -351,21 +366,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                class A
-                {
-                    [|System.Exception|] c;
-                }
-                """,
+                    class A
+                    {
+                        [|System.Exception|] c;
+                    }
+                    """,
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                class A
-                {
-                    MyType c;
-                }
-                """);
+                    class A
+                    {
+                        MyType c;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -373,27 +389,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace Root
-                {
-                    using MyType = System.Exception;
-
-                    class A
+                    namespace Root
                     {
-                        [|System.Exception|] c;
+                        using MyType = System.Exception;
+
+                        class A
+                        {
+                            [|System.Exception|] c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace Root
-                {
-                    using MyType = System.Exception;
-
-                    class A
+                    namespace Root
                     {
-                        MyType c;
+                        using MyType = System.Exception;
+
+                        class A
+                        {
+                            MyType c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -401,27 +418,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        [|System.Exception|] c;
+                        class A
+                        {
+                            [|System.Exception|] c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        MyType c;
+                        class A
+                        {
+                            MyType c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -429,33 +447,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    namespace Nested
+                    namespace Root
                     {
-                        class A
+                        namespace Nested
                         {
-                            [|System.Exception|] c;
+                            class A
+                            {
+                                [|System.Exception|] c;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    namespace Nested
+                    namespace Root
                     {
-                        class A
+                        namespace Nested
                         {
-                            MyType c;
+                            class A
+                            {
+                                MyType c;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -463,33 +482,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using Goo = System.Int32;
+                    using Goo = System.Int32;
 
-                namespace Root
-                {
-                    namespace Nested
+                    namespace Root
                     {
-                        class A
+                        namespace Nested
                         {
-                            var c = [|System.Int32|].MaxValue;
+                            class A
+                            {
+                                var c = [|System.Int32|].MaxValue;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using Goo = System.Int32;
+                    using Goo = System.Int32;
 
-                namespace Root
-                {
-                    namespace Nested
+                    namespace Root
                     {
-                        class A
+                        namespace Nested
                         {
-                            var c = Goo.MaxValue;
+                            class A
+                            {
+                                var c = Goo.MaxValue;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21449")]
@@ -497,35 +517,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using Foo = SimplifyInsideNameof.Program;
+                    using System;
+                    using Foo = SimplifyInsideNameof.Program;
 
-                namespace SimplifyInsideNameof
-                {
-                  class Program
-                  {
-                    static void Main(string[] args)
+                    namespace SimplifyInsideNameof
                     {
-                      Console.WriteLine(nameof([|SimplifyInsideNameof.Program|]));
+                      class Program
+                      {
+                        static void Main(string[] args)
+                        {
+                          Console.WriteLine(nameof([|SimplifyInsideNameof.Program|]));
+                        }
+                      }
                     }
-                  }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using Foo = SimplifyInsideNameof.Program;
+                    using System;
+                    using Foo = SimplifyInsideNameof.Program;
 
-                namespace SimplifyInsideNameof
-                {
-                  class Program
-                  {
-                    static void Main(string[] args)
+                    namespace SimplifyInsideNameof
                     {
-                      Console.WriteLine(nameof(Program));
+                      class Program
+                      {
+                        static void Main(string[] args)
+                        {
+                          Console.WriteLine(nameof(Program));
+                        }
+                      }
                     }
-                  }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -535,35 +556,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using Goo = SimplifyInsideNameof.Program;
+                    using System;
+                    using Goo = SimplifyInsideNameof.Program;
 
-                namespace SimplifyInsideNameof
-                {
-                  class Program
-                  {
-                    static void Main(string[] args)
+                    namespace SimplifyInsideNameof
                     {
-                      Console.WriteLine(nameof([|SimplifyInsideNameof.Program|].Main));
+                      class Program
+                      {
+                        static void Main(string[] args)
+                        {
+                          Console.WriteLine(nameof([|SimplifyInsideNameof.Program|].Main));
+                        }
+                      }
                     }
-                  }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using Goo = SimplifyInsideNameof.Program;
+                    using System;
+                    using Goo = SimplifyInsideNameof.Program;
 
-                namespace SimplifyInsideNameof
-                {
-                  class Program
-                  {
-                    static void Main(string[] args)
+                    namespace SimplifyInsideNameof
                     {
-                      Console.WriteLine(nameof(Main));
+                      class Program
+                      {
+                        static void Main(string[] args)
+                        {
+                          Console.WriteLine(nameof(Main));
+                        }
+                      }
                     }
-                  }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21449")]
@@ -571,43 +593,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using Goo = N.Goo;
+                    using System;
+                    using Goo = N.Goo;
 
-                namespace N {
-                    class Goo { }
-                }
-
-                namespace SimplifyInsideNameof
-                {
-                  class Program
-                  {
-                    static void Main(string[] args)
-                    {
-                      Console.WriteLine(nameof([|N.Goo|]));
+                    namespace N {
+                        class Goo { }
                     }
-                  }
-                }
-                """,
+
+                    namespace SimplifyInsideNameof
+                    {
+                      class Program
+                      {
+                        static void Main(string[] args)
+                        {
+                          Console.WriteLine(nameof([|N.Goo|]));
+                        }
+                      }
+                    }
+                    """,
                 """
-                using System;
-                using Goo = N.Goo;
+                    using System;
+                    using Goo = N.Goo;
 
-                namespace N {
-                    class Goo { }
-                }
-
-                namespace SimplifyInsideNameof
-                {
-                  class Program
-                  {
-                    static void Main(string[] args)
-                    {
-                      Console.WriteLine(nameof(Goo));
+                    namespace N {
+                        class Goo { }
                     }
-                  }
-                }
-                """);
+
+                    namespace SimplifyInsideNameof
+                    {
+                      class Program
+                      {
+                        static void Main(string[] args)
+                        {
+                          Console.WriteLine(nameof(Goo));
+                        }
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -615,31 +638,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType1 = System.Exception;
+                    using MyType1 = System.Exception;
 
-                namespace Root
-                {
-                    using MyType2 = Exception;
-
-                    class A
+                    namespace Root
                     {
-                        [|System.Exception|] c;
+                        using MyType2 = Exception;
+
+                        class A
+                        {
+                            [|System.Exception|] c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType1 = System.Exception;
+                    using MyType1 = System.Exception;
 
-                namespace Root
-                {
-                    using MyType2 = Exception;
-
-                    class A
+                    namespace Root
                     {
-                        MyType1 c;
+                        using MyType2 = Exception;
+
+                        class A
+                        {
+                            MyType1 c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -647,31 +671,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType1 = System.Exception;
+                    using MyType1 = System.Exception;
 
-                namespace Root
-                {
-                    using MyType2 = [|System.Exception|];
-
-                    class A
+                    namespace Root
                     {
-                        System.Exception c;
+                        using MyType2 = [|System.Exception|];
+
+                        class A
+                        {
+                            System.Exception c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType1 = System.Exception;
+                    using MyType1 = System.Exception;
 
-                namespace Root
-                {
-                    using MyType2 = MyType1;
-
-                    class A
+                    namespace Root
                     {
-                        System.Exception c;
+                        using MyType2 = MyType1;
+
+                        class A
+                        {
+                            System.Exception c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -679,18 +704,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    using MyType = Exception;
-
-                    class A
+                    namespace Root
                     {
-                        [|System.Exception|] c;
+                        using MyType = Exception;
+
+                        class A
+                        {
+                            [|System.Exception|] c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -698,21 +724,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        public int MyType => 3;
-
-                        void M()
+                        class A
                         {
-                            var x = [|System.ConsoleColor|].Red;
+                            public int MyType => 3;
+
+                            void M()
+                            {
+                                var x = [|System.ConsoleColor|].Red;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -720,21 +747,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        public System.ConsoleColor MyType() => 3;
-
-                        void M()
+                        class A
                         {
-                            var x = [|System.ConsoleColor|].Red;
+                            public System.ConsoleColor MyType() => 3;
+
+                            void M()
+                            {
+                                var x = [|System.ConsoleColor|].Red;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -742,37 +770,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        public System.ConsoleColor MyType => 3;
-
-                        void M()
+                        class A
                         {
-                            var x = [|System.ConsoleColor|].Red;
+                            public System.ConsoleColor MyType => 3;
+
+                            void M()
+                            {
+                                var x = [|System.ConsoleColor|].Red;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        public System.ConsoleColor MyType => 3;
-
-                        void M()
+                        class A
                         {
-                            var x = MyType.Red;
+                            public System.ConsoleColor MyType => 3;
+
+                            void M()
+                            {
+                                var x = MyType.Red;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -780,37 +809,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        public System.ConsoleColor MyType = 3;
-
-                        void M()
+                        class A
                         {
-                            var x = [|System.ConsoleColor|].Red;
+                            public System.ConsoleColor MyType = 3;
+
+                            void M()
+                            {
+                                var x = [|System.ConsoleColor|].Red;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        public System.ConsoleColor MyType = 3;
-
-                        void M()
+                        class A
                         {
-                            var x = MyType.Red;
+                            public System.ConsoleColor MyType = 3;
+
+                            void M()
+                            {
+                                var x = MyType.Red;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -818,33 +848,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        void M(System.ConsoleColor MyType)
+                        class A
                         {
-                            var x = [|System.ConsoleColor|].Red;
+                            void M(System.ConsoleColor MyType)
+                            {
+                                var x = [|System.ConsoleColor|].Red;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        void M(System.ConsoleColor MyType)
+                        class A
                         {
-                            var x = MyType.Red;
+                            void M(System.ConsoleColor MyType)
+                            {
+                                var x = MyType.Red;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -852,63 +883,64 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = Root.Inner.Inner2;
+                    using MyType = Root.Inner.Inner2;
 
-                namespace Root
-                {
-                    namespace Inner
+                    namespace Root
                     {
-                        namespace Inner2
+                        namespace Inner
                         {
-                            public class Red
+                            namespace Inner2
                             {
-                                public static void Goo()
+                                public class Red
                                 {
+                                    public static void Goo()
+                                    {
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    class A
-                    {
-                        public int MyType => 3;
-
-                        void M()
+                        class A
                         {
-                            [|Root.Inner.Inner2|].Red.Goo();
+                            public int MyType => 3;
+
+                            void M()
+                            {
+                                [|Root.Inner.Inner2|].Red.Goo();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = Root.Inner.Inner2;
+                    using MyType = Root.Inner.Inner2;
 
-                namespace Root
-                {
-                    namespace Inner
+                    namespace Root
                     {
-                        namespace Inner2
+                        namespace Inner
                         {
-                            public class Red
+                            namespace Inner2
                             {
-                                public static void Goo()
+                                public class Red
                                 {
+                                    public static void Goo()
+                                    {
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    class A
-                    {
-                        public int MyType => 3;
-
-                        void M()
+                        class A
                         {
-                            Inner.Inner2.Red.Goo();
+                            public int MyType => 3;
+
+                            void M()
+                            {
+                                Inner.Inner2.Red.Goo();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -916,59 +948,60 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = Root.Inner.Inner2;
+                    using MyType = Root.Inner.Inner2;
 
-                namespace Root
-                {
-                    namespace Inner
+                    namespace Root
                     {
-                        namespace Inner2
+                        namespace Inner
                         {
-                            public class Red
+                            namespace Inner2
                             {
-                                public static void Goo()
+                                public class Red
                                 {
+                                    public static void Goo()
+                                    {
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    class A
-                    {
-                        void M()
+                        class A
                         {
-                            [|Root.Inner.Inner2|].Red.Goo();
+                            void M()
+                            {
+                                [|Root.Inner.Inner2|].Red.Goo();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = Root.Inner.Inner2;
+                    using MyType = Root.Inner.Inner2;
 
-                namespace Root
-                {
-                    namespace Inner
+                    namespace Root
                     {
-                        namespace Inner2
+                        namespace Inner
                         {
-                            public class Red
+                            namespace Inner2
                             {
-                                public static void Goo()
+                                public class Red
                                 {
+                                    public static void Goo()
+                                    {
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    class A
-                    {
-                        void M()
+                        class A
                         {
-                            MyType.Red.Goo();
+                            void M()
+                            {
+                                MyType.Red.Goo();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -976,31 +1009,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        public int MyType => 3;
+                        class A
+                        {
+                            public int MyType => 3;
 
-                        [|System.ConsoleColor|] x;
+                            [|System.ConsoleColor|] x;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = System.ConsoleColor;
+                    using MyType = System.ConsoleColor;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        public int MyType => 3;
+                        class A
+                        {
+                            public int MyType => 3;
 
-                        MyType x;
+                            MyType x;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1008,19 +1042,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Example
-                {
-                    /// <summary>
-                    /// <see cref="[|Example|].ToString"/>
-                    /// </summary>
-                    void Method()
+                    class Example
                     {
-                    }
+                        /// <summary>
+                        /// <see cref="[|Example|].ToString"/>
+                        /// </summary>
+                        void Method()
+                        {
+                        }
 
-                    public override string ToString() => throw null;
-                    public string ToString(string format, IFormatProvider formatProvider) => throw null;
-                }
-                """);
+                        public override string ToString() => throw null;
+                        public string ToString(string format, IFormatProvider formatProvider) => throw null;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1028,19 +1063,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Example
-                {
-                    /// <summary>
-                    /// <see cref="[|Example.ToString|]"/>
-                    /// </summary>
-                    void Method()
+                    class Example
                     {
-                    }
+                        /// <summary>
+                        /// <see cref="[|Example.ToString|]"/>
+                        /// </summary>
+                        void Method()
+                        {
+                        }
 
-                    public override string ToString() => throw null;
-                    public string ToString(string format, IFormatProvider formatProvider) => throw null;
-                }
-                """);
+                        public override string ToString() => throw null;
+                        public string ToString(string format, IFormatProvider formatProvider) => throw null;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -1048,29 +1084,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScript1Async(
                 """
-                class Example
-                {
-                    void Method()
+                    class Example
                     {
-                        _ = nameof([|Example|].Goo);
-                    }
+                        void Method()
+                        {
+                            _ = nameof([|Example|].Goo);
+                        }
 
-                    public static void Goo() { }
-                    public static void Goo(int i) { }
-                }
-                """,
+                        public static void Goo() { }
+                        public static void Goo(int i) { }
+                    }
+                    """,
                 """
-                class Example
-                {
-                    void Method()
+                    class Example
                     {
-                        _ = nameof(Goo);
-                    }
+                        void Method()
+                        {
+                            _ = nameof(Goo);
+                        }
 
-                    public static void Goo() { }
-                    public static void Goo(int i) { }
-                }
-                """);
+                        public static void Goo() { }
+                        public static void Goo(int i) { }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1078,39 +1115,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    using MyType = [|System.Exception|];
-
-                    class A
+                    namespace Root
                     {
-                        System.Exception c;
+                        using MyType = [|System.Exception|];
+
+                        class A
+                        {
+                            System.Exception c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using MyType = System.Exception;
+                    using MyType = System.Exception;
 
-                namespace Root
-                {
-                    using MyType = MyType;
-
-                    class A
+                    namespace Root
                     {
-                        System.Exception c;
+                        using MyType = MyType;
+
+                        class A
+                        {
+                            System.Exception c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task AliasInSiblingNamespace()
         {
-            var content =
-                """
-                [|namespace Root 
+            var content = """
+                [|namespace Root
                 {
                     namespace Sibling
                     {
@@ -1129,30 +1166,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task KeywordInt32()
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     [|System.Int32|] i;
                 }
                 """;
             var featureOptions = PreferIntrinsicTypeEverywhere;
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                class A
-                {
-                    int i;
-                }
-                """, options: featureOptions);
+                    class A
+                    {
+                        int i;
+                    }
+                    """,
+                options: featureOptions
+            );
             await TestActionCountAsync(
-                source, count: 1, parameters: new TestParameters(options: featureOptions));
+                source,
+                count: 1,
+                parameters: new TestParameters(options: featureOptions)
+            );
             await TestSpansAsync(
                 """
-                class A
-                {
-                    [|System.Int32|] i;
-                }
-                """, parameters: new TestParameters(options: featureOptions));
+                    class A
+                    {
+                        [|System.Int32|] i;
+                    }
+                    """,
+                parameters: new TestParameters(options: featureOptions)
+            );
         }
 
         [Fact]
@@ -1176,8 +1220,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 { "System.UInt64", "ulong" }
             };
 
-            var content =
-                """
+            var content = """
                 class A
                 {
                     [|[||]|] i;
@@ -1195,9 +1238,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyTypeName()
         {
-            var content =
-                """
-                namespace Root 
+            var content = """
+                namespace Root
                 {
                     class A 
                     {
@@ -1211,8 +1253,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyTypeName1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 namespace Root
@@ -1224,38 +1265,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                using System;
+                    using System;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        Exception c;
+                        class A
+                        {
+                            Exception c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
-                using System;
+                    using System;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        [|System|].Exception c;
+                        class A
+                        {
+                            [|System|].Exception c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task SimplifyTypeName1_FileScopedNamespace()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 namespace Root;
@@ -1266,29 +1309,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                using System;
+                    using System;
 
-                namespace Root;
+                    namespace Root;
 
-                class A
-                {
-                    Exception c;
-                }
-                """);
+                    class A
+                    {
+                        Exception c;
+                    }
+                    """
+            );
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
-                using System;
+                    using System;
 
-                namespace Root;
+                    namespace Root;
 
-                class A
-                {
-                    [|System|].Exception c;
-                }
-                """);
+                    class A
+                    {
+                        [|System|].Exception c;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1296,23 +1342,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace System
-                {
-                    class A
+                    namespace System
                     {
-                        [|System.Exception|] c;
+                        class A
+                        {
+                            [|System.Exception|] c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace System
-                {
-                    class A
+                    namespace System
                     {
-                        Exception c;
+                        class A
+                        {
+                            Exception c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1320,37 +1367,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace N1
-                {
-                    public class A1
+                    namespace N1
                     {
-                    }
-
-                    namespace N2
-                    {
-                        public class A2
+                        public class A1
                         {
-                            [|N1.A1|] a;
+                        }
+
+                        namespace N2
+                        {
+                            public class A2
+                            {
+                                [|N1.A1|] a;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N1
-                {
-                    public class A1
+                    namespace N1
                     {
-                    }
-
-                    namespace N2
-                    {
-                        public class A2
+                        public class A1
                         {
-                            A1 a;
+                        }
+
+                        namespace N2
+                        {
+                            public class A2
+                            {
+                                A1 a;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1359,37 +1407,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             // this is failing since we can't speculatively bind namespace yet
             await TestInRegularAndScriptAsync(
                 """
-                namespace N1
-                {
-                    namespace N2
+                    namespace N1
                     {
-                        public class A1
+                        namespace N2
                         {
+                            public class A1
+                            {
+                            }
+                        }
+
+                        public class A2
+                        {
+                            [|N1.N2.A1|] a;
                         }
                     }
-
-                    public class A2
-                    {
-                        [|N1.N2.A1|] a;
-                    }
-                }
-                """,
+                    """,
                 """
-                namespace N1
-                {
-                    namespace N2
+                    namespace N1
                     {
-                        public class A1
+                        namespace N2
                         {
+                            public class A1
+                            {
+                            }
+                        }
+
+                        public class A2
+                        {
+                            N2.A1 a;
                         }
                     }
-
-                    public class A2
-                    {
-                        N2.A1 a;
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1397,44 +1446,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace N1
-                {
-                    class NC1
+                    namespace N1
                     {
-                        public class A1
+                        class NC1
                         {
+                            public class A1
+                            {
+                            }
+                        }
+
+                        public class A2
+                        {
+                            [|N1.NC1.A1|] a;
                         }
                     }
-
-                    public class A2
-                    {
-                        [|N1.NC1.A1|] a;
-                    }
-                }
-                """,
+                    """,
                 """
-                namespace N1
-                {
-                    class NC1
+                    namespace N1
                     {
-                        public class A1
+                        class NC1
                         {
+                            public class A1
+                            {
+                            }
+                        }
+
+                        public class A2
+                        {
+                            NC1.A1 a;
                         }
                     }
-
-                    public class A2
-                    {
-                        NC1.A1 a;
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task SimplifyTypeName6()
         {
-            var content =
-                """
+            var content = """
                 namespace N1
                 {
                     public class A1 { }
@@ -1456,8 +1505,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyTypeName7()
         {
-            var source =
-                """
+            var source = """
                 namespace N1
                 {
                     namespace N2
@@ -1472,21 +1520,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                namespace N1
-                {
-                    namespace N2
+                    namespace N1
                     {
-                        public class A2
+                        namespace N2
                         {
-                            public class A1 { }
+                            public class A2
+                            {
+                                public class A1 { }
 
-                            A1 a;
+                                A1 a;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestActionCountAsync(source, 1);
         }
@@ -1494,8 +1544,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyGenericTypeName1()
         {
-            var content =
-                """
+            var content = """
                 namespace N1
                 {
                     public class A1
@@ -1510,8 +1559,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyGenericTypeName2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 namespace N1
@@ -1523,18 +1571,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                using System;
+                    using System;
 
-                namespace N1
-                {
-                    public class A1
+                    namespace N1
                     {
-                        EventHandler<EventArgs> a;
+                        public class A1
+                        {
+                            EventHandler<EventArgs> a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestActionCountAsync(source, 1);
         }
@@ -1545,34 +1595,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                namespace N1
-                {
-                    public class A1
+                    namespace N1
                     {
-                        {|FixAllInDocument:System.Action|}<System.Action<System.Action<System.EventArgs>, System.Action<System.Action<System.EventArgs, System.Action<System.EventArgs>, System.Action<System.Action<System.Action<System.Action<System.EventArgs>, System.Action<System.EventArgs>>>>>>>> a;
+                        public class A1
+                        {
+                            {|FixAllInDocument:System.Action|}<System.Action<System.Action<System.EventArgs>, System.Action<System.Action<System.EventArgs, System.Action<System.EventArgs>, System.Action<System.Action<System.Action<System.Action<System.EventArgs>, System.Action<System.EventArgs>>>>>>>> a;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace N1
-                {
-                    public class A1
+                    namespace N1
                     {
-                        Action<Action<Action<EventArgs>, Action<Action<EventArgs, Action<EventArgs>, Action<Action<Action<Action<EventArgs>, Action<EventArgs>>>>>>>> a;
+                        public class A1
+                        {
+                            Action<Action<Action<EventArgs>, Action<Action<EventArgs, Action<EventArgs>, Action<Action<Action<Action<EventArgs>, Action<EventArgs>>>>>>>> a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task SimplifyGenericTypeName4()
         {
-            var content =
-                """
+            var content = """
                 using MyHandler = System.EventHandler;
 
                 namespace N1
@@ -1589,8 +1639,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyGenericTypeName5()
         {
-            var source =
-                """
+            var source = """
                 using MyHandler = System.EventHandler<System.EventArgs>;
 
                 namespace N1
@@ -1602,31 +1651,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                using MyHandler = System.EventHandler<System.EventArgs>;
+                    using MyHandler = System.EventHandler<System.EventArgs>;
 
-                namespace N1
-                {
-                    public class A1
+                    namespace N1
                     {
-                        System.EventHandler<MyHandler> a;
+                        public class A1
+                        {
+                            System.EventHandler<MyHandler> a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
-                using MyHandler = System.EventHandler<System.EventArgs>;
+                    using MyHandler = System.EventHandler<System.EventArgs>;
 
-                namespace N1
-                {
-                    public class A1
+                    namespace N1
                     {
-                        System.EventHandler<[|System.EventHandler<System.EventArgs>|]> a;
+                        public class A1
+                        {
+                            System.EventHandler<[|System.EventHandler<System.EventArgs>|]> a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1634,45 +1686,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                namespace N1
-                {
-                    using MyType = N2.A1<Exception>;
-
-                    namespace N2
+                    namespace N1
                     {
-                        public class A1<T>
+                        using MyType = N2.A1<Exception>;
+
+                        namespace N2
                         {
+                            public class A1<T>
+                            {
+                            }
+                        }
+
+                        class Test
+                        {
+                            [|N1.N2.A1<System.Exception>|] a;
                         }
                     }
-
-                    class Test
-                    {
-                        [|N1.N2.A1<System.Exception>|] a;
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace N1
-                {
-                    using MyType = N2.A1<Exception>;
-
-                    namespace N2
+                    namespace N1
                     {
-                        public class A1<T>
+                        using MyType = N2.A1<Exception>;
+
+                        namespace N2
                         {
+                            public class A1<T>
+                            {
+                            }
+                        }
+
+                        class Test
+                        {
+                            MyType a;
                         }
                     }
-
-                    class Test
-                    {
-                        MyType a;
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/9877")]
@@ -1681,45 +1734,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                namespace N1
-                {
-                    using MyType = Exception;
-
-                    namespace N2
+                    namespace N1
                     {
-                        public class A1<T>
+                        using MyType = Exception;
+
+                        namespace N2
                         {
+                            public class A1<T>
+                            {
+                            }
+                        }
+
+                        class Test
+                        {
+                            N1.N2.A1<[|System.Exception|]> a;
                         }
                     }
-
-                    class Test
-                    {
-                        N1.N2.A1<[|System.Exception|]> a;
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace N1
-                {
-                    using MyType = Exception;
-
-                    namespace N2
+                    namespace N1
                     {
-                        public class A1<T>
+                        using MyType = Exception;
+
+                        namespace N2
                         {
+                            public class A1<T>
+                            {
+                            }
+                        }
+
+                        class Test
+                        {
+                            N2.A1<MyType> a;
                         }
                     }
-
-                    class Test
-                    {
-                        N2.A1<MyType> a;
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1727,27 +1781,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                namespace N1
-                {
-                    class Test
+                    namespace N1
                     {
-                        [|System.Collections.Generic.List<System.String[]>|] a;
+                        class Test
+                        {
+                            [|System.Collections.Generic.List<System.String[]>|] a;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                namespace N1
-                {
-                    class Test
+                    namespace N1
                     {
-                        List<string[]> a;
+                        class Test
+                        {
+                            List<string[]> a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             // TODO: The below test is currently disabled due to restrictions of the test framework, this needs to be fixed.
 
@@ -1777,44 +1832,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                namespace N1
-                {
-                    class Test
+                    namespace N1
                     {
-                        [|System.Collections.Generic.List<System.String[][,][,,,]>|] a;
+                        class Test
+                        {
+                            [|System.Collections.Generic.List<System.String[][,][,,,]>|] a;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                namespace N1
-                {
-                    class Test
+                    namespace N1
                     {
-                        List<string[][,][,,,]> a;
+                        class Test
+                        {
+                            List<string[][,][,,,]> a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")
+        ]
         public async Task SimplifyToPredefinedTypeNameShouldNotBeOfferedInsideNameOf1()
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = nameof([|Int32|]);
+                        static void Main(string[] args)
+                        {
+                            var x = nameof([|Int32|]);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168")]
@@ -1822,69 +1883,80 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = nameof([|System.Int32|]);
+                        static void Main(string[] args)
+                        {
+                            var x = nameof([|System.Int32|]);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")
+        ]
         public async Task SimplifyToPredefinedTypeNameShouldNotBeOfferedInsideNameOf3()
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = nameof([|Int32|].MaxValue);
+                        static void Main(string[] args)
+                        {
+                            var x = nameof([|Int32|].MaxValue);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")
+        ]
         public async Task SimplifyToPredefinedTypeNameShouldBeOfferedInsideFunctionCalledNameOf()
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = nameof(typeof([|Int32|]));
-                    }
+                        static void Main(string[] args)
+                        {
+                            var x = nameof(typeof([|Int32|]));
+                        }
 
-                    static string nameof(Type t)
-                    {
-                        return string.Empty;
+                        static string nameof(Type t)
+                        {
+                            return string.Empty;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = nameof(typeof(int));
-                    }
+                        static void Main(string[] args)
+                        {
+                            var x = nameof(typeof(int));
+                        }
 
-                    static string nameof(Type t)
-                    {
-                        return string.Empty;
+                        static string nameof(Type t)
+                        {
+                            return string.Empty;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1892,27 +1964,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = nameof([|System.Int32|]);
+                        static void Main(string[] args)
+                        {
+                            var x = nameof([|System.Int32|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = nameof(Int32);
+                        static void Main(string[] args)
+                        {
+                            var x = nameof(Int32);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168")]
@@ -1920,36 +1993,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace N1
-                {
-                    public class C1
+                    namespace N1
                     {
-                        /// <see cref="[|System.Int32|]"/>
-                        public C1()
+                        public class C1
                         {
+                            /// <see cref="[|System.Int32|]"/>
+                            public C1()
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N1
-                {
-                    public class C1
+                    namespace N1
                     {
-                        /// <see cref="int"/>
-                        public C1()
+                        public class C1
                         {
+                            /// <see cref="int"/>
+                            public C1()
+                            {
+                            }
                         }
                     }
-                }
-                """, options: PreferIntrinsicTypeEverywhere);
+                    """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538727")]
         public async Task SimplifyAlias1()
         {
-            var content =
-                """
+            var content = """
                 using I64 = [|System.Int64|];
 
                 namespace N1
@@ -1968,27 +2042,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                using I64 = System.Int64;
-                using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
+                    using I64 = System.Int64;
+                    using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
 
-                namespace N1
-                {
-                    class Test
+                    namespace N1
                     {
+                        class Test
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using I64 = System.Int64;
-                using Goo = System.Collections.Generic.IList<long>;
+                    using I64 = System.Int64;
+                    using Goo = System.Collections.Generic.IList<long>;
 
-                namespace N1
-                {
-                    class Test
+                    namespace N1
                     {
+                        class Test
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538727")]
@@ -1996,33 +2071,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                namespace Outer
-                {
-                    using I64 = System.Int64;
-                    using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
-
-                    namespace N1
+                    namespace Outer
                     {
-                        class Test
+                        using I64 = System.Int64;
+                        using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
+
+                        namespace N1
                         {
+                            class Test
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace Outer
-                {
-                    using I64 = System.Int64;
-                    using Goo = System.Collections.Generic.IList<long>;
-
-                    namespace N1
+                    namespace Outer
                     {
-                        class Test
+                        using I64 = System.Int64;
+                        using Goo = System.Collections.Generic.IList<long>;
+
+                        namespace N1
                         {
+                            class Test
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538727")]
@@ -2030,42 +2106,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                using I64 = System.Int64;
+                    using I64 = System.Int64;
 
-                namespace Outer
-                {
-                    using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
-
-                    namespace N1
+                    namespace Outer
                     {
-                        class Test
+                        using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
+
+                        namespace N1
                         {
+                            class Test
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using I64 = System.Int64;
+                    using I64 = System.Int64;
 
-                namespace Outer
-                {
-                    using Goo = System.Collections.Generic.IList<long>;
-
-                    namespace N1
+                    namespace Outer
                     {
-                        class Test
+                        using Goo = System.Collections.Generic.IList<long>;
+
+                        namespace N1
                         {
+                            class Test
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544631")]
         public async Task SimplifyAlias5()
         {
-            var content =
-                """
+            var content = """
                 using System;
 
                 namespace N
@@ -2074,8 +2150,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            var result =
-                """
+            var result = """
                 using System;
 
                 namespace N
@@ -2091,27 +2166,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                using alias1 = A;
+                    using alias1 = A;
 
-                class A
-                {
-                    public [|A|] M()
+                    class A
                     {
-                        return null;
+                        public [|A|] M()
+                        {
+                            return null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using alias1 = A;
+                    using alias1 = A;
 
-                class A
-                {
-                    public alias1 M()
+                    class A
                     {
-                        return null;
+                        public alias1 M()
+                        {
+                            return null;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538949")]
@@ -2119,21 +2195,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class A<T>
-                {
-                    class B : A<B>
+                    class A<T>
                     {
+                        class B : A<B>
+                        {
+                        }
+
+                        class C : I<B>, I<[|B.B|]>
+                        {
+                        }
                     }
 
-                    class C : I<B>, I<[|B.B|]>
+                    interface I<T>
                     {
                     }
-                }
-
-                interface I<T>
-                {
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538949")]
@@ -2141,28 +2218,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class A<T>
-                {
-                    class B : A<B>
+                    class A<T>
                     {
+                        class B : A<B>
+                        {
+                        }
+
+                        class C : I<B>, [|B.B|]
+                        {
+                        }
                     }
 
-                    class C : I<B>, [|B.B|]
+                    interface I<T>
                     {
                     }
-                }
-
-                interface I<T>
-                {
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538991")]
         public async Task SimplifyMissingOnGeneric()
         {
-            var content =
-                """
+            var content = """
                 class A<T, S>
                 {
                     class B : [|A<B, B>|] { }
@@ -2175,8 +2252,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539000")]
         public async Task SimplifyMissingOnUnmentionableTypeParameter1()
         {
-            var content =
-                """
+            var content = """
                 class A<T>
                 {
                     class D : A<T[]> { }
@@ -2197,13 +2273,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
-                using M = System.Collections.Generic.IList<[|System.Collections.Generic.IList<>|]>;
+                    using System.Collections.Generic;
+                    using M = System.Collections.Generic.IList<[|System.Collections.Generic.IList<>|]>;
 
-                class C
-                {
-                }
-                """);
+                    class C
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539000")]
@@ -2212,22 +2289,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class A<T>
-                {
-                    class D : A<T[]>
+                    class A<T>
                     {
-                    }
+                        class D : A<T[]>
+                        {
+                        }
 
-                    class B
-                    {
-                    }
+                        class B
+                        {
+                        }
 
-                    class C<Y>
-                    {
-                        D.B x = new [|D.B|]();
+                        class C<Y>
+                        {
+                            D.B x = new [|D.B|]();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539000")]
@@ -2235,22 +2313,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class A<T>
-                {
-                    class D : A<T[]>
+                    class A<T>
                     {
-                    }
+                        class D : A<T[]>
+                        {
+                        }
 
-                    class B
-                    {
-                    }
+                        class B
+                        {
+                        }
 
-                    class C<T>
-                    {
-                        D.B x = new [|D.B|]();
+                        class C<T>
+                        {
+                            D.B x = new [|D.B|]();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -2258,39 +2337,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|global::System|].String s;
+                        static void Main(string[] args)
+                        {
+                            [|global::System|].String s;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string s;
+                        static void Main(string[] args)
+                        {
+                            string s;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541748")]
         public async Task TestOnErrorInScript()
         {
-            await TestMissingAsync(
-@"[|Console.WrieLine();|]",
-new TestParameters(Options.Script));
+            await TestMissingAsync(@"[|Console.WrieLine();|]", new TestParameters(Options.Script));
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/9877")]
@@ -2299,160 +2377,161 @@ new TestParameters(Options.Script));
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace OuterNamespace
-                {
-                    namespace InnerNamespace
+                    namespace OuterNamespace
                     {
-                        class InnerClass1
+                        namespace InnerNamespace
                         {
+                            class InnerClass1
+                            {
+                            }
+                        }
+
+                        class OuterClass1
+                        {
+                            OuterNamespace.OuterClass1 M1()
+                            {
+                                [|OuterNamespace.OuterClass1|] c1;
+                                OuterNamespace.OuterClass1.Equals(1, 2);
+                            }
+
+                            OuterNamespace.OuterClass2 M2()
+                            {
+                                OuterNamespace.OuterClass2 c1;
+                                OuterNamespace.OuterClass2.Equals(1, 2);
+                            }
+
+                            OuterNamespace.InnerNamespace.InnerClass1 M3()
+                            {
+                                OuterNamespace.InnerNamespace.InnerClass1 c1;
+                                OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
+                            }
+
+                            InnerNamespace.InnerClass1 M3()
+                            {
+                                InnerNamespace.InnerClass1 c1;
+                                global::OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
+                            }
+
+                            void OuterClass2()
+                            {
+                            }
+
+                            void InnerClass1()
+                            {
+                            }
+
+                            void InnerNamespace()
+                            {
+                            }
+                        }
+
+                        class OuterClass2
+                        {
+                            OuterNamespace.OuterClass1 M1()
+                            {
+                                OuterNamespace.OuterClass1 c1;
+                                OuterNamespace.OuterClass1.Equals(1, 2);
+                            }
+
+                            OuterNamespace.OuterClass2 M2()
+                            {
+                                OuterNamespace.OuterClass2 c1;
+                                OuterNamespace.OuterClass2.Equals(1, 2);
+                            }
+
+                            OuterNamespace.InnerNamespace.InnerClass1 M3()
+                            {
+                                OuterNamespace.InnerNamespace.InnerClass1 c1;
+                                OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
+                            }
+
+                            InnerNamespace.InnerClass1 M3()
+                            {
+                                InnerNamespace.InnerClass1 c1;
+                                InnerNamespace.InnerClass1.Equals(1, 2);
+                            }
                         }
                     }
-
-                    class OuterClass1
-                    {
-                        OuterNamespace.OuterClass1 M1()
-                        {
-                            [|OuterNamespace.OuterClass1|] c1;
-                            OuterNamespace.OuterClass1.Equals(1, 2);
-                        }
-
-                        OuterNamespace.OuterClass2 M2()
-                        {
-                            OuterNamespace.OuterClass2 c1;
-                            OuterNamespace.OuterClass2.Equals(1, 2);
-                        }
-
-                        OuterNamespace.InnerNamespace.InnerClass1 M3()
-                        {
-                            OuterNamespace.InnerNamespace.InnerClass1 c1;
-                            OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
-                        }
-
-                        InnerNamespace.InnerClass1 M3()
-                        {
-                            InnerNamespace.InnerClass1 c1;
-                            global::OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
-                        }
-
-                        void OuterClass2()
-                        {
-                        }
-
-                        void InnerClass1()
-                        {
-                        }
-
-                        void InnerNamespace()
-                        {
-                        }
-                    }
-
-                    class OuterClass2
-                    {
-                        OuterNamespace.OuterClass1 M1()
-                        {
-                            OuterNamespace.OuterClass1 c1;
-                            OuterNamespace.OuterClass1.Equals(1, 2);
-                        }
-
-                        OuterNamespace.OuterClass2 M2()
-                        {
-                            OuterNamespace.OuterClass2 c1;
-                            OuterNamespace.OuterClass2.Equals(1, 2);
-                        }
-
-                        OuterNamespace.InnerNamespace.InnerClass1 M3()
-                        {
-                            OuterNamespace.InnerNamespace.InnerClass1 c1;
-                            OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
-                        }
-
-                        InnerNamespace.InnerClass1 M3()
-                        {
-                            InnerNamespace.InnerClass1 c1;
-                            InnerNamespace.InnerClass1.Equals(1, 2);
-                        }
-                    }
-                }
-                """,
+                    """,
                 """
-                namespace OuterNamespace
-                {
-                    namespace InnerNamespace
+                    namespace OuterNamespace
                     {
-                        class InnerClass1
+                        namespace InnerNamespace
                         {
+                            class InnerClass1
+                            {
+                            }
+                        }
+
+                        class OuterClass1
+                        {
+                            OuterClass1 M1()
+                            {
+                                OuterClass1 c1;
+                                Equals(1, 2);
+                            }
+
+                            OuterClass2 M2()
+                            {
+                                OuterClass2 c1;
+                                Equals(1, 2);
+                            }
+
+                            InnerNamespace.InnerClass1 M3()
+                            {
+                                InnerNamespace.InnerClass1 c1;
+                                Equals(1, 2);
+                            }
+
+                            InnerNamespace.InnerClass1 M3()
+                            {
+                                InnerNamespace.InnerClass1 c1;
+                                Equals(1, 2);
+                            }
+
+                            void OuterClass2()
+                            {
+                            }
+
+                            void InnerClass1()
+                            {
+                            }
+
+                            void InnerNamespace()
+                            {
+                            }
+                        }
+
+                        class OuterClass2
+                        {
+                            OuterClass1 M1()
+                            {
+                                OuterClass1 c1;
+                                Equals(1, 2);
+                            }
+
+                            OuterClass2 M2()
+                            {
+                                OuterClass2 c1;
+                                Equals(1, 2);
+                            }
+
+                            InnerNamespace.InnerClass1 M3()
+                            {
+                                InnerNamespace.InnerClass1 c1;
+                                Equals(1, 2);
+                            }
+
+                            InnerNamespace.InnerClass1 M3()
+                            {
+                                InnerNamespace.InnerClass1 c1;
+                                Equals(1, 2);
+                            }
                         }
                     }
-
-                    class OuterClass1
-                    {
-                        OuterClass1 M1()
-                        {
-                            OuterClass1 c1;
-                            Equals(1, 2);
-                        }
-
-                        OuterClass2 M2()
-                        {
-                            OuterClass2 c1;
-                            Equals(1, 2);
-                        }
-
-                        InnerNamespace.InnerClass1 M3()
-                        {
-                            InnerNamespace.InnerClass1 c1;
-                            Equals(1, 2);
-                        }
-
-                        InnerNamespace.InnerClass1 M3()
-                        {
-                            InnerNamespace.InnerClass1 c1;
-                            Equals(1, 2);
-                        }
-
-                        void OuterClass2()
-                        {
-                        }
-
-                        void InnerClass1()
-                        {
-                        }
-
-                        void InnerNamespace()
-                        {
-                        }
-                    }
-
-                    class OuterClass2
-                    {
-                        OuterClass1 M1()
-                        {
-                            OuterClass1 c1;
-                            Equals(1, 2);
-                        }
-
-                        OuterClass2 M2()
-                        {
-                            OuterClass2 c1;
-                            Equals(1, 2);
-                        }
-
-                        InnerNamespace.InnerClass1 M3()
-                        {
-                            InnerNamespace.InnerClass1 c1;
-                            Equals(1, 2);
-                        }
-
-                        InnerNamespace.InnerClass1 M3()
-                        {
-                            InnerNamespace.InnerClass1 c1;
-                            Equals(1, 2);
-                        }
-                    }
-                }
-                """,
-index: 1);
+                    """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -2461,46 +2540,46 @@ index: 1);
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
+                            }
+
+                            static void Main()
+                            {
+                                [|N.Program.Goo.Bar|]();
+                                int Goo;
                             }
                         }
-
-                        static void Main()
-                        {
-                            [|N.Program.Goo.Bar|]();
-                            int Goo;
-                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
+                            }
+
+                            static void Main()
+                            {
+                                Program.Goo.Bar();
+                                int Goo;
                             }
                         }
-
-                        static void Main()
-                        {
-                            Program.Goo.Bar();
-                            int Goo;
-                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -2509,44 +2588,44 @@ index: 1);
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
+                            }
+
+                            static void Main(int Goo)
+                            {
+                                [|N.Program.Goo.Bar|]();
                             }
                         }
-
-                        static void Main(int Goo)
-                        {
-                            [|N.Program.Goo.Bar|]();
-                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
+                            }
+
+                            static void Main(int Goo)
+                            {
+                                Program.Goo.Bar();
                             }
                         }
-
-                        static void Main(int Goo)
-                        {
-                            Program.Goo.Bar();
-                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -2555,49 +2634,50 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
                             }
-                        }
 
-                        static void Main()
-                        {
-                            [|N.Program.Goo.Bar|]();
+                            static void Main()
                             {
-                                int Goo;
+                                [|N.Program.Goo.Bar|]();
+                                {
+                                    int Goo;
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
                             }
-                        }
 
-                        static void Main()
-                        {
-                            Goo.Bar();
+                            static void Main()
                             {
-                                int Goo;
+                                Goo.Bar();
+                                {
+                                    int Goo;
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -2606,49 +2686,50 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Linq;
+                    using System.Linq;
 
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
+                            }
+
+                            static void Main(int[] args)
+                            {
+                                [|N.Program.Goo.Bar|]();
+                                var q = from Goo in args select Goo;
                             }
                         }
-
-                        static void Main(int[] args)
-                        {
-                            [|N.Program.Goo.Bar|]();
-                            var q = from Goo in args select Goo;
-                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Linq;
+                    using System.Linq;
 
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
+                            }
+
+                            static void Main(int[] args)
+                            {
+                                Goo.Bar();
+                                var q = from Goo in args select Goo;
                             }
                         }
-
-                        static void Main(int[] args)
-                        {
-                            Goo.Bar();
-                            var q = from Goo in args select Goo;
-                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2656,17 +2737,18 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program<T>
-                {
-                    public class Inner
+                    class Program<T>
                     {
-                        [Bar(typeof([|Program<>.Inner|]))]
-                        void Goo()
+                        public class Inner
                         {
+                            [Bar(typeof([|Program<>.Inner|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2674,29 +2756,30 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public class Inner<T>
+                    class Program
                     {
-                        [Bar(typeof([|Program.Inner<>|]))]
-                        void Goo()
+                        public class Inner<T>
                         {
+                            [Bar(typeof([|Program.Inner<>|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public class Inner<T>
+                    class Program
                     {
-                        [Bar(typeof(Inner<>))]
-                        void Goo()
+                        public class Inner<T>
                         {
+                            [Bar(typeof(Inner<>))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2704,17 +2787,18 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program<X>
-                {
-                    public class Inner<Y>
+                    class Program<X>
                     {
-                        [Bar(typeof([|Program<>.Inner<>|]))]
-                        void Goo()
+                        public class Inner<Y>
                         {
+                            [Bar(typeof([|Program<>.Inner<>|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2722,17 +2806,18 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program<X>
-                {
-                    public class Inner<Y>
+                    class Program<X>
                     {
-                        [Bar(typeof([|Program<X>.Inner<>|]))]
-                        void Goo()
+                        public class Inner<Y>
                         {
+                            [Bar(typeof([|Program<X>.Inner<>|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2740,17 +2825,18 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program<X>
-                {
-                    public class Inner<Y>
+                    class Program<X>
                     {
-                        [Bar(typeof([|Program<>.Inner<Y>|]))]
-                        void Goo()
+                        public class Inner<Y>
                         {
+                            [Bar(typeof([|Program<>.Inner<Y>|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2758,17 +2844,18 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program<X>
-                {
-                    public class Inner<Y>
+                    class Program<X>
                     {
-                        [Bar(typeof([|Program<Y>.Inner<X>|]))]
-                        void Goo()
+                        public class Inner<Y>
                         {
+                            [Bar(typeof([|Program<Y>.Inner<X>|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2776,29 +2863,30 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public class Inner
+                    class Program
                     {
-                        [Bar(typeof([|Program.Inner|]))]
-                        void Goo()
+                        public class Inner
                         {
+                            [Bar(typeof([|Program.Inner|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public class Inner
+                    class Program
                     {
-                        [Bar(typeof(Inner))]
-                        void Goo()
+                        public class Inner
                         {
+                            [Bar(typeof(Inner))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2806,29 +2894,30 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program<T>
-                {
-                    public class Inner
+                    class Program<T>
                     {
-                        [Bar(typeof([|Program<T>.Inner|]))]
-                        void Goo()
+                        public class Inner
                         {
+                            [Bar(typeof([|Program<T>.Inner|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program<T>
-                {
-                    public class Inner
+                    class Program<T>
                     {
-                        [Bar(typeof(Inner))]
-                        void Goo()
+                        public class Inner
                         {
+                            [Bar(typeof(Inner))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2836,29 +2925,30 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    public class Inner<T>
+                    class Program
                     {
-                        [Bar(typeof([|Program.Inner<>|]))]
-                        void Goo()
+                        public class Inner<T>
                         {
+                            [Bar(typeof([|Program.Inner<>|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public class Inner<T>
+                    class Program
                     {
-                        [Bar(typeof(Inner<>))]
-                        void Goo()
+                        public class Inner<T>
                         {
+                            [Bar(typeof(Inner<>))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2866,29 +2956,30 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program<X>
-                {
-                    public class Inner<Y>
+                    class Program<X>
                     {
-                        [Bar(typeof([|Program<X>.Inner<Y>|]))]
-                        void Goo()
+                        public class Inner<Y>
                         {
+                            [Bar(typeof([|Program<X>.Inner<Y>|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program<X>
-                {
-                    public class Inner<Y>
+                    class Program<X>
                     {
-                        [Bar(typeof(Inner<Y>))]
-                        void Goo()
+                        public class Inner<Y>
                         {
+                            [Bar(typeof(Inner<Y>))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2896,29 +2987,30 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program<X>
-                {
-                    public class Inner<Y>
+                    class Program<X>
                     {
-                        [Bar(typeof([|Program<X>.Inner<X>|]))]
-                        void Goo()
+                        public class Inner<Y>
                         {
+                            [Bar(typeof([|Program<X>.Inner<X>|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program<X>
-                {
-                    public class Inner<Y>
+                    class Program<X>
                     {
-                        [Bar(typeof(Inner<X>))]
-                        void Goo()
+                        public class Inner<Y>
                         {
+                            [Bar(typeof(Inner<X>))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2926,17 +3018,18 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program<X>
-                {
-                    public class Inner<Y>
+                    class Program<X>
                     {
-                        [Bar(typeof([|Program<Y>.Inner<Y>|]))]
-                        void Goo()
+                        public class Inner<Y>
                         {
+                            [Bar(typeof([|Program<Y>.Inner<Y>|]))]
+                            void Goo()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542650")]
@@ -2944,27 +3037,28 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                #if true
-                class A
-                #else
-                class B
-                #endif
-                {
-                    class C
+                    #if true
+                    class A
+                    #else
+                    class B
+                    #endif
                     {
-                    }
+                        class C
+                        {
+                        }
 
-                    static void Main()
-                    {
-                #if true
-                        [|A.
-                #else
-                        B.
-                #endif
-                            C|] x;
+                        static void Main()
+                        {
+                    #if true
+                            [|A.
+                    #else
+                            B.
+                    #endif
+                                C|] x;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542719")]
@@ -2972,21 +3066,22 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    class System
+                    class Program
                     {
-                    }
+                        class System
+                        {
+                        }
 
-                    int Console = 7;
+                        int Console = 7;
 
-                    void Main()
-                    {
-                        string v = null;
-                        [|global::System.Console.WriteLine(v)|];
+                        void Main()
+                        {
+                            string v = null;
+                            [|global::System.Console.WriteLine(v)|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544615")]
@@ -2994,18 +3089,19 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                enum E
-                {
-                }
-
-                class C
-                {
-                    void Main()
+                    enum E
                     {
-                        var x = ([|global::E|])-1;
                     }
-                }
-                """);
+
+                    class C
+                    {
+                        void Main()
+                        {
+                            var x = ([|global::E|])-1;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544616")]
@@ -3013,27 +3109,28 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    void M()
+                    using System;
+                    class C
                     {
-                        object x = 1;
-                        var y = [|x as System.Nullable<int>|] + 1;
+                        void M()
+                        {
+                            object x = 1;
+                            var y = [|x as System.Nullable<int>|] + 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void M()
+                    using System;
+                    class C
                     {
-                        object x = 1;
-                        var y = (x as int?) + 1;
+                        void M()
+                        {
+                            object x = 1;
+                            var y = (x as int?) + 1;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544974")]
@@ -3041,23 +3138,24 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        [|System.Nullable<int>.Equals|](1, 1);
+                        static void Main()
+                        {
+                            [|System.Nullable<int>.Equals|](1, 1);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        Equals(1, 1);
+                        static void Main()
+                        {
+                            Equals(1, 1);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544974")]
@@ -3065,21 +3163,22 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    static void Main([|System.Nullable<int>|] i)
+                    class C
                     {
+                        static void Main([|System.Nullable<int>|] i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    static void Main(int? i)
+                    class C
                     {
+                        static void Main(int? i)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544974")]
@@ -3087,21 +3186,22 @@ index: 1);
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                class C
-                {
-                    static void Main([|System.Nullable<System.Int32>|] i)
+                    class C
                     {
+                        static void Main([|System.Nullable<System.Int32>|] i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    static void Main(int? i)
+                    class C
                     {
+                        static void Main(int? i)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544977")]
@@ -3109,27 +3209,28 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var x = [|1 is System.Nullable<int>|]? 2 : 3;
+                        static void Main()
+                        {
+                            var x = [|1 is System.Nullable<int>|]? 2 : 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var x = 1 is int? ? 2 : 3;
+                        static void Main()
+                        {
+                            var x = 1 is int? ? 2 : 3;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3137,14 +3238,15 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                /// <summary>
-                /// <see cref="[|Nullable{T}|]"/>
-                /// </summary>
-                class A
-                {
-                }
-                """);
+                    using System;
+                    /// <summary>
+                    /// <see cref="[|Nullable{T}|]"/>
+                    /// </summary>
+                    class A
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3152,13 +3254,14 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                /// <summary>
-                /// <see cref="[|System.Nullable{T}|]"/>
-                /// </summary>
-                class A
-                {
-                }
-                """);
+                    /// <summary>
+                    /// <see cref="[|System.Nullable{T}|]"/>
+                    /// </summary>
+                    class A
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3166,13 +3269,14 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                /// <summary>
-                /// <see cref="[|System.Nullable{T}|].Value"/>
-                /// </summary>
-                class A
-                {
-                }
-                """);
+                    /// <summary>
+                    /// <see cref="[|System.Nullable{T}|].Value"/>
+                    /// </summary>
+                    class A
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3180,23 +3284,24 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                /// <summary>
-                /// <see cref="C{[|Nullable{T}|]}"/>
-                /// </summary>
-                class C<T>
-                {
-                }
-                """,
+                    using System;
+                    /// <summary>
+                    /// <see cref="C{[|Nullable{T}|]}"/>
+                    /// </summary>
+                    class C<T>
+                    {
+                    }
+                    """,
                 """
-                using System;
-                /// <summary>
-                /// <see cref="C{T?}"/>
-                /// </summary>
-                class C<T>
-                {
-                }
-                """);
+                    using System;
+                    /// <summary>
+                    /// <see cref="C{T?}"/>
+                    /// </summary>
+                    class C<T>
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3204,16 +3309,17 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                /// <summary>
-                /// <see cref="A.M{[|Nullable{T}|]}()"/>
-                /// </summary>
-                class A
-                {
-                    public void M<U>() where U : struct
+                    /// <summary>
+                    /// <see cref="A.M{[|Nullable{T}|]}()"/>
+                    /// </summary>
+                    class A
                     {
+                        public void M<U>() where U : struct
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3222,14 +3328,15 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                /// <summary>
-                /// <see cref="[|Nullable{int}|]"/>
-                /// </summary>
-                class A
-                {
-                }
-                """);
+                    using System;
+                    /// <summary>
+                    /// <see cref="[|Nullable{int}|]"/>
+                    /// </summary>
+                    class A
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3238,23 +3345,24 @@ index: 1);
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                /// <summary>
-                /// <see cref="[|System.Nullable{int}|]"/>
-                /// </summary>
-                class A
-                {
-                }
-                """,
+                    using System;
+                    /// <summary>
+                    /// <see cref="[|System.Nullable{int}|]"/>
+                    /// </summary>
+                    class A
+                    {
+                    }
+                    """,
                 """
-                using System;
-                /// <summary>
-                /// <see cref="Nullable{int}"/>
-                /// </summary>
-                class A
-                {
-                }
-                """);
+                    using System;
+                    /// <summary>
+                    /// <see cref="Nullable{int}"/>
+                    /// </summary>
+                    class A
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3264,23 +3372,24 @@ index: 1);
             // actual type-references in a type-arg list.
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                /// <summary>
-                /// <see cref="C{[|Nullable{int}|]}"/>
-                /// </summary>
-                class C<T>
-                {
-                }
-                """,
+                    using System;
+                    /// <summary>
+                    /// <see cref="C{[|Nullable{int}|]}"/>
+                    /// </summary>
+                    class C<T>
+                    {
+                    }
+                    """,
                 """
-                using System;
-                /// <summary>
-                /// <see cref="C{int?}"/>
-                /// </summary>
-                class C<T>
-                {
-                }
-                """);
+                    using System;
+                    /// <summary>
+                    /// <see cref="C{int?}"/>
+                    /// </summary>
+                    class C<T>
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3288,25 +3397,26 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                /// <summary>
-                /// <see cref="Goo([|Nullable{int}|])"/>
-                /// </summary>
-                class C
-                {
-                    void Goo(int? i) { }
-                }
-                """,
+                    using System;
+                    /// <summary>
+                    /// <see cref="Goo([|Nullable{int}|])"/>
+                    /// </summary>
+                    class C
+                    {
+                        void Goo(int? i) { }
+                    }
+                    """,
                 """
-                using System;
-                /// <summary>
-                /// <see cref="Goo(int?)"/>
-                /// </summary>
-                class C
-                {
-                    void Goo(int? i) { }
-                }
-                """);
+                    using System;
+                    /// <summary>
+                    /// <see cref="Goo(int?)"/>
+                    /// </summary>
+                    class C
+                    {
+                        void Goo(int? i) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3314,16 +3424,17 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                /// <summary>
-                /// <see cref="A.M{[|Nullable{int}|]}()"/>
-                /// </summary>
-                class A
-                {
-                    public void M<U>() where U : struct
+                    /// <summary>
+                    /// <see cref="A.M{[|Nullable{int}|]}()"/>
+                    /// </summary>
+                    class A
                     {
+                        public void M<U>() where U : struct
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3331,27 +3442,28 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                /// <summary>
-                /// <see cref="A.M([|System.Nullable{A}|])"/>
-                /// </summary>
-                struct A
-                {
-                    public void M(A? x)
+                    /// <summary>
+                    /// <see cref="A.M([|System.Nullable{A}|])"/>
+                    /// </summary>
+                    struct A
                     {
+                        public void M(A? x)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                /// <summary>
-                /// <see cref="A.M(A?)"/>
-                /// </summary>
-                struct A
-                {
-                    public void M(A? x)
+                    /// <summary>
+                    /// <see cref="A.M(A?)"/>
+                    /// </summary>
+                    struct A
                     {
+                        public void M(A? x)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3359,27 +3471,28 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                /// <summary>
-                /// <see cref="M([|System.Nullable{A}|])"/>
-                /// </summary>
-                struct A
-                {
-                    public void M(A? x)
+                    /// <summary>
+                    /// <see cref="M([|System.Nullable{A}|])"/>
+                    /// </summary>
+                    struct A
                     {
+                        public void M(A? x)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                /// <summary>
-                /// <see cref="M(A?)"/>
-                /// </summary>
-                struct A
-                {
-                    public void M(A? x)
+                    /// <summary>
+                    /// <see cref="M(A?)"/>
+                    /// </summary>
+                    struct A
                     {
+                        public void M(A? x)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3387,31 +3500,32 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                /// <summary>
-                /// <see cref="A.M(List{[|Nullable{int}|]})"/>
-                /// </summary>
-                class A
-                {
-                    public void M(List<int?> x)
+                    using System;
+                    using System.Collections.Generic;
+                    /// <summary>
+                    /// <see cref="A.M(List{[|Nullable{int}|]})"/>
+                    /// </summary>
+                    class A
                     {
+                        public void M(List<int?> x)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                /// <summary>
-                /// <see cref="A.M(List{int?})"/>
-                /// </summary>
-                class A
-                {
-                    public void M(List<int?> x)
+                    using System;
+                    using System.Collections.Generic;
+                    /// <summary>
+                    /// <see cref="A.M(List{int?})"/>
+                    /// </summary>
+                    class A
                     {
+                        public void M(List<int?> x)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3419,31 +3533,32 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                /// <summary>
-                /// <see cref="A.M{U}(List{[|Nullable{U}|]})"/>
-                /// </summary>
-                class A
-                {
-                    public void M<U>(List<U?> x) where U : struct
+                    using System;
+                    using System.Collections.Generic;
+                    /// <summary>
+                    /// <see cref="A.M{U}(List{[|Nullable{U}|]})"/>
+                    /// </summary>
+                    class A
                     {
+                        public void M<U>(List<U?> x) where U : struct
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                /// <summary>
-                /// <see cref="A.M{U}(List{U?})"/>
-                /// </summary>
-                class A
-                {
-                    public void M<U>(List<U?> x) where U : struct
+                    using System;
+                    using System.Collections.Generic;
+                    /// <summary>
+                    /// <see cref="A.M{U}(List{U?})"/>
+                    /// </summary>
+                    class A
                     {
+                        public void M<U>(List<U?> x) where U : struct
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3451,31 +3566,32 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                /// <summary>
-                /// <see cref="A.M{T}(List{Nullable{T}}, [|Nullable{T}|])"/>
-                /// </summary>
-                class A
-                {
-                    public void M<U>(List<U?> x, U? y) where U : struct
+                    using System;
+                    using System.Collections.Generic;
+                    /// <summary>
+                    /// <see cref="A.M{T}(List{Nullable{T}}, [|Nullable{T}|])"/>
+                    /// </summary>
+                    class A
                     {
+                        public void M<U>(List<U?> x, U? y) where U : struct
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                /// <summary>
-                /// <see cref="A.M{T}(List{Nullable{T}}, T?)"/>
-                /// </summary>
-                class A
-                {
-                    public void M<U>(List<U?> x, U? y) where U : struct
+                    using System;
+                    using System.Collections.Generic;
+                    /// <summary>
+                    /// <see cref="A.M{T}(List{Nullable{T}}, T?)"/>
+                    /// </summary>
+                    class A
                     {
+                        public void M<U>(List<U?> x, U? y) where U : struct
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -3483,59 +3599,60 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using N;
+                    using N;
 
-                namespace N
-                {
-                    class Color
+                    namespace N
                     {
-                        public static void Goo()
+                        class Color
                         {
-                        }
+                            public static void Goo()
+                            {
+                            }
 
-                        public void Bar()
-                        {
+                            public void Bar()
+                            {
+                            }
                         }
                     }
-                }
 
-                class Program
-                {
-                    Color Color;
-
-                    void Main()
+                    class Program
                     {
-                        [|N.Color|].Goo();
+                        Color Color;
+
+                        void Main()
+                        {
+                            [|N.Color|].Goo();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using N;
+                    using N;
 
-                namespace N
-                {
-                    class Color
+                    namespace N
                     {
-                        public static void Goo()
+                        class Color
                         {
-                        }
+                            public static void Goo()
+                            {
+                            }
 
-                        public void Bar()
-                        {
+                            public void Bar()
+                            {
+                            }
                         }
                     }
-                }
 
-                class Program
-                {
-                    Color Color;
-
-                    void Main()
+                    class Program
                     {
-                        Color.Goo();
+                        Color Color;
+
+                        void Main()
+                        {
+                            Color.Goo();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -3543,32 +3660,33 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using N;
+                    using N;
 
-                namespace N
-                {
-                    class Color
+                    namespace N
                     {
-                        public static void Goo()
+                        class Color
                         {
-                        }
+                            public static void Goo()
+                            {
+                            }
 
-                        public void Bar()
-                        {
+                            public void Bar()
+                            {
+                            }
                         }
                     }
-                }
 
-                class Program
-                {
-                    Color Color;
-
-                    void Main()
+                    class Program
                     {
-                        [|Color.Goo|]();
+                        Color Color;
+
+                        void Main()
+                        {
+                            [|Color.Goo|]();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40632")]
@@ -3576,43 +3694,44 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace N
-                {
-                    class Goo
+                    namespace N
                     {
-                        public static void Bar()
+                        class Goo
                         {
+                            public static void Bar()
+                            {
+                            }
+                        }
+
+                        /// <summary>
+                        /// <see cref="[|N|].Goo.Bar"/>
+                        /// </summary>
+                        class Program
+                        {
+                            public Goo Goo;
                         }
                     }
-
-                    /// <summary>
-                    /// <see cref="[|N|].Goo.Bar"/>
-                    /// </summary>
-                    class Program
-                    {
-                        public Goo Goo;
-                    }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
-                    class Goo
+                    namespace N
                     {
-                        public static void Bar()
+                        class Goo
                         {
+                            public static void Bar()
+                            {
+                            }
+                        }
+
+                        /// <summary>
+                        /// <see cref="Goo.Bar"/>
+                        /// </summary>
+                        class Program
+                        {
+                            public Goo Goo;
                         }
                     }
-
-                    /// <summary>
-                    /// <see cref="Goo.Bar"/>
-                    /// </summary>
-                    class Program
-                    {
-                        public Goo Goo;
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40632")]
@@ -3620,45 +3739,46 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace N
-                {
-                    class Goo
+                    namespace N
                     {
-                        public class Bar
+                        class Goo
                         {
-                            public class Baz { }
+                            public class Bar
+                            {
+                                public class Baz { }
+                            }
+                        }
+
+                        /// <summary>
+                        /// <see cref="[|N|].Goo.Bar.Baz"/>
+                        /// </summary>
+                        class Program
+                        {
+                            public Goo Goo;
                         }
                     }
-
-                    /// <summary>
-                    /// <see cref="[|N|].Goo.Bar.Baz"/>
-                    /// </summary>
-                    class Program
-                    {
-                        public Goo Goo;
-                    }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
-                    class Goo
+                    namespace N
                     {
-                        public class Bar
+                        class Goo
                         {
-                            public class Baz { }
+                            public class Bar
+                            {
+                                public class Baz { }
+                            }
+                        }
+
+                        /// <summary>
+                        /// <see cref="Goo.Bar.Baz"/>
+                        /// </summary>
+                        class Program
+                        {
+                            public Goo Goo;
                         }
                     }
-
-                    /// <summary>
-                    /// <see cref="Goo.Bar.Baz"/>
-                    /// </summary>
-                    class Program
-                    {
-                        public Goo Goo;
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40632")]
@@ -3666,22 +3786,23 @@ index: 1);
         {
             await TestMissingAsync(
                 """
-                using A;
+                    using A;
 
-                namespace A
-                {
-                    public struct Goo { }
-                }
-
-                namespace N
-                {
-                    /// <summary><see cref="[|A|].Goo"/></summary
-                    class Color
+                    namespace A
                     {
-                        public Goo Goo;
+                        public struct Goo { }
                     }
-                }
-                """);
+
+                    namespace N
+                    {
+                        /// <summary><see cref="[|A|].Goo"/></summary
+                        class Color
+                        {
+                            public Goo Goo;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -3689,47 +3810,47 @@ index: 1);
         {
             await TestMissingAsync(
                 """
-                using System.Reflection.Metadata;
-                using Microsoft.Cci;
+                    using System.Reflection.Metadata;
+                    using Microsoft.Cci;
 
-                namespace System.Reflection.Metadata
-                {
-                    public enum PrimitiveTypeCode
+                    namespace System.Reflection.Metadata
                     {
-                        Void = 1,
-                    }
-                }
-
-                namespace Microsoft.Cci
-                {
-                    internal enum PrimitiveTypeCode
-                    {
-                        NotPrimitive,
-                        Pointer,
-                    }
-                }
-
-                namespace Microsoft.CodeAnalysis.CSharp.Symbols
-                {
-                    internal class TypeSymbol
-                    {
-                        internal Cci.PrimitiveTypeCode PrimitiveTypeCode => Cci.PrimitiveTypeCode.Pointer;
+                        public enum PrimitiveTypeCode
+                        {
+                            Void = 1,
+                        }
                     }
 
-                    internal partial class NamedTypeSymbol : TypeSymbol
+                    namespace Microsoft.Cci
                     {
-                        Cci.PrimitiveTypeCode TypeCode
-                            => [|Cci|].PrimitiveTypeCode.NotPrimitive;
+                        internal enum PrimitiveTypeCode
+                        {
+                            NotPrimitive,
+                            Pointer,
+                        }
                     }
-                }
-                """);
+
+                    namespace Microsoft.CodeAnalysis.CSharp.Symbols
+                    {
+                        internal class TypeSymbol
+                        {
+                            internal Cci.PrimitiveTypeCode PrimitiveTypeCode => Cci.PrimitiveTypeCode.Pointer;
+                        }
+
+                        internal partial class NamedTypeSymbol : TypeSymbol
+                        {
+                            Cci.PrimitiveTypeCode TypeCode
+                                => [|Cci|].PrimitiveTypeCode.NotPrimitive;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestAliasQualifiedType()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -3738,16 +3859,19 @@ index: 1);
                     }
                 }
                 """;
-            await TestAsync(source,
+            await TestAsync(
+                source,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Program a = null; 
+                        static void Main()
+                        {
+                            Program a = null; 
+                        }
                     }
-                }
-                """, parseOptions: null);
+                    """,
+                parseOptions: null
+            );
 
             await TestMissingAsync(source, new TestParameters(GetScriptOptions()));
         }
@@ -3757,37 +3881,37 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = [|System.Console.Read|]() + System.Console.Read();
+                        static void Main()
+                        {
+                            int x = [|System.Console.Read|]() + System.Console.Read();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = Console.Read() + System.Console.Read();
+                        static void Main()
+                        {
+                            int x = Console.Read() + System.Console.Read();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/551040")]
         public async Task TestSimplifyStaticMemberAccess()
         {
-            var source =
-                """
+            var source = """
                 class Preserve
                 {
-                	public static int Y;
+                    public static int Y;
                 }
 
                 class Z<T> : Preserve
@@ -3796,44 +3920,45 @@ index: 1);
 
                 static class M
                 {
-                	public static void Main()
-                	{
-                		int k = [|Z<float>.Y|];
-                	}
+                    public static void Main()
+                    {
+                        int k = [|Z<float>.Y|];
+                    }
                 }
                 """;
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                class Preserve
-                {
-                	public static int Y;
-                }
+                    class Preserve
+                    {
+                        public static int Y;
+                    }
 
-                class Z<T> : Preserve
-                {
-                }
+                    class Z<T> : Preserve
+                    {
+                    }
 
-                static class M
-                {
-                	public static void Main()
-                	{
-                		int k = Preserve.Y;
-                	}
-                }
-                """);
+                    static class M
+                    {
+                        public static void Main()
+                        {
+                            int k = Preserve.Y;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/551040")]
         public async Task TestSimplifyNestedType()
         {
-            var source =
-                """
+            var source = """
                 class Preserve
                 {
-                	public class X
-                	{
-                		public static int Y;
-                	}
+                    public class X
+                    {
+                        public static int Y;
+                    }
                 }
 
                 class Z<T> : Preserve
@@ -3842,41 +3967,42 @@ index: 1);
 
                 class M
                 {
-                	public static void Main()
-                	{
-                		int k = [|Z<float>.X|].Y;
-                	}
+                    public static void Main()
+                    {
+                        int k = [|Z<float>.X|].Y;
+                    }
                 }
                 """;
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                class Preserve
-                {
-                	public class X
-                	{
-                		public static int Y;
-                	}
-                }
+                    class Preserve
+                    {
+                        public class X
+                        {
+                            public static int Y;
+                        }
+                    }
 
-                class Z<T> : Preserve
-                {
-                }
+                    class Z<T> : Preserve
+                    {
+                    }
 
-                class M
-                {
-                	public static void Main()
-                	{
-                		int k = Preserve.X.Y;
-                	}
-                }
-                """);
+                    class M
+                    {
+                        public static void Main()
+                        {
+                            int k = Preserve.X.Y;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/568043")]
         public async Task DoNotSimplifyNamesWhenThereAreParseErrors()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
                 using System.Collections.Generic;
                 using System.Linq;
@@ -3899,16 +4025,17 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Action a = [|Console.WriteLine|];
+                        static void Main()
+                        {
+                            Action a = [|Console.WriteLine|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/566749")]
@@ -3916,16 +4043,17 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Action a = [|Console.Blah|];
+                        static void Main()
+                        {
+                            Action a = [|Console.Blah|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/554010")]
@@ -3933,27 +4061,28 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Action a = [|System.Console.WriteLine|];
+                        static void Main()
+                        {
+                            Action a = [|System.Console.WriteLine|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Action a = Console.WriteLine;
+                        static void Main()
+                        {
+                            Action a = Console.WriteLine;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578686")]
@@ -3961,59 +4090,60 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using goo = A.B;
-                using bar = C.D;
+                    using goo = A.B;
+                    using bar = C.D;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var s = [|new C.D().prop|];
+                        static void Main(string[] args)
+                        {
+                            var s = [|new C.D().prop|];
+                        }
                     }
-                }
 
-                namespace A
-                {
-                    class B
+                    namespace A
                     {
+                        class B
+                        {
+                        }
                     }
-                }
 
-                namespace C
-                {
-                    class D
+                    namespace C
                     {
-                        public A.B prop { get; set; }
+                        class D
+                        {
+                            public A.B prop { get; set; }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using goo = A.B;
-                using bar = C.D;
+                    using goo = A.B;
+                    using bar = C.D;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var s = new bar().prop;
+                        static void Main(string[] args)
+                        {
+                            var s = new bar().prop;
+                        }
                     }
-                }
 
-                namespace A
-                {
-                    class B
+                    namespace A
                     {
+                        class B
+                        {
+                        }
                     }
-                }
 
-                namespace C
-                {
-                    class D
+                    namespace C
                     {
-                        public A.B prop { get; set; }
+                        class D
+                        {
+                            public A.B prop { get; set; }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578686")]
@@ -4021,47 +4151,48 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                namespace NSA
-                {
-                    class DuplicateClassName
+                    namespace NSA
                     {
-                    }
-                }
-
-                namespace NSB
-                {
-                    class DuplicateClassName
-                    {
-                    }
-                }
-
-                namespace Test
-                {
-                    using AliasA = NSA.DuplicateClassName;
-                    using AliasB = NSB.DuplicateClassName;
-
-                    class TestClass
-                    {
-                        static void Main(string[] args)
+                        class DuplicateClassName
                         {
-                            var localA = new NSA.DuplicateClassName();
-                            var localB = new NSB.DuplicateClassName();
-                            new List<NoAlias.Goo>().Where(m => [|m.InnocentProperty|] == null);
                         }
                     }
-                }
 
-                namespace NoAlias
-                {
-                    class Goo
+                    namespace NSB
                     {
-                        public NSB.DuplicateClassName InnocentProperty { get; set; }
+                        class DuplicateClassName
+                        {
+                        }
                     }
-                }
-                """);
+
+                    namespace Test
+                    {
+                        using AliasA = NSA.DuplicateClassName;
+                        using AliasB = NSB.DuplicateClassName;
+
+                        class TestClass
+                        {
+                            static void Main(string[] args)
+                            {
+                                var localA = new NSA.DuplicateClassName();
+                                var localB = new NSB.DuplicateClassName();
+                                new List<NoAlias.Goo>().Where(m => [|m.InnocentProperty|] == null);
+                            }
+                        }
+                    }
+
+                    namespace NoAlias
+                    {
+                        class Goo
+                        {
+                            public NSB.DuplicateClassName InnocentProperty { get; set; }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/577169")]
@@ -4069,16 +4200,17 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var w = new [|Nullable<>|].
+                        static void Main(string[] args)
+                        {
+                            var w = new [|Nullable<>|].
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/577169")]
@@ -4086,16 +4218,17 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var x = typeof([|Nullable<>|]);
+                        static void Main(string[] args)
+                        {
+                            var x = typeof([|Nullable<>|]);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/608190")]
@@ -4103,26 +4236,27 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
 
-                struct S
-                {
-                    int x;
-
-                    S(dynamic y)
+                    struct S
                     {
-                        [|object.Equals|](y, 0);
-                        x = y;
+                        int x;
+
+                        S(dynamic y)
+                        {
+                            [|object.Equals|](y, 0);
+                            x = y;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/608190")]
@@ -4130,26 +4264,27 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
 
-                struct S
-                {
-                    int x;
-
-                    S(dynamic y)
+                    struct S
                     {
-                        x = y;
-                        [|this.Equals|](y, 0);
+                        int x;
+
+                        S(dynamic y)
+                        {
+                            x = y;
+                            [|this.Equals|](y, 0);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/608932")]
@@ -4157,29 +4292,30 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using S = X;
+                    using S = X;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                    }
-                }
-
-                namespace X
-                {
-                    using S = System;
-
-                    enum E
-                    {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
 
-                    class C<E>
+                    namespace X
                     {
-                        [|X|].E e; // Simplify type name as suggested
+                        using S = System;
+
+                        enum E
+                        {
+                        }
+
+                        class C<E>
+                        {
+                            [|X|].E e; // Simplify type name as suggested
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/635933")]
@@ -4187,52 +4323,55 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class B
-                {
-                    public static void Goo(int x, object y)
+                    class B
                     {
-                    }
-
-                    static void Main()
-                    {
-                        C<string>.D.Goo(0);
-                    }
-                }
-
-                class C<T> : B
-                {
-                    public class D : C<T> // Start rename session and try to rename D to T
-                    {
-                        public static void Goo(dynamic x)
+                        public static void Goo(int x, object y)
                         {
-                            Console.WriteLine([|D.Goo(x, ")|]);
+                        }
+
+                        static void Main()
+                        {
+                            C<string>.D.Goo(0);
                         }
                     }
 
-                    public static string Goo(int x, T y)
+                    class C<T> : B
                     {
-                        string s = null;
-                        return s;
+                        public class D : C<T> // Start rename session and try to rename D to T
+                        {
+                            public static void Goo(dynamic x)
+                            {
+                                Console.WriteLine([|D.Goo(x, ")|]);
+                            }
+                        }
+
+                        public static string Goo(int x, T y)
+                        {
+                            string s = null;
+                            return s;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/547246")]
         public async Task CodeIssueAtRightSpan()
         {
-            await TestSpansAsync("""
-                using goo = System.Console;
-                class Program
-                {
-                    static void Main(string[] args)
+            await TestSpansAsync(
+                """
+                    using goo = System.Console;
+                    class Program
                     {
-                        [|System.Console|].Read();
+                        static void Main(string[] args)
+                        {
+                            [|System.Console|].Read();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/579172")]
@@ -4240,13 +4379,14 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C<T, S>
-                {
-                    class D : C<[|D.D|], D.D.D>
+                    class C<T, S>
                     {
+                        class D : C<[|D.D|], D.D.D>
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/633182")]
@@ -4254,14 +4394,15 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        ([|this.Goo|])();
+                        void Goo()
+                        {
+                            ([|this.Goo|])();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627102")]
@@ -4269,107 +4410,114 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class B
-                {
-                    static void Goo(int x, object y)
+                    class B
                     {
+                        static void Goo(int x, object y)
+                        {
+                        }
+
+                        static void Goo<T>(dynamic x)
+                        {
+                            Console.WriteLine([|C<T>.Goo|](x, "));
+                        }
+
+                        static void Main()
+                        {
+                            Goo<string>(0);
+                        }
                     }
 
-                    static void Goo<T>(dynamic x)
+                    class C<T> : B
                     {
-                        Console.WriteLine([|C<T>.Goo|](x, "));
+                        public static string Goo(int x, T y)
+                        {
+                            return "Hello world";
+                        }
                     }
-
-                    static void Main()
-                    {
-                        Goo<string>(0);
-                    }
-                }
-
-                class C<T> : B
-                {
-                    public static string Goo(int x, T y)
-                    {
-                        return "Hello world";
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/629572")]
         public async Task DoNotIncludeAliasNameIfLastTargetNameIsTheSame_1()
         {
-            await TestSpansAsync("""
-                using Generic = System.Collections.Generic;
-                class Program
-                {
-                    static void Main(string[] args)
+            await TestSpansAsync(
+                """
+                    using Generic = System.Collections.Generic;
+                    class Program
                     {
-                        var x = new [|System.Collections|].Generic.List<int>();
+                        static void Main(string[] args)
+                        {
+                            var x = new [|System.Collections|].Generic.List<int>();
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestInRegularAndScriptAsync(
                 """
-                using Generic = System.Collections.Generic;
-                class Program
-                {
-                    static void Main(string[] args)
+                    using Generic = System.Collections.Generic;
+                    class Program
                     {
-                        var x = new [|System.Collections|].Generic.List<int>();
+                        static void Main(string[] args)
+                        {
+                            var x = new [|System.Collections|].Generic.List<int>();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using Generic = System.Collections.Generic;
-                class Program
-                {
-                    static void Main(string[] args)
+                    using Generic = System.Collections.Generic;
+                    class Program
                     {
-                        var x = new Generic.List<int>();
+                        static void Main(string[] args)
+                        {
+                            var x = new Generic.List<int>();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/629572")]
         public async Task DoNotIncludeAliasNameIfLastTargetNameIsTheSame_2()
         {
-            await TestSpansAsync("""
-                using Console = System.Console;
-                class Program
-                {
-                    static void Main(string[] args)
+            await TestSpansAsync(
+                """
+                    using Console = System.Console;
+                    class Program
                     {
-                        [|System|].Console.WriteLine("goo");
+                        static void Main(string[] args)
+                        {
+                            [|System|].Console.WriteLine("goo");
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestInRegularAndScriptAsync(
                 """
-                using Console = System.Console;
-                class Program
-                {
-                    static void Main(string[] args)
+                    using Console = System.Console;
+                    class Program
                     {
-                        [|System|].Console.WriteLine("goo");
+                        static void Main(string[] args)
+                        {
+                            [|System|].Console.WriteLine("goo");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using Console = System.Console;
-                class Program
-                {
-                    static void Main(string[] args)
+                    using Console = System.Console;
+                    class Program
                     {
-                        Console.WriteLine("goo");
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine("goo");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/736377")]
@@ -4377,20 +4525,21 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    public static void GetA
-
-                    [[|System.Diagnostics|].CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-                    public static ISet<string> GetAllFilesInSolution()
+                    class Program
                     {
-                        return null;
+                        public static void GetA
+
+                        [[|System.Diagnostics|].CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+                        public static ISet<string> GetAllFilesInSolution()
+                        {
+                            return null;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/813385")]
@@ -4398,38 +4547,41 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using Goo = System.Int32;
+                    using Goo = System.Int32;
 
-                class C
-                {
-                    [|Goo|] f;
-                }
-                """);
+                    class C
+                    {
+                        [|Goo|] f;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/825541")]
         public async Task ShowOnlyRelevantSpanForReductionOfGenericName()
         {
-            await TestSpansAsync("""
-                namespace A
-                {
-                    class Program
+            await TestSpansAsync(
+                """
+                    namespace A
                     {
-                        static void Main(string[] args)
+                        class Program
                         {
-                            var x = A.B.OtherClass.Test[|<int>|](5);
+                            static void Main(string[] args)
+                            {
+                                var x = A.B.OtherClass.Test[|<int>|](5);
+                            }
                         }
-                    }
 
-                    namespace B
-                    {
-                        class OtherClass
+                        namespace B
                         {
-                            public static int Test<T>(T t) { return 5; }
+                            class OtherClass
+                            {
+                                public static int Test<T>(T t) { return 5; }
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/878773")]
@@ -4437,11 +4589,12 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                [[|Attribute|]]
-                class Attribute : System.Attribute
-                {
-                }
-                """);
+                    [[|Attribute|]]
+                    class Attribute : System.Attribute
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -4449,16 +4602,24 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int x;
-
-                    public void z()
+                    class C
                     {
-                        [|this|].x = 4;
+                        int x;
+
+                        public void z()
+                        {
+                            [|this|].x = 4;
+                        }
                     }
-                }
-                """, new TestParameters(options: Option(CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Error)));
+                    """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.QualifyFieldAccess,
+                        true,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4466,25 +4627,26 @@ index: 1);
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                class C
-                {
-                    [|System.Int32|] x;
-
-                    public void z()
+                    class C
                     {
+                        [|System.Int32|] x;
+
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int x;
-
-                    public void z()
+                    class C
                     {
+                        int x;
+
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4492,22 +4654,25 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    [|System.Int32|]? x;
-                    public void z()
+                    class C
                     {
+                        [|System.Int32|]? x;
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, """
-                class C
-                {
-                    int? x;
-                    public void z()
+                    """,
+                """
+                    class C
                     {
+                        int? x;
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, options: PreferIntrinsicTypeEverywhere);
+                    """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4515,24 +4680,27 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    /// <see cref="[|Int32|]"/>
-                    public void z()
+                    using System;
+                    class C
                     {
+                        /// <see cref="[|Int32|]"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, """
-                using System;
-                class C
-                {
-                    /// <see cref="int"/>
-                    public void z()
+                    """,
+                """
+                    using System;
+                    class C
                     {
+                        /// <see cref="int"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, options: PreferIntrinsicTypeInMemberAccess);
+                    """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4540,22 +4708,25 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    /// <see cref="[|System.Int32|]"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="[|System.Int32|]"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, """
-                class C
-                {
-                    /// <see cref="int"/>
-                    public void z()
+                    """,
+                """
+                    class C
                     {
+                        /// <see cref="int"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, options: PreferIntrinsicTypeEverywhere);
+                    """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4563,24 +4734,27 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    /// <see cref="[|Int32|].MaxValue"/>
-                    public void z()
+                    using System;
+                    class C
                     {
+                        /// <see cref="[|Int32|].MaxValue"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, """
-                using System;
-                class C
-                {
-                    /// <see cref="int.MaxValue"/>
-                    public void z()
+                    """,
+                """
+                    using System;
+                    class C
                     {
+                        /// <see cref="int.MaxValue"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, options: PreferIntrinsicTypeEverywhere);
+                    """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4589,16 +4763,24 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    /// <see cref="[|Int32|]"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="[|Int32|]"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                    """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4607,27 +4789,29 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    /// <see cref="[|Int32|]"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="[|Int32|]"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    /// <see cref="int"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="int"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, options: PreferIntrinsicTypeInMemberAccess);
+                    """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4636,16 +4820,24 @@ index: 1);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    /// <see cref="[|Int32|].MaxValue"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="[|Int32|].MaxValue"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                    """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954536")]
@@ -4653,28 +4845,29 @@ index: 1);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    /// <see cref="[|Int32|].MaxValue"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="[|Int32|].MaxValue"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    /// <see cref="int.MaxValue"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="int.MaxValue"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """,
-options: PreferIntrinsicTypeInMemberAccess);
+                    """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954536")]
@@ -4682,14 +4875,22 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                    """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954536")]
@@ -4697,24 +4898,25 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    /// <see cref="System.Collections.Generic.List{T}.CopyTo(int, T[], int, int)"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="System.Collections.Generic.List{T}.CopyTo(int, T[], int, int)"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """,
-options: PreferIntrinsicTypeInMemberAccess);
+                    """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954536")]
@@ -4722,14 +4924,16 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, new TestParameters(options: PreferIntrinsicTypeInDeclaration));
+                    """,
+                new TestParameters(options: PreferIntrinsicTypeInDeclaration)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4737,16 +4941,24 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    [|System.Int32|] x;
-
-                    public void z(System.Int32 y)
+                    class C
                     {
-                        System.Int32 z = 9;
+                        [|System.Int32|] x;
+
+                        public void z(System.Int32 y)
+                        {
+                            System.Int32 z = 9;
+                        }
                     }
-                }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false, NotificationOption2.Error)));
+                    """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4754,16 +4966,24 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    System.Int32 x;
-
-                    public void z([|System.Int32|] y)
+                    class C
                     {
-                        System.Int32 z = 9;
+                        System.Int32 x;
+
+                        public void z([|System.Int32|] y)
+                        {
+                            System.Int32 z = 9;
+                        }
                     }
-                }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false, NotificationOption2.Error)));
+                    """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4771,16 +4991,24 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    System.Int32 x;
-
-                    public void z(System.Int32 y)
+                    class C
                     {
-                        [|System.Int32|] z = 9;
+                        System.Int32 x;
+
+                        public void z(System.Int32 y)
+                        {
+                            [|System.Int32|] z = 9;
+                        }
                     }
-                }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false, NotificationOption2.Error)));
+                    """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4788,23 +5016,25 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        var sss = [|System.Int32|].MaxValue;
+                        public void z()
+                        {
+                            var sss = [|System.Int32|].MaxValue;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        var sss = int.MaxValue;
+                        public void z()
+                        {
+                            var sss = int.MaxValue;
+                        }
                     }
-                }
-                """, options: PreferIntrinsicTypeInMemberAccess);
+                    """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4812,27 +5042,29 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        var sss = [|Int32|].MaxValue;
+                        public void z()
+                        {
+                            var sss = [|Int32|].MaxValue;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        var sss = int.MaxValue;
+                        public void z()
+                        {
+                            var sss = int.MaxValue;
+                        }
                     }
-                }
-                """, options: PreferIntrinsicTypeInMemberAccess);
+                    """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/956667")]
@@ -4840,21 +5072,22 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C1
-                {
-                    public static void z()
+                    class C1
                     {
-                        var sss = [|C2.Memb|].ToString();
+                        public static void z()
+                        {
+                            var sss = [|C2.Memb|].ToString();
+                        }
                     }
-                }
 
-                class C2
-                {
-                    public static int Memb;
-                }
-                """);
+                    class C2
+                    {
+                        public static int Memb;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4862,16 +5095,24 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        var sss = [|Int32|].MaxValue;
+                        public void z()
+                        {
+                            var sss = [|Int32|].MaxValue;
+                        }
                     }
-                }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                    """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4879,14 +5120,22 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        var sss = [|System.Int32|].MaxValue;
+                        public void z()
+                        {
+                            var sss = [|System.Int32|].MaxValue;
+                        }
                     }
-                }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                    """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/965208")]
@@ -4894,51 +5143,54 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        [|System.Console.WriteLine|](");
+                        public void z()
+                        {
+                            [|System.Console.WriteLine|](");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        Console.WriteLine(");
+                        public void z()
+                        {
+                            Console.WriteLine(");
+                        }
                     }
-                }
-                """);
+                    """
+            );
 
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        [|System.Int32|] a;
+                        public void z()
+                        {
+                            [|System.Int32|] a;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public void z()
+                    class C
                     {
-                        int a;
+                        public void z()
+                        {
+                            int a;
+                        }
                     }
-                }
-                """, parameters: new TestParameters(options: PreferIntrinsicTypeEverywhere));
+                    """,
+                parameters: new TestParameters(options: PreferIntrinsicTypeEverywhere)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1019276")]
@@ -4946,33 +5198,34 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void F()
+                    class Program
                     {
-                        object o = null;
-                        if (![|(o is Byte)|])
+                        static void F()
                         {
+                            object o = null;
+                            if (![|(o is Byte)|])
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void F()
+                    class Program
                     {
-                        object o = null;
-                        if (!(o is byte))
+                        static void F()
                         {
+                            object o = null;
+                            if (!(o is byte))
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1068445")]
@@ -4980,23 +5233,24 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                namespace ClassLibrary2
-                {
-                    public class Class1
+                    namespace ClassLibrary2
                     {
-                        public object X => ([|System.Int32|])0;
+                        public class Class1
+                        {
+                            public object X => ([|System.Int32|])0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ClassLibrary2
-                {
-                    public class Class1
+                    namespace ClassLibrary2
                     {
-                        public object X => (int)0;
+                        public class Class1
+                        {
+                            public object X => (int)0;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1068445")]
@@ -5004,17 +5258,18 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                class C
-                {
-                    public string Goo() => ([|System.String|])";
-                }
-                """,
+                    class C
+                    {
+                        public string Goo() => ([|System.String|])";
+                    }
+                    """,
                 """
-                class C
-                {
-                    public string Goo() => (string)";
-                }
-                """);
+                    class C
+                    {
+                        public string Goo() => (string)";
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1068445")]
@@ -5022,17 +5277,18 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                class C
-                {
-                    public int this[int index] => ([|System.Int32|])0;
-                }
-                """,
+                    class C
+                    {
+                        public int this[int index] => ([|System.Int32|])0;
+                    }
+                    """,
                 """
-                class C
-                {
-                    public int this[int index] => (int)0;
-                }
-                """);
+                    class C
+                    {
+                        public int this[int index] => (int)0;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems?id=388744")]
@@ -5040,32 +5296,33 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestAsync(
                 """
-                class C
-                {
-                    static void F()
+                    class C
                     {
-                        [|C.G|](out _);
+                        static void F()
+                        {
+                            [|C.G|](out _);
+                        }
+                        static void G(out object o)
+                        {
+                            o = null;
+                        }
                     }
-                    static void G(out object o)
-                    {
-                        o = null;
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    static void F()
+                    class C
                     {
-                        G(out _);
+                        static void F()
+                        {
+                            G(out _);
+                        }
+                        static void G(out object o)
+                        {
+                            o = null;
+                        }
                     }
-                    static void G(out object o)
-                    {
-                        o = null;
-                    }
-                }
-                """,
-                parseOptions: CSharpParseOptions.Default);
+                    """,
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems?id=388744")]
@@ -5073,32 +5330,35 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestAsync(
                 """
-                class C
-                {
-                    static void F()
+                    class C
                     {
-                        [|C.G|](out _);
+                        static void F()
+                        {
+                            [|C.G|](out _);
+                        }
+                        static void G(out object o)
+                        {
+                            o = null;
+                        }
                     }
-                    static void G(out object o)
-                    {
-                        o = null;
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    static void F()
+                    class C
                     {
-                        G(out _);
+                        static void F()
+                        {
+                            G(out _);
+                        }
+                        static void G(out object o)
+                        {
+                            o = null;
+                        }
                     }
-                    static void G(out object o)
-                    {
-                        o = null;
-                    }
-                }
-                """,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15996")]
@@ -5106,27 +5366,28 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestAsync(
                 """
-                using System;
-                class C
-                {
-                    void Main()
+                    using System;
+                    class C
                     {
-                        [|UInt32|] value = UInt32.MaxValue;
+                        void Main()
+                        {
+                            [|UInt32|] value = UInt32.MaxValue;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Main()
+                    using System;
+                    class C
                     {
-                        uint value = UInt32.MaxValue;
+                        void Main()
+                        {
+                            uint value = UInt32.MaxValue;
+                        }
                     }
-                }
-                """,
+                    """,
                 parseOptions: CSharpParseOptions.Default,
-                options: PreferIntrinsicTypeInDeclaration);
+                options: PreferIntrinsicTypeInDeclaration
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15996")]
@@ -5134,27 +5395,28 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestAsync(
                 """
-                using System;
-                class C
-                {
-                    void Main()
+                    using System;
+                    class C
                     {
-                        UInt32 value = [|UInt32|].MaxValue;
+                        void Main()
+                        {
+                            UInt32 value = [|UInt32|].MaxValue;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Main()
+                    using System;
+                    class C
                     {
-                        UInt32 value = uint.MaxValue;
+                        void Main()
+                        {
+                            UInt32 value = uint.MaxValue;
+                        }
                     }
-                }
-                """,
+                    """,
                 parseOptions: CSharpParseOptions.Default,
-                options: PreferIntrinsicTypeInMemberAccess);
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15996")]
@@ -5162,27 +5424,28 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestAsync(
                 """
-                using System;
-                class C
-                {
-                    void Main()
+                    using System;
+                    class C
                     {
-                        [|UInt32|].Parse("goo");
+                        void Main()
+                        {
+                            [|UInt32|].Parse("goo");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Main()
+                    using System;
+                    class C
                     {
-                        uint.Parse("goo");
+                        void Main()
+                        {
+                            uint.Parse("goo");
+                        }
                     }
-                }
-                """,
+                    """,
                 parseOptions: CSharpParseOptions.Default,
-                options: PreferIntrinsicTypeInMemberAccess);
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26923")]
@@ -5190,20 +5453,22 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        foreach (string arg in [|args|])
+                        static void Main(string[] args)
                         {
+                            foreach (string arg in [|args|])
+                            {
 
+                            }
                         }
                     }
-                }
-                """, new TestParameters(options: PreferImplicitTypeEverywhere));
+                    """,
+                new TestParameters(options: PreferImplicitTypeEverywhere)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26923")]
@@ -5211,20 +5476,22 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        foreach ([|string|] arg in args)
+                        static void Main(string[] args)
                         {
+                            foreach ([|string|] arg in args)
+                            {
 
+                            }
                         }
                     }
-                }
-                """, new TestParameters(options: PreferImplicitTypeEverywhere));
+                    """,
+                new TestParameters(options: PreferImplicitTypeEverywhere)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31849")]
@@ -5232,17 +5499,18 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                #nullable enable
-                using System.Threading.Tasks;
+                    #nullable enable
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    Task<string?> FooAsync()
+                    class C
                     {
-                        return Task.FromResult<[|string?|]>("something");
+                        Task<string?> FooAsync()
+                        {
+                            return Task.FromResult<[|string?|]>("something");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Theory]
@@ -5257,35 +5525,38 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        [|System.Exception|] c;
+                        class A
+                        {
+                            [|System.Exception|] c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace Root
-                {
-                    class A
+                    namespace Root
                     {
-                        Exception c;
+                        class A
+                        {
+                            Exception c;
+                        }
                     }
-                }
-                """, compilationOptions: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, warningLevel: warningLevel));
+                    """,
+                compilationOptions: new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    warningLevel: warningLevel
+                )
+            );
         }
 
         [Fact]
         public async Task TestGlobalAliasSimplifiesInUsingDirective()
         {
-            await TestInRegularAndScriptAsync(
-                "using [|global::System.IO|];",
-                "using System.IO;");
+            await TestInRegularAndScriptAsync("using [|global::System.IO|];", "using System.IO;");
         }
 
         [Theory]
@@ -5306,7 +5577,8 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 $"using My{typeName} = [|global::System.{typeName}|];",
-                $"using My{typeName} = System.{typeName};");
+                $"using My{typeName} = System.{typeName};"
+            );
         }
 
         [Fact]
@@ -5314,7 +5586,8 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 "using static [|global::System.Math|];",
-                "using static System.Math;");
+                "using static System.Math;"
+            );
         }
 
         [Fact]
@@ -5322,19 +5595,20 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                namespace N
-                {
-                    using [|global::System.IO|];
-                }
-                """,
+                    using System;
+                    namespace N
+                    {
+                        using [|global::System.IO|];
+                    }
+                    """,
                 """
-                using System;
-                namespace N
-                {
-                    using System.IO;
-                }
-                """);
+                    using System;
+                    namespace N
+                    {
+                        using System.IO;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40639")]
@@ -5342,13 +5616,16 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestDiagnosticInfoAsync(
                 """
-                /// <summary>
-                /// <see cref="[|System.String|]"/>
-                /// </summary>
-                class Base
-                {
-                }
-                """, IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId, DiagnosticSeverity.Hidden);
+                    /// <summary>
+                    /// <see cref="[|System.String|]"/>
+                    /// </summary>
+                    class Base
+                    {
+                    }
+                    """,
+                IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId,
+                DiagnosticSeverity.Hidden
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40639")]
@@ -5356,14 +5633,17 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestDiagnosticInfoAsync(
                 """
-                /// <summary>
-                /// <see cref="Foo([|System.String|])"/>
-                /// </summary>
-                class Base
-                {
-                    public void Foo(string s) { }
-                }
-                """, IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId, DiagnosticSeverity.Hidden);
+                    /// <summary>
+                    /// <see cref="Foo([|System.String|])"/>
+                    /// </summary>
+                    class Base
+                    {
+                        public void Foo(string s) { }
+                    }
+                    """,
+                IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId,
+                DiagnosticSeverity.Hidden
+            );
         }
 
         [Theory]
@@ -5376,19 +5656,22 @@ options: PreferIntrinsicTypeInMemberAccess);
         [InlineData("UInt32")]
         [InlineData("Int64")]
         [InlineData("UInt64")]
-        public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace(string typeName)
+        public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace(
+            string typeName
+        )
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|global::System.{typeName}|];
 }}",
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = {typeName};
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -5396,19 +5679,22 @@ namespace N
         [InlineData("UInt8")]
         [InlineData("Float32")]
         [InlineData("Float64")]
-        public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace_UnboundName(string typeName)
+        public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace_UnboundName(
+            string typeName
+        )
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|global::System.{typeName}|];
 }}",
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = System.{typeName};
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -5416,19 +5702,20 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                namespace N
-                {
-                    using static [|global::System.Math|];
-                }
-                """,
+                    using System;
+                    namespace N
+                    {
+                        using static [|global::System.Math|];
+                    }
+                    """,
                 """
-                using System;
-                namespace N
-                {
-                    using static System.Math;
-                }
-                """);
+                    using System;
+                    namespace N
+                    {
+                        using static System.Math;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27819")]
@@ -5436,23 +5723,25 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        [|System.Int32|] i = 0;
+                        void Goo()
+                        {
+                            [|System.Int32|] i = 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        int i = 0;
+                        void Goo()
+                        {
+                            int i = 0;
+                        }
                     }
-                }
-                """, options: PreferImplicitTypeEverywhere);
+                    """,
+                options: PreferImplicitTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27819")]
@@ -5460,14 +5749,16 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        [|int|] i = 0;
+                        void Goo()
+                        {
+                            [|int|] i = 0;
+                        }
                     }
-                }
-                """, new TestParameters(options: PreferImplicitTypeEverywhere));
+                    """,
+                new TestParameters(options: PreferImplicitTypeEverywhere)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40647")]
@@ -5475,21 +5766,22 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public void Goo(object o1, object o2) => [|Object|].ReferenceEquals(o1, o2);
-                }
-                """,
+                    class Base
+                    {
+                        public void Goo(object o1, object o2) => [|Object|].ReferenceEquals(o1, o2);
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public void Goo(object o1, object o2) => ReferenceEquals(o1, o2);
-                }
-                """);
+                    class Base
+                    {
+                        public void Goo(object o1, object o2) => ReferenceEquals(o1, o2);
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40649")]
@@ -5497,23 +5789,24 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System.Collections.Generic;
-                using MyList = System.Collections.Generic.List<int>;
+                    using System.Collections.Generic;
+                    using MyList = System.Collections.Generic.List<int>;
 
-                class Base
-                {
-                    public [|System.Collections.Generic.List<int>|] Goo;
-                }
-                """,
+                    class Base
+                    {
+                        public [|System.Collections.Generic.List<int>|] Goo;
+                    }
+                    """,
                 """
-                using System.Collections.Generic;
-                using MyList = System.Collections.Generic.List<int>;
+                    using System.Collections.Generic;
+                    using MyList = System.Collections.Generic.List<int>;
 
-                class Base
-                {
-                    public MyList Goo;
-                }
-                """);
+                    class Base
+                    {
+                        public MyList Goo;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40649")]
@@ -5521,23 +5814,24 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System.Collections.Generic;
-                using MyList = System.Collections.Generic.List<int>;
+                    using System.Collections.Generic;
+                    using MyList = System.Collections.Generic.List<int>;
 
-                class Base
-                {
-                    public [|List<int>|] Goo;
-                }
-                """,
+                    class Base
+                    {
+                        public [|List<int>|] Goo;
+                    }
+                    """,
                 """
-                using System.Collections.Generic;
-                using MyList = System.Collections.Generic.List<int>;
+                    using System.Collections.Generic;
+                    using MyList = System.Collections.Generic.List<int>;
 
-                class Base
-                {
-                    public MyList Goo;
-                }
-                """);
+                    class Base
+                    {
+                        public MyList Goo;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40649")]
@@ -5545,23 +5839,24 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System.Collections.Generic;
-                using MyList = System.Collections.Generic.List<int>;
+                    using System.Collections.Generic;
+                    using MyList = System.Collections.Generic.List<int>;
 
-                class Base
-                {
-                    public [|List<System.Int32>|] Goo;
-                }
-                """,
+                    class Base
+                    {
+                        public [|List<System.Int32>|] Goo;
+                    }
+                    """,
                 """
-                using System.Collections.Generic;
-                using MyList = System.Collections.Generic.List<int>;
+                    using System.Collections.Generic;
+                    using MyList = System.Collections.Generic.List<int>;
 
-                class Base
-                {
-                    public MyList Goo;
-                }
-                """);
+                    class Base
+                    {
+                        public MyList Goo;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40649")]
@@ -5569,14 +5864,15 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                using System.Collections.Generic;
-                using MyList = System.Collections.Generic.List<int>;
+                    using System.Collections.Generic;
+                    using MyList = System.Collections.Generic.List<int>;
 
-                class Base
-                {
-                    public [|List<string>|] Goo;
-                }
-                """);
+                    class Base
+                    {
+                        public [|List<string>|] Goo;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40663")]
@@ -5584,27 +5880,28 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var v = typeof([|Object|]);
+                        void Goo()
+                        {
+                            var v = typeof([|Object|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var v = typeof(object);
+                        void Goo()
+                        {
+                            var v = typeof(object);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40876")]
@@ -5612,32 +5909,32 @@ namespace N
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                using System;
+                    using System;
 
-                namespace N
-                {
-                    using Alias1 = [|System|].Object;
-
-                    class C
+                    namespace N
                     {
-                        Alias1 a1;
-                    }
-                }
-                """,
+                        using Alias1 = [|System|].Object;
 
+                        class C
+                        {
+                            Alias1 a1;
+                        }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace N
-                {
-                    using Alias1 = Object;
-
-                    class C
+                    namespace N
                     {
-                        Alias1 a1;
+                        using Alias1 = Object;
+
+                        class C
+                        {
+                            Alias1 a1;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5645,31 +5942,32 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                namespace A.B.C
-                {
-                    /// <summary>
-                    /// <see cref="[|A.B.C|].X"/>
-                    /// </summary>
-                    class X
+                    namespace A.B.C
                     {
+                        /// <summary>
+                        /// <see cref="[|A.B.C|].X"/>
+                        /// </summary>
+                        class X
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace A.B.C
-                {
-                    /// <summary>
-                    /// <see cref="X"/>
-                    /// </summary>
-                    class X
+                    namespace A.B.C
                     {
+                        /// <summary>
+                        /// <see cref="X"/>
+                        /// </summary>
+                        class X
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5677,18 +5975,19 @@ namespace N
         {
             await TestSpansAsync(
                 """
-                using System;
+                    using System;
 
-                namespace A.B.C
-                {
-                    /// <summary>
-                    /// <see cref="[|A.B.C|].X"/>
-                    /// </summary>
-                    class X
+                    namespace A.B.C
                     {
+                        /// <summary>
+                        /// <see cref="[|A.B.C|].X"/>
+                        /// </summary>
+                        class X
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5696,33 +5995,34 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                namespace A.B.C
-                {
-                    /// <summary>
-                    /// <see cref="[|A.B.C.X|].Y(A.B.C.X)"/>
-                    /// </summary>
-                    class X
+                    namespace A.B.C
                     {
-                        void Y(X x) { }
+                        /// <summary>
+                        /// <see cref="[|A.B.C.X|].Y(A.B.C.X)"/>
+                        /// </summary>
+                        class X
+                        {
+                            void Y(X x) { }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace A.B.C
-                {
-                    /// <summary>
-                    /// <see cref="Y(X)"/>
-                    /// </summary>
-                    class X
+                    namespace A.B.C
                     {
-                        void Y(X x) { }
+                        /// <summary>
+                        /// <see cref="Y(X)"/>
+                        /// </summary>
+                        class X
+                        {
+                            void Y(X x) { }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5730,33 +6030,34 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                namespace A.B.C
-                {
-                    /// <summary>
-                    /// <see cref="A.B.C.X.Y([|A.B.C|].X)"/>
-                    /// </summary>
-                    class X
+                    namespace A.B.C
                     {
-                        void Y(X x) { }
+                        /// <summary>
+                        /// <see cref="A.B.C.X.Y([|A.B.C|].X)"/>
+                        /// </summary>
+                        class X
+                        {
+                            void Y(X x) { }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace A.B.C
-                {
-                    /// <summary>
-                    /// <see cref="A.B.C.X.Y(X)"/>
-                    /// </summary>
-                    class X
+                    namespace A.B.C
                     {
-                        void Y(X x) { }
+                        /// <summary>
+                        /// <see cref="A.B.C.X.Y(X)"/>
+                        /// </summary>
+                        class X
+                        {
+                            void Y(X x) { }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Theory]
@@ -5776,11 +6077,12 @@ namespace N
         public async Task TestDoesNotSimplifyUsingAliasDirectiveToPrimitiveType(string typeName)
         {
             await TestMissingAsync(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|{typeName}|];
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -5796,16 +6098,17 @@ namespace N
         public async Task TestSimplifyUsingAliasDirectiveToQualifiedBuiltInType(string typeName)
         {
             await TestInRegularAndScript1Async(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|System.{typeName}|];
 }}",
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = {typeName};
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -5816,11 +6119,12 @@ namespace N
         public async Task TestDoesNotSimplifyUsingAliasWithUnboundTypes(string typeName)
         {
             await TestMissingInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|System.{typeName}|];
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -5828,27 +6132,28 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool Goo()
+                    class C
                     {
-                        return [|object|].Equals(null, null);
+                        bool Goo()
+                        {
+                            return [|object|].Equals(null, null);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool Goo()
+                    class C
                     {
-                        return Equals(null, null);
+                        bool Goo()
+                        {
+                            return Equals(null, null);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5856,16 +6161,17 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var v = [|base|].GetHashCode();
+                        void Goo()
+                        {
+                            var v = [|base|].GetHashCode();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5873,27 +6179,28 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                sealed class C
-                {
-                    void Goo()
+                    sealed class C
                     {
-                        var v = [|base|].GetHashCode();
+                        void Goo()
+                        {
+                            var v = [|base|].GetHashCode();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                sealed class C
-                {
-                    void Goo()
+                    sealed class C
                     {
-                        var v = GetHashCode();
+                        void Goo()
+                        {
+                            var v = GetHashCode();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5901,27 +6208,28 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                struct C
-                {
-                    void Goo()
+                    struct C
                     {
-                        var v = [|base|].GetHashCode();
+                        void Goo()
+                        {
+                            var v = [|base|].GetHashCode();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                struct C
-                {
-                    void Goo()
+                    struct C
                     {
-                        var v = GetHashCode();
+                        void Goo()
+                        {
+                            var v = GetHashCode();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5929,18 +6237,19 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var v = [|base|].GetHashCode();
-                    }
+                        void Goo()
+                        {
+                            var v = [|base|].GetHashCode();
+                        }
 
-                    public override int GetHashCode() => 0;
-                }
-                """);
+                        public override int GetHashCode() => 0;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -5948,37 +6257,38 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public int Baz() => 0;
-                }
-
-                class C : Base
-                {
-                    void Goo()
+                    class Base
                     {
-                        var v = [|base|].Baz();
+                        public int Baz() => 0;
                     }
-                }
-                """,
+
+                    class C : Base
+                    {
+                        void Goo()
+                        {
+                            var v = [|base|].Baz();
+                        }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public int Baz() => 0;
-                }
-
-                class C : Base
-                {
-                    void Goo()
+                    class Base
                     {
-                        var v = Baz();
+                        public int Baz() => 0;
                     }
-                }
-                """);
+
+                    class C : Base
+                    {
+                        void Goo()
+                        {
+                            var v = Baz();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -5986,23 +6296,24 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public int Baz(object o) => 0;
-                }
-
-                class C : Base
-                {
-                    void Goo()
+                    class Base
                     {
-                        var v = [|base|].Baz(0);
+                        public int Baz(object o) => 0;
                     }
 
-                    public int Baz(int o) => 0;
-                }
-                """);
+                    class C : Base
+                    {
+                        void Goo()
+                        {
+                            var v = [|base|].Baz(0);
+                        }
+
+                        public int Baz(int o) => 0;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6010,17 +6321,18 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public int Baz(string type)
-                        => type switch
-                        {
-                            nameof([|Int32|]) => 0,
-                        };
-                }
-                """);
+                    class Base
+                    {
+                        public int Baz(string type)
+                            => type switch
+                            {
+                                nameof([|Int32|]) => 0,
+                            };
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6028,23 +6340,24 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public void Goo() => Bar[|<int>|](0);
-                    public void Bar<T>(T t) => default;
-                }
-                """,
+                    class Base
+                    {
+                        public void Goo() => Bar[|<int>|](0);
+                        public void Bar<T>(T t) => default;
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public void Goo() => Bar(0);
-                    public void Bar<T>(T t) => default;
-                }
-                """);
+                    class Base
+                    {
+                        public void Goo() => Bar(0);
+                        public void Bar<T>(T t) => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6052,14 +6365,15 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public void Goo() => Bar[|<int>|](0);
-                    public void Bar<T>() => default;
-                }
-                """);
+                    class Base
+                    {
+                        public void Goo() => Bar[|<int>|](0);
+                        public void Bar<T>() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6067,19 +6381,20 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                enum E
-                {
-                    Goo = 1,
-                    Bar = [|E|].Goo,
-                }
-                """,
+                    enum E
+                    {
+                        Goo = 1,
+                        Bar = [|E|].Goo,
+                    }
+                    """,
                 """
-                enum E
-                {
-                    Goo = 1,
-                    Bar = Goo,
-                }
-                """);
+                    enum E
+                    {
+                        Goo = 1,
+                        Bar = Goo,
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6087,23 +6402,24 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                /// <summary>
-                /// <see cref="[|E|].Goo"/>
-                /// </summary>
-                enum E
-                {
-                    Goo = 1,
-                }
-                """,
+                    /// <summary>
+                    /// <see cref="[|E|].Goo"/>
+                    /// </summary>
+                    enum E
+                    {
+                        Goo = 1,
+                    }
+                    """,
                 """
-                /// <summary>
-                /// <see cref="Goo"/>
-                /// </summary>
-                enum E
-                {
-                    Goo = 1,
-                }
-                """);
+                    /// <summary>
+                    /// <see cref="Goo"/>
+                    /// </summary>
+                    enum E
+                    {
+                        Goo = 1,
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6111,22 +6427,24 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    /// <see cref="[|C.z|]"/>
-                    public void z()
+                    class C
                     {
+                        /// <see cref="[|C.z|]"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """, """
-                class C
-                {
-                    /// <see cref="z"/>
-                    public void z()
+                    """,
+                """
+                    class C
                     {
+                        /// <see cref="z"/>
+                        public void z()
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -6134,29 +6452,30 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class GooAttribute : Attribute
-                {
-                }
+                    class GooAttribute : Attribute
+                    {
+                    }
 
-                [Goo[|Attribute|]]
-                class Bar
-                {
-                }
-                """,
+                    [Goo[|Attribute|]]
+                    class Bar
+                    {
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class GooAttribute : Attribute
-                {
-                }
+                    class GooAttribute : Attribute
+                    {
+                    }
 
-                [Goo]
-                class Bar
-                {
-                }
-                """);
+                    [Goo]
+                    class Bar
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6164,29 +6483,30 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class GooAttribute : Attribute
-                {
-                }
+                    class GooAttribute : Attribute
+                    {
+                    }
 
-                [Goo[|Attribute|]()]
-                class Bar
-                {
-                }
-                """,
+                    [Goo[|Attribute|]()]
+                    class Bar
+                    {
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class GooAttribute : Attribute
-                {
-                }
+                    class GooAttribute : Attribute
+                    {
+                    }
 
-                [Goo()]
-                class Bar
-                {
-                }
-                """);
+                    [Goo()]
+                    class Bar
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6194,35 +6514,36 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                namespace N
-                {
-                    class GooAttribute : Attribute
+                    namespace N
+                    {
+                        class GooAttribute : Attribute
+                        {
+                        }
+                    }
+
+                    [N.Goo[|Attribute|]()]
+                    class Bar
                     {
                     }
-                }
-
-                [N.Goo[|Attribute|]()]
-                class Bar
-                {
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace N
-                {
-                    class GooAttribute : Attribute
+                    namespace N
+                    {
+                        class GooAttribute : Attribute
+                        {
+                        }
+                    }
+
+                    [N.Goo()]
+                    class Bar
                     {
                     }
-                }
-
-                [N.Goo()]
-                class Bar
-                {
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -6230,35 +6551,36 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                namespace N
-                {
-                    class GooAttribute : Attribute
+                    namespace N
+                    {
+                        class GooAttribute : Attribute
+                        {
+                        }
+                    }
+
+                    [N.GooAttribute([|typeof(System.Int32)|])]
+                    class Bar
                     {
                     }
-                }
-
-                [N.GooAttribute([|typeof(System.Int32)|])]
-                class Bar
-                {
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                namespace N
-                {
-                    class GooAttribute : Attribute
+                    namespace N
+                    {
+                        class GooAttribute : Attribute
+                        {
+                        }
+                    }
+
+                    [N.GooAttribute(typeof(int))]
+                    class Bar
                     {
                     }
-                }
-
-                [N.GooAttribute(typeof(int))]
-                class Bar
-                {
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -6266,29 +6588,30 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Runtime.Serialization;
+                    using System;
+                    using System.Runtime.Serialization;
 
-                namespace Microsoft
-                {
-                    [[|System|].Serializable]
-                    public struct ClassifiedToken
+                    namespace Microsoft
                     {
+                        [[|System|].Serializable]
+                        public struct ClassifiedToken
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Runtime.Serialization;
+                    using System;
+                    using System.Runtime.Serialization;
 
-                namespace Microsoft
-                {
-                    [Serializable]
-                    public struct ClassifiedToken
+                    namespace Microsoft
                     {
+                        [Serializable]
+                        public struct ClassifiedToken
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -6297,49 +6620,50 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
                             }
-                        }
 
-                        static void Main()
-                        {
-                            [|N.Program|].Goo.Bar();
+                            static void Main()
                             {
-                                int Goo;
+                                [|N.Program|].Goo.Bar();
+                                {
+                                    int Goo;
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
                             }
-                        }
 
-                        static void Main()
-                        {
-                            Goo.Bar();
+                            static void Main()
                             {
-                                int Goo;
+                                Goo.Bar();
+                                {
+                                    int Goo;
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542100")]
@@ -6347,49 +6671,50 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
                             }
-                        }
 
-                        static void Main()
-                        {
-                            [|Program|].Goo.Bar();
+                            static void Main()
                             {
-                                int Goo;
+                                [|Program|].Goo.Bar();
+                                {
+                                    int Goo;
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
                             }
-                        }
 
-                        static void Main()
-                        {
-                            Goo.Bar();
+                            static void Main()
                             {
-                                int Goo;
+                                Goo.Bar();
+                                {
+                                    int Goo;
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542100")]
@@ -6397,45 +6722,46 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
+                            }
+
+                            static void Main()
+                            {
+                                [|N|].Program.Goo.Bar();
+                                int Goo;
                             }
                         }
-
-                        static void Main()
-                        {
-                            [|N|].Program.Goo.Bar();
-                            int Goo;
-                        }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
+                            }
+
+                            static void Main()
+                            {
+                                Program.Goo.Bar();
+                                int Goo;
                             }
                         }
-
-                        static void Main()
-                        {
-                            Program.Goo.Bar();
-                            int Goo;
-                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542100")]
@@ -6443,25 +6769,26 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                namespace N
-                {
-                    class Program
+                    namespace N
                     {
-                        class Goo
+                        class Program
                         {
-                            public static void Bar()
+                            class Goo
                             {
+                                public static void Bar()
+                                {
+                                }
+                            }
+
+                            static void Main(int[] args)
+                            {
+                                [|Program|].Goo.Bar();
+                                int Goo;
                             }
                         }
-
-                        static void Main(int[] args)
-                        {
-                            [|Program|].Goo.Bar();
-                            int Goo;
-                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -6469,27 +6796,28 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using static System.Int32;
+                    using static System.Int32;
 
-                class Goo
-                {
-                    public void Bar(string a)
+                    class Goo
                     {
-                        var v = [|int|].Parse(a);
+                        public void Bar(string a)
+                        {
+                            var v = [|int|].Parse(a);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using static System.Int32;
+                    using static System.Int32;
 
-                class Goo
-                {
-                    public void Bar(string a)
+                    class Goo
                     {
-                        var v = Parse(a);
+                        public void Bar(string a)
+                        {
+                            var v = Parse(a);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Theory]
@@ -6505,16 +6833,17 @@ namespace N
         public async Task TestDoesNotSimplifyUsingAliasDirectiveToBuiltInType(string typeName)
         {
             await TestInRegularAndScript1Async(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|System.{typeName}|];
 }}",
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = {typeName};
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -6522,27 +6851,28 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using A;
-                using B;
+                    using A;
+                    using B;
 
-                namespace A
-                {
-                    class Goo { }
-                }
-
-                namespace B
-                {
-                    class Goo { }
-                }
-
-                class C
-                {
-                    void Bar(object o)
+                    namespace A
                     {
-                        var x = ([|A|].Goo)o;
+                        class Goo { }
                     }
-                }
-                """);
+
+                    namespace B
+                    {
+                        class Goo { }
+                    }
+
+                    class C
+                    {
+                        void Bar(object o)
+                        {
+                            var x = ([|A|].Goo)o;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6550,31 +6880,32 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using A;
+                    using A;
 
-                namespace A
-                {
-                    class Goo { }
-                }
-
-                namespace B
-                {
-                    class Goo { }
-                }
-
-                namespace N
-                {
-                    using B;
-
-                    class C
+                    namespace A
                     {
-                        void Bar(object o)
+                        class Goo { }
+                    }
+
+                    namespace B
+                    {
+                        class Goo { }
+                    }
+
+                    namespace N
+                    {
+                        using B;
+
+                        class C
                         {
-                            var x = ([|A|].Goo)o;
+                            void Bar(object o)
+                            {
+                                var x = ([|A|].Goo)o;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -6582,57 +6913,58 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using A;
-
-                namespace A
-                {
-                    class Goo { }
-                }
-
-                namespace B
-                {
-                    class Goo { }
-                }
-
-                namespace N
-                {
                     using A;
 
-                    class C
+                    namespace A
                     {
-                        void Bar(object o)
+                        class Goo { }
+                    }
+
+                    namespace B
+                    {
+                        class Goo { }
+                    }
+
+                    namespace N
+                    {
+                        using A;
+
+                        class C
                         {
-                            var x = ([|A|].Goo)o;
+                            void Bar(object o)
+                            {
+                                var x = ([|A|].Goo)o;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using A;
-
-                namespace A
-                {
-                    class Goo { }
-                }
-
-                namespace B
-                {
-                    class Goo { }
-                }
-
-                namespace N
-                {
                     using A;
 
-                    class C
+                    namespace A
                     {
-                        void Bar(object o)
+                        class Goo { }
+                    }
+
+                    namespace B
+                    {
+                        class Goo { }
+                    }
+
+                    namespace N
+                    {
+                        using A;
+
+                        class C
                         {
-                            var x = (Goo)o;
+                            void Bar(object o)
+                            {
+                                var x = (Goo)o;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168")]
@@ -6640,36 +6972,37 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                namespace N1
-                {
-                    /// <see cref="[|System.Int32|]"/>
-                    public class C1
+                    namespace N1
                     {
-                        public C1()
+                        /// <see cref="[|System.Int32|]"/>
+                        public class C1
                         {
+                            public C1()
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N1
-                {
-                    /// <see cref="int"/>
-                    public class C1
+                    namespace N1
                     {
-                        public C1()
+                        /// <see cref="int"/>
+                        public class C1
                         {
+                            public C1()
+                            {
+                            }
                         }
                     }
-                }
-                """, options: PreferIntrinsicTypeEverywhere);
+                    """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact]
         public async Task TestMissingOnInstanceMemberAccessOfOtherValue()
         {
-            var content =
-                """
+            var content = """
                 using System;
 
                 internal struct BitVector : IEquatable<BitVector>
@@ -6696,8 +7029,7 @@ namespace N
         [Fact]
         public async Task TestSimplifyStaticMemberAccessThroughDerivedType()
         {
-            var source =
-                """
+            var source = """
                 class Base
                 {
                     public static int Y;
@@ -6715,25 +7047,27 @@ namespace N
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
-                class Base
-                {
-                    public static int Y;
-                }
-
-                class Derived : Base
-                {
-                }
-
-                static class M
-                {
-                    public static void Main()
+                    class Base
                     {
-                        int k = Base.Y;
+                        public static int Y;
                     }
-                }
-                """);
+
+                    class Derived : Base
+                    {
+                    }
+
+                    static class M
+                    {
+                        public static void Main()
+                        {
+                            int k = Base.Y;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22493")]
@@ -6741,29 +7075,30 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class P
-                {
-                    public static void Main()
+                    class P
                     {
-                        dynamic y = null;
-                        [|System|].Console.WriteLine(y);
+                        public static void Main()
+                        {
+                            dynamic y = null;
+                            [|System|].Console.WriteLine(y);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class P
-                {
-                    public static void Main()
+                    class P
                     {
-                        dynamic y = null;
-                        Console.WriteLine(y);
+                        public static void Main()
+                        {
+                            dynamic y = null;
+                            Console.WriteLine(y);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22493")]
@@ -6771,26 +7106,27 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    public static void Goo(int i) { }
-                }
-
-                class Derived
-                {
-                }
-
-                class P
-                {
-                    public static void Main()
+                    class Base
                     {
-                        dynamic y = null;
-                        [|Derived|].Goo(y);
+                        public static void Goo(int i) { }
                     }
-                }
-                """);
+
+                    class Derived
+                    {
+                    }
+
+                    class P
+                    {
+                        public static void Main()
+                        {
+                            dynamic y = null;
+                            [|Derived|].Goo(y);
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -6798,16 +7134,19 @@ namespace N
         {
             await TestDiagnosticInfoAsync(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    void Goo()
+                    class Base
                     {
-                        var v = nameof([|System|].Int32);
+                        void Goo()
+                        {
+                            var v = nameof([|System|].Int32);
+                        }
                     }
-                }
-                """, IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId, DiagnosticSeverity.Hidden);
+                    """,
+                IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId,
+                DiagnosticSeverity.Hidden
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -6815,27 +7154,28 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    void Goo()
+                    class Base
                     {
-                        var v = nameof([|Base|].Goo);
+                        void Goo()
+                        {
+                            var v = nameof([|Base|].Goo);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    void Goo()
+                    class Base
                     {
-                        var v = nameof(Goo);
+                        void Goo()
+                        {
+                            var v = nameof(Goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -6843,27 +7183,28 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    static void Goo()
+                    class Base
                     {
-                        var v = nameof([|Base|].Goo);
+                        static void Goo()
+                        {
+                            var v = nameof([|Base|].Goo);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    static void Goo()
+                    class Base
                     {
-                        var v = nameof(Goo);
+                        static void Goo()
+                        {
+                            var v = nameof(Goo);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -6871,31 +7212,32 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    void Goo()
+                    class Base
                     {
-                        var v = nameof([|Base|].Goo);
-                    }
+                        void Goo()
+                        {
+                            var v = nameof([|Base|].Goo);
+                        }
 
-                    void Goo(int i) { }
-                }
-                """,
+                        void Goo(int i) { }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    void Goo()
+                    class Base
                     {
-                        var v = nameof(Goo);
+                        void Goo()
+                        {
+                            var v = nameof(Goo);
+                        }
+
+                        void Goo(int i) { }
                     }
-                
-                    void Goo(int i) { }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -6903,31 +7245,32 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    static void Goo()
+                    class Base
                     {
-                        var v = nameof([|Base|].Goo);
+                        static void Goo()
+                        {
+                            var v = nameof([|Base|].Goo);
+                        }
+
+                        static void Goo(int i) { }
                     }
-                
-                    static void Goo(int i) { }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Base
-                {
-                    static void Goo()
+                    class Base
                     {
-                        var v = nameof(Goo);
-                    }
+                        static void Goo()
+                        {
+                            var v = nameof(Goo);
+                        }
 
-                    static void Goo(int i) { }
-                }
-                """);
+                        static void Goo(int i) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11380")]
@@ -6935,15 +7278,16 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System;
+                    class Program
                     {
-                        [|Console.Equals|]("");
+                        static void Main(string[] args)
+                        {
+                            [|Console.Equals|]("");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57767")]
@@ -6951,25 +7295,26 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System.Runtime.CompilerServices;
+                    using System.Runtime.CompilerServices;
 
-                public ref struct A
-                {
-                    private void Goo()
+                    public ref struct A
                     {
-                    }
-
-                    public readonly unsafe ref struct B
-                    {
-                        private readonly void* a;
-
-                        public void Dispose()
+                        private void Goo()
                         {
-                            [|((delegate*<ref byte, ref A>)(delegate*<ref byte, ref byte>)&Unsafe.As<byte, byte>)(ref *(byte*)a)|].Goo();
+                        }
+
+                        public readonly unsafe ref struct B
+                        {
+                            private readonly void* a;
+
+                            public void Dispose()
+                            {
+                                [|((delegate*<ref byte, ref A>)(delegate*<ref byte, ref byte>)&Unsafe.As<byte, byte>)(ref *(byte*)a)|].Goo();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57767")]
@@ -6977,37 +7322,40 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public struct A
-                {
-                    private void Goo()
+                    public struct A
                     {
-                    }
-
-                    public readonly unsafe struct B
-                    {
-                        private readonly void* a;
-
-                        public void Dispose()
+                        private void Goo()
                         {
-                            [|((delegate*<ref byte, ref A>)&Unsafe.As<byte, A>)(ref *(byte*)a)|].Goo();
+                        }
+
+                        public readonly unsafe struct B
+                        {
+                            private readonly void* a;
+
+                            public void Dispose()
+                            {
+                                [|((delegate*<ref byte, ref A>)&Unsafe.As<byte, A>)(ref *(byte*)a)|].Goo();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNint1_NoNumericIntPtr()
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     [|System.IntPtr|] i;
                 }
                 """;
             var featureOptions = PreferIntrinsicTypeEverywhere;
-            await TestMissingInRegularAndScriptAsync(source, new TestParameters(options: featureOptions));
+            await TestMissingInRegularAndScriptAsync(
+                source,
+                new TestParameters(options: featureOptions)
+            );
         }
 
         [Fact]
@@ -7016,21 +7364,23 @@ namespace N
             var featureOptions = PreferIntrinsicTypeEverywhere;
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" CommonReferencesNet7="true">
-                        <Document>class A
-                {
-                    [|System.IntPtr|] i;
-                }</Document>
-                    </Project>
-                </Workspace>
-                """,
+                    <Workspace>
+                        <Project Language="C#" CommonReferencesNet7="true">
+                            <Document>class A
+                    {
+                        [|System.IntPtr|] i;
+                    }</Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                class A
-                {
-                    nint i;
-                }
-                """, options: featureOptions);
+                    class A
+                    {
+                        nint i;
+                    }
+                    """,
+                options: featureOptions
+            );
         }
 
         [Fact]
@@ -7039,29 +7389,33 @@ namespace N
             var featureOptions = PreferIntrinsicTypeEverywhere;
             await TestMissingInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" CommonReferencesNet7="true" LanguageVersion="8">
-                        <Document>class A
-                {
-                    [|System.IntPtr|] i;
-                }</Document>
-                    </Project>
-                </Workspace>
-                """, new TestParameters(options: featureOptions));
+                    <Workspace>
+                        <Project Language="C#" CommonReferencesNet7="true" LanguageVersion="8">
+                            <Document>class A
+                    {
+                        [|System.IntPtr|] i;
+                    }</Document>
+                        </Project>
+                    </Workspace>
+                    """,
+                new TestParameters(options: featureOptions)
+            );
         }
 
         [Fact]
         public async Task TestNUint1_NoNumericIntPtr()
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     [|System.UIntPtr|] i;
                 }
                 """;
             var featureOptions = PreferIntrinsicTypeEverywhere;
-            await TestMissingInRegularAndScriptAsync(source, new TestParameters(options: featureOptions));
+            await TestMissingInRegularAndScriptAsync(
+                source,
+                new TestParameters(options: featureOptions)
+            );
         }
 
         [Fact]
@@ -7070,21 +7424,23 @@ namespace N
             var featureOptions = PreferIntrinsicTypeEverywhere;
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" CommonReferencesNet7="true">
-                        <Document>class A
-                {
-                    [|System.UIntPtr|] i;
-                }</Document>
-                    </Project>
-                </Workspace>
-                """,
+                    <Workspace>
+                        <Project Language="C#" CommonReferencesNet7="true">
+                            <Document>class A
+                    {
+                        [|System.UIntPtr|] i;
+                    }</Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                class A
-                {
-                    nuint i;
-                }
-                """, options: featureOptions);
+                    class A
+                    {
+                        nuint i;
+                    }
+                    """,
+                options: featureOptions
+            );
         }
 
         [Fact]
@@ -7093,51 +7449,92 @@ namespace N
             var featureOptions = PreferIntrinsicTypeEverywhere;
             await TestMissingInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" CommonReferencesNet7="true" LanguageVersion="8">
-                        <Document>class A
-                {
-                    [|System.UIntPtr|] i;
-                }</Document>
-                    </Project>
-                </Workspace>
-                """, new TestParameters(options: featureOptions));
+                    <Workspace>
+                        <Project Language="C#" CommonReferencesNet7="true" LanguageVersion="8">
+                            <Document>class A
+                    {
+                        [|System.UIntPtr|] i;
+                    }</Document>
+                        </Project>
+                    </Workspace>
+                    """,
+                new TestParameters(options: featureOptions)
+            );
         }
 
-        private async Task TestWithPredefinedTypeOptionsAsync(string code, string expected, int index = 0)
-            => await TestInRegularAndScript1Async(code, expected, index, new TestParameters(options: PreferIntrinsicTypeEverywhere));
+        private async Task TestWithPredefinedTypeOptionsAsync(
+            string code,
+            string expected,
+            int index = 0
+        ) =>
+            await TestInRegularAndScript1Async(
+                code,
+                expected,
+                index,
+                new TestParameters(options: PreferIntrinsicTypeEverywhere)
+            );
 
-        private OptionsCollection PreferIntrinsicTypeEverywhere
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferIntrinsicTypeEverywhere =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, true, NotificationOption2.Error },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, this.onWithError },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    true,
+                    NotificationOption2.Error
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    this.onWithError
+                },
             };
 
-        private OptionsCollection PreferIntrinsicTypeInDeclaration
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferIntrinsicTypeInDeclaration =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, true, NotificationOption2.Error },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, this.offWithSilent },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    true,
+                    NotificationOption2.Error
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    this.offWithSilent
+                },
             };
 
-        private OptionsCollection PreferIntrinsicTypeInMemberAccess
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferIntrinsicTypeInMemberAccess =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, true, NotificationOption2.Error },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, this.offWithSilent },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    true,
+                    NotificationOption2.Error
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    this.offWithSilent
+                },
             };
 
-        private OptionsCollection PreferImplicitTypeEverywhere
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferImplicitTypeEverywhere =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, onWithInfo },
             };
 
-        private readonly CodeStyleOption2<bool> offWithSilent = new CodeStyleOption2<bool>(false, NotificationOption2.Silent);
-        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(true, NotificationOption2.Suggestion);
-        private readonly CodeStyleOption2<bool> onWithError = new CodeStyleOption2<bool>(true, NotificationOption2.Error);
+        private readonly CodeStyleOption2<bool> offWithSilent = new CodeStyleOption2<bool>(
+            false,
+            NotificationOption2.Silent
+        );
+        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Suggestion
+        );
+        private readonly CodeStyleOption2<bool> onWithError = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Error
+        );
     }
 }

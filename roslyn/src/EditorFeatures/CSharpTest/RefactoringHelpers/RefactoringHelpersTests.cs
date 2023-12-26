@@ -11,7 +11,8 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
 {
-    public partial class RefactoringHelpersTests : RefactoringHelpersTestBase<CSharpTestWorkspaceFixture>
+    public partial class RefactoringHelpersTests
+        : RefactoringHelpersTestBase<CSharpTestWorkspaceFixture>
     {
         #region Locations
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -1028,20 +1029,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
             static string GetTestText(string data)
             {
                 return """
-                    class C
-                    {
-                        void M()
+                        class C
                         {
-                            C LocalFunction(C c)
+                            void M()
                             {
-                    """ + data + """
-                    return null;
+                                C LocalFunction(C c)
+                                {
+                        """
+                    + data
+                    + """
+                        return null;
+                                }
+                                var a = new object();
                             }
-                            var a = new object();
                         }
-                    }
-                    """;
-
+                        """;
             }
         }
         #endregion
@@ -1166,20 +1168,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         [WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestMissingInHeaderHole(string data)
         {
-            var testText = """
-                class C
-                {
-                    void M()
+            var testText =
+                """
+                    class C
                     {
-                        C LocalFunction(C c)
+                        void M()
                         {
-                """ + data + """
-                return null;
+                            C LocalFunction(C c)
+                            {
+                    """
+                + data
+                + """
+                    return null;
+                            }
+                            var a = new object();
                         }
-                        var a = new object();
                     }
-                }
-                """;
+                    """;
             await TestMissingAsync<LocalDeclarationStatementSyntax>(testText);
         }
 
@@ -1194,20 +1199,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         [WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestInHeader(string data)
         {
-            var testText = """
-                class C
-                {
-                    void M()
+            var testText =
+                """
+                    class C
                     {
-                        C LocalFunction(C c)
+                        void M()
                         {
-                """ + data + """
-                return null;
+                            C LocalFunction(C c)
+                            {
+                    """
+                + data
+                + """
+                    return null;
+                            }
+                            var a = new object();
                         }
-                        var a = new object();
                     }
-                }
-                """;
+                    """;
             await TestAsync<LocalDeclarationStatementSyntax>(testText);
         }
         #endregion
@@ -1299,7 +1307,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                     }
                 }
                 """;
-            await TestMissingAsync<ArgumentSyntax>(testText, n => n.Parent is TupleExpressionSyntax);
+            await TestMissingAsync<ArgumentSyntax>(
+                testText,
+                n => n.Parent is TupleExpressionSyntax
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -1599,21 +1610,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         [WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestLocalDeclarationInHeader(string data)
         {
-            var testText = """
-                class C
-                {
-                    void M()
+            var testText =
+                """
+                    class C
                     {
-
-                        C LocalFunction(C c)
+                        void M()
                         {
-                """ + data + """
-                return null;
+
+                            C LocalFunction(C c)
+                            {
+                    """
+                + data
+                + """
+                    return null;
+                            }
+                            var a = new object();
                         }
-                        var a = new object();
                     }
-                }
-                """;
+                    """;
             await TestAsync<LocalDeclarationStatementSyntax>(testText);
         }
 
@@ -1624,21 +1638,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         [WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestMissingLocalDeclarationCaretInHeader(string data)
         {
-            var testText = """
-                class C
-                {
-                    void M()
+            var testText =
+                """
+                    class C
                     {
-
-                        C LocalFunction(C c)
+                        void M()
                         {
-                """ + data + """
-                return null;
+
+                            C LocalFunction(C c)
+                            {
+                    """
+                + data
+                + """
+                    return null;
+                            }
+                            var a = new object();
                         }
-                        var a = new object();
                     }
-                }
-                """;
+                    """;
             await TestMissingAsync<LocalDeclarationStatementSyntax>(testText);
         }
         #endregion
@@ -1649,25 +1666,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         {
             await TestAsync<IfStatementSyntax>(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        {|result:[|if (a)
+                        void Goo()
                         {
-                            a();
-                        }|]
-                        else if (b)
-                        {
-                            b();
+                            {|result:[|if (a)
+                            {
+                                a();
+                            }|]
+                            else if (b)
+                            {
+                                b();
+                            }
+                            else
+                            {
+                                c();
+                            }|}
                         }
-                        else
-                        {
-                            c();
-                        }|}
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -1675,25 +1693,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         {
             await TestAsync<IfStatementSyntax>(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        {|result:[|if (a)
+                        void Goo()
                         {
-                            a();
+                            {|result:[|if (a)
+                            {
+                                a();
+                            }
+                            else if (b)
+                            {
+                                b();
+                            }
+                            else
+                            {
+                                c();
+                            }|]|}
                         }
-                        else if (b)
-                        {
-                            b();
-                        }
-                        else
-                        {
-                            c();
-                        }|]|}
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -1701,25 +1720,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         {
             await TestMissingAsync<IfStatementSyntax>(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        if (a)
+                        void Goo()
                         {
-                            a();
+                            if (a)
+                            {
+                                a();
+                            }
+                            [|else if (b)
+                            {
+                                b();
+                            }
+                            else
+                            {
+                                c();
+                            }|]
                         }
-                        [|else if (b)
-                        {
-                            b();
-                        }
-                        else
-                        {
-                            c();
-                        }|]
                     }
-                }
-                """);
+                    """
+            );
         }
 
         #endregion
@@ -1781,7 +1801,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                     }
                 }
                 """;
-            await TestAsync<ArgumentSyntax>(testText, predicate: n => n.Parent is TupleExpressionSyntax);
+            await TestAsync<ArgumentSyntax>(
+                testText,
+                predicate: n => n.Parent is TupleExpressionSyntax
+            );
         }
         #endregion
     }

@@ -7,11 +7,12 @@ public class StartupWithRespectBrowserAcceptHeader
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers(options =>
-        {
-            options.RespectBrowserAcceptHeader = true;
-        })
-        .AddNewtonsoftJson();
+        services
+            .AddControllers(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+            })
+            .AddNewtonsoftJson();
     }
 
     public void Configure(IApplicationBuilder app)
@@ -23,4 +24,3 @@ public class StartupWithRespectBrowserAcceptHeader
         });
     }
 }
-

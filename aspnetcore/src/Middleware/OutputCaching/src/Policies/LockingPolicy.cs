@@ -25,22 +25,31 @@ internal sealed class LockingPolicy : IOutputCachePolicy
     /// </summary>
     public static readonly LockingPolicy Disabled = new(false);
 
-    /// <inheritdoc /> 
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    /// <inheritdoc />
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         context.AllowLocking = _lockResponse;
 
         return ValueTask.CompletedTask;
     }
 
-    /// <inheritdoc /> 
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    /// <inheritdoc />
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }
 
-    /// <inheritdoc /> 
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    /// <inheritdoc />
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }

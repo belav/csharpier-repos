@@ -6,34 +6,36 @@ using System.IO;
 using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
-
 #if !IIS_FUNCTIONALS
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class ApplicationInitializationTests : IISFunctionalTestBase
 {
-    public ApplicationInitializationTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public ApplicationInitializationTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [RequiresIIS(IISCapability.ApplicationInitialization)]
@@ -46,12 +48,18 @@ public class ApplicationInitializationTests : IISFunctionalTestBase
         {
             var baseDeploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
             baseDeploymentParameters.TransformArguments(
-                (args, contentRoot) => $"{args} CreateFile \"{Path.Combine(contentRoot, "Started.txt")}\"");
+                (args, contentRoot) =>
+                    $"{args} CreateFile \"{Path.Combine(contentRoot, "Started.txt")}\""
+            );
             EnablePreload(baseDeploymentParameters);
 
             var result = await DeployAsync(baseDeploymentParameters);
 
-            await Helpers.Retry(async () => await File.ReadAllTextAsync(Path.Combine(result.ContentRoot, "Started.txt")), TimeoutExtensions.DefaultTimeoutValue);
+            await Helpers.Retry(
+                async () =>
+                    await File.ReadAllTextAsync(Path.Combine(result.ContentRoot, "Started.txt")),
+                TimeoutExtensions.DefaultTimeoutValue
+            );
             StopServer();
             EventLogHelpers.VerifyEventLogEvent(result, EventLogHelpers.Started(result), Logger);
         }
@@ -77,11 +85,16 @@ public class ApplicationInitializationTests : IISFunctionalTestBase
                         .RequiredElement("system.webServer")
                         .GetOrAdd("applicationInitialization")
                         .GetOrAdd("add", "initializationPage", "/CreateFile");
-                });
+                }
+            );
 
             var result = await DeployAsync(baseDeploymentParameters);
 
-            await Helpers.Retry(async () => await File.ReadAllTextAsync(Path.Combine(result.ContentRoot, "Started.txt")), TimeoutExtensions.DefaultTimeoutValue);
+            await Helpers.Retry(
+                async () =>
+                    await File.ReadAllTextAsync(Path.Combine(result.ContentRoot, "Started.txt")),
+                TimeoutExtensions.DefaultTimeoutValue
+            );
             StopServer();
             EventLogHelpers.VerifyEventLogEvent(result, EventLogHelpers.Started(result), Logger);
         }
@@ -93,15 +106,18 @@ public class ApplicationInitializationTests : IISFunctionalTestBase
         baseDeploymentParameters.ServerConfigActionList.Add(
             (config, _) =>
             {
-
                 config
                     .RequiredElement("system.applicationHost")
                     .RequiredElement("sites")
                     .RequiredElement("site")
                     .RequiredElement("application")
                     .SetAttributeValue("preloadEnabled", true);
-            });
+            }
+        );
 
-        baseDeploymentParameters.EnableModule("ApplicationInitializationModule", "%IIS_BIN%\\warmup.dll");
+        baseDeploymentParameters.EnableModule(
+            "ApplicationInitializationModule",
+            "%IIS_BIN%\\warmup.dll"
+        );
     }
 }

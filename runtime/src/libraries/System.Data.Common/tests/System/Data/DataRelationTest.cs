@@ -25,8 +25,8 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
 using System.IO;
+using Xunit;
 
 namespace System.Data.Tests
 {
@@ -116,26 +116,36 @@ namespace System.Data.Tests
         public void InvalidConstraintException()
         {
             Assert.Throws<InvalidConstraintException>(() =>
-           {
-               // Parent Columns and Child Columns don't have type-matching columns.
-               DataRelation relation = new DataRelation("Rel", _mom.Columns[1], _child.Columns[1], true);
-           });
+            {
+                // Parent Columns and Child Columns don't have type-matching columns.
+                DataRelation relation = new DataRelation(
+                    "Rel",
+                    _mom.Columns[1],
+                    _child.Columns[1],
+                    true
+                );
+            });
         }
 
         [Fact]
         public void InvalidConstraintException2()
         {
             Assert.Throws<InvalidConstraintException>(() =>
-           {
-               // Parent Columns and Child Columns don't have type-matching columns.
-               _child.Columns[1].DataType = _mom.Columns[1].DataType;
+            {
+                // Parent Columns and Child Columns don't have type-matching columns.
+                _child.Columns[1].DataType = _mom.Columns[1].DataType;
 
-               DataRelation Relation = new DataRelation("Rel", _mom.Columns[1], _child.Columns[1], true);
-               _set.Relations.Add(Relation);
-               Assert.Equal(1, _set.Relations.Count);
+                DataRelation Relation = new DataRelation(
+                    "Rel",
+                    _mom.Columns[1],
+                    _child.Columns[1],
+                    true
+                );
+                _set.Relations.Add(Relation);
+                Assert.Equal(1, _set.Relations.Count);
 
-               _child.Columns[1].DataType = Type.GetType("System.Double");
-           });
+                _child.Columns[1].DataType = Type.GetType("System.Double");
+            });
         }
 
         [Fact]
@@ -227,7 +237,6 @@ namespace System.Data.Tests
             child2.Columns.Add(col5);
             child2.Columns.Add(col6);
 
-
             DataColumn col7 = new DataColumn("Name");
             DataColumn col8 = new DataColumn("Age");
             hubby.Columns.Add(col7);
@@ -240,7 +249,9 @@ namespace System.Data.Tests
             childs[0] = col4;
             childs[1] = col7;
 
-            Assert.Throws<InvalidConstraintException>(() => new DataRelation("Rel", Parents, childs));
+            Assert.Throws<InvalidConstraintException>(
+                () => new DataRelation("Rel", Parents, childs)
+            );
 
             childs[1] = col6;
 
@@ -272,7 +283,12 @@ namespace System.Data.Tests
         [Fact]
         public void Creation3()
         {
-            DataRelation relation = new DataRelation("Rel", _mom.Columns[1], _child.Columns[0], false);
+            DataRelation relation = new DataRelation(
+                "Rel",
+                _mom.Columns[1],
+                _child.Columns[0],
+                false
+            );
             _set.Relations.Add(relation);
             DataRelation test = null;
 
@@ -304,12 +320,19 @@ namespace System.Data.Tests
         [Fact]
         public void Creation4()
         {
-            DataRelation relation = new DataRelation("Rel", "Mom", "Child",
-                                                      new string[] { "ChildName" },
-                                                      new string[] { "Name" }, true);
+            DataRelation relation = new DataRelation(
+                "Rel",
+                "Mom",
+                "Child",
+                new string[] { "ChildName" },
+                new string[] { "Name" },
+                true
+            );
 
             Assert.Throws<NullReferenceException>(() => _set.Relations.Add(relation));
-            Assert.Throws<NullReferenceException>(() => _set.Relations.AddRange(new DataRelation[] { relation }));
+            Assert.Throws<NullReferenceException>(
+                () => _set.Relations.AddRange(new DataRelation[] { relation })
+            );
 
             _set.BeginInit();
             _set.Relations.AddRange(new DataRelation[] { relation });

@@ -168,6 +168,7 @@ public class NavigationEntryTest
     private class Cherry
     {
         public int Garcia { get; set; }
+
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public int Id { get; set; }
 
@@ -176,8 +177,8 @@ public class NavigationEntryTest
 
     private class FreezerContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FreezerContext));
 

@@ -31,7 +31,8 @@ public static class NewtonsoftJsonMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddNewtonsoftJson(
         this IMvcBuilder builder,
-        Action<MvcNewtonsoftJsonOptions> setupAction)
+        Action<MvcNewtonsoftJsonOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(setupAction);

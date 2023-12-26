@@ -10,8 +10,13 @@ internal static partial class Interop
 {
     internal static partial class AndroidCrypto
     {
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_EcKeyCreateByOid", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_EcKeyCreateByOid",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         private static partial SafeEcKeyHandle AndroidCryptoNative_EcKeyCreateByOid(string oid);
+
         internal static SafeEcKeyHandle? EcKeyCreateByOid(string oid)
         {
             SafeEcKeyHandle handle = AndroidCryptoNative_EcKeyCreateByOid(oid);
@@ -19,15 +24,25 @@ internal static partial class Interop
             return handle;
         }
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_EcKeyDestroy")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_EcKeyDestroy"
+        )]
         internal static partial void EcKeyDestroy(IntPtr a);
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_EcKeyUpRef")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_EcKeyUpRef"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EcKeyUpRef(IntPtr r);
 
         [LibraryImport(Libraries.AndroidCryptoNative)]
-        private static partial int AndroidCryptoNative_EcKeyGetSize(SafeEcKeyHandle ecKey, out int keySize);
+        private static partial int AndroidCryptoNative_EcKeyGetSize(
+            SafeEcKeyHandle ecKey,
+            out int keySize
+        );
+
         internal static int EcKeyGetSize(SafeEcKeyHandle key)
         {
             int keySize;
@@ -39,8 +54,14 @@ internal static partial class Interop
             throw new CryptographicException();
         }
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_EcKeyGetCurveName")]
-        private static partial int AndroidCryptoNative_EcKeyGetCurveName(SafeEcKeyHandle ecKey, out IntPtr curveName);
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_EcKeyGetCurveName"
+        )]
+        private static partial int AndroidCryptoNative_EcKeyGetCurveName(
+            SafeEcKeyHandle ecKey,
+            out IntPtr curveName
+        );
 
         internal static string? EcKeyGetCurveName(SafeEcKeyHandle key)
         {
@@ -77,9 +98,7 @@ namespace System.Security.Cryptography
 {
     internal sealed class SafeEcKeyHandle : SafeKeyHandle
     {
-        public SafeEcKeyHandle()
-        {
-        }
+        public SafeEcKeyHandle() { }
 
         internal SafeEcKeyHandle(IntPtr ptr)
         {
@@ -111,6 +130,7 @@ namespace System.Security.Cryptography
             return safeHandle;
         }
 
-        internal override SafeEcKeyHandle DuplicateHandle() => DuplicateHandle(DangerousGetHandle());
+        internal override SafeEcKeyHandle DuplicateHandle() =>
+            DuplicateHandle(DangerousGetHandle());
     }
 }

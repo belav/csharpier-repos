@@ -8,70 +8,76 @@
 // Copyright (C) 2004, 2007 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography {
+namespace MonoTests.System.Security.Cryptography
+{
+    // References:
+    // a.	FIPS PUB 180-2: Secure Hash Standard
+    //	http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf
 
-// References:
-// a.	FIPS PUB 180-2: Secure Hash Standard
-//	http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf
+    // we inherit from SHA256Test because all SHA256 implementation must return the
+    // same results (hence should run a common set of unit tests).
 
-// we inherit from SHA256Test because all SHA256 implementation must return the 
-// same results (hence should run a common set of unit tests).
+    [TestFixture]
+    public class SHA256ManagedTest : SHA256TestBase
+    {
+        [SetUp]
+        public override void SetUp()
+        {
+            hash = new SHA256Managed();
+        }
 
-[TestFixture]
-public class SHA256ManagedTest : SHA256TestBase {
+        [Test]
+        public override void Create()
+        {
+            // no need to repeat this test
+        }
 
-	[SetUp]
-	public override void SetUp () 
-	{
-		hash = new SHA256Managed ();
-	}
+        // none of those values changes for a particuliar implementation of SHA256
+        [Test]
+        public override void StaticInfo()
+        {
+            // test all values static for SHA256
+            base.StaticInfo();
+            string className = hash.ToString();
+            Assert.IsTrue(hash.CanReuseTransform, className + ".CanReuseTransform");
+            Assert.IsTrue(
+                hash.CanTransformMultipleBlocks,
+                className + ".CanTransformMultipleBlocks"
+            );
+            Assert.AreEqual(
+                "System.Security.Cryptography.SHA256Managed",
+                className,
+                className + ".ToString()"
+            );
+        }
 
-	[Test]
-	public override void Create () 
-	{
-		// no need to repeat this test
-	}
+        [Test]
+        public void FIPSCompliance_Test1()
+        {
+            SHA256 sha = (SHA256)hash;
+            // First test, we hash the string "abc"
+            FIPS186_Test1(sha);
+        }
 
-	// none of those values changes for a particuliar implementation of SHA256
-	[Test]
-	public override void StaticInfo () 
-	{
-		// test all values static for SHA256
-		base.StaticInfo ();
-		string className = hash.ToString ();
-		Assert.IsTrue (hash.CanReuseTransform, className + ".CanReuseTransform");
-		Assert.IsTrue (hash.CanTransformMultipleBlocks, className + ".CanTransformMultipleBlocks");
-		Assert.AreEqual ("System.Security.Cryptography.SHA256Managed", className, className + ".ToString()");
-	}
+        [Test]
+        public void FIPSCompliance_Test2()
+        {
+            SHA256 sha = (SHA256)hash;
+            // Second test, we hash the string "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu"
+            FIPS186_Test2(sha);
+        }
 
-	[Test]
-	public void FIPSCompliance_Test1 () 
-	{
-		SHA256 sha = (SHA256) hash;
-		// First test, we hash the string "abc"
-		FIPS186_Test1 (sha);
-	}
-
-	[Test]
-	public void FIPSCompliance_Test2 () 
-	{
-		SHA256 sha = (SHA256) hash;
-		// Second test, we hash the string "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu"
-		FIPS186_Test2 (sha);
-	}
-
-	[Test]
-	public void FIPSCompliance_Test3 () 
-	{
-		SHA256 sha = (SHA256) hash;
-		// Third test, we hash 1,000,000 times the character "a"
-		FIPS186_Test3 (sha);
-	}
-}
-
+        [Test]
+        public void FIPSCompliance_Test3()
+        {
+            SHA256 sha = (SHA256)hash;
+            // Third test, we hash 1,000,000 times the character "a"
+            FIPS186_Test3(sha);
+        }
+    }
 }

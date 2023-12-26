@@ -78,6 +78,8 @@ public class HtmlLocalizer : IHtmlLocalizer
     /// </summary>
     /// <param name="result">The <see cref="LocalizedString"/>.</param>
     /// <param name="arguments">The value arguments which will be used in construting the message.</param>
-    protected virtual LocalizedHtmlString ToHtmlString(LocalizedString result, object[] arguments) =>
-        new LocalizedHtmlString(result.Name, result.Value, result.ResourceNotFound, arguments);
+    protected virtual LocalizedHtmlString ToHtmlString(
+        LocalizedString result,
+        object[] arguments
+    ) => new LocalizedHtmlString(result.Name, result.Value, result.ResourceNotFound, arguments);
 }

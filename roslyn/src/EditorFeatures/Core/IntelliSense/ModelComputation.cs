@@ -16,7 +16,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 {
-    internal class ModelComputation<TModel> where TModel : class
+    internal class ModelComputation<TModel>
+        where TModel : class
     {
         #region Fields that can be accessed from either thread
 
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         public ModelComputation(
             IThreadingContext threadingContext,
             IController<TModel> controller,
-            TaskScheduler computationTaskScheduler)
+            TaskScheduler computationTaskScheduler
+        )
         {
             ThreadingContext = threadingContext;
             _controller = controller;
@@ -121,19 +123,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         }
 
         public void ChainTaskAndNotifyControllerWhenFinished(
-                Func<TModel, TModel> transformModel,
-                bool updateController = true)
+            Func<TModel, TModel> transformModel,
+            bool updateController = true
+        )
         {
-            ChainTaskAndNotifyControllerWhenFinished((m, c) => Task.FromResult(transformModel(m)), updateController);
+            ChainTaskAndNotifyControllerWhenFinished(
+                (m, c) => Task.FromResult(transformModel(m)),
+                updateController
+            );
         }
 
         public void ChainTaskAndNotifyControllerWhenFinished(
             Func<TModel, CancellationToken, Task<TModel>> transformModelAsync,
-            bool updateController = true)
+            bool updateController = true
+        )
         {
             ThreadingContext.ThrowIfNotOnUIThread();
 
-            Contract.ThrowIfTrue(_stopCancellationToken.IsCancellationRequested, "should not chain tasks after we've been cancelled");
+            Contract.ThrowIfTrue(
+                _stopCancellationToken.IsCancellationRequested,
+                "should not chain tasks after we've been cancelled"
+            );
 
             // Mark that an async operation has begun.  This way tests know to wait until the
             // async operation is done before verifying results.  We will consider this
@@ -143,7 +153,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             // Create the task that will actually run the transformation step.
             var nextTask = _lastTask.SafeContinueWithFromAsync(
                 t => transformModelAsync(t.Result, _stopCancellationToken),
-                _stopCancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, _taskScheduler);
+                _stopCancellationToken,
+                TaskContinuationOptions.OnlyOnRanToCompletion,
+                _taskScheduler
+            );
 
             // The next task is now the last task in the chain.
             _lastTask = nextTask;
@@ -156,7 +169,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                 new[] { _notifyControllerTask, nextTask },
                 async tasks =>
                 {
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, _stopCancellationToken);
+                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        alwaysYield: true,
+                        _stopCancellationToken
+                    );
 
                     if (tasks.All(t => t.Status == TaskStatus.RanToCompletion))
                     {
@@ -170,7 +186,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                         OnModelUpdated(nextTask.Result, updateController);
                     }
                 },
-                _stopCancellationToken, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap();
+                _stopCancellationToken,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            )
+                .Unwrap();
 
             // When we've notified the controller of our result, we consider the async operation
             // to be completed.

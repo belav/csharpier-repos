@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseDeconstructionDiagnosticAnalyzer,
-        CSharpUseDeconstructionCodeFixProvider>;
+        CSharpUseDeconstructionCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseDeconstruction)]
     public class UseDeconstructionTests
@@ -23,27 +24,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestVar()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        var [|t1|] = GetPerson();
-                    }
+                        void M()
+                        {
+                            var [|t1|] = GetPerson();
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        var (name, age) = GetPerson();
-                    }
+                        void M()
+                        {
+                            var (name, age) = GetPerson();
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """);
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -90,241 +94,265 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestUpdateReference()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        var [|t1|] = GetPerson();
-                        System.Console.WriteLine(t1.name + " " + t1.age);
-                    }
+                        void M()
+                        {
+                            var [|t1|] = GetPerson();
+                            System.Console.WriteLine(t1.name + " " + t1.age);
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        var (name, age) = GetPerson();
-                        System.Console.WriteLine(name + " " + age);
-                    }
+                        void M()
+                        {
+                            var (name, age) = GetPerson();
+                            System.Console.WriteLine(name + " " + age);
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """);
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestTupleType()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        (string name, int age) [|t1|] = GetPerson();
-                        System.Console.WriteLine(t1.name + " " + t1.age);
-                    }
+                        void M()
+                        {
+                            (string name, int age) [|t1|] = GetPerson();
+                            System.Console.WriteLine(t1.name + " " + t1.age);
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        (string name, int age) = GetPerson();
-                        System.Console.WriteLine(name + " " + age);
-                    }
+                        void M()
+                        {
+                            (string name, int age) = GetPerson();
+                            System.Console.WriteLine(name + " " + age);
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """);
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestVarInForEach()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System.Collections.Generic;
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        foreach (var [|t1|] in GetPeople())
-                            System.Console.WriteLine(t1.name + " " + t1.age);
+                        void M()
+                        {
+                            foreach (var [|t1|] in GetPeople())
+                                System.Console.WriteLine(t1.name + " " + t1.age);
+                        }
+
+                        IEnumerable<(string name, int age)> GetPeople() => default;
                     }
+                    """,
+                """
+                    using System.Collections.Generic;
 
-                    IEnumerable<(string name, int age)> GetPeople() => default;
-                }
-                """, """
-                using System.Collections.Generic;
-
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        foreach (var (name, age) in GetPeople())
-                            System.Console.WriteLine(name + " " + age);
-                    }
+                        void M()
+                        {
+                            foreach (var (name, age) in GetPeople())
+                                System.Console.WriteLine(name + " " + age);
+                        }
 
-                    IEnumerable<(string name, int age)> GetPeople() => default;
-                }
-                """);
+                        IEnumerable<(string name, int age)> GetPeople() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestTupleTypeInForEach()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System.Collections.Generic;
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        foreach ((string name, int age) [|t1|] in GetPeople())
-                            System.Console.WriteLine(t1.name + " " + t1.age);
+                        void M()
+                        {
+                            foreach ((string name, int age) [|t1|] in GetPeople())
+                                System.Console.WriteLine(t1.name + " " + t1.age);
+                        }
+
+                        IEnumerable<(string name, int age)> GetPeople() => default;
                     }
+                    """,
+                """
+                    using System.Collections.Generic;
 
-                    IEnumerable<(string name, int age)> GetPeople() => default;
-                }
-                """, """
-                using System.Collections.Generic;
-
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        foreach ((string name, int age) in GetPeople())
-                            System.Console.WriteLine(name + " " + age);
-                    }
+                        void M()
+                        {
+                            foreach ((string name, int age) in GetPeople())
+                                System.Console.WriteLine(name + " " + age);
+                        }
 
-                    IEnumerable<(string name, int age)> GetPeople() => default;
-                }
-                """);
+                        IEnumerable<(string name, int age)> GetPeople() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        var [|t1|] = GetPerson();
-                        var [|t2|] = GetPerson();
-                    }
+                        void M()
+                        {
+                            var [|t1|] = GetPerson();
+                            var [|t2|] = GetPerson();
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        var (name, age) = GetPerson();
-                        var t2 = GetPerson();
-                    }
+                        void M()
+                        {
+                            var (name, age) = GetPerson();
+                            var t2 = GetPerson();
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """);
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        var [|t1|] = GetPerson();
-                    }
+                        void M()
+                        {
+                            var [|t1|] = GetPerson();
+                        }
 
-                    void M2()
+                        void M2()
+                        {
+                            var [|t2|] = GetPerson();
+                        }
+
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        var [|t2|] = GetPerson();
-                    }
+                        void M()
+                        {
+                            var (name, age) = GetPerson();
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
-                    {
-                        var (name, age) = GetPerson();
-                    }
+                        void M2()
+                        {
+                            var (name, age) = GetPerson();
+                        }
 
-                    void M2()
-                    {
-                        var (name, age) = GetPerson();
+                        (string name, int age) GetPerson() => default;
                     }
-
-                    (string name, int age) GetPerson() => default;
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        (string name1, int age1) [|t1|] = GetPerson();
-                        (string name2, int age2) [|t2|] = GetPerson();
-                    }
+                        void M()
+                        {
+                            (string name1, int age1) [|t1|] = GetPerson();
+                            (string name2, int age2) [|t2|] = GetPerson();
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        (string name1, int age1) = GetPerson();
-                        (string name2, int age2) = GetPerson();
-                    }
+                        void M()
+                        {
+                            (string name1, int age1) = GetPerson();
+                            (string name2, int age2) = GetPerson();
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """);
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestFixAll4()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        (string name, int age) [|t1|] = GetPerson();
-                        (string name, int age) [|t2|] = GetPerson();
-                    }
+                        void M()
+                        {
+                            (string name, int age) [|t1|] = GetPerson();
+                            (string name, int age) [|t2|] = GetPerson();
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        (string name, int age) = GetPerson();
-                        (string name, int age) t2 = GetPerson();
-                    }
+                        void M()
+                        {
+                            (string name, int age) = GetPerson();
+                            (string name, int age) t2 = GetPerson();
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """);
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -348,55 +376,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestWithUserNamesThatMatchDefaultTupleNameWithVar1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        var [|t1|] = GetPerson();
-                    }
+                        void M()
+                        {
+                            var [|t1|] = GetPerson();
+                        }
 
-                    (string Item1, int Item2) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string Item1, int Item2) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        var (Item1, Item2) = GetPerson();
-                    }
+                        void M()
+                        {
+                            var (Item1, Item2) = GetPerson();
+                        }
 
-                    (string Item1, int Item2) GetPerson() => default;
-                }
-                """);
+                        (string Item1, int Item2) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestWithUserNamesThatMatchDefaultTupleNameWithVar2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        var [|t1|] = GetPerson();
-                        System.Console.WriteLine(t1.Item1);
-                    }
+                        void M()
+                        {
+                            var [|t1|] = GetPerson();
+                            System.Console.WriteLine(t1.Item1);
+                        }
 
-                    (string Item1, int Item2) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string Item1, int Item2) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        var (Item1, Item2) = GetPerson();
-                        System.Console.WriteLine(Item1);
-                    }
+                        void M()
+                        {
+                            var (Item1, Item2) = GetPerson();
+                            System.Console.WriteLine(Item1);
+                        }
 
-                    (string Item1, int Item2) GetPerson() => default;
-                }
-                """);
+                        (string Item1, int Item2) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -496,29 +530,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestTrivia1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        /*1*/(/*2*/string/*3*/ name, /*4*/int/*5*/ age)/*6*/ [|t1|] = GetPerson();
-                        System.Console.WriteLine(/*7*/t1.name/*8*/ + " " + /*9*/t1.age/*10*/);
-                    }
+                        void M()
+                        {
+                            /*1*/(/*2*/string/*3*/ name, /*4*/int/*5*/ age)/*6*/ [|t1|] = GetPerson();
+                            System.Console.WriteLine(/*7*/t1.name/*8*/ + " " + /*9*/t1.age/*10*/);
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        /*1*/(/*2*/string/*3*/ name, /*4*/int/*5*/ age)/*6*/ = GetPerson();
-                        System.Console.WriteLine(/*7*/name/*8*/ + " " + /*9*/age/*10*/);
-                    }
+                        void M()
+                        {
+                            /*1*/(/*2*/string/*3*/ name, /*4*/int/*5*/ age)/*6*/ = GetPerson();
+                            System.Console.WriteLine(/*7*/name/*8*/ + " " + /*9*/age/*10*/);
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """);
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25260")]
@@ -543,25 +580,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestWithDefaultExpressionInitializer()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        (string name, int age) [|person|] = default((string, int));
-                        System.Console.WriteLine(person.name + " " + person.age);
+                        void M()
+                        {
+                            (string name, int age) [|person|] = default((string, int));
+                            System.Console.WriteLine(person.name + " " + person.age);
+                        }
                     }
-                }
-                """, """
-                class C
-                {
-                    void M()
+                    """,
+                """
+                    class C
                     {
-                        (string name, int age) = default((string, int));
-                        System.Console.WriteLine(name + " " + age);
+                        void M()
+                        {
+                            (string name, int age) = default((string, int));
+                            System.Console.WriteLine(name + " " + age);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -589,35 +629,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestWithExplicitImplicitConversionFromNonTuple()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    class Person
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        public static implicit operator (string, int)(Person person) => default;
-                    }
+                        class Person
+                        {
+                            public static implicit operator (string, int)(Person person) => default;
+                        }
 
-                    void M()
-                    {
-                        (string name, int age) [|person|] = ((string, int))new Person();
-                        System.Console.WriteLine(person.name + " " + person.age);
+                        void M()
+                        {
+                            (string name, int age) [|person|] = ((string, int))new Person();
+                            System.Console.WriteLine(person.name + " " + person.age);
+                        }
                     }
-                }
-                """, """
-                class C
-                {
-                    class Person
+                    """,
+                """
+                    class C
                     {
-                        public static implicit operator (string, int)(Person person) => default;
-                    }
+                        class Person
+                        {
+                            public static implicit operator (string, int)(Person person) => default;
+                        }
 
-                    void M()
-                    {
-                        (string name, int age) = ((string, int))new Person();
-                        System.Console.WriteLine(name + " " + age);
+                        void M()
+                        {
+                            (string name, int age) = ((string, int))new Person();
+                            System.Console.WriteLine(name + " " + age);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -645,119 +688,131 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         [Fact]
         public async Task TestWithExplicitImplicitConversionFromNonTupleInForEach()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System.Linq;
-                class C
-                {
-                    class Person
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System.Linq;
+                    class C
                     {
-                        public static implicit operator (string, int)(Person person) => default;
-                    }
+                        class Person
+                        {
+                            public static implicit operator (string, int)(Person person) => default;
+                        }
 
-                    void M()
-                    {
-                        foreach ((string name, int age) [|person|] in new Person[] { }.Cast<(string, int)>())
-                            System.Console.WriteLine(person.name + " " + person.age);
+                        void M()
+                        {
+                            foreach ((string name, int age) [|person|] in new Person[] { }.Cast<(string, int)>())
+                                System.Console.WriteLine(person.name + " " + person.age);
+                        }
                     }
-                }
-                """, """
-                using System.Linq;
-                class C
-                {
-                    class Person
+                    """,
+                """
+                    using System.Linq;
+                    class C
                     {
-                        public static implicit operator (string, int)(Person person) => default;
-                    }
+                        class Person
+                        {
+                            public static implicit operator (string, int)(Person person) => default;
+                        }
 
-                    void M()
-                    {
-                        foreach ((string name, int age) in new Person[] { }.Cast<(string, int)>())
-                            System.Console.WriteLine(name + " " + age);
+                        void M()
+                        {
+                            foreach ((string name, int age) in new Person[] { }.Cast<(string, int)>())
+                                System.Console.WriteLine(name + " " + age);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task TestWithTupleLiteralConversion()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        (object name, double age) [|person|] = (null, 0);
-                        System.Console.WriteLine(person.name + " " + person.age);
+                        void M()
+                        {
+                            (object name, double age) [|person|] = (null, 0);
+                            System.Console.WriteLine(person.name + " " + person.age);
+                        }
                     }
-                }
-                """, """
-                class C
-                {
-                    void M()
+                    """,
+                """
+                    class C
                     {
-                        (object name, double age) = (null, 0);
-                        System.Console.WriteLine(name + " " + age);
+                        void M()
+                        {
+                            (object name, double age) = (null, 0);
+                            System.Console.WriteLine(name + " " + age);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task TestWithImplicitTupleConversion()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    class C
                     {
-                        (object name, double age) [|person|] = GetPerson();
-                        System.Console.WriteLine(person.name + " " + person.age);
-                    }
+                        void M()
+                        {
+                            (object name, double age) [|person|] = GetPerson();
+                            System.Console.WriteLine(person.name + " " + person.age);
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """, """
-                class C
-                {
-                    void M()
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """,
+                """
+                    class C
                     {
-                        (object name, double age) = GetPerson();
-                        System.Console.WriteLine(name + " " + age);
-                    }
+                        void M()
+                        {
+                            (object name, double age) = GetPerson();
+                            System.Console.WriteLine(name + " " + age);
+                        }
 
-                    (string name, int age) GetPerson() => default;
-                }
-                """);
+                        (string name, int age) GetPerson() => default;
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestWithImplicitTupleConversionInForEach()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System.Collections.Generic;
-                class C
-                {
-                    void M()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System.Collections.Generic;
+                    class C
                     {
-                        foreach ((object name, double age) [|person|] in GetPeople())
-                            System.Console.WriteLine(person.name + " " + person.age);
-                    }
+                        void M()
+                        {
+                            foreach ((object name, double age) [|person|] in GetPeople())
+                                System.Console.WriteLine(person.name + " " + person.age);
+                        }
 
-                    IEnumerable<(string name, int age)> GetPeople() => default;
-                }
-                """, """
-                using System.Collections.Generic;
-                class C
-                {
-                    void M()
+                        IEnumerable<(string name, int age)> GetPeople() => default;
+                    }
+                    """,
+                """
+                    using System.Collections.Generic;
+                    class C
                     {
-                        foreach ((object name, double age) in GetPeople())
-                            System.Console.WriteLine(name + " " + age);
-                    }
+                        void M()
+                        {
+                            foreach ((object name, double age) in GetPeople())
+                                System.Console.WriteLine(name + " " + age);
+                        }
 
-                    IEnumerable<(string name, int age)> GetPeople() => default;
-                }
-                """);
+                        IEnumerable<(string name, int age)> GetPeople() => default;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27251")]
@@ -870,10 +925,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     }
                     """,
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
                 LanguageVersion = LanguageVersion.CSharp9
             }.RunAsync();
         }
@@ -901,14 +953,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
                     }
                     """,
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication
-                },
-                FixedState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
+                FixedState = { OutputKind = OutputKind.ConsoleApplication },
                 LanguageVersion = LanguageVersion.CSharp9
             }.RunAsync();
         }

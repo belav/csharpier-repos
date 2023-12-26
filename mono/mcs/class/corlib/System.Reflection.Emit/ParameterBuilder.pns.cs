@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,68 +30,61 @@
 
 namespace System.Reflection.Emit
 {
-	public class ParameterBuilder
-	{
-		ParameterBuilder ()
-		{
-		}
+    public class ParameterBuilder
+    {
+        ParameterBuilder() { }
 
-		public virtual int Attributes {
-			get {
-				throw new PlatformNotSupportedException ();
-			}
-		}
+        public virtual int Attributes
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-		public bool IsIn {
-			get {
-				throw new PlatformNotSupportedException ();
-			}
-		}
+        public bool IsIn
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-		public bool IsOptional {
-			get {
-				throw new PlatformNotSupportedException ();
-			}
-		}
+        public bool IsOptional
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-		public bool IsOut {
-			get {
-				throw new PlatformNotSupportedException ();
-			}
-		}
+        public bool IsOut
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-		public virtual string Name {
-			get {
-				throw new PlatformNotSupportedException ();
-			}
-		}
+        public virtual string Name
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-		public virtual int Position {
-			get {
-				throw new PlatformNotSupportedException ();
-			}
-		}
+        public virtual int Position
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-		public virtual void SetConstant (object defaultValue)
-		{
-			throw new PlatformNotSupportedException ();
-		}
+        public virtual void SetConstant(object defaultValue)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
-		public void SetCustomAttribute (CustomAttributeBuilder customBuilder)
-		{
-			throw new PlatformNotSupportedException ();
-		}
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
-		public void SetCustomAttribute (ConstructorInfo con, byte[] binaryAttribute)
-		{
-			throw new PlatformNotSupportedException ();
-		}
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
-		[Obsolete ("An alternate API is available: Emit the MarshalAs custom attribute instead.")]
-		public virtual void SetMarshal (UnmanagedMarshal unmanagedMarshal) => throw new PlatformNotSupportedException ();
+        [Obsolete("An alternate API is available: Emit the MarshalAs custom attribute instead.")]
+        public virtual void SetMarshal(UnmanagedMarshal unmanagedMarshal) =>
+            throw new PlatformNotSupportedException();
 
-		public virtual ParameterToken GetToken() => throw new PlatformNotSupportedException ();
-	}
+        public virtual ParameterToken GetToken() => throw new PlatformNotSupportedException();
+    }
 }
 
 #endif

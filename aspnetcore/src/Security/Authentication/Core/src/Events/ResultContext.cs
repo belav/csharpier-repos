@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Base context for events that produce AuthenticateResults.
 /// </summary>
-public abstract class ResultContext<TOptions> : BaseContext<TOptions> where TOptions : AuthenticationSchemeOptions
+public abstract class ResultContext<TOptions> : BaseContext<TOptions>
+    where TOptions : AuthenticationSchemeOptions
 {
     private AuthenticationProperties? _properties;
 
@@ -48,7 +49,10 @@ public abstract class ResultContext<TOptions> : BaseContext<TOptions> where TOpt
     /// <summary>
     /// Calls success creating a ticket with the <see cref="Principal"/> and <see cref="Properties"/>.
     /// </summary>
-    public void Success() => Result = HandleRequestResult.Success(new AuthenticationTicket(Principal!, Properties, Scheme.Name));
+    public void Success() =>
+        Result = HandleRequestResult.Success(
+            new AuthenticationTicket(Principal!, Properties, Scheme.Name)
+        );
 
     /// <summary>
     /// Indicates that there was no information returned for this authentication scheme.

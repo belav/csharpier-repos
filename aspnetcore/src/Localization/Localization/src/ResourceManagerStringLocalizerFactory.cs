@@ -35,7 +35,8 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public ResourceManagerStringLocalizerFactory(
         IOptions<LocalizationOptions> localizationOptions,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(localizationOptions);
         ArgumentNullThrowHelper.ThrowIfNull(loggerFactory);
@@ -45,8 +46,10 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
 
         if (!string.IsNullOrEmpty(_resourcesRelativePath))
         {
-            _resourcesRelativePath = _resourcesRelativePath.Replace(Path.AltDirectorySeparatorChar, '.')
-                .Replace(Path.DirectorySeparatorChar, '.') + ".";
+            _resourcesRelativePath =
+                _resourcesRelativePath
+                    .Replace(Path.AltDirectorySeparatorChar, '.')
+                    .Replace(Path.DirectorySeparatorChar, '.') + ".";
         }
     }
 
@@ -59,7 +62,11 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
     {
         ArgumentNullThrowHelper.ThrowIfNull(typeInfo);
 
-        return GetResourcePrefix(typeInfo, GetRootNamespace(typeInfo.Assembly), GetResourcePath(typeInfo.Assembly));
+        return GetResourcePrefix(
+            typeInfo,
+            GetRootNamespace(typeInfo.Assembly),
+            GetResourcePath(typeInfo.Assembly)
+        );
     }
 
     /// <summary>
@@ -73,14 +80,20 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
     /// For the type "Sample.Controllers.Home" if there's a resourceRelativePath return
     /// "Sample.Resourcepath.Controllers.Home" if there isn't one then it would return "Sample.Controllers.Home".
     /// </remarks>
-    protected virtual string GetResourcePrefix(TypeInfo typeInfo, string? baseNamespace, string? resourcesRelativePath)
+    protected virtual string GetResourcePrefix(
+        TypeInfo typeInfo,
+        string? baseNamespace,
+        string? resourcesRelativePath
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(typeInfo);
         ArgumentThrowHelper.ThrowIfNullOrEmpty(baseNamespace);
 
         if (string.IsNullOrEmpty(typeInfo.FullName))
         {
-            throw new ArgumentException(Resources.FormatLocalization_TypeMustHaveTypeName(typeInfo));
+            throw new ArgumentException(
+                Resources.FormatLocalization_TypeMustHaveTypeName(typeInfo)
+            );
         }
 
         if (string.IsNullOrEmpty(resourcesRelativePath))
@@ -91,7 +104,10 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
         {
             // This expectation is defined by dotnet's automatic resource storage.
             // We have to conform to "{RootNamespace}.{ResourceLocation}.{FullTypeName - RootNamespace}".
-            return baseNamespace + "." + resourcesRelativePath + TrimPrefix(typeInfo.FullName, baseNamespace + ".");
+            return baseNamespace
+                + "."
+                + resourcesRelativePath
+                + TrimPrefix(typeInfo.FullName, baseNamespace + ".");
         }
     }
 
@@ -153,14 +169,17 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
         ArgumentNullThrowHelper.ThrowIfNull(baseName);
         ArgumentNullThrowHelper.ThrowIfNull(location);
 
-        return _localizerCache.GetOrAdd($"B={baseName},L={location}", _ =>
-        {
-            var assemblyName = new AssemblyName(location);
-            var assembly = Assembly.Load(assemblyName);
-            baseName = GetResourcePrefix(baseName, location);
+        return _localizerCache.GetOrAdd(
+            $"B={baseName},L={location}",
+            _ =>
+            {
+                var assemblyName = new AssemblyName(location);
+                var assembly = Assembly.Load(assemblyName);
+                baseName = GetResourcePrefix(baseName, location);
 
-            return CreateResourceManagerStringLocalizer(assembly, baseName);
-        });
+                return CreateResourceManagerStringLocalizer(assembly, baseName);
+            }
+        );
     }
 
     /// <summary>Creates a <see cref="ResourceManagerStringLocalizer"/> for the given input.</summary>
@@ -170,14 +189,16 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
     /// <remarks>This method is virtual for testing purposes only.</remarks>
     protected virtual ResourceManagerStringLocalizer CreateResourceManagerStringLocalizer(
         Assembly assembly,
-        string baseName)
+        string baseName
+    )
     {
         return new ResourceManagerStringLocalizer(
             new ResourceManager(baseName, assembly),
             assembly,
             baseName,
             _resourceNamesCache,
-            _loggerFactory.CreateLogger<ResourceManagerStringLocalizer>());
+            _loggerFactory.CreateLogger<ResourceManagerStringLocalizer>()
+        );
     }
 
     /// <summary>
@@ -187,7 +208,11 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
     /// <param name="baseName">The base name of the resource.</param>
     /// <param name="resourceLocation">The location of the resource within <paramref name="location"/>.</param>
     /// <returns>The resource prefix used to look up the resource.</returns>
-    protected virtual string GetResourcePrefix(string location, string baseName, string resourceLocation)
+    protected virtual string GetResourcePrefix(
+        string location,
+        string baseName,
+        string resourceLocation
+    )
     {
         // Re-root the base name if a resources path is set
         return location + "." + resourceLocation + TrimPrefix(baseName, location + ".");
@@ -228,9 +253,10 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
         var resourceLocationAttribute = GetResourceLocationAttribute(assembly);
 
         // If we don't have an attribute assume all assemblies use the same resource location.
-        var resourceLocation = resourceLocationAttribute == null
-            ? _resourcesRelativePath
-            : resourceLocationAttribute.ResourceLocation + ".";
+        var resourceLocation =
+            resourceLocationAttribute == null
+                ? _resourcesRelativePath
+                : resourceLocationAttribute.ResourceLocation + ".";
         resourceLocation = resourceLocation
             .Replace(Path.DirectorySeparatorChar, '.')
             .Replace(Path.AltDirectorySeparatorChar, '.');

@@ -140,8 +140,11 @@ public class HttpRequestHeadersTests
         headers.Reset();
 
         // Hacky but required because header references is private.
-        var headerReferences = typeof(HttpRequestHeaders).GetField("_headers", privateFlags).GetValue(headers);
-        var methodValue = (StringValues)headerReferences.GetType().GetField("_Method").GetValue(headerReferences);
+        var headerReferences = typeof(HttpRequestHeaders)
+            .GetField("_headers", privateFlags)
+            .GetValue(headers);
+        var methodValue = (StringValues)
+            headerReferences.GetType().GetField("_Method").GetValue(headerReferences);
 
         Assert.Equal(StringValues.Empty, methodValue);
     }
@@ -181,12 +184,14 @@ public class HttpRequestHeadersTests
         headers["custom"] = v3;
 
         Assert.Equal(
-            new[] {
-                    new KeyValuePair<string, StringValues>("Host", v1),
-                    new KeyValuePair<string, StringValues>("Content-Length", v2),
-                    new KeyValuePair<string, StringValues>("custom", v3),
+            new[]
+            {
+                new KeyValuePair<string, StringValues>("Host", v1),
+                new KeyValuePair<string, StringValues>("Content-Length", v2),
+                new KeyValuePair<string, StringValues>("custom", v3),
             },
-            headers);
+            headers
+        );
     }
 
     private static void EnumerateEntries(IDictionary<string, StringValues> headers)
@@ -199,12 +204,14 @@ public class HttpRequestHeadersTests
         headers["custom"] = v3;
 
         Assert.Equal(
-            new[] {
-                    new KeyValuePair<string, StringValues>("Host", v1),
-                    new KeyValuePair<string, StringValues>("Content-Length", v2),
-                    new KeyValuePair<string, StringValues>("custom", v3),
+            new[]
+            {
+                new KeyValuePair<string, StringValues>("Host", v1),
+                new KeyValuePair<string, StringValues>("Content-Length", v2),
+                new KeyValuePair<string, StringValues>("custom", v3),
             },
-            headers);
+            headers
+        );
     }
 
     [Fact]
@@ -218,13 +225,9 @@ public class HttpRequestHeadersTests
         headers["Content-Length"] = v2;
         headers["custom"] = v3;
 
-        Assert.Equal<string>(
-            new[] { "Host", "Content-Length", "custom" },
-            headers.Keys);
+        Assert.Equal<string>(new[] { "Host", "Content-Length", "custom" }, headers.Keys);
 
-        Assert.Equal<StringValues>(
-            new[] { v1, v2, v3 },
-            headers.Values);
+        Assert.Equal<StringValues>(new[] { v1, v2, v3 }, headers.Values);
     }
 
     [Fact]
@@ -400,7 +403,13 @@ public class HttpRequestHeadersTests
 #pragma warning disable CS0618 // Type or member is obsolete
         var exception = Assert.Throws<BadHttpRequestException>(
 #pragma warning restore CS0618 // Type or member is obsolete
-                () => headers.Append(Encoding.Latin1.GetBytes(key), Encoding.ASCII.GetBytes("value"), checkForNewlineChars: false));
+            () =>
+                headers.Append(
+                    Encoding.Latin1.GetBytes(key),
+                    Encoding.ASCII.GetBytes("value"),
+                    checkForNewlineChars: false
+                )
+        );
         Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
     }
 
@@ -476,7 +485,13 @@ public class HttpRequestHeadersTests
             var prevName = ChangeNameCase(headerName, variant: i);
             var nextName = ChangeNameCase(headerName, variant: i + 1);
 
-            var values = GetHeaderValues(headers, prevName, nextName, HeaderValue1, nextValue: null);
+            var values = GetHeaderValues(
+                headers,
+                prevName,
+                nextName,
+                HeaderValue1,
+                nextValue: null
+            );
 
             Assert.Equal(HeaderValue1, values.PrevHeaderValue);
             Assert.NotSame(HeaderValue1, values.PrevHeaderValue);
@@ -516,7 +531,10 @@ public class HttpRequestHeadersTests
 
     [Theory]
     [MemberData(nameof(KnownRequestHeaders))]
-    public void ValueReuseLatin1NotConfusedForUtf16AndStillRejected(bool reuseValue, string headerName)
+    public void ValueReuseLatin1NotConfusedForUtf16AndStillRejected(
+        bool reuseValue,
+        string headerName
+    )
     {
         var headers = new HttpRequestHeaders(reuseHeaderValues: reuseValue);
 
@@ -542,7 +560,9 @@ public class HttpRequestHeadersTests
                 else
                 {
                     // Truncated length (to ensure different paths from changing lengths in matching)
-                    headerValueUtf16Latin1CrossOver = new string(headerValue.AsSpan().Slice(0, i + 1));
+                    headerValueUtf16Latin1CrossOver = new string(
+                        headerValue.AsSpan().Slice(0, i + 1)
+                    );
                 }
 
                 headers.Reset();
@@ -559,15 +579,27 @@ public class HttpRequestHeadersTests
 
                 headers.Reset();
 
-                Assert.Throws<InvalidOperationException>((Action)(() =>
-                {
-                    var headerNameBytes = Encoding.ASCII.GetBytes((string)headerName).AsSpan();
-                    var nextSpan = Encoding.Latin1.GetBytes(headerValueUtf16Latin1CrossOver).AsSpan();
+                Assert.Throws<InvalidOperationException>(
+                    (Action)(
+                        () =>
+                        {
+                            var headerNameBytes = Encoding
+                                .ASCII.GetBytes((string)headerName)
+                                .AsSpan();
+                            var nextSpan = Encoding
+                                .Latin1.GetBytes(headerValueUtf16Latin1CrossOver)
+                                .AsSpan();
 
-                    Assert.False(nextSpan.SequenceEqual(Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)));
+                            Assert.False(
+                                nextSpan.SequenceEqual(
+                                    Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)
+                                )
+                            );
 
-                    headers.Append(headerNameBytes, nextSpan, checkForNewlineChars: false);
-                }));
+                            headers.Append(headerNameBytes, nextSpan, checkForNewlineChars: false);
+                        }
+                    )
+                );
             }
 
             // Reset back to Ascii
@@ -603,13 +635,21 @@ public class HttpRequestHeadersTests
                 else
                 {
                     // Truncated length (to ensure different paths from changing lengths in matching)
-                    headerValueUtf16Latin1CrossOver = new string(headerValue.AsSpan().Slice(0, i + 1));
+                    headerValueUtf16Latin1CrossOver = new string(
+                        headerValue.AsSpan().Slice(0, i + 1)
+                    );
                 }
 
                 var headerNameBytes = Encoding.ASCII.GetBytes(headerName).AsSpan();
-                var latinValueSpan = Encoding.Latin1.GetBytes(headerValueUtf16Latin1CrossOver).AsSpan();
+                var latinValueSpan = Encoding
+                    .Latin1.GetBytes(headerValueUtf16Latin1CrossOver)
+                    .AsSpan();
 
-                Assert.False(latinValueSpan.SequenceEqual(Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)));
+                Assert.False(
+                    latinValueSpan.SequenceEqual(
+                        Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)
+                    )
+                );
 
                 headers.Reset();
                 headers.Append(headerNameBytes, latinValueSpan, checkForNewlineChars: false);
@@ -635,7 +675,9 @@ public class HttpRequestHeadersTests
     [MemberData(nameof(KnownRequestHeaders))]
     public void NullCharactersRejectedInUTF8AndLatin1Mode(bool useLatin1, string headerName)
     {
-        var headers = new HttpRequestHeaders(encodingSelector: useLatin1 ? _ => Encoding.Latin1 : (Func<string, Encoding>)null);
+        var headers = new HttpRequestHeaders(
+            encodingSelector: useLatin1 ? _ => Encoding.Latin1 : (Func<string, Encoding>)null
+        );
 
         var valueArray = new char[127]; // 64 + 32 + 16 + 8 + 4 + 2 + 1
         for (var i = 0; i < valueArray.Length; i++)
@@ -676,13 +718,19 @@ public class HttpRequestHeadersTests
             // For known headers, the HeaderNames value is passed in.
             if (ReferenceEquals(headerName, HeaderNames.Accept))
             {
-                return Encoding.GetEncoding("ASCII", EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback);
+                return Encoding.GetEncoding(
+                    "ASCII",
+                    EncoderFallback.ExceptionFallback,
+                    DecoderFallback.ExceptionFallback
+                );
             }
 
             return Encoding.UTF8;
         });
 
-        Assert.Throws<InvalidOperationException>(() => headers.Append(acceptNameBytes, headerValueBytes, checkForNewlineChars: false));
+        Assert.Throws<InvalidOperationException>(
+            () => headers.Append(acceptNameBytes, headerValueBytes, checkForNewlineChars: false)
+        );
         headers.Append(cookieNameBytes, headerValueBytes, checkForNewlineChars: false);
         headers.OnHeadersComplete();
 
@@ -701,13 +749,23 @@ public class HttpRequestHeadersTests
         var contentLengthValueBytes = Encoding.UTF32.GetBytes("1337");
 
         var headers = new HttpRequestHeaders(encodingSelector: _ => Encoding.UTF32);
-        headers.Append(contentLengthNameBytes, contentLengthValueBytes, checkForNewlineChars: false);
+        headers.Append(
+            contentLengthNameBytes,
+            contentLengthValueBytes,
+            checkForNewlineChars: false
+        );
         headers.OnHeadersComplete();
 
         Assert.Equal(1337, headers.ContentLength);
 
-        Assert.Throws<InvalidOperationException>(() =>
-            new HttpRequestHeaders().Append(contentLengthNameBytes, contentLengthValueBytes, checkForNewlineChars: false));
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                new HttpRequestHeaders().Append(
+                    contentLengthNameBytes,
+                    contentLengthValueBytes,
+                    checkForNewlineChars: false
+                )
+        );
     }
 
     [Fact]
@@ -831,7 +889,13 @@ public class HttpRequestHeadersTests
         Assert.Equal(0, count);
     }
 
-    private static (string PrevHeaderValue, string NextHeaderValue) GetHeaderValues(HttpRequestHeaders headers, string prevName, string nextName, string prevValue, string nextValue)
+    private static (string PrevHeaderValue, string NextHeaderValue) GetHeaderValues(
+        HttpRequestHeaders headers,
+        string prevName,
+        string nextName,
+        string prevValue,
+        string nextValue
+    )
     {
         headers.Reset();
         var headerName = Encoding.ASCII.GetBytes(prevName).AsSpan();
@@ -876,6 +940,12 @@ public class HttpRequestHeadersTests
 
     // Content-Length is numeric not a string, so we exclude it from the string reuse tests
     public static IEnumerable<object[]> KnownRequestHeaders =>
-        RequestHeaders.Where(h => h.Name != "Content-Length").Select(h => new object[] { true, h.Name }).Concat(
-        RequestHeaders.Where(h => h.Name != "Content-Length").Select(h => new object[] { false, h.Name }));
+        RequestHeaders
+            .Where(h => h.Name != "Content-Length")
+            .Select(h => new object[] { true, h.Name })
+            .Concat(
+                RequestHeaders
+                    .Where(h => h.Name != "Content-Length")
+                    .Select(h => new object[] { false, h.Name })
+            );
 }

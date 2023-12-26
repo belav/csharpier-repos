@@ -9,8 +9,10 @@ using Microsoft.Extensions.Primitives;
 
 #if !(IS_TESTS || IS_BENCHMARKS)
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
+
 #else
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
+
 #endif
 
 #nullable enable
@@ -27,6 +29,7 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         Untyped,
 #endif
     }
+
     private HeadersType _headersType;
     private HttpResponseHeaders.Enumerator _headersEnumerator;
     private HttpResponseTrailers.Enumerator _trailersEnumerator;
@@ -37,7 +40,8 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
     private bool _hasMultipleValues;
     private KnownHeaderType _knownHeaderType;
 
-    public Func<string, Encoding?> EncodingSelector { get; set; } = KestrelServerOptions.DefaultHeaderEncodingSelector;
+    public Func<string, Encoding?> EncodingSelector { get; set; } =
+        KestrelServerOptions.DefaultHeaderEncodingSelector;
 
     public int HPackStaticTableId => GetResponseHeaderStaticTableId(_knownHeaderType);
     public KeyValuePair<string, string> Current { get; private set; }
@@ -92,20 +96,32 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         if (_headersType == HeadersType.Headers)
         {
             return _headersEnumerator.MoveNext()
-                ? SetCurrent(_headersEnumerator.Current.Key, _headersEnumerator.Current.Value, _headersEnumerator.CurrentKnownType)
+                ? SetCurrent(
+                    _headersEnumerator.Current.Key,
+                    _headersEnumerator.Current.Value,
+                    _headersEnumerator.CurrentKnownType
+                )
                 : false;
         }
         else if (_headersType == HeadersType.Trailers)
         {
             return _trailersEnumerator.MoveNext()
-                ? SetCurrent(_trailersEnumerator.Current.Key, _trailersEnumerator.Current.Value, _trailersEnumerator.CurrentKnownType)
+                ? SetCurrent(
+                    _trailersEnumerator.Current.Key,
+                    _trailersEnumerator.Current.Value,
+                    _trailersEnumerator.CurrentKnownType
+                )
                 : false;
         }
         else
         {
 #if IS_TESTS || IS_BENCHMARKS
             return _genericEnumerator!.MoveNext()
-                ? SetCurrent(_genericEnumerator.Current.Key, _genericEnumerator.Current.Value, GetKnownRequestHeaderType(_genericEnumerator.Current.Key))
+                ? SetCurrent(
+                    _genericEnumerator.Current.Key,
+                    _genericEnumerator.Current.Value,
+                    GetKnownRequestHeaderType(_genericEnumerator.Current.Key)
+                )
                 : false;
 #else
             ThrowUnexpectedHeadersType();
@@ -126,7 +142,9 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         }
     }
 #else
-    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     private static void ThrowUnexpectedHeadersType()
     {
         throw new InvalidOperationException("Unexpected headers collection type.");
@@ -138,7 +156,9 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         var result = _stringValuesEnumerator.MoveNext();
 
         // Current is null only when result is false.
-        Current = result ? new KeyValuePair<string, string>(key, _stringValuesEnumerator.Current!) : default;
+        Current = result
+            ? new KeyValuePair<string, string>(key, _stringValuesEnumerator.Current!)
+            : default;
         return result;
     }
 
@@ -182,9 +202,7 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         _knownHeaderType = default;
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     internal static int GetResponseHeaderStaticTableId(KnownHeaderType responseHeaderType)
     {

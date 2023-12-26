@@ -16,33 +16,58 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInitializeParameter)]
-    public partial class InitializeMemberFromPrimaryConstructorParameterTests : AbstractCSharpCodeActionTest
+    public partial class InitializeMemberFromPrimaryConstructorParameterTests
+        : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpInitializeMemberFromPrimaryConstructorParameterCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpInitializeMemberFromPrimaryConstructorParameterCodeRefactoringProvider();
 
         private readonly NamingStylesTestOptionSets _options = new(LanguageNames.CSharp);
 
-        private TestParameters OmitIfDefault_Warning => new TestParameters(options: Option(CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault, NotificationOption2.Warning));
-        private TestParameters Never_Warning => new TestParameters(options: Option(CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.Never, NotificationOption2.Warning));
-        private TestParameters Always_Warning => new TestParameters(options: Option(CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.Always, NotificationOption2.Warning));
+        private TestParameters OmitIfDefault_Warning =>
+            new TestParameters(
+                options: Option(
+                    CodeStyleOptions2.AccessibilityModifiersRequired,
+                    AccessibilityModifiersRequired.OmitIfDefault,
+                    NotificationOption2.Warning
+                )
+            );
+        private TestParameters Never_Warning =>
+            new TestParameters(
+                options: Option(
+                    CodeStyleOptions2.AccessibilityModifiersRequired,
+                    AccessibilityModifiersRequired.Never,
+                    NotificationOption2.Warning
+                )
+            );
+        private TestParameters Always_Warning =>
+            new TestParameters(
+                options: Option(
+                    CodeStyleOptions2.AccessibilityModifiersRequired,
+                    AccessibilityModifiersRequired.Always,
+                    NotificationOption2.Warning
+                )
+            );
 
         [Fact]
         public async Task TestInitializeFieldWithSameName()
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                    private string s;
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private string s;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private string s = s;
-                }
-                """);
+                    class C(string s)
+                    {
+                        private string s = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -50,17 +75,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(string s[||])
-                {
-                    private string s;
-                }
-                """,
+                    class C(string s[||])
+                    {
+                        private string s;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private string s = s;
-                }
-                """);
+                    class C(string s)
+                    {
+                        private string s = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -68,17 +94,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(string s[||], string t)
-                {
-                    private string s;
-                }
-                """,
+                    class C(string s[||], string t)
+                    {
+                        private string s;
+                    }
+                    """,
                 """
-                class C(string s, string t)
-                {
-                    private string s = s;
-                }
-                """);
+                    class C(string s, string t)
+                    {
+                        private string s = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -86,17 +113,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                    private string _s;
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private string _s;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private string _s = s;
-                }
-                """);
+                    class C(string s)
+                    {
+                        private string _s = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -104,17 +132,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                    private string S { get; }
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private string S { get; }
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private string S { get; } = s;
-                }
-                """);
+                    class C(string s)
+                    {
+                        private string S { get; } = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -122,19 +151,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C([||]string s)
-                {
-                    private string t;
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private string t;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private string t;
+                    class C(string s)
+                    {
+                        private string t;
 
-                    public string S { get; } = s;
-                }
-                """);
+                        public string S { get; } = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -142,19 +172,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                    private string S => null;
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private string S => null;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    public string S1 { get; } = s;
+                    class C(string s)
+                    {
+                        public string S1 { get; } = s;
 
-                    private string S => null;
-                }
-                """);
+                        private string S => null;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -162,18 +193,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C([||]string s)
-                {
-                    private string T { get; }
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private string T { get; }
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    public string S { get; } = s;
-                    private string T { get; }
-                }
-                """);
+                    class C(string s)
+                    {
+                        public string S { get; } = s;
+                        private string T { get; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -181,19 +213,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                    private int s;
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private int s;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private int s;
+                    class C(string s)
+                    {
+                        private int s;
 
-                    public string S { get; } = s;
-                }
-                """);
+                        public string S { get; } = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -201,18 +234,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                    private int s;
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private int s;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private readonly string s1 = s;
-                    private int s;
-                }
-                """, index: 1);
+                    class C(string s)
+                    {
+                        private readonly string s1 = s;
+                        private int s;
+                    }
+                    """,
+                index: 1
+            );
         }
 
         [Fact]
@@ -220,17 +255,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C([||]string s)
-                {
-                    private object s;
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private object s;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private object s = s;
-                }
-                """);
+                    class C(string s)
+                    {
+                        private object s = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -238,12 +274,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C([||]string s)
-                {
-                    private int s;
-                    private int x = s;
-                }
-                """);
+                    class C([||]string s)
+                    {
+                        private int s;
+                        private int x = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -251,12 +288,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C([||]string s)
-                {
-                    private int s;
-                    private int x = s ?? throw new Exception();
-                }
-                """);
+                    class C([||]string s)
+                    {
+                        private int s;
+                        private int x = s ?? throw new Exception();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -264,20 +302,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                    private int s = 0;
-                }
-                """,
-
+                    class C([||]string s)
+                    {
+                        private int s = 0;
+                    }
+                    """,
                 """
-                class C([||]string s)
-                {
-                    private int s = 0;
+                    class C([||]string s)
+                    {
+                        private int s = 0;
 
-                    public string S { get; } = s;
-                }
-                """);
+                        public string S { get; } = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -285,19 +323,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s, string t)
-                {
-                    private string s;
-                    private string t = t;
-                }
-                """,
+                    class C([||]string s, string t)
+                    {
+                        private string s;
+                        private string t = t;
+                    }
+                    """,
                 """
-                class C(string s, string t)
-                {
-                    private string s = s;
-                    private string t = t;
-                }
-                """);
+                    class C(string s, string t)
+                    {
+                        private string s = s;
+                        private string t = t;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -305,19 +344,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(string s, [||]string t)
-                {
-                    private string s = s;
-                    private string t;
-                }
-                """,
+                    class C(string s, [||]string t)
+                    {
+                        private string s = s;
+                        private string t;
+                    }
+                    """,
                 """
-                class C(string s, string t)
-                {
-                    private string s = s;
-                    private string t = t;
-                }
-                """);
+                    class C(string s, string t)
+                    {
+                        private string s = s;
+                        private string t = t;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -325,15 +365,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    private string s;
-
-                    public void M([||]string s)
+                    class C
                     {
+                        private string s;
+
+                        public void M([||]string s)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -341,18 +382,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(string s, [||]string t)
-                {
-                    public string S { get; } = s;
-                }
-                """,
+                    class C(string s, [||]string t)
+                    {
+                        public string S { get; } = s;
+                    }
+                    """,
                 """
-                class C(string s, string t)
-                {
-                    public string S { get; } = s;
-                    public string T { get; } = t;
-                }
-                """);
+                    class C(string s, string t)
+                    {
+                        public string S { get; } = s;
+                        public string T { get; } = t;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -360,18 +402,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s, string t)
-                {
-                    public string T { get; } = t;
-                }
-                """,
+                    class C([||]string s, string t)
+                    {
+                        public string T { get; } = t;
+                    }
+                    """,
                 """
-                class C(string s, string t)
-                {
-                    public string S { get; } = s;
-                    public string T { get; } = t;
-                }
-                """);
+                    class C(string s, string t)
+                    {
+                        public string S { get; } = s;
+                        public string T { get; } = t;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19956")]
@@ -379,15 +422,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(string s[||])
-                """,
+                    class C(string s[||])
+                    """,
                 """
-                class C(string s)
-                {
-                    public string S { get; } = s;
-                }
+                    class C(string s)
+                    {
+                        public string S { get; } = s;
+                    }
 
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19956")]
@@ -395,16 +439,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(string s[||])
-                """,
+                    class C(string s[||])
+                    """,
                 """
-                class C(string s)
-                {
-                    private readonly string s = s;
-                }
+                    class C(string s)
+                    {
+                        private readonly string s = s;
+                    }
 
-                """,
-                index: 1);
+                    """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29190")]
@@ -412,17 +457,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(string [|s|])
-                {
-                    private string s;
-                }
-                """,
+                    class C(string [|s|])
+                    {
+                        private string s;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private string s = s;
-                }
-                """);
+                    class C(string s)
+                    {
+                        private string s = s;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29190")]
@@ -430,17 +476,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(string [|s|], int i)
-                {
-                    private string s;
-                }
-                """,
+                    class C(string [|s|], int i)
+                    {
+                        private string s;
+                    }
+                    """,
                 """
-                class C(string s, int i)
-                {
-                    private string s = s;
-                }
-                """);
+                    class C(string s, int i)
+                    {
+                        private string s = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -448,19 +495,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(int test, int [|test2|])
-                {
-                    readonly int test = 5;
-                }
-                """,
+                    class C(int test, int [|test2|])
+                    {
+                        readonly int test = 5;
+                    }
+                    """,
                 """
-                class C(int test, int test2)
-                {
-                    readonly int test = 5;
+                    class C(int test, int test2)
+                    {
+                        readonly int test = 5;
 
-                    public int Test2 { get; } = test2;
-                }
-                """, index: 0, parameters: OmitIfDefault_Warning);
+                        public int Test2 { get; } = test2;
+                    }
+                    """,
+                index: 0,
+                parameters: OmitIfDefault_Warning
+            );
         }
 
         [Fact]
@@ -468,19 +518,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(int test, int [|test2|])
-                {
-                    readonly int test = 5;
-                }
-                """,
+                    class C(int test, int [|test2|])
+                    {
+                        readonly int test = 5;
+                    }
+                    """,
                 """
-                class C(int test, int test2)
-                {
-                    readonly int test = 5;
+                    class C(int test, int test2)
+                    {
+                        readonly int test = 5;
 
-                    public int Test2 { get; } = test2;
-                }
-                """, index: 0, parameters: Never_Warning);
+                        public int Test2 { get; } = test2;
+                    }
+                    """,
+                index: 0,
+                parameters: Never_Warning
+            );
         }
 
         [Fact]
@@ -488,19 +541,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(int test, int [|test2|])
-                {
-                    readonly int test = 5;
-                }
-                """,
+                    class C(int test, int [|test2|])
+                    {
+                        readonly int test = 5;
+                    }
+                    """,
                 """
-                class C(int test, int test2)
-                {
-                    readonly int test = 5;
+                    class C(int test, int test2)
+                    {
+                        readonly int test = 5;
 
-                    public int Test2 { get; } = test2;
-                }
-                """, index: 0, parameters: Always_Warning);
+                        public int Test2 { get; } = test2;
+                    }
+                    """,
+                index: 0,
+                parameters: Always_Warning
+            );
         }
 
         [Fact]
@@ -508,18 +564,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(int test, int [|test2|])
-                {
-                    readonly int test = 5;
-                }
-                """,
+                    class C(int test, int [|test2|])
+                    {
+                        readonly int test = 5;
+                    }
+                    """,
                 """
-                class C(int test, int test2)
-                {
-                    readonly int test = 5;
-                    readonly int test2 = test2;
-                }
-                """, index: 1, parameters: OmitIfDefault_Warning);
+                    class C(int test, int test2)
+                    {
+                        readonly int test = 5;
+                        readonly int test2 = test2;
+                    }
+                    """,
+                index: 1,
+                parameters: OmitIfDefault_Warning
+            );
         }
 
         [Fact]
@@ -527,18 +586,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(int test, int [|test2|])
-                {
-                    readonly int test = 5;
-                }
-                """,
+                    class C(int test, int [|test2|])
+                    {
+                        readonly int test = 5;
+                    }
+                    """,
                 """
-                class C(int test, int test2)
-                {
-                    readonly int test = 5;
-                    readonly int test2 = test2;
-                }
-                """, index: 1, parameters: Never_Warning);
+                    class C(int test, int test2)
+                    {
+                        readonly int test = 5;
+                        readonly int test2 = test2;
+                    }
+                    """,
+                index: 1,
+                parameters: Never_Warning
+            );
         }
 
         [Fact]
@@ -546,18 +608,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(int test, int [|test2|])
-                {
-                    readonly int test = 5;
-                }
-                """,
+                    class C(int test, int [|test2|])
+                    {
+                        readonly int test = 5;
+                    }
+                    """,
                 """
-                class C(int test, int test2)
-                {
-                    readonly int test = 5;
-                    private readonly int test2 = test2;
-                }
-                """, index: 1, parameters: Always_Warning);
+                    class C(int test, int test2)
+                    {
+                        readonly int test = 5;
+                        private readonly int test2 = test2;
+                    }
+                    """,
+                index: 1,
+                parameters: Always_Warning
+            );
         }
 
         [Fact]
@@ -565,16 +630,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                struct S(int [|test|])
-                {
-                }
-                """,
+                    struct S(int [|test|])
+                    {
+                    }
+                    """,
                 """
-                struct S(int test)
-                {
-                    public int Test { get; } = test;
-                }
-                """, index: 0, parameters: OmitIfDefault_Warning);
+                    struct S(int test)
+                    {
+                        public int Test { get; } = test;
+                    }
+                    """,
+                index: 0,
+                parameters: OmitIfDefault_Warning
+            );
         }
 
         [Fact]
@@ -582,16 +650,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                struct S(int [|test|])
-                {
-                }
-                """,
+                    struct S(int [|test|])
+                    {
+                    }
+                    """,
                 """
-                struct S(int test)
-                {
-                    public int Test { get; } = test;
-                }
-                """, index: 0, parameters: Never_Warning);
+                    struct S(int test)
+                    {
+                        public int Test { get; } = test;
+                    }
+                    """,
+                index: 0,
+                parameters: Never_Warning
+            );
         }
 
         [Fact]
@@ -599,16 +670,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                struct S(int [|test|])
-                {
-                }
-                """,
+                    struct S(int [|test|])
+                    {
+                    }
+                    """,
                 """
-                struct S(int test)
-                {
-                    public int Test { get; } = test;
-                }
-                """, index: 0, parameters: Always_Warning);
+                    struct S(int test)
+                    {
+                        public int Test { get; } = test;
+                    }
+                    """,
+                index: 0,
+                parameters: Always_Warning
+            );
         }
 
         [Fact]
@@ -616,16 +690,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                struct S(int [|test|])
-                {
-                }
-                """,
+                    struct S(int [|test|])
+                    {
+                    }
+                    """,
                 """
-                struct S(int test)
-                {
-                    readonly int test = test;
-                }
-                """, index: 1, parameters: OmitIfDefault_Warning);
+                    struct S(int test)
+                    {
+                        readonly int test = test;
+                    }
+                    """,
+                index: 1,
+                parameters: OmitIfDefault_Warning
+            );
         }
 
         [Fact]
@@ -633,16 +710,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                struct S(int [|test|])
-                {
-                }
-                """,
+                    struct S(int [|test|])
+                    {
+                    }
+                    """,
                 """
-                struct S(int test)
-                {
-                    readonly int test = test;
-                }
-                """, index: 1, parameters: Never_Warning);
+                    struct S(int test)
+                    {
+                        readonly int test = test;
+                    }
+                    """,
+                index: 1,
+                parameters: Never_Warning
+            );
         }
 
         [Fact]
@@ -650,16 +730,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                struct S(int [|test|])
-                {
-                }
-                """,
+                    struct S(int [|test|])
+                    {
+                    }
+                    """,
                 """
-                struct S(int test)
-                {
-                    private readonly int test = test;
-                }
-                """, index: 1, parameters: Always_Warning);
+                    struct S(int test)
+                    {
+                        private readonly int test = test;
+                    }
+                    """,
+                index: 1,
+                parameters: Always_Warning
+            );
         }
 
         [Fact]
@@ -667,16 +750,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                }
-                """,
+                    class C([||]string s)
+                    {
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private readonly string _s = s;
-                }
-                """, index: 1, parameters: new TestParameters(options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+                    class C(string s)
+                    {
+                        private readonly string _s = s;
+                    }
+                    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
@@ -684,16 +772,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string t_s)
-                {
-                }
-                """,
+                    class C([||]string t_s)
+                    {
+                    }
+                    """,
                 """
-                class C(string t_s)
-                {
-                    private readonly string _s = t_s;
-                }
-                """, index: 1, parameters: new TestParameters(options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+                    class C(string t_s)
+                    {
+                        private readonly string _s = t_s;
+                    }
+                    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
@@ -701,16 +794,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string p_s_End)
-                {
-                }
-                """,
+                    class C([||]string p_s_End)
+                    {
+                    }
+                    """,
                 """
-                class C(string p_s_End)
-                {
-                    private readonly string _s = p_s_End;
-                }
-                """, index: 1, parameters: new TestParameters(options: _options.MergeStyles(_options.FieldNamesAreCamelCaseWithUnderscorePrefix, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C(string p_s_End)
+                    {
+                        private readonly string _s = p_s_End;
+                    }
+                    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -718,16 +819,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string t_p_s_End)
-                {
-                }
-                """,
+                    class C([||]string t_p_s_End)
+                    {
+                    }
+                    """,
                 """
-                class C(string t_p_s_End)
-                {
-                    private readonly string _s = t_p_s_End;
-                }
-                """, index: 1, parameters: new TestParameters(options: _options.MergeStyles(_options.FieldNamesAreCamelCaseWithUnderscorePrefix, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C(string t_p_s_End)
+                    {
+                        private readonly string _s = t_p_s_End;
+                    }
+                    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -735,16 +844,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string p_t_s)
-                {
-                }
-                """,
+                    class C([||]string p_t_s)
+                    {
+                    }
+                    """,
                 """
-                class C([||]string p_t_s)
-                {
-                    private readonly string _s = p_t_s;
-                }
-                """, index: 1, parameters: new TestParameters(options: _options.MergeStyles(_options.FieldNamesAreCamelCaseWithUnderscorePrefix, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefix)));
+                    class C([||]string p_t_s)
+                    {
+                        private readonly string _s = p_t_s;
+                    }
+                    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -752,16 +869,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                }
-                """,
+                    class C([||]string s)
+                    {
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    public string S { get; } = s;
-                }
-                """, parameters: new TestParameters(options: _options.PropertyNamesArePascalCase));
+                    class C(string s)
+                    {
+                        public string S { get; } = s;
+                    }
+                    """,
+                parameters: new TestParameters(options: _options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact]
@@ -769,16 +888,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string t_s)
-                {
-                }
-                """,
+                    class C([||]string t_s)
+                    {
+                    }
+                    """,
                 """
-                class C(string t_s)
-                {
-                    public string S { get; } = t_s;
-                }
-                """, parameters: new TestParameters(options: _options.PropertyNamesArePascalCase));
+                    class C(string t_s)
+                    {
+                        public string S { get; } = t_s;
+                    }
+                    """,
+                parameters: new TestParameters(options: _options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact]
@@ -786,16 +907,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string p_s_End)
-                {
-                }
-                """,
+                    class C([||]string p_s_End)
+                    {
+                    }
+                    """,
                 """
-                class C(string p_s_End)
-                {
-                    public string S { get; } = p_s_End;
-                }
-                """, parameters: new TestParameters(options: _options.MergeStyles(_options.PropertyNamesArePascalCase, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C(string p_s_End)
+                    {
+                        public string S { get; } = p_s_End;
+                    }
+                    """,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.PropertyNamesArePascalCase,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -803,16 +931,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string t_p_s_End)
-                {
-                }
-                """,
+                    class C([||]string t_p_s_End)
+                    {
+                    }
+                    """,
                 """
-                class C(string t_p_s_End)
-                {
-                    public string S { get; } = t_p_s_End;
-                }
-                """, parameters: new TestParameters(options: _options.MergeStyles(_options.PropertyNamesArePascalCase, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C(string t_p_s_End)
+                    {
+                        public string S { get; } = t_p_s_End;
+                    }
+                    """,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.PropertyNamesArePascalCase,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -820,16 +955,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string p_t_s_End)
-                {
-                }
-                """,
+                    class C([||]string p_t_s_End)
+                    {
+                    }
+                    """,
                 """
-                class C(string p_t_s_End)
-                {
-                    public string S { get; } = p_t_s_End;
-                }
-                """, parameters: new TestParameters(options: _options.MergeStyles(_options.PropertyNamesArePascalCase, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C(string p_t_s_End)
+                    {
+                        public string S { get; } = p_t_s_End;
+                    }
+                    """,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.PropertyNamesArePascalCase,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -837,17 +979,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                    private readonly string _s;
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private readonly string _s;
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    private readonly string _s = s;
-                }
-                """, index: 0, parameters: new TestParameters(options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+                    class C(string s)
+                    {
+                        private readonly string _s = s;
+                    }
+                    """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
@@ -855,17 +1002,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string t_s)
-                {
-                    private readonly string _s;
-                }
-                """,
+                    class C([||]string t_s)
+                    {
+                        private readonly string _s;
+                    }
+                    """,
                 """
-                class C(string t_s)
-                {
-                    private readonly string _s = t_s;
-                }
-                """, index: 0, parameters: new TestParameters(options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+                    class C(string t_s)
+                    {
+                        private readonly string _s = t_s;
+                    }
+                    """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
@@ -873,17 +1025,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string p_s_End)
-                {
-                    private readonly string _s;
-                }
-                """,
+                    class C([||]string p_s_End)
+                    {
+                        private readonly string _s;
+                    }
+                    """,
                 """
-                class C(string p_s_End)
-                {
-                    private readonly string _s = p_s_End;
-                }
-                """, index: 0, parameters: new TestParameters(options: _options.MergeStyles(_options.FieldNamesAreCamelCaseWithUnderscorePrefix, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C(string p_s_End)
+                    {
+                        private readonly string _s = p_s_End;
+                    }
+                    """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -891,17 +1051,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string t_p_s_End)
-                {
-                    private readonly string _s;
-                }
-                """,
+                    class C([||]string t_p_s_End)
+                    {
+                        private readonly string _s;
+                    }
+                    """,
                 """
-                class C(string t_p_s_End)
-                {
-                    private readonly string _s = t_p_s_End;
-                }
-                """, index: 0, parameters: new TestParameters(options: _options.MergeStyles(_options.FieldNamesAreCamelCaseWithUnderscorePrefix, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C(string t_p_s_End)
+                    {
+                        private readonly string _s = t_p_s_End;
+                    }
+                    """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -909,17 +1077,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string p_t_s_End)
-                {
-                    private readonly string _s;
-                }
-                """,
+                    class C([||]string p_t_s_End)
+                    {
+                        private readonly string _s;
+                    }
+                    """,
                 """
-                class C([||]string p_t_s_End)
-                {
-                    private readonly string _s = p_t_s_End;
-                }
-                """, index: 0, parameters: new TestParameters(options: _options.MergeStyles(_options.FieldNamesAreCamelCaseWithUnderscorePrefix, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C([||]string p_t_s_End)
+                    {
+                        private readonly string _s = p_t_s_End;
+                    }
+                    """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -927,17 +1103,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s)
-                {
-                    public string S { get; }
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        public string S { get; }
+                    }
+                    """,
                 """
-                class C(string s)
-                {
-                    public string S { get; } = s;
-                }
-                """, parameters: new TestParameters(options: _options.PropertyNamesArePascalCase));
+                    class C(string s)
+                    {
+                        public string S { get; } = s;
+                    }
+                    """,
+                parameters: new TestParameters(options: _options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact]
@@ -945,17 +1123,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string t_s)
-                {
-                    public string S { get; }
-                }
-                """,
+                    class C([||]string t_s)
+                    {
+                        public string S { get; }
+                    }
+                    """,
                 """
-                class C(string t_s)
-                {
-                    public string S { get; } = t_s;
-                }
-                """, parameters: new TestParameters(options: _options.PropertyNamesArePascalCase));
+                    class C(string t_s)
+                    {
+                        public string S { get; } = t_s;
+                    }
+                    """,
+                parameters: new TestParameters(options: _options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact]
@@ -963,17 +1143,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string p_s_End)
-                {
-                    public string S { get; }
-                }
-                """,
+                    class C([||]string p_s_End)
+                    {
+                        public string S { get; }
+                    }
+                    """,
                 """
-                class C(string p_s_End)
-                {
-                    public string S { get; } = p_s_End;
-                }
-                """, parameters: new TestParameters(options: _options.MergeStyles(_options.PropertyNamesArePascalCase, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C(string p_s_End)
+                    {
+                        public string S { get; } = p_s_End;
+                    }
+                    """,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.PropertyNamesArePascalCase,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -981,17 +1168,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string t_p_s_End)
-                {
-                    public string S { get; }
-                }
-                """,
+                    class C([||]string t_p_s_End)
+                    {
+                        public string S { get; }
+                    }
+                    """,
                 """
-                class C(string t_p_s_End)
-                {
-                    public string S { get; } = t_p_s_End;
-                }
-                """, parameters: new TestParameters(options: _options.MergeStyles(_options.PropertyNamesArePascalCase, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C(string t_p_s_End)
+                    {
+                        public string S { get; } = t_p_s_End;
+                    }
+                    """,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.PropertyNamesArePascalCase,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -999,17 +1193,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string p_t_s_End)
-                {
-                    public string S { get; }
-                }
-                """,
+                    class C([||]string p_t_s_End)
+                    {
+                        public string S { get; }
+                    }
+                    """,
                 """
-                class C([||]string p_t_s_End)
-                {
-                    public string S { get; } = p_t_s_End;
-                }
-                """, parameters: new TestParameters(options: _options.MergeStyles(_options.PropertyNamesArePascalCase, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C([||]string p_t_s_End)
+                    {
+                        public string S { get; } = p_t_s_End;
+                    }
+                    """,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.PropertyNamesArePascalCase,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -1017,25 +1218,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestMissingAsync(
                 """
-                class C([||]string p__End)
-                {
-                    public string S { get; }
-                }
-                """, parameters: new TestParameters(options: _options.MergeStyles(_options.PropertyNamesArePascalCase, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C([||]string p__End)
+                    {
+                        public string S { get; }
+                    }
+                    """,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.PropertyNamesArePascalCase,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestSomeBaseNamesEmpty()
         {
-            // Currently, this case does not offer a refactoring because selecting multiple parameters 
-            // is not supported. If multiple parameters are supported in the future, this case should 
+            // Currently, this case does not offer a refactoring because selecting multiple parameters
+            // is not supported. If multiple parameters are supported in the future, this case should
             // be updated to verify that only the parameter name that does not have an empty base is offered.
             await TestMissingAsync(
                 """
-                class C([|string p__End, string p_test_t|])
-                {
-                }
-                """, parameters: new TestParameters(options: _options.MergeStyles(_options.PropertyNamesArePascalCase, _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+                    class C([|string p__End, string p_test_t|])
+                    {
+                    }
+                    """,
+                parameters: new TestParameters(
+                    options: _options.MergeStyles(
+                        _options.PropertyNamesArePascalCase,
+                        _options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -1043,18 +1258,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                #nullable enable
-                class C([||]string? s)
-                {
-                }
-                """,
+                    #nullable enable
+                    class C([||]string? s)
+                    {
+                    }
+                    """,
                 """
-                #nullable enable
-                class C(string? s)
-                {
-                    private readonly string? _s = s;
-                }
-                """, index: 1, parameters: new TestParameters(options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+                    #nullable enable
+                    class C(string? s)
+                    {
+                        private readonly string? _s = s;
+                    }
+                    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
@@ -1062,18 +1282,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                #nullable enable
-                class C([||]string? s)
-                {
-                }
-                """,
+                    #nullable enable
+                    class C([||]string? s)
+                    {
+                    }
+                    """,
                 """
-                #nullable enable
-                class C(string? s)
-                {
-                    public string? S { get; } = s;
-                }
-                """, parameters: new TestParameters(options: _options.PropertyNamesArePascalCase));
+                    #nullable enable
+                    class C(string? s)
+                    {
+                        public string? S { get; } = s;
+                    }
+                    """,
+                parameters: new TestParameters(options: _options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24526")]
@@ -1081,14 +1303,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]string s) { }
-                """,
+                    class C([||]string s) { }
+                    """,
                 """
-                class C(string s)
-                {
-                    public string S { get; } = s;
-                }
-                """);
+                    class C(string s)
+                    {
+                        public string S { get; } = s;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24526")]
@@ -1096,13 +1319,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C([||]string s) { }
-                """,
+                    class C([||]string s) { }
+                    """,
                 """
-                class C(string s) {
-                    public string S { get; } = s;
-                }
-                """, options: this.Option(CSharpFormattingOptions2.NewLineBeforeOpenBrace, NewLineBeforeOpenBracePlacement.All & ~NewLineBeforeOpenBracePlacement.Types));
+                    class C(string s) {
+                        public string S { get; } = s;
+                    }
+                    """,
+                options: this.Option(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    NewLineBeforeOpenBracePlacement.All & ~NewLineBeforeOpenBracePlacement.Types
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1110,18 +1338,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(string s, [||]int i)
-                {
-                    private readonly string s = s;
-                }
-                """,
+                    class C(string s, [||]int i)
+                    {
+                        private readonly string s = s;
+                    }
+                    """,
                 """
-                class C(string s, int i)
-                {
-                    private readonly string s = s;
-                    private readonly int i = i;
-                }
-                """);
+                    class C(string s, int i)
+                    {
+                        private readonly string s = s;
+                        private readonly int i = i;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1129,18 +1358,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]int i, string s)
-                {
-                    private readonly string s = s;
-                }
-                """,
+                    class C([||]int i, string s)
+                    {
+                        private readonly string s = s;
+                    }
+                    """,
                 """
-                class C(int i, string s)
-                {
-                    private readonly int i = i;
-                    private readonly string s = s;
-                }
-                """);
+                    class C(int i, string s)
+                    {
+                        private readonly int i = i;
+                        private readonly string s = s;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -1148,18 +1378,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]int i, int j, int k)
-                {
-                }
-                """,
+                    class C([||]int i, int j, int k)
+                    {
+                    }
+                    """,
                 """
-                class C(int i, int j, int k)
-                {
-                    private readonly int i = i;
-                    private readonly int j = j;
-                    private readonly int k = k;
-                }
-                """, index: 3);
+                    class C(int i, int j, int k)
+                    {
+                        private readonly int i = i;
+                        private readonly int j = j;
+                        private readonly int k = k;
+                    }
+                    """,
+                index: 3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -1167,19 +1399,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(int i, [||]int j, int k)
-                {
-                    private readonly int i = i;
-                }
-                """,
+                    class C(int i, [||]int j, int k)
+                    {
+                        private readonly int i = i;
+                    }
+                    """,
                 """
-                class C(int i, int j, int k)
-                {
-                    private readonly int i = i;
-                    private readonly int j = j;
-                    private readonly int k = k;
-                }
-                """, index: 2);
+                    class C(int i, int j, int k)
+                    {
+                        private readonly int i = i;
+                        private readonly int j = j;
+                        private readonly int k = k;
+                    }
+                    """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -1187,19 +1421,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]int i, int j, int k)
-                {
-                    private readonly int j = j;
-                }
-                """,
+                    class C([||]int i, int j, int k)
+                    {
+                        private readonly int j = j;
+                    }
+                    """,
                 """
-                class C(int i, int j, int k)
-                {
-                    private readonly int i = i;
-                    private readonly int j = j;
-                    private readonly int k = k;
-                }
-                """, index: 2);
+                    class C(int i, int j, int k)
+                    {
+                        private readonly int i = i;
+                        private readonly int j = j;
+                        private readonly int k = k;
+                    }
+                    """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -1207,19 +1443,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]int i, int j, int k)
-                {
-                    private readonly int k = k;
-                }
-                """,
+                    class C([||]int i, int j, int k)
+                    {
+                        private readonly int k = k;
+                    }
+                    """,
                 """
-                class C(int i, int j, int k)
-                {
-                    private readonly int i = i;
-                    private readonly int j = j;
-                    private readonly int k = k;
-                }
-                """, index: 2);
+                    class C(int i, int j, int k)
+                    {
+                        private readonly int i = i;
+                        private readonly int j = j;
+                        private readonly int k = k;
+                    }
+                    """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -1227,18 +1465,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]int i, int j, int k)
-                {
-                }
-                """,
+                    class C([||]int i, int j, int k)
+                    {
+                    }
+                    """,
                 """
-                class C(int i, int j, int k)
-                {
-                    public int I { get; } = i;
-                    public int J { get; } = j;
-                    public int K { get; } = k;
-                }
-                """, index: 2);
+                    class C(int i, int j, int k)
+                    {
+                        public int I { get; } = i;
+                        public int J { get; } = j;
+                        public int K { get; } = k;
+                    }
+                    """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -1246,20 +1486,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C(int i, [||]int j, int k)
-                {
-                    private readonly int i = i;
-                }
-                """,
+                    class C(int i, [||]int j, int k)
+                    {
+                        private readonly int i = i;
+                    }
+                    """,
                 """
-                class C(int i, int j, int k)
-                {
-                    private readonly int i = i;
+                    class C(int i, int j, int k)
+                    {
+                        private readonly int i = i;
 
-                    public int J { get; } = j;
-                    public int K { get; } = k;
-                }
-                """, index: 3);
+                        public int J { get; } = j;
+                        public int K { get; } = k;
+                    }
+                    """,
+                index: 3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -1267,20 +1509,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]int i, int j, int k)
-                {
-                    private readonly int j = j;
-                }
-                """,
+                    class C([||]int i, int j, int k)
+                    {
+                        private readonly int j = j;
+                    }
+                    """,
                 """
-                class C(int i, int j, int k)
-                {
-                    private readonly int j = j;
+                    class C(int i, int j, int k)
+                    {
+                        private readonly int j = j;
 
-                    public int I { get; } = i;
-                    public int K { get; } = k;
-                }
-                """, index: 3);
+                        public int I { get; } = i;
+                        public int K { get; } = k;
+                    }
+                    """,
+                index: 3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -1288,20 +1532,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                class C([||]int i, int j, int k)
-                {
-                    private readonly int k = k;
-                }
-                """,
+                    class C([||]int i, int j, int k)
+                    {
+                        private readonly int k = k;
+                    }
+                    """,
                 """
-                class C(int i, int j, int k)
-                {
-                    private readonly int k = k;
+                    class C(int i, int j, int k)
+                    {
+                        private readonly int k = k;
 
-                    public int I { get; } = i;
-                    public int J { get; } = j;
-                }
-                """, index: 3);
+                        public int I { get; } = i;
+                        public int J { get; } = j;
+                    }
+                    """,
+                index: 3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1309,21 +1555,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private string S => throw new NotImplementedException();
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private string S => throw new NotImplementedException();
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C(string s)
-                {
-                    private string S { get; } = s;
-                }
-                """);
+                    class C(string s)
+                    {
+                        private string S { get; } = s;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1331,27 +1578,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private string S
+                    class C([||]string s)
                     {
-                        get => throw new NotImplementedException();
+                        private string S
+                        {
+                            get => throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C(string s)
-                {
-                    private string S
+                    class C(string s)
                     {
-                        get;
-                    } = s;
-                }
-                """);
+                        private string S
+                        {
+                            get;
+                        } = s;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1359,27 +1607,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private string S
+                    class C([||]string s)
                     {
-                        get { throw new NotImplementedException(); }
+                        private string S
+                        {
+                            get { throw new NotImplementedException(); }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C(string s)
-                {
-                    private string S
+                    class C(string s)
                     {
-                        get;
-                    } = s;
-                }
-                """);
+                        private string S
+                        {
+                            get;
+                        } = s;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1387,29 +1636,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private string S
+                    class C([||]string s)
                     {
-                        get => throw new NotImplementedException();
-                        set => throw new NotImplementedException();
+                        private string S
+                        {
+                            get => throw new NotImplementedException();
+                            set => throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C(string s)
-                {
-                    private string S
+                    class C(string s)
                     {
-                        get;
-                        set;
-                    } = s;
-                }
-                """);
+                        private string S
+                        {
+                            get;
+                            set;
+                        } = s;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1417,29 +1667,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private string S
+                    class C([||]string s)
                     {
-                        get { throw new NotImplementedException(); }
-                        set { throw new NotImplementedException(); }
+                        private string S
+                        {
+                            get { throw new NotImplementedException(); }
+                            set { throw new NotImplementedException(); }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C(string s)
-                {
-                    private string S
+                    class C(string s)
                     {
-                        get;
-                        set;
-                    } = s;
-                }
-                """);
+                        private string S
+                        {
+                            get;
+                            set;
+                        } = s;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1447,23 +1698,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private string S => throw new InvalidOperationException();
-                }
-                """,
+                    class C([||]string s)
+                    {
+                        private string S => throw new InvalidOperationException();
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C(string s)
-                {
-                    public string S1 { get; } = s;
+                    class C(string s)
+                    {
+                        public string S1 { get; } = s;
 
-                    private string S => throw new InvalidOperationException();
-                }
-                """);
+                        private string S => throw new InvalidOperationException();
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1471,41 +1723,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string [||]name)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string Name => throw new NotImplementedException();
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """,
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string [||]name)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string Name => throw new NotImplementedException();
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string name)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string Name { get; } = name;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """);
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string name)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string Name { get; } = name;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
+            );
         }
 
         [Fact]
@@ -1513,33 +1766,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private string _s;
-
-                    private void M()
+                    class C([||]string s)
                     {
-                        Console.WriteLine(s);
-                        var v = new C(s: "");
+                        private string _s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(s);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                
-                class C(string s)
-                {
-                    private string _s = s;
-                
-                    private void M()
+                    using System;
+
+                    class C(string s)
                     {
-                        Console.WriteLine(_s);
-                        var v = new C(s: "");
+                        private string _s = s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(_s);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1547,33 +1801,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private string _s;
-
-                    private void M()
+                    class C([||]string s)
                     {
-                        Console.WriteLine(/*t*/ s /*t2*/);
-                        var v = new C(s: "");
+                        private string _s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(/*t*/ s /*t2*/);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                
-                class C(string s)
-                {
-                    private string _s = s;
-                
-                    private void M()
+                    using System;
+
+                    class C(string s)
                     {
-                        Console.WriteLine(/*t*/ _s /*t2*/);
-                        var v = new C(s: "");
+                        private string _s = s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(/*t*/ _s /*t2*/);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1581,33 +1836,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    public string S { get; }
-
-                    private void M()
+                    class C([||]string s)
                     {
-                        Console.WriteLine(s);
-                        var v = new C(s: "");
+                        public string S { get; }
+
+                        private void M()
+                        {
+                            Console.WriteLine(s);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                
-                class C(string s)
-                {
-                    public string S { get; } = s;
-                
-                    private void M()
+                    using System;
+
+                    class C(string s)
                     {
-                        Console.WriteLine(S);
-                        var v = new C(s: "");
+                        public string S { get; } = s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(S);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1615,33 +1871,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    public string S { get; }
-
-                    private void M()
+                    class C([||]string s)
                     {
-                        Console.WriteLine(/*t*/ s /*t2*/);
-                        var v = new C(s: "");
+                        public string S { get; }
+
+                        private void M()
+                        {
+                            Console.WriteLine(/*t*/ s /*t2*/);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                
-                class C(string s)
-                {
-                    public string S { get; } = s;
-                
-                    private void M()
+                    using System;
+
+                    class C(string s)
                     {
-                        Console.WriteLine(/*t*/ S /*t2*/);
-                        var v = new C(s: "");
+                        public string S { get; } = s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(/*t*/ S /*t2*/);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1649,31 +1906,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private void M()
+                    class C([||]string s)
                     {
-                        Console.WriteLine(s);
-                        var v = new C(s: "");
+                        private void M()
+                        {
+                            Console.WriteLine(s);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                
-                class C(string s)
-                {
-                    public string S { get; } = s;
+                    using System;
 
-                    private void M()
+                    class C(string s)
                     {
-                        Console.WriteLine(S);
-                        var v = new C(s: "");
+                        public string S { get; } = s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(S);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1681,31 +1939,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C([||]string s)
-                {
-                    private void M()
+                    class C([||]string s)
                     {
-                        Console.WriteLine(s);
-                        var v = new C(s: "");
+                        private void M()
+                        {
+                            Console.WriteLine(s);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                
-                class C(string s)
-                {
-                    private readonly string _s = s;
+                    using System;
 
-                    private void M()
+                    class C(string s)
                     {
-                        Console.WriteLine(_s);
-                        var v = new C(s: "");
+                        private readonly string _s = s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(_s);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                """, index: 1, parameters: new TestParameters(options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+                    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
@@ -1713,25 +1976,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                partial class C([||]string s)
-                {
-                }
+                    partial class C([||]string s)
+                    {
+                    }
 
-                partial class C
-                {
-                    private string s;
-                }
-                """,
+                    partial class C
+                    {
+                        private string s;
+                    }
+                    """,
                 """
-                partial class C(string s)
-                {
-                }
-                
-                partial class C
-                {
-                    private string s = s;
-                }
-                """);
+                    partial class C(string s)
+                    {
+                    }
+
+                    partial class C
+                    {
+                        private string s = s;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1739,25 +2003,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScript1Async(
                 """
-                partial class C([||]string s)
-                {
-                }
+                    partial class C([||]string s)
+                    {
+                    }
 
-                partial class C
-                {
-                    private string S { get; }
-                }
-                """,
+                    partial class C
+                    {
+                        private string S { get; }
+                    }
+                    """,
                 """
-                partial class C(string s)
-                {
-                }
-                
-                partial class C
-                {
-                    private string S { get; } = s;
-                }
-                """);
+                    partial class C(string s)
+                    {
+                    }
+
+                    partial class C
+                    {
+                        private string S { get; } = s;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1765,41 +2030,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string [||]name)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string Name { get; }
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """,
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string [||]name)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string Name { get; }
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string name)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string Name { get; } = name;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """);
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string name)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string Name { get; } = name;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1807,42 +2073,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string x, string [||]y)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string X { get; } = x;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """,
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string x, string [||]y)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string X { get; } = x;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string x, string y)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string X { get; } = x;
-                    public string Y { get; } = y;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """);
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string x, string y)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string X { get; } = x;
+                        public string Y { get; } = y;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1850,42 +2117,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string [||]x, string y)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string Y { get; } = y;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """,
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string [||]x, string y)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string Y { get; } = y;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string x, string y)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string X { get; } = x;
-                    public string Y { get; } = y;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """);
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string x, string y)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string X { get; } = x;
+                        public string Y { get; } = y;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1893,43 +2161,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string [||]x, string y, string z)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string Y { get; } = y;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """,
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string [||]x, string y, string z)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string Y { get; } = y;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string x, string y, string z)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    public string X { get; } = x;
-                    public string Y { get; } = y;
-                    public string Z { get; } = z;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """, index: 2);
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string x, string y, string z)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        public string X { get; } = x;
+                        public string Y { get; } = y;
+                        public string Z { get; } = z;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -1937,41 +2207,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string [||]name)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    private readonly string name;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """,
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string [||]name)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        private readonly string name;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                public partial class Goo(string name)
-                {
-                }
-                        </Document>
-                        <Document>
-                using System;
-                public partial class Goo
-                {
-                    private readonly string name = name;
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """);
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                            <Document>
+                    public partial class Goo(string name)
+                    {
+                    }
+                            </Document>
+                            <Document>
+                    using System;
+                    public partial class Goo
+                    {
+                        private readonly string name = name;
+                    }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69459")]
@@ -1979,51 +2250,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
-                        <Document FilePath='C.cs'>
-                using System;
-                
-                class C([||]string s)
-                {
-                    private string _s;
-                
-                    private void M()
+                    <Workspace>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
+                            <Document FilePath='C.cs'>
+                    using System;
+
+                    class C([||]string s)
                     {
-                        Console.WriteLine(s);
-                        var v = new C(s: "");
+                        private string _s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(s);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
-                        <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
-                    </Project>
-                </Workspace>
-                """,
+                            </Document>
+                        </Project>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
+                            <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
-                        <Document FilePath='C.cs'>
-                using System;
-                
-                class C(string s)
-                {
-                    private string _s = s;
-                
-                    private void M()
+                    <Workspace>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
+                            <Document FilePath='C.cs'>
+                    using System;
+
+                    class C(string s)
                     {
-                        Console.WriteLine(_s);
-                        var v = new C(s: "");
+                        private string _s = s;
+
+                        private void M()
+                        {
+                            Console.WriteLine(_s);
+                            var v = new C(s: "");
+                        }
                     }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
-                        <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
-                    </Project>
-                </Workspace>
-                """);
+                            </Document>
+                        </Project>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
+                            <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
+                        </Project>
+                    </Workspace>
+                    """
+            );
         }
     }
 }

@@ -12,10 +12,13 @@ public enum SameSiteMode
 {
     /// <summary>No SameSite field will be set, the client should follow its default cookie policy.</summary>
     Unspecified = -1,
+
     /// <summary>Indicates the client should disable same-site restrictions.</summary>
     None = 0,
+
     /// <summary>Indicates the client should send the cookie with "same-site" requests, and with "cross-site" top-level navigations.</summary>
     Lax,
+
     /// <summary>Indicates the client should only send the cookie with "same-site" requests.</summary>
     Strict
 }

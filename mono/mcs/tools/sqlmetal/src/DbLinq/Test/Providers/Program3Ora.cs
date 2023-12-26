@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 #if ODP
 using Test_NUnit_OracleODP;
 #else
@@ -11,8 +11,8 @@ using Test_NUnit_Oracle;
 namespace Test_NUnit
 {
     /// <summary>
-    /// when a problem crops up in NUnit, 
-    /// you can convert the project from DLL into EXE, 
+    /// when a problem crops up in NUnit,
+    /// you can convert the project from DLL into EXE,
     /// and debug into the offending method.
     /// </summary>
     class Program2

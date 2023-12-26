@@ -11,5 +11,4 @@ public interface IParameterPolicy
 #else
 internal interface IParameterPolicy
 #endif
-{
-}
+{ }

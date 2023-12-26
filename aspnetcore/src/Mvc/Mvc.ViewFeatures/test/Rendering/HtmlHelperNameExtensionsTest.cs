@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.InternalTesting;
 using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Core;
@@ -43,7 +43,7 @@ public class HtmlHelperNameExtensionsTest
 
         // Act
         var idResult = helper.Id(expression: string.Empty);
-        var idNullResult = helper.Id(expression: null);   // null is another alias for current model
+        var idNullResult = helper.Id(expression: null); // null is another alias for current model
         var idForResult = helper.IdFor(m => m);
         var idForModelResult = helper.IdForModel();
         var nameResult = helper.Name(expression: string.Empty);
@@ -117,7 +117,11 @@ public class HtmlHelperNameExtensionsTest
     [InlineData("A[23]", "A[23].Property1", "A_23__Property1")]
     [InlineData("A[0].B", "A[0].B.Property1", "A_0__B_Property1")]
     [InlineData("A.B.C.D", "A.B.C.D.Property1", "A_B_C_D_Property1")]
-    public void IdAndNameHelpers_ReturnPrefixAndPropertyName(string prefix, string expectedName, string expectedId)
+    public void IdAndNameHelpers_ReturnPrefixAndPropertyName(
+        string prefix,
+        string expectedName,
+        string expectedId
+    )
     {
         // Arrange
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
@@ -162,7 +166,8 @@ public class HtmlHelperNameExtensionsTest
         var provider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
         var metadata = new Mock<ModelMetadata>(
             MockBehavior.Loose,
-            ModelMetadataIdentity.ForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel)));
+            ModelMetadataIdentity.ForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel))
+        );
         provider
             .Setup(m => m.GetMetadataForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel)))
             .Returns(metadata.Object);
@@ -181,7 +186,8 @@ public class HtmlHelperNameExtensionsTest
         // Only the ViewDataDictionary should do anything with metadata.
         provider.Verify(
             m => m.GetMetadataForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel)),
-            Times.Exactly(1));
+            Times.Exactly(1)
+        );
     }
 
     [Fact]
@@ -191,7 +197,8 @@ public class HtmlHelperNameExtensionsTest
         var provider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
         var metadata = new Mock<ModelMetadata>(
             MockBehavior.Loose,
-            ModelMetadataIdentity.ForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel)));
+            ModelMetadataIdentity.ForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel))
+        );
         provider
             .Setup(m => m.GetMetadataForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel)))
             .Returns(metadata.Object);
@@ -208,14 +215,18 @@ public class HtmlHelperNameExtensionsTest
         // Only the ViewDataDictionary should do anything with metadata.
         provider.Verify(
             m => m.GetMetadataForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel)),
-            Times.Exactly(1));
+            Times.Exactly(1)
+        );
     }
 
     [Theory]
     [InlineData("A", "A")]
     [InlineData("A[0].B", "A_0__B")]
     [InlineData("A.B.C.D", "A_B_C_D")]
-    public void IdAndName_ReturnExpression_EvenIfExpressionNotFound(string expression, string expectedId)
+    public void IdAndName_ReturnExpression_EvenIfExpressionNotFound(
+        string expression,
+        string expectedId
+    )
     {
         // Arrange
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
@@ -267,37 +278,97 @@ public class HtmlHelperNameExtensionsTest
             var unknownKey = "this is a dummy parameter value";
 
             return new TheoryData<Expression<Func<List<OuterClass>, string>>, string, string>
+            {
+                { m => unknownKey, "unknownKey", "unknownKey" },
+                { m => collection[index1], "collection[5]", "collection_5_" },
                 {
-                    { m => unknownKey, "unknownKey", "unknownKey" },
-                    { m => collection[index1], "collection[5]", "collection_5_" },
-                    { m => nestedCollection[index1][23], "nestedCollection[5][23]", "nestedCollection_5__23_" },
-                    { m => nestedCollection[index1][index2], "nestedCollection[5][23]", "nestedCollection_5__23_" },
-                    { m => nestedCollection[_index][Index], "nestedCollection[7][9]", "nestedCollection_7__9_" },
-                    { m => nestedCollection[Index][StaticIndex], "nestedCollection[9][8]", "nestedCollection_9__8_" },
-                    { m => _string, "_string", "zstring" },
-                    { m => _collection[_index], "_collection[7]", "zcollection_7_" },
-                    { m => _nestedCollection[_index][23], "_nestedCollection[7][23]", "znestedCollection_7__23_" },
-                    { m => _nestedCollection[_index][index2], "_nestedCollection[7][23]", "znestedCollection_7__23_" },
-                    { m => _nestedCollection[Index][_staticIndex], "_nestedCollection[9][6]", "znestedCollection_9__6_" },
-                    { m => _nestedCollection[StaticIndex][_index], "_nestedCollection[8][7]", "znestedCollection_8__7_" },
-                    { m => StringProperty, "StringProperty", "StringProperty" },
-                    { m => Collection[Index], "Collection[9]", "Collection_9_" },
-                    { m => NestedCollection[Index][23], "NestedCollection[9][23]", "NestedCollection_9__23_" },
-                    { m => NestedCollection[Index][index2], "NestedCollection[9][23]", "NestedCollection_9__23_" },
-                    { m => NestedCollection[_index][Index], "NestedCollection[7][9]", "NestedCollection_7__9_" },
-                    { m => NestedCollection[Index][StaticIndex], "NestedCollection[9][8]", "NestedCollection_9__8_" },
-                    { m => _staticCollection[_staticIndex], "_staticCollection[6]", "zstaticCollection_6_" },
-                    { m => _staticCollection[Index], "_staticCollection[9]", "zstaticCollection_9_" },
-                    { m => _staticCollection[_index], "_staticCollection[7]", "zstaticCollection_7_" },
-                    { m => StaticCollection[StaticIndex], "StaticCollection[8]", "StaticCollection_8_" },
-                    { m => StaticCollection[_staticIndex], "StaticCollection[6]", "StaticCollection_6_" },
-                    { m => StaticCollection[index1], "StaticCollection[5]", "StaticCollection_5_" },
-                    { m => m[index1].Inner.Name, "[5].Inner.Name", "z5__Inner_Name" },
-                    { m => m[_staticIndex].Inner.Name, "[6].Inner.Name", "z6__Inner_Name" },
-                    { m => m[_index].Inner.Name, "[7].Inner.Name", "z7__Inner_Name" },
-                    { m => m[StaticIndex].Inner.Name, "[8].Inner.Name", "z8__Inner_Name" },
-                    { m => m[Index].Inner.Name, "[9].Inner.Name", "z9__Inner_Name" },
-                };
+                    m => nestedCollection[index1][23],
+                    "nestedCollection[5][23]",
+                    "nestedCollection_5__23_"
+                },
+                {
+                    m => nestedCollection[index1][index2],
+                    "nestedCollection[5][23]",
+                    "nestedCollection_5__23_"
+                },
+                {
+                    m => nestedCollection[_index][Index],
+                    "nestedCollection[7][9]",
+                    "nestedCollection_7__9_"
+                },
+                {
+                    m => nestedCollection[Index][StaticIndex],
+                    "nestedCollection[9][8]",
+                    "nestedCollection_9__8_"
+                },
+                { m => _string, "_string", "zstring" },
+                { m => _collection[_index], "_collection[7]", "zcollection_7_" },
+                {
+                    m => _nestedCollection[_index][23],
+                    "_nestedCollection[7][23]",
+                    "znestedCollection_7__23_"
+                },
+                {
+                    m => _nestedCollection[_index][index2],
+                    "_nestedCollection[7][23]",
+                    "znestedCollection_7__23_"
+                },
+                {
+                    m => _nestedCollection[Index][_staticIndex],
+                    "_nestedCollection[9][6]",
+                    "znestedCollection_9__6_"
+                },
+                {
+                    m => _nestedCollection[StaticIndex][_index],
+                    "_nestedCollection[8][7]",
+                    "znestedCollection_8__7_"
+                },
+                { m => StringProperty, "StringProperty", "StringProperty" },
+                { m => Collection[Index], "Collection[9]", "Collection_9_" },
+                {
+                    m => NestedCollection[Index][23],
+                    "NestedCollection[9][23]",
+                    "NestedCollection_9__23_"
+                },
+                {
+                    m => NestedCollection[Index][index2],
+                    "NestedCollection[9][23]",
+                    "NestedCollection_9__23_"
+                },
+                {
+                    m => NestedCollection[_index][Index],
+                    "NestedCollection[7][9]",
+                    "NestedCollection_7__9_"
+                },
+                {
+                    m => NestedCollection[Index][StaticIndex],
+                    "NestedCollection[9][8]",
+                    "NestedCollection_9__8_"
+                },
+                {
+                    m => _staticCollection[_staticIndex],
+                    "_staticCollection[6]",
+                    "zstaticCollection_6_"
+                },
+                { m => _staticCollection[Index], "_staticCollection[9]", "zstaticCollection_9_" },
+                { m => _staticCollection[_index], "_staticCollection[7]", "zstaticCollection_7_" },
+                {
+                    m => StaticCollection[StaticIndex],
+                    "StaticCollection[8]",
+                    "StaticCollection_8_"
+                },
+                {
+                    m => StaticCollection[_staticIndex],
+                    "StaticCollection[6]",
+                    "StaticCollection_6_"
+                },
+                { m => StaticCollection[index1], "StaticCollection[5]", "StaticCollection_5_" },
+                { m => m[index1].Inner.Name, "[5].Inner.Name", "z5__Inner_Name" },
+                { m => m[_staticIndex].Inner.Name, "[6].Inner.Name", "z6__Inner_Name" },
+                { m => m[_index].Inner.Name, "[7].Inner.Name", "z7__Inner_Name" },
+                { m => m[StaticIndex].Inner.Name, "[8].Inner.Name", "z8__Inner_Name" },
+                { m => m[Index].Inner.Name, "[9].Inner.Name", "z9__Inner_Name" },
+            };
         }
     }
 
@@ -306,7 +377,8 @@ public class HtmlHelperNameExtensionsTest
     public void IdForAndNameFor_ReturnExpectedValues_WithVariablesInExpression(
         Expression<Func<List<OuterClass>, string>> expression,
         string expectedName,
-        string expectedId)
+        string expectedId
+    )
     {
         // Arrange
         var model = new List<OuterClass>();
@@ -328,12 +400,19 @@ public class HtmlHelperNameExtensionsTest
         var collection = new List<string>();
         var index = 24;
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(index);
-        var message = "The expression compiler was unable to evaluate the indexer expression 'm' because it " +
-            "references the model parameter 'm' which is unavailable.";
+        var message =
+            "The expression compiler was unable to evaluate the indexer expression 'm' because it "
+            + "references the model parameter 'm' which is unavailable.";
 
         // Act & Assert
-        ExceptionAssert.Throws<InvalidOperationException>(() => helper.IdFor(m => collection[m]), message);
-        ExceptionAssert.Throws<InvalidOperationException>(() => helper.NameFor(m => collection[m]), message);
+        ExceptionAssert.Throws<InvalidOperationException>(
+            () => helper.IdFor(m => collection[m]),
+            message
+        );
+        ExceptionAssert.Throws<InvalidOperationException>(
+            () => helper.NameFor(m => collection[m]),
+            message
+        );
     }
 
     public sealed class InnerClass

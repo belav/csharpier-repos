@@ -23,11 +23,8 @@ public class BringUpTest_InitObj
     public static bool InitObj()
     {
         MyClass c = new MyClass();
-        return c.x == c.y &&
-               c.y == c.z &&
-               c.z == 0;
+        return c.x == c.y && c.y == c.z && c.z == 0;
     }
-
 
     [Fact]
     public static int TestEntryPoint()

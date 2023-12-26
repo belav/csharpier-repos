@@ -21,33 +21,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseAutoProperty;
 public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest(logger)
 {
-    internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-        => (new CSharpUseAutoPropertyAnalyzer(), GetCSharpUseAutoPropertyCodeFixProvider());
+    internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+        Workspace workspace
+    ) => (new CSharpUseAutoPropertyAnalyzer(), GetCSharpUseAutoPropertyCodeFixProvider());
 
     [Fact]
     public async Task TestSingleGetterFromField()
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -55,29 +57,30 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            namespace N;
+                namespace N;
 
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            namespace N;
+                namespace N;
 
-            class Class
-            {
-                int P { get; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -85,25 +88,27 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            record Class
-            {
-                [|int i|];
-
-                int P
+                record Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            record Class
-            {
-                int P { get; }
-            }
-            """, new TestParameters(TestOptions.RegularPreview));
+                record Class
+                {
+                    int P { get; }
+                }
+                """,
+            new TestParameters(TestOptions.RegularPreview)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -112,20 +117,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
         // ⚠ The expected outcome of this test should not change.
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|MutableInt? i|];
-
-                MutableInt? P
+                class Class
                 {
-                    get
+                    [|MutableInt? i|];
+
+                    MutableInt? P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            struct MutableInt { public int Value; }
-            """);
+                struct MutableInt { public int Value; }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -133,27 +139,28 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|readonly MutableInt? i|];
-
-                MutableInt? P
+                class Class
                 {
-                    get
+                    [|readonly MutableInt? i|];
+
+                    MutableInt? P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            struct MutableInt { public int Value; }
-            """,
+                struct MutableInt { public int Value; }
+                """,
             """
-            class Class
-            {
-                MutableInt? P { get; }
-            }
-            struct MutableInt { public int Value; }
-            """);
+                class Class
+                {
+                    MutableInt? P { get; }
+                }
+                struct MutableInt { public int Value; }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -161,25 +168,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int? i|];
-
-                int? P
+                class Class
                 {
-                    get
+                    [|int? i|];
+
+                    int? P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int? P { get; }
-            }
-            """);
+                class Class
+                {
+                    int? P { get; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -187,25 +195,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|readonly int? i|];
-
-                int? P
+                class Class
                 {
-                    get
+                    [|readonly int? i|];
+
+                    int? P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int? P { get; }
-            }
-            """);
+                class Class
+                {
+                    int? P { get; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -214,21 +223,22 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
         // Recursive type check
         await TestMissingInRegularAndScriptAsync(
             """
-            using System;
-            class Class
-            {
-                [|Nullable<MutableInt?> i|];
-
-                Nullable<MutableInt?> P
+                using System;
+                class Class
                 {
-                    get
+                    [|Nullable<MutableInt?> i|];
+
+                    Nullable<MutableInt?> P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            struct MutableInt { public int Value; }
-            """);
+                struct MutableInt { public int Value; }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -236,20 +246,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|MutableInt i|];
-
-                MutableInt P
+                class Class
                 {
-                    get
+                    [|MutableInt i|];
+
+                    MutableInt P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            struct MutableInt { public int Value; }
-            """);
+                struct MutableInt { public int Value; }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -257,27 +268,28 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|readonly MutableInt i|];
-
-                MutableInt P
+                class Class
                 {
-                    get
+                    [|readonly MutableInt i|];
+
+                    MutableInt P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            struct MutableInt { public int Value; }
-            """,
+                struct MutableInt { public int Value; }
+                """,
             """
-            class Class
-            {
-                MutableInt P { get; }
-            }
-            struct MutableInt { public int Value; }
-            """);
+                class Class
+                {
+                    MutableInt P { get; }
+                }
+                struct MutableInt { public int Value; }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -285,20 +297,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|MutableInt i|];
-
-                MutableInt P
+                class Class
                 {
-                    get
+                    [|MutableInt i|];
+
+                    MutableInt P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            struct MutableInt { public int Value { get; set; } }
-            """);
+                struct MutableInt { public int Value { get; set; } }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -306,19 +319,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|ErrorType i|];
-
-                ErrorType P
+                class Class
                 {
-                    get
+                    [|ErrorType i|];
+
+                    ErrorType P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -326,25 +340,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|readonly ErrorType i|];
-
-                ErrorType P
+                class Class
                 {
-                    get
+                    [|readonly ErrorType i|];
+
+                    ErrorType P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                ErrorType P { get; }
-            }
-            """);
+                class Class
+                {
+                    ErrorType P { get; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -352,19 +367,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|ErrorType? i|];
-
-                ErrorType? P
+                class Class
                 {
-                    get
+                    [|ErrorType? i|];
+
+                    ErrorType? P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -372,25 +388,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|readonly ErrorType? i|];
-
-                ErrorType? P
+                class Class
                 {
-                    get
+                    [|readonly ErrorType? i|];
+
+                    ErrorType? P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                ErrorType? P { get; }
-            }
-            """);
+                class Class
+                {
+                    ErrorType? P { get; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -398,25 +415,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|ErrorType[] i|];
-
-                ErrorType[] P
+                class Class
                 {
-                    get
+                    [|ErrorType[] i|];
+
+                    ErrorType[] P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                ErrorType[] P { get; }
-            }
-            """);
+                class Class
+                {
+                    ErrorType[] P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -424,26 +442,27 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                public int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    public int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                public int P { get; private set; }
-            }
-            """,
-        CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5));
+                class Class
+                {
+                    public int P { get; private set; }
+                }
+                """,
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+        );
     }
 
     [Fact]
@@ -451,19 +470,23 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingAsync(
             """
-            class Class
-            {
-                [|readonly int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|readonly int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """, new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)));
+                """,
+            new TestParameters(
+                CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+            )
+        );
     }
 
     [Fact]
@@ -471,25 +494,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i = 1|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i = 1|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; } = 1;
-            }
-            """);
+                class Class
+                {
+                    int P { get; } = 1;
+                }
+                """
+        );
     }
 
     [Fact]
@@ -497,19 +521,23 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingAsync(
             """
-            class Class
-            {
-                [|int i = 1|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i = 1|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """, new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)));
+                """,
+            new TestParameters(
+                CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+            )
+        );
     }
 
     [Fact]
@@ -517,25 +545,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int i;
-
-                [|int P
+                class Class
                 {
-                    get
+                    int i;
+
+                    [|int P
                     {
-                        return i;
-                    }
-                }|]
-            }
-            """,
+                        get
+                        {
+                            return i;
+                        }
+                    }|]
+                }
+                """,
             """
-            class Class
-            {
-                int P { get; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -543,19 +572,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    set
+                    [|int i|];
+
+                    int P
                     {
-                        i = value;
+                        set
+                        {
+                            i = value;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -563,30 +593,31 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
-                    {
-                        return i;
-                    }
+                    [|int i|];
 
-                    set
+                    int P
                     {
-                        i = value;
+                        get
+                        {
+                            return i;
+                        }
+
+                        set
+                        {
+                            i = value;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; set; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; set; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -594,25 +625,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return this.i;
+                        get
+                        {
+                            return this.i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -620,19 +652,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    set
+                    [|int i|];
+
+                    int P
                     {
-                        this.i = value;
+                        set
+                        {
+                            this.i = value;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -640,30 +673,31 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
-                    {
-                        return this.i;
-                    }
+                    [|int i|];
 
-                    set
+                    int P
                     {
-                        this.i = value;
+                        get
+                        {
+                            return this.i;
+                        }
+
+                        set
+                        {
+                            this.i = value;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; set; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; set; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -671,20 +705,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        ;
-                        return i;
+                        get
+                        {
+                            ;
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -692,20 +727,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    set
+                    [|int i|];
+
+                    int P
                     {
-                        ;
-                        i = value;
+                        set
+                        {
+                            ;
+                            i = value;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -713,25 +749,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
-                    {
-                        return i;
-                    }
+                    [|int i|];
 
-                    set
+                    int P
                     {
-                        ;
-                        i = value;
+                        get
+                        {
+                            return i;
+                        }
+
+                        set
+                        {
+                            ;
+                            i = value;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -739,25 +776,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-                int j;
-
-                int P
+                class Class
                 {
-                    get
-                    {
-                        return i;
-                    }
+                    [|int i|];
+                    int j;
 
-                    set
+                    int P
                     {
-                        j = value;
+                        get
+                        {
+                            return i;
+                        }
+
+                        set
+                        {
+                            j = value;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -765,19 +803,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|static int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|static int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -785,24 +824,25 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    void M(ref int x)
+                    {
+                        M(ref i);
                     }
                 }
-
-                void M(ref int x)
-                {
-                    M(ref i);
-                }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -810,24 +850,25 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    void M(ref int x)
+                    {
+                        M(ref this.i);
                     }
                 }
-
-                void M(ref int x)
-                {
-                    M(ref this.i);
-                }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -835,24 +876,25 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    void M(out int x)
+                    {
+                        M(out i);
                     }
                 }
-
-                void M(out int x)
-                {
-                    M(out i);
-                }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -860,24 +902,25 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    void M(in int x)
+                    {
+                        M(in i);
                     }
                 }
-
-                void M(in int x)
-                {
-                    M(in i);
-                }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25429")]
@@ -885,24 +928,25 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    void M()
+                    {
+                        ref int x = ref i;
                     }
                 }
-
-                void M()
-                {
-                    ref int x = ref i;
-                }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -910,26 +954,27 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    void M()
+                    {
+                        // because we refer to 'i' statically, it only gets resolved as a candidate symbol
+                        // let's be conservative here and disable the analyzer if we're not sure
+                        ref int x = ref Class.i;
                     }
                 }
-
-                void M()
-                {
-                    // because we refer to 'i' statically, it only gets resolved as a candidate symbol
-                    // let's be conservative here and disable the analyzer if we're not sure
-                    ref int x = ref Class.i;
-                }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -937,42 +982,43 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-                int j;
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+                    int j;
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    void M()
+                    {
+                        int i;
+                        ref int x = ref i;
+                        ref int y = ref j;
                     }
                 }
-
-                void M()
-                {
-                    int i;
-                    ref int x = ref i;
-                    ref int y = ref j;
-                }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int j;
-
-                int P { get; }
-
-                void M()
+                class Class
                 {
-                    int i;
-                    ref int x = ref i;
-                    ref int y = ref j;
+                    int j;
+
+                    int P { get; }
+
+                    void M()
+                    {
+                        int i;
+                        ref int x = ref i;
+                        ref int y = ref j;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -980,19 +1026,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int i|];
-
-                public virtual int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    public virtual int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1000,19 +1047,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|const int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|const int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25379")]
@@ -1020,19 +1068,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|volatile int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|volatile int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1040,27 +1089,28 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|], j, k;
-
-                int P
+                class Class
                 {
-                    get
+                    int [|i|], j, k;
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int j, k;
+                class Class
+                {
+                    int j, k;
 
-                int P { get; }
-            }
-            """);
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1068,27 +1118,28 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int i, [|j|], k;
-
-                int P
+                class Class
                 {
-                    get
+                    int i, [|j|], k;
+
+                    int P
                     {
-                        return j;
+                        get
+                        {
+                            return j;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int i, k;
+                class Class
+                {
+                    int i, k;
 
-                int P { get; }
-            }
-            """);
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1096,27 +1147,28 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int i, j, [|k|];
-
-                int P
+                class Class
                 {
-                    get
+                    int i, j, [|k|];
+
+                    int P
                     {
-                        return k;
+                        get
+                        {
+                            return k;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int i, j;
+                class Class
+                {
+                    int i, j;
 
-                int P { get; }
-            }
-            """);
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1124,32 +1176,33 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            partial class Class
-            {
-                [|int i|];
-            }
-
-            partial class Class
-            {
-                int P
+                partial class Class
                 {
-                    get
+                    [|int i|];
+                }
+
+                partial class Class
+                {
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            partial class Class
-            {
-            }
+                partial class Class
+                {
+                }
 
-            partial class Class
-            {
-                int P { get; }
-            }
-            """);
+                partial class Class
+                {
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1157,20 +1210,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|[A]
-                int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|[A]
+                    int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1178,35 +1232,36 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    public Class()
+                    {
+                        i = 1;
                     }
                 }
-
-                public Class()
-                {
-                    i = 1;
-                }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
-
-                public Class()
+                class Class
                 {
-                    P = 1;
+                    int P { get; }
+
+                    public Class()
+                    {
+                        P = 1;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1214,35 +1269,36 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    public Class(int P)
+                    {
+                        i = 1;
                     }
                 }
-
-                public Class(int P)
-                {
-                    i = 1;
-                }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
-
-                public Class(int P)
+                class Class
                 {
-                    this.P = 1;
+                    int P { get; }
+
+                    public Class(int P)
+                    {
+                        this.P = 1;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1250,35 +1306,36 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    public Class()
+                    {
+                        i = 1;
                     }
                 }
-
-                public Class()
-                {
-                    i = 1;
-                }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
-
-                public Class()
+                class Class
                 {
-                    P = 1;
+                    int P { get; }
+
+                    public Class()
+                    {
+                        P = 1;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1286,35 +1343,36 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    public void Goo()
+                    {
+                        i = 1;
                     }
                 }
-
-                public void Goo()
-                {
-                    i = 1;
-                }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; set; }
-
-                public void Goo()
+                class Class
                 {
-                    P = 1;
+                    int P { get; set; }
+
+                    public void Goo()
+                    {
+                        P = 1;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1322,35 +1380,36 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                public int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    public int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    public void Goo()
+                    {
+                        i = 1;
                     }
                 }
-
-                public void Goo()
-                {
-                    i = 1;
-                }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                public int P { get; private set; }
-
-                public void Goo()
+                class Class
                 {
-                    P = 1;
+                    public int P { get; private set; }
+
+                    public void Goo()
+                    {
+                        P = 1;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1358,32 +1417,33 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            using System;
+                using System;
 
-            class C
-            {
-                [|int i|];
-                int P => i;
-
-                C()
+                class C
                 {
-                    Action<int> x = _ => i = 1;
+                    [|int i|];
+                    int P => i;
+
+                    C()
+                    {
+                        Action<int> x = _ => i = 1;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System;
+                using System;
 
-            class C
-            {
-                int P { get; set; }
-
-                C()
+                class C
                 {
-                    Action<int> x = _ => P = 1;
+                    int P { get; set; }
+
+                    C()
+                    {
+                        Action<int> x = _ => P = 1;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1391,38 +1451,39 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            using System;
+                using System;
 
-            class C
-            {
-                [|int i|];
-                int P => i;
-
-                C()
+                class C
                 {
-                    Action<int> x = _ =>
+                    [|int i|];
+                    int P => i;
+
+                    C()
                     {
-                        i = 1;
-                    };
+                        Action<int> x = _ =>
+                        {
+                            i = 1;
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System;
+                using System;
 
-            class C
-            {
-                int P { get; set; }
-
-                C()
+                class C
                 {
-                    Action<int> x = _ =>
+                    int P { get; set; }
+
+                    C()
                     {
-                        P = 1;
-                    };
+                        Action<int> x = _ =>
+                        {
+                            P = 1;
+                        };
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1430,32 +1491,33 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            using System;
+                using System;
 
-            class C
-            {
-                [|int i|];
-                int P => i;
-
-                C()
+                class C
                 {
-                    Action x = () => i = 1;
+                    [|int i|];
+                    int P => i;
+
+                    C()
+                    {
+                        Action x = () => i = 1;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System;
+                using System;
 
-            class C
-            {
-                int P { get; set; }
-
-                C()
+                class C
                 {
-                    Action x = () => P = 1;
+                    int P { get; set; }
+
+                    C()
+                    {
+                        Action x = () => P = 1;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1463,38 +1525,39 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            using System;
+                using System;
 
-            class C
-            {
-                [|int i|];
-                int P => i;
-
-                C()
+                class C
                 {
-                    Action x = () =>
+                    [|int i|];
+                    int P => i;
+
+                    C()
                     {
-                        i = 1;
-                    };
+                        Action x = () =>
+                        {
+                            i = 1;
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System;
+                using System;
 
-            class C
-            {
-                int P { get; set; }
-
-                C()
+                class C
                 {
-                    Action x = () =>
+                    int P { get; set; }
+
+                    C()
                     {
-                        P = 1;
-                    };
+                        Action x = () =>
+                        {
+                            P = 1;
+                        };
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1502,38 +1565,39 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            using System;
+                using System;
 
-            class C
-            {
-                [|int i|];
-                int P => i;
-
-                C()
+                class C
                 {
-                    Action x = delegate ()
+                    [|int i|];
+                    int P => i;
+
+                    C()
                     {
-                        i = 1;
-                    };
+                        Action x = delegate ()
+                        {
+                            i = 1;
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System;
+                using System;
 
-            class C
-            {
-                int P { get; set; }
-
-                C()
+                class C
                 {
-                    Action x = delegate ()
+                    int P { get; set; }
+
+                    C()
                     {
-                        P = 1;
-                    };
+                        Action x = delegate ()
+                        {
+                            P = 1;
+                        };
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1541,34 +1605,35 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class C
-            {
-                [|int i|];
-                int P => i;
-
-                C()
+                class C
                 {
-                    void F()
+                    [|int i|];
+                    int P => i;
+
+                    C()
                     {
-                        i = 1;
+                        void F()
+                        {
+                            i = 1;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class C
-            {
-                int P { get; set; }
-
-                C()
+                class C
                 {
-                    void F()
+                    int P { get; set; }
+
+                    C()
                     {
-                        P = 1;
+                        void F()
+                        {
+                            P = 1;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1576,28 +1641,29 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class C
-            {
-                [|int i|];
-                int P => i;
-
-                C()
+                class C
                 {
-                    void F() => i = 1;
+                    [|int i|];
+                    int P => i;
+
+                    C()
+                    {
+                        void F() => i = 1;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class C
-            {
-                int P { get; set; }
-
-                C()
+                class C
                 {
-                    void F() => P = 1;
+                    int P { get; set; }
+
+                    C()
+                    {
+                        void F() => P = 1;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1605,28 +1671,29 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class C
-            {
-                [|int i|];
-                int P => i;
-
-                C()
+                class C
                 {
-                    bool F() => i == 1;
+                    [|int i|];
+                    int P => i;
+
+                    C()
+                    {
+                        bool F() => i == 1;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class C
-            {
-                int P { get; }
-
-                C()
+                class C
                 {
-                    bool F() => P == 1;
+                    int P { get; }
+
+                    C()
+                    {
+                        bool F() => P == 1;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1634,11 +1701,12 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                public int [|P|] { get; }
-            }
-            """);
+                class Class
+                {
+                    public int [|P|] { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1646,11 +1714,12 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                public int [|P|] { get; set; }
-            }
-            """);
+                class Class
+                {
+                    public int [|P|] { get; set; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1658,18 +1727,19 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-                int P { get { return i; } }
-            }
-            """,
+                class Class
+                {
+                    [|int i|];
+                    int P { get { return i; } }
+                }
+                """,
             """
-            class Class
-            {
-                int P { get; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1677,21 +1747,22 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-                int P
+                class Class
                 {
-                    get { return i; }
+                    [|int i|];
+                    int P
+                    {
+                        get { return i; }
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1699,22 +1770,23 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-                int P
+                class Class
                 {
-                    get { return i; }
-                    set { i = value; }
+                    [|int i|];
+                    int P
+                    {
+                        get { return i; }
+                        set { i = value; }
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; set; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; set; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1722,25 +1794,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|readonly (int, string) i|];
-
-                (int, string) P
+                class Class
                 {
-                    get
+                    [|readonly (int, string) i|];
+
+                    (int, string) P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                (int, string) P { get; }
-            }
-            """);
+                class Class
+                {
+                    (int, string) P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1748,25 +1821,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|readonly (int a, string b) i|];
-
-                (int a, string b) P
+                class Class
                 {
-                    get
+                    [|readonly (int a, string b) i|];
+
+                    (int a, string b) P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                (int a, string b) P { get; }
-            }
-            """);
+                class Class
+                {
+                    (int a, string b) P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1774,19 +1848,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|readonly (int a, string b) i|];
-
-                (int c, string d) P
+                class Class
                 {
-                    get
+                    [|readonly (int a, string b) i|];
+
+                    (int c, string d) P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1794,25 +1869,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|readonly (int a, string) i|];
-
-                (int a, string) P
+                class Class
                 {
-                    get
+                    [|readonly (int a, string) i|];
+
+                    (int a, string) P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                (int a, string) P { get; }
-            }
-            """);
+                class Class
+                {
+                    (int a, string) P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1820,25 +1896,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|readonly (int, string) i = (1, "hello")|];
-
-                (int, string) P
+                class Class
                 {
-                    get
+                    [|readonly (int, string) i = (1, "hello")|];
+
+                    (int, string) P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                (int, string) P { get; } = (1, "hello");
-            }
-            """);
+                class Class
+                {
+                    (int, string) P { get; } = (1, "hello");
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1846,24 +1923,25 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|(int, string) i|];
-
-                (int, string) P
+                class Class
                 {
-                    get
-                    {
-                        return i;
-                    }
+                    [|(int, string) i|];
 
-                    set
+                    (int, string) P
                     {
-                        i = value;
+                        get
+                        {
+                            return i;
+                        }
+
+                        set
+                        {
+                            i = value;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23216")]
@@ -1872,96 +1950,101 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                {|FixAllInDocument:int i|};
-
-                int P
+                class Class
                 {
-                    get
+                    {|FixAllInDocument:int i|};
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
+                    }
+
+                    int j;
+
+                    int Q
+                    {
+                        get
+                        {
+                            return j;
+                        }
                     }
                 }
-
-                int j;
-
-                int Q
-                {
-                    get
-                    {
-                        return j;
-                    }
-                }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
+                class Class
+                {
+                    int P { get; }
 
-                int Q { get; }
-            }
-            """);
+                    int Q { get; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23735")]
     public async Task ExplicitInterfaceImplementationGetterOnly()
     {
-        await TestMissingInRegularAndScriptAsync("""
-            namespace RoslynSandbox
-            {
-                public interface IFoo
+        await TestMissingInRegularAndScriptAsync(
+            """
+                namespace RoslynSandbox
                 {
-                    object Bar { get; }
-                }
-
-                class Foo : IFoo
-                {
-                    public Foo(object bar)
+                    public interface IFoo
                     {
-                        this.bar = bar;
+                        object Bar { get; }
                     }
 
-                    readonly object [|bar|];
-
-                    object IFoo.Bar
+                    class Foo : IFoo
                     {
-                        get { return bar; }
+                        public Foo(object bar)
+                        {
+                            this.bar = bar;
+                        }
+
+                        readonly object [|bar|];
+
+                        object IFoo.Bar
+                        {
+                            get { return bar; }
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23735")]
     public async Task ExplicitInterfaceImplementationGetterAndSetter()
     {
-        await TestMissingInRegularAndScriptAsync("""
-            namespace RoslynSandbox
-            {
-                public interface IFoo
+        await TestMissingInRegularAndScriptAsync(
+            """
+                namespace RoslynSandbox
                 {
-                    object Bar { get; set; }
-                }
-
-                class Foo : IFoo
-                {
-                    public Foo(object bar)
+                    public interface IFoo
                     {
-                        this.bar = bar;
+                        object Bar { get; set; }
                     }
 
-                    object [|bar|];
-
-                    object IFoo.Bar
+                    class Foo : IFoo
                     {
-                        get { return bar; }
-                        set { bar = value; }
+                        public Foo(object bar)
+                        {
+                            this.bar = bar;
+                        }
+
+                        object [|bar|];
+
+                        object IFoo.Bar
+                        {
+                            get { return bar; }
+                            set { bar = value; }
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact]
@@ -1969,21 +2052,22 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|];
-                int P
+                class Class
                 {
-                    get => i;
+                    int [|i|];
+                    int P
+                    {
+                        get => i;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -1991,21 +2075,22 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|] = 1;
-                int P
+                class Class
                 {
-                    get => i;
+                    int [|i|] = 1;
+                    int P
+                    {
+                        get => i;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; } = 1;
-            }
-            """);
+                class Class
+                {
+                    int P { get; } = 1;
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2013,23 +2098,24 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|] = 1;
-                int P
+                class Class
                 {
-                    get => i;
+                    int [|i|] = 1;
+                    int P
+                    {
+                        get => i;
+                    }
+                    void M() { i = 2; }
                 }
-                void M() { i = 2; }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; set; } = 1;
-                void M() { P = 2; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; set; } = 1;
+                    void M() { P = 2; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2037,22 +2123,23 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|];
-                int P
+                class Class
                 {
-                    get => i;
-                    set { i = value; }
+                    int [|i|];
+                    int P
+                    {
+                        get => i;
+                        set { i = value; }
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; set; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; set; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2060,18 +2147,19 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|];
-                int P => i;
-            }
-            """,
+                class Class
+                {
+                    int [|i|];
+                    int P => i;
+                }
+                """,
             """
-            class Class
-            {
-                int P { get; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2079,20 +2167,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|];
-                int P => i;
-                void M() { i = 1; }
-            }
-            """,
+                class Class
+                {
+                    int [|i|];
+                    int P => i;
+                    void M() { i = 1; }
+                }
+                """,
             """
-            class Class
-            {
-                int P { get; set; }
-                void M() { P = 1; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; set; }
+                    void M() { P = 1; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2100,18 +2189,19 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|] = 1;
-                int P => i;
-            }
-            """,
+                class Class
+                {
+                    int [|i|] = 1;
+                    int P => i;
+                }
+                """,
             """
-            class Class
-            {
-                int P { get; } = 1;
-            }
-            """);
+                class Class
+                {
+                    int P { get; } = 1;
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2119,21 +2209,22 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|];
-                int P { 
-                    get => i;
-                    set => i = value;
+                class Class
+                {
+                    int [|i|];
+                    int P { 
+                        get => i;
+                        set => i = value;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; set; }
-            }
-            """);
+                class Class
+                {
+                    int P { get; set; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2141,21 +2232,22 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int [|i|] = 1;
-                int P { 
-                    get => i;
-                    set => i = value;
+                class Class
+                {
+                    int [|i|] = 1;
+                    int P { 
+                        get => i;
+                        set => i = value;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; set; } = 1;
-            }
-            """);
+                class Class
+                {
+                    int P { get; set; } = 1;
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25401")]
@@ -2163,30 +2255,31 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                public int P
+                class Class
                 {
-                    protected get
-                    {
-                        return i;
-                    }
+                    [|int i|];
 
-                    set
+                    public int P
                     {
-                        i = value;
+                        protected get
+                        {
+                            return i;
+                        }
+
+                        set
+                        {
+                            i = value;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                public int P { protected get; set; }
-            }
-            """);
+                class Class
+                {
+                    public int P { protected get; set; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25401")]
@@ -2194,30 +2287,31 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                public int P
+                class Class
                 {
-                    get
-                    {
-                        return i;
-                    }
+                    [|int i|];
 
-                    protected set
+                    public int P
                     {
-                        i = value;
+                        get
+                        {
+                            return i;
+                        }
+
+                        protected set
+                        {
+                            i = value;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                public int P { get; protected set; }
-            }
-            """);
+                class Class
+                {
+                    public int P { get; protected set; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26858")]
@@ -2225,21 +2319,22 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Goo
-            {
-                private readonly object [|bar|] = new object();
+                class Goo
+                {
+                    private readonly object [|bar|] = new object();
 
-                public object Bar => bar;
-                public int Baz => 0;
-            }
-            """,
+                    public object Bar => bar;
+                    public int Baz => 0;
+                }
+                """,
             """
-            class Goo
-            {
-                public object Bar { get; } = new object();
-                public int Baz => 0;
-            }
-            """);
+                class Goo
+                {
+                    public object Bar { get; } = new object();
+                    public int Baz => 0;
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26858")]
@@ -2247,21 +2342,22 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Goo
-            {
-                private readonly object [|bar|] = new object();
+                class Goo
+                {
+                    private readonly object [|bar|] = new object();
 
-                public object Bar => bar; // prop comment
-                public int Baz => 0;
-            }
-            """,
+                    public object Bar => bar; // prop comment
+                    public int Baz => 0;
+                }
+                """,
             """
-            class Goo
-            {
-                public object Bar { get; } = new object(); // prop comment
-                public int Baz => 0;
-            }
-            """);
+                class Goo
+                {
+                    public object Bar { get; } = new object(); // prop comment
+                    public int Baz => 0;
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26858")]
@@ -2269,23 +2365,24 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Goo
-            {
-                private readonly object [|bar|] = new object();
+                class Goo
+                {
+                    private readonly object [|bar|] = new object();
 
-                // doc
-                public object Bar => bar; // prop comment
-                public int Baz => 0;
-            }
-            """,
+                    // doc
+                    public object Bar => bar; // prop comment
+                    public int Baz => 0;
+                }
+                """,
             """
-            class Goo
-            {
-                // doc
-                public object Bar { get; } = new object(); // prop comment
-                public int Baz => 0;
-            }
-            """);
+                class Goo
+                {
+                    // doc
+                    public object Bar { get; } = new object(); // prop comment
+                    public int Baz => 0;
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26858")]
@@ -2293,25 +2390,26 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Goo
-            {
+                class Goo
+                {
 
-                private readonly object [|bar|] = new object();
+                    private readonly object [|bar|] = new object();
 
-                // doc
-                public object Bar => bar; // prop comment
-                public int Baz => 0;
-            }
-            """,
+                    // doc
+                    public object Bar => bar; // prop comment
+                    public int Baz => 0;
+                }
+                """,
             """
-            class Goo
-            {
+                class Goo
+                {
 
-                // doc
-                public object Bar { get; } = new object(); // prop comment
-                public int Baz => 0;
-            }
-            """);
+                    // doc
+                    public object Bar { get; } = new object(); // prop comment
+                    public int Baz => 0;
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2319,28 +2417,29 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-                int j;
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+                    int j;
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int j;
+                class Class
+                {
+                    int j;
 
-                int P { get; }
-            }
-            """);
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2348,28 +2447,29 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int j;
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    int j;
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int j;
+                class Class
+                {
+                    int j;
 
-                int P { get; }
-            }
-            """);
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2377,29 +2477,30 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                [|int i|];
-
-                int j;
-
-                int P
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int j;
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int j;
+                class Class
+                {
+                    int j;
 
-                int P { get; }
-            }
-            """);
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2407,29 +2508,30 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int j;
-
-                [|int i|];
-
-                int P
+                class Class
                 {
-                    get
+                    int j;
+
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int j;
+                class Class
+                {
+                    int j;
 
-                int P { get; }
-            }
-            """);
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2437,28 +2539,29 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int P
+                class Class
                 {
-                    get
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
+
+                    [|int i|];
+                    int j;
                 }
-
-                [|int i|];
-                int j;
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
+                class Class
+                {
+                    int P { get; }
 
-                int j;
-            }
-            """);
+                    int j;
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2466,28 +2569,29 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int P
+                class Class
                 {
-                    get
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
+
+                    int j;
+                    [|int i|];
                 }
-
-                int j;
-                [|int i|];
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
+                class Class
+                {
+                    int P { get; }
 
-                int j;
-            }
-            """);
+                    int j;
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2495,29 +2599,30 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int P
+                class Class
                 {
-                    get
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
+
+                    [|int i|];
+
+                    int j;
                 }
-
-                [|int i|];
-
-                int j;
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
+                class Class
+                {
+                    int P { get; }
 
-                int j;
-            }
-            """);
+                    int j;
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2525,29 +2630,30 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                int P
+                class Class
                 {
-                    get
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
+
+                    int j;
+
+                    [|int i|];
                 }
-
-                int j;
-
-                [|int i|];
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                int P { get; }
+                class Class
+                {
+                    int P { get; }
 
-                int j;
-            }
-            """);
+                    int j;
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27675")]
@@ -2555,30 +2661,31 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                #region Test
-                [|int i|];
-                #endregion
-
-                int P
+                class Class
                 {
-                    get
+                    #region Test
+                    [|int i|];
+                    #endregion
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                #region Test
-                #endregion
+                class Class
+                {
+                    #region Test
+                    #endregion
 
-                int P { get; }
-            }
-            """);
+                    int P { get; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27675")]
@@ -2586,34 +2693,35 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class Class
-            {
-                #region Test
-                [|int i|];
-                int j;
-                #endregion
-
-                int P
+                class Class
                 {
-                    get
+                    #region Test
+                    [|int i|];
+                    int j;
+                    #endregion
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
+
                 }
-
-            }
-            """,
+                """,
             """
-            class Class
-            {
-                #region Test
-                int j;
-                #endregion
+                class Class
+                {
+                    #region Test
+                    int j;
+                    #endregion
 
-                int P { get; }
+                    int P { get; }
 
-            }
-            """);
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27675")]
@@ -2621,31 +2729,32 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            class TestClass
-            {
-                #region Field
-                [|int i|];
-                #endregion
-
-                #region Property
-                int P
+                class TestClass
                 {
-                    get { return i; }
-                }
-                #endregion
-            }
-            """,
-            """
-            class TestClass
-            {
-                #region Field
-                #endregion
+                    #region Field
+                    [|int i|];
+                    #endregion
 
-                #region Property
-                int P { get; }
-                #endregion
-            }
-            """);
+                    #region Property
+                    int P
+                    {
+                        get { return i; }
+                    }
+                    #endregion
+                }
+                """,
+            """
+                class TestClass
+                {
+                    #region Field
+                    #endregion
+
+                    #region Property
+                    int P { get; }
+                    #endregion
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40622")]
@@ -2653,19 +2762,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            public class Foo
-            {
-            	private readonly object o;
+                public class Foo
+                {
+                    private readonly object o;
 
-            	[||]public object O => o;
-            }
-            """,
+                    [||]public object O => o;
+                }
+                """,
             """
-            public class Foo
-            {
-            	public object O { get; }
-            }
-            """, new TestParameters(options: Option(FormattingOptions2.UseTabs, true)));
+                public class Foo
+                {
+                    public object O { get; }
+                }
+                """,
+            new TestParameters(options: Option(FormattingOptions2.UseTabs, true))
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40622")]
@@ -2673,19 +2784,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            public class Foo
-            {
-            	private readonly object o;
+                public class Foo
+                {
+                    private readonly object o;
 
-            	[||]public object O => o;
-            }
-            """,
+                    [||]public object O => o;
+                }
+                """,
             """
-            public class Foo
-            {
-                public object O { get; }
-            }
-            """, new TestParameters(options: Option(FormattingOptions2.UseTabs, false)));
+                public class Foo
+                {
+                    public object O { get; }
+                }
+                """,
+            new TestParameters(options: Option(FormattingOptions2.UseTabs, false))
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40622")]
@@ -2693,39 +2806,40 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            <Workspace>
-                <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath = "z:\\file.cs">
-            public class Foo
-            {
-            	private readonly object o;
+                <Workspace>
+                    <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document FilePath = "z:\\file.cs">
+                public class Foo
+                {
+                    private readonly object o;
 
-            	[||]public object O => o;
-            }
-                    </Document>
-                    <AnalyzerConfigDocument FilePath = "z:\\.editorconfig">
-            [*]
-            indent_style = tab
-            </AnalyzerConfigDocument>
-                </Project>
-            </Workspace>
-            """,
+                    [||]public object O => o;
+                }
+                        </Document>
+                        <AnalyzerConfigDocument FilePath = "z:\\.editorconfig">
+                [*]
+                indent_style = tab
+                </AnalyzerConfigDocument>
+                    </Project>
+                </Workspace>
+                """,
             """
-            <Workspace>
-                <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath = "z:\\file.cs">
-            public class Foo
-            {
-            	public object O { get; }
-            }
-                    </Document>
-                    <AnalyzerConfigDocument FilePath = "z:\\.editorconfig">
-            [*]
-            indent_style = tab
-            </AnalyzerConfigDocument>
-                </Project>
-            </Workspace>
-            """);
+                <Workspace>
+                    <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document FilePath = "z:\\file.cs">
+                public class Foo
+                {
+                    public object O { get; }
+                }
+                        </Document>
+                        <AnalyzerConfigDocument FilePath = "z:\\.editorconfig">
+                [*]
+                indent_style = tab
+                </AnalyzerConfigDocument>
+                    </Project>
+                </Workspace>
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40622")]
@@ -2733,39 +2847,40 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            <Workspace>
-                <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath = "z:\\file.cs">
-            public class Foo
-            {
-            	private readonly object o;
+                <Workspace>
+                    <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document FilePath = "z:\\file.cs">
+                public class Foo
+                {
+                    private readonly object o;
 
-            	[||]public object O => o;
-            }
-                    </Document>
-                    <AnalyzerConfigDocument FilePath = "z:\\.editorconfig">
-            [*]
-            indent_style = space
-            </AnalyzerConfigDocument>
-                </Project>
-            </Workspace>
-            """,
+                    [||]public object O => o;
+                }
+                        </Document>
+                        <AnalyzerConfigDocument FilePath = "z:\\.editorconfig">
+                [*]
+                indent_style = space
+                </AnalyzerConfigDocument>
+                    </Project>
+                </Workspace>
+                """,
             """
-            <Workspace>
-                <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath = "z:\\file.cs">
-            public class Foo
-            {
-                public object O { get; }
-            }
-                    </Document>
-                    <AnalyzerConfigDocument FilePath = "z:\\.editorconfig">
-            [*]
-            indent_style = space
-            </AnalyzerConfigDocument>
-                </Project>
-            </Workspace>
-            """);
+                <Workspace>
+                    <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document FilePath = "z:\\file.cs">
+                public class Foo
+                {
+                    public object O { get; }
+                }
+                        </Document>
+                        <AnalyzerConfigDocument FilePath = "z:\\.editorconfig">
+                [*]
+                indent_style = space
+                </AnalyzerConfigDocument>
+                    </Project>
+                </Workspace>
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34783")]
@@ -2773,20 +2888,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingAsync(
             """
-            [System.Serializable]
-            class Class
-            {
-                [|int i|];
-
-                int P
+                [System.Serializable]
+                class Class
                 {
-                    get
+                    [|int i|];
+
+                    int P
                     {
-                        return i;
+                        get
+                        {
+                            return i;
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47999")]
@@ -2794,20 +2910,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            struct S
-            {
-                [|int i|];
-                public readonly int P => i;
-                public void SetP(int value) => i = value;
-            }
-            """,
+                struct S
+                {
+                    [|int i|];
+                    public readonly int P => i;
+                    public void SetP(int value) => i = value;
+                }
+                """,
             """
-            struct S
-            {
-                public int P { get; private set; }
-                public void SetP(int value) => P = value;
-            }
-            """);
+                struct S
+                {
+                    public int P { get; private set; }
+                    public void SetP(int value) => P = value;
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47999")]
@@ -2815,20 +2932,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            struct S
-            {
-                [|int i|];
-                readonly int P => i;
-                public void SetP(int value) => i = value;
-            }
-            """,
+                struct S
+                {
+                    [|int i|];
+                    readonly int P => i;
+                    public void SetP(int value) => i = value;
+                }
+                """,
             """
-            struct S
-            {
-                int P { get; set; }
-                public void SetP(int value) => P = value;
-            }
-            """);
+                struct S
+                {
+                    int P { get; set; }
+                    public void SetP(int value) => P = value;
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47999")]
@@ -2836,18 +2954,19 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            struct S
-            {
-                [|int i|];
-                public readonly int P => i;
-            }
-            """,
+                struct S
+                {
+                    [|int i|];
+                    public readonly int P => i;
+                }
+                """,
             """
-            struct S
-            {
-                public readonly int P { get; }
-            }
-            """);
+                struct S
+                {
+                    public readonly int P { get; }
+                }
+                """
+        );
     }
 
     [Fact]
@@ -2855,18 +2974,19 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            record struct S
-            {
-                [|int i|];
-                public readonly int P => i;
-            }
-            """,
+                record struct S
+                {
+                    [|int i|];
+                    public readonly int P => i;
+                }
+                """,
             """
-            record struct S
-            {
-                public readonly int P { get; }
-            }
-            """);
+                record struct S
+                {
+                    public readonly int P { get; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38286")]
@@ -2874,19 +2994,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScriptAsync(
             """
-            class Class
-            {
-                [|int* i|];
+                class Class
+                {
+                    [|int* i|];
 
-                int* P => i;
-            }
-            """,
+                    int* P => i;
+                }
+                """,
             """
-            class Class
-            {
-                int* P { get; }
-            }
-            """);
+                class Class
+                {
+                    int* P { get; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38286")]
@@ -2894,20 +3015,21 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingAsync(
             """
-            class Class
-            {
-                [|int* i|];
-
-                int* P => i;
-
-                void M()
+                class Class
                 {
-                    fixed (int** ii = &i)
+                    [|int* i|];
+
+                    int* P => i;
+
+                    void M()
                     {
+                        fixed (int** ii = &i)
+                        {
+                        }
                     }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25408")]
@@ -2915,39 +3037,40 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            <Workspace>
-                <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
-                    <Document FilePath='C.cs'>class C
-            {
-                private readonly [|int _value|];
-
-                public C(int value)
+                <Workspace>
+                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
+                        <Document FilePath='C.cs'>class C
                 {
-                    _value = value;
-                }
+                    private readonly [|int _value|];
 
-                public int Value
-                {
-                    get { return _value; }
-                }
-            }</Document>
-                </Project>
-                <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
-                    <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
-                </Project>
-            </Workspace>
-            """,
+                    public C(int value)
+                    {
+                        _value = value;
+                    }
+
+                    public int Value
+                    {
+                        get { return _value; }
+                    }
+                }</Document>
+                    </Project>
+                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
+                        <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
+                    </Project>
+                </Workspace>
+                """,
             """
-            class C
-            {
-                public C(int value)
+                class C
                 {
-                    Value = value;
-                }
+                    public C(int value)
+                    {
+                        Value = value;
+                    }
 
-                public int Value { get; }
-            }
-            """);
+                    public int Value { get; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32597")]
@@ -2955,21 +3078,22 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingAsync(
             """
-            public struct UInt128
-            {
-                [|private ulong s0;|]
-                private ulong s1;
-
-                public ulong S0 { get { return s0; } }
-                public ulong S1 { get { return s1; } }
-
-                public static void Create(out UInt128 c, uint r0, uint r1, uint r2, uint r3)
+                public struct UInt128
                 {
-                    c.s0 = (ulong)r1 << 32 | r0;
-                    c.s1 = (ulong)r3 << 32 | r2;
+                    [|private ulong s0;|]
+                    private ulong s1;
+
+                    public ulong S0 { get { return s0; } }
+                    public ulong S1 { get { return s1; } }
+
+                    public static void Create(out UInt128 c, uint r0, uint r1, uint r2, uint r3)
+                    {
+                        c.s0 = (ulong)r1 << 32 | r0;
+                        c.s1 = (ulong)r3 << 32 | r2;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32597")]
@@ -2977,38 +3101,39 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScript1Async(
             """
-            public struct UInt128
-            {
-                [|private ulong s0;|]
-                private ulong s1;
-
-                public ulong S0 { get { return s0; } }
-                public ulong S1 { get { return s1; } }
-
-                public static void Create(out UInt128 c, uint r0, uint r1, uint r2, uint r3)
+                public struct UInt128
                 {
-                    c = default;
-                    c.s0 = (ulong)r1 << 32 | r0;
-                    c.s1 = (ulong)r3 << 32 | r2;
+                    [|private ulong s0;|]
+                    private ulong s1;
+
+                    public ulong S0 { get { return s0; } }
+                    public ulong S1 { get { return s1; } }
+
+                    public static void Create(out UInt128 c, uint r0, uint r1, uint r2, uint r3)
+                    {
+                        c = default;
+                        c.s0 = (ulong)r1 << 32 | r0;
+                        c.s1 = (ulong)r3 << 32 | r2;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            public struct UInt128
-            {
-                private ulong s1;
-
-                public ulong S0 { get; private set; }
-                public ulong S1 { get { return s1; } }
-
-                public static void Create(out UInt128 c, uint r0, uint r1, uint r2, uint r3)
+                public struct UInt128
                 {
-                    c = default;
-                    c.S0 = (ulong)r1 << 32 | r0;
-                    c.s1 = (ulong)r3 << 32 | r2;
+                    private ulong s1;
+
+                    public ulong S0 { get; private set; }
+                    public ulong S1 { get { return s1; } }
+
+                    public static void Create(out UInt128 c, uint r0, uint r1, uint r2, uint r3)
+                    {
+                        c = default;
+                        c.S0 = (ulong)r1 << 32 | r0;
+                        c.s1 = (ulong)r3 << 32 | r2;
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/71032")]
@@ -3016,26 +3141,27 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScriptAsync(
             """
-            using System;
+                using System;
 
-            public class C
-            {
-                [|private string _action;|]
-                public required string Action
+                public class C
                 {
-                    get => _action;
-                    init => _action = value;
+                    [|private string _action;|]
+                    public required string Action
+                    {
+                        get => _action;
+                        init => _action = value;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System;
+                using System;
 
-            public class C
-            {
-                public required string Action { get; init; }
-            }
-            """);
+                public class C
+                {
+                    public required string Action { get; init; }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/71032")]
@@ -3043,19 +3169,20 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System;
+                using System;
 
-            public class C
-            {
-                [|private string _action;|]
-                public required string Action
+                public class C
                 {
-                    get => _action;
-                    init => _action = value;
-                }
+                    [|private string _action;|]
+                    public required string Action
+                    {
+                        get => _action;
+                        init => _action = value;
+                    }
 
-                private void SetAction(string newAction) => _action = newAction;
-            }
-            """);
+                    private void SetAction(string newAction) => _action = newAction;
+                }
+                """
+        );
     }
 }

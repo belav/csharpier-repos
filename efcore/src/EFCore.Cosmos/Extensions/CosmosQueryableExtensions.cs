@@ -17,8 +17,10 @@ namespace Microsoft.EntityFrameworkCore;
 /// </remarks>
 public static class CosmosQueryableExtensions
 {
-    internal static readonly MethodInfo WithPartitionKeyMethodInfo
-        = typeof(CosmosQueryableExtensions).GetTypeInfo().GetDeclaredMethod(nameof(WithPartitionKey))!;
+    internal static readonly MethodInfo WithPartitionKeyMethodInfo =
+        typeof(CosmosQueryableExtensions)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(WithPartitionKey))!;
 
     /// <summary>
     ///     Specify the partition key for partition used for the query. Required when using
@@ -34,20 +36,22 @@ public static class CosmosQueryableExtensions
     /// <returns>A new query with the set partition key.</returns>
     public static IQueryable<TEntity> WithPartitionKey<TEntity>(
         this IQueryable<TEntity> source,
-        [NotParameterized] string partitionKey)
+        [NotParameterized] string partitionKey
+    )
         where TEntity : class
     {
         Check.NotNull(partitionKey, nameof(partitionKey));
 
-        return
-            source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                    Expression.Call(
-                        instance: null,
-                        method: WithPartitionKeyMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                        source.Expression,
-                        Expression.Constant(partitionKey)))
-                : source;
+        return source.Provider is EntityQueryProvider
+            ? source.Provider.CreateQuery<TEntity>(
+                Expression.Call(
+                    instance: null,
+                    method: WithPartitionKeyMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                    source.Expression,
+                    Expression.Constant(partitionKey)
+                )
+            )
+            : source;
     }
 
     /// <summary>
@@ -79,7 +83,8 @@ public static class CosmosQueryableExtensions
     public static IQueryable<TEntity> FromSqlRaw<TEntity>(
         this DbSet<TEntity> source,
         [NotParameterized] string sql,
-        params object[] parameters)
+        params object[] parameters
+    )
         where TEntity : class
     {
         Check.NotEmpty(sql, nameof(sql));
@@ -92,14 +97,16 @@ public static class CosmosQueryableExtensions
 
         Check.DebugAssert(
             (entityType.BaseType is null && !entityType.GetDirectlyDerivedTypes().Any())
-            || entityType.FindDiscriminatorProperty() is not null,
-            "Found FromSql on a TPT entity type, but TPT isn't supported on Cosmos");
+                || entityType.FindDiscriminatorProperty() is not null,
+            "Found FromSql on a TPT entity type, but TPT isn't supported on Cosmos"
+        );
 
         var fromSqlQueryRootExpression = new FromSqlQueryRootExpression(
             entityQueryRootExpression.QueryProvider!,
             entityType,
             sql,
-            Expression.Constant(parameters));
+            Expression.Constant(parameters)
+        );
 
         return queryableSource.Provider.CreateQuery<TEntity>(fromSqlQueryRootExpression);
     }

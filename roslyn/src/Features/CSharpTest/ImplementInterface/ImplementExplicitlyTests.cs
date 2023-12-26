@@ -21,42 +21,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         private const int SameInterface = 1;
         private const int AllInterfaces = 2;
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpImplementExplicitlyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpImplementExplicitlyCodeRefactoringProvider();
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact]
         public async Task TestSingleMember()
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    public void [||]Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        public void [||]Goo1() { }
 
-                    public void Goo2() { }
+                        public void Goo2() { }
 
-                    public void Bar() { }
-                }
-                """,
+                        public void Bar() { }
+                    }
+                    """,
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    void IGoo.Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        void IGoo.Goo1() { }
 
-                    public void Goo2() { }
+                        public void Goo2() { }
 
-                    public void Bar() { }
-                }
-                """, index: SingleMember);
+                        public void Bar() { }
+                    }
+                    """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -64,31 +69,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    public void [||]Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        public void [||]Goo1() { }
 
-                    public void Goo2() { }
+                        public void Goo2() { }
 
-                    public void Bar() { }
-                }
-                """,
+                        public void Bar() { }
+                    }
+                    """,
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    void IGoo.Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        void IGoo.Goo1() { }
 
-                    void IGoo.Goo2() { }
+                        void IGoo.Goo2() { }
 
-                    public void Bar() { }
-                }
-                """, index: SameInterface);
+                        public void Bar() { }
+                    }
+                    """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -96,31 +103,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    public void [||]Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        public void [||]Goo1() { }
 
-                    public void Goo2() { }
+                        public void Goo2() { }
 
-                    public void Bar() { }
-                }
-                """,
+                        public void Bar() { }
+                    }
+                    """,
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    void IGoo.Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        void IGoo.Goo1() { }
 
-                    void IGoo.Goo2() { }
+                        void IGoo.Goo2() { }
 
-                    void IBar.Bar() { }
-                }
-                """, index: AllInterfaces);
+                        void IBar.Bar() { }
+                    }
+                    """,
+                index: AllInterfaces
+            );
         }
 
         [Fact]
@@ -128,21 +137,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { int Goo1 { get; } }
+                    interface IGoo { int Goo1 { get; } }
 
-                class C : IGoo
-                {
-                    public int [||]Goo1 { get { } }
-                }
-                """,
+                    class C : IGoo
+                    {
+                        public int [||]Goo1 { get { } }
+                    }
+                    """,
                 """
-                interface IGoo { int Goo1 { get; } }
+                    interface IGoo { int Goo1 { get; } }
 
-                class C : IGoo
-                {
-                    int IGoo.Goo1 { get { } }
-                }
-                """, index: SingleMember);
+                    class C : IGoo
+                    {
+                        int IGoo.Goo1 { get { } }
+                    }
+                    """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -150,21 +161,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { event Action E; }
+                    interface IGoo { event Action E; }
 
-                class C : IGoo
-                {
-                    public event Action [||]E { add { } remove { } }
-                }
-                """,
+                    class C : IGoo
+                    {
+                        public event Action [||]E { add { } remove { } }
+                    }
+                    """,
                 """
-                interface IGoo { event Action E; }
+                    interface IGoo { event Action E; }
 
-                class C : IGoo
-                {
-                    event Action IGoo.E { add { } remove { } }
-                }
-                """, index: SingleMember);
+                    class C : IGoo
+                    {
+                        event Action IGoo.E { add { } remove { } }
+                    }
+                    """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -172,13 +185,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestMissingAsync(
                 """
-                interface IGoo { void Goo1(); }
+                    interface IGoo { void Goo1(); }
 
-                class C : IGoo
-                {
-                    void IGoo.[||]Goo1() { }
-                }
-                """);
+                    class C : IGoo
+                    {
+                        void IGoo.[||]Goo1() { }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -186,13 +200,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestMissingAsync(
                 """
-                interface IGoo { void Goo1(); }
+                    interface IGoo { void Goo1(); }
 
-                class C
-                {
-                    public void [||]Goo1() { }
-                }
-                """);
+                    class C
+                    {
+                        public void [||]Goo1() { }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -200,27 +215,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    public int [||]Prop { get { return this.Prop; } set { this.Prop = value; } }
-                    public int M(int i) { return this.M(i); }
-                    public event Action Ev { add { this.Ev += value; } remove { this.Ev -= value; } }
-                }
-                """,
+                    class C : IGoo
+                    {
+                        public int [||]Prop { get { return this.Prop; } set { this.Prop = value; } }
+                        public int M(int i) { return this.M(i); }
+                        public event Action Ev { add { this.Ev += value; } remove { this.Ev -= value; } }
+                    }
+                    """,
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    int IGoo.Prop { get { return ((IGoo)this).Prop; } set { ((IGoo)this).Prop = value; } }
-                    int IGoo.M(int i) { return ((IGoo)this).M(i); }
-                    event Action IGoo.Ev { add { ((IGoo)this).Ev += value; } remove { ((IGoo)this).Ev -= value; } }
-                }
-                """, index: SameInterface);
+                    class C : IGoo
+                    {
+                        int IGoo.Prop { get { return ((IGoo)this).Prop; } set { ((IGoo)this).Prop = value; } }
+                        int IGoo.M(int i) { return ((IGoo)this).M(i); }
+                        event Action IGoo.Ev { add { ((IGoo)this).Ev += value; } remove { ((IGoo)this).Ev -= value; } }
+                    }
+                    """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -228,27 +245,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    public int [||]Prop { get { return Prop; } set { Prop = value; } }
-                    public int M(int i) { return M(i); }
-                    public event Action Ev { add { Ev += value; } remove { Ev -= value; } }
-                }
-                """,
+                    class C : IGoo
+                    {
+                        public int [||]Prop { get { return Prop; } set { Prop = value; } }
+                        public int M(int i) { return M(i); }
+                        public event Action Ev { add { Ev += value; } remove { Ev -= value; } }
+                    }
+                    """,
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    int IGoo.Prop { get { return ((IGoo)this).Prop; } set { ((IGoo)this).Prop = value; } }
-                    int IGoo.M(int i) { return ((IGoo)this).M(i); }
-                    event Action IGoo.Ev { add { ((IGoo)this).Ev += value; } remove { ((IGoo)this).Ev -= value; } }
-                }
-                """, index: SameInterface);
+                    class C : IGoo
+                    {
+                        int IGoo.Prop { get { return ((IGoo)this).Prop; } set { ((IGoo)this).Prop = value; } }
+                        int IGoo.M(int i) { return ((IGoo)this).M(i); }
+                        event Action IGoo.Ev { add { ((IGoo)this).Ev += value; } remove { ((IGoo)this).Ev -= value; } }
+                    }
+                    """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -256,57 +275,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    public int [||]Prop { get { } set { } }
-                    public int M(int i) { }
-                    public event Action Ev { add { } remove { } }
-
-                    void InternalImplicit()
+                    class C : IGoo
                     {
-                        var v = Prop;
-                        Prop = 1;
-                        Prop++;
-                        ++Prop;
+                        public int [||]Prop { get { } set { } }
+                        public int M(int i) { }
+                        public event Action Ev { add { } remove { } }
 
-                        M(0);
-                        M(M(0));
+                        void InternalImplicit()
+                        {
+                            var v = Prop;
+                            Prop = 1;
+                            Prop++;
+                            ++Prop;
 
-                        Ev += () => {};
+                            M(0);
+                            M(M(0));
 
-                        var v1 = nameof(Prop);
+                            Ev += () => {};
+
+                            var v1 = nameof(Prop);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    int IGoo.Prop { get { } set { } }
-                    int IGoo.M(int i) { }
-                    event Action IGoo.Ev { add { } remove { } }
-
-                    void InternalImplicit()
+                    class C : IGoo
                     {
-                        var v = ((IGoo)this).Prop;
-                        ((IGoo)this).Prop = 1;
-                        ((IGoo)this).Prop++;
-                        ++((IGoo)this).Prop;
+                        int IGoo.Prop { get { } set { } }
+                        int IGoo.M(int i) { }
+                        event Action IGoo.Ev { add { } remove { } }
 
-                        ((IGoo)this).M(0);
-                        ((IGoo)this).M(((IGoo)this).M(0));
+                        void InternalImplicit()
+                        {
+                            var v = ((IGoo)this).Prop;
+                            ((IGoo)this).Prop = 1;
+                            ((IGoo)this).Prop++;
+                            ++((IGoo)this).Prop;
 
-                        ((IGoo)this).Ev += () => {};
+                            ((IGoo)this).M(0);
+                            ((IGoo)this).M(((IGoo)this).M(0));
 
-                        var v1 = nameof(((IGoo)this).Prop);
+                            ((IGoo)this).Ev += () => {};
+
+                            var v1 = nameof(((IGoo)this).Prop);
+                        }
                     }
-                }
-                """, index: SameInterface);
+                    """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -314,57 +335,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    public int [||]Prop { get { } set { } }
-                    public int M(int i) { }
-                    public event Action Ev { add { } remove { } }
-
-                    void InternalExplicit()
+                    class C : IGoo
                     {
-                        var v = this.Prop;
-                        this.Prop = 1;
-                        this.Prop++;
-                        ++this.Prop;
+                        public int [||]Prop { get { } set { } }
+                        public int M(int i) { }
+                        public event Action Ev { add { } remove { } }
 
-                        this.M(0);
-                        this.M(this.M(0));
+                        void InternalExplicit()
+                        {
+                            var v = this.Prop;
+                            this.Prop = 1;
+                            this.Prop++;
+                            ++this.Prop;
 
-                        this.Ev += () => {};
+                            this.M(0);
+                            this.M(this.M(0));
 
-                        var v1 = nameof(this.Prop);
+                            this.Ev += () => {};
+
+                            var v1 = nameof(this.Prop);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    int IGoo.Prop { get { } set { } }
-                    int IGoo.M(int i) { }
-                    event Action IGoo.Ev { add { } remove { } }
-
-                    void InternalExplicit()
+                    class C : IGoo
                     {
-                        var v = ((IGoo)this).Prop;
-                        ((IGoo)this).Prop = 1;
-                        ((IGoo)this).Prop++;
-                        ++((IGoo)this).Prop;
+                        int IGoo.Prop { get { } set { } }
+                        int IGoo.M(int i) { }
+                        event Action IGoo.Ev { add { } remove { } }
 
-                        ((IGoo)this).M(0);
-                        ((IGoo)this).M(((IGoo)this).M(0));
+                        void InternalExplicit()
+                        {
+                            var v = ((IGoo)this).Prop;
+                            ((IGoo)this).Prop = 1;
+                            ((IGoo)this).Prop++;
+                            ++((IGoo)this).Prop;
 
-                        ((IGoo)this).Ev += () => {};
+                            ((IGoo)this).M(0);
+                            ((IGoo)this).M(((IGoo)this).M(0));
 
-                        var v1 = nameof(((IGoo)this).Prop);
+                            ((IGoo)this).Ev += () => {};
+
+                            var v1 = nameof(((IGoo)this).Prop);
+                        }
                     }
-                }
-                """, index: SameInterface);
+                    """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -372,73 +395,75 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    public int [||]Prop { get { } set { } }
-                    public int M(int i) { }
-                    public event Action Ev { add { } remove { } }
-                }
-
-                class T
-                {
-                    void External(C c)
+                    class C : IGoo
                     {
-                        var v = c.Prop;
-                        c.Prop = 1;
-                        c.Prop++;
-                        ++c.Prop;
-
-                        c.M(0);
-                        c.M(c.M(0));
-
-                        c.Ev += () => {};
-
-                        new C
-                        {
-                            Prop = 1
-                        };
-
-                        var v1 = nameof(c.Prop);
+                        public int [||]Prop { get { } set { } }
+                        public int M(int i) { }
+                        public event Action Ev { add { } remove { } }
                     }
-                }
-                """,
+
+                    class T
+                    {
+                        void External(C c)
+                        {
+                            var v = c.Prop;
+                            c.Prop = 1;
+                            c.Prop++;
+                            ++c.Prop;
+
+                            c.M(0);
+                            c.M(c.M(0));
+
+                            c.Ev += () => {};
+
+                            new C
+                            {
+                                Prop = 1
+                            };
+
+                            var v1 = nameof(c.Prop);
+                        }
+                    }
+                    """,
                 """
-                using System;
-                interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    using System;
+                    interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                class C : IGoo
-                {
-                    int IGoo.Prop { get { } set { } }
-                    int IGoo.M(int i) { }
-                    event Action IGoo.Ev { add { } remove { } }
-                }
-
-                class T
-                {
-                    void External(C c)
+                    class C : IGoo
                     {
-                        var v = ((IGoo)c).Prop;
-                        ((IGoo)c).Prop = 1;
-                        ((IGoo)c).Prop++;
-                        ++((IGoo)c).Prop;
-
-                        ((IGoo)c).M(0);
-                        ((IGoo)c).M(((IGoo)c).M(0));
-
-                        ((IGoo)c).Ev += () => {};
-
-                        new C
-                        {
-                            Prop = 1
-                        };
-
-                        var v1 = nameof(((IGoo)c).Prop);
+                        int IGoo.Prop { get { } set { } }
+                        int IGoo.M(int i) { }
+                        event Action IGoo.Ev { add { } remove { } }
                     }
-                }
-                """, index: SameInterface);
+
+                    class T
+                    {
+                        void External(C c)
+                        {
+                            var v = ((IGoo)c).Prop;
+                            ((IGoo)c).Prop = 1;
+                            ((IGoo)c).Prop++;
+                            ++((IGoo)c).Prop;
+
+                            ((IGoo)c).M(0);
+                            ((IGoo)c).M(((IGoo)c).M(0));
+
+                            ((IGoo)c).Ev += () => {};
+
+                            new C
+                            {
+                                Prop = 1
+                            };
+
+                            var v1 = nameof(((IGoo)c).Prop);
+                        }
+                    }
+                    """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -446,79 +471,81 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" CommonReferences="true" AssemblyName="A1">
-                        <Document FilePath="File.cs">
-                using System;
-                public interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true" AssemblyName="A1">
+                            <Document FilePath="File.cs">
+                    using System;
+                    public interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                public class C : IGoo
-                {
-                    public int [||]Prop { get { } set { } }
-                    public int M(int i) { }
-                    public event Action Ev { add { } remove { } }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language="Visual Basic" CommonReferences="true" AssemblyName="A2">
-                        <ProjectReference>A1</ProjectReference>
-                        <Document>
-                class T
-                    sub External(c1 as C)
-                        dim v = c1.Prop
-                        c1.Prop = 1
+                    public class C : IGoo
+                    {
+                        public int [||]Prop { get { } set { } }
+                        public int M(int i) { }
+                        public event Action Ev { add { } remove { } }
+                    }
+                            </Document>
+                        </Project>
+                        <Project Language="Visual Basic" CommonReferences="true" AssemblyName="A2">
+                            <ProjectReference>A1</ProjectReference>
+                            <Document>
+                    class T
+                        sub External(c1 as C)
+                            dim v = c1.Prop
+                            c1.Prop = 1
 
-                        c1.M(0)
-                        c1.M(c1.M(0))
+                            c1.M(0)
+                            c1.M(c1.M(0))
 
-                        dim x = new C() with {
-                            .Prop = 1
-                        }
+                            dim x = new C() with {
+                                .Prop = 1
+                            }
 
-                        dim v1 = nameof(c1.Prop)
-                    end sub
-                end class
-                        </Document>
-                    </Project>
-                </Workspace>
-                """,
+                            dim v1 = nameof(c1.Prop)
+                        end sub
+                    end class
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language="C#" CommonReferences="true" AssemblyName="A1">
-                        <Document FilePath="File.cs">
-                using System;
-                public interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true" AssemblyName="A1">
+                            <Document FilePath="File.cs">
+                    using System;
+                    public interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
-                public class C : IGoo
-                {
-                    int IGoo.Prop { get { } set { } }
-                    int IGoo.M(int i) { }
-                    event Action IGoo.Ev { add { } remove { } }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language="Visual Basic" CommonReferences="true" AssemblyName="A2">
-                        <ProjectReference>A1</ProjectReference>
-                        <Document>
-                class T
-                    sub External(c1 as C)
-                        dim v = DirectCast(c1, IGoo).Prop
-                        DirectCast(c1, IGoo).Prop = 1
+                    public class C : IGoo
+                    {
+                        int IGoo.Prop { get { } set { } }
+                        int IGoo.M(int i) { }
+                        event Action IGoo.Ev { add { } remove { } }
+                    }
+                            </Document>
+                        </Project>
+                        <Project Language="Visual Basic" CommonReferences="true" AssemblyName="A2">
+                            <ProjectReference>A1</ProjectReference>
+                            <Document>
+                    class T
+                        sub External(c1 as C)
+                            dim v = DirectCast(c1, IGoo).Prop
+                            DirectCast(c1, IGoo).Prop = 1
 
-                        DirectCast(c1, IGoo).M(0)
-                        DirectCast(c1, IGoo).M(DirectCast(c1, IGoo).M(0))
+                            DirectCast(c1, IGoo).M(0)
+                            DirectCast(c1, IGoo).M(DirectCast(c1, IGoo).M(0))
 
-                        dim x = new C() with {
-                            .Prop = 1
-                        }
+                            dim x = new C() with {
+                                .Prop = 1
+                            }
 
-                        dim v1 = nameof(c1.Prop)
-                    end sub
-                end class
-                        </Document>
-                    </Project>
-                </Workspace>
-                """, index: SameInterface);
+                            dim v1 = nameof(c1.Prop)
+                        end sub
+                    end class
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -526,33 +553,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { int M(int i); }
-                interface IBar { int M(int i); }
+                    interface IGoo { int M(int i); }
+                    interface IBar { int M(int i); }
 
-                class C : IGoo, IBar
-                {
-                    public int [||]M(int i)
+                    class C : IGoo, IBar
                     {
-                        throw new System.Exception();
+                        public int [||]M(int i)
+                        {
+                            throw new System.Exception();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                interface IGoo { int M(int i); }
-                interface IBar { int M(int i); }
+                    interface IGoo { int M(int i); }
+                    interface IBar { int M(int i); }
 
-                class C : IGoo, IBar
-                {
-                    int IGoo.M(int i)
+                    class C : IGoo, IBar
                     {
-                        throw new System.Exception();
+                        int IGoo.M(int i)
+                        {
+                            throw new System.Exception();
+                        }
+                        int IBar.M(int i)
+                        {
+                            throw new System.Exception();
+                        }
                     }
-                    int IBar.M(int i)
-                    {
-                        throw new System.Exception();
-                    }
-                }
-                """, index: SingleMember);
+                    """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -560,33 +589,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { int M(int i); }
-                interface IBar { int M(int i); }
+                    interface IGoo { int M(int i); }
+                    interface IBar { int M(int i); }
 
-                class C : IGoo, IBar
-                {
-                    public int [||]M(int i)
+                    class C : IGoo, IBar
                     {
-                        return this.M(1);
+                        public int [||]M(int i)
+                        {
+                            return this.M(1);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                interface IGoo { int M(int i); }
-                interface IBar { int M(int i); }
+                    interface IGoo { int M(int i); }
+                    interface IBar { int M(int i); }
 
-                class C : IGoo, IBar
-                {
-                    int IGoo.M(int i)
+                    class C : IGoo, IBar
                     {
-                        return ((IGoo)this).M(1);
+                        int IGoo.M(int i)
+                        {
+                            return ((IGoo)this).M(1);
+                        }
+                        int IBar.M(int i)
+                        {
+                            return ((IGoo)this).M(1);
+                        }
                     }
-                    int IBar.M(int i)
-                    {
-                        return ((IGoo)this).M(1);
-                    }
-                }
-                """, index: SingleMember);
+                    """,
+                index: SingleMember
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
@@ -594,31 +625,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IRepro
-                {
-                    void A<T>(int value) where T : class;
-                }
-
-                class Repro : IRepro
-                {
-                    public void [||]A<T>(int value) where T : class
+                    interface IRepro
                     {
+                        void A<T>(int value) where T : class;
                     }
-                }
-                """,
+
+                    class Repro : IRepro
+                    {
+                        public void [||]A<T>(int value) where T : class
+                        {
+                        }
+                    }
+                    """,
                 """
-                interface IRepro
-                {
-                    void A<T>(int value) where T : class;
-                }
-
-                class Repro : IRepro
-                {
-                    void IRepro.A<T>(int value)
+                    interface IRepro
                     {
+                        void A<T>(int value) where T : class;
                     }
-                }
-                """);
+
+                    class Repro : IRepro
+                    {
+                        void IRepro.A<T>(int value)
+                        {
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
@@ -626,31 +658,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IRepro
-                {
-                    void A(int value = 0);
-                }
-
-                class Repro : IRepro
-                {
-                    public void [||]A(int value = 0)
+                    interface IRepro
                     {
+                        void A(int value = 0);
                     }
-                }
-                """,
+
+                    class Repro : IRepro
+                    {
+                        public void [||]A(int value = 0)
+                        {
+                        }
+                    }
+                    """,
                 """
-                interface IRepro
-                {
-                    void A(int value = 0);
-                }
-
-                class Repro : IRepro
-                {
-                    void IRepro.A(int value)
+                    interface IRepro
                     {
+                        void A(int value = 0);
                     }
-                }
-                """);
+
+                    class Repro : IRepro
+                    {
+                        void IRepro.A(int value)
+                        {
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
@@ -658,127 +691,131 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IRepro
-                {
-                    void A(int value = 0);
-                }
-
-                class Repro : IRepro
-                {
-                    public void [||]A(int value = 1)
+                    interface IRepro
                     {
+                        void A(int value = 0);
                     }
-                }
-                """,
+
+                    class Repro : IRepro
+                    {
+                        public void [||]A(int value = 1)
+                        {
+                        }
+                    }
+                    """,
                 """
-                interface IRepro
-                {
-                    void A(int value = 0);
-                }
-
-                class Repro : IRepro
-                {
-                    void IRepro.A(int value = 1)
+                    interface IRepro
                     {
+                        void A(int value = 0);
                     }
-                }
-                """);
+
+                    class Repro : IRepro
+                    {
+                        void IRepro.A(int value = 1)
+                        {
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
         public async Task TestWithMismatchedDefault1()
         {
             await TestInRegularAndScriptAsync(
-    """
-    interface IRepro
-    {
-        void A(int value);
-    }
+                """
+                    interface IRepro
+                    {
+                        void A(int value);
+                    }
 
-    class Repro : IRepro
-    {
-        public void [||]A(int value = 1)
-        {
-        }
-    }
-    """,
-    """
-    interface IRepro
-    {
-        void A(int value);
-    }
+                    class Repro : IRepro
+                    {
+                        public void [||]A(int value = 1)
+                        {
+                        }
+                    }
+                    """,
+                """
+                    interface IRepro
+                    {
+                        void A(int value);
+                    }
 
-    class Repro : IRepro
-    {
-        void IRepro.A(int value = 1)
-        {
-        }
-    }
-    """);
+                    class Repro : IRepro
+                    {
+                        void IRepro.A(int value = 1)
+                        {
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52020")]
         public async Task TestWithMismatchedDefault2()
         {
             await TestInRegularAndScriptAsync(
-    """
-    interface IRepro
-    {
-        void A(int value = 0);
-    }
+                """
+                    interface IRepro
+                    {
+                        void A(int value = 0);
+                    }
 
-    class Repro : IRepro
-    {
-        public void [||]A(int value)
-        {
-        }
-    }
-    """,
-    """
-    interface IRepro
-    {
-        void A(int value = 0);
-    }
+                    class Repro : IRepro
+                    {
+                        public void [||]A(int value)
+                        {
+                        }
+                    }
+                    """,
+                """
+                    interface IRepro
+                    {
+                        void A(int value = 0);
+                    }
 
-    class Repro : IRepro
-    {
-        void IRepro.A(int value)
-        {
-        }
-    }
-    """);
+                    class Repro : IRepro
+                    {
+                        void IRepro.A(int value)
+                        {
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestPreserveReadOnly()
         {
             await TestInRegularAndScriptAsync(
-    """
-    interface IRepro
-    {
-        void A();
-    }
+                """
+                    interface IRepro
+                    {
+                        void A();
+                    }
 
-    class Repro : IRepro
-    {
-        public readonly void [||]A()
-        {
-        }
-    }
-    """,
-    """
-    interface IRepro
-    {
-        void A();
-    }
+                    class Repro : IRepro
+                    {
+                        public readonly void [||]A()
+                        {
+                        }
+                    }
+                    """,
+                """
+                    interface IRepro
+                    {
+                        void A();
+                    }
 
-    class Repro : IRepro
-    {
-        readonly void IRepro.A()
-        {
-        }
-    }
-    """);
+                    class Repro : IRepro
+                    {
+                        readonly void IRepro.A()
+                        {
+                        }
+                    }
+                    """
+            );
         }
     }
 }

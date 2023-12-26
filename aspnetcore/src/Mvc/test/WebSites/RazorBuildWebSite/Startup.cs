@@ -10,7 +10,8 @@ public class Startup
         var fileProvider = new UpdateableFileProvider();
         services.AddSingleton(fileProvider);
 
-        services.AddMvc()
+        services
+            .AddMvc()
             .AddRazorRuntimeCompilation(options => options.FileProviders.Add(fileProvider));
     }
 
@@ -27,8 +28,8 @@ public class Startup
 
     public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         new WebHostBuilder()
-        .UseContentRoot(Directory.GetCurrentDirectory())
-        .UseStartup<Startup>()
-        .UseKestrel()
-        .UseIISIntegration();
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseStartup<Startup>()
+            .UseKestrel()
+            .UseIISIntegration();
 }

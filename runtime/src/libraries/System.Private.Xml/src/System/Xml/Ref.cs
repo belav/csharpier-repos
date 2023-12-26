@@ -14,7 +14,9 @@ namespace System.Xml
         {
 #if DEBUG
             if (((object?)strA != (object?)strB) && string.Equals(strA, strB))
-                Debug.Fail("Ref.Equal: Object comparison used for non-atomized string '" + strA + "'");
+                Debug.Fail(
+                    "Ref.Equal: Object comparison used for non-atomized string '" + strA + "'"
+                );
 #endif
             return (object?)strA == (object?)strB;
         }

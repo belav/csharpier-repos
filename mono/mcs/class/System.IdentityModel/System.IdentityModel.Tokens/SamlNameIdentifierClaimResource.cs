@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,36 +28,41 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Xml;
-using System.Runtime.Serialization;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
+using System.Runtime.Serialization;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	[DataContract]
-	public class SamlNameIdentifierClaimResource
-	{
-		public SamlNameIdentifierClaimResource (string name, string nameQualifier, string format)
-		{
-			this.name = name;
-			this.name_qualifier = nameQualifier;
-			this.format = format;
-		}
+    [DataContract]
+    public class SamlNameIdentifierClaimResource
+    {
+        public SamlNameIdentifierClaimResource(string name, string nameQualifier, string format)
+        {
+            this.name = name;
+            this.name_qualifier = nameQualifier;
+            this.format = format;
+        }
 
-		string name, name_qualifier, format;
+        string name,
+            name_qualifier,
+            format;
 
-		public string Format {
-			get { return format; }
-		}
+        public string Format
+        {
+            get { return format; }
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		public string NameQualifier {
-			get { return name_qualifier; }
-		}
-	}
+        public string NameQualifier
+        {
+            get { return name_qualifier; }
+        }
+    }
 }

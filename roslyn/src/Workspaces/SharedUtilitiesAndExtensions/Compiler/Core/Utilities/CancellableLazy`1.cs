@@ -20,15 +20,11 @@ namespace Roslyn.Utilities
             _valueFactory = valueFactory;
         }
 
-        public CancellableLazy(T value)
-            => _value = value;
+        public CancellableLazy(T value) => _value = value;
 
         public bool HasValue
         {
-            get
-            {
-                return this.TryGetValue(out _);
-            }
+            get { return this.TryGetValue(out _); }
         }
 
         public bool TryGetValue([MaybeNullWhen(false)] out T value)

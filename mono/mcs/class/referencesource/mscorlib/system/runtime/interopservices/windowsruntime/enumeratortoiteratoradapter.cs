@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -12,8 +12,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -24,7 +24,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // That's because they are invoked with special "this"! The "this" object
     // for all of these methods are not EnumerableToIterableAdapter objects. Rather, they are of type
     // IEnumerable<T>. No actual EnumerableToIterableAdapter object is ever instantiated. Thus, you will
-    // see a lot of expressions that cast "this" to "IEnumerable<T>". 
+    // see a lot of expressions that cast "this" to "IEnumerable<T>".
     internal sealed class EnumerableToIterableAdapter
     {
         private EnumerableToIterableAdapter()
@@ -54,12 +54,26 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             private IEnumerator enumerator;
 
             public NonGenericToGenericEnumerator(IEnumerator enumerator)
-            { this.enumerator = enumerator; }
+            {
+                this.enumerator = enumerator;
+            }
 
-            public object Current  { get { return enumerator.Current; } }
-            public bool MoveNext() { return enumerator.MoveNext(); }
-            public void Reset()    { enumerator.Reset(); }
-            public void Dispose()  { }
+            public object Current
+            {
+                get { return enumerator.Current; }
+            }
+
+            public bool MoveNext()
+            {
+                return enumerator.MoveNext();
+            }
+
+            public void Reset()
+            {
+                enumerator.Reset();
+            }
+
+            public void Dispose() { }
         }
 
         // This method is invoked when First is called on a managed implementation of IBindableIterable.
@@ -67,10 +81,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         internal IBindableIterator First_Stub()
         {
             IEnumerable _this = JitHelpers.UnsafeCast<IEnumerable>(this);
-            return new EnumeratorToIteratorAdapter<object>(new NonGenericToGenericEnumerator(_this.GetEnumerator()) );
+            return new EnumeratorToIteratorAdapter<object>(
+                new NonGenericToGenericEnumerator(_this.GetEnumerator())
+            );
         }
     }
-    
+
     // Adapter class which holds a managed IEnumerator<T>, exposing it as a Windows Runtime IIterator<T>
     internal sealed class EnumeratorToIteratorAdapter<T> : IIterator<T>, IBindableIterator
     {
@@ -107,10 +123,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         object IBindableIterator.Current
         {
-            get
-            {
-                return (object)((IIterator<T>)this).Current;
-            }
+            get { return (object)((IIterator<T>)this).Current; }
         }
 
         public bool HasCurrent

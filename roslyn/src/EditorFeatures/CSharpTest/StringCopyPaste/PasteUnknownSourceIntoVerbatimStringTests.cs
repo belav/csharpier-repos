@@ -16,12 +16,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\n",
                 """
-                var x = @"[||]"
-                """,
+                    var x = @"[||]"
+                    """,
                 "var x = @\"\n[||]\"",
                 afterUndo: """
-                var x = @"[||]"
-                """);
+                    var x = @"[||]"
+                    """
+            );
         }
 
         [WpfFact]
@@ -31,17 +32,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 pasteText: """
 
 
-                """,
+                    """,
                 """
-                var x = @"[||]"
-                """,
+                    var x = @"[||]"
+                    """,
                 """
-                var x = @"
-                [||]"
-                """,
+                    var x = @"
+                    [||]"
+                    """,
                 afterUndo: """
-                var x = @"[||]"
-                """);
+                    var x = @"[||]"
+                    """
+            );
         }
 
         [WpfFact]
@@ -50,12 +52,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\t",
                 """
-                var x = @"[||]"
-                """,
+                    var x = @"[||]"
+                    """,
                 "var x = @\"\t[||]\"",
                 afterUndo: """
-                var x = @"[||]"
-                """);
+                    var x = @"[||]"
+                    """
+            );
         }
 
         [WpfFact]
@@ -64,14 +67,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """'""",
                 """
-                var x = @"[||]"
-                """,
+                    var x = @"[||]"
+                    """,
                 """
-                var x = @"'[||]"
-                """,
+                    var x = @"'[||]"
+                    """,
                 afterUndo: """
-                var x = @"[||]"
-                """);
+                    var x = @"[||]"
+                    """
+            );
         }
 
         [WpfFact]
@@ -79,17 +83,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
         {
             TestPasteUnknownSource(
                 pasteText: """
-                "
-                """,
+                    "
+                    """,
                 """
-                var x = @"[||]"
-                """,
+                    var x = @"[||]"
+                    """,
                 """"
-                var x = @"""[||]"
-                """",
+                    var x = @"""[||]"
+                    """",
                 afterUndo: """
-                var x = @""[||]"
-                """);
+                    var x = @""[||]"
+                    """
+            );
         }
 
         [WpfFact]
@@ -98,12 +103,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\t\"\"\t",
                 """
-                var x = @"[||]"
-                """,
+                    var x = @"[||]"
+                    """,
                 "var x = @\"\t\"\"\t[||]\"",
                 afterUndo: """
-                var x = @"[||]"
-                """);
+                    var x = @"[||]"
+                    """
+            );
         }
 
         [WpfFact]
@@ -112,14 +118,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """abc""",
                 """
-                var x = @"[||]"
-                """,
+                    var x = @"[||]"
+                    """,
                 """
-                var x = @"abc[||]"
-                """,
+                    var x = @"abc[||]"
+                    """,
                 afterUndo: """
-                var x = @"[||]"
-                """);
+                    var x = @"[||]"
+                    """
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/62969")]
@@ -129,24 +136,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             // to have in a verbatim string.
             TestPasteUnknownSource(
                 pasteText: """
-                var lambda = [SuppressMessage("", "CA2013")] () => Object.ReferenceEquals(1, 2);
-                """,
+                    var lambda = [SuppressMessage("", "CA2013")] () => Object.ReferenceEquals(1, 2);
+                    """,
                 """
-                string x = @"using System.Diagnostics.CodeAnalysis;
+                    string x = @"using System.Diagnostics.CodeAnalysis;
 
-                [||]";
-                """,
+                    [||]";
+                    """,
                 """"""
-                string x = @"using System.Diagnostics.CodeAnalysis;
+                    string x = @"using System.Diagnostics.CodeAnalysis;
 
-                var lambda = [SuppressMessage("""", ""CA2013"")] () => Object.ReferenceEquals(1, 2);[||]";
-                """""",
-                afterUndo:
-                """
-                string x = @"using System.Diagnostics.CodeAnalysis;
+                    var lambda = [SuppressMessage("""", ""CA2013"")] () => Object.ReferenceEquals(1, 2);[||]";
+                    """""",
+                afterUndo: """
+                    string x = @"using System.Diagnostics.CodeAnalysis;
 
-                var lambda = [SuppressMessage("", "CA2013")] () => Object.ReferenceEquals(1, 2);[||]";
-                """);
+                    var lambda = [SuppressMessage("", "CA2013")] () => Object.ReferenceEquals(1, 2);[||]";
+                    """
+            );
         }
     }
 }

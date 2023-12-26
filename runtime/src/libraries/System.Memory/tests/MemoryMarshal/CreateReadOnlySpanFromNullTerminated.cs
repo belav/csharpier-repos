@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
-using System.Runtime.InteropServices;
 using System.Buffers;
+using System.Runtime.InteropServices;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.SpanTests
 {
@@ -30,7 +30,9 @@ namespace System.SpanTests
 
             fixed (char* expectedPtr = data.Span)
             {
-                ReadOnlySpan<char> actual = MemoryMarshal.CreateReadOnlySpanFromNullTerminated(expectedPtr);
+                ReadOnlySpan<char> actual = MemoryMarshal.CreateReadOnlySpanFromNullTerminated(
+                    expectedPtr
+                );
                 Assert.Equal(expectedLength, actual.Length);
                 fixed (char* actualPtr = &MemoryMarshal.GetReference(actual))
                 {
@@ -52,7 +54,9 @@ namespace System.SpanTests
 
             fixed (byte* expectedPtr = data.Span)
             {
-                ReadOnlySpan<byte> actual = MemoryMarshal.CreateReadOnlySpanFromNullTerminated(expectedPtr);
+                ReadOnlySpan<byte> actual = MemoryMarshal.CreateReadOnlySpanFromNullTerminated(
+                    expectedPtr
+                );
                 Assert.Equal(expectedLength, actual.Length);
                 fixed (byte* actualPtr = &MemoryMarshal.GetReference(actual))
                 {
@@ -68,7 +72,8 @@ namespace System.SpanTests
             char* mem;
             try
             {
-                mem = (char*)Marshal.AllocHGlobal(unchecked((nint)(sizeof(char) * (2L + int.MaxValue))));
+                mem = (char*)
+                    Marshal.AllocHGlobal(unchecked((nint)(sizeof(char) * (2L + int.MaxValue))));
             }
             catch (OutOfMemoryException)
             {
@@ -81,7 +86,9 @@ namespace System.SpanTests
                 *(mem + int.MaxValue) = 's';
                 *(mem + int.MaxValue + 1) = '\0';
 
-                Assert.Throws<ArgumentException>(() => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem));
+                Assert.Throws<ArgumentException>(
+                    () => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem)
+                );
             }
             finally
             {
@@ -109,7 +116,9 @@ namespace System.SpanTests
                 *(mem + int.MaxValue) = 0xFF;
                 *(mem + int.MaxValue + 1) = 0;
 
-                Assert.Throws<ArgumentException>(() => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem));
+                Assert.Throws<ArgumentException>(
+                    () => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem)
+                );
             }
             finally
             {

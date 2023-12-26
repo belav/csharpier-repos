@@ -18,7 +18,11 @@ public class TlsConnectionCallbackOptions
     /// <summary>
     /// The callback to invoke per connection. This property is required.
     /// </summary>
-    public Func<TlsConnectionCallbackContext, CancellationToken, ValueTask<SslServerAuthenticationOptions>> OnConnection { get; set; } = default!;
+    public Func<
+        TlsConnectionCallbackContext,
+        CancellationToken,
+        ValueTask<SslServerAuthenticationOptions>
+    > OnConnection { get; set; } = default!;
 
     /// <summary>
     /// Optional application state to flow to the <see cref="OnConnection"/> callback.

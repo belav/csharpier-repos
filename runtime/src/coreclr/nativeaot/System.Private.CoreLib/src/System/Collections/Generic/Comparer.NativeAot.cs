@@ -4,7 +4,6 @@
 #nullable enable
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using Internal.IntrinsicSupport;
 using Internal.Runtime.CompilerServices;
 
@@ -30,10 +29,15 @@ namespace System.Collections.Generic
             return new ObjectComparer<T>();
         }
 
-        public static Comparer<T> Default { [Intrinsic] get; } = Create();
+        public static Comparer<T> Default
+        {
+            [Intrinsic]
+            get;
+        } = Create();
     }
 
-    internal sealed partial class EnumComparer<T> : Comparer<T> where T : struct, Enum
+    internal sealed partial class EnumComparer<T> : Comparer<T>
+        where T : struct, Enum
     {
         public override int Compare(T x, T y)
         {

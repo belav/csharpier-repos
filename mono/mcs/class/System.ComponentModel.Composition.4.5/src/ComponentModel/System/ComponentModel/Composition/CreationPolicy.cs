@@ -8,7 +8,7 @@ using System.ComponentModel.Composition.Primitives;
 namespace System.ComponentModel.Composition
 {
     /// <summary>
-    /// Option placed on a type that controls when the <see cref="CompositionContainer"/> creates 
+    /// Option placed on a type that controls when the <see cref="CompositionContainer"/> creates
     /// a new instance of a <see cref="ComposablePart"/>.
     /// </summary>
     public enum CreationPolicy : int

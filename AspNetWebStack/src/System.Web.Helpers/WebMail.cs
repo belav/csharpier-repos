@@ -13,7 +13,12 @@ using Microsoft.Internal.Web.Utils;
 
 namespace System.Web.Helpers
 {
-    [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "WebMail", Justification = "The name of this class is consistent with the naming convention followed in other helpers")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1702:CompoundWordsShouldBeCasedCorrectly",
+        MessageId = "WebMail",
+        Justification = "The name of this class is consistent with the naming convention followed in other helpers"
+    )]
     public static class WebMail
     {
         internal static readonly object SmtpServerKey = new object();
@@ -23,42 +28,57 @@ namespace System.Web.Helpers
         internal static readonly object PasswordKey = new object();
         internal static readonly object UserNameKey = new object();
         internal static readonly object FromKey = new object();
-        internal static readonly Lazy<IDictionary<object, object>> SmtpDefaults = new Lazy<IDictionary<object, object>>(ReadSmtpDefaults);
+        internal static readonly Lazy<IDictionary<object, object>> SmtpDefaults = new Lazy<
+            IDictionary<object, object>
+        >(ReadSmtpDefaults);
 
         /// <summary>
-        /// MailMessage dictates that headers values that have equivalent properties would be discarded or overwritten. The list of values is available at 
+        /// MailMessage dictates that headers values that have equivalent properties would be discarded or overwritten. The list of values is available at
         /// http://msdn.microsoft.com/en-us/library/system.net.mail.mailmessage.aspx
         /// </summary>
-        private static readonly Dictionary<string, Action<MailMessage, string>> _actionableHeaders = new Dictionary<string, Action<MailMessage, string>>(StringComparer.OrdinalIgnoreCase)
-        {
-            { "Bcc", (message, value) => message.Bcc.Add(value) },
-            { "Cc", (message, value) => message.CC.Add(value) },
-            { "From", (mailMessage, value) =>
+        private static readonly Dictionary<string, Action<MailMessage, string>> _actionableHeaders =
+            new Dictionary<string, Action<MailMessage, string>>(StringComparer.OrdinalIgnoreCase)
             {
-                mailMessage.From = new MailAddress(value);
-            }
+                { "Bcc", (message, value) => message.Bcc.Add(value) },
+                { "Cc", (message, value) => message.CC.Add(value) },
+                {
+                    "From",
+                    (mailMessage, value) =>
+                    {
+                        mailMessage.From = new MailAddress(value);
+                    }
                 },
-            { "Priority", SetPriority },
-            { "Reply-To", (mailMessage, value) =>
-            {
-                mailMessage.ReplyToList.Add(value);
-            }
+                { "Priority", SetPriority },
+                {
+                    "Reply-To",
+                    (mailMessage, value) =>
+                    {
+                        mailMessage.ReplyToList.Add(value);
+                    }
                 },
-            { "Sender", (mailMessage, value) =>
-            {
-                mailMessage.Sender = new MailAddress(value);
-            }
+                {
+                    "Sender",
+                    (mailMessage, value) =>
+                    {
+                        mailMessage.Sender = new MailAddress(value);
+                    }
                 },
-            { "To", (mailMessage, value) =>
-            {
-                mailMessage.To.Add(value);
-            }
+                {
+                    "To",
+                    (mailMessage, value) =>
+                    {
+                        mailMessage.To.Add(value);
+                    }
                 },
-        };
+            };
 
         ///////////////////////////////////////////////////////////////////////////
         // Public Properties
-        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification = "SmtpServer is more descriptive as compared to the actual argument \"value\"")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2208:InstantiateArgumentExceptionsCorrectly",
+            Justification = "SmtpServer is more descriptive as compared to the actual argument \"value\""
+        )]
         public static string SmtpServer
         {
             get { return ReadValue<string>(SmtpServerKey); }
@@ -66,7 +86,10 @@ namespace System.Web.Helpers
             {
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "SmtpServer");
+                    throw new ArgumentException(
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "SmtpServer"
+                    );
                 }
                 ScopeStorage.CurrentScope[SmtpServerKey] = value;
             }
@@ -108,19 +131,21 @@ namespace System.Web.Helpers
             set { ScopeStorage.CurrentScope[PasswordKey] = value; }
         }
 
-        public static void Send(string to,
-                                string subject,
-                                string body,
-                                string from = null,
-                                string cc = null,
-                                IEnumerable<string> filesToAttach = null,
-                                bool isBodyHtml = true,
-                                IEnumerable<string> additionalHeaders = null,
-                                string bcc = null,
-                                string contentEncoding = null,
-                                string headerEncoding = null,
-                                string priority = null,
-                                string replyTo = null)
+        public static void Send(
+            string to,
+            string subject,
+            string body,
+            string from = null,
+            string cc = null,
+            IEnumerable<string> filesToAttach = null,
+            bool isBodyHtml = true,
+            IEnumerable<string> additionalHeaders = null,
+            string bcc = null,
+            string contentEncoding = null,
+            string headerEncoding = null,
+            string priority = null,
+            string replyTo = null
+        )
         {
             if (filesToAttach != null)
             {
@@ -128,7 +153,10 @@ namespace System.Web.Helpers
                 {
                     if (String.IsNullOrEmpty(fileName))
                     {
-                        throw new ArgumentException(HelpersResources.WebMail_ItemInCollectionIsNull, "filesToAttach");
+                        throw new ArgumentException(
+                            HelpersResources.WebMail_ItemInCollectionIsNull,
+                            "filesToAttach"
+                        );
                     }
                 }
             }
@@ -139,26 +167,48 @@ namespace System.Web.Helpers
                 {
                     if (String.IsNullOrEmpty(header))
                     {
-                        throw new ArgumentException(HelpersResources.WebMail_ItemInCollectionIsNull, "additionalHeaders");
+                        throw new ArgumentException(
+                            HelpersResources.WebMail_ItemInCollectionIsNull,
+                            "additionalHeaders"
+                        );
                     }
                 }
             }
 
             MailPriority priorityValue = MailPriority.Normal;
-            if (!String.IsNullOrEmpty(priority) && !ConversionUtil.TryFromStringToEnum(priority, out priorityValue))
+            if (
+                !String.IsNullOrEmpty(priority)
+                && !ConversionUtil.TryFromStringToEnum(priority, out priorityValue)
+            )
             {
                 throw new ArgumentException(HelpersResources.WebMail_InvalidPriority, "priority");
             }
 
             if (String.IsNullOrEmpty(SmtpServer))
             {
-                throw new InvalidOperationException(HelpersResources.WebMail_SmtpServerNotSpecified);
+                throw new InvalidOperationException(
+                    HelpersResources.WebMail_SmtpServerNotSpecified
+                );
             }
 
             using (MailMessage message = new MailMessage())
             {
-                SetPropertiesOnMessage(message, to, subject, body, from, cc, bcc, replyTo, contentEncoding, headerEncoding, priorityValue,
-                                       filesToAttach, isBodyHtml, additionalHeaders);
+                SetPropertiesOnMessage(
+                    message,
+                    to,
+                    subject,
+                    body,
+                    from,
+                    cc,
+                    bcc,
+                    replyTo,
+                    contentEncoding,
+                    headerEncoding,
+                    priorityValue,
+                    filesToAttach,
+                    isBodyHtml,
+                    additionalHeaders
+                );
                 using (SmtpClient client = new SmtpClient())
                 {
                     SetPropertiesOnClient(client);
@@ -198,7 +248,8 @@ namespace System.Web.Helpers
                     }
                     using (MailMessage message = new MailMessage())
                     {
-                        smtpDefaults[FromKey] = (message.From != null) ? message.From.Address : null;
+                        smtpDefaults[FromKey] =
+                            (message.From != null) ? message.From.Address : null;
                     }
                 }
             }
@@ -211,7 +262,7 @@ namespace System.Web.Helpers
 
         internal static void SetPropertiesOnClient(SmtpClient client)
         {
-            // If no value has been assigned to these properties, at the very worst we will simply 
+            // If no value has been assigned to these properties, at the very worst we will simply
             // write back the values we just read from the SmtpClient
             if (SmtpServer != null)
             {
@@ -226,11 +277,22 @@ namespace System.Web.Helpers
             }
         }
 
-        internal static void SetPropertiesOnMessage(MailMessage message, string to, string subject,
-                                                    string body, string from, string cc, string bcc, string replyTo,
-                                                    string contentEncoding, string headerEncoding, MailPriority priority,
-                                                    IEnumerable<string> filesToAttach, bool isBodyHtml,
-                                                    IEnumerable<string> additionalHeaders)
+        internal static void SetPropertiesOnMessage(
+            MailMessage message,
+            string to,
+            string subject,
+            string body,
+            string from,
+            string cc,
+            string bcc,
+            string replyTo,
+            string contentEncoding,
+            string headerEncoding,
+            MailPriority priority,
+            IEnumerable<string> filesToAttach,
+            bool isBodyHtml,
+            IEnumerable<string> additionalHeaders
+        )
         {
             message.Subject = subject;
             message.Body = body;
@@ -290,7 +352,9 @@ namespace System.Web.Helpers
                 }
                 else
                 {
-                    throw new InvalidOperationException(HelpersResources.WebMail_UnableToDetermineFrom);
+                    throw new InvalidOperationException(
+                        HelpersResources.WebMail_UnableToDetermineFrom
+                    );
                 }
             }
 
@@ -300,7 +364,9 @@ namespace System.Web.Helpers
                 {
                     if (!Path.IsPathRooted(file) && HttpRuntime.AppDomainAppPath != null)
                     {
-                        message.Attachments.Add(new Attachment(Path.Combine(HttpRuntime.AppDomainAppPath, file)));
+                        message.Attachments.Add(
+                            new Attachment(Path.Combine(HttpRuntime.AppDomainAppPath, file))
+                        );
                     }
                     else
                     {
@@ -310,15 +376,19 @@ namespace System.Web.Helpers
             }
         }
 
-        internal static void AssignHeaderValues(MailMessage message, IEnumerable<string> headerValues)
+        internal static void AssignHeaderValues(
+            MailMessage message,
+            IEnumerable<string> headerValues
+        )
         {
-            // Parse the header value. If this 
+            // Parse the header value. If this
             foreach (var header in headerValues)
             {
-                string key, value;
+                string key,
+                    value;
                 if (TryParseHeader(header, out key, out value))
                 {
-                    // Verify if the header key maps to a property on MailMessage. 
+                    // Verify if the header key maps to a property on MailMessage.
                     Action<MailMessage, string> action;
                     if (_actionableHeaders.TryGetValue(key, out action))
                     {
@@ -357,7 +427,10 @@ namespace System.Web.Helpers
         private static void SetPriority(MailMessage message, string priority)
         {
             MailPriority priorityValue;
-            if (!String.IsNullOrEmpty(priority) && ConversionUtil.TryFromStringToEnum(priority, out priorityValue))
+            if (
+                !String.IsNullOrEmpty(priority)
+                && ConversionUtil.TryFromStringToEnum(priority, out priorityValue)
+            )
             {
                 // If we can parse it, set it. Do nothing otherwise
                 message.Priority = priorityValue;

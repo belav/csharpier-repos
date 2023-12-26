@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.InteropServices;
-using Xunit;
 using System.Tests;
+using Xunit;
 
 namespace System.IO.Tests
 {
@@ -15,10 +15,17 @@ namespace System.IO.Tests
         [InlineData(HResults.CTL_E_PATHNOTFOUND)]
         public static void From_HR(int hr)
         {
-            DirectoryNotFoundException exception = Assert.IsAssignableFrom<DirectoryNotFoundException>(Marshal.GetExceptionForHR(hr, new IntPtr(-1)));
+            DirectoryNotFoundException exception =
+                Assert.IsAssignableFrom<DirectoryNotFoundException>(
+                    Marshal.GetExceptionForHR(hr, new IntPtr(-1))
+                );
 
             // Don't validate the message.  Currently .NET Native does not produce HR-specific messages
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: hr, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: hr,
+                validateMessage: false
+            );
         }
     }
 }

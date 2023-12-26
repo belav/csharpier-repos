@@ -19,31 +19,55 @@ public class Program
     {
         string responseMessage = null;
 
-        WebHost.CreateDefaultBuilder(new[] { "--cliKey", "cliValue" })
-            .ConfigureServices((context, service) => responseMessage = responseMessage ?? GetResponseMessage(context))
-            .ConfigureKestrel(options => options
-                .Configure(options.ConfigurationLoader.Configuration)
-                .Endpoint("HTTP", endpointOptions =>
+        WebHost
+            .CreateDefaultBuilder(new[] { "--cliKey", "cliValue" })
+            .ConfigureServices(
+                (context, service) =>
+                    responseMessage = responseMessage ?? GetResponseMessage(context)
+            )
+            .ConfigureKestrel(options =>
+                options
+                    .Configure(options.ConfigurationLoader.Configuration)
+                    .Endpoint(
+                        "HTTP",
+                        endpointOptions =>
+                        {
+                            if (
+                                responseMessage == null
+                                && !string.Equals(
+                                    "KestrelEndPointSettingValue",
+                                    endpointOptions.ConfigSection["KestrelEndPointSettingName"]
+                                )
+                            )
+                            {
+                                responseMessage = "Default Kestrel configuration not read.";
+                            }
+                        }
+                    )
+            )
+            .Configure(app =>
+                app.Run(context =>
                 {
-                    if (responseMessage == null
-                        && !string.Equals("KestrelEndPointSettingValue", endpointOptions.ConfigSection["KestrelEndPointSettingName"]))
+                    // Verify allowed hosts were loaded
+                    var hostFilteringOptions = app.ApplicationServices.GetRequiredService<
+                        IOptions<HostFilteringOptions>
+                    >();
+                    var hosts = string.Join(',', hostFilteringOptions.Value.AllowedHosts);
+                    if (
+                        responseMessage == null
+                        && !string.Equals("example.com,127.0.0.1", hosts, StringComparison.Ordinal)
+                    )
                     {
-                        responseMessage = "Default Kestrel configuration not read.";
+                        responseMessage = "AllowedHosts not loaded into Options.";
                     }
-                }))
-            .Configure(app => app.Run(context =>
-            {
-                // Verify allowed hosts were loaded
-                var hostFilteringOptions = app.ApplicationServices.GetRequiredService<IOptions<HostFilteringOptions>>();
-                var hosts = string.Join(',', hostFilteringOptions.Value.AllowedHosts);
-                if (responseMessage == null && !string.Equals("example.com,127.0.0.1", hosts, StringComparison.Ordinal))
-                {
-                    responseMessage = "AllowedHosts not loaded into Options.";
-                }
 
-                var hostingEnvironment = app.ApplicationServices.GetRequiredService<IHostEnvironment>();
-                return context.Response.WriteAsync(responseMessage ?? hostingEnvironment.ApplicationName);
-            }))
+                    var hostingEnvironment =
+                        app.ApplicationServices.GetRequiredService<IHostEnvironment>();
+                    return context.Response.WriteAsync(
+                        responseMessage ?? hostingEnvironment.ApplicationName
+                    );
+                })
+            )
             .Build()
             .Run();
     }
@@ -52,19 +76,37 @@ public class Program
     {
         // Verify ContentRootPath set
         var contentRoot = Environment.GetEnvironmentVariable("ASPNETCORE_CONTENTROOT");
-        if (!string.Equals(contentRoot, context.HostingEnvironment.ContentRootPath, StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                contentRoot,
+                context.HostingEnvironment.ContentRootPath,
+                StringComparison.Ordinal
+            )
+        )
         {
             return $"ContentRootPath incorrect. Expected: {contentRoot} Actual: {context.HostingEnvironment.ContentRootPath}";
         }
 
         // Verify appsettings.json loaded
-        if (!string.Equals("settingsValue", context.Configuration["settingsKey"], StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                "settingsValue",
+                context.Configuration["settingsKey"],
+                StringComparison.Ordinal
+            )
+        )
         {
             return $"appsettings.json not loaded into Configuration.";
         }
 
         // Verify appsettings.environment.json loaded
-        if (!string.Equals("devSettingsValue", context.Configuration["devSettingsKey"], StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                "devSettingsValue",
+                context.Configuration["devSettingsKey"],
+                StringComparison.Ordinal
+            )
+        )
         {
             return $"appsettings.{context.HostingEnvironment.EnvironmentName}.json not loaded into Configuration.";
         }

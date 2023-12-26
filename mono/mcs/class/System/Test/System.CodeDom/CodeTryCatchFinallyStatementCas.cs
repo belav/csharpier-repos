@@ -1,5 +1,5 @@
 //
-// CodeTryCatchFinallyStatementCas.cs 
+// CodeTryCatchFinallyStatementCas.cs
 //	- CAS unit tests for System.CodeDom.CodeTryCatchFinallyStatement
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,69 +27,75 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeTryCatchFinallyStatementCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeTryCatchFinallyStatementCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeTryCatchFinallyStatement ctcfs = new CodeTryCatchFinallyStatement();
+            Assert.AreEqual(0, ctcfs.CatchClauses.Count, "CatchClauses");
+            Assert.AreEqual(0, ctcfs.FinallyStatements.Count, "FinallyStatements");
+            Assert.AreEqual(0, ctcfs.TryStatements.Count, "TryStatements");
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            CodeStatement[] try_statements = new CodeStatement[1] { new CodeStatement() };
+            CodeCatchClause[] catch_clauses = new CodeCatchClause[1] { new CodeCatchClause() };
+            CodeTryCatchFinallyStatement ctcfs = new CodeTryCatchFinallyStatement(
+                try_statements,
+                catch_clauses
+            );
+            Assert.AreEqual(1, ctcfs.CatchClauses.Count, "CatchClauses");
+            Assert.AreEqual(0, ctcfs.FinallyStatements.Count, "FinallyStatements");
+            Assert.AreEqual(1, ctcfs.TryStatements.Count, "TryStatements");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeTryCatchFinallyStatement ctcfs = new CodeTryCatchFinallyStatement ();
-			Assert.AreEqual (0, ctcfs.CatchClauses.Count, "CatchClauses");
-			Assert.AreEqual (0, ctcfs.FinallyStatements.Count, "FinallyStatements");
-			Assert.AreEqual (0, ctcfs.TryStatements.Count, "TryStatements");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted()
+        {
+            CodeStatement[] try_statements = new CodeStatement[1] { new CodeStatement() };
+            CodeCatchClause[] catch_clauses = new CodeCatchClause[1] { new CodeCatchClause() };
+            CodeStatement[] finally_statements = new CodeStatement[1] { new CodeStatement() };
+            CodeTryCatchFinallyStatement ctcfs = new CodeTryCatchFinallyStatement(
+                try_statements,
+                catch_clauses,
+                finally_statements
+            );
+            Assert.AreEqual(1, ctcfs.CatchClauses.Count, "CatchClauses");
+            Assert.AreEqual(1, ctcfs.FinallyStatements.Count, "FinallyStatements");
+            Assert.AreEqual(1, ctcfs.TryStatements.Count, "TryStatements");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeStatement[] try_statements = new CodeStatement[1] { new CodeStatement () };
-			CodeCatchClause[] catch_clauses = new CodeCatchClause[1] { new CodeCatchClause () };
-			CodeTryCatchFinallyStatement ctcfs = new CodeTryCatchFinallyStatement (try_statements, catch_clauses);
-			Assert.AreEqual (1, ctcfs.CatchClauses.Count, "CatchClauses");
-			Assert.AreEqual (0, ctcfs.FinallyStatements.Count, "FinallyStatements");
-			Assert.AreEqual (1, ctcfs.TryStatements.Count, "TryStatements");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeStatement[] try_statements = new CodeStatement[1] { new CodeStatement () };
-			CodeCatchClause[] catch_clauses = new CodeCatchClause[1] { new CodeCatchClause () };
-			CodeStatement[] finally_statements = new CodeStatement[1] { new CodeStatement () };
-			CodeTryCatchFinallyStatement ctcfs = new CodeTryCatchFinallyStatement (try_statements, catch_clauses, finally_statements);
-			Assert.AreEqual (1, ctcfs.CatchClauses.Count, "CatchClauses");
-			Assert.AreEqual (1, ctcfs.FinallyStatements.Count, "FinallyStatements");
-			Assert.AreEqual (1, ctcfs.TryStatements.Count, "TryStatements");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeTryCatchFinallyStatement).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeTryCatchFinallyStatement).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

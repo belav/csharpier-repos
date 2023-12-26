@@ -27,7 +27,8 @@ namespace NetCoreServer
             string transferEncoding = context.Request.Headers["Transfer-Encoding"];
             if (!string.IsNullOrEmpty(transferEncoding))
             {
-                context.Response.Headers["X-HttpRequest-Headers-TransferEncoding"] = transferEncoding;
+                context.Response.Headers["X-HttpRequest-Headers-TransferEncoding"] =
+                    transferEncoding;
             }
 
             context.Response.StatusCode = 200;

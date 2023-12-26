@@ -19,9 +19,7 @@ internal sealed class ParameterDisplayInfo
         var builder = new StringBuilder();
         if (!string.IsNullOrEmpty(Prefix))
         {
-            builder
-                .Append(Prefix)
-                .Append(' ');
+            builder.Append(Prefix).Append(' ');
         }
 
         builder.Append(Type);

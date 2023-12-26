@@ -60,11 +60,9 @@ public class RectangleJsonConverter : CustomCreationConverter<Rectangle>
         JsonReader reader,
         Type objectType,
         object existingValue,
-        JsonSerializer serializer)
+        JsonSerializer serializer
+    )
     {
-        return new Rectangle()
-        {
-            RectangleProperty = reader.Value.ToString()
-        };
+        return new Rectangle() { RectangleProperty = reader.Value.ToString() };
     }
 }

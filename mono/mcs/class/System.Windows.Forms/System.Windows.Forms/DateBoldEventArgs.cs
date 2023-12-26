@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,44 +26,41 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-	public class DateBoldEventArgs : EventArgs {
-		#region Local Variables
-		private int		size;
-		private DateTime	start;
-		private int[]		days_to_bold;
-		#endregion	// Local Variables
+namespace System.Windows.Forms
+{
+    public class DateBoldEventArgs : EventArgs
+    {
+        #region Local Variables
+        private int size;
+        private DateTime start;
+        private int[] days_to_bold;
+        #endregion	// Local Variables
 
-		#region Internal Constructor
-		DateBoldEventArgs(DateTime start, int size, int[] daysToBold) {
-			this.start = start;
-			this.size = size;
-			this.days_to_bold = daysToBold;
-		}
-		#endregion
+        #region Internal Constructor
+        DateBoldEventArgs(DateTime start, int size, int[] daysToBold)
+        {
+            this.start = start;
+            this.size = size;
+            this.days_to_bold = daysToBold;
+        }
+        #endregion
 
-		#region Public Instance Properties
-		public int[] DaysToBold {
-			get {
-				return days_to_bold;
-			}
+        #region Public Instance Properties
+        public int[] DaysToBold
+        {
+            get { return days_to_bold; }
+            set { days_to_bold = value; }
+        }
 
-			set {
-				days_to_bold = value;
-			}
-		}
+        public int Size
+        {
+            get { return size; }
+        }
 
-		public int Size {
-			get {
-				return size;
-			}
-		}
-
-		public DateTime StartDate {
-			get {
-				return start;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public DateTime StartDate
+        {
+            get { return start; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

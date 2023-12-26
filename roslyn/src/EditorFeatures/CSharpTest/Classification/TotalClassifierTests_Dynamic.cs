@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         [Theory, CombinatorialData]
         public async Task DynamicAsParamTypeAndDefault(TestHost testHost)
         {
-            await TestInClassAsync(@"void M(dynamic d = default(dynamic",
+            await TestInClassAsync(
+                @"void M(dynamic d = default(dynamic",
                 testHost,
                 Keyword("void"),
                 Method("M"),
@@ -26,14 +27,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.Equals,
                 Keyword("default"),
                 Punctuation.OpenParen,
-                Keyword("dynamic"));
+                Keyword("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicExplicitConversion(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic d = (dynamic)a;",
+                @"dynamic d = (dynamic)a;",
                 testHost,
                 Keyword("dynamic"),
                 Local("d"),
@@ -42,13 +44,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("dynamic"),
                 Punctuation.CloseParen,
                 Identifier("a"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicMethodCall(TestHost testHost)
         {
-            await TestInMethodAsync(@"dynamic.Equals(1, 1);",
+            await TestInMethodAsync(
+                @"dynamic.Equals(1, 1);",
                 testHost,
                 Identifier("dynamic"),
                 Operators.Dot,
@@ -58,24 +62,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Comma,
                 Number("1"),
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicNullable(TestHost testHost)
         {
-            await TestInMethodAsync(@"dynamic? a",
+            await TestInMethodAsync(
+                @"dynamic? a",
                 testHost,
                 Keyword("dynamic"),
                 Operators.QuestionMark,
-                Local("a"));
+                Local("a")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsUsingAliasForClass(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.EventArgs;",
+                @"using dynamic = System.EventArgs;",
                 testHost,
                 Keyword("using"),
                 Class("dynamic"),
@@ -83,14 +90,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Class("EventArgs"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsUsingAliasForDelegate(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.Action;",
+                @"using dynamic = System.Action;",
                 testHost,
                 Keyword("using"),
                 Delegate("dynamic"),
@@ -98,14 +106,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Delegate("Action"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsUsingAliasForStruct(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.DateTime;",
+                @"using dynamic = System.DateTime;",
                 testHost,
                 Keyword("using"),
                 Struct("dynamic"),
@@ -113,14 +122,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Struct("DateTime"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsUsingAliasForEnum(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.DayOfWeek;",
+                @"using dynamic = System.DayOfWeek;",
                 testHost,
                 Keyword("using"),
                 Enum("dynamic"),
@@ -128,14 +138,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Enum("DayOfWeek"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsUsingAliasForInterface(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.IDisposable;",
+                @"using dynamic = System.IDisposable;",
                 testHost,
                 Keyword("using"),
                 Interface("dynamic"),
@@ -143,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Interface("IDisposable"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -151,13 +163,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                extern alias dynamic;
+                    extern alias dynamic;
 
-                class C
-                {
-                    dynamic::Goo a;
-                }
-                """,
+                    class C
+                    {
+                        dynamic::Goo a;
+                    }
+                    """,
                 testHost,
                 Keyword("extern"),
                 Keyword("alias"),
@@ -171,25 +183,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("Goo"),
                 Field("a"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsDelegateType(TestHost testHost)
         {
-            await TestAsync(@"delegate void dynamic()",
+            await TestAsync(
+                @"delegate void dynamic()",
                 testHost,
                 Keyword("delegate"),
                 Keyword("void"),
                 Delegate("dynamic"),
                 Punctuation.OpenParen,
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsDelegateReturnTypeAndParam(TestHost testHost)
         {
-            await TestAsync(@"delegate dynamic MyDelegate (dynamic d)",
+            await TestAsync(
+                @"delegate dynamic MyDelegate (dynamic d)",
                 testHost,
                 Keyword("delegate"),
                 Keyword("dynamic"),
@@ -197,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
                 Parameter("d"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory, CombinatorialData]
@@ -205,12 +222,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                Func<string> f = delegate
-                {
-                    int dynamic = 10;
-                    return dynamic.ToString();
-                };
-                """,
+                    Func<string> f = delegate
+                    {
+                        int dynamic = 10;
+                        return dynamic.ToString();
+                    };
+                    """,
                 testHost,
                 Identifier("Func"),
                 Punctuation.OpenAngle,
@@ -233,7 +250,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -241,15 +259,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                partial class dynamic<T>
-                {
-                }
+                    partial class dynamic<T>
+                    {
+                    }
 
-                class C
-                {
-                    dynamic<int> d;
-                }
-                """,
+                    class C
+                    {
+                        dynamic<int> d;
+                    }
+                    """,
                 testHost,
                 Keyword("partial"),
                 Keyword("class"),
@@ -268,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseAngle,
                 Field("d"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -276,11 +295,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class A<T>
-                {
-                    T dynamic;
-                }
-                """,
+                    class A<T>
+                    {
+                        T dynamic;
+                    }
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("A"),
@@ -291,26 +310,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 TypeParameter("T"),
                 Field("dynamic"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsIndexerTypeAndParameter(TestHost testHost)
         {
-            await TestInClassAsync(@"dynamic this[dynamic i]",
+            await TestInClassAsync(
+                @"dynamic this[dynamic i]",
                 testHost,
                 Keyword("dynamic"),
                 Keyword("this"),
                 Punctuation.OpenBracket,
                 Keyword("dynamic"),
                 Parameter("i"),
-                Punctuation.CloseBracket);
+                Punctuation.CloseBracket
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsOperatorTypeAndParameter(TestHost testHost)
         {
-            await TestInClassAsync(@"static dynamic operator +(dynamic d1)",
+            await TestInClassAsync(
+                @"static dynamic operator +(dynamic d1)",
                 testHost,
                 Keyword("static"),
                 Keyword("dynamic"),
@@ -319,13 +342,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
                 Parameter("d1"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsOperatorName(TestHost testHost)
         {
-            await TestInClassAsync(@"static explicit operator dynamic(dynamic s)",
+            await TestInClassAsync(
+                @"static explicit operator dynamic(dynamic s)",
                 testHost,
                 Keyword("static"),
                 Keyword("explicit"),
@@ -334,13 +359,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
                 Parameter("s"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsPropertyTypeAndName(TestHost testHost)
         {
-            await TestInClassAsync(@"dynamic dynamic { get; set; }",
+            await TestInClassAsync(
+                @"dynamic dynamic { get; set; }",
                 testHost,
                 Keyword("dynamic"),
                 Property("dynamic"),
@@ -349,23 +376,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Semicolon,
                 Keyword("set"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsEventName(TestHost testHost)
         {
-            await TestInClassAsync(@"event Action dynamic",
+            await TestInClassAsync(
+                @"event Action dynamic",
                 testHost,
                 Keyword("event"),
                 Identifier("Action"),
-                Event("dynamic"));
+                Event("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsLinqLocalVariable(TestHost testHost)
         {
-            await TestInMethodAsync(@"var v = from dynamic in names",
+            await TestInMethodAsync(
+                @"var v = from dynamic in names",
                 testHost,
                 Keyword("var"),
                 Local("v"),
@@ -373,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("from"),
                 Identifier("dynamic"),
                 Keyword("in"),
-                Identifier("names"));
+                Identifier("names")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -381,9 +413,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                var v = from dynamic in names
-                        select new { dynamic = dynamic };
-                """,
+                    var v = from dynamic in names
+                            select new { dynamic = dynamic };
+                    """,
                 testHost,
                 Keyword("var"),
                 Local("v"),
@@ -399,14 +431,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.Equals,
                 Identifier("dynamic"),
                 Punctuation.CloseCurly,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsArgumentToLambdaExpression(TestHost testHost)
         {
             await TestInMethodAsync(
-@"var p = names.Select(dynamic => dynamic.Length);",
+                @"var p = names.Select(dynamic => dynamic.Length);",
                 testHost,
                 Keyword("var"),
                 Local("p"),
@@ -421,7 +454,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.Dot,
                 Identifier("Length"),
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -429,12 +463,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                D f = delegate
-                {
-                    string dynamic = "a";
-                    return dynamic.Length;
-                };
-                """,
+                    D f = delegate
+                    {
+                        string dynamic = "a";
+                        return dynamic.Length;
+                    };
+                    """,
                 testHost,
                 Identifier("D"),
                 Local("f"),
@@ -444,9 +478,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("string"),
                 Local("dynamic"),
                 Operators.Equals,
-                String("""
-                    "a"
-                    """),
+                String(
+                    """
+                        "a"
+                        """
+                ),
                 Punctuation.Semicolon,
                 ControlKeyword("return"),
                 Local("dynamic"),
@@ -454,7 +490,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Property("Length"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -462,17 +499,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                dynamic dynamic()
-                {
-                }
-                """,
+                    dynamic dynamic()
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("dynamic"),
                 Method("dynamic"),
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -480,10 +518,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                static dynamic dynamic(params dynamic[] dynamic)
-                {
-                }
-                """,
+                    static dynamic dynamic(params dynamic[] dynamic)
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("static"),
                 Keyword("dynamic"),
@@ -497,7 +535,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Parameter("dynamic"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -505,10 +544,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                dynamic[] M(dynamic[] p, params dynamic[] pa)
-                {
-                }
-                """,
+                    dynamic[] M(dynamic[] p, params dynamic[] pa)
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("dynamic"),
                 Punctuation.OpenBracket,
@@ -527,7 +566,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Parameter("pa"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -535,12 +575,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                partial void F(dynamic d);
+                    partial void F(dynamic d);
 
-                partial void F(dynamic d)
-                {
-                }
-                """,
+                    partial void F(dynamic d)
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("partial"),
                 Keyword("void"),
@@ -558,7 +598,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Parameter("d"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -566,10 +607,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                void F(ref dynamic r, out dynamic o)
-                {
-                }
-                """,
+                    void F(ref dynamic r, out dynamic o)
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("void"),
                 Method("F"),
@@ -583,7 +624,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Parameter("o"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -591,10 +633,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                dynamic F(this dynamic self, dynamic p)
-                {
-                }
-                """,
+                    dynamic F(this dynamic self, dynamic p)
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("dynamic"),
                 ExtensionMethod("F"),
@@ -607,7 +649,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Parameter("p"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -615,17 +658,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C : dynamic
-                {
-                }
-                """,
+                    class C : dynamic
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
                 Punctuation.Colon,
                 Keyword("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -633,10 +677,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C<T> where T : dynamic
-                {
-                }
-                """,
+                    class C<T> where T : dynamic
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
@@ -648,7 +692,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Keyword("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -656,11 +701,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                unsafe int M()
-                {
-                    return sizeof(dynamic);
-                }
-                """,
+                    unsafe int M()
+                    {
+                        return sizeof(dynamic);
+                    }
+                    """,
                 testHost,
                 Keyword("unsafe"),
                 Keyword("int"),
@@ -674,26 +719,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("dynamic"),
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicTypeOf(TestHost testHost)
         {
-            await TestInMethodAsync(@"typeof(dynamic)",
+            await TestInMethodAsync(
+                @"typeof(dynamic)",
                 testHost,
                 Keyword("typeof"),
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/44423")]
         [CombinatorialData]
         public async Task DynamicAsArrayName(bool script, TestHost testHost)
         {
-            var code =
-                """
+            var code = """
                 int[] dynamic = {
                     1
                 };
@@ -714,42 +761,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Number("1"),
                 Punctuation.CloseCurly,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicInForeach(TestHost testHost)
         {
-            await TestInMethodAsync(@"foreach (dynamic dynamic in dynamic",
+            await TestInMethodAsync(
+                @"foreach (dynamic dynamic in dynamic",
                 testHost,
                 ControlKeyword("foreach"),
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
                 Local("dynamic"),
                 ControlKeyword("in"),
-                Identifier("dynamic"));
+                Identifier("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicInUsing(TestHost testHost)
         {
-            await TestInMethodAsync(@"using(dynamic d",
+            await TestInMethodAsync(
+                @"using(dynamic d",
                 testHost,
                 Keyword("using"),
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
-                Local("d"));
+                Local("d")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsLocalVariableName(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic dynamic;",
+                @"dynamic dynamic;",
                 testHost,
                 Keyword("dynamic"),
                 Local("dynamic"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -757,15 +810,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace dynamic
-                {
-                }
-                """,
+                    namespace dynamic
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -773,15 +827,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class dynamic
-                {
-                }
-                """,
+                    class dynamic
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -789,13 +844,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class dynamic
-                {
-                    dynamic()
+                    class dynamic
                     {
+                        dynamic()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("dynamic"),
@@ -805,20 +860,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsNamespaceAlias(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic.FileInfo file;",
+                @"dynamic.FileInfo file;",
                 testHost,
                 Identifier("dynamic"),
                 Operators.Dot,
                 Identifier("FileInfo"),
                 Local("file"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -826,9 +883,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                dynamic: int i = 0;
-                        goto dynamic;
-                """,
+                    dynamic: int i = 0;
+                            goto dynamic;
+                    """,
                 testHost,
                 Label("dynamic"),
                 Punctuation.Colon,
@@ -839,14 +896,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Semicolon,
                 ControlKeyword("goto"),
                 Label("dynamic"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsEnumField(TestHost testHost)
         {
             await TestInMethodAsync(
-@"A a = A.dynamic;",
+                @"A a = A.dynamic;",
                 testHost,
                 Identifier("A"),
                 Local("a"),
@@ -854,7 +912,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("A"),
                 Operators.Dot,
                 Identifier("dynamic"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -862,17 +921,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                enum A
-                {
-                    dynamic
-                }
-                """,
+                    enum A
+                    {
+                        dynamic
+                    }
+                    """,
                 testHost,
                 Keyword("enum"),
                 Enum("A"),
                 Punctuation.OpenCurly,
                 EnumMember("dynamic"),
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -880,15 +940,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                enum dynamic
-                {
-                }
-                """,
+                    enum dynamic
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("enum"),
                 Enum("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -896,11 +957,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C<dynamic, T> where dynamic : T
-                {
-                    dynamic d;
-                }
-                """,
+                    class C<dynamic, T> where dynamic : T
+                    {
+                        dynamic d;
+                    }
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
@@ -917,54 +978,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 TypeParameter("dynamic"),
                 Field("d"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsFieldType(TestHost testHost)
         {
-            await TestInClassAsync(@"dynamic d",
-                testHost,
-                Keyword("dynamic"),
-                Field("d"));
+            await TestInClassAsync(@"dynamic d", testHost, Keyword("dynamic"), Field("d"));
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsStaticFieldType(TestHost testHost)
         {
-            await TestInClassAsync(@"static dynamic d",
+            await TestInClassAsync(
+                @"static dynamic d",
                 testHost,
                 Keyword("static"),
                 Keyword("dynamic"),
                 Field("d"),
-                Static("d"));
+                Static("d")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsLocalVariableType(TestHost testHost)
         {
-            await TestInMethodAsync(@"dynamic d",
-                testHost,
-                Keyword("dynamic"),
-                Local("d"));
+            await TestInMethodAsync(@"dynamic d", testHost, Keyword("dynamic"), Local("d"));
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsArrayLocalVariableType(TestHost testHost)
         {
-            await TestInMethodAsync(@"dynamic[] d",
+            await TestInMethodAsync(
+                @"dynamic[] d",
                 testHost,
                 Keyword("dynamic"),
                 Punctuation.OpenBracket,
                 Punctuation.CloseBracket,
-                Local("d"));
+                Local("d")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsLambdaParameterType(TestHost testHost)
         {
             await TestInMethodAsync(
-@"var q = a.Where((dynamic d) => d == dynamic);",
+                @"var q = a.Where((dynamic d) => d == dynamic);",
                 testHost,
                 Keyword("var"),
                 Local("q"),
@@ -982,14 +1042,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.EqualsEquals,
                 Identifier("dynamic"),
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicArray(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic d = new dynamic[5];",
+                @"dynamic d = new dynamic[5];",
                 testHost,
                 Keyword("dynamic"),
                 Local("d"),
@@ -999,14 +1060,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenBracket,
                 Number("5"),
                 Punctuation.CloseBracket,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicConstructor(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic d = new dynamic();",
+                @"dynamic d = new dynamic();",
                 testHost,
                 Keyword("dynamic"),
                 Local("d"),
@@ -1015,39 +1077,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("dynamic"),
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAfterIs(TestHost testHost)
         {
-            await TestInMethodAsync(@"if (a is dynamic)",
+            await TestInMethodAsync(
+                @"if (a is dynamic)",
                 testHost,
                 ControlKeyword("if"),
                 Punctuation.OpenParen,
                 Identifier("a"),
                 Keyword("is"),
                 Keyword("dynamic"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAfterAs(TestHost testHost)
         {
-            await TestInMethodAsync(@"a = a as dynamic",
+            await TestInMethodAsync(
+                @"a = a as dynamic",
                 testHost,
                 Identifier("a"),
                 Operators.Equals,
                 Identifier("a"),
                 Keyword("as"),
-                Keyword("dynamic"));
+                Keyword("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsGenericTypeArgument(TestHost testHost)
         {
             await TestInMethodAsync(
-@"List<dynamic> l = new List<dynamic>();",
+                @"List<dynamic> l = new List<dynamic>();",
                 testHost,
                 Identifier("List"),
                 Punctuation.OpenAngle,
@@ -1062,14 +1129,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseAngle,
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsSecondGenericTypeArgument(TestHost testHost)
         {
             await TestInMethodAsync(
-@"KVP<string, dynamic> kvp;",
+                @"KVP<string, dynamic> kvp;",
                 testHost,
                 Identifier("KVP"),
                 Punctuation.OpenAngle,
@@ -1078,24 +1146,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("dynamic"),
                 Punctuation.CloseAngle,
                 Local("kvp"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsRegionLabel(TestHost testHost)
         {
-            var code =
-                """
+            var code = """
                 #region dynamic
                 #endregion
                 """;
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
                 PPText("dynamic"),
                 PPKeyword("#"),
-                PPKeyword("endregion"));
+                PPKeyword("endregion")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1103,15 +1173,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface dynamic
-                {
-                }
-                """,
+                    interface dynamic
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1119,29 +1190,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                struct dynamic
-                {
-                }
-                """,
+                    struct dynamic
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("struct"),
                 Struct("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DynamicAsUndefinedGenericType(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic<int> d;",
+                @"dynamic<int> d;",
                 testHost,
                 Identifier("dynamic"),
                 Punctuation.OpenAngle,
                 Keyword("int"),
                 Punctuation.CloseAngle,
                 Local("d"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
     }
 }
