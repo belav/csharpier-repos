@@ -22,16 +22,16 @@ namespace System.Net.Mime
         internal static readonly bool[] Ctext = CreateCharactersAllowedInComments();
 
         private static readonly SearchValues<char> s_charactersAllowedInHeaderNames =
-        // ftext = %d33-57 / %d59-126
-        SearchValues.Create(
-            "!\"#$%&'()*+,-./0123456789;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-        );
+            // ftext = %d33-57 / %d59-126
+            SearchValues.Create(
+                "!\"#$%&'()*+,-./0123456789;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+            );
 
         private static readonly SearchValues<char> s_charactersAllowedInTokens =
-        // ttext = %d33-126 except '()<>@,;:\"/[]?='
-        SearchValues.Create(
-            "!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~"
-        );
+            // ttext = %d33-126 except '()<>@,;:\"/[]?='
+            SearchValues.Create(
+                "!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~"
+            );
 
         internal const char Quote = '\"';
         internal const char Space = ' ';

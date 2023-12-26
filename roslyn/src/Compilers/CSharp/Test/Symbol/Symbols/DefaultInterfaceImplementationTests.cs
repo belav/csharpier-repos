@@ -65283,9 +65283,9 @@ class Test1 : I2
             validate(compilation1.SourceModule);
 
             var expected =
-            // (2,15): error CS0535: 'Test1' does not implement interface member 'I1.M1()'
-            // class Test1 : I2
-            Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "I2");
+                // (2,15): error CS0535: 'Test1' does not implement interface member 'I1.M1()'
+                // class Test1 : I2
+                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "I2");
 
             if (name == "M1")
             {

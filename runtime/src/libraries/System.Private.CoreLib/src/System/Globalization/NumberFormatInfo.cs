@@ -234,9 +234,9 @@ namespace System.Globalization
         /// </summary>
         public static NumberFormatInfo InvariantInfo =>
             s_invariantInfo ??=
-            // Lazy create the invariant info. This cannot be done in a .cctor because exceptions can
-            // be thrown out of a .cctor stack that will need this.
-            CultureInfo.InvariantCulture.NumberFormat;
+                // Lazy create the invariant info. This cannot be done in a .cctor because exceptions can
+                // be thrown out of a .cctor stack that will need this.
+                CultureInfo.InvariantCulture.NumberFormat;
 
         public static NumberFormatInfo GetInstance(IFormatProvider? formatProvider)
         {

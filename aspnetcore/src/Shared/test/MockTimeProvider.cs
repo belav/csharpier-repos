@@ -8,10 +8,10 @@ namespace Microsoft.AspNetCore.Testing;
 public class MockTimeProvider : TimeProvider
 {
     private readonly long _timestampFrequency =
-    // 10_000_000; // Windows
-    // 100_000_000; // 8 zeros, in between
-    // 1_000_000_000; // Linux
-    Stopwatch.Frequency;
+        // 10_000_000; // Windows
+        // 100_000_000; // 8 zeros, in between
+        // 1_000_000_000; // Linux
+        Stopwatch.Frequency;
     private long _utcTicks;
     private long _timestamp;
 

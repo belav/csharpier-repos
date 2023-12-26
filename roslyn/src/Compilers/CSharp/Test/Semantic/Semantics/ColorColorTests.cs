@@ -2453,14 +2453,14 @@ class M
             );
 
             var unifyReferenceWarning =
-            // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'RefLib' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
-            Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
-                .WithArguments(
-                    "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                    "RefLib",
-                    "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                    "mscorlib"
-                );
+                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'RefLib' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
+                Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
+                    .WithArguments(
+                        "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "RefLib",
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "mscorlib"
+                    );
 
             main.VerifyEmitDiagnostics(
                 unifyReferenceWarning,
@@ -2510,14 +2510,14 @@ class C
             );
 
             var unifyReferenceWarning =
-            // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'RefLib' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
-            Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
-                .WithArguments(
-                    "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                    "RefLib",
-                    "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                    "mscorlib"
-                );
+                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'RefLib' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
+                Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
+                    .WithArguments(
+                        "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "RefLib",
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "mscorlib"
+                    );
 
             main.VerifyEmitDiagnostics(
                 unifyReferenceWarning,
@@ -2553,10 +2553,10 @@ class M
             var compilation = CreateCompilation(source, assemblyName: "Main");
 
             DiagnosticDescription obsoleteWarning =
-            // warning CS0612: 'Color.Red' is obsolete
-            Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Color.Red")
-                .WithArguments("Color.Red")
-                .WithLocation(11, 29);
+                // warning CS0612: 'Color.Red' is obsolete
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Color.Red")
+                    .WithArguments("Color.Red")
+                    .WithLocation(11, 29);
 
             compilation.VerifyEmitDiagnostics(obsoleteWarning, obsoleteWarning);
         }

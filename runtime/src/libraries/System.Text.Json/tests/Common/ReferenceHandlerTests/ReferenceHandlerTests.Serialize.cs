@@ -103,8 +103,8 @@ namespace System.Text.Json.Serialization.Tests
 
             //ImmutableArray<T> as root.
             ImmutableArray<EmployeeStruct> array =
-            //Struct as array element (same as struct being root).
-            ImmutableArray.Create(employee);
+                //Struct as array element (same as struct being root).
+                ImmutableArray.Create(employee);
 
             // Regardless of using preserve, do not emit $id to value types; that is why we compare against default.
             string actual = await Serializer.SerializeWrapper(array, s_serializerOptionsPreserve);

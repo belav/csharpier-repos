@@ -801,14 +801,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             {
                 tParameter = GetWithPublicMethods();
                 var lambda =
-                // We produce dataflow warnings for the unknown parameter even though it has been overwritten
-                // with a value that satisfies the requirement.
-                [ExpectedWarning(
-                    "IL2067",
-                    "tParameter",
-                    nameof(DataFlowTypeExtensions.RequiresPublicMethods)
-                )]
-                () => tParameter.RequiresPublicMethods();
+                    // We produce dataflow warnings for the unknown parameter even though it has been overwritten
+                    // with a value that satisfies the requirement.
+                    [ExpectedWarning(
+                        "IL2067",
+                        "tParameter",
+                        nameof(DataFlowTypeExtensions.RequiresPublicMethods)
+                    )]
+                    () => tParameter.RequiresPublicMethods();
                 lambda();
             }
 

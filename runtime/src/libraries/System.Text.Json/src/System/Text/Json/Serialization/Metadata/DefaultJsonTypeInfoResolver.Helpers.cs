@@ -19,10 +19,10 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 return s_memberAccessor ??=
 #if NETCOREAPP
-                // if dynamic code isn't supported, fallback to reflection
-                RuntimeFeature.IsDynamicCodeSupported
-                    ? new ReflectionEmitCachingMemberAccessor()
-                    : new ReflectionMemberAccessor();
+                    // if dynamic code isn't supported, fallback to reflection
+                    RuntimeFeature.IsDynamicCodeSupported
+                        ? new ReflectionEmitCachingMemberAccessor()
+                        : new ReflectionMemberAccessor();
 #elif NETFRAMEWORK
                 new ReflectionEmitCachingMemberAccessor();
 #else

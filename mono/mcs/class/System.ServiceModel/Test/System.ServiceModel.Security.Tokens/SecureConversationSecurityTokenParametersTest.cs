@@ -130,10 +130,10 @@ namespace MonoTests.System.ServiceModel
             ServiceModelSecurityTokenRequirement r =
                 new InitiatorServiceModelSecurityTokenRequirement();
             SymmetricSecurityBindingElement sbe =
-            //				new SymmetricSecurityBindingElement ();
-            new WSHttpBinding()
-                .CreateBindingElements()
-                .Find<SymmetricSecurityBindingElement>();
+                //				new SymmetricSecurityBindingElement ();
+                new WSHttpBinding()
+                    .CreateBindingElements()
+                    .Find<SymmetricSecurityBindingElement>();
             sbe.ProtectionTokenParameters = new X509SecurityTokenParameters();
             //			MyParameters p = new MyParameters (sbe);
             // NRE occurs on winfx (likely a bug).
