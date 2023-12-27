@@ -9,32 +9,46 @@ using System.Threading.Tasks;
 namespace System.Threading.Channels
 {
     /// <summary>Provides a channel with a bounded capacity.</summary>
-    [DebuggerDisplay("Items = {ItemsCountForDebugger}, Capacity = {_bufferedCapacity}, Mode = {_mode}, Closed = {ChannelIsClosedForDebugger}")]
+    [DebuggerDisplay(
+        "Items = {ItemsCountForDebugger}, Capacity = {_bufferedCapacity}, Mode = {_mode}, Closed = {ChannelIsClosedForDebugger}"
+    )]
     [DebuggerTypeProxy(typeof(DebugEnumeratorDebugView<>))]
     internal sealed class BoundedChannel<T> : Channel<T>, IDebugEnumerable<T>
     {
         /// <summary>The mode used when the channel hits its bound.</summary>
         private readonly BoundedChannelFullMode _mode;
+
         /// <summary>The delegate that will be invoked when the channel hits its bound and an item is dropped from the channel.</summary>
         private readonly Action<T>? _itemDropped;
+
         /// <summary>Task signaled when the channel has completed.</summary>
         private readonly TaskCompletionSource _completion;
+
         /// <summary>The maximum capacity of the channel.</summary>
         private readonly int _bufferedCapacity;
+
         /// <summary>Items currently stored in the channel waiting to be read.</summary>
         private readonly Deque<T> _items = new Deque<T>();
+
         /// <summary>Readers waiting to read from the channel.</summary>
         private readonly Deque<AsyncOperation<T>> _blockedReaders = new Deque<AsyncOperation<T>>();
+
         /// <summary>Writers waiting to write to the channel.</summary>
-        private readonly Deque<VoidAsyncOperationWithData<T>> _blockedWriters = new Deque<VoidAsyncOperationWithData<T>>();
+        private readonly Deque<VoidAsyncOperationWithData<T>> _blockedWriters =
+            new Deque<VoidAsyncOperationWithData<T>>();
+
         /// <summary>Linked list of WaitToReadAsync waiters.</summary>
         private AsyncOperation<bool>? _waitingReadersTail;
+
         /// <summary>Linked list of WaitToWriteAsync waiters.</summary>
         private AsyncOperation<bool>? _waitingWritersTail;
+
         /// <summary>Whether to force continuations to be executed asynchronously from producer writes.</summary>
         private readonly bool _runContinuationsAsynchronously;
+
         /// <summary>Set to non-null once Complete has been called.</summary>
         private Exception? _doneWriting;
+
         /// <summary>Gets an object used to synchronize all state on the instance.</summary>
         private object SyncObj => _items;
 
@@ -43,14 +57,23 @@ namespace System.Threading.Channels
         /// <param name="mode">The mode used when writing to a full channel.</param>
         /// <param name="runContinuationsAsynchronously">Whether to force continuations to be executed asynchronously.</param>
         /// <param name="itemDropped">Delegate that will be invoked when an item is dropped from the channel. See <see cref="BoundedChannelFullMode"/>.</param>
-        internal BoundedChannel(int bufferedCapacity, BoundedChannelFullMode mode, bool runContinuationsAsynchronously, Action<T>? itemDropped)
+        internal BoundedChannel(
+            int bufferedCapacity,
+            BoundedChannelFullMode mode,
+            bool runContinuationsAsynchronously,
+            Action<T>? itemDropped
+        )
         {
             Debug.Assert(bufferedCapacity > 0);
             _bufferedCapacity = bufferedCapacity;
             _mode = mode;
             _runContinuationsAsynchronously = runContinuationsAsynchronously;
             _itemDropped = itemDropped;
-            _completion = new TaskCompletionSource(runContinuationsAsynchronously ? TaskCreationOptions.RunContinuationsAsynchronously : TaskCreationOptions.None);
+            _completion = new TaskCompletionSource(
+                runContinuationsAsynchronously
+                    ? TaskCreationOptions.RunContinuationsAsynchronously
+                    : TaskCreationOptions.None
+            );
             Reader = new BoundedChannelReader(this);
             Writer = new BoundedChannelWriter(this);
         }
@@ -66,8 +89,14 @@ namespace System.Threading.Channels
             internal BoundedChannelReader(BoundedChannel<T> parent)
             {
                 _parent = parent;
-                _readerSingleton = new AsyncOperation<T>(parent._runContinuationsAsynchronously, pooled: true);
-                _waiterSingleton = new AsyncOperation<bool>(parent._runContinuationsAsynchronously, pooled: true);
+                _readerSingleton = new AsyncOperation<T>(
+                    parent._runContinuationsAsynchronously,
+                    pooled: true
+                );
+                _waiterSingleton = new AsyncOperation<bool>(
+                    parent._runContinuationsAsynchronously,
+                    pooled: true
+                );
             }
 
             public override Task Completion => _parent._completion.Task;
@@ -156,7 +185,9 @@ namespace System.Threading.Channels
                     // will never be more items, fail.
                     if (parent._doneWriting != null)
                     {
-                        return ChannelUtilities.GetInvalidCompletionValueTask<T>(parent._doneWriting);
+                        return ChannelUtilities.GetInvalidCompletionValueTask<T>(
+                            parent._doneWriting
+                        );
                     }
 
                     // If we're able to use the singleton reader, do so.
@@ -178,7 +209,10 @@ namespace System.Threading.Channels
                     // cancellation callback could end up running arbitrary code, including code that called back into the reader or
                     // writer and tried to take the same lock held by the thread running UnregisterCancellation... deadlock.  As such,
                     // we only allow synchronous continuations here if both a) the caller requested it and the token isn't cancelable.
-                    var reader = new AsyncOperation<T>(parent._runContinuationsAsynchronously | cancellationToken.CanBeCanceled, cancellationToken);
+                    var reader = new AsyncOperation<T>(
+                        parent._runContinuationsAsynchronously | cancellationToken.CanBeCanceled,
+                        cancellationToken
+                    );
                     parent._blockedReaders.EnqueueTail(reader);
                     return reader.ValueTaskOfT;
                 }
@@ -205,9 +239,9 @@ namespace System.Threading.Channels
                     // There were no items available, so if we're done writing, a read will never be possible.
                     if (parent._doneWriting != null)
                     {
-                        return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel ?
-                            new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting)) :
-                            default;
+                        return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
+                            ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
+                            : default;
                     }
 
                     // There were no items available, but there could be in the future, so ensure
@@ -232,7 +266,10 @@ namespace System.Threading.Channels
                     // cancellation callback could end up running arbitrary code, including code that called back into the reader or
                     // writer and tried to take the same lock held by the thread running UnregisterCancellation... deadlock.  As such,
                     // we only allow synchronous continuations here if both a) the caller requested it and the token isn't cancelable.
-                    var waiter = new AsyncOperation<bool>(parent._runContinuationsAsynchronously | cancellationToken.CanBeCanceled, cancellationToken);
+                    var waiter = new AsyncOperation<bool>(
+                        parent._runContinuationsAsynchronously | cancellationToken.CanBeCanceled,
+                        cancellationToken
+                    );
                     ChannelUtilities.QueueWaiter(ref _parent._waitingReadersTail, waiter);
                     return waiter.ValueTaskOfT;
                 }
@@ -304,8 +341,14 @@ namespace System.Threading.Channels
             internal BoundedChannelWriter(BoundedChannel<T> parent)
             {
                 _parent = parent;
-                _writerSingleton = new VoidAsyncOperationWithData<T>(runContinuationsAsynchronously: true, pooled: true);
-                _waiterSingleton = new AsyncOperation<bool>(runContinuationsAsynchronously: true, pooled: true);
+                _writerSingleton = new VoidAsyncOperationWithData<T>(
+                    runContinuationsAsynchronously: true,
+                    pooled: true
+                );
+                _waiterSingleton = new AsyncOperation<bool>(
+                    runContinuationsAsynchronously: true,
+                    pooled: true
+                );
             }
 
             public override bool TryComplete(Exception? error)
@@ -342,10 +385,24 @@ namespace System.Threading.Channels
                 // We also know that only one thread (this one) will ever get here, as only that thread
                 // will be the one to transition from _doneWriting false to true.  As such, we can
                 // freely manipulate them without any concurrency concerns.
-                ChannelUtilities.FailOperations<AsyncOperation<T>, T>(parent._blockedReaders, ChannelUtilities.CreateInvalidCompletionException(error));
-                ChannelUtilities.FailOperations<VoidAsyncOperationWithData<T>, VoidResult>(parent._blockedWriters, ChannelUtilities.CreateInvalidCompletionException(error));
-                ChannelUtilities.WakeUpWaiters(ref parent._waitingReadersTail, result: false, error: error);
-                ChannelUtilities.WakeUpWaiters(ref parent._waitingWritersTail, result: false, error: error);
+                ChannelUtilities.FailOperations<AsyncOperation<T>, T>(
+                    parent._blockedReaders,
+                    ChannelUtilities.CreateInvalidCompletionException(error)
+                );
+                ChannelUtilities.FailOperations<VoidAsyncOperationWithData<T>, VoidResult>(
+                    parent._blockedWriters,
+                    ChannelUtilities.CreateInvalidCompletionException(error)
+                );
+                ChannelUtilities.WakeUpWaiters(
+                    ref parent._waitingReadersTail,
+                    result: false,
+                    error: error
+                );
+                ChannelUtilities.WakeUpWaiters(
+                    ref parent._waitingWritersTail,
+                    result: false,
+                    error: error
+                );
 
                 // Successfully transitioned to completed.
                 return true;
@@ -431,9 +488,10 @@ namespace System.Threading.Channels
                     {
                         // The channel is full, and we're in a dropping mode.
                         // Drop either the oldest or the newest
-                        T droppedItem = parent._mode == BoundedChannelFullMode.DropNewest ?
-                            parent._items.DequeueTail() :
-                            parent._items.DequeueHead();
+                        T droppedItem =
+                            parent._mode == BoundedChannelFullMode.DropNewest
+                                ? parent._items.DequeueTail()
+                                : parent._items.DequeueHead();
 
                         parent._items.EnqueueTail(item);
 
@@ -455,7 +513,10 @@ namespace System.Threading.Channels
                 // We either wrote the item already, or we're transferring it to the blocked reader we grabbed.
                 if (blockedReader != null)
                 {
-                    Debug.Assert(waitingReadersTail == null, "Shouldn't have any waiters to wake up");
+                    Debug.Assert(
+                        waitingReadersTail == null,
+                        "Shouldn't have any waiters to wake up"
+                    );
 
                     // Transfer the written item to the blocked reader.
                     bool success = blockedReader.TrySetResult(item);
@@ -488,15 +549,18 @@ namespace System.Threading.Channels
                     // If we're done writing, no writes will ever succeed.
                     if (parent._doneWriting != null)
                     {
-                        return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel ?
-                            new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting)) :
-                            default;
+                        return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
+                            ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
+                            : default;
                     }
 
                     // If there's space to write, a write is possible.
                     // And if the mode involves dropping/ignoring, we can always write, as even if it's
                     // full we'll just drop an element to make room.
-                    if (parent._items.Count < parent._bufferedCapacity || parent._mode != BoundedChannelFullMode.Wait)
+                    if (
+                        parent._items.Count < parent._bufferedCapacity
+                        || parent._mode != BoundedChannelFullMode.Wait
+                    )
                     {
                         return new ValueTask<bool>(true);
                     }
@@ -515,7 +579,10 @@ namespace System.Threading.Channels
                     }
 
                     // Otherwise, queue a waiter.
-                    var waiter = new AsyncOperation<bool>(runContinuationsAsynchronously: true, cancellationToken);
+                    var waiter = new AsyncOperation<bool>(
+                        runContinuationsAsynchronously: true,
+                        cancellationToken
+                    );
                     ChannelUtilities.QueueWaiter(ref parent._waitingWritersTail, waiter);
                     return waiter.ValueTaskOfT;
                 }
@@ -543,7 +610,13 @@ namespace System.Threading.Channels
                     // If we're done writing, trying to write is an error.
                     if (parent._doneWriting != null)
                     {
-                        return new ValueTask(Task.FromException(ChannelUtilities.CreateInvalidCompletionException(parent._doneWriting)));
+                        return new ValueTask(
+                            Task.FromException(
+                                ChannelUtilities.CreateInvalidCompletionException(
+                                    parent._doneWriting
+                                )
+                            )
+                        );
                     }
 
                     // Get the number of items in the channel currently.
@@ -604,7 +677,10 @@ namespace System.Threading.Channels
                         }
 
                         // Otherwise, queue a new writer.
-                        var writer = new VoidAsyncOperationWithData<T>(runContinuationsAsynchronously: true, cancellationToken);
+                        var writer = new VoidAsyncOperationWithData<T>(
+                            runContinuationsAsynchronously: true,
+                            cancellationToken
+                        );
                         writer.Item = item;
                         parent._blockedWriters.EnqueueTail(writer);
                         return writer.ValueTask;
@@ -622,9 +698,10 @@ namespace System.Threading.Channels
                     {
                         // The channel is full, and we're in a dropping mode.
                         // Drop either the oldest or the newest and write the new item.
-                        T droppedItem = parent._mode == BoundedChannelFullMode.DropNewest ?
-                            parent._items.DequeueTail() :
-                            parent._items.DequeueHead();
+                        T droppedItem =
+                            parent._mode == BoundedChannelFullMode.DropNewest
+                                ? parent._items.DequeueTail()
+                                : parent._items.DequeueHead();
 
                         parent._items.EnqueueTail(item);
 
@@ -676,27 +753,54 @@ namespace System.Threading.Channels
         private void AssertInvariants()
         {
             Debug.Assert(SyncObj != null, "The sync obj must not be null.");
-            Debug.Assert(Monitor.IsEntered(SyncObj), "Invariants can only be validated while holding the lock.");
+            Debug.Assert(
+                Monitor.IsEntered(SyncObj),
+                "Invariants can only be validated while holding the lock."
+            );
 
             if (!_items.IsEmpty)
             {
-                Debug.Assert(_blockedReaders.IsEmpty, "There are items available, so there shouldn't be any blocked readers.");
-                Debug.Assert(_waitingReadersTail == null, "There are items available, so there shouldn't be any waiting readers.");
+                Debug.Assert(
+                    _blockedReaders.IsEmpty,
+                    "There are items available, so there shouldn't be any blocked readers."
+                );
+                Debug.Assert(
+                    _waitingReadersTail == null,
+                    "There are items available, so there shouldn't be any waiting readers."
+                );
             }
             if (_items.Count < _bufferedCapacity)
             {
-                Debug.Assert(_blockedWriters.IsEmpty, "There's space available, so there shouldn't be any blocked writers.");
-                Debug.Assert(_waitingWritersTail == null, "There's space available, so there shouldn't be any waiting writers.");
+                Debug.Assert(
+                    _blockedWriters.IsEmpty,
+                    "There's space available, so there shouldn't be any blocked writers."
+                );
+                Debug.Assert(
+                    _waitingWritersTail == null,
+                    "There's space available, so there shouldn't be any waiting writers."
+                );
             }
             if (!_blockedReaders.IsEmpty)
             {
-                Debug.Assert(_items.IsEmpty, "There shouldn't be queued items if there's a blocked reader.");
-                Debug.Assert(_blockedWriters.IsEmpty, "There shouldn't be any blocked writer if there's a blocked reader.");
+                Debug.Assert(
+                    _items.IsEmpty,
+                    "There shouldn't be queued items if there's a blocked reader."
+                );
+                Debug.Assert(
+                    _blockedWriters.IsEmpty,
+                    "There shouldn't be any blocked writer if there's a blocked reader."
+                );
             }
             if (!_blockedWriters.IsEmpty)
             {
-                Debug.Assert(_items.Count == _bufferedCapacity, "We should have a full buffer if there's a blocked writer.");
-                Debug.Assert(_blockedReaders.IsEmpty, "There shouldn't be any blocked readers if there's a blocked writer.");
+                Debug.Assert(
+                    _items.Count == _bufferedCapacity,
+                    "We should have a full buffer if there's a blocked writer."
+                );
+                Debug.Assert(
+                    _blockedReaders.IsEmpty,
+                    "There shouldn't be any blocked readers if there's a blocked writer."
+                );
             }
             if (_completion.Task.IsCompleted)
             {

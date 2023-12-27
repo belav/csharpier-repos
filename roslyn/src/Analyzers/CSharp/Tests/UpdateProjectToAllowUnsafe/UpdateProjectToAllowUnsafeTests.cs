@@ -17,15 +17,15 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUnsafe
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUpdateProjectToAllowUnsafe)]
-    public class UpdateProjectToAllowUnsafeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class UpdateProjectToAllowUnsafeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UpdateProjectToAllowUnsafeTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpUpdateProjectToAllowUnsafeCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpUpdateProjectToAllowUnsafeCodeFixProvider());
 
         private async Task TestAllowUnsafeEnabledIfDisabledAsync(string initialMarkup)
         {
@@ -35,13 +35,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
                 var (_, action) = await GetCodeActionsAsync(workspace, parameters);
                 var operations = await VerifyActionAndGetOperationsAsync(workspace, action);
 
-                var (oldSolution, newSolution) = await ApplyOperationsAndGetSolutionAsync(workspace, operations);
-                Assert.True(((CSharpCompilationOptions)newSolution.Projects.Single().CompilationOptions!).AllowUnsafe);
+                var (oldSolution, newSolution) = await ApplyOperationsAndGetSolutionAsync(
+                    workspace,
+                    operations
+                );
+                Assert.True(
+                    (
+                        (CSharpCompilationOptions)newSolution.Projects.Single().CompilationOptions!
+                    ).AllowUnsafe
+                );
             }
 
             // no action offered if unsafe was already enabled
-            await TestMissingAsync(initialMarkup, new TestParameters(compilationOptions:
-                new CSharpCompilationOptions(outputKind: default, allowUnsafe: true)));
+            await TestMissingAsync(
+                initialMarkup,
+                new TestParameters(
+                    compilationOptions: new CSharpCompilationOptions(
+                        outputKind: default,
+                        allowUnsafe: true
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -49,10 +63,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
                 """
-                unsafe class [|C|] // The compiler reports this on the name, not the 'unsafe' keyword.
-                {
-                }
-                """);
+                    unsafe class [|C|] // The compiler reports this on the name, not the 'unsafe' keyword.
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -60,13 +75,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
                 """
-                class C
-                {
-                    unsafe void [|M|]()
+                    class C
                     {
+                        unsafe void [|M|]()
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -74,16 +90,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        unsafe void [|F|]()
+                        void M()
                         {
+                            unsafe void [|F|]()
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -91,16 +108,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|unsafe|]
+                        void M()
                         {
+                            [|unsafe|]
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -108,17 +126,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        unsafe
+                        void M()
                         {
-                            [|int * p;|]
+                            unsafe
+                            {
+                                [|int * p;|]
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

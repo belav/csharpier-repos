@@ -4,7 +4,6 @@
 
 using System;
 
-
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
 
@@ -66,7 +65,6 @@ namespace GCVariant
                     break;
             }
 
-
             Console.Write("iRep= ");
             Console.Write(iRep);
             Console.Write(" iObj= ");
@@ -84,7 +82,6 @@ namespace GCVariant
             Console.WriteLine("Test Failed");
             return 1;
         }
-
 
         public bool runTest(int iRep, int iObj, int iNum)
         {
@@ -105,7 +102,6 @@ namespace GCVariant
             }
             return true;
         }
-
 
         public void MakeLeak(int iRep, int iObj, int iNum)
         {
@@ -139,9 +135,7 @@ namespace GCVariant
         internal DLinkNode[] Mv_DLink;
 
         public DoubLink(int Num)
-            : this(Num, false)
-        {
-        }
+            : this(Num, false) { }
 
         public DoubLink(int Num, bool large)
         {
@@ -165,20 +159,20 @@ namespace GCVariant
             // all elements in between
             for (int i = 1; i < Num - 1; i++)
             {
-                Mv_DLink[i] = new DLinkNode((large ? 256 : i + 1), Mv_DLink[i - 1], Mv_DLink[i + 1]);
+                Mv_DLink[i] = new DLinkNode(
+                    (large ? 256 : i + 1),
+                    Mv_DLink[i - 1],
+                    Mv_DLink[i + 1]
+                );
             }
 
             // last element
             Mv_DLink[Num - 1] = new DLinkNode((large ? 256 : Num), Mv_DLink[Num - 2], Mv_DLink[0]);
         }
 
-
         public int NodeNum
         {
-            get
-            {
-                return Mv_DLink.Length;
-            }
+            get { return Mv_DLink.Length; }
         }
     }
 

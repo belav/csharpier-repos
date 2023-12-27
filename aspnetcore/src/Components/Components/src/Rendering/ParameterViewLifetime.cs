@@ -22,7 +22,9 @@ internal readonly struct ParameterViewLifetime
         // the same as ParameterViewLifetime.Unbound. That means it never expires.
         if (_owner != null && _owner.ParameterViewValidityStamp != _stamp)
         {
-            throw new InvalidOperationException($"The {nameof(ParameterView)} instance can no longer be read because it has expired. {nameof(ParameterView)} can only be read synchronously and must not be stored for later use.");
+            throw new InvalidOperationException(
+                $"The {nameof(ParameterView)} instance can no longer be read because it has expired. {nameof(ParameterView)} can only be read synchronously and must not be stored for later use."
+            );
         }
     }
 }

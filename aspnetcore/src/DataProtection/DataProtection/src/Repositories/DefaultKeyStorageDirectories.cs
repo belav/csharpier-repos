@@ -10,13 +10,14 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
 internal sealed class DefaultKeyStorageDirectories : IDefaultKeyStorageDirectories
 {
-    private static readonly Lazy<DirectoryInfo?> _defaultDirectoryLazy = new Lazy<DirectoryInfo?>(GetKeyStorageDirectoryImpl);
+    private static readonly Lazy<DirectoryInfo?> _defaultDirectoryLazy = new Lazy<DirectoryInfo?>(
+        GetKeyStorageDirectoryImpl
+    );
 
-    private DefaultKeyStorageDirectories()
-    {
-    }
+    private DefaultKeyStorageDirectories() { }
 
-    public static IDefaultKeyStorageDirectories Instance { get; } = new DefaultKeyStorageDirectories();
+    public static IDefaultKeyStorageDirectories Instance { get; } =
+        new DefaultKeyStorageDirectories();
 
     /// <summary>
     /// The default key storage directory.
@@ -34,11 +35,16 @@ internal sealed class DefaultKeyStorageDirectories : IDefaultKeyStorageDirectori
         DirectoryInfo retVal;
 
         // Environment.GetFolderPath returns null if the user profile isn't loaded.
-        var localAppDataFromSystemPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        var localAppDataFromSystemPath = Environment.GetFolderPath(
+            Environment.SpecialFolder.LocalApplicationData
+        );
         var localAppDataFromEnvPath = Environment.GetEnvironmentVariable("LOCALAPPDATA");
         var homePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && !string.IsNullOrEmpty(localAppDataFromSystemPath))
+        if (
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            && !string.IsNullOrEmpty(localAppDataFromSystemPath)
+        )
         {
             // To preserve backwards-compatibility with 1.x, Environment.SpecialFolder.LocalApplicationData
             // cannot take precedence over $LOCALAPPDATA and $HOME/.aspnet on non-Windows platforms
@@ -52,12 +58,16 @@ internal sealed class DefaultKeyStorageDirectories : IDefaultKeyStorageDirectori
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                retVal = GetKeyStorageDirectoryFromBaseAppDataPath(Path.Combine(homePath, "AppData", "Local"));
+                retVal = GetKeyStorageDirectoryFromBaseAppDataPath(
+                    Path.Combine(homePath, "AppData", "Local")
+                );
             }
             else
             {
                 // Use*NIX conventions for a folder name.
-                retVal = new DirectoryInfo(Path.Combine(homePath, ".aspnet", DataProtectionKeysFolderName));
+                retVal = new DirectoryInfo(
+                    Path.Combine(homePath, ".aspnet", DataProtectionKeysFolderName)
+                );
             }
         }
         else if (!string.IsNullOrEmpty(localAppDataFromSystemPath))

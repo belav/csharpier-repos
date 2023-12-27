@@ -13,7 +13,6 @@ struct S
     public String str;
 }
 
-
 public class Test_struct5_2
 {
     static void c(S s1, S s2, S s3, S s4)
@@ -24,7 +23,10 @@ public class Test_struct5_2
     [Fact]
     public static void TestEntryPoint()
     {
-        S sM, sM2, sM3, sM4;
+        S sM,
+            sM2,
+            sM3,
+            sM4;
 
         sM.str = "test";
         sM2.str = "test2";

@@ -25,25 +25,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
     {
         private static async Task TestAsync(string markup, string expectedText = null)
         {
-            await TestSpanGetterAsync(markup, async (document, position, expectedSpan) =>
-            {
-                var result = await DataTipInfoGetter.GetInfoAsync(document, position, CancellationToken.None);
+            await TestSpanGetterAsync(
+                markup,
+                async (document, position, expectedSpan) =>
+                {
+                    var result = await DataTipInfoGetter.GetInfoAsync(
+                        document,
+                        position,
+                        CancellationToken.None
+                    );
 
-                Assert.Equal(expectedSpan, result.Span);
-                Assert.Equal(expectedText, result.Text);
-            });
+                    Assert.Equal(expectedSpan, result.Span);
+                    Assert.Equal(expectedText, result.Text);
+                }
+            );
         }
 
         private static async Task TestNoDataTipAsync(string markup)
         {
-            await TestSpanGetterAsync(markup, async (document, position, expectedSpan) =>
-            {
-                var result = await DataTipInfoGetter.GetInfoAsync(document, position, CancellationToken.None);
-                Assert.True(result.IsDefault);
-            });
+            await TestSpanGetterAsync(
+                markup,
+                async (document, position, expectedSpan) =>
+                {
+                    var result = await DataTipInfoGetter.GetInfoAsync(
+                        document,
+                        position,
+                        CancellationToken.None
+                    );
+                    Assert.True(result.IsDefault);
+                }
+            );
         }
 
-        private static async Task TestSpanGetterAsync(string markup, Func<Document, int, TextSpan?, Task> continuation)
+        private static async Task TestSpanGetterAsync(
+            string markup,
+            Func<Document, int, TextSpan?, Task> continuation
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(markup);
             var testHostDocument = workspace.Documents.Single();
@@ -55,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             await continuation(
                 workspace.CurrentSolution.Projects.First().Documents.First(),
                 position,
-                expectedSpan);
+                expectedSpan
+            );
         }
 
         [Fact]
@@ -73,14 +91,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    [|Sys$$tem|].Console.WriteLine(args);
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        [|Sys$$tem|].Console.WriteLine(args);
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -88,14 +107,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    [|System$$.Console|].WriteLine(args);
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        [|System$$.Console|].WriteLine(args);
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -103,14 +123,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    [|System.$$Console|].WriteLine(args);
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        [|System.$$Console|].WriteLine(args);
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -118,14 +139,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    [|System.Con$$sole|].WriteLine(args);
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        [|System.Con$$sole|].WriteLine(args);
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -133,14 +155,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    [|System.Console.Wri$$teLine|](args);
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        [|System.Console.Wri$$teLine|](args);
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -148,14 +171,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestNoDataTipAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    [|System.Console.WriteLine|]$$(args);
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        [|System.Console.WriteLine|]$$(args);
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -163,14 +187,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    System.Console.WriteLine($$[|args|]);
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        System.Console.WriteLine($$[|args|]);
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -178,14 +203,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestNoDataTipAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    [|System.Console.WriteLine|](args$$);
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        [|System.Console.WriteLine|](args$$);
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -193,14 +219,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    [|va$$r|] v = 0;
-                  }
-                }
-                """, "int");
+                    class C
+                    {
+                      void Goo()
+                      {
+                        [|va$$r|] v = 0;
+                      }
+                    }
+                    """,
+                "int"
+            );
         }
 
         [Fact]
@@ -208,14 +236,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    [|in$$t|] i = 0;
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        [|in$$t|] i = 0;
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -223,14 +252,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    int [|$$i|] = 0;
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        int [|$$i|] = 0;
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539910")]
@@ -238,14 +268,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    int i = [|4$$2|];
-                  }
-                }
-                """, "int");
+                    class C
+                    {
+                      void Goo()
+                      {
+                        int i = [|4$$2|];
+                      }
+                    }
+                    """,
+                "int"
+            );
         }
 
         [Fact]
@@ -253,14 +285,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestNoDataTipAsync(
                 """
-                class C
-                {
-                  void Goo()
-                  {
-                    int i = 42;
-                  }$$
-                }
-                """);
+                    class C
+                    {
+                      void Goo()
+                      {
+                        int i = 42;
+                      }$$
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -268,13 +301,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo(int [|$$i|])
-                  {
-                  }
-                }
-                """);
+                    class C
+                    {
+                      void Goo(int [|$$i|])
+                      {
+                      }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942699")]
@@ -282,19 +316,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        try
+                        void Goo()
                         {
-                        }
-                        catch (System.Exception [|$$e|])
-                        {
+                            try
+                            {
+                            }
+                            catch (System.Exception [|$$e|])
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -302,23 +337,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                    event System.Action [|$$E|];
-                }
-                """);
+                    class C
+                    {
+                        event System.Action [|$$E|];
+                    }
+                    """
+            );
 
             await TestAsync(
                 """
-                class C
-                {
-                    event System.Action [|$$E|]
+                    class C
                     {
-                        add { }
-                        remove { }
+                        event System.Action [|$$E|]
+                        {
+                            add { }
+                            remove { }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -326,11 +363,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                    int [|$$M|]() { }
-                }
-                """);
+                    class C
+                    {
+                        int [|$$M|]() { }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -339,11 +377,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             await TestAsync("class C<T, [|$$U|], V> { }");
             await TestAsync(
                 """
-                class C
-                {
-                    void M<T, [|$$U|]>() { }
-                }
-                """);
+                    class C
+                    {
+                        void M<T, [|$$U|]>() { }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -351,12 +390,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                using [|$$S|] = Static;
+                    using [|$$S|] = Static;
 
-                static class Static
-                {
-                }
-                """);
+                    static class Static
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540921")]
@@ -364,16 +404,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C
-                {
-                  void Goo(string[] args)
-                  {
-                    foreach (string [|$$s|] in args)
+                    class C
                     {
+                      void Goo(string[] args)
+                      {
+                        foreach (string [|$$s|] in args)
+                        {
+                        }
+                      }
                     }
-                  }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546328")]
@@ -381,84 +422,90 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace ConsoleApplication16
-                {
-                    class C
+                    namespace ConsoleApplication16
                     {
-                        public int [|$$goo|] { get; private set; } // hover over me
-                        public C()
+                        class C
                         {
-                            this.goo = 1;
+                            public int [|$$goo|] { get; private set; } // hover over me
+                            public C()
+                            {
+                                this.goo = 1;
+                            }
+                            public int Goo()
+                            {
+                                return 2; // breakpoint here
+                            }
                         }
-                        public int Goo()
+                        class Program
                         {
-                            return 2; // breakpoint here
+                            static void Main(string[] args)
+                            {
+                                new C().Goo();
+                            }
                         }
                     }
-                    class Program
-                    {
-                        static void Main(string[] args)
-                        {
-                            new C().Goo();
-                        }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task TestQueryIdentifier()
         {
             await TestAsync( // From
-                """
-                class C
-                {
-                    object Goo(string[] args)
+                    """
+                    class C
                     {
-                        return from [|$$a|] in args select a;
+                        object Goo(string[] args)
+                        {
+                            return from [|$$a|] in args select a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
             await TestAsync( // Let
-                """
-                class C
-                {
-                    object Goo(string[] args)
+                    """
+                    class C
                     {
-                        return from a in args let [|$$b|] = "END" select a + b;
+                        object Goo(string[] args)
+                        {
+                            return from a in args let [|$$b|] = "END" select a + b;
+                        }
                     }
-                }
-                """);
+                    """
+            );
             await TestAsync( // Join
-                """
-                class C
-                {
-                    object Goo(string[] args)
+                    """
+                    class C
                     {
-                        return from a in args join [|$$b|] in args on a equals b;
+                        object Goo(string[] args)
+                        {
+                            return from a in args join [|$$b|] in args on a equals b;
+                        }
                     }
-                }
-                """);
+                    """
+            );
             await TestAsync( // Join Into
-                """
-                class C
-                {
-                    object Goo(string[] args)
+                    """
+                    class C
                     {
-                        return from a in args join b in args on a equals b into [|$$c|];
+                        object Goo(string[] args)
+                        {
+                            return from a in args join b in args on a equals b into [|$$c|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
             await TestAsync( // Continuation
-                """
-                class C
-                {
-                    object Goo(string[] args)
+                    """
+                    class C
                     {
-                        return from a in args select a into [|$$b|] from c in b select c;
+                        object Goo(string[] args)
+                        {
+                            return from a in args select a into [|$$b|] from c in b select c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1077843")]
@@ -557,9 +604,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 }}
                 """;
 
-            await TestAsync(string.Format(sourceTemplate, "/*1*/[|$$Me|]/*2*/?./*3*/B/*4*/?./*5*/C/*6*/"));
-            await TestAsync(string.Format(sourceTemplate, "/*1*/[|Me/*2*/?./*3*/$$B|]/*4*/?./*5*/C/*6*/"));
-            await TestAsync(string.Format(sourceTemplate, "/*1*/[|Me/*2*/?./*3*/B/*4*/?./*5*/$$C|]/*6*/"));
+            await TestAsync(
+                string.Format(sourceTemplate, "/*1*/[|$$Me|]/*2*/?./*3*/B/*4*/?./*5*/C/*6*/")
+            );
+            await TestAsync(
+                string.Format(sourceTemplate, "/*1*/[|Me/*2*/?./*3*/$$B|]/*4*/?./*5*/C/*6*/")
+            );
+            await TestAsync(
+                string.Format(sourceTemplate, "/*1*/[|Me/*2*/?./*3*/B/*4*/?./*5*/$$C|]/*6*/")
+            );
         }
     }
 }

@@ -17,52 +17,59 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
 {
-    public partial class MakeLocalFunctionStaticTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class MakeLocalFunctionStaticTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public MakeLocalFunctionStaticTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new MakeLocalFunctionStaticDiagnosticAnalyzer(), new MakeLocalFunctionStaticCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new MakeLocalFunctionStaticDiagnosticAnalyzer(),
+                new MakeLocalFunctionStaticCodeFixProvider()
+            );
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
-        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp72ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp8ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestAboveCSharp8()
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]fibonacci(int n)
+                        void M()
                         {
-                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            int [||]fibonacci(int n)
+                            {
+                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int n)
+                        void M()
                         {
-                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            static int fibonacci(int n)
+                            {
+                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            }
                         }
                     }
-                }
-                """,
-parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseSimpleUsingStatement)]
@@ -70,22 +77,27 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]fibonacci(int n)
+                        void M()
                         {
-                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            int [||]fibonacci(int n)
+                            {
+                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            }
                         }
                     }
-                }
-                """,
-new TestParameters(
-    parseOptions: CSharp8ParseOptions,
-    options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOption2.FalseWithSilentEnforcement)));
+                    """,
+                new TestParameters(
+                    parseOptions: CSharp8ParseOptions,
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOption2.FalseWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -93,19 +105,21 @@ new TestParameters(
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int [||]fibonacci(int n)
+                        void M()
                         {
-                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            static int [||]fibonacci(int n)
+                            {
+                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            }
                         }
                     }
-                }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                    """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -113,19 +127,21 @@ new TestParameters(
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]fibonacci(int n)
+                        void M()
                         {
-                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            int [||]fibonacci(int n)
+                            {
+                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            }
                         }
                     }
-                }
-                """, parameters: new TestParameters(parseOptions: CSharp72ParseOptions));
+                    """,
+                parameters: new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -133,19 +149,21 @@ new TestParameters(
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(int i)
+                    class C
                     {
-                        int [||]fibonacci(int n)
+                        void M(int i)
                         {
-                            return i <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            int [||]fibonacci(int n)
+                            {
+                                return i <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            }
                         }
                     }
-                }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                    """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -153,20 +171,22 @@ new TestParameters(
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]fibonacci(int n)
+                        void M()
                         {
-                            M();
-                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            int [||]fibonacci(int n)
+                            {
+                                M();
+                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+                            }
                         }
                     }
-                }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                    """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -174,36 +194,37 @@ new TestParameters(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        async Task<int> [||]fibonacci(int n)
+                        void M()
                         {
-                            return n <= 1 ? n : await fibonacci(n - 1) + await fibonacci(n - 2);
+                            async Task<int> [||]fibonacci(int n)
+                            {
+                                return n <= 1 ? n : await fibonacci(n - 1) + await fibonacci(n - 2);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static async Task<int> fibonacci(int n)
+                        void M()
                         {
-                            return n <= 1 ? n : await fibonacci(n - 1) + await fibonacci(n - 2);
+                            static async Task<int> fibonacci(int n)
+                            {
+                                return n <= 1 ? n : await fibonacci(n - 1) + await fibonacci(n - 2);
+                            }
                         }
                     }
-                }
-                """,
-parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -213,7 +234,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterSemicolon(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -226,7 +247,7 @@ class C
         }}
     }}
 }}",
-"""
+                """
 using System;
 
 class C
@@ -242,7 +263,8 @@ class C
     }
 }
 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -252,7 +274,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterOpenBrace(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -264,7 +286,7 @@ class C
         }}
     }}
 }}",
-"""
+                """
 using System;
 
 class C
@@ -278,7 +300,8 @@ class C
     }
 }
 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -288,7 +311,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterLocalFunction(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -304,7 +327,7 @@ class C
         }}
     }}
 }}",
-"""
+                """
 using System;
 
 class C
@@ -323,7 +346,8 @@ class C
     }
 }
 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -333,7 +357,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterExpressionBodyLocalFunction(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -343,7 +367,7 @@ class C
         int [||]fibonacci(int n) => n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
     }}
 }}",
-"""
+                """
 using System;
 
 class C
@@ -356,7 +380,8 @@ class C
     }
 }
 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -366,7 +391,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterComment(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -379,7 +404,7 @@ class C
         }}
     }}
 }}",
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -392,7 +417,8 @@ class C
         }}
     }}
 }}",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -401,7 +427,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaBeforeComment(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -414,7 +440,7 @@ class C
         }}
     }}
 }}",
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -427,7 +453,8 @@ class C
         }}
     }}
 }}",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -436,23 +463,25 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        void [||]A()
+                        void M()
                         {
-                            B();
-                        }
+                            void [||]A()
+                            {
+                                B();
+                            }
 
-                        void B()
-                        {
+                            void B()
+                            {
+                            }
                         }
                     }
-                }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                    """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -460,44 +489,45 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        void [||]A()
+                        void M()
                         {
-                            B();
-                        }
+                            void [||]A()
+                            {
+                                B();
+                            }
 
-                        static void B()
-                        {
+                            static void B()
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static void A()
+                        void M()
                         {
-                            B();
-                        }
+                            static void A()
+                            {
+                                B();
+                            }
 
-                        static void B()
-                        {
+                            static void B()
+                            {
+                            }
                         }
                     }
-                }
-                """,
-parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -505,76 +535,83 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        void [||]A()
+                        void M()
                         {
-                            B();
-
-                            void B()
+                            void [||]A()
                             {
+                                B();
+
+                                void B()
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static void A()
+                        void M()
                         {
-                            B();
-
-                            void B()
+                            static void A()
                             {
+                                B();
+
+                                void B()
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
-parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/53179")]
         public async Task TestLocalFunctionAsTopLevelStatement()
         {
-            await TestAsync("""
-                void [||]A()
-                {
-                }
-                """, """
-                static void A()
-                {
-                }
-                """,
-parseOptions: CSharp8ParseOptions);
+            await TestAsync(
+                """
+                    void [||]A()
+                    {
+                    }
+                    """,
+                """
+                    static void A()
+                    {
+                    }
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/59286")]
         public async Task TestUnsafeLocalFunction()
         {
-            await TestAsync("""
-                unsafe void [||]A()
-                {
-                }
-                """, """
-                static unsafe void A()
-                {
-                }
-                """,
-parseOptions: CSharp8ParseOptions);
+            await TestAsync(
+                """
+                    unsafe void [||]A()
+                    {
+                    }
+                    """,
+                """
+                    static unsafe void A()
+                    {
+                    }
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
     }
 }

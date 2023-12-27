@@ -14,14 +14,10 @@ namespace BuildValidator
         public static readonly StringComparer StringComparer = StringComparer.OrdinalIgnoreCase;
         public static readonly FileNameEqualityComparer Instance = new FileNameEqualityComparer();
 
-        private FileNameEqualityComparer()
-        {
-        }
+        private FileNameEqualityComparer() { }
 
-        public bool Equals(FileInfo? x, FileInfo? y)
-            => StringComparer.Equals(x?.Name, y?.Name);
+        public bool Equals(FileInfo? x, FileInfo? y) => StringComparer.Equals(x?.Name, y?.Name);
 
-        public int GetHashCode(FileInfo? file)
-            => file?.Name.GetHashCode() ?? 0;
+        public int GetHashCode(FileInfo? file) => file?.Name.GetHashCode() ?? 0;
     }
 }

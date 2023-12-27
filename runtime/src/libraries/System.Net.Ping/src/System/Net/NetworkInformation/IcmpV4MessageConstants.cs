@@ -56,14 +56,19 @@ namespace System.Net.NetworkInformation
             return (IcmpV4MessageType)type switch
             {
                 IcmpV4MessageType.EchoReply => IPStatus.Success,
-                IcmpV4MessageType.DestinationUnreachable => (IcmpV4DestinationUnreachableCode)code switch
-                {
-                    IcmpV4DestinationUnreachableCode.DestinationNetworkUnreachable => IPStatus.DestinationNetworkUnreachable,
-                    IcmpV4DestinationUnreachableCode.DestinationHostUnreachable => IPStatus.DestinationHostUnreachable,
-                    IcmpV4DestinationUnreachableCode.DestinationProtocolUnreachable => IPStatus.DestinationProtocolUnreachable,
-                    IcmpV4DestinationUnreachableCode.DestinationPortUnreachable => IPStatus.DestinationPortUnreachable,
-                    _ => IPStatus.DestinationUnreachable,
-                },
+                IcmpV4MessageType.DestinationUnreachable
+                    => (IcmpV4DestinationUnreachableCode)code switch
+                    {
+                        IcmpV4DestinationUnreachableCode.DestinationNetworkUnreachable
+                            => IPStatus.DestinationNetworkUnreachable,
+                        IcmpV4DestinationUnreachableCode.DestinationHostUnreachable
+                            => IPStatus.DestinationHostUnreachable,
+                        IcmpV4DestinationUnreachableCode.DestinationProtocolUnreachable
+                            => IPStatus.DestinationProtocolUnreachable,
+                        IcmpV4DestinationUnreachableCode.DestinationPortUnreachable
+                            => IPStatus.DestinationPortUnreachable,
+                        _ => IPStatus.DestinationUnreachable,
+                    },
                 IcmpV4MessageType.SourceQuench => IPStatus.SourceQuench,
                 IcmpV4MessageType.TimeExceeded => IPStatus.TtlExpired,
                 IcmpV4MessageType.ParameterProblemBadIPHeader => IPStatus.BadHeader,

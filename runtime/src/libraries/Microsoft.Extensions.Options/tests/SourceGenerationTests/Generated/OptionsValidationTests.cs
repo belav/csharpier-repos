@@ -16,10 +16,7 @@ public class OptionsValidationTests
     [Fact]
     public void RequiredAttributeValid()
     {
-        var validModel = new RequiredAttributeModel
-        {
-            Val = "val"
-        };
+        var validModel = new RequiredAttributeModel { Val = "val" };
 
         var modelValidator = new RequiredAttributeModelValidator();
         var result = modelValidator.Validate(nameof(validModel), validModel);
@@ -30,22 +27,19 @@ public class OptionsValidationTests
     [Fact]
     public void RequiredAttributeInvalid()
     {
-        var validModel = new RequiredAttributeModel
-        {
-            Val = null
-        };
+        var validModel = new RequiredAttributeModel { Val = null };
 
         var modelValidator = new RequiredAttributeModelValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(validModel), validModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(validModel), validModel),
+            1
+        );
     }
 
     [Fact]
     public void RegularExpressionAttributeValid()
     {
-        var validModel = new RegularExpressionAttributeModel
-        {
-            Val = " "
-        };
+        var validModel = new RegularExpressionAttributeModel { Val = " " };
 
         var modelValidator = new RegularExpressionAttributeModelValidator();
         var result = modelValidator.Validate(nameof(validModel), validModel);
@@ -56,22 +50,19 @@ public class OptionsValidationTests
     [Fact]
     public void RegularExpressionAttributeInvalid()
     {
-        var validModel = new RegularExpressionAttributeModel
-        {
-            Val = "Not Space"
-        };
+        var validModel = new RegularExpressionAttributeModel { Val = "Not Space" };
 
         var modelValidator = new RegularExpressionAttributeModelValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(validModel), validModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(validModel), validModel),
+            1
+        );
     }
 
     [Fact]
     public void EmailAttributeValid()
     {
-        var validModel = new EmailAttributeModel
-        {
-            Val = "abc@xyz.com"
-        };
+        var validModel = new EmailAttributeModel { Val = "abc@xyz.com" };
 
         var modelValidator = new EmailAttributeModelValidator();
         var result = modelValidator.Validate(nameof(validModel), validModel);
@@ -82,22 +73,19 @@ public class OptionsValidationTests
     [Fact]
     public void EmailAttributeInvalid()
     {
-        var validModel = new EmailAttributeModel
-        {
-            Val = "Not Email Address"
-        };
+        var validModel = new EmailAttributeModel { Val = "Not Email Address" };
 
         var modelValidator = new EmailAttributeModelValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(validModel), validModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(validModel), validModel),
+            1
+        );
     }
 
     [Fact]
     public void CustomValidationAttributeValid()
     {
-        var validModel = new CustomValidationAttributeModel
-        {
-            Val = "Pass"
-        };
+        var validModel = new CustomValidationAttributeModel { Val = "Pass" };
 
         var modelValidator = new CustomValidationAttributeModelValidator();
         var result = modelValidator.Validate(nameof(validModel), validModel);
@@ -108,22 +96,18 @@ public class OptionsValidationTests
     [Fact]
     public void CustomValidationAttributeInvalid()
     {
-        var validModel = new CustomValidationAttributeModel
-        {
-            Val = "NOT PASS"
-        };
+        var validModel = new CustomValidationAttributeModel { Val = "NOT PASS" };
 
         var modelValidator = new CustomValidationAttributeModelValidator();
-        Assert.Throws<ValidationException>(() => modelValidator.Validate(nameof(validModel), validModel));
+        Assert.Throws<ValidationException>(
+            () => modelValidator.Validate(nameof(validModel), validModel)
+        );
     }
 
     [Fact]
     public void DataTypeAttributeValid()
     {
-        var validModel = new DataTypeAttributeModel
-        {
-            Val = "ABC"
-        };
+        var validModel = new DataTypeAttributeModel { Val = "ABC" };
 
         var modelValidator = new DataTypeAttributeModelValidator();
         var result = modelValidator.Validate(nameof(validModel), validModel);
@@ -134,10 +118,7 @@ public class OptionsValidationTests
     [Fact]
     public void RangeAttributeModelIntValid()
     {
-        var validModel = new RangeAttributeModelInt
-        {
-            Val = 1
-        };
+        var validModel = new RangeAttributeModelInt { Val = 1 };
 
         var modelValidator = new RangeAttributeModelIntValidator();
         var result = modelValidator.Validate(nameof(validModel), validModel);
@@ -148,22 +129,19 @@ public class OptionsValidationTests
     [Fact]
     public void RangeAttributeModelIntInvalid()
     {
-        var validModel = new RangeAttributeModelInt
-        {
-            Val = 0
-        };
+        var validModel = new RangeAttributeModelInt { Val = 0 };
 
         var modelValidator = new RangeAttributeModelIntValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(validModel), validModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(validModel), validModel),
+            1
+        );
     }
 
     [Fact]
     public void RangeAttributeModelDoubleValid()
     {
-        var validModel = new RangeAttributeModelDouble
-        {
-            Val = 0.6
-        };
+        var validModel = new RangeAttributeModelDouble { Val = 0.6 };
 
         var modelValidator = new RangeAttributeModelDoubleValidator();
         var result = modelValidator.Validate(nameof(validModel), validModel);
@@ -174,13 +152,13 @@ public class OptionsValidationTests
     [Fact]
     public void RangeAttributeModelDoubleInvalid()
     {
-        var validModel = new RangeAttributeModelDouble
-        {
-            Val = 0.1
-        };
+        var validModel = new RangeAttributeModelDouble { Val = 0.1 };
 
         var modelValidator = new RangeAttributeModelDoubleValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(validModel), validModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(validModel), validModel),
+            1
+        );
     }
 
     [Fact]
@@ -215,7 +193,10 @@ public class OptionsValidationTests
         };
 
         var modelValidator = new RangeAttributeModelDateValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(validModel), validModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(validModel), validModel),
+            1
+        );
     }
 
     [Fact]
@@ -252,7 +233,10 @@ public class OptionsValidationTests
         };
 
         var modelValidator = new MultipleAttributeModelValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(validModel), validModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(validModel), validModel),
+            1
+        );
     }
 
     [Fact]
@@ -278,7 +262,9 @@ public class OptionsValidationTests
         };
 
         var modelValidator = new CustomTypeCustomValidationAttributeModelValidator();
-        Assert.Throws<ValidationException>(() => modelValidator.Validate(nameof(validModel), validModel));
+        Assert.Throws<ValidationException>(
+            () => modelValidator.Validate(nameof(validModel), validModel)
+        );
     }
 
     [Fact]
@@ -303,7 +289,13 @@ public class OptionsValidationTests
     [InlineData(0, "", 1, null, "Valid hidden member from base class")]
     [InlineData(null, "Valid", 1, null, "Valid hidden member from base class")]
     [InlineData(1, "Valid", null, null, "Valid hidden member from base class")]
-    public void DerivedModelIsInvalid(int? val, string? derivedVal, int? virtValAttr, int? virtVal, string? hiddenValBaseClass)
+    public void DerivedModelIsInvalid(
+        int? val,
+        string? derivedVal,
+        int? virtValAttr,
+        int? virtVal,
+        string? hiddenValBaseClass
+    )
     {
         var invalidModel = new DerivedModel
         {
@@ -316,7 +308,10 @@ public class OptionsValidationTests
         ((RequiredAttributeModel)invalidModel).Val = hiddenValBaseClass;
 
         var validator = new DerivedModelValidator();
-        Utils.VerifyValidateOptionsResult(validator.Validate(nameof(invalidModel), invalidModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            validator.Validate(nameof(invalidModel), invalidModel),
+            1
+        );
     }
 
     [Fact]
@@ -386,21 +381,38 @@ public class OptionsValidationTests
         };
 
         var modelValidator = new ComplexModelValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(invalidModel), invalidModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(invalidModel), invalidModel),
+            1
+        );
 
         invalidModel = new ComplexModel
         {
-            ValWithoutOptionsValidator = new TypeWithoutOptionsValidator { Val1 = "Valid", Val2 = new DateTime(2003, 3, 3) }
+            ValWithoutOptionsValidator = new TypeWithoutOptionsValidator
+            {
+                Val1 = "Valid",
+                Val2 = new DateTime(2003, 3, 3)
+            }
         };
 
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(invalidModel), invalidModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(invalidModel), invalidModel),
+            1
+        );
 
         invalidModel = new ComplexModel
         {
-            ValWithoutOptionsValidator = new TypeWithoutOptionsValidator { Val1 = string.Empty, Val2 = new DateTime(2004, 3, 3) }
+            ValWithoutOptionsValidator = new TypeWithoutOptionsValidator
+            {
+                Val1 = string.Empty,
+                Val2 = new DateTime(2004, 3, 3)
+            }
         };
 
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(invalidModel), invalidModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(invalidModel), invalidModel),
+            1
+        );
 
         invalidModel = new ComplexModel
         {
@@ -412,33 +424,34 @@ public class OptionsValidationTests
             }
         };
 
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(invalidModel), invalidModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(invalidModel), invalidModel),
+            1
+        );
     }
 
     [Fact]
     public void AttributePropertyModelTestOnErrorMessage()
     {
-        var validModel = new AttributePropertyModel
-        {
-            Val1 = 5,
-            Val2 = 1
-        };
+        var validModel = new AttributePropertyModel { Val1 = 5, Val2 = 1 };
 
         var modelValidator = new AttributePropertyModelValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(validModel), validModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(validModel), validModel),
+            1
+        );
     }
 
     [Fact]
     public void AttributePropertyModelTestOnErrorMessageResource()
     {
-        var validModel = new AttributePropertyModel
-        {
-            Val1 = 1,
-            Val2 = 5
-        };
+        var validModel = new AttributePropertyModel { Val1 = 1, Val2 = 5 };
 
         var modelValidator = new AttributePropertyModelValidator();
-        Utils.VerifyValidateOptionsResult(modelValidator.Validate(nameof(validModel), validModel), 1);
+        Utils.VerifyValidateOptionsResult(
+            modelValidator.Validate(nameof(validModel), validModel),
+            1
+        );
     }
 
     [Fact]

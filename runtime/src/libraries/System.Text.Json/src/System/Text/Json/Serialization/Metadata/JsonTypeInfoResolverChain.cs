@@ -3,12 +3,18 @@
 
 namespace System.Text.Json.Serialization.Metadata
 {
-    internal class JsonTypeInfoResolverChain : ConfigurationList<IJsonTypeInfoResolver>, IJsonTypeInfoResolver, IBuiltInJsonTypeInfoResolver
+    internal class JsonTypeInfoResolverChain
+        : ConfigurationList<IJsonTypeInfoResolver>,
+            IJsonTypeInfoResolver,
+            IBuiltInJsonTypeInfoResolver
     {
-        public JsonTypeInfoResolverChain() : base(null) { }
+        public JsonTypeInfoResolverChain()
+            : base(null) { }
+
         public override bool IsReadOnly => true;
-        protected override void OnCollectionModifying()
-            => ThrowHelper.ThrowInvalidOperationException_TypeInfoResolverChainImmutable();
+
+        protected override void OnCollectionModifying() =>
+            ThrowHelper.ThrowInvalidOperationException_TypeInfoResolverChainImmutable();
 
         public JsonTypeInfo? GetTypeInfo(Type type, JsonSerializerOptions options)
         {
@@ -28,7 +34,8 @@ namespace System.Text.Json.Serialization.Metadata
         {
             switch (resolver)
             {
-                case null or EmptyJsonTypeInfoResolver:
+                case null
+                or EmptyJsonTypeInfoResolver:
                     break;
 
                 case JsonTypeInfoResolverChain otherChain:

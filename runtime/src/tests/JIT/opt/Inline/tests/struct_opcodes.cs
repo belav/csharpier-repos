@@ -20,7 +20,6 @@ public struct X
     public SingleInt f;
 }
 
-
 public class SingleInt
 {
     public int i1;
@@ -62,6 +61,7 @@ public class TestStruct
         x.f = new SingleInt();
         x.f.i1 = 77;
     }
+
     [Fact]
     public static void TestEntryPoint()
     {
@@ -79,4 +79,3 @@ public class TestStruct
         dMethod_Inline();
     }
 }
-

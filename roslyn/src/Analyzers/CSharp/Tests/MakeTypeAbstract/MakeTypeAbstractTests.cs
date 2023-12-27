@@ -18,29 +18,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
     public class MakeTypeAbstractTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public MakeTypeAbstractTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpMakeTypeAbstractCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpMakeTypeAbstractCodeFixProvider());
 
         [Fact]
         public async Task TestMethod()
         {
             await TestInRegularAndScript1Async(
                 """
-                public class Goo
-                {
-                    public abstract void [|M|]();
-                }
-                """,
+                    public class Goo
+                    {
+                        public abstract void [|M|]();
+                    }
+                    """,
                 """
-                public abstract class Goo
-                {
-                    public abstract void M();
-                }
-                """);
+                    public abstract class Goo
+                    {
+                        public abstract void M();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -48,17 +48,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                class Goo
-                {
-                    public abstract void [|M|]();
-                }
-                """,
+                    class Goo
+                    {
+                        public abstract void [|M|]();
+                    }
+                    """,
                 """
-                abstract class Goo
-                {
-                    public abstract void M();
-                }
-                """);
+                    abstract class Goo
+                    {
+                        public abstract void M();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -66,23 +67,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                /// <summary>
-                /// Some class comment.
-                /// </summary>
-                public class Goo
-                {
-                    public abstract void [|M|]();
-                }
-                """,
+                    /// <summary>
+                    /// Some class comment.
+                    /// </summary>
+                    public class Goo
+                    {
+                        public abstract void [|M|]();
+                    }
+                    """,
                 """
-                /// <summary>
-                /// Some class comment.
-                /// </summary>
-                public abstract class Goo
-                {
-                    public abstract void M();
-                }
-                """);
+                    /// <summary>
+                    /// Some class comment.
+                    /// </summary>
+                    public abstract class Goo
+                    {
+                        public abstract void M();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -90,17 +92,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                public class Goo
-                {
-                    public abstract object P { [|get|]; }
-                }
-                """,
+                    public class Goo
+                    {
+                        public abstract object P { [|get|]; }
+                    }
+                    """,
                 """
-                public abstract class Goo
-                {
-                    public abstract object P { get; }
-                }
-                """);
+                    public abstract class Goo
+                    {
+                        public abstract object P { get; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -108,17 +111,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                public class Goo
-                {
-                    public abstract object P { [|set|]; }
-                }
-                """,
+                    public class Goo
+                    {
+                        public abstract object P { [|set|]; }
+                    }
+                    """,
                 """
-                public abstract class Goo
-                {
-                    public abstract object P { set; }
-                }
-                """);
+                    public abstract class Goo
+                    {
+                        public abstract object P { set; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -126,17 +130,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                public class Goo
-                {
-                    public abstract object this[object o] { [|get|]; }
-                }
-                """,
+                    public class Goo
+                    {
+                        public abstract object this[object o] { [|get|]; }
+                    }
+                    """,
                 """
-                public abstract class Goo
-                {
-                    public abstract object this[object o] { get; }
-                }
-                """);
+                    public abstract class Goo
+                    {
+                        public abstract object this[object o] { get; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -144,17 +149,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                public class Goo
-                {
-                    public abstract object this[object o] { [|set|]; }
-                }
-                """,
+                    public class Goo
+                    {
+                        public abstract object this[object o] { [|set|]; }
+                    }
+                    """,
                 """
-                public abstract class Goo
-                {
-                    public abstract object this[object o] { set; }
-                }
-                """);
+                    public abstract class Goo
+                    {
+                        public abstract object this[object o] { set; }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/54218")]
@@ -162,25 +168,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                public partial class Goo
-                {
-                    public abstract void [|M|]();
-                }
+                    public partial class Goo
+                    {
+                        public abstract void [|M|]();
+                    }
 
-                public partial class Goo
-                {
-                }
-                """,
+                    public partial class Goo
+                    {
+                    }
+                    """,
                 """
-                public abstract partial class Goo
-                {
-                    public abstract void M();
-                }
+                    public abstract partial class Goo
+                    {
+                        public abstract void M();
+                    }
 
-                public partial class Goo
-                {
-                }
-                """);
+                    public partial class Goo
+                    {
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -188,11 +195,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class Goo
-                {
-                    public abstract event System.EventHandler E { [|add|]; }
-                }
-                """);
+                    public class Goo
+                    {
+                        public abstract event System.EventHandler E { [|add|]; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -200,11 +208,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class Goo
-                {
-                    public abstract event System.EventHandler E { [|remove|]; }
-                }
-                """);
+                    public class Goo
+                    {
+                        public abstract event System.EventHandler E { [|remove|]; }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -212,11 +221,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class Goo
-                {
-                    public abstract int [|M|]() => 3;
-                }
-                """);
+                    public class Goo
+                    {
+                        public abstract int [|M|]() => 3;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -224,11 +234,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class Goo
-                {
-                    public abstract int [|P|] => 3;
-                }
-                """);
+                    public class Goo
+                    {
+                        public abstract int [|P|] => 3;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -236,14 +247,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class Goo
-                {
-                    public abstract int P
+                    public class Goo
                     {
-                        [|get|] { return 1; }
+                        public abstract int P
+                        {
+                            [|get|] { return 1; }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -251,14 +263,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    public struct S
+                    public class C
                     {
-                        public abstract void [|Goo|]();
+                        public struct S
+                        {
+                            public abstract void [|Goo|]();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -266,11 +279,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public static class Goo
-                {
-                    public abstract void [|M|]();
-                }
-                """);
+                    public static class Goo
+                    {
+                        public abstract void [|M|]();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -278,17 +292,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                public record Goo
-                {
-                    public abstract void [|M|]();
-                }
-                """,
+                    public record Goo
+                    {
+                        public abstract void [|M|]();
+                    }
+                    """,
                 """
-                public abstract record Goo
-                {
-                    public abstract void M();
-                }
-                """);
+                    public abstract record Goo
+                    {
+                        public abstract void M();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -296,28 +311,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                public record class Goo
-                {
-                    public abstract void [|M|]();
-                }
-                """,
+                    public record class Goo
+                    {
+                        public abstract void [|M|]();
+                    }
+                    """,
                 """
-                public abstract record class Goo
-                {
-                    public abstract void M();
-                }
-                """);
+                    public abstract record class Goo
+                    {
+                        public abstract void M();
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestRecordStruct()
         {
-            await TestMissingInRegularAndScriptAsync("""
-                public record struct Goo
-                {
-                    public abstract void [|M|]();
-                }
-                """);
+            await TestMissingInRegularAndScriptAsync(
+                """
+                    public record struct Goo
+                    {
+                        public abstract void [|M|]();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -325,57 +343,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace NS
-                {
-                    using System;
-
-                    public class C1
+                    namespace NS
                     {
-                        public abstract void {|FixAllInDocument:|}M();
-                        public abstract object P { get; set; }
-                        public abstract object this[object o] { get; set; }
-                    }
+                        using System;
 
-                    public class C2
-                    {
-                        public abstract void M();
-                    }
+                        public class C1
+                        {
+                            public abstract void {|FixAllInDocument:|}M();
+                            public abstract object P { get; set; }
+                            public abstract object this[object o] { get; set; }
+                        }
 
-                    public class C3
-                    {
-                        public class InnerClass
+                        public class C2
                         {
                             public abstract void M();
                         }
+
+                        public class C3
+                        {
+                            public class InnerClass
+                            {
+                                public abstract void M();
+                            }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace NS
-                {
-                    using System;
-
-                    public abstract class C1
+                    namespace NS
                     {
-                        public abstract void M();
-                        public abstract object P { get; set; }
-                        public abstract object this[object o] { get; set; }
-                    }
+                        using System;
 
-                    public abstract class C2
-                    {
-                        public abstract void M();
-                    }
+                        public abstract class C1
+                        {
+                            public abstract void M();
+                            public abstract object P { get; set; }
+                            public abstract object this[object o] { get; set; }
+                        }
 
-                    public class C3
-                    {
-                        public abstract class InnerClass
+                        public abstract class C2
                         {
                             public abstract void M();
                         }
+
+                        public class C3
+                        {
+                            public abstract class InnerClass
+                            {
+                                public abstract void M();
+                            }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

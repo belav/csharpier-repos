@@ -1,16 +1,25 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace System.Reflection.Emit.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/2389",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class ModuleBuilderDefinePInvokeMethodTests
     {
-        public static IEnumerable<object[]> TheoryData1 => TypeBuilderDefinePInvokeMethodTests.TestData.Where(dpm => dpm.NoCMods).Select(dpm => new object[] { dpm });
+        public static IEnumerable<object[]> TheoryData1 =>
+            TypeBuilderDefinePInvokeMethodTests
+                .TestData.Where(dpm => dpm.NoCMods)
+                .Select(dpm => new object[] { dpm });
+
         [Theory]
         [MemberData(nameof(TheoryData1))]
         public static void TestDefinePInvokeMethod1(DpmParams p)
@@ -25,16 +34,30 @@ namespace System.Reflection.Emit.Tests
                 p.ReturnType,
                 p.ParameterTypes,
                 p.NativeCallConv,
-                p.Charset);
-            mb.SetImplementationFlags(mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
+                p.Charset
+            );
+            mb.SetImplementationFlags(
+                mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig
+            );
 
             modb.CreateGlobalFunctions();
-            MethodInfo m = modb.GetMethod(p.MethodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static, null, CallingConventions.Any, p.ParameterTypes, null);
+            MethodInfo m = modb.GetMethod(
+                p.MethodName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static,
+                null,
+                CallingConventions.Any,
+                p.ParameterTypes,
+                null
+            );
             Assert.NotNull(m);
             TypeBuilderDefinePInvokeMethodTests.VerifyPInvokeMethod(m.DeclaringType, m, p);
         }
 
-        public static IEnumerable<object[]> TheoryData2 => TypeBuilderDefinePInvokeMethodTests.TestData.Where(dpm => dpm.NoCMods && dpm.EntrypointName == dpm.MethodName).Select(dpm => new object[] { dpm });
+        public static IEnumerable<object[]> TheoryData2 =>
+            TypeBuilderDefinePInvokeMethodTests
+                .TestData.Where(dpm => dpm.NoCMods && dpm.EntrypointName == dpm.MethodName)
+                .Select(dpm => new object[] { dpm });
+
         [Theory]
         [MemberData(nameof(TheoryData2))]
         public static void TestDefinePInvokeMethod2(DpmParams p)
@@ -48,11 +71,21 @@ namespace System.Reflection.Emit.Tests
                 p.ReturnType,
                 p.ParameterTypes,
                 p.NativeCallConv,
-                p.Charset);
-            mb.SetImplementationFlags(mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
+                p.Charset
+            );
+            mb.SetImplementationFlags(
+                mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig
+            );
 
             modb.CreateGlobalFunctions();
-            MethodInfo m = modb.GetMethod(p.MethodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static, null, CallingConventions.Any, p.ParameterTypes, null);
+            MethodInfo m = modb.GetMethod(
+                p.MethodName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static,
+                null,
+                CallingConventions.Any,
+                p.ParameterTypes,
+                null
+            );
             Assert.NotNull(m);
             TypeBuilderDefinePInvokeMethodTests.VerifyPInvokeMethod(m.DeclaringType, m, p);
         }

@@ -96,15 +96,12 @@ public class ComplexTypeData : ISetSource
             BillingAddress = address3
         };
 
-        return new List<Customer>
-        {
-            customer1,
-            customer2,
-            customer3
-        };
+        return new List<Customer> { customer1, customer2, customer3 };
     }
 
-    private static IReadOnlyList<CustomerGroup> CreateCustomerGroups(IReadOnlyList<Customer> customers)
+    private static IReadOnlyList<CustomerGroup> CreateCustomerGroups(
+        IReadOnlyList<Customer> customers
+    )
     {
         var group1 = new CustomerGroup
         {
@@ -127,12 +124,7 @@ public class ComplexTypeData : ISetSource
             OptionalCustomer = null
         };
 
-        return new List<CustomerGroup>
-        {
-            group1,
-            group2,
-            group3
-        };
+        return new List<CustomerGroup> { group1, group2, group3 };
     }
 
     private static IReadOnlyList<ValuedCustomer> CreateValuedCustomers()
@@ -185,15 +177,12 @@ public class ComplexTypeData : ISetSource
             BillingAddress = address3
         };
 
-        return new List<ValuedCustomer>
-        {
-            customer1,
-            customer2,
-            customer3
-        };
+        return new List<ValuedCustomer> { customer1, customer2, customer3 };
     }
 
-    private static IReadOnlyList<ValuedCustomerGroup> CreateValuedCustomerGroups(IReadOnlyList<ValuedCustomer> customers)
+    private static IReadOnlyList<ValuedCustomerGroup> CreateValuedCustomerGroups(
+        IReadOnlyList<ValuedCustomer> customers
+    )
     {
         var group1 = new ValuedCustomerGroup
         {
@@ -216,12 +205,7 @@ public class ComplexTypeData : ISetSource
             OptionalCustomer = null
         };
 
-        return new List<ValuedCustomerGroup>
-        {
-            group1,
-            group2,
-            group3
-        };
+        return new List<ValuedCustomerGroup> { group1, group2, group3 };
     }
 
     public static void Seed(PoolableDbContext context)

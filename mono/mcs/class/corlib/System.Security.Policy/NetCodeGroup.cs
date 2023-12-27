@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,219 +33,239 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class NetCodeGroup : CodeGroup
+    {
+        public static readonly string AbsentOriginScheme = String.Empty;
+        public static readonly string AnyOtherOriginScheme = "*";
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class NetCodeGroup : CodeGroup {
+        private Hashtable _rules = new Hashtable();
+        private int _hashcode;
 
-		public static readonly string AbsentOriginScheme = String.Empty;
-		public static readonly string AnyOtherOriginScheme = "*";
+        public NetCodeGroup(IMembershipCondition membershipCondition)
+            : base(membershipCondition, null) { }
 
-		private Hashtable _rules = new Hashtable ();
-		private int _hashcode;
+        // for PolicyLevel (to avoid validation duplication)
+        internal NetCodeGroup(SecurityElement e, PolicyLevel level)
+            : base(e, level) { }
 
-		public NetCodeGroup (IMembershipCondition membershipCondition) 
-			: base (membershipCondition, null) 
-		{
-		}
+        //
+        // Public Properties
+        //
 
-		// for PolicyLevel (to avoid validation duplication)
-		internal NetCodeGroup (SecurityElement e, PolicyLevel level)
-			: base (e, level)
-		{
-		}
-	
-		//
-		// Public Properties
-		//
+        public override string AttributeString
+        {
+            get { return null; }
+        }
 
-		public override string AttributeString {
-			get { return null; }
-		}
-	
-		public override string MergeLogic {
-			get { return "Union"; }
-		}
+        public override string MergeLogic
+        {
+            get { return "Union"; }
+        }
 
-		public override string PermissionSetName {
-			get { return "Same site Web"; }
-		}
+        public override string PermissionSetName
+        {
+            get { return "Same site Web"; }
+        }
 
+        //
+        // Public Methods
+        //
 
-		//
-		// Public Methods
-		//
+        [MonoTODO("(2.0) missing validations")]
+        public void AddConnectAccess(string originScheme, CodeConnectAccess connectAccess)
+        {
+            if (originScheme == null)
+                throw new ArgumentException("originScheme");
 
-		[MonoTODO ("(2.0) missing validations")]
-		public void AddConnectAccess (string originScheme, CodeConnectAccess connectAccess)
-		{
-			if (originScheme == null)
-				throw new ArgumentException ("originScheme");
+            // TODO (2.0) - invalid characters in originScheme
+            if (
+                (originScheme == AbsentOriginScheme)
+                && (connectAccess.Scheme == CodeConnectAccess.OriginScheme)
+            )
+            {
+                throw new ArgumentOutOfRangeException(
+                    "connectAccess",
+                    Locale.GetText("Schema == CodeConnectAccess.OriginScheme")
+                );
+            }
 
-			// TODO (2.0) - invalid characters in originScheme
-			if ((originScheme == AbsentOriginScheme) && (connectAccess.Scheme == CodeConnectAccess.OriginScheme)) {
-				throw new ArgumentOutOfRangeException ("connectAccess", Locale.GetText (
-					"Schema == CodeConnectAccess.OriginScheme"));
-			}
+            if (_rules.ContainsKey(originScheme))
+            {
+                // NULL has no effect
+                if (connectAccess != null)
+                {
+                    CodeConnectAccess[] existing = (CodeConnectAccess[])_rules[originScheme];
+                    CodeConnectAccess[] array = new CodeConnectAccess[existing.Length + 1];
+                    Array.Copy(existing, 0, array, 0, existing.Length);
+                    array[existing.Length] = connectAccess;
+                    _rules[originScheme] = array;
+                }
+            }
+            else
+            {
+                CodeConnectAccess[] array = new CodeConnectAccess[1];
+                array[0] = connectAccess;
+                _rules.Add(originScheme, array);
+                // add null to prevent access
+            }
+        }
 
-			if (_rules.ContainsKey (originScheme)) {
-				// NULL has no effect
-				if (connectAccess != null) {
-					CodeConnectAccess[] existing = (CodeConnectAccess[]) _rules [originScheme];
-					CodeConnectAccess[] array = new CodeConnectAccess [existing.Length + 1];
-					Array.Copy (existing, 0, array, 0, existing.Length);
-					array [existing.Length] = connectAccess;
-					_rules [originScheme] = array;
-				}
-			}
-			else {
-				CodeConnectAccess[] array = new CodeConnectAccess [1];
-				array [0] = connectAccess;
-				_rules.Add (originScheme, array);
-				// add null to prevent access
-			}
-		}
+        public override CodeGroup Copy()
+        {
+            NetCodeGroup copy = new NetCodeGroup(MembershipCondition);
+            copy.Name = Name;
+            copy.Description = Description;
+            copy.PolicyStatement = PolicyStatement;
 
-		public override CodeGroup Copy ()
-		{
-			NetCodeGroup copy = new NetCodeGroup (MembershipCondition);
-			copy.Name = Name;
-			copy.Description = Description;
-			copy.PolicyStatement = PolicyStatement;		
+            foreach (CodeGroup child in Children)
+            {
+                copy.AddChild(child.Copy()); // deep copy
+            }
+            return copy;
+        }
 
-			foreach (CodeGroup child in Children) {
-				copy.AddChild (child.Copy ());	// deep copy
-			}
-			return copy;
-		}
+        private bool Equals(CodeConnectAccess[] rules1, CodeConnectAccess[] rules2)
+        {
+            for (int i = 0; i < rules1.Length; i++)
+            {
+                bool found = false;
+                for (int j = 0; j < rules2.Length; j++)
+                {
+                    if (rules1[i].Equals(rules2[j]))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                    return false;
+            }
+            return true;
+        }
 
-		private bool Equals (CodeConnectAccess[] rules1, CodeConnectAccess[] rules2)
-		{
-			for (int i=0; i < rules1.Length; i++) {
-				bool found = false;
-				for (int j=0; j < rules2.Length; j++) {
-					if (rules1 [i].Equals (rules2 [j])) {
-						found = true;
-						break;
-					}
-				}
-				if (!found)
-					return false;
-			}
-			return true;
-		}
+        public override bool Equals(object o)
+        {
+            if (!base.Equals(o))
+                return false;
+            NetCodeGroup ncg = (o as NetCodeGroup);
+            if (ncg == null)
+                return false;
 
-		public override bool Equals (object o)
-		{
-			if (!base.Equals (o))
-				return false;
-			NetCodeGroup ncg = (o as NetCodeGroup);
-			if (ncg == null) 
-				return false;
-	
-			// check rules
-			foreach (DictionaryEntry de in _rules) {
-				bool found = false;
-				CodeConnectAccess[] ccas = (CodeConnectAccess[]) ncg._rules [de.Key];
-				if (ccas != null)
-					found = Equals ((CodeConnectAccess[]) de.Value, ccas);
-				else
-					found = (de.Value == null);
+            // check rules
+            foreach (DictionaryEntry de in _rules)
+            {
+                bool found = false;
+                CodeConnectAccess[] ccas = (CodeConnectAccess[])ncg._rules[de.Key];
+                if (ccas != null)
+                    found = Equals((CodeConnectAccess[])de.Value, ccas);
+                else
+                    found = (de.Value == null);
 
-				if (!found)
-					return false;
-			}
-			return true;
-		}
+                if (!found)
+                    return false;
+            }
+            return true;
+        }
 
-		public DictionaryEntry[] GetConnectAccessRules ()
-		{
-			DictionaryEntry[] result = new DictionaryEntry [_rules.Count];
-			_rules.CopyTo (result, 0);
-			return result;
-		}
+        public DictionaryEntry[] GetConnectAccessRules()
+        {
+            DictionaryEntry[] result = new DictionaryEntry[_rules.Count];
+            _rules.CopyTo(result, 0);
+            return result;
+        }
 
-		public override int GetHashCode ()
-		{
-			if (_hashcode == 0) {
-				_hashcode = base.GetHashCode ();
-				foreach (DictionaryEntry de in _rules) {
-					CodeConnectAccess[] ccas = (CodeConnectAccess[]) de.Value;
-					if (ccas != null) {
-						foreach (CodeConnectAccess cca in ccas) {
-							_hashcode ^= cca.GetHashCode ();
-						}
-					}
-				}
-			}
-			return _hashcode;
-		}
+        public override int GetHashCode()
+        {
+            if (_hashcode == 0)
+            {
+                _hashcode = base.GetHashCode();
+                foreach (DictionaryEntry de in _rules)
+                {
+                    CodeConnectAccess[] ccas = (CodeConnectAccess[])de.Value;
+                    if (ccas != null)
+                    {
+                        foreach (CodeConnectAccess cca in ccas)
+                        {
+                            _hashcode ^= cca.GetHashCode();
+                        }
+                    }
+                }
+            }
+            return _hashcode;
+        }
 
-		public override PolicyStatement Resolve (Evidence evidence)
-		{
-			if (evidence == null) 
-				throw new ArgumentNullException ("evidence");
+        public override PolicyStatement Resolve(Evidence evidence)
+        {
+            if (evidence == null)
+                throw new ArgumentNullException("evidence");
 
- 			if (!MembershipCondition.Check (evidence))
-				return null;
+            if (!MembershipCondition.Check(evidence))
+                return null;
 
-			PermissionSet ps = null;
-			if (this.PolicyStatement == null)
-				ps = new PermissionSet (PermissionState.None);
-			else
-				ps = this.PolicyStatement.PermissionSet.Copy ();
+            PermissionSet ps = null;
+            if (this.PolicyStatement == null)
+                ps = new PermissionSet(PermissionState.None);
+            else
+                ps = this.PolicyStatement.PermissionSet.Copy();
 
-			if (this.Children.Count > 0) {
-				foreach (CodeGroup child_cg in this.Children) {
-					PolicyStatement child_pst = child_cg.Resolve (evidence);
-					if (child_pst != null) {
-						ps = ps.Union (child_pst.PermissionSet);
-					}
-				}
-			}
+            if (this.Children.Count > 0)
+            {
+                foreach (CodeGroup child_cg in this.Children)
+                {
+                    PolicyStatement child_pst = child_cg.Resolve(evidence);
+                    if (child_pst != null)
+                    {
+                        ps = ps.Union(child_pst.PermissionSet);
+                    }
+                }
+            }
 
-			PolicyStatement pst = this.PolicyStatement.Copy ();
-			pst.PermissionSet = ps;
-			return pst;
-		}
+            PolicyStatement pst = this.PolicyStatement.Copy();
+            pst.PermissionSet = ps;
+            return pst;
+        }
 
-		public void ResetConnectAccess ()
-		{
-			_rules.Clear ();
-		}
+        public void ResetConnectAccess()
+        {
+            _rules.Clear();
+        }
 
-		public override CodeGroup ResolveMatchingCodeGroups (Evidence evidence) 
-		{
-			if (evidence == null)
-				throw new ArgumentNullException ("evidence");
-			
-			CodeGroup return_group = null;
-			if (MembershipCondition.Check (evidence)) {
-				return_group = Copy ();
+        public override CodeGroup ResolveMatchingCodeGroups(Evidence evidence)
+        {
+            if (evidence == null)
+                throw new ArgumentNullException("evidence");
 
-				foreach (CodeGroup child_group in Children) {
-					CodeGroup matching = 
-						child_group.ResolveMatchingCodeGroups (evidence);
-					if (matching == null)
-						continue;
-					return_group.AddChild (matching);
-				}
-			}
+            CodeGroup return_group = null;
+            if (MembershipCondition.Check(evidence))
+            {
+                return_group = Copy();
 
-			return return_group;
-		}
+                foreach (CodeGroup child_group in Children)
+                {
+                    CodeGroup matching = child_group.ResolveMatchingCodeGroups(evidence);
+                    if (matching == null)
+                        continue;
+                    return_group.AddChild(matching);
+                }
+            }
 
-		[MonoTODO ("(2.0) Add new stuff (CodeConnectAccess) into XML")]
-		protected override void CreateXml (SecurityElement element, PolicyLevel level)
-		{
-			base.CreateXml (element, level);
-		}
+            return return_group;
+        }
 
-		[MonoTODO ("(2.0) Parse new stuff (CodeConnectAccess) from XML")]
-		protected override void ParseXml (SecurityElement e, PolicyLevel level)
-		{
-			base.ParseXml (e, level);
-		}
-	}
+        [MonoTODO("(2.0) Add new stuff (CodeConnectAccess) into XML")]
+        protected override void CreateXml(SecurityElement element, PolicyLevel level)
+        {
+            base.CreateXml(element, level);
+        }
+
+        [MonoTODO("(2.0) Parse new stuff (CodeConnectAccess) from XML")]
+        protected override void ParseXml(SecurityElement e, PolicyLevel level)
+        {
+            base.ParseXml(e, level);
+        }
+    }
 }

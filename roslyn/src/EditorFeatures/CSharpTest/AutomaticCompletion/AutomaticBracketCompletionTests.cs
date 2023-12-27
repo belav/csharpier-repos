@@ -256,7 +256,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Array_Multiple_Invalid()
         {
             var code = """
-                class C 
+                class C
                 {
                     int [$$]
                 }
@@ -326,7 +326,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                Bracket.OpenCharacter, Bracket.CloseCharacter);
+                Bracket.OpenCharacter,
+                Bracket.CloseCharacter
+            );
         }
     }
 }

@@ -7,6 +7,6 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class BadDataJsonDeserializationInMemoryTest : BadDataJsonDeserializationTestBase
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => base.OnConfiguring(optionsBuilder.UseInMemoryDatabase("X"));
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+        base.OnConfiguring(optionsBuilder.UseInMemoryDatabase("X"));
 }

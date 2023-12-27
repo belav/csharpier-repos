@@ -4,10 +4,10 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis;
-using Roslyn.Test.Utilities;
 using System;
 using System.IO;
+using Microsoft.CodeAnalysis;
+using Roslyn.Test.Utilities;
 using Xunit;
 
 namespace Roslyn.Utilities.UnitTests.InternalUtilities
@@ -21,17 +21,19 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
             var sourceArray = new byte[] { 1, 2, 3, 4 };
             int sourceOffset = 0;
 
-            var stream = new TestStream(readFunc: (buf, offset, count) =>
-            {
-                if (firstRead)
+            var stream = new TestStream(
+                readFunc: (buf, offset, count) =>
                 {
-                    count = count / 2;
-                    firstRead = false;
+                    if (firstRead)
+                    {
+                        count = count / 2;
+                        firstRead = false;
+                    }
+                    Array.Copy(sourceArray, sourceOffset, buf, offset, count);
+                    sourceOffset += count;
+                    return count;
                 }
-                Array.Copy(sourceArray, sourceOffset, buf, offset, count);
-                sourceOffset += count;
-                return count;
-            });
+            );
 
             var destArray = new byte[4];
             var destCopy = destArray.AsImmutable();
@@ -45,17 +47,24 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
         {
             var buffer = new byte[10];
 
-            var stream = new TestStream(readFunc: (_1, _2, _3) => { throw new IOException(); });
+            var stream = new TestStream(
+                readFunc: (_1, _2, _3) =>
+                {
+                    throw new IOException();
+                }
+            );
             Assert.Throws<IOException>(() => stream.TryReadAll(null, 0, 1));
 
-            stream = new TestStream(readFunc: (buf, offset, count) =>
-            {
-                if (offset + count > buf.Length)
+            stream = new TestStream(
+                readFunc: (buf, offset, count) =>
                 {
-                    throw new ArgumentException();
+                    if (offset + count > buf.Length)
+                    {
+                        throw new ArgumentException();
+                    }
+                    return 0;
                 }
-                return 0;
-            });
+            );
             Assert.Equal(0, stream.TryReadAll(buffer, 0, 1));
             Assert.Throws<ArgumentException>(() => stream.TryReadAll(buffer, 0, 100));
         }
@@ -66,17 +75,19 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
             var firstRead = true;
             var sourceArray = new byte[] { 1, 2, 3, 4 };
 
-            var stream = new TestStream(readFunc: (buf, offset, count) =>
-            {
-                if (firstRead)
+            var stream = new TestStream(
+                readFunc: (buf, offset, count) =>
                 {
-                    count = count / 2;
-                    Array.Copy(sourceArray, 0, buf, offset, count);
-                    firstRead = false;
-                    return count;
+                    if (firstRead)
+                    {
+                        count = count / 2;
+                        Array.Copy(sourceArray, 0, buf, offset, count);
+                        firstRead = false;
+                        return count;
+                    }
+                    throw new IOException();
                 }
-                throw new IOException();
-            });
+            );
 
             var destArray = new byte[4];
             var destCopy = destArray.AsImmutable();
@@ -92,17 +103,19 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
             var sourceArray = new byte[] { 1, 2, 3, 4 };
             var backingStream = new MemoryStream(sourceArray);
 
-            var stream = new TestStream(readFunc: (buf, offset, count) =>
-            {
-                if (firstRead)
+            var stream = new TestStream(
+                readFunc: (buf, offset, count) =>
                 {
-                    count = count / 2;
-                    backingStream.Read(buf, offset, count);
-                    firstRead = false;
-                    return count;
+                    if (firstRead)
+                    {
+                        count = count / 2;
+                        backingStream.Read(buf, offset, count);
+                        firstRead = false;
+                        return count;
+                    }
+                    throw new IOException();
                 }
-                throw new IOException();
-            });
+            );
 
             var destArray = new byte[4];
             Assert.Equal(0, backingStream.Position);
@@ -129,7 +142,10 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
         public void ReadAllBytes(bool canSeek)
         {
             var sourceArray = new byte[] { 1, 2, 3, 4 };
-            var stream = new TestStream(canSeek: canSeek, backingStream: new MemoryStream(sourceArray));
+            var stream = new TestStream(
+                canSeek: canSeek,
+                backingStream: new MemoryStream(sourceArray)
+            );
             stream.ReadByte();
             Assert.Equal(new byte[] { 2, 3, 4 }, stream.ReadAllBytes());
         }
@@ -140,7 +156,10 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
         public void ReadAllBytes_End(bool canSeek)
         {
             var sourceArray = new byte[] { 1, 2 };
-            var stream = new TestStream(canSeek: canSeek, backingStream: new MemoryStream(sourceArray));
+            var stream = new TestStream(
+                canSeek: canSeek,
+                backingStream: new MemoryStream(sourceArray)
+            );
             stream.ReadByte();
             stream.ReadByte();
             Assert.Equal(new byte[0], stream.ReadAllBytes());
@@ -152,7 +171,11 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
         public void ReadAllBytes_Resize(bool canSeek)
         {
             var sourceArray = new byte[] { 1, 2 };
-            var stream = new TestStream(canSeek: canSeek, backingStream: new MemoryStream(sourceArray), length: 3);
+            var stream = new TestStream(
+                canSeek: canSeek,
+                backingStream: new MemoryStream(sourceArray),
+                length: 3
+            );
             Assert.Equal(new byte[] { 1, 2 }, stream.ReadAllBytes());
         }
     }

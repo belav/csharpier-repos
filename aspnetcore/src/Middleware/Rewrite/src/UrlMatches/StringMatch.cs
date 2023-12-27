@@ -20,7 +20,9 @@ internal sealed class StringMatch : UrlMatch
         }
 
         _operation = operation;
-        _stringComparison = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+        _stringComparison = ignoreCase
+            ? StringComparison.OrdinalIgnoreCase
+            : StringComparison.Ordinal;
     }
 
     public override MatchResults Evaluate(string input, RewriteContext context)
@@ -28,15 +30,25 @@ internal sealed class StringMatch : UrlMatch
         switch (_operation)
         {
             case StringOperationType.Equal:
-                return string.Compare(input, _value, _stringComparison) == 0 ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                return string.Compare(input, _value, _stringComparison) == 0
+                    ? MatchResults.EmptySuccess
+                    : MatchResults.EmptyFailure;
             case StringOperationType.Greater:
-                return string.Compare(input, _value, _stringComparison) > 0 ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                return string.Compare(input, _value, _stringComparison) > 0
+                    ? MatchResults.EmptySuccess
+                    : MatchResults.EmptyFailure;
             case StringOperationType.GreaterEqual:
-                return string.Compare(input, _value, _stringComparison) >= 0 ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                return string.Compare(input, _value, _stringComparison) >= 0
+                    ? MatchResults.EmptySuccess
+                    : MatchResults.EmptyFailure;
             case StringOperationType.Less:
-                return string.Compare(input, _value, _stringComparison) < 0 ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                return string.Compare(input, _value, _stringComparison) < 0
+                    ? MatchResults.EmptySuccess
+                    : MatchResults.EmptyFailure;
             case StringOperationType.LessEqual:
-                return string.Compare(input, _value, _stringComparison) <= 0 ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                return string.Compare(input, _value, _stringComparison) <= 0
+                    ? MatchResults.EmptySuccess
+                    : MatchResults.EmptyFailure;
             default:
                 Debug.Fail("This is never reached.");
                 throw new InvalidOperationException(); // Will never be thrown

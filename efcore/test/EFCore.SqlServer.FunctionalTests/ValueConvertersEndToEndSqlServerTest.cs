@@ -11,9 +11,7 @@ public class ValueConvertersEndToEndSqlServerTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndSqlServerTest.ValueConvertersEndToEndSqlServerFixture>
 {
     public ValueConvertersEndToEndSqlServerTest(ValueConvertersEndToEndSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(nameof(ConvertingEntity.BoolAsChar), "nvarchar(1)", false)]
@@ -95,7 +93,11 @@ public class ValueConvertersEndToEndSqlServerTest
     [InlineData(nameof(ConvertingEntity.NullableDateTimeOffsetToBinary), "bigint", true)]
     [InlineData(nameof(ConvertingEntity.NullableDateTimeOffsetToNullableBinary), "bigint", true)]
     [InlineData(nameof(ConvertingEntity.NullableDateTimeOffsetToString), "nvarchar(48)", true)]
-    [InlineData(nameof(ConvertingEntity.NullableDateTimeOffsetToNullableString), "nvarchar(48)", true)]
+    [InlineData(
+        nameof(ConvertingEntity.NullableDateTimeOffsetToNullableString),
+        "nvarchar(48)",
+        true
+    )]
     [InlineData(nameof(ConvertingEntity.NullableDateTimeToBinary), "bigint", true)]
     [InlineData(nameof(ConvertingEntity.NullableDateTimeToNullableBinary), "bigint", true)]
     [InlineData(nameof(ConvertingEntity.NullableDateTimeToString), "nvarchar(48)", true)]
@@ -113,9 +115,17 @@ public class ValueConvertersEndToEndSqlServerTest
     [InlineData(nameof(ConvertingEntity.NullableIPAddressToBytes), "varbinary(16)", true)]
     [InlineData(nameof(ConvertingEntity.NullableIPAddressToNullableBytes), "varbinary(16)", true)]
     [InlineData(nameof(ConvertingEntity.NullablePhysicalAddressToString), "nvarchar(20)", true)]
-    [InlineData(nameof(ConvertingEntity.NullablePhysicalAddressToNullableString), "nvarchar(20)", true)]
+    [InlineData(
+        nameof(ConvertingEntity.NullablePhysicalAddressToNullableString),
+        "nvarchar(20)",
+        true
+    )]
     [InlineData(nameof(ConvertingEntity.NullablePhysicalAddressToBytes), "varbinary(8)", true)]
-    [InlineData(nameof(ConvertingEntity.NullablePhysicalAddressToNullableBytes), "varbinary(8)", true)]
+    [InlineData(
+        nameof(ConvertingEntity.NullablePhysicalAddressToNullableBytes),
+        "varbinary(8)",
+        true
+    )]
     [InlineData(nameof(ConvertingEntity.NullableNumberToString), "nvarchar(64)", true)]
     [InlineData(nameof(ConvertingEntity.NullableNumberToNullableString), "nvarchar(64)", true)]
     [InlineData(nameof(ConvertingEntity.NullableNumberToBytes), "varbinary(1)", true)]
@@ -129,7 +139,11 @@ public class ValueConvertersEndToEndSqlServerTest
     [InlineData(nameof(ConvertingEntity.NullableStringToDateTime), "datetime2", true)]
     [InlineData(nameof(ConvertingEntity.NullableStringToNullableDateTime), "datetime2", true)]
     [InlineData(nameof(ConvertingEntity.NullableStringToDateTimeOffset), "datetimeoffset", true)]
-    [InlineData(nameof(ConvertingEntity.NullableStringToNullableDateTimeOffset), "datetimeoffset", true)]
+    [InlineData(
+        nameof(ConvertingEntity.NullableStringToNullableDateTimeOffset),
+        "datetimeoffset",
+        true
+    )]
     [InlineData(nameof(ConvertingEntity.NullableStringToEnum), "int", true)]
     [InlineData(nameof(ConvertingEntity.NullableStringToNullableEnum), "int", true)]
     [InlineData(nameof(ConvertingEntity.NullableStringToGuid), "uniqueidentifier", true)]
@@ -151,11 +165,14 @@ public class ValueConvertersEndToEndSqlServerTest
     public virtual void Properties_with_conversions_map_to_appropriately_null_columns(
         string propertyName,
         string databaseType,
-        bool isNullable)
+        bool isNullable
+    )
     {
         using var context = CreateContext();
 
-        var property = context.Model.FindEntityType(typeof(ConvertingEntity))!.FindProperty(propertyName);
+        var property = context
+            .Model.FindEntityType(typeof(ConvertingEntity))!
+            .FindProperty(propertyName);
 
         Assert.Equal(databaseType, property!.GetColumnType());
         Assert.Equal(isNullable, property!.IsNullable);
@@ -169,8 +186,14 @@ public class ValueConvertersEndToEndSqlServerTest
         using (var context = CreateContext())
         {
             Assert.Empty(
-                context.Set<ConvertingEntity>()
-                    .Where(e => EF.Functions.DataLength((string)(object)new WrappedString { Value = "" }) == 1).ToList());
+                context
+                    .Set<ConvertingEntity>()
+                    .Where(e =>
+                        EF.Functions.DataLength((string)(object)new WrappedString { Value = "" })
+                        == 1
+                    )
+                    .ToList()
+            );
         }
 
         Assert.Equal(
@@ -180,7 +203,8 @@ FROM [ConvertingEntity] AS [c]
 WHERE CAST(DATALENGTH(CAST(N'' AS nvarchar(max))) AS int) = 1
 """,
             Fixture.TestSqlLoggerFactory.SqlStatements[0],
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 
     private struct WrappedString
@@ -191,9 +215,7 @@ WHERE CAST(DATALENGTH(CAST(N'' AS nvarchar(max))) AS int) = 1
     private class WrappedStringToStringConverter : ValueConverter<WrappedString, string>
     {
         public WrappedStringToStringConverter()
-            : base(v => v.Value, v => new WrappedString { Value = v })
-        {
-        }
+            : base(v => v.Value, v => new WrappedString { Value = v }) { }
     }
 
     [ConditionalFact]
@@ -205,15 +227,17 @@ WHERE CAST(DATALENGTH(CAST(N'' AS nvarchar(max))) AS int) = 1
 
         var guid = new Guid("d854227f-7076-48c3-997c-4e72c1c713b9");
 
-        var mapping = context.Set<SqlServerConvertingEntity>()
-            .EntityType
-            .FindProperty(nameof(SqlServerConvertingEntity.GuidToFixedLengthString))!
+        var mapping = context
+            .Set<SqlServerConvertingEntity>()
+            .EntityType.FindProperty(nameof(SqlServerConvertingEntity.GuidToFixedLengthString))!
             .FindRelationalTypeMapping()!;
 
         Assert.Equal("nchar(40)", mapping.StoreType);
         Assert.Equal(40, mapping.Size);
 
-        Assert.Empty(context.Set<SqlServerConvertingEntity>().Where(e => e.GuidToFixedLengthString != guid));
+        Assert.Empty(
+            context.Set<SqlServerConvertingEntity>().Where(e => e.GuidToFixedLengthString != guid)
+        );
 
         Assert.Equal(
             """
@@ -224,7 +248,8 @@ FROM [SqlServerConvertingEntity] AS [s]
 WHERE [s].[GuidToFixedLengthString] <> @__guid_0
 """,
             Fixture.TestSqlLoggerFactory.SqlStatements[0],
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         var parameter = Fixture.TestSqlLoggerFactory.Parameters.Single();
     }
@@ -236,9 +261,9 @@ WHERE [s].[GuidToFixedLengthString] <> @__guid_0
 
         using var context = CreateContext();
 
-        var mapping = context.Set<SqlServerConvertingEntity>()
-            .EntityType
-            .FindProperty(nameof(SqlServerConvertingEntity.GuidToDbTypeString))!
+        var mapping = context
+            .Set<SqlServerConvertingEntity>()
+            .EntityType.FindProperty(nameof(SqlServerConvertingEntity.GuidToDbTypeString))!
             .FindRelationalTypeMapping()!;
 
         Assert.Equal(DbType.AnsiStringFixedLength, mapping.DbType!);
@@ -246,7 +271,9 @@ WHERE [s].[GuidToFixedLengthString] <> @__guid_0
 
         var guid = new Guid("d854227f-7076-48c3-997c-4e72c1c713b9");
 
-        Assert.Empty(context.Set<SqlServerConvertingEntity>().Where(e => e.GuidToDbTypeString != guid));
+        Assert.Empty(
+            context.Set<SqlServerConvertingEntity>().Where(e => e.GuidToDbTypeString != guid)
+        );
 
         Assert.Equal(
             """
@@ -257,7 +284,8 @@ FROM [SqlServerConvertingEntity] AS [s]
 WHERE [s].[GuidToDbTypeString] <> @__guid_0
 """,
             Fixture.TestSqlLoggerFactory.SqlStatements[0],
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 
     protected class SqlServerConvertingEntity
@@ -274,41 +302,47 @@ WHERE [s].[GuidToDbTypeString] <> @__guid_0
         {
             base.ConfigureConventions(configurationBuilder);
 
-            configurationBuilder.DefaultTypeMapping<WrappedString>().HasConversion<WrappedStringToStringConverter>();
+            configurationBuilder
+                .DefaultTypeMapping<WrappedString>()
+                .HasConversion<WrappedStringToStringConverter>();
         }
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
 
-            modelBuilder.Entity<ConvertingEntity>(
-                b =>
-                {
-                    b.Property(e => e.NullableListOfInt).HasDefaultValue(new List<int>());
-                    b.Property(e => e.ListOfInt).HasDefaultValue(new List<int>());
-                    b.Property(e => e.NullableEnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
-                    b.Property(e => e.EnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
-                });
+            modelBuilder.Entity<ConvertingEntity>(b =>
+            {
+                b.Property(e => e.NullableListOfInt).HasDefaultValue(new List<int>());
+                b.Property(e => e.ListOfInt).HasDefaultValue(new List<int>());
+                b.Property(e => e.NullableEnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
+                b.Property(e => e.EnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
+            });
 
-            modelBuilder.Entity<SqlServerConvertingEntity>(
-                b =>
-                {
-                    b.Property(e => e.GuidToFixedLengthString).HasConversion(
+            modelBuilder.Entity<SqlServerConvertingEntity>(b =>
+            {
+                b.Property(e => e.GuidToFixedLengthString)
+                    .HasConversion(
+                        new GuidToStringConverter(
+                            new RelationalConverterMappingHints(size: 40, fixedLength: true)
+                        )
+                    );
+
+                b.Property(e => e.GuidToDbTypeString)
+                    .HasConversion(
                         new GuidToStringConverter(
                             new RelationalConverterMappingHints(
-                                size: 40, fixedLength: true)));
-
-                    b.Property(e => e.GuidToDbTypeString).HasConversion(
-                        new GuidToStringConverter(
-                            new RelationalConverterMappingHints(
-                                size: 40, unicode: false, dbType: DbType.AnsiStringFixedLength)));
-                });
+                                size: 40,
+                                unicode: false,
+                                dbType: DbType.AnsiStringFixedLength
+                            )
+                        )
+                    );
+            });
         }
     }
 }

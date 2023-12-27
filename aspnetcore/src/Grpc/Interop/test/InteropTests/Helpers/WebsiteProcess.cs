@@ -14,7 +14,9 @@ public class WebsiteProcess : IDisposable
     private readonly Process _process;
     private readonly ProcessEx _processEx;
     private readonly TaskCompletionSource _startTcs;
-    private static readonly Regex NowListeningRegex = new Regex(@"^\s*Now listening on: .*:(?<port>\d*)$");
+    private static readonly Regex NowListeningRegex = new Regex(
+        @"^\s*Now listening on: .*:(?<port>\d*)$"
+    );
     private readonly StringBuilder _output;
     private readonly object _outputLock = new object();
 

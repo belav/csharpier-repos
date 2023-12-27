@@ -16,20 +16,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveUnnecessaryCastDiagnosticAnalyzer,
-        CSharpRemoveUnnecessaryCastCodeFixProvider>;
+        CSharpRemoveUnnecessaryCastCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
     public class RemoveUnnecessaryCastTests
     {
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545979")]
         public async Task DoNotRemoveCastToErrorType()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -50,40 +50,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(5,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(5, 22, 5, 22),
                 ],
-                source);
+                source
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545137"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/870550")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545137"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/870550")
+        ]
         public async Task ParenthesizeToKeepParseTheSame1()
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = 2;
-                        int i = 1;
-                        Goo(x < [|(int)|]i, x > (2 + 3));
+                        static void Main()
+                        {
+                            int x = 2;
+                            int i = 1;
+                            Goo(x < [|(int)|]i, x > (2 + 3));
+                        }
+
+                        static void Goo(bool a, bool b) { }
                     }
-
-                    static void Goo(bool a, bool b) { }
-                }
-                """,
-
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = 2;
-                        int i = 1;
-                        Goo(x < (i), x > (2 + 3));
-                    }
+                        static void Main()
+                        {
+                            int x = 2;
+                            int i = 1;
+                            Goo(x < (i), x > (2 + 3));
+                        }
 
-                    static void Goo(bool a, bool b) { }
-                }
-                """);
+                        static void Goo(bool a, bool b) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545146")]
@@ -91,30 +96,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        Action a = Console.WriteLine;
-                        ([|(Action)|]a)();
+                        static void Main()
+                        {
+                            Action a = Console.WriteLine;
+                            ([|(Action)|]a)();
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        Action a = Console.WriteLine;
-                        a();
+                        static void Main()
+                        {
+                            Action a = Console.WriteLine;
+                            a();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545160")]
@@ -122,35 +127,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var x = (Decimal)[|(int)|]-1;
+                        static void Main()
+                        {
+                            var x = (Decimal)[|(int)|]-1;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var x = (Decimal)(-1);
+                        static void Main()
+                        {
+                            var x = (Decimal)(-1);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545138")]
         public async Task DoNotRemoveTypeParameterCastToObject()
         {
-            var source =
-                """
+            var source = """
                 class D
                 {
                     void Goo<T>(T obj)
@@ -166,8 +170,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545139")]
         public async Task DoNotRemoveCastInIsTest()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class D
@@ -186,8 +189,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545142")]
         public async Task DoNotRemoveCastNeedForUserDefinedOperator()
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     public static implicit operator A(string x)
@@ -213,45 +215,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class A
-                {
-                    public static implicit operator A(string x)
+                    class A
                     {
-                        return new A();
+                        public static implicit operator A(string x)
+                        {
+                            return new A();
+                        }
                     }
-                }
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        A x = [|(string)|]"";
+                        static void Main()
+                        {
+                            A x = [|(string)|]"";
+                        }
                     }
-                }
-                """, """
-                class A
-                {
-                    public static implicit operator A(string x)
+                    """,
+                """
+                    class A
                     {
-                        return new A();
+                        public static implicit operator A(string x)
+                        {
+                            return new A();
+                        }
                     }
-                }
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        A x = "";
+                        static void Main()
+                        {
+                            A x = "";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545143")]
         public async Task DoNotRemovePointerCast1()
         {
-            var source =
-                """
+            var source = """
                 unsafe class C
                 {
                     static unsafe void Main()
@@ -270,8 +273,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // The cast below can't be removed because it would result in the Delegate
             // op_Equality operator overload being used over reference equality.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -293,38 +295,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        var x = (Action)delegate {
+                        static void Main()
+                        {
+                            var x = (Action)delegate {
+                            }
+
+                            [|as Action|];
                         }
-
-                        [|as Action|];
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        var x = (Action)delegate {
-                        };
+                        static void Main()
+                        {
+                            var x = (Action)delegate {
+                            };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545147")]
         public async Task DoNotRemoveCastInFloatingPointOperation()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     static void Main()
@@ -341,8 +343,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545157")]
         public async Task DoNotRemoveIdentityCastWhichAffectsOverloadResolution1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -368,8 +369,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545158")]
         public async Task DoNotRemoveIdentityCastWhichAffectsOverloadResolution2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -396,8 +396,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545158")]
         public async Task DoNotRemoveIdentityCastWhichAffectsOverloadResolution3()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -425,8 +424,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545747")]
         public async Task DoNotRemoveCastWhichChangesTypeOfInferredLocal()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     static void Main()
@@ -443,8 +441,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545159")]
         public async Task DoNotRemoveNeededCastToIListOfObject()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Collections.Generic;
 
@@ -468,27 +465,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             await VerifyCS.VerifyCodeFixAsync(source, source);
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545287"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545287"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         public async Task RemoveUnneededCastInParameterDefaultValue()
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    static void M1(int? i1 = [|(int?)|]null)
+                    class Program
                     {
+                        static void M1(int? i1 = [|(int?)|]null)
+                        {
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class Program
-                {
-                    static void M1(int? i1 = null)
+                    class Program
                     {
+                        static void M1(int? i1 = null)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545289")]
@@ -496,24 +497,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    static long M2()
+                    class Program
                     {
-                        return [|(long)|]5;
+                        static long M2()
+                        {
+                            return [|(long)|]5;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class Program
-                {
-                    static long M2()
+                    class Program
                     {
-                        return 5;
+                        static long M2()
+                        {
+                            return 5;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
@@ -521,26 +522,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                class Program
-                {
-                    static void M1()
+                    using System;
+                    class Program
                     {
-                        Func<long> f1 = () => [|(long)|]5;
+                        static void M1()
+                        {
+                            Func<long> f1 = () => [|(long)|]5;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
-                class Program
-                {
-                    static void M1()
+                    using System;
+                    class Program
                     {
-                        Func<long> f1 = () => 5;
+                        static void M1()
+                        {
+                            Func<long> f1 = () => 5;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
@@ -548,33 +549,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                class Program
-                {
-                    static void M1()
+                    using System;
+                    class Program
                     {
-                        Func<long> f1 = () => { return [|(long)|]5; };
+                        static void M1()
+                        {
+                            Func<long> f1 = () => { return [|(long)|]5; };
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
-                class Program
-                {
-                    static void M1()
+                    using System;
+                    class Program
                     {
-                        Func<long> f1 = () => { return 5; };
+                        static void M1()
+                        {
+                            Func<long> f1 = () => { return 5; };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda3()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class Program
                 {
@@ -584,8 +584,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 class Program
                 {
@@ -598,22 +597,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { source },
-                },
-                FixedState =
-                {
-                    Sources = { fixedSource },
-                },
+                TestState = { Sources = { source }, },
+                FixedState = { Sources = { fixedSource }, },
             }.RunAsync();
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda4()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class Program
                 {
@@ -623,8 +615,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 class Program
                 {
@@ -637,22 +628,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { source },
-                },
-                FixedState =
-                {
-                    Sources = { fixedSource },
-                },
+                TestState = { Sources = { source }, },
+                FixedState = { Sources = { fixedSource }, },
             }.RunAsync();
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
         public async Task RemoveUnneededCastInConditionalExpression1()
         {
-            var source =
-                """
+            var source = """
                 class Test
                 {
                     public static void Main()
@@ -663,8 +647,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class Test
                 {
                     public static void Main()
@@ -678,14 +661,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { source },
-                },
-                FixedState =
-                {
-                    Sources = { fixedSource },
-                },
+                TestState = { Sources = { source }, },
+                FixedState = { Sources = { fixedSource }, },
             }.RunAsync();
         }
 
@@ -694,34 +671,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Test
-                {
-                    public static void Main()
+                    class Test
                     {
-                        int b = 5;
+                        public static void Main()
+                        {
+                            int b = 5;
 
-                        long f1 = (b == 5) ? 4 : [|(long)|]5;
+                            long f1 = (b == 5) ? 4 : [|(long)|]5;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Test
-                {
-                    public static void Main()
+                    class Test
                     {
-                        int b = 5;
+                        public static void Main()
+                        {
+                            int b = 5;
 
-                        long f1 = (b == 5) ? 4 : 5;
+                            long f1 = (b == 5) ? 4 : 5;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
         public async Task DoNotRemoveNeededCastInConditionalExpression()
         {
-            var source =
-                """
+            var source = """
                 class Test
                 {
                     public static void Main()
@@ -738,8 +715,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
         public async Task RemoveUnneededCastInConditionalExpression4()
         {
-            var source =
-                """
+            var source = """
                 class Test
                 {
                     public static void Main()
@@ -750,8 +726,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class Test
                 {
                     public static void Main()
@@ -762,8 +737,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """;
-            var batchFixedSource =
-                """
+            var batchFixedSource = """
                 class Test
                 {
                     public static void Main()
@@ -791,34 +765,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                class Test
-                {
-                    delegate void D(int x);
-
-                    static void Main(string[] args)
+                    using System;
+                    class Test
                     {
-                        var cd1 = new D([|(Action<int>)|]M1);
+                        delegate void D(int x);
+
+                        static void Main(string[] args)
+                        {
+                            var cd1 = new D([|(Action<int>)|]M1);
+                        }
+
+                        public static void M1(int i) { }
                     }
-
-                    public static void M1(int i) { }
-                }
-                """,
-
+                    """,
                 """
-                using System;
-                class Test
-                {
-                    delegate void D(int x);
-
-                    static void Main(string[] args)
+                    using System;
+                    class Test
                     {
-                        var cd1 = new D(M1);
-                    }
+                        delegate void D(int x);
 
-                    public static void M1(int i) { }
-                }
-                """);
+                        static void Main(string[] args)
+                        {
+                            var cd1 = new D(M1);
+                        }
+
+                        public static void M1(int i) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545419")]
@@ -826,32 +800,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                class Test
-                {
-                    public static void Main()
+                    using System;
+                    class Test
                     {
-                        Func<Func<int>> f2 = () =>
+                        public static void Main()
                         {
-                            return [|(Func<int>)|](/*Lambda returning int const*/() => 5 /*Const returned is 5*/);
-                        };
+                            Func<Func<int>> f2 = () =>
+                            {
+                                return [|(Func<int>)|](/*Lambda returning int const*/() => 5 /*Const returned is 5*/);
+                            };
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
-                class Test
-                {
-                    public static void Main()
+                    using System;
+                    class Test
                     {
-                        Func<Func<int>> f2 = () =>
+                        public static void Main()
                         {
-                            return /*Lambda returning int const*/() => 5 /*Const returned is 5*/;
-                        };
+                            Func<Func<int>> f2 = () =>
+                            {
+                                return /*Lambda returning int const*/() => 5 /*Const returned is 5*/;
+                            };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545422")]
@@ -859,32 +833,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Test
-                {
-                    static void Main()
+                    class Test
                     {
-                        switch (5L)
+                        static void Main()
                         {
-                            case [|(long)|]5:
-                                break;
+                            switch (5L)
+                            {
+                                case [|(long)|]5:
+                                    break;
+                            }
                         }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class Test
-                {
-                    static void Main()
+                    class Test
                     {
-                        switch (5L)
+                        static void Main()
                         {
-                            case 5:
-                                break;
+                            switch (5L)
+                            {
+                                case 5:
+                                    break;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938")]
@@ -893,34 +867,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Test
-                {
-                    static void Main()
+                    class Test
                     {
-                        switch (5L)
+                        static void Main()
                         {
-                            case 5:
-                                goto case [|(long)|]5;
-                                break;
+                            switch (5L)
+                            {
+                                case 5:
+                                    goto case [|(long)|]5;
+                                    break;
+                            }
                         }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class Test
-                {
-                    static void Main()
+                    class Test
                     {
-                        switch (5L)
+                        static void Main()
                         {
-                            case 5:
-                                goto case 5;
-                                break;
+                            switch (5L)
+                            {
+                                case 5:
+                                    goto case 5;
+                                    break;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545595")]
@@ -929,36 +903,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var z = new List<long> { [|(long)0|] };
+                        static void Main()
+                        {
+                            var z = new List<long> { [|(long)0|] };
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var z = new List<long> { 0 };
+                        static void Main()
+                        {
+                            var z = new List<long> { 0 };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529787")]
         [WpfFact(Skip = "529787")]
         public async Task DoNotRemoveNecessaryCastWhichInCollectionInitializer1()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Collections.Generic;
 
@@ -988,8 +961,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [WpfFact(Skip = "529787")]
         public async Task DoNotRemoveNecessaryCastWhichInCollectionInitializer2()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Collections.Generic;
 
@@ -1020,25 +992,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class X
-                {
-                    static void Goo()
+                    class X
                     {
-                        string x = "";
-                        var s = new object[] { [|(object)|]x };
+                        static void Goo()
+                        {
+                            string x = "";
+                            var s = new object[] { [|(object)|]x };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class X
-                {
-                    static void Goo()
+                    class X
                     {
-                        string x = "";
-                        var s = new object[] { x };
+                        static void Goo()
+                        {
+                            string x = "";
+                            var s = new object[] { x };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545616")]
@@ -1046,38 +1019,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                class MyAction
-                {
-                    static void Goo()
+                    using System;
+                    class MyAction
                     {
-                        MyAction x = null;
-                        var y = x + [|(Action)|]delegate { };
-                    }
+                        static void Goo()
+                        {
+                            MyAction x = null;
+                            var y = x + [|(Action)|]delegate { };
+                        }
 
-                    public static MyAction operator +(MyAction x, Action y)
-                    {
-                        throw new NotImplementedException();
+                        public static MyAction operator +(MyAction x, Action y)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
-                class MyAction
-                {
-                    static void Goo()
+                    using System;
+                    class MyAction
                     {
-                        MyAction x = null;
-                        var y = x + delegate { };
-                    }
+                        static void Goo()
+                        {
+                            MyAction x = null;
+                            var y = x + delegate { };
+                        }
 
-                    public static MyAction operator +(MyAction x, Action y)
-                    {
-                        throw new NotImplementedException();
+                        public static MyAction operator +(MyAction x, Action y)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545616")]
@@ -1102,25 +1075,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                class MyAction
-                {
-                    static void Goo()
+                    using System;
+                    class MyAction
                     {
-                        Action y = [|(Action)|](() => { });
+                        static void Goo()
+                        {
+                            Action y = [|(Action)|](() => { });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class MyAction
-                {
-                    static void Goo()
+                    using System;
+                    class MyAction
                     {
-                        Action y = () => { };
+                        static void Goo()
+                        {
+                            Action y = () => { };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545822")]
@@ -1128,37 +1102,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Goo<T>()
+                    class Program
                     {
-                        Action a = null;
-                        var x = [|(Action)|](Goo<Guid>)==a;
+                        static void Goo<T>()
+                        {
+                            Action a = null;
+                            var x = [|(Action)|](Goo<Guid>)==a;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Goo<T>()
+                    class Program
                     {
-                        Action a = null;
-                        var x = (Goo<Guid>) == a;
+                        static void Goo<T>()
+                        {
+                            Action a = null;
+                            var x = (Goo<Guid>) == a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545560")]
         public async Task DoNotRemoveNecessaryCastWithExplicitUserDefinedConversion()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class A
@@ -1190,8 +1163,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545608")]
         public async Task DoNotRemoveNecessaryCastWithImplicitUserDefinedConversion()
         {
-            var source =
-                """
+            var source = """
                 class X
                 {
                     static void Goo()
@@ -1215,7 +1187,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(11,18): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(11, 18, 11, 18),
                 ],
-                source);
+                source
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545941")]
@@ -1225,8 +1198,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // an expression of type Exception -- not an expression convertible to
             // Exception.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 class E
@@ -1253,8 +1225,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // an expression of type Exception -- not an expression convertible to
             // Exception.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -1275,35 +1246,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class E
-                {
-                    static void Main()
+                    class E
                     {
-                        throw [|(Exception)|]new Exception();
+                        static void Main()
+                        {
+                            throw [|(Exception)|]new Exception();
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
+                    using System;
 
-                class E
-                {
-                    static void Main()
+                    class E
                     {
-                        throw new Exception();
+                        static void Main()
+                        {
+                            throw new Exception();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545945")]
         public async Task DoNotRemoveNecessaryDowncast()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(object y)
@@ -1319,8 +1289,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545591")]
         public async Task DoNotRemoveNecessaryCastWithinLambda()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -1360,8 +1329,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545606")]
         public async Task DoNotRemoveNecessaryCastFromNullToTypeParameter()
         {
-            var source =
-                """
+            var source = """
                 class X
                 {
                     static void Goo<T, S>() where T : class, S
@@ -1377,8 +1345,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545744")]
         public async Task DoNotRemoveNecessaryCastInImplicitlyTypedArray()
         {
-            var source =
-                """
+            var source = """
                 class X
                 {
                     static void Goo()
@@ -1398,7 +1365,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(5,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(5, 22, 5, 22),
                 ],
-                source);
+                source
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545750")]
@@ -1406,33 +1374,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class X
-                {
-                    static void Main()
+                    class X
                     {
-                        var s = ([|(object)|]new X()).ToString();
-                    }
+                        static void Main()
+                        {
+                            var s = ([|(object)|]new X()).ToString();
+                        }
 
-                    public override string ToString()
-                    {
-                        return "";
+                        public override string ToString()
+                        {
+                            return "";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class X
-                {
-                    static void Main()
+                    class X
                     {
-                        var s = new X().ToString();
-                    }
+                        static void Main()
+                        {
+                            var s = new X().ToString();
+                        }
 
-                    public override string ToString()
-                    {
-                        return "";
+                        public override string ToString()
+                        {
+                            return "";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545855")]
@@ -1440,54 +1409,54 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Reflection;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Reflection;
 
-                static class Program
-                {
-                    static void Main()
+                    static class Program
                     {
-                        FieldInfo[] fields = typeof(Exception).GetFields();
-                        Console.WriteLine(fields.Any([|(Func<FieldInfo, bool>)|](field => field.IsStatic)));
-                    }
+                        static void Main()
+                        {
+                            FieldInfo[] fields = typeof(Exception).GetFields();
+                            Console.WriteLine(fields.Any([|(Func<FieldInfo, bool>)|](field => field.IsStatic)));
+                        }
 
-                    static bool Any<T>(this IEnumerable<T> s, Func<T, bool> predicate)
-                    {
-                        return false;
-                    }
+                        static bool Any<T>(this IEnumerable<T> s, Func<T, bool> predicate)
+                        {
+                            return false;
+                        }
 
-                    static bool Any<T>(this ICollection<T> s, Func<T, bool> predicate)
-                    {
-                        return true;
+                        static bool Any<T>(this ICollection<T> s, Func<T, bool> predicate)
+                        {
+                            return true;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Reflection;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Reflection;
 
-                static class Program
-                {
-                    static void Main()
+                    static class Program
                     {
-                        FieldInfo[] fields = typeof(Exception).GetFields();
-                        Console.WriteLine(fields.Any(field => field.IsStatic));
-                    }
+                        static void Main()
+                        {
+                            FieldInfo[] fields = typeof(Exception).GetFields();
+                            Console.WriteLine(fields.Any(field => field.IsStatic));
+                        }
 
-                    static bool Any<T>(this IEnumerable<T> s, Func<T, bool> predicate)
-                    {
-                        return false;
-                    }
+                        static bool Any<T>(this IEnumerable<T> s, Func<T, bool> predicate)
+                        {
+                            return false;
+                        }
 
-                    static bool Any<T>(this ICollection<T> s, Func<T, bool> predicate)
-                    {
-                        return true;
+                        static bool Any<T>(this ICollection<T> s, Func<T, bool> predicate)
+                        {
+                            return true;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529816")]
@@ -1495,39 +1464,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class A
-                {
-                    int Select(Func<int, long> x) { return 1; }
-
-                    static void Main()
+                    class A
                     {
-                        Console.WriteLine(from y in new A() select [|(long)|]0);
-                    }
-                }
-                """,
+                        int Select(Func<int, long> x) { return 1; }
 
+                        static void Main()
+                        {
+                            Console.WriteLine(from y in new A() select [|(long)|]0);
+                        }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class A
-                {
-                    int Select(Func<int, long> x) { return 1; }
-
-                    static void Main()
+                    class A
                     {
-                        Console.WriteLine(from y in new A() select 0);
+                        int Select(Func<int, long> x) { return 1; }
+
+                        static void Main()
+                        {
+                            Console.WriteLine(from y in new A() select 0);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529816")]
         public async Task DoNotRemoveNecessaryCastInQueryExpression()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class A
@@ -1556,8 +1524,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545848")]
         public async Task DoNotRemoveNecessaryCastInConstructorInitializer()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -1599,103 +1566,104 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface IIncrementable
-                {
-                    int Value { get; }
-
-                    void Increment();
-                }
-
-                struct S : IIncrementable
-                {
-                    public int Value { get; private set; }
-
-                    public void Increment()
+                    interface IIncrementable
                     {
-                        Value++;
-                    }
-                }
+                        int Value { get; }
 
-                class C : IIncrementable
-                {
-                    public int Value { get; private set; }
-
-                    public void Increment()
-                    {
-                        Value++;
-                    }
-                }
-
-                static class Program
-                {
-                    static void Main()
-                    {
-                        Goo(new S(), new C());
+                        void Increment();
                     }
 
-                    static void Goo<TAny, TClass>(TAny x, TClass y)
-                        where TAny : IIncrementable
-                        where TClass : class, IIncrementable
+                    struct S : IIncrementable
                     {
-                        ((IIncrementable)x).Increment(); // False Unnecessary Cast
-                        ([|(IIncrementable)|]y).Increment(); // Unnecessary Cast - OK
+                        public int Value { get; private set; }
 
-                        Console.WriteLine(x.Value);
-                        Console.WriteLine(y.Value);
+                        public void Increment()
+                        {
+                            Value++;
+                        }
                     }
-                }
-                """,
+
+                    class C : IIncrementable
+                    {
+                        public int Value { get; private set; }
+
+                        public void Increment()
+                        {
+                            Value++;
+                        }
+                    }
+
+                    static class Program
+                    {
+                        static void Main()
+                        {
+                            Goo(new S(), new C());
+                        }
+
+                        static void Goo<TAny, TClass>(TAny x, TClass y)
+                            where TAny : IIncrementable
+                            where TClass : class, IIncrementable
+                        {
+                            ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                            ([|(IIncrementable)|]y).Increment(); // Unnecessary Cast - OK
+
+                            Console.WriteLine(x.Value);
+                            Console.WriteLine(y.Value);
+                        }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface IIncrementable
-                {
-                    int Value { get; }
-
-                    void Increment();
-                }
-
-                struct S : IIncrementable
-                {
-                    public int Value { get; private set; }
-
-                    public void Increment()
+                    interface IIncrementable
                     {
-                        Value++;
-                    }
-                }
+                        int Value { get; }
 
-                class C : IIncrementable
-                {
-                    public int Value { get; private set; }
-
-                    public void Increment()
-                    {
-                        Value++;
-                    }
-                }
-
-                static class Program
-                {
-                    static void Main()
-                    {
-                        Goo(new S(), new C());
+                        void Increment();
                     }
 
-                    static void Goo<TAny, TClass>(TAny x, TClass y)
-                        where TAny : IIncrementable
-                        where TClass : class, IIncrementable
+                    struct S : IIncrementable
                     {
-                        ((IIncrementable)x).Increment(); // False Unnecessary Cast
-                        y.Increment(); // Unnecessary Cast - OK
+                        public int Value { get; private set; }
 
-                        Console.WriteLine(x.Value);
-                        Console.WriteLine(y.Value);
+                        public void Increment()
+                        {
+                            Value++;
+                        }
                     }
-                }
-                """);
+
+                    class C : IIncrementable
+                    {
+                        public int Value { get; private set; }
+
+                        public void Increment()
+                        {
+                            Value++;
+                        }
+                    }
+
+                    static class Program
+                    {
+                        static void Main()
+                        {
+                            Goo(new S(), new C());
+                        }
+
+                        static void Goo<TAny, TClass>(TAny x, TClass y)
+                            where TAny : IIncrementable
+                            where TClass : class, IIncrementable
+                        {
+                            ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                            y.Increment(); // Unnecessary Cast - OK
+
+                            Console.WriteLine(x.Value);
+                            Console.WriteLine(y.Value);
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529831")]
@@ -1703,93 +1671,93 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface IIncrementable
-                {
-                    int Value { get; }
-                    void Increment();
-                }
-
-                struct S : IIncrementable
-                {
-                    public int Value { get; private set; }
-                    public void Increment() { Value++; }
-                }
-
-                class C: IIncrementable
-                {
-                    public int Value { get; private set; }
-                    public void Increment() { Value++; }
-                }
-
-                static class Program
-                {
-                    static void Main()
+                    interface IIncrementable
                     {
-                        Goo(new S(), new C());
+                        int Value { get; }
+                        void Increment();
                     }
 
-                    static void Goo<TAny, TClass>(TAny x, TClass y) 
-                        where TAny : IIncrementable
-                        where TClass : class, IIncrementable
+                    struct S : IIncrementable
                     {
-                        ((IIncrementable)x).Increment(); // False Unnecessary Cast
-                        ([|(IIncrementable)|]y).Increment(); // Unnecessary Cast - OK
-
-                        Console.WriteLine(x.Value);
-                        Console.WriteLine(y.Value);
+                        public int Value { get; private set; }
+                        public void Increment() { Value++; }
                     }
-                }
-                """,
+
+                    class C: IIncrementable
+                    {
+                        public int Value { get; private set; }
+                        public void Increment() { Value++; }
+                    }
+
+                    static class Program
+                    {
+                        static void Main()
+                        {
+                            Goo(new S(), new C());
+                        }
+
+                        static void Goo<TAny, TClass>(TAny x, TClass y) 
+                            where TAny : IIncrementable
+                            where TClass : class, IIncrementable
+                        {
+                            ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                            ([|(IIncrementable)|]y).Increment(); // Unnecessary Cast - OK
+
+                            Console.WriteLine(x.Value);
+                            Console.WriteLine(y.Value);
+                        }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface IIncrementable
-                {
-                    int Value { get; }
-                    void Increment();
-                }
-
-                struct S : IIncrementable
-                {
-                    public int Value { get; private set; }
-                    public void Increment() { Value++; }
-                }
-
-                class C: IIncrementable
-                {
-                    public int Value { get; private set; }
-                    public void Increment() { Value++; }
-                }
-
-                static class Program
-                {
-                    static void Main()
+                    interface IIncrementable
                     {
-                        Goo(new S(), new C());
+                        int Value { get; }
+                        void Increment();
                     }
 
-                    static void Goo<TAny, TClass>(TAny x, TClass y) 
-                        where TAny : IIncrementable
-                        where TClass : class, IIncrementable
+                    struct S : IIncrementable
                     {
-                        ((IIncrementable)x).Increment(); // False Unnecessary Cast
-                        y.Increment(); // Unnecessary Cast - OK
-
-                        Console.WriteLine(x.Value);
-                        Console.WriteLine(y.Value);
+                        public int Value { get; private set; }
+                        public void Increment() { Value++; }
                     }
-                }
-                """);
+
+                    class C: IIncrementable
+                    {
+                        public int Value { get; private set; }
+                        public void Increment() { Value++; }
+                    }
+
+                    static class Program
+                    {
+                        static void Main()
+                        {
+                            Goo(new S(), new C());
+                        }
+
+                        static void Goo<TAny, TClass>(TAny x, TClass y) 
+                            where TAny : IIncrementable
+                            where TClass : class, IIncrementable
+                        {
+                            ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                            y.Increment(); // Unnecessary Cast - OK
+
+                            Console.WriteLine(x.Value);
+                            Console.WriteLine(y.Value);
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545877")]
         public async Task DoNotCrashOnIncompleteMethodDeclaration()
         {
             // This test has intentional syntax errors
-            var source =
-                """
+            var source = """
                 using System;
 
                 class A
@@ -1812,49 +1780,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46423")]
         public async Task RemoveUnneededTargetTypedCast()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                class Other
-                {
-                    public short GetScopeIdForTelemetry(FixAllScope scope)
-                        => [|(short)|](scope switch
-                        {
-                            FixAllScope.Document => 1,
-                            FixAllScope.Project => 2,
-                            FixAllScope.Solution => 3,
-                            _ => 4,
-                        });
-
-                    public enum FixAllScope
-                    {
-                        Document,
-                        Project,
-                        Solution,
-                        Other
-                    }
-                }
-                """,
+            await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Other
-                {
-                    public short GetScopeIdForTelemetry(FixAllScope scope)
-                        => scope switch
-                        {
-                            FixAllScope.Document => 1,
-                            FixAllScope.Project => 2,
-                            FixAllScope.Solution => 3,
-                            _ => 4,
-                        };
-
-                    public enum FixAllScope
+                    class Other
                     {
-                        Document,
-                        Project,
-                        Solution,
-                        Other
+                        public short GetScopeIdForTelemetry(FixAllScope scope)
+                            => [|(short)|](scope switch
+                            {
+                                FixAllScope.Document => 1,
+                                FixAllScope.Project => 2,
+                                FixAllScope.Solution => 3,
+                                _ => 4,
+                            });
+
+                        public enum FixAllScope
+                        {
+                            Document,
+                            Project,
+                            Solution,
+                            Other
+                        }
                     }
-                }
+                    """,
                 """
-);
+                    class Other
+                    {
+                        public short GetScopeIdForTelemetry(FixAllScope scope)
+                            => scope switch
+                            {
+                                FixAllScope.Document => 1,
+                                FixAllScope.Project => 2,
+                                FixAllScope.Solution => 3,
+                                _ => 4,
+                            };
+
+                        public enum FixAllScope
+                        {
+                            Document,
+                            Project,
+                            Solution,
+                            Other
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545777")]
@@ -1862,32 +1831,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        long x =
-                #if true
-                            [|(long)|] // Remove Unnecessary Cast
-                #endif
-                            1;
+                        static void Main()
+                        {
+                            long x =
+                    #if true
+                                [|(long)|] // Remove Unnecessary Cast
+                    #endif
+                                1;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        long x =
-                #if true
-                            // Remove Unnecessary Cast
-                #endif
-                            1;
+                        static void Main()
+                        {
+                            long x =
+                    #if true
+                                // Remove Unnecessary Cast
+                    #endif
+                                1;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529791")]
@@ -1895,26 +1864,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class X
-                {
-                    static void Goo()
+                    class X
                     {
-                        object x = [|(string)|]null;
-                        object y = [|(int?)|]null;
+                        static void Goo()
+                        {
+                            object x = [|(string)|]null;
+                            object y = [|(int?)|]null;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class X
-                {
-                    static void Goo()
+                    class X
                     {
-                        object x = null;
-                        object y = null;
+                        static void Goo()
+                        {
+                            object x = null;
+                            object y = null;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545842")]
@@ -1922,28 +1891,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                static class C
-                {
-                    static void Main()
+                    static class C
                     {
-                        int? x = 1;
-                        long y = 2;
-                        long? z = x + [|(long?)|] y;
+                        static void Main()
+                        {
+                            int? x = 1;
+                            long y = 2;
+                            long? z = x + [|(long?)|] y;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                static class C
-                {
-                    static void Main()
+                    static class C
                     {
-                        int? x = 1;
-                        long y = 2;
-                        long? z = x + y;
+                        static void Main()
+                        {
+                            int? x = 1;
+                            long y = 2;
+                            long? z = x + y;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545850")]
@@ -1951,33 +1920,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = 1;
-                        ([|(int)|]x).ToString();
+                        static void Main()
+                        {
+                            int x = 1;
+                            ([|(int)|]x).ToString();
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = 1;
-                        x.ToString();
+                        static void Main()
+                        {
+                            int x = 1;
+                            x.ToString();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529846")]
         public async Task DoNotRemoveNecessaryCastFromTypeParameterToObject()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     static void Goo<T>(T x, object y)
@@ -1995,8 +1963,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545858")]
         public async Task DoNotRemoveNecessaryCastFromDelegateTypeToMulticastDelegate()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -2019,8 +1986,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // The cast below can't be removed because it would result in the implicit
             // conversion to int being called instead.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -2050,8 +2016,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             // Array bounds must be an int, so the cast below can't be removed.
 
-            var source =
-                """
+            var source = """
                 class C
                 {
                     static void Main()
@@ -2067,8 +2032,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529842")]
         public async Task DoNotRemoveNecessaryCastInTernaryExpression()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class X
@@ -2090,59 +2054,66 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             await VerifyCS.VerifyCodeFixAsync(source, source);
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545882"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545882"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         public async Task RemoveCastInConstructorInitializer1()
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    C(int x) { }
-                    C() : this([|(int)|]1) { }
-                }
-                """,
-
+                    class C
+                    {
+                        C(int x) { }
+                        C() : this([|(int)|]1) { }
+                    }
+                    """,
                 """
-                class C
-                {
-                    C(int x) { }
-                    C() : this(1) { }
-                }
-                """);
+                    class C
+                    {
+                        C(int x) { }
+                        C() : this(1) { }
+                    }
+                    """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545958"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545958"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         public async Task RemoveCastInConstructorInitializer2()
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.Collections;
+                    using System.Collections;
 
-                class C
-                {
-                    C(int x) { }
-                    C(object x) { }
-                    C() : this([|(IEnumerable)|]"") { }
-                }
-                """,
-
+                    class C
+                    {
+                        C(int x) { }
+                        C(object x) { }
+                        C() : this([|(IEnumerable)|]"") { }
+                    }
+                    """,
                 """
-                using System.Collections;
+                    using System.Collections;
 
-                class C
-                {
-                    C(int x) { }
-                    C(object x) { }
-                    C() : this("") { }
-                }
-                """);
+                    class C
+                    {
+                        C(int x) { }
+                        C(object x) { }
+                        C() : this("") { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545957")]
         public async Task DoNotRemoveCastInConstructorInitializer3()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     C(int x)
@@ -2158,8 +2129,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(7,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                DiagnosticResult.CompilerError("CS1503").WithSpan(7, 16, 7, 23).WithArguments("1", "long", "int"),
-                source);
+                DiagnosticResult
+                    .CompilerError("CS1503")
+                    .WithSpan(7, 16, 7, 23)
+                    .WithArguments("1", "long", "int"),
+                source
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545842")]
@@ -2167,28 +2142,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                static class C
-                {
-                    static void Main()
+                    static class C
                     {
-                        int? x = 1;
-                        long y = 2;
-                        long? z = x + [|(long?)|]y;
+                        static void Main()
+                        {
+                            int? x = 1;
+                            long y = 2;
+                            long? z = x + [|(long?)|]y;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                static class C
-                {
-                    static void Main()
+                    static class C
                     {
-                        int? x = 1;
-                        long y = 2;
-                        long? z = x + y;
+                        static void Main()
+                        {
+                            int? x = 1;
+                            long y = 2;
+                            long? z = x + y;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545942")]
@@ -2197,8 +2172,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Note: The cast below can't be removed because it would result in an
             // illegal reference equality test between object and a value type.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -2219,8 +2193,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             // Note: The cast below can't be removed because its expression doesn't bind.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -2241,8 +2214,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Note: The cast below can't be removed because it would result in *null,
             // which is illegal.
 
-            var source =
-                """
+            var source = """
                 unsafe class C
                 {
                     int x = *(int*)null;
@@ -2258,8 +2230,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Note: The cast below can't be removed because it would result in dereferencing
             // void*, which is illegal.
 
-            var source =
-                """
+            var source = """
                 unsafe class C
                 {
                     static void Main()
@@ -2280,8 +2251,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Conservatively disable cast simplifications for casts involving pointer conversions.
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
-            var source =
-                """
+            var source = """
                 class C
                 {
                     public unsafe float ReadSingle(byte* ptr)
@@ -2301,8 +2271,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Conservatively disable cast simplifications within explicit checked/unchecked expressions.
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private unsafe readonly byte* _endPointer;
@@ -2327,8 +2296,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Conservatively disable cast simplifications within explicit checked/unchecked statements.
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private unsafe readonly byte* _endPointer;
@@ -2356,8 +2324,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Conservatively disable cast simplifications within explicit checked/unchecked expressions.
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private unsafe readonly byte* _endPointer;
@@ -2382,8 +2349,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Conservatively disable cast simplifications within explicit checked/unchecked statements.
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private unsafe readonly byte* _endPointer;
@@ -2424,30 +2390,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    object M1(bool b)
+                    class C
                     {
-                        return b ? [|(double)|]1 : [|(double)|]0;
+                        object M1(bool b)
+                        {
+                            return b ? [|(double)|]1 : [|(double)|]0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    object M1(bool b)
+                    class C
                     {
-                        return b ? 1 : (double)0;
+                        object M1(bool b)
+                        {
+                            return b ? 1 : (double)0;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26640")]
         public async Task DoNotRemoveCastToDoubleFromIntInConditionalExpression()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     object M1(bool b)
@@ -2463,8 +2429,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26640")]
         public async Task DoNotRemoveCastToUIntFromCharInConditionalExpression()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     object M1(bool b)
@@ -2482,30 +2447,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    object M1(bool b)
+                    class C
                     {
-                        return b ? [|(int)|]1 : 0;
+                        object M1(bool b)
+                        {
+                            return b ? [|(int)|]1 : 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    object M1(bool b)
+                    class C
                     {
-                        return b ? 1 : 0;
+                        object M1(bool b)
+                        {
+                            return b ? 1 : 0;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545894")]
         public async Task DoNotRemoveNecessaryCastInAttribute()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 [A((byte)0)]
@@ -2525,34 +2490,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                [A([|(int)|]0)]
-                class A : Attribute
-                {
-                    public A(object x)
+                    [A([|(int)|]0)]
+                    class A : Attribute
                     {
+                        public A(object x)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                [A(0)]
-                class A : Attribute
-                {
-                    public A(object x)
+                    [A(0)]
+                    class A : Attribute
                     {
+                        public A(object x)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545894")]
         public async Task DoNotRemoveImplicitConstantConversionToDifferentType()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class A : Attribute
@@ -2572,34 +2537,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class A : Attribute
-                {
-                    public A()
+                    class A : Attribute
                     {
-                        object x = [|(int)|]0;
+                        public A()
+                        {
+                            object x = [|(int)|]0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class A : Attribute
-                {
-                    public A()
+                    class A : Attribute
                     {
-                        object x = 0;
+                        public A()
+                        {
+                            object x = 0;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545894")]
         public async Task DoNotRemoveNumericConversionBoxed()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class A : Attribute
@@ -2619,27 +2584,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class A : Attribute
-                {
-                    public A(int i)
+                    class A : Attribute
                     {
-                        long x = [|(long)|]i;
+                        public A(int i)
+                        {
+                            long x = [|(long)|]i;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class A : Attribute
-                {
-                    public A(int i)
+                    class A : Attribute
                     {
-                        long x = i;
+                        public A(int i)
+                        {
+                            long x = i;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545894")]
@@ -2647,34 +2613,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                [A({|CS0182:[|(IComparable)|]0|})]
-                class A : Attribute
-                {
-                    public A(object x)
+                    [A({|CS0182:[|(IComparable)|]0|})]
+                    class A : Attribute
                     {
+                        public A(object x)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                [A(0)]
-                class A : Attribute
-                {
-                    public A(object x)
+                    [A(0)]
+                    class A : Attribute
                     {
+                        public A(object x)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39042")]
         public async Task DoNotRemoveNecessaryCastForImplicitNumericCastsThatLoseInformation()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class A
@@ -2696,8 +2662,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             // Note: The cast below can't be removed because X is not sealed.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 class X : IDisposable
@@ -2730,48 +2695,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [WorkItem("https://github.com/dotnet/roslyn/issues/34326")]
         public async Task DoRemoveCastToInterfaceForSealedType1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-
-                interface I
-                {
-                    void Goo(int x = 0);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x = 0)
-                    {
-                        Console.WriteLine(x);
-                    }
-
-                    static void Main()
-                    {
-                        ([|(I)|]new C()).Goo();
-                    }
-                }
-                """,
+            await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x = 0);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x = 0)
+                    interface I
                     {
-                        Console.WriteLine(x);
+                        void Goo(int x = 0);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        new C().Goo();
+                        public void Goo(int x = 0)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            ([|(I)|]new C()).Goo();
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    interface I
+                    {
+                        void Goo(int x = 0);
+                    }
+
+                    sealed class C : I
+                    {
+                        public void Goo(int x = 0)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            new C().Goo();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
@@ -2780,53 +2747,54 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    string Goo { get; }
-                }
-
-                sealed class C : I
-                {
-                    public string Goo
+                    interface I
                     {
-                        get
+                        string Goo { get; }
+                    }
+
+                    sealed class C : I
+                    {
+                        public string Goo
                         {
-                            return "Nikov Rules";
+                            get
+                            {
+                                return "Nikov Rules";
+                            }
+                        }
+
+                        static void Main()
+                        {
+                            Console.WriteLine(([|(I)|]new C()).Goo);
                         }
                     }
-
-                    static void Main()
-                    {
-                        Console.WriteLine(([|(I)|]new C()).Goo);
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    string Goo { get; }
-                }
-
-                sealed class C : I
-                {
-                    public string Goo
+                    interface I
                     {
-                        get
+                        string Goo { get; }
+                    }
+
+                    sealed class C : I
+                    {
+                        public string Goo
                         {
-                            return "Nikov Rules";
+                            get
+                            {
+                                return "Nikov Rules";
+                            }
+                        }
+
+                        static void Main()
+                        {
+                            Console.WriteLine(new C().Goo);
                         }
                     }
-
-                    static void Main()
-                    {
-                        Console.WriteLine(new C().Goo);
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
@@ -2835,64 +2803,64 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    string Goo { get; }
-                }
-
-                sealed class C : I
-                {
-                    public C Instance { get { return new C(); } }
-
-                    public string Goo
+                    interface I
                     {
-                        get
+                        string Goo { get; }
+                    }
+
+                    sealed class C : I
+                    {
+                        public C Instance { get { return new C(); } }
+
+                        public string Goo
                         {
-                            return "Nikov Rules";
+                            get
+                            {
+                                return "Nikov Rules";
+                            }
+                        }
+
+                        void Main()
+                        {
+                            Console.WriteLine(([|(I)|]Instance).Goo);
                         }
                     }
-
-                    void Main()
-                    {
-                        Console.WriteLine(([|(I)|]Instance).Goo);
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    string Goo { get; }
-                }
-
-                sealed class C : I
-                {
-                    public C Instance { get { return new C(); } }
-
-                    public string Goo
+                    interface I
                     {
-                        get
+                        string Goo { get; }
+                    }
+
+                    sealed class C : I
+                    {
+                        public C Instance { get { return new C(); } }
+
+                        public string Goo
                         {
-                            return "Nikov Rules";
+                            get
+                            {
+                                return "Nikov Rules";
+                            }
+                        }
+
+                        void Main()
+                        {
+                            Console.WriteLine(Instance.Goo);
                         }
                     }
-
-                    void Main()
-                    {
-                        Console.WriteLine(Instance.Goo);
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
         public async Task DoNotRemoveCastToInterfaceForSealedType4()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 interface I
@@ -2923,47 +2891,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x = 0);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x = 1)
+                    interface I
                     {
-                        Console.WriteLine(x);
+                        void Goo(int x = 0);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        ([|(I)|]new C()).Goo(2);
+                        public void Goo(int x = 1)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            ([|(I)|]new C()).Goo(2);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x = 0);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x = 1)
+                    interface I
                     {
-                        Console.WriteLine(x);
+                        void Goo(int x = 0);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        new C().Goo(2);
+                        public void Goo(int x = 1)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            new C().Goo(2);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -2973,8 +2942,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // because the specified named arguments refer to parameters that
             // appear at different positions in the member signatures.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 interface I
@@ -3004,47 +2972,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x = 0);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x = 0)
+                    interface I
                     {
-                        Console.WriteLine(x);
+                        void Goo(int x = 0);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        ([|(I)|]new C()).Goo();
+                        public void Goo(int x = 0)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            ([|(I)|]new C()).Goo();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x = 0);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x = 0)
+                    interface I
                     {
-                        Console.WriteLine(x);
+                        void Goo(int x = 0);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        new C().Goo();
+                        public void Goo(int x = 0)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            new C().Goo();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -3052,47 +3021,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x = 0);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x = 1)
+                    interface I
                     {
-                        Console.WriteLine(x);
+                        void Goo(int x = 0);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        ([|(I)|]new C()).Goo(2);
+                        public void Goo(int x = 1)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            ([|(I)|]new C()).Goo(2);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x = 0);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x = 1)
+                    interface I
                     {
-                        Console.WriteLine(x);
+                        void Goo(int x = 0);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        new C().Goo(2);
+                        public void Goo(int x = 1)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            new C().Goo(2);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -3128,47 +3098,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x)
+                    interface I
                     {
-                        Console.WriteLine(x);
+                        void Goo(int x);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        ([|(I)|]new C()).Goo(0);
+                        public void Goo(int x)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            ([|(I)|]new C()).Goo(0);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int x)
+                    interface I
                     {
-                        Console.WriteLine(x);
+                        void Goo(int x);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        new C().Goo(0);
+                        public void Goo(int x)
+                        {
+                            Console.WriteLine(x);
+                        }
+
+                        static void Main()
+                        {
+                            new C().Goo(0);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -3176,47 +3147,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int y)
+                    interface I
                     {
-                        Console.WriteLine(y);
+                        void Goo(int x);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        ([|(I)|]new C()).Goo(0);
+                        public void Goo(int y)
+                        {
+                            Console.WriteLine(y);
+                        }
+
+                        static void Main()
+                        {
+                            ([|(I)|]new C()).Goo(0);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(int x);
-                }
-
-                sealed class C : I
-                {
-                    public void Goo(int y)
+                    interface I
                     {
-                        Console.WriteLine(y);
+                        void Goo(int x);
                     }
 
-                    static void Main()
+                    sealed class C : I
                     {
-                        new C().Goo(0);
+                        public void Goo(int y)
+                        {
+                            Console.WriteLine(y);
+                        }
+
+                        static void Main()
+                        {
+                            new C().Goo(0);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -3251,8 +3223,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [WorkItem("https://github.com/dotnet/roslyn/issues/34326")]
         public async Task DoNotRemoveCastToInterfaceForSealedType7()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 interface I
@@ -3287,8 +3258,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // because the specified named arguments refer to parameters that
             // appear at different positions in the member signatures.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 interface I
@@ -3317,13 +3287,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 source,
                 [
                     // /0/Test0.cs(8,18): error CS0535: 'C' does not implement interface member 'I.this[int, int]'
-                    DiagnosticResult.CompilerError("CS0535").WithSpan(8, 18, 8, 19).WithArguments("C", "I.this[int, int]"),
+                    DiagnosticResult
+                        .CompilerError("CS0535")
+                        .WithSpan(8, 18, 8, 19)
+                        .WithArguments("C", "I.this[int, int]"),
                     // /0/Test0.cs(10,16): error CS0548: 'C.this[(int y, ?), int]': property or indexer must have at least one accessor
-                    DiagnosticResult.CompilerError("CS0548").WithSpan(10, 16, 10, 20).WithArguments("C.this[(int y, ?), int]"),
+                    DiagnosticResult
+                        .CompilerError("CS0548")
+                        .WithSpan(10, 16, 10, 20)
+                        .WithArguments("C.this[(int y, ?), int]"),
                     // /0/Test0.cs(10,20): error CS1003: Syntax error, '[' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(10, 20, 10, 21).WithArguments("["),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(10, 20, 10, 21)
+                        .WithArguments("["),
                     // /0/Test0.cs(10,27): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type '(int y, ?)'
-                    DiagnosticResult.CompilerError("CS1750").WithSpan(10, 27, 10, 27).WithArguments("int", "(int y, ?)"),
+                    DiagnosticResult
+                        .CompilerError("CS1750")
+                        .WithSpan(10, 27, 10, 27)
+                        .WithArguments("int", "(int y, ?)"),
                     // /0/Test0.cs(10,27): error CS1001: Identifier expected
                     DiagnosticResult.CompilerError("CS1001").WithSpan(10, 27, 10, 28),
                     // /0/Test0.cs(10,27): error CS1026: ) expected
@@ -3331,7 +3313,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(10,27): error CS8124: Tuple must contain at least two elements.
                     DiagnosticResult.CompilerError("CS8124").WithSpan(10, 27, 10, 28),
                     // /0/Test0.cs(10,41): error CS1003: Syntax error, ']' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(10, 41, 10, 42).WithArguments("]"),
+                    DiagnosticResult
+                        .CompilerError("CS1003")
+                        .WithSpan(10, 41, 10, 42)
+                        .WithArguments("]"),
                     // /0/Test0.cs(10,41): error CS1014: A get or set accessor expected
                     DiagnosticResult.CompilerError("CS1014").WithSpan(10, 41, 10, 42),
                     // /0/Test0.cs(10,41): error CS1514: { expected
@@ -3343,7 +3328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(16,6): error CS1513: } expected
                     DiagnosticResult.CompilerError("CS1513").WithSpan(16, 6, 16, 6),
                 ],
-                source);
+                source
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545883")]
@@ -3353,8 +3339,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // because it would result in binding to a Dispose method that doesn't
             // implement IDisposable.Dispose().
 
-            var source =
-                """
+            var source = """
                 using System;
                 using System.IO;
 
@@ -3382,8 +3367,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Note: The cast below can't be removed because the cast boxes 's' and
             // unboxing would change program behavior.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 interface IIncrementable
@@ -3420,41 +3404,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        ([|(IDisposable)|]GetEnumerator()).Dispose();
-                    }
+                        static void Main()
+                        {
+                            ([|(IDisposable)|]GetEnumerator()).Dispose();
+                        }
 
-                    static List<int>.Enumerator GetEnumerator()
-                    {
-                        var x = new List<int> { 1, 2, 3 };
-                        return x.GetEnumerator();
+                        static List<int>.Enumerator GetEnumerator()
+                        {
+                            var x = new List<int> { 1, 2, 3 };
+                            return x.GetEnumerator();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        GetEnumerator().Dispose();
-                    }
+                        static void Main()
+                        {
+                            GetEnumerator().Dispose();
+                        }
 
-                    static List<int>.Enumerator GetEnumerator()
-                    {
-                        var x = new List<int> { 1, 2, 3 };
-                        return x.GetEnumerator();
+                        static List<int>.Enumerator GetEnumerator()
+                        {
+                            var x = new List<int> { 1, 2, 3 };
+                            return x.GetEnumerator();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544655")]
@@ -3465,30 +3450,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        Action a = () => { };
-                        var c = ([|(ICloneable)|]a).Clone();
+                        static void Main()
+                        {
+                            Action a = () => { };
+                            var c = ([|(ICloneable)|]a).Clone();
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        Action a = () => { };
-                        var c = a.Clone();
+                        static void Main()
+                        {
+                            Action a = () => { };
+                            var c = a.Clone();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545926")]
@@ -3499,30 +3484,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        var a = new[] { 1, 2, 3 };
-                        var c = ([|(ICloneable)|]a).Clone(); 
+                        static void Main()
+                        {
+                            var a = new[] { 1, 2, 3 };
+                            var c = ([|(ICloneable)|]a).Clone(); 
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        var a = new[] { 1, 2, 3 };
-                        var c = a.Clone(); 
+                        static void Main()
+                        {
+                            var a = new[] { 1, 2, 3 };
+                            var c = a.Clone(); 
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -3530,30 +3515,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string s)
+                    class C
                     {
-                        IEnumerable<char> i = [|(IEnumerable<char>)|]s;
+                        static void Main(string s)
+                        {
+                            IEnumerable<char> i = [|(IEnumerable<char>)|]s;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string s)
+                    class C
                     {
-                        IEnumerable<char> i = s;
+                        static void Main(string s)
+                        {
+                            IEnumerable<char> i = s;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529897")]
@@ -3564,30 +3549,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Enum e = DayOfWeek.Monday;
-                        var y = ([|(IConvertible)|]e).GetTypeCode();
+                        static void Main()
+                        {
+                            Enum e = DayOfWeek.Monday;
+                            var y = ([|(IConvertible)|]e).GetTypeCode();
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Enum e = DayOfWeek.Monday;
-                        var y = e.GetTypeCode();
+                        static void Main()
+                        {
+                            Enum e = DayOfWeek.Monday;
+                            var y = e.GetTypeCode();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529897")]
@@ -3612,26 +3597,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var y = ([|(IConvertible)|](DateTime.Now + TimeSpan.Zero)).GetTypeCode();
+                        static void Main()
+                        {
+                            var y = ([|(IConvertible)|](DateTime.Now + TimeSpan.Zero)).GetTypeCode();
+                        }
                     }
-                }
-                """, """
-                using System;
+                    """,
+                """
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var y = (DateTime.Now + TimeSpan.Zero).GetTypeCode();
+                        static void Main()
+                        {
+                            var y = (DateTime.Now + TimeSpan.Zero).GetTypeCode();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529897")]
@@ -3658,31 +3645,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    DateTime this[int i] => default;
-
-                    void Main()
+                    class Program
                     {
-                        var y = ([|(IConvertible)|]this[0]).GetTypeCode();
+                        DateTime this[int i] => default;
+
+                        void Main()
+                        {
+                            var y = ([|(IConvertible)|]this[0]).GetTypeCode();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    DateTime this[int i] => default;
-
-                    void Main()
+                    class Program
                     {
-                        var y = this[0].GetTypeCode();
+                        DateTime this[int i] => default;
+
+                        void Main()
+                        {
+                            var y = this[0].GetTypeCode();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529897")]
@@ -3709,31 +3697,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    DateTime X => default;
-
-                    void Main()
+                    class Program
                     {
-                        var y = ([|(IConvertible)|]X).GetTypeCode();
+                        DateTime X => default;
+
+                        void Main()
+                        {
+                            var y = ([|(IConvertible)|]X).GetTypeCode();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    DateTime X => default;
-
-                    void Main()
+                    class Program
                     {
-                        var y = X.GetTypeCode();
+                        DateTime X => default;
+
+                        void Main()
+                        {
+                            var y = X.GetTypeCode();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529897")]
@@ -3760,31 +3749,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    DateTime X() => default;
-
-                    void Main()
+                    class Program
                     {
-                        var y = ([|(IConvertible)|]X()).GetTypeCode();
+                        DateTime X() => default;
+
+                        void Main()
+                        {
+                            var y = ([|(IConvertible)|]X()).GetTypeCode();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    DateTime X() => default;
-
-                    void Main()
+                    class Program
                     {
-                        var y = X().GetTypeCode();
+                        DateTime X() => default;
+
+                        void Main()
+                        {
+                            var y = X().GetTypeCode();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         #endregion
@@ -3794,8 +3784,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545141")]
         public async Task DoNotRemoveCastToObjectInParamArrayArg1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -3818,8 +3807,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task DoNotRemoveCastToIntArrayInParamArrayArg2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -3842,8 +3830,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task DoNotRemoveCastToObjectArrayInParamArrayArg3()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -3868,28 +3855,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    static void Goo(params object[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo([|(object[])|]null);
-                    }
-                }
-                """,
+                        static void Goo(params object[] x) { }
 
+                        static void Main()
+                        {
+                            Goo([|(object[])|]null);
+                        }
+                    }
+                    """,
                 """
-                class C
-                {
-                    static void Goo(params object[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo(null);
+                        static void Goo(params object[] x) { }
+
+                        static void Main()
+                        {
+                            Goo(null);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -3897,28 +3884,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    static void Goo(params object[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo([|(string[])|]null);
-                    }
-                }
-                """,
+                        static void Goo(params object[] x) { }
 
+                        static void Main()
+                        {
+                            Goo([|(string[])|]null);
+                        }
+                    }
+                    """,
                 """
-                class C
-                {
-                    static void Goo(params object[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo(null);
+                        static void Goo(params object[] x) { }
+
+                        static void Main()
+                        {
+                            Goo(null);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -3926,28 +3913,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    static void Goo(params int[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo([|(int[])|]null);
-                    }
-                }
-                """,
+                        static void Goo(params int[] x) { }
 
+                        static void Main()
+                        {
+                            Goo([|(int[])|]null);
+                        }
+                    }
+                    """,
                 """
-                class C
-                {
-                    static void Goo(params int[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo(null);
+                        static void Goo(params int[] x) { }
+
+                        static void Main()
+                        {
+                            Goo(null);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -3955,28 +3942,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    static void Goo(params object[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo([|(object[])|]null, null);
-                    }
-                }
-                """,
+                        static void Goo(params object[] x) { }
 
+                        static void Main()
+                        {
+                            Goo([|(object[])|]null, null);
+                        }
+                    }
+                    """,
                 """
-                class C
-                {
-                    static void Goo(params object[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo(null, null);
+                        static void Goo(params object[] x) { }
+
+                        static void Main()
+                        {
+                            Goo(null, null);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -3984,28 +3971,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    static void Goo(params object[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo([|(object)|]null, null);
-                    }
-                }
-                """,
+                        static void Goo(params object[] x) { }
 
+                        static void Main()
+                        {
+                            Goo([|(object)|]null, null);
+                        }
+                    }
+                    """,
                 """
-                class C
-                {
-                    static void Goo(params object[] x) { }
-
-                    static void Main()
+                    class C
                     {
-                        Goo(null, null);
+                        static void Goo(params object[] x) { }
+
+                        static void Main()
+                        {
+                            Goo(null, null);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -4013,27 +4000,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        Goo(x: [|(object[])|]null);
-                    }
+                        static void Main()
+                        {
+                            Goo(x: [|(object[])|]null);
+                        }
 
-                    static void Goo(params object[] x) { }
-                }
-                """,
+                        static void Goo(params object[] x) { }
+                    }
+                    """,
                 """
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        Goo(x: null);
-                    }
+                        static void Main()
+                        {
+                            Goo(x: null);
+                        }
 
-                    static void Goo(params object[] x) { }
-                }
-                """);
+                        static void Goo(params object[] x) { }
+                    }
+                    """
+            );
         }
 
         #endregion
@@ -4046,8 +4034,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // The cast below can't be removed because it would result an error
             // in the foreach statement.
 
-            var source =
-                """
+            var source = """
                 using System.Collections;
 
                 class Program
@@ -4070,7 +4057,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(7,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(7, 22, 7, 22),
                 ],
-                source);
+                source
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -4079,8 +4067,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // The cast below can't be removed because it would result an error
             // in the foreach statement.
 
-            var source =
-                """
+            var source = """
                 using System.Collections.Generic;
 
                 class Program
@@ -4103,7 +4090,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(7,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(7, 22, 7, 22),
                 ],
-                source);
+                source
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -4113,8 +4101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // in the foreach statement since C doesn't contain a GetEnumerator()
             // method.
 
-            var source =
-                """
+            var source = """
                 using System.Collections;
 
                 class D
@@ -4150,7 +4137,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(20,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(20, 22, 20, 22),
                 ],
-                source);
+                source
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -4159,8 +4147,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // The cast below can't be removed because it would result in
             // C.GetEnumerator() being called rather than D.GetEnumerator().
 
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Collections;
 
@@ -4203,7 +4190,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(26,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(26, 22, 26, 22),
                 ],
-                source);
+                source
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -4212,8 +4200,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // The cast below can't be removed because it would change the
             // type of 'x'.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -4243,8 +4230,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Note: The cast below can't be removed because the parameter list
             // of Goo and its override have different default values.
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 abstract class Y
@@ -4277,48 +4263,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                abstract class Y
-                {
-                    public abstract void Goo(int x = 1);
-                }
-
-                class X : Y
-                {
-                    static void Main()
+                    abstract class Y
                     {
-                        ([|(Y)|]new X()).Goo();
+                        public abstract void Goo(int x = 1);
                     }
 
-                    public override void Goo(int x = 1)
+                    class X : Y
                     {
-                        Console.WriteLine(x);
-                    }
-                }
-                """,
+                        static void Main()
+                        {
+                            ([|(Y)|]new X()).Goo();
+                        }
 
+                        public override void Goo(int x = 1)
+                        {
+                            Console.WriteLine(x);
+                        }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                abstract class Y
-                {
-                    public abstract void Goo(int x = 1);
-                }
-
-                class X : Y
-                {
-                    static void Main()
+                    abstract class Y
                     {
-                        new X().Goo();
+                        public abstract void Goo(int x = 1);
                     }
 
-                    public override void Goo(int x = 1)
+                    class X : Y
                     {
-                        Console.WriteLine(x);
+                        static void Main()
+                        {
+                            new X().Goo();
+                        }
+
+                        public override void Goo(int x = 1)
+                        {
+                            Console.WriteLine(x);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529916")]
@@ -4329,39 +4315,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                static class Program
-                {
-                    static void Main()
+                    static class Program
                     {
-                        Action a = ([|(string)|]"").Goo;
+                        static void Main()
+                        {
+                            Action a = ([|(string)|]"").Goo;
+                        }
+
+                        static void Goo(this string x) { }
                     }
-
-                    static void Goo(this string x) { }
-                }
-                """,
-
+                    """,
                 """
-                using System;
+                    using System;
 
-                static class Program
-                {
-                    static void Main()
+                    static class Program
                     {
-                        Action a = "".Goo;
-                    }
+                        static void Main()
+                        {
+                            Action a = "".Goo;
+                        }
 
-                    static void Goo(this string x) { }
-                }
-                """);
+                        static void Goo(this string x) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/609497")]
         public async Task Bugfix_609497()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -4389,8 +4374,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Note: The cast below cannot be removed because the it results in
             // a different overload being picked.
 
-            var source =
-                """
+            var source = """
                 using System;
                 using MyInt = System.Int32;
 
@@ -4433,8 +4417,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Note: The cast below cannot be removed because it would result in
             // a different attribute constructor being picked
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 [Flags]
@@ -4477,8 +4460,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/608180")]
         public async Task DoNotRemoveCastIfArgumentIsRestricted_TypedReference()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -4505,8 +4487,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DoNotRemoveCastOnArgumentsWithOtherDynamicArguments()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -4541,8 +4522,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DoNotRemoveCastOnArgumentsWithOtherDynamicArguments_Bracketed()
         {
-            var source =
-                """
+            var source = """
                 class C<T>
                 {
                     int this[int x, T s, string d = "abc"]
@@ -4582,8 +4562,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DoNotRemoveCastOnArgumentsWithDynamicReceiverOpt()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     static bool Goo(dynamic d)
@@ -4600,8 +4579,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DoNotRemoveCastOnArgumentsWithDynamicReceiverOpt_1()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     static bool Goo(dynamic d)
@@ -4618,8 +4596,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DoNotRemoveCastOnArgumentsWithDynamicReceiverOpt_2()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     static bool Goo(dynamic d)
@@ -4636,8 +4613,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DoNotRemoveCastOnArgumentsWithDynamicReceiverOpt_3()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     static bool Goo(dynamic d)
@@ -4654,8 +4630,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DoNotRemoveCastOnArgumentsWithOtherDynamicArguments_1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -4693,8 +4668,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // Note: The cast below cannot be removed because it would result in
             // a different attribute constructor being picked
 
-            var source =
-                """
+            var source = """
                 using System;
 
                 [A(new[] { (long)0 })]
@@ -4712,8 +4686,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529894")]
         public async Task DoNotUnnecessaryCastFromEnumToUint()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 enum E
@@ -4737,8 +4710,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529846")]
         public async Task DoNotUnnecessaryCastFromTypeParameterToObject()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     static void Goo<T>(T x, object y)
@@ -4756,8 +4728,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/640136")]
         public async Task RemoveUnnecessaryCastAndParseCorrect()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -4769,8 +4740,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -4792,9 +4762,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(9,10): error CS0118: 'x' is a variable but is used like a type
-                        DiagnosticResult.CompilerError("CS0118").WithSpan(8, 10, 8, 11).WithArguments("x", "variable", "type"),
+                        DiagnosticResult
+                            .CompilerError("CS0118")
+                            .WithSpan(8, 10, 8, 11)
+                            .WithArguments("x", "variable", "type"),
                         // /0/Test0.cs(9,20): error CS1525: Invalid expression term ')'
-                        DiagnosticResult.CompilerError("CS1525").WithSpan(8, 20, 8, 21).WithArguments(")"),
+                        DiagnosticResult
+                            .CompilerError("CS1525")
+                            .WithSpan(8, 20, 8, 21)
+                            .WithArguments(")"),
                     },
                 },
                 // The code fix in this case does not produce valid code or a valid syntax tree
@@ -4805,8 +4781,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/626026")]
         public async Task DoNotRemoveCastIfUserDefinedExplicitCast()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main(string[] args)
@@ -4835,8 +4810,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768895")]
         public async Task DoNotRemoveNecessaryCastInTernary()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main(string[] args)
@@ -4853,8 +4827,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/770187")]
         public async Task DoNotRemoveNecessaryCastInSwitchExpression()
         {
-            var source =
-                """
+            var source = """
                 namespace ConsoleApplication23
                 {
                     class Program
@@ -4887,8 +4860,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/844482")]
         public async Task DoNotRemoveCastFromBaseToDerivedWithExplicitReference()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main(string[] args)
@@ -4914,8 +4886,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/3254")]
         public async Task DoNotRemoveCastToTypeParameterWithExceptionConstraint()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -4936,8 +4907,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/3254")]
         public async Task DoNotRemoveCastToTypeParameterWithExceptionSubTypeConstraint()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -4958,8 +4928,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8111")]
         public async Task DoNotRemoveCastThatChangesShapeOfAnonymousTypeObject()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main(string[] args)
@@ -4985,40 +4954,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        object thing = new { shouldBeAnInt = [|(Directions)|]Directions.South };
-                    }
+                        static void Main(string[] args)
+                        {
+                            object thing = new { shouldBeAnInt = [|(Directions)|]Directions.South };
+                        }
 
-                    public enum Directions
-                    {
-                        North,
-                        East,
-                        South,
-                        West
+                        public enum Directions
+                        {
+                            North,
+                            East,
+                            South,
+                            West
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        object thing = new { shouldBeAnInt = Directions.South };
-                    }
+                        static void Main(string[] args)
+                        {
+                            object thing = new { shouldBeAnInt = Directions.South };
+                        }
 
-                    public enum Directions
-                    {
-                        North,
-                        East,
-                        South,
-                        West
+                        public enum Directions
+                        {
+                            North,
+                            East,
+                            South,
+                            West
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5026,23 +4995,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void Main()
+                    class C
                     {
-                        (int, string) tuple = [|((int, string))|](1, "hello");
+                        void Main()
+                        {
+                            (int, string) tuple = [|((int, string))|](1, "hello");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void Main()
+                    class C
                     {
-                        (int, string) tuple = (1, "hello");
+                        void Main()
+                        {
+                            (int, string) tuple = (1, "hello");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -5050,23 +5020,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void Main()
+                    class C
                     {
-                        (int a, string) tuple = [|((int, string d))|](1, f: "hello");
+                        void Main()
+                        {
+                            (int a, string) tuple = [|((int, string d))|](1, f: "hello");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void Main()
+                    class C
                     {
-                        (int a, string) tuple = (1, f: "hello");
+                        void Main()
+                        {
+                            (int a, string) tuple = (1, f: "hello");
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24791")]
@@ -5074,33 +5045,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        if (![|(bool)|]M()) throw null;
-                        throw null;
+                        bool M()
+                        {
+                            if (![|(bool)|]M()) throw null;
+                            throw null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        if (!M()) throw null;
-                        throw null;
+                        bool M()
+                        {
+                            if (!M()) throw null;
+                            throw null;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12572")]
         public async Task DoNotRemoveCastThatUnboxes()
         {
             // The cast below can't be removed because it could throw a null ref exception.
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -5130,8 +5101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17029")]
         public async Task DoNotRemoveCastOnEnumComparison1()
         {
-            var source =
-                """
+            var source = """
                 enum TransferTypeKey
                 {
                     Transfer,
@@ -5151,15 +5121,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(13,21): error CS0246: The type or namespace name 'InvalidOperationException' could not be found (are you missing a using directive or an assembly reference?)
-                DiagnosticResult.CompilerError("CS0246").WithSpan(12, 21, 12, 46).WithArguments("InvalidOperationException"),
-                source);
+                DiagnosticResult
+                    .CompilerError("CS0246")
+                    .WithSpan(12, 21, 12, 46)
+                    .WithArguments("InvalidOperationException"),
+                source
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17029")]
         public async Task DoNotRemoveCastOnEnumComparison2()
         {
-            var source =
-                """
+            var source = """
                 enum TransferTypeKey
                 {
                     Transfer,
@@ -5179,15 +5152,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(13,21): error CS0246: The type or namespace name 'InvalidOperationException' could not be found (are you missing a using directive or an assembly reference?)
-                DiagnosticResult.CompilerError("CS0246").WithSpan(12, 21, 12, 46).WithArguments("InvalidOperationException"),
-                source);
+                DiagnosticResult
+                    .CompilerError("CS0246")
+                    .WithSpan(12, 21, 12, 46)
+                    .WithArguments("InvalidOperationException"),
+                source
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18978")]
         public async Task DoNotRemoveCastOnCallToMethodWithParamsArgs()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     public static void Main(string[] args)
@@ -5206,8 +5182,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(12,9): error CS0103: The name 'Console' does not exist in the current context
-                DiagnosticResult.CompilerError("CS0103").WithSpan(11, 9, 11, 16).WithArguments("Console"),
-                source);
+                DiagnosticResult
+                    .CompilerError("CS0103")
+                    .WithSpan(11, 9, 11, 16)
+                    .WithArguments("Console"),
+                source
+            );
         }
 
         [Fact]
@@ -5215,31 +5195,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    public static void Main(string[] args)
+                    class Program
                     {
-                        TakesParams([|(string)|]null);
-                    }
+                        public static void Main(string[] args)
+                        {
+                            TakesParams([|(string)|]null);
+                        }
 
-                    private static void TakesParams({|CS0225:params|} string wrongDefined)
-                    {
+                        private static void TakesParams({|CS0225:params|} string wrongDefined)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public static void Main(string[] args)
+                    class Program
                     {
-                        TakesParams(null);
-                    }
+                        public static void Main(string[] args)
+                        {
+                            TakesParams(null);
+                        }
 
-                    private static void TakesParams({|CS0225:params|} string wrongDefined)
-                    {
+                        private static void TakesParams({|CS0225:params|} string wrongDefined)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18978")]
@@ -5247,42 +5228,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    public static void Main(string[] args)
+                    class Program
                     {
-                        var takesArgs = new[] { "Hello", "World" };
-                        TakesParams([|(System.IComparable[])|]takesArgs);
-                    }
+                        public static void Main(string[] args)
+                        {
+                            var takesArgs = new[] { "Hello", "World" };
+                            TakesParams([|(System.IComparable[])|]takesArgs);
+                        }
 
-                    private static void TakesParams(params object[] goo)
-                    {
-                        System.Console.WriteLine(goo.Length);
+                        private static void TakesParams(params object[] goo)
+                        {
+                            System.Console.WriteLine(goo.Length);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public static void Main(string[] args)
+                    class Program
                     {
-                        var takesArgs = new[] { "Hello", "World" };
-                        TakesParams(takesArgs);
-                    }
+                        public static void Main(string[] args)
+                        {
+                            var takesArgs = new[] { "Hello", "World" };
+                            TakesParams(takesArgs);
+                        }
 
-                    private static void TakesParams(params object[] goo)
-                    {
-                        System.Console.WriteLine(goo.Length);
+                        private static void TakesParams(params object[] goo)
+                        {
+                            System.Console.WriteLine(goo.Length);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DoNotRemoveCastOnCallToAttributeWithParamsArgs()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Reflection;
 
@@ -5310,8 +5291,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29264")]
         public async Task DoNotRemoveCastOnDictionaryIndexer()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Reflection;
                 using System.Collections.Generic;
@@ -5341,54 +5321,54 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                using System.Reflection;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Reflection;
+                    using System.Collections.Generic;
 
-                static class Program
-                {
-                    enum TestEnum
+                    static class Program
                     {
-                        Test,
-                    }
-
-                    static void Main()
-                    {
-                        Dictionary<int, string> Icons = new Dictionary<int, string>
+                        enum TestEnum
                         {
-                            [[|(int)|] 0] = null,
-                        };
+                            Test,
+                        }
+
+                        static void Main()
+                        {
+                            Dictionary<int, string> Icons = new Dictionary<int, string>
+                            {
+                                [[|(int)|] 0] = null,
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Reflection;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Reflection;
+                    using System.Collections.Generic;
 
-                static class Program
-                {
-                    enum TestEnum
+                    static class Program
                     {
-                        Test,
-                    }
-
-                    static void Main()
-                    {
-                        Dictionary<int, string> Icons = new Dictionary<int, string>
+                        enum TestEnum
                         {
-                            [0] = null,
-                        };
+                            Test,
+                        }
+
+                        static void Main()
+                        {
+                            Dictionary<int, string> Icons = new Dictionary<int, string>
+                            {
+                                [0] = null,
+                            };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DoNotRemoveCastOnCallToAttributeWithParamsArgsAndProperty()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
@@ -5398,7 +5378,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     public int Prop { get; set; }
                 }
 
-                [Mark((string)null, Prop = 1)] 
+                [Mark((string)null, Prop = 1)]
                 static class Program
                 {
                 }
@@ -5410,8 +5390,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DoNotRemoveCastOnCallToAttributeWithParamsArgsPropertyAndOtherArg()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
@@ -5421,7 +5400,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     public int Prop { get; set; }
                 }
 
-                [Mark(true, (string)null, Prop = 1)] 
+                [Mark(true, (string)null, Prop = 1)]
                 static class Program
                 {
                 }
@@ -5433,8 +5412,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DoNotRemoveCastOnCallToAttributeWithParamsArgsNamedArgsAndProperty()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
@@ -5458,42 +5436,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                sealed class MarkAttribute : Attribute
-                {
-                    public MarkAttribute(bool otherArg, {|CS0225:params|} string wrongDefined)
+                    using System;
+                    sealed class MarkAttribute : Attribute
+                    {
+                        public MarkAttribute(bool otherArg, {|CS0225:params|} string wrongDefined)
+                        {
+                        }
+                        public int Prop { get; set; }
+                    }
+
+                    [Mark(true, [|(string)|]null, Prop = 1)]
+                    static class Program
                     {
                     }
-                    public int Prop { get; set; }
-                }
-
-                [Mark(true, [|(string)|]null, Prop = 1)]
-                static class Program
-                {
-                }
-                """,
+                    """,
                 """
-                using System;
-                sealed class MarkAttribute : Attribute
-                {
-                    public MarkAttribute(bool otherArg, {|CS0225:params|} string wrongDefined)
+                    using System;
+                    sealed class MarkAttribute : Attribute
+                    {
+                        public MarkAttribute(bool otherArg, {|CS0225:params|} string wrongDefined)
+                        {
+                        }
+                        public int Prop { get; set; }
+                    }
+
+                    [Mark(true, null, Prop = 1)]
+                    static class Program
                     {
                     }
-                    public int Prop { get; set; }
-                }
-
-                [Mark(true, null, Prop = 1)]
-                static class Program
-                {
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
         public async Task RemoveCastOnCallToAttributeWithParamsArgsWithImplicitCast()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
@@ -5508,8 +5486,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 {
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
@@ -5553,35 +5530,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                sealed class MarkAttribute : Attribute
-                {
-                    public MarkAttribute()
+                    using System;
+                    sealed class MarkAttribute : Attribute
+                    {
+                        public MarkAttribute()
+                        {
+                        }
+                        public int Prop { get; set; }
+                    }
+
+                    [Mark(Prop = [|(int)|]1)]
+                    static class Program
                     {
                     }
-                    public int Prop { get; set; }
-                }
-
-                [Mark(Prop = [|(int)|]1)]
-                static class Program
-                {
-                }
-                """,
+                    """,
                 """
-                using System;
-                sealed class MarkAttribute : Attribute
-                {
-                    public MarkAttribute()
+                    using System;
+                    sealed class MarkAttribute : Attribute
+                    {
+                        public MarkAttribute()
+                        {
+                        }
+                        public int Prop { get; set; }
+                    }
+
+                    [Mark(Prop = 1)]
+                    static class Program
                     {
                     }
-                    public int Prop { get; set; }
-                }
-
-                [Mark(Prop = 1)]
-                static class Program
-                {
-                }
-                """);
+                    """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/18510")]
@@ -5590,7 +5568,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         public async Task DoNotRemoveCastOnInvalidUnaryOperatorEnumValue1(string op)
         {
             var source =
-$@"
+                $@"
 enum Sign
     {{
         Positive = 1,
@@ -5615,7 +5593,7 @@ enum Sign
         public async Task DoNotRemoveCastOnInvalidUnaryOperatorEnumValue2(string op)
         {
             var source =
-$@"
+                $@"
 enum Sign
     {{
         Positive = 1,
@@ -5637,8 +5615,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18510")]
         public async Task RemoveCastOnValidUnaryOperatorEnumValue()
         {
-            var source =
-                """
+            var source = """
                 enum Sign
                     {
                         Positive = 1,
@@ -5654,8 +5631,7 @@ enum Sign
                         }
                     }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 enum Sign
                     {
                         Positive = 1,
@@ -5675,11 +5651,7 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { fixedSource },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -5687,8 +5659,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18510")]
         public async Task RemoveCastOnValidUnaryOperatorEnumValue_Nullable()
         {
-            var source =
-                """
+            var source = """
                 enum Sign
                 {
                     Positive = 1,
@@ -5704,8 +5675,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 enum Sign
                 {
                     Positive = 1,
@@ -5722,18 +5692,13 @@ enum Sign
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = fixedSource,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = fixedSource, }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18510")]
         public async Task DoNotRemoveEnumCastToDifferentRepresentation()
         {
-            var source =
-                """
+            var source = """
                 enum Sign
                     {
                         Positive = 1,
@@ -5750,18 +5715,13 @@ enum Sign
                     }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = source,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25456#issuecomment-373549735")]
         public async Task DoNotIntroduceDefaultLiteralInSwitchCase()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -5786,8 +5746,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInSwitchCase_CastInsideParentheses()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -5812,8 +5771,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInSwitchCase_DefaultInsideParentheses()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -5838,8 +5796,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInSwitchCase_RemoveDoubleCast()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -5852,8 +5809,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M()
@@ -5880,32 +5836,32 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var a = true;
-                        var b = ![|(bool)|]a;
+                        void M()
+                        {
+                            var a = true;
+                            var b = ![|(bool)|]a;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var a = true;
-                        var b = !a;
+                        void M()
+                        {
+                            var a = true;
+                            var b = !a;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -5930,8 +5886,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase_CastInsideParentheses()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -5956,8 +5911,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase_DefaultInsideParentheses()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -5982,8 +5936,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase_RemoveDoubleCast()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -5996,8 +5949,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M()
@@ -6022,8 +5974,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase_RemoveInsideWhenClause()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -6036,8 +5987,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M()
@@ -6062,8 +6012,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPatternIs()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -6084,8 +6033,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPatternIs_CastInsideParentheses()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -6106,8 +6054,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPatternIs_DefaultInsideParentheses()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -6128,8 +6075,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPatternIs_RemoveDoubleCast()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M()
@@ -6138,8 +6084,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M()
@@ -6160,8 +6105,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPropertyPattern1()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(string s)
@@ -6184,8 +6128,7 @@ enum Sign
         [Fact]
         public async Task DoNotIntroduceDefaultLiteralInPropertyPattern2()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(string s)
@@ -6208,8 +6151,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27239")]
         public async Task DoNotOfferToRemoveCastWhereNoConversionExists()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -6281,8 +6223,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31963")]
         public async Task DoNotOfferToRemoveCastInBaseConstructorInitializerWhenItNeeded()
         {
-            var source =
-                """
+            var source = """
                 class B
                 {
                     B(int a)
@@ -6300,15 +6241,18 @@ enum Sign
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(10,19): error CS0122: 'B.B(int)' is inaccessible due to its protection level
-                DiagnosticResult.CompilerError("CS0122").WithSpan(9, 19, 9, 23).WithArguments("B.B(int)"),
-                source);
+                DiagnosticResult
+                    .CompilerError("CS0122")
+                    .WithSpan(9, 19, 9, 23)
+                    .WithArguments("B.B(int)"),
+                source
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31963")]
         public async Task DoNotOfferToRemoveCastInConstructorInitializerWhenItNeeded()
         {
-            var source =
-                """
+            var source = """
                 class B
                 {
                     B(int a)
@@ -6327,8 +6271,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10220")]
         public async Task DoNotRemoveObjectCastInParamsCall()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Diagnostics;
 
@@ -6353,8 +6296,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22804")]
         public async Task DoNotRemoveCastFromNullableToUnderlyingType()
         {
-            var source =
-                """
+            var source = """
                 using System.Text;
 
                 class C
@@ -6374,8 +6316,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41433")]
         public async Task DoNotRemoveCastFromIntPtrToPointer()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -6393,8 +6334,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38599")]
         public async Task DoNotRemoveCastFromIntPtrToPointerInReturn()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -6412,8 +6352,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32491")]
         public async Task DoNotRemoveCastFromIntPtrToPointerWithTypeParameter()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 struct Block<T>
@@ -6433,8 +6372,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25021")]
         public async Task DoNotRemoveCastFromIntPtrToPointerWithAddressAndCast()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -6455,44 +6393,44 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    public static void M()
+                    class Program
                     {
-                        for (int i = 0; i < 1; i++)
+                        public static void M()
                         {
-                            long a = 0, b = 0;
+                            for (int i = 0; i < 1; i++)
+                            {
+                                long a = 0, b = 0;
 
-                            SameScope([|(decimal)|]a + [|(decimal)|]b);
+                                SameScope([|(decimal)|]a + [|(decimal)|]b);
 
-                            static void SameScope(decimal sum) { }
+                                static void SameScope(decimal sum) { }
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public static void M()
+                    class Program
                     {
-                        for (int i = 0; i < 1; i++)
+                        public static void M()
                         {
-                            long a = 0, b = 0;
+                            for (int i = 0; i < 1; i++)
+                            {
+                                long a = 0, b = 0;
 
-                            SameScope(a + (decimal)b);
+                                SameScope(a + (decimal)b);
 
-                            static void SameScope(decimal sum) { }
+                                static void SameScope(decimal sum) { }
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38347")]
         public async Task TestArgToLocalFunction2()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     public static void M()
@@ -6508,8 +6446,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class Program
                 {
                     public static void M()
@@ -6525,8 +6462,7 @@ enum Sign
                     }
                 }
                 """;
-            var batchFixedSource =
-                """
+            var batchFixedSource = """
                 class Program
                 {
                     public static void M()
@@ -6556,8 +6492,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36631")]
         public async Task TestFormattableString1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -6577,34 +6512,34 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        IFormattable x = [|(IFormattable)|]$"";
+                        private void goo()
+                        {
+                            IFormattable x = [|(IFormattable)|]$"";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        IFormattable x = $"";
+                        private void goo()
+                        {
+                            IFormattable x = $"";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36631")]
         public async Task TestFormattableString2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -6624,34 +6559,34 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        FormattableString x = [|(FormattableString)|]$"";
+                        private void goo()
+                        {
+                            FormattableString x = [|(FormattableString)|]$"";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        FormattableString x = $"";
+                        private void goo()
+                        {
+                            FormattableString x = $"";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36631")]
         public async Task TestFormattableString3()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -6674,31 +6609,32 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        bar([|(FormattableString)|]$"");
-                    }
+                        private void goo()
+                        {
+                            bar([|(FormattableString)|]$"");
+                        }
 
-                    private void bar(FormattableString s) { }
-                }
-                """,
+                        private void bar(FormattableString s) { }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        bar($"");
-                    }
+                        private void goo()
+                        {
+                            bar($"");
+                        }
 
-                    private void bar(FormattableString s) { }
-                }
-                """);
+                        private void bar(FormattableString s) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36631")]
@@ -6706,27 +6642,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        object o = [|(string)|]$"";
+                        private void goo()
+                        {
+                            object o = [|(string)|]$"";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        object o = $"";
+                        private void goo()
+                        {
+                            object o = $"";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36631")]
@@ -6734,38 +6671,38 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        bar([|(IFormattable)|]$"");
-                    }
+                        private void goo()
+                        {
+                            bar([|(IFormattable)|]$"");
+                        }
 
-                    private void bar(IFormattable s) { }
-                }
-                """,
+                        private void bar(IFormattable s) { }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private void goo()
+                    class C
                     {
-                        bar($"");
-                    }
+                        private void goo()
+                        {
+                            bar($"");
+                        }
 
-                    private void bar(IFormattable s) { }
-                }
-                """);
+                        private void bar(IFormattable s) { }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36631")]
         public async Task TestFormattableString7()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -6783,8 +6720,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34326")]
         public async Task TestMissingOnInterfaceCallOnNonSealedClass()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class DbContext : IDisposable
@@ -6814,16 +6750,13 @@ enum Sign
                 }
                 """;
 
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                source);
+            await VerifyCS.VerifyCodeFixAsync(source, source);
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34326")]
         public async Task TestMissingOnInterfaceCallOnNonReadOnlyStruct()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public struct DbContext : IDisposable
@@ -6846,9 +6779,7 @@ enum Sign
                 }
                 """;
 
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                source);
+            await VerifyCS.VerifyCodeFixAsync(source, source);
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34326")]
@@ -6857,8 +6788,7 @@ enum Sign
             // We technically could support this.  But we choose not to for simplicity. While semantics could be
             // preserved, the semantics around interfaces are subtle and we don't want to make a change that might
             // negatively impact the user if they make other code changes.
-            var source =
-                """
+            var source = """
                 using System;
 
                 public struct DbContext : IDisposable
@@ -6881,9 +6811,7 @@ enum Sign
                 }
                 """;
 
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                source);
+            await VerifyCS.VerifyCodeFixAsync(source, source);
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34326")]
@@ -6891,54 +6819,54 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public sealed class DbContext : IDisposable
-                {
-                    public void Dispose()
+                    public sealed class DbContext : IDisposable
                     {
-                        Console.WriteLine("Base called");
+                        public void Dispose()
+                        {
+                            Console.WriteLine("Base called");
+                        }
                     }
-                }
 
-                class C
-                {
-                    private readonly DbContext _dbContext = null;
-
-                    void Main()
+                    class C
                     {
-                        ([|(IDisposable)|]_dbContext).Dispose();
+                        private readonly DbContext _dbContext = null;
+
+                        void Main()
+                        {
+                            ([|(IDisposable)|]_dbContext).Dispose();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public sealed class DbContext : IDisposable
-                {
-                    public void Dispose()
+                    public sealed class DbContext : IDisposable
                     {
-                        Console.WriteLine("Base called");
+                        public void Dispose()
+                        {
+                            Console.WriteLine("Base called");
+                        }
                     }
-                }
 
-                class C
-                {
-                    private readonly DbContext _dbContext = null;
-
-                    void Main()
+                    class C
                     {
-                        _dbContext.Dispose();
+                        private readonly DbContext _dbContext = null;
+
+                        void Main()
+                        {
+                            _dbContext.Dispose();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29726")]
         public async Task TestDefaultLiteralWithNullableCastInCoalesce()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class C
@@ -6956,8 +6884,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/6309")]
         public async Task TestFPIdentityThatMustRemain1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class C
@@ -6972,8 +6899,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
         public async Task TestFPIdentityThatMustRemain2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class C
@@ -6993,8 +6919,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
         public async Task TestFPIdentityThatMustRemain3()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class C
@@ -7016,31 +6941,32 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    float f;
-
-                    void M()
+                    public class C
                     {
-                        var v = [|(float)|]f;
+                        float f;
+
+                        void M()
+                        {
+                            var v = [|(float)|]f;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    float f;
-
-                    void M()
+                    public class C
                     {
-                        var v = f;
+                        float f;
+
+                        void M()
+                        {
+                            var v = f;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
@@ -7048,31 +6974,32 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    float f;
-
-                    void M(float f1)
+                    public class C
                     {
-                        f = [|(float)|]f1;
+                        float f;
+
+                        void M(float f1)
+                        {
+                            f = [|(float)|]f1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    float f;
-
-                    void M(float f1)
+                    public class C
                     {
-                        f = f1;
+                        float f;
+
+                        void M(float f1)
+                        {
+                            f = f1;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
@@ -7080,23 +7007,24 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    static float f1;
-                    static float f2 = [|(float)|]f1;
-                }
-                """,
+                    public class C
+                    {
+                        static float f1;
+                        static float f2 = [|(float)|]f1;
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    static float f1;
-                    static float f2 = f1;
-                }
-                """);
+                    public class C
+                    {
+                        static float f1;
+                        static float f2 = f1;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
@@ -7104,31 +7032,32 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    float[] f;
-
-                    void M()
+                    public class C
                     {
-                        var v = [|(float)|]f[0];
+                        float[] f;
+
+                        void M()
+                        {
+                            var v = [|(float)|]f[0];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    float[] f;
-
-                    void M()
+                    public class C
                     {
-                        var v = f[0];
+                        float[] f;
+
+                        void M()
+                        {
+                            var v = f[0];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
@@ -7136,31 +7065,32 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    float[] f;
-
-                    void M(float f2)
+                    public class C
                     {
-                        f[0] = [|(float)|]f2;
+                        float[] f;
+
+                        void M(float f2)
+                        {
+                            f[0] = [|(float)|]f2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    float[] f;
-
-                    void M(float f2)
+                    public class C
                     {
-                        f[0] = f2;
+                        float[] f;
+
+                        void M(float f2)
+                        {
+                            f[0] = f2;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
@@ -7168,27 +7098,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M(float f2)
+                    public class C
                     {
-                        float[] f = { [|(float)|]f2 };
+                        void M(float f2)
+                        {
+                            float[] f = { [|(float)|]f2 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M(float f2)
+                    public class C
                     {
-                        float[] f = { f2 };
+                        void M(float f2)
+                        {
+                            float[] f = { f2 };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
@@ -7196,27 +7127,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M(float f2)
+                    public class C
                     {
-                        float[] f = new float[] { [|(float)|]f2 };
+                        void M(float f2)
+                        {
+                            float[] f = new float[] { [|(float)|]f2 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M(float f2)
+                    public class C
                     {
-                        float[] f = new float[] { f2 };
+                        void M(float f2)
+                        {
+                            float[] f = new float[] { f2 };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
@@ -7224,27 +7156,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M(float f2)
+                    public class C
                     {
-                        float[] f = new[] { [|(float)|]f2 };
+                        void M(float f2)
+                        {
+                            float[] f = new[] { [|(float)|]f2 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M(float f2)
+                    public class C
                     {
-                        float[] f = new[] { f2 };
+                        void M(float f2)
+                        {
+                            float[] f = new[] { f2 };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
@@ -7252,29 +7185,30 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        float value = 0.0f;
-                        object boxed = [|(float)|]value;
+                        void M()
+                        {
+                            float value = 0.0f;
+                            object boxed = [|(float)|]value;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        float value = 0.0f;
-                        object boxed = value;
+                        void M()
+                        {
+                            float value = 0.0f;
+                            object boxed = value;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34873")]
@@ -7282,29 +7216,30 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        double value = 0.0;
-                        object boxed = [|(double)|]value;
+                        void M()
+                        {
+                            double value = 0.0;
+                            object boxed = [|(double)|]value;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        double value = 0.0;
-                        object boxed = value;
+                        void M()
+                        {
+                            double value = 0.0;
+                            object boxed = value;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37953")]
@@ -7312,42 +7247,42 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    public static void Main() { }
+                    class Program
+                    {
+                        public static void Main() { }
 
-                    public static string GetValue(DayOfWeek value)
-                        => [|(DayOfWeek)|]value switch
-                        {
-                            DayOfWeek.Monday => "Monday",
-                            _ => "Other",
-                        };
-                }
-                """,
+                        public static string GetValue(DayOfWeek value)
+                            => [|(DayOfWeek)|]value switch
+                            {
+                                DayOfWeek.Monday => "Monday",
+                                _ => "Other",
+                            };
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    public static void Main() { }
+                    class Program
+                    {
+                        public static void Main() { }
 
-                    public static string GetValue(DayOfWeek value)
-                        => value switch
-                        {
-                            DayOfWeek.Monday => "Monday",
-                            _ => "Other",
-                        };
-                }
-                """);
+                        public static string GetValue(DayOfWeek value)
+                            => value switch
+                            {
+                                DayOfWeek.Monday => "Monday",
+                                _ => "Other",
+                            };
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37953")]
         public async Task TestLeaveNecessarySwitchExpressionCast1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -7369,8 +7304,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrAssignment1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -7392,8 +7326,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrBinary1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -7415,8 +7348,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrBinary2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -7438,116 +7370,118 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithAndAssignment1()
         {
-
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-
-                class C
-                {
-                    private long Repro()
-                    {
-                        var random = new Random();
-                        long result = random.Next();
-                        result <<= 32;
-                        result &= [|(long)|]random.Next();
-                        return result;
-                    }
-                }
-                """,
+            await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private long Repro()
+                    class C
                     {
-                        var random = new Random();
-                        long result = random.Next();
-                        result <<= 32;
-                        result &= random.Next();
-                        return result;
+                        private long Repro()
+                        {
+                            var random = new Random();
+                            long result = random.Next();
+                            result <<= 32;
+                            result &= [|(long)|]random.Next();
+                            return result;
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        private long Repro()
+                        {
+                            var random = new Random();
+                            long result = random.Next();
+                            result <<= 32;
+                            result &= random.Next();
+                            return result;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithAndBinary1()
         {
-
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-
-                class C
-                {
-                    private long Repro()
-                    {
-                        var random = new Random();
-                        long result = random.Next();
-                        result <<= 32;
-                        var x = result & [|(long)|]random.Next();
-                        return result;
-                    }
-                }
-                """,
+            await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private long Repro()
+                    class C
                     {
-                        var random = new Random();
-                        long result = random.Next();
-                        result <<= 32;
-                        var x = result & random.Next();
-                        return result;
+                        private long Repro()
+                        {
+                            var random = new Random();
+                            long result = random.Next();
+                            result <<= 32;
+                            var x = result & [|(long)|]random.Next();
+                            return result;
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        private long Repro()
+                        {
+                            var random = new Random();
+                            long result = random.Next();
+                            result <<= 32;
+                            var x = result & random.Next();
+                            return result;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithAndBinary2()
         {
-
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-
-                class C
-                {
-                    private long Repro()
-                    {
-                        var random = new Random();
-                        long result = random.Next();
-                        result <<= 32;
-                        var x = [|(long)|]random.Next() & result;
-                        return result;
-                    }
-                }
-                """,
+            await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private long Repro()
+                    class C
                     {
-                        var random = new Random();
-                        long result = random.Next();
-                        result <<= 32;
-                        var x = random.Next() & result;
-                        return result;
+                        private long Repro()
+                        {
+                            var random = new Random();
+                            long result = random.Next();
+                            result <<= 32;
+                            var x = [|(long)|]random.Next() & result;
+                            return result;
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        private long Repro()
+                        {
+                            var random = new Random();
+                            long result = random.Next();
+                            result <<= 32;
+                            var x = random.Next() & result;
+                            return result;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCase1()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7572,42 +7506,42 @@ enum Sign
             // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                public class sign
-                {
-                    public static void Main()
+                    public class sign
                     {
-                        int i32_hi = 1;
-                        int i32_lo = 1;
-                        ulong u64 = 1;
-                        sbyte i08 = 1;
-                        short i16 = -1;
+                        public static void Main()
+                        {
+                            int i32_hi = 1;
+                            int i32_lo = 1;
+                            ulong u64 = 1;
+                            sbyte i08 = 1;
+                            short i16 = -1;
 
-                        object v2 = (ulong)i32_hi | [|(ulong)|]u64;
+                            object v2 = (ulong)i32_hi | [|(ulong)|]u64;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                public class sign
-                {
-                    public static void Main()
+                    public class sign
                     {
-                        int i32_hi = 1;
-                        int i32_lo = 1;
-                        ulong u64 = 1;
-                        sbyte i08 = 1;
-                        short i16 = -1;
+                        public static void Main()
+                        {
+                            int i32_hi = 1;
+                            int i32_lo = 1;
+                            ulong u64 = 1;
+                            sbyte i08 = 1;
+                            short i16 = -1;
 
-                        object v2 = (ulong)i32_hi | u64;
+                            object v2 = (ulong)i32_hi | u64;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCase3()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7632,78 +7566,79 @@ enum Sign
             // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                public class sign
-                {
-                    public static void Main()
+                    public class sign
                     {
-                        int i32_hi = 1;
-                        int i32_lo = 1;
-                        ulong u64 = 1;
-                        sbyte i08 = 1;
-                        short i16 = -1;
+                        public static void Main()
+                        {
+                            int i32_hi = 1;
+                            int i32_lo = 1;
+                            ulong u64 = 1;
+                            sbyte i08 = 1;
+                            short i16 = -1;
 
-                        object v4 = [|(ulong)|](uint)(ushort)i08 | (ulong)i32_lo;
+                            object v4 = [|(ulong)|](uint)(ushort)i08 | (ulong)i32_lo;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                public class sign
-                {
-                    public static void Main()
+                    public class sign
                     {
-                        int i32_hi = 1;
-                        int i32_lo = 1;
-                        ulong u64 = 1;
-                        sbyte i08 = 1;
-                        short i16 = -1;
+                        public static void Main()
+                        {
+                            int i32_hi = 1;
+                            int i32_lo = 1;
+                            ulong u64 = 1;
+                            sbyte i08 = 1;
+                            short i16 = -1;
 
-                        object v4 = (ushort)i08 | (ulong)i32_lo;
+                            object v4 = (ushort)i08 | (ulong)i32_lo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCase5()
         {
-
-            await VerifyCS.VerifyCodeFixAsync("""
-                public class sign
-                {
-                    public static void Main()
-                    {
-                        int i32_hi = 1;
-                        int i32_lo = 1;
-                        ulong u64 = 1;
-                        sbyte i08 = 1;
-                        short i16 = -1;
-
-                        object v5 = (int)i08 | [|(int)|]i32_lo;
-                    }
-                }
-                """,
+            await VerifyCS.VerifyCodeFixAsync(
                 """
-                public class sign
-                {
-                    public static void Main()
+                    public class sign
                     {
-                        int i32_hi = 1;
-                        int i32_lo = 1;
-                        ulong u64 = 1;
-                        sbyte i08 = 1;
-                        short i16 = -1;
+                        public static void Main()
+                        {
+                            int i32_hi = 1;
+                            int i32_lo = 1;
+                            ulong u64 = 1;
+                            sbyte i08 = 1;
+                            short i16 = -1;
 
-                        object v5 = (int)i08 | i32_lo;
+                            object v5 = (int)i08 | [|(int)|]i32_lo;
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    public class sign
+                    {
+                        public static void Main()
+                        {
+                            int i32_hi = 1;
+                            int i32_lo = 1;
+                            ulong u64 = 1;
+                            sbyte i08 = 1;
+                            short i16 = -1;
+
+                            object v5 = (int)i08 | i32_lo;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCase6()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7725,8 +7660,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCase7()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7748,8 +7682,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCase8()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7771,8 +7704,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCase9()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7794,8 +7726,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCaseNullable1()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7818,42 +7749,44 @@ enum Sign
         public async Task TestSignExtensionWithOrCompilerCaseNullable2()
         {
             // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
-            await VerifyCS.VerifyCodeFixAsync("""
-                public class sign
-                {
-                    public static void Main()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    public class sign
                     {
-                        int? i32_hi = 1;
-                        int? i32_lo = 1;
-                        ulong? u64 = 1;
-                        sbyte? i08 = 1;
-                        short? i16 = -1;
+                        public static void Main()
+                        {
+                            int? i32_hi = 1;
+                            int? i32_lo = 1;
+                            ulong? u64 = 1;
+                            sbyte? i08 = 1;
+                            short? i16 = -1;
 
-                        object v2 = (ulong?)i32_hi | [|(ulong?)|]u64;
+                            object v2 = (ulong?)i32_hi | [|(ulong?)|]u64;
+                        }
                     }
-                }
-                """, """
-                public class sign
-                {
-                    public static void Main()
+                    """,
+                """
+                    public class sign
                     {
-                        int? i32_hi = 1;
-                        int? i32_lo = 1;
-                        ulong? u64 = 1;
-                        sbyte? i08 = 1;
-                        short? i16 = -1;
+                        public static void Main()
+                        {
+                            int? i32_hi = 1;
+                            int? i32_lo = 1;
+                            ulong? u64 = 1;
+                            sbyte? i08 = 1;
+                            short? i16 = -1;
 
-                        object v2 = (ulong?)i32_hi | u64;
+                            object v2 = (ulong?)i32_hi | u64;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCaseNullable3()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7876,78 +7809,81 @@ enum Sign
         public async Task TestSignExtensionWithOrCompilerCaseNullable4()
         {
             // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
-            await VerifyCS.VerifyCodeFixAsync("""
-                public class sign
-                {
-                    public static void Main()
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    public class sign
                     {
-                        int? i32_hi = 1;
-                        int? i32_lo = 1;
-                        ulong? u64 = 1;
-                        sbyte? i08 = 1;
-                        short? i16 = -1;
+                        public static void Main()
+                        {
+                            int? i32_hi = 1;
+                            int? i32_lo = 1;
+                            ulong? u64 = 1;
+                            sbyte? i08 = 1;
+                            short? i16 = -1;
 
-                        object v4 = [|(ulong?)|][|(uint?)|](ushort?)i08 | (ulong?)i32_lo;
+                            object v4 = [|(ulong?)|][|(uint?)|](ushort?)i08 | (ulong?)i32_lo;
+                        }
                     }
-                }
-                """, """
-                public class sign
-                {
-                    public static void Main()
+                    """,
+                """
+                    public class sign
                     {
-                        int? i32_hi = 1;
-                        int? i32_lo = 1;
-                        ulong? u64 = 1;
-                        sbyte? i08 = 1;
-                        short? i16 = -1;
+                        public static void Main()
+                        {
+                            int? i32_hi = 1;
+                            int? i32_lo = 1;
+                            ulong? u64 = 1;
+                            sbyte? i08 = 1;
+                            short? i16 = -1;
 
-                        object v4 = (ushort?)i08 | (ulong?)i32_lo;
+                            object v4 = (ushort?)i08 | (ulong?)i32_lo;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCaseNullable5()
         {
-
-            await VerifyCS.VerifyCodeFixAsync("""
-                public class sign
-                {
-                    public static void Main()
-                    {
-                        int? i32_hi = 1;
-                        int? i32_lo = 1;
-                        ulong? u64 = 1;
-                        sbyte? i08 = 1;
-                        short? i16 = -1;
-
-                        object v5 = (int?)i08 | [|(int?)|]i32_lo;
-                    }
-                }
-                """,
+            await VerifyCS.VerifyCodeFixAsync(
                 """
-                public class sign
-                {
-                    public static void Main()
+                    public class sign
                     {
-                        int? i32_hi = 1;
-                        int? i32_lo = 1;
-                        ulong? u64 = 1;
-                        sbyte? i08 = 1;
-                        short? i16 = -1;
+                        public static void Main()
+                        {
+                            int? i32_hi = 1;
+                            int? i32_lo = 1;
+                            ulong? u64 = 1;
+                            sbyte? i08 = 1;
+                            short? i16 = -1;
 
-                        object v5 = (int?)i08 | i32_lo;
+                            object v5 = (int?)i08 | [|(int?)|]i32_lo;
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    public class sign
+                    {
+                        public static void Main()
+                        {
+                            int? i32_hi = 1;
+                            int? i32_lo = 1;
+                            ulong? u64 = 1;
+                            sbyte? i08 = 1;
+                            short? i16 = -1;
+
+                            object v5 = (int?)i08 | i32_lo;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCaseNullable6()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7969,8 +7905,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCaseNullable7()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -7992,8 +7927,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCaseNullable8()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -8015,8 +7949,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCaseNullable9()
         {
-            var source =
-                """
+            var source = """
                 public class sign
                 {
                     public static void Main()
@@ -8038,8 +7971,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20211")]
         public async Task DoNotRemoveNullCastInSwitch1()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -8059,8 +7991,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20211")]
         public async Task DoNotRemoveNullCastInSwitch2()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -8080,8 +8011,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20211")]
         public async Task DoNotRemoveNullCastInSwitch3()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -8101,8 +8031,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20211")]
         public async Task DoNotRemoveNullCastInSwitch4()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -8122,8 +8051,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20211")]
         public async Task DoNotRemoveNullCastInSwitch5()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -8143,8 +8071,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20211")]
         public async Task DoNotRemoveDefaultCastInSwitch1()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -8164,8 +8091,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20211")]
         public async Task DoNotRemoveDefaultCastInSwitch2()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -8185,8 +8111,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20211")]
         public async Task DoNotRemoveDefaultCastInSwitch3()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -8206,8 +8131,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20211")]
         public async Task DoNotRemoveDefaultCastInSwitch4()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -8228,8 +8152,7 @@ enum Sign
         public async Task DoNotRemoveDoubleNullCastInSwitch1()
         {
             // Removing the 'object' cast would make `case object:` unreachable.
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static int Main()
@@ -8258,8 +8181,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional1()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8275,8 +8197,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional2()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8292,8 +8213,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional3()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8309,8 +8229,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional4_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8334,23 +8253,23 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? [|(int?)|]1 : null;
+                        void M(bool x)
+                        {
+                            int? y = x ? [|(int?)|]1 : null;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? 1 : null;
+                        void M(bool x)
+                        {
+                            int? y = x ? 1 : null;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -8358,8 +8277,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional5_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8383,23 +8301,23 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? ([|(int?)|]1) : null;
+                        void M(bool x)
+                        {
+                            int? y = x ? ([|(int?)|]1) : null;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? 1 : null;
+                        void M(bool x)
+                        {
+                            int? y = x ? 1 : null;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -8407,8 +8325,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional6_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8432,23 +8349,23 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? [|(int?)|]1 : (null);
+                        void M(bool x)
+                        {
+                            int? y = x ? [|(int?)|]1 : (null);
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? 1 : (null);
+                        void M(bool x)
+                        {
+                            int? y = x ? 1 : (null);
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -8456,8 +8373,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional7()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8473,8 +8389,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8490,8 +8405,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8507,8 +8421,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional10_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8532,23 +8445,23 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? null : [|(int?)|]1;
+                        void M(bool x)
+                        {
+                            int? y = x ? null : [|(int?)|]1;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? null : 1;
+                        void M(bool x)
+                        {
+                            int? y = x ? null : 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -8556,8 +8469,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional11_CSharp()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8581,23 +8493,23 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? null : ([|(int?)|]1);
+                        void M(bool x)
+                        {
+                            int? y = x ? null : ([|(int?)|]1);
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? null : 1;
+                        void M(bool x)
+                        {
+                            int? y = x ? null : 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -8605,8 +8517,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional12_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8630,23 +8541,23 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? (null) : [|(int?)|]1;
+                        void M(bool x)
+                        {
+                            int? y = x ? (null) : [|(int?)|]1;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M(bool x)
+                    class C
                     {
-                        int? y = x ? (null) : 1;
+                        void M(bool x)
+                        {
+                            int? y = x ? (null) : 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -8654,8 +8565,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional13()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8671,8 +8581,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task DoNotRemoveNecessaryCastInConditional14()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8688,8 +8597,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task RemoveUnecessaryCastInConditional1()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8699,8 +8607,7 @@ enum Sign
                 }
                 """;
 
-            var fixedCode =
-                """
+            var fixedCode = """
                 class C
                 {
                     void M(bool x)
@@ -8716,8 +8623,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task RemoveUnecessaryCastInConditional2()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8727,8 +8633,7 @@ enum Sign
                 }
                 """;
 
-            var fixedCode =
-                """
+            var fixedCode = """
                 class C
                 {
                     void M(bool x)
@@ -8744,8 +8649,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task RemoveUnecessaryCastInConditional3()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8755,8 +8659,7 @@ enum Sign
                 }
                 """;
 
-            var fixedCode =
-                """
+            var fixedCode = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8772,8 +8675,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task RemoveUnecessaryCastInConditional4()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8783,8 +8685,7 @@ enum Sign
                 }
                 """;
 
-            var fixedCode =
-                """
+            var fixedCode = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8800,8 +8701,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task RemoveUnecessaryCastInConditional5()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x)
@@ -8810,8 +8710,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class C
                 {
                     void M(bool x)
@@ -8832,8 +8731,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task RemoveUnnecessaryCastInConditional6()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8842,8 +8740,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8859,8 +8756,7 @@ enum Sign
         [Fact, WorkItem(20211, "https://github.com/dotnet/roslyn/issues/21613")]
         public async Task RemoveUnnecessaryCastInConditional7()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8869,8 +8765,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class C
                 {
                     void M(bool x, int? z)
@@ -8886,8 +8781,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20742")]
         public async Task DoNotRemoveNamedArgToParamsParameter1()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     public void M()
@@ -8908,8 +8802,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20742")]
         public async Task DoRemoveNamedArgToParamsParameter1()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     public void M()
@@ -8923,8 +8816,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Program
                 {
                     public void M()
@@ -8945,8 +8837,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20742")]
         public async Task DoRemoveNamedArgToParamsParameter2()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     public void M()
@@ -8960,8 +8851,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Program
                 {
                     public void M()
@@ -8982,8 +8872,7 @@ enum Sign
         [Fact]
         public async Task ObjectCastInInterpolation1()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     public void M(int x, int z)
@@ -8992,8 +8881,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Program
                 {
                     public void M(int x, int z)
@@ -9009,8 +8897,7 @@ enum Sign
         [Fact]
         public async Task ObjectCastInInterpolation2()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     public void M(int x, int z)
@@ -9019,8 +8906,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Program
                 {
                     public void M(int x, int z)
@@ -9036,8 +8922,7 @@ enum Sign
         [Fact]
         public async Task TestIdentityDoubleCast()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     public void M(object x)
@@ -9046,8 +8931,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Program
                 {
                     public void M(object x)
@@ -9305,8 +9189,7 @@ enum Sign
         [Fact]
         public async Task TestIntendedReferenceComparison1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class Symbol
@@ -9337,8 +9220,7 @@ enum Sign
         [Fact]
         public async Task TestIntendedReferenceComparison2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class Symbol
@@ -9369,8 +9251,7 @@ enum Sign
         [Fact]
         public async Task TestIntendedReferenceComparison3()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class Symbol
@@ -9401,8 +9282,7 @@ enum Sign
         [Fact]
         public async Task TestIntendedReferenceComparison4()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class Symbol
@@ -9433,8 +9313,7 @@ enum Sign
         [Fact]
         public async Task TestIntendedReferenceComparison5()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class Symbol
@@ -9465,8 +9344,7 @@ enum Sign
         [Fact]
         public async Task TestIntendedReferenceComparison6()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class Symbol
@@ -9497,8 +9375,7 @@ enum Sign
         [Fact]
         public async Task TestIntendedReferenceComparison7()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class Symbol
@@ -9529,8 +9406,7 @@ enum Sign
         [Fact]
         public async Task TestIntendedReferenceComparison8()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class Symbol
@@ -9561,8 +9437,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44382")]
         public async Task DoNotRemoveCastOnParameterInitializer1()
         {
-            var source =
-                """
+            var source = """
                 enum E : byte { }
                 class C { void F() { void f(E e = (E)byte.MaxValue) { } } }
                 """;
@@ -9573,8 +9448,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44382")]
         public async Task DoNotRemoveCastOnParameterInitializer2()
         {
-            var source =
-                """
+            var source = """
                 enum E : byte { }
                 class C { void f(E e = (E)byte.MaxValue) { } }
                 """;
@@ -9585,8 +9459,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45695")]
         public async Task DoNotRemoveNonObjectCastInsideInterpolation()
         {
-            var source =
-                """
+            var source = """
                 class Other
                 {
                     void Goo()
@@ -9605,40 +9478,39 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Other
-                {
-                    void Goo()
-                    {  
-                        char c = '4';
-                        string s = $"{[|(object)|]c:X4}";
+                    class Other
+                    {
+                        void Goo()
+                        {  
+                            char c = '4';
+                            string s = $"{[|(object)|]c:X4}";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Other
-                {
-                    void Goo()
-                    {  
-                        char c = '4';
-                        string s = $"{c:X4}";
+                    class Other
+                    {
+                        void Goo()
+                        {  
+                            char c = '4';
+                            string s = $"{c:X4}";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47800")]
         public async Task RemoveNativeIntCastsAsIdentity()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class C {
                     public nint N(IntPtr x) => [|(nint)|]x;
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
 
                 public class C {
@@ -9659,8 +9531,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47800")]
         public async Task DoRemoveNativeIntCasts()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class C {
@@ -9681,16 +9552,14 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47800")]
         public async Task RemoveNativeUIntCastsAsIdentity()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class C {
                     public nuint N(UIntPtr x) => [|(nuint)|]x;
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
 
                 public class C {
@@ -9711,8 +9580,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51123")]
         public async Task DoRemoveNativeIntCastsToInt()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class C {
@@ -9733,8 +9601,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47800")]
         public async Task DoRemoveNativeUIntCasts()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 public class C {
@@ -9755,8 +9622,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47800")]
         public async Task RemoveIntPtrCastsAsIdentity()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -9767,8 +9633,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
 
                 class C
@@ -9786,8 +9651,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47800")]
         public async Task RemoveUIntPtrCastsAsIdentity()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -9798,8 +9662,7 @@ enum Sign
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
 
                 class C
@@ -9817,8 +9680,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49140")]
         public async Task DoNotRemoveBitwiseNotOfUnsignedExtendedValue1()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     public static ulong P(ulong a, uint b)
@@ -9841,8 +9703,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49140")]
         public async Task DoNotRemoveBitwiseNotOfUnsignedExtendedValue2()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     public static nuint N(nuint a, uint b)
@@ -9865,8 +9726,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49140")]
         public async Task DoNotRemoveBitwiseNotOfUnsignedExtendedValue3()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     public static ulong N()
@@ -9892,23 +9752,23 @@ enum Sign
             var test = new VerifyCS.Test()
             {
                 TestCode = """
-                class C
-                {
-                    public static long P(long a, int b)
+                    class C
                     {
-                        return a & ~[|(long)|]b;
+                        public static long P(long a, int b)
+                        {
+                            return a & ~[|(long)|]b;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    public static long P(long a, int b)
+                    class C
                     {
-                        return a & ~b;
+                        public static long P(long a, int b)
+                        {
+                            return a & ~b;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9
             };
 
@@ -9918,27 +9778,26 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49140")]
         public async Task DoRemoveBitwiseNotOfSignExtendedValue2()
         {
-
             var test = new VerifyCS.Test()
             {
                 TestCode = """
-                class C
-                {
-                    public static nint N(nint a, int b)
+                    class C
                     {
-                        return a & ~[|(nint)|]b;
+                        public static nint N(nint a, int b)
+                        {
+                            return a & ~[|(nint)|]b;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    public static nint N(nint a, int b)
+                    class C
                     {
-                        return a & ~b;
+                        public static nint N(nint a, int b)
+                        {
+                            return a & ~b;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9
             };
 
@@ -9951,12 +9810,12 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    ushort Goo(string s)
-                        => s is null ? (ushort)1234 : ushort.Parse(s);
-                }
-                """,
+                    class C
+                    {
+                        ushort Goo(string s)
+                            => s is null ? (ushort)1234 : ushort.Parse(s);
+                    }
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -9967,19 +9826,19 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    uint Goo(string s)
-                        => s is null ? [|(uint)|]1234 : uint.Parse(s);
-                }
-                """,
+                    class C
+                    {
+                        uint Goo(string s)
+                            => s is null ? [|(uint)|]1234 : uint.Parse(s);
+                    }
+                    """,
                 FixedCode = """
-                class C
-                {
-                    uint Goo(string s)
-                        => s is null ? 1234 : uint.Parse(s);
-                }
-                """,
+                    class C
+                    {
+                        uint Goo(string s)
+                            => s is null ? 1234 : uint.Parse(s);
+                    }
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -9987,8 +9846,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52524")]
         public async Task DoNotRemoveForValueTaskConstrutor()
         {
-            var source =
-                """
+            var source = """
                 #nullable enable
 
                 using System.Threading.Tasks;
@@ -10024,8 +9882,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/53698")]
         public async Task DoNotRemoveForConditional()
         {
-            var source =
-                """
+            var source = """
                 using System.Collections.Generic;
 
                 class E
@@ -10053,14 +9910,13 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/55621")]
         public async Task DoNotRemoveForNullWithMultipleMatchingParameterTypes()
         {
-            var source =
-                """
+            var source = """
                 #nullable enable
                 using System;
                 public class TestClass
                 {
-                	public TestClass(object? value) { }
-                	public TestClass(Func<object?> value) { }
+                    public TestClass(object? value) { }
+                    public TestClass(Func<object?> value) { }
 
                     public TestClass Create1() => new ((object?)null);
                 }
@@ -10077,12 +9933,11 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56207")]
         public async Task DoNotRemoveForNintPointerToVoidPointer()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 public class TestClass
                 {
-                	unsafe void M(nint** ptr)
+                    unsafe void M(nint** ptr)
                     {
                         nint value = (nint)(void*)*ptr;
                     }
@@ -10102,24 +9957,24 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    void Main(int? n)
+                    class Program
                     {
-                        var v = n is [|(int)|]0;
+                        void Main(int? n)
+                        {
+                            var v = n is [|(int)|]0;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class Program
-                {
-                    void Main(int? n)
+                    class Program
                     {
-                        var v = n is 0;
+                        void Main(int? n)
+                        {
+                            var v = n is 0;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938")]
@@ -10127,24 +9982,24 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    void Main(int? n)
+                    class Program
                     {
-                        var v = n is [|(int?)|]0;
+                        void Main(int? n)
+                        {
+                            var v = n is [|(int?)|]0;
+                        }
                     }
-                }
-                """,
-
+                    """,
                 """
-                class Program
-                {
-                    void Main(int? n)
+                    class Program
                     {
-                        var v = n is 0;
+                        void Main(int? n)
+                        {
+                            var v = n is 0;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10167,39 +10022,42 @@ enum Sign
         [Fact]
         public async Task DoRemoveFPCastFromNonFPTypeToWidenedType1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = int.MaxValue;
-                        double y = x;
-                        double z = [|(float)|]x;
-                        Console.WriteLine(x);
-                        Console.WriteLine(y);
-                        Console.WriteLine(z);
-                        Console.WriteLine(y == z);
+                        static void Main()
+                        {
+                            int x = int.MaxValue;
+                            double y = x;
+                            double z = [|(float)|]x;
+                            Console.WriteLine(x);
+                            Console.WriteLine(y);
+                            Console.WriteLine(z);
+                            Console.WriteLine(y == z);
+                        }
                     }
-                }
-                """, """
-                using System;
+                    """,
+                """
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = int.MaxValue;
-                        double y = x;
-                        double z = x;
-                        Console.WriteLine(x);
-                        Console.WriteLine(y);
-                        Console.WriteLine(z);
-                        Console.WriteLine(y == z);
+                        static void Main()
+                        {
+                            int x = int.MaxValue;
+                            double y = x;
+                            double z = x;
+                            Console.WriteLine(x);
+                            Console.WriteLine(y);
+                            Console.WriteLine(z);
+                            Console.WriteLine(y == z);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10228,8 +10086,7 @@ enum Sign
         [Fact]
         public async Task DoNotRemoveCastIfOverriddenMethodHasDifferentReturnType()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 abstract class Y
@@ -10257,8 +10114,7 @@ enum Sign
         [Fact]
         public async Task KeepCastToObjectToPreserveDynamicOverload()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -10279,8 +10135,7 @@ enum Sign
         [Fact]
         public async Task KeepIntToLongCastWithIComparable()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -10299,8 +10154,7 @@ enum Sign
         public async Task KeepCastNeededToPickCorrectOverload()
         {
             // removing the 'byte' cast will switch the overload called.
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -10325,31 +10179,32 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Bar(dynamic x, Action y) { }
-
-                    static void Main()
+                    class C
                     {
-                        Bar([|(object)|]1, Console.WriteLine);
+                        static void Bar(dynamic x, Action y) { }
+
+                        static void Main()
+                        {
+                            Bar([|(object)|]1, Console.WriteLine);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Bar(dynamic x, Action y) { }
-
-                    static void Main()
+                    class C
                     {
-                        Bar(1, Console.WriteLine);
+                        static void Bar(dynamic x, Action y) { }
+
+                        static void Main()
+                        {
+                            Bar(1, Console.WriteLine);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10357,38 +10212,38 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Bar(dynamic x, Action y) { }
-
-                    static void Main()
+                    class C
                     {
-                        Bar([|(IComparable)|]1, Console.WriteLine);
+                        static void Bar(dynamic x, Action y) { }
+
+                        static void Main()
+                        {
+                            Bar([|(IComparable)|]1, Console.WriteLine);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Bar(dynamic x, Action y) { }
-
-                    static void Main()
+                    class C
                     {
-                        Bar(1, Console.WriteLine);
+                        static void Bar(dynamic x, Action y) { }
+
+                        static void Main()
+                        {
+                            Bar(1, Console.WriteLine);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task NotOnWidenedNumericStoredInObject1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -10407,8 +10262,7 @@ enum Sign
         [Fact]
         public async Task NotOnWidenedNumericConstantStoredInObject2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -10428,29 +10282,30 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        long lng = 0;
-                        object o1 = [|(long)|]lng;
+                        static void Main()
+                        {
+                            long lng = 0;
+                            object o1 = [|(long)|]lng;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        long lng = 0;
-                        object o1 = lng;
+                        static void Main()
+                        {
+                            long lng = 0;
+                            object o1 = lng;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10458,34 +10313,34 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        object o1 = [|(long)|]0L;
+                        static void Main()
+                        {
+                            object o1 = [|(long)|]0L;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        object o1 = 0L;
+                        static void Main()
+                        {
+                            object o1 = 0L;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task DisallowNarrowingNullableNumericAsCast()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class Program
@@ -10507,31 +10362,32 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        byte? data = 1;
-                        var x = data [|as byte?|];
-                        Console.WriteLine(x);
+                        static void Main()
+                        {
+                            byte? data = 1;
+                            var x = data [|as byte?|];
+                            Console.WriteLine(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        byte? data = 1;
-                        var x = data;
-                        Console.WriteLine(x);
+                        static void Main()
+                        {
+                            byte? data = 1;
+                            var x = data;
+                            Console.WriteLine(x);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10563,39 +10419,40 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                namespace System
-                {
-                    public readonly ref struct Span<T> 
+                    using System;
+                    namespace System
                     {
-                        unsafe public Span(void* pointer, int length) { }
+                        public readonly ref struct Span<T> 
+                        {
+                            unsafe public Span(void* pointer, int length) { }
+                        }
                     }
-                }
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
+                        static void Main()
+                        {
+                            Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                namespace System
-                {
-                    public readonly ref struct Span<T> 
+                    using System;
+                    namespace System
                     {
-                        unsafe public Span(void* pointer, int length) { }
+                        public readonly ref struct Span<T> 
+                        {
+                            unsafe public Span(void* pointer, int length) { }
+                        }
                     }
-                }
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Span<int> x = stackalloc int[8]; // cast can be removed
+                        static void Main()
+                        {
+                            Span<int> x = stackalloc int[8]; // cast can be removed
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10654,45 +10511,46 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                namespace System
-                {
-                    public readonly ref struct Span<T> 
+                    using System;
+                    namespace System
                     {
-                        unsafe public Span(void* pointer, int length) { }
-                    }
-                }
-                class Program
-                {
-                    static void Main()
-                    {
-                        unsafe
+                        public readonly ref struct Span<T> 
                         {
-                            Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
+                            unsafe public Span(void* pointer, int length) { }
                         }
                     }
-                }
-                """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            unsafe
+                            {
+                                Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
+                            }
+                        }
+                    }
+                    """,
                 """
-                using System;
-                namespace System
-                {
-                    public readonly ref struct Span<T> 
+                    using System;
+                    namespace System
                     {
-                        unsafe public Span(void* pointer, int length) { }
-                    }
-                }
-                class Program
-                {
-                    static void Main()
-                    {
-                        unsafe
+                        public readonly ref struct Span<T> 
                         {
-                            Span<int> x = stackalloc int[8]; // cast can be removed
+                            unsafe public Span(void* pointer, int length) { }
                         }
                     }
-                }
-                """);
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            unsafe
+                            {
+                                Span<int> x = stackalloc int[8]; // cast can be removed
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -10700,39 +10558,40 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                namespace System
-                {
-                    public readonly ref struct Span<T> 
+                    using System;
+                    namespace System
                     {
-                        unsafe public Span(void* pointer, int length) { }
+                        public readonly ref struct Span<T> 
+                        {
+                            unsafe public Span(void* pointer, int length) { }
+                        }
                     }
-                }
-                class Program
-                {
-                    unsafe static void Main()
+                    class Program
                     {
-                        Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
+                        unsafe static void Main()
+                        {
+                            Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                namespace System
-                {
-                    public readonly ref struct Span<T> 
+                    using System;
+                    namespace System
                     {
-                        unsafe public Span(void* pointer, int length) { }
+                        public readonly ref struct Span<T> 
+                        {
+                            unsafe public Span(void* pointer, int length) { }
+                        }
                     }
-                }
-                class Program
-                {
-                    unsafe static void Main()
+                    class Program
                     {
-                        Span<int> x = stackalloc int[8]; // cast can be removed
+                        unsafe static void Main()
+                        {
+                            Span<int> x = stackalloc int[8]; // cast can be removed
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10764,39 +10623,40 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                namespace System
-                {
-                    public readonly ref struct Span<T> 
+                    using System;
+                    namespace System
                     {
-                        unsafe public Span(void* pointer, int length) { }
+                        public readonly ref struct Span<T> 
+                        {
+                            unsafe public Span(void* pointer, int length) { }
+                        }
                     }
-                }
-                class Program
-                {
-                    unsafe static void Main()
+                    class Program
                     {
-                        var x = [|(Span<int>)|](stackalloc int[8]); // cast can be removed
+                        unsafe static void Main()
+                        {
+                            var x = [|(Span<int>)|](stackalloc int[8]); // cast can be removed
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                namespace System
-                {
-                    public readonly ref struct Span<T> 
+                    using System;
+                    namespace System
                     {
-                        unsafe public Span(void* pointer, int length) { }
+                        public readonly ref struct Span<T> 
+                        {
+                            unsafe public Span(void* pointer, int length) { }
+                        }
                     }
-                }
-                class Program
-                {
-                    unsafe static void Main()
+                    class Program
                     {
-                        var x = (stackalloc int[8]); // cast can be removed
+                        unsafe static void Main()
+                        {
+                            var x = (stackalloc int[8]); // cast can be removed
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -10829,31 +10689,32 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        if (o is [|(int)|]0)
+                        void M(object o)
                         {
+                            if (o is [|(int)|]0)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        if (o is 0)
+                        void M(object o)
                         {
+                            if (o is 0)
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57062")]
@@ -10861,38 +10722,38 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        if (o is [|(long)|]0L)
+                        void M(object o)
                         {
+                            if (o is [|(long)|]0L)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        if (o is 0L)
+                        void M(object o)
                         {
+                            if (o is 0L)
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57062")]
         public async Task DoNotRemoveNonIdentityCastInConstantPattern1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -10912,8 +10773,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57062")]
         public async Task DoNotRemoveNonIdentityCastInConstantPattern2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -10941,35 +10801,35 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        if (o is (sbyte)1 or (short)1 or [|(int)|]1 or (long)1 or
-                                (byte)1 or (ushort)1 or (uint)1 or (ulong)1 or
-                                1.0 or 1.0f or 1.0m)
+                        void M(object o)
                         {
+                            if (o is (sbyte)1 or (short)1 or [|(int)|]1 or (long)1 or
+                                    (byte)1 or (ushort)1 or (uint)1 or (ulong)1 or
+                                    1.0 or 1.0f or 1.0m)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        if (o is (sbyte)1 or (short)1 or 1 or (long)1 or
-                                (byte)1 or (ushort)1 or (uint)1 or (ulong)1 or
-                                1.0 or 1.0f or 1.0m)
+                        void M(object o)
                         {
+                            if (o is (sbyte)1 or (short)1 or 1 or (long)1 or
+                                    (byte)1 or (ushort)1 or (uint)1 or (ulong)1 or
+                                    1.0 or 1.0f or 1.0m)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -10977,8 +10837,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57062")]
         public async Task DoNotRemoveNonIdentityCastInConstantPattern4()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -10998,8 +10857,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveEqualityWarningSilencingCast1()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11026,8 +10884,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveEqualityWarningSilencingCast2()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11054,8 +10911,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveEqualityWarningSilencingCast3()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11082,8 +10938,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveEqualityWarningSilencingCast4()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11112,51 +10967,52 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class Assembly : IAssembly
-                {
-                    public static bool operator ==(Assembly a1, Assembly a2) => false;
-                    public static bool operator !=(Assembly a1, Assembly a2) => false;
+                    class Assembly : IAssembly
+                    {
+                        public static bool operator ==(Assembly a1, Assembly a2) => false;
+                        public static bool operator !=(Assembly a1, Assembly a2) => false;
 
-                    public override bool Equals(object obj) => false;
-                    public override int GetHashCode() => 0;
-                }
+                        public override bool Equals(object obj) => false;
+                        public override int GetHashCode() => 0;
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, Assembly a1)
-                        => [|(object)|]a1 == [|(object)|]a2;
-                }
-                """, """
-                interface IAssembly
-                {
-                }
+                    class C
+                    {
+                        bool M(IAssembly a2, Assembly a1)
+                            => [|(object)|]a1 == [|(object)|]a2;
+                    }
+                    """,
+                """
+                    interface IAssembly
+                    {
+                    }
 
-                class Assembly : IAssembly
-                {
-                    public static bool operator ==(Assembly a1, Assembly a2) => false;
-                    public static bool operator !=(Assembly a1, Assembly a2) => false;
+                    class Assembly : IAssembly
+                    {
+                        public static bool operator ==(Assembly a1, Assembly a2) => false;
+                        public static bool operator !=(Assembly a1, Assembly a2) => false;
 
-                    public override bool Equals(object obj) => false;
-                    public override int GetHashCode() => 0;
-                }
+                        public override bool Equals(object obj) => false;
+                        public override int GetHashCode() => 0;
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, Assembly a1)
-                        => a1 == [|(object)|]a2;
-                }
-                """);
+                    class C
+                    {
+                        bool M(IAssembly a2, Assembly a1)
+                            => a1 == [|(object)|]a2;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveEqualityWarningSilencingCast6()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11183,8 +11039,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveEqualityWarningSilencingCast7()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11211,8 +11066,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveEqualityWarningSilencingCast8()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11239,8 +11093,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveEqualityWarningSilencingCast9()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11269,51 +11122,52 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class Assembly : IAssembly
-                {
-                    public static bool operator ==(Assembly a1, Assembly a2) => false;
-                    public static bool operator !=(Assembly a1, Assembly a2) => false;
+                    class Assembly : IAssembly
+                    {
+                        public static bool operator ==(Assembly a1, Assembly a2) => false;
+                        public static bool operator !=(Assembly a1, Assembly a2) => false;
 
-                    public override bool Equals(object obj) => false;
-                    public override int GetHashCode() => 0;
-                }
+                        public override bool Equals(object obj) => false;
+                        public override int GetHashCode() => 0;
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, Assembly a1)
-                        => a1 [|as object|] == a2 [|as object|];
-                }
-                """, """
-                interface IAssembly
-                {
-                }
+                    class C
+                    {
+                        bool M(IAssembly a2, Assembly a1)
+                            => a1 [|as object|] == a2 [|as object|];
+                    }
+                    """,
+                """
+                    interface IAssembly
+                    {
+                    }
 
-                class Assembly : IAssembly
-                {
-                    public static bool operator ==(Assembly a1, Assembly a2) => false;
-                    public static bool operator !=(Assembly a1, Assembly a2) => false;
+                    class Assembly : IAssembly
+                    {
+                        public static bool operator ==(Assembly a1, Assembly a2) => false;
+                        public static bool operator !=(Assembly a1, Assembly a2) => false;
 
-                    public override bool Equals(object obj) => false;
-                    public override int GetHashCode() => 0;
-                }
+                        public override bool Equals(object obj) => false;
+                        public override int GetHashCode() => 0;
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, Assembly a1)
-                        => a1 == a2 as object;
-                }
-                """);
+                    class C
+                    {
+                        bool M(IAssembly a2, Assembly a1)
+                            => a1 == a2 as object;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveObjectCastToCauseReferenceEqualityWhenUserDefinedComparisonExists1()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11340,8 +11194,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveObjectCastToCauseReferenceEqualityWhenUserDefinedComparisonExists2()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11368,8 +11221,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveObjectCastToCauseReferenceEqualityWhenUserDefinedComparisonExists3()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11396,8 +11248,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
         public async Task DoNotRemoveObjectCastToCauseReferenceEqualityWhenUserDefinedComparisonExists4()
         {
-            var source =
-                """
+            var source = """
                 interface IAssembly
                 {
                 }
@@ -11426,27 +11277,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => [|(object)|]a1 == a2;
-                }
-                """,
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => [|(object)|]a1 == a2;
+                    }
+                    """,
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 == a2;
-                }
-                """);
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 == a2;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
@@ -11454,27 +11306,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 == [|(object)|]a2;
-                }
-                """,
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 == [|(object)|]a2;
+                    }
+                    """,
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 == a2;
-                }
-                """);
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 == a2;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
@@ -11482,27 +11335,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => [|(object)|]a1 == [|(object)|]a2;
-                }
-                """,
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => [|(object)|]a1 == [|(object)|]a2;
+                    }
+                    """,
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 == a2;
-                }
-                """);
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 == a2;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
@@ -11510,27 +11364,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 [|as object|] == a2;
-                }
-                """,
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 [|as object|] == a2;
+                    }
+                    """,
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 == a2;
-                }
-                """);
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 == a2;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
@@ -11538,27 +11393,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 == a2 [|as object|];
-                }
-                """,
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 == a2 [|as object|];
+                    }
+                    """,
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 == a2;
-                }
-                """);
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 == a2;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57065")]
@@ -11566,34 +11422,34 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 [|as object|] == a2 [|as object|];
-                }
-                """,
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 [|as object|] == a2 [|as object|];
+                    }
+                    """,
                 """
-                interface IAssembly
-                {
-                }
+                    interface IAssembly
+                    {
+                    }
 
-                class C
-                {
-                    bool M(IAssembly a2, IAssembly a1)
-                        => a1 == a2;
-                }
-                """);
+                    class C
+                    {
+                        bool M(IAssembly a2, IAssembly a1)
+                            => a1 == a2;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57063")]
         public async Task DoNotRemoveNullableIntToNullableEnumCast()
         {
-            var source =
-                """
+            var source = """
                 enum E { }
 
                 class Program
@@ -11611,8 +11467,7 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57064")]
         public async Task DoNotRemoveNRTCast1()
         {
-            var source =
-                """
+            var source = """
                 #nullable enable
 
                 using System.Collections.Generic;
@@ -11642,34 +11497,33 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                #nullable enable
+                    #nullable enable
 
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class C
-                {
-                    string? M(bool b, string s)
+                    class C
                     {
-                        return b ? [|(string?)|]s : null;
+                        string? M(bool b, string s)
+                        {
+                            return b ? [|(string?)|]s : null;
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                #nullable enable
+                    """,
+                FixedCode = """
+                    #nullable enable
 
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class C
-                {
-                    string? M(bool b, string s)
+                    class C
                     {
-                        return b ? s : null;
+                        string? M(bool b, string s)
+                        {
+                            return b ? s : null;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -11679,33 +11533,34 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class C
-                {
-                    string? M(bool b, string s)
+                    class C
                     {
-                        return b ? s : [|(string?)|]null;
+                        string? M(bool b, string s)
+                        {
+                            return b ? s : [|(string?)|]null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class C
-                {
-                    string? M(bool b, string s)
+                    class C
                     {
-                        return b ? s : null;
+                        string? M(bool b, string s)
+                        {
+                            return b ? s : null;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57064")]
@@ -11713,23 +11568,24 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(int a)
+                    class C
                     {
-                        long f1 = (a == 5) ? 4 : [|(long)|]5;
+                        void M(int a)
+                        {
+                            long f1 = (a == 5) ? 4 : [|(long)|]5;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(int a)
+                    class C
                     {
-                        long f1 = (a == 5) ? 4 : 5;
+                        void M(int a)
+                        {
+                            long f1 = (a == 5) ? 4 : 5;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57064")]
@@ -11753,23 +11609,24 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        long f1 = (a == 5) ? b : [|(long)|]c;
+                        void M(int a, int b, int c)
+                        {
+                            long f1 = (a == 5) ? b : [|(long)|]c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        long f1 = (a == 5) ? b : c;
+                        void M(int a, int b, int c)
+                        {
+                            long f1 = (a == 5) ? b : c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57064")]
@@ -11792,23 +11649,24 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        int? f1 = (a == 5) ? [|(int?)|]0 : 1;
+                        void M(int a, int b, int c)
+                        {
+                            int? f1 = (a == 5) ? [|(int?)|]0 : 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        int? f1 = (a == 5) ? 0 : 1;
+                        void M(int a, int b, int c)
+                        {
+                            int? f1 = (a == 5) ? 0 : 1;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57064")]
@@ -11832,23 +11690,24 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        int? f1 = (a == 5) ? [|(int?)|]b : c;
+                        void M(int a, int b, int c)
+                        {
+                            int? f1 = (a == 5) ? [|(int?)|]b : c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        int? f1 = (a == 5) ? b : c;
+                        void M(int a, int b, int c)
+                        {
+                            int? f1 = (a == 5) ? b : c;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57064")]
@@ -11872,23 +11731,24 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        long f1 = (a == 5) ? [|(long)|]0 : default;
+                        void M(int a, int b, int c)
+                        {
+                            long f1 = (a == 5) ? [|(long)|]0 : default;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        long f1 = (a == 5) ? 0 : default;
+                        void M(int a, int b, int c)
+                        {
+                            long f1 = (a == 5) ? 0 : default;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57064")]
@@ -11911,23 +11771,24 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        long f1 = (a == 5) ? [|(long)|]b : default;
+                        void M(int a, int b, int c)
+                        {
+                            long f1 = (a == 5) ? [|(long)|]b : default;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(int a, int b, int c)
+                    class C
                     {
-                        long f1 = (a == 5) ? b : default;
+                        void M(int a, int b, int c)
+                        {
+                            long f1 = (a == 5) ? b : default;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57064")]
@@ -11980,27 +11841,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Console.WriteLine((int)(float?)[|(int?)|]2147483647); // Prints -2147483648
+                        static void Main()
+                        {
+                            Console.WriteLine((int)(float?)[|(int?)|]2147483647); // Prints -2147483648
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Console.WriteLine((int)(float?)2147483647); // Prints -2147483648
+                        static void Main()
+                        {
+                            Console.WriteLine((int)(float?)2147483647); // Prints -2147483648
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56938")]
@@ -12008,27 +11870,28 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Console.WriteLine((int)(double?)[|(long?)|][|(int?)|]1);
+                        static void Main()
+                        {
+                            Console.WriteLine((int)(double?)[|(long?)|][|(int?)|]1);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        Console.WriteLine((int)(double?)1);
+                        static void Main()
+                        {
+                            Console.WriteLine((int)(double?)1);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57064")]
@@ -12182,11 +12045,7 @@ enum Sign
                         Boolean.TryParse("", out var b) ? b : (bool?)default;
                 }
                 """;
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = source,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34509")]
@@ -12541,39 +12400,39 @@ enum Sign
 
                 namespace WrongRedundantCastWarning
                 {
-                	struct Flag
-                	{
-                		public Flag(int value) => this.Value = value;
+                    struct Flag
+                    {
+                        public Flag(int value) => this.Value = value;
 
-                		public int Value { get; }
+                        public int Value { get; }
 
-                		// This cast is wrongly reported as redundant
-                		public static FlagSet operator ~(Flag flag) => ~(FlagSet)flag;
-                	}
+                        // This cast is wrongly reported as redundant
+                        public static FlagSet operator ~(Flag flag) => ~(FlagSet)flag;
+                    }
 
-                	struct FlagSet
-                	{
-                		public FlagSet(int value) => this.Value = value;
+                    struct FlagSet
+                    {
+                        public FlagSet(int value) => this.Value = value;
 
-                		public int Value { get; }
+                        public int Value { get; }
 
-                		public static implicit operator FlagSet(Flag flag) => new FlagSet(flag.Value);
+                        public static implicit operator FlagSet(Flag flag) => new FlagSet(flag.Value);
 
-                		public static FlagSet operator ~(FlagSet flagSet) => new FlagSet(~flagSet.Value);
-                	}
+                        public static FlagSet operator ~(FlagSet flagSet) => new FlagSet(~flagSet.Value);
+                    }
 
-                	class Program
-                	{
-                		static readonly Flag One = new Flag(1);
-                		static readonly Flag Two = new Flag(2);
+                    class Program
+                    {
+                        static readonly Flag One = new Flag(1);
+                        static readonly Flag Two = new Flag(2);
 
-                		static void Main(string[] args)
-                		{
-                			var flipped = ~Two;
+                        static void Main(string[] args)
+                        {
+                            var flipped = ~Two;
 
-                			Console.WriteLine(flipped.Value);
-                		}
-                	}
+                            Console.WriteLine(flipped.Value);
+                        }
+                    }
                 }
                 """;
             await new VerifyCS.Test
@@ -12738,10 +12597,7 @@ enum Sign
                 """;
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication, },
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp10,
@@ -12756,7 +12612,7 @@ enum Sign
                 {
                     protected sbyte ExtractInt8(object data)
                     {
-                	    return (data is sbyte value) ? value : (sbyte)0;
+                        return (data is sbyte value) ? value : (sbyte)0;
                     }
                 }
                 """;
@@ -12774,27 +12630,27 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var id = true ? [|(Guid?)|]Guid.NewGuid() : [|(Guid?)|]Guid.Empty;
+                        void M()
+                        {
+                            var id = true ? [|(Guid?)|]Guid.NewGuid() : [|(Guid?)|]Guid.Empty;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var id = true ? Guid.NewGuid() : (Guid?)Guid.Empty;
+                        void M()
+                        {
+                            var id = true ? Guid.NewGuid() : (Guid?)Guid.Empty;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -12805,27 +12661,27 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid g1, Guid? g2)
+                    class C
                     {
-                        var id = true ? [|(Guid?)|]g1 : g2;
+                        void M(Guid g1, Guid? g2)
+                        {
+                            var id = true ? [|(Guid?)|]g1 : g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid g1, Guid? g2)
+                    class C
                     {
-                        var id = true ? g1 : g2;
+                        void M(Guid g1, Guid? g2)
+                        {
+                            var id = true ? g1 : g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -12836,27 +12692,27 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid? g1, Guid g2)
+                    class C
                     {
-                        var id = true ? g1 : [|(Guid?)|]g2;
+                        void M(Guid? g1, Guid g2)
+                        {
+                            var id = true ? g1 : [|(Guid?)|]g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid? g1, Guid g2)
+                    class C
                     {
-                        var id = true ? g1 : g2;
+                        void M(Guid? g1, Guid g2)
+                        {
+                            var id = true ? g1 : g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -12867,27 +12723,27 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid g1, Guid g2)
+                    class C
                     {
-                        Guid? id = true ? [|(Guid?)|]g1 : g2;
+                        void M(Guid g1, Guid g2)
+                        {
+                            Guid? id = true ? [|(Guid?)|]g1 : g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid g1, Guid g2)
+                    class C
                     {
-                        Guid? id = true ? g1 : g2;
+                        void M(Guid g1, Guid g2)
+                        {
+                            Guid? id = true ? g1 : g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -12898,27 +12754,27 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid g1, Guid g2)
+                    class C
                     {
-                        Guid? id = true ? g1 : [|(Guid?)|]g2;
+                        void M(Guid g1, Guid g2)
+                        {
+                            Guid? id = true ? g1 : [|(Guid?)|]g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid g1, Guid g2)
+                    class C
                     {
-                        Guid? id = true ? g1 : g2;
+                        void M(Guid g1, Guid g2)
+                        {
+                            Guid? id = true ? g1 : g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -12929,27 +12785,27 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid g1, Guid g2)
+                    class C
                     {
-                        Guid? id = true ? [|(Guid?)|]g1 : [|(Guid?)|]g2;
+                        void M(Guid g1, Guid g2)
+                        {
+                            Guid? id = true ? [|(Guid?)|]g1 : [|(Guid?)|]g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Guid g1, Guid g2)
+                    class C
                     {
-                        Guid? id = true ? g1 : g2;
+                        void M(Guid g1, Guid g2)
+                        {
+                            Guid? id = true ? g1 : g2;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -13007,7 +12863,8 @@ enum Sign
         [InlineData("Func<string>")]
         public async Task ConvertingMethodGroupToObject_CastIsUnnecessary(string type)
         {
-            var code = $@"
+            var code =
+                $@"
 using System;
 
 class C
@@ -13018,7 +12875,8 @@ class C
     }}
 }}
 ";
-            var fixedCode = $@"
+            var fixedCode =
+                $@"
 using System;
 
 class C
@@ -13080,18 +12938,15 @@ class C
             var test = new VerifyCS.Test()
             {
                 TestCode = """
-                int x = 1;
-                int y = [|(int)|]x;
-                """,
+                    int x = 1;
+                    int y = [|(int)|]x;
+                    """,
                 FixedCode = """
-                int x = 1;
-                int y = x;
-                """,
+                    int x = 1;
+                    int y = x;
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication, },
             };
 
             await test.RunAsync();
@@ -13340,297 +13195,319 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                public class C {
-                    double s;
+                    public class C {
+                        double s;
 
-                    public void M() {
-                        ([|(double)|]s).CompareTo(0); // double is built in.  Methods will not mutate it.
-                        Console.WriteLine(s);
+                        public void M() {
+                            ([|(double)|]s).CompareTo(0); // double is built in.  Methods will not mutate it.
+                            Console.WriteLine(s);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class C {
-                    double s;
+                    public class C {
+                        double s;
 
-                    public void M() {
-                        s.CompareTo(0); // double is built in.  Methods will not mutate it.
-                        Console.WriteLine(s);
+                        public void M() {
+                            s.CompareTo(0); // double is built in.  Methods will not mutate it.
+                            Console.WriteLine(s);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61922")]
         public async Task IdentityStructCast3()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-                public class S {
-                    public int Field;
-                    public void Increment() => Field++;
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
-
-                    public void M() {
-                        ([|(S)|]s).Increment(); // safe to remove since this is not a struct
-                        s.Print();
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System;
+                    public class S {
+                        public int Field;
+                        public void Increment() => Field++;
+                        public void Print() => Console.WriteLine(Field);
                     }
-                }
-                """, """
-                using System;
-                public class S {
-                    public int Field;
-                    public void Increment() => Field++;
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
+                    public class C {
+                        S s;
 
-                    public void M() {
-                        s.Increment(); // safe to remove since this is not a struct
-                        s.Print();
+                        public void M() {
+                            ([|(S)|]s).Increment(); // safe to remove since this is not a struct
+                            s.Print();
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    public class S {
+                        public int Field;
+                        public void Increment() => Field++;
+                        public void Print() => Console.WriteLine(Field);
+                    }
+                    public class C {
+                        S s;
+
+                        public void M() {
+                            s.Increment(); // safe to remove since this is not a struct
+                            s.Print();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61922")]
         public async Task IdentityStructCast4()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-                public readonly struct S
-                {
-                    public readonly int Field;
-                    public void Increment() { }
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
-
-                    public void M() {
-                        ([|(S)|]s).Increment(); // safe to remove since struct is readonly
-                        s.Print();
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System;
+                    public readonly struct S
+                    {
+                        public readonly int Field;
+                        public void Increment() { }
+                        public void Print() => Console.WriteLine(Field);
                     }
-                }
-                """, """
-                using System;
-                public readonly struct S
-                {
-                    public readonly int Field;
-                    public void Increment() { }
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
+                    public class C {
+                        S s;
 
-                    public void M() {
-                        s.Increment(); // safe to remove since struct is readonly
-                        s.Print();
+                        public void M() {
+                            ([|(S)|]s).Increment(); // safe to remove since struct is readonly
+                            s.Print();
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    public readonly struct S
+                    {
+                        public readonly int Field;
+                        public void Increment() { }
+                        public void Print() => Console.WriteLine(Field);
+                    }
+                    public class C {
+                        S s;
+
+                        public void M() {
+                            s.Increment(); // safe to remove since struct is readonly
+                            s.Print();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61922")]
         public async Task IdentityStructCast5()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-                public struct S
-                {
-                    public readonly int Field;
-                    public void Increment() { }
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
-
-                    S GetS() => s;
-
-                    public void M() {
-                        ([|(S)|]GetS()).Increment(); // safe to remove since not an lvalue.
-                        s.Print();
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System;
+                    public struct S
+                    {
+                        public readonly int Field;
+                        public void Increment() { }
+                        public void Print() => Console.WriteLine(Field);
                     }
-                }
-                """, """
-                using System;
-                public struct S
-                {
-                    public readonly int Field;
-                    public void Increment() { }
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
+                    public class C {
+                        S s;
 
-                    S GetS() => s;
+                        S GetS() => s;
 
-                    public void M() {
-                        GetS().Increment(); // safe to remove since not an lvalue.
-                        s.Print();
+                        public void M() {
+                            ([|(S)|]GetS()).Increment(); // safe to remove since not an lvalue.
+                            s.Print();
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    public struct S
+                    {
+                        public readonly int Field;
+                        public void Increment() { }
+                        public void Print() => Console.WriteLine(Field);
+                    }
+                    public class C {
+                        S s;
+
+                        S GetS() => s;
+
+                        public void M() {
+                            GetS().Increment(); // safe to remove since not an lvalue.
+                            s.Print();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61922")]
         public async Task IdentityStructCast6()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-                public struct S
-                {
-                    public readonly int Field;
-                    public readonly void Increment() { }
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
-
-                    public void M() {
-                        ([|(S)|]s).Increment(); // safe to remove since method is readonly
-                        s.Print();
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System;
+                    public struct S
+                    {
+                        public readonly int Field;
+                        public readonly void Increment() { }
+                        public void Print() => Console.WriteLine(Field);
                     }
-                }
-                """, """
-                using System;
-                public struct S
-                {
-                    public readonly int Field;
-                    public readonly void Increment() { }
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
+                    public class C {
+                        S s;
 
-                    public void M() {
-                        s.Increment(); // safe to remove since method is readonly
-                        s.Print();
+                        public void M() {
+                            ([|(S)|]s).Increment(); // safe to remove since method is readonly
+                            s.Print();
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    public struct S
+                    {
+                        public readonly int Field;
+                        public readonly void Increment() { }
+                        public void Print() => Console.WriteLine(Field);
+                    }
+                    public class C {
+                        S s;
+
+                        public void M() {
+                            s.Increment(); // safe to remove since method is readonly
+                            s.Print();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61922")]
         public async Task IdentityStructCast7()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-                public struct S
-                {
-                    public readonly int Field;
-                    public override string ToString() => "";
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
-
-                    public void M() {
-                        ([|(S)|]s).ToString(); // safe to remove since override of object method
-                        s.Print();
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System;
+                    public struct S
+                    {
+                        public readonly int Field;
+                        public override string ToString() => "";
+                        public void Print() => Console.WriteLine(Field);
                     }
-                }
-                """, """
-                using System;
-                public struct S
-                {
-                    public readonly int Field;
-                    public override string ToString() => "";
-                    public void Print() => Console.WriteLine(Field);
-                }
-                public class C {
-                    S s;
+                    public class C {
+                        S s;
 
-                    public void M() {
-                        s.ToString(); // safe to remove since override of object method
-                        s.Print();
+                        public void M() {
+                            ([|(S)|]s).ToString(); // safe to remove since override of object method
+                            s.Print();
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    public struct S
+                    {
+                        public readonly int Field;
+                        public override string ToString() => "";
+                        public void Print() => Console.WriteLine(Field);
+                    }
+                    public class C {
+                        S s;
+
+                        public void M() {
+                            s.ToString(); // safe to remove since override of object method
+                            s.Print();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61922")]
         public async Task IdentityStructCast8()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-                public struct S {
-                    public int Field;
-                    public void Increment() => Field++;
-                    public void Print() => Console.WriteLine(Field);
-                    public int Prop => 0;
-                }
-                public class C {
-                    S s;
-
-                    public void M() {
-                        var v = ([|(S)|]s).Prop; // Safe because we assume non-methods don't mutate
-                        s.Print();
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System;
+                    public struct S {
+                        public int Field;
+                        public void Increment() => Field++;
+                        public void Print() => Console.WriteLine(Field);
+                        public int Prop => 0;
                     }
-                }
-                """, """
-                using System;
-                public struct S {
-                    public int Field;
-                    public void Increment() => Field++;
-                    public void Print() => Console.WriteLine(Field);
-                    public int Prop => 0;
-                }
-                public class C {
-                    S s;
+                    public class C {
+                        S s;
 
-                    public void M() {
-                        var v = s.Prop; // Safe because we assume non-methods don't mutate
-                        s.Print();
+                        public void M() {
+                            var v = ([|(S)|]s).Prop; // Safe because we assume non-methods don't mutate
+                            s.Print();
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    public struct S {
+                        public int Field;
+                        public void Increment() => Field++;
+                        public void Print() => Console.WriteLine(Field);
+                        public int Prop => 0;
+                    }
+                    public class C {
+                        S s;
+
+                        public void M() {
+                            var v = s.Prop; // Safe because we assume non-methods don't mutate
+                            s.Print();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61922")]
         public async Task IdentityStructCast9()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
-                using System;
-                public struct S {
-                    public int Field;
-                    public void Increment() => Field++;
-                    public void Print() => Console.WriteLine(Field);
-                    public int Prop => 0;
-                }
-                public class C {
-                    S s;
-
-                    public void M() {
-                        var v = [|(S)|]s; // Safe because we're not accessing a member
-                        s.Print();
+            await VerifyCS.VerifyCodeFixAsync(
+                """
+                    using System;
+                    public struct S {
+                        public int Field;
+                        public void Increment() => Field++;
+                        public void Print() => Console.WriteLine(Field);
+                        public int Prop => 0;
                     }
-                }
-                """, """
-                using System;
-                public struct S {
-                    public int Field;
-                    public void Increment() => Field++;
-                    public void Print() => Console.WriteLine(Field);
-                    public int Prop => 0;
-                }
-                public class C {
-                    S s;
+                    public class C {
+                        S s;
 
-                    public void M() {
-                        var v = s; // Safe because we're not accessing a member
-                        s.Print();
+                        public void M() {
+                            var v = [|(S)|]s; // Safe because we're not accessing a member
+                            s.Print();
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    public struct S {
+                        public int Field;
+                        public void Increment() => Field++;
+                        public void Print() => Console.WriteLine(Field);
+                        public int Prop => 0;
+                    }
+                    public class C {
+                        S s;
+
+                        public void M() {
+                            var v = s; // Safe because we're not accessing a member
+                            s.Print();
+                        }
+                    }
+                    """
+            );
         }
     }
 }

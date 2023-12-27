@@ -16,22 +16,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertToInterpolatedString)]
     public class ConvertRegularStringToInterpolatedStringTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ConvertRegularStringToInterpolatedStringRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ConvertRegularStringToInterpolatedStringRefactoringProvider();
 
         [Fact]
         public async Task TestMissingOnRegularStringWithNoBraces()
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"string";
+                        void M()
+                        {
+                            var v = [||]"string";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -39,23 +42,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"string {";
+                        void M()
+                        {
+                            var v = [||]"string {";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = $"string {{";
+                        void M()
+                        {
+                            var v = $"string {{";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -63,23 +67,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"string { \r\n \t";
+                        void M()
+                        {
+                            var v = [||]"string { \r\n \t";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = $"string {{ \r\n \t";
+                        void M()
+                        {
+                            var v = $"string {{ \r\n \t";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -87,15 +92,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var i = 0;
-                        var v = $[||]"string {i}";
+                        void M()
+                        {
+                            var i = 0;
+                            var v = $[||]"string {i}";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -103,25 +109,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = @[||]"string
-                }";
+                        void M()
+                        {
+                            var v = @[||]"string
+                    }";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = $@"string
-                }}";
+                        void M()
+                        {
+                            var v = $@"string
+                    }}";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -129,25 +136,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = @[||]"string ""foo""
-                }";
+                        void M()
+                        {
+                            var v = @[||]"string ""foo""
+                    }";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = $@"string ""foo""
-                }}";
+                        void M()
+                        {
+                            var v = $@"string ""foo""
+                    }}";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52243")]
@@ -155,14 +163,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        const string v = [||]"string {";
+                        void M()
+                        {
+                            const string v = [||]"string {";
+                        }
                     }
-                }
-                """, new(new CSharpParseOptions(LanguageVersion.CSharp9)));
+                    """,
+                new(new CSharpParseOptions(LanguageVersion.CSharp9))
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52243")]
@@ -170,23 +180,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        const string v = [||]"string {";
+                        void M()
+                        {
+                            const string v = [||]"string {";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        const string v = $"string {{";
+                        void M()
+                        {
+                            const string v = $"string {{";
+                        }
                     }
-                }
-                """, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10));
+                    """,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10)
+            );
         }
 
         [Fact]
@@ -194,14 +206,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"string {
+                        void M()
+                        {
+                            var v = [||]"string {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52243")]
@@ -209,13 +222,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                [System.Diagnostics.DebuggerDisplay([||]"FirstName={FirstName}, LastName={LastName}")]
-                public class C
-                {
-                    public string FirstName { get; set; }
-                    public string LastName { get; set; }
-                }
-                """, new(new CSharpParseOptions(LanguageVersion.CSharp9)));
+                    [System.Diagnostics.DebuggerDisplay([||]"FirstName={FirstName}, LastName={LastName}")]
+                    public class C
+                    {
+                        public string FirstName { get; set; }
+                        public string LastName { get; set; }
+                    }
+                    """,
+                new(new CSharpParseOptions(LanguageVersion.CSharp9))
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52243")]
@@ -223,21 +238,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestInRegularAndScriptAsync(
                 """
-                [System.Diagnostics.DebuggerDisplay([||]"FirstName={FirstName}, LastName={LastName}")]
-                public class C
-                {
-                    public string FirstName { get; set; }
-                    public string LastName { get; set; }
-                }
-                """,
+                    [System.Diagnostics.DebuggerDisplay([||]"FirstName={FirstName}, LastName={LastName}")]
+                    public class C
+                    {
+                        public string FirstName { get; set; }
+                        public string LastName { get; set; }
+                    }
+                    """,
                 """
-                [System.Diagnostics.DebuggerDisplay($"FirstName={{FirstName}}, LastName={{LastName}}")]
-                public class C
-                {
-                    public string FirstName { get; set; }
-                    public string LastName { get; set; }
-                }
-                """, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10));
+                    [System.Diagnostics.DebuggerDisplay($"FirstName={{FirstName}}, LastName={{LastName}}")]
+                    public class C
+                    {
+                        public string FirstName { get; set; }
+                        public string LastName { get; set; }
+                    }
+                    """,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10)
+            );
         }
 
         [Fact]
@@ -245,14 +262,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v [||]= "string {";
+                        void M()
+                        {
+                            var v [||]= "string {";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCollectionExpress
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer,
-    CSharpUseCollectionExpressionForArrayCodeFixProvider>;
+    CSharpUseCollectionExpressionForArrayCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUseCollectionExpression)]
 public class UseCollectionExpressionForArrayTests
@@ -463,7 +464,8 @@ public class UseCollectionExpressionForArrayTests
 
     [Theory, CombinatorialData]
     public async Task TestNotWithVar_ExplicitArrayType(
-         [CombinatorialValues(new object[] { "var", "object", "dynamic" })] string type)
+        [CombinatorialValues(new object[] { "var", "object", "dynamic" })] string type
+    )
     {
         await new VerifyCS.Test
         {
@@ -482,7 +484,8 @@ public class UseCollectionExpressionForArrayTests
 
     [Theory, CombinatorialData]
     public async Task TestNotWithVar_ExplicitArrayType2(
-        [CombinatorialValues(new object[] { "var", "object", "dynamic" })] string type)
+        [CombinatorialValues(new object[] { "var", "object", "dynamic" })] string type
+    )
     {
         await new VerifyCS.Test
         {
@@ -501,7 +504,8 @@ public class UseCollectionExpressionForArrayTests
 
     [Theory, CombinatorialData]
     public async Task TestNotWithVar_ImplicitArrayType(
-        [CombinatorialValues(new object[] { "var", "object", "dynamic" })] string type)
+        [CombinatorialValues(new object[] { "var", "object", "dynamic" })] string type
+    )
     {
         await new VerifyCS.Test
         {
@@ -520,7 +524,8 @@ public class UseCollectionExpressionForArrayTests
 
     [Theory, CombinatorialData]
     public async Task TestNotWithVar_ImplicitArrayType2(
-        [CombinatorialValues(new object[] { "var", "object", "dynamic" })] string type)
+        [CombinatorialValues(new object[] { "var", "object", "dynamic" })] string type
+    )
     {
         await new VerifyCS.Test
         {
@@ -1017,9 +1022,18 @@ public class UseCollectionExpressionForArrayTests
                 ExpectedDiagnostics =
                 {
                     // /0/Test0.cs(5,22): info IDE0300: Collection initialization can be simplified
-                    VerifyCS.Diagnostic().WithSpan(5, 22, 5, 25).WithSpan(5, 22, 5, 39).WithSeverity(DiagnosticSeverity.Info),
+                    VerifyCS
+                        .Diagnostic()
+                        .WithSpan(5, 22, 5, 25)
+                        .WithSpan(5, 22, 5, 39)
+                        .WithSeverity(DiagnosticSeverity.Info),
                     // /0/Test0.cs(5,22): hidden IDE0300: Collection initialization can be simplified
-                    VerifyCS.Diagnostic().WithSpan(5, 22, 5, 27).WithSpan(5, 22, 5, 39).WithSpan(5, 22, 5, 27).WithSeverity(DiagnosticSeverity.Hidden),
+                    VerifyCS
+                        .Diagnostic()
+                        .WithSpan(5, 22, 5, 27)
+                        .WithSpan(5, 22, 5, 39)
+                        .WithSpan(5, 22, 5, 27)
+                        .WithSeverity(DiagnosticSeverity.Hidden),
                 }
             },
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1101,7 +1115,7 @@ public class UseCollectionExpressionForArrayTests
                 class C
                 {
                 }
-                
+
                 public class XAttribute : System.Attribute
                 {
                     public XAttribute(int[] values) { }
@@ -1188,7 +1202,7 @@ public class UseCollectionExpressionForArrayTests
                 class C
                 {
                     public int[] X;
-                
+
                     void M()
                     {
                         var v = new C
@@ -2002,14 +2016,14 @@ public class UseCollectionExpressionForArrayTests
                 """,
             FixedCode = """
                 using System;
-                
+
                 namespace N
                 {
                     class WellKnownDiagnosticTags
                     {
                         public static string Telemetry, EditAndContinue, Unnecessary, NotConfigurable;
                     }
-                
+
                     class C
                     {
                         private static readonly string s_enforceOnBuildNeverTag;
@@ -2607,7 +2621,7 @@ public class UseCollectionExpressionForArrayTests
                 """,
             FixedCode = """
                 using System;
-                
+
                 class C
                 {
                     void M(int i, int j)
@@ -2642,7 +2656,7 @@ public class UseCollectionExpressionForArrayTests
                 """,
             FixedCode = """
                 using System;
-                
+
                 class C
                 {
                     void M(int i, int j)
@@ -2685,7 +2699,7 @@ public class UseCollectionExpressionForArrayTests
                 """,
             FixedCode = """
                 using System;
-                
+
                 class C
                 {
                     void M(int i, int j)
@@ -2717,10 +2731,7 @@ public class UseCollectionExpressionForArrayTests
                 int[] i = [1, 2, 3];
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();
     }
 
@@ -2746,10 +2757,7 @@ public class UseCollectionExpressionForArrayTests
                 ];
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();
     }
 
@@ -2777,19 +2785,16 @@ public class UseCollectionExpressionForArrayTests
                 ];
                 """.ReplaceLineEndings(endOfLine),
             LanguageVersion = LanguageVersion.CSharp12,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();
     }
 
     public static readonly IEnumerable<object[]> EmptyOrConstantsOnly = new object[][]
     {
-        new [] { "[|[|new|] int[0]|]", "[]" },
-        new [] { "[|[|new|] int[]|] { }", "[]" },
-        new [] { "[|[|new|] int[]|] { 1, 2, 3 }", "[1, 2, 3]" },
-        new [] { "[|[|new|][]|] { 1, 2, 3 }", "[1, 2, 3]" },
+        new[] { "[|[|new|] int[0]|]", "[]" },
+        new[] { "[|[|new|] int[]|] { }", "[]" },
+        new[] { "[|[|new|] int[]|] { 1, 2, 3 }", "[1, 2, 3]" },
+        new[] { "[|[|new|][]|] { 1, 2, 3 }", "[1, 2, 3]" },
     };
 
     [Theory, MemberData(nameof(EmptyOrConstantsOnly))]

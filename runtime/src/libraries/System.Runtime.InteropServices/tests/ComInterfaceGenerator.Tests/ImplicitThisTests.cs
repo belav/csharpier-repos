@@ -18,7 +18,11 @@ namespace ComInterfaceGenerator.Tests
             [UnmanagedObjectUnwrapperAttribute<VTableGCHandlePair<INativeObject>>]
             internal partial interface INativeObject : IUnmanagedInterfaceType
             {
-                private static void** s_vtable = (void**)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(INativeObject), sizeof(void*) * 6);
+                private static void** s_vtable = (void**)
+                    RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(INativeObject),
+                        sizeof(void*) * 6
+                    );
                 static void* IUnmanagedInterfaceType.VirtualMethodTableManagedImplementation
                 {
                     get
@@ -33,28 +37,39 @@ namespace ComInterfaceGenerator.Tests
 
                 [VirtualMethodIndex(0, ImplicitThisParameter = true)]
                 int GetData();
+
                 [VirtualMethodIndex(1, ImplicitThisParameter = true)]
                 void SetData(int x);
+
                 [VirtualMethodIndex(2, ImplicitThisParameter = true)]
                 void ExchangeData(ref int x);
+
                 [VirtualMethodIndex(3, ImplicitThisParameter = true)]
                 void SumAndSetData(
                     [MarshalUsing(CountElementName = nameof(numValues))] int[] values,
                     int numValues,
-                    out int oldValue);
+                    out int oldValue
+                );
+
                 [VirtualMethodIndex(4, ImplicitThisParameter = true)]
                 void SumAndSetData(
                     [MarshalUsing(CountElementName = nameof(numValues))] ref int[] values,
                     int numValues,
-                    out int oldValue);
+                    out int oldValue
+                );
+
                 [VirtualMethodIndex(5, ImplicitThisParameter = true)]
                 void MultiplyWithData(
                     [MarshalUsing(CountElementName = nameof(numValues))] int[] values,
-                    int numValues);
+                    int numValues
+                );
             }
 
             [NativeMarshalling(typeof(NativeObjectMarshaller))]
-            public class NativeObject : INativeObject.Native, IUnmanagedVirtualMethodTableProvider, IDisposable
+            public class NativeObject
+                : INativeObject.Native,
+                    IUnmanagedVirtualMethodTableProvider,
+                    IDisposable
             {
                 private readonly void* _pointer;
 
@@ -75,7 +90,11 @@ namespace ComInterfaceGenerator.Tests
                 }
             }
 
-            [CustomMarshaller(typeof(NativeObject), MarshalMode.ManagedToUnmanagedOut, typeof(NativeObjectMarshaller))]
+            [CustomMarshaller(
+                typeof(NativeObject),
+                MarshalMode.ManagedToUnmanagedOut,
+                typeof(NativeObjectMarshaller)
+            )]
             static class NativeObjectMarshaller
             {
                 public static NativeObject ConvertToManaged(void* value) => new NativeObject(value);
@@ -102,7 +121,8 @@ namespace ComInterfaceGenerator.Tests
         {
             const int value = 42;
 
-            using NativeExportsNE.ImplicitThis.NativeObject obj = NativeExportsNE.ImplicitThis.NewNativeObject();
+            using NativeExportsNE.ImplicitThis.NativeObject obj =
+                NativeExportsNE.ImplicitThis.NewNativeObject();
 
             NativeExportsNE.ImplicitThis.INativeObject nativeObjInterface = obj;
 
@@ -119,11 +139,16 @@ namespace ComInterfaceGenerator.Tests
 
             ManagedObjectImplementation impl = new ManagedObjectImplementation(startingValue);
 
-            void* wrapper = VTableGCHandlePair<NativeExportsNE.ImplicitThis.INativeObject>.Allocate(impl);
+            void* wrapper = VTableGCHandlePair<NativeExportsNE.ImplicitThis.INativeObject>.Allocate(
+                impl
+            );
 
             try
             {
-                Assert.Equal(startingValue, NativeExportsNE.ImplicitThis.GetNativeObjectData(wrapper));
+                Assert.Equal(
+                    startingValue,
+                    NativeExportsNE.ImplicitThis.GetNativeObjectData(wrapper)
+                );
                 NativeExportsNE.ImplicitThis.SetNativeObjectData(wrapper, newValue);
                 Assert.Equal(newValue, NativeExportsNE.ImplicitThis.GetNativeObjectData(wrapper));
                 // Verify that we actually updated the managed instance.
@@ -145,23 +170,38 @@ namespace ComInterfaceGenerator.Tests
             }
 
             public void ExchangeData(ref int x) => x = Interlocked.Exchange(ref _data, x);
+
             public int GetData() => _data;
-            public void MultiplyWithData([MarshalUsing(CountElementName = "numValues")] int[] values, int numValues)
+
+            public void MultiplyWithData(
+                [MarshalUsing(CountElementName = "numValues")] int[] values,
+                int numValues
+            )
             {
                 for (int i = 0; i < values.Length; i++)
                 {
                     values[i] *= _data;
                 }
             }
+
             public void SetData(int x) => _data = x;
-            public void SumAndSetData([MarshalUsing(CountElementName = "numValues")] int[] values, int numValues, out int oldValue)
+
+            public void SumAndSetData(
+                [MarshalUsing(CountElementName = "numValues")] int[] values,
+                int numValues,
+                out int oldValue
+            )
             {
                 int value = values.Sum();
                 oldValue = _data;
                 _data = value;
             }
 
-            public void SumAndSetData([MarshalUsing(CountElementName = "numValues")] ref int[] values, int numValues, out int oldValue) => SumAndSetData(values, numValues, out oldValue);
+            public void SumAndSetData(
+                [MarshalUsing(CountElementName = "numValues")] ref int[] values,
+                int numValues,
+                out int oldValue
+            ) => SumAndSetData(values, numValues, out oldValue);
         }
     }
 }

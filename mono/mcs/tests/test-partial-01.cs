@@ -2,54 +2,54 @@
 
 namespace Foo
 {
-	public class Hello
-	{
-		public static int World = 8;
-	}
+    public class Hello
+    {
+        public static int World = 8;
+    }
 }
 
 namespace Bar
 {
-	public class Hello
-	{
-		public static int World = 9;
-	}
+    public class Hello
+    {
+        public static int World = 9;
+    }
 }
 
 namespace X
 {
-	using Foo;
+    using Foo;
 
-	public partial class Test
-	{
-		public static int FooWorld ()
-		{
-			return Hello.World;
-		}
-	}
+    public partial class Test
+    {
+        public static int FooWorld()
+        {
+            return Hello.World;
+        }
+    }
 }
 
 namespace X
 {
-	using Bar;
+    using Bar;
 
-	public partial class Test
-	{
-		public static int BarWorld ()
-		{
-			return Hello.World;
-		}
-	}
+    public partial class Test
+    {
+        public static int BarWorld()
+        {
+            return Hello.World;
+        }
+    }
 }
 
 class Y
 {
-	public static int Main ()
-	{
-		if (X.Test.FooWorld () != 8)
-			return 1;
-		if (X.Test.BarWorld () != 9)
-			return 2;
-		return 0;
-	}
+    public static int Main()
+    {
+        if (X.Test.FooWorld() != 8)
+            return 1;
+        if (X.Test.BarWorld() != 9)
+            return 2;
+        return 0;
+    }
 }

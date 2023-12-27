@@ -3,8 +3,8 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.Localization;
 using Moq;
 
@@ -16,21 +16,37 @@ public class FileExtensionsAttributeAdapterTest
     [InlineData("", ".png,.jpg,.jpeg,.gif")]
     [InlineData(null, ".png,.jpg,.jpeg,.gif")]
     [ReplaceCulture]
-    public void AddValidation_WithoutLocalizationAndDefaultFileExtensions(string extensions, string expectedExtensions)
+    public void AddValidation_WithoutLocalizationAndDefaultFileExtensions(
+        string extensions,
+        string expectedExtensions
+    )
     {
         // Arrange
         var provider = TestModelMetadataProvider.CreateDefaultProvider();
-        var metadata = provider.GetMetadataForProperty(typeof(Profile), nameof(Profile.PhotoFileName));
+        var metadata = provider.GetMetadataForProperty(
+            typeof(Profile),
+            nameof(Profile.PhotoFileName)
+        );
 
         var attribute = new FileExtensionsAttribute() { Extensions = extensions };
         attribute.ErrorMessage = "{0} expects only the following extensions: {1}";
 
         // FileExtensionsAttribute formats the extension list for the error message
         var formattedExtensions = string.Join(", ", expectedExtensions.Split(','));
-        var expectedErrorMessage = string.Format(CultureInfo.CurrentCulture, attribute.ErrorMessage, nameof(Profile.PhotoFileName), formattedExtensions);
+        var expectedErrorMessage = string.Format(
+            CultureInfo.CurrentCulture,
+            attribute.ErrorMessage,
+            nameof(Profile.PhotoFileName),
+            formattedExtensions
+        );
 
         var adapter = new FileExtensionsAttributeAdapter(attribute, stringLocalizer: null);
-        var context = new ClientModelValidationContext(new ActionContext(), metadata, provider, new Dictionary<string, string>());
+        var context = new ClientModelValidationContext(
+            new ActionContext(),
+            metadata,
+            provider,
+            new Dictionary<string, string>()
+        );
 
         // Act
         adapter.AddValidation(context);
@@ -38,9 +54,22 @@ public class FileExtensionsAttributeAdapterTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-            kvp => { Assert.Equal("data-val-fileextensions", kvp.Key); Assert.Equal(expectedErrorMessage, kvp.Value); },
-            kvp => { Assert.Equal("data-val-fileextensions-extensions", kvp.Key); Assert.Equal(expectedExtensions, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-fileextensions", kvp.Key);
+                Assert.Equal(expectedErrorMessage, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-fileextensions-extensions", kvp.Key);
+                Assert.Equal(expectedExtensions, kvp.Value);
+            }
+        );
     }
 
     public static TheoryData<string, string> ExtensionsData
@@ -48,40 +77,56 @@ public class FileExtensionsAttributeAdapterTest
         get
         {
             return new TheoryData<string, string>()
-                {
-                    { "jpg", ".jpg" },
-                    { " j p g ", ".jpg" },
-                    { ".jpg", ".jpg" },
-                    { ".x", ".x" },
-                    { "jpg,png", ".jpg,.png" },
-                    { "jpg, png", ".jpg,.png" },
-                    { "JPG, Png", ".jpg,.png" },
-                    { ".jpg,.png", ".jpg,.png" },
-                    { "..jpg,..png", ".jpg,.png" },
-                    { ".TXT, .png", ".txt,.png" },
-                    { ".pdf , .docx", ".pdf,.docx" },
-                };
+            {
+                { "jpg", ".jpg" },
+                { " j p g ", ".jpg" },
+                { ".jpg", ".jpg" },
+                { ".x", ".x" },
+                { "jpg,png", ".jpg,.png" },
+                { "jpg, png", ".jpg,.png" },
+                { "JPG, Png", ".jpg,.png" },
+                { ".jpg,.png", ".jpg,.png" },
+                { "..jpg,..png", ".jpg,.png" },
+                { ".TXT, .png", ".txt,.png" },
+                { ".pdf , .docx", ".pdf,.docx" },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(ExtensionsData))]
     [ReplaceCulture]
-    public void AddValidation_WithoutLocalizationAndCustomFileExtensions(string extensions, string expectedExtensions)
+    public void AddValidation_WithoutLocalizationAndCustomFileExtensions(
+        string extensions,
+        string expectedExtensions
+    )
     {
         // Arrange
         var provider = TestModelMetadataProvider.CreateDefaultProvider();
-        var metadata = provider.GetMetadataForProperty(typeof(Profile), nameof(Profile.PhotoFileName));
+        var metadata = provider.GetMetadataForProperty(
+            typeof(Profile),
+            nameof(Profile.PhotoFileName)
+        );
 
         var attribute = new FileExtensionsAttribute() { Extensions = extensions };
         attribute.ErrorMessage = "{0} expects only the following extensions: {1}";
 
         // FileExtensionsAttribute formats the extension list for the error message
         var formattedExtensions = string.Join(", ", expectedExtensions.Split(','));
-        var expectedErrorMessage = string.Format(CultureInfo.CurrentCulture, attribute.ErrorMessage, nameof(Profile.PhotoFileName), formattedExtensions);
+        var expectedErrorMessage = string.Format(
+            CultureInfo.CurrentCulture,
+            attribute.ErrorMessage,
+            nameof(Profile.PhotoFileName),
+            formattedExtensions
+        );
 
         var adapter = new FileExtensionsAttributeAdapter(attribute, stringLocalizer: null);
-        var context = new ClientModelValidationContext(new ActionContext(), metadata, provider, new Dictionary<string, string>());
+        var context = new ClientModelValidationContext(
+            new ActionContext(),
+            metadata,
+            provider,
+            new Dictionary<string, string>()
+        );
 
         // Act
         adapter.AddValidation(context);
@@ -89,9 +134,22 @@ public class FileExtensionsAttributeAdapterTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-            kvp => { Assert.Equal("data-val-fileextensions", kvp.Key); Assert.Equal(expectedErrorMessage, kvp.Value); },
-            kvp => { Assert.Equal("data-val-fileextensions-extensions", kvp.Key); Assert.Equal(expectedExtensions, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-fileextensions", kvp.Key);
+                Assert.Equal(expectedErrorMessage, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-fileextensions-extensions", kvp.Key);
+                Assert.Equal(expectedExtensions, kvp.Value);
+            }
+        );
     }
 
     [Theory]
@@ -101,22 +159,34 @@ public class FileExtensionsAttributeAdapterTest
     {
         // Arrange
         var provider = TestModelMetadataProvider.CreateDefaultProvider();
-        var metadata = provider.GetMetadataForProperty(typeof(Profile), nameof(Profile.PhotoFileName));
+        var metadata = provider.GetMetadataForProperty(
+            typeof(Profile),
+            nameof(Profile.PhotoFileName)
+        );
 
         var attribute = new FileExtensionsAttribute() { Extensions = extensions };
         attribute.ErrorMessage = "{0} expects only the following extensions: {1}";
 
         var formattedExtensions = string.Join(", ", expectedExtensions.Split(','));
         var expectedProperties = new object[] { "PhotoFileName", formattedExtensions };
-        var expectedErrorMessage = $"{nameof(Profile.PhotoFileName)} expects only the following extensions: {formattedExtensions}";
+        var expectedErrorMessage =
+            $"{nameof(Profile.PhotoFileName)} expects only the following extensions: {formattedExtensions}";
 
         var stringLocalizer = new Mock<IStringLocalizer>();
         stringLocalizer
             .Setup(s => s[attribute.ErrorMessage, expectedProperties])
             .Returns(new LocalizedString(attribute.ErrorMessage, expectedErrorMessage));
 
-        var adapter = new FileExtensionsAttributeAdapter(attribute, stringLocalizer: stringLocalizer.Object);
-        var context = new ClientModelValidationContext(new ActionContext(), metadata, provider, new Dictionary<string, string>());
+        var adapter = new FileExtensionsAttributeAdapter(
+            attribute,
+            stringLocalizer: stringLocalizer.Object
+        );
+        var context = new ClientModelValidationContext(
+            new ActionContext(),
+            metadata,
+            provider,
+            new Dictionary<string, string>()
+        );
 
         // Act
         adapter.AddValidation(context);
@@ -124,9 +194,22 @@ public class FileExtensionsAttributeAdapterTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-            kvp => { Assert.Equal("data-val-fileextensions", kvp.Key); Assert.Equal(expectedErrorMessage, kvp.Value); },
-            kvp => { Assert.Equal("data-val-fileextensions-extensions", kvp.Key); Assert.Equal(expectedExtensions, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-fileextensions", kvp.Key);
+                Assert.Equal(expectedErrorMessage, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-fileextensions-extensions", kvp.Key);
+                Assert.Equal(expectedExtensions, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -141,7 +224,12 @@ public class FileExtensionsAttributeAdapterTest
         attribute.ErrorMessage = "{0} expects only the following extensions: {1}";
 
         var adapter = new FileExtensionsAttributeAdapter(attribute, stringLocalizer: null);
-        var context = new ClientModelValidationContext(new ActionContext(), metadata, provider, new Dictionary<string, string>());
+        var context = new ClientModelValidationContext(
+            new ActionContext(),
+            metadata,
+            provider,
+            new Dictionary<string, string>()
+        );
 
         context.Attributes.Add("data-val", "original");
         context.Attributes.Add("data-val-fileextensions", "original");
@@ -153,9 +241,22 @@ public class FileExtensionsAttributeAdapterTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("original", kvp.Value); },
-            kvp => { Assert.Equal("data-val-fileextensions", kvp.Key); Assert.Equal("original", kvp.Value); },
-            kvp => { Assert.Equal("data-val-fileextensions-extensions", kvp.Key); Assert.Equal("original", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-fileextensions", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-fileextensions-extensions", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            }
+        );
     }
 
     private class Profile

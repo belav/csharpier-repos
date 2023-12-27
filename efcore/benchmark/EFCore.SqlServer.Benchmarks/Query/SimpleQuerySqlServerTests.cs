@@ -7,6 +7,6 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query;
 
 public class SimpleQuerySqlServerTests : SimpleQueryTests
 {
-    protected override OrdersFixtureBase CreateFixture()
-        => new OrdersSqlServerFixture("Perf_Query_Simple");
+    protected override OrdersFixtureBase CreateFixture() =>
+        new OrdersSqlServerFixture("Perf_Query_Simple");
 }

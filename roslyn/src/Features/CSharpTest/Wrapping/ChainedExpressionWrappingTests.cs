@@ -15,20 +15,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
     [Trait(Traits.Feature, Traits.Features.CodeActionsWrapping)]
     public class ChainedExpressionWrappingTests : AbstractWrappingTests
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpWrappingCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpWrappingCodeRefactoringProvider();
 
         [Fact]
         public async Task TestMissingWithSyntaxError()
         {
             await TestMissingAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick().brown.fox(,);
+                    class C {
+                        void Bar() {
+                            [||]the.quick().brown.fox(,);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -36,12 +39,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick();
+                    class C {
+                        void Bar() {
+                            [||]the.quick();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -49,28 +53,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick.brown().fox.jumped();
+                    class C {
+                        void Bar() {
+                            [||]the.quick.brown().fox.jumped();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown().fox
-                            .jumped();
+                    class C {
+                        void Bar() {
+                            the.quick.brown().fox
+                                .jumped();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown().fox
-                                 .jumped();
+                    class C {
+                        void Bar() {
+                            the.quick.brown().fox
+                                     .jumped();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -78,28 +83,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick.brown<int>().fox.jumped<string, bool>();
+                    class C {
+                        void Bar() {
+                            [||]the.quick.brown<int>().fox.jumped<string, bool>();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown<int>().fox
-                            .jumped<string, bool>();
+                    class C {
+                        void Bar() {
+                            the.quick.brown<int>().fox
+                                .jumped<string, bool>();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown<int>().fox
-                                 .jumped<string, bool>();
+                    class C {
+                        void Bar() {
+                            the.quick.brown<int>().fox
+                                     .jumped<string, bool>();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -107,28 +113,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick.brown[1, 2, 3].fox.jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            [||]the.quick.brown[1, 2, 3].fox.jumped[1][2][3];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown[1, 2, 3].fox
-                            .jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            the.quick.brown[1, 2, 3].fox
+                                .jumped[1][2][3];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown[1, 2, 3].fox
-                                 .jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            the.quick.brown[1, 2, 3].fox
+                                     .jumped[1][2][3];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -136,28 +143,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick.brown[1, 2, 3].fox
-                                 .jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            [||]the.quick.brown[1, 2, 3].fox
+                                     .jumped[1][2][3];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown[1, 2, 3].fox
-                            .jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            the.quick.brown[1, 2, 3].fox
+                                .jumped[1][2][3];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown[1, 2, 3].fox.jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            the.quick.brown[1, 2, 3].fox.jumped[1][2][3];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -165,37 +173,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick.
-                                brown[1, 2, 3]
-                           .fox.jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            [||]the.quick.
+                                    brown[1, 2, 3]
+                               .fox.jumped[1][2][3];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown[1, 2, 3].fox
-                            .jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            the.quick.brown[1, 2, 3].fox
+                                .jumped[1][2][3];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown[1, 2, 3].fox
-                                 .jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            the.quick.brown[1, 2, 3].fox
+                                     .jumped[1][2][3];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown[1, 2, 3].fox.jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            the.quick.brown[1, 2, 3].fox.jumped[1][2][3];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -203,28 +212,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the().quick.brown[1, 2, 3].fox.jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            [||]the().quick.brown[1, 2, 3].fox.jumped[1][2][3];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the().quick.brown[1, 2, 3].fox
-                            .jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            the().quick.brown[1, 2, 3].fox
+                                .jumped[1][2][3];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the().quick.brown[1, 2, 3].fox
-                                   .jumped[1][2][3];
+                    class C {
+                        void Bar() {
+                            the().quick.brown[1, 2, 3].fox
+                                       .jumped[1][2][3];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -232,28 +242,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick.brown().fox.jumped().over;
+                    class C {
+                        void Bar() {
+                            [||]the.quick.brown().fox.jumped().over;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown().fox
-                            .jumped().over;
+                    class C {
+                        void Bar() {
+                            the.quick.brown().fox
+                                .jumped().over;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the.quick.brown().fox
-                                 .jumped().over;
+                    class C {
+                        void Bar() {
+                            the.quick.brown().fox
+                                     .jumped().over;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -261,14 +272,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick.brown().fox.jumped().over.the().lazy().dog();
+                    class C {
+                        void Bar() {
+                            [||]the.quick.brown().fox.jumped().over.the().lazy().dog();
+                        }
                     }
-                }
-                """,
-GetIndentionColumn(35),
-"""
+                    """,
+                GetIndentionColumn(35),
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -279,7 +290,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -290,7 +301,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -299,7 +310,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -308,7 +319,8 @@ class C {
                  .dog();
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -316,14 +328,14 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick.brown().fox.jumped().over.the().lazy().dog();
+                    class C {
+                        void Bar() {
+                            [||]the.quick.brown().fox.jumped().over.the().lazy().dog();
+                        }
                     }
-                }
-                """,
-GetIndentionColumn(40),
-"""
+                    """,
+                GetIndentionColumn(40),
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -334,7 +346,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -345,7 +357,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -354,7 +366,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -362,7 +374,8 @@ class C {
                  .lazy().dog();
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -370,14 +383,14 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the.quick.brown().fox.jumped().over.the().lazy().dog();
+                    class C {
+                        void Bar() {
+                            [||]the.quick.brown().fox.jumped().over.the().lazy().dog();
+                        }
                     }
-                }
-                """,
-GetIndentionColumn(60),
-"""
+                    """,
+                GetIndentionColumn(60),
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -388,7 +401,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -399,7 +412,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox.jumped().over.the().lazy()
@@ -407,14 +420,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox.jumped().over.the().lazy()
                  .dog();
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -422,28 +436,29 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        the?.[||]quick.brown().fox.jumped();
+                    class C {
+                        void Bar() {
+                            the?.[||]quick.brown().fox.jumped();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the?.quick.brown().fox
-                            .jumped();
+                    class C {
+                        void Bar() {
+                            the?.quick.brown().fox
+                                .jumped();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the?.quick.brown().fox
-                                  .jumped();
+                    class C {
+                        void Bar() {
+                            the?.quick.brown().fox
+                                      .jumped();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -451,28 +466,29 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        the?.[||]quick.brown()?.fox.jumped();
+                    class C {
+                        void Bar() {
+                            the?.[||]quick.brown()?.fox.jumped();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the?.quick.brown()?.fox
-                            .jumped();
+                    class C {
+                        void Bar() {
+                            the?.quick.brown()?.fox
+                                .jumped();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the?.quick.brown()?.fox
-                                  .jumped();
+                    class C {
+                        void Bar() {
+                            the?.quick.brown()?.fox
+                                      .jumped();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -480,28 +496,29 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        the?.[||]quick.brown()?.fox().jumped();
+                    class C {
+                        void Bar() {
+                            the?.[||]quick.brown()?.fox().jumped();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the?.quick.brown()?.fox()
-                            .jumped();
+                    class C {
+                        void Bar() {
+                            the?.quick.brown()?.fox()
+                                .jumped();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the?.quick.brown()?.fox()
-                                  .jumped();
+                    class C {
+                        void Bar() {
+                            the?.quick.brown()?.fox()
+                                      .jumped();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -509,21 +526,22 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]the?.quick().brown()?.fox().jumped();
+                    class C {
+                        void Bar() {
+                            [||]the?.quick().brown()?.fox().jumped();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        the?.quick()
-                            .brown()?.fox()
-                            .jumped();
+                    class C {
+                        void Bar() {
+                            the?.quick()
+                                .brown()?.fox()
+                                .jumped();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

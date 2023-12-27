@@ -14,27 +14,40 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Features.Testing;
 
-internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(IEnumerable<ITestFrameworkMetadata> testFrameworks) : ITestMethodFinder where TMethodDeclaration : SyntaxNode
+internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(
+    IEnumerable<ITestFrameworkMetadata> testFrameworks
+) : ITestMethodFinder
+    where TMethodDeclaration : SyntaxNode
 {
     /// <summary>
     /// Output the method symbol as a fully qualified method name, e.g. Namespace.Class.Method to match what test discovery gives us.
     /// Generics are not applicable here - none of our supported test frameworks allow generic test classes / methods.
     /// </summary>
-    private static readonly SymbolDisplayFormat s_methodSymbolNoParametersDisplayFormat = new(
-        typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-        memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
+    private static readonly SymbolDisplayFormat s_methodSymbolNoParametersDisplayFormat =
+        new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+        );
 
-    protected readonly ImmutableArray<ITestFrameworkMetadata> TestFrameworkMetadata = testFrameworks.ToImmutableArray();
+    protected readonly ImmutableArray<ITestFrameworkMetadata> TestFrameworkMetadata =
+        testFrameworks.ToImmutableArray();
 
     protected abstract bool IsTestMethod(TMethodDeclaration method);
 
     protected abstract bool DescendIntoChildren(SyntaxNode node);
 
-    public async Task<ImmutableArray<SyntaxNode>> GetPotentialTestMethodsAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken)
+    public async Task<ImmutableArray<SyntaxNode>> GetPotentialTestMethodsAsync(
+        Document document,
+        TextSpan textSpan,
+        CancellationToken cancellationToken
+    )
     {
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
 
-        var testNodes = await GetPotentialTestNodesAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
+        var testNodes = await GetPotentialTestNodesAsync(document, textSpan, cancellationToken)
+            .ConfigureAwait(false);
 
         // Find any test methods that intersect with the requested span.
         var intersectingNodes = testNodes.WhereAsArray(node => node.Span.IntersectsWith(textSpan));
@@ -47,7 +60,12 @@ internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(IEnumerable
         return testNodes.WhereAsArray(node => node.Parent?.Span.IntersectsWith(textSpan) == true);
     }
 
-    public bool IsMatch(SemanticModel semanticModel, SyntaxNode node, string fullyQualifiedTestName, CancellationToken cancellationToken)
+    public bool IsMatch(
+        SemanticModel semanticModel,
+        SyntaxNode node,
+        string fullyQualifiedTestName,
+        CancellationToken cancellationToken
+    )
     {
         var method = (TMethodDeclaration)node;
 
@@ -60,7 +78,9 @@ internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(IEnumerable
             return false;
         }
 
-        var fullyQualifiedMethodName = methodSymbol.ToDisplayString(s_methodSymbolNoParametersDisplayFormat);
+        var fullyQualifiedMethodName = methodSymbol.ToDisplayString(
+            s_methodSymbolNoParametersDisplayFormat
+        );
 
         // Qualified test names use a '+' to separate outer classes from nested classes whereas display strings use '.'.
         fullyQualifiedTestName = fullyQualifiedTestName.Replace('+', '.');
@@ -83,10 +103,20 @@ internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(IEnumerable
         return node is TMethodDeclaration method && IsTestMethod(method);
     }
 
-    private async Task<ImmutableArray<SyntaxNode>> GetPotentialTestNodesAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken)
+    private async Task<ImmutableArray<SyntaxNode>> GetPotentialTestNodesAsync(
+        Document document,
+        TextSpan textSpan,
+        CancellationToken cancellationToken
+    )
     {
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-        var methodsInRange = root.DescendantNodesAndSelf(descendIntoChildren: ShouldDescend, descendIntoTrivia: false).OfType<TMethodDeclaration>();
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var methodsInRange = root.DescendantNodesAndSelf(
+                descendIntoChildren: ShouldDescend,
+                descendIntoTrivia: false
+            )
+            .OfType<TMethodDeclaration>();
 
         using var _ = ArrayBuilder<SyntaxNode>.GetInstance(out var testMethods);
         foreach (var method in methodsInRange)

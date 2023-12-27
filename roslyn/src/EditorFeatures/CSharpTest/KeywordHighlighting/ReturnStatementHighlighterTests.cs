@@ -15,69 +15,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class ReturnStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(ReturnStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(ReturnStatementHighlighter);
 
         [Fact]
         public async Task TestInLambda()
         {
             await TestAsync(
                 """
-                static double CalculateArea(double radius)
-                {
-                    Func<double, double> f = r => {
-                        if (Double.IsNan(r))
-                        {
-                            {|Cursor:[|return|]|} Double.NaN;
-                        }
-                        else
-                        {
-                            [|return|] r * r * Math.PI;
-                        }
-                    };
-                    return calcArea(radius);
-                }
-                """);
-        }
-
-        [Fact]
-        public async Task TestInLambda_NotOnReturnValue()
-        {
-            await TestAsync(
-                """
-                class C
-                {
                     static double CalculateArea(double radius)
                     {
                         Func<double, double> f = r => {
                             if (Double.IsNan(r))
                             {
-                                return {|Cursor:Double.NaN|};
-                            }
-                            else
-                            {
-                                return r * r * Math.PI;
-                            }
-                        };
-                        return calcArea(radius);
-                    }
-                }
-                """);
-        }
-
-        [Fact]
-        public async Task TestInLambda_OnSemicolon()
-        {
-            await TestAsync(
-                """
-                class C
-                {
-                    static double CalculateArea(double radius)
-                    {
-                        Func<double, double> f = r => {
-                            if (Double.IsNan(r))
-                            {
-                                [|return|] Double.NaN;{|Cursor:|}
+                                {|Cursor:[|return|]|} Double.NaN;
                             }
                             else
                             {
@@ -86,8 +36,60 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         };
                         return calcArea(radius);
                     }
-                }
-                """);
+                    """
+            );
+        }
+
+        [Fact]
+        public async Task TestInLambda_NotOnReturnValue()
+        {
+            await TestAsync(
+                """
+                    class C
+                    {
+                        static double CalculateArea(double radius)
+                        {
+                            Func<double, double> f = r => {
+                                if (Double.IsNan(r))
+                                {
+                                    return {|Cursor:Double.NaN|};
+                                }
+                                else
+                                {
+                                    return r * r * Math.PI;
+                                }
+                            };
+                            return calcArea(radius);
+                        }
+                    }
+                    """
+            );
+        }
+
+        [Fact]
+        public async Task TestInLambda_OnSemicolon()
+        {
+            await TestAsync(
+                """
+                    class C
+                    {
+                        static double CalculateArea(double radius)
+                        {
+                            Func<double, double> f = r => {
+                                if (Double.IsNan(r))
+                                {
+                                    [|return|] Double.NaN;{|Cursor:|}
+                                }
+                                else
+                                {
+                                    [|return|] r * r * Math.PI;
+                                }
+                            };
+                            return calcArea(radius);
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -95,24 +97,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    static double CalculateArea(double radius)
+                    class C
                     {
-                        Func<double, double> f = r => {
-                            if (Double.IsNan(r))
-                            {
-                                [|return|] Double.NaN;
-                            }
-                            else
-                            {
-                                {|Cursor:[|return|]|} r * r * Math.PI;
-                            }
-                        };
-                        return calcArea(radius);
+                        static double CalculateArea(double radius)
+                        {
+                            Func<double, double> f = r => {
+                                if (Double.IsNan(r))
+                                {
+                                    [|return|] Double.NaN;
+                                }
+                                else
+                                {
+                                    {|Cursor:[|return|]|} r * r * Math.PI;
+                                }
+                            };
+                            return calcArea(radius);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -120,24 +123,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    static double CalculateArea(double radius)
+                    class C
                     {
-                        Func<double, double> f = r => {
-                            if (Double.IsNan(r))
-                            {
-                                return Double.NaN;
-                            }
-                            else
-                            {
-                                return {|Cursor:r * r * Math.PI|};
-                            }
-                        };
-                        return calcArea(radius);
+                        static double CalculateArea(double radius)
+                        {
+                            Func<double, double> f = r => {
+                                if (Double.IsNan(r))
+                                {
+                                    return Double.NaN;
+                                }
+                                else
+                                {
+                                    return {|Cursor:r * r * Math.PI|};
+                                }
+                            };
+                            return calcArea(radius);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -145,24 +149,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    static double CalculateArea(double radius)
+                    class C
                     {
-                        Func<double, double> f = r => {
-                            if (Double.IsNan(r))
-                            {
-                                [|return|] Double.NaN;
-                            }
-                            else
-                            {
-                                [|return|] r * r * Math.PI;{|Cursor:|}
-                            }
-                        };
-                        return calcArea(radius);
+                        static double CalculateArea(double radius)
+                        {
+                            Func<double, double> f = r => {
+                                if (Double.IsNan(r))
+                                {
+                                    [|return|] Double.NaN;
+                                }
+                                else
+                                {
+                                    [|return|] r * r * Math.PI;{|Cursor:|}
+                                }
+                            };
+                            return calcArea(radius);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -170,24 +175,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    static double CalculateArea(double radius)
+                    class C
                     {
-                        Func<double, double> f = r => {
-                            if (Double.IsNan(r))
-                            {
-                                return Double.NaN;
-                            }
-                            else
-                            {
-                                return r * r * Math.PI;
-                            }
-                        };
-                        {|Cursor:[|return|]|} calcArea(radius);
+                        static double CalculateArea(double radius)
+                        {
+                            Func<double, double> f = r => {
+                                if (Double.IsNan(r))
+                                {
+                                    return Double.NaN;
+                                }
+                                else
+                                {
+                                    return r * r * Math.PI;
+                                }
+                            };
+                            {|Cursor:[|return|]|} calcArea(radius);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -195,24 +201,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    static double CalculateArea(double radius)
+                    class C
                     {
-                        Func<double, double> f = r => {
-                            if (Double.IsNan(r))
-                            {
-                                return Double.NaN;
-                            }
-                            else
-                            {
-                                return r * r * Math.PI;
-                            }
-                        };
-                        return {|Cursor:calcArea(radius)|};
+                        static double CalculateArea(double radius)
+                        {
+                            Func<double, double> f = r => {
+                                if (Double.IsNan(r))
+                                {
+                                    return Double.NaN;
+                                }
+                                else
+                                {
+                                    return r * r * Math.PI;
+                                }
+                            };
+                            return {|Cursor:calcArea(radius)|};
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -220,24 +227,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    static double CalculateArea(double radius)
+                    class C
                     {
-                        Func<double, double> f = r => {
-                            if (Double.IsNan(r))
-                            {
-                                return Double.NaN;
-                            }
-                            else
-                            {
-                                return r * r * Math.PI;
-                            }
-                        };
-                        [|return|] calcArea(radius);{|Cursor:|}
+                        static double CalculateArea(double radius)
+                        {
+                            Func<double, double> f = r => {
+                                if (Double.IsNan(r))
+                                {
+                                    return Double.NaN;
+                                }
+                                else
+                                {
+                                    return r * r * Math.PI;
+                                }
+                            };
+                            [|return|] calcArea(radius);{|Cursor:|}
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -245,15 +253,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    C()
+                    class C
                     {
-                        {|Cursor:[|return|]|};
-                        [|return|];
+                        C()
+                        {
+                            {|Cursor:[|return|]|};
+                            [|return|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -261,15 +270,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    ~C()
+                    class C
                     {
-                        {|Cursor:[|return|]|};
-                        [|return|];
+                        ~C()
+                        {
+                            {|Cursor:[|return|]|};
+                            [|return|];
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -277,15 +287,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    public static string operator +(C a)
+                    class C
                     {
-                        {|Cursor:[|return|]|} null;
-                        [|return|] null;
+                        public static string operator +(C a)
+                        {
+                            {|Cursor:[|return|]|} null;
+                            [|return|] null;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -293,15 +304,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    public static explicit operator string(C a)
+                    class C
                     {
-                        {|Cursor:[|return|]|} null;
-                        [|return|] null;
+                        public static explicit operator string(C a)
+                        {
+                            {|Cursor:[|return|]|} null;
+                            [|return|] null;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -309,23 +321,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    int P
+                    class C
                     {
-                        get
+                        int P
                         {
-                            {|Cursor:[|return|]|} 0;
-                            [|return|] 0;
-                        }
-                        set
-                        {
-                            return;
-                            return;
+                            get
+                            {
+                                {|Cursor:[|return|]|} 0;
+                                [|return|] 0;
+                            }
+                            set
+                            {
+                                return;
+                                return;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -333,23 +346,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    int P
+                    class C
                     {
-                        get
+                        int P
                         {
-                            return 0;
-                            return 0;
-                        }
-                        set
-                        {
-                            {|Cursor:[|return|]|};
-                            [|return|];
+                            get
+                            {
+                                return 0;
+                                return 0;
+                            }
+                            set
+                            {
+                                {|Cursor:[|return|]|};
+                                [|return|];
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -357,23 +371,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    int P
+                    class C
                     {
-                        get
+                        int P
                         {
-                            return 0;
-                            return 0;
-                        }
-                        init
-                        {
-                            {|Cursor:[|return|]|};
-                            [|return|];
+                            get
+                            {
+                                return 0;
+                                return 0;
+                            }
+                            init
+                            {
+                                {|Cursor:[|return|]|};
+                                [|return|];
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -381,23 +396,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    event EventHandler E
+                    class C
                     {
-                        add
+                        event EventHandler E
                         {
-                            {|Cursor:[|return|]|};
-                            [|return|];
-                        }
-                        remove
-                        {
-                            return;
-                            return;
+                            add
+                            {
+                                {|Cursor:[|return|]|};
+                                [|return|];
+                            }
+                            remove
+                            {
+                                return;
+                                return;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -405,23 +421,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    event EventHandler E
+                    class C
                     {
-                        add
+                        event EventHandler E
                         {
-                            return;
-                            return;
-                        }
-                        remove
-                        {
-                            {|Cursor:[|return|]|};
-                            [|return|];
+                            add
+                            {
+                                return;
+                                return;
+                            }
+                            remove
+                            {
+                                {|Cursor:[|return|]|};
+                                [|return|];
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -429,20 +446,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        void F()
+                        void M()
                         {
-                            {|Cursor:[|return|]|};
-                            [|return|];
-                        }
+                            void F()
+                            {
+                                {|Cursor:[|return|]|};
+                                [|return|];
+                            }
 
-                        return;
+                            return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -450,20 +468,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action<string> f = s =>
+                        void M()
                         {
-                            {|Cursor:[|return|]|};
-                            [|return|];
-                        };
+                            Action<string> f = s =>
+                            {
+                                {|Cursor:[|return|]|};
+                                [|return|];
+                            };
 
-                        return;
+                            return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -471,20 +490,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action<string> f = (s) =>
+                        void M()
                         {
-                            {|Cursor:[|return|]|};
-                            [|return|];
-                        };
+                            Action<string> f = (s) =>
+                            {
+                                {|Cursor:[|return|]|};
+                                [|return|];
+                            };
 
-                        return;
+                            return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -492,20 +512,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action<string> f = delegate
+                        void M()
                         {
-                            {|Cursor:[|return|]|};
-                            [|return|];
-                        };
+                            Action<string> f = delegate
+                            {
+                                {|Cursor:[|return|]|};
+                                [|return|];
+                            };
 
-                        return;
+                            return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -513,9 +534,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                if (args.Length > 0) [|return|] 0;
-                {|Cursor:[|return|]|} 1;
-                """);
+                    if (args.Length > 0) [|return|] 0;
+                    {|Cursor:[|return|]|} 1;
+                    """
+            );
         }
     }
 }

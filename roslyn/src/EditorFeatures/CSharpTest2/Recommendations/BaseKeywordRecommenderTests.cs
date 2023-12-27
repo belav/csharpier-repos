@@ -16,30 +16,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotInTopLevelMethod()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                void Goo()
-                {
-                    $$
-                }
-                """);
+                    void Goo()
+                    {
+                        $$
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """);
+                    class C { }
+                    $$
+                    """
+            );
         }
 
         [Fact]
@@ -47,9 +50,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                System.Console.WriteLine();
-                $$
-                """, options: CSharp9ParseOptions);
+                    System.Console.WriteLine();
+                    $$
+                    """,
+                options: CSharp9ParseOptions
+            );
         }
 
         [Fact]
@@ -57,23 +62,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                int i = 0;
-                $$
-                """, options: CSharp9ParseOptions);
+                    int i = 0;
+                    $$
+                    """,
+                options: CSharp9ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
@@ -81,9 +86,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C {
-                    public C() : $$
-                """);
+                    class C {
+                        public C() : $$
+                    """
+            );
         }
 
         [Fact]
@@ -91,10 +97,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             // The recommender doesn't work in record in script
             // Tracked by https://github.com/dotnet/roslyn/issues/44865
-            await VerifyWorkerAsync("""
-                record C {
-                    public C() : $$
-                """, absent: false, options: TestOptions.RegularPreview);
+            await VerifyWorkerAsync(
+                """
+                    record C {
+                        public C() : $$
+                    """,
+                absent: false,
+                options: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
@@ -102,9 +112,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    static C() : $$
-                """);
+                    class C {
+                        static C() : $$
+                    """
+            );
         }
 
         [Fact]
@@ -112,9 +123,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                struct C {
-                    public C() : $$
-                """);
+                    struct C {
+                        public C() : $$
+                    """
+            );
         }
 
         [Fact]
@@ -122,18 +134,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                struct C {
-                    new internal ErrorCode Code { get { return (ErrorCode)$$
-                """);
+                    struct C {
+                        new internal ErrorCode Code { get { return (ErrorCode)$$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestInEmptyMethod()
         {
-            await VerifyKeywordAsync(
-                SourceCodeKind.Regular,
-                AddInsideMethod(
-@"$$"));
+            await VerifyKeywordAsync(SourceCodeKind.Regular, AddInsideMethod(@"$$"));
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -141,41 +151,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                enum E {
-                    a = $$
-                }
-                """);
+                    enum E {
+                        a = $$
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544219")]
         public async Task TestNotInObjectInitializerMemberContext()
         {
-            await VerifyAbsenceAsync("""
-                class C
-                {
-                    public int x, y;
-                    void M()
+            await VerifyAbsenceAsync(
+                """
+                    class C
                     {
-                        var c = new C { x = 2, y = 3, $$
-                """);
+                        public int x, y;
+                        void M()
+                        {
+                            var c = new C { x = 2, y = 3, $$
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/16335")]
         public async Task InExpressionBodyAccessor()
         {
-            await VerifyKeywordAsync("""
-                class B
-                {
-                    public virtual int T { get => bas$$ }
-                }
-                """);
+            await VerifyKeywordAsync(
+                """
+                    class B
+                    {
+                        public virtual int T { get => bas$$ }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestAfterRefExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"ref int x = ref $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"ref int x = ref $$"));
         }
 
         #region Collection expressions
@@ -183,10 +197,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
         public async Task TestInCollectionExpressions_BeforeFirstElementToVar()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                var x = [$$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                        var x = [$$
+                        """
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -194,20 +211,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C
-                {
-                    IEnumerable<string> M() => [$$
-                }
-                """);
+                    class C
+                    {
+                        IEnumerable<string> M() => [$$
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
         public async Task TestInCollectionExpressions_AfterFirstElementToVar()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                var x = [new object(), $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                        var x = [new object(), $$
+                        """
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -215,11 +236,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C
-                {
-                    IEnumerable<string> M() => [string.Empty, $$
-                }
-                """);
+                    class C
+                    {
+                        IEnumerable<string> M() => [string.Empty, $$
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -227,11 +249,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C
-                {
-                    IEnumerable<string> M() => [.. $$
-                }
-                """);
+                    class C
+                    {
+                        IEnumerable<string> M() => [.. $$
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -239,11 +262,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C
-                {
-                    IEnumerable<string> M() => [string.Empty, .. $$
-                }
-                """);
+                    class C
+                    {
+                        IEnumerable<string> M() => [string.Empty, .. $$
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -251,11 +275,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C
-                {
-                    IEnumerable<string> M() => [($$
-                }
-                """);
+                    class C
+                    {
+                        IEnumerable<string> M() => [($$
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -263,11 +288,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C
-                {
-                    IEnumerable<string> M() => [string.Empty, ($$
-                }
-                """);
+                    class C
+                    {
+                        IEnumerable<string> M() => [string.Empty, ($$
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -275,11 +301,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C
-                {
-                    IEnumerable<string> M() => [.. ($$
-                }
-                """);
+                    class C
+                    {
+                        IEnumerable<string> M() => [.. ($$
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -287,11 +314,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C
-                {
-                    IEnumerable<string> M() => [string.Empty, .. ($$
-                }
-                """);
+                    class C
+                    {
+                        IEnumerable<string> M() => [string.Empty, .. ($$
+                    }
+                    """
+            );
         }
 
         #endregion

@@ -20,49 +20,108 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpImplementInterfaceCodeFixProvider>;
+        CSharpImplementInterfaceCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
     public class ImplementInterfaceTests
     {
-        private readonly NamingStylesTestOptionSets _options = new NamingStylesTestOptionSets(LanguageNames.CSharp);
+        private readonly NamingStylesTestOptionSets _options = new NamingStylesTestOptionSets(
+            LanguageNames.CSharp
+        );
 
-        private static OptionsCollection AllOptionsOff
-            => new OptionsCollection(LanguageNames.CSharp)
+        private static OptionsCollection AllOptionsOff =>
+            new OptionsCollection(LanguageNames.CSharp)
             {
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
-        private static OptionsCollection AllOptionsOn
-            => new OptionsCollection(LanguageNames.CSharp)
+        private static OptionsCollection AllOptionsOn =>
+            new OptionsCollection(LanguageNames.CSharp)
             {
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
             };
 
-        private static OptionsCollection AccessorOptionsOn
-            => new OptionsCollection(LanguageNames.CSharp)
+        private static OptionsCollection AccessorOptionsOn =>
+            new OptionsCollection(LanguageNames.CSharp)
             {
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
         internal static async Task TestWithAllCodeStyleOptionsOffAsync(
-            string initialMarkup, string expectedMarkup,
-            (string equivalenceKey, int index)? codeAction = null)
+            string initialMarkup,
+            string expectedMarkup,
+            (string equivalenceKey, int index)? codeAction = null
+        )
         {
             await new VerifyCS.Test
             {
@@ -75,7 +134,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
             }.RunAsync();
         }
 
-        internal static async Task TestWithAllCodeStyleOptionsOnAsync(string initialMarkup, string expectedMarkup)
+        internal static async Task TestWithAllCodeStyleOptionsOnAsync(
+            string initialMarkup,
+            string expectedMarkup
+        )
         {
             await new VerifyCS.Test
             {
@@ -85,7 +147,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
             }.RunAsync();
         }
 
-        internal static async Task TestWithAccessorCodeStyleOptionsOnAsync(string initialMarkup, string expectedMarkup)
+        internal static async Task TestWithAccessorCodeStyleOptionsOnAsync(
+            string initialMarkup,
+            string expectedMarkup
+        )
         {
             await new VerifyCS.Test
             {
@@ -98,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         private static async Task TestInRegularAndScriptAsync(
             string initialMarkup,
             string expectedMarkup,
-            (string equivalenceKey, int index)? codeAction = null)
+            (string equivalenceKey, int index)? codeAction = null
+        )
         {
             await new VerifyCS.Test
             {
@@ -115,29 +181,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    void Method1();
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    void Method1();
-                }
-
-                class Class : IInterface
-                {
-                    public void Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        void Method1();
+                    }
+
+                    class Class : IInterface
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -147,29 +214,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
             {
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
-                }
-
-                record Record : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
-                }
-
-                record Record : IInterface
-                {
-                    public void Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
                     }
-                }
-                """,
+
+                    record Record : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IInterface
+                    {
+                        void Method1();
+                    }
+
+                    record Record : IInterface
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -196,34 +263,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp9,
-                TestCode = """
-                interface IInterface
-                {
-                    [return: {|CS8335:System.Runtime.CompilerServices.NativeInteger(new[] { true, true })|}]
-                    (nint, nuint) Method(nint x, nuint x2);
-                }
+                TestCode =
+                    """
+                        interface IInterface
+                        {
+                            [return: {|CS8335:System.Runtime.CompilerServices.NativeInteger(new[] { true, true })|}]
+                            (nint, nuint) Method(nint x, nuint x2);
+                        }
 
-                class Class : {|CS0535:IInterface|}
-                {
-                }
+                        class Class : {|CS0535:IInterface|}
+                        {
+                        }
 
-                """ + nativeIntegerAttributeDefinition,
-                FixedCode = """
-                interface IInterface
-                {
-                    [return: {|CS8335:System.Runtime.CompilerServices.NativeInteger(new[] { true, true })|}]
-                    (nint, nuint) Method(nint x, nuint x2);
-                }
+                        """ + nativeIntegerAttributeDefinition,
+                FixedCode =
+                    """
+                        interface IInterface
+                        {
+                            [return: {|CS8335:System.Runtime.CompilerServices.NativeInteger(new[] { true, true })|}]
+                            (nint, nuint) Method(nint x, nuint x2);
+                        }
 
-                class Class : IInterface
-                {
-                    public (nint, nuint) Method(nint x, nuint x2)
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                }
+                        class Class : IInterface
+                        {
+                            public (nint, nuint) Method(nint x, nuint x2)
+                            {
+                                throw new System.NotImplementedException();
+                            }
+                        }
 
-                """ + nativeIntegerAttributeDefinition,
+                        """ + nativeIntegerAttributeDefinition,
                 Options = { AllOptionsOff },
             }.RunAsync();
         }
@@ -233,29 +302,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    (int, int) Method((string, string) x);
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    (int, int) Method((string, string) x);
-                }
-
-                class Class : IInterface
-                {
-                    public (int, int) Method((string, string) x)
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        (int, int) Method((string, string) x);
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        (int, int) Method((string, string) x);
+                    }
+
+                    class Class : IInterface
+                    {
+                        public (int, int) Method((string, string) x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16793")]
@@ -263,29 +333,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                interface I
-                {
-                    ValueTuple<object> F();
-                }
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System;
-                interface I
-                {
-                    ValueTuple<object> F();
-                }
-                class C : I
-                {
-                    public ValueTuple<object> F()
+                    using System;
+                    interface I
                     {
-                        throw new NotImplementedException();
+                        ValueTuple<object> F();
                     }
-                }
-                """);
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+                    interface I
+                    {
+                        ValueTuple<object> F();
+                    }
+                    class C : I
+                    {
+                        public ValueTuple<object> F()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -293,26 +364,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                interface IInterface
-                {
-                    void Method1();
-                }
+                    interface IInterface
+                    {
+                        void Method1();
+                    }
 
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
                 """
-                interface IInterface
-                {
-                    void Method1();
-                }
+                    interface IInterface
+                    {
+                        void Method1();
+                    }
 
-                class Class : IInterface
-                {
-                    public void Method1() => throw new System.NotImplementedException();
-                }
-                """);
+                    class Class : IInterface
+                    {
+                        public void Method1() => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.Tuples)]
@@ -321,31 +393,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
             // Note: we're putting the attribute by hand to simulate metadata
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                    (int a, int b)[] Method1((int c, string) x);
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                    (int a, int b)[] Method1((int c, string) x);
-                }
-
-                class Class : IInterface
-                {
-                    public (int a, int b)[] Method1((int c, string) x)
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                        (int a, int b)[] Method1((int c, string) x);
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                        (int a, int b)[] Method1((int c, string) x);
+                    }
+
+                    class Class : IInterface
+                    {
+                        public (int a, int b)[] Method1((int c, string) x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.Tuples)]
@@ -353,32 +426,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                    (int a, int b)[] Method1((int c, string) x);
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                    (int a, int b)[] Method1((int c, string) x);
-                }
-
-                class Class : IInterface
-                {
-                    (int a, int b)[] IInterface.Method1((int c, string) x)
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                        (int a, int b)[] Method1((int c, string) x);
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                        (int a, int b)[] Method1((int c, string) x);
+                    }
+
+                    class Class : IInterface
+                    {
+                        (int a, int b)[] IInterface.Method1((int c, string) x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.Tuples)]
@@ -386,39 +463,40 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                    (int a, int b)[] Property1 { [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] get; [param: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] set; }
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                    (int a, int b)[] Property1 { [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] get; [param: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] set; }
-                }
-
-                class Class : IInterface
-                {
-                    public (int a, int b)[] Property1
+                    interface IInterface
                     {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                        (int a, int b)[] Property1 { [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] get; [param: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] set; }
+                    }
 
-                        set
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                        (int a, int b)[] Property1 { [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] get; [param: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] set; }
+                    }
+
+                    class Class : IInterface
+                    {
+                        public (int a, int b)[] Property1
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
+
+                            set
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.Tuples)]
@@ -427,30 +505,30 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface IInterface
-                {
-                    [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                    event System.Func<(int a, int b)> Event1;
-                }
+                    interface IInterface
+                    {
+                        [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                        event System.Func<(int a, int b)> Event1;
+                    }
 
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                interface IInterface
-                {
-                    [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                    event System.Func<(int a, int b)> Event1;
-                }
+                    interface IInterface
+                    {
+                        [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                        event System.Func<(int a, int b)> Event1;
+                    }
 
-                class Class : IInterface
-                {
-                    public event Func<(int a, int b)> Event1;
-                }
-                """,
+                    class Class : IInterface
+                    {
+                        public event Func<(int a, int b)> Event1;
+                    }
+                    """,
                 Options = { AllOptionsOff },
             }.RunAsync();
         }
@@ -460,31 +538,32 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    [return: {|CS1970:System.Runtime.CompilerServices.DynamicAttribute()|}]
-                    object Method1();
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    [return: {|CS1970:System.Runtime.CompilerServices.DynamicAttribute()|}]
-                    object Method1();
-                }
-
-                class Class : IInterface
-                {
-                    public object Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        [return: {|CS1970:System.Runtime.CompilerServices.DynamicAttribute()|}]
+                        object Method1();
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        [return: {|CS1970:System.Runtime.CompilerServices.DynamicAttribute()|}]
+                        object Method1();
+                    }
+
+                    class Class : IInterface
+                    {
+                        public object Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -497,14 +576,14 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
                     Sources =
                     {
                         """
-                        #nullable enable
+                            #nullable enable
 
-                        using System;
+                            using System;
 
-                        class C : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                        }
-                        """,
+                            class C : {|CS0535:{|CS0535:IInterface|}|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -513,55 +592,53 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
                             Sources =
                             {
                                 """
-                                #nullable enable
+                                    #nullable enable
 
-                                public interface IInterface
-                                {
-                                    void M(string? s1, string s2);
-                                    string this[string? s1, string s2] { get; set; }
-                                }
-                                """
+                                    public interface IInterface
+                                    {
+                                        void M(string? s1, string s2);
+                                        string this[string? s1, string s2] { get; set; }
+                                    }
+                                    """
                             },
                         },
                     },
-                    AdditionalProjectReferences =
-                    {
-                        "Assembly1",
-                    },
+                    AdditionalProjectReferences = { "Assembly1", },
                 },
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        #nullable enable
+                            #nullable enable
 
-                        using System;
+                            using System;
 
-                        class C : IInterface
-                        {
-                            public string this[string? s1, string s2]
+                            class C : IInterface
                             {
-                                get
+                                public string this[string? s1, string s2]
                                 {
-                                    throw new NotImplementedException();
+                                    get
+                                    {
+                                        throw new NotImplementedException();
+                                    }
+
+                                    set
+                                    {
+                                        throw new NotImplementedException();
+                                    }
                                 }
 
-                                set
+                                public void M(string? s1, string s2)
                                 {
                                     throw new NotImplementedException();
                                 }
                             }
-
-                            public void M(string? s1, string s2)
-                            {
-                                throw new NotImplementedException();
-                            }
-                        }
-                        """,
+                            """,
                     },
                 },
-                CodeActionEquivalenceKey = "False;False;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             };
 
@@ -574,28 +651,29 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    void Method1();
-                }
-
-                class Class : {|CS0535:IInterface|}{|CS1513:|}{|CS1514:|}
-                """,
-                """
-                interface IInterface
-                {
-                    void Method1();
-                }
-
-                class Class : IInterface
-                {
-                    public void Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
                     }
-                }
 
-                """);
+                    class Class : {|CS0535:IInterface|}{|CS1513:|}{|CS1514:|}
+                    """,
+                """
+                    interface IInterface
+                    {
+                        void Method1();
+                    }
+
+                    class Class : IInterface
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+
+                    """
+            );
         }
 
         [Fact]
@@ -603,37 +681,38 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface1
-                {
-                    void Method1();
-                }
-
-                interface IInterface2 : IInterface1
-                {
-                }
-
-                class Class : {|CS0535:IInterface2|}
-                {
-                }
-                """,
-                """
-                interface IInterface1
-                {
-                    void Method1();
-                }
-
-                interface IInterface2 : IInterface1
-                {
-                }
-
-                class Class : IInterface2
-                {
-                    public void Method1()
+                    interface IInterface1
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
                     }
-                }
-                """);
+
+                    interface IInterface2 : IInterface1
+                    {
+                    }
+
+                    class Class : {|CS0535:IInterface2|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface1
+                    {
+                        void Method1();
+                    }
+
+                    interface IInterface2 : IInterface1
+                    {
+                    }
+
+                    class Class : IInterface2
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -641,37 +720,38 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface1
-                {
-                }
-
-                interface IInterface2 : IInterface1
-                {
-                    void Method1();
-                }
-
-                class Class : {|CS0535:IInterface2|}
-                {
-                }
-                """,
-                """
-                interface IInterface1
-                {
-                }
-
-                interface IInterface2 : IInterface1
-                {
-                    void Method1();
-                }
-
-                class Class : IInterface2
-                {
-                    public void Method1()
+                    interface IInterface1
                     {
-                        throw new System.NotImplementedException();
                     }
-                }
-                """);
+
+                    interface IInterface2 : IInterface1
+                    {
+                        void Method1();
+                    }
+
+                    class Class : {|CS0535:IInterface2|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface1
+                    {
+                    }
+
+                    interface IInterface2 : IInterface1
+                    {
+                        void Method1();
+                    }
+
+                    class Class : IInterface2
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -679,44 +759,45 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface1
-                {
-                    void Method1();
-                }
+                    interface IInterface1
+                    {
+                        void Method1();
+                    }
 
-                interface IInterface2 : IInterface1
-                {
-                    void Method2();
-                }
+                    interface IInterface2 : IInterface1
+                    {
+                        void Method2();
+                    }
 
-                class Class : {|CS0535:{|CS0535:IInterface2|}|}
-                {
-                }
-                """,
+                    class Class : {|CS0535:{|CS0535:IInterface2|}|}
+                    {
+                    }
+                    """,
                 """
-                interface IInterface1
-                {
-                    void Method1();
-                }
-
-                interface IInterface2 : IInterface1
-                {
-                    void Method2();
-                }
-
-                class Class : IInterface2
-                {
-                    public void Method1()
+                    interface IInterface1
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
                     }
 
-                    public void Method2()
+                    interface IInterface2 : IInterface1
                     {
-                        throw new System.NotImplementedException();
+                        void Method2();
                     }
-                }
-                """);
+
+                    class Class : IInterface2
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        public void Method2()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -724,39 +805,40 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface1
-                {
-                    void Method1();
-                }
-
-                interface IInterface2 : IInterface1
-                {
-                    void Method1();
-                }
-
-                class Class : {|CS0535:{|CS0535:IInterface2|}|}
-                {
-                }
-                """,
-                """
-                interface IInterface1
-                {
-                    void Method1();
-                }
-
-                interface IInterface2 : IInterface1
-                {
-                    void Method1();
-                }
-
-                class Class : IInterface2
-                {
-                    public void Method1()
+                    interface IInterface1
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
                     }
-                }
-                """);
+
+                    interface IInterface2 : IInterface1
+                    {
+                        void Method1();
+                    }
+
+                    class Class : {|CS0535:{|CS0535:IInterface2|}|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface1
+                    {
+                        void Method1();
+                    }
+
+                    interface IInterface2 : IInterface1
+                    {
+                        void Method1();
+                    }
+
+                    class Class : IInterface2
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -764,38 +846,39 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface1
-                {
-                    void Method1();
-                }
-
-                class Class : {|CS0738:IInterface1|}
-                {
-                    public int Method1()
+                    interface IInterface1
                     {
-                        return 0;
+                        void Method1();
                     }
-                }
-                """,
+
+                    class Class : {|CS0738:IInterface1|}
+                    {
+                        public int Method1()
+                        {
+                            return 0;
+                        }
+                    }
+                    """,
                 """
-                interface IInterface1
-                {
-                    void Method1();
-                }
-
-                class Class : IInterface1
-                {
-                    public int Method1()
+                    interface IInterface1
                     {
-                        return 0;
+                        void Method1();
                     }
 
-                    void IInterface1.Method1()
+                    class Class : IInterface1
                     {
-                        throw new System.NotImplementedException();
+                        public int Method1()
+                        {
+                            return 0;
+                        }
+
+                        void IInterface1.Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -803,36 +886,37 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface1
-                {
-                    void Method1(int i);
-                }
-
-                class Class : {|CS0535:IInterface1|}
-                {
-                    public void Method1(string i)
+                    interface IInterface1
                     {
+                        void Method1(int i);
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface1|}
+                    {
+                        public void Method1(string i)
+                        {
+                        }
+                    }
+                    """,
                 """
-                interface IInterface1
-                {
-                    void Method1(int i);
-                }
-
-                class Class : IInterface1
-                {
-                    public void Method1(string i)
+                    interface IInterface1
                     {
+                        void Method1(int i);
                     }
 
-                    public void Method1(int i)
+                    class Class : IInterface1
                     {
-                        throw new System.NotImplementedException();
+                        public void Method1(string i)
+                        {
+                        }
+
+                        public void Method1(int i)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -840,29 +924,30 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface1<T>
-                {
-                    void Method1(T t);
-                }
-
-                class Class : {|CS0535:IInterface1<int>|}
-                {
-                }
-                """,
-                """
-                interface IInterface1<T>
-                {
-                    void Method1(T t);
-                }
-
-                class Class : IInterface1<int>
-                {
-                    public void Method1(int t)
+                    interface IInterface1<T>
                     {
-                        throw new System.NotImplementedException();
+                        void Method1(T t);
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface1<int>|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface1<T>
+                    {
+                        void Method1(T t);
+                    }
+
+                    class Class : IInterface1<int>
+                    {
+                        public void Method1(int t)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -870,29 +955,30 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface1<T>
-                {
-                    void Method1<U>(T t, U u);
-                }
-
-                class Class : {|CS0535:IInterface1<int>|}
-                {
-                }
-                """,
-                """
-                interface IInterface1<T>
-                {
-                    void Method1<U>(T t, U u);
-                }
-
-                class Class : IInterface1<int>
-                {
-                    public void Method1<U>(int t, U u)
+                    interface IInterface1<T>
                     {
-                        throw new System.NotImplementedException();
+                        void Method1<U>(T t, U u);
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface1<int>|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface1<T>
+                    {
+                        void Method1<U>(T t, U u);
+                    }
+
+                    class Class : IInterface1<int>
+                    {
+                        public void Method1<U>(int t, U u)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -900,31 +986,32 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Collections.Generic;
-                interface IInterface1<T>
-                {
-                    void Method1<U>(T t, U u) where U : IList<T>;
-                }
-
-                class Class : {|CS0535:IInterface1<int>|}
-                {
-                }
-                """,
-                """
-                using System.Collections.Generic;
-                interface IInterface1<T>
-                {
-                    void Method1<U>(T t, U u) where U : IList<T>;
-                }
-
-                class Class : IInterface1<int>
-                {
-                    public void Method1<U>(int t, U u) where U : IList<int>
+                    using System.Collections.Generic;
+                    interface IInterface1<T>
                     {
-                        throw new System.NotImplementedException();
+                        void Method1<U>(T t, U u) where U : IList<T>;
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface1<int>|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Collections.Generic;
+                    interface IInterface1<T>
+                    {
+                        void Method1<U>(T t, U u) where U : IList<T>;
+                    }
+
+                    class Class : IInterface1<int>
+                    {
+                        public void Method1<U>(int t, U u) where U : IList<int>
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -932,29 +1019,30 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface1<T>
-                {
-                    void Method1<U>(T t, U u) where U : T;
-                }
-
-                class Class : {|CS0535:IInterface1<int>|}
-                {
-                }
-                """,
-                """
-                interface IInterface1<T>
-                {
-                    void Method1<U>(T t, U u) where U : T;
-                }
-
-                class Class : IInterface1<int>
-                {
-                    void IInterface1<int>.Method1<U>(int t, U u)
+                    interface IInterface1<T>
                     {
-                        throw new System.NotImplementedException();
+                        void Method1<U>(T t, U u) where U : T;
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface1<int>|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface1<T>
+                    {
+                        void Method1<U>(T t, U u) where U : T;
+                    }
+
+                    class Class : IInterface1<int>
+                    {
+                        void IInterface1<int>.Method1<U>(int t, U u)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -962,29 +1050,30 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    string[] M();
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    string[] M();
-                }
-
-                class C : I
-                {
-                    public string[] M()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        string[] M();
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        string[] M();
+                    }
+
+                    class C : I
+                    {
+                        public string[] M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -992,33 +1081,37 @@ codeAction: ("True;False;False:global::IInterface;TestProject;Microsoft.CodeAnal
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Method1();
-                }
-
-                class C : {|CS0535:I|}
-                {
-                    I i;
-                }
-                """,
-                """
-                interface I
-                {
-                    void Method1();
-                }
-
-                class C : I
-                {
-                    I i;
-
-                    public void Method1()
+                    interface I
                     {
-                        i.Method1();
+                        void Method1();
                     }
-                }
-                """,
-codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i", 1));
+
+                    class C : {|CS0535:I|}
+                    {
+                        I i;
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void Method1();
+                    }
+
+                    class C : I
+                    {
+                        I i;
+
+                        public void Method1()
+                        {
+                            i.Method1();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69177")]
@@ -1026,30 +1119,34 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Method1();
-                }
-
-                class C(I i) : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    void Method1();
-                }
-
-                class C(I i) : I
-                {
-                    public void Method1()
+                    interface I
                     {
-                        i.Method1();
+                        void Method1();
                     }
-                }
-                """,
-codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i", 1));
+
+                    class C(I i) : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void Method1();
+                    }
+
+                    class C(I i) : I
+                    {
+                        public void Method1()
+                        {
+                            i.Method1();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -1057,48 +1154,52 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Method1();
-                }
+                    interface I
+                    {
+                        void Method1();
+                    }
 
-                class C : {|CS0535:I|}
-                {
-                    I i;
-                }
+                    class C : {|CS0535:I|}
+                    {
+                        I i;
+                    }
 
-                class D : {|CS0535:I|}
-                {
-                    I i;
-                }
-                """,
+                    class D : {|CS0535:I|}
+                    {
+                        I i;
+                    }
+                    """,
                 """
-                interface I
-                {
-                    void Method1();
-                }
-
-                class C : I
-                {
-                    I i;
-
-                    public void Method1()
+                    interface I
                     {
-                        i.Method1();
+                        void Method1();
                     }
-                }
 
-                class D : I
-                {
-                    I i;
-
-                    public void Method1()
+                    class C : I
                     {
-                        i.Method1();
+                        I i;
+
+                        public void Method1()
+                        {
+                            i.Method1();
+                        }
                     }
-                }
-                """,
-codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i", 1));
+
+                    class D : I
+                    {
+                        I i;
+
+                        public void Method1()
+                        {
+                            i.Method1();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -1106,48 +1207,52 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Method1();
-                }
+                    interface I
+                    {
+                        void Method1();
+                    }
 
-                class C : {|CS0535:I|}
-                {
-                    I i;
-                }
+                    class C : {|CS0535:I|}
+                    {
+                        I i;
+                    }
 
-                class D : {|CS0535:I|}
-                {
-                    I i { get; }
-                }
-                """,
+                    class D : {|CS0535:I|}
+                    {
+                        I i { get; }
+                    }
+                    """,
                 """
-                interface I
-                {
-                    void Method1();
-                }
-
-                class C : I
-                {
-                    I i;
-
-                    public void Method1()
+                    interface I
                     {
-                        i.Method1();
+                        void Method1();
                     }
-                }
 
-                class D : I
-                {
-                    I i { get; }
-
-                    public void Method1()
+                    class C : I
                     {
-                        i.Method1();
+                        I i;
+
+                        public void Method1()
+                        {
+                            i.Method1();
+                        }
                     }
-                }
-                """,
-codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i", 1));
+
+                    class D : I
+                    {
+                        I i { get; }
+
+                        public void Method1()
+                        {
+                            i.Method1();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -1156,51 +1261,52 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
             var test = new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    void Method1();
-                }
+                    interface I
+                    {
+                        void Method1();
+                    }
 
-                class C : {|CS0535:I|}
-                {
-                    I i;
-                }
+                    class C : {|CS0535:I|}
+                    {
+                        I i;
+                    }
 
-                class D : {|CS0535:I|}
-                {
-                    int i;
-                }
-                """,
+                    class D : {|CS0535:I|}
+                    {
+                        int i;
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface I
-                        {
-                            void Method1();
-                        }
-
-                        class C : I
-                        {
-                            I i;
-
-                            public void Method1()
+                            interface I
                             {
-                                i.Method1();
+                                void Method1();
                             }
-                        }
 
-                        class D : {|CS0535:I|}
-                        {
-                            int i;
-                        }
-                        """,
+                            class C : I
+                            {
+                                I i;
+
+                                public void Method1()
+                                {
+                                    i.Method1();
+                                }
+                            }
+
+                            class D : {|CS0535:I|}
+                            {
+                                int i;
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-                CodeActionEquivalenceKey = "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
+                CodeActionEquivalenceKey =
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
                 CodeActionIndex = 1,
             };
 
@@ -1213,41 +1319,45 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IGoo
-                {
-                    int this[int x] { get; set; }
-                }
-
-                class Goo : {|CS0535:IGoo|}
-                {
-                    IGoo f;
-                }
-                """,
-                """
-                interface IGoo
-                {
-                    int this[int x] { get; set; }
-                }
-
-                class Goo : IGoo
-                {
-                    IGoo f;
-
-                    public int this[int x]
+                    interface IGoo
                     {
-                        get
-                        {
-                            return f[x];
-                        }
+                        int this[int x] { get; set; }
+                    }
 
-                        set
+                    class Goo : {|CS0535:IGoo|}
+                    {
+                        IGoo f;
+                    }
+                    """,
+                """
+                    interface IGoo
+                    {
+                        int this[int x] { get; set; }
+                    }
+
+                    class Goo : IGoo
+                    {
+                        IGoo f;
+
+                        public int this[int x]
                         {
-                            f[x] = value;
+                            get
+                            {
+                                return f[x];
+                            }
+
+                            set
+                            {
+                                f[x] = value;
+                            }
                         }
                     }
-                }
-                """,
-codeAction: ("False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;f", 1));
+                    """,
+                codeAction: (
+                    "False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;f",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/472")]
@@ -1255,27 +1365,31 @@ codeAction: ("False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Collections;
+                    using System.Collections;
 
-                sealed class X : {|CS0535:IComparer|}
-                {
-                    X x;
-                }
-                """,
-                """
-                using System.Collections;
-
-                sealed class X : IComparer
-                {
-                    X x;
-
-                    public int Compare(object x, object y)
+                    sealed class X : {|CS0535:IComparer|}
                     {
-                        return this.x.Compare(x, y);
+                        X x;
                     }
-                }
-                """,
-codeAction: ("False;False;False:global::System.Collections.IComparer;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;x", 1));
+                    """,
+                """
+                    using System.Collections;
+
+                    sealed class X : IComparer
+                    {
+                        X x;
+
+                        public int Compare(object x, object y)
+                        {
+                            return this.x.Compare(x, y);
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "False;False;False:global::System.Collections.IComparer;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;x",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/472")]
@@ -1283,27 +1397,31 @@ codeAction: ("False;False;False:global::System.Collections.IComparer;mscorlib;Mi
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Collections;
+                    using System.Collections;
 
-                sealed class X : {|CS0535:IComparer|}
-                {
-                    X a;
-                }
-                """,
-                """
-                using System.Collections;
-
-                sealed class X : IComparer
-                {
-                    X a;
-
-                    public int Compare(object x, object y)
+                    sealed class X : {|CS0535:IComparer|}
                     {
-                        return a.Compare(x, y);
+                        X a;
                     }
-                }
-                """,
-codeAction: ("False;False;False:global::System.Collections.IComparer;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a", 1));
+                    """,
+                """
+                    using System.Collections;
+
+                    sealed class X : IComparer
+                    {
+                        X a;
+
+                        public int Compare(object x, object y)
+                        {
+                            return a.Compare(x, y);
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "False;False;False:global::System.Collections.IComparer;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -1311,27 +1429,31 @@ codeAction: ("False;False;False:global::System.Collections.IComparer;mscorlib;Mi
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Method1();
-                }
+                    interface I
+                    {
+                        void Method1();
+                    }
 
-                abstract class C : {|CS0535:I|}
-                {
-                }
-                """,
+                    abstract class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
                 """
-                interface I
-                {
-                    void Method1();
-                }
+                    interface I
+                    {
+                        void Method1();
+                    }
 
-                abstract class C : I
-                {
-                    public abstract void Method1();
-                }
-                """,
-codeAction: ("False;True;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    abstract class C : I
+                    {
+                        public abstract void Method1();
+                    }
+                    """,
+                codeAction: (
+                    "False;True;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -1339,40 +1461,44 @@ codeAction: ("False;True;True:global::I;TestProject;Microsoft.CodeAnalysis.Imple
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                class C : {|CS0535:{|CS0535:I|}|}
-                {
-                    I goo;
-                }
+                    class C : {|CS0535:{|CS0535:I|}|}
+                    {
+                        I goo;
+                    }
 
-                interface I
-                {
-                    void Method1(ref int x, out int y, ref readonly int w, int z);
-                    int Method2();
-                }
-                """,
+                    interface I
+                    {
+                        void Method1(ref int x, out int y, ref readonly int w, int z);
+                        int Method2();
+                    }
+                    """,
                 """
-                class C : I
-                {
-                    I goo;
-
-                    public void Method1(ref int x, out int y, ref readonly int w, int z)
+                    class C : I
                     {
-                        goo.Method1(ref x, out y, in w, z);
+                        I goo;
+
+                        public void Method1(ref int x, out int y, ref readonly int w, int z)
+                        {
+                            goo.Method1(ref x, out y, in w, z);
+                        }
+
+                        public int Method2()
+                        {
+                            return goo.Method2();
+                        }
                     }
 
-                    public int Method2()
+                    interface I
                     {
-                        return goo.Method2();
+                        void Method1(ref int x, out int y, ref readonly int w, int z);
+                        int Method2();
                     }
-                }
-
-                interface I
-                {
-                    void Method1(ref int x, out int y, ref readonly int w, int z);
-                    int Method2();
-                }
-                """,
-codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;goo", 1));
+                    """,
+                codeAction: (
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;goo",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -1380,45 +1506,46 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                class B
-                {
-                    public int Method1()
+                    class B
                     {
-                        return 0;
+                        public int Method1()
+                        {
+                            return 0;
+                        }
                     }
-                }
 
-                class C : B, {|CS0738:I|}
-                {
-                }
+                    class C : B, {|CS0738:I|}
+                    {
+                    }
 
-                interface I
-                {
-                    void Method1();
-                }
-                """,
+                    interface I
+                    {
+                        void Method1();
+                    }
+                    """,
                 """
-                class B
-                {
-                    public int Method1()
+                    class B
                     {
-                        return 0;
+                        public int Method1()
+                        {
+                            return 0;
+                        }
                     }
-                }
 
-                class C : B, I
-                {
-                    void I.Method1()
+                    class C : B, I
                     {
-                        throw new System.NotImplementedException();
+                        void I.Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
 
-                interface I
-                {
-                    void Method1();
-                }
-                """);
+                    interface I
+                    {
+                        void Method1();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1426,47 +1553,47 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                class Test : {|CS0737:I1|}
-                {
-                    int Prop { get; set; }
-                }
-
-                interface I1
-                {
-                    int Prop { get; set; }
-                }
-                """,
-                """
-                class Test : I1
-                {
-                    int Prop { get; set; }
-
-                    int I1.Prop
+                    class Test : {|CS0737:I1|}
                     {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        int Prop { get; set; }
+                    }
 
-                        set
+                    interface I1
+                    {
+                        int Prop { get; set; }
+                    }
+                    """,
+                """
+                    class Test : I1
+                    {
+                        int Prop { get; set; }
+
+                        int I1.Prop
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
+
+                            set
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
 
-                interface I1
-                {
-                    int Prop { get; set; }
-                }
-                """);
+                    interface I1
+                    {
+                        int Prop { get; set; }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539043")]
         public async Task TestExplicitProperties()
         {
-            var code =
-                """
+            var code = """
                 interface I2
                 {
                     decimal Calc { get; }
@@ -1494,29 +1621,30 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    void @M();
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    void @M();
-                }
-
-                class Class : IInterface
-                {
-                    public void M()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void @M();
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        void @M();
+                    }
+
+                    class Class : IInterface
+                    {
+                        public void M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1524,29 +1652,30 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    void @int();
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    void @int();
-                }
-
-                class Class : IInterface
-                {
-                    public void @int()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void @int();
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        void @int();
+                    }
+
+                    class Class : IInterface
+                    {
+                        public void @int()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1554,32 +1683,33 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface @IInterface
-                {
-                    void M();
-                }
-
-                class Class : {|CS0737:@IInterface|}
-                {
-                    string M() => "";
-                }
-                """,
-                """
-                interface @IInterface
-                {
-                    void M();
-                }
-
-                class Class : @IInterface
-                {
-                    string M() => "";
-
-                    void IInterface.M()
+                    interface @IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void M();
                     }
-                }
-                """);
+
+                    class Class : {|CS0737:@IInterface|}
+                    {
+                        string M() => "";
+                    }
+                    """,
+                """
+                    interface @IInterface
+                    {
+                        void M();
+                    }
+
+                    class Class : @IInterface
+                    {
+                        string M() => "";
+
+                        void IInterface.M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1587,32 +1717,33 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface @IInterface
-                {
-                    void @M();
-                }
-
-                class Class : {|CS0737:@IInterface|}
-                {
-                    string M() => "";
-                }
-                """,
-                """
-                interface @IInterface
-                {
-                    void @M();
-                }
-
-                class Class : @IInterface
-                {
-                    string M() => "";
-
-                    void IInterface.M()
+                    interface @IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void @M();
                     }
-                }
-                """);
+
+                    class Class : {|CS0737:@IInterface|}
+                    {
+                        string M() => "";
+                    }
+                    """,
+                """
+                    interface @IInterface
+                    {
+                        void @M();
+                    }
+
+                    class Class : @IInterface
+                    {
+                        string M() => "";
+
+                        void IInterface.M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1620,32 +1751,33 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface @int
-                {
-                    void M();
-                }
-
-                class Class : {|CS0737:@int|}
-                {
-                    string M() => "";
-                }
-                """,
-                """
-                interface @int
-                {
-                    void M();
-                }
-
-                class Class : @int
-                {
-                    string M() => "";
-
-                    void @int.M()
+                    interface @int
                     {
-                        throw new System.NotImplementedException();
+                        void M();
                     }
-                }
-                """);
+
+                    class Class : {|CS0737:@int|}
+                    {
+                        string M() => "";
+                    }
+                    """,
+                """
+                    interface @int
+                    {
+                        void M();
+                    }
+
+                    class Class : @int
+                    {
+                        string M() => "";
+
+                        void @int.M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1653,32 +1785,33 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface @int
-                {
-                    void @bool();
-                }
-
-                class Class : {|CS0737:@int|}
-                {
-                    string @bool() => "";
-                }
-                """,
-                """
-                interface @int
-                {
-                    void @bool();
-                }
-
-                class Class : @int
-                {
-                    string @bool() => "";
-
-                    void @int.@bool()
+                    interface @int
                     {
-                        throw new System.NotImplementedException();
+                        void @bool();
                     }
-                }
-                """);
+
+                    class Class : {|CS0737:@int|}
+                    {
+                        string @bool() => "";
+                    }
+                    """,
+                """
+                    interface @int
+                    {
+                        void @bool();
+                    }
+
+                    class Class : @int
+                    {
+                        string @bool() => "";
+
+                        void @int.@bool()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1686,35 +1819,36 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                public interface DD
-                {
-                    int Prop { get; set; }
-                }
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
-                """
-                public interface DD
-                {
-                    int Prop { get; set; }
-                }
-                public class A : DD
-                {
-                    public int Prop
+                    public interface DD
                     {
-                        get
+                        int Prop { get; set; }
+                    }
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
+                """
+                    public interface DD
+                    {
+                        int Prop { get; set; }
+                    }
+                    public class A : DD
+                    {
+                        public int Prop
                         {
-                            throw new System.NotImplementedException();
-                        }
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
 
-                        set
-                        {
-                            throw new System.NotImplementedException();
+                            set
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1722,26 +1856,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
+                    public interface DD
+                    {
+                        int Prop { get; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
+                    public interface DD
+                    {
+                        int Prop { get; }
+                    }
 
-                public class A : DD
-                {
-                    public int Prop => throw new System.NotImplementedException();
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int Prop => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1749,26 +1884,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
+                    public interface DD
+                    {
+                        int Prop { get; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
+                    public interface DD
+                    {
+                        int Prop { get; }
+                    }
 
-                public class A : DD
-                {
-                    public int Prop { get => throw new System.NotImplementedException(); }
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int Prop { get => throw new System.NotImplementedException(); }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1776,26 +1912,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int this[int i] { get; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int this[int i] { get; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; }
+                    }
 
-                public class A : DD
-                {
-                    public int this[int i] => throw new System.NotImplementedException();
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int this[int i] => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1803,26 +1940,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int this[int i] { get; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int this[int i] { get; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; }
+                    }
 
-                public class A : DD
-                {
-                    public int this[int i] { get => throw new System.NotImplementedException(); }
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int this[int i] { get => throw new System.NotImplementedException(); }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1830,26 +1968,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int M();
-                }
+                    public interface DD
+                    {
+                        int M();
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int M();
-                }
+                    public interface DD
+                    {
+                        int M();
+                    }
 
-                public class A : DD
-                {
-                    public int M() => throw new System.NotImplementedException();
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int M() => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1857,24 +1996,25 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public interface DD
+                    {
+                        int Prop { get; }
+                    }
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
-                public class A : DD
-                {
-                    public int Prop => throw new System.NotImplementedException();
-                }
-                """);
+                    public interface DD
+                    {
+                        int Prop { get; }
+                    }
+                    public class A : DD
+                    {
+                        public int Prop => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1882,26 +2022,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
+                    public interface DD
+                    {
+                        int Prop { get; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
+                    public interface DD
+                    {
+                        int Prop { get; }
+                    }
 
-                public class A : DD
-                {
-                    public int Prop { get => throw new System.NotImplementedException(); }
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int Prop { get => throw new System.NotImplementedException(); }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1909,26 +2050,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int Prop { get; set; }
-                }
+                    public interface DD
+                    {
+                        int Prop { get; set; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int Prop { get; set; }
-                }
+                    public interface DD
+                    {
+                        int Prop { get; set; }
+                    }
 
-                public class A : DD
-                {
-                    public int Prop { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int Prop { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1936,32 +2078,33 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
-
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
-                """
-                public interface DD
-                {
-                    int Prop { get; }
-                }
-
-                public class A : DD
-                {
-                    public int Prop
+                    public interface DD
                     {
-                        get
+                        int Prop { get; }
+                    }
+
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
+                """
+                    public interface DD
+                    {
+                        int Prop { get; }
+                    }
+
+                    public class A : DD
+                    {
+                        public int Prop
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1969,26 +2112,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int this[int i] { get; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int this[int i] { get; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; }
+                    }
 
-                public class A : DD
-                {
-                    public int this[int i] => throw new System.NotImplementedException();
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int this[int i] => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1996,26 +2140,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int this[int i] { get; set; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; set; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int this[int i] { get; set; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; set; }
+                    }
 
-                public class A : DD
-                {
-                    public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -2023,26 +2168,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int this[int i] { get; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int this[int i] { get; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; }
+                    }
 
-                public class A : DD
-                {
-                    public int this[int i] { get => throw new System.NotImplementedException(); }
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int this[int i] { get => throw new System.NotImplementedException(); }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -2050,26 +2196,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                public interface DD
-                {
-                    int this[int i] { get; set; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; set; }
+                    }
 
-                public class A : {|CS0535:DD|}
-                {
-                }
-                """,
+                    public class A : {|CS0535:DD|}
+                    {
+                    }
+                    """,
                 """
-                public interface DD
-                {
-                    int this[int i] { get; set; }
-                }
+                    public interface DD
+                    {
+                        int this[int i] { get; set; }
+                    }
 
-                public class A : DD
-                {
-                    public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-                }
-                """);
+                    public class A : DD
+                    {
+                        public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -2077,29 +2224,30 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                public interface DD
-                {
-                    void Goo();
-                }
-                public class A : {|CS0535:DD|}
-                {
-                    //comments
-                }
-                """,
-                """
-                public interface DD
-                {
-                    void Goo();
-                }
-                public class A : DD
-                {
-                    //comments
-                    public void Goo()
+                    public interface DD
                     {
-                        throw new System.NotImplementedException();
+                        void Goo();
                     }
-                }
-                """);
+                    public class A : {|CS0535:DD|}
+                    {
+                        //comments
+                    }
+                    """,
+                """
+                    public interface DD
+                    {
+                        void Goo();
+                    }
+                    public class A : DD
+                    {
+                        //comments
+                        public void Goo()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539991")]
@@ -2107,27 +2255,27 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
-                """,
+                    using System;
+                    class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
-                class C : IServiceProvider
-                {
-                    public object GetService(Type serviceType)
+                    using System;
+                    class C : IServiceProvider
                     {
-                        throw new NotImplementedException();
+                        public object GetService(Type serviceType)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540318")]
         public async Task TestMissingWithIncompleteMember()
         {
-            var code =
-                """
+            var code = """
                 interface ITest
                 {
                     void Method();
@@ -2150,45 +2298,48 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface i1
-                {
-                    int p { get; set; }
-                }
-
-                class c1 : {|CS0535:i1|}
-                {
-                }
-                """,
-                """
-                interface i1
-                {
-                    int p { get; set; }
-                }
-
-                class c1 : i1
-                {
-                    int i1.p
+                    interface i1
                     {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        int p { get; set; }
+                    }
 
-                        set
+                    class c1 : {|CS0535:i1|}
+                    {
+                    }
+                    """,
+                """
+                    interface i1
+                    {
+                        int p { get; set; }
+                    }
+
+                    class c1 : i1
+                    {
+                        int i1.p
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
+
+                            set
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::i1;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    """,
+                codeAction: (
+                    "True;False;False:global::i1;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541981")]
         public async Task TestNoDelegateThroughField1()
         {
-            var code =
-                """
+            var code = """
                 interface I
                 {
                     void Method1();
@@ -2204,24 +2355,25 @@ codeAction: ("True;False;False:global::i1;TestProject;Microsoft.CodeAnalysis.Imp
             {
                 TestCode = code,
                 FixedCode = """
-                interface I
-                {
-                    void Method1();
-                }
-
-                class C : I
-                {
-                    I i { get; set; }
-
-                    public void Method1()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
                     }
-                }
-                """,
+
+                    class C : I
+                    {
+                        I i { get; set; }
+
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
                 CodeActionsVerifier = codeActions => Assert.Equal(3, codeActions.Length),
-                CodeActionEquivalenceKey = "False;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
 
@@ -2229,24 +2381,25 @@ codeAction: ("True;False;False:global::i1;TestProject;Microsoft.CodeAnalysis.Imp
             {
                 TestCode = code,
                 FixedCode = """
-                interface I
-                {
-                    void Method1();
-                }
-
-                class C : I
-                {
-                    I i { get; set; }
-
-                    public void Method1()
+                    interface I
                     {
-                        i.Method1();
+                        void Method1();
                     }
-                }
-                """,
+
+                    class C : I
+                    {
+                        I i { get; set; }
+
+                        public void Method1()
+                        {
+                            i.Method1();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
                 CodeActionsVerifier = codeActions => Assert.Equal(3, codeActions.Length),
-                CodeActionEquivalenceKey = "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
+                CodeActionEquivalenceKey =
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
                 CodeActionIndex = 1,
             }.RunAsync();
 
@@ -2254,24 +2407,25 @@ codeAction: ("True;False;False:global::i1;TestProject;Microsoft.CodeAnalysis.Imp
             {
                 TestCode = code,
                 FixedCode = """
-                interface I
-                {
-                    void Method1();
-                }
-
-                class C : I
-                {
-                    I i { get; set; }
-
-                    void I.Method1()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
                     }
-                }
-                """,
+
+                    class C : I
+                    {
+                        I i { get; set; }
+
+                        void I.Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
                 CodeActionsVerifier = codeActions => Assert.Equal(3, codeActions.Length),
-                CodeActionEquivalenceKey = "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 2,
             }.RunAsync();
         }
@@ -2281,49 +2435,53 @@ codeAction: ("True;False;False:global::i1;TestProject;Microsoft.CodeAnalysis.Imp
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class A : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IReadOnlyList<int>|}|}|}|}
-                {
-                    int[] field;
-                }
-                """,
+                    class A : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IReadOnlyList<int>|}|}|}|}
+                    {
+                        int[] field;
+                    }
+                    """,
                 """
-                using System.Collections;
-                using System.Collections.Generic;
+                    using System.Collections;
+                    using System.Collections.Generic;
 
-                class A : IReadOnlyList<int>
-                {
-                    int[] field;
-
-                    public int this[int index]
+                    class A : IReadOnlyList<int>
                     {
-                        get
+                        int[] field;
+
+                        public int this[int index]
                         {
-                            return ((IReadOnlyList<int>)field)[index];
+                            get
+                            {
+                                return ((IReadOnlyList<int>)field)[index];
+                            }
+                        }
+
+                        public int Count
+                        {
+                            get
+                            {
+                                return ((IReadOnlyCollection<int>)field).Count;
+                            }
+                        }
+
+                        public IEnumerator<int> GetEnumerator()
+                        {
+                            return ((IEnumerable<int>)field).GetEnumerator();
+                        }
+
+                        IEnumerator IEnumerable.GetEnumerator()
+                        {
+                            return field.GetEnumerator();
                         }
                     }
-
-                    public int Count
-                    {
-                        get
-                        {
-                            return ((IReadOnlyCollection<int>)field).Count;
-                        }
-                    }
-
-                    public IEnumerator<int> GetEnumerator()
-                    {
-                        return ((IEnumerable<int>)field).GetEnumerator();
-                    }
-
-                    IEnumerator IEnumerable.GetEnumerator()
-                    {
-                        return field.GetEnumerator();
-                    }
-                }
-                """,
-codeAction: ("False;False;False:global::System.Collections.Generic.IReadOnlyList<int>;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;field", 1));
+                    """,
+                codeAction: (
+                    "False;False;False:global::System.Collections.Generic.IReadOnlyList<int>;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;field",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2331,49 +2489,53 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IReadOnlyList
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class A : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IReadOnlyList<int>|}|}|}|}
-                {
-                    int[] field { get; set; }
-                }
-                """,
+                    class A : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IReadOnlyList<int>|}|}|}|}
+                    {
+                        int[] field { get; set; }
+                    }
+                    """,
                 """
-                using System.Collections;
-                using System.Collections.Generic;
+                    using System.Collections;
+                    using System.Collections.Generic;
 
-                class A : IReadOnlyList<int>
-                {
-                    public int this[int index]
+                    class A : IReadOnlyList<int>
                     {
-                        get
+                        public int this[int index]
                         {
-                            return ((IReadOnlyList<int>)field)[index];
+                            get
+                            {
+                                return ((IReadOnlyList<int>)field)[index];
+                            }
+                        }
+
+                        public int Count
+                        {
+                            get
+                            {
+                                return ((IReadOnlyCollection<int>)field).Count;
+                            }
+                        }
+
+                        int[] field { get; set; }
+
+                        public IEnumerator<int> GetEnumerator()
+                        {
+                            return ((IEnumerable<int>)field).GetEnumerator();
+                        }
+
+                        IEnumerator IEnumerable.GetEnumerator()
+                        {
+                            return field.GetEnumerator();
                         }
                     }
-
-                    public int Count
-                    {
-                        get
-                        {
-                            return ((IReadOnlyCollection<int>)field).Count;
-                        }
-                    }
-
-                    int[] field { get; set; }
-
-                    public IEnumerator<int> GetEnumerator()
-                    {
-                        return ((IEnumerable<int>)field).GetEnumerator();
-                    }
-
-                    IEnumerator IEnumerable.GetEnumerator()
-                    {
-                        return field.GetEnumerator();
-                    }
-                }
-                """,
-codeAction: ("False;False;False:global::System.Collections.Generic.IReadOnlyList<int>;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;field", 1));
+                    """,
+                codeAction: (
+                    "False;False;False:global::System.Collections.Generic.IReadOnlyList<int>;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;field",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2381,49 +2543,53 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IReadOnlyList
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    int M();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : {|CS0535:I|}
-                {
-                    A a;
-                }
-                """,
+                    class A : I
+                    {
+                        int I.M()
+                        {
+                            return 0;
+                        }
+                    }
+
+                    class B : {|CS0535:I|}
+                    {
+                        A a;
+                    }
+                    """,
                 """
-                interface I
-                {
-                    int M();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : I
-                {
-                    A a;
-
-                    public int M()
+                    class A : I
                     {
-                        return ((I)a).M();
+                        int I.M()
+                        {
+                            return 0;
+                        }
                     }
-                }
-                """,
-codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a", 1));
+
+                    class B : I
+                    {
+                        A a;
+
+                        public int M()
+                        {
+                            return ((I)a).M();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2432,72 +2598,72 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                interface I2
-                {
-                    int M2();
-                }
-
-                class A : I, I2
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
 
-                    int I2.M2()
+                    interface I2
                     {
-                        return 0;
+                        int M2();
                     }
-                }
 
-                class B : {|CS0535:I|}, {|CS0535:I2|}
-                {
-                    A a;
-                }
-                """,
+                    class A : I, I2
+                    {
+                        int I.M()
+                        {
+                            return 0;
+                        }
+
+                        int I2.M2()
+                        {
+                            return 0;
+                        }
+                    }
+
+                    class B : {|CS0535:I|}, {|CS0535:I2|}
+                    {
+                        A a;
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface I
-                        {
-                            int M();
-                        }
-
-                        interface I2
-                        {
-                            int M2();
-                        }
-
-                        class A : I, I2
-                        {
-                            int I.M()
+                            interface I
                             {
-                                return 0;
+                                int M();
                             }
 
-                            int I2.M2()
+                            interface I2
                             {
-                                return 0;
+                                int M2();
                             }
-                        }
 
-                        class B : I, {|CS0535:I2|}
-                        {
-                            A a;
-
-                            public int M()
+                            class A : I, I2
                             {
-                                return ((I)a).M();
+                                int I.M()
+                                {
+                                    return 0;
+                                }
+
+                                int I2.M2()
+                                {
+                                    return 0;
+                                }
                             }
-                        }
-                        """,
+
+                            class B : I, {|CS0535:I2|}
+                            {
+                                A a;
+
+                                public int M()
+                                {
+                                    return ((I)a).M();
+                                }
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -2505,79 +2671,80 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
                 CodeActionsVerifier = codeActions => Assert.Equal(3, codeActions.Length),
                 DiagnosticSelector = diagnostics => diagnostics[0],
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-                CodeActionEquivalenceKey = "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
+                CodeActionEquivalenceKey =
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
                 CodeActionIndex = 1,
             }.RunAsync();
 
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                interface I2
-                {
-                    int M2();
-                }
-
-                class A : I, I2
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
 
-                    int I2.M2()
+                    interface I2
                     {
-                        return 0;
+                        int M2();
                     }
-                }
 
-                class B : {|CS0535:I|}, {|CS0535:I2|}
-                {
-                    A a;
-                }
-                """,
+                    class A : I, I2
+                    {
+                        int I.M()
+                        {
+                            return 0;
+                        }
+
+                        int I2.M2()
+                        {
+                            return 0;
+                        }
+                    }
+
+                    class B : {|CS0535:I|}, {|CS0535:I2|}
+                    {
+                        A a;
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface I
-                        {
-                            int M();
-                        }
-
-                        interface I2
-                        {
-                            int M2();
-                        }
-
-                        class A : I, I2
-                        {
-                            int I.M()
+                            interface I
                             {
-                                return 0;
+                                int M();
                             }
 
-                            int I2.M2()
+                            interface I2
                             {
-                                return 0;
+                                int M2();
                             }
-                        }
 
-                        class B : {|CS0535:I|}, I2
-                        {
-                            A a;
-
-                            public int M2()
+                            class A : I, I2
                             {
-                                return ((I2)a).M2();
+                                int I.M()
+                                {
+                                    return 0;
+                                }
+
+                                int I2.M2()
+                                {
+                                    return 0;
+                                }
                             }
-                        }
-                        """,
+
+                            class B : {|CS0535:I|}, I2
+                            {
+                                A a;
+
+                                public int M2()
+                                {
+                                    return ((I2)a).M2();
+                                }
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -2585,7 +2752,8 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
                 CodeActionsVerifier = codeActions => Assert.Equal(3, codeActions.Length),
                 DiagnosticSelector = diagnostics => diagnostics[1],
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-                CodeActionEquivalenceKey = "False;False;False:global::I2;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
+                CodeActionEquivalenceKey =
+                    "False;False;False:global::I2;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -2596,120 +2764,122 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : {|CS0535:I|}
-                {
-                    A a;
-                    A aa;
-                }
-                """,
+                    class A : I
+                    {
+                        int I.M()
+                        {
+                            return 0;
+                        }
+                    }
+
+                    class B : {|CS0535:I|}
+                    {
+                        A a;
+                        A aa;
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface I
-                        {
-                            int M();
-                        }
-
-                        class A : I
-                        {
-                            int I.M()
+                            interface I
                             {
-                                return 0;
+                                int M();
                             }
-                        }
 
-                        class B : I
-                        {
-                            A a;
-                            A aa;
-
-                            public int M()
+                            class A : I
                             {
-                                return ((I)a).M();
+                                int I.M()
+                                {
+                                    return 0;
+                                }
                             }
-                        }
-                        """,
+
+                            class B : I
+                            {
+                                A a;
+                                A aa;
+
+                                public int M()
+                                {
+                                    return ((I)a).M();
+                                }
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
                 CodeActionsVerifier = codeActions => Assert.Equal(4, codeActions.Length),
-                CodeActionEquivalenceKey = "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
+                CodeActionEquivalenceKey =
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
                 CodeActionIndex = 1,
             }.RunAsync();
 
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : {|CS0535:I|}
-                {
-                    A a;
-                    A aa;
-                }
-                """,
+                    class A : I
+                    {
+                        int I.M()
+                        {
+                            return 0;
+                        }
+                    }
+
+                    class B : {|CS0535:I|}
+                    {
+                        A a;
+                        A aa;
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface I
-                        {
-                            int M();
-                        }
-
-                        class A : I
-                        {
-                            int I.M()
+                            interface I
                             {
-                                return 0;
+                                int M();
                             }
-                        }
 
-                        class B : I
-                        {
-                            A a;
-                            A aa;
-
-                            public int M()
+                            class A : I
                             {
-                                return ((I)aa).M();
+                                int I.M()
+                                {
+                                    return 0;
+                                }
                             }
-                        }
-                        """,
+
+                            class B : I
+                            {
+                                A a;
+                                A aa;
+
+                                public int M()
+                                {
+                                    return ((I)aa).M();
+                                }
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
                 CodeActionsVerifier = codeActions => Assert.Equal(4, codeActions.Length),
-                CodeActionEquivalenceKey = "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;aa",
+                CodeActionEquivalenceKey =
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;aa",
                 CodeActionIndex = 2,
             }.RunAsync();
         }
@@ -2720,80 +2890,80 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                interface I2
-                {
-                    int M2();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : I2
-                {
-                    int I2.M2()
+                    interface I2
                     {
-                        return 0;
+                        int M2();
                     }
-                }
 
-                class C : {|CS0535:I|}, {|CS0535:I2|}
-                {
-                    A a;
-                    B b;
-                }
-                """,
+                    class A : I
+                    {
+                        int I.M()
+                        {
+                            return 0;
+                        }
+                    }
+
+                    class B : I2
+                    {
+                        int I2.M2()
+                        {
+                            return 0;
+                        }
+                    }
+
+                    class C : {|CS0535:I|}, {|CS0535:I2|}
+                    {
+                        A a;
+                        B b;
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface I
-                        {
-                            int M();
-                        }
-
-                        interface I2
-                        {
-                            int M2();
-                        }
-
-                        class A : I
-                        {
-                            int I.M()
+                            interface I
                             {
-                                return 0;
+                                int M();
                             }
-                        }
 
-                        class B : I2
-                        {
-                            int I2.M2()
+                            interface I2
                             {
-                                return 0;
+                                int M2();
                             }
-                        }
 
-                        class C : I, {|CS0535:I2|}
-                        {
-                            A a;
-                            B b;
-
-                            public int M()
+                            class A : I
                             {
-                                return ((I)a).M();
+                                int I.M()
+                                {
+                                    return 0;
+                                }
                             }
-                        }
-                        """,
+
+                            class B : I2
+                            {
+                                int I2.M2()
+                                {
+                                    return 0;
+                                }
+                            }
+
+                            class C : I, {|CS0535:I2|}
+                            {
+                                A a;
+                                B b;
+
+                                public int M()
+                                {
+                                    return ((I)a).M();
+                                }
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -2801,87 +2971,88 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
                 CodeActionsVerifier = codeActions => Assert.Equal(3, codeActions.Length),
                 DiagnosticSelector = diagnostics => diagnostics[0],
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-                CodeActionEquivalenceKey = "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
+                CodeActionEquivalenceKey =
+                    "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
                 CodeActionIndex = 1,
             }.RunAsync();
 
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                interface I2
-                {
-                    int M2();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : I2
-                {
-                    int I2.M2()
+                    interface I2
                     {
-                        return 0;
+                        int M2();
                     }
-                }
 
-                class C : {|CS0535:I|}, {|CS0535:I2|}
-                {
-                    A a;
-                    B b;
-                }
-                """,
+                    class A : I
+                    {
+                        int I.M()
+                        {
+                            return 0;
+                        }
+                    }
+
+                    class B : I2
+                    {
+                        int I2.M2()
+                        {
+                            return 0;
+                        }
+                    }
+
+                    class C : {|CS0535:I|}, {|CS0535:I2|}
+                    {
+                        A a;
+                        B b;
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface I
-                        {
-                            int M();
-                        }
-
-                        interface I2
-                        {
-                            int M2();
-                        }
-
-                        class A : I
-                        {
-                            int I.M()
+                            interface I
                             {
-                                return 0;
+                                int M();
                             }
-                        }
 
-                        class B : I2
-                        {
-                            int I2.M2()
+                            interface I2
                             {
-                                return 0;
+                                int M2();
                             }
-                        }
 
-                        class C : {|CS0535:I|}, I2
-                        {
-                            A a;
-                            B b;
-
-                            public int M2()
+                            class A : I
                             {
-                                return ((I2)b).M2();
+                                int I.M()
+                                {
+                                    return 0;
+                                }
                             }
-                        }
-                        """,
+
+                            class B : I2
+                            {
+                                int I2.M2()
+                                {
+                                    return 0;
+                                }
+                            }
+
+                            class C : {|CS0535:I|}, I2
+                            {
+                                A a;
+                                B b;
+
+                                public int M2()
+                                {
+                                    return ((I2)b).M2();
+                                }
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -2889,7 +3060,8 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
                 CodeActionsVerifier = codeActions => Assert.Equal(3, codeActions.Length),
                 DiagnosticSelector = diagnostics => diagnostics[1],
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-                CodeActionEquivalenceKey = "False;False;False:global::I2;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;b",
+                CodeActionEquivalenceKey =
+                    "False;False;False:global::I2;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;b",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -2900,41 +3072,42 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface IA
-                {
-                    IB B { get; }
-                }
-                interface IB
-                {
-                    int M();
-                }
-                class AB : IA, {|CS0535:IB|}
-                {
-                    IB IA.B => null;
-                }
-                """,
-                FixedCode = """
-                interface IA
-                {
-                    IB B { get; }
-                }
-                interface IB
-                {
-                    int M();
-                }
-                class AB : IA, IB
-                {
-                    IB IA.B => null;
-
-                    public int M()
+                    interface IA
                     {
-                        return ((IA)this).B.M();
+                        IB B { get; }
                     }
-                }
-                """,
+                    interface IB
+                    {
+                        int M();
+                    }
+                    class AB : IA, {|CS0535:IB|}
+                    {
+                        IB IA.B => null;
+                    }
+                    """,
+                FixedCode = """
+                    interface IA
+                    {
+                        IB B { get; }
+                    }
+                    interface IB
+                    {
+                        int M();
+                    }
+                    class AB : IA, IB
+                    {
+                        IB IA.B => null;
+
+                        public int M()
+                        {
+                            return ((IA)this).B.M();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
                 CodeActionsVerifier = codeActions => Assert.Equal(3, codeActions.Length),
-                CodeActionEquivalenceKey = "False;False;False:global::IB;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;IA.B",
+                CodeActionEquivalenceKey =
+                    "False;False;False:global::IB;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;IA.B",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -2945,60 +3118,60 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : {|CS0535:I|}
-                {
-                    A this[int index]
+                    class A : I
                     {
-                        get
+                        int I.M()
                         {
-                            return null;
+                            return 0;
                         }
                     }
-                }
-                """,
+
+                    class B : {|CS0535:I|}
+                    {
+                        A this[int index]
+                        {
+                            get
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                    """,
                 FixedCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : I
-                {
-                    A this[int index]
+                    class A : I
                     {
-                        get
+                        int I.M()
                         {
-                            return null;
+                            return 0;
                         }
                     }
 
-                    public int M()
+                    class B : I
                     {
-                        throw new System.NotImplementedException();
+                        A this[int index]
+                        {
+                            get
+                            {
+                                return null;
+                            }
+                        }
+
+                        public int M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionsVerifier = codeActions => Assert.Equal(2, codeActions.Length),
             }.RunAsync();
         }
@@ -3009,58 +3182,58 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : {|CS0535:I|}
-                {
-                    A a
+                    class A : I
                     {
-                        set
+                        int I.M()
                         {
+                            return 0;
                         }
                     }
-                }
-                """,
+
+                    class B : {|CS0535:I|}
+                    {
+                        A a
+                        {
+                            set
+                            {
+                            }
+                        }
+                    }
+                    """,
                 FixedCode = """
-                interface I
-                {
-                    int M();
-                }
-
-                class A : I
-                {
-                    int I.M()
+                    interface I
                     {
-                        return 0;
+                        int M();
                     }
-                }
 
-                class B : {|CS0535:I|}
-                {
-                    A a
+                    class A : I
                     {
-                        set
+                        int I.M()
                         {
+                            return 0;
                         }
                     }
 
-                    public int M()
+                    class B : {|CS0535:I|}
                     {
-                        throw new System.NotImplementedException();
+                        A a
+                        {
+                            set
+                            {
+                            }
+                        }
+
+                        public int M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionsVerifier = codeActions => Assert.Equal(2, codeActions.Length),
             }.RunAsync();
         }
@@ -3068,61 +3241,67 @@ codeAction: ("False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Imp
         [Fact]
         public async Task TestImplementEventThroughMember()
         {
-            await TestInRegularAndScriptAsync("""
-                interface IGoo
-                {
-                    event System.EventHandler E;
-                }
-
-                class CanGoo : IGoo
-                {
-                    public event System.EventHandler E;
-                }
-
-                class HasCanGoo : {|CS0535:IGoo|}
-                {
-                    CanGoo canGoo;
-                }
-                """,
+            await TestInRegularAndScriptAsync(
                 """
-                using System;
-
-                interface IGoo
-                {
-                    event System.EventHandler E;
-                }
-
-                class CanGoo : IGoo
-                {
-                    public event System.EventHandler E;
-                }
-
-                class HasCanGoo : IGoo
-                {
-                    CanGoo canGoo;
-
-                    public event EventHandler E
+                    interface IGoo
                     {
-                        add
-                        {
-                            ((IGoo)canGoo).E += value;
-                        }
+                        event System.EventHandler E;
+                    }
 
-                        remove
+                    class CanGoo : IGoo
+                    {
+                        public event System.EventHandler E;
+                    }
+
+                    class HasCanGoo : {|CS0535:IGoo|}
+                    {
+                        CanGoo canGoo;
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface IGoo
+                    {
+                        event System.EventHandler E;
+                    }
+
+                    class CanGoo : IGoo
+                    {
+                        public event System.EventHandler E;
+                    }
+
+                    class HasCanGoo : IGoo
+                    {
+                        CanGoo canGoo;
+
+                        public event EventHandler E
                         {
-                            ((IGoo)canGoo).E -= value;
+                            add
+                            {
+                                ((IGoo)canGoo).E += value;
+                            }
+
+                            remove
+                            {
+                                ((IGoo)canGoo).E -= value;
+                            }
                         }
                     }
-                }
-                """, codeAction: ("False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;canGoo", 1));
+                    """,
+                codeAction: (
+                    "False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;canGoo",
+                    1
+                )
+            );
         }
 
         [Fact]
         public async Task TestImplementEventThroughExplicitMember()
         {
             await TestInRegularAndScriptAsync(
-@"interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event System.EventHandler IGoo.E { add { } remove { } } } class HasCanGoo : {|CS0535:IGoo|} { CanGoo canGoo; }",
-"""
+                @"interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event System.EventHandler IGoo.E { add { } remove { } } } class HasCanGoo : {|CS0535:IGoo|} { CanGoo canGoo; }",
+                """
 using System;
 
 interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event System.EventHandler IGoo.E { add { } remove { } } } class HasCanGoo : IGoo { CanGoo canGoo;
@@ -3141,7 +3320,11 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
     }
 }
 """,
-codeAction: ("False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;canGoo", 1));
+                codeAction: (
+                    "False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;canGoo",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -3149,29 +3332,33 @@ codeAction: ("False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IGoo
-                {
-                    event System.EventHandler E;
-                }
+                    interface IGoo
+                    {
+                        event System.EventHandler E;
+                    }
 
-                abstract class Goo : {|CS0535:IGoo|}
-                {
-                }
-                """,
+                    abstract class Goo : {|CS0535:IGoo|}
+                    {
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface IGoo
-                {
-                    event System.EventHandler E;
-                }
+                    interface IGoo
+                    {
+                        event System.EventHandler E;
+                    }
 
-                abstract class Goo : IGoo
-                {
-                    public event EventHandler E;
-                }
-                """,
-codeAction: ("False;False;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 0));
+                    abstract class Goo : IGoo
+                    {
+                        public event EventHandler E;
+                    }
+                    """,
+                codeAction: (
+                    "False;False;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    0
+                )
+            );
         }
 
         [Fact]
@@ -3179,29 +3366,33 @@ codeAction: ("False;False;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IGoo
-                {
-                    event System.EventHandler E;
-                }
+                    interface IGoo
+                    {
+                        event System.EventHandler E;
+                    }
 
-                abstract class Goo : {|CS0535:IGoo|}
-                {
-                }
-                """,
+                    abstract class Goo : {|CS0535:IGoo|}
+                    {
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface IGoo
-                {
-                    event System.EventHandler E;
-                }
+                    interface IGoo
+                    {
+                        event System.EventHandler E;
+                    }
 
-                abstract class Goo : IGoo
-                {
-                    public abstract event EventHandler E;
-                }
-                """,
-codeAction: ("False;True;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    abstract class Goo : IGoo
+                    {
+                        public abstract event EventHandler E;
+                    }
+                    """,
+                codeAction: (
+                    "False;True;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -3209,40 +3400,44 @@ codeAction: ("False;True;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.Im
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IGoo
-                {
-                    event System.EventHandler E;
-                }
-
-                abstract class Goo : {|CS0535:IGoo|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface IGoo
-                {
-                    event System.EventHandler E;
-                }
-
-                abstract class Goo : IGoo
-                {
-                    event EventHandler IGoo.E
+                    interface IGoo
                     {
-                        add
-                        {
-                            throw new NotImplementedException();
-                        }
+                        event System.EventHandler E;
+                    }
 
-                        remove
+                    abstract class Goo : {|CS0535:IGoo|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface IGoo
+                    {
+                        event System.EventHandler E;
+                    }
+
+                    abstract class Goo : IGoo
+                    {
+                        event EventHandler IGoo.E
                         {
-                            throw new NotImplementedException();
+                            add
+                            {
+                                throw new NotImplementedException();
+                            }
+
+                            remove
+                            {
+                                throw new NotImplementedException();
+                            }
                         }
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 2));
+                    """,
+                codeAction: (
+                    "True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    2
+                )
+            );
         }
 
         [Fact]
@@ -3252,17 +3447,17 @@ codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.I
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IFoo
-                {
-                    static string Name { set; get; }
+                    interface IFoo
+                    {
+                        static string Name { set; get; }
 
-                    static int {|CS0501:Foo|}(string s);
-                }
+                        static int {|CS0501:Foo|}(string s);
+                    }
 
-                class Program : IFoo
-                {
-                }
-                """,
+                    class Program : IFoo
+                    {
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -3273,41 +3468,41 @@ codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.I
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IFoo
-                {
-                    string Name { set; get; }
-
-                    static int {|CS0501:Foo|}(string s);
-                }
-
-                class Program : {|CS0535:IFoo|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IFoo
-                {
-                    string Name { set; get; }
-
-                    static int {|CS0501:Foo|}(string s);
-                }
-
-                class Program : IFoo
-                {
-                    public string Name
+                    interface IFoo
                     {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        string Name { set; get; }
 
-                        set
+                        static int {|CS0501:Foo|}(string s);
+                    }
+
+                    class Program : {|CS0535:IFoo|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IFoo
+                    {
+                        string Name { set; get; }
+
+                        static int {|CS0501:Foo|}(string s);
+                    }
+
+                    class Program : IFoo
+                    {
+                        public string Name
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
+
+                            set
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
             };
 
             test.Options.AddRange(AllOptionsOff);
@@ -3321,33 +3516,33 @@ codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.I
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IGoo
-                {
-                    static string Name { set; get; }
-
-                    int Goo(string s);
-                }
-
-                class Program : {|CS0535:IGoo|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IGoo
-                {
-                    static string Name { set; get; }
-
-                    int Goo(string s);
-                }
-
-                class Program : IGoo
-                {
-                    public int Goo(string s)
+                    interface IGoo
                     {
-                        throw new System.NotImplementedException();
+                        static string Name { set; get; }
+
+                        int Goo(string s);
                     }
-                }
-                """,
+
+                    class Program : {|CS0535:IGoo|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IGoo
+                    {
+                        static string Name { set; get; }
+
+                        int Goo(string s);
+                    }
+
+                    class Program : IGoo
+                    {
+                        public int Goo(string s)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
             };
 
             test.Options.AddRange(AllOptionsOff);
@@ -3359,37 +3554,38 @@ codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                public interface ISomeInterface
-                {
-                    int this[int index] { get; set; }
-                }
-
-                class IndexerClass : {|CS0535:ISomeInterface|}
-                {
-                }
-                """,
-                """
-                public interface ISomeInterface
-                {
-                    int this[int index] { get; set; }
-                }
-
-                class IndexerClass : ISomeInterface
-                {
-                    public int this[int index]
+                    public interface ISomeInterface
                     {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        int this[int index] { get; set; }
+                    }
 
-                        set
+                    class IndexerClass : {|CS0535:ISomeInterface|}
+                    {
+                    }
+                    """,
+                """
+                    public interface ISomeInterface
+                    {
+                        int this[int index] { get; set; }
+                    }
+
+                    class IndexerClass : ISomeInterface
+                    {
+                        public int this[int index]
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
+
+                            set
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -3397,38 +3593,42 @@ codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                public interface ISomeInterface
-                {
-                    int this[int index] { get; set; }
-                }
-
-                class IndexerClass : {|CS0535:ISomeInterface|}
-                {
-                }
-                """,
-                """
-                public interface ISomeInterface
-                {
-                    int this[int index] { get; set; }
-                }
-
-                class IndexerClass : ISomeInterface
-                {
-                    int ISomeInterface.this[int index]
+                    public interface ISomeInterface
                     {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        int this[int index] { get; set; }
+                    }
 
-                        set
+                    class IndexerClass : {|CS0535:ISomeInterface|}
+                    {
+                    }
+                    """,
+                """
+                    public interface ISomeInterface
+                    {
+                        int this[int index] { get; set; }
+                    }
+
+                    class IndexerClass : ISomeInterface
+                    {
+                        int ISomeInterface.this[int index]
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
+
+                            set
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::ISomeInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    """,
+                codeAction: (
+                    "True;False;False:global::ISomeInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -3436,32 +3636,33 @@ codeAction: ("True;False;False:global::ISomeInterface;TestProject;Microsoft.Code
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                public interface ISomeInterface
-                {
-                    int this[int index] { get; }
-                }
-
-                class IndexerClass : {|CS0535:ISomeInterface|}
-                {
-                }
-                """,
-                """
-                public interface ISomeInterface
-                {
-                    int this[int index] { get; }
-                }
-
-                class IndexerClass : ISomeInterface
-                {
-                    public int this[int index]
+                    public interface ISomeInterface
                     {
-                        get
+                        int this[int index] { get; }
+                    }
+
+                    class IndexerClass : {|CS0535:ISomeInterface|}
+                    {
+                    }
+                    """,
+                """
+                    public interface ISomeInterface
+                    {
+                        int this[int index] { get; }
+                    }
+
+                    class IndexerClass : ISomeInterface
+                    {
+                        public int this[int index]
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542357")]
@@ -3469,29 +3670,30 @@ codeAction: ("True;False;False:global::ISomeInterface;TestProject;Microsoft.Code
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo<T>() where T : class;
-                }
-
-                class A : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    void Goo<T>() where T : class;
-                }
-
-                class A : I
-                {
-                    public void Goo<T>() where T : class
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<T>() where T : class;
                     }
-                }
-                """);
+
+                    class A : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void Goo<T>() where T : class;
+                    }
+
+                    class A : I
+                    {
+                        public void Goo<T>() where T : class
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542357")]
@@ -3499,30 +3701,34 @@ codeAction: ("True;False;False:global::ISomeInterface;TestProject;Microsoft.Code
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo<T>() where T : class;
-                }
-
-                class A : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    void Goo<T>() where T : class;
-                }
-
-                class A : I
-                {
-                    void I.Goo<T>()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<T>() where T : class;
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class A : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void Goo<T>() where T : class;
+                    }
+
+                    class A : I
+                    {
+                        void I.Goo<T>()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542357")]
@@ -3530,31 +3736,32 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo<T>() where T : System.Attribute;
-                }
-
-                class A : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I
-                {
-                    void Goo<T>() where T : System.Attribute;
-                }
-
-                class A : I
-                {
-                    public void Goo<T>() where T : Attribute
+                    interface I
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : System.Attribute;
                     }
-                }
-                """);
+
+                    class A : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I
+                    {
+                        void Goo<T>() where T : System.Attribute;
+                    }
+
+                    class A : I
+                    {
+                        public void Goo<T>() where T : Attribute
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542379")]
@@ -3562,37 +3769,38 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    int this[int x] { get; set; }
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    int this[int x] { get; set; }
-                }
-
-                class C : I
-                {
-                    public int this[int x]
+                    interface I
                     {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        int this[int x] { get; set; }
+                    }
 
-                        set
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        int this[int x] { get; set; }
+                    }
+
+                    class C : I
+                    {
+                        public int this[int x]
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
+
+                            set
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542588")]
@@ -3600,33 +3808,34 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo<T>() where T : IComparable<T>;
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I
-                {
-                    void Goo<T>() where T : IComparable<T>;
-                }
-
-                class C : I
-                {
-                    public void Goo<T>() where T : IComparable<T>
+                    interface I
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : IComparable<T>;
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I
+                    {
+                        void Goo<T>() where T : IComparable<T>;
+                    }
+
+                    class C : I
+                    {
+                        public void Goo<T>() where T : IComparable<T>
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542588")]
@@ -3634,34 +3843,38 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo<T>() where T : IComparable<T>;
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I
-                {
-                    void Goo<T>() where T : IComparable<T>;
-                }
-
-                class C : I
-                {
-                    void I.Goo<T>()
+                    interface I
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : IComparable<T>;
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I
+                    {
+                        void Goo<T>() where T : IComparable<T>;
+                    }
+
+                    class C : I
+                    {
+                        void I.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3669,29 +3882,30 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : {|CS0535:I<string>|}
-                {
-                }
-                """,
-                """
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : I<string>
-                {
-                    void I<string>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """);
+
+                    class A : {|CS0535:I<string>|}
+                    {
+                    }
+                    """,
+                """
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    class A : I<string>
+                    {
+                        void I<string>.Goo<T>()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3699,29 +3913,30 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : {|CS0535:I<object>|}
-                {
-                }
-                """,
-                """
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : I<object>
-                {
-                    public void Goo<T>() where T : class
+                    interface I<S>
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """);
+
+                    class A : {|CS0535:I<object>|}
+                    {
+                    }
+                    """,
+                """
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    class A : I<object>
+                    {
+                        public void Goo<T>() where T : class
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3729,30 +3944,34 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : {|CS0535:I<object>|}
-                {
-                }
-                """,
-                """
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : I<object>
-                {
-                    void I<object>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class A : {|CS0535:I<object>|}
+                    {
+                    }
+                    """,
+                """
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    class A : I<object>
+                    {
+                        void I<object>.Goo<T>()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I<object>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3760,33 +3979,34 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : {|CS0535:I<Delegate>|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : I<Delegate>
-                {
-                    void I<Delegate>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """);
+
+                    class A : {|CS0535:I<Delegate>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    class A : I<Delegate>
+                    {
+                        void I<Delegate>.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3794,33 +4014,34 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : {|CS0535:I<MulticastDelegate>|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : I<MulticastDelegate>
-                {
-                    void I<MulticastDelegate>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """);
+
+                    class A : {|CS0535:I<MulticastDelegate>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    class A : I<MulticastDelegate>
+                    {
+                        void I<MulticastDelegate>.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3828,37 +4049,38 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                delegate void Bar();
-
-                class A : {|CS0535:I<Bar>|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                delegate void Bar();
-
-                class A : I<Bar>
-                {
-                    void I<Bar>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """);
+
+                    delegate void Bar();
+
+                    class A : {|CS0535:I<Bar>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    delegate void Bar();
+
+                    class A : I<Bar>
+                    {
+                        void I<Bar>.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3866,33 +4088,34 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : {|CS0535:I<Enum>|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : I<Enum>
-                {
-                    void I<Enum>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """);
+
+                    class A : {|CS0535:I<Enum>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    class A : I<Enum>
+                    {
+                        void I<Enum>.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3900,33 +4123,34 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : {|CS0535:I<int[]>|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class A : I<int[]>
-                {
-                    void I<int[]>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """);
+
+                    class A : {|CS0535:I<int[]>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    class A : I<int[]>
+                    {
+                        void I<int[]>.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3934,41 +4158,42 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                enum E
-                {
-                }
-
-                class A : {|CS0535:I<E>|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                enum E
-                {
-                }
-
-                class A : I<E>
-                {
-                    void I<E>.Goo<{|CS0455:T|}>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """);
+
+                    enum E
+                    {
+                    }
+
+                    class A : {|CS0535:I<E>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    enum E
+                    {
+                    }
+
+                    class A : I<E>
+                    {
+                        void I<E>.Goo<{|CS0455:T|}>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542621")]
@@ -3977,36 +4202,34 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp7_2,
-                TestCode =
-                """
-                using System;
+                TestCode = """
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : S;
-                }
-
-                class A : {|CS0535:I<ValueType>|}
-                {
-                }
-                """,
-                FixedCode =
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : S;
-                }
-
-                class A : I<ValueType>
-                {
-                    void I<ValueType>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : S;
                     }
-                }
-                """,
+
+                    class A : {|CS0535:I<ValueType>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : S;
+                    }
+
+                    class A : I<ValueType>
+                    {
+                        void I<ValueType>.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -4016,36 +4239,34 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp8,
-                TestCode =
-                """
-                using System;
+                TestCode = """
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : S;
-                }
-
-                class A : {|CS0535:I<ValueType>|}
-                {
-                }
-                """,
-                FixedCode =
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : S;
-                }
-
-                class A : I<ValueType>
-                {
-                    void I<ValueType>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : S;
                     }
-                }
-                """,
+
+                    class A : {|CS0535:I<ValueType>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : S;
+                    }
+
+                    class A : I<ValueType>
+                    {
+                        void I<ValueType>.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -4054,33 +4275,34 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : S;
-                }
-
-                class C : {|CS0535:I<Array>|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : S;
-                }
-
-                class C : I<Array>
-                {
-                    void I<Array>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : S;
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I<Array>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : S;
+                    }
+
+                    class C : I<Array>
+                    {
+                        void I<Array>.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542743")]
@@ -4088,33 +4310,34 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : Exception, S;
-                }
-
-                class C : {|CS0535:I<Attribute>|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : Exception, S;
-                }
-
-                class C : I<Attribute>
-                {
-                    void I<Attribute>.Goo<{|CS0455:T|}>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : Exception, S;
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I<Attribute>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : Exception, S;
+                    }
+
+                    class C : I<Attribute>
+                    {
+                        void I<Attribute>.Goo<{|CS0455:T|}>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542751")]
@@ -4122,33 +4345,34 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class C : {|CS0535:I<Exception>|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I<S>
-                {
-                    void Goo<T>() where T : class, S;
-                }
-
-                class C : I<Exception>
-                {
-                    void I<Exception>.Goo<T>()
+                    interface I<S>
                     {
-                        throw new NotImplementedException();
+                        void Goo<T>() where T : class, S;
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I<Exception>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I<S>
+                    {
+                        void Goo<T>() where T : class, S;
+                    }
+
+                    class C : I<Exception>
+                    {
+                        void I<Exception>.Goo<T>()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542505")]
@@ -4156,35 +4380,36 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                interface I<T>
-                {
-                    void Goo<S>(T x, IList<S> list) where S : T;
-                }
-
-                class A<S> : {|CS0535:I<S>|}
-                {
-                }
-                """,
-                """
-                using System;
-                using System.Collections.Generic;
-
-                interface I<T>
-                {
-                    void Goo<S>(T x, IList<S> list) where S : T;
-                }
-
-                class A<S> : I<S>
-                {
-                    public void Goo<S1>(S x, IList<S1> list) where S1 : S
+                    interface I<T>
                     {
-                        throw new NotImplementedException();
+                        void Goo<S>(T x, IList<S> list) where S : T;
                     }
-                }
-                """);
+
+                    class A<S> : {|CS0535:I<S>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+                    using System.Collections.Generic;
+
+                    interface I<T>
+                    {
+                        void Goo<S>(T x, IList<S> list) where S : T;
+                    }
+
+                    class A<S> : I<S>
+                    {
+                        public void Goo<S1>(S x, IList<S1> list) where S1 : S
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542505")]
@@ -4192,36 +4417,40 @@ codeAction: ("True;False;False:global::I<object>;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                interface I<T>
-                {
-                    void Goo<S>(T x, IList<S> list) where S : T;
-                }
-
-                class A<S> : {|CS0535:I<S>|}
-                {
-                }
-                """,
-                """
-                using System;
-                using System.Collections.Generic;
-
-                interface I<T>
-                {
-                    void Goo<S>(T x, IList<S> list) where S : T;
-                }
-
-                class A<S> : I<S>
-                {
-                    void I<S>.Goo<S1>(S x, IList<S1> list)
+                    interface I<T>
                     {
-                        throw new NotImplementedException();
+                        void Goo<S>(T x, IList<S> list) where S : T;
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::I<S>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class A<S> : {|CS0535:I<S>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+                    using System.Collections.Generic;
+
+                    interface I<T>
+                    {
+                        void Goo<S>(T x, IList<S> list) where S : T;
+                    }
+
+                    class A<S> : I<S>
+                    {
+                        void I<S>.Goo<S1>(S x, IList<S1> list)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I<S>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542505")]
@@ -4229,41 +4458,42 @@ codeAction: ("True;False;False:global::I<S>;TestProject;Microsoft.CodeAnalysis.I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                interface I<X, Y>
-                {
-                    void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
-                        where A : IList<B>
-                        where B : IList<A>;
-                }
-
-                class C<A, B> : {|CS0535:I<A, B>|}
-                {
-                }
-                """,
-                """
-                using System;
-                using System.Collections.Generic;
-
-                interface I<X, Y>
-                {
-                    void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
-                        where A : IList<B>
-                        where B : IList<A>;
-                }
-
-                class C<A, B> : I<A, B>
-                {
-                    public void Goo<A1, B1>(A x, B y, IList<A1> list1, IList<B1> list2)
-                        where A1 : IList<B1>
-                        where B1 : IList<A1>
+                    interface I<X, Y>
                     {
-                        throw new NotImplementedException();
+                        void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
+                            where A : IList<B>
+                            where B : IList<A>;
                     }
-                }
-                """);
+
+                    class C<A, B> : {|CS0535:I<A, B>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+                    using System.Collections.Generic;
+
+                    interface I<X, Y>
+                    {
+                        void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
+                            where A : IList<B>
+                            where B : IList<A>;
+                    }
+
+                    class C<A, B> : I<A, B>
+                    {
+                        public void Goo<A1, B1>(A x, B y, IList<A1> list1, IList<B1> list2)
+                            where A1 : IList<B1>
+                            where B1 : IList<A1>
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542505")]
@@ -4271,40 +4501,44 @@ codeAction: ("True;False;False:global::I<S>;TestProject;Microsoft.CodeAnalysis.I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                interface I<X, Y>
-                {
-                    void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
-                        where A : IList<B>
-                        where B : IList<A>;
-                }
-
-                class C<A, B> : {|CS0535:I<A, B>|}
-                {
-                }
-                """,
-                """
-                using System;
-                using System.Collections.Generic;
-
-                interface I<X, Y>
-                {
-                    void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
-                        where A : IList<B>
-                        where B : IList<A>;
-                }
-
-                class C<A, B> : I<A, B>
-                {
-                    void I<A, B>.Goo<A1, B1>(A x, B y, IList<A1> list1, IList<B1> list2)
+                    interface I<X, Y>
                     {
-                        throw new NotImplementedException();
+                        void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
+                            where A : IList<B>
+                            where B : IList<A>;
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::I<A, B>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class C<A, B> : {|CS0535:I<A, B>|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+                    using System.Collections.Generic;
+
+                    interface I<X, Y>
+                    {
+                        void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
+                            where A : IList<B>
+                            where B : IList<A>;
+                    }
+
+                    class C<A, B> : I<A, B>
+                    {
+                        void I<A, B>.Goo<A1, B1>(A x, B y, IList<A1> list1, IList<B1> list2)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I<A, B>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542506")]
@@ -4312,47 +4546,48 @@ codeAction: ("True;False;False:global::I<A, B>;TestProject;Microsoft.CodeAnalysi
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class A<T>
-                {
-                    class B
+                    class A<T>
                     {
-                    }
-
-                    interface I
-                    {
-                        void Goo(B x);
-                    }
-
-                    class C<U> : {|CS0535:I|}
-                    {
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class A<T>
-                {
-                    class B
-                    {
-                    }
-
-                    interface I
-                    {
-                        void Goo(B x);
-                    }
-
-                    class C<U> : I
-                    {
-                        public void Goo(B x)
+                        class B
                         {
-                            throw new NotImplementedException();
+                        }
+
+                        interface I
+                        {
+                            void Goo(B x);
+                        }
+
+                        class C<U> : {|CS0535:I|}
+                        {
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class A<T>
+                    {
+                        class B
+                        {
+                        }
+
+                        interface I
+                        {
+                            void Goo(B x);
+                        }
+
+                        class C<U> : I
+                        {
+                            public void Goo(B x)
+                            {
+                                throw new NotImplementedException();
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542506")]
@@ -4360,43 +4595,44 @@ codeAction: ("True;False;False:global::I<A, B>;TestProject;Microsoft.CodeAnalysi
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                class A<T>
-                {
-                    class B
+                    class A<T>
                     {
-                    }
-
-                    interface I
-                    {
-                        void Goo(B[] x);
-                    }
-
-                    class C<U> : {|CS0535:I|}
-                    {
-                    }
-                }
-                """,
-                """
-                class A<T>
-                {
-                    class B
-                    {
-                    }
-
-                    interface I
-                    {
-                        void Goo(B[] x);
-                    }
-
-                    class C<U> : I
-                    {
-                        public void Goo(B[] x)
+                        class B
                         {
-                            throw new System.NotImplementedException();
+                        }
+
+                        interface I
+                        {
+                            void Goo(B[] x);
+                        }
+
+                        class C<U> : {|CS0535:I|}
+                        {
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    class A<T>
+                    {
+                        class B
+                        {
+                        }
+
+                        interface I
+                        {
+                            void Goo(B[] x);
+                        }
+
+                        class C<U> : I
+                        {
+                            public void Goo(B[] x)
+                            {
+                                throw new System.NotImplementedException();
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542506")]
@@ -4404,43 +4640,44 @@ codeAction: ("True;False;False:global::I<A, B>;TestProject;Microsoft.CodeAnalysi
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                class A<T>
-                {
-                    class B
+                    class A<T>
                     {
-                    }
-
-                    interface I
-                    {
-                        void Goo(B[][,][,,][,,,] x);
-                    }
-
-                    class C<U> : {|CS0535:I|}
-                    {
-                    }
-                }
-                """,
-                """
-                class A<T>
-                {
-                    class B
-                    {
-                    }
-
-                    interface I
-                    {
-                        void Goo(B[][,][,,][,,,] x);
-                    }
-
-                    class C<U> : I
-                    {
-                        public void Goo(B[][,][,,][,,,] x)
+                        class B
                         {
-                            throw new System.NotImplementedException();
+                        }
+
+                        interface I
+                        {
+                            void Goo(B[][,][,,][,,,] x);
+                        }
+
+                        class C<U> : {|CS0535:I|}
+                        {
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    class A<T>
+                    {
+                        class B
+                        {
+                        }
+
+                        interface I
+                        {
+                            void Goo(B[][,][,,][,,,] x);
+                        }
+
+                        class C<U> : I
+                        {
+                            public void Goo(B[][,][,,][,,,] x)
+                            {
+                                throw new System.NotImplementedException();
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544166")]
@@ -4448,34 +4685,37 @@ codeAction: ("True;False;False:global::I<A, B>;TestProject;Microsoft.CodeAnalysi
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IGoo
-                {
-                    int Gibberish { get; set; }
-                }
+                    interface IGoo
+                    {
+                        int Gibberish { get; set; }
+                    }
 
-                abstract class Goo : {|CS0535:IGoo|}
-                {
-                }
-                """,
+                    abstract class Goo : {|CS0535:IGoo|}
+                    {
+                    }
+                    """,
                 """
-                interface IGoo
-                {
-                    int Gibberish { get; set; }
-                }
+                    interface IGoo
+                    {
+                        int Gibberish { get; set; }
+                    }
 
-                abstract class Goo : IGoo
-                {
-                    public abstract int Gibberish { get; set; }
-                }
-                """,
-codeAction: ("False;True;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    abstract class Goo : IGoo
+                    {
+                        public abstract int Gibberish { get; set; }
+                    }
+                    """,
+                codeAction: (
+                    "False;True;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544210")]
         public async Task TestMissingOnWrongArity()
         {
-            var code =
-                """
+            var code = """
                 interface I1<T>
                 {
                     int X { get; set; }
@@ -4494,29 +4734,30 @@ codeAction: ("False;True;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.Im
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IOptional
-                {
-                    int Goo(int g = 0);
-                }
-
-                class Opt : {|CS0535:IOptional|}
-                {
-                }
-                """,
-                """
-                interface IOptional
-                {
-                    int Goo(int g = 0);
-                }
-
-                class Opt : IOptional
-                {
-                    public int Goo(int g = 0)
+                    interface IOptional
                     {
-                        throw new System.NotImplementedException();
+                        int Goo(int g = 0);
                     }
-                }
-                """);
+
+                    class Opt : {|CS0535:IOptional|}
+                    {
+                    }
+                    """,
+                """
+                    interface IOptional
+                    {
+                        int Goo(int g = 0);
+                    }
+
+                    class Opt : IOptional
+                    {
+                        public int Goo(int g = 0)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544281")]
@@ -4524,37 +4765,40 @@ codeAction: ("False;True;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.Im
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IOptional
-                {
-                    int Goo(int g = 0);
-                }
-
-                class Opt : {|CS0535:IOptional|}
-                {
-                }
-                """,
-                """
-                interface IOptional
-                {
-                    int Goo(int g = 0);
-                }
-
-                class Opt : IOptional
-                {
-                    int IOptional.Goo(int g)
+                    interface IOptional
                     {
-                        throw new System.NotImplementedException();
+                        int Goo(int g = 0);
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::IOptional;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class Opt : {|CS0535:IOptional|}
+                    {
+                    }
+                    """,
+                """
+                    interface IOptional
+                    {
+                        int Goo(int g = 0);
+                    }
+
+                    class Opt : IOptional
+                    {
+                        int IOptional.Goo(int g)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::IOptional;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact]
         public async Task TestMissingInHiddenType()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 class Program : {|CS0535:IComparable|}
@@ -4572,36 +4816,37 @@ codeAction: ("True;False;False:global::IOptional;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                #line default
-                using System;
+                    #line default
+                    using System;
 
-                partial class Program : {|CS0535:IComparable|}
-                {
-                    void Goo()
+                    partial class Program : {|CS0535:IComparable|}
                     {
-                #line hidden
+                        void Goo()
+                        {
+                    #line hidden
+                        }
                     }
-                }
-                #line default
-                """,
+                    #line default
+                    """,
                 """
-                #line default
-                using System;
+                    #line default
+                    using System;
 
-                partial class Program : IComparable
-                {
-                    public int CompareTo(object obj)
+                    partial class Program : IComparable
                     {
-                        throw new NotImplementedException();
-                    }
+                        public int CompareTo(object obj)
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    void Goo()
-                    {
-                #line hidden
+                        void Goo()
+                        {
+                    #line hidden
+                        }
                     }
-                }
-                #line default
-                """);
+                    #line default
+                    """
+            );
         }
 
         [Fact]
@@ -4609,42 +4854,42 @@ codeAction: ("True;False;False:global::IOptional;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                partial class Program : {|CS0535:IComparable|}
-                {
-                #line hidden
-                }
-                #line default
-
-                partial class Program
-                {
-                }
-                """,
-                """
-                using System;
-
-                partial class Program : IComparable
-                {
-                #line hidden
-                }
-                #line default
-
-                partial class Program
-                {
-                    public int CompareTo(object obj)
+                    partial class Program : {|CS0535:IComparable|}
                     {
-                        throw new NotImplementedException();
+                    #line hidden
                     }
-                }
-                """);
+                    #line default
+
+                    partial class Program
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    partial class Program : IComparable
+                    {
+                    #line hidden
+                    }
+                    #line default
+
+                    partial class Program
+                    {
+                        public int CompareTo(object obj)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545334")]
         public async Task TestNoGenerateInVenusCase1()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 #line 1 "Bar"
                 class Goo : {|CS0535:IComparable|}{|CS1513:|}{|CS1514:|}
@@ -4664,39 +4909,38 @@ codeAction: ("True;False;False:global::IOptional;TestProject;Microsoft.CodeAnaly
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
 
-                interface IGoo
-                {
-                    void Goo([Optional][DateTimeConstant(100)] DateTime x);
-                }
-
-                public class C : {|CS0535:IGoo|}
-                {
-                }
-                """,
-                FixedCode = """
-                using System;
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
-
-                interface IGoo
-                {
-                    void Goo([Optional][DateTimeConstant(100)] DateTime x);
-                }
-
-                public class C : IGoo
-                {
-                    public void Goo([DateTimeConstant(100), Optional] DateTime x)
+                    interface IGoo
                     {
-                        throw new NotImplementedException();
+                        void Goo([Optional][DateTimeConstant(100)] DateTime x);
                     }
-                }
-                """,
-                Options = { AllOptionsOff },
 
+                    public class C : {|CS0535:IGoo|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
+
+                    interface IGoo
+                    {
+                        void Goo([Optional][DateTimeConstant(100)] DateTime x);
+                    }
+
+                    public class C : IGoo
+                    {
+                        public void Goo([DateTimeConstant(100), Optional] DateTime x)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
+                Options = { AllOptionsOff },
                 // 🐛 one value is generated with 0L instead of 0
                 CodeActionValidationMode = CodeActionValidationMode.None,
             }.RunAsync();
@@ -4707,38 +4951,42 @@ codeAction: ("True;False;False:global::IOptional;TestProject;Microsoft.CodeAnaly
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
 
-                interface IGoo
-                {
-                    void Goo([Optional][DateTimeConstant(100)] DateTime x);
-                }
-
-                public class C : {|CS0535:IGoo|}
-                {
-                }
-                """,
-                """
-                using System;
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
-
-                interface IGoo
-                {
-                    void Goo([Optional][DateTimeConstant(100)] DateTime x);
-                }
-
-                public class C : IGoo
-                {
-                    void IGoo.Goo(DateTime x)
+                    interface IGoo
                     {
-                        throw new NotImplementedException();
+                        void Goo([Optional][DateTimeConstant(100)] DateTime x);
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    public class C : {|CS0535:IGoo|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
+
+                    interface IGoo
+                    {
+                        void Goo([Optional][DateTimeConstant(100)] DateTime x);
+                    }
+
+                    public class C : IGoo
+                    {
+                        void IGoo.Goo(DateTime x)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545477")]
@@ -4746,42 +4994,43 @@ codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
 
-                interface IGoo
-                {
-                    void Goo1([Optional][IUnknownConstant] object x);
-                    void Goo2([Optional][IDispatchConstant] object x);
-                }
+                    interface IGoo
+                    {
+                        void Goo1([Optional][IUnknownConstant] object x);
+                        void Goo2([Optional][IDispatchConstant] object x);
+                    }
 
-                public class C : {|CS0535:{|CS0535:IGoo|}|}
-                {
-                }
-                """,
+                    public class C : {|CS0535:{|CS0535:IGoo|}|}
+                    {
+                    }
+                    """,
                 """
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
 
-                interface IGoo
-                {
-                    void Goo1([Optional][IUnknownConstant] object x);
-                    void Goo2([Optional][IDispatchConstant] object x);
-                }
-
-                public class C : IGoo
-                {
-                    public void Goo1([IUnknownConstant, Optional] object x)
+                    interface IGoo
                     {
-                        throw new System.NotImplementedException();
+                        void Goo1([Optional][IUnknownConstant] object x);
+                        void Goo2([Optional][IDispatchConstant] object x);
                     }
 
-                    public void Goo2([IDispatchConstant, Optional] object x)
+                    public class C : IGoo
                     {
-                        throw new System.NotImplementedException();
+                        public void Goo1([IUnknownConstant, Optional] object x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        public void Goo2([IDispatchConstant, Optional] object x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545477")]
@@ -4789,43 +5038,47 @@ codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
 
-                interface IGoo
-                {
-                    void Goo1([Optional][IUnknownConstant] object x);
-                    void Goo2([Optional][IDispatchConstant] object x);
-                }
+                    interface IGoo
+                    {
+                        void Goo1([Optional][IUnknownConstant] object x);
+                        void Goo2([Optional][IDispatchConstant] object x);
+                    }
 
-                public class C : {|CS0535:{|CS0535:IGoo|}|}
-                {
-                }
-                """,
+                    public class C : {|CS0535:{|CS0535:IGoo|}|}
+                    {
+                    }
+                    """,
                 """
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
 
-                interface IGoo
-                {
-                    void Goo1([Optional][IUnknownConstant] object x);
-                    void Goo2([Optional][IDispatchConstant] object x);
-                }
-
-                public class C : IGoo
-                {
-                    void IGoo.Goo1(object x)
+                    interface IGoo
                     {
-                        throw new System.NotImplementedException();
+                        void Goo1([Optional][IUnknownConstant] object x);
+                        void Goo2([Optional][IDispatchConstant] object x);
                     }
 
-                    void IGoo.Goo2(object x)
+                    public class C : IGoo
                     {
-                        throw new System.NotImplementedException();
+                        void IGoo.Goo1(object x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        void IGoo.Goo2(object x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    """,
+                codeAction: (
+                    "True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545464")]
@@ -4833,37 +5086,38 @@ codeAction: ("True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IGoo
-                {
-                    void Goo();
-                }
-
-                public class Goo : {|CS0535:IGoo|}
-                {
-                }
-                """,
-                """
-                interface IGoo
-                {
-                    void Goo();
-                }
-
-                public class Goo : IGoo
-                {
-                    void IGoo.Goo()
+                    interface IGoo
                     {
-                        throw new System.NotImplementedException();
+                        void Goo();
                     }
-                }
-                """);
+
+                    public class Goo : {|CS0535:IGoo|}
+                    {
+                    }
+                    """,
+                """
+                    interface IGoo
+                    {
+                        void Goo();
+                    }
+
+                    public class Goo : IGoo
+                    {
+                        void IGoo.Goo()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestStringLiteral()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IGoo { void Goo ( string s = ""\"""" ) ; } class B : {|CS0535:IGoo|} { }",
-"""
+                @"interface IGoo { void Goo ( string s = ""\"""" ) ; } class B : {|CS0535:IGoo|} { }",
+                """
 interface IGoo { void Goo ( string s = "\"" ) ; }
 class B : IGoo
 {
@@ -4872,7 +5126,8 @@ class B : IGoo
         throw new System.NotImplementedException();
     }
 }
-""");
+"""
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/916114")]
@@ -4880,37 +5135,38 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                struct b
-                {
-                }
-
-                interface d
-                {
-                    void m(b? x = null, b? y = default(b?));
-                }
-
-                class c : {|CS0535:d|}
-                {
-                }
-                """,
-                """
-                struct b
-                {
-                }
-
-                interface d
-                {
-                    void m(b? x = null, b? y = default(b?));
-                }
-
-                class c : d
-                {
-                    public void m(b? x = null, b? y = null)
+                    struct b
                     {
-                        throw new System.NotImplementedException();
                     }
-                }
-                """);
+
+                    interface d
+                    {
+                        void m(b? x = null, b? y = default(b?));
+                    }
+
+                    class c : {|CS0535:d|}
+                    {
+                    }
+                    """,
+                """
+                    struct b
+                    {
+                    }
+
+                    interface d
+                    {
+                        void m(b? x = null, b? y = default(b?));
+                    }
+
+                    class c : d
+                    {
+                        public void m(b? x = null, b? y = null)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/916114")]
@@ -4918,37 +5174,42 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                struct b
-                {
-                }
-
-                interface d
-                {
-                    void m(b? x = null, b? y = default(b?));
-                }
-
-                class c : {|CS0535:d|}
-                {
-                }
-                """,
-                """
-                struct b
-                {
-                }
-
-                interface d
-                {
-                    void m(b? x = null, b? y = default(b?));
-                }
-
-                class c : d
-                {
-                    void d.m(b? x, b? y)
+                    struct b
                     {
-                        throw new System.NotImplementedException();
                     }
-                }
-                """, codeAction: ("True;False;False:global::d;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    interface d
+                    {
+                        void m(b? x = null, b? y = default(b?));
+                    }
+
+                    class c : {|CS0535:d|}
+                    {
+                    }
+                    """,
+                """
+                    struct b
+                    {
+                    }
+
+                    interface d
+                    {
+                        void m(b? x = null, b? y = default(b?));
+                    }
+
+                    class c : d
+                    {
+                        void d.m(b? x, b? y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::d;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/916114")]
@@ -4956,29 +5217,30 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface d
-                {
-                    void m(int? x = 5, int? y = null);
-                }
-
-                class c : {|CS0535:d|}
-                {
-                }
-                """,
-                """
-                interface d
-                {
-                    void m(int? x = 5, int? y = null);
-                }
-
-                class c : d
-                {
-                    public void m(int? x = 5, int? y = null)
+                    interface d
                     {
-                        throw new System.NotImplementedException();
+                        void m(int? x = 5, int? y = null);
                     }
-                }
-                """);
+
+                    class c : {|CS0535:d|}
+                    {
+                    }
+                    """,
+                """
+                    interface d
+                    {
+                        void m(int? x = 5, int? y = null);
+                    }
+
+                    class c : d
+                    {
+                        public void m(int? x = 5, int? y = null)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545613")]
@@ -4986,33 +5248,34 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices;
 
-                interface I
-                {
-                    void Goo([Optional] I o);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System.Runtime.InteropServices;
-
-                interface I
-                {
-                    void Goo([Optional] I o);
-                }
-
-                class C : I
-                {
-                    public void Goo([Optional] I o)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo([Optional] I o);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Runtime.InteropServices;
+
+                    interface I
+                    {
+                        void Goo([Optional] I o);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo([Optional] I o)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -5021,192 +5284,191 @@ class B : IGoo
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface I
-                {
-                    void M01(short s = short.MinValue);
-                    void M02(short s = -1);
-                    void M03(short s = short.MaxValue);
-                    void M04(ushort s = ushort.MinValue);
-                    void M05(ushort s = 1);
-                    void M06(ushort s = ushort.MaxValue);
-                    void M07(int s = int.MinValue);
-                    void M08(int s = -1);
-                    void M09(int s = int.MaxValue);
-                    void M10(uint s = uint.MinValue);
-                    void M11(uint s = 1);
-                    void M12(uint s = uint.MaxValue);
-                    void M13(long s = long.MinValue);
-                    void M14(long s = -1);
-                    void M15(long s = long.MaxValue);
-                    void M16(ulong s = ulong.MinValue);
-                    void M17(ulong s = 1);
-                    void M18(ulong s = ulong.MaxValue);
-                    void M19(float s = float.MinValue);
-                    void M20(float s = 1);
-                    void M21(float s = float.MaxValue);
-                    void M22(double s = double.MinValue);
-                    void M23(double s = 1);
-                    void M24(double s = double.MaxValue);
-                }
+                    interface I
+                    {
+                        void M01(short s = short.MinValue);
+                        void M02(short s = -1);
+                        void M03(short s = short.MaxValue);
+                        void M04(ushort s = ushort.MinValue);
+                        void M05(ushort s = 1);
+                        void M06(ushort s = ushort.MaxValue);
+                        void M07(int s = int.MinValue);
+                        void M08(int s = -1);
+                        void M09(int s = int.MaxValue);
+                        void M10(uint s = uint.MinValue);
+                        void M11(uint s = 1);
+                        void M12(uint s = uint.MaxValue);
+                        void M13(long s = long.MinValue);
+                        void M14(long s = -1);
+                        void M15(long s = long.MaxValue);
+                        void M16(ulong s = ulong.MinValue);
+                        void M17(ulong s = 1);
+                        void M18(ulong s = ulong.MaxValue);
+                        void M19(float s = float.MinValue);
+                        void M20(float s = 1);
+                        void M21(float s = float.MaxValue);
+                        void M22(double s = double.MinValue);
+                        void M23(double s = 1);
+                        void M24(double s = double.MaxValue);
+                    }
 
-                class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}
-                {
-                }
-                """,
+                    class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface I
-                {
-                    void M01(short s = short.MinValue);
-                    void M02(short s = -1);
-                    void M03(short s = short.MaxValue);
-                    void M04(ushort s = ushort.MinValue);
-                    void M05(ushort s = 1);
-                    void M06(ushort s = ushort.MaxValue);
-                    void M07(int s = int.MinValue);
-                    void M08(int s = -1);
-                    void M09(int s = int.MaxValue);
-                    void M10(uint s = uint.MinValue);
-                    void M11(uint s = 1);
-                    void M12(uint s = uint.MaxValue);
-                    void M13(long s = long.MinValue);
-                    void M14(long s = -1);
-                    void M15(long s = long.MaxValue);
-                    void M16(ulong s = ulong.MinValue);
-                    void M17(ulong s = 1);
-                    void M18(ulong s = ulong.MaxValue);
-                    void M19(float s = float.MinValue);
-                    void M20(float s = 1);
-                    void M21(float s = float.MaxValue);
-                    void M22(double s = double.MinValue);
-                    void M23(double s = 1);
-                    void M24(double s = double.MaxValue);
-                }
-
-                class C : I
-                {
-                    public void M01(short s = short.MinValue)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M01(short s = short.MinValue);
+                        void M02(short s = -1);
+                        void M03(short s = short.MaxValue);
+                        void M04(ushort s = ushort.MinValue);
+                        void M05(ushort s = 1);
+                        void M06(ushort s = ushort.MaxValue);
+                        void M07(int s = int.MinValue);
+                        void M08(int s = -1);
+                        void M09(int s = int.MaxValue);
+                        void M10(uint s = uint.MinValue);
+                        void M11(uint s = 1);
+                        void M12(uint s = uint.MaxValue);
+                        void M13(long s = long.MinValue);
+                        void M14(long s = -1);
+                        void M15(long s = long.MaxValue);
+                        void M16(ulong s = ulong.MinValue);
+                        void M17(ulong s = 1);
+                        void M18(ulong s = ulong.MaxValue);
+                        void M19(float s = float.MinValue);
+                        void M20(float s = 1);
+                        void M21(float s = float.MaxValue);
+                        void M22(double s = double.MinValue);
+                        void M23(double s = 1);
+                        void M24(double s = double.MaxValue);
                     }
 
-                    public void M02(short s = -1)
+                    class C : I
                     {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M01(short s = short.MinValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M03(short s = short.MaxValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M02(short s = -1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M04(ushort s = 0)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M03(short s = short.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M05(ushort s = 1)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M04(ushort s = 0)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M06(ushort s = ushort.MaxValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M05(ushort s = 1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M07(int s = int.MinValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M06(ushort s = ushort.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M08(int s = -1)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M07(int s = int.MinValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M09(int s = int.MaxValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M08(int s = -1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M10(uint s = 0)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M09(int s = int.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M11(uint s = 1)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M10(uint s = 0)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M12(uint s = uint.MaxValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M11(uint s = 1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M13(long s = long.MinValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M12(uint s = uint.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M14(long s = -1)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M13(long s = long.MinValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M15(long s = long.MaxValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M14(long s = -1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M16(ulong s = 0)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M15(long s = long.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M17(ulong s = 1)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M16(ulong s = 0)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M18(ulong s = ulong.MaxValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M17(ulong s = 1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M19(float s = float.MinValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M18(ulong s = ulong.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M20(float s = 1)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M19(float s = float.MinValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M21(float s = float.MaxValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M20(float s = 1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M22(double s = double.MinValue)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M21(float s = float.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M23(double s = 1)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void M22(double s = double.MinValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void M24(double s = double.MaxValue)
-                    {
-                        throw new System.NotImplementedException();
+                        public void M23(double s = 1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        public void M24(double s = double.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 Options = { AllOptionsOff },
-
                 // 🐛 one value is generated with 0U instead of 0
                 CodeActionValidationMode = CodeActionValidationMode.None,
             }.RunAsync();
@@ -5217,66 +5479,67 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                enum E
-                {
-                   A = 1,
-                   B = 2  
-                }
+                    enum E
+                    {
+                       A = 1,
+                       B = 2  
+                    }
 
-                [FlagsAttribute]
-                enum FlagE
-                {
-                   A = 1,
-                   B = 2
-                }
+                    [FlagsAttribute]
+                    enum FlagE
+                    {
+                       A = 1,
+                       B = 2
+                    }
 
-                interface I
-                {
-                    void M1(E e = E.A | E.B);
-                    void M2(FlagE e = FlagE.A | FlagE.B);
-                }
+                    interface I
+                    {
+                        void M1(E e = E.A | E.B);
+                        void M2(FlagE e = FlagE.A | FlagE.B);
+                    }
 
-                class C : {|CS0535:{|CS0535:I|}|}
-                {
-                }
-                """,
+                    class C : {|CS0535:{|CS0535:I|}|}
+                    {
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                enum E
-                {
-                   A = 1,
-                   B = 2  
-                }
-
-                [FlagsAttribute]
-                enum FlagE
-                {
-                   A = 1,
-                   B = 2
-                }
-
-                interface I
-                {
-                    void M1(E e = E.A | E.B);
-                    void M2(FlagE e = FlagE.A | FlagE.B);
-                }
-
-                class C : I
-                {
-                    public void M1(E e = (E)3)
+                    enum E
                     {
-                        throw new NotImplementedException();
+                       A = 1,
+                       B = 2  
                     }
 
-                    public void M2(FlagE e = FlagE.A | FlagE.B)
+                    [FlagsAttribute]
+                    enum FlagE
                     {
-                        throw new NotImplementedException();
+                       A = 1,
+                       B = 2
                     }
-                }
-                """);
+
+                    interface I
+                    {
+                        void M1(E e = E.A | E.B);
+                        void M2(FlagE e = FlagE.A | FlagE.B);
+                    }
+
+                    class C : I
+                    {
+                        public void M1(E e = (E)3)
+                        {
+                            throw new NotImplementedException();
+                        }
+
+                        public void M2(FlagE e = FlagE.A | FlagE.B)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -5284,103 +5547,104 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void M01(char c = '\0');
-                    void M02(char c = '\r');
-                    void M03(char c = '\n');
-                    void M04(char c = '\t');
-                    void M05(char c = '\b');
-                    void M06(char c = '\v');
-                    void M07(char c = '\'');
-                    void M08(char c = '“');
-                    void M09(char c = 'a');
-                    void M10(char c = '"');
-                    void M11(char c = '\u2029');
-                }
+                    interface I
+                    {
+                        void M01(char c = '\0');
+                        void M02(char c = '\r');
+                        void M03(char c = '\n');
+                        void M04(char c = '\t');
+                        void M05(char c = '\b');
+                        void M06(char c = '\v');
+                        void M07(char c = '\'');
+                        void M08(char c = '“');
+                        void M09(char c = 'a');
+                        void M10(char c = '"');
+                        void M11(char c = '\u2029');
+                    }
 
-                class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}|}|}|}|}|}|}|}
-                {
-                }
-                """,
+                    class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}|}|}|}|}|}|}|}
+                    {
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void M01(char c = '\0');
-                    void M02(char c = '\r');
-                    void M03(char c = '\n');
-                    void M04(char c = '\t');
-                    void M05(char c = '\b');
-                    void M06(char c = '\v');
-                    void M07(char c = '\'');
-                    void M08(char c = '“');
-                    void M09(char c = 'a');
-                    void M10(char c = '"');
-                    void M11(char c = '\u2029');
-                }
-
-                class C : I
-                {
-                    public void M01(char c = '\0')
+                    interface I
                     {
-                        throw new NotImplementedException();
+                        void M01(char c = '\0');
+                        void M02(char c = '\r');
+                        void M03(char c = '\n');
+                        void M04(char c = '\t');
+                        void M05(char c = '\b');
+                        void M06(char c = '\v');
+                        void M07(char c = '\'');
+                        void M08(char c = '“');
+                        void M09(char c = 'a');
+                        void M10(char c = '"');
+                        void M11(char c = '\u2029');
                     }
 
-                    public void M02(char c = '\r')
+                    class C : I
                     {
-                        throw new NotImplementedException();
-                    }
+                        public void M01(char c = '\0')
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void M03(char c = '\n')
-                    {
-                        throw new NotImplementedException();
-                    }
+                        public void M02(char c = '\r')
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void M04(char c = '\t')
-                    {
-                        throw new NotImplementedException();
-                    }
+                        public void M03(char c = '\n')
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void M05(char c = '\b')
-                    {
-                        throw new NotImplementedException();
-                    }
+                        public void M04(char c = '\t')
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void M06(char c = '\v')
-                    {
-                        throw new NotImplementedException();
-                    }
+                        public void M05(char c = '\b')
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void M07(char c = '\'')
-                    {
-                        throw new NotImplementedException();
-                    }
+                        public void M06(char c = '\v')
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void M08(char c = '“')
-                    {
-                        throw new NotImplementedException();
-                    }
+                        public void M07(char c = '\'')
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void M09(char c = 'a')
-                    {
-                        throw new NotImplementedException();
-                    }
+                        public void M08(char c = '“')
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void M10(char c = '"')
-                    {
-                        throw new NotImplementedException();
-                    }
+                        public void M09(char c = 'a')
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void M11(char c = '\u2029')
-                    {
-                        throw new NotImplementedException();
+                        public void M10(char c = '"')
+                        {
+                            throw new NotImplementedException();
+                        }
+
+                        public void M11(char c = '\u2029')
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545695")]
@@ -5388,36 +5652,37 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(DayOfWeek x = DayOfWeek.Friday);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                    DayOfWeek DayOfWeek { get; set; }
-                }
-                """,
-                """
-                using System;
-
-                interface I
-                {
-                    void Goo(DayOfWeek x = DayOfWeek.Friday);
-                }
-
-                class C : I
-                {
-                    DayOfWeek DayOfWeek { get; set; }
-
-                    public void Goo(DayOfWeek x = DayOfWeek.Friday)
+                    interface I
                     {
-                        throw new NotImplementedException();
+                        void Goo(DayOfWeek x = DayOfWeek.Friday);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                        DayOfWeek DayOfWeek { get; set; }
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I
+                    {
+                        void Goo(DayOfWeek x = DayOfWeek.Friday);
+                    }
+
+                    class C : I
+                    {
+                        DayOfWeek DayOfWeek { get; set; }
+
+                        public void Goo(DayOfWeek x = DayOfWeek.Friday)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545696")]
@@ -5425,29 +5690,30 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo(decimal x = decimal.MaxValue);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    void Goo(decimal x = decimal.MaxValue);
-                }
-
-                class C : I
-                {
-                    public void Goo(decimal x = decimal.MaxValue)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo(decimal x = decimal.MaxValue);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void Goo(decimal x = decimal.MaxValue);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo(decimal x = decimal.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545711")]
@@ -5455,29 +5721,30 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo(decimal? x = decimal.MaxValue);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    void Goo(decimal? x = decimal.MaxValue);
-                }
-
-                class C : I
-                {
-                    public void Goo(decimal? x = decimal.MaxValue)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo(decimal? x = decimal.MaxValue);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void Goo(decimal? x = decimal.MaxValue);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo(decimal? x = decimal.MaxValue)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545715")]
@@ -5485,33 +5752,34 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(DayOfWeek? x = DayOfWeek.Friday);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I
-                {
-                    void Goo(DayOfWeek? x = DayOfWeek.Friday);
-                }
-
-                class C : I
-                {
-                    public void Goo(DayOfWeek? x = DayOfWeek.Friday)
+                    interface I
                     {
-                        throw new NotImplementedException();
+                        void Goo(DayOfWeek? x = DayOfWeek.Friday);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I
+                    {
+                        void Goo(DayOfWeek? x = DayOfWeek.Friday);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo(DayOfWeek? x = DayOfWeek.Friday)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545752")]
@@ -5519,29 +5787,30 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo(byte x = 1);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    void Goo(byte x = 1);
-                }
-
-                class C : I
-                {
-                    public void Goo(byte x = 1)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo(byte x = 1);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void Goo(byte x = 1);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo(byte x = 1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545736")]
@@ -5583,33 +5852,34 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface I
-                {
-                    void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I
-                {
-                    void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue);
-                }
-
-                class C : I
-                {
-                    public void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue)
+                    interface I
                     {
-                        throw new NotImplementedException();
+                        void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I
+                    {
+                        void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545785")]
@@ -5617,39 +5887,40 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                enum E
-                {
-                    A = 1,
-                }
-
-                interface I
-                {
-                    void Goo(E x = 0);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                enum E
-                {
-                    A = 1,
-                }
-
-                interface I
-                {
-                    void Goo(E x = 0);
-                }
-
-                class C : I
-                {
-                    public void Goo(E x = 0)
+                    enum E
                     {
-                        throw new System.NotImplementedException();
+                        A = 1,
                     }
-                }
-                """);
+
+                    interface I
+                    {
+                        void Goo(E x = 0);
+                    }
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    enum E
+                    {
+                        A = 1,
+                    }
+
+                    interface I
+                    {
+                        void Goo(E x = 0);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo(E x = 0)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545793")]
@@ -5657,33 +5928,34 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices;
 
-                interface I
-                {
-                    void Goo([Optional][DefaultParameterValue(1)] int x, int[,] y);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System.Runtime.InteropServices;
-
-                interface I
-                {
-                    void Goo([Optional][DefaultParameterValue(1)] int x, int[,] y);
-                }
-
-                class C : I
-                {
-                    public void Goo([{|CS1745:DefaultParameterValue|}(1), {|CS1745:Optional|}] int x = {|CS8017:1|}, int[,] y = null)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo([Optional][DefaultParameterValue(1)] int x, int[,] y);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Runtime.InteropServices;
+
+                    interface I
+                    {
+                        void Goo([Optional][DefaultParameterValue(1)] int x, int[,] y);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo([{|CS1745:DefaultParameterValue|}(1), {|CS1745:Optional|}] int x = {|CS8017:1|}, int[,] y = null)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545794")]
@@ -5691,33 +5963,34 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices;
 
-                interface I
-                {
-                    void Goo([Optional, DefaultParameterValue(1)] int x, int[] y, int[] z);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System.Runtime.InteropServices;
-
-                interface I
-                {
-                    void Goo([Optional, DefaultParameterValue(1)] int x, int[] y, int[] z);
-                }
-
-                class C : I
-                {
-                    public void Goo([{|CS1745:DefaultParameterValue|}(1), {|CS1745:Optional|}] int x = {|CS8017:1|}, int[] y = null, int[] z = null)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo([Optional, DefaultParameterValue(1)] int x, int[] y, int[] z);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Runtime.InteropServices;
+
+                    interface I
+                    {
+                        void Goo([Optional, DefaultParameterValue(1)] int x, int[] y, int[] z);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo([{|CS1745:DefaultParameterValue|}(1), {|CS1745:Optional|}] int x = {|CS8017:1|}, int[] y = null, int[] z = null)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545605")]
@@ -5725,38 +5998,36 @@ class B : IGoo
         {
             var test = new VerifyCS.Test
             {
-                TestCode =
-                """
-                using System;
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
+                TestCode = """
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
 
-                interface I
-                {
-                    void Goo([Optional][DateTimeConstant(100)] DateTime d1, [Optional][IUnknownConstant] object d2);
-                }
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                FixedCode =
-                """
-                using System;
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
-
-                interface I
-                {
-                    void Goo([Optional][DateTimeConstant(100)] DateTime d1, [Optional][IUnknownConstant] object d2);
-                }
-                class C : I
-                {
-                    public void Goo([DateTimeConstant(100), Optional] DateTime d1, [IUnknownConstant, Optional] object d2)
+                    interface I
                     {
-                        throw new NotImplementedException();
+                        void Goo([Optional][DateTimeConstant(100)] DateTime d1, [Optional][IUnknownConstant] object d2);
                     }
-                }
-                """,
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
+
+                    interface I
+                    {
+                        void Goo([Optional][DateTimeConstant(100)] DateTime d1, [Optional][IUnknownConstant] object d2);
+                    }
+                    class C : I
+                    {
+                        public void Goo([DateTimeConstant(100), Optional] DateTime d1, [IUnknownConstant, Optional] object d2)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
                 // 🐛 the DateTimeConstant attribute is generated with 100L instead of 100
                 CodeActionValidationMode = CodeActionValidationMode.None,
             };
@@ -5770,29 +6041,30 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I<S>
-                {
-                    void T1<T>(S x, T y);
-                }
-
-                class C<T> : {|CS0535:I<T>|}
-                {
-                }
-                """,
-                """
-                interface I<S>
-                {
-                    void T1<T>(S x, T y);
-                }
-
-                class C<T> : I<T>
-                {
-                    public void T1<T2>(T x, T2 y)
+                    interface I<S>
                     {
-                        throw new System.NotImplementedException();
+                        void T1<T>(S x, T y);
                     }
-                }
-                """);
+
+                    class C<T> : {|CS0535:I<T>|}
+                    {
+                    }
+                    """,
+                """
+                    interface I<S>
+                    {
+                        void T1<T>(S x, T y);
+                    }
+
+                    class C<T> : I<T>
+                    {
+                        public void T1<T2>(T x, T2 y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545895")]
@@ -5800,33 +6072,34 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                interface I<S>
-                {
-                    void Goo<T>(S y, List<T>.Enumerator x);
-                }
-
-                class D<T> : {|CS0535:I<T>|}
-                {
-                }
-                """,
-                """
-                using System.Collections.Generic;
-
-                interface I<S>
-                {
-                    void Goo<T>(S y, List<T>.Enumerator x);
-                }
-
-                class D<T> : I<T>
-                {
-                    public void Goo<T1>(T y, List<T1>.Enumerator x)
+                    interface I<S>
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<T>(S y, List<T>.Enumerator x);
                     }
-                }
-                """);
+
+                    class D<T> : {|CS0535:I<T>|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Collections.Generic;
+
+                    interface I<S>
+                    {
+                        void Goo<T>(S y, List<T>.Enumerator x);
+                    }
+
+                    class D<T> : I<T>
+                    {
+                        public void Goo<T1>(T y, List<T1>.Enumerator x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545864")]
@@ -5834,29 +6107,30 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo(float x = 1E10F);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    void Goo(float x = 1E10F);
-                }
-
-                class C : I
-                {
-                    public void Goo(float x = 1E+10F)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo(float x = 1E10F);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void Goo(float x = 1E10F);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo(float x = 1E+10F)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544640")]
@@ -5864,28 +6138,29 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo<@class>();
-                }
-
-                class C : {|CS0535:I|}{|CS1513:|}{|CS1514:|}
-                """,
-                """
-                interface I
-                {
-                    void Goo<@class>();
-                }
-
-                class C : I
-                {
-                    public void Goo<@class>()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<@class>();
                     }
-                }
 
-                """);
+                    class C : {|CS0535:I|}{|CS1513:|}{|CS1514:|}
+                    """,
+                """
+                    interface I
+                    {
+                        void Goo<@class>();
+                    }
+
+                    class C : I
+                    {
+                        public void Goo<@class>()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545922")]
@@ -5893,36 +6168,37 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo1(decimal x = 1E28M);
-                    void Goo2(decimal x = -1E28M);
-                }
+                    interface I
+                    {
+                        void Goo1(decimal x = 1E28M);
+                        void Goo2(decimal x = -1E28M);
+                    }
 
-                class C : {|CS0535:{|CS0535:I|}|}
-                {
-                }
-                """,
+                    class C : {|CS0535:{|CS0535:I|}|}
+                    {
+                    }
+                    """,
                 """
-                interface I
-                {
-                    void Goo1(decimal x = 1E28M);
-                    void Goo2(decimal x = -1E28M);
-                }
-
-                class C : I
-                {
-                    public void Goo1(decimal x = 10000000000000000000000000000M)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo1(decimal x = 1E28M);
+                        void Goo2(decimal x = -1E28M);
                     }
 
-                    public void Goo2(decimal x = -10000000000000000000000000000M)
+                    class C : I
                     {
-                        throw new System.NotImplementedException();
+                        public void Goo1(decimal x = 10000000000000000000000000000M)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        public void Goo2(decimal x = -10000000000000000000000000000M)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544659")]
@@ -5930,29 +6206,30 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo(decimal x = 0.1M);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    void Goo(decimal x = 0.1M);
-                }
-
-                class C : I
-                {
-                    public void Goo(decimal x = 0.1M)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo(decimal x = 0.1M);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void Goo(decimal x = 0.1M);
+                    }
+
+                    class C : I
+                    {
+                        public void Goo(decimal x = 0.1M)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544639")]
@@ -5960,26 +6237,27 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                // Implement interface
-                class C : {|CS0535:IServiceProvider|} {|CS1035:|}/*
-                {|CS1513:|}{|CS1514:|}
-                """,
+                    // Implement interface
+                    class C : {|CS0535:IServiceProvider|} {|CS1035:|}/*
+                    {|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
+                    using System;
 
-                // Implement interface
-                class C : IServiceProvider /*
-                */
-                {
-                    public object GetService(Type serviceType)
+                    // Implement interface
+                    class C : IServiceProvider /*
+                    */
                     {
-                        throw new NotImplementedException();
+                        public object GetService(Type serviceType)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529920")]
@@ -5987,25 +6265,26 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                // Implement interface
-                class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
-                #pragma warning disable
-                """,
+                    // Implement interface
+                    class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
+                    #pragma warning disable
+                    """,
                 """
-                using System;
+                    using System;
 
-                // Implement interface
-                class C : IServiceProvider
-                {
-                    public object GetService(Type serviceType)
+                    // Implement interface
+                    class C : IServiceProvider
                     {
-                        throw new NotImplementedException();
+                        public object GetService(Type serviceType)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                #pragma warning disable
-                """);
+                    #pragma warning disable
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529947")]
@@ -6013,23 +6292,24 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|} // Implement interface
+                    class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|} // Implement interface
 
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C : IServiceProvider // Implement interface
-                {
-                    public object GetService(Type serviceType)
+                    class C : IServiceProvider // Implement interface
                     {
-                        throw new NotImplementedException();
+                        public object GetService(Type serviceType)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529947")]
@@ -6037,23 +6317,24 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|} 
-                // Implement interface
-                """,
+                    class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
+                    // Implement interface
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C : IServiceProvider
-                {
-                    public object GetService(Type serviceType)
+                    class C : IServiceProvider
                     {
-                        throw new NotImplementedException();
+                        public object GetService(Type serviceType)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                // Implement interface
-                """);
+                    // Implement interface
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/958699")]
@@ -6062,20 +6343,25 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                """,
+                    using System;
+                    class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
-                class C : IDisposable
-                {
-                    public void Dispose()
+                    using System;
+                    class C : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """, codeAction: ("False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 0));
+                    """,
+                codeAction: (
+                    "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    0
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/958699")]
@@ -6084,17 +6370,22 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                """,
-$@"using System;
+                    using System;
+                    class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                    """,
+                $@"using System;
 class C : IDisposable
 {{
     private bool disposedValue;
 
 {DisposePattern("protected virtual ", "C", "public void ")}
 }}
-", codeAction: ("False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 1));
+",
+                codeAction: (
+                    "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/958699")]
@@ -6103,20 +6394,25 @@ class C : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                """,
+                    using System;
+                    class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
-                class C : IDisposable
-                {
-                    void IDisposable.Dispose()
+                    using System;
+                    class C : IDisposable
                     {
-                        throw new NotImplementedException();
+                        void IDisposable.Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """, codeAction: ("True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 2));
+                    """,
+                codeAction: (
+                    "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    2
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/941469")]
@@ -6125,15 +6421,15 @@ class C : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                class C : {|CS0535:System.IDisposable|}
-                {
-                    class IDisposable
+                    using System;
+                    class C : {|CS0535:System.IDisposable|}
                     {
+                        class IDisposable
+                        {
+                        }
                     }
-                }
-                """,
-$@"using System;
+                    """,
+                $@"using System;
 class C : System.IDisposable
 {{
     private bool disposedValue;
@@ -6143,7 +6439,12 @@ class C : System.IDisposable
     }}
 
 {DisposePattern("protected virtual ", "C", "void System.IDisposable.")}
-}}", codeAction: ("True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 3));
+}}",
+                codeAction: (
+                    "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    3
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/958699")]
@@ -6152,17 +6453,22 @@ class C : System.IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                abstract class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                """,
+                    using System;
+                    abstract class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
-                abstract class C : IDisposable
-                {
-                    public abstract void Dispose();
-                }
+                    using System;
+                    abstract class C : IDisposable
+                    {
+                        public abstract void Dispose();
+                    }
 
-                """, codeAction: ("False;True;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 2));
+                    """,
+                codeAction: (
+                    "False;True;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    2
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/958699")]
@@ -6171,24 +6477,29 @@ class C : System.IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                class C : {|CS0535:IDisposable|}
-                {
-                    private IDisposable goo;
-                }
-                """,
-                """
-                using System;
-                class C : IDisposable
-                {
-                    private IDisposable goo;
-
-                    public void Dispose()
+                    using System;
+                    class C : {|CS0535:IDisposable|}
                     {
-                        goo.Dispose();
+                        private IDisposable goo;
                     }
-                }
-                """, codeAction: ("False;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;goo", 2));
+                    """,
+                """
+                    using System;
+                    class C : IDisposable
+                    {
+                        private IDisposable goo;
+
+                        public void Dispose()
+                        {
+                            goo.Dispose();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "False;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;goo",
+                    2
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/941469")]
@@ -6197,16 +6508,17 @@ class C : System.IDisposable
             await new VerifyCS.Test
             {
                 TestCode = @"class C : {|CS0535:System.IDisposable|}{|CS1513:|}{|CS1514:|}",
-                FixedCode = $@"class C : System.IDisposable
+                FixedCode =
+                    $@"class C : System.IDisposable
 {{
     private bool disposedValue;
 
 {DisposePattern("protected virtual ", "C", "void System.IDisposable.", gcPrefix: "System.")}
 }}
 ",
-                CodeActionEquivalenceKey = "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
                 CodeActionIndex = 3,
-
                 // 🐛 generated QualifiedName where SimpleMemberAccessExpression was expected
                 CodeActionValidationMode = CodeActionValidationMode.None,
             }.RunAsync();
@@ -6217,34 +6529,39 @@ class C : System.IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                interface I : IDisposable
-                {
-                    void F();
-                }
-                class C : {|CS0535:{|CS0535:I|}|}
-                {
-                }
-                """,
+                    using System;
+                    interface I : IDisposable
+                    {
+                        void F();
+                    }
+                    class C : {|CS0535:{|CS0535:I|}|}
+                    {
+                    }
+                    """,
                 """
-                using System;
-                interface I : IDisposable
-                {
-                    void F();
-                }
-                class C : I
-                {
-                    public void Dispose()
+                    using System;
+                    interface I : IDisposable
                     {
-                        throw new NotImplementedException();
+                        void F();
                     }
+                    class C : I
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
 
-                    public void F()
-                    {
-                        throw new NotImplementedException();
+                        public void F()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """, codeAction: ("False;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 0));
+                    """,
+                codeAction: (
+                    "False;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    0
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/951968")]
@@ -6252,16 +6569,16 @@ class C : System.IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                interface I : IDisposable
-                {
-                    void F();
-                }
-                class C : {|CS0535:{|CS0535:I|}|}
-                {
-                }
-                """,
-$@"using System;
+                    using System;
+                    interface I : IDisposable
+                    {
+                        void F();
+                    }
+                    class C : {|CS0535:{|CS0535:I|}|}
+                    {
+                    }
+                    """,
+                $@"using System;
 interface I : IDisposable
 {{
     void F();
@@ -6276,7 +6593,12 @@ class C : I
     }}
 
 {DisposePattern("protected virtual ", "C", "public void ")}
-}}", codeAction: ("False;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 1));
+}}",
+                codeAction: (
+                    "False;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/951968")]
@@ -6284,16 +6606,16 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                interface I : IDisposable
-                {
-                    void F();
-                }
-                class C : {|CS0535:{|CS0535:I|}|}
-                {
-                }
-                """,
-$@"using System;
+                    using System;
+                    interface I : IDisposable
+                    {
+                        void F();
+                    }
+                    class C : {|CS0535:{|CS0535:I|}|}
+                    {
+                    }
+                    """,
+                $@"using System;
 interface I : IDisposable
 {{
     void F();
@@ -6308,7 +6630,12 @@ class C : I
     }}
 
 {DisposePattern("protected virtual ", "C", "void IDisposable.")}
-}}", codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 3));
+}}",
+                codeAction: (
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    3
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/941469")]
@@ -6316,33 +6643,38 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                namespace System
-                {
-                    interface IDisposable
+                    namespace System
                     {
-                        void Dispose();
-                    }
-
-                    class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                }
-                """,
-                """
-                namespace System
-                {
-                    interface IDisposable
-                    {
-                        void Dispose();
-                    }
-
-                    class C : IDisposable
-                    {
-                        void IDisposable.Dispose()
+                        interface IDisposable
                         {
-                            throw new NotImplementedException();
+                            void Dispose();
+                        }
+
+                        class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                    }
+                    """,
+                """
+                    namespace System
+                    {
+                        interface IDisposable
+                        {
+                            void Dispose();
+                        }
+
+                        class C : IDisposable
+                        {
+                            void IDisposable.Dispose()
+                            {
+                                throw new NotImplementedException();
+                            }
                         }
                     }
-                }
-                """, codeAction: ("True;False;False:global::System.IDisposable;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    """,
+                codeAction: (
+                    "True;False;False:global::System.IDisposable;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -6350,20 +6682,21 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                struct S : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                """,
+                    using System;
+                    struct S : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
-                struct S : IDisposable
-                {
-                    public void Dispose()
+                    using System;
+                    struct S : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -6371,20 +6704,25 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                struct S : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                """,
+                    using System;
+                    struct S : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
-                struct S : IDisposable
-                {
-                    void IDisposable.Dispose()
+                    using System;
+                    struct S : IDisposable
                     {
-                        throw new NotImplementedException();
+                        void IDisposable.Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """, codeAction: ("True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    """,
+                codeAction: (
+                    "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545924")]
@@ -6393,45 +6731,45 @@ class C : I
             var test = new VerifyCS.Test()
             {
                 TestCode = """
-                class C<T>
-                {
-                    public enum E
+                    class C<T>
                     {
-                        X
+                        public enum E
+                        {
+                            X
+                        }
                     }
-                }
 
-                interface I
-                {
-                    void Goo<T>(C<T>.E x = C<T>.E.X);
-                }
+                    interface I
+                    {
+                        void Goo<T>(C<T>.E x = C<T>.E.X);
+                    }
 
-                class D : {|CS0535:I|}
-                {
-                }
-                """,
+                    class D : {|CS0535:I|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                class C<T>
-                {
-                    public enum E
+                    class C<T>
                     {
-                        X
+                        public enum E
+                        {
+                            X
+                        }
                     }
-                }
 
-                interface I
-                {
-                    void Goo<T>(C<T>.E x = C<T>.E.X);
-                }
-
-                class D : I
-                {
-                    public void Goo<T>(C<T>.E x = C<T>.E.X)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<T>(C<T>.E x = C<T>.E.X);
                     }
-                }
-                """,
+
+                    class D : I
+                    {
+                        public void Goo<T>(C<T>.E x = C<T>.E.X)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 // 🐛 generated QualifiedName where SimpleMemberAccessExpression was expected
                 CodeActionValidationMode = CodeActionValidationMode.None,
             };
@@ -6445,21 +6783,22 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class C : {|CS0535:IServiceProvider|} {|CS1039:|}@"{|CS1513:|}{|CS1514:|}
-                """,
+                    class C : {|CS0535:IServiceProvider|} {|CS1039:|}@"{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C : IServiceProvider {|CS1003:@""|}{
-                    public object GetService(Type serviceType)
-                    {
-                        throw new NotImplementedException();
+                    class C : IServiceProvider {|CS1003:@""|}{
+                        public object GetService(Type serviceType)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545939")]
@@ -6467,21 +6806,22 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class C : {|CS0535:IServiceProvider|} {|CS1010:|}"{|CS1513:|}{|CS1514:|}
-                """,
+                    class C : {|CS0535:IServiceProvider|} {|CS1010:|}"{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C : IServiceProvider {|CS1003:""|}{
-                    public object GetService(Type serviceType)
-                    {
-                        throw new NotImplementedException();
+                    class C : IServiceProvider {|CS1003:""|}{
+                        public object GetService(Type serviceType)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545939")]
@@ -6489,21 +6829,22 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class C : {|CS0535:IServiceProvider|} {|CS1039:|}@"{|CS1513:|}{|CS1514:|}
-                """,
+                    class C : {|CS0535:IServiceProvider|} {|CS1039:|}@"{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C : IServiceProvider {|CS1003:@""|}{
-                    public object GetService(Type serviceType)
-                    {
-                        throw new NotImplementedException();
+                    class C : IServiceProvider {|CS1003:@""|}{
+                        public object GetService(Type serviceType)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545939")]
@@ -6511,21 +6852,22 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class C : {|CS0535:IServiceProvider|} {|CS1010:|}"{|CS1513:|}{|CS1514:|}
-                """,
+                    class C : {|CS0535:IServiceProvider|} {|CS1010:|}"{|CS1513:|}{|CS1514:|}
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C : IServiceProvider {|CS1003:""|}{
-                    public object GetService(Type serviceType)
-                    {
-                        throw new NotImplementedException();
+                    class C : IServiceProvider {|CS1003:""|}{
+                        public object GetService(Type serviceType)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545940")]
@@ -6533,50 +6875,51 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void Goo1(decimal x = 1E-25M);
-                    void Goo2(decimal x = -1E-25M);
-                    void Goo3(decimal x = 1E-24M);
-                    void Goo4(decimal x = -1E-24M);
-                }
+                    interface I
+                    {
+                        void Goo1(decimal x = 1E-25M);
+                        void Goo2(decimal x = -1E-25M);
+                        void Goo3(decimal x = 1E-24M);
+                        void Goo4(decimal x = -1E-24M);
+                    }
 
-                class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}
-                {
-                }
-                """,
+                    class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}
+                    {
+                    }
+                    """,
                 """
-                interface I
-                {
-                    void Goo1(decimal x = 1E-25M);
-                    void Goo2(decimal x = -1E-25M);
-                    void Goo3(decimal x = 1E-24M);
-                    void Goo4(decimal x = -1E-24M);
-                }
-
-                class C : I
-                {
-                    public void Goo1(decimal x = 0.0000000000000000000000001M)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo1(decimal x = 1E-25M);
+                        void Goo2(decimal x = -1E-25M);
+                        void Goo3(decimal x = 1E-24M);
+                        void Goo4(decimal x = -1E-24M);
                     }
 
-                    public void Goo2(decimal x = -0.0000000000000000000000001M)
+                    class C : I
                     {
-                        throw new System.NotImplementedException();
-                    }
+                        public void Goo1(decimal x = 0.0000000000000000000000001M)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void Goo3(decimal x = 0.000000000000000000000001M)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void Goo2(decimal x = -0.0000000000000000000000001M)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void Goo4(decimal x = -0.000000000000000000000001M)
-                    {
-                        throw new System.NotImplementedException();
+                        public void Goo3(decimal x = 0.000000000000000000000001M)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        public void Goo4(decimal x = -0.000000000000000000000001M)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545938")]
@@ -6585,45 +6928,45 @@ class C : I
             var test = new VerifyCS.Test
             {
                 TestCode = """
-                class C<T>
-                {
-                    public enum E
+                    class C<T>
                     {
-                        X
+                        public enum E
+                        {
+                            X
+                        }
                     }
-                }
 
-                interface I<S>
-                {
-                    void Goo<T>(S y, C<T>.E x = C<T>.E.X);
-                }
+                    interface I<S>
+                    {
+                        void Goo<T>(S y, C<T>.E x = C<T>.E.X);
+                    }
 
-                class D<T> : {|CS0535:I<T>|}
-                {
-                }
-                """,
+                    class D<T> : {|CS0535:I<T>|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                class C<T>
-                {
-                    public enum E
+                    class C<T>
                     {
-                        X
+                        public enum E
+                        {
+                            X
+                        }
                     }
-                }
 
-                interface I<S>
-                {
-                    void Goo<T>(S y, C<T>.E x = C<T>.E.X);
-                }
-
-                class D<T> : I<T>
-                {
-                    public void Goo<T1>(T y, C<T1>.E x = C<T1>.E.X)
+                    interface I<S>
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<T>(S y, C<T>.E x = C<T>.E.X);
                     }
-                }
-                """,
+
+                    class D<T> : I<T>
+                    {
+                        public void Goo<T1>(T y, C<T1>.E x = C<T1>.E.X)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 // 🐛 generated QualifiedName where SimpleMemberAccessExpression was expected
                 CodeActionValidationMode = CodeActionValidationMode.None,
             };
@@ -6637,29 +6980,30 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I<S>
-                {
-                    void Goo<T>(S T1);
-                }
-
-                class C<T> : {|CS0535:I<T>|}
-                {
-                }
-                """,
-                """
-                interface I<S>
-                {
-                    void Goo<T>(S T1);
-                }
-
-                class C<T> : I<T>
-                {
-                    public void Goo<T2>(T T1)
+                    interface I<S>
                     {
-                        throw new System.NotImplementedException();
+                        void Goo<T>(S T1);
                     }
-                }
-                """);
+
+                    class C<T> : {|CS0535:I<T>|}
+                    {
+                    }
+                    """,
+                """
+                    interface I<S>
+                    {
+                        void Goo<T>(S T1);
+                    }
+
+                    class C<T> : I<T>
+                    {
+                        public void Goo<T2>(T T1)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530265")]
@@ -6667,36 +7011,37 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices;
 
-                interface I
-                {
-                    [return: MarshalAs(UnmanagedType.U1)]
-                    bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System.Runtime.InteropServices;
-
-                interface I
-                {
-                    [return: MarshalAs(UnmanagedType.U1)]
-                    bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
-                }
-
-                class C : I
-                {
-                    [return: MarshalAs(UnmanagedType.U1)]
-                    public bool Goo([MarshalAs(UnmanagedType.U1)] bool x)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        [return: MarshalAs(UnmanagedType.U1)]
+                        bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Runtime.InteropServices;
+
+                    interface I
+                    {
+                        [return: MarshalAs(UnmanagedType.U1)]
+                        bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
+                    }
+
+                    class C : I
+                    {
+                        [return: MarshalAs(UnmanagedType.U1)]
+                        public bool Goo([MarshalAs(UnmanagedType.U1)] bool x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530265")]
@@ -6704,36 +7049,40 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices;
 
-                interface I
-                {
-                    [return: MarshalAs(UnmanagedType.U1)]
-                    bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System.Runtime.InteropServices;
-
-                interface I
-                {
-                    [return: MarshalAs(UnmanagedType.U1)]
-                    bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
-                }
-
-                class C : I
-                {
-                    bool I.Goo(bool x)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        [return: MarshalAs(UnmanagedType.U1)]
+                        bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
                     }
-                }
-                """,
-codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Runtime.InteropServices;
+
+                    interface I
+                    {
+                        [return: MarshalAs(UnmanagedType.U1)]
+                        bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
+                    }
+
+                    class C : I
+                    {
+                        bool I.Goo(bool x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546443")]
@@ -6741,33 +7090,34 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                interface IGoo
-                {
-                    void Bar(DateTime DateTime);
-                }
-
-                class C : {|CS0535:IGoo|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface IGoo
-                {
-                    void Bar(DateTime DateTime);
-                }
-
-                class C : IGoo
-                {
-                    public void Bar(DateTime DateTime)
+                    interface IGoo
                     {
-                        throw new NotImplementedException();
+                        void Bar(DateTime DateTime);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:IGoo|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface IGoo
+                    {
+                        void Bar(DateTime DateTime);
+                    }
+
+                    class C : IGoo
+                    {
+                        public void Bar(DateTime DateTime)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530521")]
@@ -6775,38 +7125,39 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Collections.Generic;
-                using System.Runtime.InteropServices;
+                    using System.Collections.Generic;
+                    using System.Runtime.InteropServices;
 
-                interface I
-                {
-                    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
-                    void Goo();
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System.Collections.Generic;
-                using System.Runtime.InteropServices;
-
-                interface I
-                {
-                    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
-                    void Goo();
-                }
-
-                class C : I
-                {
-                    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
-                    public void Goo()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
+                        void Goo();
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Collections.Generic;
+                    using System.Runtime.InteropServices;
+
+                    interface I
+                    {
+                        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
+                        void Goo();
+                    }
+
+                    class C : I
+                    {
+                        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
+                        public void Goo()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/752436")]
@@ -6814,35 +7165,36 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                namespace N
-                {
-                    public interface I
+                    namespace N
                     {
-                        void M();
+                        public interface I
+                        {
+                            void M();
+                        }
                     }
-                }
 
-                class C : {|CS0535:N.I|}
-                {
-                }
-                """,
+                    class C : {|CS0535:N.I|}
+                    {
+                    }
+                    """,
                 """
-                namespace N
-                {
-                    public interface I
+                    namespace N
                     {
-                        void M();
+                        public interface I
+                        {
+                            void M();
+                        }
                     }
-                }
 
-                class C : N.I
-                {
-                    public void M()
+                    class C : N.I
                     {
-                        throw new System.NotImplementedException();
+                        public void M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/752436")]
@@ -6850,37 +7202,42 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                namespace N
-                {
-                    public interface I
+                    namespace N
                     {
-                        void M();
+                        public interface I
+                        {
+                            void M();
+                        }
                     }
-                }
 
-                class C : {|CS0535:N.I|}
-                {
-                }
-                """,
+                    class C : {|CS0535:N.I|}
+                    {
+                    }
+                    """,
                 """
-                using N;
+                    using N;
 
-                namespace N
-                {
-                    public interface I
+                    namespace N
                     {
-                        void M();
+                        public interface I
+                        {
+                            void M();
+                        }
                     }
-                }
 
-                class C : N.I
-                {
-                    void I.M()
+                    class C : N.I
                     {
-                        throw new System.NotImplementedException();
+                        void I.M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """, codeAction: ("True;False;False:global::N.I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    """,
+                codeAction: (
+                    "True;False;False:global::N.I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/847464")]
@@ -6888,37 +7245,42 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                public interface I
-                {
-                    void Goo();
-                }
-
-                partial class C
-                {
-                }
-
-                partial class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                public interface I
-                {
-                    void Goo();
-                }
-
-                partial class C
-                {
-                }
-
-                partial class C : I
-                {
-                    void I.Goo()
+                    public interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo();
                     }
-                }
-                """, codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    partial class C
+                    {
+                    }
+
+                    partial class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    public interface I
+                    {
+                        void Goo();
+                    }
+
+                    partial class C
+                    {
+                    }
+
+                    partial class C : I
+                    {
+                        void I.Goo()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/847464")]
@@ -6926,37 +7288,42 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                public interface I
-                {
-                    void Goo();
-                }
-
-                partial class C : {|CS0535:I|}
-                {
-                }
-
-                partial class C
-                {
-                }
-                """,
-                """
-                public interface I
-                {
-                    void Goo();
-                }
-
-                partial class C : I
-                {
-                    void I.Goo()
+                    public interface I
                     {
-                        throw new System.NotImplementedException();
+                        void Goo();
                     }
-                }
 
-                partial class C
-                {
-                }
-                """, codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+                    partial class C : {|CS0535:I|}
+                    {
+                    }
+
+                    partial class C
+                    {
+                    }
+                    """,
+                """
+                    public interface I
+                    {
+                        void Goo();
+                    }
+
+                    partial class C : I
+                    {
+                        void I.Goo()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+
+                    partial class C
+                    {
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/847464")]
@@ -6965,57 +7332,58 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
             await new VerifyCS.Test
             {
                 TestCode = """
-                public interface I
-                {
-                    void Goo();
-                }
+                    public interface I
+                    {
+                        void Goo();
+                    }
 
-                public interface I2
-                {
-                    void Goo2();
-                }
+                    public interface I2
+                    {
+                        void Goo2();
+                    }
 
-                partial class C : {|CS0535:I|}
-                {
-                }
+                    partial class C : {|CS0535:I|}
+                    {
+                    }
 
-                partial class C : {|CS0535:I2|}
-                {
-                }
-                """,
+                    partial class C : {|CS0535:I2|}
+                    {
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        public interface I
-                        {
-                            void Goo();
-                        }
-
-                        public interface I2
-                        {
-                            void Goo2();
-                        }
-
-                        partial class C : I
-                        {
-                            void I.Goo()
+                            public interface I
                             {
-                                throw new System.NotImplementedException();
+                                void Goo();
                             }
-                        }
 
-                        partial class C : {|CS0535:I2|}
-                        {
-                        }
-                        """,
+                            public interface I2
+                            {
+                                void Goo2();
+                            }
+
+                            partial class C : I
+                            {
+                                void I.Goo()
+                                {
+                                    throw new System.NotImplementedException();
+                                }
+                            }
+
+                            partial class C : {|CS0535:I2|}
+                            {
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-                CodeActionEquivalenceKey = "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -7030,10 +7398,10 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
                     Sources =
                     {
                         """
-                        public class Test : {|CS0535:{|CS0535:IGoo|}|}
-                        {
-                        }
-                        """,
+                            public class Test : {|CS0535:{|CS0535:IGoo|}|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -7042,39 +7410,37 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
                             Sources =
                             {
                                 """
-                                Public Interface IGoo
-                                    Property IndexProp(ByVal p1 As Integer) As String
-                                End Interface
-                                """,
+                                    Public Interface IGoo
+                                        Property IndexProp(ByVal p1 As Integer) As String
+                                    End Interface
+                                    """,
                             },
                         },
                     },
-                    AdditionalProjectReferences =
-                    {
-                        "Assembly1",
-                    },
+                    AdditionalProjectReferences = { "Assembly1", },
                 },
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        public class Test : IGoo
-                        {
-                            string IGoo.get_IndexProp(int p1)
+                            public class Test : IGoo
                             {
-                                throw new System.NotImplementedException();
-                            }
+                                string IGoo.get_IndexProp(int p1)
+                                {
+                                    throw new System.NotImplementedException();
+                                }
 
-                            void IGoo.set_IndexProp(int p1, string Value)
-                            {
-                                throw new System.NotImplementedException();
+                                void IGoo.set_IndexProp(int p1, string Value)
+                                {
+                                    throw new System.NotImplementedException();
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                 },
-                CodeActionEquivalenceKey = "True;False;False:global::IGoo;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::IGoo;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             };
 
@@ -7092,12 +7458,12 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
                     Sources =
                     {
                         """
-                        using System;
+                            using System;
 
-                        class C : {|CS0535:{|CS0535:I|}|}
-                        {
-                        }
-                        """,
+                            class C : {|CS0535:{|CS0535:I|}|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -7106,10 +7472,10 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
                             Sources =
                             {
                                 """
-                                Public Interface I
-                                    Property P(x As Integer)
-                                End Interface
-                                """,
+                                    Public Interface I
+                                        Property P(x As Integer)
+                                    End Interface
+                                    """,
                             },
                         },
                     },
@@ -7120,24 +7486,25 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
                     Sources =
                     {
                         """
-                        using System;
+                            using System;
 
-                        class C : I
-                        {
-                            public object get_P(int x)
+                            class C : I
                             {
-                                throw new NotImplementedException();
-                            }
+                                public object get_P(int x)
+                                {
+                                    throw new NotImplementedException();
+                                }
 
-                            public void set_P(int x, object Value)
-                            {
-                                throw new NotImplementedException();
+                                public void set_P(int x, object Value)
+                                {
+                                    throw new NotImplementedException();
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                 },
-                CodeActionEquivalenceKey = "False;False;True:global::I;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::I;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -7152,12 +7519,12 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
                     Sources =
                     {
                         """
-                        using System;
+                            using System;
 
-                        class C : {|CS0535:I|}
-                        {
-                        }
-                        """,
+                            class C : {|CS0535:I|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -7166,47 +7533,45 @@ codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.Impl
                             Sources =
                             {
                                 """
-                                using System;
-                                internal class ShouldBeRemovedAttribute : Attribute { }
-                                public interface I
-                                {
-                                    string this[[ShouldBeRemovedAttribute] int i] { get; set; }
-                                }
-                                """
+                                    using System;
+                                    internal class ShouldBeRemovedAttribute : Attribute { }
+                                    public interface I
+                                    {
+                                        string this[[ShouldBeRemovedAttribute] int i] { get; set; }
+                                    }
+                                    """
                             },
                         },
                     },
-                    AdditionalProjectReferences =
-                    {
-                        "Assembly1",
-                    },
+                    AdditionalProjectReferences = { "Assembly1", },
                 },
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        using System;
+                            using System;
 
-                        class C : I
-                        {
-                            public string this[int i]
+                            class C : I
                             {
-                                get
+                                public string this[int i]
                                 {
-                                    throw new NotImplementedException();
-                                }
+                                    get
+                                    {
+                                        throw new NotImplementedException();
+                                    }
 
-                                set
-                                {
-                                    throw new NotImplementedException();
+                                    set
+                                    {
+                                        throw new NotImplementedException();
+                                    }
                                 }
                             }
-                        }
-                        """,
+                            """,
                     },
                 },
-                CodeActionEquivalenceKey = "False;False;True:global::I;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::I;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             };
 
@@ -7233,20 +7598,25 @@ class Goo : [|IComparable|]
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class Program : {|CS0535:IDisposable|}
-                {
-                }
-                """,
-$@"using System;
+                    class Program : {|CS0535:IDisposable|}
+                    {
+                    }
+                    """,
+                $@"using System;
 
 class Program : IDisposable
 {{
     private bool disposedValue;
 
 {DisposePattern("protected virtual ", "Program", "public void ")}
-}}", codeAction: ("False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 1));
+}}",
+                codeAction: (
+                    "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact]
@@ -7254,14 +7624,14 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class Program : {|CS0535:IDisposable|}
-                {
-                    private bool DisposedValue;
-                }
-                """,
-$@"using System;
+                    class Program : {|CS0535:IDisposable|}
+                    {
+                        private bool DisposedValue;
+                    }
+                    """,
+                $@"using System;
 
 class Program : IDisposable
 {{
@@ -7269,7 +7639,12 @@ class Program : IDisposable
     private bool disposedValue;
 
 {DisposePattern("protected virtual ", "Program", "void IDisposable.")}
-}}", codeAction: ("True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 3));
+}}",
+                codeAction: (
+                    "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    3
+                )
+            );
         }
 
         [Fact]
@@ -7277,26 +7652,31 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class Program : {|CS0535:IDisposable|}
-                {
-                    private bool disposedValue;
-                }
-                """,
-                """
-                using System;
-
-                class Program : IDisposable
-                {
-                    private bool disposedValue;
-
-                    public void Dispose()
+                    class Program : {|CS0535:IDisposable|}
                     {
-                        throw new NotImplementedException();
+                        private bool disposedValue;
                     }
-                }
-                """, codeAction: ("False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 0));
+                    """,
+                """
+                    using System;
+
+                    class Program : IDisposable
+                    {
+                        private bool disposedValue;
+
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    0
+                )
+            );
         }
 
         [Fact]
@@ -7304,30 +7684,35 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class Program : {|CS0535:IDisposable|}
-                {
-                    public void Dispose(bool flag)
+                    class Program : {|CS0535:IDisposable|}
                     {
+                        public void Dispose(bool flag)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program : IDisposable
-                {
-                    public void Dispose(bool flag)
+                    class Program : IDisposable
                     {
-                    }
+                        public void Dispose(bool flag)
+                        {
+                        }
 
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """, codeAction: ("False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 0));
+                    """,
+                codeAction: (
+                    "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    0
+                )
+            );
         }
 
         [Fact]
@@ -7335,20 +7720,25 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                sealed class Program : {|CS0535:IDisposable|}
-                {
-                }
-                """,
-$@"using System;
+                    sealed class Program : {|CS0535:IDisposable|}
+                    {
+                    }
+                    """,
+                $@"using System;
 
 sealed class Program : IDisposable
 {{
     private bool disposedValue;
 
 {DisposePattern("private ", "Program", "void IDisposable.")}
-}}", codeAction: ("True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 3));
+}}",
+                codeAction: (
+                    "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    3
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9760")]
@@ -7356,14 +7746,14 @@ sealed class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                class Program : {|CS0535:IDisposable|}
-                {
-                    private bool disposedValue;
-                }
-                """,
-$@"using System;
+                    class Program : {|CS0535:IDisposable|}
+                    {
+                        private bool disposedValue;
+                    }
+                    """,
+                $@"using System;
 
 class Program : IDisposable
 {{
@@ -7371,7 +7761,12 @@ class Program : IDisposable
     private bool disposedValue1;
 
 {DisposePattern("protected virtual ", "Program", "public void ", disposeField: "disposedValue1")}
-}}", codeAction: ("False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 1));
+}}",
+                codeAction: (
+                    "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9760")]
@@ -7380,13 +7775,14 @@ class Program : IDisposable
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class Program : {|CS0535:IDisposable|}
-                {
-                }
-                """,
-                FixedCode = $@"using System;
+                    class Program : {|CS0535:IDisposable|}
+                    {
+                    }
+                    """,
+                FixedCode =
+                    $@"using System;
 
 class Program : IDisposable
 {{
@@ -7394,11 +7790,9 @@ class Program : IDisposable
 
 {DisposePattern("protected virtual ", "Program", "public void ", disposeField: "_disposedValue")}
 }}",
-                Options =
-                {
-                    _options.FieldNamesAreCamelCaseWithUnderscorePrefix,
-                },
-                CodeActionEquivalenceKey = "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                Options = { _options.FieldNamesAreCamelCaseWithUnderscorePrefix, },
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -7408,29 +7802,30 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    void M([System.Runtime.InteropServices.ComAliasName("pAlias")] int p);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    void M([System.Runtime.InteropServices.ComAliasName("pAlias")] int p);
-                }
-
-                class C : I
-                {
-                    public void M(int p)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M([System.Runtime.InteropServices.ComAliasName("pAlias")] int p);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void M([System.Runtime.InteropServices.ComAliasName("pAlias")] int p);
+                    }
+
+                    class C : I
+                    {
+                        public void M(int p)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/939123")]
@@ -7438,35 +7833,36 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices;
 
-                interface I
-                {
-                    [return: ComAliasName("pAlias1")]
-                    long M([ComAliasName("pAlias2")] int p);
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System.Runtime.InteropServices;
-
-                interface I
-                {
-                    [return: ComAliasName("pAlias1")]
-                    long M([ComAliasName("pAlias2")] int p);
-                }
-
-                class C : I
-                {
-                    public long M(int p)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        [return: ComAliasName("pAlias1")]
+                        long M([ComAliasName("pAlias2")] int p);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Runtime.InteropServices;
+
+                    interface I
+                    {
+                        [return: ComAliasName("pAlias1")]
+                        long M([ComAliasName("pAlias2")] int p);
+                    }
+
+                    class C : I
+                    {
+                        public long M(int p)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/939123")]
@@ -7474,32 +7870,33 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I
-                {
-                    long this[[System.Runtime.InteropServices.ComAliasName("pAlias")] int p] { get; }
-                }
-
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                interface I
-                {
-                    long this[[System.Runtime.InteropServices.ComAliasName("pAlias")] int p] { get; }
-                }
-
-                class C : I
-                {
-                    public long this[int p]
+                    interface I
                     {
-                        get
+                        long this[[System.Runtime.InteropServices.ComAliasName("pAlias")] int p] { get; }
+                    }
+
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        long this[[System.Runtime.InteropServices.ComAliasName("pAlias")] int p] { get; }
+                    }
+
+                    class C : I
+                    {
+                        public long this[int p]
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/947819")]
@@ -7507,39 +7904,40 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                namespace Scenarios
-                {
-                    public interface TestInterface
+                    namespace Scenarios
                     {
-                        void M1();
-                    }
-
-                    struct TestStruct1 : {|CS0535:TestInterface|}{|CS1513:|}{|CS1514:|}
-
-
-                    // Comment
-                }
-                """,
-                """
-                namespace Scenarios
-                {
-                    public interface TestInterface
-                    {
-                        void M1();
-                    }
-
-                    struct TestStruct1 : TestInterface
-                    {
-                        public void M1()
+                        public interface TestInterface
                         {
-                            throw new System.NotImplementedException();
+                            void M1();
                         }
+
+                        struct TestStruct1 : {|CS0535:TestInterface|}{|CS1513:|}{|CS1514:|}
+
+
+                        // Comment
                     }
+                    """,
+                """
+                    namespace Scenarios
+                    {
+                        public interface TestInterface
+                        {
+                            void M1();
+                        }
+
+                        struct TestStruct1 : TestInterface
+                        {
+                            public void M1()
+                            {
+                                throw new System.NotImplementedException();
+                            }
+                        }
 
 
-                    // Comment
-                }
-                """);
+                        // Comment
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994328")]
@@ -7548,21 +7946,21 @@ class Program : IDisposable
             //CSharpFeaturesResources.DisposePattern
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
-                {
-                    System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
-                    System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
-                }
+                    interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
+                    {
+                        System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
+                        System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
+                    }
 
-                partial class C
-                {
-                }
+                    partial class C
+                    {
+                    }
 
-                partial class C : {|CS0535:{|CS0535:{|CS0535:I<System.Exception, System.AggregateException>|}|}|}, {|CS0535:System.IDisposable|}
-                {
-                }
-                """,
-$@"using System;
+                    partial class C : {|CS0535:{|CS0535:{|CS0535:I<System.Exception, System.AggregateException>|}|}|}, {|CS0535:System.IDisposable|}
+                    {
+                    }
+                    """,
+                $@"using System;
 using System.Collections.Generic;
 
 interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
@@ -7595,7 +7993,12 @@ partial class C : I<System.Exception, System.AggregateException>, System.IDispos
     }}
 
 {DisposePattern("protected virtual ", "C", "public void ")}
-}}", codeAction: ("False;False;True:global::I<global::System.Exception, global::System.AggregateException>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 1));
+}}",
+                codeAction: (
+                    "False;False;True:global::I<global::System.Exception, global::System.AggregateException>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994328")]
@@ -7603,21 +8006,21 @@ partial class C : I<System.Exception, System.AggregateException>, System.IDispos
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
-                {
-                    System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
-                    System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
-                }
+                    interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
+                    {
+                        System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
+                        System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
+                    }
 
-                partial class C : {|CS0535:{|CS0535:{|CS0535:I<System.Exception, System.AggregateException>|}|}|}, {|CS0535:System.IDisposable|}
-                {
-                }
+                    partial class C : {|CS0535:{|CS0535:{|CS0535:I<System.Exception, System.AggregateException>|}|}|}, {|CS0535:System.IDisposable|}
+                    {
+                    }
 
-                partial class C
-                {
-                }
-                """,
-$@"using System;
+                    partial class C
+                    {
+                    }
+                    """,
+                $@"using System;
 using System.Collections.Generic;
 
 interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
@@ -7650,7 +8053,12 @@ partial class C : I<System.Exception, System.AggregateException>, System.IDispos
 
 partial class C
 {{
-}}", codeAction: ("True;False;False:global::I<global::System.Exception, global::System.AggregateException>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;", 3));
+}}",
+                codeAction: (
+                    "True;False;False:global::I<global::System.Exception, global::System.AggregateException>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
+                    3
+                )
+            );
         }
 
         private static string DisposePattern(
@@ -7658,7 +8066,8 @@ partial class C
             string className,
             string implementationVisibility,
             string disposeField = "disposedValue",
-            string gcPrefix = "")
+            string gcPrefix = ""
+        )
         {
             return $@"    {disposeVisibility}void Dispose(bool disposing)
     {{
@@ -7695,47 +8104,48 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
+                    using System;
 
-                public class Goo : {|CS0535:Holder.SomeInterface|}
-                {
-                }
-
-                public class Holder
-                {
-                    public interface SomeInterface
-                    {
-                        void Something([SomeAttribute] string helloWorld);
-                    }
-
-                    private class SomeAttribute : Attribute
+                    public class Goo : {|CS0535:Holder.SomeInterface|}
                     {
                     }
-                }
-                """,
+
+                    public class Holder
+                    {
+                        public interface SomeInterface
+                        {
+                            void Something([SomeAttribute] string helloWorld);
+                        }
+
+                        private class SomeAttribute : Attribute
+                        {
+                        }
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                public class Goo : Holder.SomeInterface
-                {
-                    public void Something(string helloWorld)
+                    public class Goo : Holder.SomeInterface
                     {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                public class Holder
-                {
-                    public interface SomeInterface
-                    {
-                        void Something([SomeAttribute] string helloWorld);
+                        public void Something(string helloWorld)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
 
-                    private class SomeAttribute : Attribute
+                    public class Holder
                     {
+                        public interface SomeInterface
+                        {
+                            void Something([SomeAttribute] string helloWorld);
+                        }
+
+                        private class SomeAttribute : Attribute
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/2785")]
@@ -7743,108 +8153,112 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class Issue2785<T> : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:IList<object>|}|}|}|}|}|}|}|}|}|}|}|}|}
-                {
-                    private static List<object> innerList = new List<object>();
-                }
-                """,
+                    class Issue2785<T> : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:IList<object>|}|}|}|}|}|}|}|}|}|}|}|}|}
+                    {
+                        private static List<object> innerList = new List<object>();
+                    }
+                    """,
                 """
-                using System;
-                using System.Collections;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class Issue2785<T> : IList<object>
-                {
-                    private static List<object> innerList = new List<object>();
-
-                    public object this[int index]
+                    class Issue2785<T> : IList<object>
                     {
-                        get
+                        private static List<object> innerList = new List<object>();
+
+                        public object this[int index]
                         {
-                            return ((IList<object>)innerList)[index];
+                            get
+                            {
+                                return ((IList<object>)innerList)[index];
+                            }
+
+                            set
+                            {
+                                ((IList<object>)innerList)[index] = value;
+                            }
                         }
 
-                        set
+                        public int Count
                         {
-                            ((IList<object>)innerList)[index] = value;
+                            get
+                            {
+                                return ((ICollection<object>)innerList).Count;
+                            }
+                        }
+
+                        public bool IsReadOnly
+                        {
+                            get
+                            {
+                                return ((ICollection<object>)innerList).IsReadOnly;
+                            }
+                        }
+
+                        public void Add(object item)
+                        {
+                            ((ICollection<object>)innerList).Add(item);
+                        }
+
+                        public void Clear()
+                        {
+                            ((ICollection<object>)innerList).Clear();
+                        }
+
+                        public bool Contains(object item)
+                        {
+                            return ((ICollection<object>)innerList).Contains(item);
+                        }
+
+                        public void CopyTo(object[] array, int arrayIndex)
+                        {
+                            ((ICollection<object>)innerList).CopyTo(array, arrayIndex);
+                        }
+
+                        public IEnumerator<object> GetEnumerator()
+                        {
+                            return ((IEnumerable<object>)innerList).GetEnumerator();
+                        }
+
+                        public int IndexOf(object item)
+                        {
+                            return ((IList<object>)innerList).IndexOf(item);
+                        }
+
+                        public void Insert(int index, object item)
+                        {
+                            ((IList<object>)innerList).Insert(index, item);
+                        }
+
+                        public bool Remove(object item)
+                        {
+                            return ((ICollection<object>)innerList).Remove(item);
+                        }
+
+                        public void RemoveAt(int index)
+                        {
+                            ((IList<object>)innerList).RemoveAt(index);
+                        }
+
+                        IEnumerator IEnumerable.GetEnumerator()
+                        {
+                            return ((IEnumerable)innerList).GetEnumerator();
                         }
                     }
-
-                    public int Count
-                    {
-                        get
-                        {
-                            return ((ICollection<object>)innerList).Count;
-                        }
-                    }
-
-                    public bool IsReadOnly
-                    {
-                        get
-                        {
-                            return ((ICollection<object>)innerList).IsReadOnly;
-                        }
-                    }
-
-                    public void Add(object item)
-                    {
-                        ((ICollection<object>)innerList).Add(item);
-                    }
-
-                    public void Clear()
-                    {
-                        ((ICollection<object>)innerList).Clear();
-                    }
-
-                    public bool Contains(object item)
-                    {
-                        return ((ICollection<object>)innerList).Contains(item);
-                    }
-
-                    public void CopyTo(object[] array, int arrayIndex)
-                    {
-                        ((ICollection<object>)innerList).CopyTo(array, arrayIndex);
-                    }
-
-                    public IEnumerator<object> GetEnumerator()
-                    {
-                        return ((IEnumerable<object>)innerList).GetEnumerator();
-                    }
-
-                    public int IndexOf(object item)
-                    {
-                        return ((IList<object>)innerList).IndexOf(item);
-                    }
-
-                    public void Insert(int index, object item)
-                    {
-                        ((IList<object>)innerList).Insert(index, item);
-                    }
-
-                    public bool Remove(object item)
-                    {
-                        return ((ICollection<object>)innerList).Remove(item);
-                    }
-
-                    public void RemoveAt(int index)
-                    {
-                        ((IList<object>)innerList).RemoveAt(index);
-                    }
-
-                    IEnumerator IEnumerable.GetEnumerator()
-                    {
-                        return ((IEnumerable)innerList).GetEnumerator();
-                    }
-                }
-                """,
-codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;innerList", 1));
+                    """,
+                codeAction: (
+                    "False;False;False:global::System.Collections.Generic.IList<object>;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;innerList",
+                    1
+                )
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.Tuples)]
@@ -7852,32 +8266,33 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                    (int, string) x;
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
-                }
-
-                class Class : IInterface
-                {
-                    (int, string) x;
-
-                    public (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y)
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                        (int, string) x;
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
+                    }
+
+                    class Class : IInterface
+                    {
+                        (int, string) x;
+
+                        public (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -7885,32 +8300,33 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface
-                {
-                    (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                    (int, string) x;
-                }
-                """,
-                """
-                interface IInterface
-                {
-                    (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
-                }
-
-                class Class : IInterface
-                {
-                    (int, string) x;
-
-                    public (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y)
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                        (int, string) x;
+                    }
+                    """,
+                """
+                    interface IInterface
+                    {
+                        (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
+                    }
+
+                    class Class : IInterface
+                    {
+                        (int, string) x;
+
+                        public (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -7918,32 +8334,33 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface<TA, TB>
-                {
-                    (TA, TB) Method1((TA, TB) y);
-                }
-
-                class Class : {|CS0535:IInterface<(int, string), int>|}
-                {
-                    (int, string) x;
-                }
-                """,
-                """
-                interface IInterface<TA, TB>
-                {
-                    (TA, TB) Method1((TA, TB) y);
-                }
-
-                class Class : IInterface<(int, string), int>
-                {
-                    (int, string) x;
-
-                    public ((int, string), int) Method1(((int, string), int) y)
+                    interface IInterface<TA, TB>
                     {
-                        throw new System.NotImplementedException();
+                        (TA, TB) Method1((TA, TB) y);
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface<(int, string), int>|}
+                    {
+                        (int, string) x;
+                    }
+                    """,
+                """
+                    interface IInterface<TA, TB>
+                    {
+                        (TA, TB) Method1((TA, TB) y);
+                    }
+
+                    class Class : IInterface<(int, string), int>
+                    {
+                        (int, string) x;
+
+                        public ((int, string), int) Method1(((int, string), int) y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -7951,32 +8368,33 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                interface IInterface<TA, TB>
-                {
-                    (TA a, TB b) Method1((TA a, TB b) y);
-                }
-
-                class Class : {|CS0535:IInterface<(int, string), int>|}
-                {
-                    (int, string) x;
-                }
-                """,
-                """
-                interface IInterface<TA, TB>
-                {
-                    (TA a, TB b) Method1((TA a, TB b) y);
-                }
-
-                class Class : IInterface<(int, string), int>
-                {
-                    (int, string) x;
-
-                    public ((int, string) a, int b) Method1(((int, string) a, int b) y)
+                    interface IInterface<TA, TB>
                     {
-                        throw new System.NotImplementedException();
+                        (TA a, TB b) Method1((TA a, TB b) y);
                     }
-                }
-                """);
+
+                    class Class : {|CS0535:IInterface<(int, string), int>|}
+                    {
+                        (int, string) x;
+                    }
+                    """,
+                """
+                    interface IInterface<TA, TB>
+                    {
+                        (TA a, TB b) Method1((TA a, TB b) y);
+                    }
+
+                    class Class : IInterface<(int, string), int>
+                    {
+                        (int, string) x;
+
+                        public ((int, string) a, int b) Method1(((int, string) a, int b) y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15387")]
@@ -7985,33 +8403,38 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             await new VerifyCS.Test
             {
                 TestCode = """
-                interface IInterface
-                {
-                    int Prop { get; }
-                }
+                    interface IInterface
+                    {
+                        int Prop { get; }
+                    }
 
-                class Class : {|CS0535:IInterface|}
-                {
-                    void M() { }
-                }
-                """,
+                    class Class : {|CS0535:IInterface|}
+                    {
+                        void M() { }
+                    }
+                    """,
                 FixedCode = """
-                interface IInterface
-                {
-                    int Prop { get; }
-                }
+                    interface IInterface
+                    {
+                        int Prop { get; }
+                    }
 
-                class Class : IInterface
-                {
-                    void M() { }
+                    class Class : IInterface
+                    {
+                        void M() { }
 
-                    public int Prop => throw new System.NotImplementedException();
-                }
-                """,
-                CodeActionOptions = (CSharpCodeActionOptions.Default with
-                {
-                    ImplementTypeOptions = new() { InsertionBehavior = ImplementTypeInsertionBehavior.AtTheEnd }
-                }).CreateProvider()
+                        public int Prop => throw new System.NotImplementedException();
+                    }
+                    """,
+                CodeActionOptions = (
+                    CSharpCodeActionOptions.Default with
+                    {
+                        ImplementTypeOptions = new()
+                        {
+                            InsertionBehavior = ImplementTypeInsertionBehavior.AtTheEnd
+                        }
+                    }
+                ).CreateProvider()
             }.RunAsync();
         }
 
@@ -8020,55 +8443,56 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices;
 
-                [ComImport]
-                [Guid("00000000-0000-0000-0000-000000000000")]
-                interface IComInterface
-                {
-                    void MOverload();
-                    void X();
-                    void MOverload(int i);
-                    int Prop { get; }
-                }
+                    [ComImport]
+                    [Guid("00000000-0000-0000-0000-000000000000")]
+                    interface IComInterface
+                    {
+                        void MOverload();
+                        void X();
+                        void MOverload(int i);
+                        int Prop { get; }
+                    }
 
-                class Class : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IComInterface|}|}|}|}
-                {
-                }
-                """,
+                    class Class : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IComInterface|}|}|}|}
+                    {
+                    }
+                    """,
                 """
-                using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices;
 
-                [ComImport]
-                [Guid("00000000-0000-0000-0000-000000000000")]
-                interface IComInterface
-                {
-                    void MOverload();
-                    void X();
-                    void MOverload(int i);
-                    int Prop { get; }
-                }
-
-                class Class : IComInterface
-                {
-                    public void MOverload()
+                    [ComImport]
+                    [Guid("00000000-0000-0000-0000-000000000000")]
+                    interface IComInterface
                     {
-                        throw new System.NotImplementedException();
+                        void MOverload();
+                        void X();
+                        void MOverload(int i);
+                        int Prop { get; }
                     }
 
-                    public void X()
+                    class Class : IComInterface
                     {
-                        throw new System.NotImplementedException();
-                    }
+                        public void MOverload()
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public void MOverload(int i)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public void X()
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public int Prop => throw new System.NotImplementedException();
-                }
-                """);
+                        public void MOverload(int i)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        public int Prop => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15387")]
@@ -8077,43 +8501,41 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             await new VerifyCS.Test
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
-                TestCode =
-                """
-                using System.Runtime.InteropServices;
+                TestCode = """
+                    using System.Runtime.InteropServices;
 
-                [ComImport]
-                [Guid("00000000-0000-0000-0000-000000000000")]
-                interface IComInterface
-                {
-                    void {|CS0423:MOverload|}() { }
-                    void {|CS0423:X|}() { }
-                    void {|CS0423:MOverload|}(int i) { }
-                    int Prop { get; }
-                }
+                    [ComImport]
+                    [Guid("00000000-0000-0000-0000-000000000000")]
+                    interface IComInterface
+                    {
+                        void {|CS0423:MOverload|}() { }
+                        void {|CS0423:X|}() { }
+                        void {|CS0423:MOverload|}(int i) { }
+                        int Prop { get; }
+                    }
 
-                class Class : {|CS0535:IComInterface|}
-                {
-                }
-                """,
-                FixedCode =
-                """
-                using System.Runtime.InteropServices;
+                    class Class : {|CS0535:IComInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    using System.Runtime.InteropServices;
 
-                [ComImport]
-                [Guid("00000000-0000-0000-0000-000000000000")]
-                interface IComInterface
-                {
-                    void {|CS0423:MOverload|}() { }
-                    void {|CS0423:X|}() { }
-                    void {|CS0423:MOverload|}(int i) { }
-                    int Prop { get; }
-                }
+                    [ComImport]
+                    [Guid("00000000-0000-0000-0000-000000000000")]
+                    interface IComInterface
+                    {
+                        void {|CS0423:MOverload|}() { }
+                        void {|CS0423:X|}() { }
+                        void {|CS0423:MOverload|}(int i) { }
+                        int Prop { get; }
+                    }
 
-                class Class : IComInterface
-                {
-                    public int Prop => throw new System.NotImplementedException();
-                }
-                """,
+                    class Class : IComInterface
+                    {
+                        public int Prop => throw new System.NotImplementedException();
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -8122,39 +8544,40 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                interface I {
-                    ref int IGoo();
-                    ref int Goo { get; }
-                    ref int this[int i] { get; }
-                }
-
-                class C : {|CS0535:{|CS0535:{|CS0535:I|}|}|}
-                {
-                }
-                """,
-                """
-                using System;
-
-                interface I {
-                    ref int IGoo();
-                    ref int Goo { get; }
-                    ref int this[int i] { get; }
-                }
-
-                class C : I
-                {
-                    public ref int this[int i] => throw new NotImplementedException();
-
-                    public ref int Goo => throw new NotImplementedException();
-
-                    public ref int IGoo()
-                    {
-                        throw new NotImplementedException();
+                    interface I {
+                        ref int IGoo();
+                        ref int Goo { get; }
+                        ref int this[int i] { get; }
                     }
-                }
-                """);
+
+                    class C : {|CS0535:{|CS0535:{|CS0535:I|}|}|}
+                    {
+                    }
+                    """,
+                """
+                    using System;
+
+                    interface I {
+                        ref int IGoo();
+                        ref int Goo { get; }
+                        ref int this[int i] { get; }
+                    }
+
+                    class C : I
+                    {
+                        public ref int this[int i] => throw new NotImplementedException();
+
+                        public ref int Goo => throw new NotImplementedException();
+
+                        public ref int IGoo()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5898")]
@@ -8164,36 +8587,42 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             await new VerifyCS.Test()
             {
                 TestCode = """
-                interface IInterface
-                {
-                    int ReadOnlyProp { get; }
-                    int ReadWriteProp { get; set; }
-                    int WriteOnlyProp { set; }
-                }
+                    interface IInterface
+                    {
+                        int ReadOnlyProp { get; }
+                        int ReadWriteProp { get; set; }
+                        int WriteOnlyProp { set; }
+                    }
 
-                class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                {
-                }
-                """,
+                    class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface IInterface
-                {
-                    int ReadOnlyProp { get; }
-                    int ReadWriteProp { get; set; }
-                    int WriteOnlyProp { set; }
-                }
+                    interface IInterface
+                    {
+                        int ReadOnlyProp { get; }
+                        int ReadWriteProp { get; set; }
+                        int WriteOnlyProp { set; }
+                    }
 
-                class Class : IInterface
-                {
-                    public int ReadOnlyProp { get; }
-                    public int ReadWriteProp { get; set; }
-                    public int WriteOnlyProp { set => throw new System.NotImplementedException(); }
-                }
-                """,
-                CodeActionOptions = (CSharpCodeActionOptions.Default with
-                {
-                    ImplementTypeOptions = new() { PropertyGenerationBehavior = ImplementTypePropertyGenerationBehavior.PreferAutoProperties }
-                }).CreateProvider()
+                    class Class : IInterface
+                    {
+                        public int ReadOnlyProp { get; }
+                        public int ReadWriteProp { get; set; }
+                        public int WriteOnlyProp { set => throw new System.NotImplementedException(); }
+                    }
+                    """,
+                CodeActionOptions = (
+                    CSharpCodeActionOptions.Default with
+                    {
+                        ImplementTypeOptions = new()
+                        {
+                            PropertyGenerationBehavior =
+                                ImplementTypePropertyGenerationBehavior.PreferAutoProperties
+                        }
+                    }
+                ).CreateProvider()
             }.RunAsync();
         }
 
@@ -8204,39 +8633,41 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 LanguageVersion = LanguageVersion.CSharp7_1,
                 TestCode = """
-                using System.Threading;
+                    using System.Threading;
 
-                interface IInterface
-                {
-                    void Method1(CancellationToken cancellationToken = default(CancellationToken));
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                using System.Threading;
-
-                interface IInterface
-                {
-                    void Method1(CancellationToken cancellationToken = default(CancellationToken));
-                }
-
-                class Class : IInterface
-                {
-                    public void Method1(CancellationToken cancellationToken = default)
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1(CancellationToken cancellationToken = default(CancellationToken));
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    using System.Threading;
+
+                    interface IInterface
+                    {
+                        void Method1(CancellationToken cancellationToken = default(CancellationToken));
+                    }
+
+                    class Class : IInterface
+                    {
+                        public void Method1(CancellationToken cancellationToken = default)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
             }.RunAsync();
         }
 
         [Theory, CombinatorialData]
-        public async Task TestRefWithMethod_Parameters([CombinatorialValues("ref", "in", "ref readonly")] string modifier)
+        public async Task TestRefWithMethod_Parameters(
+            [CombinatorialValues("ref", "in", "ref readonly")] string modifier
+        )
         {
             await TestInRegularAndScriptAsync(
                 $$"""
@@ -8260,7 +8691,8 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8268,27 +8700,28 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface ITest
-                {
-                    ref readonly int Method();
-                }
-                public class Test : {|CS0535:ITest|}
-                {
-                }
-                """,
-                """
-                interface ITest
-                {
-                    ref readonly int Method();
-                }
-                public class Test : ITest
-                {
-                    public ref readonly int Method()
+                    interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        ref readonly int Method();
                     }
-                }
-                """);
+                    public class Test : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                """
+                    interface ITest
+                    {
+                        ref readonly int Method();
+                    }
+                    public class Test : ITest
+                    {
+                        public ref readonly int Method()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -8296,28 +8729,31 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface ITest
-                {
-                    ref readonly int Property { get; }
-                }
-                public class Test : {|CS0535:ITest|}
-                {
-                }
-                """,
+                    interface ITest
+                    {
+                        ref readonly int Property { get; }
+                    }
+                    public class Test : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
                 """
-                interface ITest
-                {
-                    ref readonly int Property { get; }
-                }
-                public class Test : ITest
-                {
-                    public ref readonly int Property => throw new System.NotImplementedException();
-                }
-                """);
+                    interface ITest
+                    {
+                        ref readonly int Property { get; }
+                    }
+                    public class Test : ITest
+                    {
+                        public ref readonly int Property => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestRefWithIndexer_Parameters([CombinatorialValues("in", "ref readonly")] string modifier)
+        public async Task TestRefWithIndexer_Parameters(
+            [CombinatorialValues("in", "ref readonly")] string modifier
+        )
         {
             await TestInRegularAndScriptAsync(
                 $$"""
@@ -8338,7 +8774,8 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                 {
                     public int this[{{modifier}} int p] { set => throw new System.NotImplementedException(); }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8346,24 +8783,25 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface ITest
-                {
-                    ref readonly int this[int p] { get; }
-                }
-                public class Test : {|CS0535:ITest|}
-                {
-                }
-                """,
+                    interface ITest
+                    {
+                        ref readonly int this[int p] { get; }
+                    }
+                    public class Test : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
                 """
-                interface ITest
-                {
-                    ref readonly int this[int p] { get; }
-                }
-                public class Test : ITest
-                {
-                    public ref readonly int this[int p] => throw new System.NotImplementedException();
-                }
-                """);
+                    interface ITest
+                    {
+                        ref readonly int this[int p] { get; }
+                    }
+                    public class Test : ITest
+                    {
+                        public ref readonly int this[int p] => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -8371,27 +8809,28 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                public interface ITest
-                {
-                    void M<T>() where T : unmanaged;
-                }
-                public class Test : {|CS0535:ITest|}
-                {
-                }
-                """,
-                """
-                public interface ITest
-                {
-                    void M<T>() where T : unmanaged;
-                }
-                public class Test : ITest
-                {
-                    public void M<T>() where T : unmanaged
+                    public interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        void M<T>() where T : unmanaged;
                     }
-                }
-                """);
+                    public class Test : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                """
+                    public interface ITest
+                    {
+                        void M<T>() where T : unmanaged;
+                    }
+                    public class Test : ITest
+                    {
+                        public void M<T>() where T : unmanaged
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -8401,35 +8840,35 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    sealed void M1() {}
-                    sealed int P1 => 1;
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    sealed void M1() {}
-                    sealed int P1 => 1;
-                }
-
-                class Class : IInterface
-                {
-                    public void Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
+
+                        sealed void M1() {}
+                        sealed int P1 => 1;
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IInterface
+                    {
+                        void Method1();
+
+                        sealed void M1() {}
+                        sealed int P1 => 1;
+                    }
+
+                    class Class : IInterface
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
             }.RunAsync();
         }
@@ -8441,37 +8880,38 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    sealed void M1() {}
-                    sealed int P1 => 1;
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    sealed void M1() {}
-                    sealed int P1 => 1;
-                }
-
-                class Class : IInterface
-                {
-                    void IInterface.Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
+
+                        sealed void M1() {}
+                        sealed int P1 => 1;
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IInterface
+                    {
+                        void Method1();
+
+                        sealed void M1() {}
+                        sealed int P1 => 1;
+                    }
+
+                    class Class : IInterface
+                    {
+                        void IInterface.Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -8483,34 +8923,35 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    sealed void M1() {}
-                    sealed int P1 => 1;
-                }
+                        sealed void M1() {}
+                        sealed int P1 => 1;
+                    }
 
-                abstract class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
+                    abstract class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    sealed void M1() {}
-                    sealed int P1 => 1;
-                }
+                        sealed void M1() {}
+                        sealed int P1 => 1;
+                    }
 
-                abstract class Class : IInterface
-                {
-                    public abstract void Method1();
-                }
-                """,
+                    abstract class Class : IInterface
+                    {
+                        public abstract void Method1();
+                    }
+                    """,
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -8522,44 +8963,45 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    protected void M1();
-                    protected int P1 {get;}
-                }
+                        protected void M1();
+                        protected int P1 {get;}
+                    }
 
-                class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                {
-                }
-                """,
+                    class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                    {
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface IInterface
-                        {
-                            void Method1();
-
-                            protected void M1();
-                            protected int P1 {get;}
-                        }
-
-                        class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            public void Method1()
+                            interface IInterface
                             {
-                                throw new System.NotImplementedException();
+                                void Method1();
+
+                                protected void M1();
+                                protected int P1 {get;}
                             }
-                        }
-                        """,
+
+                            class Class : {|CS0535:{|CS0535:IInterface|}|}
+                            {
+                                public void Method1()
+                                {
+                                    throw new System.NotImplementedException();
+                                }
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "False;False;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
             }.RunAsync();
         }
 
@@ -8570,50 +9012,51 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    protected void M1();
-                    protected int P1 {get;}
-                }
+                    interface IInterface
+                    {
+                        protected void M1();
+                        protected int P1 {get;}
+                    }
 
-                class Class : {|CS0535:{|CS0535:IInterface|}|}
-                {
-                }
-                """,
+                    class Class : {|CS0535:{|CS0535:IInterface|}|}
+                    {
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface IInterface
-                        {
-                            protected void M1();
-                            protected int P1 {get;}
-                        }
-
-                        class Class : IInterface
-                        {
-                            int IInterface.P1
+                            interface IInterface
                             {
-                                get
+                                protected void M1();
+                                protected int P1 {get;}
+                            }
+
+                            class Class : IInterface
+                            {
+                                int IInterface.P1
+                                {
+                                    get
+                                    {
+                                        throw new System.NotImplementedException();
+                                    }
+                                }
+
+                                void IInterface.M1()
                                 {
                                     throw new System.NotImplementedException();
                                 }
                             }
-
-                            void IInterface.M1()
-                            {
-                                throw new System.NotImplementedException();
-                            }
-                        }
-                        """,
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
                 DiagnosticSelector = diagnostics => diagnostics[1],
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-                CodeActionEquivalenceKey = "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -8625,41 +9068,42 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    protected void M1();
-                    protected int P1 {get;}
-                }
+                        protected void M1();
+                        protected int P1 {get;}
+                    }
 
-                abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                {
-                }
-                """,
+                    abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                    {
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface IInterface
-                        {
-                            void Method1();
+                            interface IInterface
+                            {
+                                void Method1();
 
-                            protected void M1();
-                            protected int P1 {get;}
-                        }
+                                protected void M1();
+                                protected int P1 {get;}
+                            }
 
-                        abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            public abstract void Method1();
-                        }
-                        """,
+                            abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
+                            {
+                                public abstract void Method1();
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
             }.RunAsync();
         }
 
@@ -8670,44 +9114,45 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    int P1 {get; protected set;}
-                    int P2 {protected get; set;}
-                }
+                        int P1 {get; protected set;}
+                        int P2 {protected get; set;}
+                    }
 
-                class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                {
-                }
-                """,
+                    class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                    {
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface IInterface
-                        {
-                            void Method1();
-
-                            int P1 {get; protected set;}
-                            int P2 {protected get; set;}
-                        }
-
-                        class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            public void Method1()
+                            interface IInterface
                             {
-                                throw new System.NotImplementedException();
+                                void Method1();
+
+                                int P1 {get; protected set;}
+                                int P2 {protected get; set;}
                             }
-                        }
-                        """,
+
+                            class Class : {|CS0535:{|CS0535:IInterface|}|}
+                            {
+                                public void Method1()
+                                {
+                                    throw new System.NotImplementedException();
+                                }
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "False;False;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
             }.RunAsync();
         }
 
@@ -8718,61 +9163,62 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    int P1 {get; protected set;}
-                    int P2 {protected get; set;}
-                }
+                    interface IInterface
+                    {
+                        int P1 {get; protected set;}
+                        int P2 {protected get; set;}
+                    }
 
-                class Class : {|CS0535:{|CS0535:IInterface|}|}
-                {
-                }
-                """,
+                    class Class : {|CS0535:{|CS0535:IInterface|}|}
+                    {
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface IInterface
-                        {
-                            int P1 {get; protected set;}
-                            int P2 {protected get; set;}
-                        }
-
-                        class Class : IInterface
-                        {
-                            int IInterface.P1
+                            interface IInterface
                             {
-                                get
-                                {
-                                    throw new System.NotImplementedException();
-                                }
-
-                                set
-                                {
-                                    throw new System.NotImplementedException();
-                                }
+                                int P1 {get; protected set;}
+                                int P2 {protected get; set;}
                             }
 
-                            int IInterface.P2
+                            class Class : IInterface
                             {
-                                get
+                                int IInterface.P1
                                 {
-                                    throw new System.NotImplementedException();
+                                    get
+                                    {
+                                        throw new System.NotImplementedException();
+                                    }
+
+                                    set
+                                    {
+                                        throw new System.NotImplementedException();
+                                    }
                                 }
 
-                                set
+                                int IInterface.P2
                                 {
-                                    throw new System.NotImplementedException();
+                                    get
+                                    {
+                                        throw new System.NotImplementedException();
+                                    }
+
+                                    set
+                                    {
+                                        throw new System.NotImplementedException();
+                                    }
                                 }
                             }
-                        }
-                        """,
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -8784,41 +9230,42 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    int P1 {get; protected set;}
-                    int P2 {protected get; set;}
-                }
+                        int P1 {get; protected set;}
+                        int P2 {protected get; set;}
+                    }
 
-                abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                {
-                }
-                """,
+                    abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                    {
+                    }
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        interface IInterface
-                        {
-                            void Method1();
+                            interface IInterface
+                            {
+                                void Method1();
 
-                            int P1 {get; protected set;}
-                            int P2 {protected get; set;}
-                        }
+                                int P1 {get; protected set;}
+                                int P2 {protected get; set;}
+                            }
 
-                        abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            public abstract void Method1();
-                        }
-                        """,
+                            abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
+                            {
+                                public abstract void Method1();
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
             }.RunAsync();
         }
 
@@ -8829,35 +9276,35 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    int P1 {get => 0; private set {}}
-                    int P2 {private get => 0; set {}}
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    int P1 {get => 0; private set {}}
-                    int P2 {private get => 0; set {}}
-                }
-
-                class Class : IInterface
-                {
-                    public void Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
+
+                        int P1 {get => 0; private set {}}
+                        int P2 {private get => 0; set {}}
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IInterface
+                    {
+                        void Method1();
+
+                        int P1 {get => 0; private set {}}
+                        int P2 {private get => 0; set {}}
+                    }
+
+                    class Class : IInterface
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
             }.RunAsync();
         }
@@ -8869,37 +9316,38 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    int P1 {get => 0; private set {}}
-                    int P2 {private get => 0; set {}}
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    int P1 {get => 0; private set {}}
-                    int P2 {private get => 0; set {}}
-                }
-
-                class Class : IInterface
-                {
-                    void IInterface.Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
+
+                        int P1 {get => 0; private set {}}
+                        int P2 {private get => 0; set {}}
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IInterface
+                    {
+                        void Method1();
+
+                        int P1 {get => 0; private set {}}
+                        int P2 {private get => 0; set {}}
+                    }
+
+                    class Class : IInterface
+                    {
+                        void IInterface.Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -8911,34 +9359,35 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    int P1 {get => 0; private set {}}
-                    int P2 {private get => 0; set {}}
-                }
+                        int P1 {get => 0; private set {}}
+                        int P2 {private get => 0; set {}}
+                    }
 
-                abstract class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
+                    abstract class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    int P1 {get => 0; private set {}}
-                    int P2 {private get => 0; set {}}
-                }
+                        int P1 {get => 0; private set {}}
+                        int P2 {private get => 0; set {}}
+                    }
 
-                abstract class Class : IInterface
-                {
-                    public abstract void Method1();
-                }
-                """,
+                    abstract class Class : IInterface
+                    {
+                        public abstract void Method1();
+                    }
+                    """,
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -8953,10 +9402,10 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                        {
-                        }
-                        """,
+                            class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -8965,14 +9414,14 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                             Sources =
                             {
                                 """
-                                public interface IInterface
-                                {
-                                    void Method1();
+                                    public interface IInterface
+                                    {
+                                        void Method1();
 
-                                    internal void M1();
-                                    internal int P1 {get;}
-                                }
-                                """,
+                                        internal void M1();
+                                        internal int P1 {get;}
+                                    }
+                                    """,
                             },
                         },
                     },
@@ -8983,21 +9432,21 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            public void Method1()
+                            class Class : {|CS0535:{|CS0535:IInterface|}|}
                             {
-                                throw new System.NotImplementedException();
+                                public void Method1()
+                                {
+                                    throw new System.NotImplementedException();
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-
                 // Specify the code action by equivalence key only to avoid trying to implement the interface explicitly with a second code fix pass.
-                CodeActionEquivalenceKey = "False;False;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
             }.RunAsync();
         }
 
@@ -9011,10 +9460,10 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                        {
-                        }
-                        """,
+                            class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -9023,14 +9472,14 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                             Sources =
                             {
                                 """
-                                public interface IInterface
-                                {
-                                    void Method1();
+                                    public interface IInterface
+                                    {
+                                        void Method1();
 
-                                    internal void M1();
-                                    internal int P1 {get;}
-                                }
-                                """,
+                                        internal void M1();
+                                        internal int P1 {get;}
+                                    }
+                                    """,
                             },
                         },
                     },
@@ -9041,19 +9490,20 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            void IInterface.Method1()
+                            class Class : {|CS0535:{|CS0535:IInterface|}|}
                             {
-                                throw new System.NotImplementedException();
+                                void IInterface.Method1()
+                                {
+                                    throw new System.NotImplementedException();
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "True;False;False:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -9068,10 +9518,10 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                        {
-                        }
-                        """,
+                            abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -9080,14 +9530,14 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                             Sources =
                             {
                                 """
-                                public interface IInterface
-                                {
-                                    void Method1();
+                                    public interface IInterface
+                                    {
+                                        void Method1();
 
-                                    internal void M1();
-                                    internal int P1 {get;}
-                                }
-                                """,
+                                        internal void M1();
+                                        internal int P1 {get;}
+                                    }
+                                    """,
                             },
                         },
                     },
@@ -9098,18 +9548,18 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            public abstract void Method1();
-                        }
-                        """,
+                            abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
+                            {
+                                public abstract void Method1();
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-
                 // Specify the code action by equivalence key only to avoid trying to execute a second code fix pass with a different action
-                CodeActionEquivalenceKey = "False;True;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
             }.RunAsync();
         }
 
@@ -9118,36 +9568,37 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    Goo MyProperty { get; }
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal class Goo {}
-
-                internal interface I
-                {
-                    Goo MyProperty { get; }
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    Goo I.MyProperty
+                    internal interface I
                     {
-                        get
+                        Goo MyProperty { get; }
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal class Goo {}
+
+                    internal interface I
+                    {
+                        Goo MyProperty { get; }
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        Goo I.MyProperty
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9155,33 +9606,34 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    Goo M();
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal class Goo {}
-
-                internal interface I
-                {
-                    Goo M();
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    Goo I.M()
+                    internal interface I
                     {
-                        throw new System.NotImplementedException();
+                        Goo M();
                     }
-                }
-                """);
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal class Goo {}
+
+                    internal interface I
+                    {
+                        Goo M();
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        Goo I.M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9189,33 +9641,34 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    void M(Goo goo);
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal class Goo {}
-
-                internal interface I
-                {
-                    void M(Goo goo);
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    void I.M(Goo goo)
+                    internal interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M(Goo goo);
                     }
-                }
-                """);
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal class Goo {}
+
+                    internal interface I
+                    {
+                        void M(Goo goo);
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        void I.M(Goo goo)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9223,41 +9676,42 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal delegate void MyDelegate();
+                    internal delegate void MyDelegate();
 
-                internal interface I
-                {
-                    event MyDelegate Event;
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal delegate void MyDelegate();
-
-                internal interface I
-                {
-                    event MyDelegate Event;
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    event MyDelegate I.Event
+                    internal interface I
                     {
-                        add
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        event MyDelegate Event;
+                    }
 
-                        remove
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal delegate void MyDelegate();
+
+                    internal interface I
+                    {
+                        event MyDelegate Event;
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        event MyDelegate I.Event
                         {
-                            throw new System.NotImplementedException();
+                            add
+                            {
+                                throw new System.NotImplementedException();
+                            }
+
+                            remove
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9265,36 +9719,37 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    Goo this[int i] { get; }
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal class Goo {}
-
-                internal interface I
-                {
-                    Goo this[int i] { get; }
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    Goo I.this[int i]
+                    internal interface I
                     {
-                        get
+                        Goo this[int i] { get; }
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal class Goo {}
+
+                    internal interface I
+                    {
+                        Goo this[int i] { get; }
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        Goo I.this[int i]
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9302,36 +9757,37 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    int this[Goo goo] { get; }
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal class Goo {}
-
-                internal interface I
-                {
-                    int this[Goo goo] { get; }
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    int I.this[Goo goo]
+                    internal interface I
                     {
-                        get
+                        int this[Goo goo] { get; }
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal class Goo {}
+
+                    internal interface I
+                    {
+                        int this[Goo goo] { get; }
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        int I.this[Goo goo]
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9339,37 +9795,38 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    List<Goo> M();
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                using System.Collections.Generic;
-
-                internal class Goo {}
-
-                internal interface I
-                {
-                    List<Goo> M();
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    List<Goo> I.M()
+                    internal interface I
                     {
-                        throw new System.NotImplementedException();
+                        List<Goo> M();
                     }
-                }
-                """);
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    using System.Collections.Generic;
+
+                    internal class Goo {}
+
+                    internal interface I
+                    {
+                        List<Goo> M();
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        List<Goo> I.M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9377,39 +9834,40 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Container
-                {
-                    public class Goo {}
-                }
-
-                internal interface I
-                {
-                    Container.Goo M();
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal class Container
-                {
-                    public class Goo {}
-                }
-
-                internal interface I
-                {
-                    Container.Goo M();
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    Container.Goo I.M()
+                    internal class Container
                     {
-                        throw new System.NotImplementedException();
+                        public class Goo {}
                     }
-                }
-                """);
+
+                    internal interface I
+                    {
+                        Container.Goo M();
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal class Container
+                    {
+                        public class Goo {}
+                    }
+
+                    internal interface I
+                    {
+                        Container.Goo M();
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        Container.Goo I.M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9417,33 +9875,34 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    T M<T>() where T: Goo;
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal class Goo {}
-
-                internal interface I
-                {
-                    T M<T>() where T: Goo;
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    T I.M<T>()
+                    internal interface I
                     {
-                        throw new System.NotImplementedException();
+                        T M<T>() where T: Goo;
                     }
-                }
-                """);
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal class Goo {}
+
+                    internal interface I
+                    {
+                        T M<T>() where T: Goo;
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        T I.M<T>()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9451,33 +9910,34 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    void M<T>(T arg) where T: Goo;
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal class Goo {}
-
-                internal interface I
-                {
-                    void M<T>(T arg) where T: Goo;
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    void I.M<T>(T arg)
+                    internal interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M<T>(T arg) where T: Goo;
                     }
-                }
-                """);
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal class Goo {}
+
+                    internal interface I
+                    {
+                        void M<T>(T arg) where T: Goo;
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        void I.M<T>(T arg)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9485,33 +9945,34 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    void M<T>() where T: Goo;
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                internal class Goo {}
-
-                internal interface I
-                {
-                    void M<T>() where T: Goo;
-                }
-
-                public class C : {|CS0535:I|}
-                {
-                    void I.M<T>()
+                    internal interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M<T>() where T: Goo;
                     }
-                }
-                """);
+
+                    public class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    internal class Goo {}
+
+                    internal interface I
+                    {
+                        void M<T>() where T: Goo;
+                    }
+
+                    public class C : {|CS0535:I|}
+                    {
+                        void I.M<T>()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4146")]
@@ -9519,40 +9980,41 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    int N();
-                    Goo M();
-                }
+                    internal interface I
+                    {
+                        int N();
+                        Goo M();
+                    }
 
-                public class C : {|CS0535:{|CS0535:I|}|}
-                {
-                }
-                """,
+                    public class C : {|CS0535:{|CS0535:I|}|}
+                    {
+                    }
+                    """,
                 """
-                internal class Goo {}
+                    internal class Goo {}
 
-                internal interface I
-                {
-                    int N();
-                    Goo M();
-                }
-
-                public class C : {|CS0535:{|CS0535:I|}|}
-                {
-                    public int N()
+                    internal interface I
                     {
-                        throw new System.NotImplementedException();
+                        int N();
+                        Goo M();
                     }
 
-                    Goo I.M()
+                    public class C : {|CS0535:{|CS0535:I|}|}
                     {
-                        throw new System.NotImplementedException();
+                        public int N()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        Goo I.M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -9565,10 +10027,10 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                        {
-                        }
-                        """,
+                            class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -9577,14 +10039,14 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                             Sources =
                             {
                                 """
-                                public interface IInterface
-                                {
-                                    void Method1();
+                                    public interface IInterface
+                                    {
+                                        void Method1();
 
-                                    int P1 {get; internal set;}
-                                    int P2 {internal get; set;}
-                                }
-                                """,
+                                        int P1 {get; internal set;}
+                                        int P2 {internal get; set;}
+                                    }
+                                    """,
                             },
                         },
                     },
@@ -9595,21 +10057,21 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            public void Method1()
+                            class Class : {|CS0535:{|CS0535:IInterface|}|}
                             {
-                                throw new System.NotImplementedException();
+                                public void Method1()
+                                {
+                                    throw new System.NotImplementedException();
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-
                 // Specify the code action by equivalence key only to avoid trying to implement the interface explicitly with a second code fix pass.
-                CodeActionEquivalenceKey = "False;False;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
             }.RunAsync();
         }
 
@@ -9623,10 +10085,10 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                        {
-                        }
-                        """,
+                            class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -9635,14 +10097,14 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                             Sources =
                             {
                                 """
-                                public interface IInterface
-                                {
-                                    void Method1();
+                                    public interface IInterface
+                                    {
+                                        void Method1();
 
-                                    int P1 {get; internal set;}
-                                    int P2 {internal get; set;}
-                                }
-                                """,
+                                        int P1 {get; internal set;}
+                                        int P2 {internal get; set;}
+                                    }
+                                    """,
                             },
                         },
                     },
@@ -9653,19 +10115,20 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            void IInterface.Method1()
+                            class Class : {|CS0535:{|CS0535:IInterface|}|}
                             {
-                                throw new System.NotImplementedException();
+                                void IInterface.Method1()
+                                {
+                                    throw new System.NotImplementedException();
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "True;False;False:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -9680,10 +10143,10 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                        {
-                        }
-                        """,
+                            abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                            {
+                            }
+                            """,
                     },
                     AdditionalProjects =
                     {
@@ -9692,14 +10155,14 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                             Sources =
                             {
                                 """
-                                public interface IInterface
-                                {
-                                    void Method1();
+                                    public interface IInterface
+                                    {
+                                        void Method1();
 
-                                    int P1 {get; internal set;}
-                                    int P2 {internal get; set;}
-                                }
-                                """,
+                                        int P1 {get; internal set;}
+                                        int P2 {internal get; set;}
+                                    }
+                                    """,
                             },
                         },
                     },
@@ -9710,18 +10173,18 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                     Sources =
                     {
                         """
-                        abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
-                        {
-                            public abstract void Method1();
-                        }
-                        """,
+                            abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
+                            {
+                                public abstract void Method1();
+                            }
+                            """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
                 Options = { AllOptionsOff },
-
                 // Specify the code action by equivalence key only to avoid trying to execute a second code fix pass with a different action
-                CodeActionEquivalenceKey = "False;True;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::IInterface;Assembly1;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
             }.RunAsync();
         }
 
@@ -9732,35 +10195,35 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    virtual void M1() {}
-                    virtual int P1 => 1;
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    virtual void M1() {}
-                    virtual int P1 => 1;
-                }
-
-                class Class : IInterface
-                {
-                    public void Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
+
+                        virtual void M1() {}
+                        virtual int P1 => 1;
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IInterface
+                    {
+                        void Method1();
+
+                        virtual void M1() {}
+                        virtual int P1 => 1;
+                    }
+
+                    class Class : IInterface
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
             }.RunAsync();
         }
@@ -9772,37 +10235,38 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    virtual void M1() {}
-                    virtual int P1 => 1;
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    virtual void M1() {}
-                    virtual int P1 => 1;
-                }
-
-                class Class : IInterface
-                {
-                    void IInterface.Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
+
+                        virtual void M1() {}
+                        virtual int P1 => 1;
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IInterface
+                    {
+                        void Method1();
+
+                        virtual void M1() {}
+                        virtual int P1 => 1;
+                    }
+
+                    class Class : IInterface
+                    {
+                        void IInterface.Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -9814,34 +10278,35 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    virtual void M1() {}
-                    virtual int P1 => 1;
-                }
+                        virtual void M1() {}
+                        virtual int P1 => 1;
+                    }
 
-                abstract class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
+                    abstract class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    virtual void M1() {}
-                    virtual int P1 => 1;
-                }
+                        virtual void M1() {}
+                        virtual int P1 => 1;
+                    }
 
-                abstract class Class : IInterface
-                {
-                    public abstract void Method1();
-                }
-                """,
+                    abstract class Class : IInterface
+                    {
+                        public abstract void Method1();
+                    }
+                    """,
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -9853,39 +10318,39 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    static void M1() {}
-                    static int P1 => 1;
-                    static int F1;
-                    public abstract class C {}
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    static void M1() {}
-                    static int P1 => 1;
-                    static int F1;
-                    public abstract class C {}
-                }
-
-                class Class : IInterface
-                {
-                    public void Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
+
+                        static void M1() {}
+                        static int P1 => 1;
+                        static int F1;
+                        public abstract class C {}
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IInterface
+                    {
+                        void Method1();
+
+                        static void M1() {}
+                        static int P1 => 1;
+                        static int F1;
+                        public abstract class C {}
+                    }
+
+                    class Class : IInterface
+                    {
+                        public void Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
             }.RunAsync();
         }
@@ -9897,41 +10362,42 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    static void M1() {}
-                    static int P1 => 1;
-                    static int F1;
-                    public abstract class C {}
-                }
-
-                class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
-
-                    static void M1() {}
-                    static int P1 => 1;
-                    static int F1;
-                    public abstract class C {}
-                }
-
-                class Class : IInterface
-                {
-                    void IInterface.Method1()
+                    interface IInterface
                     {
-                        throw new System.NotImplementedException();
+                        void Method1();
+
+                        static void M1() {}
+                        static int P1 => 1;
+                        static int F1;
+                        public abstract class C {}
                     }
-                }
-                """,
+
+                    class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IInterface
+                    {
+                        void Method1();
+
+                        static void M1() {}
+                        static int P1 => 1;
+                        static int F1;
+                        public abstract class C {}
+                    }
+
+                    class Class : IInterface
+                    {
+                        void IInterface.Method1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -9943,38 +10409,39 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    static void M1() {}
-                    static int P1 => 1;
-                    static int F1;
-                    public abstract class C {}
-                }
+                        static void M1() {}
+                        static int P1 => 1;
+                        static int F1;
+                        public abstract class C {}
+                    }
 
-                abstract class Class : {|CS0535:IInterface|}
-                {
-                }
-                """,
+                    abstract class Class : {|CS0535:IInterface|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface IInterface
-                {
-                    void Method1();
+                    interface IInterface
+                    {
+                        void Method1();
 
-                    static void M1() {}
-                    static int P1 => 1;
-                    static int F1;
-                    public abstract class C {}
-                }
+                        static void M1() {}
+                        static int P1 => 1;
+                        static int F1;
+                        public abstract class C {}
+                    }
 
-                abstract class Class : IInterface
-                {
-                    public abstract void Method1();
-                }
-                """,
+                    abstract class Class : IInterface
+                    {
+                        public abstract void Method1();
+                    }
+                    """,
                 Options = { AllOptionsOff },
-                CodeActionEquivalenceKey = "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -9984,27 +10451,28 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                public interface ITest
-                {
-                    void M<T>() where T : notnull;
-                }
-                public class Test : {|CS0535:ITest|}
-                {
-                }
-                """,
-                """
-                public interface ITest
-                {
-                    void M<T>() where T : notnull;
-                }
-                public class Test : ITest
-                {
-                    public void M<T>() where T : notnull
+                    public interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        void M<T>() where T : notnull;
                     }
-                }
-                """);
+                    public class Test : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                """
+                    public interface ITest
+                    {
+                        void M<T>() where T : notnull;
+                    }
+                    public class Test : ITest
+                    {
+                        public void M<T>() where T : notnull
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -10012,36 +10480,36 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable 
+                    #nullable enable
 
-                public interface ITest
-                {
-                    string? P { get; }
-                }
-                public class Test : {|CS0535:ITest|}
-                {
-                }
-                """,
+                    public interface ITest
+                    {
+                        string? P { get; }
+                    }
+                    public class Test : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
                 """
-                #nullable enable 
+                    #nullable enable
 
-                public interface ITest
-                {
-                    string? P { get; }
-                }
-                public class Test : ITest
-                {
-                    public string? P => throw new System.NotImplementedException();
-                }
-                """);
+                    public interface ITest
+                    {
+                        string? P { get; }
+                    }
+                    public class Test : ITest
+                    {
+                        public string? P => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestWithNullablePropertyAlreadyImplemented()
         {
-            var code =
-                """
-                #nullable enable 
+            var code = """
+                #nullable enable
 
                 public interface ITest
                 {
@@ -10060,66 +10528,68 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable 
+                    #nullable enable
 
-                public interface ITest
-                {
-                    string? P();
-                }
-                public class Test : {|CS0535:ITest|}
-                {
-                }
-                """,
-                """
-                #nullable enable 
-
-                public interface ITest
-                {
-                    string? P();
-                }
-                public class Test : ITest
-                {
-                    public string? P()
+                    public interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        string? P();
                     }
-                }
-                """);
+                    public class Test : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                """
+                    #nullable enable
+
+                    public interface ITest
+                    {
+                        string? P();
+                    }
+                    public class Test : ITest
+                    {
+                        public string? P()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task TestWithNullableEvent()
         {
             // Question whether this is needed,
-            // see https://github.com/dotnet/roslyn/issues/36673 
+            // see https://github.com/dotnet/roslyn/issues/36673
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable 
+                    #nullable enable
 
-                using System;
+                    using System;
 
-                public interface ITest
-                {
-                    event EventHandler? SomeEvent;
-                }
-                public class Test : {|CS0535:ITest|}
-                {
-                }
-                """,
+                    public interface ITest
+                    {
+                        event EventHandler? SomeEvent;
+                    }
+                    public class Test : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
                 """
-                #nullable enable 
+                    #nullable enable
 
-                using System;
+                    using System;
 
-                public interface ITest
-                {
-                    event EventHandler? SomeEvent;
-                }
-                public class Test : ITest
-                {
-                    public event EventHandler? SomeEvent;
-                }
-                """);
+                    public interface ITest
+                    {
+                        event EventHandler? SomeEvent;
+                    }
+                    public class Test : ITest
+                    {
+                        public event EventHandler? SomeEvent;
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -10127,34 +10597,35 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable 
+                    #nullable enable
 
-                public interface ITest
-                {
-                    string? P { get; }
-                }
+                    public interface ITest
+                    {
+                        string? P { get; }
+                    }
 
-                #nullable disable
+                    #nullable disable
 
-                public class Test : {|CS0535:ITest|}
-                {
-                }
-                """,
+                    public class Test : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
                 """
-                #nullable enable 
+                    #nullable enable
 
-                public interface ITest
-                {
-                    string? P { get; }
-                }
+                    public interface ITest
+                    {
+                        string? P { get; }
+                    }
 
-                #nullable disable
+                    #nullable disable
 
-                public class Test : ITest
-                {
-                    public string P => throw new System.NotImplementedException();
-                }
-                """);
+                    public class Test : ITest
+                    {
+                        public string P => throw new System.NotImplementedException();
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -10164,52 +10635,52 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = """
-                #nullable enable 
+                    #nullable enable
 
-                using System.Diagnostics.CodeAnalysis;
+                    using System.Diagnostics.CodeAnalysis;
 
-                interface IFoo<T>
-                {
-                    [return: NotNull]
-                    T Bar([DisallowNull] T bar);
+                    interface IFoo<T>
+                    {
+                        [return: NotNull]
+                        T Bar([DisallowNull] T bar);
 
-                    [return: MaybeNull]
-                    T Baz([AllowNull] T bar);
-                }
+                        [return: MaybeNull]
+                        T Baz([AllowNull] T bar);
+                    }
 
-                class A : {|CS0535:{|CS0535:IFoo<int>|}|}
-                {
-                }
-                """,
+                    class A : {|CS0535:{|CS0535:IFoo<int>|}|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                #nullable enable 
+                    #nullable enable
 
-                using System.Diagnostics.CodeAnalysis;
+                    using System.Diagnostics.CodeAnalysis;
 
-                interface IFoo<T>
-                {
-                    [return: NotNull]
-                    T Bar([DisallowNull] T bar);
-
-                    [return: MaybeNull]
-                    T Baz([AllowNull] T bar);
-                }
-
-                class A : IFoo<int>
-                {
-                    [return: NotNull]
-                    public int Bar([DisallowNull] int bar)
+                    interface IFoo<T>
                     {
-                        throw new System.NotImplementedException();
+                        [return: NotNull]
+                        T Bar([DisallowNull] T bar);
+
+                        [return: MaybeNull]
+                        T Baz([AllowNull] T bar);
                     }
 
-                    [return: MaybeNull]
-                    public int Baz([AllowNull] int bar)
+                    class A : IFoo<int>
                     {
-                        throw new System.NotImplementedException();
+                        [return: NotNull]
+                        public int Bar([DisallowNull] int bar)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        [return: MaybeNull]
+                        public int Baz([AllowNull] int bar)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
             }.RunAsync();
         }
 
@@ -10218,73 +10689,80 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                class B
-                {
-                    public void M<T>() { }
-                }
-
-                interface I
-                {
-                    void M();
-                }
-
-                class D : B, {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                class B
-                {
-                    public void M<T>() { }
-                }
-
-                interface I
-                {
-                    void M();
-                }
-
-                class D : B, I
-                {
-                    public void M()
+                    class B
                     {
-                        throw new System.NotImplementedException();
+                        public void M<T>() { }
                     }
-                }
-                """);
+
+                    interface I
+                    {
+                        void M();
+                    }
+
+                    class D : B, {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    class B
+                    {
+                        public void M<T>() { }
+                    }
+
+                    interface I
+                    {
+                        void M();
+                    }
+
+                    class D : B, I
+                    {
+                        public void M()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task ImplementRemainingExplicitlyWhenPartiallyImplemented()
         {
-            await TestInRegularAndScriptAsync("""
-                interface I
-                {
-                    void M1();
-                    void M2();
-                }
-
-                class C : {|CS0535:I|}
-                {
-                    public void M1(){}
-                }
-                """,
+            await TestInRegularAndScriptAsync(
                 """
-                interface I
-                {
-                    void M1();
-                    void M2();
-                }
-
-                class C : {|CS0535:I|}
-                {
-                    public void M1(){}
-
-                    void I.M2()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M1();
+                        void M2();
                     }
-                }
-                """, codeAction: ("True;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 2));
+
+                    class C : {|CS0535:I|}
+                    {
+                        public void M1(){}
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void M1();
+                        void M2();
+                    }
+
+                    class C : {|CS0535:I|}
+                    {
+                        public void M1(){}
+
+                        void I.M2()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    2
+                )
+            );
         }
 
         [Fact]
@@ -10295,26 +10773,26 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = """
-                interface I
-                {
-                    int Property { get; init; }
-                }
+                    interface I
+                    {
+                        int Property { get; init; }
+                    }
 
-                class C : {|CS0535:I|}
-                {
-                }
-                """,
+                    class C : {|CS0535:I|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface I
-                {
-                    int Property { get; init; }
-                }
+                    interface I
+                    {
+                        int Property { get; init; }
+                    }
 
-                class C : I
-                {
-                    public int Property { get => throw new System.NotImplementedException(); init => throw new System.NotImplementedException(); }
-                }
-                """,
+                    class C : I
+                    {
+                        public int Property { get => throw new System.NotImplementedException(); init => throw new System.NotImplementedException(); }
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -10382,35 +10860,41 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
         [Fact]
         public async Task TestImplementRemainingExplicitlyNonPublicMember()
         {
-            await TestInRegularAndScriptAsync("""
-                interface I
-                {
-                    void M1();
-                    internal void M2();
-                }
-
-                class C : {|CS0535:I|}
-                {
-                    public void M1(){}
-                }
-                """,
+            await TestInRegularAndScriptAsync(
                 """
-                interface I
-                {
-                    void M1();
-                    internal void M2();
-                }
-
-                class C : {|CS0535:I|}
-                {
-                    public void M1(){}
-
-                    void I.M2()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M1();
+                        internal void M2();
                     }
-                }
-                """, codeAction: ("True;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class C : {|CS0535:I|}
+                    {
+                        public void M1(){}
+                    }
+                    """,
+                """
+                    interface I
+                    {
+                        void M1();
+                        internal void M2();
+                    }
+
+                    class C : {|CS0535:I|}
+                    {
+                        public void M1(){}
+
+                        void I.M2()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48295")]
@@ -10421,28 +10905,28 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface I
-                {
-                    void M1();
-                }
-
-                record C : {|CS0535:I|};
-                """,
-                FixedCode = """
-                interface I
-                {
-                    void M1();
-                }
-
-                record C : {|CS0535:I|}
-                {
-                    public void M1()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M1();
                     }
-                }
 
-                """,
+                    record C : {|CS0535:I|};
+                    """,
+                FixedCode = """
+                    interface I
+                    {
+                        void M1();
+                    }
+
+                    record C : {|CS0535:I|}
+                    {
+                        public void M1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+
+                    """,
             }.RunAsync();
         }
 
@@ -10454,28 +10938,28 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface I
-                {
-                    void M1();
-                }
-
-                class C : {|CS0535:I|};
-                """,
-                FixedCode = """
-                interface I
-                {
-                    void M1();
-                }
-
-                class C : {|CS0535:I|}
-                {
-                    public void M1()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M1();
                     }
-                }
 
-                """,
+                    class C : {|CS0535:I|};
+                    """,
+                FixedCode = """
+                    interface I
+                    {
+                        void M1();
+                    }
+
+                    class C : {|CS0535:I|}
+                    {
+                        public void M1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+
+                    """,
             }.RunAsync();
         }
 
@@ -10487,28 +10971,28 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface I
-                {
-                    void M1();
-                }
-
-                struct C : {|CS0535:I|};
-                """,
-                FixedCode = """
-                interface I
-                {
-                    void M1();
-                }
-
-                struct C : {|CS0535:I|}
-                {
-                    public void M1()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M1();
                     }
-                }
 
-                """,
+                    struct C : {|CS0535:I|};
+                    """,
+                FixedCode = """
+                    interface I
+                    {
+                        void M1();
+                    }
+
+                    struct C : {|CS0535:I|}
+                    {
+                        public void M1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+
+                    """,
             }.RunAsync();
         }
 
@@ -10520,27 +11004,27 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface I
-                {
-                    void M1();
-                }
-
-                record C : {|CS0535:I|} { } // hello
-                """,
-                FixedCode = """
-                interface I
-                {
-                    void M1();
-                }
-
-                record C : {|CS0535:I|}
-                {
-                    public void M1()
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M1();
                     }
-                } // hello
-                """,
+
+                    record C : {|CS0535:I|} { } // hello
+                    """,
+                FixedCode = """
+                    interface I
+                    {
+                        void M1();
+                    }
+
+                    record C : {|CS0535:I|}
+                    {
+                        public void M1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    } // hello
+                    """,
             }.RunAsync();
         }
 
@@ -10556,7 +11040,8 @@ codeAction: ("False;False;False:global::System.Collections.Generic.IList<object>
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 LanguageVersion = LanguageVersion.CSharp12,
-                TestCode = $@"
+                TestCode =
+                    $@"
 interface I
 {{
     void M1();
@@ -10564,7 +11049,8 @@ interface I
 
 {record} C : {{|CS0535:I|}}; // hello
 ",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 interface I
 {{
     void M1();
@@ -10588,61 +11074,63 @@ interface I
             {
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = """
-                #nullable enable
-                interface IGoo<T>
-                {
-                    void Bar(T? x);
-                }
-
-                class C : {|CS0535:IGoo<int>|}
-                {
-                }
-                """,
-                FixedCode = """
-                #nullable enable
-                interface IGoo<T>
-                {
-                    void Bar(T? x);
-                }
-
-                class C : IGoo<int>
-                {
-                    public void Bar(int x)
+                    #nullable enable
+                    interface IGoo<T>
                     {
-                        throw new System.NotImplementedException();
+                        void Bar(T? x);
                     }
-                }
-                """,
+
+                    class C : {|CS0535:IGoo<int>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    #nullable enable
+                    interface IGoo<T>
+                    {
+                        void Bar(T? x);
+                    }
+
+                    class C : IGoo<int>
+                    {
+                        public void Bar(int x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49019")]
         public async Task TestConstrainedGenericInstantiatedWithValueType()
         {
-            await TestInRegularAndScriptAsync("""
-                interface IGoo<T> where T : struct
-                {
-                    void Bar(T? x);
-                }
-
-                class C : {|CS0535:IGoo<int>|}
-                {
-                }
-                """,
+            await TestInRegularAndScriptAsync(
                 """
-                interface IGoo<T> where T : struct
-                {
-                    void Bar(T? x);
-                }
-
-                class C : IGoo<int>
-                {
-                    public void Bar(int? x)
+                    interface IGoo<T> where T : struct
                     {
-                        throw new System.NotImplementedException();
+                        void Bar(T? x);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:IGoo<int>|}
+                    {
+                    }
+                    """,
+                """
+                    interface IGoo<T> where T : struct
+                    {
+                        void Bar(T? x);
+                    }
+
+                    class C : IGoo<int>
+                    {
+                        public void Bar(int? x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49019")]
@@ -10652,33 +11140,33 @@ interface I
             {
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = """
-                interface IGoo<T>
-                {
-                #nullable enable
-                    void Bar(T? x);
-                #nullable restore
-                }
-
-                class C : {|CS0535:IGoo<string>|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface IGoo<T>
-                {
-                #nullable enable
-                    void Bar(T? x);
-                #nullable restore
-                }
-
-                class C : IGoo<string>
-                {
-                    public void Bar(string x)
+                    interface IGoo<T>
                     {
-                        throw new System.NotImplementedException();
+                    #nullable enable
+                        void Bar(T? x);
+                    #nullable restore
                     }
-                }
-                """,
+
+                    class C : {|CS0535:IGoo<string>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface IGoo<T>
+                    {
+                    #nullable enable
+                        void Bar(T? x);
+                    #nullable restore
+                    }
+
+                    class C : IGoo<string>
+                    {
+                        public void Bar(string x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -10689,33 +11177,33 @@ interface I
             {
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = """
-                #nullable enable
+                    #nullable enable
 
-                interface IGoo<T>
-                {
-                    void Bar(T? x);
-                }
-
-                class C : {|CS0535:IGoo<string>|}
-                {
-                }
-                """,
-                FixedCode = """
-                #nullable enable
-
-                interface IGoo<T>
-                {
-                    void Bar(T? x);
-                }
-
-                class C : IGoo<string>
-                {
-                    public void Bar(string? x)
+                    interface IGoo<T>
                     {
-                        throw new System.NotImplementedException();
+                        void Bar(T? x);
                     }
-                }
-                """,
+
+                    class C : {|CS0535:IGoo<string>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    #nullable enable
+
+                    interface IGoo<T>
+                    {
+                        void Bar(T? x);
+                    }
+
+                    class C : IGoo<string>
+                    {
+                        public void Bar(string? x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -10726,65 +11214,67 @@ interface I
             {
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = """
-                #nullable enable
-                interface IGoo<T> where T : class
-                {
-                    void Bar(T? x);
-                }
-
-                class C : {|CS0535:IGoo<string>|}
-                {
-                }
-                """,
-                FixedCode = """
-                #nullable enable
-                interface IGoo<T> where T : class
-                {
-                    void Bar(T? x);
-                }
-
-                class C : IGoo<string>
-                {
-                    public void Bar(string? x)
+                    #nullable enable
+                    interface IGoo<T> where T : class
                     {
-                        throw new System.NotImplementedException();
+                        void Bar(T? x);
                     }
-                }
-                """,
+
+                    class C : {|CS0535:IGoo<string>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    #nullable enable
+                    interface IGoo<T> where T : class
+                    {
+                        void Bar(T? x);
+                    }
+
+                    class C : IGoo<string>
+                    {
+                        public void Bar(string? x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49019")]
         public async Task TestConstrainedGenericInstantiatedWithReferenceType_NullableEnable()
         {
-            await TestInRegularAndScriptAsync("""
-                #nullable enable
-
-                interface IGoo<T> where T : class
-                {
-                    void Bar(T? x);
-                }
-
-                class C : {|CS0535:IGoo<string>|}
-                {
-                }
-                """,
+            await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                interface IGoo<T> where T : class
-                {
-                    void Bar(T? x);
-                }
-
-                class C : IGoo<string>
-                {
-                    public void Bar(string? x)
+                    interface IGoo<T> where T : class
                     {
-                        throw new System.NotImplementedException();
+                        void Bar(T? x);
                     }
-                }
-                """);
+
+                    class C : {|CS0535:IGoo<string>|}
+                    {
+                    }
+                    """,
+                """
+                    #nullable enable
+
+                    interface IGoo<T> where T : class
+                    {
+                        void Bar(T? x);
+                    }
+
+                    class C : IGoo<string>
+                    {
+                        public void Bar(string? x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/53012")]
@@ -10792,33 +11282,34 @@ interface I
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                interface I
-                {
-                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
-                }
-
-                class D : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                #nullable enable
-
-                interface I
-                {
-                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
-                }
-
-                class D : I
-                {
-                    public void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
                     }
-                }
-                """);
+
+                    class D : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    #nullable enable
+
+                    interface I
+                    {
+                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
+                    }
+
+                    class D : I
+                    {
+                        public void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/53012")]
@@ -10826,35 +11317,40 @@ interface I
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                interface I
-                {
-                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
-                }
-
-                class D : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                #nullable enable
-
-                interface I
-                {
-                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
-                }
-
-                class D : I
-                {
-                    void I.M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
-                        where T1 : default
-                        where T3 : default
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
                     }
-                }
-                """, codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class D : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    #nullable enable
+
+                    interface I
+                    {
+                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
+                    }
+
+                    class D : I
+                    {
+                        void I.M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
+                            where T1 : default
+                            where T3 : default
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/53012")]
@@ -10862,35 +11358,40 @@ interface I
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                interface I
-                {
-                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) where T1 : class;
-                }
-
-                class D : {|CS0535:I|}
-                {
-                }
-                """,
-                """
-                #nullable enable
-
-                interface I
-                {
-                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) where T1 : class;
-                }
-
-                class D : I
-                {
-                    void I.M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
-                        where T1 : class
-                        where T3 : default
+                    interface I
                     {
-                        throw new System.NotImplementedException();
+                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) where T1 : class;
                     }
-                }
-                """, codeAction: ("True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;", 1));
+
+                    class D : {|CS0535:I|}
+                    {
+                    }
+                    """,
+                """
+                    #nullable enable
+
+                    interface I
+                    {
+                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) where T1 : class;
+                    }
+
+                    class D : I
+                    {
+                        void I.M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
+                            where T1 : class
+                            where T3 : default
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                codeAction: (
+                    "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    1
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51779")]
@@ -10900,42 +11401,42 @@ interface I
             {
                 LanguageVersion = LanguageVersion.CSharp5,
                 TestCode = """
-                interface ITest
-                {
-                    int Bar { get; }
-                    int Foo { get; }
-                }
+                    interface ITest
+                    {
+                        int Bar { get; }
+                        int Foo { get; }
+                    }
 
-                class Program : {|CS0535:{|CS0535:ITest|}|}
-                {
-                }
-                """,
+                    class Program : {|CS0535:{|CS0535:ITest|}|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface ITest
-                {
-                    int Bar { get; }
-                    int Foo { get; }
-                }
-
-                class Program : ITest
-                {
-                    public int Bar
+                    interface ITest
                     {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        int Bar { get; }
+                        int Foo { get; }
                     }
 
-                    public int Foo
+                    class Program : ITest
                     {
-                        get
+                        public int Bar
                         {
-                            throw new System.NotImplementedException();
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
+                        }
+
+                        public int Foo
+                        {
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
             }.RunAsync();
         }
 
@@ -10947,31 +11448,33 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest
-                {
-                    static abstract void M1();
-                }
-
-                class C : {|CS0535:ITest|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest
-                {
-                    static abstract void M1();
-                }
-
-                class C : ITest
-                {
-                    public static void M1()
+                    interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        static abstract void M1();
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
-                CodeActionEquivalenceKey = "False;False;True:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+
+                    class C : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest
+                    {
+                        static abstract void M1();
+                    }
+
+                    class C : ITest
+                    {
+                        public static void M1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -10984,31 +11487,36 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest
-                {
-                    static abstract void M1();
-                }
-
-                class C : {|CS0535:ITest|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest
-                {
-                    static abstract void M1();
-                }
-
-                class C : ITest
-                {
-                    static void ITest.M1()
+                    interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        static abstract void M1();
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_all_members_explicitly, codeAction.Title),
-                CodeActionEquivalenceKey = "True;False;False:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+
+                    class C : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest
+                    {
+                        static abstract void M1();
+                    }
+
+                    class C : ITest
+                    {
+                        static void ITest.M1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_all_members_explicitly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -11021,31 +11529,36 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest
-                {
-                    static abstract void M1();
-                }
-
-                abstract class C : {|CS0535:ITest|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest
-                {
-                    static abstract void M1();
-                }
-
-                abstract class C : ITest
-                {
-                    public static void M1()
+                    interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        static abstract void M1();
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface_abstractly, codeAction.Title),
-                CodeActionEquivalenceKey = "False;True;True:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+
+                    abstract class C : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest
+                    {
+                        static abstract void M1();
+                    }
+
+                    abstract class C : ITest
+                    {
+                        public static void M1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_interface_abstractly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -11058,29 +11571,34 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest
-                {
-                    static abstract int operator -(ITest x);
-                }
-                class C : {|CS0535:ITest|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest
-                {
-                    static abstract int operator -(ITest x);
-                }
-                class C : ITest
-                {
-                    static int ITest.operator -(ITest x)
+                    interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int operator -(ITest x);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_all_members_explicitly, codeAction.Title),
-                CodeActionEquivalenceKey = "True;False;False:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    class C : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest
+                    {
+                        static abstract int operator -(ITest x);
+                    }
+                    class C : ITest
+                    {
+                        static int ITest.operator -(ITest x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_all_members_explicitly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -11093,29 +11611,34 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest
-                {
-                    static abstract int operator >>>(ITest x, int y);
-                }
-                class C : {|CS0535:ITest|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest
-                {
-                    static abstract int operator >>>(ITest x, int y);
-                }
-                class C : ITest
-                {
-                    static int ITest.operator >>>(ITest x, int y)
+                    interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int operator >>>(ITest x, int y);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_all_members_explicitly, codeAction.Title),
-                CodeActionEquivalenceKey = "True;False;False:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    class C : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest
+                    {
+                        static abstract int operator >>>(ITest x, int y);
+                    }
+                    class C : ITest
+                    {
+                        static int ITest.operator >>>(ITest x, int y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_all_members_explicitly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -11128,36 +11651,38 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int operator -(T x);
-                    static abstract int operator -(T x, int y);
-                }
-                class C : {|CS0535:{|CS0535:ITest<C>|}|}
-                {
-                }
-                """,
+                    interface ITest<T> where T : ITest<T>
+                    {
+                        static abstract int operator -(T x);
+                        static abstract int operator -(T x, int y);
+                    }
+                    class C : {|CS0535:{|CS0535:ITest<C>|}|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int operator -(T x);
-                    static abstract int operator -(T x, int y);
-                }
-                class C : ITest<C>
-                {
-                    public static int operator -(C x)
+                    interface ITest<T> where T : ITest<T>
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int operator -(T x);
+                        static abstract int operator -(T x, int y);
                     }
+                    class C : ITest<C>
+                    {
+                        public static int operator -(C x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static int operator -(C x, int y)
-                    {
-                        throw new System.NotImplementedException();
+                        public static int operator -(C x, int y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
-                CodeActionEquivalenceKey = "False;False;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -11170,29 +11695,31 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int operator >>>(T x, int y);
-                }
-                class C : {|CS0535:ITest<C>|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int operator >>>(T x, int y);
-                }
-                class C : ITest<C>
-                {
-                    public static int operator >>>(C x, int y)
+                    interface ITest<T> where T : ITest<T>
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int operator >>>(T x, int y);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
-                CodeActionEquivalenceKey = "False;False;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    class C : {|CS0535:ITest<C>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest<T> where T : ITest<T>
+                    {
+                        static abstract int operator >>>(T x, int y);
+                    }
+                    class C : ITest<C>
+                    {
+                        public static int operator >>>(C x, int y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -11205,29 +11732,34 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int operator -(T x);
-                }
-                class C : {|CS0535:ITest<C>|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int operator -(T x);
-                }
-                class C : ITest<C>
-                {
-                    static int ITest<C>.operator -(C x)
+                    interface ITest<T> where T : ITest<T>
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int operator -(T x);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_all_members_explicitly, codeAction.Title),
-                CodeActionEquivalenceKey = "True;False;False:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    class C : {|CS0535:ITest<C>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest<T> where T : ITest<T>
+                    {
+                        static abstract int operator -(T x);
+                    }
+                    class C : ITest<C>
+                    {
+                        static int ITest<C>.operator -(C x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_all_members_explicitly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -11240,31 +11772,35 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int operator -(T x);
-                }
-                abstract class C : {|CS0535:ITest<C>|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int operator -(T x);
-                }
-                abstract class C : ITest<C>
-                {
-                    public static int operator -(C x)
+                    interface ITest<T> where T : ITest<T>
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int operator -(T x);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface_abstractly, codeAction.Title),
-                CodeActionEquivalenceKey = "False;True;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    abstract class C : {|CS0535:ITest<C>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest<T> where T : ITest<T>
+                    {
+                        static abstract int operator -(T x);
+                    }
+                    abstract class C : ITest<C>
+                    {
+                        public static int operator -(C x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_interface_abstractly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
-
             }.RunAsync();
         }
 
@@ -11276,31 +11812,35 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest
-                {
-                    static abstract int M(ITest x);
-                }
-                class C : {|CS0535:ITest|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest
-                {
-                    static abstract int M(ITest x);
-                }
-                class C : ITest
-                {
-                    static int ITest.M(ITest x)
+                    interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int M(ITest x);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_all_members_explicitly, codeAction.Title),
-                CodeActionEquivalenceKey = "True;False;False:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    class C : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest
+                    {
+                        static abstract int M(ITest x);
+                    }
+                    class C : ITest
+                    {
+                        static int ITest.M(ITest x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_all_members_explicitly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
-
             }.RunAsync();
         }
 
@@ -11312,31 +11852,32 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest
-                {
-                    static abstract int M(ITest x);
-                }
-                class C : {|CS0535:ITest|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest
-                {
-                    static abstract int M(ITest x);
-                }
-                class C : ITest
-                {
-                    public static int M(ITest x)
+                    interface ITest
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int M(ITest x);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
-                CodeActionEquivalenceKey = "False;False;True:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    class C : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest
+                    {
+                        static abstract int M(ITest x);
+                    }
+                    class C : ITest
+                    {
+                        public static int M(ITest x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::ITest;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
-
             }.RunAsync();
         }
 
@@ -11348,31 +11889,32 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int M(T x);
-                }
-                class C : {|CS0535:ITest<C>|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int M(T x);
-                }
-                class C : ITest<C>
-                {
-                    public static int M(C x)
+                    interface ITest<T> where T : ITest<T>
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int M(T x);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
-                CodeActionEquivalenceKey = "False;False;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    class C : {|CS0535:ITest<C>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest<T> where T : ITest<T>
+                    {
+                        static abstract int M(T x);
+                    }
+                    class C : ITest<C>
+                    {
+                        public static int M(C x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
-
             }.RunAsync();
         }
 
@@ -11384,31 +11926,35 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int M(T x);
-                }
-                class C : {|CS0535:ITest<C>|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int M(T x);
-                }
-                class C : ITest<C>
-                {
-                    static int ITest<C>.M(C x)
+                    interface ITest<T> where T : ITest<T>
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int M(T x);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_all_members_explicitly, codeAction.Title),
-                CodeActionEquivalenceKey = "True;False;False:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    class C : {|CS0535:ITest<C>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest<T> where T : ITest<T>
+                    {
+                        static abstract int M(T x);
+                    }
+                    class C : ITest<C>
+                    {
+                        static int ITest<C>.M(C x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_all_members_explicitly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
-
             }.RunAsync();
         }
 
@@ -11420,31 +11966,35 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int M(T x);
-                }
-                abstract class C : {|CS0535:ITest<C>|}
-                {
-                }
-                """,
-                FixedCode = """
-                interface ITest<T> where T : ITest<T>
-                {
-                    static abstract int M(T x);
-                }
-                abstract class C : ITest<C>
-                {
-                    public static int M(C x)
+                    interface ITest<T> where T : ITest<T>
                     {
-                        throw new System.NotImplementedException();
+                        static abstract int M(T x);
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface_abstractly, codeAction.Title),
-                CodeActionEquivalenceKey = "False;True;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    abstract class C : {|CS0535:ITest<C>|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    interface ITest<T> where T : ITest<T>
+                    {
+                        static abstract int M(T x);
+                    }
+                    abstract class C : ITest<C>
+                    {
+                        public static int M(C x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_interface_abstractly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::ITest<global::C>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
-
             }.RunAsync();
         }
 
@@ -11456,70 +12006,75 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface I1<T> where T : I1<T>
-                {
-                    abstract static explicit operator checked string(T x);
-                    abstract static explicit operator string(T x);
+                    interface I1<T> where T : I1<T>
+                    {
+                        abstract static explicit operator checked string(T x);
+                        abstract static explicit operator string(T x);
 
-                    abstract static T operator checked -(T x);
-                    abstract static T operator -(T x);
+                        abstract static T operator checked -(T x);
+                        abstract static T operator -(T x);
 
-                    abstract static T operator checked +(T x, T y);
-                    abstract static T operator +(T x, T y);
-                }
+                        abstract static T operator checked +(T x, T y);
+                        abstract static T operator +(T x, T y);
+                    }
 
-                class C3 : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I1<C3>|}|}|}|}|}|}
-                {
-                }
-                """,
+                    class C3 : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I1<C3>|}|}|}|}|}|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface I1<T> where T : I1<T>
-                {
-                    abstract static explicit operator checked string(T x);
-                    abstract static explicit operator string(T x);
-
-                    abstract static T operator checked -(T x);
-                    abstract static T operator -(T x);
-
-                    abstract static T operator checked +(T x, T y);
-                    abstract static T operator +(T x, T y);
-                }
-
-                class C3 : I1<C3>
-                {
-                    static C3 I1<C3>.operator checked +(C3 x, C3 y)
+                    interface I1<T> where T : I1<T>
                     {
-                        throw new System.NotImplementedException();
+                        abstract static explicit operator checked string(T x);
+                        abstract static explicit operator string(T x);
+
+                        abstract static T operator checked -(T x);
+                        abstract static T operator -(T x);
+
+                        abstract static T operator checked +(T x, T y);
+                        abstract static T operator +(T x, T y);
                     }
 
-                    static C3 I1<C3>.operator +(C3 x, C3 y)
+                    class C3 : I1<C3>
                     {
-                        throw new System.NotImplementedException();
-                    }
+                        static C3 I1<C3>.operator checked +(C3 x, C3 y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    static C3 I1<C3>.operator checked -(C3 x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        static C3 I1<C3>.operator +(C3 x, C3 y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    static C3 I1<C3>.operator -(C3 x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        static C3 I1<C3>.operator checked -(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static explicit operator checked string(C3 x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        static C3 I1<C3>.operator -(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static explicit operator string(C3 x)
-                    {
-                        throw new System.NotImplementedException();
+                        public static explicit operator checked string(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        public static explicit operator string(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_all_members_explicitly, codeAction.Title),
-                CodeActionEquivalenceKey = "True;False;False:global::I1<global::C3>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_all_members_explicitly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::I1<global::C3>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -11532,70 +12087,72 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface I1<T> where T : I1<T>
-                {
-                    abstract static explicit operator checked string(T x);
-                    abstract static explicit operator string(T x);
+                    interface I1<T> where T : I1<T>
+                    {
+                        abstract static explicit operator checked string(T x);
+                        abstract static explicit operator string(T x);
 
-                    abstract static T operator checked -(T x);
-                    abstract static T operator -(T x);
+                        abstract static T operator checked -(T x);
+                        abstract static T operator -(T x);
 
-                    abstract static T operator checked +(T x, T y);
-                    abstract static T operator +(T x, T y);
-                }
+                        abstract static T operator checked +(T x, T y);
+                        abstract static T operator +(T x, T y);
+                    }
 
-                class C3 : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I1<C3>|}|}|}|}|}|}
-                {
-                }
-                """,
+                    class C3 : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I1<C3>|}|}|}|}|}|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface I1<T> where T : I1<T>
-                {
-                    abstract static explicit operator checked string(T x);
-                    abstract static explicit operator string(T x);
-
-                    abstract static T operator checked -(T x);
-                    abstract static T operator -(T x);
-
-                    abstract static T operator checked +(T x, T y);
-                    abstract static T operator +(T x, T y);
-                }
-
-                class C3 : I1<C3>
-                {
-                    public static C3 operator checked +(C3 x, C3 y)
+                    interface I1<T> where T : I1<T>
                     {
-                        throw new System.NotImplementedException();
+                        abstract static explicit operator checked string(T x);
+                        abstract static explicit operator string(T x);
+
+                        abstract static T operator checked -(T x);
+                        abstract static T operator -(T x);
+
+                        abstract static T operator checked +(T x, T y);
+                        abstract static T operator +(T x, T y);
                     }
 
-                    public static C3 operator +(C3 x, C3 y)
+                    class C3 : I1<C3>
                     {
-                        throw new System.NotImplementedException();
-                    }
+                        public static C3 operator checked +(C3 x, C3 y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static C3 operator checked -(C3 x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public static C3 operator +(C3 x, C3 y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static C3 operator -(C3 x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public static C3 operator checked -(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static explicit operator checked string(C3 x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public static C3 operator -(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static explicit operator string(C3 x)
-                    {
-                        throw new System.NotImplementedException();
+                        public static explicit operator checked string(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        public static explicit operator string(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
-                CodeActionEquivalenceKey = "False;False;True:global::I1<global::C3>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(FeaturesResources.Implement_interface, codeAction.Title),
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::I1<global::C3>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -11608,70 +12165,75 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                interface I1<T> where T : I1<T>
-                {
-                    abstract static explicit operator checked string(T x);
-                    abstract static explicit operator string(T x);
+                    interface I1<T> where T : I1<T>
+                    {
+                        abstract static explicit operator checked string(T x);
+                        abstract static explicit operator string(T x);
 
-                    abstract static T operator checked -(T x);
-                    abstract static T operator -(T x);
+                        abstract static T operator checked -(T x);
+                        abstract static T operator -(T x);
 
-                    abstract static T operator checked +(T x, T y);
-                    abstract static T operator +(T x, T y);
-                }
+                        abstract static T operator checked +(T x, T y);
+                        abstract static T operator +(T x, T y);
+                    }
 
-                abstract class C3 : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I1<C3>|}|}|}|}|}|}
-                {
-                }
-                """,
+                    abstract class C3 : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I1<C3>|}|}|}|}|}|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                interface I1<T> where T : I1<T>
-                {
-                    abstract static explicit operator checked string(T x);
-                    abstract static explicit operator string(T x);
-
-                    abstract static T operator checked -(T x);
-                    abstract static T operator -(T x);
-
-                    abstract static T operator checked +(T x, T y);
-                    abstract static T operator +(T x, T y);
-                }
-
-                abstract class C3 : I1<C3>
-                {
-                    public static C3 operator checked +(C3 x, C3 y)
+                    interface I1<T> where T : I1<T>
                     {
-                        throw new System.NotImplementedException();
+                        abstract static explicit operator checked string(T x);
+                        abstract static explicit operator string(T x);
+
+                        abstract static T operator checked -(T x);
+                        abstract static T operator -(T x);
+
+                        abstract static T operator checked +(T x, T y);
+                        abstract static T operator +(T x, T y);
                     }
 
-                    public static C3 operator +(C3 x, C3 y)
+                    abstract class C3 : I1<C3>
                     {
-                        throw new System.NotImplementedException();
-                    }
+                        public static C3 operator checked +(C3 x, C3 y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static C3 operator checked -(C3 x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public static C3 operator +(C3 x, C3 y)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static C3 operator -(C3 x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public static C3 operator checked -(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static explicit operator checked string(C3 x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public static C3 operator -(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    public static explicit operator string(C3 x)
-                    {
-                        throw new System.NotImplementedException();
+                        public static explicit operator checked string(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        public static explicit operator string(C3 x)
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_interface_abstractly, codeAction.Title),
-                CodeActionEquivalenceKey = "False;True;True:global::I1<global::C3>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_interface_abstractly,
+                        codeAction.Title
+                    ),
+                CodeActionEquivalenceKey =
+                    "False;True;True:global::I1<global::C3>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -11682,36 +12244,34 @@ interface I
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp7_3,
-                TestCode =
-                """
-                using System;
+                TestCode = """
+                    using System;
 
-                public interface ITest
-                {
-                    void TestEnum<T>(T value) where T : Enum;
-                }
-
-                public abstract class BaseTest : {|CS0535:ITest|}
-                {
-                }
-                """,
-                FixedCode =
-                """
-                using System;
-
-                public interface ITest
-                {
-                    void TestEnum<T>(T value) where T : Enum;
-                }
-
-                public abstract class BaseTest : ITest
-                {
-                    public void TestEnum<T>(T value) where T : Enum
+                    public interface ITest
                     {
-                        throw new NotImplementedException();
+                        void TestEnum<T>(T value) where T : Enum;
                     }
-                }
-                """,
+
+                    public abstract class BaseTest : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+
+                    public interface ITest
+                    {
+                        void TestEnum<T>(T value) where T : Enum;
+                    }
+
+                    public abstract class BaseTest : ITest
+                    {
+                        public void TestEnum<T>(T value) where T : Enum
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -11721,36 +12281,34 @@ interface I
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp7_2,
-                TestCode =
-                """
-                using System;
+                TestCode = """
+                    using System;
 
-                public interface ITest
-                {
-                    void TestEnum<T>(T value) where T : {|CS8320:Enum|};
-                }
-
-                public abstract class BaseTest : {|CS0535:ITest|}
-                {
-                }
-                """,
-                FixedCode =
-                """
-                using System;
-
-                public interface ITest
-                {
-                    void TestEnum<T>(T value) where T : {|CS8320:Enum|};
-                }
-
-                public abstract class BaseTest : ITest
-                {
-                    void ITest.TestEnum<T>(T value)
+                    public interface ITest
                     {
-                        throw new NotImplementedException();
+                        void TestEnum<T>(T value) where T : {|CS8320:Enum|};
                     }
-                }
-                """,
+
+                    public abstract class BaseTest : {|CS0535:ITest|}
+                    {
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+
+                    public interface ITest
+                    {
+                        void TestEnum<T>(T value) where T : {|CS8320:Enum|};
+                    }
+
+                    public abstract class BaseTest : ITest
+                    {
+                        void ITest.TestEnum<T>(T value)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -11762,57 +12320,61 @@ interface I
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
                 LanguageVersion = LanguageVersion.CSharp12,
                 TestCode = """
-                using System;
+                    using System;
 
-                internal interface I
-                {
-                    internal static abstract int P { get; }
+                    internal interface I
+                    {
+                        internal static abstract int P { get; }
 
-                    internal static abstract event Action E;
+                        internal static abstract event Action E;
 
-                    internal static abstract void M();
-                }
+                        internal static abstract void M();
+                    }
 
-                class C : {|CS0535:{|CS0535:{|CS0535:I|}|}|}
-                {
-                }
-                """,
+                    class C : {|CS0535:{|CS0535:{|CS0535:I|}|}|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                internal interface I
-                {
-                    internal static abstract int P { get; }
-
-                    internal static abstract event Action E;
-
-                    internal static abstract void M();
-                }
-
-                class C : I
-                {
-                    static int I.P => throw new NotImplementedException();
-
-                    static event Action I.E
+                    internal interface I
                     {
-                        add
+                        internal static abstract int P { get; }
+
+                        internal static abstract event Action E;
+
+                        internal static abstract void M();
+                    }
+
+                    class C : I
+                    {
+                        static int I.P => throw new NotImplementedException();
+
+                        static event Action I.E
                         {
-                            throw new NotImplementedException();
+                            add
+                            {
+                                throw new NotImplementedException();
+                            }
+
+                            remove
+                            {
+                                throw new NotImplementedException();
+                            }
                         }
 
-                        remove
+                        static void I.M()
                         {
                             throw new NotImplementedException();
                         }
                     }
-
-                    static void I.M()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Implement_all_members_explicitly, codeAction.Title),
+                    """,
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Implement_all_members_explicitly,
+                        codeAction.Title
+                    ),
             }.RunAsync();
         }
 
@@ -11822,53 +12384,51 @@ interface I
             await new VerifyCS.Test
             {
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                TestCode =
-                """
-                using System.Collections;
-                using System.Collections.Generic;
+                TestCode = """
+                    using System.Collections;
+                    using System.Collections.Generic;
 
-                public interface IRefReadOnlyList<T> : IReadOnlyList<T> where T : struct
-                {
-                    new ref readonly T this[int ix] { get; }
-                }
-
-                public struct A { };
-
-                public class Class : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:IRefReadOnlyList<A>|}|}|}|}|}
-                {
-                }
-                """,
-                FixedCode =
-                """
-                using System.Collections;
-                using System.Collections.Generic;
-
-                public interface IRefReadOnlyList<T> : IReadOnlyList<T> where T : struct
-                {
-                    new ref readonly T this[int ix] { get; }
-                }
-
-                public struct A { };
-
-                public class Class : IRefReadOnlyList<A>
-                {
-                    public ref readonly A this[int ix] => throw new System.NotImplementedException();
-
-                    A IReadOnlyList<A>.this[int index] => throw new System.NotImplementedException();
-
-                    public int Count => throw new System.NotImplementedException();
-
-                    public IEnumerator<A> GetEnumerator()
+                    public interface IRefReadOnlyList<T> : IReadOnlyList<T> where T : struct
                     {
-                        throw new System.NotImplementedException();
+                        new ref readonly T this[int ix] { get; }
                     }
 
-                    IEnumerator IEnumerable.GetEnumerator()
+                    public struct A { };
+
+                    public class Class : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:IRefReadOnlyList<A>|}|}|}|}|}
                     {
-                        throw new System.NotImplementedException();
                     }
-                }
-                """,
+                    """,
+                FixedCode = """
+                    using System.Collections;
+                    using System.Collections.Generic;
+
+                    public interface IRefReadOnlyList<T> : IReadOnlyList<T> where T : struct
+                    {
+                        new ref readonly T this[int ix] { get; }
+                    }
+
+                    public struct A { };
+
+                    public class Class : IRefReadOnlyList<A>
+                    {
+                        public ref readonly A this[int ix] => throw new System.NotImplementedException();
+
+                        A IReadOnlyList<A>.this[int index] => throw new System.NotImplementedException();
+
+                        public int Count => throw new System.NotImplementedException();
+
+                        public IEnumerator<A> GetEnumerator()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+
+                        IEnumerator IEnumerable.GetEnumerator()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
     }

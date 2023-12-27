@@ -59,29 +59,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public C(string s)
-                    {
-                        if (s is null)
+                        public C([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -91,29 +92,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             {
                 LanguageVersion = LanguageVersion.CSharp6,
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                class C
-                {
-                    public C(string s)
-                    {
-                        if (s == null)
+                        public C([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
                     }
-                }
-                """
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C(string s)
+                        {
+                            if (s == null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -122,29 +123,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]int? i)
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public C(int? i)
-                    {
-                        if (i is null)
+                        public C([||]int? i)
                         {
-                            throw new ArgumentNullException(nameof(i));
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C(int? i)
+                        {
+                            if (i is null)
+                            {
+                                throw new ArgumentNullException(nameof(i));
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47030")]
@@ -342,33 +344,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                partial class C
-                {
-                    partial void M(string s);
-
-                    partial void M([||]string s)
+                    partial class C
                     {
-                    }
-                }
-                """,
-                """
-                using System;
+                        partial void M(string s);
 
-                partial class C
-                {
-                    partial void M(string s);
-
-                    partial void M(string s)
-                    {
-                        if (s is null)
+                        partial void M([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    partial class C
+                    {
+                        partial void M(string s);
+
+                        partial void M(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -378,33 +381,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             {
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = """
-                using System;
+                    using System;
 
-                partial class C
-                {
-                    public partial void M(string s);
-
-                    public partial void M([||]string s)
+                    partial class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
+                        public partial void M(string s);
 
-                partial class C
-                {
-                    public partial void M(string s);
-
-                    public partial void M(string s)
-                    {
-                        if (s is null)
+                        public partial void M([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
                     }
-                }
-                """
+                    """,
+                FixedCode = """
+                    using System;
+
+                    partial class C
+                    {
+                        public partial void M(string s);
+
+                        public partial void M(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -413,33 +416,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                partial class C
-                {
-                    partial void M([||]string s)
+                    partial class C
                     {
-                    }
-
-                    partial void M(string s);
-                }
-                """,
-                """
-                using System;
-
-                partial class C
-                {
-                    partial void M(string s)
-                    {
-                        if (s is null)
+                        partial void M([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
-                    }
 
-                    partial void M(string s);
-                }
-                """);
+                        partial void M(string s);
+                    }
+                    """,
+                """
+                    using System;
+
+                    partial class C
+                    {
+                        partial void M(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+
+                        partial void M(string s);
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -449,33 +453,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             {
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = """
-                using System;
+                    using System;
 
-                partial class C
-                {
-                    public partial void M([||]string s)
+                    partial class C
                     {
-                    }
-
-                    public partial void M(string s);
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                partial class C
-                {
-                    public partial void M(string s)
-                    {
-                        if (s is null)
+                        public partial void M([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
-                    }
 
-                    public partial void M(string s);
-                }
-                """
+                        public partial void M(string s);
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+
+                    partial class C
+                    {
+                        public partial void M(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+
+                        public partial void M(string s);
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -484,31 +488,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string _s;
-
-                    public C([||]string s)
+                    class C
                     {
-                        _s = s;
+                        private string _s;
+
+                        public C([||]string s)
+                        {
+                            _s = s;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string _s;
-
-                    public C(string s)
+                    class C
                     {
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
+                        private string _s;
+
+                        public C(string s)
+                        {
+                            _s = s ?? throw new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -517,16 +522,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string a, string b, string c)
+                    class C
                     {
+                        public C([||]string a, string b, string c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -561,7 +567,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -571,18 +579,19 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                #nullable enable
+                    #nullable enable
 
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string a, string b, string? c)
+                    class C
                     {
+                        public C([||]string a, string b, string? c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"#nullable enable
+                    """,
+                FixedCode =
+                    @$"#nullable enable
 
 using System;
 
@@ -610,7 +619,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -636,16 +647,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(string a, [||]bool b, string c)
+                    class C
                     {
+                        public C(string a, [||]bool b, string c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -671,7 +683,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -681,16 +695,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string a, bool b, string c)
+                    class C
                     {
+                        public C([||]string a, bool b, string c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -716,7 +731,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -726,16 +743,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string a, object b, string c)
+                    class C
                     {
+                        public C([||]string a, object b, string c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -766,7 +784,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -776,41 +796,43 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]object a, object b, object c)
+                    class C
                     {
+                        public C([||]object a, object b, object c)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object a, object b, object c)
+                    class C
                     {
-                        if (a is null)
+                        public C(object a, object b, object c)
                         {
-                            throw new ArgumentNullException(nameof(a));
-                        }
+                            if (a is null)
+                            {
+                                throw new ArgumentNullException(nameof(a));
+                            }
 
-                        if (b is null)
-                        {
-                            throw new ArgumentNullException(nameof(b));
-                        }
+                            if (b is null)
+                            {
+                                throw new ArgumentNullException(nameof(b));
+                            }
 
-                        if (c is null)
-                        {
-                            throw new ArgumentNullException(nameof(c));
+                            if (c is null)
+                            {
+                                throw new ArgumentNullException(nameof(c));
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -820,41 +842,43 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]int ? a, bool ? b, double ? c)
+                    class C
                     {
+                        public C([||]int ? a, bool ? b, double ? c)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(int ? a, bool ? b, double ? c)
+                    class C
                     {
-                        if (a is null)
+                        public C(int ? a, bool ? b, double ? c)
                         {
-                            throw new ArgumentNullException(nameof(a));
-                        }
+                            if (a is null)
+                            {
+                                throw new ArgumentNullException(nameof(a));
+                            }
 
-                        if (b is null)
-                        {
-                            throw new ArgumentNullException(nameof(b));
-                        }
+                            if (b is null)
+                            {
+                                throw new ArgumentNullException(nameof(b));
+                            }
 
-                        if (c is null)
-                        {
-                            throw new ArgumentNullException(nameof(c));
+                            if (c is null)
+                            {
+                                throw new ArgumentNullException(nameof(c));
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -863,31 +887,32 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string S;
-
-                    public C([||]string s)
+                    class C
                     {
-                        S = s;
+                        private string S;
+
+                        public C([||]string s)
+                        {
+                            S = s;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string S;
-
-                    public C(string s)
+                    class C
                     {
-                        S = s ?? throw new ArgumentNullException(nameof(s));
+                        private string S;
+
+                        public C(string s)
+                        {
+                            S = s ?? throw new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -897,36 +922,36 @@ class C
             {
                 LanguageVersion = LanguageVersion.CSharp6,
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string S;
-
-                    public C([||]string s)
+                    class C
                     {
-                        S = s;
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
+                        private string S;
 
-                class C
-                {
-                    private string S;
-
-                    public C(string s)
-                    {
-                        if (s == null)
+                        public C([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
+                            S = s;
                         }
-
-                        S = s;
                     }
-                }
-                """
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        private string S;
+
+                        public C(string s)
+                        {
+                            if (s == null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+
+                            S = s;
+                        }
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -936,39 +961,43 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string S;
-
-                    public C([||]string s)
+                    class C
                     {
-                        S = s;
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
+                        private string S;
 
-                class C
-                {
-                    private string S;
-
-                    public C(string s)
-                    {
-                        if (s is null)
+                        public C([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
+                            S = s;
                         }
-
-                        S = s;
                     }
-                }
-                """,
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        private string S;
+
+                        public C(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+
+                            S = s;
+                        }
+                    }
+                    """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferThrowExpression, false, NotificationOption2.Silent }
+                    {
+                        CSharpCodeStyleOptions.PreferThrowExpression,
+                        false,
+                        NotificationOption2.Silent
+                    }
                 }
             }.RunAsync();
         }
@@ -978,27 +1007,28 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string S;
+                    class C
+                    {
+                        private string S;
 
-                    public C([||]string s)
-                        => S = s;
-                }
-                """,
+                        public C([||]string s)
+                            => S = s;
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string S;
+                    class C
+                    {
+                        private string S;
 
-                    public C(string s)
-                        => S = s ?? throw new ArgumentNullException(nameof(s));
-                }
-                """);
+                        public C(string s)
+                            => S = s ?? throw new ArgumentNullException(nameof(s));
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1006,38 +1036,39 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
-                        => Init();
-
-                    private void Init()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                using System;
+                        public C([||]string s)
+                            => Init();
 
-                class C
-                {
-                    public C(string s)
-                    {
-                        if (s is null)
+                        private void Init()
                         {
-                            throw new ArgumentNullException(nameof(s));
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+
+                            Init();
                         }
 
-                        Init();
+                        private void Init()
+                        {
+                        }
                     }
-
-                    private void Init()
-                    {
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1046,41 +1077,44 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
-                        => Init();
-
-                    private void Init()
+                    class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
+                        public C([||]string s)
+                            => Init();
 
-                class C
-                {
-                    public C(string s)
-                    {
-                        if (s is null)
+                        private void Init()
                         {
-                            throw new ArgumentNullException(nameof(s));
+                        }
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+
+                            Init();
                         }
 
-                        Init();
+                        private void Init()
+                        {
+                        }
                     }
-
-                    private void Init()
-                    {
-                    }
-                }
-                """,
+                    """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement }
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                        CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                    }
                 }
             }.RunAsync();
         }
@@ -1090,39 +1124,40 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int F([||]string s) => Init();
-                    }
-
-                    private int Init() => 1;
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        int F(string s)
+                        void M()
                         {
-                            if (s is null)
-                            {
-                                throw new ArgumentNullException(nameof(s));
-                            }
-
-                            return Init();
+                            int F([||]string s) => Init();
                         }
-                    }
 
-                    private int Init() => 1;
-                }
-                """);
+                        private int Init() => 1;
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            int F(string s)
+                            {
+                                if (s is null)
+                                {
+                                    throw new ArgumentNullException(nameof(s));
+                                }
+
+                                return Init();
+                            }
+                        }
+
+                        private int Init() => 1;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1130,39 +1165,40 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        void F([||]string s) => Init();
-                    }
-
-                    private int Init() => 1;
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        void F(string s)
+                        void M()
                         {
-                            if (s is null)
-                            {
-                                throw new ArgumentNullException(nameof(s));
-                            }
-
-                            Init();
+                            void F([||]string s) => Init();
                         }
-                    }
 
-                    private int Init() => 1;
-                }
-                """);
+                        private int Init() => 1;
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            void F(string s)
+                            {
+                                if (s is null)
+                                {
+                                    throw new ArgumentNullException(nameof(s));
+                                }
+
+                                Init();
+                            }
+                        }
+
+                        private int Init() => 1;
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1170,39 +1206,40 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<string, int> f = [||]s => GetValue();
-
-                        int GetValue() => 0;
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        Func<string, int> f = s =>
+                        void M()
                         {
-                            if (s is null)
-                            {
-                                throw new ArgumentNullException(nameof(s));
-                            }
+                            Func<string, int> f = [||]s => GetValue();
 
-                            return GetValue();
-                        };
-
-                        int GetValue() => 0;
+                            int GetValue() => 0;
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            Func<string, int> f = s =>
+                            {
+                                if (s is null)
+                                {
+                                    throw new ArgumentNullException(nameof(s));
+                                }
+
+                                return GetValue();
+                            };
+
+                            int GetValue() => 0;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1210,39 +1247,40 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action<string> f = [||]s => NoValue();
-
-                        void NoValue() { }
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        Action<string> f = s =>
+                        void M()
                         {
-                            if (s is null)
-                            {
-                                throw new ArgumentNullException(nameof(s));
-                            }
+                            Action<string> f = [||]s => NoValue();
 
-                            NoValue();
-                        };
-
-                        void NoValue() { }
+                            void NoValue() { }
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            Action<string> f = s =>
+                            {
+                                if (s is null)
+                                {
+                                    throw new ArgumentNullException(nameof(s));
+                                }
+
+                                NoValue();
+                            };
+
+                            void NoValue() { }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1250,36 +1288,37 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(string a, [||]string s)
+                    class C
                     {
-                        if (a == null)
+                        public C(string a, [||]string s)
                         {
+                            if (a == null)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(string a, string s)
+                    class C
                     {
-                        if (a == null)
+                        public C(string a, string s)
                         {
-                        }
+                            if (a == null)
+                            {
+                            }
 
-                        if (s is null)
-                        {
-                            throw new ArgumentNullException(nameof(s));
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1287,36 +1326,37 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(string [||]a, string s)
+                    class C
                     {
-                        if (s == null)
+                        public C(string [||]a, string s)
                         {
+                            if (s == null)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(string a, string s)
+                    class C
                     {
-                        if (a is null)
+                        public C(string a, string s)
                         {
-                            throw new ArgumentNullException(nameof(a));
-                        }
+                            if (a is null)
+                            {
+                                throw new ArgumentNullException(nameof(a));
+                            }
 
-                        if (s == null)
-                        {
+                            if (s == null)
+                            {
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -1497,29 +1537,30 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void F([||]string s)
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void F(string s)
-                    {
-                        if (s is null)
+                        void F([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void F(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1527,32 +1568,33 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static C operator +(C c1, [||]string s)
+                    class C
                     {
-                        return null;
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public static C operator +(C c1, [||]string s)
-                    {
-                        if (s is null)
+                        public static C operator +(C c1, [||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
+                            return null;
                         }
-
-                        return null;
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public static C operator +(C c1, [||]string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+
+                            return null;
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1560,35 +1602,36 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C()
+                    class C
                     {
-                        Func<string, int> f = [||]s => { return 0; };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public C()
-                    {
-                        Func<string, int> f = s =>
+                        public C()
                         {
-                            if (s is null)
-                            {
-                                throw new ArgumentNullException(nameof(s));
-                            }
-
-                            return 0;
-                        };
+                            Func<string, int> f = [||]s => { return 0; };
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C()
+                        {
+                            Func<string, int> f = s =>
+                            {
+                                if (s is null)
+                                {
+                                    throw new ArgumentNullException(nameof(s));
+                                }
+
+                                return 0;
+                            };
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1596,33 +1639,34 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C()
+                    class C
                     {
-                        Action<string> f = [||]s => { };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public C()
-                    {
-                        Action<string> f = s =>
+                        public C()
                         {
-                            if (s is null)
-                            {
-                                throw new ArgumentNullException(nameof(s));
-                            }
-                        };
+                            Action<string> f = [||]s => { };
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C()
+                        {
+                            Action<string> f = s =>
+                            {
+                                if (s is null)
+                                {
+                                    throw new ArgumentNullException(nameof(s));
+                                }
+                            };
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1630,35 +1674,36 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C()
+                    class C
                     {
-                        Func<string, int> f = ([||]string s) => { return 0; };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public C()
-                    {
-                        Func<string, int> f = (string s) =>
+                        public C()
                         {
-                            if (s is null)
-                            {
-                                throw new ArgumentNullException(nameof(s));
-                            }
-
-                            return 0;
-                        };
+                            Func<string, int> f = ([||]string s) => { return 0; };
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C()
+                        {
+                            Func<string, int> f = (string s) =>
+                            {
+                                if (s is null)
+                                {
+                                    throw new ArgumentNullException(nameof(s));
+                                }
+
+                                return 0;
+                            };
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1668,35 +1713,35 @@ class C
             {
                 LanguageVersion = LanguageVersion.CSharp11,
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C()
+                    class C
                     {
-                        Func<string, int> f = ([||]_) => { return 0; };
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                class C
-                {
-                    public C()
-                    {
-                        Func<string, int> f = (_) =>
+                        public C()
                         {
-                            if (_ is null)
-                            {
-                                throw new ArgumentNullException(nameof(_));
-                            }
-
-                            return 0;
-                        };
+                            Func<string, int> f = ([||]_) => { return 0; };
+                        }
                     }
-                }
-                """
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C()
+                        {
+                            Func<string, int> f = (_) =>
+                            {
+                                if (_ is null)
+                                {
+                                    throw new ArgumentNullException(nameof(_));
+                                }
+
+                                return 0;
+                            };
+                        }
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -1727,35 +1772,36 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C()
+                    class C
                     {
-                        Func<string, int> f = delegate ([||]string s) { return 0; };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public C()
-                    {
-                        Func<string, int> f = delegate (string s)
+                        public C()
                         {
-                            if (s is null)
-                            {
-                                throw new ArgumentNullException(nameof(s));
-                            }
-
-                            return 0;
-                        };
+                            Func<string, int> f = delegate ([||]string s) { return 0; };
+                        }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C()
+                        {
+                            Func<string, int> f = delegate (string s)
+                            {
+                                if (s is null)
+                                {
+                                    throw new ArgumentNullException(nameof(s));
+                                }
+
+                                return 0;
+                            };
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1763,35 +1809,36 @@ class C
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C()
+                    class C
                     {
-                        void F([||]string s)
+                        public C()
                         {
-                        }
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public C()
-                    {
-                        void F(string s)
-                        {
-                            if (s is null)
+                            void F([||]string s)
                             {
-                                throw new ArgumentNullException(nameof(s));
                             }
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C()
+                        {
+                            void F(string s)
+                            {
+                                if (s is null)
+                                {
+                                    throw new ArgumentNullException(nameof(s));
+                                }
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -1863,16 +1910,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
+                        public C([||]string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = $@"using System;
+                    """,
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -1899,16 +1947,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
+                        public C([||]string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = $@"using System;
+                    """,
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -1925,7 +1974,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_string_IsNullOrWhiteSpace_check)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_string_IsNullOrWhiteSpace_check
+                )
             }.RunAsync();
         }
 
@@ -1936,16 +1987,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
+                        public C([||]string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = $@"using System;
+                    """,
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -1990,16 +2042,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main([||]String bar)
+                    class Program
                     {
+                        static void Main([||]String bar)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class Program
 {{
@@ -2019,7 +2072,10 @@ class Program
                 CodeActionEquivalenceKey = nameof(FeaturesResources.Add_string_IsNullOrEmpty_check),
                 Options =
                 {
-                    { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, CodeStyleOption2.FalseWithSuggestionEnforcement }
+                    {
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
                 }
             }.RunAsync();
         }
@@ -2032,29 +2088,35 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
+                        public C([||]string s)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(string s)
+                    class C
                     {
-                        if (s is null) throw new ArgumentNullException(nameof(s));
+                        public C(string s)
+                        {
+                            if (s is null) throw new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferBraces, new CodeStyleOption2<PreferBracesPreference>((PreferBracesPreference)preferBraces, NotificationOption2.Silent) },
+                    {
+                        CSharpCodeStyleOptions.PreferBraces,
+                        new CodeStyleOption2<PreferBracesPreference>(
+                            (PreferBracesPreference)preferBraces,
+                            NotificationOption2.Silent
+                        )
+                    },
                 }
             }.RunAsync();
         }
@@ -2065,35 +2127,42 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
+                    class C
+                    {
+                        public C(string s[||])
+                    }
+                    """,
+                ExpectedDiagnostics =
                 {
-                    public C(string s[||])
-                }
-                """,
-                ExpectedDiagnostics = {
                     // /0/Test0.cs(6,12): error CS0501: 'C.C(string)' must declare a body because it is not marked abstract, extern, or partial
-                    DiagnosticResult.CompilerError("CS0501").WithLocation(5, 12).WithArguments("C.C(string)"),
+                    DiagnosticResult
+                        .CompilerError("CS0501")
+                        .WithLocation(5, 12)
+                        .WithArguments("C.C(string)"),
                     // /0/Test0.cs(6,23): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithLocation(5, 23),
                 },
                 FixedState =
                 {
-                    Sources = { """
-                        using System;
+                    Sources =
+                    {
+                        """
+                            using System;
 
-                        class C
-                        {
-                            public C(string s)
+                            class C
                             {
-                                if (s is null)
+                                public C(string s)
                                 {
-                                    throw new ArgumentNullException(nameof(s));
+                                    if (s is null)
+                                    {
+                                        throw new ArgumentNullException(nameof(s));
+                                    }
                                 }
                             }
-                        }
-                        """ },
+                            """
+                    },
                     InheritanceMode = StateInheritanceMode.Explicit
                 }
             }.RunAsync();
@@ -2104,36 +2173,37 @@ class Program
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                class C
-                {
-                    public int Foo(int[] array[||]) =>
-                        array.Where(x => x > 3)
-                            .OrderBy(x => x)
-                            .Count();
-                }
-                """,
-                """
-                using System;
-                using System.Linq;
-
-                class C
-                {
-                    public int Foo(int[] array)
+                    class C
                     {
-                        if (array is null)
-                        {
-                            throw new ArgumentNullException(nameof(array));
-                        }
-
-                        return array.Where(x => x > 3)
-                            .OrderBy(x => x)
-                            .Count();
+                        public int Foo(int[] array[||]) =>
+                            array.Where(x => x > 3)
+                                .OrderBy(x => x)
+                                .Count();
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    using System.Linq;
+
+                    class C
+                    {
+                        public int Foo(int[] array)
+                        {
+                            if (array is null)
+                            {
+                                throw new ArgumentNullException(nameof(array));
+                            }
+
+                            return array.Where(x => x > 3)
+                                .OrderBy(x => x)
+                                .Count();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21501")]
@@ -2141,36 +2211,37 @@ class Program
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                class C
-                {
-                    public int Foo(int[] array[||]) /* Bar */ => /* Bar */
-                        array.Where(x => x > 3)
-                            .OrderBy(x => x)
-                            .Count(); /* Bar */
-                }
-                """,
-                """
-                using System;
-                using System.Linq;
-
-                class C
-                {
-                    public int Foo(int[] array) /* Bar */
+                    class C
                     {
-                        if (array is null)
-                        {
-                            throw new ArgumentNullException(nameof(array));
-                        }
-                        /* Bar */
-                        return array.Where(x => x > 3)
-                            .OrderBy(x => x)
-                            .Count(); /* Bar */
+                        public int Foo(int[] array[||]) /* Bar */ => /* Bar */
+                            array.Where(x => x > 3)
+                                .OrderBy(x => x)
+                                .Count(); /* Bar */
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    using System.Linq;
+
+                    class C
+                    {
+                        public int Foo(int[] array) /* Bar */
+                        {
+                            if (array is null)
+                            {
+                                throw new ArgumentNullException(nameof(array));
+                            }
+                            /* Bar */
+                            return array.Where(x => x > 3)
+                                .OrderBy(x => x)
+                                .Count(); /* Bar */
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21501")]
@@ -2222,36 +2293,37 @@ class Program
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                class C
-                {
-                    public void Foo(int[] array[||]) =>
-                        array.Where(x => x > 3)
-                            .OrderBy(x => x)
-                            .Count();
-                }
-                """,
-                """
-                using System;
-                using System.Linq;
-
-                class C
-                {
-                    public void Foo(int[] array)
+                    class C
                     {
-                        if (array is null)
-                        {
-                            throw new ArgumentNullException(nameof(array));
-                        }
-
-                        array.Where(x => x > 3)
-                            .OrderBy(x => x)
-                            .Count();
+                        public void Foo(int[] array[||]) =>
+                            array.Where(x => x > 3)
+                                .OrderBy(x => x)
+                                .Count();
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+                    using System.Linq;
+
+                    class C
+                    {
+                        public void Foo(int[] array)
+                        {
+                            if (array is null)
+                            {
+                                throw new ArgumentNullException(nameof(array));
+                            }
+
+                            array.Where(x => x > 3)
+                                .OrderBy(x => x)
+                                .Count();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29190")]
@@ -2259,29 +2331,30 @@ class Program
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(string [|s|])
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public C(string s)
-                    {
-                        if (s is null)
+                        public C(string [|s|])
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29333")]
@@ -2298,17 +2371,23 @@ class Program
                     }
                 }
                 """;
-            await VerifyCS.VerifyRefactoringAsync(code,
+            await VerifyCS.VerifyRefactoringAsync(
+                code,
                 [
                     // /0/Test0.cs(7,12): error CS0103: The name 'x' does not exist in the current context
-                    DiagnosticResult.CompilerError("CS0103").WithSpan(7, 12, 7, 13).WithArguments("x"),
+                    DiagnosticResult
+                        .CompilerError("CS0103")
+                        .WithSpan(7, 12, 7, 13)
+                        .WithArguments("x"),
                     // /0/Test0.cs(7,13): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(7, 13, 7, 13),
                     // /0/Test0.cs(7,13): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithSpan(7, 13, 7, 13),
                     // /0/Test0.cs(7,13): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithSpan(7, 13, 7, 13),
-                ], code);
+                ],
+                code
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41824")]
@@ -2335,27 +2414,28 @@ class Program
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    public C(string s)
-                    {
-                        if (s is null)
+                        public C([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        public C(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52385")]
@@ -2364,27 +2444,27 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
+                        public C($$object o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object o)
+                    class C
                     {
-                        if (o is null)
-                            throw new ArgumentNullException(nameof(o));
+                        public C(object o)
+                        {
+                            if (o is null)
+                                throw new ArgumentNullException(nameof(o));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2400,27 +2480,27 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
+                        public C($$object o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object o)
+                    class C
                     {
-                        if (o is null)
-                            throw new ArgumentNullException(nameof(o));
+                        public C(object o)
+                        {
+                            if (o is null)
+                                throw new ArgumentNullException(nameof(o));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2436,29 +2516,29 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                class C
-                {
-                    public C(object o)
-                    {
-                        if (o is null)
+                        public C($$object o)
                         {
-                            throw new ArgumentNullException(nameof(o));
                         }
                     }
-                }
-                """,
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C(object o)
+                        {
+                            if (o is null)
+                            {
+                                throw new ArgumentNullException(nameof(o));
+                            }
+                        }
+                    }
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2474,26 +2554,26 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
+                        public C($$object o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object o)
+                    class C
                     {
-                        if (o is null) throw new ArgumentNullException(nameof(o));
+                        public C(object o)
+                        {
+                            if (o is null) throw new ArgumentNullException(nameof(o));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2509,26 +2589,26 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
+                        public C($$object o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object o)
+                    class C
                     {
-                        if (o is null) throw new ArgumentNullException(nameof(o));
+                        public C(object o)
+                        {
+                            if (o is null) throw new ArgumentNullException(nameof(o));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2544,29 +2624,29 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                class C
-                {
-                    public C(object o)
-                    {
-                        if (o is null)
+                        public C($$object o)
                         {
-                            throw new ArgumentNullException(nameof(o));
                         }
                     }
-                }
-                """,
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C(object o)
+                        {
+                            if (o is null)
+                            {
+                                throw new ArgumentNullException(nameof(o));
+                            }
+                        }
+                    }
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2582,16 +2662,17 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = $@"using System;
+                    """,
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -2622,16 +2703,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2648,7 +2730,7 @@ class C
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
-                    { CSharpCodeStyleOptions.PreferBraces, PreferBracesPreference.WhenMultiline},
+                    { CSharpCodeStyleOptions.PreferBraces, PreferBracesPreference.WhenMultiline },
                     { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, false },
                 },
                 CodeActionIndex = 1,
@@ -2662,16 +2744,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2704,16 +2787,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2743,16 +2827,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2782,16 +2867,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2824,28 +2910,28 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]object a, object b, object c)
+                    class C
                     {
+                        public C([||]object a, object b, object c)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object a, object b, object c)
+                    class C
                     {
-                        if (a is null) throw new ArgumentNullException(nameof(a));
-                        if (b is null) throw new ArgumentNullException(nameof(b));
-                        if (c is null) throw new ArgumentNullException(nameof(c));
+                        public C(object a, object b, object c)
+                        {
+                            if (a is null) throw new ArgumentNullException(nameof(a));
+                            if (b is null) throw new ArgumentNullException(nameof(b));
+                            if (c is null) throw new ArgumentNullException(nameof(c));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2853,7 +2939,9 @@ class C
                     { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, true },
                 },
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -2969,104 +3057,113 @@ class C
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38093")]
         public async Task TestReadBeforeAssignment()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                using System;
-                using System.IO;
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    using System;
+                    using System.IO;
 
-                class Program
-                {
-                    public Program([||]Stream output)
+                    class Program
                     {
-                        if (!output.CanWrite) throw new ArgumentException();
-                        OutStream = output;
-                    }
-
-                    public Stream OutStream { get; }
-                }
-                """, """
-                using System;
-                using System.IO;
-
-                class Program
-                {
-                    public Program([||]Stream output)
-                    {
-                        if (output is null)
+                        public Program([||]Stream output)
                         {
-                            throw new ArgumentNullException(nameof(output));
+                            if (!output.CanWrite) throw new ArgumentException();
+                            OutStream = output;
                         }
 
-                        if (!output.CanWrite) throw new ArgumentException();
-                        OutStream = output;
+                        public Stream OutStream { get; }
                     }
+                    """,
+                """
+                    using System;
+                    using System.IO;
 
-                    public Stream OutStream { get; }
-                }
-                """);
+                    class Program
+                    {
+                        public Program([||]Stream output)
+                        {
+                            if (output is null)
+                            {
+                                throw new ArgumentNullException(nameof(output));
+                            }
+
+                            if (!output.CanWrite) throw new ArgumentException();
+                            OutStream = output;
+                        }
+
+                        public Stream OutStream { get; }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41140")]
         public async Task TestAfterComma1()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                using System;
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    using System;
 
-                class C
-                {
-                    // should generate for 'b'
-                    void M(string a,$$ string b, string c)
+                    class C
                     {
-
-                    }
-                }
-                """, """
-                using System;
-
-                class C
-                {
-                    // should generate for 'b'
-                    void M(string a, string b, string c)
-                    {
-                        if (b is null)
+                        // should generate for 'b'
+                        void M(string a,$$ string b, string c)
                         {
-                            throw new ArgumentNullException(nameof(b));
+
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        // should generate for 'b'
+                        void M(string a, string b, string c)
+                        {
+                            if (b is null)
+                            {
+                                throw new ArgumentNullException(nameof(b));
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41140")]
         public async Task TestAfterComma2()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                using System;
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    using System;
 
-                class C
-                {
-                    // should generate for 'a'
-                    void M(string a,$$
-                        string b, string c)
+                    class C
                     {
-
-                    }
-                }
-                """, """
-                using System;
-
-                class C
-                {
-                    // should generate for 'a'
-                    void M(string a,
-                        string b, string c)
-                    {
-                        if (a is null)
+                        // should generate for 'a'
+                        void M(string a,$$
+                            string b, string c)
                         {
-                            throw new ArgumentNullException(nameof(a));
+
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        // should generate for 'a'
+                        void M(string a,
+                            string b, string c)
+                        {
+                            if (a is null)
+                            {
+                                throw new ArgumentNullException(nameof(a));
+                            }
+                        }
+                    }
+                    """
+            );
         }
     }
 }

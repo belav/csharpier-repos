@@ -16,37 +16,38 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFunction
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedLocalFunction)]
-    public partial class RemoveUnusedLocalFunctionTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class RemoveUnusedLocalFunctionTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnusedLocalFunctionTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpRemoveUnusedLocalFunctionCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpRemoveUnusedLocalFunctionCodeFixProvider());
 
         [Fact]
         public async Task RemoveUnusedLocalFunction()
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        void [|Goo|]() { }
+                        void Method()
+                        {
+                            void [|Goo|]() { }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
+                        void Method()
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -54,23 +55,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        void {|FixAllInDocument:F|}() { }
-                        void G() { }
+                        void Method()
+                        {
+                            void {|FixAllInDocument:F|}() { }
+                            void G() { }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
+                        void Method()
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -78,23 +80,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        void G() { }
-                        void {|FixAllInDocument:F|}() { }
+                        void Method()
+                        {
+                            void G() { }
+                            void {|FixAllInDocument:F|}() { }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
+                        void Method()
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -102,22 +105,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        void {|FixAllInDocument:F|}() { void G() { } }
+                        void Method()
+                        {
+                            void {|FixAllInDocument:F|}() { void G() { } }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
+                        void Method()
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -125,33 +129,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                        void G() { void {|FixAllInDocument:F|}() { } }
+                        void Method()
+                        {
+                            void G() { void {|FixAllInDocument:F|}() { } }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
+                        void Method()
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44272")]
         public async Task TopLevelStatement()
         {
-            await TestAsync("""
-                void [|local()|] { }
-                """,
+            await TestAsync(
+                """
+                    void [|local()|] { }
+                    """,
                 """
 
-                """, TestOptions.Regular);
+                    """,
+                TestOptions.Regular
+            );
         }
     }
 }

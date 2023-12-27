@@ -14,38 +14,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 {
     public class AsyncLocalFunctionHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(AsyncAwaitHighlighter);
+        internal override Type GetHighlighterType() => typeof(AsyncAwaitHighlighter);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestLocalFunction()
         {
             await TestAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class AsyncExample
-                {
-                    async Task<int> AsyncMethod()
+                    class AsyncExample
                     {
-                        int hours = 24;
-                        return hours;
-                    }
-
-                    async Task UseAsync()
-                    {
-                        {|Cursor:[|async|]|} Task<int> function()
+                        async Task<int> AsyncMethod()
                         {
-                            return [|await|] AsyncMethod();
+                            int hours = 24;
+                            return hours;
                         }
-                        int result = await AsyncMethod();
-                        Task<int> resultTask = AsyncMethod();
-                        result = await resultTask;
-                        result = await function();
+
+                        async Task UseAsync()
+                        {
+                            {|Cursor:[|async|]|} Task<int> function()
+                            {
+                                return [|await|] AsyncMethod();
+                            }
+                            int result = await AsyncMethod();
+                            Task<int> resultTask = AsyncMethod();
+                            result = await resultTask;
+                            result = await function();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

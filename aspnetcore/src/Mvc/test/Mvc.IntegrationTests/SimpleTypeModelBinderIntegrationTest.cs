@@ -6,9 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
@@ -23,11 +23,7 @@ public class SimpleTypeModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "CustomParameter",
-            },
-
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
             ParameterType = typeof(Person)
         };
 
@@ -116,7 +112,6 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-
             ParameterType = typeof(string)
         };
 
@@ -160,7 +155,6 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-
             ParameterType = typeof(string)
         };
 
@@ -283,10 +277,7 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             ParameterType = typeof(DateTime),
-            BindingInfo = new BindingInfo
-            {
-                BindingSource = BindingSource.Body,
-            }
+            BindingInfo = new BindingInfo { BindingSource = BindingSource.Body, }
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -322,7 +313,6 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-
             ParameterType = typeof(string)
         };
 
@@ -366,7 +356,6 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-
             ParameterType = typeof(int)
         };
 
@@ -418,7 +407,8 @@ public class SimpleTypeModelBinderIntegrationTest
             {
                 // A real details provider could customize message based on BindingMetadataProviderContext.
                 binding.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
-                (value) => $"Hmm, '{ value }' is not a valid value.");
+                    (value) => $"Hmm, '{value}' is not a valid value."
+                );
             });
 
         var testContext = ModelBindingTestHelper.GetTestContext(
@@ -426,10 +416,13 @@ public class SimpleTypeModelBinderIntegrationTest
             {
                 request.QueryString = QueryString.Create("Parameter1", "abcd");
             },
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
@@ -477,7 +470,6 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-
             ParameterType = parameterType
         };
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -511,7 +503,9 @@ public class SimpleTypeModelBinderIntegrationTest
     [Theory]
     [InlineData(typeof(int))]
     [InlineData(typeof(bool))]
-    public async Task BindParameter_WithEmptyData_AndPerTypeMessage_AddsGivenMessage(Type parameterType)
+    public async Task BindParameter_WithEmptyData_AndPerTypeMessage_AddsGivenMessage(
+        Type parameterType
+    )
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
@@ -520,8 +514,9 @@ public class SimpleTypeModelBinderIntegrationTest
             .BindingDetails(binding =>
             {
                 // A real details provider could customize message based on BindingMetadataProviderContext.
-                binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
-                value => $"Hurts when '{ value }' is provided.");
+                binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value =>
+                    $"Hurts when '{value}' is provided."
+                );
             });
 
         var testContext = ModelBindingTestHelper.GetTestContext(
@@ -529,15 +524,17 @@ public class SimpleTypeModelBinderIntegrationTest
             {
                 request.QueryString = QueryString.Create("Parameter1", string.Empty);
             },
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-
             ParameterType = parameterType
         };
 
@@ -566,7 +563,9 @@ public class SimpleTypeModelBinderIntegrationTest
     [InlineData(typeof(int?))]
     [InlineData(typeof(bool?))]
     [InlineData(typeof(string))]
-    public async Task BindParameter_WithEmptyData_BindsReferenceAndNullableObjects(Type parameterType)
+    public async Task BindParameter_WithEmptyData_BindsReferenceAndNullableObjects(
+        Type parameterType
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -574,7 +573,6 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-
             ParameterType = parameterType
         };
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -612,7 +610,6 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-
             ParameterType = typeof(string)
         };
 
@@ -639,26 +636,28 @@ public class SimpleTypeModelBinderIntegrationTest
         get
         {
             return new TheoryData<IDictionary<string, StringValues>>
+            {
+                new Dictionary<string, StringValues>
                 {
-                    new Dictionary<string, StringValues>
-                    {
-                        { "name", new[] { "Fred" } },
-                        { "address.zip", new[] { "98052" } },
-                        { "address.lines", new[] { "line 1", "line 2" } },
-                    },
-                    new Dictionary<string, StringValues>
-                    {
-                        { "address.lines[]", new[] { "line 1", "line 2" } },
-                        { "address[].zip", new[] { "98052" } },
-                        { "name[]", new[] { "Fred" } },
-                    }
-                };
+                    { "name", new[] { "Fred" } },
+                    { "address.zip", new[] { "98052" } },
+                    { "address.lines", new[] { "line 1", "line 2" } },
+                },
+                new Dictionary<string, StringValues>
+                {
+                    { "address.lines[]", new[] { "line 1", "line 2" } },
+                    { "address[].zip", new[] { "98052" } },
+                    { "name[]", new[] { "Fred" } },
+                }
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(PersonStoreData))]
-    public async Task BindParameter_FromFormData_BindsCorrectly(Dictionary<string, StringValues> personStore)
+    public async Task BindParameter_FromFormData_BindsCorrectly(
+        Dictionary<string, StringValues> personStore
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -693,7 +692,10 @@ public class SimpleTypeModelBinderIntegrationTest
         // ModelState
         Assert.True(modelState.IsValid);
 
-        Assert.Equal(new[] { "Address.Lines", "Address.Zip", "Name" }, modelState.Keys.OrderBy(p => p).ToArray());
+        Assert.Equal(
+            new[] { "Address.Lines", "Address.Zip", "Name" },
+            modelState.Keys.OrderBy(p => p).ToArray()
+        );
         var entry = modelState["Address.Lines"];
         Assert.NotNull(entry);
         Assert.Empty(entry.Errors);
@@ -810,7 +812,10 @@ public class SimpleTypeModelBinderIntegrationTest
         public string Value { get; set; }
         public string Source { get; set; }
 
-        public static bool TryParse([NotNullWhen(true)] string s, [MaybeNullWhen(false)] out SampleModel result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string s,
+            [MaybeNullWhen(false)] out SampleModel result
+        )
         {
             result = new SampleModel() { Value = s, Source = "TryParse" };
             return true;
@@ -822,7 +827,10 @@ public class SimpleTypeModelBinderIntegrationTest
         public string Value { get; set; }
         public string Source { get; set; }
 
-        public static bool TryParse([NotNullWhen(true)] string s, [MaybeNullWhen(false)] out SampleTryParsableModel result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string s,
+            [MaybeNullWhen(false)] out SampleTryParsableModel result
+        )
         {
             result = new SampleTryParsableModel() { Value = s, Source = "TryParse" };
             return true;
@@ -836,7 +844,11 @@ public class SimpleTypeModelBinderIntegrationTest
             return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value is string s)
             {

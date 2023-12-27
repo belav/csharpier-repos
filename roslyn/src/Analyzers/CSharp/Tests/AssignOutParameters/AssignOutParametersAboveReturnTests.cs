@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        AssignOutParametersAboveReturnCodeFixProvider>;
+        AssignOutParametersAboveReturnCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsAssignOutParameters)]
     public class AssignOutParametersAboveReturnTests
@@ -23,24 +24,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(out int i)
+                    class C
                     {
-                        {|CS0177:return 'a';|}
+                        char M(out int i)
+                        {
+                            {|CS0177:return 'a';|}
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(out int i)
+                    class C
                     {
-                        i = 0;
-                        return 'a';
+                        char M(out int i)
+                        {
+                            i = 0;
+                            return 'a';
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -48,32 +50,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(out int i)
+                    class C
                     {
-                        switch (0)
+                        char M(out int i)
                         {
-                            default:
-                                {|CS0177:return 'a';|}
+                            switch (0)
+                            {
+                                default:
+                                    {|CS0177:return 'a';|}
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(out int i)
+                    class C
                     {
-                        switch (0)
+                        char M(out int i)
                         {
-                            default:
-                                i = 0;
-                                return 'a';
+                            switch (0)
+                            {
+                                default:
+                                    i = 0;
+                                    return 'a';
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -98,29 +101,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(bool b, out int i)
+                    class C
                     {
-                        if (b)
-                            i = 1;
-                        
-                        {|CS0177:return 'a';|}
+                        char M(bool b, out int i)
+                        {
+                            if (b)
+                                i = 1;
+                            
+                            {|CS0177:return 'a';|}
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(bool b, out int i)
+                    class C
                     {
-                        if (b)
-                            i = 1;
-                        i = 0;
-                        return 'a';
+                        char M(bool b, out int i)
+                        {
+                            if (b)
+                                i = 1;
+                            i = 0;
+                            return 'a';
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -128,36 +132,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    bool M(out int i1, out int i2)
+                    class C
                     {
-                        {|CS0177:return Try(out i1) || Try(out i2);|}
-                    }
+                        bool M(out int i1, out int i2)
+                        {
+                            {|CS0177:return Try(out i1) || Try(out i2);|}
+                        }
 
-                    bool Try(out int i)
-                    {
-                        i = 0;
-                        return true;
+                        bool Try(out int i)
+                        {
+                            i = 0;
+                            return true;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    bool M(out int i1, out int i2)
+                    class C
                     {
-                        i2 = 0;
-                        return Try(out i1) || Try(out i2);
-                    }
+                        bool M(out int i1, out int i2)
+                        {
+                            i2 = 0;
+                            return Try(out i1) || Try(out i2);
+                        }
 
-                    bool Try(out int i)
-                    {
-                        i = 0;
-                        return true;
+                        bool Try(out int i)
+                        {
+                            i = 0;
+                            return true;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -186,25 +191,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(out int i, out string s)
+                    class C
                     {
-                        {|CS0177:{|CS0177:return 'a';|}|}
+                        char M(out int i, out string s)
+                        {
+                            {|CS0177:{|CS0177:return 'a';|}|}
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(out int i, out string s)
+                    class C
                     {
-                        i = 0;
-                        s = null;
-                        return 'a';
+                        char M(out int i, out string s)
+                        {
+                            i = 0;
+                            s = null;
+                            return 'a';
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -212,24 +218,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    string M(out int i, out string s)
+                    class C
                     {
-                        {|CS0177:return s = "";|}
+                        string M(out int i, out string s)
+                        {
+                            {|CS0177:return s = "";|}
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    string M(out int i, out string s)
+                    class C
                     {
-                        i = 0;
-                        return s = "";
+                        string M(out int i, out string s)
+                        {
+                            i = 0;
+                            return s = "";
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -237,24 +244,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    string M(out int i, out string s)
+                    class C
                     {
-                        {|CS0177:return (i = 0).ToString();|}
+                        string M(out int i, out string s)
+                        {
+                            {|CS0177:return (i = 0).ToString();|}
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    string M(out int i, out string s)
+                    class C
                     {
-                        s = null;
-                        return (i = 0).ToString();
+                        string M(out int i, out string s)
+                        {
+                            s = null;
+                            return (i = 0).ToString();
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -262,30 +270,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(out int i)
+                    class C
                     {
-                        if (true)
+                        char M(out int i)
                         {
-                            {|CS0177:return 'a';|}
+                            if (true)
+                            {
+                                {|CS0177:return 'a';|}
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(out int i)
+                    class C
                     {
-                        if (true)
+                        char M(out int i)
                         {
-                            i = 0;
-                            return 'a';
+                            if (true)
+                            {
+                                i = 0;
+                                return 'a';
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -293,28 +302,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(out int i)
+                    class C
                     {
-                        if (true)
-                            {|CS0177:return 'a';|}
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    char M(out int i)
-                    {
-                        if (true)
+                        char M(out int i)
                         {
-                            i = 0;
-                            return 'a';
+                            if (true)
+                                {|CS0177:return 'a';|}
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    class C
+                    {
+                        char M(out int i)
+                        {
+                            if (true)
+                            {
+                                i = 0;
+                                return 'a';
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -322,36 +332,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(bool b, out int i)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i)
                         {
-                            {|CS0177:return 'a';|}
-                        }
+                            if (b)
+                            {
+                                {|CS0177:return 'a';|}
+                            }
 
-                        i = 1;
-                        throw null;
+                            i = 1;
+                            throw null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(bool b, out int i)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i)
                         {
-                            i = 0;
-                            return 'a';
-                        }
+                            if (b)
+                            {
+                                i = 0;
+                                return 'a';
+                            }
 
-                        i = 1;
-                        throw null;
+                            i = 1;
+                            throw null;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -359,21 +370,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(out int i) => {|CS0177:'a'|};
-                }
-                """,
-                """
-                class C
-                {
-                    char M(out int i)
+                    class C
                     {
-                        i = 0;
-                        return 'a';
+                        char M(out int i) => {|CS0177:'a'|};
                     }
-                }
-                """);
+                    """,
+                """
+                    class C
+                    {
+                        char M(out int i)
+                        {
+                            i = 0;
+                            return 'a';
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -381,25 +393,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    delegate char D(out int i);
-                    void X()
+                    class C
                     {
-                        D d = (out int i) => {|CS0177:'a'|};
+                        delegate char D(out int i);
+                        void X()
+                        {
+                            D d = (out int i) => {|CS0177:'a'|};
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    delegate char D(out int i);
-                    void X()
+                    class C
                     {
-                        D d = (out int i) => { i = 0; return 'a'; };
+                        delegate char D(out int i);
+                        void X()
+                        {
+                            D d = (out int i) => { i = 0; return 'a'; };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -407,26 +420,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void X()
+                    class C
                     {
-                        char {|CS0177:D|}(out int i) => 'a';
-                        D(out _);
+                        void X()
+                        {
+                            char {|CS0177:D|}(out int i) => 'a';
+                            D(out _);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void X()
+                    class C
                     {
-                        char D(out int i) { i = 0; return 'a'; }
+                        void X()
+                        {
+                            char D(out int i) { i = 0; return 'a'; }
 
-                        D(out _);
+                            D(out _);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -434,32 +448,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    delegate char D(out int i);
-                    void X()
+                    class C
                     {
-                        D d = (out int i) =>
+                        delegate char D(out int i);
+                        void X()
                         {
-                            {|CS0177:return 'a';|}
-                        };
+                            D d = (out int i) =>
+                            {
+                                {|CS0177:return 'a';|}
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    delegate char D(out int i);
-                    void X()
+                    class C
                     {
-                        D d = (out int i) =>
+                        delegate char D(out int i);
+                        void X()
                         {
-                            i = 0;
-                            return 'a';
-                        };
+                            D d = (out int i) =>
+                            {
+                                i = 0;
+                                return 'a';
+                            };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -467,34 +482,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void X()
+                    class C
                     {
-                        char D(out int i)
+                        void X()
                         {
-                            {|CS0177:return 'a';|}
-                        }
+                            char D(out int i)
+                            {
+                                {|CS0177:return 'a';|}
+                            }
 
-                        D(out _);
+                            D(out _);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void X()
+                    class C
                     {
-                        char D(out int i)
+                        void X()
                         {
-                            i = 0;
-                            return 'a';
-                        }
+                            char D(out int i)
+                            {
+                                i = 0;
+                                return 'a';
+                            }
 
-                        D(out _);
+                            D(out _);
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -525,41 +541,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            {|CS0177:{|CS0177:return 'a';|}|}
-                        }
-                        else
-                        {
-                            {|CS0177:{|CS0177:return 'a';|}|}
+                            if (b)
+                            {
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                            }
+                            else
+                            {
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            j = 0;
-                            return 'a';
-                        }
-                        else
-                        {
-                            i = 0;
-                            j = 0;
-                            return 'a';
+                            if (b)
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
+                            else
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -567,67 +584,68 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            {|CS0177:{|CS0177:return 'a';|}|}
+                            if (b)
+                            {
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                            }
+                            else
+                            {
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                            }
                         }
-                        else
+                        char N(bool b, out int i, out int j)
                         {
-                            {|CS0177:{|CS0177:return 'a';|}|}
+                            if (b)
+                            {
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                            }
+                            else
+                            {
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                            }
                         }
                     }
-                    char N(bool b, out int i, out int j)
-                    {
-                        if (b)
-                        {
-                            {|CS0177:{|CS0177:return 'a';|}|}
-                        }
-                        else
-                        {
-                            {|CS0177:{|CS0177:return 'a';|}|}
-                        }
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            j = 0;
-                            return 'a';
+                            if (b)
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
+                            else
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
                         }
-                        else
+                        char N(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            j = 0;
-                            return 'a';
+                            if (b)
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
+                            else
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
                         }
                     }
-                    char N(bool b, out int i, out int j)
-                    {
-                        if (b)
-                        {
-                            i = 0;
-                            j = 0;
-                            return 'a';
-                        }
-                        else
-                        {
-                            i = 0;
-                            j = 0;
-                            return 'a';
-                        }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -635,37 +653,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
-                            {|CS0177:{|CS0177:return 'a';|}|}
-                        else
-                            {|CS0177:{|CS0177:return 'a';|}|}
+                        char M(bool b, out int i, out int j)
+                        {
+                            if (b)
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                            else
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            j = 0;
-                            return 'a';
-                        }
-                        else
-                        {
-                            i = 0;
-                            j = 0;
-                            return 'a';
+                            if (b)
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
+                            else
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -673,59 +692,60 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
-                            {|CS0177:{|CS0177:return 'a';|}|}
-                        else
-                            {|CS0177:{|CS0177:return 'a';|}|}
+                        char M(bool b, out int i, out int j)
+                        {
+                            if (b)
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                            else
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                        }
+                        char N(bool b, out int i, out int j)
+                        {
+                            if (b)
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                            else
+                                {|CS0177:{|CS0177:return 'a';|}|}
+                        }
                     }
-                    char N(bool b, out int i, out int j)
-                    {
-                        if (b)
-                            {|CS0177:{|CS0177:return 'a';|}|}
-                        else
-                            {|CS0177:{|CS0177:return 'a';|}|}
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            j = 0;
-                            return 'a';
+                            if (b)
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
+                            else
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
                         }
-                        else
+                        char N(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            j = 0;
-                            return 'a';
+                            if (b)
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
+                            else
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
                         }
                     }
-                    char N(bool b, out int i, out int j)
-                    {
-                        if (b)
-                        {
-                            i = 0;
-                            j = 0;
-                            return 'a';
-                        }
-                        else
-                        {
-                            i = 0;
-                            j = 0;
-                            return 'a';
-                        }
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -733,43 +753,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            {|CS0177:return 'a';|}
-                        }
-                        else
-                        {
-                            j = 0;
-                            {|CS0177:return 'a';|}
+                            if (b)
+                            {
+                                i = 0;
+                                {|CS0177:return 'a';|}
+                            }
+                            else
+                            {
+                                j = 0;
+                                {|CS0177:return 'a';|}
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            j = 0;
-                            return 'a';
-                        }
-                        else
-                        {
-                            j = 0;
-                            i = 0;
-                            return 'a';
+                            if (b)
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
+                            else
+                            {
+                                j = 0;
+                                i = 0;
+                                return 'a';
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -777,71 +798,72 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            {|CS0177:return 'a';|}
+                            if (b)
+                            {
+                                i = 0;
+                                {|CS0177:return 'a';|}
+                            }
+                            else
+                            {
+                                j = 0;
+                                {|CS0177:return 'a';|}
+                            }
                         }
-                        else
+                        char N(bool b, out int i, out int j)
                         {
-                            j = 0;
-                            {|CS0177:return 'a';|}
+                            if (b)
+                            {
+                                i = 0;
+                                {|CS0177:return 'a';|}
+                            }
+                            else
+                            {
+                                j = 0;
+                                {|CS0177:return 'a';|}
+                            }
                         }
                     }
-                    char N(bool b, out int i, out int j)
-                    {
-                        if (b)
-                        {
-                            i = 0;
-                            {|CS0177:return 'a';|}
-                        }
-                        else
-                        {
-                            j = 0;
-                            {|CS0177:return 'a';|}
-                        }
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    char M(bool b, out int i, out int j)
+                    class C
                     {
-                        if (b)
+                        char M(bool b, out int i, out int j)
                         {
-                            i = 0;
-                            j = 0;
-                            return 'a';
+                            if (b)
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
+                            else
+                            {
+                                j = 0;
+                                i = 0;
+                                return 'a';
+                            }
                         }
-                        else
+                        char N(bool b, out int i, out int j)
                         {
-                            j = 0;
-                            i = 0;
-                            return 'a';
+                            if (b)
+                            {
+                                i = 0;
+                                j = 0;
+                                return 'a';
+                            }
+                            else
+                            {
+                                j = 0;
+                                i = 0;
+                                return 'a';
+                            }
                         }
                     }
-                    char N(bool b, out int i, out int j)
-                    {
-                        if (b)
-                        {
-                            i = 0;
-                            j = 0;
-                            return 'a';
-                        }
-                        else
-                        {
-                            j = 0;
-                            i = 0;
-                            return 'a';
-                        }
-                    }
-                }
-                """);
+                    """
+            );
         }
     }
 }

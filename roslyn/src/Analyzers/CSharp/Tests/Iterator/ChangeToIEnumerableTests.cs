@@ -17,18 +17,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
     public class ChangeToIEnumerableTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ChangeToIEnumerableTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpChangeToIEnumerableCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpChangeToIEnumerableCodeFixProvider());
 
         [Fact]
         public async Task TestChangeToIEnumerableObjectMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -41,8 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections.Generic;
 
@@ -60,8 +57,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableTupleMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -74,8 +70,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections.Generic;
 
@@ -93,8 +88,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableListMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -107,8 +101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections.Generic;
 
@@ -126,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableWithListReturningMethodWithNullableArgument()
         {
-            var initial =
-                """
+            var initial = """
                 #nullable enable
 
                 using System;
@@ -142,8 +134,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 #nullable enable
 
                 using System;
@@ -163,8 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableGenericIEnumerableMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -182,8 +172,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableGenericIEnumeratorMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -201,8 +190,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableIEnumeratorMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
 
@@ -220,8 +208,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableIEnumerableMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
 
@@ -239,8 +226,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableVoidMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
 
@@ -260,81 +246,82 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                namespace Asdf
-                {
-                    public class Test
+                    namespace Asdf
                     {
-                        public ISet<IMyInterface> Test
+                        public class Test
                         {
-                            [|get|]
+                            public ISet<IMyInterface> Test
                             {
-                                yield return TestFactory.Create<float>("yada yada yada");
-                            } ;
+                                [|get|]
+                                {
+                                    yield return TestFactory.Create<float>("yada yada yada");
+                                } ;
+                            }
                         }
-                    }
 
-                    public static class TestFactory
-                    {
-                        public static IMyInterface Create<T>(string someIdentifier)
+                        public static class TestFactory
                         {
-                            return new MyClass<T>();
+                            public static IMyInterface Create<T>(string someIdentifier)
+                            {
+                                return new MyClass<T>();
+                            }
                         }
-                    }
 
-                    public interface IMyInterface : IEquatable<IMyInterface>
-                    {
-                    }
-
-                    public class MyClass<T> : IMyInterface
-                    {
-                        public bool Equals(IMyInterface other)
+                        public interface IMyInterface : IEquatable<IMyInterface>
                         {
-                            throw new NotImplementedException();
+                        }
+
+                        public class MyClass<T> : IMyInterface
+                        {
+                            public bool Equals(IMyInterface other)
+                            {
+                                throw new NotImplementedException();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                namespace Asdf
-                {
-                    public class Test
+                    namespace Asdf
                     {
-                        public IEnumerable<IMyInterface> Test
+                        public class Test
                         {
-                            get
+                            public IEnumerable<IMyInterface> Test
                             {
-                                yield return TestFactory.Create<float>("yada yada yada");
-                            } ;
+                                get
+                                {
+                                    yield return TestFactory.Create<float>("yada yada yada");
+                                } ;
+                            }
                         }
-                    }
 
-                    public static class TestFactory
-                    {
-                        public static IMyInterface Create<T>(string someIdentifier)
+                        public static class TestFactory
                         {
-                            return new MyClass<T>();
+                            public static IMyInterface Create<T>(string someIdentifier)
+                            {
+                                return new MyClass<T>();
+                            }
                         }
-                    }
 
-                    public interface IMyInterface : IEquatable<IMyInterface>
-                    {
-                    }
-
-                    public class MyClass<T> : IMyInterface
-                    {
-                        public bool Equals(IMyInterface other)
+                        public interface IMyInterface : IEquatable<IMyInterface>
                         {
-                            throw new NotImplementedException();
+                        }
+
+                        public class MyClass<T> : IMyInterface
+                        {
+                            public bool Equals(IMyInterface other)
+                            {
+                                throw new NotImplementedException();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem(7087, @"https://github.com/dotnet/roslyn/issues/7087")]
@@ -342,37 +329,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections;
+                    using System.Collections.Generic;
 
-                namespace Asdf
-                {
-                    public class T
+                    namespace Asdf
                     {
-                        public static ISet<int> operator [|=|] (T left, T right)
+                        public class T
                         {
-                            yield return 0;
+                            public static ISet<int> operator [|=|] (T left, T right)
+                            {
+                                yield return 0;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections;
+                    using System.Collections.Generic;
 
-                namespace Asdf
-                {
-                    public class T
+                    namespace Asdf
                     {
-                        public static IEnumerable<int> operator = (T left, T right)
+                        public class T
                         {
-                            yield return 0;
+                            public static IEnumerable<int> operator = (T left, T right)
+                            {
+                                yield return 0;
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem(7087, @"https://github.com/dotnet/roslyn/issues/7087")]
@@ -380,39 +368,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class T
-                {
-                    public T[] this[int i]
+                    class T
                     {
-                        [|get|]
+                        public T[] this[int i]
                         {
-                            yield return new T();
+                            [|get|]
+                            {
+                                yield return new T();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                class T
-                {
-                    public IEnumerable<T> this[int i]
+                    class T
                     {
-                        get
+                        public IEnumerable<T> this[int i]
                         {
-                            yield return new T();
+                            get
+                            {
+                                yield return new T();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

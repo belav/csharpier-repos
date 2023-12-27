@@ -34,14 +34,16 @@ namespace System.Diagnostics.Tracing
             EventPipeSerializationFormat format,
             uint circularBufferSizeInMB,
             EventPipeProviderConfigurationNative* providers,
-            uint numProviders)
+            uint numProviders
+        )
         {
             return RuntimeImports.RhEventPipeInternal_Enable(
                 outputFile,
                 (int)format,
                 circularBufferSizeInMB,
                 providers,
-                numProviders);
+                numProviders
+            );
         }
 
         internal static void Disable(ulong sessionID)
@@ -53,22 +55,37 @@ namespace System.Diagnostics.Tracing
         // These PInvokes are used by EventSource to interact with the EventPipe.
         //
 
-//        private static extern unsafe IntPtr CreateProvider(string providerName, IntPtr callbackFunc, IntPtr callbackContext);
+        //        private static extern unsafe IntPtr CreateProvider(string providerName, IntPtr callbackFunc, IntPtr callbackContext);
 
-        internal static unsafe IntPtr CreateProvider(string providerName,
-                    delegate* unmanaged<byte*, int, byte, long, long, Interop.Advapi32.EVENT_FILTER_DESCRIPTOR*, void*, void> callbackFunc,
-                    void* callbackContext)
-                    => CreateProvider(providerName, (IntPtr)callbackFunc, (IntPtr)callbackContext);
+        internal static unsafe IntPtr CreateProvider(
+            string providerName,
+            delegate* unmanaged<
+                byte*,
+                int,
+                byte,
+                long,
+                long,
+                Interop.Advapi32.EVENT_FILTER_DESCRIPTOR*,
+                void*,
+                void> callbackFunc,
+            void* callbackContext
+        ) => CreateProvider(providerName, (IntPtr)callbackFunc, (IntPtr)callbackContext);
+
         //internal static unsafe IntPtr CreateProvider(string providerName, IntPtr callbackFunc, IntPtr callbackContext);
 
-        internal static unsafe IntPtr CreateProvider(string providerName, IntPtr callbackFunc, IntPtr callbackContext)
+        internal static unsafe IntPtr CreateProvider(
+            string providerName,
+            IntPtr callbackFunc,
+            IntPtr callbackContext
+        )
         {
             fixed (char* pProviderName = providerName)
             {
                 return RuntimeImports.RhEventPipeInternal_CreateProvider(
                     pProviderName,
                     callbackFunc,
-                    callbackContext);
+                    callbackContext
+                );
             }
         }
 
@@ -78,8 +95,9 @@ namespace System.Diagnostics.Tracing
             long keywords,
             uint eventVersion,
             uint level,
-            void *pMetadata,
-            uint metadataLength)
+            void* pMetadata,
+            uint metadataLength
+        )
         {
             return RuntimeImports.RhEventPipeInternal_DefineEvent(
                 provHandle,
@@ -88,7 +106,8 @@ namespace System.Diagnostics.Tracing
                 eventVersion,
                 level,
                 pMetadata,
-                metadataLength);
+                metadataLength
+            );
         }
 
         internal static unsafe IntPtr GetProvider(string providerName)
@@ -111,8 +130,17 @@ namespace System.Diagnostics.Tracing
             // managing the supplied byref in an in/out manner.
             //
             Guid localActivityId = activityId;
-            try { return RuntimeImports.RhEventPipeInternal_EventActivityIdControl(controlCode, &localActivityId); }
-            finally { activityId = localActivityId; }
+            try
+            {
+                return RuntimeImports.RhEventPipeInternal_EventActivityIdControl(
+                    controlCode,
+                    &localActivityId
+                );
+            }
+            finally
+            {
+                activityId = localActivityId;
+            }
         }
 
         internal static unsafe void WriteEventData(
@@ -120,26 +148,37 @@ namespace System.Diagnostics.Tracing
             EventProvider.EventData* pEventData,
             uint dataCount,
             Guid* activityId,
-            Guid* relatedActivityId)
+            Guid* relatedActivityId
+        )
         {
             RuntimeImports.RhEventPipeInternal_WriteEventData(
                 eventHandle,
                 pEventData,
                 dataCount,
                 activityId,
-                relatedActivityId);
+                relatedActivityId
+            );
         }
 
         //
         // These PInvokes are used as part of the EventPipeEventDispatcher.
         //
-        internal static unsafe bool GetSessionInfo(ulong sessionID, EventPipeSessionInfo* pSessionInfo)
+        internal static unsafe bool GetSessionInfo(
+            ulong sessionID,
+            EventPipeSessionInfo* pSessionInfo
+        )
         {
-            uint rawBool = RuntimeImports.RhEventPipeInternal_GetSessionInfo(sessionID, pSessionInfo);
+            uint rawBool = RuntimeImports.RhEventPipeInternal_GetSessionInfo(
+                sessionID,
+                pSessionInfo
+            );
             return (rawBool != 0);
         }
 
-        internal static unsafe bool GetNextEvent(ulong sessionID, EventPipeEventInstanceData* pInstance)
+        internal static unsafe bool GetNextEvent(
+            ulong sessionID,
+            EventPipeEventInstanceData* pInstance
+        )
         {
             uint rawBool = RuntimeImports.RhEventPipeInternal_GetNextEvent(sessionID, pInstance);
             return (rawBool != 0);
@@ -153,11 +192,13 @@ namespace System.Diagnostics.Tracing
 
         internal static bool WaitForSessionSignal(ulong sessionID, int timeoutMs)
         {
-            uint rawBool = RuntimeImports.RhEventPipeInternal_WaitForSessionSignal(sessionID, timeoutMs);
+            uint rawBool = RuntimeImports.RhEventPipeInternal_WaitForSessionSignal(
+                sessionID,
+                timeoutMs
+            );
             return (rawBool != 0);
         }
     }
 }
 
 #endif // FEATURE_PERFTRACING
-

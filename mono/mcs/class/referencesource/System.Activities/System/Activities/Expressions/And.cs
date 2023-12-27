@@ -6,15 +6,18 @@ namespace System.Activities.Expressions
 {
     using System.Activities;
     using System.Activities.Statements;
-    using System.Linq.Expressions;
     using System.Activities.Validation;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq.Expressions;
+    using System.Runtime;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldNotMatchKeywords,
-        Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [And])")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldNotMatchKeywords,
+        Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [And])"
+    )]
     public sealed class And<TLeft, TRight, TResult> : CodeActivity<TResult>
     {
         //Lock is not needed for operationFunction here. The reason is that delegates for a given And<TLeft, TRight, TResult> are the same.
@@ -23,19 +26,11 @@ namespace System.Activities.Expressions
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TLeft> Left
-        {
-            get;
-            set;
-        }
+        public InArgument<TLeft> Left { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TRight> Right
-        {
-            get;
-            set;
-        }
+        public InArgument<TRight> Right { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -44,7 +39,13 @@ namespace System.Activities.Expressions
             if (operationFunction == null)
             {
                 ValidationError validationError;
-                if (!BinaryExpressionHelper.TryGenerateLinqDelegate(ExpressionType.And, out operationFunction, out validationError))
+                if (
+                    !BinaryExpressionHelper.TryGenerateLinqDelegate(
+                        ExpressionType.And,
+                        out operationFunction,
+                        out validationError
+                    )
+                )
                 {
                     metadata.AddValidationError(validationError);
                 }

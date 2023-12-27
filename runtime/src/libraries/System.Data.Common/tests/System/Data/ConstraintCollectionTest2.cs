@@ -36,14 +36,18 @@ namespace System.Data.Tests
         public void CanRemove_ParentForeign()
         {
             DataSet ds = DataProvider.CreateForeignConstraint();
-            Assert.False(ds.Tables["parent"].Constraints.CanRemove(ds.Tables["parent"].Constraints[0]));
+            Assert.False(
+                ds.Tables["parent"].Constraints.CanRemove(ds.Tables["parent"].Constraints[0])
+            );
         }
 
         [Fact]
         public void CanRemove_ChildForeign()
         {
             DataSet ds = DataProvider.CreateForeignConstraint();
-            Assert.True(ds.Tables["child"].Constraints.CanRemove(ds.Tables["child"].Constraints[0]));
+            Assert.True(
+                ds.Tables["child"].Constraints.CanRemove(ds.Tables["child"].Constraints[0])
+            );
         }
 
         [Fact]
@@ -52,7 +56,9 @@ namespace System.Data.Tests
             DataSet ds = DataProvider.CreateForeignConstraint();
             //remove the forigen and ask about the unique
             ds.Tables["child"].Constraints.Remove(ds.Tables["child"].Constraints[0]);
-            Assert.True(ds.Tables["parent"].Constraints.CanRemove(ds.Tables["parent"].Constraints[0]));
+            Assert.True(
+                ds.Tables["parent"].Constraints.CanRemove(ds.Tables["parent"].Constraints[0])
+            );
         }
 
         [Fact]
@@ -84,7 +90,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             _collectionChangedFlag = false;
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(Constraints_CollectionChangedHandler);
+            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
+                Constraints_CollectionChangedHandler
+            );
             dt = DataProvider.CreateUniqueConstraint(dt);
             Assert.True(_collectionChangedFlag);
         }
@@ -98,7 +106,6 @@ namespace System.Data.Tests
 
             ds.Tables["child"].Constraints[0].ConstraintName = "name1";
             ds.Tables["parent"].Constraints[0].ConstraintName = "name2";
-
 
             Assert.True(ds.Tables["child"].Constraints.Contains("name1"));
             Assert.False(ds.Tables["child"].Constraints.Contains("xxx"));
@@ -276,7 +283,10 @@ namespace System.Data.Tests
             Assert.False(col1.Unique);
 
             table.PrimaryKey = new DataColumn[] { col2 };
-            AssertExtensions.Throws<ArgumentException>(null, () => table.Constraints.Remove(table.Constraints[0]));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => table.Constraints.Remove(table.Constraints[0])
+            );
         }
 
         [Fact]
@@ -306,7 +316,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateUniqueConstraint();
             _collectionChangedFlag = false;
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(Constraints_CollectionChangedHandler);
+            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
+                Constraints_CollectionChangedHandler
+            );
             dt.Constraints.Remove(dt.Constraints[0]);
             Assert.True(_collectionChangedFlag);
         }
@@ -316,7 +328,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateUniqueConstraint();
             _collectionChangedFlag = false;
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(Constraints_CollectionChangedHandler);
+            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
+                Constraints_CollectionChangedHandler
+            );
             dt.Constraints.Remove("constraint1");
             Assert.True(_collectionChangedFlag);
         }
@@ -326,12 +340,17 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             _collectionChangedFlag = false;
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(Constraints_CollectionChangedHandler);
+            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
+                Constraints_CollectionChangedHandler
+            );
             dt = DataProvider.CreateUniqueConstraint(dt);
             Assert.True(_collectionChangedFlag);
         }
 
-        private void Constraints_CollectionChangedHandler(object sender, CollectionChangeEventArgs e) => _collectionChangedFlag = true;
+        private void Constraints_CollectionChangedHandler(
+            object sender,
+            CollectionChangeEventArgs e
+        ) => _collectionChangedFlag = true;
 
         [Fact]
         public void Remove_Constraint()
@@ -392,11 +411,17 @@ namespace System.Data.Tests
 
             var arr = new ArrayList(1);
             arr.Add(new ConstraintException());
-            TestException(new testExceptionMethodCallback(DataProvider.TryToBreakUniqueConstraint), arr);
+            TestException(
+                new testExceptionMethodCallback(DataProvider.TryToBreakUniqueConstraint),
+                arr
+            );
 
             arr = new ArrayList(1);
             arr.Add(new InvalidConstraintException());
-            TestException(new testExceptionMethodCallback(DataProvider.TryToBreakForigenConstraint), arr);
+            TestException(
+                new testExceptionMethodCallback(DataProvider.TryToBreakForigenConstraint),
+                arr
+            );
         }
 
         private static void TestException(testExceptionMethodCallback dlg, IList exceptionList)
@@ -435,7 +460,10 @@ namespace System.Data.Tests
 
             ArrayList arr = new ArrayList(1);
             arr.Add(new ConstraintException());
-            TestException(new testExceptionMethodCallback(DataProvider.TryToBreakUniqueConstraint), arr);
+            TestException(
+                new testExceptionMethodCallback(DataProvider.TryToBreakUniqueConstraint),
+                arr
+            );
         }
 
         [Fact]
@@ -469,7 +497,10 @@ namespace System.Data.Tests
 
             ArrayList arr = new ArrayList(1);
             arr.Add(new InvalidConstraintException());
-            TestException(new testExceptionMethodCallback(DataProvider.TryToBreakForigenConstraint), arr);
+            TestException(
+                new testExceptionMethodCallback(DataProvider.TryToBreakForigenConstraint),
+                arr
+            );
 
             Assert.Equal(1, parent.Constraints.Count);
             Assert.Equal(1, child.Constraints.Count);
@@ -497,15 +528,18 @@ namespace System.Data.Tests
         [Fact]
         public void AddRange_C3()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                var ds = new DataSet();
-                ds.Tables.Add(DataProvider.CreateParentDataTable());
-                ds.Tables.Add(DataProvider.CreateChildDataTable());
-                Constraint badConstraint = new UniqueConstraint(ds.Tables[0].Columns[0]);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    var ds = new DataSet();
+                    ds.Tables.Add(DataProvider.CreateParentDataTable());
+                    ds.Tables.Add(DataProvider.CreateChildDataTable());
+                    Constraint badConstraint = new UniqueConstraint(ds.Tables[0].Columns[0]);
 
-                ds.Tables[1].Constraints.AddRange(new Constraint[] { badConstraint }); //Cuz foreign key belongs to child table
-            });
+                    ds.Tables[1].Constraints.AddRange(new Constraint[] { badConstraint }); //Cuz foreign key belongs to child table
+                }
+            );
         }
 
         private Constraint[] GetConstraintArray(DataSet ds)
@@ -560,7 +594,9 @@ namespace System.Data.Tests
             Assert.Equal("constraint2", dt.Constraints[0].ConstraintName);
 
             dt = DataProvider.CreateUniqueConstraint();
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(Constraints_CollectionChanged);
+            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
+                Constraints_CollectionChanged
+            );
             dt.Constraints.RemoveAt(0);
             Assert.True(_collectionChanged);
 
@@ -586,7 +622,10 @@ namespace System.Data.Tests
             DataTable table = new DataTable();
             table.Columns.Add("col1");
             Constraint c = table.Constraints.Add("c", table.Columns[0], false);
-            AssertExtensions.Throws<ArgumentException>(null, () => table.Constraints.Remove("sdfs"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => table.Constraints.Remove("sdfs")
+            );
 
             table.Constraints.Remove(c);
             Assert.Equal(0, table.Constraints.Count);

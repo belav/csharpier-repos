@@ -10,11 +10,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class ElifKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public ElifKeywordRecommender()
-            : base(SyntaxKind.ElifKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.ElifKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.IsPreProcessorKeywordContext;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => context.IsPreProcessorKeywordContext;
     }
 }

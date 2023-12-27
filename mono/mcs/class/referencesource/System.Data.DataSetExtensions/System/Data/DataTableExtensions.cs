@@ -8,22 +8,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-using System.Linq.Expressions;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data.DataSetExtensions;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Xml;
 
 namespace System.Data
 {
-
     /// <summary>
     /// This static class defines the DataTable extension methods.
     /// </summary>
     public static class DataTableExtensions
     {
-
         /// <summary>
         ///   This method returns a IEnumerable of Datarows.
         /// </summary>
@@ -64,14 +62,17 @@ namespace System.Data
         /// <summary>
         ///   delegates to other CopyToDataTable overload with a null FillErrorEventHandler.
         /// </summary>
-        public static void CopyToDataTable<T>(this IEnumerable<T> source, DataTable table, LoadOption options)
+        public static void CopyToDataTable<T>(
+            this IEnumerable<T> source,
+            DataTable table,
+            LoadOption options
+        )
             where T : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, "source");
             DataSetUtil.CheckArgumentNull(table, "table");
             LoadTableFromEnumerable(source, table, options, null);
         }
-
 
         /// <summary>
         ///   This method takes an input sequence of DataRows and produces a DataTable object
@@ -107,7 +108,12 @@ namespace System.Data
         /// <exception cref="ArgumentNullException">if source is null</exception>
         /// <exception cref="ArgumentNullException">if table is null</exception>
         /// <exception cref="InvalidOperationException">if source DataRow is in Deleted or Detached state</exception>
-        public static void CopyToDataTable<T>(this IEnumerable<T> source, DataTable table, LoadOption options, FillErrorEventHandler errorHandler)
+        public static void CopyToDataTable<T>(
+            this IEnumerable<T> source,
+            DataTable table,
+            LoadOption options,
+            FillErrorEventHandler errorHandler
+        )
             where T : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, "source");
@@ -115,11 +121,18 @@ namespace System.Data
             LoadTableFromEnumerable(source, table, options, errorHandler);
         }
 
-        private static DataTable LoadTableFromEnumerable<T>(IEnumerable<T> source, DataTable table, LoadOption? options, FillErrorEventHandler errorHandler)
+        private static DataTable LoadTableFromEnumerable<T>(
+            IEnumerable<T> source,
+            DataTable table,
+            LoadOption? options,
+            FillErrorEventHandler errorHandler
+        )
             where T : DataRow
         {
-            if (options.HasValue) {
-                switch(options.Value) {
+            if (options.HasValue)
+            {
+                switch (options.Value)
+                {
                     case LoadOption.OverwriteChanges:
                     case LoadOption.PreserveChanges:
                     case LoadOption.Upsert:
@@ -128,7 +141,6 @@ namespace System.Data
                         throw DataSetUtil.InvalidLoadOption(options.Value);
                 }
             }
-
 
             using (IEnumerator<T> rows = source.GetEnumerator())
             {
@@ -180,13 +192,15 @@ namespace System.Data
 
                         object[] values = null;
                         try
-                        {   // 'recoverable' error block
-                            switch(current.RowState)
+                        { // 'recoverable' error block
+                            switch (current.RowState)
                             {
                                 case DataRowState.Detached:
                                     if (!current.HasVersion(DataRowVersion.Proposed))
                                     {
-                                        throw DataSetUtil.InvalidOperation(Strings.DataSetLinq_CannotLoadDetachedRow);
+                                        throw DataSetUtil.InvalidOperation(
+                                            Strings.DataSetLinq_CannotLoadDetachedRow
+                                        );
                                     }
                                     goto case DataRowState.Added;
                                 case DataRowState.Unchanged:
@@ -203,7 +217,9 @@ namespace System.Data
                                     }
                                     break;
                                 case DataRowState.Deleted:
-                                    throw DataSetUtil.InvalidOperation(Strings.DataSetLinq_CannotLoadDeletedRow);
+                                    throw DataSetUtil.InvalidOperation(
+                                        Strings.DataSetLinq_CannotLoadDeletedRow
+                                    );
                                 default:
                                     throw DataSetUtil.InvalidDataRowState(current.RowState);
                             }
@@ -222,17 +238,18 @@ namespace System.Data
                                 fillError.Errors = e;
                                 errorHandler.Invoke(rows, fillError);
                             }
-                            if (null == fillError) {
+                            if (null == fillError)
+                            {
                                 throw;
                             }
                             else if (!fillError.Continue)
                             {
                                 if (Object.ReferenceEquals(fillError.Errors ?? e, e))
-                                {   // if user didn't change exception to throw (or set it to null)
+                                { // if user didn't change exception to throw (or set it to null)
                                     throw;
                                 }
                                 else
-                                {   // user may have changed exception to throw in handler
+                                { // user may have changed exception to throw in handler
                                     throw fillError.Errors;
                                 }
                             }
@@ -261,20 +278,19 @@ namespace System.Data
             return new LinqDataView(table, null);
         }
 
-
         /// <summary>
         /// Creates a LinqDataView from EnumerableDataTable
         /// </summary>
         /// <typeparam name="T">Type of the row in the table. Must inherit from DataRow</typeparam>
         /// <param name="source">The enumerable-datatable over which view must be created.</param>
         /// <returns>Generated LinkDataView of type T</returns>
-        public static DataView AsDataView<T>(this EnumerableRowCollection<T> source) where T : DataRow
+        public static DataView AsDataView<T>(this EnumerableRowCollection<T> source)
+            where T : DataRow
         {
             DataSetUtil.CheckArgumentNull<EnumerableRowCollection<T>>(source, "source");
             return source.GetLinqDataView();
         }
 
         #endregion LinqDataView
-
     }
 }

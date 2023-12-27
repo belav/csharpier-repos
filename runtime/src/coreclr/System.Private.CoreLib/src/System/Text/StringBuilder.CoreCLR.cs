@@ -41,7 +41,11 @@ namespace System.Text
 
         internal void ReplaceBufferUtf8Internal(ReadOnlySpan<byte> source)
         {
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(source.Length, m_MaxCapacity, "capacity");
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                source.Length,
+                m_MaxCapacity,
+                "capacity"
+            );
 
             int numChars = Encoding.UTF8.GetCharCount(source);
             if (numChars > m_ChunkChars.Length)
@@ -87,9 +91,15 @@ namespace System.Text
                     (byte*)newBuffer,
                     newLength,
                     pChunkChars,
-                    newLength);
+                    newLength
+                );
 #else
-                convertedChars = Encoding.UTF8.GetChars((byte*)newBuffer, newLength, pChunkChars, newLength);
+                convertedChars = Encoding.UTF8.GetChars(
+                    (byte*)newBuffer,
+                    newLength,
+                    pChunkChars,
+                    newLength
+                );
 #endif
             }
 

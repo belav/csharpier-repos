@@ -57,7 +57,8 @@
 using System.IO;
 using System.Text;
 
-namespace RabbitMQ.Util {
+namespace RabbitMQ.Util
+{
     /// <summary>
     /// Subclass of BinaryWriter that writes integers etc in correct network order.
     /// </summary>
@@ -69,60 +70,68 @@ namespace RabbitMQ.Util {
     /// See also NetworkBinaryReader.
     /// </p>
     /// </remarks>
-    public class NetworkBinaryWriter: BinaryWriter {
+    public class NetworkBinaryWriter : BinaryWriter
+    {
         /// <summary>
         /// Construct a NetworkBinaryWriter over the given input stream.
         /// </summary>
-        public NetworkBinaryWriter(Stream output): base(output) {}
+        public NetworkBinaryWriter(Stream output)
+            : base(output) { }
 
         /// <summary>
         /// Construct a NetworkBinaryWriter over the given input
         /// stream, reading strings using the given encoding.
         /// </summary>
-        public NetworkBinaryWriter(Stream output, Encoding encoding): base(output, encoding) {}
+        public NetworkBinaryWriter(Stream output, Encoding encoding)
+            : base(output, encoding) { }
 
         /// <summary>
         /// Override BinaryWriter's method for network-order.
         /// </summary>
-        public override void Write(short i) {
-            Write((byte) ((i & 0xFF00) >> 8));
-            Write((byte) (i & 0x00FF));
+        public override void Write(short i)
+        {
+            Write((byte)((i & 0xFF00) >> 8));
+            Write((byte)(i & 0x00FF));
         }
 
         /// <summary>
         /// Override BinaryWriter's method for network-order.
         /// </summary>
-        public override void Write(ushort i) {
-            Write((byte) ((i & 0xFF00) >> 8));
-            Write((byte) (i & 0x00FF));
+        public override void Write(ushort i)
+        {
+            Write((byte)((i & 0xFF00) >> 8));
+            Write((byte)(i & 0x00FF));
         }
 
         /// <summary>
         /// Override BinaryWriter's method for network-order.
         /// </summary>
-        public override void Write(int i) {
-            Write((byte) ((i & 0xFF000000) >> 24));
-            Write((byte) ((i & 0x00FF0000) >> 16));
-            Write((byte) ((i & 0x0000FF00) >> 8));
-            Write((byte) (i & 0x000000FF));
+        public override void Write(int i)
+        {
+            Write((byte)((i & 0xFF000000) >> 24));
+            Write((byte)((i & 0x00FF0000) >> 16));
+            Write((byte)((i & 0x0000FF00) >> 8));
+            Write((byte)(i & 0x000000FF));
         }
 
         /// <summary>
         /// Override BinaryWriter's method for network-order.
         /// </summary>
-        public override void Write(uint i) {
-            Write((byte) ((i & 0xFF000000) >> 24));
-            Write((byte) ((i & 0x00FF0000) >> 16));
-            Write((byte) ((i & 0x0000FF00) >> 8));
-            Write((byte) (i & 0x000000FF));
+        public override void Write(uint i)
+        {
+            Write((byte)((i & 0xFF000000) >> 24));
+            Write((byte)((i & 0x00FF0000) >> 16));
+            Write((byte)((i & 0x0000FF00) >> 8));
+            Write((byte)(i & 0x000000FF));
         }
 
         /// <summary>
         /// Override BinaryWriter's method for network-order.
         /// </summary>
-        public override void Write(long i) {
-            uint i1 = (uint) (i >> 32);
-            uint i2 = (uint) i;
+        public override void Write(long i)
+        {
+            uint i1 = (uint)(i >> 32);
+            uint i2 = (uint)i;
             Write(i1);
             Write(i2);
         }
@@ -130,9 +139,10 @@ namespace RabbitMQ.Util {
         /// <summary>
         /// Override BinaryWriter's method for network-order.
         /// </summary>
-        public override void Write(ulong i) {
-            uint i1 = (uint) (i >> 32);
-            uint i2 = (uint) i;
+        public override void Write(ulong i)
+        {
+            uint i1 = (uint)(i >> 32);
+            uint i2 = (uint)i;
             Write(i1);
             Write(i2);
         }
@@ -140,7 +150,8 @@ namespace RabbitMQ.Util {
         /// <summary>
         /// Override BinaryWriter's method for network-order.
         /// </summary>
-        public override void Write(float f) {
+        public override void Write(float f)
+        {
             BinaryWriter w = TemporaryBinaryWriter(4);
             w.Write(f);
             byte[] wrongBytes = TemporaryContents(w);
@@ -153,7 +164,8 @@ namespace RabbitMQ.Util {
         /// <summary>
         /// Override BinaryWriter's method for network-order.
         /// </summary>
-        public override void Write(double d) {
+        public override void Write(double d)
+        {
             BinaryWriter w = TemporaryBinaryWriter(8);
             w.Write(d);
             byte[] wrongBytes = TemporaryContents(w);
@@ -170,15 +182,17 @@ namespace RabbitMQ.Util {
         ///<summary>Helper method for constructing a temporary
         ///BinaryWriter streaming into a fresh MemoryStream
         ///provisioned with the given initialSize.</summary>
-        public static BinaryWriter TemporaryBinaryWriter(int initialSize) {
+        public static BinaryWriter TemporaryBinaryWriter(int initialSize)
+        {
             return new BinaryWriter(new MemoryStream(initialSize));
         }
 
         ///<summary>Helper method for extracting the byte[] contents
         ///of a BinaryWriter over a MemoryStream, such as constructed
         ///by TemporaryBinaryWriter.</summary>
-        public static byte[] TemporaryContents(BinaryWriter w) {
-            return ((MemoryStream) w.BaseStream).ToArray();
+        public static byte[] TemporaryContents(BinaryWriter w)
+        {
+            return ((MemoryStream)w.BaseStream).ToArray();
         }
     }
 }

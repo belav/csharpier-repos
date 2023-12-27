@@ -4,20 +4,20 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
-    using System.Runtime.Serialization;
     using System.Reflection;
-    using System.Xml;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Channels;
-    using System.Runtime.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.Threading;
+    using System.Xml;
 
     abstract class OperationFormatter : IClientMessageFormatter, IDispatchMessageFormatter
     {
@@ -25,7 +25,8 @@ namespace System.ServiceModel.Dispatcher
         MessageDescription requestDescription;
         XmlDictionaryString action;
         XmlDictionaryString replyAction;
-        protected StreamFormatter requestStreamFormatter, replyStreamFormatter;
+        protected StreamFormatter requestStreamFormatter,
+            replyStreamFormatter;
         XmlDictionary dictionary;
         string operationName;
         static object[] emptyObjectArray = new object[0];
@@ -44,19 +45,53 @@ namespace System.ServiceModel.Dispatcher
             dictionary = new XmlDictionary(stringCount * 2);
             GetActions(description, dictionary, out this.action, out this.replyAction);
             operationName = description.Name;
-            requestStreamFormatter = StreamFormatter.Create(requestDescription, operationName, true/*isRequest*/);
+            requestStreamFormatter = StreamFormatter.Create(
+                requestDescription,
+                operationName,
+                true /*isRequest*/
+            );
             if (replyDescription != null)
-                replyStreamFormatter = StreamFormatter.Create(replyDescription, operationName, false/*isResponse*/);
+                replyStreamFormatter = StreamFormatter.Create(
+                    replyDescription,
+                    operationName,
+                    false /*isResponse*/
+                );
         }
 
-        protected abstract void AddHeadersToMessage(Message message, MessageDescription messageDescription, object[] parameters, bool isRequest);
-        protected abstract void SerializeBody(XmlDictionaryWriter writer, MessageVersion version, string action, MessageDescription messageDescription, object returnValue, object[] parameters, bool isRequest);
-        protected abstract void GetHeadersFromMessage(Message message, MessageDescription messageDescription, object[] parameters, bool isRequest);
-        protected abstract object DeserializeBody(XmlDictionaryReader reader, MessageVersion version, string action, MessageDescription messageDescription, object[] parameters, bool isRequest);
+        protected abstract void AddHeadersToMessage(
+            Message message,
+            MessageDescription messageDescription,
+            object[] parameters,
+            bool isRequest
+        );
+        protected abstract void SerializeBody(
+            XmlDictionaryWriter writer,
+            MessageVersion version,
+            string action,
+            MessageDescription messageDescription,
+            object returnValue,
+            object[] parameters,
+            bool isRequest
+        );
+        protected abstract void GetHeadersFromMessage(
+            Message message,
+            MessageDescription messageDescription,
+            object[] parameters,
+            bool isRequest
+        );
+        protected abstract object DeserializeBody(
+            XmlDictionaryReader reader,
+            MessageVersion version,
+            string action,
+            MessageDescription messageDescription,
+            object[] parameters,
+            bool isRequest
+        );
 
-        protected virtual void WriteBodyAttributes(XmlDictionaryWriter writer, MessageVersion messageVersion)
-        {
-        }
+        protected virtual void WriteBodyAttributes(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        ) { }
 
         internal string RequestAction
         {
@@ -108,20 +143,37 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
 
             if (parameters == null)
-                throw TraceUtility.ThrowHelperError(new ArgumentNullException("parameters"), message);
+                throw TraceUtility.ThrowHelperError(
+                    new ArgumentNullException("parameters"),
+                    message
+                );
 
             try
             {
                 object result = null;
                 if (replyDescription.IsTypedMessage)
                 {
-                    object typeMessageInstance = CreateTypedMessageInstance(replyDescription.MessageType);
-                    TypedMessageParts typedMessageParts = new TypedMessageParts(typeMessageInstance, replyDescription);
+                    object typeMessageInstance = CreateTypedMessageInstance(
+                        replyDescription.MessageType
+                    );
+                    TypedMessageParts typedMessageParts = new TypedMessageParts(
+                        typeMessageInstance,
+                        replyDescription
+                    );
                     object[] parts = new object[typedMessageParts.Count];
 
                     GetPropertiesFromMessage(message, replyDescription, parts);
-                    GetHeadersFromMessage(message, replyDescription, parts, false/*isRequest*/);
-                    DeserializeBodyContents(message, parts, false/*isRequest*/);
+                    GetHeadersFromMessage(
+                        message,
+                        replyDescription,
+                        parts,
+                        false /*isRequest*/
+                    );
+                    DeserializeBodyContents(
+                        message,
+                        parts,
+                        false /*isRequest*/
+                    );
 
                     // copy values into the actual field/properties
                     typedMessageParts.SetTypedMessageParts(parts);
@@ -131,42 +183,90 @@ namespace System.ServiceModel.Dispatcher
                 else
                 {
                     GetPropertiesFromMessage(message, replyDescription, parameters);
-                    GetHeadersFromMessage(message, replyDescription, parameters, false/*isRequest*/);
-                    result = DeserializeBodyContents(message, parameters, false/*isRequest*/);
+                    GetHeadersFromMessage(
+                        message,
+                        replyDescription,
+                        parameters,
+                        false /*isRequest*/
+                    );
+                    result = DeserializeBodyContents(
+                        message,
+                        parameters,
+                        false /*isRequest*/
+                    );
                 }
                 return result;
             }
             catch (XmlException xe)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(
-                    SR.GetString(SR.SFxErrorDeserializingReplyBodyMore, this.operationName, xe.Message), xe));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(
+                        SR.GetString(
+                            SR.SFxErrorDeserializingReplyBodyMore,
+                            this.operationName,
+                            xe.Message
+                        ),
+                        xe
+                    )
+                );
             }
             catch (FormatException fe)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(
-                    SR.GetString(SR.SFxErrorDeserializingReplyBodyMore, this.operationName, fe.Message), fe));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(
+                        SR.GetString(
+                            SR.SFxErrorDeserializingReplyBodyMore,
+                            this.operationName,
+                            fe.Message
+                        ),
+                        fe
+                    )
+                );
             }
             catch (SerializationException se)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(
-                    SR.GetString(SR.SFxErrorDeserializingReplyBodyMore, this.operationName, se.Message), se));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(
+                        SR.GetString(
+                            SR.SFxErrorDeserializingReplyBodyMore,
+                            this.operationName,
+                            se.Message
+                        ),
+                        se
+                    )
+                );
             }
         }
 
         private static object CreateTypedMessageInstance(Type messageContractType)
         {
-            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance | BindingFlags.NonPublic;
+            BindingFlags bindingFlags =
+                BindingFlags.Instance
+                | BindingFlags.Public
+                | BindingFlags.CreateInstance
+                | BindingFlags.NonPublic;
             try
             {
                 object typeMessageInstance = Activator.CreateInstance(
                     messageContractType,
                     bindingFlags,
-                    null, emptyObjectArray, null);
+                    null,
+                    emptyObjectArray,
+                    null
+                );
                 return typeMessageInstance;
             }
             catch (MissingMethodException mme)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxMessageContractRequiresDefaultConstructor, messageContractType.FullName), mme));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxMessageContractRequiresDefaultConstructor,
+                            messageContractType.FullName
+                        ),
+                        mme
+                    )
+                );
             }
         }
 
@@ -176,19 +276,36 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
 
             if (parameters == null)
-                throw TraceUtility.ThrowHelperError(new ArgumentNullException("parameters"), message);
+                throw TraceUtility.ThrowHelperError(
+                    new ArgumentNullException("parameters"),
+                    message
+                );
 
             try
             {
                 if (requestDescription.IsTypedMessage)
                 {
-                    object typeMessageInstance = CreateTypedMessageInstance(requestDescription.MessageType);
-                    TypedMessageParts typedMessageParts = new TypedMessageParts(typeMessageInstance, requestDescription);
+                    object typeMessageInstance = CreateTypedMessageInstance(
+                        requestDescription.MessageType
+                    );
+                    TypedMessageParts typedMessageParts = new TypedMessageParts(
+                        typeMessageInstance,
+                        requestDescription
+                    );
                     object[] parts = new object[typedMessageParts.Count];
 
                     GetPropertiesFromMessage(message, requestDescription, parts);
-                    GetHeadersFromMessage(message, requestDescription, parts, true/*isRequest*/);
-                    DeserializeBodyContents(message, parts, true/*isRequest*/);
+                    GetHeadersFromMessage(
+                        message,
+                        requestDescription,
+                        parts,
+                        true /*isRequest*/
+                    );
+                    DeserializeBodyContents(
+                        message,
+                        parts,
+                        true /*isRequest*/
+                    );
 
                     // copy values into the actual field/properties
                     typedMessageParts.SetTypedMessageParts(parts);
@@ -198,29 +315,57 @@ namespace System.ServiceModel.Dispatcher
                 else
                 {
                     GetPropertiesFromMessage(message, requestDescription, parameters);
-                    GetHeadersFromMessage(message, requestDescription, parameters, true/*isRequest*/);
-                    DeserializeBodyContents(message, parameters, true/*isRequest*/);
+                    GetHeadersFromMessage(
+                        message,
+                        requestDescription,
+                        parameters,
+                        true /*isRequest*/
+                    );
+                    DeserializeBodyContents(
+                        message,
+                        parameters,
+                        true /*isRequest*/
+                    );
                 }
             }
             catch (XmlException xe)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     OperationFormatter.CreateDeserializationFailedFault(
-                        SR.GetString(SR.SFxErrorDeserializingRequestBodyMore, this.operationName, xe.Message), 
-                        xe));
+                        SR.GetString(
+                            SR.SFxErrorDeserializingRequestBodyMore,
+                            this.operationName,
+                            xe.Message
+                        ),
+                        xe
+                    )
+                );
             }
             catch (FormatException fe)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     OperationFormatter.CreateDeserializationFailedFault(
-                        SR.GetString(SR.SFxErrorDeserializingRequestBodyMore, this.operationName, fe.Message), 
-                        fe));
+                        SR.GetString(
+                            SR.SFxErrorDeserializingRequestBodyMore,
+                            this.operationName,
+                            fe.Message
+                        ),
+                        fe
+                    )
+                );
             }
             catch (SerializationException se)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(
-                    SR.GetString(SR.SFxErrorDeserializingRequestBodyMore, this.operationName, se.Message), 
-                    se));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(
+                        SR.GetString(
+                            SR.SFxErrorDeserializingRequestBodyMore,
+                            this.operationName,
+                            se.Message
+                        ),
+                        se
+                    )
+                );
             }
         }
 
@@ -229,7 +374,11 @@ namespace System.ServiceModel.Dispatcher
             MessageDescription messageDescription;
             StreamFormatter streamFormatter;
 
-            SetupStreamAndMessageDescription(isRequest, out streamFormatter, out messageDescription);
+            SetupStreamAndMessageDescription(
+                isRequest,
+                out streamFormatter,
+                out messageDescription
+            );
 
             if (streamFormatter != null)
             {
@@ -247,7 +396,14 @@ namespace System.ServiceModel.Dispatcher
                 XmlDictionaryReader reader = message.GetReaderAtBodyContents();
                 using (reader)
                 {
-                    object body = DeserializeBody(reader, message.Version, RequestAction, messageDescription, parameters, isRequest);
+                    object body = DeserializeBody(
+                        reader,
+                        message.Version,
+                        RequestAction,
+                        messageDescription,
+                        parameters,
+                        isRequest
+                    );
                     message.ReadFromBodyContentsToEnd(reader);
                     return body;
                 }
@@ -265,7 +421,10 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("parameters");
             if (requestDescription.IsTypedMessage)
             {
-                TypedMessageParts typedMessageParts = new TypedMessageParts(parameters[0], requestDescription);
+                TypedMessageParts typedMessageParts = new TypedMessageParts(
+                    parameters[0],
+                    requestDescription
+                );
 
                 // copy values from the actual field/properties
                 parts = new object[typedMessageParts.Count];
@@ -275,16 +434,30 @@ namespace System.ServiceModel.Dispatcher
             {
                 parts = parameters;
             }
-            Message msg = new OperationFormatterMessage(this, messageVersion,
+            Message msg = new OperationFormatterMessage(
+                this,
+                messageVersion,
                 action == null ? null : ActionHeader.Create(action, messageVersion.Addressing),
-                parts, null, true/*isRequest*/);
+                parts,
+                null,
+                true /*isRequest*/
+            );
             AddPropertiesToMessage(msg, requestDescription, parts);
-            AddHeadersToMessage(msg, requestDescription, parts, true /*isRequest*/);
+            AddHeadersToMessage(
+                msg,
+                requestDescription,
+                parts,
+                true /*isRequest*/
+            );
 
             return msg;
         }
 
-        public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+        public Message SerializeReply(
+            MessageVersion messageVersion,
+            object[] parameters,
+            object result
+        )
         {
             object[] parts = null;
             object resultPart = null;
@@ -297,12 +470,15 @@ namespace System.ServiceModel.Dispatcher
 
             if (replyDescription.IsTypedMessage)
             {
-                // If the response is a typed message then it must 
+                // If the response is a typed message then it must
                 // me the response (as opposed to an out param).  We will
                 // serialize the response in the exact same way that we
                 // would serialize a bunch of outs (with no return value).
 
-                TypedMessageParts typedMessageParts = new TypedMessageParts(result, replyDescription);
+                TypedMessageParts typedMessageParts = new TypedMessageParts(
+                    result,
+                    replyDescription
+                );
 
                 // make a copy of the list so that we have the actual values of the field/properties
                 parts = new object[typedMessageParts.Count];
@@ -316,15 +492,31 @@ namespace System.ServiceModel.Dispatcher
                 resultPart = result;
             }
 
-            Message msg = new OperationFormatterMessage(this, messageVersion,
-                replyAction == null ? null : ActionHeader.Create(replyAction, messageVersion.Addressing),
-                parts, resultPart, false/*isRequest*/);
+            Message msg = new OperationFormatterMessage(
+                this,
+                messageVersion,
+                replyAction == null
+                    ? null
+                    : ActionHeader.Create(replyAction, messageVersion.Addressing),
+                parts,
+                resultPart,
+                false /*isRequest*/
+            );
             AddPropertiesToMessage(msg, replyDescription, parts);
-            AddHeadersToMessage(msg, replyDescription, parts, false /*isRequest*/);
+            AddHeadersToMessage(
+                msg,
+                replyDescription,
+                parts,
+                false /*isRequest*/
+            );
             return msg;
         }
 
-        void SetupStreamAndMessageDescription(bool isRequest, out StreamFormatter streamFormatter, out MessageDescription messageDescription)
+        void SetupStreamAndMessageDescription(
+            bool isRequest,
+            out StreamFormatter streamFormatter,
+            out MessageDescription messageDescription
+        )
         {
             if (isRequest)
             {
@@ -338,12 +530,22 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        void SerializeBodyContents(XmlDictionaryWriter writer, MessageVersion version, object[] parameters, object returnValue, bool isRequest)
+        void SerializeBodyContents(
+            XmlDictionaryWriter writer,
+            MessageVersion version,
+            object[] parameters,
+            object returnValue,
+            bool isRequest
+        )
         {
             MessageDescription messageDescription;
             StreamFormatter streamFormatter;
 
-            SetupStreamAndMessageDescription(isRequest, out streamFormatter, out messageDescription);
+            SetupStreamAndMessageDescription(
+                isRequest,
+                out streamFormatter,
+                out messageDescription
+            );
 
             if (streamFormatter != null)
             {
@@ -351,13 +553,37 @@ namespace System.ServiceModel.Dispatcher
                 return;
             }
 
-            SerializeBody(writer, version, RequestAction, messageDescription, returnValue, parameters, isRequest);
+            SerializeBody(
+                writer,
+                version,
+                RequestAction,
+                messageDescription,
+                returnValue,
+                parameters,
+                isRequest
+            );
         }
 
-        IAsyncResult BeginSerializeBodyContents(XmlDictionaryWriter writer, MessageVersion version, object[] parameters, object returnValue, bool isRequest,
-            AsyncCallback callback, object state)
+        IAsyncResult BeginSerializeBodyContents(
+            XmlDictionaryWriter writer,
+            MessageVersion version,
+            object[] parameters,
+            object returnValue,
+            bool isRequest,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new SerializeBodyContentsAsyncResult(this, writer, version, parameters, returnValue, isRequest, callback, state);
+            return new SerializeBodyContentsAsyncResult(
+                this,
+                writer,
+                version,
+                parameters,
+                returnValue,
+                isRequest,
+                callback,
+                state
+            );
         }
 
         void EndSerializeBodyContents(IAsyncResult result)
@@ -367,12 +593,22 @@ namespace System.ServiceModel.Dispatcher
 
         class SerializeBodyContentsAsyncResult : AsyncResult
         {
-            static AsyncCompletion handleEndSerializeBodyContents = new AsyncCompletion(HandleEndSerializeBodyContents);
+            static AsyncCompletion handleEndSerializeBodyContents = new AsyncCompletion(
+                HandleEndSerializeBodyContents
+            );
 
             StreamFormatter streamFormatter;
 
-            internal SerializeBodyContentsAsyncResult(OperationFormatter operationFormatter, XmlDictionaryWriter writer, MessageVersion version, object[] parameters,
-                object returnValue, bool isRequest, AsyncCallback callback, object state)
+            internal SerializeBodyContentsAsyncResult(
+                OperationFormatter operationFormatter,
+                XmlDictionaryWriter writer,
+                MessageVersion version,
+                object[] parameters,
+                object returnValue,
+                bool isRequest,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 bool completeSelf = true;
@@ -380,20 +616,37 @@ namespace System.ServiceModel.Dispatcher
                 MessageDescription messageDescription;
                 StreamFormatter streamFormatter;
 
-                operationFormatter.SetupStreamAndMessageDescription(isRequest, out streamFormatter, out messageDescription);
+                operationFormatter.SetupStreamAndMessageDescription(
+                    isRequest,
+                    out streamFormatter,
+                    out messageDescription
+                );
 
                 if (streamFormatter != null)
                 {
                     this.streamFormatter = streamFormatter;
-                    IAsyncResult result = streamFormatter.BeginSerialize(writer, parameters, returnValue, PrepareAsyncCompletion(handleEndSerializeBodyContents), this);
+                    IAsyncResult result = streamFormatter.BeginSerialize(
+                        writer,
+                        parameters,
+                        returnValue,
+                        PrepareAsyncCompletion(handleEndSerializeBodyContents),
+                        this
+                    );
                     completeSelf = SyncContinue(result);
                 }
                 else
                 {
-                    operationFormatter.SerializeBody(writer, version, operationFormatter.RequestAction, messageDescription, returnValue, parameters, isRequest);
+                    operationFormatter.SerializeBody(
+                        writer,
+                        version,
+                        operationFormatter.RequestAction,
+                        messageDescription,
+                        returnValue,
+                        parameters,
+                        isRequest
+                    );
                     completeSelf = true;
                 }
-
 
                 if (completeSelf)
                 {
@@ -401,10 +654,10 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-
             static bool HandleEndSerializeBodyContents(IAsyncResult result)
             {
-                SerializeBodyContentsAsyncResult thisPtr = (SerializeBodyContentsAsyncResult)result.AsyncState;
+                SerializeBodyContentsAsyncResult thisPtr = (SerializeBodyContentsAsyncResult)
+                    result.AsyncState;
                 thisPtr.streamFormatter.EndSerialize(result);
                 return true;
             }
@@ -415,7 +668,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        void AddPropertiesToMessage(Message message, MessageDescription messageDescription, object[] parameters)
+        void AddPropertiesToMessage(
+            Message message,
+            MessageDescription messageDescription,
+            object[] parameters
+        )
         {
             if (messageDescription.Properties.Count > 0)
             {
@@ -423,10 +680,15 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        void AddPropertiesToMessageCore(Message message, MessageDescription messageDescription, object[] parameters)
+        void AddPropertiesToMessageCore(
+            Message message,
+            MessageDescription messageDescription,
+            object[] parameters
+        )
         {
             MessageProperties properties = message.Properties;
-            MessagePropertyDescriptionCollection propertyDescriptions = messageDescription.Properties;
+            MessagePropertyDescriptionCollection propertyDescriptions =
+                messageDescription.Properties;
             for (int i = 0; i < propertyDescriptions.Count; i++)
             {
                 MessagePropertyDescription propertyDescription = propertyDescriptions[i];
@@ -436,7 +698,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        void GetPropertiesFromMessage(Message message, MessageDescription messageDescription, object[] parameters)
+        void GetPropertiesFromMessage(
+            Message message,
+            MessageDescription messageDescription,
+            object[] parameters
+        )
         {
             if (messageDescription.Properties.Count > 0)
             {
@@ -444,10 +710,15 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        void GetPropertiesFromMessageCore(Message message, MessageDescription messageDescription, object[] parameters)
+        void GetPropertiesFromMessageCore(
+            Message message,
+            MessageDescription messageDescription,
+            object[] parameters
+        )
         {
             MessageProperties properties = message.Properties;
-            MessagePropertyDescriptionCollection propertyDescriptions = messageDescription.Properties;
+            MessagePropertyDescriptionCollection propertyDescriptions =
+                messageDescription.Properties;
             for (int i = 0; i < propertyDescriptions.Count; i++)
             {
                 MessagePropertyDescription propertyDescription = propertyDescriptions[i];
@@ -458,14 +729,26 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal static object GetContentOfMessageHeaderOfT(MessageHeaderDescription headerDescription, object parameterValue, out bool mustUnderstand, out bool relay, out string actor)
+        internal static object GetContentOfMessageHeaderOfT(
+            MessageHeaderDescription headerDescription,
+            object parameterValue,
+            out bool mustUnderstand,
+            out bool relay,
+            out string actor
+        )
         {
             actor = headerDescription.Actor;
             mustUnderstand = headerDescription.MustUnderstand;
             relay = headerDescription.Relay;
 
             if (headerDescription.TypedHeader && parameterValue != null)
-                parameterValue = TypedHeaderManager.GetContent(headerDescription.Type, parameterValue, out mustUnderstand, out relay, out actor);
+                parameterValue = TypedHeaderManager.GetContent(
+                    headerDescription.Type,
+                    parameterValue,
+                    out mustUnderstand,
+                    out relay,
+                    out actor
+                );
             return parameterValue;
         }
 
@@ -488,7 +771,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (isEncoded && !isRpc)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxDocEncodedNotSupported, operation.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxDocEncodedNotSupported, operation.Name)
+                    )
+                );
             }
 
             bool hasVoid = false;
@@ -502,8 +789,14 @@ namespace System.ServiceModel.Dispatcher
                     if (isRpc && operation.IsValidateRpcWrapperName)
                     {
                         if (!isEncoded)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxTypedMessageCannotBeRpcLiteral, operation.Name)));
-
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxTypedMessageCannotBeRpcLiteral,
+                                        operation.Name
+                                    )
+                                )
+                            );
                     }
                     hasTypedOrUntypedMessage = true;
                 }
@@ -513,14 +806,34 @@ namespace System.ServiceModel.Dispatcher
                     hasParameter = true;
             }
             if (hasParameter && hasTypedOrUntypedMessage)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxTypedOrUntypedMessageCannotBeMixedWithParameters, operation.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxTypedOrUntypedMessageCannotBeMixedWithParameters,
+                            operation.Name
+                        )
+                    )
+                );
             if (isRpc && hasTypedOrUntypedMessage && hasVoid)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxTypedOrUntypedMessageCannotBeMixedWithVoidInRpc, operation.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxTypedOrUntypedMessageCannotBeMixedWithVoidInRpc,
+                            operation.Name
+                        )
+                    )
+                );
         }
 
-        internal static void GetActions(OperationDescription description, XmlDictionary dictionary, out XmlDictionaryString action, out XmlDictionaryString replyAction)
+        internal static void GetActions(
+            OperationDescription description,
+            XmlDictionary dictionary,
+            out XmlDictionaryString action,
+            out XmlDictionaryString replyAction
+        )
         {
-            string actionString, replyActionString;
+            string actionString,
+                replyActionString;
             actionString = description.Messages[0].Action;
             if (actionString == MessageHeaders.WildcardAction)
                 actionString = null;
@@ -537,10 +850,16 @@ namespace System.ServiceModel.Dispatcher
                 replyAction = AddToDictionary(dictionary, replyActionString);
         }
 
-        internal static NetDispatcherFaultException CreateDeserializationFailedFault(string reason, Exception innerException)
+        internal static NetDispatcherFaultException CreateDeserializationFailedFault(
+            string reason,
+            Exception innerException
+        )
         {
             reason = SR.GetString(SR.SFxDeserializationFailed1, reason);
-            FaultCode code = new FaultCode(FaultCodeConstants.Codes.DeserializationFailed, FaultCodeConstants.Namespaces.NetDispatch);
+            FaultCode code = new FaultCode(
+                FaultCodeConstants.Codes.DeserializationFailed,
+                FaultCodeConstants.Namespaces.NetDispatch
+            );
             code = FaultCode.CreateSenderFaultCode(code);
             return new NetDispatcherFaultException(reason, code, innerException);
         }
@@ -549,7 +868,15 @@ namespace System.ServiceModel.Dispatcher
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.ElementIgnored, SR.GetString(SR.SFxTraceCodeElementIgnored), new StringTraceRecord("Element", xmlReader.NamespaceURI + ":" + xmlReader.LocalName));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.ElementIgnored,
+                    SR.GetString(SR.SFxTraceCodeElementIgnored),
+                    new StringTraceRecord(
+                        "Element",
+                        xmlReader.NamespaceURI + ":" + xmlReader.LocalName
+                    )
+                );
             }
             xmlReader.Skip();
         }
@@ -563,15 +890,25 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (description == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("description"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("description")
+                    );
                 }
 
                 if (instance == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException(SR.GetString(SR.SFxTypedMessageCannotBeNull, description.Action)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException(
+                            SR.GetString(SR.SFxTypedMessageCannotBeNull, description.Action)
+                        )
+                    );
                 }
 
-                members = new MemberInfo[description.Body.Parts.Count + description.Properties.Count + description.Headers.Count];
+                members = new MemberInfo[
+                    description.Body.Parts.Count
+                        + description.Properties.Count
+                        + description.Headers.Count
+                ];
 
                 foreach (MessagePartDescription part in description.Headers)
                     members[part.Index] = part.MemberInfo;
@@ -636,17 +973,42 @@ namespace System.ServiceModel.Dispatcher
         internal class OperationFormatterMessage : BodyWriterMessage
         {
             OperationFormatter operationFormatter;
-            public OperationFormatterMessage(OperationFormatter operationFormatter, MessageVersion version, ActionHeader action,
-               object[] parameters, object returnValue, bool isRequest)
-                : base(version, action, new OperationFormatterBodyWriter(operationFormatter, version, parameters, returnValue, isRequest))
+
+            public OperationFormatterMessage(
+                OperationFormatter operationFormatter,
+                MessageVersion version,
+                ActionHeader action,
+                object[] parameters,
+                object returnValue,
+                bool isRequest
+            )
+                : base(
+                    version,
+                    action,
+                    new OperationFormatterBodyWriter(
+                        operationFormatter,
+                        version,
+                        parameters,
+                        returnValue,
+                        isRequest
+                    )
+                )
             {
                 this.operationFormatter = operationFormatter;
             }
 
+            public OperationFormatterMessage(
+                MessageVersion version,
+                string action,
+                BodyWriter bodyWriter
+            )
+                : base(version, action, bodyWriter) { }
 
-            public OperationFormatterMessage(MessageVersion version, string action, BodyWriter bodyWriter) : base(version, action, bodyWriter) { }
-
-            OperationFormatterMessage(MessageHeaders headers, KeyValuePair<string, object>[] properties, OperationFormatterBodyWriter bodyWriter)
+            OperationFormatterMessage(
+                MessageHeaders headers,
+                KeyValuePair<string, object>[] properties,
+                OperationFormatterBodyWriter bodyWriter
+            )
                 : base(headers, properties, bodyWriter)
             {
                 operationFormatter = bodyWriter.OperationFormatter;
@@ -669,9 +1031,15 @@ namespace System.ServiceModel.Dispatcher
                 {
                     bufferedBodyWriter = base.BodyWriter.CreateBufferedCopy(maxBufferSize);
                 }
-                KeyValuePair<string, object>[] properties = new KeyValuePair<string, object>[base.Properties.Count];
+                KeyValuePair<string, object>[] properties = new KeyValuePair<string, object>[
+                    base.Properties.Count
+                ];
                 ((ICollection<KeyValuePair<string, object>>)base.Properties).CopyTo(properties, 0);
-                return new OperationFormatterMessageBuffer(base.Headers, properties, bufferedBodyWriter);
+                return new OperationFormatterMessageBuffer(
+                    base.Headers,
+                    properties,
+                    bufferedBodyWriter
+                );
             }
 
             class OperationFormatterBodyWriter : BodyWriter
@@ -683,8 +1051,13 @@ namespace System.ServiceModel.Dispatcher
                 MessageVersion version;
                 bool onBeginWriteBodyContentsCalled;
 
-                public OperationFormatterBodyWriter(OperationFormatter operationFormatter, MessageVersion version,
-                    object[] parameters, object returnValue, bool isRequest)
+                public OperationFormatterBodyWriter(
+                    OperationFormatter operationFormatter,
+                    MessageVersion version,
+                    object[] parameters,
+                    object returnValue,
+                    bool isRequest
+                )
                     : base(AreParametersBuffered(isRequest, operationFormatter))
                 {
                     this.parameters = parameters;
@@ -699,9 +1072,14 @@ namespace System.ServiceModel.Dispatcher
                     get { return this; }
                 }
 
-                static bool AreParametersBuffered(bool isRequest, OperationFormatter operationFormatter)
+                static bool AreParametersBuffered(
+                    bool isRequest,
+                    OperationFormatter operationFormatter
+                )
                 {
-                    StreamFormatter streamFormatter = isRequest ? operationFormatter.requestStreamFormatter : operationFormatter.replyStreamFormatter;
+                    StreamFormatter streamFormatter = isRequest
+                        ? operationFormatter.requestStreamFormatter
+                        : operationFormatter.replyStreamFormatter;
                     return streamFormatter == null;
                 }
 
@@ -709,13 +1087,26 @@ namespace System.ServiceModel.Dispatcher
                 {
                     lock (ThisLock)
                     {
-                        this.operationFormatter.SerializeBodyContents(writer, this.version, this.parameters, this.returnValue, this.isRequest);
+                        this.operationFormatter.SerializeBodyContents(
+                            writer,
+                            this.version,
+                            this.parameters,
+                            this.returnValue,
+                            this.isRequest
+                        );
                     }
                 }
 
-                protected override IAsyncResult OnBeginWriteBodyContents(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+                protected override IAsyncResult OnBeginWriteBodyContents(
+                    XmlDictionaryWriter writer,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
-                    Fx.Assert(!onBeginWriteBodyContentsCalled, "OnBeginWriteBodyContents has already been called");
+                    Fx.Assert(
+                        !onBeginWriteBodyContentsCalled,
+                        "OnBeginWriteBodyContents has already been called"
+                    );
                     this.onBeginWriteBodyContentsCalled = true;
                     return new OnWriteBodyContentsAsyncResult(this, writer, callback, state);
                 }
@@ -732,19 +1123,32 @@ namespace System.ServiceModel.Dispatcher
 
                 class OnWriteBodyContentsAsyncResult : AsyncResult
                 {
-                    static AsyncCompletion handleEndOnWriteBodyContents = new AsyncCompletion(HandleEndOnWriteBodyContents);
+                    static AsyncCompletion handleEndOnWriteBodyContents = new AsyncCompletion(
+                        HandleEndOnWriteBodyContents
+                    );
 
                     OperationFormatter operationFormatter;
 
-                    internal OnWriteBodyContentsAsyncResult(OperationFormatterBodyWriter operationFormatterBodyWriter, XmlDictionaryWriter writer, AsyncCallback callback, object state)
+                    internal OnWriteBodyContentsAsyncResult(
+                        OperationFormatterBodyWriter operationFormatterBodyWriter,
+                        XmlDictionaryWriter writer,
+                        AsyncCallback callback,
+                        object state
+                    )
                         : base(callback, state)
                     {
                         bool completeSelf = true;
                         this.operationFormatter = operationFormatterBodyWriter.OperationFormatter;
 
-                        IAsyncResult result = this.operationFormatter.BeginSerializeBodyContents(writer, operationFormatterBodyWriter.version,
-                            operationFormatterBodyWriter.parameters, operationFormatterBodyWriter.returnValue, operationFormatterBodyWriter.isRequest,
-                            PrepareAsyncCompletion(handleEndOnWriteBodyContents), this);
+                        IAsyncResult result = this.operationFormatter.BeginSerializeBodyContents(
+                            writer,
+                            operationFormatterBodyWriter.version,
+                            operationFormatterBodyWriter.parameters,
+                            operationFormatterBodyWriter.returnValue,
+                            operationFormatterBodyWriter.isRequest,
+                            PrepareAsyncCompletion(handleEndOnWriteBodyContents),
+                            this
+                        );
                         completeSelf = SyncContinue(result);
 
                         if (completeSelf)
@@ -755,7 +1159,8 @@ namespace System.ServiceModel.Dispatcher
 
                     static bool HandleEndOnWriteBodyContents(IAsyncResult result)
                     {
-                        OnWriteBodyContentsAsyncResult thisPtr = (OnWriteBodyContentsAsyncResult)result.AsyncState;
+                        OnWriteBodyContentsAsyncResult thisPtr = (OnWriteBodyContentsAsyncResult)
+                            result.AsyncState;
                         thisPtr.operationFormatter.EndSerializeBodyContents(result);
                         return true;
                     }
@@ -769,22 +1174,30 @@ namespace System.ServiceModel.Dispatcher
 
             class OperationFormatterMessageBuffer : BodyWriterMessageBuffer
             {
-                public OperationFormatterMessageBuffer(MessageHeaders headers,
-                    KeyValuePair<string, object>[] properties, BodyWriter bodyWriter)
-                    : base(headers, properties, bodyWriter)
-                {
-                }
+                public OperationFormatterMessageBuffer(
+                    MessageHeaders headers,
+                    KeyValuePair<string, object>[] properties,
+                    BodyWriter bodyWriter
+                )
+                    : base(headers, properties, bodyWriter) { }
 
                 public override Message CreateMessage()
                 {
-                    OperationFormatterBodyWriter operationFormatterBodyWriter = base.BodyWriter as OperationFormatterBodyWriter;
+                    OperationFormatterBodyWriter operationFormatterBodyWriter =
+                        base.BodyWriter as OperationFormatterBodyWriter;
                     if (operationFormatterBodyWriter == null)
                         return base.CreateMessage();
                     lock (ThisLock)
                     {
                         if (base.Closed)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateBufferDisposedException());
-                        return new OperationFormatterMessage(base.Headers, base.Properties, operationFormatterBodyWriter);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                CreateBufferDisposedException()
+                            );
+                        return new OperationFormatterMessage(
+                            base.Headers,
+                            base.Properties,
+                            operationFormatterBodyWriter
+                        );
                     }
                 }
             }
@@ -796,22 +1209,44 @@ namespace System.ServiceModel.Dispatcher
             protected OperationFormatter operationFormatter;
             protected MessageVersion version;
 
-            public OperationFormatterHeader(OperationFormatter operationFormatter, MessageVersion version, string name, string ns, bool mustUnderstand, string actor, bool relay)
+            public OperationFormatterHeader(
+                OperationFormatter operationFormatter,
+                MessageVersion version,
+                string name,
+                string ns,
+                bool mustUnderstand,
+                string actor,
+                bool relay
+            )
             {
                 this.operationFormatter = operationFormatter;
                 this.version = version;
                 if (actor != null)
-                    innerHeader = MessageHeader.CreateHeader(name, ns, null/*headerValue*/, mustUnderstand, actor, relay);
+                    innerHeader = MessageHeader.CreateHeader(
+                        name,
+                        ns,
+                        null /*headerValue*/
+                        ,
+                        mustUnderstand,
+                        actor,
+                        relay
+                    );
                 else
-                    innerHeader = MessageHeader.CreateHeader(name, ns, null/*headerValue*/, mustUnderstand, "", relay);
+                    innerHeader = MessageHeader.CreateHeader(
+                        name,
+                        ns,
+                        null /*headerValue*/
+                        ,
+                        mustUnderstand,
+                        "",
+                        relay
+                    );
             }
-
 
             public override bool IsMessageVersionSupported(MessageVersion messageVersion)
             {
                 return innerHeader.IsMessageVersionSupported(messageVersion);
             }
-
 
             public override string Name
             {
@@ -838,14 +1273,24 @@ namespace System.ServiceModel.Dispatcher
                 get { return innerHeader.Actor; }
             }
 
-            protected override void OnWriteStartHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteStartHeader(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 //Prefix needed since there may be xsi:type attribute at toplevel with qname value where ns = ""
-                writer.WriteStartElement((this.Namespace == null || this.Namespace.Length == 0) ? string.Empty : "h", this.Name, this.Namespace);
+                writer.WriteStartElement(
+                    (this.Namespace == null || this.Namespace.Length == 0) ? string.Empty : "h",
+                    this.Name,
+                    this.Namespace
+                );
                 OnWriteHeaderAttributes(writer, messageVersion);
             }
 
-            protected virtual void OnWriteHeaderAttributes(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected virtual void OnWriteHeaderAttributes(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 base.WriteHeaderAttributes(writer, messageVersion);
             }
@@ -854,38 +1299,60 @@ namespace System.ServiceModel.Dispatcher
         internal class XmlElementMessageHeader : OperationFormatterHeader
         {
             protected XmlElement headerValue;
-            public XmlElementMessageHeader(OperationFormatter operationFormatter, MessageVersion version, string name, string ns, bool mustUnderstand, string actor, bool relay, XmlElement headerValue) :
-                base(operationFormatter, version, name, ns, mustUnderstand, actor, relay)
+
+            public XmlElementMessageHeader(
+                OperationFormatter operationFormatter,
+                MessageVersion version,
+                string name,
+                string ns,
+                bool mustUnderstand,
+                string actor,
+                bool relay,
+                XmlElement headerValue
+            )
+                : base(operationFormatter, version, name, ns, mustUnderstand, actor, relay)
             {
                 this.headerValue = headerValue;
             }
 
-            protected override void OnWriteHeaderAttributes(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteHeaderAttributes(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 base.WriteHeaderAttributes(writer, messageVersion);
-                XmlDictionaryReader nodeReader = XmlDictionaryReader.CreateDictionaryReader(new XmlNodeReader(headerValue));
+                XmlDictionaryReader nodeReader = XmlDictionaryReader.CreateDictionaryReader(
+                    new XmlNodeReader(headerValue)
+                );
                 nodeReader.MoveToContent();
                 writer.WriteAttributes(nodeReader, false);
             }
 
-            protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteHeaderContents(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 headerValue.WriteContentTo(writer);
             }
         }
+
         internal struct QName
         {
             internal string Name;
             internal string Namespace;
+
             internal QName(string name, string ns)
             {
                 Name = name;
                 Namespace = ns;
             }
         }
+
         internal class QNameComparer : IEqualityComparer<QName>
         {
-            static internal QNameComparer Singleton = new QNameComparer();
+            internal static QNameComparer Singleton = new QNameComparer();
+
             QNameComparer() { }
 
             public bool Equals(QName x, QName y)
@@ -898,13 +1365,17 @@ namespace System.ServiceModel.Dispatcher
                 return obj.Name.GetHashCode();
             }
         }
+
         internal class MessageHeaderDescriptionTable : Dictionary<QName, MessageHeaderDescription>
         {
-            internal MessageHeaderDescriptionTable() : base(QNameComparer.Singleton) { }
+            internal MessageHeaderDescriptionTable()
+                : base(QNameComparer.Singleton) { }
+
             internal void Add(string name, string ns, MessageHeaderDescription message)
             {
                 base.Add(new QName(name, ns), message);
             }
+
             internal MessageHeaderDescription Get(string name, string ns)
             {
                 MessageHeaderDescription message;

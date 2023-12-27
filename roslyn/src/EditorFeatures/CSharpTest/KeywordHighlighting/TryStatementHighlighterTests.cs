@@ -15,33 +15,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class TryStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(TryStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(TryStatementHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|Cursor:[|try|]|}
+                        void M()
                         {
-                            try
+                            {|Cursor:[|try|]|}
+                            {
+                                try
+                                {
+                                }
+                                catch (Exception e)
+                                {
+                                }
+                            }
+                            [|finally|]
                             {
                             }
-                            catch (Exception e)
-                            {
-                            }
-                        }
-                        [|finally|]
-                        {
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -49,25 +49,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        try
+                        void M()
                         {
-                            {|Cursor:[|try|]|}
+                            try
+                            {
+                                {|Cursor:[|try|]|}
+                                {
+                                }
+                                [|catch|] (Exception e)
+                                {
+                                }
+                            }
+                            finally
                             {
                             }
-                            [|catch|] (Exception e)
-                            {
-                            }
-                        }
-                        finally
-                        {
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -75,25 +76,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        try
+                        void M()
                         {
-                            [|try|]
+                            try
+                            {
+                                [|try|]
+                                {
+                                }
+                                {|Cursor:[|catch|]|} (Exception e)
+                                {
+                                }
+                            }
+                            finally
                             {
                             }
-                            {|Cursor:[|catch|]|} (Exception e)
-                            {
-                            }
-                        }
-                        finally
-                        {
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -101,25 +103,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|try|]
+                        void M()
                         {
-                            try
+                            [|try|]
+                            {
+                                try
+                                {
+                                }
+                                catch (Exception e)
+                                {
+                                }
+                            }
+                            {|Cursor:[|finally|]|}
                             {
                             }
-                            catch (Exception e)
-                            {
-                            }
-                        }
-                        {|Cursor:[|finally|]|}
-                        {
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -127,25 +130,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        try
+                        void M()
                         {
-                            {|Cursor:[|try|]|}
+                            try
+                            {
+                                {|Cursor:[|try|]|}
+                                {
+                                }
+                                [|catch|] (Exception e) [|when|] (e != null)
+                                {
+                                }
+                            }
+                            finally
                             {
                             }
-                            [|catch|] (Exception e) [|when|] (e != null)
-                            {
-                            }
-                        }
-                        finally
-                        {
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -153,25 +157,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        try
+                        void M()
                         {
-                            [|try|]
+                            try
+                            {
+                                [|try|]
+                                {
+                                }
+                                {|Cursor:[|catch|]|} (Exception e) [|when|] (e != null)
+                                {
+                                }
+                            }
+                            finally
                             {
                             }
-                            {|Cursor:[|catch|]|} (Exception e) [|when|] (e != null)
-                            {
-                            }
-                        }
-                        finally
-                        {
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -179,25 +184,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        try
+                        void M()
                         {
-                            [|try|]
+                            try
+                            {
+                                [|try|]
+                                {
+                                }
+                                [|catch|] (Exception e) {|Cursor:[|when|]|} (e != null)
+                                {
+                                }
+                            }
+                            finally
                             {
                             }
-                            [|catch|] (Exception e) {|Cursor:[|when|]|} (e != null)
-                            {
-                            }
-                        }
-                        finally
-                        {
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

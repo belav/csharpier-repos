@@ -15,9 +15,7 @@ namespace Roslyn.Utilities
             {
                 public static readonly ICollection<T> Instance = new Collection<T>();
 
-                protected Collection()
-                {
-                }
+                protected Collection() { }
 
                 public void Add(T item)
                 {
@@ -34,9 +32,7 @@ namespace Roslyn.Utilities
                     return false;
                 }
 
-                public void CopyTo(T[] array, int arrayIndex)
-                {
-                }
+                public void CopyTo(T[] array, int arrayIndex) { }
 
                 public int Count => 0;
 

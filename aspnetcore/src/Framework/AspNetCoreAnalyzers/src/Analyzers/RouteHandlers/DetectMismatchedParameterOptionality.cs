@@ -13,7 +13,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     private static void DetectMismatchedParameterOptionality(
         in OperationAnalysisContext context,
         RouteUsageModel routeUsage,
-        IMethodSymbol methodSymbol)
+        IMethodSymbol methodSymbol
+    )
     {
         var allDeclarations = methodSymbol.GetAllMethodSymbolsOfPartialParts();
         foreach (var method in allDeclarations)
@@ -24,19 +25,29 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 
                 //  If this is not the methpd parameter associated with the route
                 // parameter then continue looking for it in the list
-                if (!routeUsage.RoutePattern.TryGetRouteParameter(paramName, out var routeParameter))
+                if (
+                    !routeUsage.RoutePattern.TryGetRouteParameter(paramName, out var routeParameter)
+                )
                 {
                     continue;
                 }
 
-                var argumentIsOptional = parameter.IsOptional || parameter.NullableAnnotation != NullableAnnotation.NotAnnotated;
+                var argumentIsOptional =
+                    parameter.IsOptional
+                    || parameter.NullableAnnotation != NullableAnnotation.NotAnnotated;
                 if (!argumentIsOptional && routeParameter.IsOptional)
                 {
-                    var location = parameter.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation();
-                    context.ReportDiagnostic(Diagnostic.Create(
-                        DiagnosticDescriptors.DetectMismatchedParameterOptionality,
-                        location,
-                        paramName));
+                    var location = parameter
+                        .DeclaringSyntaxReferences.FirstOrDefault()
+                        ?.GetSyntax()
+                        .GetLocation();
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            DiagnosticDescriptors.DetectMismatchedParameterOptionality,
+                            location,
+                            paramName
+                        )
+                    );
                 }
             }
         }

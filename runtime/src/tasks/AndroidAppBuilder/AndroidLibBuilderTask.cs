@@ -31,7 +31,8 @@ public class AndroidLibBuilderTask : Task
         var androidSdk = new AndroidSdkHelper(
             androidSdkPath: AndroidSdk,
             buildApiLevel: BuildApiLevel,
-            buildToolsVersion: BuildToolsVersion);
+            buildToolsVersion: BuildToolsVersion
+        );
 
         var objDir = Path.Combine(OutputDir, "obj");
         Directory.CreateDirectory(objDir);
@@ -53,7 +54,11 @@ public class AndroidLibBuilderTask : Task
     private void CompileJava(string objDir, AndroidSdkHelper androidSdk)
     {
         var compiler = new JavaCompiler(Log, androidSdk, workingDir: JavaSourceDirectory);
-        string[] javaFiles = Directory.GetFiles(JavaSourceDirectory, "*.java", SearchOption.AllDirectories);
+        string[] javaFiles = Directory.GetFiles(
+            JavaSourceDirectory,
+            "*.java",
+            SearchOption.AllDirectories
+        );
         foreach (var file in javaFiles)
         {
             compiler.Compile(file, outputDir: objDir);

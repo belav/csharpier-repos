@@ -6,22 +6,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class SqlServerAbstractionsApiConsistencyTest : ApiConsistencyTestBase<
-    SqlServerAbstractionsApiConsistencyTest.SqlServerAbstractionsApiConsistencyFixture>
+public class SqlServerAbstractionsApiConsistencyTest
+    : ApiConsistencyTestBase<SqlServerAbstractionsApiConsistencyTest.SqlServerAbstractionsApiConsistencyFixture>
 {
-    public SqlServerAbstractionsApiConsistencyTest(SqlServerAbstractionsApiConsistencyFixture fixture)
-        : base(fixture)
-    {
-    }
+    public SqlServerAbstractionsApiConsistencyTest(
+        SqlServerAbstractionsApiConsistencyFixture fixture
+    )
+        : base(fixture) { }
 
-    protected override void AddServices(ServiceCollection serviceCollection)
-    {
-    }
+    protected override void AddServices(ServiceCollection serviceCollection) { }
 
-    protected override Assembly TargetAssembly
-        => typeof(HierarchyId).Assembly;
+    protected override Assembly TargetAssembly => typeof(HierarchyId).Assembly;
 
-    public class SqlServerAbstractionsApiConsistencyFixture : ApiConsistencyFixtureBase
-    {
-    }
+    public class SqlServerAbstractionsApiConsistencyFixture : ApiConsistencyFixtureBase { }
 }

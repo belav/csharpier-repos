@@ -13,7 +13,12 @@ public class JsonQueryData : ISetSource
         EntitiesBasic = CreateEntitiesBasic();
         JsonEntitiesBasicForReference = CreateJsonEntitiesBasicForReference();
         JsonEntitiesBasicForCollection = CreateJsonEntitiesBasicForCollection();
-        WireUp(JsonEntitiesBasic, EntitiesBasic, JsonEntitiesBasicForReference, JsonEntitiesBasicForCollection);
+        WireUp(
+            JsonEntitiesBasic,
+            EntitiesBasic,
+            JsonEntitiesBasicForReference,
+            JsonEntitiesBasicForCollection
+        );
 
         JsonEntitiesCustomNaming = CreateJsonEntitiesCustomNaming();
         JsonEntitiesSingleOwned = CreateJsonEntitiesSingleOwned();
@@ -341,19 +346,15 @@ public class JsonQueryData : ISetSource
         var entity2 = new JsonEntityBasicForCollection { Id = 2, Name = "EntityCollection2" };
         var entity3 = new JsonEntityBasicForCollection { Id = 3, Name = "EntityCollection3" };
 
-        return new List<JsonEntityBasicForCollection>
-        {
-            entity1,
-            entity2,
-            entity3
-        };
+        return new List<JsonEntityBasicForCollection> { entity1, entity2, entity3 };
     }
 
     public static void WireUp(
         IReadOnlyList<JsonEntityBasic> jsonEntitiesBasic,
         IReadOnlyList<EntityBasic> entitiesBasic,
         IReadOnlyList<JsonEntityBasicForReference> entitiesBasicForReference,
-        IReadOnlyList<JsonEntityBasicForCollection> entitiesBasicForCollection)
+        IReadOnlyList<JsonEntityBasicForCollection> entitiesBasicForCollection
+    )
     {
         entitiesBasic[0].JsonEntityBasics = new List<JsonEntityBasic> { jsonEntitiesBasic[0] };
 
@@ -380,17 +381,20 @@ public class JsonQueryData : ISetSource
     {
         var e1_r_r = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2100, 1, 1), Fraction = 10.0,
+            Date = new DateTime(2100, 1, 1),
+            Fraction = 10.0,
         };
 
         var e1_r_c1 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2101, 1, 1), Fraction = 10.1,
+            Date = new DateTime(2101, 1, 1),
+            Fraction = 10.1,
         };
 
         var e1_r_c2 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2102, 1, 1), Fraction = 10.2,
+            Date = new DateTime(2102, 1, 1),
+            Fraction = 10.2,
         };
 
         var e1_r = new JsonOwnedCustomNameRoot
@@ -404,17 +408,20 @@ public class JsonQueryData : ISetSource
 
         var e1_c1_r = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2110, 1, 1), Fraction = 11.0,
+            Date = new DateTime(2110, 1, 1),
+            Fraction = 11.0,
         };
 
         var e1_c1_c1 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2111, 1, 1), Fraction = 11.1,
+            Date = new DateTime(2111, 1, 1),
+            Fraction = 11.1,
         };
 
         var e1_c1_c2 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2112, 1, 1), Fraction = 11.2,
+            Date = new DateTime(2112, 1, 1),
+            Fraction = 11.2,
         };
 
         var e1_c1 = new JsonOwnedCustomNameRoot
@@ -428,17 +435,20 @@ public class JsonQueryData : ISetSource
 
         var e1_c2_r = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2120, 1, 1), Fraction = 12.0,
+            Date = new DateTime(2120, 1, 1),
+            Fraction = 12.0,
         };
 
         var e1_c2_c1 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2121, 1, 1), Fraction = 12.1,
+            Date = new DateTime(2121, 1, 1),
+            Fraction = 12.1,
         };
 
         var e1_c2_c2 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2122, 1, 1), Fraction = 12.2,
+            Date = new DateTime(2122, 1, 1),
+            Fraction = 12.2,
         };
 
         var e1_c2 = new JsonOwnedCustomNameRoot
@@ -488,16 +498,12 @@ public class JsonQueryData : ISetSource
             Name = "JsonEntitySingleOwned3",
             OwnedCollection = new List<JsonOwnedLeaf>
             {
-                new() { SomethingSomething = "owned_3_1" }, new() { SomethingSomething = "owned_3_2" },
+                new() { SomethingSomething = "owned_3_1" },
+                new() { SomethingSomething = "owned_3_2" },
             }
         };
 
-        return new List<JsonEntitySingleOwned>
-        {
-            e1,
-            e2,
-            e3
-        };
+        return new List<JsonEntitySingleOwned> { e1, e2, e3 };
     }
 
     public static IReadOnlyList<JsonEntityInheritanceBase> CreateJsonEntitiesInheritance()
@@ -697,7 +703,10 @@ public class JsonQueryData : ISetSource
             TestDouble = -1.23456789,
             TestDecimal = -1234567890.01M,
             TestDateTime = DateTime.Parse("01/01/2000 12:34:56"),
-            TestDateTimeOffset = new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0)),
+            TestDateTimeOffset = new DateTimeOffset(
+                DateTime.Parse("01/01/2000 12:34:56"),
+                TimeSpan.FromHours(-8.0)
+            ),
             TestTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
             TestDateOnly = new DateOnly(2023, 10, 10),
             TestTimeOnly = new TimeOnly(11, 12, 13),
@@ -717,48 +726,34 @@ public class JsonQueryData : ISetSource
             TestNullableEnumWithIntConverter = JsonEnum.Two,
             TestNullableEnumWithConverterThatHandlesNulls = JsonEnum.Three,
             TestDefaultStringCollection = new[] { "S1", "\"S2\"", "S3" },
-            TestMaxLengthStringCollection = new List<string>
-            {
-                "S1",
-                "S2",
-                "S3"
-            },
+            TestMaxLengthStringCollection = new List<string> { "S1", "S2", "S3" },
             TestBooleanCollection = new[] { true, false },
-            TestCharacterCollection = new ObservableCollection<char>
+            TestCharacterCollection = new ObservableCollection<char> { 'A', 'B', '\"' },
+            TestDateTimeCollection = new List<DateTime>
             {
-                'A',
-                'B',
-                '\"'
+                DateTime.Parse("01/01/2000 12:34:56"),
+                DateTime.Parse("01/01/3000 12:34:56")
             },
-            TestDateTimeCollection = new List<DateTime> { DateTime.Parse("01/01/2000 12:34:56"), DateTime.Parse("01/01/3000 12:34:56") },
-            TestDateTimeOffsetCollection = new[] { new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0)) },
+            TestDateTimeOffsetCollection = new[]
+            {
+                new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0))
+            },
             TestDoubleCollection = new[] { -1.23456789, 1.23456789, 0.0 },
             TestDecimalCollection = new[] { -1234567890.01M },
             TestGuidCollection = new List<Guid> { new("12345678-1234-4321-7777-987654321000") },
             TestInt16Collection = new[] { short.MinValue, (short)0, short.MaxValue },
             TestInt32Collection = new[] { int.MinValue, 0, int.MaxValue },
-            TestInt64Collection = new List<long>
-            {
-                long.MinValue,
-                0,
-                long.MaxValue
-            },
+            TestInt64Collection = new List<long> { long.MinValue, 0, long.MaxValue },
             TestSignedByteCollection = new[] { sbyte.MinValue, (sbyte)0, sbyte.MaxValue },
-            TestSingleCollection = new List<float>
+            TestSingleCollection = new List<float> { -1.234F, 0.0F, -1.234F },
+            TestTimeSpanCollection = new[]
             {
-                -1.234F,
-                0.0F,
-                -1.234F
+                new TimeSpan(0, 10, 9, 8, 7),
+                new TimeSpan(0, -10, 9, 8, 7)
             },
-            TestTimeSpanCollection = new[] { new TimeSpan(0, 10, 9, 8, 7), new TimeSpan(0, -10, 9, 8, 7) },
             TestDateOnlyCollection = new[] { new DateOnly(1234, 1, 23), new DateOnly(4321, 1, 21) },
             TestTimeOnlyCollection = new[] { new TimeOnly(11, 42, 23), new TimeOnly(7, 17, 27) },
-            TestUnsignedInt16Collection = new List<ushort>
-            {
-                ushort.MinValue,
-                0,
-                ushort.MaxValue
-            },
+            TestUnsignedInt16Collection = new List<ushort> { ushort.MinValue, 0, ushort.MaxValue },
             TestUnsignedInt32Collection = new[] { uint.MinValue, (uint)0, uint.MaxValue },
             TestUnsignedInt64Collection = new ObservableCollection<ulong>
             {
@@ -776,7 +771,12 @@ public class JsonQueryData : ISetSource
                 null
             },
             TestEnumCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
-            TestEnumWithIntConverterCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
+            TestEnumWithIntConverterCollection = new[]
+            {
+                JsonEnum.One,
+                JsonEnum.Three,
+                (JsonEnum)(-7)
+            },
             TestNullableEnumCollection = new Collection<JsonEnum?>
             {
                 JsonEnum.One,
@@ -791,7 +791,12 @@ public class JsonQueryData : ISetSource
                 JsonEnum.Three,
                 (JsonEnum)(-7)
             },
-            TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[] { JsonEnum.One, null, (JsonEnum)(-7) }
+            TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[]
+            {
+                JsonEnum.One,
+                null,
+                (JsonEnum)(-7)
+            }
         };
 
         var r2 = new JsonOwnedAllTypes
@@ -804,7 +809,10 @@ public class JsonQueryData : ISetSource
             TestDouble = -1.2346789,
             TestDecimal = -123567890.01M,
             TestDateTime = DateTime.Parse("01/01/3000 12:34:56"),
-            TestDateTimeOffset = new DateTimeOffset(DateTime.Parse("01/01/3000 12:34:56"), TimeSpan.FromHours(-8.0)),
+            TestDateTimeOffset = new DateTimeOffset(
+                DateTime.Parse("01/01/3000 12:34:56"),
+                TimeSpan.FromHours(-8.0)
+            ),
             TestTimeSpan = new TimeSpan(0, 5, 9, 8, 7),
             TestDateOnly = new DateOnly(2123, 7, 8),
             TestTimeOnly = new TimeOnly(9, 10, 11),
@@ -824,40 +832,31 @@ public class JsonQueryData : ISetSource
             TestNullableEnumWithIntConverter = null,
             TestNullableEnumWithConverterThatHandlesNulls = null,
             TestDefaultStringCollection = new[] { "S1", "\"S2\"", "S3" },
-            TestMaxLengthStringCollection = new List<string>
-            {
-                "S1",
-                "S2",
-                "S3"
-            },
+            TestMaxLengthStringCollection = new List<string> { "S1", "S2", "S3" },
             TestBooleanCollection = new[] { true, false },
-            TestCharacterCollection = new ObservableCollection<char>
+            TestCharacterCollection = new ObservableCollection<char> { 'A', 'B', '\"' },
+            TestDateTimeCollection = new List<DateTime>
             {
-                'A',
-                'B',
-                '\"'
+                DateTime.Parse("01/01/2000 12:34:56"),
+                DateTime.Parse("01/01/3000 12:34:56")
             },
-            TestDateTimeCollection = new List<DateTime> { DateTime.Parse("01/01/2000 12:34:56"), DateTime.Parse("01/01/3000 12:34:56") },
-            TestDateTimeOffsetCollection = new[] { new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0)) },
+            TestDateTimeOffsetCollection = new[]
+            {
+                new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0))
+            },
             TestDoubleCollection = new[] { -1.23456789, 1.23456789, 0.0 },
             TestDecimalCollection = new[] { -1234567890.01M },
             TestGuidCollection = new List<Guid> { new("12345678-1234-4321-7777-987654321000") },
             TestInt16Collection = new[] { short.MinValue, (short)0, short.MaxValue },
             TestInt32Collection = new[] { int.MinValue, 0, int.MaxValue },
-            TestInt64Collection = new List<long>
-            {
-                long.MinValue,
-                0,
-                long.MaxValue
-            },
+            TestInt64Collection = new List<long> { long.MinValue, 0, long.MaxValue },
             TestSignedByteCollection = new[] { sbyte.MinValue, (sbyte)0, sbyte.MaxValue },
-            TestSingleCollection = new List<float>
+            TestSingleCollection = new List<float> { -1.234F, 0.0F, -1.234F },
+            TestTimeSpanCollection = new[]
             {
-                -1.234F,
-                0.0F,
-                -1.234F
+                new TimeSpan(0, 10, 9, 8, 7),
+                new TimeSpan(0, -10, 9, 8, 7)
             },
-            TestTimeSpanCollection = new[] { new TimeSpan(0, 10, 9, 8, 7), new TimeSpan(0, -10, 9, 8, 7) },
             TestDateOnlyCollection = new[] { new DateOnly(2234, 1, 23), new DateOnly(5321, 1, 21) },
             TestTimeOnlyCollection = new[] { new TimeOnly(21, 42, 23), new TimeOnly(17, 17, 27) },
             TestUnsignedInt16Collection = new[] { ushort.MinValue, (ushort)0, ushort.MaxValue },
@@ -878,7 +877,12 @@ public class JsonQueryData : ISetSource
                 null
             },
             TestEnumCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
-            TestEnumWithIntConverterCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
+            TestEnumWithIntConverterCollection = new[]
+            {
+                JsonEnum.One,
+                JsonEnum.Three,
+                (JsonEnum)(-7)
+            },
             TestNullableEnumCollection = new Collection<JsonEnum?>
             {
                 JsonEnum.One,
@@ -893,7 +897,12 @@ public class JsonQueryData : ISetSource
                 JsonEnum.Three,
                 (JsonEnum)(-7)
             },
-            TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[] { JsonEnum.One, null, (JsonEnum)(-7) }
+            TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[]
+            {
+                JsonEnum.One,
+                null,
+                (JsonEnum)(-7)
+            }
         };
 
         var c1 = new JsonOwnedAllTypes
@@ -906,7 +915,10 @@ public class JsonQueryData : ISetSource
             TestDouble = -1.2345,
             TestDecimal = -123450.01M,
             TestDateTime = DateTime.Parse("11/11/2100 12:34:56"),
-            TestDateTimeOffset = new DateTimeOffset(DateTime.Parse("11/11/2200 12:34:56"), TimeSpan.FromHours(-5.0)),
+            TestDateTimeOffset = new DateTimeOffset(
+                DateTime.Parse("11/11/2200 12:34:56"),
+                TimeSpan.FromHours(-5.0)
+            ),
             TestTimeSpan = new TimeSpan(0, 6, 5, 4, 3),
             TestDateOnly = new DateOnly(2323, 4, 3),
             TestTimeOnly = new TimeOnly(5, 7, 8),
@@ -926,40 +938,31 @@ public class JsonQueryData : ISetSource
             TestNullableEnumWithIntConverter = JsonEnum.Three,
             TestNullableEnumWithConverterThatHandlesNulls = JsonEnum.Two,
             TestDefaultStringCollection = new[] { "S1", "\"S2\"", "S3" },
-            TestMaxLengthStringCollection = new List<string>
-            {
-                "S1",
-                "S2",
-                "S3"
-            },
+            TestMaxLengthStringCollection = new List<string> { "S1", "S2", "S3" },
             TestBooleanCollection = new[] { true, false },
-            TestCharacterCollection = new ObservableCollection<char>
+            TestCharacterCollection = new ObservableCollection<char> { 'A', 'B', '\"' },
+            TestDateTimeCollection = new List<DateTime>
             {
-                'A',
-                'B',
-                '\"'
+                DateTime.Parse("01/01/2000 12:34:56"),
+                DateTime.Parse("01/01/3000 12:34:56")
             },
-            TestDateTimeCollection = new List<DateTime> { DateTime.Parse("01/01/2000 12:34:56"), DateTime.Parse("01/01/3000 12:34:56") },
-            TestDateTimeOffsetCollection = new[] { new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0)) },
+            TestDateTimeOffsetCollection = new[]
+            {
+                new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0))
+            },
             TestDoubleCollection = new[] { -1.23456789, 1.23456789, 0.0 },
             TestDecimalCollection = new[] { -1234567890.01M },
             TestGuidCollection = new List<Guid> { new("12345678-1234-4321-7777-987654321000") },
             TestInt16Collection = new[] { short.MinValue, (short)0, short.MaxValue },
             TestInt32Collection = new[] { int.MinValue, 0, int.MaxValue },
-            TestInt64Collection = new List<long>
-            {
-                long.MinValue,
-                0,
-                long.MaxValue
-            },
+            TestInt64Collection = new List<long> { long.MinValue, 0, long.MaxValue },
             TestSignedByteCollection = new[] { sbyte.MinValue, (sbyte)0, sbyte.MaxValue },
-            TestSingleCollection = new List<float>
+            TestSingleCollection = new List<float> { -1.234F, 0.0F, -1.234F },
+            TestTimeSpanCollection = new[]
             {
-                -1.234F,
-                0.0F,
-                -1.234F
+                new TimeSpan(0, 10, 9, 8, 7),
+                new TimeSpan(0, -10, 9, 8, 7)
             },
-            TestTimeSpanCollection = new[] { new TimeSpan(0, 10, 9, 8, 7), new TimeSpan(0, -10, 9, 8, 7) },
             TestDateOnlyCollection = new[] { new DateOnly(3234, 1, 23), new DateOnly(4331, 1, 21) },
             TestTimeOnlyCollection = new[] { new TimeOnly(13, 42, 23), new TimeOnly(7, 17, 25) },
             TestUnsignedInt16Collection = new[] { ushort.MinValue, (ushort)0, ushort.MaxValue },
@@ -980,7 +983,12 @@ public class JsonQueryData : ISetSource
                 null
             },
             TestEnumCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
-            TestEnumWithIntConverterCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
+            TestEnumWithIntConverterCollection = new[]
+            {
+                JsonEnum.One,
+                JsonEnum.Three,
+                (JsonEnum)(-7)
+            },
             TestNullableEnumCollection = new ObservableCollection<JsonEnum?>
             {
                 JsonEnum.One,
@@ -995,7 +1003,12 @@ public class JsonQueryData : ISetSource
                 JsonEnum.Three,
                 (JsonEnum)(-7)
             },
-            TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[] { JsonEnum.One, null, (JsonEnum)(-7) }
+            TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[]
+            {
+                JsonEnum.One,
+                null,
+                (JsonEnum)(-7)
+            }
         };
 
         var c2 = new JsonOwnedAllTypes
@@ -1008,7 +1021,10 @@ public class JsonQueryData : ISetSource
             TestDouble = -1.235,
             TestDecimal = -12350.01M,
             TestDateTime = DateTime.Parse("11/11/3100 12:34:56"),
-            TestDateTimeOffset = new DateTimeOffset(DateTime.Parse("11/11/3200 12:34:56"), TimeSpan.FromHours(-5.0)),
+            TestDateTimeOffset = new DateTimeOffset(
+                DateTime.Parse("11/11/3200 12:34:56"),
+                TimeSpan.FromHours(-5.0)
+            ),
             TestTimeSpan = new TimeSpan(0, 6, 5, 2, 3),
             TestDateOnly = new DateOnly(4019, 2, 25),
             TestTimeOnly = new TimeOnly(5, 30, 42),
@@ -1028,40 +1044,31 @@ public class JsonQueryData : ISetSource
             TestNullableEnumWithIntConverter = null,
             TestNullableEnumWithConverterThatHandlesNulls = null,
             TestDefaultStringCollection = new[] { "S1", "\"S2\"", "S3" },
-            TestMaxLengthStringCollection = new List<string>
-            {
-                "S1",
-                "S2",
-                "S3"
-            },
+            TestMaxLengthStringCollection = new List<string> { "S1", "S2", "S3" },
             TestBooleanCollection = new[] { true, false },
-            TestCharacterCollection = new ObservableCollection<char>
+            TestCharacterCollection = new ObservableCollection<char> { 'A', 'B', '\"' },
+            TestDateTimeCollection = new List<DateTime>
             {
-                'A',
-                'B',
-                '\"'
+                DateTime.Parse("01/01/2000 12:34:56"),
+                DateTime.Parse("01/01/3000 12:34:56")
             },
-            TestDateTimeCollection = new List<DateTime> { DateTime.Parse("01/01/2000 12:34:56"), DateTime.Parse("01/01/3000 12:34:56") },
-            TestDateTimeOffsetCollection = new[] { new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0)) },
+            TestDateTimeOffsetCollection = new[]
+            {
+                new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0))
+            },
             TestDoubleCollection = new[] { -1.23456789, 1.23456789, 0.0 },
             TestDecimalCollection = new[] { -1234567890.01M },
             TestGuidCollection = new List<Guid> { new("12345678-1234-4321-7777-987654321000") },
             TestInt16Collection = new[] { short.MinValue, (short)0, short.MaxValue },
             TestInt32Collection = new[] { int.MinValue, 0, int.MaxValue },
-            TestInt64Collection = new List<long>
-            {
-                long.MinValue,
-                0,
-                long.MaxValue
-            },
+            TestInt64Collection = new List<long> { long.MinValue, 0, long.MaxValue },
             TestSignedByteCollection = new[] { sbyte.MinValue, (sbyte)0, sbyte.MaxValue },
-            TestSingleCollection = new List<float>
+            TestSingleCollection = new List<float> { -1.234F, 0.0F, -1.234F },
+            TestTimeSpanCollection = new[]
             {
-                -1.234F,
-                0.0F,
-                -1.234F
+                new TimeSpan(0, 10, 9, 8, 7),
+                new TimeSpan(0, -10, 9, 8, 7)
             },
-            TestTimeSpanCollection = new[] { new TimeSpan(0, 10, 9, 8, 7), new TimeSpan(0, -10, 9, 8, 7) },
             TestDateOnlyCollection = new[] { new DateOnly(1638, 1, 23), new DateOnly(4321, 1, 21) },
             TestTimeOnlyCollection = new[] { new TimeOnly(8, 22, 23), new TimeOnly(7, 27, 37) },
             TestUnsignedInt16Collection = new[] { ushort.MinValue, (ushort)0, ushort.MaxValue },
@@ -1082,7 +1089,12 @@ public class JsonQueryData : ISetSource
                 null
             },
             TestEnumCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
-            TestEnumWithIntConverterCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
+            TestEnumWithIntConverterCollection = new[]
+            {
+                JsonEnum.One,
+                JsonEnum.Three,
+                (JsonEnum)(-7)
+            },
             TestNullableEnumCollection = new ObservableCollection<JsonEnum?>
             {
                 JsonEnum.One,
@@ -1097,7 +1109,12 @@ public class JsonQueryData : ISetSource
                 JsonEnum.Three,
                 (JsonEnum)(-7)
             },
-            TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[] { JsonEnum.One, null, (JsonEnum)(-7) }
+            TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[]
+            {
+                JsonEnum.One,
+                null,
+                (JsonEnum)(-7)
+            }
         };
 
         return new List<JsonEntityAllTypes>
@@ -1108,42 +1125,34 @@ public class JsonQueryData : ISetSource
                 Reference = r1,
                 Collection = new List<JsonOwnedAllTypes> { c1 },
                 TestDefaultStringCollection = new[] { "S1", "\"S2\"", "S3" },
-                TestMaxLengthStringCollection = new List<string>
-                {
-                    "S1",
-                    "S2",
-                    "S3"
-                },
+                TestMaxLengthStringCollection = new List<string> { "S1", "S2", "S3" },
                 TestBooleanCollection = new[] { true, false },
-                TestCharacterCollection = new ObservableCollection<char>
+                TestCharacterCollection = new ObservableCollection<char> { 'A', 'B', '\"' },
+                TestDateTimeCollection = new List<DateTime>
                 {
-                    'A',
-                    'B',
-                    '\"'
+                    DateTime.Parse("01/01/2000 12:34:56"),
+                    DateTime.Parse("01/01/3000 12:34:56")
                 },
-                TestDateTimeCollection =
-                    new List<DateTime> { DateTime.Parse("01/01/2000 12:34:56"), DateTime.Parse("01/01/3000 12:34:56") },
-                TestDateTimeOffsetCollection =
-                    new[] { new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0)) },
+                TestDateTimeOffsetCollection = new[]
+                {
+                    new DateTimeOffset(
+                        DateTime.Parse("01/01/2000 12:34:56"),
+                        TimeSpan.FromHours(-8.0)
+                    )
+                },
                 TestDoubleCollection = new[] { -1.23456789, 1.23456789, 0.0 },
                 TestDecimalCollection = new[] { -1234567890.01M },
                 TestGuidCollection = new List<Guid> { new("12345678-1234-4321-7777-987654321000") },
                 TestInt16Collection = new[] { short.MinValue, (short)0, short.MaxValue },
                 TestInt32Collection = new[] { int.MinValue, 0, int.MaxValue },
-                TestInt64Collection = new List<long>
-                {
-                    long.MinValue,
-                    0,
-                    long.MaxValue
-                },
+                TestInt64Collection = new List<long> { long.MinValue, 0, long.MaxValue },
                 TestSignedByteCollection = new[] { sbyte.MinValue, (sbyte)0, sbyte.MaxValue },
-                TestSingleCollection = new List<float>
+                TestSingleCollection = new List<float> { -1.234F, 0.0F, -1.234F },
+                TestTimeSpanCollection = new[]
                 {
-                    -1.234F,
-                    0.0F,
-                    -1.234F
+                    new TimeSpan(0, 10, 9, 8, 7),
+                    new TimeSpan(0, 7, 9, 8, 7)
                 },
-                TestTimeSpanCollection = new[] { new TimeSpan(0, 10, 9, 8, 7), new TimeSpan(0, 7, 9, 8, 7) },
                 TestUnsignedInt16Collection = new List<ushort>
                 {
                     ushort.MinValue,
@@ -1167,7 +1176,12 @@ public class JsonQueryData : ISetSource
                     null
                 },
                 TestEnumCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
-                TestEnumWithIntConverterCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
+                TestEnumWithIntConverterCollection = new[]
+                {
+                    JsonEnum.One,
+                    JsonEnum.Three,
+                    (JsonEnum)(-7)
+                },
                 TestNullableEnumCollection = new Collection<JsonEnum?>
                 {
                     JsonEnum.One,
@@ -1182,7 +1196,12 @@ public class JsonQueryData : ISetSource
                     JsonEnum.Three,
                     (JsonEnum)(-7)
                 },
-                TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[] { JsonEnum.One, null, (JsonEnum)(-7) }
+                TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[]
+                {
+                    JsonEnum.One,
+                    null,
+                    (JsonEnum)(-7)
+                }
             },
             new()
             {
@@ -1190,42 +1209,34 @@ public class JsonQueryData : ISetSource
                 Reference = r2,
                 Collection = new List<JsonOwnedAllTypes> { c2 },
                 TestDefaultStringCollection = new[] { "S1", "\"S2\"", "S3" },
-                TestMaxLengthStringCollection = new List<string>
-                {
-                    "S1",
-                    "S2",
-                    "S3"
-                },
+                TestMaxLengthStringCollection = new List<string> { "S1", "S2", "S3" },
                 TestBooleanCollection = new[] { true, false },
-                TestCharacterCollection = new ObservableCollection<char>
+                TestCharacterCollection = new ObservableCollection<char> { 'A', 'B', '\"' },
+                TestDateTimeCollection = new List<DateTime>
                 {
-                    'A',
-                    'B',
-                    '\"'
+                    DateTime.Parse("01/01/2000 12:34:56"),
+                    DateTime.Parse("01/01/3000 12:34:56")
                 },
-                TestDateTimeCollection =
-                    new List<DateTime> { DateTime.Parse("01/01/2000 12:34:56"), DateTime.Parse("01/01/3000 12:34:56") },
-                TestDateTimeOffsetCollection =
-                    new[] { new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0)) },
+                TestDateTimeOffsetCollection = new[]
+                {
+                    new DateTimeOffset(
+                        DateTime.Parse("01/01/2000 12:34:56"),
+                        TimeSpan.FromHours(-8.0)
+                    )
+                },
                 TestDoubleCollection = new[] { -1.23456789, 1.23456789, 0.0 },
                 TestDecimalCollection = new[] { -1234567890.01M },
                 TestGuidCollection = new List<Guid> { new("12345678-1234-4321-7777-987654321000") },
                 TestInt16Collection = new[] { short.MinValue, (short)0, short.MaxValue },
                 TestInt32Collection = new[] { int.MinValue, 0, int.MaxValue },
-                TestInt64Collection = new List<long>
-                {
-                    long.MinValue,
-                    0,
-                    long.MaxValue
-                },
+                TestInt64Collection = new List<long> { long.MinValue, 0, long.MaxValue },
                 TestSignedByteCollection = new[] { sbyte.MinValue, (sbyte)0, sbyte.MaxValue },
-                TestSingleCollection = new List<float>
+                TestSingleCollection = new List<float> { -1.234F, 0.0F, -1.234F },
+                TestTimeSpanCollection = new[]
                 {
-                    -1.234F,
-                    0.0F,
-                    -1.234F
+                    new TimeSpan(0, 10, 9, 8, 7),
+                    new TimeSpan(0, 7, 9, 8, 7)
                 },
-                TestTimeSpanCollection = new[] { new TimeSpan(0, 10, 9, 8, 7), new TimeSpan(0, 7, 9, 8, 7) },
                 TestUnsignedInt16Collection = new List<ushort>
                 {
                     ushort.MinValue,
@@ -1249,7 +1260,12 @@ public class JsonQueryData : ISetSource
                     null
                 },
                 TestEnumCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
-                TestEnumWithIntConverterCollection = new[] { JsonEnum.One, JsonEnum.Three, (JsonEnum)(-7) },
+                TestEnumWithIntConverterCollection = new[]
+                {
+                    JsonEnum.One,
+                    JsonEnum.Three,
+                    (JsonEnum)(-7)
+                },
                 TestNullableEnumCollection = new Collection<JsonEnum?>
                 {
                     JsonEnum.One,
@@ -1264,7 +1280,12 @@ public class JsonQueryData : ISetSource
                     JsonEnum.Three,
                     (JsonEnum)(-7)
                 },
-                TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[] { JsonEnum.One, null, (JsonEnum)(-7) }
+                TestNullableEnumWithConverterThatHandlesNullsCollection = new JsonEnum?[]
+                {
+                    JsonEnum.One,
+                    null,
+                    (JsonEnum)(-7)
+                }
             }
         };
     }
@@ -1293,14 +1314,8 @@ public class JsonQueryData : ISetSource
 
         return new List<JsonEntityConverters>
         {
-            new()
-            {
-                Id = 1, Reference = r1,
-            },
-            new()
-            {
-                Id = 2, Reference = r2,
-            }
+            new() { Id = 1, Reference = r1, },
+            new() { Id = 2, Reference = r2, }
         };
     }
 
@@ -1334,17 +1349,20 @@ public class JsonQueryData : ISetSource
 
         if (typeof(TEntity) == typeof(JsonEntityInheritanceDerived))
         {
-            return (IQueryable<TEntity>)JsonEntitiesInheritance.OfType<JsonEntityInheritanceDerived>().AsQueryable();
+            return (IQueryable<TEntity>)
+                JsonEntitiesInheritance.OfType<JsonEntityInheritanceDerived>().AsQueryable();
         }
 
         if (typeof(TEntity) == typeof(JsonEntityAllTypes))
         {
-            return (IQueryable<TEntity>)JsonEntitiesAllTypes.OfType<JsonEntityAllTypes>().AsQueryable();
+            return (IQueryable<TEntity>)
+                JsonEntitiesAllTypes.OfType<JsonEntityAllTypes>().AsQueryable();
         }
 
         if (typeof(TEntity) == typeof(JsonEntityConverters))
         {
-            return (IQueryable<TEntity>)JsonEntitiesConverters.OfType<JsonEntityConverters>().AsQueryable();
+            return (IQueryable<TEntity>)
+                JsonEntitiesConverters.OfType<JsonEntityConverters>().AsQueryable();
         }
 
         if (typeof(TEntity) == typeof(JsonEntityBasicForReference))

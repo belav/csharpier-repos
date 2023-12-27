@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,33 +29,31 @@
 
 using System;
 using System.Threading;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Threading {
+namespace MonoTests.System.Threading
+{
+    [TestFixture]
+    public class EventWaitHandleTest
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void EventWaitHandle_InvalidEventResetMode()
+        {
+            new EventWaitHandle(true, (EventResetMode)Int32.MinValue);
+        }
 
-	[TestFixture]
-	public class EventWaitHandleTest {
-
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void EventWaitHandle_InvalidEventResetMode ()
-		{
-			new EventWaitHandle (true, (EventResetMode) Int32.MinValue);
-		}
-
-		[Test]
-		public void Disposed_Set ()
-		{
-			var ewh = new EventWaitHandle (false, EventResetMode.ManualReset);
-			ewh.Dispose();
-			try {
-				ewh.Set();
-				Assert.Fail ();
-			} catch (ObjectDisposedException) {
-			}
-		}
-	}
+        [Test]
+        public void Disposed_Set()
+        {
+            var ewh = new EventWaitHandle(false, EventResetMode.ManualReset);
+            ewh.Dispose();
+            try
+            {
+                ewh.Set();
+                Assert.Fail();
+            }
+            catch (ObjectDisposedException) { }
+        }
+    }
 }
-
-

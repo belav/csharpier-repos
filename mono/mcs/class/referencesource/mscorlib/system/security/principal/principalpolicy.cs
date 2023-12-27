@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>ShawnFa</OWNER>
-// 
+//
 
 //
 //  PrincipalPolicy.cs
@@ -16,8 +16,9 @@
 namespace System.Security.Principal
 {
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public enum PrincipalPolicy {
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public enum PrincipalPolicy
+    {
         // Note: it's important that the default policy has the value 0.
         UnauthenticatedPrincipal = 0,
         NoPrincipal = 1,

@@ -12,29 +12,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ForEachCast
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpForEachCastDiagnosticAnalyzer,
-        CSharpForEachCastCodeFixProvider>;
+        CSharpForEachCastCodeFixProvider
+    >;
 
     public class ForEachCastTests
     {
         private static async Task TestWorkerAsync(
-            string testCode, string fixedCode, string optionValue)
+            string testCode,
+            string fixedCode,
+            string optionValue
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = testCode,
                 FixedCode = fixedCode,
-                EditorConfig = """
-                [*]
-                dotnet_style_prefer_foreach_explicit_cast_in_source=
-                """ + optionValue,
+                EditorConfig =
+                    """
+                        [*]
+                        dotnet_style_prefer_foreach_explicit_cast_in_source=
+                        """ + optionValue,
             }.RunAsync();
         }
 
-        private static Task TestAlwaysAsync(string markup, string alwaysMarkup)
-            => TestWorkerAsync(markup, alwaysMarkup, "always");
+        private static Task TestAlwaysAsync(string markup, string alwaysMarkup) =>
+            TestWorkerAsync(markup, alwaysMarkup, "always");
 
-        private static Task TestWhenStronglyTypedAsync(string markup, string nonLegacyMarkup)
-            => TestWorkerAsync(markup, nonLegacyMarkup, "when_strongly_typed");
+        private static Task TestWhenStronglyTypedAsync(string markup, string nonLegacyMarkup) =>
+            TestWorkerAsync(markup, nonLegacyMarkup, "when_strongly_typed");
 
         [Fact]
         public async Task NonGenericIComparableCollection()
@@ -1044,7 +1049,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ForEachCast
                 using System.Linq;
 
                 public static class Program
-                {   
+                {
                     public static void M((object, object)[] x)
                     {
                         [|foreach|] ((string, string) item in x)
@@ -1061,7 +1066,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ForEachCast
                 using System.Linq;
 
                 public static class Program
-                {   
+                {
                     public static void M((object, object)[] x)
                     {
                         foreach ((string, string) item in x.Select(v => ((string, string))v))
